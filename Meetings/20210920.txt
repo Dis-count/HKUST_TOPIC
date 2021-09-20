@@ -1,0 +1,18 @@
+1. Know the scheme of operating. We should apply for the funding and then do the corresponding the research.
+   During the research, maybe you will find something new in untouched field. Then you can think about a new topic based on that.
+   If you do not have a proposal right now, you should do the existing one at first.
+
+2. Revenue management. ->
+   If setting a Price 1, then the hotel will provide the corresponding rooms.
+   Price are not continuous.
+   Similarly, groups are also not discrete. How to realize the maximization of serving people.
+
+座位利用率
+
+想想餐厅占座的 improve serving time, how to solve this problem.
+
+3. Meanwhile, you should think about if we can add new model to the machine scheduling with pricing.
+   Price can result in the change of demand.
+
+——————————————————————————————————————————————————————————————————————
+I'll never forget it to my dying day.

@@ -1,0 +1,13 @@
+9/15/2021
+My main concern:
+1. Think about the purpose of this topic.
+
+seating 概念适用性较差？  意义不大？
+时效性强  如何推广相关概念？
+
+A: We can't get the answer before doing it.
+
+建模方式需不需要参考别人的
+2. Circle packing problem.
+
+A: You can have a try.

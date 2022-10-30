@@ -1,0 +1,19 @@
+% !TEX root = sum1.tex
+\section{Dynamic demand situation}
+
+We also study the dynamic seating plan problem, which is more suitable for commercial use. In this situation, customers come dynamically, and the seating plan needs to be made without knowing the number and composition of future customers. It becomes a sequential stochastic optimization problem where conventional methods fall into the curse of dimensionality due to many seating plan combinations. To avoid this complexity, we develop an approach that aims directly at the final seating plans. Specifically, we define the concept of target seating plans deemed satisfactory. In making the dynamic seating plan, we will try to maintain the possibility of achieving one of the target seating plans as much as possible.
+
+\subsection{Nested Structure}\label{section-nested}
+Notice that small-size groups can utilize the larger seats. For example, a group with one person can take the planned two-seat with a waste of one seat or three-seat wasting one seat for social distancing while another group with one person can take the left seat.
+
+
+$V_t(s) = \sum_i \lambda_i (\max\{i+V_{t+1}(s-i-1), V_{t+1}(s)\})$
+
+
+Then we can develop the Theorem \ref{num1}.
+
+\begin{thm}\label{num1}
+...
+\end{thm}
+
+\newpage

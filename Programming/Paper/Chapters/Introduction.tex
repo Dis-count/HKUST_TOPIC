@@ -1,0 +1,34 @@
+% !TEX root = sum1.tex
+\section{Introduction}
+
+Social distancing, a non-pharmaceutical way to contain the spread of Social distancing, a physical way to control the spread of infectious disease, has been broadly recognized and practiced. As a result, extensive research has emerged on social distancing concerning its effectiveness and impact. What lags is operational guidance for implementation, an issue particularly critical to social distance measures of which the implementation involves operations details. One typical example is how to make social distancing ensured seating plans.
+
+We will start by considering the seating plan with a given set of seats. In a pandemic, the government may issue a minimum physical distance between people, which must be implemented in the seating plan. The problem is further complicated by the existence of groups of guests who will be seated together. To achieve such
+a goal, we develop a mechanism for seat planning, which includes a model to characterize the riskiness of a seating plan, and a solution approach to make the tradeoff between seat utilization rate and the associated risk of infection.
+
+In this paper, we are interested in finding a way to implement a seating plan with social distancing constraints instead of solving the IP model directly.
+After knowing the group portfolio structure, we can obtain the minimum number of seat rows inspired by the cutting stock problem.
+And we can formulate the corresponding model with a given number of rows to maximize the capacity.
+
+% Note that the original global schedule could be changed as the price changes. Meanwhile, ...
+% To promote ..., it is of great importance to ...
+
+Our main contributions are summarized as follows.
+
+First, this paper is the first attempt to consider how to arrange seating assignment with social distancing. 
+Most literature on social distancing in seat assignments highlights the importance of social distance in controlling the virus's spread and focuses too much on the model. There is not much work on the operational significance behind the social distance \cite{barry2021optimal} \cite{fischetti2021safe}.
+Recently, some scholars studied the effects of social distance on health and economics, mainly in aircraft \cite{salari2020social} \cite{ghorbani2020model}. Especially, our study provides another perspective to help the authority adopt a mechanism for setting seat assignments to control the spread of the virus.
+
+
+Second, we establish the deterministic model to analyze the effects of social distancing. We construct an algorithm based on the column generation method to obtain the maximal supply when the demand is known. Then we consider the stochastic demand situation when the demands of different group types are random. With the aid of two-stage stochastic programming, we use Benders decomposition and column-and-cut generation methods to obtain the optimal linear solution. Then we develop several possible integral solutions from linear solutions according to the trait of our problem.
+
+
+Third, to solve the dynamic demand situation, we apply the result of a scenario-based problem. We generate scenarios from multinomial distribution and use dynamic programming to decide whether to accept or reject each group arrival.
+
+
+% With this new .., we illustrate how to assign the seats by the govenment/stakeholder to balance health and economic issues. In addition, we also provide managerial guidance for the government on how to publish the related policy to make the tradeoff between economic maintenance and risk management.
+
+
+The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the model and analyze its properties. Section 5 demonstrates the dynamic form and its property. Section 6 gives the results. The conclusions are shown in Section 7.
+
+\newpage

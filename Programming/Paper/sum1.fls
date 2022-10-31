@@ -1,8 +1,8 @@
-PWD f:/Nutshell/Qi/Topic/MyProject/Paper
+PWD f:/Files/Github/HKUST_TOPIC/Programming/Paper
 INPUT e:/Software/texlive/2021/texmf.cnf
 INPUT e:/Software/texlive/2021/texmf-dist/web2c/texmf.cnf
 INPUT e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT f:/Nutshell/Qi/Topic/MyProject/Paper/sum1.tex
+INPUT f:/Files/Github/HKUST_TOPIC/Programming/Paper/sum1.tex
 OUTPUT sum1.log
 INPUT e:/Software/texlive/2021/texmf-dist/tex/latex/base/article.cls
 INPUT e:/Software/texlive/2021/texmf-dist/tex/latex/base/article.cls

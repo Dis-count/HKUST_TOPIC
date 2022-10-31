@@ -169,7 +169,6 @@ class stochasticModel:
         while eps < tol and it < maxit:
             start1 = time.time()
             alpha_set, w_set, LB = self.add_Constrs(x0, zstar)  # give the constraints
-            print(len(w_set))
             # m.addConstrs(grb.quicksum(alpha_set[t][i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + z[w_set[t]-1] <= grb.quicksum(alpha_set[t][i] * self.dw[w_set[t]-1][i] for i in range(self.I)) for t in range(len(w_set)))
 
             # m.addConstrs(grb.quicksum(alpha_set[t][i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + z[k-1] <= grb.quicksum(alpha_set[t][i] * self.dw[k-1][i] for i in range(self.I)) for t,k in enumerate(w_set))
@@ -181,7 +180,7 @@ class stochasticModel:
                 m.addLConstr(grb.LinExpr(coff, x_var), GRB.LESS_EQUAL, -z[w_set[t]-1]+myrhs)
 
 
-            print("LP and AddConstrs took...", round(time.time() - start1, 3), "seconds")
+            # print("LP and AddConstrs took...", round(time.time() - start1, 3), "seconds")
             # UB = min(UB, obj)
             m.optimize()
             obj = m.objVal
@@ -191,7 +190,7 @@ class stochasticModel:
 
             tol = abs(obj - LB)
             it += 1
-            print('----------------------iteration ' + str(it) + '-------------------')
+            # print('----------------------iteration ' + str(it) + '-------------------')
             # print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
             # print('optimal solution:', newx)
         # print('The number of iterations is:', it)
@@ -200,11 +199,11 @@ class stochasticModel:
         newx = np.reshape(x0, (self.I, self.given_lines))
         # print('each row:', newx)
         newd = np.sum(newx, axis=1)
-        print("IP took...", round(time.time() - start, 3), "seconds")
+        # print("IP took...", round(time.time() - start, 3), "seconds")
         print('optimal demand:', newd)
         # print('optimal solution:', newx)
         # print('optimal LP objective:', obj)
-        print('optimal IP objective:', obj_IP)
+        # print('optimal IP objective:', obj_IP)
         return newd, LB
 
     def solveBendersDynamic(self, demand, eps=1e-4, maxit=10):
@@ -314,13 +313,46 @@ class originalModel():
         print('optimal demand:', newd)
         return m2.objVal
 
+    def solveModelGurobiDynamic(self, demand):
+        m2 = grb.Model()
+        x = m2.addVars(self.I, self.given_lines, lb=0,
+                       vtype=GRB.INTEGER, name='varx')
+        y1 = m2.addVars(self.I, self.W, lb=0,  vtype=GRB.CONTINUOUS)
+        y2 = m2.addVars(self.I, self.W, lb=0,  vtype=GRB.CONTINUOUS)
+        W0 = self.Wmatrix()
+        start = time.time()
+        m2.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
+        M_identity = np.identity(self.I)
+
+            # add demand constraints
+        m2.addConstrs(grb.quicksum(x[i,j] for j in range(self.given_lines)) >= demand[i] for i in range(self.I))
+
+        m2.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) + grb.quicksum(W0[i, j] * y1[j, w] +
+                      M_identity[i, j]*y2[j, w] for j in range(self.I)) == self.dw[w][i] for i in range(self.I) for w in range(self.W))
+        # print("Constructing second took...", round(time.time() - start, 2), "seconds")
+        m2.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(
+            self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
+
+        m2.setParam('OutputFlag', 0)
+        m2.optimize()
+        # print('optimal value:', m2.objVal)
+        sol = np.array(m2.getAttr('X'))
+        solx = sol[0:self.I * self.given_lines]
+        newx = np.reshape(solx, (self.I, self.given_lines))
+        # print('each row:', newx)
+        newd = np.sum(newx, axis=1)
+        # print('optimal demand:', newd)
+        return newd, m2.objVal
+
 
 class samplingmethod:
-    def __init__(self, I, number_sample, number_period) -> None:
+    def __init__(self, I, number_sample, number_period, prob) -> None:
         self.I = I
         self.number_sample = number_sample
         self.number_period = number_period
-        sample_multi = np.random.multinomial(self.number_period, [1/self.I]*self.I, size=self.number_sample)
+        # sample_multi = np.random.multinomial(self.number_period, [1/self.I]*self.I, size=self.number_sample)
+        sample_multi = np.random.multinomial(self.number_period, prob, size=self.number_sample)
         self.sample_multi = sample_multi.tolist()
 
     def convert(self):
@@ -402,8 +434,8 @@ def decision1(sequence, demand, probab):
                 if accept_reject-position-2 >= 0:
                     demand[accept_reject-position-2] += 1
         t += 1
-        print('the period:', t)
-        print('demand is:', demand)
+        # print('the period:', t)
+        # print('demand is:', demand)
     return decision_list
 
 def generate_sequence(period, prob):
@@ -422,14 +454,15 @@ def decision_demand(sequence, decision_list):
 # print('The optimal solution for the whole model:', bb[0:I])
 
 if __name__ == "__main__":
-    num_sample = 1000  # the number of scenarios
+    num_sample = 5000  # the number of scenarios
     I = 4  # the number of group types
     number_period = 100
-    given_lines = 10
+    given_lines = 7
     np.random.seed(0)
     # dw = np.random.randint(20, size=(W, I)) + 20
     # dw = np.random.randint(low = 50, high= 100, size=(W, I))
-    sam = samplingmethod(I, num_sample, number_period)
+    probab = [0.25, 0.25, 0.25, 0.25]
+    sam = samplingmethod(I, num_sample, number_period, probab)
 
     dw, prop = sam.get_prob()
     W = len(dw)
@@ -447,85 +480,87 @@ if __name__ == "__main__":
     # obj = my1.solveModelGurobi()
 
     ini_demand, upperbound = my.solveBenders(eps = 1e-4, maxit= 15)
-    print(ini_demand)
-    probab = [0.25, 0.25, 0.25, 0.25]
+    print('initial demand:', ini_demand)
     sequence = generate_sequence(number_period, probab)
-    
+    sequence1 = copy.deepcopy(sequence)
     decision_list = decision1(sequence, ini_demand, probab)
-
+    total_people = np.dot(sequence, decision_list)
+    print(total_people)
 # when demand =0, return used demands, remaining period, decision_list
 # Use remaining period, generate new dw and + used demands -> new scenarios
 # call benders again.
 
 
-# def decisionSeveral(sequence, demand):
-#     # the function is used to make several decisions
-#     # Sequence is one possible sequence of the group arrival.
-#     period = len(sequence)
-#     group_type = sorted(list(set(sequence)))
-#     # decision_list = [0] * period
-#     originalDemand = copy.deepcopy(demand)
-#     t = 0
-#     for i in sequence:
-#         remaining_period = period - t
-#         position = group_type.index(i)
-#         demand_posi = demand[position]
-#         if demand_posi > 0:
-#             # decision_list[t] = 1
-#             demand[position] = demand_posi - 1
-#         else:
-#             usedDemand = originalDemand - demand
-#             break
-#         t += 1
-#         print('the period:', t)
-#         print('demand is:', demand)
-#     # decision_list = decision_list[0:t]
-#     return usedDemand, remaining_period
+def decisionSeveral(sequence, demand):
+    # the function is used to make several decisions
+    # Sequence is one possible sequence of the group arrival.
+    period = len(sequence)
+    group_type = sorted(list(set(sequence)))
+    # decision_list = [0] * period
+    originalDemand = copy.deepcopy(demand)
+    t = 0
+    for i in sequence:
+        remaining_period = period - t
+        position = group_type.index(i)
+        demand_posi = demand[position]
+        if demand_posi > 0:
+            # decision_list[t] = 1
+            demand[position] = demand_posi - 1
+        else:
+            usedDemand = originalDemand - demand
+            break
+        t += 1
+        # print('the period:', t)
+        # print('demand is:', demand)
+    # decision_list = decision_list[0:t]
+    return usedDemand, remaining_period
 
-# def newScenario(usedDemand, remaining_period):
+def newScenario(usedDemand, remaining_period):
 
-#     sam1 = samplingmethod(I, num_sample, remaining_period)
+    sam1 = samplingmethod(I, num_sample, remaining_period, probab)
 
-#     dw, prop = sam1.get_prob()
-#     newDemand = dw + usedDemand
-#     return newDemand, prop
+    dw, prop = sam1.get_prob()
+    newDemand = dw + usedDemand
+    return newDemand, prop
 
 
-# # demand = np.array([14, 22, 22, 42])
+total_usedDemand = np.zeros(I)
 
-# total_usedDemand = np.zeros(I)
+for i in range(100):
 
-# for i in range(100):
+    demand = ini_demand - total_usedDemand
 
-#     demand = ini_demand - total_usedDemand
+    usedDemand, remaining_period = decisionSeveral(sequence, demand)
 
-#     usedDemand, remaining_period = decisionSeveral(sequence, demand)
+    sequence = sequence[-remaining_period:]
 
-#     sequence = sequence[-remaining_period:]
+    total_usedDemand += usedDemand
 
-#     total_usedDemand += usedDemand
+    newDemand, prop = newScenario(total_usedDemand, remaining_period)
 
-#     newDemand, prop = newScenario(total_usedDemand, remaining_period)
+    W = len(prop)
+    print(i)
+    newModel = originalModel(roll_width, given_lines,
+                               demand_width_array, W, I, prop, newDemand)
 
-#     W = len(prop)
+    ini_demand1, obj = newModel.solveModelGurobiDynamic(total_usedDemand)
+    print('Total used demand:', total_usedDemand)
+    print('supply:', ini_demand1)
+    # if two solutions are the same, then we can fix the demand, use decision1.
+    # if ini_demand1.tolist() == ini_demand.tolist():
+    #     break
+    if len(sequence)<10:
+        break
+    else:
+        ini_demand = ini_demand1
 
-#     newModel = stochasticModel(roll_width, given_lines,
-#                                demand_width_array, W, I, prop, newDemand)
+mylist = [1]* (number_period - remaining_period)
 
-#     ini_demand1, obj = newModel.solveBendersDynamic(total_usedDemand, eps=1e-4, maxit=15)
-#     print('Total demand:', total_usedDemand)
-#     # if two solutions are the same, then we can fix the demand, use decision1.
-#     if ini_demand1.tolist() == ini_demand.tolist():
-#         break
-#     else:
-#         ini_demand = ini_demand1
+remaining_demand = ini_demand - total_usedDemand
 
-# mylist = [1]* (number_period - remaining_period)
+decision_list = decision1(sequence, remaining_demand, probab)
 
-# remaining_demand = ini_demand - total_usedDemand
-
-# decision_list = decision1(sequence, remaining_demand, probab)
-
-# mylist += decision_list
-
-# print(mylist)
+mylist += decision_list
+print(mylist)
+total_people1 = np.dot(sequence1, mylist)
+print(total_people1)

@@ -1150,19 +1150,27 @@ But the programming doesnot work well unless the demands are larger than supply.
 \begin{table}[ht]
   \begin{tabular}{l|l|l|l|l|l}
   \hline
-  \# of samples & T & prob & \# of rows & \# of groups & \# of people served (once, several) \\
-  1000  & 100 & (0.4,0.4,0.1,0.1) & 7 & 4 & (272,277) \\
-  1000  & 150 & (0.4,0.4,0.1,0.1) & 7 & 4 & (280,*)\\
-  5000  & 150 & (0.4,0.4,0.1,0.1) & 7 & 4 & (320,*)\\
-  5000  & 100 & (0.4,0.4,0.1,0.1) & 7 & 4 & (263,266)\\
+  \# of samples & T & prob & \# of rows & groups served (once, several)& \# of seats taken \\
+  1000  & 100 & (0.4,0.4,0.1,0.1) & 7 & [5,33,6,7], [45,33,7,8] & (168,257) \\
+  1000  & 150 & (0.4,0.4,0.1,0.1) & 7 & [4,21,10,11], [58,48,13,12] & (166, 372)\\
+  5000  & 100 & (0.4,0.4,0.1,0.1) & 7 & [6,30,8,6], [48,31,10,6] & (164,259)\\
+  5000  & 150 & (0.4,0.4,0.1,0.1) & 7 & [3,18,12,12], [34,45,11,18] & (168,337)\\
   \hline
-  1000  & 100 & (0.25,0.25,0.25,0.25) & 7 & 4 & (279,*)\\
-  1000  & 150 & (0.25,0.25,0.25,0.25) & 7 & 4 & (293,*)\\
-  5000  & 150 & (0.25,0.25,0.25,0.25) & 7 & 4 & (310,*)\\
-  5000  & 100 & (0.25,0.25,0.25,0.25) & 7 & 4 & (252,*)\\
+  1000  & 100 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [7, 14, 8, 24] & (168, 208)\\
+  1000  & 100 & (0.25,0.25,0.25,0.25) & 10 & [7,17,20,22], [20, 23, 19, 28] & (255, 325)\\
+  1000  & 150 & (0.25,0.25,0.25,0.25) & 10 & [2, 2, 20, 33], [27, 27, 24, 38] & (255, 421)\\
+  5000  & 100 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [11,20,15,22] & (168, 252)\\
+  5000  & 150 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [2,2,7,26] & (168, 168)\\
+  5000  & 150 & (0.25,0.25,0.25,0.25) & 10 & [2,2,20,33], [30,26,36,33] & (255, 447)\\
   \hline
   \end{tabular}
 \end{table}
+
+Once: Obtain the supply from the stochastic model. Then use the several-class rule to decide whether to accept the group at each period.
+
+Several: Initially, set the mean demand for all periods as the upper bound of demand. Then obtain the supply from the deterministic model. Set the accepted demand as the lower bound of demand, the upper bound of demand will be the sum of accepted demand and mean demand for the remaining periods. Update the lower bound and upper bound when some supply runs out.
+
+Fix the number of seats for each row: [21, 22, \ldots, 20 + # of rows].
 
 \subsubsection{Measurement}
 

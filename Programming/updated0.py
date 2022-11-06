@@ -1,3 +1,4 @@
+from tokenize import group
 import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
@@ -130,6 +131,10 @@ class stochasticModel:
 # two ways to add constraints
 # 1. keep the basic m model.
 
+
+    def updateDemand(self, m, demand):
+        # This function is used to update the demands constraints in the model.
+        return
 
     def solve_IP(self, m):
         xvalue = m.getVars()[0: self.I * self.given_lines]
@@ -340,6 +345,7 @@ class originalModel():
         # print('optimal demand:', newd)
         return newd, m2.objVal
 
+
 class samplingmethod:
     def __init__(self, I, number_sample, number_period, prob) -> None:
         self.I = I
@@ -432,31 +438,6 @@ def decision1(sequence, demand, probab):
         # print('demand is:', demand)
     return decision_list
 
-def decisionOnce(sequence, demand, probab):
-    # the function is used to make a decision once on several classes
-    # sequence is one possible sequence of the group arrival.
-    record_demand = np.zeros(len(demand))
-    period = len(sequence)
-    group_type = sorted(list(set(sequence)))
-    decision_list = 0
-    i = sequence[0]
-    remaining_period = period
-    position = group_type.index(i)
-
-    if i == group_type[-1] and demand[-1] == 0:
-        decision_list = 0
-    else:
-        accept_reject = several_class(
-            i-1, demand, remaining_period-1, probab)
-        if accept_reject:
-            decision_list = accept_reject
-            demand[accept_reject] -= 1
-            if accept_reject-position-2 >= 0:
-                demand[accept_reject-position-2] += 1
-            record_demand[position] = 1
-    return record_demand, decision_list
-
-
 def generate_sequence(period, prob):
     trials = [np.random.choice([2, 3, 4, 5], p=prob) for i in range(period)]
     return trials
@@ -485,8 +466,9 @@ if __name__ == "__main__":
 
     dw, prop = sam.get_prob()
     W = len(dw)
+    # roll_width = np.random.randint(low=21, high=31, size=given_lines)
     # roll_width = np.random.randint(21, size = given_lines) + 30
-    roll_width = np.arange(21,21 + given_lines)
+    roll_width = np.arange(21, 21 + given_lines)
     # total_seat = np.sum(roll_width)
 
     demand_width_array = np.array([2, 3, 4, 5])
@@ -498,15 +480,13 @@ if __name__ == "__main__":
 
     # obj = my1.solveModelGurobi()
 
-    ini_demand, upperbound = my.solveBenders(eps = 1e-4, maxit= 15)
+    ini_demand, upperbound = my.solveBenders(eps = 1e-4, maxit= 20)
+    print('initial demand:', ini_demand)
     sequence = generate_sequence(number_period, probab)
     sequence1 = copy.deepcopy(sequence)
     decision_list = decision1(sequence, ini_demand, probab)
     total_people = np.dot(sequence, decision_list)
-    print(total_people)    
-    final_demand = np.array(sequence) * np.array(decision_list)
-    print(Counter(final_demand))
-
+    print(total_people)
 # when demand =0, return used demands, remaining period, decision_list
 # Use remaining period, generate new dw and + used demands -> new scenarios
 # call benders again.
@@ -547,27 +527,12 @@ def newScenario(usedDemand, remaining_period):
 
 total_usedDemand = np.zeros(I)
 
-mylist = []
-remaining_period0 = number_period
 for i in range(100):
 
     demand = ini_demand - total_usedDemand
 
     usedDemand, remaining_period = decisionSeveral(sequence, demand)
-    
-    diff_period = remaining_period0 - remaining_period
 
-    mylist += [1]* diff_period
-    
-    if any(usedDemand) == 0: # all are 0
-        useDemand, decision_list = decisionOnce(sequence, demand, probab)
-        if decision_list:
-            mylist.append(1)
-        else:
-            mylist.append(0)
-        remaining_period -=1
-
-    remaining_period0 = remaining_period
     sequence = sequence[-remaining_period:]
 
     total_usedDemand += usedDemand
@@ -582,19 +547,21 @@ for i in range(100):
     ini_demand1, obj = newModel.solveModelGurobiDynamic(total_usedDemand)
     print('Total used demand:', total_usedDemand)
     print('supply:', ini_demand1)
-
-    if len(sequence) < 10:
+    # if two solutions are the same, then we can fix the demand, use decision1.
+    # if ini_demand1.tolist() == ini_demand.tolist():
+    #     break
+    if len(sequence)<10:
         break
     else:
         ini_demand = ini_demand1
+
+mylist = [1]* (number_period - remaining_period)
 
 remaining_demand = ini_demand - total_usedDemand
 
 decision_list = decision1(sequence, remaining_demand, probab)
 
 mylist += decision_list
-
+print(mylist)
 total_people1 = np.dot(sequence1, mylist)
-final_demand1 = np.array(sequence1) * np.array(mylist)
 print(total_people1)
-print(Counter(final_demand1))

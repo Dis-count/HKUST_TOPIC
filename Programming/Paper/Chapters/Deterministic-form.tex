@@ -1151,17 +1151,17 @@ But the programming doesnot work well unless the demands are larger than supply.
   \begin{tabular}{l|l|l|l|l|l}
   \hline
   \# of samples & T & prob & \# of rows & groups served (once, several)& \# of seats taken \\
-  1000  & 100 & (0.4,0.4,0.1,0.1) & 7 & [5,33,6,7], [45,33,7,8] & (168,257) \\
-  1000  & 150 & (0.4,0.4,0.1,0.1) & 7 & [4,21,10,11], [58,48,13,12] & (166, 372)\\
-  5000  & 100 & (0.4,0.4,0.1,0.1) & 7 & [6,30,8,6], [48,31,10,6] & (164,259)\\
-  5000  & 150 & (0.4,0.4,0.1,0.1) & 7 & [3,18,12,12], [34,45,11,18] & (168,337)\\
+  1000  & 100 & (0.4,0.4,0.1,0.1) & 7 & [5,33,6,7], [20,23,6,7] & (168,168) \\
+  1000  & 150 & (0.4,0.4,0.1,0.1) & 7 & [4,21,10,11], [22,17,7,9] & (166, 168)\\
+  5000  & 100 & (0.4,0.4,0.1,0.1) & 7 & [6,30,8,6], [26,18,8,6] & (164,169)\\
+  5000  & 150 & (0.4,0.4,0.1,0.1) & 7 & [3,18,12,12], [19,15,5,13] & (168,168)\\
   \hline
-  1000  & 100 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [7, 14, 8, 24] & (168, 208)\\
-  1000  & 100 & (0.25,0.25,0.25,0.25) & 10 & [7,17,20,22], [20, 23, 19, 28] & (255, 325)\\
-  1000  & 150 & (0.25,0.25,0.25,0.25) & 10 & [2, 2, 20, 33], [27, 27, 24, 38] & (255, 421)\\
-  5000  & 100 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [11,20,15,22] & (168, 252)\\
-  5000  & 150 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [2,2,7,26] & (168, 168)\\
-  5000  & 150 & (0.25,0.25,0.25,0.25) & 10 & [2,2,20,33], [30,26,36,33] & (255, 447)\\
+  1000  & 100 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [3,10,8,20] & (168, 168)\\
+  1000  & 100 & (0.25,0.25,0.25,0.25) & 10 & [7,17,20,22], [10,18,14,25] & (255, 255)\\
+  1000  & 150 & (0.25,0.25,0.25,0.25) & 10 & [2,2,20,33], [7,8,8,37] & (255, 255)\\
+  5000  & 100 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [3,10,8,20] & (168, 168)\\
+  5000  & 150 & (0.25,0.25,0.25,0.25) & 7 & [0,0,17,20], [2,1,5,28] & (168, 167)\\
+  5000  & 150 & (0.25,0.25,0.25,0.25) & 10 & [2,2,20,33], [9,11,11,32] & (255, 255)\\
   \hline
   \end{tabular}
 \end{table}
@@ -1170,7 +1170,7 @@ Once: Obtain the supply from the stochastic model. Then use the several-class ru
 
 Several: Initially, set the mean demand for all periods as the upper bound of demand. Then obtain the supply from the deterministic model. Set the accepted demand as the lower bound of demand, the upper bound of demand will be the sum of accepted demand and mean demand for the remaining periods. Update the lower bound and upper bound when some supply runs out.
 
-Fix the number of seats for each row: [21, 22, \ldots, 20 + # of rows].
+Fix the number of seats for each row: $[21, 22, \ldots, 20 + \text{the number of rows}]$.
 
 \subsubsection{Measurement}
 

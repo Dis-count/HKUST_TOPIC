@@ -328,7 +328,7 @@ class originalModel():
         m2.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
 
         m2.setParam('OutputFlag', 0)
-        # m2.write('revisedModel.lp')
+
         m2.optimize()
         # print('optimal value:', m2.objVal)
         sol = np.array(m2.getAttr('X'))
@@ -370,7 +370,6 @@ class originalModel():
         newd = np.sum(newx, axis=1)
         # print('optimal demand:', newd)
         return newd, m2.objVal
-
 
 class samplingmethod:
     def __init__(self, I, number_sample, number_period, prob) -> None:
@@ -484,12 +483,12 @@ def decision_demand(sequence, decision_list):
 if __name__ == "__main__":
     num_sample = 5000  # the number of scenarios
     I = 4  # the number of group types
-    number_period = 150
-    given_lines = 7
+    number_period = 70
+    given_lines = 8
     np.random.seed(0)
     # dw = np.random.randint(20, size=(W, I)) + 20
     # dw = np.random.randint(low = 50, high= 100, size=(W, I))
-    probab = [0.4, 0.4, 0.1, 0.1]
+    probab = [0.25, 0.25, 0.25, 0.25]
     sam = samplingmethod(I, num_sample, number_period, probab)
 
     dw, prop = sam.get_prob()
@@ -499,7 +498,7 @@ if __name__ == "__main__":
     roll_width = np.arange(21, 21 + given_lines)
     # total_seat = np.sum(roll_width)
 
-    demand_width_array = np.array([2, 3, 4, 5])
+    demand_width_array = np.arange(2, 2+I)
 
     sequence = generate_sequence(number_period, probab)
     sequence1 = copy.deepcopy(sequence)
@@ -601,7 +600,7 @@ for i in range(150):
     mylist += [1] * diff_period
 
     if any(usedDemand) == 0:  # all are 0
-        useDemand, decision_list = decisionOnce(sequence, demand, probab)
+        usedDemand, decision_list = decisionOnce(sequence, demand, probab)
         if decision_list:
             mylist.append(1)
         else:
@@ -618,7 +617,6 @@ for i in range(150):
     deterModel = deterministicModel(roll_width, given_lines, demand_width_array, I)
 
     ini_demand, obj = deterModel.IP_formulation(total_usedDemand, ini_demand1)
-
     if len(sequence) < 10:
         break
 

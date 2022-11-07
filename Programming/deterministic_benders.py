@@ -481,14 +481,14 @@ def decision_demand(sequence, decision_list):
 # print('The optimal solution for the whole model:', bb[0:I])
 
 if __name__ == "__main__":
-    num_sample = 5000  # the number of scenarios
+    num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    number_period = 70
+    number_period = 80
     given_lines = 8
     np.random.seed(0)
     # dw = np.random.randint(20, size=(W, I)) + 20
     # dw = np.random.randint(low = 50, high= 100, size=(W, I))
-    probab = [0.25, 0.25, 0.25, 0.25]
+    probab = [0.4, 0.4, 0.1, 0.1]
     sam = samplingmethod(I, num_sample, number_period, probab)
 
     dw, prop = sam.get_prob()
@@ -632,3 +632,4 @@ final_demand1 = np.array(sequence1) * np.array(mylist)
 # print(final_demand1)
 print(total_people1)
 print(Counter(final_demand1))
+print(Counter(sequence1))

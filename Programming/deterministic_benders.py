@@ -166,8 +166,8 @@ class stochasticModel:
         xvalue = m.getVars()[0: self.I * self.given_lines]
         for var in xvalue:
             var.vtype = GRB.INTEGER
-        # m.update()
-        m.setParam('OutputFlag', 0)
+        m.update()
+        m.setParam('OutputFlag', 1)
         m.optimize()
 
         return m.objVal, [m.getVarByName('varx[' + str(i) + ',' + str(j) + ']').x for i in range(self.I) for j in range(self.given_lines)]
@@ -193,7 +193,6 @@ class stochasticModel:
         # UB = float("inf")
         LB = 0  # Any feasible solution gives a lower bound.
         while eps < tol and it < maxit:
-            start1 = time.time()
             alpha_set, w_set, LB = self.add_Constrs(x0, zstar)  # give the constraints
             # m.addConstrs(grb.quicksum(alpha_set[t][i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + z[w_set[t]-1] <= grb.quicksum(alpha_set[t][i] * self.dw[w_set[t]-1][i] for i in range(self.I)) for t in range(len(w_set)))
 
@@ -216,12 +215,12 @@ class stochasticModel:
 
             tol = abs(obj - LB)
             it += 1
-            # print('----------------------iteration ' + str(it) + '-------------------')
-            # print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
+            print('----------------------iteration ' + str(it) + '-------------------')
+            print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
             # print('optimal solution:', newx)
         # print('The number of iterations is:', it)
         start = time.time()
-        obj_IP, x0 = self.solve_IP(m)
+        # obj_IP, x0 = self.solve_IP(m)
         newx = np.reshape(x0, (self.I, self.given_lines))
         # print('each row:', newx)
         newd = np.sum(newx, axis=1)
@@ -294,7 +293,7 @@ class stochasticModel:
         print('optimal IP objective:', obj_IP)
         return newd, LB
 
-class originalModel():
+class originalModel:
     def __init__(self, roll_width, given_lines, demand_width_array, W, I, prop, dw):
         self.roll_width = roll_width
         self.given_lines = given_lines
@@ -356,10 +355,9 @@ class originalModel():
 
         m2.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) + grb.quicksum(W0[i, j] * y1[j, w] +
                       M_identity[i, j]*y2[j, w] for j in range(self.I)) == self.dw[w][i] for i in range(self.I) for w in range(self.W))
-        # print("Constructing second took...", round(time.time() - start, 2), "seconds")
         m2.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(
             self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
-
+        start = time.time()
         m2.setParam('OutputFlag', 0)
         m2.optimize()
         # print('optimal value:', m2.objVal)
@@ -369,6 +367,7 @@ class originalModel():
         # print('each row:', newx)
         newd = np.sum(newx, axis=1)
         # print('optimal demand:', newd)
+        print('It took', round(time.time()-start, 2), 'seconds')
         return newd, m2.objVal
 
 class samplingmethod:
@@ -476,6 +475,7 @@ def decision_demand(sequence, decision_list):
     # Sort the list according to the value of dictionary.
     res_demand = [dic[key] for key in sorted(dic)]
     return res_demand
+
 # print('----------------------For the whole model-------------------')
 # print('The optimal value for the whole model:', t)
 # print('The optimal solution for the whole model:', bb[0:I])
@@ -503,13 +503,13 @@ if __name__ == "__main__":
     sequence = generate_sequence(number_period, probab)
     sequence1 = copy.deepcopy(sequence)
 
-    # my = stochasticModel(roll_width, given_lines,demand_width_array, W, I, prop, dw)
+    my = stochasticModel(roll_width, given_lines,demand_width_array, W, I, prop, dw)
 
-    my1 = originalModel(roll_width, given_lines, demand_width_array, W, I, prop, dw)
+    # my1 = originalModel(roll_width, given_lines, demand_width_array, W, I, prop, dw)
 
-    ini_demand, upperbound = my1.solveModelGurobi()
+    # ini_demand, upperbound = my1.solveModelGurobi()
 
-    # ini_demand, upperbound = my.solveBenders(eps = 1e-4, maxit= 20)
+    ini_demand, upperbound = my.solveBenders(eps = 1e-4, maxit= 20)
 
     decision_list = decision1(sequence, ini_demand, probab)
     total_people = np.dot(sequence, decision_list)
@@ -517,6 +517,7 @@ if __name__ == "__main__":
     # print(final_demand)
     print(total_people)
     print(Counter(final_demand))
+    
 # when demand =0, return used demands, remaining period, decision_list
 # Use remaining period, generate new dw and + used demands -> new scenarios
 # call benders again.
@@ -545,7 +546,6 @@ def decisionOnce(sequence, demand, probab):
                 demand[accept_reject-position-2] += 1
             record_demand[position] = 1
     return record_demand, decision_list
-
 
 def decisionSeveral(sequence, demand):
     # the function is used to make several decisions

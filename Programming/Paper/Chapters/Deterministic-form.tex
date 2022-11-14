@@ -1145,6 +1145,20 @@ Three problems:
 $d_{i}^{a}$ is the number of group $i$ we have accepted when we calculate several supplies.
 % But the programming doesnot work well unless the demands are larger than supply.
 
+\begin{figure}[h]
+	\centering  
+	\includegraphics[width = 0.9\textwidth]{Figures/IP1.png}  %插入的图，包括JPG,PNG,PDF,EPS等，放在源文件目录下
+	\caption{}  %图片的名称
+	\label{fig:IP1}   %标签，用作引用
+\end{figure}
+
+\begin{figure}[h]
+	\centering  
+	\includegraphics[width = 0.9\textwidth]{Figures/IP2.png}  %插入的图，包括JPG,PNG,PDF,EPS等，放在源文件目录下
+	\caption{}  %图片的名称
+	\label{fig:IP2}   %标签，用作引用
+\end{figure}
+
 \begin{table}[ht]
   \begin{tabular}{l|l|l|l|l}
   \hline
@@ -1179,10 +1193,9 @@ $d_{i}^{a}$ is the number of group $i$ we have accepted when we calculate severa
 Each entry of people served is the average of 50 instances.
 
 
-$20* 8$
-$40* 30$
+The specific groups served for the case, $1000, 100, 8$ are:
 
-100: [52.22, 4.34, 30.24, 6.92, 6.28], [47.42, 18.82, 20, 6.46, 7.3], [47.38, 18.76, 20.2, 6.42, 7.24]
+$[52.22, 4.34, 30.24, 6.92, 6.28], [47.42, 18.82, 20, 6.46, 7.3], [47.38, 18.76, 20.2, 6.42, 7.24]$ .
 
 Once: Obtain the supply from the stochastic model by benders decomposition. Use the deterministic model to obtain a heuristi supply. Then use the multi-class rule to decide whether to accept the group at each period.
 
@@ -1192,7 +1205,7 @@ Several1: initial supply is from deterministic model.
 
 Several2: initial supply is from stochastic model.
 
-Fix the number of seats for each row: 20,40.
+Fix the number of seats for each row: 20, 40.
 
 \subsubsection{Measurement}
 

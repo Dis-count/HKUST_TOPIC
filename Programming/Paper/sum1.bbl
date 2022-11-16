@@ -1,0 +1,120 @@
+\begin{thebibliography}{10}
+
+\bibitem{alem2010cutting}
+Douglas~Jos{\'e} Alem, Pedro~Augusto Munari, Marcos~Nereu Arenales, and Paulo
+  Augusto~Valente Ferreira.
+\newblock On the cutting stock problem under stochastic demand.
+\newblock {\em Annals of Operations Research}, 179(1):169--186, 2010.
+
+\bibitem{barnhart1998branch}
+Cynthia Barnhart, Ellis~L Johnson, George~L Nemhauser, Martin~WP Savelsbergh,
+  and Pamela~H Vance.
+\newblock Branch-and-price: Column generation for solving huge integer
+  programs.
+\newblock {\em Operations research}, 46(3):316--329, 1998.
+
+\bibitem{barry2021optimal}
+Michael Barry, Claudio Gambella, Fabio Lorenzi, John Sheehan, and Joern
+  Ploennigs.
+\newblock Optimal seat allocation under social distancing constraints.
+\newblock {\em arXiv preprint arXiv:2105.05017}, 2021.
+
+\bibitem{baum1981integer}
+Stephen Baum and LE~Trotter, Jr.
+\newblock Integer rounding for polymatroid and branching optimization problems.
+\newblock {\em SIAM Journal on Algebraic Discrete Methods}, 2(4):416--425,
+  1981.
+
+\bibitem{baum1982finite}
+Stephen Baum and Leslie~E Trotter.
+\newblock Finite checkability for integer rounding properties in combinatorial
+  programming problems.
+\newblock {\em Mathematical Programming}, 22(1):141--147, 1982.
+
+\bibitem{bent2004scenario}
+Russell~W Bent and Pascal Van~Hentenryck.
+\newblock Scenario-based planning for partially dynamic vehicle routing with
+  stochastic customers.
+\newblock {\em Operations Research}, 52(6):977--987, 2004.
+
+\bibitem{casey2005scenario}
+Michael~S Casey and Suvrajeet Sen.
+\newblock The scenario generation algorithm for multistage stochastic linear
+  programming.
+\newblock {\em Mathematics of Operations Research}, 30(3):615--631, 2005.
+
+\bibitem{de1984decomposition}
+Dominique de~Werra.
+\newblock A decomposition property of polyhedra.
+\newblock {\em Mathematical programming}, 30(3):261--266, 1984.
+
+\bibitem{feng2013scenario}
+Yonghan Feng and Sarah~M Ryan.
+\newblock Scenario construction and reduction applied to stochastic power
+  generation expansion planning.
+\newblock {\em Computers \& Operations Research}, 40(1):9--23, 2013.
+
+\bibitem{fischetti2021safe}
+Martina Fischetti, Matteo Fischetti, and Jakob Stoustrup.
+\newblock Safe distancing in the time of covid-19.
+\newblock {\em European Journal of Operational Research}, 2021.
+
+\bibitem{ghorbani2020model}
+Elaheh Ghorbani, Hamid Molavian, and Fred Barez.
+\newblock A model for optimizing the health and economic impacts of covid-19
+  under social distancing measures; a study for the number of passengers and
+  their seating arrangements in aircrafts.
+\newblock {\em arXiv preprint arXiv:2010.10993}, 2020.
+
+\bibitem{gilmore1961linear}
+Paul~C Gilmore and Ralph~E Gomory.
+\newblock A linear programming approach to the cutting-stock problem.
+\newblock {\em Operations research}, 9(6):849--859, 1961.
+
+\bibitem{goulimis1990optimal}
+Constantine Goulimis.
+\newblock Optimal solutions for the cutting stock problem.
+\newblock {\em European Journal of Operational Research}, 44(2):197--208, 1990.
+
+\bibitem{henrion2018problem}
+R{\'e}ne Henrion and Werner R{\"o}misch.
+\newblock Problem-based optimal scenario generation and reduction in stochastic
+  programming.
+\newblock {\em Mathematical Programming}, pages 1--23, 2018.
+
+\bibitem{marcotte1985cutting}
+Odile Marcotte.
+\newblock The cutting stock problem and integer rounding.
+\newblock {\em Mathematical Programming}, 33(1):82--92, 1985.
+
+\bibitem{salari2020social}
+Mostafa Salari, R~John Milne, Camelia Delcea, Lina Kattan, and Liviu-Adrian
+  Cotfas.
+\newblock Social distancing in airplane seat assignments.
+\newblock {\em Journal of Air Transport Management}, 89:101915, 2020.
+
+\bibitem{scheithauer1995modified}
+Guntram Scheithauer and Johannes Terno.
+\newblock The modified integer round-up property of the one-dimensional cutting
+  stock problem.
+\newblock {\em European Journal of Operational Research}, 84(3):562--571, 1995.
+
+\bibitem{vance1998branch}
+Pamela~H Vance.
+\newblock Branch-and-price algorithms for the one-dimensional cutting stock
+  problem.
+\newblock {\em Computational optimization and applications}, 9(3):211--228,
+  1998.
+
+\bibitem{vanderbeck1999computational}
+Fran{\c{c}}ois Vanderbeck.
+\newblock Computational study of a column generation algorithm for bin packing
+  and cutting stock problems.
+\newblock {\em Mathematical Programming}, 86(3):565--594, 1999.
+
+\bibitem{vanderbeck1996exact}
+Fran{\c{c}}ois Vanderbeck and Laurence~A Wolsey.
+\newblock An exact algorithm for ip column generation.
+\newblock {\em Operations research letters}, 19(4):151--159, 1996.
+
+\end{thebibliography}

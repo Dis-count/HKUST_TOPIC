@@ -85,9 +85,9 @@ class compare_methods:
         sequence1 = [i-1 for i in sequence1 if i > 0]
         total_people1 = np.dot(sequence1, mylist)
         final_demand1 = np.array(sequence1) * np.array(mylist)
-
+        final_demand1 = final_demand1[final_demand1 != 0]
         t = Counter(final_demand1)
-        demand = np.zeros(self.I+1)
+        demand = np.zeros(self.I)
         for k, i in enumerate(sorted(t)):
             demand[k] = t[i]
         return demand
@@ -98,21 +98,22 @@ class compare_methods:
 
     def method1(self, sequence, ini_demand):
         decision_list = decision1(sequence, ini_demand, self.probab)
-
+        
         sequence = [i-1 for i in sequence if i > 0]
-        total_people = np.dot(sequence, decision_list)
+        # total_people = np.dot(sequence, decision_list)
         final_demand = np.array(sequence) * np.array(decision_list)
         # print('The result of Method 1--------------')
         # print(f'The total seats: {total_seat}')
         # print(f'The total people:{total_people}')
         # print(Counter(final_demand))
+        final_demand = final_demand[final_demand!=0]
         t = Counter(final_demand)
-        demand = np.zeros(self.I+1)
+        demand = np.zeros(self.I)
         for k,i in enumerate(sorted(t)):
             demand[k]= t[i]
         return demand
 
-    def result(self):
+    def result(self, sequence, ini_demand, ini_demand3):
         final_demand1 = self.method1(sequence, ini_demand)
         final_demand3 = self.method4(sequence, ini_demand3)
         final_demand4 = self.method4(sequence, ini_demand)
@@ -123,7 +124,7 @@ if __name__ == "__main__":
 
     num_sample = 10000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 400
+    num_period = 350
     given_lines = 30
     # np.random.seed(0)
     probab = [0.25, 0.25, 0.25, 0.25]
@@ -134,21 +135,21 @@ if __name__ == "__main__":
 
     a_instance = compare_methods(roll_width, given_lines, I, probab, num_period, num_sample)
 
-    final_demand1 = np.zeros(I+1)
-    final_demand3 = np.zeros(I+1)
-    final_demand4 = np.zeros(I+1)
+    final_demand1 = np.zeros(I)
+    final_demand3 = np.zeros(I)
+    final_demand4 = np.zeros(I)
 
     count = 50
     for i in range(count):
         sequence, ini_demand, ini_demand3 = a_instance.random_generate()
-        a,b,c = a_instance.result()
+        a,b,c = a_instance.result(sequence, ini_demand, ini_demand3)
         final_demand1 += a
         final_demand3 += b
         final_demand4 += c
 
-    people1 = np.dot(np.arange(I+1), final_demand1/count)
-    people3 = np.dot(np.arange(I+1), final_demand3/count)
-    people4 = np.dot(np.arange(I+1), final_demand4/count)
+    people1 = np.dot(np.arange(1,I+1), final_demand1/count)
+    people3 = np.dot(np.arange(1,I+1), final_demand3/count)
+    people4 = np.dot(np.arange(1,I+1), final_demand4/count)
 
     # print(final_demand1/50)
     # print(final_demand3/50)

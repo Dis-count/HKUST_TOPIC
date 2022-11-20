@@ -3,6 +3,7 @@
 import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
+from Method2 import originalModel
 from Method3 import deterministicModel
 from Mist import generate_sequence, decision1
 from collections import Counter
@@ -32,6 +33,10 @@ class compare_methods:
         m1 = stochasticModel(self.roll_width, self.given_lines,
                              self.demand_width_array, W, self.I, prop, dw)
 
+        m2 = originalModel(self.roll_width, self.given_lines,
+                             self.demand_width_array, self.num_sample, self.I, prop, dw)
+        ini_demand2, obj_m2 = m2.solveModelGurobi()
+
         ini_demand, upperbound = m1.solveBenders(eps=1e-4, maxit=20)
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I)
@@ -42,7 +47,7 @@ class compare_methods:
 
         ini_demand3, obj = deter.IP_formulation(np.zeros(self.I), ini_demand1)
 
-        return sequence, ini_demand, ini_demand3
+        return sequence, ini_demand, ini_demand3, ini_demand2
 
 
     def method4(self, sequence, ini_demand):
@@ -113,41 +118,45 @@ class compare_methods:
             demand[k]= t[i]
         return demand
 
-    def result(self, sequence, ini_demand, ini_demand3):
+    def result(self, sequence, ini_demand, ini_demand3, ini_demand2):
         final_demand1 = self.method1(sequence, ini_demand)
+        final_demand2 = self.method1(sequence, ini_demand2)
         final_demand3 = self.method4(sequence, ini_demand3)
         final_demand4 = self.method4(sequence, ini_demand)
-        return final_demand1, final_demand3, final_demand4
+        return final_demand1, final_demand2, final_demand3, final_demand4
 
 
 if __name__ == "__main__":
 
-    num_sample = 10000  # the number of scenarios
+    num_sample = 5000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 350
-    given_lines = 30
+    num_period = 40
+    given_lines = 8
     # np.random.seed(0)
-    probab = [0.25, 0.25, 0.25, 0.25]
+    probab = [0.4, 0.4, 0.1, 0.1]
 
-    roll_width = np.ones(given_lines) * 40
+    roll_width = np.ones(given_lines) * 20
 
     total_seat = np.sum(roll_width)
 
     a_instance = compare_methods(roll_width, given_lines, I, probab, num_period, num_sample)
 
     final_demand1 = np.zeros(I)
+    final_demand2 = np.zeros(I)
     final_demand3 = np.zeros(I)
     final_demand4 = np.zeros(I)
 
     count = 50
     for i in range(count):
-        sequence, ini_demand, ini_demand3 = a_instance.random_generate()
-        a,b,c = a_instance.result(sequence, ini_demand, ini_demand3)
+        sequence, ini_demand, ini_demand3, ini_demand2 = a_instance.random_generate()
+        a,b,c,d = a_instance.result(sequence, ini_demand, ini_demand3, ini_demand2)
         final_demand1 += a
-        final_demand3 += b
-        final_demand4 += c
+        final_demand2 += b
+        final_demand3 += c
+        final_demand4 += d
 
     people1 = np.dot(np.arange(1,I+1), final_demand1/count)
+    people2 = np.dot(np.arange(1,I+1), final_demand2/count)
     people3 = np.dot(np.arange(1,I+1), final_demand3/count)
     people4 = np.dot(np.arange(1,I+1), final_demand4/count)
 
@@ -156,5 +165,6 @@ if __name__ == "__main__":
     # print(final_demand4/50)
 
     print(people1)
+    print(people2)
     print(people3)
     print(people4)

@@ -4,7 +4,7 @@ import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
 from Method2 import originalModel
-from Method3 import deterministicModel
+from Method4 import deterministicModel
 from Mist import generate_sequence, decision1
 from collections import Counter
 import copy
@@ -35,19 +35,25 @@ class compare_methods:
 
         m2 = originalModel(self.roll_width, self.given_lines,
                              self.demand_width_array, self.num_sample, self.I, prop, dw)
-        ini_demand2, obj_m2 = m2.solveModelGurobi()
+        ini_demand2, _ = m2.solveModelGurobi()
 
-        ini_demand, upperbound = m1.solveBenders(eps=1e-4, maxit=20)
+        ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I)
 
-        ini_demand, obj = deter.IP_formulation(np.zeros(self.I), ini_demand)
+        ini_demand2, _ = deter.IP_formulation(np.zeros(self.I), ini_demand2) 
+        ini_demand2, _ = deter.IP_formulation(ini_demand2, np.zeros(self.I))
+
+        ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand) 
+        ini_demand, _ = deter.IP_formulation(ini_demand, np.zeros(self.I))
+
 
         ini_demand1 = np.array(self.probab) * self.num_period
 
-        ini_demand3, obj = deter.IP_formulation(np.zeros(self.I), ini_demand1)
+        ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
+        ini_demand3, _ = deter.IP_formulation(ini_demand3, np.zeros(self.I))
 
-        return sequence, ini_demand, ini_demand3, ini_demand2
+        return sequence, ini_demand, ini_demand2, ini_demand3
 
 
     def method4(self, sequence, ini_demand):
@@ -55,15 +61,13 @@ class compare_methods:
         remaining_period0 = self.num_period
         sequence1 = copy.deepcopy(sequence)
         total_usedDemand = np.zeros(self.I)
-        ini_demand1 = np.array(self.probab) * self.num_period
+        # ini_demand1 = np.array(self.probab) * self.num_period
         deterModel = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
 
         while remaining_period0:
             demand = ini_demand - total_usedDemand
-
             usedDemand, remaining_period = decisionSeveral(sequence, demand)
-
             diff_period = remaining_period0 - remaining_period
 
             mylist += [1] * diff_period
@@ -81,14 +85,12 @@ class compare_methods:
 
             total_usedDemand += usedDemand
 
-            ini_demand1 = total_usedDemand + \
-                np.ceil(np.array(self.probab) * remaining_period)
-
             ini_demand, obj = deterModel.IP_formulation(
-                total_usedDemand, ini_demand1)
+                total_usedDemand, np.zeros(self.I))
 
         sequence1 = [i-1 for i in sequence1 if i > 0]
-        total_people1 = np.dot(sequence1, mylist)
+        # total_people1 = np.dot(sequence1, mylist)
+
         final_demand1 = np.array(sequence1) * np.array(mylist)
         final_demand1 = final_demand1[final_demand1 != 0]
         t = Counter(final_demand1)
@@ -96,46 +98,44 @@ class compare_methods:
         for k, i in enumerate(sorted(t)):
             demand[k] = t[i]
         return demand
-        # print(f'The number of seats: {total_seat}')
-        # print(f'The number of people:{total_people1}')
-        # print(Counter(final_demand1))
-
 
     def method1(self, sequence, ini_demand):
         decision_list = decision1(sequence, ini_demand, self.probab)
-        
         sequence = [i-1 for i in sequence if i > 0]
         # total_people = np.dot(sequence, decision_list)
         final_demand = np.array(sequence) * np.array(decision_list)
         # print('The result of Method 1--------------')
         # print(f'The total seats: {total_seat}')
-        # print(f'The total people:{total_people}')
-        # print(Counter(final_demand))
+
         final_demand = final_demand[final_demand!=0]
         t = Counter(final_demand)
         demand = np.zeros(self.I)
         for k,i in enumerate(sorted(t)):
             demand[k]= t[i]
+
         return demand
 
-    def result(self, sequence, ini_demand, ini_demand3, ini_demand2):
+    def result(self, sequence, ini_demand, ini_demand2, ini_demand3):
+        ini_demand4 = copy.deepcopy(ini_demand)
+
         final_demand1 = self.method1(sequence, ini_demand)
         final_demand2 = self.method1(sequence, ini_demand2)
         final_demand3 = self.method4(sequence, ini_demand3)
-        final_demand4 = self.method4(sequence, ini_demand)
+        final_demand4 = self.method4(sequence, ini_demand4)
         return final_demand1, final_demand2, final_demand3, final_demand4
 
 
 if __name__ == "__main__":
 
-    num_sample = 5000  # the number of scenarios
-    I = 4  # the number of group types
-    num_period = 40
-    given_lines = 8
-    # np.random.seed(0)
-    probab = [0.4, 0.4, 0.1, 0.1]
 
-    roll_width = np.ones(given_lines) * 20
+    num_sample = 10000  # the number of scenarios
+    I = 4  # the number of group types
+    num_period = 350
+    given_lines = 30
+    # np.random.seed(i)
+    probab = [0.25, 0.25, 0.25, 0.25]
+
+    roll_width = np.ones(given_lines) * 40
 
     total_seat = np.sum(roll_width)
 
@@ -147,24 +147,23 @@ if __name__ == "__main__":
     final_demand4 = np.zeros(I)
 
     count = 50
-    for i in range(count):
-        sequence, ini_demand, ini_demand3, ini_demand2 = a_instance.random_generate()
-        a,b,c,d = a_instance.result(sequence, ini_demand, ini_demand3, ini_demand2)
+    for j in range(count):
+        sequence, ini_demand, ini_demand2, ini_demand3 = a_instance.random_generate()
+
+        a,b,c,d = a_instance.result(sequence, ini_demand, ini_demand2, ini_demand3)
+
         final_demand1 += a
         final_demand2 += b
         final_demand3 += c
         final_demand4 += d
 
-    people1 = np.dot(np.arange(1,I+1), final_demand1/count)
-    people2 = np.dot(np.arange(1,I+1), final_demand2/count)
-    people3 = np.dot(np.arange(1,I+1), final_demand3/count)
-    people4 = np.dot(np.arange(1,I+1), final_demand4/count)
+    people1 = np.dot(np.arange(1,I+1), final_demand1)
+    people2 = np.dot(np.arange(1,I+1), final_demand2)
+    people3 = np.dot(np.arange(1,I+1), final_demand3)
+    people4 = np.dot(np.arange(1,I+1), final_demand4)
 
-    # print(final_demand1/50)
-    # print(final_demand3/50)
-    # print(final_demand4/50)
 
-    print(people1)
-    print(people2)
-    print(people3)
-    print(people4)
+    print(people1/count)
+    print(people2/count)
+    print(people3/count)
+    print(people4/count)

@@ -1127,10 +1127,10 @@ Fix the number of seats for each row and the number of scenarios, consider the e
   \end{tabular}
 \end{table}
 
-Three problems:
-1. When the seats are larger than the number of people, Benders decomposition will give a solution like $[***,0,0,0]$.
-2. In fact, we cannot obtain the optimal integral solution by using Benders and IP. That is because it relaxes more constraints.
-3. When we add more constraints, the Benders shows something wrong.
+% Three problems:
+% 1. When the seats are larger than the number of people, Benders decomposition will give a solution like $[***,0,0,0]$.
+% 2. In fact, we cannot obtain the optimal integral solution by using Benders and IP. That is because it relaxes more constraints.
+% 3. When we add more constraints, the Benders shows something wrong.
 
 \begin{equation}\label{BD_demands}
   \begin{aligned}
@@ -1150,46 +1150,46 @@ $d_{i}^{a}$ is the number of group $i$ we have accepted when we calculate severa
   \begin{tabular}{l|l|l|l|l}
   \hline
   \# samples & T & probabilities & \# rows &  \# of people served \\
-  1000  & 30  & [0.4,0.4,0.1,0.1] & 8 & (52.24, 55.08, 55.38, 54.06) \\
-  1000  & 35  & [0.4,0.4,0.1,0.1] & 8 & (67.5, 67.56, 67.3, 67.22) \\
-  1000  & 40  & [0.4,0.4,0.1,0.1] & 8 & (76.48, 76.18, 75.94, 75.64) \\
-  1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & (84.04, 84.04, 83.80, 83.44) \\
-  1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (93.9, 93.98, 94.28, 93.18) \\
-  1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (98.12, NA, 101.86, 101.02) \\ % slow
-  1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (101.68, NA, 104.24, 103.6) \\
-  5000  & 40  & [0.4,0.4,0.1,0.1] & 8 & (76.62, 75.98, 75.66) \\
+  1000  & 30  & [0.4,0.4,0.1,0.1] & 8 & (56.72, 56.72, 56.72, 56.72) \\
+  1000  & 35  & [0.4,0.4,0.1,0.1] & 8 & (68.06, 68.06, 68.06, 68.06) \\
+  1000  & 40  & [0.4,0.4,0.1,0.1] & 8 & (75.74, 75.74, 75.74, 75.74) \\
+  1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & (85.06, 85.06, 85.06, 85.06) \\
+  1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (94.82, 94.82, 95.32, 95.32) \\
+  1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (100.28, NA, 103.04, 103.06) \\ % slow
+  1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (102.16, NA, 104.5, 104.5) \\
+  5000  & 40  & [0.4,0.4,0.1,0.1] & 8 & (75.72, 75.72, 75.72, 75.72) \\
   \hline
-  1000  & 25  & [0.25,0.25,0.25,0.25] & 8 & (61.34, 63.54, 62.90, 60.9) \\
-  1000  & 30  & [0.25,0.25,0.25,0.25] & 8 & (72.84, 75.26, 74.3, 72.18) \\
-  1000  & 35  & [0.25,0.25,0.25,0.25] & 8 & (86.82, 86.82, 85.3, 84.66) \\
-  1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (97.74, 97.80, 97.32, 96.64)  \\
-  1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (108.06, 108.06, 110.74, 109.66) \\
-  1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (111.84, 112.2, 114.24, 113.72) \\
-  5000  & 30  & [0.25,0.25,0.25,0.25] & 8 & (74.9, 76.76, 75.7, 73.62)  \\
-  10000  & 30  & [0.25,0.25,0.25,0.25] & 8 & (73.08, 74.58, 73.78, 71.96) \\
+  1000  & 25  & [0.25,0.25,0.25,0.25] & 8 & (61.66, 61.66, 61.66, 61.66) \\
+  1000  & 30  & [0.25,0.25,0.25,0.25] & 8 & (76.52, 76.52, 76.52, 76.52) \\
+  1000  & 35  & [0.25,0.25,0.25,0.25] & 8 & (87.82, 87.82, 87.82, 87.82) \\
+  1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (100.56, 100.48, 100.7, 100.7) \\
+  1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (107.26, 107.26, 109.5, 109.5) \\
+  1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (112.28, 112.46, 114.36, 114.38) \\
+  5000  & 30  & [0.25,0.25,0.25,0.25] & 8 & (74.48, 74.48, 74.48, 74.48) \\
   \hline
-  5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & (751.96, 750.60, 749.72) \\
-  5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & (851.88, 851.82, 859.28, 859.38) \\
-  5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & (871.46, 862.94, 862.92) \\
-  5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & (896.04, 871.28, 871.18) \\
-  10000  & 350  & [0.25,0.25,0.25,0.25] & 30 & (849.92, 857.14, 857.0) \\
+  5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & (752.32, 752.32, 752.32, 752.32) \\
+  5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & (851.82, 851.78, 857.78, 857.78) \\
+  5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & (873.14, 873.42, 864.4, 864.4) \\
+  5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & (896.16, 896.6, 871.32, 871.32) \\
+  10000 & 350  & [0.25,0.25,0.25,0.25] & 30 & (849.92, 857.14, 857.0) \\
   \hline
   \end{tabular}
 \end{table}
 
-Stochastic solution works better when demand is less than supply but works worse when demand is larger than supply. The results are shown in the table.
+The stochastic model only gives the maximal people that can be served, not the maximal seat assignment. We do the following changes to obtain the supply in the 
+Firstly, we solve the deterministic model by setting the LP solution as the upper bound to obtain a feasible solution, then solve the deterministic model by setting this solution as the lower bound to obtain a new supply.
 
-(1,2,3) in the 'people served in the table: 
-1: use the supply from stochastic model. 
-2: the inital supply from stochastic model, update the supply by deterministic model. 
-3: set the mean demand as the initial supply, update the supply by deterministic model. 
-2 is always better than 3.
+
+(1,2,3,4) in the 'people served in the table: 
+1: Use the supply from stochastic model.(LP) 
+2. Use the supply from stochastic model.(IP)
+3: the inital supply from stochastic model, update the supply by deterministic model. 
+4: set the mean demand as the initial supply, update the supply by deterministic model. 
+
 
 Each entry of people served is the average of 50 instances.
 
 The specific groups served for the case, $1000, 100, 8$ are:
-
-$[52.22, 4.34, 30.24, 6.92, 6.28], [47.42, 18.82, 20, 6.46, 7.3], [47.38, 18.76, 20.2, 6.42, 7.24]$ .
 
 Once: Obtain the supply from the stochastic model by benders decomposition. Use the deterministic model to obtain a heuristi supply. Then use the multi-class rule to decide whether to accept the group at each period.
 
@@ -1200,6 +1200,8 @@ Several1: initial supply is from deterministic model.
 Several2: initial supply is from stochastic model.
 
 Fix the number of seats for each row: 20, 40.
+
+One counterexample: [15,21,13,3] /[15,21,10,3]  reject 4
 
 \subsubsection{Measurement}
 

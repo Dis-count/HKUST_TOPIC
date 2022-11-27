@@ -33,7 +33,8 @@ def decision1(sequence, demand, probab):
     # the function is used to make a decision on several classes
     # sequence is one possible sequence of the group arrival.
     period = len(sequence)
-    group_type = sorted(list(set(sequence)))
+    I = len(demand)
+    group_type = [i+2 for i in range(I)]
     decision_list = [0] * period
     t = 0
     for i in sequence:
@@ -78,9 +79,10 @@ def decision_demand(sequence, decision_list):
 def decisionOnce(sequence, demand, probab):
     # the function is used to make a decision once on several classes
     # sequence is one possible sequence of the group arrival.
-    record_demand = np.zeros(len(demand))
+    I = len(demand)
+    record_demand = np.zeros(I)
     period = len(sequence)
-    group_type = sorted(list(set(sequence)))
+    group_type = [i+2 for i in range(I)]
     decision_list = 0
     i = sequence[0]
     remaining_period = period
@@ -104,22 +106,26 @@ def decisionSeveral(sequence, demand):
     # the function is used to make several decisions
     # Sequence is one possible sequence of the group arrival.
     period = len(sequence)
-    group_type = sorted(list(set(sequence)))
+    I = len(demand)
+    group_type = [i+2 for i in range(I)]
+
     # decision_list = [0] * period
     originalDemand = copy.deepcopy(demand)
     t = 0
     for i in sequence:
-        remaining_period = period - t
         position = group_type.index(i)
         demand_posi = demand[position]
         if demand_posi > 0:
             # decision_list[t] = 1
             demand[position] = demand_posi - 1
         else:
+            remaining_period = period - t
             break
         t += 1
+        remaining_period = period - t
     usedDemand = originalDemand - demand
         # print('the period:', t)
         # print('demand is:', demand)
     # decision_list = decision_list[0:t]
     return usedDemand, remaining_period
+

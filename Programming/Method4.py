@@ -22,10 +22,10 @@ class deterministicModel:
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
-        m.addConstrs(grb.quicksum(x[i, j] for j in range(
-            self.given_lines)) <= demand_upper[i] for i in range(self.I))
-
-        m.addConstrs(grb.quicksum(x[i, j] for j in range(
+        if sum(demand_upper)!= 0:
+            m.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) <= demand_upper[i] for i in range(self.I))
+        if sum(demand_lower)!= 0:
+            m.addConstrs(grb.quicksum(x[i, j] for j in range(
             self.given_lines)) >= demand_lower[i] for i in range(self.I))
 
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(

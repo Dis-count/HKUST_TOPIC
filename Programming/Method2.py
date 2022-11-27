@@ -37,16 +37,15 @@ class originalModel:
                                    for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         M_identity = np.identity(self.I)
 
-        m2.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) + grb.quicksum(W0[i, j] * y1[j, w] +
-                      M_identity[i, j]*y2[j, w] for j in range(self.I)) == self.dw[w][i] for i in range(self.I) for w in range(self.W))
+        m2.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) + grb.quicksum(W0[i, j] * y1[j, w] + M_identity[i, j]*y2[j, w] for j in range(self.I)) == self.dw[w][i] for i in range(self.I) for w in range(self.W))
         # print("Constructing second took...", round(time.time() - start, 2), "seconds")
         m2.setObjective(grb.quicksum(self.num_sample* self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(
             self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
 
-        # m2.setParam('OutputFlag', 0)
+        m2.setParam('OutputFlag', 0)
 
         m2.optimize()
-        # print('optimal value:', m2.objVal)
+
         sol = np.array(m2.getAttr('X'))
         solx = sol[0:self.I * self.given_lines]
         newx = np.reshape(solx, (self.I, self.given_lines))

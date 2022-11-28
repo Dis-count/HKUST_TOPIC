@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex sum1"] 1669554869 "sum1.aux" "sum1.bbl" "sum1" 1669554874
+["bibtex sum1"] 1669610831 "sum1.aux" "sum1.bbl" "sum1" 1669610836
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1630493868 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "refe.bib" 1661137281 6297 7e058d3b91b357e8a54eb1740659750d ""
-  "sum1.aux" 1669554873 9700 d7250f8f3c170327856c8bfb44ea891e "pdflatex"
+  "sum1.aux" 1669610834 9700 b9b536ffb3639ed92f658201bf902c9d "pdflatex"
   (generated)
   "sum1.blg"
   "sum1.bbl"
-["pdflatex"] 1669554872 "f:/Files/Github/HKUST_TOPIC/Programming/Paper/sum1.tex" "sum1.pdf" "sum1" 1669554874
+["pdflatex"] 1669610833 "f:/Files/Github/HKUST_TOPIC/Programming/Paper/sum1.tex" "sum1.pdf" "sum1" 1669610836
   "Chapters/Abstract.tex" 1658657188 1006 cff0309bbe6084c6d1ee5b6ee656f01d ""
   "Chapters/Conclusion.tex" 1644062107 278 c046f9da481190b6e0cefc62467b3834 ""
-  "Chapters/Deterministic-form.tex" 1669554870 89233 b076da276c492e4618cc0085c99a5f55 ""
+  "Chapters/Deterministic-form.tex" 1669610832 90403 eb90dffadd299199e359e914d732f64c ""
   "Chapters/Dynamic-form.tex" 1663067715 1279 cab934ba128aebd122527649a031e957 ""
   "Chapters/Introduction.tex" 1663066586 3966 89afa0d4fe55a4965fb5478de30e0a73 ""
   "Chapters/Literature-review.tex" 1659875762 2539 9aa4211166fe037248bf3c138806e8c8 ""
@@ -128,13 +128,13 @@
   "e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1630497016 5227370 214224b42125130ccee72e74a5bb57f5 ""
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
-  "f:/Files/Github/HKUST_TOPIC/Programming/Paper/sum1.tex" 1669552822 1726 ff0eda767874c75cffc2cde4ba1a0e5f ""
-  "sum1.aux" 1669554873 9700 d7250f8f3c170327856c8bfb44ea891e "pdflatex"
-  "sum1.bbl" 1669554870 4598 72782a90d14b565de569da007ef3781c "bibtex sum1"
-  "sum1.out" 1669554873 6460 798c003d329155309512fa54d04d75e4 "pdflatex"
-  "sum1.tex" 1669552822 1726 ff0eda767874c75cffc2cde4ba1a0e5f ""
+  "f:/Files/Github/HKUST_TOPIC/Programming/Paper/sum1.tex" 1669607725 1726 ff0eda767874c75cffc2cde4ba1a0e5f ""
+  "sum1.aux" 1669610834 9700 b9b536ffb3639ed92f658201bf902c9d "pdflatex"
+  "sum1.bbl" 1669610831 4598 72782a90d14b565de569da007ef3781c "bibtex sum1"
+  "sum1.out" 1669610834 6460 798c003d329155309512fa54d04d75e4 "pdflatex"
+  "sum1.tex" 1669607725 1726 ff0eda767874c75cffc2cde4ba1a0e5f ""
   (generated)
-  "sum1.log"
+  "sum1.pdf"
   "sum1.out"
   "sum1.aux"
-  "sum1.pdf"
+  "sum1.log"

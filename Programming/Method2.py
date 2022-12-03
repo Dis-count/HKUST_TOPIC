@@ -43,15 +43,15 @@ class originalModel:
             self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
 
         m2.setParam('OutputFlag', 0)
-
+        # m2.Params.MIPGapAbs = 1
         m2.optimize()
 
         sol = np.array(m2.getAttr('X'))
         solx = sol[0:self.I * self.given_lines]
+        # soly2 = sol[-self.I * self.W:]
+        # print(f'check the result:{any(soly2)}')
         newx = np.reshape(solx, (self.I, self.given_lines))
-        # print('each row:', newx)
         newd = np.sum(newx, axis=1)
-        # print('optimal demand:', newd)
         return newd, m2.objVal/self.num_sample
 
 if __name__ == "__main__":

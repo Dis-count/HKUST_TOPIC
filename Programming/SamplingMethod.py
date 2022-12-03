@@ -42,7 +42,7 @@ class samplingmethod:
 
 
 if __name__ == "__main__":
-    num_sample = 1000  # the number of scenarios
+    num_sample = 10  # the number of scenarios
     I = 4  # the number of group types
     number_period = 80
     probab = [0.4, 0.4, 0.1, 0.1]

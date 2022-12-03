@@ -11,16 +11,17 @@ import copy
 from Mist import decisionSeveral, decisionOnce
 # This function call different methods
 
-class compare_methods:
+class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
-        self.roll_width = roll_width
-        self.given_lines = given_lines
+        self.roll_width = roll_width  # array, mutable object
+        self.given_lines = given_lines  # number, Immutable object
         self.demand_width_array = np.arange(2, 2+I)
         self.value_array = self.demand_width_array - 1
-        self.I = I
+        self.I = I   # number, Immutable object
         self.probab = probab
-        self.num_period = num_period
-        self.num_sample = num_sample
+        self.num_period = num_period   # number, Immutable object
+        self.num_sample = num_sample   # number, Immutable object
+
 
     def random_generate(self):
         sam = samplingmethod(self.I, self.num_sample, self.num_period, self.probab)
@@ -55,11 +56,52 @@ class compare_methods:
 
         return sequence, ini_demand, ini_demand2, ini_demand3
 
+    def row_by_row(self, sequence):
+        # i is the i-th request in the sequence
+        # j is the j-th row
+        # sequence includes social distance.
+        remaining_capacity = np.zeros(self.given_lines)
+        current_capacity = copy.deepcopy(self.roll_width)
+        j = 0
+        period  = 0
+        for i in sequence:
+            if i in remaining_capacity:
+                inx = np.where(remaining_capacity == i)[0][0]
+                remaining_capacity[inx] = 0
+
+            if current_capacity[j] > i:
+                current_capacity[j] -= i
+            else:    
+                remaining_capacity[j] = current_capacity[j]
+                j +=1
+                if j > self.given_lines-1:
+                    break
+                current_capacity[j] -= i
+            period +=1
+        
+        lis = [0] * (self.num_period - period)
+        for k, i in enumerate(sequence[period:]):
+            if i in remaining_capacity:
+                inx = np.where(remaining_capacity == i)[0][0]
+                remaining_capacity[inx] = 0
+                lis[k] = 1
+        my_list111 = [1]* period + lis
+        sequence = [i-1 for i in sequence]
+
+        final_demand = np.array(sequence) * np.array(my_list111)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+
+        return demand
+
 
     def method4(self, sequence, ini_demand):
         mylist = []
         remaining_period0 = self.num_period
-        sequence1 = copy.deepcopy(sequence)
+        sequence1 = copy.copy(sequence)
         total_usedDemand = np.zeros(self.I)
         # ini_demand1 = np.array(self.probab) * self.num_period
         deterModel = deterministicModel(
@@ -93,25 +135,25 @@ class compare_methods:
 
         final_demand1 = np.array(sequence1) * np.array(mylist)
         final_demand1 = final_demand1[final_demand1 != 0]
-        t = Counter(final_demand1)
+
         demand = np.zeros(self.I)
-        for k, i in enumerate(sorted(t)):
-            demand[k] = t[i]
+        for i in final_demand1:
+            demand[i-1] += 1
+        
         return demand
 
     def method1(self, sequence, ini_demand):
         decision_list = decision1(sequence, ini_demand, self.probab)
         sequence = [i-1 for i in sequence if i > 0]
+
         # total_people = np.dot(sequence, decision_list)
         final_demand = np.array(sequence) * np.array(decision_list)
         # print('The result of Method 1--------------')
-        # print(f'The total seats: {total_seat}')
-
         final_demand = final_demand[final_demand!=0]
-        t = Counter(final_demand)
+
         demand = np.zeros(self.I)
-        for k,i in enumerate(sorted(t)):
-            demand[k]= t[i]
+        for i in final_demand:
+            demand[i-1] += 1
 
         return demand
 
@@ -127,43 +169,48 @@ class compare_methods:
 
 if __name__ == "__main__":
 
-
-    num_sample = 10000  # the number of scenarios
+    num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 350
-    given_lines = 30
+    num_period = 40
+    given_lines = 8
     # np.random.seed(i)
     probab = [0.25, 0.25, 0.25, 0.25]
 
-    roll_width = np.ones(given_lines) * 40
+    roll_width = np.ones(given_lines) * 20
 
     total_seat = np.sum(roll_width)
 
-    a_instance = compare_methods(roll_width, given_lines, I, probab, num_period, num_sample)
+    a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
     final_demand1 = np.zeros(I)
     final_demand2 = np.zeros(I)
     final_demand3 = np.zeros(I)
     final_demand4 = np.zeros(I)
+    final_demand5 = np.zeros(I)
+
 
     count = 50
     for j in range(count):
         sequence, ini_demand, ini_demand2, ini_demand3 = a_instance.random_generate()
 
         a,b,c,d = a_instance.result(sequence, ini_demand, ini_demand2, ini_demand3)
+        
+        e = a_instance.row_by_row(sequence)
 
         final_demand1 += a
         final_demand2 += b
         final_demand3 += c
         final_demand4 += d
+        final_demand5 += e
 
     people1 = np.dot(np.arange(1,I+1), final_demand1)
     people2 = np.dot(np.arange(1,I+1), final_demand2)
     people3 = np.dot(np.arange(1,I+1), final_demand3)
     people4 = np.dot(np.arange(1,I+1), final_demand4)
-
+    people5 = np.dot(np.arange(1,I+1), final_demand5)
 
     print(people1/count)
     print(people2/count)
     print(people3/count)
     print(people4/count)
+    print(people5/count)

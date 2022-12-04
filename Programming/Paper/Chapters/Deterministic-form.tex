@@ -1149,29 +1149,22 @@ $d_{i}^{a}$ is the number of group $i$ we have accepted when we calculate severa
 \begin{table}[ht]
   \begin{tabular}{l|l|l|l|l}
   \hline
-  \# samples & T & probabilities & \# rows &  \# of people served \\
-  1000  & 30  & [0.4,0.4,0.1,0.1] & 8 & (56.72, 56.72, 56.72, 56.72) \\
-  1000  & 35  & [0.4,0.4,0.1,0.1] & 8 & (68.06, 68.06, 68.06, 68.06) \\
-  1000  & 40  & [0.4,0.4,0.1,0.1] & 8 & (75.74, 75.74, 75.74, 75.74) \\
-  1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & (85.06, 85.06, 85.06, 85.06) \\
-  1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (95.86, 95.86, 96.26, 96.26) \\
-  1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (100.28, NA, 103.04, 103.06) \\ % slow
-  1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (102.16, NA, 104.5, 104.5) \\
-  5000  & 40  & [0.4,0.4,0.1,0.1] & 8 & (75.72, 75.72, 75.72, 75.72) \\
+  \# samples & T & probabilities & \# rows & relative performance(\%) compared to FCFS \\
+  1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & (0.12, 0.12, 0.12, 0.12, 0.12, 0.12) \\
+  1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (1.86, 1.86, 2.54, 2.54, 2.54, 2.54) \\
+  1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (5.39, NA, 7.98, 7.98, 8.46, 8.04) \\ % slow
+  1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (7.41, NA, 9.79, 9.79, 12.23, 9.60) \\
+  1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & (9.03, 9.07, 10.68, 10.68, 15.75, 10.49) \\
   \hline
-  1000  & 25  & [0.25,0.25,0.25,0.25] & 8 & (61.66, 61.66, 61.66, 61.66) \\
-  1000  & 30  & [0.25,0.25,0.25,0.25] & 8 & (76.52, 76.52, 76.52, 76.52) \\
-  1000  & 35  & [0.25,0.25,0.25,0.25] & 8 & (87.82, 87.82, 87.82, 87.82) \\
-  1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (99.84, 99.84, 100.12, 100.12) \\
-  1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (109.9, 109.9, 111.34, 111.24) \\
-  1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (101.5, 111.18, 111.26, 113.74, 114.74) \\
-  5000  & 30  & [0.25,0.25,0.25,0.25] & 8 & (74.48, 74.48, 74.48, 74.48) \\
+  1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (1.54, 1.54, 1.91, 1.91, 1.91, 1.91) \\
+  1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (7.17, 7.17, 9.77, 9.77, 10.68, 10.07) \\
+  1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (8.83, 8.95, 11.10, 11.08, 13.64, 10.89) \\
+  1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & (11.10, 11.10, 11.84, 11.84, 16.38, 11.15) \\
   \hline
-  5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & (752.32, 752.32, 752.32, 752.32) \\
-  5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & (851.82, 851.78, 857.78, 857.78) \\
-  5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & (873.14, 873.42, 864.4, 864.4) \\
-  5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & (896.16, 896.6, 871.32, 871.32) \\
-  10000 & 350  & [0.25,0.25,0.25,0.25] & 30 & (850.18, 850.2, 855.84, 855.84) \\
+  5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & (0.00, 0.00, 0.00, 0.00, 0.00, 0.00) \\
+  5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & (5.28, 5.28, 6.32, 6.32, 7.00, 6.21) \\
+  5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & (8.16, 8.20, 7.28, 7.28, 11.45, 6.39) \\
+  5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & (11.00, 11.04, 7.93, 7.93, 13.06, 6.14) \\
   \hline
   \end{tabular}
 \end{table}
@@ -1179,12 +1172,17 @@ $d_{i}^{a}$ is the number of group $i$ we have accepted when we calculate severa
 The stochastic model only gives the maximal people that can be served, not the maximal seat assignment. We make the following changes to obtain the supply in the once-decision method.
 Firstly, we solve the deterministic model by setting the LP solution as the upper bound to obtain a feasible solution, then solve the deterministic model by setting this solution as the lower bound to obtain a new supply.
 
+0 is the result obtained from first-come-first-serve. For each request, we assign it row by row. When the capacity of one row is not enough for the request, we assign it in the next row. If the following request can take up the remaining capacity of some rows exactly, we place it in the row immediately. We check each request until the capacity is used up.
 
-(1,2,3,4) in the `people served in the table': 
+We set the result as the baseline.
+
+(1,2,3,4,5,6) in the `people served in the table': 
 1: The supply is obtained from stochastic model.(LP) 
 2. The supply is obtained from stochastic model.(IP)
 3: Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. 
 4: The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound.
+5: The optimal people from the offline sequence.
+6: Based on First-come-first-serve, but use the deterministic model to update.
 
 Policies 1 and 2 don't have a dominant relation. Policy 4 dominates policy 3.
 Policy 4 needs to be advised to dominate policy 1.

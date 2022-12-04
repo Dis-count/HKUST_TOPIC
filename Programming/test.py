@@ -1,4 +1,5 @@
 import numpy as np
+from Method4 import deterministicModel
 
 class FirstComeFirstServe:
     def __init__(self, I, num_period, roll_width, given_lines) -> None:
@@ -10,19 +11,31 @@ class FirstComeFirstServe:
 
     def binary_search_first(self, sequence):
         # Return the index not less than the first 
+        sequence = [i-1 for i in sequence]
         target = self.num_seats
         arr = np.cumsum(sequence) + np.arange(1, self.num_period+1)
         low = 0
         high = len(arr)-1
         res = -1
         while low <= high:
-            mid = (low+high)//2
+            mid = (low + high)//2
             if target <= arr[mid]:
                 res = mid
                 high = mid-1
             else:
                 low = mid+1
-        return self.seq[0:res]
+        if res == -1:
+            total = sum(sequence)
+            seq = sequence
+        else:
+            total = sum(sequence[0:res])
+
+        remaining = target - total
+        if remaining > 0 and res >0:
+            for i in sequence[res:]:
+                if i == remaining-1:
+                    seq = sequence[0:res]+ [i]
+        return seq
 
     def seq2demand(self):
         seq = self.binary_search_first()
@@ -72,3 +85,14 @@ class FirstComeFirstServe:
 
         return demand
 
+    def offline(self, sequence):
+        # This function is to obtain the optimal decision.
+        demand = np.zeros(self.I)
+        sequence = [i-1 for i in sequence]
+        for i in sequence:
+            demand[i-1] += 1
+        test = deterministicModel(
+            self.roll_width, self.given_lines, self.demand_width_array, self.I)
+        newd, obj = test.IP_formulation(np.zeros(self.I), demand)
+
+        return newd

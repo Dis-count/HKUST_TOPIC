@@ -9,6 +9,7 @@ from Mist import generate_sequence, decision1
 from collections import Counter
 import copy
 from Mist import decisionSeveral, decisionOnce
+import time
 # This function call different methods
 
 class CompareMethods:
@@ -36,9 +37,11 @@ class CompareMethods:
 
         m2 = originalModel(self.roll_width, self.given_lines,
                              self.demand_width_array, self.num_sample, self.I, prop, dw)
+        
         ini_demand2, _ = m2.solveModelGurobi()
 
         ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
+
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I)
 
@@ -97,6 +100,45 @@ class CompareMethods:
 
         return demand
 
+    def binary_search_first(self, sequence):
+        # Return the index not less than the first
+        target = sum(self.roll_width)
+        arr = np.cumsum(sequence)
+        low = 0
+        high = len(arr)-1
+        res = -1
+        while low <= high:
+            mid = (low + high)//2
+            if target <= arr[mid]:
+                res = mid
+                high = mid-1
+            else:
+                low = mid+1
+        if res == -1:
+            total = sum(sequence)
+            seq = sequence
+        else:
+            seq = sequence[0:res]
+            total = sum(seq)
+
+        remaining = target - total
+        if remaining > 0 and res > 0:
+            for i in sequence[res:]:
+                if i == remaining:
+                    seq = sequence[0:res] + [i]
+        return seq
+
+    def offline(self, sequence):
+        # This function is to obtain the optimal decision.
+        demand = np.zeros(self.I)
+        sequence = [i-1 for i in sequence]
+        for i in sequence:
+            demand[i-1] += 1
+        test = deterministicModel(
+            self.roll_width, self.given_lines, self.demand_width_array, self.I)
+        newd, obj = test.IP_formulation(np.zeros(self.I), demand)
+
+        return newd
 
     def method4(self, sequence, ini_demand):
         mylist = []
@@ -143,10 +185,10 @@ class CompareMethods:
         return demand
 
     def method1(self, sequence, ini_demand):
+
         decision_list = decision1(sequence, ini_demand, self.probab)
         sequence = [i-1 for i in sequence if i > 0]
 
-        # total_people = np.dot(sequence, decision_list)
         final_demand = np.array(sequence) * np.array(decision_list)
         # print('The result of Method 1--------------')
         final_demand = final_demand[final_demand!=0]
@@ -161,9 +203,14 @@ class CompareMethods:
         ini_demand4 = copy.deepcopy(ini_demand)
 
         final_demand1 = self.method1(sequence, ini_demand)
+
         final_demand2 = self.method1(sequence, ini_demand2)
+
         final_demand3 = self.method4(sequence, ini_demand3)
+
         final_demand4 = self.method4(sequence, ini_demand4)
+
+
         return final_demand1, final_demand2, final_demand3, final_demand4
 
 
@@ -171,23 +218,25 @@ if __name__ == "__main__":
 
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 40
-    given_lines = 8
+    num_period = 450
+    given_lines = 30
     # np.random.seed(i)
     probab = [0.25, 0.25, 0.25, 0.25]
 
-    roll_width = np.ones(given_lines) * 20
+    roll_width = np.ones(given_lines) * 40
 
     total_seat = np.sum(roll_width)
 
     a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
-    final_demand1 = np.zeros(I)
-    final_demand2 = np.zeros(I)
-    final_demand3 = np.zeros(I)
-    final_demand4 = np.zeros(I)
-    final_demand5 = np.zeros(I)
+    ratio1 = 0
+    ratio2 = 0
+    ratio3 = 0
+    ratio4 = 0
+    ratio5 = 0
+    ratio6 = 0
 
+    multi = np.arange(1, I+1)
 
     count = 50
     for j in range(count):
@@ -197,20 +246,24 @@ if __name__ == "__main__":
         
         e = a_instance.row_by_row(sequence)
 
-        final_demand1 += a
-        final_demand2 += b
-        final_demand3 += c
-        final_demand4 += d
-        final_demand5 += e
+        baseline = np.dot(multi, e)
 
-    people1 = np.dot(np.arange(1,I+1), final_demand1)
-    people2 = np.dot(np.arange(1,I+1), final_demand2)
-    people3 = np.dot(np.arange(1,I+1), final_demand3)
-    people4 = np.dot(np.arange(1,I+1), final_demand4)
-    people5 = np.dot(np.arange(1,I+1), final_demand5)
+        f = a_instance.offline(sequence)
 
-    print(people1/count)
-    print(people2/count)
-    print(people3/count)
-    print(people4/count)
-    print(people5/count)
+        seq = a_instance.binary_search_first(sequence)
+
+        g = a_instance.offline(seq)
+
+        ratio1 += (np.dot(multi, a)-baseline)/ baseline
+        ratio2 += (np.dot(multi, b)-baseline) / baseline
+        ratio3 += (np.dot(multi, c)-baseline) / baseline
+        ratio4 += (np.dot(multi, d)-baseline) / baseline
+        ratio5 += (np.dot(multi, f)-baseline) / baseline
+        ratio6 += (np.dot(multi, g)-baseline) / baseline
+
+    print("%.2f" % (ratio1/count*100))
+    print('%.2f' % (ratio2/count*100))
+    print('%.2f' % (ratio3/count*100))
+    print('%.2f' % (ratio4/count*100))
+    print('%.2f' % (ratio5/count*100))
+    print('%.2f' % (ratio6/count*100))

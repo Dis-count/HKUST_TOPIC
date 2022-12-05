@@ -218,12 +218,12 @@ if __name__ == "__main__":
 
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 450
-    given_lines = 30
+    num_period = 37
+    given_lines = 8
     # np.random.seed(i)
     probab = [0.25, 0.25, 0.25, 0.25]
 
-    roll_width = np.ones(given_lines) * 40
+    roll_width = np.ones(given_lines) * 20
 
     total_seat = np.sum(roll_width)
 

@@ -1156,6 +1156,7 @@ $d_{i}^{a}$ is the number of group $i$ we have accepted when we calculate severa
   1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (7.41, NA, 9.79, 9.79, 12.23, 9.60) \\
   1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & (9.03, 9.07, 10.68, 10.68, 15.75, 10.49) \\
   \hline
+  1000  & 37  & [0.25,0.25,0.25,0.25] & 8 & (0.10, 0.10, 0.10, 0.10, 0.10, 0.10) \\
   1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (1.54, 1.54, 1.91, 1.91, 1.91, 1.91) \\
   1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (7.17, 7.17, 9.77, 9.77, 10.68, 10.07) \\
   1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (8.83, 8.95, 11.10, 11.08, 13.64, 10.89) \\
@@ -1181,7 +1182,7 @@ We set the result as the baseline.
 2. The supply is obtained from stochastic model.(IP)
 3: Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. 
 4: The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound.
-5: The optimal people from the offline sequence.
+5: The maximal people from the offline sequence.
 6: Based on First-come-first-serve, but use the deterministic model to update.
 
 Policies 1 and 2 don't have a dominant relation. Policy 4 dominates policy 3.
@@ -1203,7 +1204,6 @@ After certain periods, we update the remaining seats and rows, then solve a simi
 
 Each entry of people served is the average of 50 instances.
 
-The specific groups served for the case, $1000, 100, 8$ are:
 
 Once: Obtain the supply from the stochastic model by benders decomposition. Use the deterministic model to obtain a heuristi supply. Then use the multi-class rule to decide whether to accept the group at each period.
 

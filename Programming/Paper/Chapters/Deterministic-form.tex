@@ -1217,6 +1217,14 @@ Fix the number of seats for each row: 20, 40.
 
 One counterexample: [15,21,13,3] /[15,21,10,3]  reject 4
 
+\subsubsection*{DP}
+Suppose there always exists one assignment when the total demand equals the capacity.
+Then we can use DP to decide accept or reject in each period.
+
+$$V(S,T) = \sum_{i \in N} p_i \max\{ {[V((S-s_i-1),T-1)+ s_i]}, {V(S,T-1)} \}$$
+
+
+
 \subsubsection{Measurement}
 
 Suppose a real scenario with a fixed sequence, $s^{r}$. Solving the following program can obtain the optimal value, $V_{s^{r}}$. (Offline)

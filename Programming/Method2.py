@@ -42,7 +42,7 @@ class originalModel:
         m2.setObjective(grb.quicksum(self.num_sample* self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(
             self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
 
-        m2.setParam('OutputFlag', 0)
+        # m2.setParam('OutputFlag', 0)
         # m2.Params.MIPGapAbs = 1
         m2.optimize()
 
@@ -57,9 +57,9 @@ class originalModel:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    number_period = 60
+    number_period = 55
     given_lines = 8
-    # np.random.seed(0)
+    np.random.seed(0)
 
     probab = [0.4, 0.4, 0.1, 0.1]
     sam = samplingmethod(I, num_sample, number_period, probab)

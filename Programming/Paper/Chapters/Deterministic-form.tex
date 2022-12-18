@@ -1105,28 +1105,6 @@ The scenarios of demands are generated from (150, 250) randomly.
 Fix the number of seats for each row and the number of scenarios, consider the effect of different scenarios of demands. Fix the number of scenarios at 5000.
 
 
-\begin{table}[ht]
-  \begin{tabular}{l|l|l|l|l}
-  \hline
-  Scenarios of demands & running time of IP(s) & Benders \& IP(s) & \# of rows & \# of groups \\
-  (25,30)  & 106.71 & 92.04, 54.732 & 30 & 8 \\
-  (20,40)  & 318.91 & 243.4, 219.975 & 30 & 8 \\
-  (10,60)  & 48.42  & 96.98, 83.701 & 30 & 8 \\
-  (10,100) & 38.41  & 38.86, 29.874 & 30 & 8 \\
-  \hline
-  (100,200) & 69.07 & 243.5, 156.618 & 200 & 8 \\
-  (100,300) & 57.86 & 394.49, 346.657 & 200 & 8 \\
-  (50,250) & 72.11  & 717.53, 642.289 & 200 & 8 \\
-  (50,150) & 124.11  & 594.15, 562.371 & 100 & 8 \\
-  \hline
-  (5,15)   & 138.94  & 197.41, 131.32 & 30 & 16  \\
-  (10,20)  & 1466.73 & 444.67, 420.034 & 30 & 16  \\
-  (10,30)  & 258.56 & 78.72, 62.136 & 30 & 16  \\
-  (25,30)  & 96.4  & 8.05, 1.094 & 30 & 16  \\
-  \hline
-  \end{tabular}
-\end{table}
-
 % Three problems:
 % 1. When the seats are larger than the number of people, Benders decomposition will give a solution like $[***,0,0,0]$.
 % 2. In fact, we cannot obtain the optimal integral solution by using Benders and IP. That is because it relaxes more constraints.
@@ -1146,21 +1124,43 @@ $d_{i}^{a}$ is the number of group $i$ we have accepted when we calculate severa
 % But the programming doesnot work well unless the demands are larger than supply.
 
 
+% \begin{table}[ht]
+%   \begin{tabular}{l|l|l|l|l}
+%   \hline
+%   \# samples & T & probabilities & \# rows & relative performance(\%) compared to FCFS \\
+%   1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & (0.12, 0.12, 0.12, 0.12, 0.12, 0.12) \\
+%   1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (1.86, 1.86, 2.54, 2.54, 2.54, 2.54) \\
+%   1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (5.39, NA, 7.98, 7.98, 8.46, 8.04) \\ % slow
+%   1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (7.41, NA, 9.79, 9.79, 12.23, 9.60) \\
+%   1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & (9.03, 9.07, 10.68, 10.68, 15.75, 10.49) \\
+%   \hline
+%   1000  & 37  & [0.25,0.25,0.25,0.25] & 8 & (0.10, 0.10, 0.10, 0.10, 0.10, 0.10) \\
+%   1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (1.54, 1.54, 1.91, 1.91, 1.91, 1.91) \\
+%   1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (7.17, 7.17, 9.77, 9.77, 10.68, 10.07) \\
+%   1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (8.83, 8.95, 11.10, 11.08, 13.64, 10.89) \\
+%   1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & (11.10, 11.10, 11.84, 11.84, 16.38, 11.15) \\
+%   \hline
+%   5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & (0.00, 0.00, 0.00, 0.00, 0.00, 0.00) \\
+%   5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & (5.28, 5.28, 6.32, 6.32, 7.00, 6.21) \\
+%   5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & (8.16, 8.20, 7.28, 7.28, 11.45, 6.39) \\
+%   5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & (11.00, 11.04, 7.93, 7.93, 13.06, 6.14) \\
+%   \hline
+%   \end{tabular}
+% \end{table}
+
 \begin{table}[ht]
   \begin{tabular}{l|l|l|l|l}
   \hline
-  \# samples & T & probabilities & \# rows & relative performance(\%) compared to FCFS \\
-  1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & (0.12, 0.12, 0.12, 0.12, 0.12, 0.12) \\
-  1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (1.86, 1.86, 2.54, 2.54, 2.54, 2.54) \\
-  1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (5.39, NA, 7.98, 7.98, 8.46, 8.04) \\ % slow
-  1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (7.41, NA, 9.79, 9.79, 12.23, 9.60) \\
-  1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & (9.03, 9.07, 10.68, 10.68, 15.75, 10.49) \\
+  \# samples & T & probabilities & \# rows & relative performance(\%) compared to the optimal \\
+  1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (99.72, 100.00, 100.00, 100.00, 98.11, 100.00) \\
+  1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (97.75, 99.83, 99.76, 99.76, 93.15, 99.76) \\ % slow
+  1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (95.78, 99.20, 97.80, 97.80, 89.35, 97.65) \\
+  1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & (95.61, 99.10, 96.23, 96.23, 87.80, 96.12) \\
   \hline
-  1000  & 37  & [0.25,0.25,0.25,0.25] & 8 & (0.10, 0.10, 0.10, 0.10, 0.10, 0.10) \\
-  1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (1.54, 1.54, 1.91, 1.91, 1.91, 1.91) \\
-  1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (7.17, 7.17, 9.77, 9.77, 10.68, 10.07) \\
-  1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (8.83, 8.95, 11.10, 11.08, 13.64, 10.89) \\
-  1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & (11.10, 11.10, 11.84, 11.84, 16.38, 11.15) \\
+  1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (99.94, 100.00, 100.00, 100.00, 98.22, 100.00) \\
+  1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (97.19, 99.51, 99.09, 99.09, 91.31, 99.29) \\
+  1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (95.23, 98.98, 97.21, 97.21, 87.73, 96.88) \\
+  1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & (94.84, 99.05, 95.70, 95.70, 85.49, 95.13) \\
   \hline
   5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & (0.00, 0.00, 0.00, 0.00, 0.00, 0.00) \\
   5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & (5.28, 5.28, 6.32, 6.32, 7.00, 6.21) \\
@@ -1218,12 +1218,43 @@ Fix the number of seats for each row: 20, 40.
 One counterexample: [15,21,13,3] /[15,21,10,3]  reject 4
 
 \subsubsection*{DP}
+Set several rows as one row with the same capacity.
 Suppose there always exists one assignment when the total demand equals the capacity.
 Then we can use DP to decide accept or reject in each period.
 
-$$V(S,T) = \sum_{i \in N} p_i \max\{ {[V((S-s_i-1),T-1)+ s_i]}, {V(S,T-1)} \}$$
+$$V(S,T) = \sum_{i \in N} p_i \max\{ {[V((S-s_i-1),T-1)+ s_i]}, {V(S,T-1)}\}$$
 
+Use a buffer to contain the accpected groups, when the groups can be assigned to a full row, then remove them from the buffer.
 
+\subsubsection*{Continuous time}
+Richard and Yi solved the finite horizon stochastic knapsack problem. \cite{van2000finite}
+
+Group type, $k$, has an integer weight $w_k$, a value $b_k$, and an arrival rate $\lambda_{k}(t)$.
+
+Consider arrivals as a nonhomogeneous Poisson process over a continuous time horizon $[0, T]$ to a knapsack with capacity $W$.
+
+Let $f(y, t)$ be the maximum expected sum of the benefits of the accepted objects given that $y$ capacity and $t$ seconds remaining.
+
+$$
+\begin{aligned}
+f(y, t) &= \int_0^t \lambda(s) e^{-\int_s^t \lambda(\tau) \mathrm{d} \tau} \cdot \sum_{k=1}^K p_k(s) \max \left\{b_k+f\left(y-w_k, s\right), f(y, s)\right\} \mathrm{d} s \\
+ &= \int_0^t \lambda(s) e^{-(\Lambda(t)-\Lambda(s))} \cdot \sum_{k=1}^K p_k(s) \max \left\{b_k+f\left(y-w_k, s\right), f(y, s)\right\} \mathrm{d} s,
+\end{aligned}
+$$
+
+By differentiation of the above, we obtain:
+
+$$
+\begin{aligned}
+f^{\prime}(y, t)= & \lambda(t) \sum_{k=1}^K p_k(t) \max \{b_k+f\left(y-w_k, t\right),f(y, t)\}-\lambda f(y, t) \\
+= & \lambda(t) \sum_{k=1}^K p_k(t) \max \{0, b_k+f\left(y-w_k, t\right) -f(y, t)\} \\
+= & \sum_{k=1}^{K} \lambda_{k}(t) \max \{0, b_k+f\left(y-w_k, t\right) -f(y, t)\}
+\end{aligned}
+$$
+
+If the $\lambda_{k}(t) > 0$ for all $k$ and $t$, then $f(y,t)$ is strictly monotone increasing in $t$ for $y \geq \min_{k} w_k$.
+
+Need to solve a differential equation for every possible capacity.
 
 \subsubsection{Measurement}
 

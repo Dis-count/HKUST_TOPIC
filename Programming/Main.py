@@ -3,13 +3,11 @@
 import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
-from Method2 import originalModel
 from Method4 import deterministicModel
 from Mist import generate_sequence, decision1
-from collections import Counter
 import copy
 from Mist import decisionSeveral, decisionOnce
-import time
+
 # This function call different methods
 
 class CompareMethods:
@@ -23,7 +21,6 @@ class CompareMethods:
         self.num_period = num_period   # number, Immutable object
         self.num_sample = num_sample   # number, Immutable object
 
-
     def random_generate(self):
         sam = samplingmethod(self.I, self.num_sample, self.num_period, self.probab)
 
@@ -35,29 +32,19 @@ class CompareMethods:
         m1 = stochasticModel(self.roll_width, self.given_lines,
                              self.demand_width_array, W, self.I, prop, dw)
 
-        m2 = originalModel(self.roll_width, self.given_lines,
-                             self.demand_width_array, self.num_sample, self.I, prop, dw)
-        
-        ini_demand2, _ = m2.solveModelGurobi()
-
         ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
-
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I)
 
-        ini_demand2, _ = deter.IP_formulation(np.zeros(self.I), ini_demand2) 
-        ini_demand2, _ = deter.IP_formulation(ini_demand2, np.zeros(self.I))
-
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand) 
         ini_demand, _ = deter.IP_formulation(ini_demand, np.zeros(self.I))
-
 
         ini_demand1 = np.array(self.probab) * self.num_period
 
         ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
         ini_demand3, _ = deter.IP_formulation(ini_demand3, np.zeros(self.I))
 
-        return sequence, ini_demand, ini_demand2, ini_demand3
+        return sequence, ini_demand, ini_demand3
 
     def row_by_row(self, sequence):
         # i is the i-th request in the sequence
@@ -128,6 +115,57 @@ class CompareMethods:
                     seq = sequence[0:res] + [i]
         return seq
 
+
+    def dynamic_program(self, sequence):
+        S = int(sum(self.roll_width))
+        p = self.probab
+        T = self.num_period
+        capa =0 # used to indicate whether the capacity is enough
+        option = self.I
+        value = [[0 for _ in range(T + 1)] for _ in range(S + 1)]
+        record = [[[0] * option for _ in range(T + 1)] for _ in range(S+1)]
+        for i in range(1, S + 1):
+            for j in range(1, T + 1):
+                value[i][j] = value[i][j-1]
+
+                everyvalue = 0
+                totalvalue = 0
+                for k in range(option):
+                    if k == (option -1) and (i - self.value_array[k]) >= 1:
+                        everyvalue = value[i - self.value_array[k] -1][j - 1] + self.value_array[k]
+                        capa = 1
+                    elif (i - self.value_array[k]) >= 1:
+                        everyvalue = value[i - self.value_array[k]-1][j - 1] + self.value_array[k]
+                        capa = 1
+                    else:
+                        everyvalue = value[i][j-1]
+                        capa = 0
+
+                    if value[i][j-1] <= everyvalue and capa:  # delta_k
+                        totalvalue += p[k] * everyvalue
+                        record[i][j][k] = 1
+                    else:
+                        totalvalue += p[k] * value[i][j-1]
+                value[i][j] = totalvalue
+
+        decision_list = [0] * T
+        sequence = [i-1 for i in sequence if i > 0]
+
+        for k, i in enumerate(sequence):  # i = 1,2,3,4
+            decision = record[S][T][i-1]
+            if decision:
+                S -= i+1
+            T -= 1
+            decision_list[k] = decision
+        final_demand = np.array(sequence) * np.array(decision_list)
+
+        final_demand = final_demand[final_demand!=0]
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+
+        return demand
+
     def offline(self, sequence):
         # This function is to obtain the optimal decision.
         demand = np.zeros(self.I)
@@ -136,8 +174,8 @@ class CompareMethods:
             demand[i-1] += 1
         test = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
-        newd, obj = test.IP_formulation(np.zeros(self.I), demand)
-
+        newd, _ = test.IP_formulation(np.zeros(self.I), demand)
+        
         return newd
 
     def method4(self, sequence, ini_demand):
@@ -199,33 +237,31 @@ class CompareMethods:
 
         return demand
 
-    def result(self, sequence, ini_demand, ini_demand2, ini_demand3):
+    def result(self, sequence, ini_demand, ini_demand3):
         ini_demand4 = copy.deepcopy(ini_demand)
 
         final_demand1 = self.method1(sequence, ini_demand)
-
-        final_demand2 = self.method1(sequence, ini_demand2)
 
         final_demand3 = self.method4(sequence, ini_demand3)
 
         final_demand4 = self.method4(sequence, ini_demand4)
 
 
-        return final_demand1, final_demand2, final_demand3, final_demand4
+        return final_demand1, final_demand3, final_demand4
 
 
 if __name__ == "__main__":
 
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 37
+    num_period = 65
     given_lines = 8
     # np.random.seed(i)
-    probab = [0.25, 0.25, 0.25, 0.25]
+    probab = [0.4, 0.4, 0.1, 0.1]
 
     roll_width = np.ones(given_lines) * 20
 
-    total_seat = np.sum(roll_width)
+    # total_seat = np.sum(roll_width)
 
     a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
@@ -240,28 +276,38 @@ if __name__ == "__main__":
 
     count = 50
     for j in range(count):
-        sequence, ini_demand, ini_demand2, ini_demand3 = a_instance.random_generate()
+        sequence, ini_demand, ini_demand3 = a_instance.random_generate()
 
-        a,b,c,d = a_instance.result(sequence, ini_demand, ini_demand2, ini_demand3)
+        a,c,d = a_instance.result(sequence, ini_demand, ini_demand3)
         
-        e = a_instance.row_by_row(sequence)
+        b = a_instance.dynamic_program(sequence)
 
+        e = a_instance.row_by_row(sequence)
         baseline = np.dot(multi, e)
 
-        f = a_instance.offline(sequence)
+        f = a_instance.offline(sequence)  # optimal result
+        optimal = np.dot(multi, f)
 
         seq = a_instance.binary_search_first(sequence)
 
         g = a_instance.offline(seq)
 
-        ratio1 += (np.dot(multi, a)-baseline)/ baseline
-        ratio2 += (np.dot(multi, b)-baseline) / baseline
-        ratio3 += (np.dot(multi, c)-baseline) / baseline
-        ratio4 += (np.dot(multi, d)-baseline) / baseline
-        ratio5 += (np.dot(multi, f)-baseline) / baseline
-        ratio6 += (np.dot(multi, g)-baseline) / baseline
+        # ratio1 += (np.dot(multi, a)-baseline)/ baseline
+        # ratio2 += (np.dot(multi, b)-baseline)/ baseline
+        # ratio3 += (np.dot(multi, c)-baseline) / baseline
+        # ratio4 += (np.dot(multi, d)-baseline) / baseline
+        # ratio5 += (np.dot(multi, f)-baseline) / baseline
+        # ratio6 += (np.dot(multi, g)-baseline) / baseline
 
-    print("%.2f" % (ratio1/count*100))
+        ratio1 += np.dot(multi, a) / optimal
+        ratio2 += np.dot(multi, b) / optimal
+        ratio3 += np.dot(multi, c) / optimal
+        ratio4 += np.dot(multi, d) / optimal
+        ratio5 += np.dot(multi, e) / optimal
+        ratio6 += np.dot(multi, g) / optimal
+
+
+    print('%.2f' % (ratio1/count*100))
     print('%.2f' % (ratio2/count*100))
     print('%.2f' % (ratio3/count*100))
     print('%.2f' % (ratio4/count*100))

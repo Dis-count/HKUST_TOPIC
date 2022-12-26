@@ -674,3 +674,53 @@ $V_{10}([0,1]) = p_{2} \cdot 1 + p_{3} \cdot 2$
 $V_{10}([1,0]) = p_{2} \cdot 1$
 
 Notice that not all possible demands, $d \in D$, can be developed from $\X^{0}$. Thus, the stochatic information is still useful.
+
+\subsubsection*{Continuous time}
+Richard and Yi solved the finite horizon stochastic knapsack problem. \cite{van2000finite}
+
+Group type, $i$, has an integer weight $s_i +1$, a value $s_i$, and an arrival rate $\lambda_{i}(t)$.
+
+Consider arrivals as a nonhomogeneous Poisson process over a continuous time horizon $[0, T]$ to a knapsack with capacity $S$.
+
+Let $f(y, t)$ be the maximum expected sum of the benefits of the accepted objects given that $y$ capacity and $t$ seconds remaining.
+
+$$
+\begin{aligned}
+f(y, t) &= \int_0^t \lambda(s) e^{-\int_s^t \lambda(\tau) \mathrm{d} \tau} \cdot \sum_{i=1}^N p_i(s) \max \left\{s_i+f\left(y-s_i -1, s\right), f(y, s)\right\} \mathrm{d} s \\
+ &= \int_0^t \lambda(s) e^{-(\Lambda(t)-\Lambda(s))} \cdot \sum_{i=1}^N p_i(s) \max \left\{s_i+f\left(y-s_i-1, s\right), f(y, s)\right\} \mathrm{d} s,
+\end{aligned}
+$$
+
+By differentiation of the above, we obtain:
+
+$$
+\begin{aligned}
+f^{\prime}(y, t)= & \lambda(t) \sum_{i=1}^N p_i(t) \max \{s_i+f\left(y-s_i-1, t\right),f(y, t)\}-\lambda(t) f(y, t) \\
+= & \lambda(t) \sum_{i=1}^N p_i(t) \max \{0, s_i+f\left(y-s_i-1, t\right) -f(y, t)\} \\
+= & \sum_{i=1}^{N} \lambda_{i}(t) \max \{0, s_i+f\left(y-s_i -1, t\right) -f(y, t)\}
+\end{aligned}
+$$
+
+If the $\lambda_{i}(t) > 0$ for all $i$ and $t$, then $f(y,t)$ is strictly monotone increasing in $t$ for $y \geq \min_{i} s_i +1$.
+
+Need to solve a differential equation for every possible capacity.
+
+In our problem, $f(1,t) = 0$.
+
+$f^{\prime}(2, t) = \lambda_1 [1- f(2,t)] \Rightarrow f(2,t) = 1- e^{-\lambda t}$
+
+$f^{\prime}(3, t) = \lambda_1 [1- f(3,t)] + \lambda_2 [2 - f(3,t)] \Rightarrow f(3,t) = \frac{\lambda_1 + 2 \lambda_2}{\lambda_1 + \lambda_2} [1- e^{-(\lambda_1 + \lambda_2) t}]$
+
+$f^{\prime}(4, t) = \lambda_1 [1 + f(2,t) - f(4,t)] + \lambda_2 [2 - f(4,t)] \Rightarrow f(4,t) = 2- \frac{\lambda_1}{\lambda_2} e^{-\lambda_1 t} - (2- \frac{\lambda_1}{\lambda_2}) e^{-(\lambda_1 + \lambda_2)t}$
+
+$\delta(1,3,t) = 1- f(3,t) = - \frac{\lambda_2}{\lambda_1 + \lambda_2} + \frac{\lambda_1 + 2 \lambda_2}{\lambda_1 + \lambda_2} e^{-(\lambda_1 + \lambda_2)t}$
+
+$\delta(1,4,t) = 1+ f(2,t) - f(4,t) = \frac{\lambda_2- \lambda_1}{\lambda_2} e^{-\lambda_1 t} + (2- \frac{\lambda_1}{\lambda_2}) e^{-(\lambda_1 + \lambda_2)t}$
+
+Critical $t{'}$, when $t < t{'}$, accept $1$.  $\lambda_1 \uparrow, t \uparrow$.
+
+Divide $[0, T]$ into $N$ subintervals to approximate $f(y,t)$:
+
+$f(y,t_{n+1}) = f(y, t_n) + \Delta f(y, t_n)$ with $\Delta f(y, t_n) = f^{'}(y, t_n) \Delta t$, $\Delta t = t_{n+1} - t_{n}$.
+
+Then use $f^{\prime} (y, t_n) = \sum_k \lambda_k \max\{b_k + f(y-w_k, t_n)- f(y, t_n), 0\}$, $f(y, t_{n+1}) = f(y, t_n) + (t_{n+1} - t{n}) f^{\prime}(y, t_n)$ to update.

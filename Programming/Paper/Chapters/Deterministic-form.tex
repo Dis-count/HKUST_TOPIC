@@ -855,7 +855,7 @@ solving the problem, which we mentioned in section \ref{maximal_supply}. (From (
 
 For several plannings, we select the one that matches the request. (The plan has priority over rejection or use DP to compare the expected value.) 
 
-\subsubsection{Mapping sequences to scenarios}
+\subsubsection{Mapping sequences to scenarios}\label{MappingSeq}
 Suppose there are $T$ independent periods, at most one group will arrive in each period.
 
 There are $J$ different group types(including the group with no people). Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = j) = p_j$, $j = 0,1,\ldots,J-1$ and $\sum_{j} p_{j} =1$. Then a sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. (It can be modeled as a multinomial distribution, $p(\mathbf{Y} \mid \mathbf{p})=\prod_{j=0}^{J-1} p_j N_j$).
@@ -1221,59 +1221,59 @@ Use a buffer to contain the accpected groups, when the groups can be assigned to
   1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (95.23, 98.98, 97.21, 97.21, 87.73, 96.88) \\
   1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & (94.84, 99.05, 95.70, 95.70, 85.49, 95.13) \\
   \hline
+  1000  & 60  & [0.25,0.25,0.25,0.25] & 8 & () \\
+  1000  & 50  & [0.1, 0.2, 0.3, 0.4] & 8 & () \\
+  1000  & 75  & [0.4, 0.3, 0.2, 0.1] & 9 * 25 & (97.07, 99.78, 99.51, 99.51, 93.05, 99.50) \\
+  1000  & 75  & [0.3, 0.5, 0.1, 0.1] & 9 * 25 & (97.58, 99.70, 99.31, 99.31, 92.89, 99.31) \\
   \end{tabular}
 \end{table}
 
-\subsubsection*{Continuous time}
-Richard and Yi solved the finite horizon stochastic knapsack problem. \cite{van2000finite}
+\subsubsection{Different probabilities}
 
-Group type, $i$, has an integer weight $s_i +1$, a value $s_i$, and an arrival rate $\lambda_{i}(t)$.
+$E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$
 
-Consider arrivals as a nonhomogeneous Poisson process over a continuous time horizon $[0, T]$ to a knapsack with capacity $S$.
+Case1: $p = [0.1, 0.2, 0.3, 0.4]$, $E(D) = 3T$.
 
-Let $f(y, t)$ be the maximum expected sum of the benefits of the accepted objects given that $y$ capacity and $t$ seconds remaining.
+Case2: $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$.
 
-$$
-\begin{aligned}
-f(y, t) &= \int_0^t \lambda(s) e^{-\int_s^t \lambda(\tau) \mathrm{d} \tau} \cdot \sum_{i=1}^N p_i(s) \max \left\{s_i+f\left(y-s_i -1, s\right), f(y, s)\right\} \mathrm{d} s \\
- &= \int_0^t \lambda(s) e^{-(\Lambda(t)-\Lambda(s))} \cdot \sum_{i=1}^N p_i(s) \max \left\{s_i+f\left(y-s_i-1, s\right), f(y, s)\right\} \mathrm{d} s,
-\end{aligned}
-$$
+Case3: $p = [0.4, 0.3, 0.2, 0.1]$, $E(D) = 2 T$.
 
-By differentiation of the above, we obtain:
+Case4: $p = [0.3, 0.5, 0.1, 0.1]$, $E(D) = 2 T$.
 
-$$
-\begin{aligned}
-f^{\prime}(y, t)= & \lambda(t) \sum_{i=1}^N p_i(t) \max \{s_i+f\left(y-s_i-1, t\right),f(y, t)\}-\lambda(t) f(y, t) \\
-= & \lambda(t) \sum_{i=1}^N p_i(t) \max \{0, s_i+f\left(y-s_i-1, t\right) -f(y, t)\} \\
-= & \sum_{i=1}^{N} \lambda_{i}(t) \max \{0, s_i+f\left(y-s_i -1, t\right) -f(y, t)\}
-\end{aligned}
-$$
+Suppose there are no empty seats for the assignment, the occupancy rate is $\frac{D_{a}}{T_a + D_{a}}$, $T_a$ is the number of accepted groups and $D_a$ is the number of accepted people.
 
-If the $\lambda_{i}(t) > 0$ for all $i$ and $t$, then $f(y,t)$ is strictly monotone increasing in $t$ for $y \geq \min_{i} s_i +1$.
+Let $E(D) = 150, T = 50, 60, 75$. The average occupancy rates are $\frac{3}{4}$, $\frac{5}{7}$, $\frac{2}{3}$, $\frac{2}{3}$ respectively.
 
-Need to solve a differential equation for every possible capacity.
+The number of seats: 200, 210, 225.
 
-In our problem, $f(1,t) = 0$.
+1: When $E(D)$ is fixed, case3,4 need a larger hall to accept the same number of people.
 
-$f^{\prime}(2, t) = \lambda_1 [1- f(2,t)] \Rightarrow f(2,t) = 1- e^{-\lambda t}$
+Different layout may make a difference.
 
-$f^{\prime}(3, t) = \lambda_1 [1- f(3,t)] + \lambda_2 [2 - f(3,t)] \Rightarrow f(3,t) = \frac{\lambda_1 + 2 \lambda_2}{\lambda_1 + \lambda_2} [1- e^{-(\lambda_1 + \lambda_2) t}]$
+2. Similarly, when the number of seats is fixed, case3,4 will accept less people.
 
-$f^{\prime}(4, t) = \lambda_1 [1 + f(2,t) - f(4,t)] + \lambda_2 [2 - f(4,t)] \Rightarrow f(4,t) = 2- \frac{\lambda_1}{\lambda_2} e^{-\lambda_1 t} - (2- \frac{\lambda_1}{\lambda_2}) e^{-(\lambda_1 + \lambda_2)t}$
+3. The assumption that $T$ is fixed will be more reasonable for the continuous time. 
 
-$\delta(1,3,t) = 1- f(3,t) = - \frac{\lambda_2}{\lambda_1 + \lambda_2} + \frac{\lambda_1 + 2 \lambda_2}{\lambda_1 + \lambda_2} e^{-(\lambda_1 + \lambda_2)t}$
+When the time is continuous, we only need to count the number of different group types, the method will be the same.
 
-$\delta(1,4,t) = 1+ f(2,t) - f(4,t) = \frac{\lambda_2- \lambda_1}{\lambda_2} e^{-\lambda_1 t} + (2- \frac{\lambda_1}{\lambda_2}) e^{-(\lambda_1 + \lambda_2)t}$
+For the nonhomogeneous Poisson process, $N_{i}(T) \sim Poisson (\int_0^{T} p_i(s)\lambda(s) \mathrm{d} s)$. If the Poisson process is homogeneous, $N_{i} \sim Poisson(\lambda p_i T)$ during the interval $[0, T]$. Then for a realization of the Poisson process, we can still apply the method in Section \ref{MappingSeq}.
 
-Critical $t{'}$, when $t < t{'}$, accept $1$.  $\lambda_1 \uparrow, t \uparrow$.
+Three senarios:
 
-Divide $[0, T]$ into $N$ subintervals to approximate $f(y,t)$:
+1. The seat assignment will be arranged in advance, the groups only need to find the corresponding-size seats. This scenario applies for the short admission time. For example, the same film genre will attract the same feature of different group types. The movie hall can assign the seats without changing to save costs in one day. (Theater, Concert, will not provide the seat positions)
 
-$f(y,t_{n+1}) = f(y, t_n) + \Delta f(y, t_n)$ with $\Delta f(y, t_n) = f^{'}(y, t_n) \Delta t$, $\Delta t = t_{n+1} - t_{n}$.
+2. The groups can only select which row they sit.
 
-Then use $f^{\prime} (y, t_n) = \sum_k \lambda_k \max\{b_k + f(y-w_k, t_n)- f(y, t_n), 0\}$, $f(y, t_{n+1}) = f(y, t_n) + (t_{n+1} - t{n}) f^{\prime}(y, t_n)$ to update.
+3. Online booking. (Can select arbitrarily.)
 
+
+Notice we only give the solution of how to assign seats for each row, but the order is not fixed.
+
+In order to obtain a balanced seat assignment, we use a greedy way to place the seats.
+
+Sort each row by the number of people. Then place the smallest one in row 1, place the largest one in row 2, the second smallest one in row 3 and so on. 
+
+For each row, sort the groups in an ascending/descending order. In a similar way.
 
 \subsubsection{Measurement}
 

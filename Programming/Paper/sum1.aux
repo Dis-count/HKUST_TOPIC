@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -75,6 +78,7 @@
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces The scenario-based method to deal with the dynamic situation\relax }}{18}{algorithm.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.10}How to generate an integral demand from a fractional demand}{19}{subsubsection.4.5.10}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.11}Mapping sequences to scenarios}{19}{subsubsection.4.5.11}\protected@file@percent }
+\newlabel{MappingSeq}{{4.5.11}{19}{Mapping sequences to scenarios}{subsubsection.4.5.11}{}}
 \citation{feng2013scenario}
 \citation{casey2005scenario}
 \citation{henrion2018problem}
@@ -86,10 +90,10 @@
 \newlabel{revised_form}{{18}{22}{Revised model}{equation.4.18}{}}
 \newlabel{BD_revised}{{19}{23}{Revised model}{equation.4.19}{}}
 \newlabel{BD_demands}{{20}{24}{Revised model}{equation.4.20}{}}
-\citation{van2000finite}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.3}Different probabilities}{25}{subsubsection.4.6.3}\protected@file@percent }
 \citation{bent2004scenario}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.3}Measurement}{26}{subsubsection.4.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.4}How to use the stochastic demand to solve the dynamic situation?}{26}{subsubsection.4.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.4}Measurement}{26}{subsubsection.4.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.5}How to use the stochastic demand to solve the dynamic situation?}{26}{subsubsection.4.6.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.7}The Property}{27}{subsection.4.7}\protected@file@percent }
 \newlabel{I_1}{{4}{27}{}{thm.4}{}}
 \newlabel{algoDI}{{\caption@xref {algoDI}{ on input line 1352}}{28}{The Property}{thm.4}{}}
@@ -124,8 +128,7 @@
 \bibcite{marcotte1985cutting}{15}
 \bibcite{salari2020social}{16}
 \bibcite{scheithauer1995modified}{17}
-\bibcite{van2000finite}{18}
-\bibcite{vance1998branch}{19}
-\bibcite{vanderbeck1999computational}{20}
-\bibcite{vanderbeck1996exact}{21}
+\bibcite{vance1998branch}{18}
+\bibcite{vanderbeck1999computational}{19}
+\bibcite{vanderbeck1996exact}{20}
 \gdef \@abspage@last{37}

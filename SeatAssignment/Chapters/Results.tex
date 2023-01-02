@@ -1,0 +1,139 @@
+% !TEX root = sum1.tex
+
+\section{Results}
+
+\subsection{Result}
+
+% The nested structure makes the greedy method useful.
+% Remark: Similar to what we mentioned, the greedy method refers to using the largest groups to fill the seats.
+
+Merit: The plan will be always feasible.
+
+Demerit: Cannot cover all possible demands.
+
+Improvement:
+For $\X^{0}$, we introduce one empty seat, $x_1$. But it cannot provide the feasibility.
+
+\subsection{How to generate scenario demands}
+It is challenging to consider all the possible realizations; thus, it is practicable to use discrete distributions with a finite number of scenarios to approximate the random demands. This procedure is often called scenario generation.
+
+Some papers consider obtaining a set of scenarios that realistically represents the distributions of the random parameters but is not too large. \cite{feng2013scenario} \cite{casey2005scenario}
+\cite{henrion2018problem}
+
+Another process to reduce the calculation is called scenario reduction. It tries to approximate the original scenario set with a smaller subset that retains essential features.
+
+Solving the deterministic formulation with a large set of scenarios is not tricky in our case.
+
+For the stochastic situation, we assume the group sizes are discretized from independent random variables following some distribution.(non-negative)
+
+Every time we can regenerate the scenario based on the realized demands. (Use the conditional distribution or the truncated distribution)
+
+If we need to assign seats before the groups' arrival, we can select any planning supply and fix it. 
+
+If we don't need to assign seats immediately, we can wait until all demands are realized. During the process, we only need to decide whether to reject or accept each request.
+
+Suppose that the groups arrive from small to large according to their size. Once a larger group comes, the smaller one will never appear again.
+
+When a new group arrives (suppose we have accepted $n$ groups with the same size), we accept or reject it according to the supply (when $n+1 < \text{supply}$, we accept it), then update the scenario set according to the truncated distribution. We can obtain a new supply with the new probability and scenario set.
+
+With the conclusion of section , we know how to reject a request. Once we reject one group, we will reject all groups of the same size. 
+
+Fix the supply of this group size, and continue this procedure.  
+
+If groups arrive randomly, the procedure will be similar. 
+
+We don't care about the arrival sequence; only the number of groups matters. Because as long as the approximation about the number of groups is accurate, we can handle any sequence.
+
+
+Three senarios:
+
+1. The seat assignment will be arranged in advance, the groups only need to find the corresponding-size seats. This scenario applies for the short admission time. For example, the same film genre will attract the same feature of different group types. The movie hall can assign the seats without changing to save costs in one day. (Theater, Concert, will not provide the seat positions)
+
+2. The groups can only select which row they sit.
+
+3. Online booking. (Can select arbitrarily but with some constraints.)
+
+At first, the request should give the size of group, then give the possible row number it can sit. Finally give the possible first seat number.
+
+The second step is based on the other choices of reserved groups, just need to check which rows in the seat assignment include the corresponding-size seats.
+
+The third step need to check whether the group destroies the assignment. Use subset sum problem to check every position in the row.
+
+Notice we only give the solution of how to assign seats for each row, but the order is not fixed.
+
+In order to obtain a balanced seat assignment, we use a greedy way to place the seats.
+
+Sort each row by the number of people. Then place the smallest one in row 1, place the largest one in row 2, the second smallest one in row 3 and so on. 
+
+For each row, sort the groups in an ascending/descending order. In a similar way.
+
+\subsection{Different probabilities}
+Discuss the effect of different probabilities.
+$E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$
+
+% When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
+% Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
+
+% 1: When $E(D)$ is fixed, case3,4 need a larger hall to accept the same number of people.
+
+% Different layout may make a difference.
+
+% 2. The assumption that $T$ is fixed will be more reasonable for the continuous time. 
+
+Let $E(D) = 150$.
+
+Two experiments:
+When $E(D) = 2.5T$, which means on average 2.5 people arrive for each group.
+
+$T =75$, the number of rows is 9, the number of seats each row is 25.
+
+Probabilities: 
+$p_1 = p_3 + 2p_4$. $p_3$ is from $0.05$ to $0.45$ with step size of 0.1. $p_4$ is from $0.05$ to $0.3$ with step size of 0.05.
+
+When $E(D) = 2T$, which means on average 2 people arrive for each group.
+
+$T = 60$, the number of rows is 10, the number of seats each row is 21.
+
+Probabilities: 
+$2p_2 + 4p_3 + 6p_4 =3$. $p_2$ is from $0.05$ to $0.95$ with step size of $0.1$. $p_3$ is from $0.05$ to $0.75$ with step size of $0.1$.
+
+Results: M1-M6, the number of accepted people, the number of total people.
+
+\subsection{Different periods}
+Discuss the effect of the number of periods: 
+Parameters: T = 70-80, step size =1.
+
+The expected number of period: 75
+The expected number of demand(people): 150
+Number of rows: 9
+Number of seats each row: 25
+Probabilities: $[0.4, 0.3, 0.2, 0.1], [0.3, 0.5, 0.1, 0.1]$.
+
+Results: M1-M6, the number of accepted people, the number of total people.
+
+T = 55-65, step size =1.
+
+The expected number of period: 60
+The expected number of demand(people): 150
+Number of rows: 10
+Number of seats each row: 21
+Probabilities: $[0.25, 0.25, 0.25, 0.25]$.
+
+Results: M1-M6, the number of accepted people, the number of total people.
+
+\subsection{Measurement}
+
+Suppose a real scenario with a fixed sequence, $s^{r}$. Solving the following program can obtain the optimal value, $V_{s^{r}}$. (Offline)
+
+Then the difference is $V_{s^{r}} - \text{our result}$
+
+WS(the value under wait-and-see policy with all possible scenarios)
+
+EVPI(Expected Value of Perfect Information) = WS - the value of deterministic equivalent form
+
+
+\subsection{How to use the stochastic demand to solve the dynamic situation?}
+
+\cite{bent2004scenario} this paper connects the stochastic and dynamic VRP.
+
+\newpage

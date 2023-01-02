@@ -123,7 +123,7 @@ class CompareMethods:
                                             self.demand_width_array, self.I)
         indi = deter1.IP_formulation1(demand, np.zeros(self.I))
         while not indi:
-            demand[seq[-1]-1] -= 1
+            demand[seq[-1]] -= 1
             seq.pop()
             indi = deter1.IP_formulation1(demand, np.zeros(self.I))
         seq = [i+1 for i in seq]
@@ -182,7 +182,7 @@ class CompareMethods:
                                     self.demand_width_array, self.I)
         indi = deter1.IP_formulation1(demand, np.zeros(self.I))
         while not indi:
-            demand[final_demand[-1]-1] -= 1
+            demand[final_demand[-1]] -=1
             final_demand = final_demand[:-1]
             indi = deter1.IP_formulation1(demand, np.zeros(self.I))
         return demand
@@ -284,41 +284,23 @@ def prop_list():
 
     return p
 
-def prop_list1():
-    x = np.arange(0.05, 0.5, 0.1)  #p3
-    y = np.arange(0.05, 0.35, 0.05)  #p4
-    p = np.zeros((len(x)*len(y), 4))
-
-    t = 0
-    for i in x:
-        for j in y:
-            if 1-2*i-3*j > 0:
-                p[t] = [(i + 2*j), (1 - 2*i - 3*j), i, j]
-                t += 1
-    p = p[0:t]
-
-    return p
-
-
 if __name__ == "__main__":
-
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 60
+    period_range = range(55,66,1)
     given_lines = 10
     # np.random.seed(i)
-    p = prop_list()
+    probab = [0.25, 0.25, 0.25, 0.25]
 
     begin_time = time.time()
-    filename = 'Results_' + str(time.time()) + '.txt'
+    filename = 'Periods_' + str(time.time()) + '.txt'
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    for probab in p:
+    for num_period in period_range:
 
-        my_file.write('probabilities: \t' + str(probab) + '\n')
-        # probab = [0.3, 0.5, 0.1, 0.1]
-
+        my_file.write('The number of periods: \t' + str(num_period) + '\n')
+        
         roll_width = np.ones(given_lines) * 21
         # total_seat = np.sum(roll_width)
 
@@ -330,7 +312,7 @@ if __name__ == "__main__":
         ratio4 = 0
         ratio5 = 0
         ratio6 = 0
-        accept_people = 0
+        accept_people =0
         num_people = 0
 
         multi = np.arange(1, I+1)
@@ -371,9 +353,10 @@ if __name__ == "__main__":
         my_file.write('M3: %.2f ;' % (ratio3/count*100))
         my_file.write('M4: %.2f ;' % (ratio4/count*100))
         my_file.write('M5: %.2f ;' % (ratio5/count*100))
-        my_file.write('M6: %.2f \n' % (ratio6/count*100))
+        my_file.write('M6: %.2f \n;' % (ratio6/count*100))
         my_file.write('Number of accepted people: %.2f \t' % (accept_people/count))
         my_file.write('Number of people: %.2f \n' % (num_people/count))
+
         # f.write(str(ratio6/count*100) + '\n')
     
     run_time = time.time() - begin_time

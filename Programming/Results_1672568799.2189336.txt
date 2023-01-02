@@ -1,0 +1,44 @@
+Run Start Time: Sun Jan  1 18:26:39 2023
+probabilities: 	[0.15 0.75 0.05 0.05]
+M1: 97.86 ;M2: 99.72 ;M3: 99.63 ;M4: 99.63 ;M5: 92.88 ;M6: 99.66 
+Number of accepted people: 149.30 	Number of people: 150.82 
+probabilities: 	[0.25 0.6  0.05 0.1 ]
+M1: 97.68 ;M2: 99.62 ;M3: 99.50 ;M4: 99.50 ;M5: 93.10 ;M6: 99.52 
+Number of accepted people: 148.82 	Number of people: 150.56 
+probabilities: 	[0.35 0.45 0.05 0.15]
+M1: 97.60 ;M2: 99.60 ;M3: 99.30 ;M4: 99.30 ;M5: 92.97 ;M6: 99.32 
+Number of accepted people: 149.08 	Number of people: 151.28 
+probabilities: 	[0.45 0.3  0.05 0.2 ]
+M1: 98.36 ;M2: 99.80 ;M3: 99.65 ;M4: 99.65 ;M5: 94.27 ;M6: 99.63 
+Number of accepted people: 146.02 	Number of people: 147.70 
+probabilities: 	[0.55 0.15 0.05 0.25]
+M1: 97.17 ;M2: 99.57 ;M3: 99.31 ;M4: 99.30 ;M5: 92.50 ;M6: 99.23 
+Number of accepted people: 148.48 	Number of people: 150.92 
+probabilities: 	[6.50000000e-01 1.11022302e-16 5.00000000e-02 3.00000000e-01]
+M1: 98.20 ;M2: 99.66 ;M3: 99.49 ;M4: 99.51 ;M5: 93.46 ;M6: 99.31 
+Number of accepted people: 145.98 	Number of people: 148.28 
+probabilities: 	[0.25 0.55 0.15 0.05]
+M1: 98.52 ;M2: 99.75 ;M3: 99.67 ;M4: 99.67 ;M5: 93.67 ;M6: 99.66 
+Number of accepted people: 148.12 	Number of people: 149.18 
+probabilities: 	[0.35 0.4  0.15 0.1 ]
+M1: 97.43 ;M2: 99.58 ;M3: 99.39 ;M4: 99.39 ;M5: 93.04 ;M6: 99.45 
+Number of accepted people: 148.92 	Number of people: 150.78 
+probabilities: 	[0.45 0.25 0.15 0.15]
+M1: 97.14 ;M2: 99.62 ;M3: 99.39 ;M4: 99.39 ;M5: 92.84 ;M6: 99.25 
+Number of accepted people: 149.80 	Number of people: 152.32 
+probabilities: 	[0.55 0.1  0.15 0.2 ]
+M1: 97.98 ;M2: 99.73 ;M3: 99.50 ;M4: 99.50 ;M5: 93.35 ;M6: 99.51 
+Number of accepted people: 147.12 	Number of people: 149.02 
+probabilities: 	[0.35 0.35 0.25 0.05]
+M1: 97.27 ;M2: 99.66 ;M3: 99.44 ;M4: 99.44 ;M5: 92.40 ;M6: 99.47 
+Number of accepted people: 149.52 	Number of people: 151.30 
+probabilities: 	[0.45 0.2  0.25 0.1 ]
+M1: 96.75 ;M2: 99.57 ;M3: 99.29 ;M4: 99.29 ;M5: 92.67 ;M6: 99.16 
+Number of accepted people: 149.28 	Number of people: 151.46 
+probabilities: 	[0.55 0.05 0.25 0.15]
+M1: 97.62 ;M2: 99.52 ;M3: 99.25 ;M4: 99.25 ;M5: 93.34 ;M6: 99.20 
+Number of accepted people: 148.52 	Number of people: 150.96 
+probabilities: 	[0.45 0.15 0.35 0.05]
+M1: 98.05 ;M2: 99.73 ;M3: 99.66 ;M4: 99.66 ;M5: 93.50 ;M6: 99.64 
+Number of accepted people: 147.64 	Number of people: 149.12 
+Total Runtime	527.228867

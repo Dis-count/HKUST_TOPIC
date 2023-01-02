@@ -1,0 +1,87 @@
+% !TEX root = sum1.tex
+\section{Dynamic demand situation}\label{dynamic_demand}
+
+We also study the dynamic seating plan problem, which is more suitable for commercial use. In this situation, customers come dynamically, and the seating plan needs to be made without knowing the number and composition of future customers. 
+
+It becomes a sequential stochastic optimization problem where conventional methods fall into the curse of dimensionality due to many seating plan combinations. To avoid this complexity, we develop an approach that aims directly at the final seating plans. Specifically, we define the concept of target seating plans deemed satisfactory. In making the dynamic seating plan, we will try to maintain the possibility of achieving one of the target seating plans as much as possible.
+
+\subsection{Seat assignment methods}
+In this section, we will present several methods to assign seats under different scenarios.
+
+The intuitive but trivial method will be first-come-first-serve. Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in the row immediately. We check each request until the capacity is used up. We set the result as the baseline.
+
+% Set the maximal people from the offline sequence.
+(1,2,3,4,5,6) in the `people served in the table': 
+1: The supply is obtained from stochastic model.(LP)  can be used in scenario 1,2,3.
+
+The seat assignment can be used in all scenarios, and the cinema can place the seat in advance, unsettle the useless seats.
+
+2. DP/ Because we relax several rows to one row, this method can only be applied in scenario 1.
+
+3: Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
+
+4: The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound. / Similar to the above.
+
+5: First-come-first-serve / can be used in scenario 1,2,3. For scenario 3, the performane will be worse without restriction.
+
+6: Based on First-come-first-serve, but use the deterministic model to update. can be used in scenario 1,2. 
+
+
+If we need to assign seats to the group each period.
+
+1.1 Every group can only choose which row to sit.
+In each period, every group can choose to sit in some row with the corresponding capacity. 
+After certain periods, we update the remaining seats in each row, then solve a sub-problem. 
+
+1.2 Every group can choose where to sit according to the assignment.
+In each period, every group can choose to sit everywhere as long as the assignment allows. If one group choose to sit in the middle of some row, then this row is divided into two rows. 
+After certain periods, we update the remaining seats and rows, then solve a similar problem.
+
+% Different types of movies will have different probabilities, consider the preference for policy when demand = supply.
+
+
+
+Once: Obtain the supply from the stochastic model by benders decomposition. Use the deterministic model to obtain a heuristi supply. Then use the multi-class rule to decide whether to accept the group at each period.
+
+Several: Initially, set the mean demand for all periods as the upper bound of demand. Then obtain the supply from the deterministic model. Set the accepted demand as the lower bound of demand, the upper bound of demand will be the sum of accepted demand and mean demand for the remaining periods. Update the lower bound and upper bound when some supply runs out.
+
+% Several1: initial supply is from deterministic model.
+
+% Several2: initial supply is from stochastic model.
+
+% One counterexample: [15,21,13,3] /[15,21,10,3]  reject 4
+
+\subsection{DP}
+Set several rows as one row with the same capacity.
+Suppose there always exists one assignment when the total demand equals the capacity.
+Then we can use DP to accept or reject in each period.
+
+$$V(S,T) = \sum_{i \in N} p_i \max\{ {[V((S-s_i-1),T-1)+ s_i]}, {V(S,T-1)}\}$$
+
+Use a buffer to contain the accpected groups, when the groups can be assigned to a full row, then remove them from the buffer.
+
+In fact, direct DP will have a gap, we should use a buffer to improve this method.
+
+For example, the number of seats for 10 rows is 21. The demand is $[1,2,41,16]$. The optimal assignment is $[0, 0, 40, 10]$. But DP will give $[0, 0, 35, 14]$.
+
+When a full pattern is reached, then delete the related groups and the row. Update the remaining demand.
+
+We know $(0,0,4,1)$ is a largest and full pattern, thus an assignment constructed with these 10 patterns is an optimal assignment.
+
+\begin{table}[ht]
+  \begin{tabular}{l|l|l|l|l}
+  \hline
+  \# samples & T & probabilities & \# rows & performance(\%) compared to the optimal \\
+  1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (99.72, 100.00, 100.00, 100.00, 98.11, 100.00) \\
+  1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (97.75, 99.83, 99.76, 99.76, 93.15, 99.76) \\ % slow
+  1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (95.78, 99.20, 97.80, 97.80, 89.35, 97.65) \\
+  1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & (95.61, 99.10, 96.23, 96.23, 87.80, 96.12) \\
+  \hline
+  1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (99.94, 100.00, 100.00, 100.00, 98.22, 100.00) \\
+  1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (97.19, 99.51, 99.09, 99.09, 91.31, 99.29) \\
+  1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (95.23, 98.98, 97.21, 97.21, 87.73, 96.88) \\
+  1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & (94.84, 99.05, 95.70, 95.70, 85.49, 95.13) \\
+  \end{tabular}
+\end{table}
+
+\newpage

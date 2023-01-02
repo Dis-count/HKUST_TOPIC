@@ -1,0 +1,1082 @@
+\subsection{Branch And Price}
+Rather than solving IP directly to obtain the optimal integer solution, the commonly used method is to branch the fractional solution.
+
+General branch is commonly as follows:
+$\sum_{k \in K\left(k^{j}\right)} x_{k} = \alpha$, where $K(p) = \{k \in K: k\geq p\}$ (column subsets) for $p \in Z^m_+$, $\alpha$ is fractional.
+$K = \{k \in N^m: \sum_{i=1}^m s_i k_i \leq S\}$ indicate all feasible patterns, and $x_k$ is the number of times pattern $k$ selected.
+Given a feasible solution $x^*$ of LP that is not integral, take $k^*$ to be any maximal element of the set $\{k \in K: x_k^* \notin Z_+\}$. Then the only fractional term in this sum $\sum_{k \in K\left(k^{j}\right)} x_{k}^*$ is $x_{k^*}^*$.
+Maximal means that the space left after cutting this pattern is less than the smallest size of the group.
+
+Then the generic branching constraints will be:
+$\sum_{k \in K(k^j)} x_{k} \leq U^{j}, \forall j \in G^u$ and $\sum_{k \in K(k^j)} x_{k} \geq L^{j}, \forall j \in H^u$, where $G^u$ and $H^u$ are sets of branching constraints of the form
+\begin{equation}
+ \sum_{k \in {K(k)}} x_{k} \leq\lfloor\alpha\rfloor
+\end{equation} and
+\begin{equation}
+\sum_{k \in {K(k)}} x_{k} \geq \lceil\alpha\rceil
+\end{equation}, respectively.
+
+If we can always generate the maximal pattern, then any fractional column defines a branching set which contains only one member.
+
+The corresponding restricted master problem will be reformulated as:
+
+\[\begin{split}\mbox{max}\quad & \sum_{k\in K}(\sum_{i=1}^m (s_i-1)t_i^k) x_{k}\\
+\mbox{s.t.} \quad & \sum_{k \in K} x_{k} \leq N \\
+& \sum_{k \in K} t_i^k x_k \leq g_i,\quad i=1,\ldots,m\\
+& \sum_{k \in K(k^j)} x_{k} \leq U^{j}, \forall j \in G^u \\
+& \sum_{k \in K(k^j)} x_{k} \geq L^{j}, \forall j \in H^u \\
+& x_{k} \geq 0, \quad k \in K
+\end{split}\]
+
+Let $(\pi,\lambda,\mu,v)$ be optimal dual variables associated with the added constraints.
+The pricing problem(sub-problem) is:
+\[\begin{split}\mbox{max}\quad & \left[(s_i-1) -\lambda_i\right] y_{i}- \pi - \sum_{j\in G^u}\mu_j z^j - \sum_{j\in H^u}v_j z^j \\
+\mbox{s.t.} \quad & \sum_{i=1}^m s_i y_i \leq S  \\
+& z^j =1 \mbox{ if } y \geq k^j; z^j =0 \mbox{ otherwise}  \\
+& y_i \geq 0, \mbox{integer}\quad \mbox{for}~ i=1,\ldots,m.
+\end{split}\]
+$Y_k = \{(y,z): z=1,\text{ if } y \geq k,z=0 \text{ otherwise} \}$ can be formulated as MIPs.
+
+The pricing problem is only affected when an upper bound has been placed on the value of the variable associated with the selected pattern. Because this variable could be a nonbasic variable for the LP. In this case, we have avoid regenerating this maximal pattern. Thus, we should solve a knapsack problem with a forbidden pattern set. Besides, the drawback of this method will be that the branch is unbalanced.
+
+The procedure of branch and price is as follows:
+
+\begin{itemize}
+  \item [1)] Solve the restricted master problem with the initial columns.
+  \item [2)] Use the pricing problem to generate columns.
+  \item [3)] When the column generation method terminates, is the solution integral?
+
+  Yes, update lower bound.
+
+  No, update upper bound. And fathom node or branch to create two nodes.
+
+  \item [4)] Select the next node until all nodes are explored.
+\end{itemize}
+
+\subsection{Column-and-cut generation}
+
+Recall that $T$ is a subset of the set of all possible cutting patterns, thus we need to find more cutting patterns by the column generation.
+
+\begin{lem}\label{full_cutting_pattern}
+When the group sizes are consecutive integers starting from 2, i.e., $[2,3,\ldots,u]$, $T$ only need include the full or largest cutting patterns.
+\end{lem}
+
+We can always find a full pattern which accomodates more people than any non-full pattern except when the largest pattern is $(u, \ldots, u, 1)$.
+
+Suppose that we have $p$ cuts during some iteration, let $(\pi=\left[\pi_{1}, \pi_{2},\cdots,\pi_{p}\right],\lambda)$ be optimal dual variables associated with the scenario constraints and row number constraint.
+
+Then the pricing problem will be
+
+\begin{equation}\label{add_cutting_pattern}
+  \begin{aligned}
+  \mbox{max}\quad & \sum_{i=1}^m \left[(s_i-1) -\sum_{p}\pi_{p}\alpha_{i}^{p} \right] y_{i} - \lambda \\
+  \mbox{s.t.} \quad & \sum_{i=1}^m s_i y_i \leq L  \\
+  & y_i \geq 0, \mbox{integer}\quad \mbox{for}~ i=1,\ldots,m
+\end{aligned}
+\end{equation}
+
+where $y_i$ indicate the number of times group type $i$ placed in the new pattern.
+
+By solving the pricing problem, we can obtain a new cutting pattern, then add it to $T$. Then solve the master problem to obtain $(x^{*}, z^{*})$ and continue the column-and-cut generation.
+
+After we obtained $x_1$, add new optimality cuts and cutting patterns, then repeat the above procedure until the optimal value does not increase anymore.
+
+\subsection{Occupancy}
+
+For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left space, respectively. Denote $(\alpha_k + \beta_k)$ as the loss for pattern k, $l(k)$.
+
+For any pattern $k$, the occupancy is $\frac{S-l(k)}{S-1}$ and the largest occupancy is $\frac{S-l(k)}{S-1}, k \in I_1$. Thus, the largest occupancy for
+multiple rows is also $\frac{S-l(k)}{S-1}, k \in I_1$ when all rows are largest patterns. $l(k)$ can be represented in another way, then we have the following lemma.
+
+\begin{lem}
+Suppose the size of group types be $s = [2,3,\ldots,u]$, the largest occupancy will be $\frac{S-q-\sign(r)}{S-1}$, where $q = \lfloor \frac{S}{u} \rfloor$, $\sign(r)=1$ if $r >0$, $\sign(r)=0$ if $r =0$.
+\end{lem}
+
+Suppose the size of group types be $s = [2,3,\ldots,u]$, the maximal group size be $u$ and $S = u\cdot q + r$. When $r =0$, the minimal loss is $q$, the largest occupancy will be $\frac{S-q}{S-1}$.
+When $r>0$, the minimal loss will be $q+1$, the largest occupancy will be $\frac{S-q-1}{S-1}$.
+Thus, the largest occupancy will be $\frac{S-q-\sign(r)}{S-1}$, where $q = \lfloor \frac{S}{u} \rfloor$, $\sign(r)=1$ if $r >0$, $\sign(r)=0$ if $r =0$.
+
+% $S \equiv r \Mod{u}$
+
+If we want the largest occupancy is no more than $\frac{1}{2}$, we have $\frac{S-\lfloor \frac{S}{u} \rfloor -1}{S-1} \leq \frac{1}{2} \Rightarrow \frac{S-1}{2} \leq \lfloor \frac{S}{u} \rfloor$. It is clear that when $u =2$ this inequality holds. When $u =3$, $S$ should be no larger than 3. In other cases, this inequality doesnot hold.
+
+When $uq \leq S \leq uq + (u-1)$, $\lfloor \frac{S}{u} \rfloor$ equals $q$ and this ratio $\frac{S-q-1}{S-1}$ increases in $S$ when $q$ is fixed. Thus, when $S = uq + (u-1)$, the occupancy can reach maximum value, $\frac{S-q-1}{S-1}$.
+
+When the social distancing is $2$, the size of group types will be $s = [3,4,\ldots,u]$, the occupancy will be $\frac{S-1-2*\lfloor \frac{S}{u} \rfloor}{S-1}$
+
+
+2): The initial analysis about the loss between group type [2,3,\ldots,t-1] and [2,3,\ldots,t].
+Suppose that $S \div t = q \ldots r$, then $S \div (t-1) = q \ldots q+r$
+If $q+r < t-1$, the loss of the largest pattern for group size $t,(t-1)$, will be the same.
+If $q+r = t-1$, $S = (t-1)* (q+1)$, the loss of the largest pattern for group size $t,(t-1)$, will be the same.
+
+In other cases, the quotient of $S/(t-1)$ will be larger than that of $S/t$.
+If the loss of the largest pattern for group size $(t-1)$ is $l$, the loss of the largest pattern for group size $t$ will be $l+1$.
+
+3): If the size of group types is $s = [2,3,4]$, then we can obtain an optimal solution by the following way.
+
+Suppose the demands for each group type are positive and $d_2,d_3,d_4$, respectively. The number of seats for each row is $S$. We have $N$ rows at the beginning. Let $S = 4 \times q +r, q = \lfloor \frac{S}{4} \rfloor$.
+
+If $r = 0$, the largest pattern will be $(4,4,\ldots,4)$;
+
+If $r = 1$, the largest pattern will be $(4,4,\ldots,4,3,2)$;
+
+If $r = 2$, the largest pattern will be $(4,4,\ldots,4,2)$;
+
+If $r = 3$, the largest pattern will be $(4,4,\ldots,4,3)$;
+
+Repeat to generate the largest pattern until we do not have enough demands.
+If any one of demands for group types runs out, the problem is reduced to the case of two group types, use the above method to solve this case.
+
+Now suppose the rest demands are $d_2^{'},d_3^{'},d_4^{'}$ after deducting the demands of the largest patterns. Let $p = \lfloor \frac{d_4}{q} \rfloor$, then $d_4^{'} = d_4 - p \times q$. $p$ is equal to the number of rows where we placed groups.
+
+$d_4^{'}$ should be less than $q$, otherwise, we can continue to generate the largest pattern.
+
+For the next row, we place all rest $d_4^{'}$ groups with size of 4. Then we will have $S^{'} = S - d_4^{'} \times 4$ empty seats. The problem can be reduced to the case of two group types. That is, place groups with size of 3 as many as possible, the rest seats can be taken by group with size of 2.
+
+For the rest $(N-p-1)$ rows, this problem is reduced to the case of two group types.
+
+Extension: If the size of group types is $s = [2,3,u]$, $u$ is an integer and larger than 3, then we can obtain an optimal solution by the same way.
+
+Remark: We can only obtain one optimal assignment, but this problem still has other optimal assignments.
+
+
+% 4) Counter example: [6, 10, 15]*(4,2,1) under 30 seats.
+%
+% One row will be taken by one 15-size group and one 10-size group.
+% Another one will be taken by one 10-size group and three 6-size groups.
+%
+% [4, 6, 9, 10]* (1, 2, 1, 1) under 18 seats.
+%
+% From the counter example, we can construct a case which has the positive demands for $[2,3,\ldots,10]$.
+%
+% When $d_4,d_5,d_6$ are all large for $[2,3,4,5,6]$, we can continue the above way to generate the largest pattern.
+% That is the counter example of column generation not the policy.
+
+
+% Remaining questions:
+%
+% 1. In which situation, we can always satisfy the largest group size.
+%
+% (3,3,3,2,2) if the optimal pattern is (3,3,2,2). In this way, we will reject 3.
+%
+% 2. When S is small we will have a counter example easily. When S is large we are able to satisfy. the relation between S and u?
+%
+% 3. the number of maximal group size is equal to the number of rows.
+% For example, for [2,3,4], if we have N groups of 4.
+
+
+\subsection{Details about the initial cutting pattern}
+It seems that the initial cutting patterns are not crucial to the complexity of the whole problem.
+
+How to generate the initial cutting patterns depends on the demands for scenarios.
+
+At least, we know that the full or largest patterns are needed.
+
+\subsection{Complexity about the number of cutting patterns}
+We only know that the full pattern will be used.
+
+Demonstrate the number of cutting patterns is large.
+
+The number of cutting patterns is equal to the number of solutions to $\sum_{i=1}^m s_i y_i = L$. $\{y_i\}$
+
+\subsection{How to generate an integral demand from a fractional demand}
+
+% Notice that the optimal linear solution only leaves one empty seat in the allocation. Thus, the fractional demand can be like $[6, 9\frac{1}{3}, 10, 14]$ or $[3, 7, 8\frac{1}{4}, 12]$ with corresponding group types $[2,3,4,5]$. ($\frac{1}{3} * 3 =1$)
+
+If the optimal supply is $[2, 3.75, 4.25, 6.75]$, how should we deal with it?
+
+\begin{thm}
+An optimal integral supply can be derived from the fractional supply obtained by stochastic programming.
+\end{thm}
+
+
+For $[2, 3.75, 4.25, 6.75]$, change it to $[2, 3\frac{1}{3}, 4.25, 7]$, to $[1, 3, 5, 7]$.
+
+When $S = 50$, $[2,3,4,5]$, $N =3$, the scenario demands generated from $[5,15]$, then from the fractional demand $[6, 9\frac{1}{3}, 10, 14]$, the integral demands can be $[5, 10, 10, 14]$. 
+% $[6, 8, 11, 14]$, $[6, 9, 9, 15]$.
+% That is because the empty seat can be combined with other seats to obtain larger seats.
+
+Let $D$ be the polyhedron including all feasible demands with $N$ rows, i.e., $D = \{d = (d_1,d_2,\ldots, d_n): Tx = d,\sum_{k} x_k \leq N, x_k \geq 0, \mbox{integer} \}$.
+Denote by $d^{i}, i = 1,\ldots, I-1$, the planning demands, where $I$ is the number of group types.
+
+Then every $d^{i}$ gives the maximum number of people under given scenarios and locates at the vertex of $D$.
+
+% Then from $[3, 7, 8\frac{1}{4}, 12]$,
+% when $S = 40$, $[2,3,4,5]$ and the scenario demands from $[5,15]$, $N =3$.
+% we can develop several maximal integer demands: $[2, 8, 8, 12]$, $[3, 7, 7, 13]$, $[3, 6, 9, 12]$.
+
+We can obtain the patterns from the integral demand by
+solving the problem, which we mentioned in section \ref{maximal_supply}. (From (D)\ref{lambda1}, we know how to check the feasibility of the integral demand) If some integral demand is not feasible, then delete it from the plannings.
+
+For several plannings, we select the one that matches the request. (The plan has priority over rejection or use DP to compare the expected value.) 
+
+
+% largest pattern 唯一 拆开来写  问题的一般性描述，结果 <-> 算法.
+
+\subsection{Two adjacent group types model}\label{sec_adjacent}
+The model assumes two group types, group 1 and 2, with associated sizes $s_1 = s_2 + 1$.
+
+It can help us accept or reject group 2 when the capacity of group 2 is not enough but the capacity of group 1 is sufficient.
+
+Suppose that there are $x$ quantities of group 1 remaining and we receive a request from group 2.
+
+If we accept the request, $(s_2 -1)$ people will be placed. If we reject it, we will place $x$ quantities of group 1 if and only if demand for group 1 is $x$ or higher. That is, if and only if $D_1 \geq x$. Thus, the expected number of people from reserving x units of capacity for group 1 is $(s_1-1)P(D_1 \geq x)$.
+
+Therefore, we will accept a group 2 request if and only if $(s_{2}-1) \geq (s_{1}-1) P\left(D_{1} \geq x\right)
+\Rightarrow P(D_1 < x) \geq \frac{1}{s_2}$.
+
+If a continuous distribution $F(x)$ is used to model demand, $D_1$, then the optimal remaining capacity is given by the simpler expression, $x^{*} = F^{-1}(\frac{1}{s_2})$.
+
+\subsection{[a,b]}
+
+\begin{lem}
+For $[2,3]$, we can obtain an optimal assignment by the policy.
+\end{lem}
+
+The following procedure can generate an optimal assignment.
+
+% In fact, if we only have two types of group size, we can use column generation
+% obtain the results directly. Or generate the pattern greedily.
+
+% One result is that we will satisfy 3 first.
+
+Suppose the group sizes are $2,3$ and the demand is $d_2,d_3$, respectively. We have $N$ rows initially.
+
+If $S \div 3 = q \ldots 1$, the largest patterns will be $(3,3,\ldots,3,2,2), (3,3,\ldots,3,1)$. %need to explain the priority.
+If $S \div 3 = q \ldots 2$, the largest pattern will be $(3,3,\ldots,3,2)$.
+If $S \div 3 = q $, the largest pattern will be $(3,3,\ldots,3)$.
+
+According to the value of $S$, repeat the largest pattern until $q > d_3$ or $d_2 =0$.
+When $q > d_3$, just place groups with 3 $d_3$ times, the rest space will be placed by groups with 2. When $d_2 =0$, just place groups with 3 only.
+In the way, we can obtain the optimal scheme.
+
+For example, $S \div 3 = q \ldots 1$, each row will be divided by $(q-1)\times 3, 2\times 2$, thus we need to find the smaller one, $\min\{\lfloor\frac{d_3}{q-1}\rfloor, \lfloor\frac{d_2}{2}\rfloor \}$, denoted by $r$. If $r \geq N$, choose the largest pattern $N$ times. If $r< N$, when $\lfloor\frac{d_3}{q-1}\rfloor$ is smaller, the number of remaining groups with 3 is $d_3 - \lfloor\frac{d_3}{q-1}\rfloor * (q-1)$.
+
+When $\lfloor\frac{d_2}{2}\rfloor$ is smaller, the number of remaining groups with 2 is $d_2 - \lfloor\frac{d_2}{2}\rfloor * 2$(0 or 1). Retain the group with 2, then place groups with 3 repeatedly.
+
+% 2) the number of 5 and 6 is less than something, estimate the occupancy.
+The conclusion can be extended to any two types of group size. But we still need to consider the number of the largest pattern and the demands of group sizes.
+
+As long as we can obtain the maximum number of the largest patterns with some demands, we will obtain an optimal assignment.
+
+\begin{lem}
+For $[4,5]$, only when $r=1$, we have two largest patterns,
+  $(5,\ldots,5,1)$ and $(5,\ldots,5,4,4,4,4)$.
+
+For $[3,5]$, when $r=1$, we have two largest patterns, $(5,\ldots,5,1)$ and $(5,\ldots,5,3,3)$. When $r=4$, we have two largest patterns, $(5,\ldots,5,3,1)$ and $(5,\ldots,5,3,3,3)$, which depends on $D_3,D_5$.
+
+For $[2,5]$, we don't have two largest patterns.
+
+For $[2,4]$, we don't have two largest patterns.
+
+For $[3,4]$, only when $r=1$, we have two largest patterns, $(4,\ldots,4,1)$ and $(4,\ldots,4,3,3,3)$.
+
+For $[2,3]$, only when $r=1$, we have two largest patterns, $(3,\ldots,3,1)$ and $(3,\ldots,3,2,2)$.
+\end{lem}
+
+\begin{thm}
+For two types of group size,$[a,b], a < b \leq 5$, we can obtain an optimal assignment by following our policy.
+\end{thm}
+
+\begin{algorithm}[H]\label{algo2}
+\caption{Construct an optimal assignment for $[a,b], 2 \leq a<b \leq 5$}
+\begin{description}
+  \item[Step 1.] Generate all the largest patterns, $k_i,i=1,2,\ldots,l$ when given $S$, $[a,b]$, $(d_a,d_b)_D$, $n$ rows.
+  \vspace{10pt}
+  \item[Step 2.] According to the demands, obtain the priority of the largest patterns, suppose the priority be $k_1 \succeq k_2 \succeq \ldots \succeq k_l$.
+	\vspace{10pt}
+  \item[Step 3.] Fill the rows with the largest patterns until we cannot obtain the largest pattern. Suppose the number of rows is $m$. When $m \geq n$, we have obtained an optimal assignment. When $m <n$, continue Step 4.
+  \item[Step 4.] Generate the largest pattern in the greedy way. Place the corresponding groups in the $(m+1)$-st row. One of the group sizes will run out.
+  \item[Step 5.] Place groups with size of $a$ or $b$ in the remaining $n-(m+1)$ rows.
+\end{description}
+\end{algorithm}
+
+% 3. Theorem:  Add one row, the number of people will decrease, the assignment is still optimal. f_1 < g_1  f_1 + f_2 < g_1+ g_2
+
+Why (3,3,3,1) will be worse than (3,3,2,2)?
+Just consider this case: We have 10 groups with 2, 6 groups with 3, the length for each row is 10. For the first policy, when we need 3 rows to place, the result will be (3,3,3,1)*2, (2,2,2,2,2). But the second policy will give a better result, (3,3,2,2)*3. The reason is 1 space will be wasted by (3,3,3,1).
+
+Notice that the group with size of $a$ can provide a profit of $(a-1)$, thus placing the group with the largest size as many as possible can make a larger profit.
+
+\begin{algorithm}[H]\label{algo3}
+\caption{Construct an optimal assignment for $[a,b,c], 2 \leq a<b<c \leq 5$}
+\begin{description}
+  \item[Step 1.] Generate all the largest patterns, $k_i,i=1,2,\ldots,l$ when given $S$, $[a,b,c]$, $(d_a,d_b,d_c)_D$, $n$ rows.
+  \vspace{10pt}
+  \item[Step 2.] According to the demands, obtain the priority of the largest patterns, suppose the priority be $k_1 \succeq k_2 \succeq \ldots \succeq k_l$.
+	\vspace{10pt}
+  \item[Step 3.] Fill the rows with the largest patterns until we cannot obtain the largest pattern. Suppose the number of rows is $m$. When $m \geq n$, we have obtained an optimal assignment. When $m <n$, continue Step 4.
+  \item[Step 4.] Generate the largest pattern in the greedy way. Place the corresponding groups in the $(m+1)$-st row. One of the group sizes will run out.
+  \item[Step 5.] We use Algorithm ~2 to solve the case of two group sizes.
+\end{description}
+\end{algorithm}
+
+\subsection{[a,b,c]}
+
+\begin{thm}
+  For any $[a,b,c], 2 \leq a <b <c \leq 5$, we can obtain an optimal assignment by the following policy.
+\end{thm}
+
+\subsubsection{[2,3,4]}
+
+\begin{thm}\label{234case}
+The following policy will give an optimal assignment for [2,3,4].
+\end{thm}
+
+Suppose the demands for each group type are positive and $D_2,D_3,D_4$, respectively. The number of seats for each row is $S$. We have $n$ rows at the beginning. Let $S = 4 \times q +r, q = \lfloor \frac{S}{4} \rfloor$.
+
+If $r = 0$, the largest pattern will be $(4,4,\ldots,4)$;
+
+If $r = 1$, the largest pattern will be $(4,\ldots,4,1),(4,\ldots,4,3,2),(4,\ldots,4,3,3,3)$; Let $t$ be the number of 4 in pattern $(4,\ldots,4,3,3,3)$.
+When $\min\{\lfloor \frac{D_4}{t} \rfloor, D_2\} > \lceil \frac{D_3}{3} \rceil$, we select $(4,\ldots,4,3,2)$; otherwise, we select $(4,\ldots,4,3,3,3)$.
+
+If $r = 2$, the largest pattern will be $(4,\ldots,4,3,3),(4,\ldots,4,4,2)$, we will select $(4,\ldots,4,3,3)$;
+
+If $r = 3$, the largest pattern will be $(4,\ldots,4,3)$;
+
+Repeat to generate the largest pattern until we do not have enough demands.
+If any one of demands for group types runs out, the problem is reduced to the case of two group types, use the above method to solve this case.
+
+Now suppose the rest demands are $d_2^{l},d_3^{l},d_4^{l}$ after deducting the demands of the largest patterns.
+% Let $p$ be the number of rows where we placed groups.
+% $p = \lfloor \frac{D_4}{q} \rfloor$, then $d_4^{l} = D_4 - p \times q$.
+
+$d_4^{l}$ should be less than $q$ for $r=0,3$, less than $q-1$ for $r=1,2$, otherwise, we can continue to generate the largest pattern.
+
+For the next row, we place all rest $d_4^{l}$ groups with size of 4. Then we will have $S^{l} = S - d_4^{l} \times 4$ empty seats. The problem can be reduced to the case of two group types. That is, place groups with size of 3 as many as possible, the rest seats can be taken by group with size of 2.
+
+For the rest $(n-p-1)$ rows, this problem is reduced to the case of two group types.
+
+\begin{lem}\label{4case}
+For the case $r=2$, $(4,\ldots,4,3,3)$ will give an assignment no worse than that of $(4,\ldots,4,2)$.
+\end{lem}
+
+\begin{pf}[Proof of lemma \ref{4case}]
+
+Let $d_i(n), i =2,3,4$ indicate the number of demand which can be satisfied by the first policy when placing n rows. Denote by $d_i^{'}(n), i =2,3,4$ the number of demand when we take the second policy.
+
+There are three stages to satisfy demands for n rows. The first one is to generate the largest pattern until we cannot get the largest pattern. The second one is to satisfy the group with largest size. The third one is to satisfy the left two types of demands.
+
+If the first stage can cover n rows for both policies. These two policies will have no difference because they both give the largest pattern.
+
+If the second policy cannot generate the largest pattern, but the first policy can generate the largest pattern, the first policy will give a better solution than the second one.
+
+If the first policy cannot generate the largest pattern, $(4,\ldots,4,3,3)$, but the second policy can generate the largest pattern, it means $D_3- d_3 < 2$. Notice that the first policy will satisfy less groups with 4. Because the remaining demands, $D_4 - d_4$,$D_2 - d_2$ will be larger than those of the second one, the first policy can generate $(4,\ldots,4,2)$ as the largest pattern until both of them cannot generate the largest pattern.
+
+If both policies cannot generate the largest pattern in stage two, for the second policy, it means $D_4 - d_4^{'} <q$ or $D_2 = d_2^{'}.$
+
+When $D_4 - d_4^{'} \geq q$, the first policy can always generate $(4,\ldots,4,2)$, thus $D_4 - d_4^{'} <q$ and $D_4 - d_4 <q$ always hold.
+
+In this way, $D_4$ will be satisfied in stage two. But $d_2 \leq d_2^{'}$, with the same rows, $d_3 \geq d_3^{'}$. Thus, the first policy will give a solution no worse than that of the second policy.
+
+In stage three, $D_3- d_3$ will be satisfied until all $D_3$ are satisfied. But before that, $d_2 \leq d_2^{'}$ and $d_3 \geq d_3^{'}$ will hold.
+
+Therefore, the first policy will give a solution no worse than that of the second policy.
+
+\end{pf}
+
+A case will show that. We have the demands, (10,6,4) for [2,3,4] respectively. The length of each row is 14. We need to arrange them on two rows. If we take $(4,\ldots,4,2)$, the solution will be (4,4,4,2) and (4,3,3,3). If we take $(4,\ldots,4,3,3) $, the solution will be (4,4,3,3)*2, which is better than the former one.
+
+Similarly, we have the following lemma.
+
+\begin{lem}
+For the case $r=1$, $(4,\ldots,4,3,2),(4,\ldots,4,3,3,3)$ will be better than $(4,\ldots,4,1)$. Let $t$ be the number of 4 in pattern $(4,\ldots,4,3,3,3)$.
+When $\min\{\lfloor \frac{D_4}{t} \rfloor, D_2\} > \lceil \frac{D_3}{3} \rceil$, we select $(4,\ldots,4,3,2)$; otherwise, we select $(4,\ldots,4,3,3,3)$.
+\end{lem}
+
+Example:
+
+(10,3,7) for [2,3,4], length is 13, n=4. (4,4,3,2) is better than (4,3,3,3).
+
+(10,2,8) for [2,3,4], length is 13, n=2. (4,3,3,3) is better than (4,4,3,2).
+
+\begin{pf}[Proof of Theorem \ref{234case}]
+Suppose the demands for each group type are positive and $D_2,D_3,D_4$, respectively. The number of seats for each row is $S$. We have $N$ rows at the beginning. Let $S = 4 \times q +r, q = \lfloor \frac{S}{4} \rfloor$. Let $d_i(n), i =2,3,4$ indicate the number of demand which can be satisfied by the policy when placing $n$ rows.
+
+There are three stages to satisfy demands for n rows. The first one is to generate the largest pattern until we cannot get the largest pattern. The second one is to satisfy the group with largest size. The third one is to satisfy the left two types of demands.
+
+If the first stage can cover $N$ rows for this policy. It is easy to know that this policy give an optimal assignment.
+
+Suppose the number of rows can be covered in the first stage is $m$.
+
+If $D_2 = d_2(m)$ or $D_3 = d_3(m)$, just follow the policy of two types of group in the second stage.
+
+If $D_2 - d_2(m)>0$ and $D_3 - d_3(m)>0$, we know that $D_4 - d_4(m) < q$. Thus, one row will satisfy the left demand, $D_4 - d_4(m)$ and then place group with 3 as many as possible, if the left demand $D_3 - d_3(m)$ is also satisfied, then place group with 2 as many as possible.
+% (Because 3+2>2+2+2)
+
+$D_4$ will be satisfied in the second stage, and the demand, $d_3(m+1)$ will also be satisfied as many as possible. Thus, the policy gives the largest $d_4(m+1), d_3(m+1)$, which corresponds to an optimal solution.
+
+In the third stage, follow the policy of two types of group, $d_4(n),d_3(n),N \geq n>m+1$ will still be the largest.
+
+Thus, the policy will give an optimal solution.
+
+\end{pf}
+
+
+% (6,8,10,35)  The largest pattern is not easy to obtain.
+
+% Suppose the length of each row is $S$, the largest seats can be taken by $(a,b,c)$ are $S_1$.
+%
+% Let $ax + by + cz = S_1, a<b<c$, the loss for the largest pattern is $x+y+z+S-S_1$.
+%
+% $\min (x+y+z+S-S_1) \to \min (x+y+z-S_1) \to \min (x+y+z-(ax + by + cz)) \to \max (a-1)x + (b-1)y + (c-1)z$, it is the maximal number of people served for each row.
+%
+% \begin{lem}
+% When $ax+cz = (x+z)b$, the number of different largest patterns is at most $\frac{1}{(x+z)}\lfloor\frac{S}{b}\rfloor +1$.
+% \end{lem}
+% % is at most $\frac{1}{2}\lfloor\frac{S}{b}\rfloor +1$
+%
+% \begin{lem}
+% When $ax+cz \neq (x+z)b$, the number of different largest patterns is at most a.
+% \end{lem}
+%
+% Suppose one largest pattern is $[x_1,y_1,z_1]$ and the number of left seats is $s_1, s_1 < a$.
+%
+% If $z_1 =0, s_1=0$, then $ax_1 +by_1 =S$, we do not have another integer solution for this linear equation.Thus, we only have one largest pattern in this case.
+%
+% If $z_1 =0, s_1>0$, when $(t-1)b = ta+1$, $[x_1+t,y_1-(t-1),z_1]$ will be another largest pattern and the number of left seats is $s_1-1$. When $s_1 = a-1$, the number of largest patterns can reach $a$.
+%
+% When $z_1 >0$, if we decrease $z_1$ by 1, then we must increase $a$ or $b$ or both. In this way, $s_1$ will change correspondingly.
+%
+% Note that $ax+cz \noteq (x+z)b$, we cannot decrease b by $(x+z)$ and increase a by $x$, c by $z$.
+%
+% After obtaining the largest patterns, we need to compare the demands of $a,b,c$, then construct the largest patterns as many as possible.
+
+\subsubsection{[2,3,5]}
+
+For $[2,3,5]$, as long as we can gaurantee that $d_5,d_3$ are always largest during generating patterns, we can say our policy can give an optimal solution.
+
+% Always placing the groups with the largest size can make sure that $d_3,d_5$ are largest.
+% Because placing the groups with the largest size will be no worse than the second largest pattern.
+
+1) When $r = 1$, the largest patterns are $(5,\ldots,5,1),(5,\ldots,5,3,3)$.
+
+For this case, $(5,\ldots,5,3,3)$ is always no worse than $(5,\ldots,5,1)$.
+
+After generating all $(5,\ldots,5,3,3)$, either the number of groups with 5 or 3 is not enough. Continue to place groups with 5 for each row until the group with 5 is not available. Because in this way, we can gaurantee the pattern generated for each row is no worse than others and $d_3,d_5$ are always largest.
+
+2) When $r=2$, the largest pattern is $(5,\ldots,5,2)$.
+
+After generating all $(5,\ldots,5,2)$, continue to place groups with 5 for each row until the group with 5 is not available. In this way, we will generate $(5,\ldots,5)$, which has the same profit with $(5,\ldots,5,3,3)$.
+When the group with 5 is not available, continue to place the group with 3 for each row. $d_3,d_5$ will still be largest.
+
+3) When $r=3$, the largest pattern is $(5,\ldots,5,3)$
+
+When the group with 3 is not available, generate $(5,\ldots,5,2)$.
+
+When the group with 5 is not available, continue to place the group with 3 for each row.
+
+All in all, always placing the groups with the largest size can make sure that
+$d_3,d_5$ are the largest.
+
+4) When $r=4$, the largest patterns are $(5,\ldots,5,3)$, $(5,\ldots,5,2,2)$.
+
+$(5,\ldots,5,3) \succeq (5,\ldots,5,2,2)$.
+
+Placing the groups with the available largest size can make sure that $d_3,d_5$ are the largest.
+
+5) When $r=5$, the largest pattern is $(5,\ldots,5,5)$.
+
+When we cannot generate $(5,\ldots,5,5)$, place the group with 3 for each row. Filling the groups with 3 as many as possible into each row can always give the largest profit.
+
+\subsubsection{[2,4,5]}
+
+For $[2,4,5]$, as long as we can gaurantee that $d_5,d_4$ are always largest during generating patterns, we can say our policy can give an optimal solution.
+
+1) When $r = 1$, the largest patterns are $(5,\ldots,5,1), (5,\ldots,5,4,2), (5,\ldots,5,4,4,4,4)$.
+
+For $(\underbrace{5,\ldots,5}_{t},4,2)$, when $\min\{\lfloor \frac{D_5}{t} \rfloor, D_2\} > \lceil \frac{D_4}{4} \rceil$, we select $(5,\ldots,5,4,2)$; otherwise, we select $(5,\ldots,5,4,4,4,4)$.
+
+$(5,\ldots,5,4,4,4,4), (5,\ldots,5,4,2) \succeq (5,\ldots,5,1)$.
+
+When $(5,\ldots,5,4,4,4,4)$ is not available, the number of groups with 4 is less than 4.
+
+When all largest patterns are not available, place the groups with 5 as many as possible.
+
+
+2) When $r=2$, the largest patterns are $(5,\ldots,5,2), (5,\ldots,5,4,4,4)$.
+
+For this case, $(5,\ldots,5,4,4,4) \succeq (5,\ldots,5,2)$.
+
+
+3) When $r=3$, the largest pattern is $(5,\ldots,5,4,4)$.
+
+For this case, when the group with 4 is less than 2, the second largest pattern $(5,\ldots,5,2)$ will be no worse than $(5,\ldots,5,4,2,2)$.
+When the group with 5 is not enough to generate $(5,\ldots,5,4,4)$, $d_4,d_5$ will be largest when placing the available largest pattern.
+Thus, placing the available largest pattern as many as possible will still give an optimal solution.
+
+4) When $r=4$, the largest pattern is $(5,\ldots,5,4)$. Continue to generate the second largest pattern, we can ensure $d_5(n), d_4(n)$ will be the largest when given n rows.
+
+5) When $r=5$, the largest pattern is $(5,\ldots,5,5)$.
+
+\subsubsection{[3,4,5]}
+
+For $[3,4,5]$, as long as we can gaurantee that $d_5,d_4$ are always largest during generating patterns, we can say our policy can give an optimal solution.
+
+1) When $r = 1$, the largest patterns are $(5,\ldots,5,1), (5,\ldots,5,3,3), (5,\ldots,5,4,4,3), (5,\ldots,5,4,4,4,4)$.
+
+In this case, $(5,\ldots,5,4,4,4,4)$ will have the highest priority, because
+other patterns will have a lower occupancy.
+
+$(5,\ldots,5,4,4,4,4) \succeq (5,\ldots,5,4,4,3) \succeq (5,\ldots,5,3,3)$.
+
+
+2) When $r=2$, the largest patterns are $(5,\ldots,5,4,3), (5,\ldots,5,4,4,4)$.
+
+For $(\underbrace{5,\ldots,5}_{t},4,3)$, when $\min\{\lfloor \frac{D_5}{t} \rfloor, D_3\} > \lceil \frac{D_4}{3} \rceil$, we select $(5,\ldots,5,4,3)$; otherwise, we select $(5,\ldots,5,4,4,4)$.
+
+Similar to the case, $[2,3,4]$.
+
+3) When $r=3$, the largest patterns are $(5,\ldots,5,3), (5,\ldots,5,4,4)$
+
+For this case, $(5,\ldots,5,4,4) \succeq (5,\ldots,5,3)$. Because these two patterns are independent.
+
+4) When $r=4$, the largest pattern is $(5,\ldots,5,4)$. Continue to generate the second largest pattern, we can ensure $d_5(n), d_4(n)$ will be the largest when given n rows.
+
+5) When $r=5$, the largest pattern is $(5,\ldots,5,5)$. Similar to 4).
+
+\subsection{[2,3,4,5]}
+
+Example:
+$[2,3,4,5] * (8,8,3,7)_D, S = 16, n=4$
+
+The same policy will give the demand $(4,3,3,7)_{D_p}$.
+
+The optimal solution has the demand $(0,7,2,7)_{D_o}$.
+
+\begin{thm}
+  Let $r$ be the remainder of $S$ divided by 5, i.e., $S = 5 \times q +r, q = \lfloor \frac{S}{5} \rfloor$.
+  The most preferred pattern is $(5,\ldots,5,\underbrace{4,\ldots,4}_{5-r}), r =2,3,4$. When $r=0$, The most preferred pattern is $(5,\ldots,5)$. When $r=1$, The most preferred pattern is $(5,\ldots,5,4,2)$ or $(5,\ldots,5,4,4,4,4)$, which depends on the demands.
+\end{thm}
+
+We can have the following 5 situations according to the remainder.
+
+1) When $r = 1$, the largest patterns are $(5,\ldots,5,1), (5,\ldots,5,4,2),(5,\ldots,5,3,3), (5,\ldots,5,4,4,3), (5,\ldots,5,4,4,4,4)$.
+
+We have $(5,\ldots,5,4,4,4,4) \succeq (5,\ldots,5,4,4,3) \succeq (5,\ldots,5,3,3), (5,\ldots,5,4,2) \succeq (5,\ldots,5,1)$.
+
+% In this case, $(5,\ldots,5,4,4,4,4)$ will have the highest priority, because other patterns will have a group with 3 or less, having the lower occupancy. We can always construct a counter example to prove $(5,\ldots,5,4,4,4,4)$ is better than others.
+
+Notice that $(5,\ldots,5,4,4,4,4) + (5,\ldots,5,3,3) = 2* (5,\ldots,5,4,4,3)$, and $(5,\ldots,5,4,4,3)$ uses less the group with 3 than $(5,\ldots,5,3,3)$, thus $(5,\ldots,5,4,4,3) \succeq (5,\ldots,5,3,3)$.
+
+For $(\underbrace{5,\ldots,5}_{t},4,2)$, when $\min\{\lfloor \frac{D_5}{t} \rfloor, D_2\} > \lceil \frac{D_4}{4} \rceil$, we select $(5,\ldots,5,4,2)$; otherwise, we select $(5,\ldots,5,4,4,4,4)$.
+
+$(5,\ldots,5,1)$ will have the lowest priority because one empty seat is wasted.
+
+2) When $r=2$, the largest patterns are $(5,\ldots,5,2), (5,\ldots,5,4,3), (5,\ldots,5,4,4,4)$.
+
+For this case, $(5,\ldots,5,4,4,4), (5,\ldots,5,4,3) \succeq (5,\ldots,5,2)$.
+
+For $(\underbrace{5,\ldots,5}_{t},4,3)$, when $\min\{\lfloor \frac{D_5}{t} \rfloor, D_3\} > \lceil \frac{D_4}{3} \rceil$, we select $(5,\ldots,5,4,3)$; otherwise, we select $(5,\ldots,5,4,4,4)$.
+
+3) When $r=3$, the largest patterns are $(5,\ldots,5,3), (5,\ldots,5,4,4)$
+
+For this case, $(5,\ldots,5,4,4) \succeq (5,\ldots,5,3)$.
+
+4) When $r=4$, the largest pattern is $(5,\ldots,5,4)$. Continue to generate the second largest pattern, we can ensure $d_5(n), d_4(n)$ will be the largest when given n rows.
+
+5) When $r=5$, the largest pattern is $(5,\ldots,5,5)$. Similar to 4).
+
+Now we need to consider the situation where we cannot generate the largest patterns.
+
+If all types of groups remain, i.e., $D_i - d_i >0, i=21,3,4,5$, we need to place the groups according to their sizes. Then $D_5$ will be satisfied and the problem is reduced to the case with $[2,3,4]$.
+
+If $d_5 = D_5$ initially, the problem will be reduced to the case with $[2,3,4]$.
+
+If the group with the size of 5 remains and the demand of at least one other type of group is satisfied, i.e., we have $[2,3,5]$ or $[2,4,5]$ or $[3,4,5]$.
+
+With the above conclusions, we can follow the policies to obtain an optimal solution.
+
+\subsubsection{Column-and-cut generation}
+
+Notice that $T$ is a subset of the set of all possible cutting patterns, thus we need to find more cutting patterns by the column generation.
+
+
+The linear relaxation of problem \eqref{deterministic_form} can be written as:
+
+\begin{equation}\label{linear_relaxation}
+  \begin{aligned}
+    \max \quad & c{'} \mathbf{x} + f{'} \mathbf{y} \\
+    \text {s.t.} \quad & \mathbf{T} \mathbf{x} + \mathbf{V}_\omega \mathbf{y}_\omega = \mathbf{D}_\omega, \omega\in \Omega \\
+    & \mathbf{1} \mathbf{x} = N \\
+    & \mathbf{x}, \mathbf{y} \geq \mathbf{0}
+  \end{aligned}
+\end{equation}
+
+Obtain the dual of the problem \eqref{linear_relaxation}, the constraints are represented in the matrix form:
+
+$$
+\left[\begin{array}{cccccccccc}
+\mathbf{T} & \mathbf{T} & & & \cdots & & & & \mathbf{T}  & \mathbf{1} \\
+\mathbf{W} & & & & & & & & & \\
+\mathbf{I} & & & & & & & & & \\
+ & \mathbf{W}& & & \ddots & & & & & \\
+  & \mathbf{I} & & & & & & & &  \\
+  & & & & \ddots & & & & \mathbf{W} & \\
+  & &  & & & & & & \mathbf{I} &  
+\end{array}\right],
+$$
+
+Let $(\pi=\left[\pi_{11}, \pi_{21},\cdots,\pi_{m 1}, \cdots, \pi_{1 \omega}, \pi_{2 \omega}, \cdots, \pi_{m \omega}\right],\lambda)$ be optimal dual variables associated with the scenario constraints and row number constraint.
+
+Then the dual problem is:
+
+\begin{align}
+    \min \quad & \sum_{\omega} D_{\omega} \mathbf{\pi}_{\omega} + N \lambda \\
+    \text {s.t.} \quad & \sum_{\omega} \mathbf{T} \mathbf{\pi}_{\omega} + \mathbf{1} \lambda \geq (\mathbf{s}-1)\mathbf{T} \\
+    & \mathbf{W} \mathbf{\pi}_{\omega} \geq -\mathbf{\bar{s}}~p_{\omega}, ~\omega \in \Omega \label{W_dual} \\ 
+    & \mathbf{I} \mathbf{\pi}_{\omega} \geq \mathbf{0}, ~\omega \in \Omega \label{I_dual} 
+\end{align}
+
+$\mathbf{s}$ is the vector of group sizes, $s_i$. $\mathbf{\bar{s}}_{i} = s_i - s_{i-1}$ with $s_0 =1$.
+
+
+From the constraints \eqref{W_dual} and \eqref{I_dual}, we have 
+
+\begin{equation}
+  \left\{
+    \begin{array}{lr}
+    0 \leq \pi_{\omega,m} \leq (s_m -s_{m-1})p_{\omega}, &  \\
+    0 \leq \pi_{\omega, m-1} \leq (s_{m-1} -s_{m-2})p_{\omega}+ \pi_{\omega,m}, &  \\
+    \qquad \vdots \qquad \vdots &  \\
+    0 \leq \pi_{\omega,1} \leq (s_{1} - 1)p_{\omega}+ \pi_{\omega,2}, &
+    \end{array}
+  \right.
+\end{equation}
+
+Similarly, according to the complementary slackness,
+when $y_{\omega,m}^{+} \neq 0$, $\pi_{\omega,m} = (s_m -s_{m-1})p_{\omega}$; when $y_{\omega,m}^{-} \neq 0$, $\pi_{\omega,m} = 0$. 
+
+When both $y_{\omega,i}^{+}, y_{\omega,i}^{-}$ are equal to 0, to minimize the objective function, $\pi_{\omega,i}$ should also be 0.
+
+Therefore, when we obtain $\mathbf{x},\mathbf{y}$ of the problem \eqref{linear_relaxation}, we can immediately obtain $\mathbf{\pi}$. And $\lambda$ can be obtained by the strong duality.
+
+The pricing problem will be
+
+\[\begin{split}\mbox{max}\quad & \sum_{i=1}^m \left[(s_i-1) -\sum_{\omega}\pi_{i \omega}\right] y_{i} - \lambda \\
+  \mbox{s.t.} \quad & \sum_{i=1}^m s_i y_i \leq L  \\
+  & y_i \geq 0, \mbox{integer}\quad \mbox{for}~ i=1,\ldots,m,\\
+\end{split}\]
+
+where $y_i$ indicate the number of times group type $i$ is placed in the new pattern.
+
+By solving the pricing problem, we can obtain a new cutting pattern, then add it to $T$. Then solve the problem to obtain $(x^{*}, z^{*})$ and continue the Benders Decomposition.
+
+\subsection{Results of the column-and-cut method}
+
+\begin{table}[ht]
+  \begin{tabular}{l|l|l|l|l}
+  \hline
+  \# of scenarios number & \# of group types & \# of iterations & \# of cutting patterns & time(s) \\
+  100  & 4  & 2 & 1 & 0.5 \\
+  200  & 4  & 2 & 1 & 1 \\
+  500  & 4  & 2 & 1 & 3 \\
+  1000 & 4 & 2 & 1 & 5 \\
+  2000 & 4 & 2 & 1 & 10 \\
+  5000 & 4 & 2 & 1 & 24\\
+  \hline
+  \end{tabular}
+\end{table}
+
+The size of each row is 18.
+
+Group types are $[2,3,4,5]$.
+
+The scenarios are generated from $[5,15]$.
+
+Given the number of rows is 3. The initial cutting pattern are gererated in the same way as before.
+
+We can see that the number of cutting patterns and iterations is related with the size of row and group types.
+
+The running time increases with the number of scenarios linearly.
+
+Now Fix the number of scenarios at 500.
+
+\begin{table}[ht]
+  \begin{tabular}{l|l|l|l|l}
+  \hline
+  size of row & \# of group types & \# of iterations & \# of cutting patterns & time(s) \\
+  10  & 4  & 1 & 0 & 0.8 \\
+  20  & 4  & 3 & 0 & 3 \\
+  30  & 4  & 4 & 2 & 6.3 \\
+  40  & 4  & 5 & 1 & 9.6 \\
+  50  & 4  & 7 & 3 & 16.5 \\
+  90  & 4  & 5 & 1 & 9 \\
+  100 & 4 & 1 & 0 & 1.29 \\
+  200 & 4 & 1 & 0 & 1.26 \\
+  500 & 4 & 1 & 0 & 1.25 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+One interesting thing is that the running time are higher when the size of row is 50. Then we fix the size of row at 50, just change the number of group types. (Starting from 2 and group types are consecutive integers starting from 2)
+
+\begin{table}[ht]
+  \begin{tabular}{l|l|l|l|l}
+  \hline
+  \# of group types & size of row & \# of iterations & \# of cutting patterns & time(s) \\
+  2  & 50  & 1 & 1 & 1.26 \\
+  3  & 50  & 4 & 2 & 6.3 \\
+  4  & 50  & 7 & 3 & 16.1 \\
+  5  & 50  & 5 & 5 & 9.6 \\
+  6  & 50  & 5 & 4 & 9.7 \\
+  7  & 50  & 4 & 4 & 6.5 \\
+  8  & 50 & 4 & 3 & 6.2 \\
+  9  & 50 & 3 & 1 & 4 \\
+  10 & 50 & 3 & 1 & 4.2 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+% But the larger one can be divided into two smaller groups, $7 = 3 + 4$, still difficult to calculate the number of different full patterns.
+
+% Example:
+% $(2,2)$ will be inferior to $(1,3)$.
+% $S =11, s =[2,3], p_1 =p_2 =0.5, N =3$.
+% $T = 
+%   \begin{pmatrix}
+%   1 & 4  \\
+%   3 & 1  
+%   \end{pmatrix}$
+% $x_{0} = 
+% \begin{pmatrix}
+% 2   \\
+% 1  \end{pmatrix}$
+
+% $d_0 = T x_{0} = \begin{pmatrix}
+%   1 & 4  \\
+%   3 & 1  
+%   \end{pmatrix} \begin{pmatrix}
+%     2   \\
+%     1  \end{pmatrix} = \begin{pmatrix}
+%       6   \\
+%       7  \end{pmatrix}$
+
+% $d_{1} = 
+% \begin{pmatrix}
+% 6   \\
+% 6  \end{pmatrix}$ 
+% $d_{2} = 
+% \begin{pmatrix}
+% 7   \\
+% 7  \end{pmatrix}$
+% $\Rightarrow  \alpha_{1} = (1,2),\alpha_{2} = (0,1).$
+
+% Solve problem \eqref{lemma_eq2}, $x^{*} = (3,0){'}, z_{1} = 3, z_{2} = -2$.
+
+% $d_0 = T x^{*} = \begin{pmatrix}
+%     3   \\
+%     9  \end{pmatrix}$
+% $\Rightarrow  \alpha_{1}^{(1)} = (1,0),\alpha_{2}^{(1)} = (1,0).$
+
+% $z_{1} = -3 <3$, add $\alpha_1^{(1)}$.
+
+% \begin{equation}
+%   \begin{aligned}
+%     \max \quad & (7,6) (x_1,x_2){'} + \frac{1}{2} (z_1+z_2) \\
+%     \text {s.t.} \quad & (0, 1)(6, 6){'} \geq (3,1) (x_1,x_2){'} + z_1 \\
+%     & (2, 1)(6, 6){'} \geq (5,9) (x_1,x_2){'} + z_1 \\
+%     & (0, 1)(7, 7){'} \geq (3,1) (x_1,x_2){'} + z_2 \\
+%     & x_1 + x_2 = 3 \\
+%     & x_1,x_2 \geq 0
+%   \end{aligned}
+% \end{equation}
+
+% One observation is that if we can obtain the valid cuts every time, we only need to add at most $(K-1)$ cuts, where $K$ is the number of initial cutting patterns.
+
+% For each $\omega$, if it satisfies $f{'} y_{\omega} < z^{*}_{\omega}$, then we have identified a violated constraint, $(\alpha^{t}){'}(\mathbf{d}_{\omega}- \mathbf{T}x^{*}) \geq z_{\omega}$, which can be added to the relaxed master problem. $\alpha^{t}$ is the dual optimal solution.
+% If we have $(\alpha^{t(\omega)}){'}(\mathbf{d}_{\omega}- \mathbf{T}x^{*}) \geq z_{\omega}$ for all $\omega$, then we obtain $(\alpha^{t}){'}(\mathbf{d}_{\omega}- \mathbf{T}x^{*}) \geq z_{\omega}$. In this way, we have an optimal solution to the master problem \eqref{BD_master1} because no constraint is violated.
+
+
+
+\subsubsection{Max regret}
+Let $D$ be the polyhedron including all feasible demands with $N$ rows, i.e., 
+$D = \{d = (d_1,d_2,\ldots, d_n): Tx = d,\sum_{k} x_k \leq N, x_k \geq 0, \mbox{integer} \}$.
+
+We denote by $z^{s}(d)$ the value given by a demand $d \in D$ for scenario $s$. According to our assumption, the larger seats can be utilized by the smaller group. Then, we have
+$z^{s}(d) = \sum_{i=1}^{m-1}(s_i -1)(Tx + y_{i+1}^{+}-y_{i}^{+}) + (s_m-1)(Tx- y_m^{+})$.
+
+When $s_i = i+1$, $z^{s}(d) = \sum_{i=1}^{m} i Tx - \sum_{i=1}^{m} y_{i}^{+}$, $y_{m}^{+} = (d_{m} - d_{m}^{s})^{+}$, $y_{i}^{+} = (d_{i} - d_{i}^{s} + y_{i+1}^{+})^{+}, i = 1, \ldots, m-1$.
+
+Let $z^{s}_{*}$ be the optimal solution value under scenario $s$, i.e., the solution value of the following problem.
+
+\begin{align*}
+  z^{s}_{*} = \mbox{max}\quad & \sum_{k=1}^K \sum_{i=1}^m (s_i-1) t_{i}^{k}x_{k} \\
+  \mbox{s.t.} \quad & \sum_{k=1}^K x_{k} \leq N \\
+  & \sum_{k=1}^K t_i^k x_k \leq d_i^{s},\quad i=1,\ldots,m \\
+  & x_{k} \geq 0, \mbox{integer} \quad k = 1,\ldots,K
+\end{align*}
+
+The regret associated with demand $d$, for scenario $s$, is then $r^{s}(d) = z^{s}_{*} - z^{s}(d)$.
+
+Let $S$ denote the set of all possible scenarios $s$, then $D \subset S$.
+
+\begin{definition}
+  We say $d^{s_0}$ associated with $s$ is the minimum demand if it satisfies $z^{s}_{*} = z^{s_0}_{*}$, $d^{s} \notin D$.
+\end{definition}
+
+Thus, $d^{s_0}_{i} \leq d^{s}_{i}$.
+
+The min-max regret problem is to find a feasible demand $d$ such that the maximum regret is minimized.
+
+\begin{align*}
+  \mbox{min}_{d} \ \mbox{max}_{s \in S}\quad & r^{s}(d) \\
+  \mbox{s.t.} \quad & \sum_{k=1}^K x_{k} \leq N \\
+  & \sum_{k=1}^K t_i^k x_k \leq d_i,\quad i=1,\ldots,m \\
+  & x_{k} \geq 0, \mbox{integer} \quad k = 1,\ldots,K
+\end{align*}
+
+$\mbox{min}_{d} \ \mbox{max}_{s \in S} \ r^{s}(d) = \mbox{min}_{d} \ \mbox{max}_{s \in S} [(\max_{d^{s} \in S_0} \sum i d^{s}) - \sum_{i=1}^{m} (i d_i - y_{i}^{+})]$
+
+It is easy to find that the min-max regret is 0 when we take $d = d^{s} \in D$.
+
+Thus, we only consider the maximum regret given a demand $d^{0}$.
+
+Then the maximum regret is $\max_{s} \sum_{i}^{m} y_{i}^{+} + \sum_{i} i d^{s}_{i} - \sum_{i} i d^{0}_{i}, y_{m}^{+} = (d_{m}^{0} - d_{m}^{s})^{+}$, $y_{i}^{+} = (d_{i}^{0} - d_{i}^{s} + y_{i+1}^{+})^{+}, i = 1, \ldots, m-1$.
+
+\begin{thm}
+  The regret reaches its maximum if and only if $d^{s}$ is at the vertex of $D$.
+\end{thm}
+
+When $s \notin S_0$, the increase of any element of $d^{s_0}$ will keep the value of $\sum_{i} i d^{s}_{i}$ unchanged and the value of $\max_{s} \sum_{i} y_{i}^{+}$ non-increasing.
+
+When $s \in S_0$, if $s$ is not at the vertex of $D$, then the increase of $d^{s}$ will make the value of $\sum_{i} i d^{s}_{i} + \max_{s} \sum_{i} y_{i}^{+}$ non-decreasing until $d^{s}$ reaches the vertex.
+
+Therefore, the regret reaches its maximum if and only if $d$ is at the vertex of $D$.
+
+Now, we consider to solve the following problem:
+
+\begin{equation}\label{regret_problem}
+\begin{aligned}
+  \mbox{max}_{s} & \sum_{i} y_{i}^{+} + \sum_{i} i d^{s}_{i} - \sum_{i} i d^{0}_{i} \\
+  \mbox{s.t.} \quad & d^{s} \in D = \{d = (d_1,d_2,\ldots, d_n): Tx = d,\sum_{k} x_k \leq N, x_k \geq 0, \mbox{integer} \} \\
+  & y_{i}^{+} = (d_{i}^{0} - d_{i}^{s} + y_{i+1}^{+})^{+}, i = 1, \ldots, m-1 \\
+  & y_{m}^{+} = (d_{m}^{0} - d_{m}^{s})^{+}.
+\end{aligned}
+\end{equation}
+
+Notice that every $d^{s}$ can be expressed as $d^{s} = Tx$, then let $w_{m} = (d^{0} - Tx)_{m}^{+}$, $w_{i} = ((d^{0} - Tx)_{i}+ y_{i+1}^{+})^{+}, i =1 ,\ldots, m-1$.
+ 
+Then the problem \eqref{regret_problem} can be reformulated as 
+
+\begin{equation}\label{regret_problem_1}
+  \begin{aligned}
+    \mbox{max}_{x,w} & (\sum_{i} i (Tx)_{i} - \sum_{i} i d^{0}_{i} + \min \sum_{i} w_{i}) \\
+    \mbox{s.t.} \quad & w_m \geq (d^{0}- Tx)_{m} \\
+    & w_{i} \geq (d^{0}- Tx)_{m-1} + w_{i+1}, i =1, \ldots,m-1 \\
+    & w_i \geq 0, i =1, \ldots,m \\
+    & \sum_{k} x_{k} \leq N \\
+    & x_k \geq 0, \mbox{integer}.
+  \end{aligned}
+\end{equation}
+  
+We can introduce a new variable $z$ to satisfy $z \leq z(x) =\{\min \sum_{i} w_{i}: w_{m} \geq (d^{0}- Tx)_{m}, w_{i} \geq (d^{0}- Tx)_{m-1} + w_{i+1}, i =1, \ldots,m-1, w_i \geq 0 \}$. Then, we can obtain the dual:
+\[\{\max \alpha{'}(d^{0}- Tx): 0 \leq \alpha_{1} \leq 1, 0 \leq \alpha_{i} \leq \alpha_{i-1} + 1, i=2,\ldots,m \}\]
+
+Let $\alpha_0 = 0$, an optimal solution to the dual is given by
+\begin{align*}
+  & \alpha_{i} =0, i =1,\ldots,m \ \text{if}~  d^{0}-Tx < 0,\\ 
+  & \alpha_{i} = \alpha_{i-1}+1,  i =1,\ldots,m \ \text{if}~  d^{0}-Tx \geq 0
+\end{align*}
+
+The master problem will be:
+
+\begin{equation}\label{regret_problem_2}
+  \begin{aligned}
+    \mbox{max}_{x,z} & \sum_{i} i (Tx)_{i} - \sum_{i} i d^{0}_{i} + z \\
+    \mbox{s.t.} \quad & z \leq \alpha{'} (d^{0}- Tx) \\
+    & \sum_{k} x_{k} \leq N \\
+    & x_k \geq 0, \mbox{integer}.
+  \end{aligned}
+\end{equation}
+
+Notice that this problem is just one scenario version of problem \eqref{BD_master2}, thus, we can use column-and-cut to solve it directly.
+
+\begin{algorithm}[H]\label{column_and_cut_algo1}
+  \caption{The column-and-cut algorithm}
+    \begin{description}
+    \item[Step 1.] Solve LP form of \eqref{regret_problem_2} with $\alpha^0 = \mathbf{0}$.
+    Then, obtain the solution $(x_0, z^{0})$ and dual solution $(\pi, \lambda)$.
+    \item[Step 2.] Set the upper bound $UB = c{'} x_0 +  z^{0} - \sum_{i} i d^{0}_{i}$
+    \item[Step 3.]
+    For $x_0$, we can obtain $\alpha^{1}$ and $z^{(0)}$, set the lower bound $LB = c{'} x_0 +  z^{(0)} - \sum_{i} i d^{0}_{i}$
+    \item[Step 4.]
+    If $(\alpha^{1}){'}(\mathbf{d}^{0}- \mathbf{T}x_0) < z^{(0)}$, add one new constraint, $(\alpha^{1}){'}(\mathbf{d}^{0}- \mathbf{T}x) \geq z$, to LP \eqref{regret_problem_2}.
+    \item[Step 5.]
+    Solve the pricing problem with $(\pi,\lambda)$, add a new cutting pattern and update $T$.
+    \vspace{5pt}
+    \item[Step 6.] Solve the updated LP \eqref{regret_problem_2}, obtain a new solution $(x_1, z^{1})$ and update UB.
+    \item[Step 7.] Repeat step 3 until $UB - LB < \epsilon$.(Or in our case, UB converges.)
+   \end{description}
+  \end{algorithm}
+
+\subsubsection{Two-stage Robust optimization}
+
+We can find that the worst scenario is $d^{s}$ when all elements $d_i^{s}$ take their minimum values. 
+
+
+\subsubsection{Details}
+% \begin{equation}
+  % \begin{aligned}
+%     \max \quad & c{'} x + E(\max \{d -Tx , 0\}) \\
+%     \text {s.t.} \quad & \sum_{k \in K} x_k = N \\
+%      & x \geq 0
+%   \end{aligned}
+% \end{equation}
+
+Sample Average Approximation(SAA): generate the scenarios.
+
+How to deal with the continuous situation?
+
+Multi-cut, Single-Cut
+
+How to know the valid cuts:
+
+If we can find several solutions from theorem \eqref{optimal_sol_sub_dual} and these solutions do not dominate each other, we can add them into the cuts pool together during one iteration.
+
+Generate enough cutting patterns at the beginning or use the column generation.
+
+Disaggregated, Aggregated form
+
+Benders Decomposition: relaxed master problem $(x_k,z_\omega)$, subproblems: add cuts
+% When we use the simplex method, the non-linear will be satisfied naturally.
+
+\subsection{Occupancy by the greedy way}
+
+Recall that for any pattern $k$, the occupancy is $\frac{S-l(k)}{S-1}$ and the largest occupancy is $O^{*}(S) = \frac{S-l(k)}{S-1}, k \in I_1$, where $l(k)$ is the loss for pattern $k$.
+
+For $[2,3,4]$, $S = 4q + r$, the largest loss,$l^{*}$, is $q+ \sign(r)$.
+
+If $S =20, q = 5, r=0$, $l^{*} = 5$, $O^{*}(S) = \frac{15}{20} \approx 80\%$
+
+If we only use 2 to fill one row, $O(S) = \frac{10}{19}$.
+
+If we have six seats, 3 groups with size of 2 or 2 groups with size of 3.
+
+The occupancy will increse from $\frac{3}{6}, 50\%$ to $\frac{4}{6}, 66.7\%$. On average, one more people for six seats if we allow groups with size of 3 join.
+
+If we have 12 seats, 4 groups with size of 3 or 3 groups with size of 4.
+
+The occupancy will increse from $\frac{8}{12}, 66.7\%$ to $\frac{9}{12}, 75\%$. On average, one more people for 12 seats if we allow groups with size of 4 join.
+
+Suppose the demand, $d_2,d_3,d_4$ has a close ratio, for example, one to one to one, then according to the greedy way, we have $m_1 = \lceil \frac{d_4}{q} \rceil$ rows with the largest pattern at first. The corresponding occupancy is $\frac{S- q- \sign(r)}{S-1}$.
+
+The left demand, $d^{'}_4$ is $d_4 - m_1 q$, taking $4(d_4 - m_1 q)$ seats and having the occupancy of $\frac{3}{4}$.
+
+The number of left seats is $S_1 = S- 4(d_4 - m_1 q)$. For $S_1$, $S_1 = 3q_1 + r_1$, the largest occupancy is $\frac{S_1 - q_1 -\sign(r_1)}{S_1-1}$.
+
+The left demand for group with size of 3 is $d^{'}_3= d_3 - q_1$. Continue...
+
+\subsubsection{Dynamic Programming}
+Besides, DP may be a possible method.
+
+We can use DP to solve this problem for the fixed supply if we know the arrival rates.
+
+To ensure optimality, we need to follow some rules:
+
+1. When there are enough supplies, we will accept them directly.
+
+2. The demand can be accepted by a larger-size supply when there is not enough corresponding-size supply. 
+
+3. The demand can only be satisfied by one larger-size supply.
+
+Basic Bellman equation for network capacity: $V_{t}(\X) = E[\max_{\mathbf{u}}\{R_{t}\mathbf{u}+ V_{t+1}(\X- A\mathbf{u})\}]$
+
+$\X$ is the remaining capacity for each group type.
+
+Boundary condition: $V_{t}(\X=0) =0, V_{T+1}(\X) =0$.
+ 
+Let $e_{i} = [\underbrace{0, \ldots, 0}_{i-1},1,0, \ldots, 0]$.
+
+When $\X > 0$(all elements is above 0), $\mathbf{u} = e_i, i \in I$. The value function $V_{t}(\X) = E[\max\{\mathbf{u} \mathbf{s} -1 + V_{t+1}(\X- \mathbf{u})\}]$.
+
+When some element of $\X$ is 0, say $x_{i}$, then here comes a group $i$, if we accept it by supply $j$, $\mathbf{u} = [-1, \underbrace{0,\ldots,0}_{i}, 1,0,\ldots,0], [0, -1, \underbrace{0,\ldots,0}_{i}, 1,0,\ldots,0], \cdots$. Here, $\mathbf{u}$ indicates all the decisions, i.e, group type $i$ is served by supply $j$, $i<j$. Then the value function $V_{t}(\X) = E[\max\{\mathbf{u} \mathbf{s} -1 + V_{t+1}(\X- \mathbf{u})\}]$, $\mathbf{u} \mathbf{s}  = s_i$.
+
+Example: $[0,6,8] \to [1,6,7]$ when $1$ is served by $3$.
+
+\begin{algorithm}[H]\label{DP_based}
+  \caption{Backward method to make decisions under fixed supply}
+  \begin{description}
+    \item[Step 1.] Obtain a supply, $\X^{0} = [x_1,\ldots,x_{J}]$, from the stochastic programming.
+    \item[Step 2.] For the arrival group type $i$, if $x_{i} > 0$, accept it. $V_{t}(\X) = s_{i}-1 + V_{t+1}(\X- e_i)$. If $x_{i} = 0$, $V_{t}(\X) = E[\max_{\mathbf{u}}\{\mathbf{u} \mathbf{s} -1 + V_{t+1}(\X- \mathbf{u})\}]$.
+    % \item[Step 3.] If $x_1 =0$, go to step 4. If $x_1 =1$, find if there exists $x_i >0, i \neq 1$, if so, make $x_0$ to 0, if not, continue to accept next arrival group, then make $x_0$ to 0.
+    \item[Step 3.] Set the boundary conditions: $V_{t}(\X= \mathbf{0}) =0, V_{T+1}(\X) =0$.
+    \item[Step 4.] Calculate $V_{1}(\X^{0})$.
+  \end{description}
+\end{algorithm}
+
+Complexity: $O(T \cdot |x_1| \cdot |x_2| \cdot \ldots \cdot |x_{J}|)$.
+
+According to the rule 1, we only need to obtain $V_{1}(0, x_{2}, \cdots, x_{J})$, $V_{1}(x_{1}, 0, \cdots, x_{J}),\ldots, V_{1}(x_{1}, \cdots, x_{J-2},0, x_{J})$.
+
+Use the same example to illustrate:
+
+$V_{1}([3,3]) = p_{2} (1+ V_{2}([2,3])) + p_{3} (2 + V_{2}([3,2]))$
+
+$V_{1}([3,3]) = 3 + V_{4}([0,3])$ when the first three arrivals are groups with $2$.
+
+$V_{4}([0,3]) = p_{2} \max\{1 + V_{5}(0,2), V_{5}(0,3)\} + p_{3} (2+ V_{5}(0,2))$
+
+$\cdots \cdots$
+
+$V_{9}([0,2]) = p_{2} \cdot (1 + V_{10}(0,1)) + p_{3} \cdot (2+ V_{10}(0,1))$
+
+$V_{9}([2,0]) = p_{2} \cdot (1 + V_{10}(1,0))$
+
+$V_{10}([0,1]) = p_{2} \cdot 1 + p_{3} \cdot 2$
+
+$V_{10}([1,0]) = p_{2} \cdot 1$
+
+Notice that not all possible demands, $d \in D$, can be developed from $\X^{0}$. Thus, the stochatic information is still useful.
+
+\subsubsection*{Continuous time}
+Richard and Yi solved the finite horizon stochastic knapsack problem. \cite{van2000finite}
+
+Group type, $i$, has an integer weight $s_i +1$, a value $s_i$, and an arrival rate $\lambda_{i}(t)$.
+
+Consider arrivals as a nonhomogeneous Poisson process over a continuous time horizon $[0, T]$ to a knapsack with capacity $S$.
+
+Let $f(y, t)$ be the maximum expected sum of the benefits of the accepted objects given that $y$ capacity and $t$ seconds remaining.
+
+$$
+\begin{aligned}
+f(y, t) &= \int_0^t \lambda(s) e^{-\int_s^t \lambda(\tau) \mathrm{d} \tau} \cdot \sum_{i=1}^N p_i(s) \max \left\{s_i+f\left(y-s_i -1, s\right), f(y, s)\right\} \mathrm{d} s \\
+ &= \int_0^t \lambda(s) e^{-(\Lambda(t)-\Lambda(s))} \cdot \sum_{i=1}^N p_i(s) \max \left\{s_i+f\left(y-s_i-1, s\right), f(y, s)\right\} \mathrm{d} s,
+\end{aligned}
+$$
+
+By differentiation of the above, we obtain:
+
+$$
+\begin{aligned}
+f^{\prime}(y, t)= & \lambda(t) \sum_{i=1}^N p_i(t) \max \{s_i+f\left(y-s_i-1, t\right),f(y, t)\}-\lambda(t) f(y, t) \\
+= & \lambda(t) \sum_{i=1}^N p_i(t) \max \{0, s_i+f\left(y-s_i-1, t\right) -f(y, t)\} \\
+= & \sum_{i=1}^{N} \lambda_{i}(t) \max \{0, s_i+f\left(y-s_i -1, t\right) -f(y, t)\}
+\end{aligned}
+$$
+
+If the $\lambda_{i}(t) > 0$ for all $i$ and $t$, then $f(y,t)$ is strictly monotone increasing in $t$ for $y \geq \min_{i} s_i +1$.
+
+Need to solve a differential equation for every possible capacity.
+
+In our problem, $f(1,t) = 0$.
+
+$f^{\prime}(2, t) = \lambda_1 [1- f(2,t)] \Rightarrow f(2,t) = 1- e^{-\lambda t}$
+
+$f^{\prime}(3, t) = \lambda_1 [1- f(3,t)] + \lambda_2 [2 - f(3,t)] \Rightarrow f(3,t) = \frac{\lambda_1 + 2 \lambda_2}{\lambda_1 + \lambda_2} [1- e^{-(\lambda_1 + \lambda_2) t}]$
+
+$f^{\prime}(4, t) = \lambda_1 [1 + f(2,t) - f(4,t)] + \lambda_2 [2 - f(4,t)] \Rightarrow f(4,t) = 2- \frac{\lambda_1}{\lambda_2} e^{-\lambda_1 t} - (2- \frac{\lambda_1}{\lambda_2}) e^{-(\lambda_1 + \lambda_2)t}$
+
+$\delta(1,3,t) = 1- f(3,t) = - \frac{\lambda_2}{\lambda_1 + \lambda_2} + \frac{\lambda_1 + 2 \lambda_2}{\lambda_1 + \lambda_2} e^{-(\lambda_1 + \lambda_2)t}$
+
+$\delta(1,4,t) = 1+ f(2,t) - f(4,t) = \frac{\lambda_2- \lambda_1}{\lambda_2} e^{-\lambda_1 t} + (2- \frac{\lambda_1}{\lambda_2}) e^{-(\lambda_1 + \lambda_2)t}$
+
+Critical $t{'}$, when $t < t{'}$, accept $1$.  $\lambda_1 \uparrow, t \uparrow$.
+
+Divide $[0, T]$ into $N$ subintervals to approximate $f(y,t)$:
+
+$f(y,t_{n+1}) = f(y, t_n) + \Delta f(y, t_n)$ with $\Delta f(y, t_n) = f^{'}(y, t_n) \Delta t$, $\Delta t = t_{n+1} - t_{n}$.
+
+Then use $f^{\prime} (y, t_n) = \sum_k \lambda_k \max\{b_k + f(y-w_k, t_n)- f(y, t_n), 0\}$, $f(y, t_{n+1}) = f(y, t_n) + (t_{n+1} - t{n}) f^{\prime}(y, t_n)$ to update.

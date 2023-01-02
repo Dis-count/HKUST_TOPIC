@@ -1,0 +1,44 @@
+% !TEX root = sum1.tex
+\section{Literature Review}
+
+\cite{baum1982finite} gives a method to check IRU and IRD property
+and give the conclusion that IRU holds for a given A if and only if IRU holds for
+C(A,w) for every fractional solution.
+
+\cite{de1984decomposition} gives a general decomposition property.
+We shall say that polyhedron $P(A, d, e)$ has the real decomposition property (RDP) if for any positive real $T$ and any real $x \in TP(A, d, e)$, there exists an integer $r$, positive coefficients $\lambda_1, \ldots, \lambda_r$ and
+vectors $s^1,\ldots,s^r \in P(A,d,e)$ such that $x = \lambda_1 s^1 +\cdots + \lambda_r s^r$, $T = \lambda_1 + \cdots + \lambda_r$.
+
+An important property: $Q(A, b)$ has the RDP iff is integral.
+
+\cite{baum1981integer} gives that IRD holds for $M$(A matrix) if and only if $P$ satisfies the integral decomposition property.
+
+\cite{marcotte1985cutting} demonstrates that
+CSP has the IRU property if and only if P, the corresponding knapsack polyhedron,
+has the integral decomposition property.
+
+Cutting stock problems of the form $(a_1,a_2;b)$ have the IRU property.
+
+\cite{vance1998branch} compares two branch-and-price approaches for the cutting stock problem. Both algorithms employ column generation for solving LP relaxations at each node of a branch-and-bound tree to obtain optimal integer solutions.
+
+\cite{vanderbeck1999computational} transforms the integer knapsack subproblems into 0-1 knapsack problems and use branch-and-bound procedure to solve them.
+
+\cite{goulimis1990optimal} sloves CSP based on enumerating the possible cutting patterns.
+
+\cite{gilmore1961linear} gives the well-known initial compact formulation.
+
+\cite{vanderbeck1996exact} gives the branch and column generation for general IP.
+
+\cite{barnhart1998branch} uses branch-and-price to solve huge integer programs.
+
+\cite{scheithauer1995modified} carries out the computational experiments with a lot of randomly generated instances of the one-dimensional cutting stock problem. 
+
+And shows that for all instances an integer solution fulfills the MIRUP(Modified Integer Round-Up Property). Moreover, in most cases the optimal value equals the round-up optimal value of the corresponding LP relaxation.
+
+% Firstly, The cutting stock problem.
+%
+% Secondly, for solving general method is branch and price. But branching scheme is not clear.
+%
+% Thus, we need find an efficient way to obtain optimal solution --Find the integer decomposition property/ round-up property.
+
+\newpage

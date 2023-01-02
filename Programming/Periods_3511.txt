@@ -1,0 +1,52 @@
+Run Start Time: Sun Jan  1 17:36:13 2023
+Probability: [0.3, 0.5, 0.1, 0.1]
+
+The number of periods: 	70
+M1: 99.17 ;M2: 99.97 ;M3: 99.96 ;M4: 99.96 ;M5: 97.43 ;M6: 99.96 
+;Number of accepted people: 140.30 	Number of people: 140.40 
+The number of periods: 	71
+M1: 99.01 ;M2: 99.96 ;M3: 99.95 ;M4: 99.95 ;M5: 96.91 ;M6: 99.95 
+;Number of accepted people: 141.98 	Number of people: 142.08 
+The number of periods: 	72
+M1: 98.72 ;M2: 99.99 ;M3: 99.89 ;M4: 99.89 ;M5: 96.18 ;M6: 99.99 
+;Number of accepted people: 143.92 	Number of people: 143.96 
+The number of periods: 	73
+M1: 98.42 ;M2: 99.87 ;M3: 99.76 ;M4: 99.76 ;M5: 95.28 ;M6: 99.82 
+;Number of accepted people: 145.16 	Number of people: 145.70 
+The number of periods: 	74
+M1: 98.66 ;M2: 99.84 ;M3: 99.67 ;M4: 99.67 ;M5: 94.49 ;M6: 99.75 
+;Number of accepted people: 145.08 	Number of people: 145.72 
+The number of periods: 	75
+M1: 98.26 ;M2: 99.79 ;M3: 99.78 ;M4: 99.78 ;M5: 93.97 ;M6: 99.75 
+;Number of accepted people: 146.42 	Number of people: 147.42 
+The number of periods: 	76
+M1: 97.35 ;M2: 99.67 ;M3: 99.46 ;M4: 99.46 ;M5: 92.63 ;M6: 99.46 
+;Number of accepted people: 148.96 	Number of people: 151.16 
+The number of periods: 	77
+M1: 97.01 ;M2: 99.54 ;M3: 99.24 ;M4: 99.24 ;M5: 92.55 ;M6: 99.20 
+;Number of accepted people: 149.82 	Number of people: 153.16 
+The number of periods: 	78
+M1: 96.92 ;M2: 99.48 ;M3: 98.87 ;M4: 98.87 ;M5: 91.47 ;M6: 98.90 
+;Number of accepted people: 151.30 	Number of people: 156.28 
+The number of periods: 	79
+M1: 96.47 ;M2: 99.42 ;M3: 98.46 ;M4: 98.46 ;M5: 91.06 ;M6: 98.41 
+;Number of accepted people: 152.44 	Number of people: 159.30 
+The number of periods: 	80
+M1: 96.59 ;M2: 99.42 ;M3: 98.07 ;M4: 98.07 ;M5: 91.03 ;M6: 97.99 
+;Number of accepted people: 152.80 	Number of people: 161.16 
+The number of periods: 	81
+M1: 96.33 ;M2: 99.48 ;M3: 98.01 ;M4: 98.01 ;M5: 91.03 ;M6: 97.92 
+;Number of accepted people: 152.76 	Number of people: 162.22 
+The number of periods: 	82
+M1: 96.16 ;M2: 99.35 ;M3: 97.55 ;M4: 97.55 ;M5: 90.50 ;M6: 97.49 
+;Number of accepted people: 153.80 	Number of people: 165.32 
+The number of periods: 	83
+M1: 95.87 ;M2: 99.26 ;M3: 97.34 ;M4: 97.34 ;M5: 89.84 ;M6: 97.29 
+;Number of accepted people: 153.98 	Number of people: 166.64 
+The number of periods: 	84
+M1: 95.78 ;M2: 99.44 ;M3: 97.38 ;M4: 97.38 ;M5: 90.15 ;M6: 97.32 
+;Number of accepted people: 153.24 	Number of people: 166.20 
+The number of periods: 	85
+M1: 96.15 ;M2: 99.44 ;M3: 96.97 ;M4: 96.97 ;M5: 89.63 ;M6: 96.90 
+;Number of accepted people: 153.72 	Number of people: 168.12 
+Total Runtime	693.916252

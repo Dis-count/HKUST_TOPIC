@@ -7,7 +7,7 @@ from Method4 import deterministicModel
 from Mist import generate_sequence, decision1
 import copy
 from Mist import decisionSeveral, decisionOnce
-import time
+from collections import Counter
 # This function call different methods
 
 class CompareMethods:
@@ -113,22 +113,8 @@ class CompareMethods:
             for i in sequence[res:]:
                 if i == remaining:
                     seq = sequence[0:res] + [i]
-        
-        seq = [i-1 for i in seq]
-        demand = np.zeros(self.I)
-        for i in seq:
-            demand[i-1] += 1
-
-        deter1 = deterministicModel(self.roll_width, self.given_lines,
-                                            self.demand_width_array, self.I)
-        indi = deter1.IP_formulation1(demand, np.zeros(self.I))
-        while not indi:
-            demand[seq[-1]-1] -= 1
-            seq.pop()
-            indi = deter1.IP_formulation1(demand, np.zeros(self.I))
-        seq = [i+1 for i in seq]
-
         return seq
+
 
     def dynamic_program(self, sequence):
         S = int(sum(self.roll_width))
@@ -178,13 +164,6 @@ class CompareMethods:
         for i in final_demand:
             demand[i-1] += 1
 
-        deter1 = deterministicModel(self.roll_width, self.given_lines,
-                                    self.demand_width_array, self.I)
-        indi = deter1.IP_formulation1(demand, np.zeros(self.I))
-        while not indi:
-            demand[final_demand[-1]-1] -= 1
-            final_demand = final_demand[:-1]
-            indi = deter1.IP_formulation1(demand, np.zeros(self.I))
         return demand
 
     def offline(self, sequence):
@@ -195,9 +174,9 @@ class CompareMethods:
             demand[i-1] += 1
         test = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
-        newd, _ = test.IP_formulation(np.zeros(self.I), demand)
+        newx, newd, _ = test.IP_formulation1(np.zeros(self.I), demand)
         
-        return newd
+        return newx, newd
 
     def method4(self, sequence, ini_demand):
         mylist = []
@@ -267,37 +246,8 @@ class CompareMethods:
 
         final_demand4 = self.method4(sequence, ini_demand4)
 
+
         return final_demand1, final_demand3, final_demand4
-
-def prop_list():
-    x = np.arange(0.05, 1, 0.1)
-    y = np.arange(0.05, 0.8, 0.1)
-    p = np.zeros((len(x)*len(y), 4))
-
-    t = 0
-    for i in x:
-        for j in y:
-            if 3-2*i-4*j > 0 and 3-4*i-2*j > 0:
-                p[t] = [(3 - 4*i - 2*j)/6, i, j, (3 - 2*i - 4*j)/6]
-                t += 1
-    p = p[0:t]
-
-    return p
-
-def prop_list1():
-    x = np.arange(0.05, 0.5, 0.1)  #p3
-    y = np.arange(0.05, 0.35, 0.05)  #p4
-    p = np.zeros((len(x)*len(y), 4))
-
-    t = 0
-    for i in x:
-        for j in y:
-            if 1-2*i-3*j > 0:
-                p[t] = [(i + 2*j), (1 - 2*i - 3*j), i, j]
-                t += 1
-    p = p[0:t]
-
-    return p
 
 
 if __name__ == "__main__":
@@ -307,82 +257,44 @@ if __name__ == "__main__":
     num_period = 60
     given_lines = 10
     # np.random.seed(i)
-    p = prop_list()
+    probab = [0.05, 0.05, 0.65, 0.25]
 
-    begin_time = time.time()
-    filename = 'Results_' + str(time.time()) + '.txt'
-    my_file = open(filename, 'w')
-    my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
+    roll_width = np.ones(given_lines) * 21
+    # total_seat = np.sum(roll_width)
 
-    for probab in p:
+    a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
-        my_file.write('probabilities: \t' + str(probab) + '\n')
-        # probab = [0.3, 0.5, 0.1, 0.1]
+    ratio1 = 0
+    ratio2 = 0
+    ratio3 = 0
+    ratio4 = 0
+    ratio5 = 0
+    ratio6 = 0
 
-        roll_width = np.ones(given_lines) * 21
-        # total_seat = np.sum(roll_width)
+    multi = np.arange(1, I+1)
 
-        a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
+    count = 50
+    for j in range(count):
+        sequence, ini_demand, ini_demand3 = a_instance.random_generate()
 
-        ratio1 = 0
-        ratio2 = 0
-        ratio3 = 0
-        ratio4 = 0
-        ratio5 = 0
-        ratio6 = 0
-        accept_people = 0
-        num_people = 0
+        a,c,d = a_instance.result(sequence, ini_demand, ini_demand3)
+        
+        b = a_instance.dynamic_program(sequence)
 
-        multi = np.arange(1, I+1)
+        e = a_instance.row_by_row(sequence)
+        baseline = np.dot(multi, e)
 
-        count = 50
-        for j in range(count):
-            sequence, ini_demand, ini_demand3 = a_instance.random_generate()
+        newx, f = a_instance.offline(sequence)  # optimal result
+        optimal = np.dot(multi, f)
 
-            total_people = sum(sequence) - num_period
+        seq = a_instance.binary_search_first(sequence)
 
-            a,c,d = a_instance.result(sequence, ini_demand, ini_demand3)
-            
-            b = a_instance.dynamic_program(sequence)
+        g = a_instance.offline(seq)
 
-            e = a_instance.row_by_row(sequence)
-            baseline = np.dot(multi, e)
+        if np.dot(multi, b) > optimal:
+            print(Counter(sequence))
+            print(f)
+            print(newx)
+            print(b)
 
-            f = a_instance.offline(sequence)  # optimal result
-            optimal = np.dot(multi, f)
-
-            seq = a_instance.binary_search_first(sequence)
-
-            g = a_instance.offline(seq)
-
-            # ratio1 += (np.dot(multi, a)-baseline)/ baseline
-
-            ratio1 += np.dot(multi, a) / optimal
-            ratio2 += np.dot(multi, b) / optimal
-            ratio3 += np.dot(multi, c) / optimal
-            ratio4 += np.dot(multi, d) / optimal
-            ratio5 += np.dot(multi, e) / optimal
-            ratio6 += np.dot(multi, g) / optimal
-            accept_people += optimal
-            num_people += total_people
-
-        my_file.write('M1: %.2f ;' % (ratio1/count*100))
-        my_file.write('M2: %.2f ;' % (ratio2/count*100))
-        my_file.write('M3: %.2f ;' % (ratio3/count*100))
-        my_file.write('M4: %.2f ;' % (ratio4/count*100))
-        my_file.write('M5: %.2f ;' % (ratio5/count*100))
-        my_file.write('M6: %.2f \n' % (ratio6/count*100))
-        my_file.write('Number of accepted people: %.2f \t' % (accept_people/count))
-        my_file.write('Number of people: %.2f \n' % (num_people/count))
-        # f.write(str(ratio6/count*100) + '\n')
-    
-    run_time = time.time() - begin_time
-    my_file.write('Total Runtime\t%f\n' % run_time)
-        # print('%.2f' % (ratio1/count*100))
-        # print('%.2f' % (ratio2/count*100))
-        # print('%.2f' % (ratio3/count*100))
-        # print('%.2f' % (ratio4/count*100))
-        # print('%.2f' % (ratio5/count*100))
-        # print('%.2f' % (ratio6/count*100))
-    my_file.close()
 

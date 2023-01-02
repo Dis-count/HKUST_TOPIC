@@ -45,19 +45,6 @@ If groups arrive randomly, the procedure will be similar.
 We don't care about the arrival sequence; only the number of groups matters. Because as long as the approximation about the number of groups is accurate, we can handle any sequence.
 
 
-Three senarios:
-
-1. The seat assignment will be arranged in advance, the groups only need to find the corresponding-size seats. This scenario applies for the short admission time. For example, the same film genre will attract the same feature of different group types. The movie hall can assign the seats without changing to save costs in one day. (Theater, Concert, will not provide the seat positions)
-
-2. The groups can only select which row they sit.
-
-3. Online booking. (Can select arbitrarily but with some constraints.)
-
-At first, the request should give the size of group, then give the possible row number it can sit. Finally give the possible first seat number.
-
-The second step is based on the other choices of reserved groups, just need to check which rows in the seat assignment include the corresponding-size seats.
-
-The third step need to check whether the group destroies the assignment. Use subset sum problem to check every position in the row.
 
 Notice we only give the solution of how to assign seats for each row, but the order is not fixed.
 

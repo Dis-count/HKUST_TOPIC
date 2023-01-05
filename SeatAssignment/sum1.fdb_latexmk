@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex sum1"] 1672642107 "sum1.aux" "sum1.bbl" "sum1" 1672642228
+["bibtex sum1"] 1672734634 "sum1.aux" "sum1.bbl" "sum1" 1672738805
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1630493868 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "refe.bib" 1671368982 6624 c98cebdefb6f04b26cad5872bb044230 ""
-  "sum1.aux" 1672642227 7970 9b02a50e795e1d03f816f0532267ea59 "pdflatex"
+  "sum1.aux" 1672734711 7860 f241e933c858d0dee6f44dc373e5591e "pdflatex"
   (generated)
-  "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1672642226 "f:/Files/Github/HKUST_TOPIC/SeatAssignment/sum1.tex" "sum1.pdf" "sum1" 1672642228
+  "sum1.bbl"
+["pdflatex"] 1672734709 "f:/Files/Github/HKUST_TOPIC/SeatAssignment/sum1.tex" "sum1.pdf" "sum1" 1672738805
   "Chapters/Abstract.tex" 1658657188 1006 cff0309bbe6084c6d1ee5b6ee656f01d ""
   "Chapters/Conclusion.tex" 1644062107 278 c046f9da481190b6e0cefc62467b3834 ""
   "Chapters/Deterministic-form.tex" 1672574205 7077 d162df4ad30d6876c9807a0baf0a0918 ""
-  "Chapters/Dynamic-form.tex" 1672642226 7236 169209339fd75e3365c9ba96d5696c58 ""
+  "Chapters/Dynamic-form.tex" 1672734708 7982 c501355e97d267f1a06af600f8c441e7 ""
   "Chapters/Introduction.tex" 1663066586 3966 89afa0d4fe55a4965fb5478de30e0a73 ""
   "Chapters/Literature-review.tex" 1659875762 2539 9aa4211166fe037248bf3c138806e8c8 ""
   "Chapters/Problem-description.tex" 1644224079 218 c2b40c2b31bb2ff7414b4a33000d6fb3 ""
@@ -145,13 +145,13 @@
   "e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1630497016 5227370 214224b42125130ccee72e74a5bb57f5 ""
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
-  "f:/Files/Github/HKUST_TOPIC/SeatAssignment/sum1.tex" 1672579899 1811 e0dfab19fcdf66a7c1fa6de63520a663 ""
-  "sum1.aux" 1672642227 7970 9b02a50e795e1d03f816f0532267ea59 "pdflatex"
-  "sum1.bbl" 1672642107 4331 4362d8b88e6ce42fab1d4b7cc64e20cc "bibtex sum1"
-  "sum1.out" 1672642227 4819 54d17e6692eb45ca6aaf783468a589be "pdflatex"
-  "sum1.tex" 1672579899 1811 e0dfab19fcdf66a7c1fa6de63520a663 ""
+  "f:/Files/Github/HKUST_TOPIC/SeatAssignment/sum1.tex" 1672734630 1811 e0dfab19fcdf66a7c1fa6de63520a663 ""
+  "sum1.aux" 1672734711 7860 f241e933c858d0dee6f44dc373e5591e "pdflatex"
+  "sum1.bbl" 1672734635 4331 4362d8b88e6ce42fab1d4b7cc64e20cc "bibtex sum1"
+  "sum1.out" 1672734711 4751 c6446d2391990cf7d900262587d87b62 "pdflatex"
+  "sum1.tex" 1672734630 1811 e0dfab19fcdf66a7c1fa6de63520a663 ""
   (generated)
-  "sum1.pdf"
   "sum1.out"
   "sum1.aux"
   "sum1.log"
+  "sum1.pdf"

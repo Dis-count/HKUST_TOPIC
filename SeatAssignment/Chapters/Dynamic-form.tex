@@ -12,8 +12,17 @@ There are three senarios:
 
 1. The seat assignment will be arranged in advance, the groups only need to find the corresponding-size seats. This scenario applies for the reservation without seat selection. For example, some theaters and concerts only provide the seat reservation for the audiences. The movie hall can assign the seats without changing to save costs in one day because the same film genre will attract the same feature of different group types.
 
-2. The groups can only select which row they sit. This scenario appears in the on-site seminar. 
+We don't need to assign seats when they make the reservation. After the deadline of the reservation, we will give the seat assignment and tell the groups their seats when they check in.
 
+2. The groups can only choose which row to sit. This scenario appears in the on-site seminar. 
+
+We need to assign seats to the group for each arrival. In each period, the group can select the row they want to sit when the capacity is enough. 
+
+After certain periods, we update the remaining seats in each row.
+
+2.1 have a row list, used for M2.
+
+2.2 Arbitrary row used for FCFS.
 
 3. Online booking. (Can select arbitrarily but with some constraints.)
 
@@ -22,6 +31,11 @@ When the customers book the tickets, they will be asked how many seats they are 
 The second step is based on the other choices of reserved groups, just need to check which rows in the seat assignment include the corresponding-size seats.
 
 The third step need to check whether the group destroies the assignment. Use subset sum problem to check every position in the row.
+
+1.2 Every group can choose where to sit according to the assignment.
+In each period, every group can choose to sit everywhere as long as the assignment allows. If one group choose to sit in the middle of some row, then this row is divided into two rows. 
+After certain periods, we update the remaining seats and rows, then solve a similar problem.
+
 
 There are six methods basically:
 
@@ -32,7 +46,7 @@ It can be used in scenario 1,2,3. For scenario 3, the performane will be worse w
 
 % Set the maximal people from the offline sequence.
 
-M2: The seat assignment(supply) is obtained from stochastic model. Then make the decision according to the nested policy  
+M2: The seat assignment(supply) is obtained from stochastic model. Then make the decision according to the nested policy.
 
 It can be used in scenario 1,2,3. The seats can be placed in the cinema hall in advance.
 % unsettle the useless seats.
@@ -43,41 +57,39 @@ $$V(S,T) = \sum_{i \in N} p_i \max\{ {[V((S-s_i-1),T-1)+ s_i]}, {V(S,T-1)}\}$$
 
 After obtaining the accpected sequence, we still need to check whether this sequence is feasible for the seat assignment. For most cases, it is feasible. That is the reason why we choose DP. When it is not feasible, we should delete the group one by one from the last arrival of the sequence until it is feasible.
 
-% In practice, we can use a buffer to contain the accpected groups, when the groups can be assigned to a full row, then remove them from the buffer. When 
+In practice, we accept the request until we can't find the seat assignment. It can only be applied in scenario 1.
 
-It can only be applied in scenario 1.
+% we can use a buffer to contain the accpected groups, when the groups can be assigned to a full row, then remove them from the buffer. 
 
-M4: Based on first-come-first-serve. For the arrival sequence, calculate the sum 
+% In fact, direct DP will have a gap, we should use a buffer to improve this method.
 
-find the last arrival when the sum of the preceding arrivals does not exceed the capacity.
+% For example, the number of seats for 10 rows is 21. The demand is $[1,2,41,16]$. The optimal assignment is $[0, 0, 40, 10]$. But DP will give $[0, 0, 35, 14]$.
 
-but use the deterministic model to update. 
+% When a full pattern is reached, then delete the related groups and the row. Update the remaining demand.
 
-It can be used in scenario 1,2. 
+% We know $(0,0,4,1)$ is a largest and full pattern, thus an assignment constructed with these 10 patterns is an optimal assignment.
 
+
+M4: Based on first-come-first-serve. For the arrival sequence, find the target arrival when the total number of seats taken by the preceding arrivals does not exceed the capacity. And use nested policy to accept or reject one group in the remaining arrivals.
+
+Then we obtain a new sub-sequence, which includes the arrivals from the first one to the target one and a possible arrival.
+
+Similar to the above method, when it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until it is feasible.
+
+It can be used in scenario 1. 
+
+% M5: 
+
+% Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
 
 M5: 
 
-Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
+The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound. / It can be used in scenario 1,2.
+
+The initial supply can be mean demand or other form. 
 
 M6: 
 
-The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound. / Similar to the above.
-
-
-
-
-If we need to assign seats to the group each period.
-
-1.1 Every group can only choose which row to sit.
-In each period, every group can choose to sit in some row with the corresponding capacity. 
-After certain periods, we update the remaining seats in each row, then solve a sub-problem. 
-
-1.2 Every group can choose where to sit according to the assignment.
-In each period, every group can choose to sit everywhere as long as the assignment allows. If one group choose to sit in the middle of some row, then this row is divided into two rows. 
-After certain periods, we update the remaining seats and rows, then solve a similar problem.
-
-% Different types of movies will have different probabilities, consider the preference for policy when demand = supply.
 
 
 Once: Obtain the supply from the stochastic model by benders decomposition. Use the deterministic model to obtain a heuristi supply. Then use the multi-class rule to decide whether to accept the group at each period.
@@ -86,20 +98,11 @@ Several: Initially, set the mean demand for all periods as the upper bound of de
 
 % One counterexample: [15,21,13,3] /[15,21,10,3]  reject 4
 
-\subsection{DP}
-
-
-In fact, direct DP will have a gap, we should use a buffer to improve this method.
-
-For example, the number of seats for 10 rows is 21. The demand is $[1,2,41,16]$. The optimal assignment is $[0, 0, 40, 10]$. But DP will give $[0, 0, 35, 14]$.
-
-When a full pattern is reached, then delete the related groups and the row. Update the remaining demand.
-
-We know $(0,0,4,1)$ is a largest and full pattern, thus an assignment constructed with these 10 patterns is an optimal assignment.
+% Different types of movies will have different probabilities, consider the preference for policy when demand = supply.
 
 The results are shown below.
 
-% (M1,M2,M3,M4,M5,M6) in the `performance compared to the optimal': 
+% (M2, DP, M5, M6, FCFS, B-FCFS) in the `performance compared to the optimal': 
 
 \begin{table}[ht]
   \begin{tabular}{l|l|l|l|l}

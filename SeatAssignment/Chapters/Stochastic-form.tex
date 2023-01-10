@@ -368,7 +368,36 @@ In part \ref{dynamic_demand}, different methods are derived to deal with these s
 
 % Many symmetry structure/ Every step we need to solve a multiple knapsack problem(difficult).
 
-\subsection{Mapping sequences to scenarios}\label{MappingSeq}
+\subsection{How to generate scenarios}\label{MappingSeq}
+It is challenging to consider all the possible realizations; thus, it is practicable to use discrete distributions with a finite number of scenarios to approximate the random demands. This procedure is often called scenario generation.
+
+Some papers consider obtaining a set of scenarios that realistically represents the distributions of the random parameters but is not too large. \cite{feng2013scenario} \cite{casey2005scenario}
+\cite{henrion2018problem}
+
+Another process to reduce the calculation is called scenario reduction. It tries to approximate the original scenario set with a smaller subset that retains essential features.
+
+Solving the deterministic formulation with a large set of scenarios is not tricky in our case.
+
+For the stochastic situation, we assume the group sizes are discretized from independent random variables following some distribution.(non-negative)
+
+Every time we can regenerate the scenario based on the realized demands. (Use the conditional distribution or the truncated distribution)
+
+
+Suppose that the groups arrive from small to large according to their size. Once a larger group comes, the smaller one will never appear again.
+
+When a new group arrives (suppose we have accepted $n$ groups with the same size), we accept or reject it according to the supply (when $n+1 < \text{supply}$, we accept it), then update the scenario set according to the truncated distribution. We can obtain a new supply with the new probability and scenario set.
+
+With the conclusion of section , we know how to reject a request. Once we reject one group, we will reject all groups of the same size. 
+
+% Fix the supply of this group size, and continue this procedure.  
+
+% If groups arrive randomly, the procedure will be similar. 
+
+% We don't care about the arrival sequence; only the number of groups matters. Because as long as the approximation about the number of groups is accurate, we can handle any sequence.
+
+
+\subsubsection{Mapping sequences to scenarios by discrete periods}
+
 Notice that this approach still works under the assumption that time is continuous.
 
 Suppose there are $T$ independent periods, at most one group will arrive in each period.
@@ -394,17 +423,18 @@ The number of scenarios is too large to enumerate all possible cases.
 Thus, we choose to sample some sequences from the multinomial distribution.
 
 
-Remark: 
-When the time is continuous, we only need to count the number of different group types, the method will be the same.
-
-For the nonhomogeneous Poisson process, $N_{i}(T) \sim Poisson (\int_0^{T} p_i(s)\lambda(s) \mathrm{d} s)$. If the Poisson process is homogeneous, $N_{i} \sim Poisson(\lambda p_i T)$ during the interval $[0, T]$. Then for a realization of the Poisson process, we can still apply the method in Section \ref{MappingSeq}.
-
 % Example:
 % The group types are $[2,3,4,5]$. The number of periods is $20$. The number of given rows is 4 and the number of seats is 22.
 % Each group arrives with the same probability.
 % The number of sequences generating from multinomial distribution is $1000$. Then, we can obtain $[0,3,6,11]$ from stochastic programming. When the number of sequences is 5000, we still obtain $[0,3,6,11]$. It shows that sampling is practical.
 
-\subsection{Nested policy under given supply}\label{nested_policy}
+\subsubsection{Mapping sequences to scenarios by continuous time}
+
+When the time is continuous, we only need to count the number of different group types, the method will be the same.
+
+For the nonhomogeneous Poisson process, $N_{i}(T) \sim Poisson (\int_0^{T} p_i(s)\lambda(s) \mathrm{d} s)$. If the Poisson process is homogeneous, $N_{i} \sim Poisson(\lambda p_i T)$ during the interval $[0, T]$. Then for a realization of the Poisson process, we can still apply the method in Section \ref{MappingSeq}.
+
+\subsection{Nested policy when given supply}\label{nested_policy}
 % Recall that the stochastic programming only considers the situation that small-size groups can use the surplus large-size seats.
 
 Once we obtain a solution from the stochastic programming, we need to follow some basic rules to assign the seats.
@@ -424,7 +454,6 @@ Thus, $P(D_{j-i-1} \geq x_{j-i-1}+1)$ indicates the probability of that the dema
 Similarly, when the expected demand of group of $j$ in the future is no less than its remaining supply currently, we would reject a group of $i$, the expected served people is $j P(D_{j} \geq x_{j})$.
 
 Let $d(i,j)$ be the difference of expected served people between acceptance and rejection on group $i$ occupying $j$-size seats. Then $d(i,j) = i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1) - j P(D_{j} \geq x_{j}), j >i$.
-
 
 One intuitive decision is to choose the largest difference.
 

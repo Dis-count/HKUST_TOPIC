@@ -50,54 +50,57 @@ $y_k =1$ if line $k$ is used and 0 otherwise, $x_{ik}$ is the number of times gr
 
 \subsection{Provide The Maximal Supply When Given Rows}\label{maximal_supply}
 
-Let us review this problem in another way. In most cases where the number of rows is fixed, we hope to accommodate as many as people possible. That is, we should minimize the space loss.
+% Let us review this problem in another way. In most cases where 
+Suppose that the number of rows is fixed, we hope to accommodate as many as people possible. 
 
-% This can be illustrated from the following picture.
-%
-% \begin{figure}[h]%%图
-% 	\centering  %插入的图片居中表示
-% 	\includegraphics[width = 0.6\textwidth]{Figures/illu.png}  %插入的图，包括JPG,PNG,PDF,EPS等，放在源文件目录下
-% 	\caption{The illustration for minimizing space loss}  %图片的名称
-% 	\label{fig:illustration}   %标签，用作引用
-% \end{figure}
-%
-% $N$: the number of given rows. $S$: the length of the line. $g$: total demand. $r$: remaining demand  $d$: discarded demand.
+% That is, we should minimize the space loss.
 
-Then minimizing $NS - \sum_{i=1}^m r_i(s_i-1)$ equals to maximize $\sum_{i=1}^m r_i(s_i-1)$ and maximze $\sum_{i=1}^m (g_i - d_i)(s_i-1)$.
+% Then minimizing $NS - \sum_{i=1}^m r_i(s_i-1)$ equals to maximize $\sum_{i=1}^m r_i(s_i-1)$ and maximze $\sum_{i=1}^m (g_i - d_i)(s_i-1)$.
 
-Notice that $\sum_{k=1}^K t_i^k x_k + d_i = g_i$, by substituting this equation we can obtain the objective function of the following master problem.
+% Notice that $\sum_{k=1}^K t_i^k x_k + d_i = g_i$, by substituting this equation we can obtain the objective function of the following master problem.
 
-\begin{align}
-(D) \quad \mbox{max}\quad & \sum_{k=1}^K(\sum_{i=1}^m (s_i-1)t_i^k) x_{k} \notag \\
-\mbox{s.t.} \quad & \sum_{k=1}^K x_{k} \leq N \label{lambda1} \\
-& \sum_{k=1}^K t_i^k x_k \leq g_i,\quad i=1,\ldots,m  \label{mu1} \\
-& x_{k} \geq 0, \quad k = 1,\ldots,K \notag
-\end{align}
+% \begin{align}
+% (D) \quad \mbox{max}\quad & \sum_{k=1}^K(\sum_{i=1}^m (s_i-1)t_i^k) x_{k} \notag \\
+% \mbox{s.t.} \quad & \sum_{k=1}^K x_{k} \leq N \label{lambda1} \\
+% & \sum_{k=1}^K t_i^k x_k \leq g_i, \quad i=1,\ldots,m  \label{mu1} \\
+% & x_{k} \geq 0, \quad k = 1,\ldots,K \notag
+% \end{align}
 
-Similarly, we consider the linear relaxation of the master problem and the optimal dual variable vector $\lambda,\mu$. Using $\lambda$ as the value assigned to the first constraint \eqref{lambda1} and $\mu$ to the second constraints \eqref{mu1}. This master problem is to find a feasible pattern $(t_1^{k_0},t_2^{k_0},\ldots, t_m^{k_0})$ that maximizes the reduced cost. The corresponding reduced cost is $c_{k_0} - c_B B^{-1}A_{k_0}$, where $c_{k_0} = \sum_{i=1}^m (s_i-1)t_i^{k_0}, c_B B^{-1} = (\lambda,\mu)$, $A_{k_0} = (1,t_1^{k_0},t_2^{k_0},\ldots,t_m^{k_0})^T$.
-Use $y_i$ indicate the feasible pattern instead of $t_i^{k_0}$, we can obtain the sub-problem:
+% Similarly, we consider the linear relaxation of the master problem and the optimal dual variable vector $\lambda,\mu$. Using $\lambda$ as the value assigned to the first constraint \eqref{lambda1} and $\mu$ to the second constraints \eqref{mu1}. This master problem is to find a feasible pattern $(t_1^{k_0},t_2^{k_0},\ldots, t_m^{k_0})$ that maximizes the reduced cost. The corresponding reduced cost is $c_{k_0} - c_B B^{-1}A_{k_0}$, where $c_{k_0} = \sum_{i=1}^m (s_i-1)t_i^{k_0}, c_B B^{-1} = (\lambda,\mu)$, $A_{k_0} = (1,t_1^{k_0},t_2^{k_0},\ldots,t_m^{k_0})^T$.
+% Use $y_i$ indicate the feasible pattern instead of $t_i^{k_0}$, we can obtain the sub-problem:
 
-\[\begin{split}\mbox{max}\quad & \sum_{i=1}^m \left[(s_i-1) -\mu_i\right] y_{i} - \lambda \\
-      \mbox{s.t.} \quad & \sum_{i=1}^m s_i y_i \leq S  \\
-      & y_i \geq 0, \mbox{integer}\quad \mbox{for}~ i=1,\ldots,m.\\
-\end{split}\]
+% \[\begin{split}\mbox{max}\quad & \sum_{i=1}^m \left[(s_i-1) -\mu_i\right] y_{i} - \lambda \\
+%       \mbox{s.t.} \quad & \sum_{i=1}^m s_i y_i \leq S  \\
+%       & y_i \geq 0, \mbox{integer}\quad \mbox{for}~ i=1,\ldots,m.\\
+% \end{split}\]
 
-Use column generation to generate a new pattern until all reduced costs are negative.
+% Use column generation to generate a new pattern until all reduced costs are negative.
 
 And the IP formulation can be shown as below:
 
-\begin{equation}
-\begin{aligned}
-\mbox{max}\quad & \sum_{j=1}^{m} \sum_{i=1}^n (s_i-1) x_{ij} \\
-\mbox{s.t.} \quad & \sum_{i=1}^n s_i x_{ij} \leq S, \quad j=1,\ldots,m \\
-& \sum_{j=1}^{m} x_{ij} \leq g_i ,\quad i=1,\ldots,n \\
-& x_{ij} \geq 0 \mbox{ and integer}, \quad i=1,\ldots,n, j=1,\ldots,m \\
-\end{aligned}
+% \begin{equation}
+% \begin{aligned}
+% \mbox{max}\quad & \sum_{j=1}^{m} \sum_{i=1}^n (s_i-1) x_{ij} \\
+% \mbox{s.t.} \quad & \sum_{i=1}^n s_i x_{ij} \leq S, \quad j=1,\ldots,m \\
+% & \sum_{j=1}^{m} x_{ij} \leq g_i ,\quad i=1,\ldots,n \\
+% & x_{ij} \geq 0 \mbox{ and integer}, \quad i=1,\ldots,n, j=1,\ldots,m \\
+% \end{aligned}
+% \end{equation}
+
+\begin{equation}\label{deter_upper}
+    \begin{aligned}
+      \max \quad & \sum_{j =1}^{N} \sum_{i = 1}^{m} (s_i -1) x_{ij} \\
+      \text {s.t.} \quad & \sum_{i = 1}^{m} s_i x_{ij} \leq L_{j}, j=1,\ldots,N \\
+      & \sum_{j =1}^{N} x_{ij} \leq d_{i}^{u}, i=1,\ldots,m \\
+      & x_{ij} \geq 0, i=1,\ldots,m, j=1,\ldots,N.
+    \end{aligned}
 \end{equation}
 
 $m$ indicates the number of rows. $x_{ij}$ indicates the number of group type $i$ placed in each row $j$.
 
 % For the cutting stock problem, $\min LP \leq \min LP^r \leq \min IP \leq \min IP^r$.
-For our new problem, the column generation will give the upper bound (LP relaxation) and lower bound (restricted IP). After obtaining the patterns with column generation, restricted LP equals LP relaxation, $LP^r = LP$, which provides an upper bound. Thus, we have the relation, $\max LP \geq \max LP^r \geq \max IP \geq \max IP^r$.
 
-To obtain an optimal solution, we should implement branch and bound into column generation. This method is called branch-and-price.
+
+% For our new problem, the column generation will give the upper bound (LP relaxation) and lower bound (restricted IP). After obtaining the patterns with column generation, restricted LP equals LP relaxation, $LP^r = LP$, which provides an upper bound. Thus, we have the relation, $\max LP \geq \max LP^r \geq \max IP \geq \max IP^r$.
+
+% To obtain an optimal solution, we should implement branch and bound into column generation. This method is called branch-and-price.

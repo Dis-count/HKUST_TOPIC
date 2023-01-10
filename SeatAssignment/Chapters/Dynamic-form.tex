@@ -8,56 +8,47 @@ It becomes a sequential stochastic optimization problem where conventional metho
 \subsection{Seat assignment scenarios and methods}
 In this section, we will present several methods to assign seats under different scenarios.
 
-There are three senarios:
+There are four senarios:
 
-1. The seat assignment will be arranged in advance, the groups only need to find the corresponding-size seats. This scenario applies for the reservation without seat selection. For example, some theaters and concerts only provide the seat reservation for the audiences. The movie hall can assign the seats without changing to save costs in one day because the same film genre will attract the same feature of different group types.
-
-We don't need to assign seats when they make the reservation. After the deadline of the reservation, we will give the seat assignment and tell the groups their seats when they check in.
+1. Seat assignment will not be made immediately, we only need to reject or accept each request during the making-reservation stage. After the deadline of the reservation, we will give the seat assignment and tell the groups their seats when they check in. This scenario applies for the reservation without seat selection. For example, some theaters and concerts only provide the seat reservation for the audiences.
 
 2. The groups can only choose which row to sit. This scenario appears in the on-site seminar. 
 
 We need to assign seats to the group for each arrival. In each period, the group can select the row they want to sit when the capacity is enough. 
 
-After certain periods, we update the remaining seats in each row.
+FCFS will be more appropriate. But M1 and M3 can also be used.
 
-2.1 have a row list, used for M2.
-
-2.2 Arbitrary row used for FCFS.
+% After certain periods, we update the remaining seats in each row. have a row list, used for M2.  
 
 3. Online booking. (Can select arbitrarily but with some constraints.)
 
 When the customers book the tickets, they will be asked how many seats they are going to book at first. Then we give the possible row numbers for their selection. Finally we give the seat number for their choice.
 
-The second step is based on the other choices of reserved groups, just need to check which rows in the seat assignment include the corresponding-size seats.
+The second step is based on the other choices of reserved groups, we need to check which rows in the seat assignment include the corresponding-size seats.
 
-The third step need to check whether the group destroies the assignment. Use subset sum problem to check every position in the row.
+In third step, we need to check whether the chosen number destroys the pattern of the row. Use subset sum problem to check every position in the row.
 
-1.2 Every group can choose where to sit according to the assignment.
-In each period, every group can choose to sit everywhere as long as the assignment allows. If one group choose to sit in the middle of some row, then this row is divided into two rows. 
-After certain periods, we update the remaining seats and rows, then solve a similar problem.
+% 1.2 Every group can choose where to sit according to the assignment.
+% In each period, every group can choose to sit everywhere as long as the assignment allows. If one group choose to sit in the middle of some row, then this row is divided into two rows. 
+% After certain periods, we update the remaining seats and rows, then solve a similar problem.
+
+4. The seat assignment will be arranged before the arrival of groups, the groups only need to find the corresponding-size seats. This scenario applies for the reservation without seat selection. For example, the movie halls can assign the seats in advance to save costs. And seat assignment could be remained in one day because the same film genre will attract the same feature of different group types.
 
 
 There are six methods basically:
 
-M1:
-The intuitive but trivial method will be first-come-first-serve. Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in the row immediately. We check each request until the capacity is used up. We set this result as the baseline.
+M1: The seat assignment(supply) is obtained from stochastic model. Then make the decision according to the nested policy.
 
-It can be used in scenario 1,2,3. For scenario 3, the performane will be worse without restriction.
-
-% Set the maximal people from the offline sequence.
-
-M2: The seat assignment(supply) is obtained from stochastic model. Then make the decision according to the nested policy.
-
-It can be used in scenario 1,2,3. The seats can be placed in the cinema hall in advance.
+It can be used in scenario 1,2,3,4. The seats can be placed in the cinema hall in advance.
 % unsettle the useless seats.
 
-M3: DP-based. We relax several rows to one row with the same capacity. Suppose there always exists one assignment under the capacity. Then we can use DP to make the decision in each period.
+M2: DP-based. We relax several rows to one row with the same capacity. Suppose there always exists one assignment under the capacity. Then we can use DP to make the decision in each period.
 
 $$V(S,T) = \sum_{i \in N} p_i \max\{ {[V((S-s_i-1),T-1)+ s_i]}, {V(S,T-1)}\}$$
 
 After obtaining the accpected sequence, we still need to check whether this sequence is feasible for the seat assignment. For most cases, it is feasible. That is the reason why we choose DP. When it is not feasible, we should delete the group one by one from the last arrival of the sequence until it is feasible.
 
-In practice, we accept the request until we can't find the seat assignment. It can only be applied in scenario 1.
+In practice, we accept the request until we cannot find the seat assignment. It can only be applied in scenario 1.
 
 % we can use a buffer to contain the accpected groups, when the groups can be assigned to a full row, then remove them from the buffer. 
 
@@ -69,8 +60,24 @@ In practice, we accept the request until we can't find the seat assignment. It c
 
 % We know $(0,0,4,1)$ is a largest and full pattern, thus an assignment constructed with these 10 patterns is an optimal assignment.
 
+M3: 
+The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound. / It can be used in scenario 1,2.
 
-M4: Based on first-come-first-serve. For the arrival sequence, find the target arrival when the total number of seats taken by the preceding arrivals does not exceed the capacity. And use nested policy to accept or reject one group in the remaining arrivals.
+
+M4: 
+The inital supply is the expectation of demand.
+
+% Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
+
+M5:
+The intuitive but trivial method will be first-come-first-serve. Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in the row immediately. We check each request until the capacity is used up. 
+
+It can be used in scenario 1,2,3. For scenario 3, the performane will be worse without restriction.
+
+% Set the maximal people from the offline sequence.
+
+
+M6: Based on first-come-first-serve. For the arrival sequence, find the target arrival when the total number of seats taken by the preceding arrivals does not exceed the capacity. And use nested policy to accept or reject one group in the remaining arrivals.
 
 Then we obtain a new sub-sequence, which includes the arrivals from the first one to the target one and a possible arrival.
 
@@ -78,36 +85,39 @@ Similar to the above method, when it is not feasible for the seat assignment, we
 
 It can be used in scenario 1. 
 
-% M5: 
 
-% Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
+The relation between the scenarios and the methods is showed in the following table:
+\begin{table}[ht]
+  \centering
+  \caption{Relation between the scenarios and the methods}
+  \begin{tabular}{|l|l|l|l|l|l|l|}
+  \hline
+   & M1 & M2 & M3 & M4 & M5 & M6 \\
+  \hline
+  Scenario 1 & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+  Scenario 2 & \checkmark &            & \checkmark & \checkmark & \checkmark &            \\
+  Scenario 3 & \checkmark &            &            &            & \checkmark &            \\
+  Scenario 4 & \checkmark &            &            &            &            & \\
+  \hline
+  \end{tabular}
+\end{table}
 
-M5: 
 
-The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound. / It can be used in scenario 1,2.
+% Once: Obtain the supply from the stochastic model by benders decomposition. Use the deterministic model to obtain a heuristi supply. Then use the multi-class rule to decide whether to accept the group at each period.
 
-The initial supply can be mean demand or other form. 
-
-M6: 
-
-
-
-Once: Obtain the supply from the stochastic model by benders decomposition. Use the deterministic model to obtain a heuristi supply. Then use the multi-class rule to decide whether to accept the group at each period.
-
-Several: Initially, set the mean demand for all periods as the upper bound of demand. Then obtain the supply from the deterministic model. Set the accepted demand as the lower bound of demand, the upper bound of demand will be the sum of accepted demand and mean demand for the remaining periods. Update the lower bound and upper bound when some supply runs out.
+% Several: Initially, set the mean demand for all periods as the upper bound of demand. Then obtain the supply from the deterministic model. Set the accepted demand as the lower bound of demand, the upper bound of demand will be the sum of accepted demand and mean demand for the remaining periods. Update the lower bound and upper bound when some supply runs out.
 
 % One counterexample: [15,21,13,3] /[15,21,10,3]  reject 4
 
 % Different types of movies will have different probabilities, consider the preference for policy when demand = supply.
 
-The results are shown below.
-
-% (M2, DP, M5, M6, FCFS, B-FCFS) in the `performance compared to the optimal': 
+The results of different methods on scenario 1 are shown below.
 
 \begin{table}[ht]
-  \begin{tabular}{l|l|l|l|l}
+  \begin{tabular}{|l|l|l|l|l|}
   \hline
   \# samples & T & probabilities & \# rows & performance(\%) compared to the optimal \\
+  \hline
   1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (99.72, 100.00, 100.00, 100.00, 98.11, 100.00) \\
   1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (97.75, 99.83, 99.76, 99.76, 93.15, 99.76) \\ % slow
   1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (95.78, 99.20, 97.80, 97.80, 89.35, 97.65) \\
@@ -117,7 +127,12 @@ The results are shown below.
   1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (97.19, 99.51, 99.09, 99.09, 91.31, 99.29) \\
   1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (95.23, 98.98, 97.21, 97.21, 87.73, 96.88) \\
   1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & (94.84, 99.05, 95.70, 95.70, 85.49, 95.13) \\
+  \hline
   \end{tabular}
 \end{table}
+ 
+The numbers in the `performance compared to the optimal' represent M1, M2, M3, M4, M5, M6 respectively in order.
+
+The maximal number of people served can be obtained by \eqref{deter_upper} with a realized sequence of arrival.
 
 \newpage

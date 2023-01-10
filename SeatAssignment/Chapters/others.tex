@@ -207,7 +207,7 @@ Then every $d^{i}$ gives the maximum number of people under given scenarios and 
 % we can develop several maximal integer demands: $[2, 8, 8, 12]$, $[3, 7, 7, 13]$, $[3, 6, 9, 12]$.
 
 We can obtain the patterns from the integral demand by
-solving the problem, which we mentioned in section \ref{maximal_supply}. (From (D)\ref{lambda1}, we know how to check the feasibility of the integral demand) If some integral demand is not feasible, then delete it from the plannings.
+solving the problem, which we mentioned in section . (From (D), we know how to check the feasibility of the integral demand) If some integral demand is not feasible, then delete it from the plannings.
 
 For several plannings, we select the one that matches the request. (The plan has priority over rejection or use DP to compare the expected value.) 
 
@@ -593,7 +593,7 @@ With the above conclusions, we can follow the policies to obtain an optimal solu
 Notice that $T$ is a subset of the set of all possible cutting patterns, thus we need to find more cutting patterns by the column generation.
 
 
-The linear relaxation of problem \eqref{deterministic_form} can be written as:
+The linear relaxation of problem can be written as:
 
 \begin{equation}\label{linear_relaxation}
   \begin{aligned}
@@ -892,7 +892,7 @@ The master problem will be:
   \end{aligned}
 \end{equation}
 
-Notice that this problem is just one scenario version of problem \eqref{BD_master2}, thus, we can use column-and-cut to solve it directly.
+Notice that this problem is just one scenario version of problem , thus, we can use column-and-cut to solve it directly.
 
 \begin{algorithm}[H]\label{column_and_cut_algo1}
   \caption{The column-and-cut algorithm}
@@ -934,7 +934,7 @@ Multi-cut, Single-Cut
 
 How to know the valid cuts:
 
-If we can find several solutions from theorem \eqref{optimal_sol_sub_dual} and these solutions do not dominate each other, we can add them into the cuts pool together during one iteration.
+If we can find several solutions from theorem  and these solutions do not dominate each other, we can add them into the cuts pool together during one iteration.
 
 Generate enough cutting patterns at the beginning or use the column generation.
 

@@ -15,15 +15,17 @@ And we can formulate the corresponding model with a given number of rows to maxi
 
 Our main contributions are summarized as follows.
 
-First, this paper is the first attempt to consider how to arrange seating assignment with social distancing. 
+First, this paper is the first attempt to consider how to arrange the seat assignment with social distancing under dynamic arrivals. 
 Most literature on social distancing in seat assignments highlights the importance of social distance in controlling the virus's spread and focuses too much on the model. There is not much work on the operational significance behind the social distance \cite{barry2021optimal} \cite{fischetti2021safe}.
-Recently, some scholars studied the effects of social distance on health and economics, mainly in aircraft \cite{salari2020social} \cite{ghorbani2020model}. Especially, our study provides another perspective to help the authority adopt a mechanism for setting seat assignments to control the spread of the virus.
+Recently, some scholars studied the effects of social distance on health and economics, mainly in aircraft \cite{salari2020social} \cite{ghorbani2020model}. Especially, our study provides another perspective to help the government adopt a mechanism for setting seat assignments to protect people 
+in the post-pandemic era.
+
+Second, we establish the deterministic model to analyze the effects of social distancing. The column generation method is used to obtain the minimal number of rows. When the demand is known, we can solve the IP model directly because of the medium size of this problem. Then we consider the stochastic demand situation when the demands of different group types are random. With the aid of two-stage stochastic programming, we use Benders decomposition methods to obtain the optimal linear solution. Then we develop several possible integral solutions from linear solutions according to the traits of our problem.
+
+% We construct an algorithm based on the column generation method to obtain the maximal supply when the demand is known.
 
 
-Second, we establish the deterministic model to analyze the effects of social distancing. We construct an algorithm based on the column generation method to obtain the maximal supply when the demand is known. Then we consider the stochastic demand situation when the demands of different group types are random. With the aid of two-stage stochastic programming, we use Benders decomposition and column-and-cut generation methods to obtain the optimal linear solution. Then we develop several possible integral solutions from linear solutions according to the trait of our problem.
-
-
-Third, to solve the dynamic demand situation, we apply the result of a scenario-based problem. We generate scenarios from multinomial distribution and use dynamic programming to decide whether to accept or reject each group arrival.
+Third, to solve the dynamic demand situation, we apply the result of a scenario-based problem. We generate scenarios from multinomial distribution and use nested policy to decide whether to accept or reject each group arrival.
 
 
 % With this new .., we illustrate how to assign the seats by the govenment/stakeholder to balance health and economic issues. In addition, we also provide managerial guidance for the government on how to publish the related policy to make the tradeoff between economic maintenance and risk management.

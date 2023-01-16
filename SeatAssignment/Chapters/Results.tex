@@ -10,9 +10,119 @@
 % For $\X^{0}$, we introduce one empty seat, $x_1$. But it cannot provide the feasibility.
 
 
+\subsection{Benders decomposition versus IP}\label{Bender_IP}
+
+% In view of the fact that IP of the deterministic model can be solved quickly, the column generation method does not show an obvious advantage. 
+
+At first, we compare the running time of these two methods.
+
+The running times of solving IP directly and using Benders decomposition are shown in the table below. 
+
+\begin{table}[ht]
+  \centering
+  \caption{Running time of Decomposion and IP}
+  \begin{tabular}{l|l|l|l|l}
+  \hline
+  \# of Scenarios & running time of IP(s) & Benders (s) & \# of rows & \# of groups \\
+  1000  & 5.1  & 0.13 & 30 & 8 \\
+  5000  & 28.73 & 0.47 & 30 & 8 \\
+  10000 & 66.81  & 0.91 & 30 & 8 \\
+  50000 & 925.17 & 4.3 & 30 & 8 \\
+  \hline
+  1000  & 5.88 & 0.29 & 200 & 8 \\
+  5000  & 30.0 & 0.62 & 200 & 8 \\
+  10000 & 64.41 & 1.09 & 200 & 8 \\
+  50000 & 365.57 & 4.56 & 200 & 8 \\
+  \hline
+  1000  & 17.15  & 0.18 & 30 & 16  \\
+  5000  & 105.2  & 0.67 & 30 & 16  \\
+  10000 & 260.88 & 1.28 & 30 & 16  \\
+  50000 & 3873.16 & 6.18 & 30 & 16  \\
+  \hline
+  \end{tabular}
+\end{table}
+
+The parameters of the experiments are listed below.
+
+The first one:
+The number of rows is 30.
+The number of groups is 8.
+The number of seats for each row L is generated from (21, 50) randomly, about 1000 seats.
+The scenarios of demands are generated from (150, 350) randomly.
+
+The second one:
+The number of rows is 200.
+The number of groups is 8.
+The number of seats for each row L is generated from (21, 50) randomly, about 7000 seats.
+The scenarios of demands are generated from (1000, 2000) randomly.
+
+The third one:
+The number of rows is 30.
+The number of groups is 16.
+The number of seats for each row L is generated from 41-60 randomly, about 1500 seats.
+The scenarios of demands are generated from (150, 250) randomly.
+
+Then we compare the results of benders decomposition and IP under nested policy.
+
+\begin{table}[ht]
+    \caption{Results of Decomposion and IP under nested policy}
+    \begin{tabular}{l|l|l|l|l|l}
+    \hline
+    \# samples & T & probabilities & \# rows & people served by decomposition & people served by IP \\
+    1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 85.30 & 85.3 \\
+    1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & 97.32 & 97.32 \\
+    1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & 102.40 & 102.40  \\ % slow
+    1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & 106.70 & NA  \\
+    1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & 108.84 & 108.84 \\
+    \hline
+    1000  & 35  & [0.25,0.25,0.25,0.25] & 8 & 87.16 & 87.08 \\
+    1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & 101.32 & 101.24 \\
+    1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & 110.62 & 110.52 \\
+    1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & 115.46 & NA \\
+    1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & 117.06 & 117.26 \\
+    \hline
+    5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & 749.76 & 749.76 \\
+    5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & 866.02 & 866.42 \\
+    5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & 889.02 & 889.44 \\
+    5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & 916.16 & 916.66 \\
+    \hline
+    \end{tabular}
+\end{table}
+
+Each entry of people served is the average of 50 instances.
+IP will spend more than 2 hours in some instances, as `NA' showed in the table.
+The number of seats is 20 when the number of rows is 8, the number of seats is 40 when the number of rows is 30.
+
+We can find that the people served by Benders decomposition and IP under nested policy are close. Thus, we can substitute IP with the Benders decomposition.
+
+
 \subsection{Different probabilities}
 Discuss the effect of different probabilities.
 $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$
+
+Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$. Notice that different $c$ need different $T$ such that the supply is close to the demand. Different $T$ has little effect on the number of people served when using M6 because it is based on first-come-first-served. 
+
+Thus, we use M6 to compare the number of people served under different values of $c$.
+
+Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$. The number of rows is 10, the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
+
+\begin{figure}[h]
+  \centering
+  \subfigure[One instance for each data point]{
+    \label{Fig.sub.1}
+    \includegraphics[width=0.48\textwidth]{./Figures/Figure_1.pdf}}
+  \subfigure[Average of 50 instances for each data point]{
+    \label{Fig.sub.2}
+    \includegraphics[width=0.48\textwidth]{./Figures/Figure_2.pdf}}
+  \caption{The number of people served versus $c$}
+  \label{Fig.lable}
+\end{figure}
+
+
+We can find that 160 is the upper bound of the number of people served. 
+
+If the largest pattern is assigned for each row, then the occupancy rate is $\frac{16}{20} = \frac{4}{5}$. The maximal number of people can be served is $200 * \frac{4}{5} =160$. 
+
 
 % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
 % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
@@ -22,6 +132,8 @@ $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$
 % Different layout may make a difference.
 
 % 2. The assumption that $T$ is fixed will be more reasonable for the continuous time. 
+
+\newpage
 
 Let $E(D) = 150$.
 
@@ -35,7 +147,7 @@ $p_1 = p_3 + 2p_4$. $p_3$ is from $0.05$ to $0.45$ with step size of 0.1. $p_4$ 
 
 Results: M1-M6, the number of accepted people, the number of total people.
 
-\includepdf{./Figures/Results_25T.pdf}
+% \includepdf{./Figures/Results_25T.pdf}
 
 When $E(D) = 2T$, which means on average 2 people arrive for each group.
 
@@ -46,7 +158,7 @@ $2p_2 + 4p_3 + 6p_4 =3$. $p_2$ is from $0.05$ to $0.95$ with step size of $0.1$.
 
 Results: M1-M6, the number of accepted people, the number of total people.
 
-\includepdf{./Figures/Results_2T.pdf}
+% \includepdf{./Figures/Results_2T.pdf}
 
 \subsection{Different periods}
 Discuss the effect of the number of periods: 
@@ -60,9 +172,9 @@ Probabilities: $[0.4, 0.3, 0.2, 0.1], [0.3, 0.5, 0.1, 0.1]$.
 
 Results: M1-M6, the number of accepted people, the number of total people.
 
-\includepdf{./Figures/Periods_3511.pdf}
+% \includepdf{./Figures/Periods_3511.pdf}
 
-\includepdf{./Figures/Periods_4321.pdf}
+% \includepdf{./Figures/Periods_4321.pdf}
 
 T = 55-65, step size =1.
 
@@ -77,7 +189,7 @@ Results: M1-M6, the number of accepted people, the number of total people.
 We can find that the difference between the number of accepted people and the number of total people will increase with the period. 
 % When the number of periods is small, the seats 
 
-\includepdf{./Figures/Periods_25252525.pdf}
+% \includepdf{./Figures/Periods_25252525.pdf}
 
 \subsection{Measurement}
 
@@ -90,19 +202,6 @@ WS(the value under wait-and-see policy with all possible scenarios)
 EVPI(Expected Value of Perfect Information) = WS - the value of deterministic equivalent form
 
 Regret.
-
-\subsection{How to use the stochastic demand to solve the dynamic situation?}
-
-\cite{bent2004scenario} this paper connects the stochastic and dynamic VRP.
-
-Partially dynamic:
-
-Scenario:
-
-There is a reservation stage, we only decide to accept or reject.
-
-After certain periods, there is a seat selection stage.
-
 
 
 \subsection{How to give a balanced seat assignment}

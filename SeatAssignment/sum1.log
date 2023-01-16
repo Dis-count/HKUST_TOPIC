@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  10 JAN 2023 13:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  16 JAN 2023 20:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -346,10 +346,11 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \c@lem=\count296
 \c@remark=\count297
 \c@corollary=\count298
-\c@definition=\count299
+\c@prop=\count299
+\c@definition=\count300
  (e:/Software/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count300
+\l__color_backend_stack_int=\count301
 \l__pdf_internal_box=\box56
 ) (./sum1.aux)
 \openout1 = `sum1.aux'.
@@ -374,16 +375,16 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 46.
 LaTeX Font Info:    ... okay on input line 46.
  (e:/Software/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count301
+\scratchcounter=\count302
 \scratchdimen=\dimen178
 \scratchbox=\box57
-\nofMPsegments=\count302
-\nofMParguments=\count303
+\nofMPsegments=\count303
+\nofMParguments=\count304
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count304
+\MPscratchCnt=\count305
 \MPscratchDim=\dimen179
-\MPnumerator=\count305
-\makeMPintoPDFobject=\count306
+\MPnumerator=\count306
+\makeMPintoPDFobject=\count307
 \everyMPtoPDFconversion=\toks35
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -411,7 +412,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (e:/Software/texlive/2021/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count307
+\c@section@level=\count308
 )
 LaTeX Info: Redefining \ref on input line 46.
 LaTeX Info: Redefining \pageref on input line 46.
@@ -464,241 +465,45 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (./Chapters/Abstract.tex) (./Chapters/Introduction.tex [1
 
-{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]) (./Chapters/Literature-review.tex [3]) (./Chapters/Problem-description.tex [4]) (./Chapters/Deterministic-form.tex [5]) (./Chapters/Stochastic-form.tex [6] [7] [8] [9] [10]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 255.
- [11] [12] [13] [14] [15]) (./Chapters/Dynamic-form.tex [16] [17] [18] [19]) (./Chapters/Results.tex
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Results_25T.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Results_25T.pdf, id=283, 597.23125pt x 845.1575pt>
-File: ./Figures/Results_25T.pdf Graphic file (type pdf)
-<use ./Figures/Results_25T.pdf>
-Package pdftex.def Info: ./Figures/Results_25T.pdf  used on input line 38.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Results_25T.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-File: ./Figures/Results_25T.pdf Graphic file (type pdf)
-<use ./Figures/Results_25T.pdf>
-Package pdftex.def Info: ./Figures/Results_25T.pdf  used on input line 38.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]) (./Chapters/Literature-review.tex [3]) (./Chapters/Problem-description.tex [4]) (./Chapters/Deterministic-form.tex [5] [6]) (./Chapters/Stochastic-form.tex [7] [8] [9] [10] [11]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 263.
+ [12] [13]) (./Chapters/Dynamic-form.tex [14] [15] [16] [17] [18]) (./Chapters/Results.tex [19]
+<./Figures/Figure_1.pdf, id=310, 462.52798pt x 346.89601pt>
+File: ./Figures/Figure_1.pdf Graphic file (type pdf)
+<use ./Figures/Figure_1.pdf>
+Package pdftex.def Info: ./Figures/Figure_1.pdf  used on input line 113.
+(pdftex.def)             Requested size: 232.17242pt x 174.13039pt.
+<./Figures/Figure_2.pdf, id=311, 462.52798pt x 346.89601pt>
+File: ./Figures/Figure_2.pdf Graphic file (type pdf)
+<use ./Figures/Figure_2.pdf>
+Package pdftex.def Info: ./Figures/Figure_2.pdf  used on input line 116.
+(pdftex.def)             Requested size: 232.17242pt x 174.13039pt.
 
 
-pdfTeX warning: pdflatex.exe (file ./Figures/Results_25T.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
+LaTeX Warning: `h' float specifier changed to `ht'.
 
+[20] [21 <./Figures/Figure_1.pdf> <./Figures/Figure_2.pdf
 
-pdfTeX warning: pdflatex.exe (file ./Figures/Results_25T.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Results_25T.pdf, id=286, page=1, 597.23125pt x 845.1575pt>
-File: ./Figures/Results_25T.pdf Graphic file (type pdf)
-<use ./Figures/Results_25T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_25T.pdf , page1 used on input line 38.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-File: ./Figures/Results_25T.pdf Graphic file (type pdf)
-<use ./Figures/Results_25T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_25T.pdf , page1 used on input line 38.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[20]
-File: ./Figures/Results_25T.pdf Graphic file (type pdf)
-<use ./Figures/Results_25T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_25T.pdf , page1 used on input line 38.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Results_25T.pdf Graphic file (type pdf)
-<use ./Figures/Results_25T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_25T.pdf , page1 used on input line 38.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Results_25T.pdf Graphic file (type pdf)
-<use ./Figures/Results_25T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_25T.pdf , page1 used on input line 38.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
- [21 <./Figures/Results_25T.pdf>]
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Results_2T.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Results_2T.pdf, id=302, 597.23125pt x 845.1575pt>
-File: ./Figures/Results_2T.pdf Graphic file (type pdf)
-<use ./Figures/Results_2T.pdf>
-Package pdftex.def Info: ./Figures/Results_2T.pdf  used on input line 49.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Results_2T.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-File: ./Figures/Results_2T.pdf Graphic file (type pdf)
-<use ./Figures/Results_2T.pdf>
-Package pdftex.def Info: ./Figures/Results_2T.pdf  used on input line 49.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Results_2T.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Results_2T.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Results_2T.pdf, id=305, page=1, 597.23125pt x 845.1575pt>
-File: ./Figures/Results_2T.pdf Graphic file (type pdf)
-<use ./Figures/Results_2T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_2T.pdf , page1 used on input line 49.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-File: ./Figures/Results_2T.pdf Graphic file (type pdf)
-<use ./Figures/Results_2T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_2T.pdf , page1 used on input line 49.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[22]
-File: ./Figures/Results_2T.pdf Graphic file (type pdf)
-<use ./Figures/Results_2T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_2T.pdf , page1 used on input line 49.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Results_2T.pdf Graphic file (type pdf)
-<use ./Figures/Results_2T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_2T.pdf , page1 used on input line 49.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Results_2T.pdf Graphic file (type pdf)
-<use ./Figures/Results_2T.pdf, page 1>
-Package pdftex.def Info: ./Figures/Results_2T.pdf , page1 used on input line 49.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
- [23 <./Figures/Results_2T.pdf>]
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_3511.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Periods_3511.pdf, id=320, 597.23125pt x 845.1575pt>
-File: ./Figures/Periods_3511.pdf Graphic file (type pdf)
-<use ./Figures/Periods_3511.pdf>
-Package pdftex.def Info: ./Figures/Periods_3511.pdf  used on input line 63.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_3511.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-File: ./Figures/Periods_3511.pdf Graphic file (type pdf)
-<use ./Figures/Periods_3511.pdf>
-Package pdftex.def Info: ./Figures/Periods_3511.pdf  used on input line 63.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_3511.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_3511.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Periods_3511.pdf, id=323, page=1, 597.23125pt x 845.1575pt>
-File: ./Figures/Periods_3511.pdf Graphic file (type pdf)
-<use ./Figures/Periods_3511.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_3511.pdf , page1 used on input line 63.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-File: ./Figures/Periods_3511.pdf Graphic file (type pdf)
-<use ./Figures/Periods_3511.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_3511.pdf , page1 used on input line 63.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[24]
-File: ./Figures/Periods_3511.pdf Graphic file (type pdf)
-<use ./Figures/Periods_3511.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_3511.pdf , page1 used on input line 63.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Periods_3511.pdf Graphic file (type pdf)
-<use ./Figures/Periods_3511.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_3511.pdf , page1 used on input line 63.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Periods_3511.pdf Graphic file (type pdf)
-<use ./Figures/Periods_3511.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_3511.pdf , page1 used on input line 63.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
- [25 <./Figures/Periods_3511.pdf>]
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_4321.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Periods_4321.pdf, id=339, 597.23125pt x 845.1575pt>
-File: ./Figures/Periods_4321.pdf Graphic file (type pdf)
-<use ./Figures/Periods_4321.pdf>
-Package pdftex.def Info: ./Figures/Periods_4321.pdf  used on input line 65.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_4321.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-File: ./Figures/Periods_4321.pdf Graphic file (type pdf)
-<use ./Figures/Periods_4321.pdf>
-Package pdftex.def Info: ./Figures/Periods_4321.pdf  used on input line 65.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_4321.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_4321.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Periods_4321.pdf, id=342, page=1, 597.23125pt x 845.1575pt>
-File: ./Figures/Periods_4321.pdf Graphic file (type pdf)
-<use ./Figures/Periods_4321.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_4321.pdf , page1 used on input line 65.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-File: ./Figures/Periods_4321.pdf Graphic file (type pdf)
-<use ./Figures/Periods_4321.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_4321.pdf , page1 used on input line 65.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Periods_4321.pdf Graphic file (type pdf)
-<use ./Figures/Periods_4321.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_4321.pdf , page1 used on input line 65.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Periods_4321.pdf Graphic file (type pdf)
-<use ./Figures/Periods_4321.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_4321.pdf , page1 used on input line 65.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Periods_4321.pdf Graphic file (type pdf)
-<use ./Figures/Periods_4321.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_4321.pdf , page1 used on input line 65.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[26 <./Figures/Periods_4321.pdf>]
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_25252525.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Periods_25252525.pdf, id=353, 597.23125pt x 845.1575pt>
-File: ./Figures/Periods_25252525.pdf Graphic file (type pdf)
-<use ./Figures/Periods_25252525.pdf>
-Package pdftex.def Info: ./Figures/Periods_25252525.pdf  used on input line 80.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_25252525.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-File: ./Figures/Periods_25252525.pdf Graphic file (type pdf)
-<use ./Figures/Periods_25252525.pdf>
-Package pdftex.def Info: ./Figures/Periods_25252525.pdf  used on input line 80.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_25252525.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./Figures/Periods_25252525.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/Periods_25252525.pdf, id=356, page=1, 597.23125pt x 845.1575pt>
-File: ./Figures/Periods_25252525.pdf Graphic file (type pdf)
-<use ./Figures/Periods_25252525.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_25252525.pdf , page1 used on input line 80.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-File: ./Figures/Periods_25252525.pdf Graphic file (type pdf)
-<use ./Figures/Periods_25252525.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_25252525.pdf , page1 used on input line 80.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[27]
-File: ./Figures/Periods_25252525.pdf Graphic file (type pdf)
-<use ./Figures/Periods_25252525.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_25252525.pdf , page1 used on input line 80.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Periods_25252525.pdf Graphic file (type pdf)
-<use ./Figures/Periods_25252525.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_25252525.pdf , page1 used on input line 80.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: ./Figures/Periods_25252525.pdf Graphic file (type pdf)
-<use ./Figures/Periods_25252525.pdf, page 1>
-Package pdftex.def Info: ./Figures/Periods_25252525.pdf , page1 used on input line 80.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
- [28 <./Figures/Periods_25252525.pdf>] [29]) (./Chapters/Conclusion.tex) (./sum1.bbl) (./Chapters/Proof.tex [30]) (./Chapters/Res_app.tex) [31
+pdfTeX warning: pdflatex.exe (file ./Figures/Figure_2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] [22]) (./Chapters/Conclusion.tex) (./sum1.bbl) (./Chapters/Proof.tex [23]) (./Chapters/Res_app.tex) [24
 
 ] (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: 69AF3B7FDE0551796D12027C07C23369;5336.
+(rerunfilecheck)             Checksum: 904C1FAE96628F0F2F623D2BB52A8147;5905.
  ) 
 Here is how much of TeX's memory you used:
- 12680 strings out of 478599
- 192373 string characters out of 5853593
- 510525 words of memory out of 5000000
- 30233 multiletter control sequences out of 15000+600000
+ 12655 strings out of 478599
+ 190858 string characters out of 5853593
+ 511114 words of memory out of 5000000
+ 30210 multiletter control sequences out of 15000+600000
  413291 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,17n,75p,715b,454s stack positions out of 5000i,500n,10000p,200000b,80000s
-{e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (31 pages, 498463 bytes).
+ 62i,15n,75p,715b,431s stack positions out of 5000i,500n,10000p,200000b,80000s
+{e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on sum1.pdf (24 pages, 316137 bytes).
 PDF statistics:
- 483 PDF objects out of 1000 (max. 8388607)
- 382 compressed objects within 4 object streams
- 95 named destinations out of 1000 (max. 500000)
- 317 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 472 PDF objects out of 1000 (max. 8388607)
+ 384 compressed objects within 4 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 243 words of extra memory for PDF output out of 10000 (max. 10000000)
 

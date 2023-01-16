@@ -1,7 +1,7 @@
 % !TEX root = ./sum1.tex
-\section{Stochastic demands situation}
+\section{Stochastic Demands Situation}
 
-\subsection{Deterministic equivalent form}
+\subsection{Two-stage Stochastic Programming}
 
 Consider the decision maker who has to act in two consecutive stages. The first stage involves the choice of cutting patterns denoted by decision vector $\mathbf{x}$. At the second stage, some new information about demands is obtained, then a new vector $\mathbf{y}$ of decisions is to be chosen.
 
@@ -79,7 +79,7 @@ $\mathbf{y}_{s}^{+}=\left[\begin{array}{lllll}y_{1 s}^{+} & y_{2 s}^{+} & \cdots
 
 As we can find, this formulation is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. Thus, we need to reformulate the problem and use a decomposition method.
 
-\subsection{Two-stage stochastic programming}
+\subsection{Solve The Second Stage Problem}
 
 Let $c{'}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^m (s_i-1) x_{ij}$, $f{'}y_{\omega} = -\left((s_1-1)y_{1 \omega}^{+} + \sum_{i=2}^{m}(s_{i}-s_{i-1}) y_{i \omega}^{+}\right)$. The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$.
 
@@ -110,7 +110,7 @@ In order to solve this problem, we should only consider those $x$ for which $z_{
 
 \begin{equation}\label{BD_sub_dual}
   \begin{aligned}
-    \min \quad & \alpha{'}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} ) \\
+    \min \quad & \alpha{'}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
     \text {s.t.} \quad & \alpha{'}_{\omega} \mathbf{V} \geq f{'}
   \end{aligned}
   \end{equation}
@@ -120,27 +120,35 @@ We assume that $P$ is nonempty and has at least one extreme point. Then, either 
 
 Let $\mathcal{O}$ be the set of all extreme points of $P$ and $\mathcal{F}$ be the set of all extreme rays of $P$. Then $z_{\omega} > -\infty$ if and only if $(\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq 0, \alpha^{k} \in \mathcal{F}$, which stands for the feasibility cut. 
 
-\begin{thm}\label{feasible_region}
-  The feasible region, P, is bounded. And the extreme points are all integral.
-\end{thm}
+\begin{lem}\label{feasible_region}
+  The feasible region of problem \eqref{BD_sub_dual}, $P$, is bounded. In addition, all the extreme points of $P$ are integral.
+\end{lem}
 
-\begin{pf}[Proof of theorem \ref{feasible_region}]
+\begin{pf}[Proof of lemma \ref{feasible_region}]
 Notice that $V =(W,~I)$, $W$ is a totally unimodular matrix. Then, we have $\alpha{'}W \geq -\bar{s}, \alpha{'}I \geq 0$. Thus, the feasible region is bounded.
-And $\bar{s}_i = s_i - s_{i-1}, s_0 =1$ are integral, so the extreme points are all integral.
+Further more, $\bar{s}_i = s_i - s_{i-1}, s_0 =1$ are integral, so the extreme points are all integral.
 \qed
 \end{pf}
 
-Remark: we only need to consider the optimality cut in the following decomposition method.
+Because the feasible region is bounded, then feasibility cuts are not needed.
 
-When $s_i = i+1$, $f{'} = [-\mathbf{1},~\mathbf{0}], V =(W,~I)$, we have $\alpha{'}W \geq -1, \alpha{'}I \geq 0$. Thus, it is easy to find that the feasible region is bounded, i.e., $P$ does not contain any extreme rays. Furthermore, let $\alpha_0 = 0$, then we have 
-\begin{align*}
-  & 0 \leq \alpha_1 \leq 1,\\ 
-  & 0 \leq \alpha_2 \leq \alpha_1 + 1, \\
-  & \cdots, \\
-  & 0 \leq \alpha_m \leq \alpha_{m-1} + 1
-\end{align*}
+\begin{corollary}
+  Only the optimality cuts, $\alpha{'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, will be included in the following decomposition method.
+\end{corollary}
 
-When $s_i$ is integral, we can still use the same way to obtain the dual optimal solution.
+
+\begin{corollary}
+  When $s_i = i+1$, $f{'} = [-\mathbf{1},~\mathbf{0}], V =(W,~I)$, we have $\alpha{'}W \geq -1, \alpha{'}I \geq 0$. Thus, it is easy to find that the feasible region is bounded, i.e., $P$ does not contain any extreme rays. Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i = 1, \ldots, m$.
+
+  % \begin{align*}
+  %   & 0 \leq \alpha_1 \leq 1,\\ 
+  %   & 0 \leq \alpha_2 \leq \alpha_1 + 1, \\
+  %   & \cdots, \\
+  %   & 0 \leq \alpha_m \leq \alpha_{m-1} + 1
+  % \end{align*}
+\end{corollary}
+
+% When $s_i$ is integral, we can still use the same way to obtain the dual optimal solution.
 
 When we are given $x^{*}$, the demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{m,0})$.
 Then plug them in the subproblem \eqref{BD_sub}, we can obtain the value of $y_{i \omega}$ recursively:
@@ -157,7 +165,7 @@ The optimal value for scenario $\omega$ can be obtained by $f{'} y_{\omega}$, th
 
 
 \begin{thm}\label{optimal_sol_sub_dual}
-  An optimal solution to problem \eqref{BD_sub_dual} is given by 
+  The optimal solutions to problem \eqref{BD_sub_dual} are given by 
 \begin{equation}\label{BD_sub_simplified}
   \begin{aligned}
     & \alpha_{i \omega} =0, i =1,\ldots,m \quad \text{if}~  y_{i \omega}^{-} > 0   \\
@@ -166,9 +174,8 @@ The optimal value for scenario $\omega$ can be obtained by $f{'} y_{\omega}$, th
 \end{equation}
 \end{thm}
 
-When $y_{i \omega}^{+} = 0$ and $y_{i \omega}^{-} = 0$, $\left(d_{i 0}- d_{i \omega} + y_{i+1, \omega}^{+}\right) = 0$, $d_{i \omega}- d_{i 0} = y_{i+1, \omega}^{+} \geq 0$.
-
-If $y_{i+1, \omega}^{+} > 0$, $\alpha_{i \omega} = 0$,
+For some $i$, when $y_{i \omega}^{+} = 0$ and $y_{i \omega}^{-} = 0$, $\left(d_{i 0}- d_{i \omega} + y_{i+1, \omega}^{+}\right) = 0$, $d_{i \omega}- d_{i 0} = y_{i+1, \omega}^{+} \geq 0$.
+If $y_{i+1, \omega}^{+} > 0$, $\alpha_{i \omega} = 0$;
 if $y_{i+1, \omega}^{+} = 0$, $0 \leq \alpha_{i \omega} \leq \alpha_{i-1, \omega} +1$.
 
 \begin{pf}[Proof of theorem \ref{optimal_sol_sub_dual}]
@@ -184,9 +191,9 @@ Let $\Delta d = d_{\omega} - d_0$, then the elements in $\Delta d$ will be negat
 We can use the forward method, starting from $\alpha_{1 \omega}$ to $\alpha_{m \omega}$, to obtain the value of $\alpha_{\omega}$ rather than solving a linear programming.
 
 
-We know that $z_{\omega}(x)$ is finite and it is the optimal value of the problem \eqref{BD_sub} and this value will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
+The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and this value will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
 
-\subsection{Benders decomposition}
+\subsection{Solve The Two-stage Problem by Benders Decomposition}
 
 Let $z_{\omega}(x)$ be the upper bound of $z_{\omega}$ such that $(\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}$, which is the optimality cut.
 
@@ -214,7 +221,7 @@ Now use a small subset of $\mathcal{O}$, $\mathcal{O}^t$, to substitute the orig
 \end{equation}
 
 
-Given the initial $\mathcal{O}^{t}$, we can obtain the optimal $\mathbf{x}^{*}$ and $\mathbf{z}^{*}=(z^{*}_1,\ldots, z^{*}_S)$. We need to check whether $(\mathbf{x}^{*}, \mathbf{z}^{*})$ is also an optimal solution to the full master problem. 
+To determine the initial $\mathcal{O}^{t}$, we have the following lemma.
 
 \begin{lem}\label{one_ep_feasible}
 When each scenario has at least any one optimality cut, the problem \eqref{BD_master2} is always bounded.
@@ -238,11 +245,12 @@ When each scenario has at least any one optimality cut, the problem \eqref{BD_ma
       & \mathbf{x} \geq 0
     \end{aligned}
   \end{equation}
-  Notice that $\mathbf{x}$ is bounded, then the problem \eqref{lemma_eq} is bounded. Adding more optimality cuts will not make the optimal value larger. Thus, the problem \eqref{BD_master2} is bounded. 
+  Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more optimality cuts will not make the optimal value larger. Thus, the problem \eqref{BD_master2} is bounded. 
   \qed
 \end{pf}
 
-When some scenario only includes one optimality cut, we can substitute $z_{\omega}$ into the objective function. 
+Given the initial $\mathcal{O}^{t}$, we can obtain the optimal $\mathbf{x}^{*}$ and $\mathbf{z}^{*}=(z^{*}_1,\ldots, z^{*}_S)$. By solving problem \eqref{BD_sub_dual}, we can check whether $(\mathbf{x}^{*}, \mathbf{z}^{*})$ is an optimal solution to the full problem.
+
 
 According to theorem \ref{optimal_sol_sub_dual}, we can obtain the optimal solution, $\alpha_{\omega}^{*}$, to problem \eqref{BD_sub_dual}. When $\mathbf{x}_0$ is given, $z_{\omega}^{0} = \alpha_{\omega}^{*}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ will give a minimal upper bound of $z_{\omega}$, thus all the left constraints associated with other extreme points are redundant.
 
@@ -269,65 +277,23 @@ The steps of the algorithm can be described as below,
    \end{description}
   \end{algorithm}
 
-Remark: Step 1 results from the lemma \ref{one_ep_feasible}. Step 6, notice that only contraints are added, thus $LB$ and $UB$ are both monotone, then we can use $UB - LB < \epsilon$ to terminate the algorithm.
+\begin{remark}
+From the lemma \ref{one_ep_feasible}, we can set $\alpha_{\omega}^0 = \mathbf{0}$ initially in Step 1. 
+\end{remark}
+
+\begin{remark}
+  Notice that only contraints are added in each iteration, thus $LB$ and $UB$ are both monotone. Then we can use $UB - LB < \epsilon$ to terminate the algorithm in Step 6.
+\end{remark}
+
 
 After the algorithm terminates, we obtain the optimal $x^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = d_0 = (d_{1,0},\ldots,d_{m,0})$.
 Then we can obtain the value of $y_{i \omega}$ from equation \eqref{y_recursively}.
 
-\subsection{Benders decomposition versus IP}
+We show the results of Benders and IP in the section \ref{Bender_IP}.
 
-In view of the fact that IP of the deterministic model can be solved quickly, the column generation method does not show an obvious advantage. We can revise the stochastic model as follows:
+\subsection{Obtain Near-optimal Seat Assignment}
 
-The running times of solving IP directly and using Benders decomposition are shown in the table below. 
-
-\begin{table}[ht]
-  \begin{tabular}{l|l|l|l|l}
-  \hline
-  \# of Scenarios & running time of IP(s) & Benders (s) & \# of rows & \# of groups \\
-  1000  & 5.1  & 0.13 & 30 & 8 \\
-  5000  & 28.73 & 0.47 & 30 & 8 \\
-  10000 & 66.81  & 0.91 & 30 & 8 \\
-  50000 & 925.17 & 4.3 & 30 & 8 \\
-  \hline
-  1000  & 5.88 & 0.29 & 200 & 8 \\
-  5000  & 30.0 & 0.62 & 200 & 8 \\
-  10000 & 64.41 & 1.09 & 200 & 8 \\
-  50000 & 365.57 & 4.56 & 200 & 8 \\
-  \hline
-  1000  & 17.15  & 0.18 & 30 & 16  \\
-  5000  & 105.2  & 0.67 & 30 & 16  \\
-  10000 & 260.88 & 1.28 & 30 & 16  \\
-  50000 & 3873.16 & 6.18 & 30 & 16  \\
-  \hline
-  \end{tabular}
-\end{table}
-
-The parameters of the experiments are listed below.
-
-The first one:
-The number of rows is 30.
-The number of groups is 8.
-The number of seats for each row L is generated from (21, 50) randomly, about 1000 seats.
-The scenarios of demands are generated from (150, 350) randomly.
-
-The second one:
-The number of rows is 200.
-The number of groups is 8.
-The number of seats for each row L is generated from (21, 50) randomly, about 7000 seats.
-The scenarios of demands are generated from (1000, 2000) randomly.
-
-The third one:
-The number of rows is 30.
-The number of groups is 16.
-The number of seats for each row L is generated from 41-60 randomly, about 1500 seats.
-The scenarios of demands are generated from (150, 250) randomly.
-
-% problems:
-% 3. When we add more constraints, the Benders shows something wrong.
-
-\subsection{Scenario-based method}
-
-The stochastic model only gives the maximal people that can be served, not the maximal seat assignment. It will not give an appropriate solution when the number of arriving people of the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
+The stochastic model only gives the maximal people that can be served, not the optimal seat assignment. It will not give an appropriate solution when the number of arriving people of the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 
 We make the following changes to obtain the near-optimal seat assignment in the once-decision method.
 
@@ -338,182 +304,42 @@ Before that, we give the deterministic model with a lower bound and upper bound 
       \text {s.t.} \quad & \sum_{i = 1}^{m} s_i x_{ij} \leq L_{j}, j=1,\ldots,N \\
       & \sum_{j =1}^{N} x_{ij} \geq d_{i}^{l}, i=1,\ldots,m \\
       & \sum_{j =1}^{N} x_{ij} \leq d_{i}^{u}, i=1,\ldots,m \\
-      & x_{ij} \geq 0, i=1,\ldots,m, j=1,\ldots,N.
+      & x_{ij} \geq 0, \text{integer},  i=1,\ldots,m, j=1,\ldots,N.
     \end{aligned}
   \end{equation}
 
 $d_{i}^{l}$ is the lower bound of the demand. (It can be the number of group type $i$ we have accepted.)
 $d_{i}^{u}$ is the upper bound of the demand.  
 
-Firstly, we obtain the solution from stochatic programming. This solution corresponds to a supply for each group type. Then solve the deterministic model by setting the supply as the upper bound of demand to obtain another feasible supply. Finally, solve the deterministic model by setting this supply as the lower bound to obtain the seat assignment.
+When the lower/upper bound is not needed, the corresponding constraints can be removed. The solver can solve this deterministic formulation with bounds quickly.
 
-\begin{algorithm}[H]\label{scenario_based}
-  \caption{The scenario-based method to deal with the dynamic situation}
-  \begin{description}
-    \item[Step 1.] Obtain a linear solution from stochastic programming \eqref{BD_master1}.
-    \item[Step 2.] Obtain the near-optimal integral solution from deterministic model with lower and upper bounds.
-    \item[Step 3.] Accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
-    \item[Step 4.] According to different scenarios, we can fix the supply or re-calculate to give a new supply. 
-    % update the scenario and the probability, add constraints when re-calculating stochastic programming.
-    % we can update the supply whenever some demand exceeds the supply.
-  \end{description}
-\end{algorithm}
 
-In step 4, the scenarios include the ticket reservation without seat selection, ticket reservation with only row selection, ticket reservation with limited seat selection. 
+% Firstly, we obtain the solution from stochatic programming. This solution corresponds to a supply for each group type. Then solve the deterministic model by setting the supply as the upper bound of demand to obtain another feasible supply. Finally, solve the deterministic model by setting this supply as the lower bound to obtain the seat assignment.
 
-In part \ref{dynamic_demand}, different methods are derived to deal with these situations. 
+
+\begin{algorithm}[H]\label{near-optimal}
+  \caption{Near-optimal seat assignment algorithm}
+    \begin{description}
+    \item[Step 1.] Obtain the solution from stochatic programming by benders decomposition.
+
+    \item[Step 2.] Aggregate the solution to the supply for each group type.
+
+    \item[Step 3.] Set the supply as the upper bound of demand in problem \eqref{deter_lower_upper}. The lower bound is not included.
+    
+    \item[Step 4.] Aggregate the solution from problem \eqref{deter_lower_upper} to a supply for each group type.
+
+    \item[Step 5.] Obtain the near-optimal assignment algorithm from \eqref{deter_lower_upper} by setting the supply as the lower bound.
+   \end{description}
+  \end{algorithm}
+
+\begin{remark}
+  Step 3 can give a feasible integer supply. Then problem \eqref{deter_lower_upper} with this supply as the lower bound can always give a integer solution.  
+  Thus, we can obtain the near-optimal seat assignment by setting the upper and lower bound alternately.
+\end{remark}
+
 
 
 % 1. Why should we don't use the subset sum problem to decompose the whole problem, it will destroy global optimality. But notice that when we arrange row by row, it may also affect the optimality.
 
 % Many symmetry structure/ Every step we need to solve a multiple knapsack problem(difficult).
 
-\subsection{How to generate scenarios}\label{MappingSeq}
-It is challenging to consider all the possible realizations; thus, it is practicable to use discrete distributions with a finite number of scenarios to approximate the random demands. This procedure is often called scenario generation.
-
-Some papers consider obtaining a set of scenarios that realistically represents the distributions of the random parameters but is not too large. \cite{feng2013scenario} \cite{casey2005scenario}
-\cite{henrion2018problem}
-
-Another process to reduce the calculation is called scenario reduction. It tries to approximate the original scenario set with a smaller subset that retains essential features.
-
-Solving the deterministic formulation with a large set of scenarios is not tricky in our case.
-
-For the stochastic situation, we assume the group sizes are discretized from independent random variables following some distribution.(non-negative)
-
-Every time we can regenerate the scenario based on the realized demands. (Use the conditional distribution or the truncated distribution)
-
-
-Suppose that the groups arrive from small to large according to their size. Once a larger group comes, the smaller one will never appear again.
-
-When a new group arrives (suppose we have accepted $n$ groups with the same size), we accept or reject it according to the supply (when $n+1 < \text{supply}$, we accept it), then update the scenario set according to the truncated distribution. We can obtain a new supply with the new probability and scenario set.
-
-With the conclusion of section , we know how to reject a request. Once we reject one group, we will reject all groups of the same size. 
-
-% Fix the supply of this group size, and continue this procedure.  
-
-% If groups arrive randomly, the procedure will be similar. 
-
-% We don't care about the arrival sequence; only the number of groups matters. Because as long as the approximation about the number of groups is accurate, we can handle any sequence.
-
-
-\subsubsection{Mapping sequences to scenarios by discrete periods}
-
-Notice that this approach still works under the assumption that time is continuous.
-
-Suppose there are $T$ independent periods, at most one group will arrive in each period.
-
-There are $J$ different group types(including the group with no people). Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = j) = p_j$, $j = 0,1,\ldots,J-1$ and $\sum_{j} p_{j} =1$. Then a sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. (It can be modeled as a multinomial distribution, $p(\mathbf{Y} \mid \mathbf{p})=\prod_{j=0}^{J-1} p_j N_j$).
-
-Let $N_{j} = \sum_{t} I(y_t = j)$, i.e., the count number of times group type $j$ arrives during $T$ periods. Then the set of counts $N_{j}$ (scenarios) follows a multinomial distribution, $$p\left(N_0, \ldots, N_{J-1} \mid \mathbf{p}\right)=\frac{T !}{N_{0}!, \ldots, N_{J-1}!} \prod_{j=0}^{J-1} p_{j}^{N_j}, T = \sum_{j=0}^{J-1} N_{j}$$
-
-% scenario:
-
-% sequence will affect the result.
-% Then, if we fix the seat assignment as $[3,3]$. For the sequence, $2,2,2,2,2,3,3,3,3,3$, we will place one $2$ in a three-seat. 
-% But for the sequence, $3,3,3,3,3,2,2,2,2,2$, we will accept three $3$ and three $2$.
-
-Show the complexity: the number of different sequences $J^{T}$, and the number of scenarios is $O(T^{J-1})$.
-
-Obtained by DP:
-Use $D(T,J) $ to denote the number of scenarios, which equals to the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$.
-Then we know the recursion relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and $D(i,2) = i+1, D(i,1) = 1$.
-$D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$.
-
-The number of scenarios is too large to enumerate all possible cases.
-Thus, we choose to sample some sequences from the multinomial distribution.
-
-
-% Example:
-% The group types are $[2,3,4,5]$. The number of periods is $20$. The number of given rows is 4 and the number of seats is 22.
-% Each group arrives with the same probability.
-% The number of sequences generating from multinomial distribution is $1000$. Then, we can obtain $[0,3,6,11]$ from stochastic programming. When the number of sequences is 5000, we still obtain $[0,3,6,11]$. It shows that sampling is practical.
-
-\subsubsection{Mapping sequences to scenarios by continuous time}
-
-When the time is continuous, we only need to count the number of different group types, the method will be the same.
-
-For the nonhomogeneous Poisson process, $N_{i}(T) \sim Poisson (\int_0^{T} p_i(s)\lambda(s) \mathrm{d} s)$. If the Poisson process is homogeneous, $N_{i} \sim Poisson(\lambda p_i T)$ during the interval $[0, T]$. Then for a realization of the Poisson process, we can still apply the method in Section \ref{MappingSeq}.
-
-\subsection{Nested policy when given supply}\label{nested_policy}
-% Recall that the stochastic programming only considers the situation that small-size groups can use the surplus large-size seats.
-
-Once we obtain a solution from the stochastic programming, we need to follow some basic rules to assign the seats.
-\begin{itemize}
-    \item When the supply of one arriving group is enough, we will accept the group directly.
-    \item When the supply of one arriving group is 0, the demand can be satisfied by only one larger-size supply.
-    \item When one group is accpected to occupy the larger-size seats, the rest empty seat(s) can be reserved for the future demand.
-\end{itemize}
-
-we can assign the seats to the corresponding-size group. But when a group comes while the corresponding supply is 0, should we assign this group to the larger-size seats? Now we demonstate the nested policy for this problem.
-
-If we accept a group of $i$ to take over $j$-size seats, then the expected served people is $i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1)$, where $i < j$, $P(D_i \geq x_i)$ is the probability of that the expected demand of group type $i$ in the following periods is no less than $x_i$, the remaining supply of group type $i$.
-
-When a group of $i$ occupies $j$-size seats, $(j-i-1)$ seats can be provided for one group of $j-i-1$ with one seat of social distancing.
-Thus, $P(D_{j-i-1} \geq x_{j-i-1}+1)$ indicates the probability of that the demand of group type $(j-i-1)$ in the future is no less than its current remaining supply plus 1. If $j -i-1 =0$, then this term equals 0.
-
-Similarly, when the expected demand of group of $j$ in the future is no less than its remaining supply currently, we would reject a group of $i$, the expected served people is $j P(D_{j} \geq x_{j})$.
-
-Let $d(i,j)$ be the difference of expected served people between acceptance and rejection on group $i$ occupying $j$-size seats. Then $d(i,j) = i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1) - j P(D_{j} \geq x_{j}), j >i$.
-
-One intuitive decision is to choose the largest difference.
-
-We can obtain $d(i,j) = j P(D_{j} \leq x_{j} -1) - (j-i-1)P(D_{j-i-1} \leq x_{j-i-1}) -1$ after reformulating. 
-Let $F_{j}(x;T)$ be the cumulative distribution function of the number of arrival groups $D_{j}$ in $T$ periods. Then $F_{j}(x; T_{r}) = P(D_{j} \leq x)$, and $D_{j}$ follows a binomial distribution $B(T_{r}, p_{j})$, where $T_{r}$ is the numebr of remaining periods.
-
-Thus, $d(i,j) = j F_{j}(x_{j}-1; T) - (j-i-1) F_{j-i-1}(x_{j-i-1}; T) -1$. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$.
-
-If $d(i,j^{*}) >0$, we will place the group $i$ in $j^{*}$-size seats. Otherwise, the group will be rejected.
-
-The algorithm is shown below:
-
-\begin{algorithm}[H]\label{several_class}
-  \caption{Nested policy under given supply}
-  \begin{description}
-    \item[Step 1.] Obtain a supply, $\X^{0} = [x_1,\ldots,x_{J}]$, from the stochastic programming.
-    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
-    \item[Step 3.] If $x_{i} = 0$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, accpect group type $i$. Set $x_{j^{*}} = x_{j^{*}} -1$. Let $x_{j-i-1} = x_{j-i-1} + 1$ when $j-i-1>0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
-    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2.
-  \end{description}
-\end{algorithm}
-
-% Example:
-
-% If the supply is $[0,3,6,11]$, then here comes a group of 1. There will be three choices.
-% \begin{align*}
-% 1 \geq 2 P(D_{2} & \geq x_{2}) \\
-% 1 + 1\cdot P(D_{1}\geq 1) & \geq 3 P(D_{3}\geq x_{3}) \\
-% 1 + 2\cdot P(D_{2}\geq (1+ x_{2})) & \geq 4 P(D_{4}\geq x_{4})
-% \end{align*}
-% $\mathbf{x}$ is the remaining supply right now.
-
-\begin{table}[ht]
-  \caption{Decomposion and IP with nested policy}
-  \begin{tabular}{l|l|l|l|l|l}
-  \hline
-  \# samples & T & probabilities & \# rows & people served by decomposition & people served by IP \\
-  1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 0.12 & 0.12 \\
-  1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & 1.86 & 1.86 \\
-  1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & 5.39 & NA  \\ % slow
-  1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & 7.41 & NA  \\
-  1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & 9.03 & 9.07 \\
-  \hline
-  1000  & 37  & [0.25,0.25,0.25,0.25] & 8 & 0.10 & 0.10 \\
-  1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & 1.54 & 1.54 \\
-  1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & 7.17 & 7.17 \\
-  1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & 8.83 & 8.95 \\
-  1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & 11.10 & 11.10 \\
-  \hline
-  5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & 0.00 & 0.00 \\
-  5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & 5.28 & 5.28 \\
-  5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & 8.16 & 8.20 \\
-  5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & 11.00 & 11.04 \\
-  \hline
-  \end{tabular}
-\end{table}
-
-Need to update the table to show benders decomposition and IP.
-
-Fix the number of seats for each row: 20, 40.
-Each entry of people served is the average of 50 instances.
-
-IP will spend more than 2 hours in some instances, as `NA' showed in the table.

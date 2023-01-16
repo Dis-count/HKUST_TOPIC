@@ -189,7 +189,7 @@ class stochasticModel:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    number_period = 80
+    number_period = 55
     given_lines = 8
     np.random.seed(0)
 
@@ -208,7 +208,10 @@ if __name__ == "__main__":
 
     my = stochasticModel(roll_width, given_lines, demand_width_array, W, I, prop, dw)
 
+    start = time.time()
     ini_demand, upperbound = my.solveBenders(eps=1e-4, maxit=20)
+    print("Benders took...", round(time.time() - start, 3), "seconds")
+
     ini_demand = np.ceil(ini_demand)  # take the ceiling of the upper demand
 
     deter = deterministicModel(roll_width, given_lines, demand_width_array, I)

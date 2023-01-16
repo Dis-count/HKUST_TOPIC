@@ -50,6 +50,7 @@ $y_k =1$ if line $k$ is used and 0 otherwise, $x_{ik}$ is the number of times gr
 
 \subsection{Provide The Maximal Supply When Given Rows}\label{maximal_supply}
 
+\subsubsection{Model}
 % Let us review this problem in another way. In most cases where 
 Suppose that the number of rows is fixed, we hope to accommodate as many as people possible. 
 
@@ -98,8 +99,44 @@ And the IP formulation can be shown as below:
 
 $m$ indicates the number of rows. $x_{ij}$ indicates the number of group type $i$ placed in each row $j$.
 
-% For the cutting stock problem, $\min LP \leq \min LP^r \leq \min IP \leq \min IP^r$.
+\subsubsection{Property}
 
+Although the solver can solve this problem easily, the analyses on the property of the solution to this problem can help us generate the useful method for the dynamic situation. 
+
+At first, we consider the types of pattern, which refers to the seat assignment for each row.
+
+For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left seat, respectively. Denote by $l(k) = \alpha_k + \beta_k$ the loss for pattern $k$.
+
+Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. Recall that we use the vector $(t_1, t_2, \ldots, t_m)$ to represent a pattern, where $t_i$ is the size of group $i$. 
+
+For example, take the length of each row be S = 21, the size of group types be $s = [2, 3, 4, 5]$. Thus these patterns, $(5, 5, 5, 5, 1),(5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belongs to $I_1$. Notice that
+the pattern, $(0, 0, 0, 4)$, is not full because there is one left space.
+
+Suppose $(u-1)$ is the size of the largest group allowed, all possible seats will be taken are the consecutive integers starting from 2, $[2,3,\ldots,u]$.
+Then we can use the following greedy way to generate the largest pattern. Select the maximal group size,$u$, as many as possible and the left space is occupied by the group with the corresponding size. The loss is $q+1$, where $q$ is the number of times $u$ selected. Let $S = u\cdot q + r$, when $r>0$, we will have at least $\lfloor \frac{r+u}{2} \rfloor -r +1$ largest patterns with the same loss. When $r =0$, we have only one possible largest pattern.
+
+\begin{lem}
+If all patterns associated with an integral feasible solution belong to $I_1$, then this solution is optimal.
+\end{lem}
+
+This lemma holds because we cannot find a better solution occupying more space.
+
+When the number of given rows is small, we can construct a solution in the following way. Every time we can select one pattern from $I_1$, then minus the corresponding number of group type from demand and update demand. Repeat this procedure until we cannot generate a largest pattern. Compare the number of generated patterns with the number of rows.
+
+But how could we know if the number of rows is small enough?
+We can consider the relation between the demand and the number of group types in patterns. Then we develop the following proposition:
+
+\begin{prop}\label{I_1}
+  Let $k^{*} = \arg \max_{k\in I_1} \min_{i} \{\lfloor \frac{d_i}{b_i^k}\rfloor\}$, 
+  When $N \leq \max_{k\in I_1} \min_{i} \{\lfloor \frac{d_i}{b_i^k}\rfloor\}$, select $k^*$-th pattern from $I_1$ and it is the optimal solution.
+  $N$ is the number of rows, $i = 1,2,\ldots, m$, $d_m$ is the demand of the largest size, $b_m^k$ is the number of group $m$ placed in pattern $k$.
+\end{prop}
+
+In the light of the Proposition \ref{I_1}, when the number of given rows is small, we just need to select some patterns from $I_1$.
+Continuing with the above example, we just take $(5,5,5,5), (5,4,4,4,4), (5,5,4,4,3)$ as the alternative patterns. For each $k$, $\min_{i} \{\lfloor \frac{d_i}{b_i^k}\rfloor\}$ will be $2,3,5$ respectively. So when $N \leq 5$, we can always select the pattern $(5,5,4,4,3)$ five times as the optimal solution.
+
+
+% For the cutting stock problem, $\min LP \leq \min LP^r \leq \min IP \leq \min IP^r$.
 
 % For our new problem, the column generation will give the upper bound (LP relaxation) and lower bound (restricted IP). After obtaining the patterns with column generation, restricted LP equals LP relaxation, $LP^r = LP$, which provides an upper bound. Thus, we have the relation, $\max LP \geq \max LP^r \geq \max IP \geq \max IP^r$.
 

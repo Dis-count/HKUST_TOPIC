@@ -7,7 +7,7 @@ It becomes a sequential stochastic optimization problem where conventional metho
 
 \subsection{Generate Scenarios From Dynamic Group Arrivals}\label{MappingSeq}
 
-At first, we can use the stochastic information to 
+At first, we can use the stochastic information to generate scenarios.
 
 % Fix the supply of this group size, and continue this procedure.  
 
@@ -272,4 +272,4 @@ Or use partial static information to estimate the probabilities, then generate n
 
 Multiple scenario approach:
 
-Suppose that we know the probabilities, we can use the sampling demands to estimate which patterns we should use. For example, three rows with $I_1$, seven rows with $I_2$.
+Suppose that we know the probabilities, we can use the sampling demands to estimate which patterns we should use. For example, three rows with $I_1$, seven rows with $I_2$. For each arrival, if there exists one scenario containing this group, we accept it; otherwise we use nested policy to accept or reject it.

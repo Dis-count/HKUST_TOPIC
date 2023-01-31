@@ -1,0 +1,113 @@
+Run Start Time: Mon Jan 30 16:35:19 2023
+probabilities: 	[0.45 0.05 0.05 0.45]
+M1: 100.00 ;M2: 100.00 ;M3: 89.04 ;M4: 100.00 ;M5: 90.41 ;M6: 100.00 
+Number of accepted people: 146.00 	Number of people: 146.00 
+probabilities: 	[0.41666667 0.05       0.15       0.38333333]
+M1: 98.68 ;M2: 100.00 ;M3: 92.05 ;M4: 100.00 ;M5: 83.44 ;M6: 98.01 
+Number of accepted people: 151.00 	Number of people: 152.00 
+probabilities: 	[0.38333333 0.05       0.25       0.31666667]
+M1: 100.00 ;M2: 100.00 ;M3: 100.00 ;M4: 100.00 ;M5: 97.76 ;M6: 100.00 
+Number of accepted people: 134.00 	Number of people: 134.00 
+probabilities: 	[0.35 0.05 0.35 0.25]
+M1: 100.00 ;M2: 100.00 ;M3: 92.20 ;M4: 100.00 ;M5: 93.62 ;M6: 100.00 
+Number of accepted people: 141.00 	Number of people: 141.00 
+probabilities: 	[0.31666667 0.05       0.45       0.18333333]
+M1: 100.00 ;M2: 100.00 ;M3: 97.86 ;M4: 100.00 ;M5: 93.57 ;M6: 100.00 
+Number of accepted people: 140.00 	Number of people: 140.00 
+probabilities: 	[0.28333333 0.05       0.55       0.11666667]
+M1: 97.22 ;M2: 100.00 ;M3: 97.22 ;M4: 100.00 ;M5: 90.97 ;M6: 100.00 
+Number of accepted people: 144.00 	Number of people: 144.00 
+probabilities: 	[0.25 0.05 0.65 0.05]
+M1: 98.04 ;M2: 98.69 ;M3: 89.54 ;M4: 97.39 ;M5: 90.85 ;M6: 97.39 
+Number of accepted people: 153.00 	Number of people: 158.00 
+probabilities: 	[0.38333333 0.15       0.05       0.41666667]
+M1: 92.36 ;M2: 98.73 ;M3: 88.54 ;M4: 98.09 ;M5: 85.35 ;M6: 96.82 
+Number of accepted people: 157.00 	Number of people: 164.00 
+probabilities: 	[0.35 0.15 0.15 0.35]
+M1: 100.00 ;M2: 100.00 ;M3: 97.12 ;M4: 100.00 ;M5: 92.81 ;M6: 100.00 
+Number of accepted people: 139.00 	Number of people: 139.00 
+probabilities: 	[0.31666667 0.15       0.25       0.28333333]
+M1: 100.00 ;M2: 100.00 ;M3: 95.04 ;M4: 100.00 ;M5: 97.16 ;M6: 100.00 
+Number of accepted people: 141.00 	Number of people: 141.00 
+probabilities: 	[0.28333333 0.15       0.35       0.21666667]
+M1: 95.33 ;M2: 99.33 ;M3: 92.00 ;M4: 100.00 ;M5: 90.00 ;M6: 100.00 
+Number of accepted people: 150.00 	Number of people: 150.00 
+probabilities: 	[0.25 0.15 0.45 0.15]
+M1: 100.00 ;M2: 100.00 ;M3: 92.96 ;M4: 100.00 ;M5: 95.77 ;M6: 100.00 
+Number of accepted people: 142.00 	Number of people: 142.00 
+probabilities: 	[0.21666667 0.15       0.55       0.08333333]
+M1: 97.40 ;M2: 98.05 ;M3: 87.66 ;M4: 97.40 ;M5: 87.66 ;M6: 97.40 
+Number of accepted people: 154.00 	Number of people: 159.00 
+probabilities: 	[0.18333333 0.15       0.65       0.01666667]
+M1: 100.00 ;M2: 100.00 ;M3: 91.55 ;M4: 100.00 ;M5: 91.55 ;M6: 100.00 
+Number of accepted people: 142.00 	Number of people: 142.00 
+probabilities: 	[0.31666667 0.25       0.05       0.38333333]
+M1: 100.00 ;M2: 99.32 ;M3: 95.92 ;M4: 99.32 ;M5: 91.84 ;M6: 100.00 
+Number of accepted people: 147.00 	Number of people: 147.00 
+probabilities: 	[0.28333333 0.25       0.15       0.31666667]
+M1: 100.00 ;M2: 100.00 ;M3: 97.14 ;M4: 100.00 ;M5: 92.14 ;M6: 100.00 
+Number of accepted people: 140.00 	Number of people: 140.00 
+probabilities: 	[0.25 0.25 0.25 0.25]
+M1: 100.00 ;M2: 100.00 ;M3: 94.37 ;M4: 100.00 ;M5: 90.85 ;M6: 100.00 
+Number of accepted people: 142.00 	Number of people: 142.00 
+probabilities: 	[0.21666667 0.25       0.35       0.18333333]
+M1: 97.40 ;M2: 98.70 ;M3: 90.91 ;M4: 98.70 ;M5: 89.61 ;M6: 98.70 
+Number of accepted people: 154.00 	Number of people: 158.00 
+probabilities: 	[0.18333333 0.25       0.45       0.11666667]
+M1: 96.05 ;M2: 98.68 ;M3: 89.47 ;M4: 98.68 ;M5: 87.50 ;M6: 98.68 
+Number of accepted people: 152.00 	Number of people: 154.00 
+probabilities: 	[0.15 0.25 0.55 0.05]
+M1: 97.97 ;M2: 100.00 ;M3: 89.86 ;M4: 100.00 ;M5: 91.22 ;M6: 100.00 
+Number of accepted people: 148.00 	Number of people: 148.00 
+probabilities: 	[0.25 0.35 0.05 0.35]
+M1: 100.00 ;M2: 100.00 ;M3: 91.67 ;M4: 100.00 ;M5: 95.14 ;M6: 100.00 
+Number of accepted people: 144.00 	Number of people: 144.00 
+probabilities: 	[0.21666667 0.35       0.15       0.28333333]
+M1: 97.40 ;M2: 98.70 ;M3: 90.26 ;M4: 98.70 ;M5: 88.31 ;M6: 98.70 
+Number of accepted people: 154.00 	Number of people: 159.00 
+probabilities: 	[0.18333333 0.35       0.25       0.21666667]
+M1: 99.33 ;M2: 98.67 ;M3: 92.67 ;M4: 100.00 ;M5: 88.67 ;M6: 100.00 
+Number of accepted people: 150.00 	Number of people: 150.00 
+probabilities: 	[0.15 0.35 0.35 0.15]
+M1: 93.46 ;M2: 98.04 ;M3: 89.54 ;M4: 98.04 ;M5: 87.58 ;M6: 98.04 
+Number of accepted people: 153.00 	Number of people: 156.00 
+probabilities: 	[0.11666667 0.35       0.45       0.08333333]
+M1: 96.03 ;M2: 98.68 ;M3: 86.75 ;M4: 98.68 ;M5: 88.74 ;M6: 98.68 
+Number of accepted people: 151.00 	Number of people: 152.00 
+probabilities: 	[0.08333333 0.35       0.55       0.01666667]
+M1: 100.00 ;M2: 100.00 ;M3: 88.51 ;M4: 100.00 ;M5: 89.86 ;M6: 100.00 
+Number of accepted people: 148.00 	Number of people: 148.00 
+probabilities: 	[0.18333333 0.45       0.05       0.31666667]
+M1: 100.00 ;M2: 100.00 ;M3: 91.78 ;M4: 100.00 ;M5: 91.78 ;M6: 100.00 
+Number of accepted people: 146.00 	Number of people: 146.00 
+probabilities: 	[0.15 0.45 0.15 0.25]
+M1: 95.45 ;M2: 99.35 ;M3: 89.61 ;M4: 98.05 ;M5: 87.01 ;M6: 98.05 
+Number of accepted people: 154.00 	Number of people: 159.00 
+probabilities: 	[0.11666667 0.45       0.25       0.18333333]
+M1: 97.33 ;M2: 100.00 ;M3: 88.67 ;M4: 100.00 ;M5: 89.33 ;M6: 100.00 
+Number of accepted people: 150.00 	Number of people: 150.00 
+probabilities: 	[0.08333333 0.45       0.35       0.11666667]
+M1: 99.35 ;M2: 99.35 ;M3: 91.50 ;M4: 99.35 ;M5: 88.89 ;M6: 99.35 
+Number of accepted people: 153.00 	Number of people: 157.00 
+probabilities: 	[0.05 0.45 0.45 0.05]
+M1: 98.03 ;M2: 98.03 ;M3: 89.47 ;M4: 98.03 ;M5: 86.84 ;M6: 98.03 
+Number of accepted people: 152.00 	Number of people: 155.00 
+probabilities: 	[0.11666667 0.55       0.05       0.28333333]
+M1: 100.00 ;M2: 100.00 ;M3: 93.57 ;M4: 100.00 ;M5: 95.71 ;M6: 100.00 
+Number of accepted people: 140.00 	Number of people: 140.00 
+probabilities: 	[0.08333333 0.55       0.15       0.21666667]
+M1: 99.34 ;M2: 99.34 ;M3: 89.40 ;M4: 99.34 ;M5: 91.39 ;M6: 99.34 
+Number of accepted people: 151.00 	Number of people: 152.00 
+probabilities: 	[0.05 0.55 0.25 0.15]
+M1: 98.65 ;M2: 100.00 ;M3: 93.92 ;M4: 100.00 ;M5: 89.86 ;M6: 100.00 
+Number of accepted people: 148.00 	Number of people: 148.00 
+probabilities: 	[0.01666667 0.55       0.35       0.08333333]
+M1: 99.33 ;M2: 99.33 ;M3: 91.33 ;M4: 99.33 ;M5: 90.67 ;M6: 99.33 
+Number of accepted people: 150.00 	Number of people: 151.00 
+probabilities: 	[0.05 0.65 0.05 0.25]
+M1: 95.36 ;M2: 98.01 ;M3: 91.39 ;M4: 98.01 ;M5: 90.07 ;M6: 98.01 
+Number of accepted people: 151.00 	Number of people: 152.00 
+probabilities: 	[0.01666667 0.65       0.15       0.18333333]
+M1: 98.67 ;M2: 100.00 ;M3: 92.67 ;M4: 99.33 ;M5: 88.67 ;M6: 99.33 
+Number of accepted people: 150.00 	Number of people: 151.00 
+Total Runtime	35.521051

@@ -6,11 +6,8 @@ from Method1 import stochasticModel
 from Method4 import deterministicModel
 from Method2 import originalModel
 from Mist import generate_sequence, decision1
-import copy
-from Mist import decisionSeveral, decisionOnce
-import time
-# This function call different methods
 
+# This function is used to compare the time of LP and IP. 
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):

@@ -106,24 +106,41 @@ Thus, we use M6 to compare the number of people served under different values of
 
 Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$. The number of rows is 10, and the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
 
-\begin{figure}[h]
+% \begin{figure}[h]
+%   \centering
+%   \subfigure[One instance for each data point]{
+%     \label{Fig.sub.1}
+%     \includegraphics[width=0.48\textwidth]{./Figures/Figure_1.pdf}}
+%   \subfigure[Average of 50 instances for each data point]{
+%     \label{Fig.sub.2}
+%     \includegraphics[width=0.48\textwidth]{./Figures/Figure_2.pdf}}
+%   \caption{The number of people served versus $c$}
+%   \label{Fig.lable}
+% \end{figure}
+
+\begin{figure}[ht]
   \centering
-  \subfigure[One instance for each data point]{
-    \label{Fig.sub.1}
-    \includegraphics[width=0.48\textwidth]{./Figures/Figure_1.pdf}}
-  \subfigure[Average of 50 instances for each data point]{
-    \label{Fig.sub.2}
-    \includegraphics[width=0.48\textwidth]{./Figures/Figure_2.pdf}}
+  \includegraphics[width = 0.7\textwidth]{./Figures/diff_2.pdf}
   \caption{The number of people served versus $c$}
-  \label{Fig.lable}
 \end{figure}
 
-The number of people served is near $\frac{c}{c+1} * 210$ for most instances. $\frac{c}{c+1}$ is a rough estimation of occupancy rate when supply is close to demand. (Suppose $E(D) + T$ = the total number of seats, we accept $E(D)$ people with $T$ arrivals. Then the occupancy rate is $\frac{c * T}{(c+1) * T}= \frac{c}{c+1}$).
+Each blue point stands for the average number of people of 50 instances.
+Each red point stands for the expected number of people.
+
+Suppose we accept $D_a$ people with $T$ arrivals and the sum of $D_a$ and $T$ is equal to the total number of seats. Then the occupancy rate is $\frac{c * T}{(c+1) * T}= \frac{c}{c+1}$.($D_a = c * T$)
+
+$\frac{c}{c+1}$ is the estimation of occupancy rate when there are full patterns for all rows.
+
+The number of people served is near $\frac{c}{c+1} * 210$ on average.(Red points showed in the figure.) 
+
+Why some blue points are far from the red points? 
+
+Explanation:
+For the case of probability $[0.05, 0.05, 0.85, 0.05](c =2.9)$, the demand can be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$. We cannot construct all full patterns for every row.
 
 We can find that 160 is the upper bound of the number of people served. 
 
 If the largest pattern is assigned for each row, then the occupancy rate is $\frac{16}{21}$. The maximal number of people can be served is $210 * \frac{16}{21} =160$. 
-
 
 % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
 % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
@@ -189,6 +206,14 @@ Results: M1-M6, the number of accepted people, the number of total people.
 
 We can find that the difference between the number of accepted people and the number of total people will increase with the period. 
 % When the number of periods is small, the seats 
+
+There are three stages, 
+
+First stage: the capacity is sufficient. The social distancing will not cause any effect.
+
+Second stage: gap is becoming larger as $T$ increases. 
+
+Third stage: As $T$ continues to increases, gap is becoming smaller when the capacity is limited.
 
 % \includepdf{./Figures/Periods_25252525.pdf}
 

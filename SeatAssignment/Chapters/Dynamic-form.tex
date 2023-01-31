@@ -85,8 +85,8 @@ If $d(i,j^{*}) >0$, we will place the group $i$ in $j^{*}$-size seats. Otherwise
 
 The algorithm is shown below:
 
-\begin{algorithm}[H]\label{several_class}
-  \caption{Nested policy under given supply}
+\begin{algorithm}[H]
+  \caption{Nested policy under given supply}\label{algo_nested_policy}
   \begin{description}
     \item[Step 1.] Obtain a supply, $\X^{0} = [x_1,\ldots,x_{J}]$, from the stochastic programming.
     \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
@@ -158,9 +158,9 @@ In third step, we need to check whether the chosen number destroys the pattern o
 
 There are six methods basically:
 
-M1: The seat assignment(supply) is obtained from stochastic model. Then make the decision according to the nested policy.
+M1: The seat assignment(supply) is obtained from stochastic model. Then use Algorithm \ref{algo_nested_policy} to make the decision.
 
-It can be used in scenario 1,2,3,4. The seats can be placed in the cinema hall in advance.
+M1 can be used in scenario 1,2,3,4. The seats can be placed in the cinema hall in advance.
 % unsettle the useless seats.
 
 M2: DP-based. We relax several rows to one row with the same capacity. Suppose there always exists one assignment under the capacity. Then we can use DP to make the decision in each period.
@@ -181,12 +181,10 @@ In practice, we accept the request until we cannot find the seat assignment. It 
 
 % We know $(0,0,4,1)$ is a largest and full pattern, thus an assignment constructed with these 10 patterns is an optimal assignment.
 
-M3: 
-The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound. / It can be used in scenario 1,2.
-
+M3: Set the largest pattern in each row. See section \ref{largest_pattern}
 
 M4: 
-The inital supply is the expectation of demand.
+The inital supply is obtained from stochastic model, update the supply from deterministic model by setting accpected demand as the lower bound. / It can be used in scenario 1,2. (The initial supply can be other demands.)
 
 % Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
 
@@ -216,7 +214,7 @@ The relation between the scenarios and the methods is showed in the following ta
   \hline
   Scenario 1 & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
   Scenario 2 & \checkmark &            & \checkmark & \checkmark & \checkmark &            \\
-  Scenario 3 & \checkmark &            &            &            & \checkmark &            \\
+  Scenario 3 & \checkmark &            & \checkmark &            & \checkmark &            \\
   Scenario 4 & \checkmark &            &            &            &            & \\
   \hline
   \end{tabular}
@@ -255,21 +253,45 @@ The numbers in the `performance compared to the optimal' represent M1, M2, M3, M
 
 The maximal number of people served can be obtained by \eqref{deter_upper} with a realized sequence of arrival.
 
-\subsection{How to use the stochastic demand to solve the dynamic situation?}
+\subsection{Solve the dynamic situation with the largest patterns}\label{largest_pattern}
 
-\cite{bent2004scenario} this paper connects the stochastic and dynamic VRP.
+\cite{bent2004scenario} this paper connects the stochastic and dynamic VRP. We borrow some ideas from this paper.
 
-Partially dynamic:
+Partially dynamic: at the beginning stage, the capacity is sufficient, thus we will accept all. Suppose that we don't know the stochastic information, we can use the multiple planning approach (Apply the largest pattern for each row). Then according to the realized arrivals, we can decide whether to accept a smaller-size group such that one largest pattern becomes a second largest pattern.
 
-There is a reservation stage, we only decide to accept or reject.
+% There is a reservation stage, we only decide to accept or reject.
 
-After certain periods, there is a seat selection stage.
+% After certain periods, there is a seat selection stage.
 
-When we don't have the stochastic information, just use multiple planning approach. 
-For each row, we can choose the pattern from $I_1, I_2$. When any group can be assigned in the planning, we accept it; otherwise, reject the group. 
+When we have the stochastic information, we can use nested policy based on the multiple planning approach. 
+For each row, we can choose the pattern from $I_1$. When the arrival cannot be assigned in the planning patterns from $I_1$, we use the nested policy to make the decision. 
 
-Or use partial static information to estimate the probabilities, then generate new plannings.
+% Or use partial static information to estimate the probabilities, then generate new plannings.
 
-Multiple scenario approach:
+% Multiple scenario approach:
+% Suppose that we know the probabilities, we can use the sampling demands to estimate which patterns we should use. For example, three rows with $I_1$, seven rows with $I_2$. For each arrival, if there exists one scenario containing this group, we accept it; otherwise we use nested policy to accept or reject it.
 
-Suppose that we know the probabilities, we can use the sampling demands to estimate which patterns we should use. For example, three rows with $I_1$, seven rows with $I_2$. For each arrival, if there exists one scenario containing this group, we accept it; otherwise we use nested policy to accept or reject it.
+\begin{algorithm}[H]\label{algo_largest}
+  \caption{Method by using the largest patterns}
+  \begin{description}
+    \item[Step 1.] Generate the largest pattern by the greedy way for each row.
+    \item[Step 2.] Denote the minimal and maximal size of group in the pattern of row $i$ as $\min_i$ and $\max_i$. 
+    \item[Step 3.] For the arrival with the size of $a$ in period $t$, if there exists $i$ such that $\min_i + \max_i >= a$ and $a > \min_i$, accept this arrival at row $i$ and go to step 5; otherwise, go to step 4.
+    \item[Step 4.] Add up the remaining supply for all rows, use the nested policy to make the decision.
+    \item[Step 5.] Move to the next period. Repeat step 3. 
+  \end{description}
+\end{algorithm}
+
+Step 2: the pattern will have the same loss by these procedures. ($\min_i$ can be 0.)
+
+\begin{lem}
+  Any patterns can be generated from the largest pattern.
+\end{lem}
+
+Results compared with other methods:
+
+We can compare M3 with M5, the improvement from M3 to M5 results from the stochastic information. But the result of M5 is not ideal compared with other methods.
+
+M3 can be used without stochastic information.
+
+\includepdf{./Figures/Results_M3.pdf}

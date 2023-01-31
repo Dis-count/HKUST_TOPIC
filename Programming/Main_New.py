@@ -4,11 +4,13 @@ import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
 from Method4 import deterministicModel
+from Method_dynamic import dynamicWay
 from Mist import generate_sequence, decision1
 import copy
 from Mist import decisionSeveral, decisionOnce
 import time
-# This function call different methods
+
+# This function call different methods(Use method_dynamic)
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
@@ -39,12 +41,7 @@ class CompareMethods:
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand) 
         ini_demand, _ = deter.IP_formulation(ini_demand, np.zeros(self.I))
 
-        ini_demand1 = np.array(self.probab) * self.num_period
-
-        ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
-        ini_demand3, _ = deter.IP_formulation(ini_demand3, np.zeros(self.I))
-
-        return sequence, ini_demand, ini_demand3
+        return sequence, ini_demand
 
     def row_by_row(self, sequence):
         # i is the i-th request in the sequence
@@ -259,16 +256,14 @@ class CompareMethods:
 
         return demand
 
-    def result(self, sequence, ini_demand, ini_demand3):
+    def result(self, sequence, ini_demand):
         ini_demand4 = copy.deepcopy(ini_demand)
 
         final_demand1 = self.method1(sequence, ini_demand)
 
-        final_demand3 = self.method4(sequence, ini_demand3)
-
         final_demand4 = self.method4(sequence, ini_demand4)
 
-        return final_demand1, final_demand3, final_demand4
+        return final_demand1, final_demand4
 
 def prop_list():
     x = np.arange(0.05, 1, 0.1)
@@ -324,6 +319,7 @@ if __name__ == "__main__":
         # total_seat = np.sum(roll_width)
 
         a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
+        method_b = dynamicWay(roll_width, given_lines, I, probab)
 
         ratio1 = 0
         ratio2 = 0
@@ -338,12 +334,14 @@ if __name__ == "__main__":
 
         count = 50
         for j in range(count):
-            sequence, ini_demand, ini_demand3 = a_instance.random_generate()
+            sequence, ini_demand = a_instance.random_generate()
 
             total_people = sum(sequence) - num_period
 
-            a,c,d = a_instance.result(sequence, ini_demand, ini_demand3)
+            a,d = a_instance.result(sequence, ini_demand)
             
+            c = method_b.largest(sequence) # people
+
             b = a_instance.dynamic_program(sequence)
 
             e = a_instance.row_by_row(sequence)
@@ -360,7 +358,7 @@ if __name__ == "__main__":
 
             ratio1 += np.dot(multi, a) / optimal
             ratio2 += np.dot(multi, b) / optimal
-            ratio3 += np.dot(multi, c) / optimal
+            ratio3 += c / optimal
             ratio4 += np.dot(multi, d) / optimal
             ratio5 += np.dot(multi, e) / optimal
             ratio6 += np.dot(multi, g) / optimal

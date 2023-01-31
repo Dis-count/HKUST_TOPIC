@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -67,31 +70,27 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2}Mapping sequences to scenarios by continuous time}{15}{subsubsection.6.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Nested policy when given supply}{15}{subsection.6.2}\protected@file@percent }
 \newlabel{nested_policy}{{6.2}{15}{Nested policy when given supply}{subsection.6.2}{}}
-\newlabel{several_class}{{\caption@xref {several_class}{ on input line 88}}{16}{Nested policy when given supply}{subsection.6.2}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Nested policy under given supply\relax }}{16}{algorithm.3}\protected@file@percent }
+\newlabel{algo_nested_policy}{{3}{16}{Nested policy under given supply\relax }{algorithm.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Seat assignment scenarios and methods}{16}{subsection.6.3}\protected@file@percent }
 \newlabel{general_method}{{\caption@xref {general_method}{ on input line 116}}{16}{Seat assignment scenarios and methods}{subsection.6.3}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces General method to deal with the Dynamic situation\relax }}{16}{algorithm.4}\protected@file@percent }
 \citation{bent2004scenario}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Relation between the scenarios and the methods\relax }}{18}{table.caption.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}How to use the stochastic demand to solve the dynamic situation?}{18}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Results}{18}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Benders decomposition versus IP}{18}{subsection.7.1}\protected@file@percent }
-\newlabel{Bender_IP}{{7.1}{18}{Benders decomposition versus IP}{subsection.7.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Running time of Decomposion and IP\relax }}{19}{table.caption.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Results of Decomposion and IP under nested policy\relax }}{19}{table.caption.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Different probabilities}{20}{subsection.7.2}\protected@file@percent }
-\newlabel{Fig.sub.1}{{1(a)}{20}{Subfigure 1(a)}{subfigure.1.1}{}}
-\newlabel{sub@Fig.sub.1}{{(a)}{20}{Subfigure 1(a)\relax }{subfigure.1.1}{}}
-\newlabel{Fig.sub.2}{{1(b)}{20}{Subfigure 1(b)}{subfigure.1.2}{}}
-\newlabel{sub@Fig.sub.2}{{(b)}{20}{Subfigure 1(b)\relax }{subfigure.1.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The number of people served versus $c$\relax }}{20}{figure.caption.6}\protected@file@percent }
-\newlabel{Fig.lable}{{1}{20}{The number of people served versus $c$\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each data point}}}{20}{figure.caption.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each data point}}}{20}{figure.caption.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Different periods}{21}{subsection.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Measurement}{21}{subsection.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}How to give a balanced seat assignment}{21}{subsection.7.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Solve the dynamic situation with the largest patterns}{18}{subsection.6.4}\protected@file@percent }
+\newlabel{largest_pattern}{{6.4}{18}{Solve the dynamic situation with the largest patterns}{subsection.6.4}{}}
+\newlabel{algo_largest}{{\caption@xref {algo_largest}{ on input line 274}}{18}{Solve the dynamic situation with the largest patterns}{subsection.6.4}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Method by using the largest patterns\relax }}{18}{algorithm.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Results}{21}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Benders decomposition versus IP}{21}{subsection.7.1}\protected@file@percent }
+\newlabel{Bender_IP}{{7.1}{21}{Benders decomposition versus IP}{subsection.7.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Running time of Decomposion and IP\relax }}{21}{table.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Different probabilities}{21}{subsection.7.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Results of Decomposion and IP under nested policy\relax }}{22}{table.caption.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The number of people served versus $c$\relax }}{22}{figure.caption.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Different periods}{24}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Measurement}{24}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}How to give a balanced seat assignment}{24}{subsection.7.5}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refe}
 \bibcite{barry2021optimal}{1}
@@ -104,5 +103,5 @@
 \bibcite{henrion2018problem}{8}
 \bibcite{salari2020social}{9}
 \bibcite{scheithauer1995modified}{10}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{22}{section.8}\protected@file@percent }
-\gdef \@abspage@last{23}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{26}{section.8}\protected@file@percent }
+\gdef \@abspage@last{27}

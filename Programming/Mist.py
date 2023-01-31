@@ -10,6 +10,7 @@ def several_class(size_group, demand, remaining_period, probab):
     # here probab should be a vector of arrival rate
     # demand is the current left demand
     # size_group is the actual size of group i
+    #  return 0-index
     max_size = len(demand)
     if size_group == max_size:
         return False

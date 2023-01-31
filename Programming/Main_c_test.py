@@ -72,7 +72,7 @@ class CompareMethods:
             seq.pop()
             indi = deter1.IP_formulation1(demand, np.zeros(self.I))
         seq = [i+1 for i in seq]
-
+        print(demand)
         return seq
 
     def offline(self, sequence):
@@ -87,6 +87,7 @@ class CompareMethods:
 
         return newd
 
+
     def result(self, sequence, ini_demand, ini_demand3):
         ini_demand4 = copy.deepcopy(ini_demand)
 
@@ -99,33 +100,13 @@ class CompareMethods:
         return final_demand1, final_demand3, final_demand4
 
 
-def prop_list():
-    x1 = np.arange(0.05, 1, 0.05)
-    x2 = np.arange(0.05, 1, 0.05)
-    x3 = np.arange(0.05, 1, 0.05)
-
-    p = np.zeros((len(x1)*len(x2)*len(x3), 4))
-    t = 0
-
-    for i in x1:
-        for j in x2:
-            for k in x3:
-                if 1 - i - j - k >0:
-                    p[t] = [i, j, k, 1 - i - j - k]
-                    t += 1
-
-    p = p[0:t]
-
-    return p
-
-
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
     num_period = 200
     given_lines = 10
     # np.random.seed(i)
-    p = prop_list()
+    p = [[0.05, 0.05, 0.85, 0.05], [0.05, 0.05, 0.85, 0.05]]
     p_len = len(p)
     c_value = np.zeros(p_len)
     people_value = np.zeros(p_len)
@@ -157,7 +138,7 @@ if __name__ == "__main__":
         c_p = multi @ probab
         c_value[cnt] = c_p
         
-        count = 50
+        count = 1
         for j in range(count):
             sequence = a_instance.random_generate()
             # total_people = sum(sequence) - num_period
@@ -173,29 +154,14 @@ if __name__ == "__main__":
             # num_people += total_people
 
         my_file.write('M6: %.2f \n' % (ratio6/count))
-        my_file.write('Number of accepted people: %.2f \t' %
+        my_file.write('Number of accepted optimal people: %.2f \t' %
                       (accept_people/count))
-        # my_file.write('Number of people: %.2f \n' % (num_people/count))
 
         people_value[cnt] = ratio6/count
         cnt += 1
-
+    print(sum(roll_width) * (c_value[1]/(c_value[1]+1)))
+    
     run_time = time.time() - begin_time
     my_file.write('Total Runtime\t %f \n' % run_time)
-
-    occup_value = np.zeros(p_len)
-    for i in range(p_len):
-        if c_value[i] < 3.2:
-            occup_value[i] = sum(roll_width) * (c_value[i]/(c_value[i]+1))
-        else:
-            occup_value[i] = 160
-        diff = occup_value[i]- people_value[i]
-        if abs(diff) >= 3:
-            my_file.write('Deviated probability: ' + str(p[i]) + '\t')
-            my_file.write('Deviated value: %.2f \n' % diff)
-
-    plt.scatter(c_value, people_value, c = "blue")
-    plt.scatter(c_value, occup_value, c = "red")
-    plt.show()
 
     my_file.close()

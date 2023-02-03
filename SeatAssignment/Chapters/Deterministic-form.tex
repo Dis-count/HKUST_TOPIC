@@ -1,53 +1,6 @@
 % !TEX root = ./sum1.tex
 \section{Deterministic Model}
 
-\subsection{Obtain Minimum Number of Rows to Cover Demand}
-
-We are given a demand, for example, $(d_1, d_2, d_3, d_4, d_5, d_6) = (3,5,7,0,10,6)$, where $d_i$ indicates the number of group containing $i$ people. Suppose each group has to leave a seat to maintain social distancing with the adjacent groups. Regard the groups as items in the CSP, and rows as stocks to be cut.
-With considering the social distancing, the size of each group should be treated as the actual size plus one. Then each row of seats should also add a dummy(virtual) seat for the same reason, and the number of all seats in each row is called the length of the row.
-
-To find the minimum number of rows to satisfy the demand, we can formulate this problem as a cutting stock problem form and use the column generation method to obtain an approximate solution.
-
-Similar to the concept of pattern in the CSP, let the $k$-th placing pattern of a line of seats with length $S$ into some of the $m$ group types be denoted as a vector $(t^k_1,t^k_2,\ldots,t^k_m)$. Here, $t^k_i$ represents the number of times group type $i$ is placed in the $k$-th placing pattern. For a pattern $(t^k_1,t^k_2,\ldots,t^k_m)$ to be feasible, it must satisfy: $\sum_{i=1}^m t^k_i s_i \leq S$, where $s_i$ is the size of group type $i$. Denote by $K$ the current number of placing patterns.
-
-
-This problem is to decide how to place a total number of group type $i$ at least $g_i$ times, from all the available placing patterns, so that the total number of rows of seats used is minimized.
-
-Immediately we have the master problem:
-
-\[\begin{split}\mbox{min}\quad & \sum_{k \in K}^K x_{k}\\
- \mbox{s.t.} \quad & \sum_{k \in K}^K t_i^k x_k \geq d_i  \quad  \mbox{ for } i=1,\ldots,m \\
-  & x_k \geq 0, \mbox{integer}\quad \mbox{for}~ k \in K,\ldots,K.\\
-\end{split}\]
-
-If $K$ includes all possible patterns, we can obtain the optimal solution by solving the corresponding IP. But it is clear that the patterns will be numerous, considering all possible patterns will be time-consuming.
-
-Thus, we need to consider the linear relaxation of the master problem, and the optimal dual variable vector $\lambda$. Using $\lambda$ as the value assigned to each group type $i$, the next problem is to find a feasible pattern $(y_1,y_2,\ldots,y_m)$ that maximizes the product of $\lambda$ and $y$.
-
-
-Then the corresponding sub-problem is:
-\[\begin{split}\mbox{max}\quad & \sum_{i=1}^m \lambda_i y_{i}\\
-        \mbox{s.t.} \quad & \sum_{i=1}^m w_i y_i \leq S  \\
-        & y_i \geq 0, \mbox{integer}\quad \mbox{for}~ i=1,\ldots,m.\\
-\end{split}\]
-
-This is a knapsack problem, its solution will be used as an additional pattern in the master problem.
-We should continue to add new pattern until all reduced costs are nonnegative. Then we have an optimal solution to the original linear programming problem.
-
-But note that column generation method cannot gaurantee an optimal solution. If we want to reach the optimal solution, we should tackle with the integer formulation.
-
-\begin{equation}
-\begin{aligned}
-\min \sum_{k \in K}^{K} y_{k} & \\
-\sum_{k=1}^{K} x_{i k} & \geq d_{i} \quad i=1, \ldots, n \\
-\sum_{i=1}^{n} a_{i} x_{i k} & \leq S y_{k} \quad k=1, \ldots, K \\
-y_{k} & \in\{0,1\} \quad k=1, \ldots, K \\
-x_{i k} & \geq 0 \text { and integer } i=1, \ldots, n ; k=1, \ldots, K
-\end{aligned}
-\end{equation}
-
-$y_k =1$ if line $k$ is used and 0 otherwise, $x_{ik}$ is the number of times group $i$ is placed in row $k$, and $K$ is the upper bound on the number of the rows needed.
-
 \subsection{Provide The Maximal Supply When Given Rows}\label{maximal_supply}
 
 \subsubsection{Model}

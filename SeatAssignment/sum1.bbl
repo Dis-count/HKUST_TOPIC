@@ -1,16 +1,10 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 
 \bibitem{barry2021optimal}
 Michael Barry, Claudio Gambella, Fabio Lorenzi, John Sheehan, and Joern
   Ploennigs.
 \newblock Optimal seat allocation under social distancing constraints.
 \newblock {\em arXiv preprint arXiv:2105.05017}, 2021.
-
-\bibitem{bent2004scenario}
-Russell~W Bent and Pascal Van~Hentenryck.
-\newblock Scenario-based planning for partially dynamic vehicle routing with
-  stochastic customers.
-\newblock {\em Operations Research}, 52(6):977--987, 2004.
 
 \bibitem{casey2005scenario}
 Michael~S Casey and Suvrajeet Sen.

@@ -136,7 +136,7 @@ The number of people served is near $\frac{c}{c+1} * 210$ on average.(Red points
 Why some blue points are far from the red points? 
 
 Explanation:
-For the case of probability $[0.05, 0.05, 0.85, 0.05](c =2.9)$, the demand can be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$. We cannot construct all full patterns for every row.
+For the case of probability $[0.05, 0.05, 0.85, 0.05](c =2.9)$, the demand can be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$. We cannot construct all full patterns for every row. It violates the assumption, thus in this case there is a large gap between blue point and red point.
 
 We can find that 160 is the upper bound of the number of people served. 
 
@@ -207,15 +207,21 @@ Results: M1-M6, the number of accepted people, the number of total people.
 We can find that the difference between the number of accepted people and the number of total people will increase with the period. 
 % When the number of periods is small, the seats 
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width = 0.7\textwidth]{./Figures/Figure_111.pdf}
+  \caption{The number of people served versus $c$}
+\end{figure}
+
 There are three stages, 
 
 First stage: the capacity is sufficient. The social distancing will not cause any effect.
 
-Second stage: gap is becoming larger as $T$ increases. 
+Second stage: the gap is becoming larger as $T$ increases. 
 
-Third stage: As $T$ continues to increases, gap is becoming smaller when the capacity is limited.
+Third stage: As $T$ continues to increases, the gap will converge when the capacity is limited.
 
-% \includepdf{./Figures/Periods_25252525.pdf}
+
 
 \subsection{Measurement}
 

@@ -3,11 +3,12 @@
 import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
-from Method4 import deterministicModel
+from Method5 import deterministicModel
 from Mist import generate_sequence, decision1
 import copy
 from Mist import decisionSeveral, decisionOnce
 import time
+import matplotlib.pyplot as plt
 # This function call different methods
 
 class CompareMethods:
@@ -39,12 +40,7 @@ class CompareMethods:
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand) 
         ini_demand, _ = deter.IP_formulation(ini_demand, np.zeros(self.I))
 
-        ini_demand1 = np.array(self.probab) * self.num_period
-
-        ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
-        ini_demand3, _ = deter.IP_formulation(ini_demand3, np.zeros(self.I))
-
-        return sequence, ini_demand, ini_demand3
+        return sequence, ini_demand
 
     def row_by_row(self, sequence):
         # i is the i-th request in the sequence
@@ -194,7 +190,7 @@ class CompareMethods:
         for i in sequence:
             demand[i-1] += 1
         test = deterministicModel(
-            self.roll_width, self.given_lines, self.demand_width_array, self.I)
+            self.roll_width, self.given_lines, self.demand_width_array-1, self.I)
         newd, _ = test.IP_formulation(np.zeros(self.I), demand)
         
         return newd
@@ -258,100 +254,59 @@ class CompareMethods:
 
         return demand
 
-    def result(self, sequence, ini_demand, ini_demand3):
-        ini_demand4 = copy.deepcopy(ini_demand)
+    def result(self, sequence, ini_demand):
 
         final_demand1 = self.method1(sequence, ini_demand)
 
-        final_demand3 = self.method4(sequence, ini_demand3)
-
-        final_demand4 = self.method4(sequence, ini_demand4)
-
-        return final_demand1, final_demand3, final_demand4
-
+        return final_demand1
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(55,65,1)
+    period_range = range(10,100,1)
     given_lines = 10
     # np.random.seed(i)
     probab = [0.25, 0.25, 0.25, 0.25]
 
     begin_time = time.time()
-    filename = 'Periods_' + str(time.time()) + '.txt'
-    my_file = open(filename, 'w')
-    my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
+    t_value = np.arange(10, 100, 1)
+    people_value = np.zeros(len(period_range))
+    occup_value = np.zeros(len(period_range))
+
+    cnt = 0
     for num_period in period_range:
 
-        my_file.write('The number of periods: \t' + str(num_period) + '\n')
-        
         roll_width = np.ones(given_lines) * 21
         # total_seat = np.sum(roll_width)
 
         a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
-        ratio1 = 0
-        ratio2 = 0
-        ratio3 = 0
-        ratio4 = 0
-        ratio5 = 0
-        ratio6 = 0
-        accept_people =0
-        num_people = 0
+        M1 = 0
+        accept_people = 0
 
         multi = np.arange(1, I+1)
 
         count = 50
         for j in range(count):
-            sequence, ini_demand, ini_demand3 = a_instance.random_generate()
+            sequence, ini_demand = a_instance.random_generate()
 
-            total_people = sum(sequence) - num_period
-
-            a,c,d = a_instance.result(sequence, ini_demand, ini_demand3)
+            a = a_instance.result(sequence, ini_demand)
             
-            b = a_instance.dynamic_program(sequence)
-
-            e = a_instance.row_by_row(sequence)
-            baseline = np.dot(multi, e)
-
             f = a_instance.offline(sequence)  # optimal result
             optimal = np.dot(multi, f)
 
-            seq = a_instance.binary_search_first(sequence)
-
-            g = a_instance.offline(seq)
-
             # ratio1 += (np.dot(multi, a)-baseline)/ baseline
 
-            ratio1 += np.dot(multi, a) / optimal
-            ratio2 += np.dot(multi, b) / optimal
-            ratio3 += np.dot(multi, c) / optimal
-            ratio4 += np.dot(multi, d) / optimal
-            ratio5 += np.dot(multi, e) / optimal
-            ratio6 += np.dot(multi, g) / optimal
+            M1 += np.dot(multi, a)
             accept_people += optimal
-            num_people += total_people
 
-        my_file.write('M1: %.2f ;' % (ratio1/count*100))
-        my_file.write('M2: %.2f ;' % (ratio2/count*100))
-        my_file.write('M3: %.2f ;' % (ratio3/count*100))
-        my_file.write('M4: %.2f ;' % (ratio4/count*100))
-        my_file.write('M5: %.2f ;' % (ratio5/count*100))
-        my_file.write('M6: %.2f \n;' % (ratio6/count*100))
-        my_file.write('Number of accepted people: %.2f \t' % (accept_people/count))
-        my_file.write('Number of people: %.2f \n' % (num_people/count))
+        occup_value[cnt] = M1/count
+        people_value[cnt] = accept_people/count
+        cnt += 1
 
-        # f.write(str(ratio6/count*100) + '\n')
-    
-    run_time = time.time() - begin_time
-    my_file.write('Total Runtime\t%f\n' % run_time)
-        # print('%.2f' % (ratio1/count*100))
-        # print('%.2f' % (ratio2/count*100))
-        # print('%.2f' % (ratio3/count*100))
-        # print('%.2f' % (ratio4/count*100))
-        # print('%.2f' % (ratio5/count*100))
-        # print('%.2f' % (ratio6/count*100))
-    my_file.close()
+    plt.scatter(t_value, people_value, marker='s', c= "blue")
+    plt.scatter(t_value, occup_value, c= "red")
+    plt.show()
+
 

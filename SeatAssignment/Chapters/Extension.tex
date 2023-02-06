@@ -1,5 +1,7 @@
 % !TEX root = sum1.tex
 
+\section{Extension}
+
 \subsection{Obtain Minimum Number of Rows to Cover Demand}
 
 To find the minimum number of rows to satisfy the demand, we can formulate this problem as a cutting stock problem form and use the column generation method to obtain an approximate solution.
@@ -44,3 +46,13 @@ x_{i k} & \geq 0 \text { and integer } i=1, \ldots, n ; k=1, \ldots, K
 
 $y_k =1$ if line $k$ is used and 0 otherwise, $x_{ik}$ is the number of times group $i$ is placed in row $k$, and $K$ is the upper bound on the number of the rows needed.
 
+
+\subsection{Online booking} 
+
+The groups can select the seats arbitrarily but with some constraints.
+
+When the customers book the tickets, they will be asked how many seats they are going to book at first. Then we give the possible row numbers for their selection. Finally we give the seat number for their choice.
+
+The second step is based on the other choices of reserved groups, we need to check which rows in the seat assignment include the corresponding-size seats.
+
+In third step, we need to check whether the chosen number destroys the pattern of the row. Use subset sum problem to check every position in the row.

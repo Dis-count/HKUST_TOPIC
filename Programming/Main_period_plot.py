@@ -275,10 +275,11 @@ if __name__ == "__main__":
     occup_value = np.zeros(len(period_range))
 
     cnt = 0
+    gap_if = True
     for num_period in period_range:
 
         roll_width = np.ones(given_lines) * 21
-        # total_seat = np.sum(roll_width)
+        total_seat = np.sum(roll_width)
 
         a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
@@ -301,12 +302,18 @@ if __name__ == "__main__":
             M1 += np.dot(multi, a)
             accept_people += optimal
 
-        occup_value[cnt] = M1/count
-        people_value[cnt] = accept_people/count
+        occup_value[cnt] = M1/count/total_seat * 100
+        people_value[cnt] = accept_people/count/total_seat * 100
+        if gap_if:
+            if accept_people/count - M1/count > 1:
+                point = (num_period-1, occup_value[cnt-1])
+                gap_if = False
         cnt += 1
 
-    plt.scatter(t_value, people_value, marker='s', c= "blue")
-    plt.scatter(t_value, occup_value, c= "red")
+    plt.plot(t_value, people_value, 'bs', label='Without social distancing')
+    plt.plot(t_value, occup_value, 'r--', label='With social distancing')
+    plt.xlabel('Periods')
+    plt.ylabel('Percentage of total seats')
+    plt.annotate('Gap', xy = point, xytext=(point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
+    plt.legend()
     plt.show()
-
-

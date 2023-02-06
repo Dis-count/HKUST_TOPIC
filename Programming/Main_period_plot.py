@@ -266,7 +266,8 @@ if __name__ == "__main__":
     period_range = range(10,100,1)
     given_lines = 10
     # np.random.seed(i)
-    probab = [0.25, 0.25, 0.25, 0.25]
+    # probab = [0.25, 0.25, 0.25, 0.25]
+    probab = [0.4, 0.4, 0.1, 0.1]
 
     begin_time = time.time()
 
@@ -305,7 +306,7 @@ if __name__ == "__main__":
         occup_value[cnt] = M1/count/total_seat * 100
         people_value[cnt] = accept_people/count/total_seat * 100
         if gap_if:
-            if accept_people/count - M1/count > 1:
+            if accept_people/count - M1/count > 2:
                 point = (num_period-1, occup_value[cnt-1])
                 gap_if = False
         cnt += 1

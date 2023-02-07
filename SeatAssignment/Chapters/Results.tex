@@ -100,9 +100,11 @@ We can find that the people served by Benders decomposition and IP under nested 
 Discuss the effect of different probabilities.
 $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$
 
-Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$. Notice that different $c$ need different $T$ such that the supply is close to the demand. Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
+Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$. Choose $T(E(D)/c)$ such that the supply is near the demand. 
 
-Thus, we use M6 to compare the number of people served under different values of $c$.
+% Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
+
+Then we use M6 to compare the number of people served under different values of $c$.
 
 Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$. The number of rows is 10, and the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
 
@@ -207,8 +209,8 @@ Results: M1-M6, the number of accepted people, the number of total people.
 We can find that the difference between the number of accepted people and the number of total people will increase with the period. 
 % When the number of periods is small, the seats 
 
-Probability 1: $[0.25, 0.25, 0.25, 0.25]$
-Probability 2: $[0.4, 0.4, 0.1, 0.1]$
+Probability 1: $[0.4, 0.4, 0.1, 0.1]$
+Probability 2: $[0.25, 0.25, 0.25, 0.25]$
 
 \begin{figure}[h]
   \centering
@@ -228,7 +230,7 @@ First stage: the capacity is sufficient. The social distancing will not cause an
 
 Second stage: the gap is becoming larger as $T$ increases. 
 
-Third stage: As $T$ continues to increases, the gap will converge when the capacity is limited.
+Third stage: As $T$ continues to increase, the gap will converge when the capacity is limited.
 
 
 \subsection{Measurement}

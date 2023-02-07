@@ -263,7 +263,7 @@ class CompareMethods:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(10,100,1)
+    period_range = range(30,120,1)
     given_lines = 10
     # np.random.seed(i)
     # probab = [0.25, 0.25, 0.25, 0.25]
@@ -271,7 +271,7 @@ if __name__ == "__main__":
 
     begin_time = time.time()
 
-    t_value = np.arange(10, 100, 1)
+    t_value = np.arange(30, 120, 1)
     people_value = np.zeros(len(period_range))
     occup_value = np.zeros(len(period_range))
 
@@ -305,16 +305,16 @@ if __name__ == "__main__":
 
         occup_value[cnt] = M1/count/total_seat * 100
         people_value[cnt] = accept_people/count/total_seat * 100
-        if gap_if:
-            if accept_people/count - M1/count > 2:
-                point = (num_period-1, occup_value[cnt-1])
-                gap_if = False
+        # if gap_if:
+        #     if accept_people/count - M1/count > 2:
+        #         point = (num_period-1, occup_value[cnt-1])
+        #         gap_if = False
         cnt += 1
 
     plt.plot(t_value, people_value, 'bs', label='Without social distancing')
     plt.plot(t_value, occup_value, 'r--', label='With social distancing')
     plt.xlabel('Periods')
     plt.ylabel('Percentage of total seats')
-    plt.annotate('Gap', xy = point, xytext=(point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
+    # plt.annotate('Gap', xy = point, xytext=(point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
     plt.legend()
     plt.show()

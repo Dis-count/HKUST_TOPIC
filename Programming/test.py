@@ -1,98 +1,68 @@
+import gurobipy as grb
+from gurobipy import GRB
 import numpy as np
-from Method4 import deterministicModel
+from SamplingMethod import samplingmethod
+from Method1 import stochasticModel
+from Method5 import deterministicModel
+from Mist import generate_sequence, decision1
+import copy
+from Mist import decisionSeveral, decisionOnce
+import time
+import matplotlib.pyplot as plt
+# This function call different methods
 
-class FirstComeFirstServe:
-    def __init__(self, I, num_period, roll_width, given_lines) -> None:
-        self.I = I
-        self.num_period = num_period
+
+class deterministicModel:
+    def __init__(self, roll_width, given_lines, demand_width_array, I):
         self.roll_width = roll_width
         self.given_lines = given_lines
-        self.num_seats = roll_width * given_lines
+        self.demand_width_array = demand_width_array
+        self.value_array = demand_width_array
+        self.I = I
 
-    def binary_search_first(self, sequence):
-        # Return the index not less than the first 
-        sequence = [i-1 for i in sequence]
-        target = self.num_seats
-        arr = np.cumsum(sequence) + np.arange(1, self.num_period+1)
-        low = 0
-        high = len(arr)-1
-        res = -1
-        while low <= high:
-            mid = (low + high)//2
-            if target <= arr[mid]:
-                res = mid
-                high = mid-1
-            else:
-                low = mid+1
-        if res == -1:
-            total = sum(sequence)
-            seq = sequence
-        else:
-            total = sum(sequence[0:res])
+    def IP_formulation(self, demand_lower, demand_upper):
+        m = grb.Model()
+        x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.CONTINUOUS)
+        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+                                  for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
+        if sum(demand_upper) != 0:
+            m.addConstrs(grb.quicksum(x[i, j] for j in range(
+                self.given_lines)) <= demand_upper[i] for i in range(self.I))
+        if sum(demand_lower) != 0:
+            m.addConstrs(grb.quicksum(x[i, j] for j in range(
+                self.given_lines)) >= demand_lower[i] for i in range(self.I))
 
-        remaining = target - total
-        if remaining > 0 and res >0:
-            for i in sequence[res:]:
-                if i == remaining-1:
-                    seq = sequence[0:res]+ [i]
-        return seq
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
+            self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
+        m.setParam('OutputFlag', 0)
+        print(f'upper: {demand_upper}')
+        print(f'lower: {demand_lower}')
+        m.optimize()
+        print('************************************************')
+        print('Optimal value of LP is: %g' % m.objVal)
+        x_ij = np.array(m.getAttr('X'))
+        newx = np.reshape(x_ij, (self.I, self.given_lines))
+        newd = np.sum(newx, axis=1)
+        print(newd)
+        return newd, m.objVal
 
-    def seq2demand(self):
-        seq = self.binary_search_first()
-        demand = np.zeros()
-        for x in seq:
-            demand[x-1] += 1
-        return demand
+if __name__ == "__main__":
 
-    def row_by_row(self, sequence):
-        # i is the i-th request in the sequence
-        # j is the j-th row
-        # sequence includes social distance.
-        remaining_capacity = np.zeros(self.given_lines)
-        current_capacity = self.roll_width
-        j = 0
-        period  = 0
-        for i in sequence:
-            if i in remaining_capacity:
-                inx = np.where(remaining_capacity == i)[0][0]
-                remaining_capacity[inx] = 0
+    I = 4  # the number of group types
 
-            if current_capacity[j] > i:
-                current_capacity[j] -= i
-            else:    
-                remaining_capacity[j] = current_capacity[j]
-                j +=1
-                if j > self.given_lines-1:
-                    break
-                current_capacity[j] -= i
-            period +=1
-        
-        lis = [0] * (self.num_period - period)
-        for k, i in enumerate(sequence[period:]):
-            if i in remaining_capacity:
-                inx = np.where(remaining_capacity == i)[0][0]
-                remaining_capacity[inx] = 0
-                lis[k] = 1
-        my_list = [1]* period + lis
-        sequence = [i-1 for i in sequence]
+    given_lines = 10
+    # np.random.seed(i)
+    # probab = [0.25, 0.25, 0.25, 0.25]
+    probab = [0.4, 0.4, 0.1, 0.1]
 
-        final_demand = np.array(sequence) * np.array(my_list)
-        final_demand = final_demand[final_demand != 0]
+    demand_width_array = np.arange(2, 2+I)
 
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
+    roll_width = np.ones(given_lines) * 21
+    total_seat = np.sum(roll_width)
 
-        return demand
+    a_instance = deterministicModel(roll_width, given_lines, demand_width_array, I)
 
-    def offline(self, sequence):
-        # This function is to obtain the optimal decision.
-        demand = np.zeros(self.I)
-        sequence = [i-1 for i in sequence]
-        for i in sequence:
-            demand[i-1] += 1
-        test = deterministicModel(
-            self.roll_width, self.given_lines, self.demand_width_array, self.I)
-        newd, obj = test.IP_formulation(np.zeros(self.I), demand)
+    demand_lower = np.array([24, 28, 8, 9])
+    demand_upper = np.zeros(I)
 
-        return newd
+    a_instance.IP_formulation(demand_lower, demand_upper)

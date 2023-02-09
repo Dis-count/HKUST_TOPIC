@@ -123,7 +123,7 @@ class stochasticModel:
 
         return m.objVal, [m.getVarByName('varx[' + str(i) + ',' + str(j) + ']').x for i in range(self.I) for j in range(self.given_lines)]
 
-    def solveBenders(self, eps=1e-4, maxit=10):
+    def solveBenders(self, eps=1e-4, maxit=20):
 
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0,

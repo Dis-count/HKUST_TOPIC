@@ -9,7 +9,7 @@ from Mist import decisionSeveral, decisionOnce
 from Method1 import stochasticModel
 # This function uses deterministicModel to make several decisions with initial stochastic solution.
 
-class deterministicModel:
+class deterministicModel1:
     def __init__(self, roll_width, given_lines, demand_width_array, I):
         self.roll_width = roll_width
         self.given_lines = given_lines
@@ -32,8 +32,7 @@ class deterministicModel:
             self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
         m.optimize()
-        # print('************************************************')
-        # print('Optimal value of IP is: %g' % m.objVal)
+
         x_ij = np.array(m.getAttr('X'))
         newx = np.reshape(x_ij, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
@@ -93,7 +92,7 @@ if __name__ == "__main__":
 
     mylist = []
     remaining_period0 = number_period
-    deterModel = deterministicModel(
+    deterModel = deterministicModel1(
         roll_width, given_lines, demand_width_array, I)
         
     while remaining_period0:

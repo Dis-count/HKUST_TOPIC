@@ -50,42 +50,46 @@ class CompareMethods:
         # i is the i-th request in the sequence
         # j is the j-th row
         # sequence includes social distance.
-        remaining_capacity = np.zeros(self.given_lines)
         current_capacity = copy.deepcopy(self.roll_width)
         j = 0
-        period  = 0
+        period = 0
         for i in sequence:
-            if i in remaining_capacity:
-                inx = np.where(remaining_capacity == i)[0][0]
-                remaining_capacity[inx] = 0
+            if i in current_capacity:
+                inx = np.where(current_capacity == i)[0][0]
+                current_capacity[inx] = 0
+                period += 1
+                continue
 
-            if current_capacity[j] > i:
+            if current_capacity[j] >= i:
                 current_capacity[j] -= i
-            else:    
-                remaining_capacity[j] = current_capacity[j]
-                j +=1
+            else:
+                j += 1
                 if j > self.given_lines-1:
                     break
                 current_capacity[j] -= i
-            period +=1
-        
+            period += 1
+
         lis = [0] * (self.num_period - period)
         for k, i in enumerate(sequence[period:]):
-            if i in remaining_capacity:
-                inx = np.where(remaining_capacity == i)[0][0]
-                remaining_capacity[inx] = 0
+            if i in current_capacity:
+                inx = np.where(current_capacity == i)[0][0]
+                current_capacity[inx] = 0
+
                 lis[k] = 1
-        my_list111 = [1]* period + lis
+
+        my_list111 = [1] * period + lis
         sequence = [i-1 for i in sequence]
 
         final_demand = np.array(sequence) * np.array(my_list111)
         final_demand = final_demand[final_demand != 0]
+
 
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
 
         return demand
+
 
     def binary_search_first(self, sequence):
         # Return the index not less than the first
@@ -316,10 +320,8 @@ if __name__ == "__main__":
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
     for probab in p:
-
         my_file.write('probabilities: \t' + str(probab) + '\n')
         # probab = [0.3, 0.5, 0.1, 0.1]
-
         roll_width = np.ones(given_lines) * 21
         # total_seat = np.sum(roll_width)
 
@@ -355,7 +357,6 @@ if __name__ == "__main__":
             seq = a_instance.binary_search_first(sequence)
 
             g = a_instance.offline(seq)
-
             # ratio1 += (np.dot(multi, a)-baseline)/ baseline
 
             ratio1 += np.dot(multi, a) / optimal

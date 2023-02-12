@@ -57,6 +57,13 @@ The second step is based on the other choices of reserved groups, we need to che
 
 In third step, we need to check whether the chosen number destroys the pattern of the row. Use subset sum problem to check every position in the row.
 
+\subsubsection{Mapping Sequences to Scenarios by Continuous Time}
+
+When the time is continuous, we only need to count the number of different group types, the method will be the same.
+
+For the nonhomogeneous Poisson process, $N_{i}(T) \sim Poisson (\int_0^{T} p_i(s)\lambda(s) \mathrm{d} s)$. If the Poisson process is homogeneous, $N_{i} \sim Poisson(\lambda p_i T)$ during the interval $[0, T]$. Then for a realization of the Poisson process, we can still apply the method in Section \ref{MappingSeq}.
+
+
 \subsection{How to give a balanced seat assignment}
 
 Notice we only give the solution of how to assign seats for each row, but the order is not fixed.

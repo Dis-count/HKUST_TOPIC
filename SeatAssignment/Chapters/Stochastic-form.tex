@@ -75,7 +75,9 @@ $\mathbf{y}_{s}^{+}=\left[\begin{array}{lllll}y_{1 s}^{+} & y_{2 s}^{+} & \cdots
 
 As we can find, this formulation is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. Thus, we need to reformulate the problem and use a decomposition method.
 
-\subsection{Solve The Second Stage Problem}
+\subsection{Solve The Two-stage Problem by Benders Decomposition}
+
+\subsubsection{Solve The Second Stage Problem}
 
 Let $c{'}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^m (s_i-1) x_{ij}$, $f{'}y_{\omega} = -\left((s_1-1)y_{1 \omega}^{+} + \sum_{i=2}^{m}(s_{i}-s_{i-1}) y_{i \omega}^{+}\right)$. The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$.
 
@@ -189,7 +191,7 @@ We can use the forward method, starting from $\alpha_{1 \omega}$ to $\alpha_{m \
 
 The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and this value will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
 
-\subsection{Solve The Two-stage Problem by Benders Decomposition}
+\subsubsection{Delayed Constraint Generation}
 
 Let $z_{\omega}(x)$ be the upper bound of $z_{\omega}$ such that $(\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}$, which is the optimality cut.
 

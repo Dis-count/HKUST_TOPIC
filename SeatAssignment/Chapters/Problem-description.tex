@@ -55,19 +55,19 @@ If the ratio is the same for the groups, IP will use more branching to obtain an
 \subsection{Property}
 Although the solver can solve this problem easily, the analyses on the property of the solution to this problem can help us generate a method for the dynamic situation. 
 
-At first, we consider the types of pattern, which refers to the seat assignment for each row. For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left seat, respectively. Denote by $l(k) = \alpha_k + \beta_k$ the loss for pattern $k$.
+At first, we consider the types of pattern, which refers to the seat assignment for each row. For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left seat, respectively. Denote by $l(k) = \alpha_k + \beta_k -1$ the loss for pattern $k$. The loss represents the number of people lost compared to the situation without social distancing.
 
 Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. We use the descending form $(t_1, t_2, \ldots, t_k)$ to represent a pattern, where $t_i$ is the new group size. 
 
 \begin{example}\label{ex_largest}
-  The length of one row is $S = 21$ and the new size of groups be $L = [2, 3, 4, 5]$. Then these patterns, $(5, 5, 5, 5, 1),(5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. The demand is $[10, 12, 9, 8]$.
+  The length of one row is $S = 21$ and the new size of groups be $L = [2, 3, 4, 5]$. Then these patterns, $(5, 5, 5, 5, 1),(5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. The demand is $[10, 12, 9, 8]_d$.
 \end{example}
 
 To represent a pattern with a fixed length of form, we can use a $(m+1)-$dimensional vector with $m$ group types. The aggregated form can be expressed as $[n_0, n_1, \ldots, n_m]$, where $n_i$ is the number of $i$-th group type, $i=1,\ldots,m$. 
 $n_0$ is the number of left seat, its value can only be $0, 1$ because two or more left seats will be assigned to groups. Thus the pattern, $[1, 0, 0, 0, 4]$, is not full because there is one left seat.
 
 Suppose $u$ is the size of the largest group allowed, all possible seats can be assigned are the consecutive integers from 2 to $u$, i.e., $[2,3,\ldots,u]$.
-Then we can use the following greedy way to generate the largest pattern. Select the maximal group size,$u$, as many as possible and the left space is assigned to the group with the corresponding size. Let $S = u\cdot q + r$, where $q$ is the number of times $u$ selected. When $r>0$, there are $d[0][u-r][q+1]$ largest patterns with the same loss of $q+1$. When $r =0$, there is only one possible largest pattern.
+Then we can use the following greedy way to generate the largest pattern. Select the maximal group size,$u$, as many as possible and the left space is assigned to the group with the corresponding size. Let $S = u\cdot q + r$, where $q$ is the number of times $u$ selected. When $r>0$, there are $d[0][u-r][q+1]$ largest patterns with the same loss of $q$. When $r =0$, there is only one possible largest pattern.
 
 Use dynamic programming to solve. $d[k][i][j]$ indicates the number of assignment of using $i$ capacity to allocate $j$ units, $k$ is the number of capacity allocated on the last unit. In our case, $u-r$ is the capacity need to be allocated, $q+1$ is the number of units which corresponds to the groups. Notice that we only consider the number of combinations, so we fix the allocation in ascending order, which means the allocation in current unit should be no less than the last unit.  
 

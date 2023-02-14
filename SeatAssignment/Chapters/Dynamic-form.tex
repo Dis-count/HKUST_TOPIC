@@ -199,6 +199,8 @@ There are two methods to achieve this goal.
 
 First, we can generate patterns planning according to the stochastic information. Calculate the maximal supply from the mean demand. The supply gives the number of patterns with different losses, then we prepare the corresponding pattern planning for each row. In each period, every group will be assigned according to the designated row as long as the capacity allows. 
 
+The number of combinations is large.
+
 The second one is named seat row selection method which is based on stochastic seat assignment method. The inital supply is obtained from stochastic model, then update the supply from deterministic model after the first period. After accepting one group, we update the accepted demand and remaining seats. The policy follows section \ref{nested_policy}.
 
 
@@ -221,7 +223,7 @@ The relation between the situations and the methods is showed in the following t
   \hline
    & With stochastic information & Without stochastic information \\
   \hline
-  With row selection    & patterns planning/seat row selection & FCFS/largest patterns planning \\
+  With row selection    & seat row selection & FCFS(full patterns planning) \\
   \hline
   Without seat selection & DP-based & FCFS-based \\
   \hline

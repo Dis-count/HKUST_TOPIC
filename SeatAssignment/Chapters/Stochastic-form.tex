@@ -291,9 +291,8 @@ We show the results of Benders and IP in the section \ref{Bender_IP}.
 
 \subsection{Obtain The Near-optimal Seat Assignment}
 
-The stochastic model only gives the maximal people that can be served, not the optimal seat assignment. It will not give an appropriate solution when the number of arriving people of the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
-
-We make the following changes to obtain the near-optimal seat assignment in the once-decision method.
+The stochastic model only gives a fractional solution; its objective is to obtain the maximal number of people that can be served, not the optimal seat assignment. It will not give an appropriate solution when the number of arriving people of the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
+Thus, we make some changes to obtain the near-optimal seat assignment.
 
 Before that, we give the deterministic model with a lower bound and upper bound of demand as below,
 \begin{equation}\label{deter_lower_upper}
@@ -309,7 +308,7 @@ Before that, we give the deterministic model with a lower bound and upper bound 
 $d_{i}^{l}$ is the lower bound of the demand. (It can be the number of group type $i$ we have accepted.)
 $d_{i}^{u}$ is the upper bound of the demand.  
 
-When the lower/upper bound is not needed, the corresponding constraints can be removed. The solver can solve this deterministic formulation with bounds quickly.
+When the lower or upper bound is not needed, the corresponding constraints can be removed. This deterministic formulation with bounds can be solved quickly because of the monotone ratio.
 
 
 % Firstly, we obtain the solution from stochatic programming. This solution corresponds to a supply for each group type. Then solve the deterministic model by setting the supply as the upper bound of demand to obtain another feasible supply. Finally, solve the deterministic model by setting this supply as the lower bound to obtain the seat assignment.

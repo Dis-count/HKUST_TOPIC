@@ -1,14 +1,7 @@
 import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
-from SamplingMethod import samplingmethod
-from Method1 import stochasticModel
-from Method5 import deterministicModel
-from Mist import generate_sequence, decision1
-import copy
-from Mist import decisionSeveral, decisionOnce
-import time
-import matplotlib.pyplot as plt
+
 # This function call different methods
 
 
@@ -22,7 +15,7 @@ class deterministicModel:
 
     def IP_formulation(self, demand_lower, demand_upper):
         m = grb.Model()
-        x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.CONTINUOUS)
+        x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         if sum(demand_upper) != 0:
@@ -34,7 +27,7 @@ class deterministicModel:
 
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
             self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
-        m.setParam('OutputFlag', 0)
+        # m.setParam('OutputFlag', 0)
         print(f'upper: {demand_upper}')
         print(f'lower: {demand_lower}')
         m.optimize()

@@ -39,7 +39,7 @@ To accommodate as many as people possible in the fixed rows, the IP formulation 
       \max \quad & \sum_{j =1}^{N} \sum_{i = 1}^{m} (s_i -1) x_{ij} \\
       \text {s.t.} \quad & \sum_{i = 1}^{m} s_i x_{ij} \leq L_{j}, j=1,\ldots,N \\
       & \sum_{j =1}^{N} x_{ij} \leq d_{i}, i=1,\ldots,m \\
-      & x_{ij} \geq 0, i=1,\ldots,m, j=1,\ldots,N.
+      & x_{ij} \geq 0, \text{integer}~ i=1,\ldots,m, j=1,\ldots,N.
     \end{aligned}
 \end{equation}
 
@@ -47,10 +47,13 @@ $m$ indicates the number of group types. $x_{ij}$ indicates the number of group 
 
 Why is it easy to solve this IP?
 
-Because the ratio of value to capacity is monotone for the size of groups.
+Because the ratio of value to capacity is monotone for the size of groups, when the capacity allows accepting the groups from large to small as many as possible will give an optimal solution.
 
-If the ratio is the same for the groups, IP will use more branching to obtain an optimal solution.
+If the ratio is the same for the groups, IP will use more branches to obtain an optimal solution.
 
+$[24,28,8,9]$ 10 rows.
+
+Total loss: 60; loss of the largest pattern: 5.
 
 \subsection{Property}
 Although the solver can solve this problem easily, the analyses on the property of the solution to this problem can help us generate a method for the dynamic situation. 
@@ -77,7 +80,8 @@ The recurrence relation is $d[k][i][j] = \sum_{t=k}^{i-k} d[t][i-k][j-1]$.
 When $i < k$, $d[k][i][j] =0$; when $i \geq k$, $d[k][i][1] =1$.
 
 \begin{lem}
-If all patterns associated with an integral feasible solution belong to $I_1$, then this solution is optimal.
+% If all patterns associated with an integral feasible solution belong to $I_1$, then this solution is optimal.
+The seat assignment made up of the largest patterns is optimal.
 \end{lem}
 
 This lemma holds because we cannot find a better solution occupying more seats.
@@ -90,7 +94,7 @@ When the demand is so large that the largest patterns can be generated in all ro
   $N$ is the number of rows, $d_i$ is the number of $i$-th group type, $i = 1,2,\ldots, m$, $b_i^k$ is the number of group type $i$ placed in pattern $k$.
 \end{prop}
 
-Use the above example \ref{ex_largest} to explain. Take $(5,5,5,5), (5,4,4,4,4), (5,5,4,4,3)$ as the alternative patterns, denoted by pattern $1, 2, 3$ respectively. When $k = 1,2,3$. $\min_{i} \{\lfloor \frac{d_i}{b_i^k}\rfloor\}$ will be $2,3,5$, thus $k^{*}= 3$. So when $N \leq 5$, we can always select the pattern $(5,5,4,4,3)$ five times to construct the optimal seat assignment.
+Use the above example \ref{ex_largest} to explain. Take $(5,5,5,5), (5,4,4,4,4), (5,5,4,4,3)$ as the alternative patterns, denoted by pattern $1, 2, 3$ respectively. When $k = 1,2,3$, $\min_{i} \{\lfloor \frac{d_i}{b_i^k}\rfloor\}$ will be $2,3,5$, thus $k^{*}= 3$. So when $N \leq 5$, we can select the pattern $(5,5,4,4,3)$ five times to construct the optimal seat assignment.
 
 \begin{prop}\label{prop_I_2}
   We can construct a seat assignment in the following way. Every time we can select one pattern from $I_1$, then minus the corresponding number of group types from demand and update demand. Repeat this procedure until we cannot generate a largest pattern. If the number of generated patterns is no less than the number of rows, this assignment is optimal.

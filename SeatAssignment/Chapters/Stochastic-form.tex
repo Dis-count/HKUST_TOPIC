@@ -1,24 +1,26 @@
 % !TEX root = ./sum1.tex
 \section{Stochastic Demands Situation}
 
+As mentioned earlier, the objective is to give a seat assignment that can accept as many groups as possible. We develop stochastic programming by the scenarios modeling demand uncertainty.
+
 \subsection{Two-stage Scenario-based Stochastic Programming}
 
-Consider the decision maker who has to act in two consecutive stages. The first stage involves the initial seat assignment denoted by decision vector $\mathbf{x}$. At the second stage, some new information about demands is obtained, then a new vector $\mathbf{y}$ of decisions is to be chosen.
+Consider the decision maker who has to act in two consecutive stages. The first stage involves the initial seat assignment denoted by decision vector $\mathbf{x}$. In the second stage, some new information about demands is obtained, then a new vector $\mathbf{y}$ of decisions is to be chosen.
 
-$\mathbf{x} \in \mathbb{Z}_{+}^{n}$ is the vector of first-stage scenario-independent decision variables, each component $x_k$ stands for the pattern $k$.
+$\mathbf{x} \in \mathbb{Z}_{+}^{n}$ is the vector of first-stage scenario-independent decision variables, and each component $x_k$ stands for the pattern $k$.
 
 Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega=\{1,2,\ldots,S\}$ corresponds to a particular realization of the demand vector, $\mathbf{D}_s = (d_{1s},d_{2s},\ldots,d_{ms})$.
 
 $\mathbf{y} \in \mathbb{Z}_{+}^{m}$ is the vector of second-stage scenario-dependent decision variables, which include the number of holding groups, $y_{i \omega}^{+}$, when the supply overestimates the actual demand and the number of short groups, $y_{i \omega}^{-}$, when the supply understimates the actual demand for group type $i$ in scenario $\omega$.
 
 
-Regarding the nature of the obtained information, we assume that there are $S$ possible scenarios, and that the true scenario is only revealed after $\mathbf{x}$ is chosen. 
+Regarding the nature of the obtained information, we assume that there are $S$ possible scenarios and that the true scenario is only revealed after $\mathbf{x}$ is chosen. 
 
-Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. We use the same definition as above, the size of group type $i$, $s_i$.
+Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. We use the exact definition above, the size of group type $i$, $s_i$.
 
 % The assignment will be determined before the realization of the random demand, here-and-now policy.
 
-Considering that the seats assigned to some group type can be taken by the smaller group type, we assume that the holding group type $i$ can be utilized by the smaller group type $j = i-1$. Then we have the following scenario-based optimization problem:
+Considering that the smaller group type can take the seats assigned to some group type, we assume that the holding group type $i$ can be utilized by the smaller group type $j = i-1$. Then we have the following scenario-based optimization problem:
 
 \begin{equation}\label{sto_form}
     \begin{aligned}
@@ -94,7 +96,7 @@ Once $x$ is fixed, the optimal second stage decision $y_{\omega}$ can be determi
 
 Let $z_{\omega}(x)$ be the optimal value of the problem \eqref{BD_sub}, together with the convention $z_{\omega}(x) = \infty$ if the problem is infeasible. 
 
-Now go back to consider the optimization of $x$, we are faced with the problem:
+Now go back to consider the optimization of $x$, we have the problem:
 
 \begin{equation}\label{BD_master}
   \begin{aligned}
@@ -104,7 +106,7 @@ Now go back to consider the optimization of $x$, we are faced with the problem:
   \end{aligned}
 \end{equation}
 
-In order to solve this problem, we should only consider those $x$ for which $z_{\omega}(x)$ are all finite. Notice that the feasible region of the dual of problem \eqref{BD_sub} does not depend on $x$. We can form its dual, which is 
+To solve this problem, we should only consider that $x$ for which $z_{\omega}(x)$ are all finite. Notice that the feasible region of the dual of problem \eqref{BD_sub} does not depend on $x$. We can form its dual problem, which is 
 
 \begin{equation}\label{BD_sub_dual}
   \begin{aligned}
@@ -182,18 +184,19 @@ $d_{i \omega} > d_{i 0} \Rightarrow y_{i \omega}^{-} >0$, then $\alpha_{i \omega
 
 When $d_{i \omega} = d_{i 0}$,  we can find that $\alpha_{i \omega} = \alpha_{i-1, \omega} + 1$ will minimize the objective function.
 
-Let $\Delta d = d_{\omega} - d_0$, then the elements in $\Delta d$ will be negative integer, positive integer and zero. The value of $\alpha$ associated with zero will not affect objective function directly, only affect the value of $\alpha$ associated with negative integer. The larger the value of $\alpha$ associated with negative integer is, the smaller the objective function will be. Thus, let $\alpha_{i \omega} = \alpha_{i-1, \omega} + 1$ when $d_{i \omega} = d_{i 0}$ can obtain the minimized objective function.
+Let $\Delta d = d_{\omega} - d_0$, then the elements in $\Delta d$ will be a negative integer, positive integer and zero. The value of $\alpha$ associated with zero will not directly affect the objective function, only the value of $\alpha$ associated with a negative integer. The larger the value of $\alpha$ associated with a negative integer is, the smaller the objective function will be. Thus, let $\alpha_{i \omega} = \alpha_{i-1, \omega} + 1$ when $d_{i \omega} = d_{i 0}$ can obtain the minimized objective function.
 \qed
 \end{pf}
 
-We can use the forward method, starting from $\alpha_{1 \omega}$ to $\alpha_{m \omega}$, to obtain the value of $\alpha_{\omega}$ rather than solving a linear programming.
+We can use the forward method, calculating from $\alpha_{1 \omega}$ to $\alpha_{m \omega}$, to obtain the value of $\alpha_{\omega}$ rather than solving linear programming.
 
 
-The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and this value will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
+The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
+
 
 \subsubsection{Delayed Constraint Generation}
 
-Let $z_{\omega}(x)$ be the upper bound of $z_{\omega}$ such that $(\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}$, which is the optimality cut.
+Let $z_{\omega}$ be the lower bound of $z_{\omega}(x)$ such that $(\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}$, which is the optimality cut.
 
 Use the characterization of $z_{\omega}(x)$ in the problem 
 \eqref{BD_master}, and take into account the optimality condition, we can conclude the master problem \eqref{BD_master} will have the form:
@@ -255,7 +258,7 @@ According to theorem \ref{optimal_sol_sub_dual}, we can obtain the optimal solut
 Notice that $(x_0, z_{\omega}^{0})$ is a feasible solution ($c{'} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is the lower bound) when the extreme points are $\alpha_{\omega}$. The problem \eqref{lemma_eq} associated with $\alpha_{\omega}$ will give an optimal solution $(x_1, z_{\omega}^{1})$. (Upper bound)
 
 
-The steps of the algorithm can be described as below,
+We can describe the steps of the algorithm below,
 
 \begin{algorithm}[H]\label{cut_algo}
   \caption{The benders decomposition algorithm}
@@ -291,7 +294,7 @@ We show the results of Benders and IP in the section \ref{Bender_IP}.
 
 \subsection{Obtain The Near-optimal Seat Assignment}
 
-The stochastic model only gives a fractional solution; its objective is to obtain the maximal number of people that can be served, not the optimal seat assignment. It will not give an appropriate solution when the number of arriving people of the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
+The stochastic model only gives a fractional solution; its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 Thus, we make some changes to obtain the near-optimal seat assignment.
 
 Before that, we give the deterministic model with a lower bound and upper bound of demand as below,
@@ -308,7 +311,7 @@ Before that, we give the deterministic model with a lower bound and upper bound 
 $d_{i}^{l}$ is the lower bound of the demand. (It can be the number of group type $i$ we have accepted.)
 $d_{i}^{u}$ is the upper bound of the demand.  
 
-When the lower or upper bound is not needed, the corresponding constraints can be removed. This deterministic formulation with bounds can be solved quickly because of the monotone ratio.
+The corresponding constraints can be removed when the lower or upper bound is not needed. The solver can quickly solve this deterministic formulation with lower or upper bound because of the monotone ratio.
 
 
 % Firstly, we obtain the solution from stochatic programming. This solution corresponds to a supply for each group type. Then solve the deterministic model by setting the supply as the upper bound of demand to obtain another feasible supply. Finally, solve the deterministic model by setting this supply as the lower bound to obtain the seat assignment.
@@ -330,7 +333,7 @@ When the lower or upper bound is not needed, the corresponding constraints can b
   \end{algorithm}
 
 \begin{remark}
-  Step 3 can give a feasible integer supply. Then problem \eqref{deter_lower_upper} with this supply as the lower bound can always give a integer solution.  
+  Step 3 can give a feasible integer supply. Then problem \eqref{deter_lower_upper} with this supply as the lower bound can always give an integer solution.  
   Thus, we can obtain the near-optimal seat assignment by setting the upper and lower bound alternately.
 \end{remark}
 

@@ -3,83 +3,41 @@
 
 We also study the dynamic seating plan problem, which is more suitable for commercial use. In this situation, customers come dynamically, and the seating plan needs to be made without knowing the number and composition of future customers. 
 
-It becomes a sequential stochastic optimization problem where conventional methods fall into the curse of dimensionality due to many seating plan combinations. To avoid this complexity, we develop an approach that aims directly at the final seating plans. Specifically, we define the concept of target seating plans deemed satisfactory. In making the dynamic seating plan, we will try to maintain the possibility of achieving one of the target seating plans as much as possible.
+It becomes a sequential stochastic optimization problem where conventional methods fall into the curse of dimensionality due to many seating plan combinations. To avoid this complexity, we develop an approach that aims directly at the final seating plans. As stated above, we can obtain such a seating plan from stochastic programming. However, it only gives the initial seat assignment without handling the dynamic situation. To further know how to make decisions when the group arrives dynamically, we discuss three different dynamic situations in the following section. 
+
+% Specifically, we define the concept of target seating plans deemed satisfactory. In making the dynamic seating plan, we will try to maintain the possibility of achieving one of the target seating plans as much as possible.
 
 \subsection{Dynamic Demand Situations}
-We consider the following dynamic demand situations, ticket reservation without seat selection, ticket reservation with row selection and seat assignment before arrival.
+Generally speaking, there are two ways to purchase tickets for concerts or movies: no seat selection when booking and seat selection when booking. We consider the following dynamic demand situations, ticket reservation without seat selection and seat assignment before arrival. % ticket reservation with row selection
 
-For reservations without seat selection, the seat assignment will not be made immediately, we only need to reject or accept each request during the making-reservation stage. After the reservation deadline, the seat assignment will be given to the groups when they check in. For example, some theaters only provide seat reservations for the audience.
-
-For reservation with row selection, the seat assignment will be arranged before the arrival of groups, the groups only need to find the corresponding-size seats. For example, the concerts will allow people to choose the section and row when making the reservation.
-
-For seat assignment before arrival, the movie halls can seal the empty seats to prevent people from taking seats. The prior measure can satisfy the requirement of social distancing. It can also save costs without changing seat allocation.
-
-% And seat assignment could be remained in one day because the same film genre will attract the same feature of different group types.
-
-\subsection{Dynamic Situations without Stochastic Information}
-
-% Partially dynamic: at the beginning stage, the capacity is sufficient, thus we will accept all arrivals. 
-% Multiple planning approach 
-Suppose that we don't know the stochastic information, we can use FCFS, FCFS-based, largest patterns planning methods for the above three situations respectively. 
-
-\subsubsection{FCFS}
-The intuitive but trivial method will be first-come-first-served. Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in that row immediately. We check each request until the capacity is used up. We set this method as the benchmark.
+Since singing concert venues have more seats and higher demand for tickets, organizers usually do not take the approach of determining the seats at the time of booking, but only provide the seat sections that can be selected at the time of booking or simply do not provide seat information, and then inform customers of the seat information after the overall seat layout is determined. Movie theaters or small concert, however, have relatively few seats, the attendance rate is usually low enough to allow free selection of seats directly online.
 
 
-\subsubsection{FCFS-based}\label{FCFS-based}
+For reservations without seat selection, the seat assignment will not be made immediately, decision-maker only needs to reject or accept each request during the making-reservation stage. After the reservation deadline, the seat layout information will be informed to the customers before admission. 
+(Row/second selection for extention)
+% For example, some theaters only provide seat reservations for the audience.
 
-The method is based on first-come-first-served. Relax all rows to one row with the total number of seats. For the arrival sequence, find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity. And use the nested policy to accept or reject one group in the remaining arrivals. Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. For the convenience of calculation, we check the feasibility of constructing a seat assignment from the end of the sub-sequence. When it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until a feasible seat assignment is found. In reality, we need to check the feasibility one group by one. 
+For seat assignment before arrival, the specific procedure will be changed under the requirement of social distancing. The seat assignment will be arranged when the groups book the tickets, the groups only need to find the corresponding-size seats when accepting services. For example, the prior seat planning can satisfy the requirement of social distancing and also save costs without changing seat allocation. The seat assignment could be remained in one day because the same film genre will attract the same feature of different group types.
+(Online for extention)
+% , the movie halls can seal the empty seats to prevent people from taking seats.
 
-\subsubsection{Largest Patterns Planning}\label{largest_pattern}
-For each row, we choose the patterns from $I_1$. Accept the group such that the largest pattern can be maintained. When the arrival cannot be assigned in the planning patterns from $I_1$, we can change the largest pattern to a second largest pattern according to the coming arrival.
+% For reservation with row selection, 
+% the concerts will allow people to choose the section and row when making the reservation.
+% 根據客戶交易的日期及時間以先後次序分配，不設自行選擇座位
+% 预订票指的是，第一类，预订门票并付完款之后，无需选座，大麦网会按照付款先后顺序配送门票；第二类，预订门票并付完款之后，需要选座的场次，大麦也会提前短信通知您所在分组的选座时间，准时参加即可
 
+% https://zhuanlan.zhihu.com/p/39125507
+% 优先购票  公开发售
+% 由于位置必须相连，相连座位门票一般会比单张门票位置稍差，如果是单人购票，建议把相连座位的勾去掉，这样系统会按从近到远的顺序自动为你筛选出较近的门票。
 
-% There is a reservation stage, we only decide to accept or reject.
-% After certain periods, there is a seat selection stage.
-
-
-
-% Or use partial static information to estimate the probabilities, then generate new plannings.
-
-% Multiple scenario approach:
-% Suppose that we know the probabilities, we can use the sampling demands to estimate which patterns we should use. For example, three rows with $I_1$, seven rows with $I_2$. For each arrival, if there exists one scenario containing this group, we accept it; otherwise we use nested policy to accept or reject it.
-
-\begin{algorithm}[H]\label{algo_largest}
-  \caption{Method by using the largest patterns}
-  \begin{description}
-    \item[Step 1.] Generate the largest pattern by the greedy way for each row.
-    \item[Step 2.] Denote the minimal and maximal size of group in the pattern of row $i$ as $\min_i$ and $\max_i$. 
-    \item[Step 3.] For the arrival with the size of $a$ in period $t$, if there exists $i$ such that $\min_i + \max_i >= a$ and $a > \min_i$, accept this arrival at row $i$ and go to step 5; otherwise, go to step 4.
-    \item[Step 4.] Use the information of realized arrivals to make the decision.
-    \item[Step 5.] Move to the next period. Repeat step 3. 
-  \end{description}
-\end{algorithm}
-
-Step 2: the pattern will have the same loss by these procedures. ($\min_i$ can be 0.)
-Step 4: we can use the partial information.
-
-\begin{lem}
-  Any largest patterns can be generated by the largest pattern constructed from the greedy method.
-\end{lem}
-
-This method can be used without stochastic information. The performance will improve when the total demand can construct the largest patterns for all rows.
-
-
-\subsection{Generate Scenarios with Stochastic Information}\label{MappingSeq}
-
-At first, we can use the stochastic information to generate scenarios.
-
-% Fix the supply of this group size, and continue this procedure.  
-
-% If groups arrive randomly, the procedure will be similar. 
+%  为了公平 分阶段 
 
 % We don't care about the arrival sequence; only the number of groups matters. Because as long as the approximation about the number of groups is accurate, we can handle any sequence.
 
-\subsubsection{Mapping sequences to scenarios by discrete periods}
+% \subsection{Generate Scenarios with Stochastic Information}
 
-Notice that this approach still works under the assumption that time is continuous.
-
-Suppose there are $T$ independent periods; at most one group will arrive in each period.
+\subsection{Mapping sequences to scenarios by discrete periods}\label{MappingSeq}
+We can use the stochastic information to generate scenarios integrated from sequences. Suppose there are $T$ independent periods; at most one group will arrive in each period.
 
 There are $J$ different group types(including the group with no people). Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = j) = p_j$, $j = 0,1,\ldots,J-1$ and $\sum_{j} p_{j} =1$. Then a sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. (It can be modeled as a multinomial distribution, $p(\mathbf{Y} \mid \mathbf{p})=\prod_{j=0}^{J-1} p_j N_j$).
 
@@ -101,12 +59,11 @@ $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$.
 The number of scenarios is too large to enumerate all possible cases.
 Thus, we choose to sample some sequences from the multinomial distribution.
 
-
+Remark: this approach still works under the assumption that time is continuous.
 % Example:
 % The group types are $[2,3,4,5]$. The number of periods is $20$. The number of given rows is 4 and the number of seats is 22.
 % Each group arrives with the same probability.
 % The number of sequences generating from multinomial distribution is $1000$. Then, we can obtain $[0,3,6,11]$ from stochastic programming. When the number of sequences is 5000, we still obtain $[0,3,6,11]$. It shows that sampling is practical.
-
 
 \subsection{Nested Policy with Given Supply}\label{nested_policy}
 % Recall that the stochastic programming only considers the situation that small-size groups can use the surplus large-size seats.
@@ -146,7 +103,7 @@ The algorithm is shown below:
     \item[Step 1.] Obtain a supply, $\X^{0} = [x_1,\ldots,x_{J}]$, from the stochastic programming.
     \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
     \item[Step 3.] If $x_{i} = 0$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, accpect group type $i$. Set $x_{j^{*}} = x_{j^{*}} -1$. Let $x_{j-i-1} = x_{j-i-1} + 1$ when $j-i-1>0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
-    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2.
+    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
 
@@ -160,6 +117,7 @@ The algorithm is shown below:
 % $\mathbf{x}$ is the remaining supply right now.
 
 We show the results of Benders and IP under nested policy in section \ref{Bender_IP}.
+
 
 \subsection{Dynamic Situation with Stochastic Information}
 In this section, we will present methods to assign seats with stochastic information.
@@ -194,43 +152,65 @@ The stochastic seat assignment(SSA) method can give a seat assignment before the
 % Then use Algorithm \ref{algo_nested_policy} to make the decision.
 
 
-\subsubsection{Ticket Reservation with Row Selection}
-There are two methods to achieve this goal.
+% \subsubsection{Ticket Reservation with Row Selection}
+% There are two methods to achieve this goal.
 
-First, we can generate patterns planning according to stochastic information. Calculate the maximal supply from the mean demand. The supply gives the number of patterns with different losses; then we prepare the corresponding pattern planning for each row. Every group will be assigned in each period according to the designated row as long as the capacity allows. 
+% First, we can generate patterns planning according to stochastic information. Calculate the maximal supply from the mean demand. The supply gives the number of patterns with different losses; then we prepare the corresponding pattern planning for each row. Every group will be assigned in each period according to the designated row as long as the capacity allows. 
 
-The number of combinations is enormous.
+% The number of combinations is enormous.
 
-The second one is named the seat row selection method based on the stochastic seat assignment method. The initial supply is obtained from the stochastic model, then update the supply from the deterministic model after the first period. After accepting one group, we update the accepted demand and remaining seats. The policy follows section \ref{nested_policy}.
+% The second one is named the seat row selection method based on the stochastic seat assignment method. The initial supply is obtained from the stochastic model, then update the supply from the deterministic model after the first period. After accepting one group, we update the accepted demand and remaining seats. The policy follows section \ref{nested_policy}.
 
 
 % Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
 
-% we can use a buffer to contain the accpected groups, when the groups can be assigned to a full row, then remove them from the buffer. 
-
-% In fact, direct DP will have a gap, we should use a buffer to improve this method.
-
-% For example, the number of seats for 10 rows is 21. The demand is $[1,2,41,16]$. The optimal assignment is $[0, 0, 40, 10]$. But DP will give $[0, 0, 35, 14]$.
-
-% When a full pattern is reached, then delete the related groups and the row. Update the remaining demand.
 
 
-The relation between the situations and the methods is showed in the following table:
-\begin{table}[ht]
-  \centering
-  \caption{Different situations and the corresponding methods}
-  \begin{tabular}{|l|l|l|}
-  \hline
-   & With stochastic information & Without stochastic information \\
-  \hline
-  With row selection    & seat row selection & FCFS(full patterns planning) \\
-  \hline
-  Without seat selection & DP-based & FCFS-based \\
-  \hline
-  Seat assignment before arrivals & stochastic seat assignment & largest patterns planning \\
-  \hline
-  \end{tabular}
-\end{table}
+% Partially dynamic: at the beginning stage, the capacity is sufficient, thus we will accept all arrivals. 
+% Multiple planning approach 
+
+\subsection{Benchmark}
+ 
+The benchmarks for the above two situations are described below.
+
+\subsubsection{FCFS}\label{FCFS-based}
+For ticket reservation without seat selection, the intuitive but trivial method will be on a first-come-first-served basis. Relax all rows to one row with the total number of seats. For the arrival sequence, find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity. And use the nested policy to accept or reject one group in the remaining arrivals. Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. For the convenience of calculation, we check the feasibility of constructing a seat assignment from the end of the sub-sequence. When it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until a feasible seat assignment is found. In reality, we need to check the feasibility one group by one. 
+
+% Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in that row immediately. We check each request until the capacity is used up. 
+
+
+\subsubsection{Largest Patterns Planning}\label{largest_pattern}
+For each row, we choose the patterns from $I_1$. Accept the group such that the largest pattern can be maintained. When the arrival cannot be assigned in the planning patterns from $I_1$, we can change the largest pattern to a second largest pattern according to the coming arrival.
+
+
+% There is a reservation stage, we only decide to accept or reject.
+% After certain periods, there is a seat selection stage.
+
+% Or use partial static information to estimate the probabilities, then generate new plannings.
+
+% Multiple scenario approach:
+% Suppose that we know the probabilities, we can use the sampling demands to estimate which patterns we should use. For example, three rows with $I_1$, seven rows with $I_2$. For each arrival, if there exists one scenario containing this group, we accept it; otherwise we use nested policy to accept or reject it.
+
+\begin{algorithm}[H]\label{algo_largest}
+  \caption{Method by using the largest patterns}
+  \begin{description}
+    \item[Step 1.] Generate the largest pattern by the greedy way for each row.
+    \item[Step 2.] Denote the minimal and maximal size of group in the pattern of row $i$ as $\min_i$ and $\max_i$. 
+    \item[Step 3.] For the arrival with the size of $a$ in period $t$, if there exists $i$ such that $\min_i + \max_i >= a$ and $a > \min_i$, accept this arrival at row $i$, go to step 5; otherwise, go to step 4.
+    \item[Step 4.] Find a maximal group of seats to accept this arrival, otherwise, reject this arrival.
+    % Use the information of realized arrivals to make the decision.
+    \item[Step 5.] Move to the next period. Repeat step 3. 
+  \end{description}
+\end{algorithm}
+
+Step 2: the pattern will have the same loss by these procedures. ($\min_i$ can be 0.)
+(Can we use the partial information?)
+
+\begin{lem}
+  Any largest patterns can be generated by the largest pattern constructed from the greedy method.
+\end{lem}
+
+This method can be used without stochastic information. The performance will improve when the total demand can construct the largest patterns for all rows.
 
 
 % Once: Obtain the supply from the stochastic model by benders decomposition. Use the deterministic model to obtain a heuristi supply. Then use the multi-class rule to decide whether to accept the group at each period.
@@ -241,31 +221,10 @@ The relation between the situations and the methods is showed in the following t
 
 % Different types of movies will have different probabilities, consider the preference for policy when demand = supply.
 
-% The results of different methods on scenario 1 are shown below.
 
-% \begin{table}[ht]
-%   \begin{tabular}{|l|l|l|l|l|}
-%   \hline
-%   \# samples & T & probabilities & \# rows & performance(\%) compared to the optimal \\
-%   \hline
-%   1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & (99.72, 100.00, 100.00, 100.00, 98.11, 100.00) \\
-%   1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & (97.75, 99.83, 99.76, 99.76, 93.15, 99.76) \\ % slow
-%   1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & (95.78, 99.20, 97.80, 97.80, 89.35, 97.65) \\
-%   1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & (95.61, 99.10, 96.23, 96.23, 87.80, 96.12) \\
-%   \hline
-%   1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & (99.94, 100.00, 100.00, 100.00, 98.22, 100.00) \\
-%   1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & (97.19, 99.51, 99.09, 99.09, 91.31, 99.29) \\
-%   1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & (95.23, 98.98, 97.21, 97.21, 87.73, 96.88) \\
-%   1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & (94.84, 99.05, 95.70, 95.70, 85.49, 95.13) \\
-%   \hline
-%   \end{tabular}
-% \end{table}
- 
 % The numbers in the `performance compared to the optimal' represent M1, M2, M3, M4, M5, M6 respectively in order.
 
 % The maximal number of people served can be obtained by \eqref{deter_upper} with a realized sequence of arrival.
 
 % Some important information:
 % The government will give the restriction: 入座人数50% /相连座位 4个
-
-\includepdf{./Figures/Results_M3.pdf}

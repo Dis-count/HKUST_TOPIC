@@ -1,7 +1,6 @@
 % !TEX root = sum1.tex
 
 \section{Results}
-
 % The nested structure makes the greedy method useful.
 % Remark: Similar to what we mentioned, the greedy method refers to using the largest groups to fill the seats.
 
@@ -9,64 +8,65 @@
 % Improvement:
 % For $\X^{0}$, we introduce one empty seat, $x_1$. But it cannot provide the feasibility.
 
+\subsection{Deterministic Model}\label{Deterministic_result}
+The integer programming \eqref{deter_upper} can be solved quickly because of the monotone ratio.
 
-\subsection{Benders decomposition versus IP}\label{Bender_IP}
+
+\subsection{Benders Decomposition versus IP}\label{Bender_IP}
 
 % In view of the fact that IP of the deterministic model can be solved quickly, the column generation method does not show an obvious advantage. 
 
-At first, we compare the running time of these two methods.
+% At first, we compare the running time of these two methods. 
 
 The running times of solving IP directly and using Benders decomposition are shown in the table below. 
 
 \begin{table}[ht]
   \centering
   \caption{Running time of Decomposion and IP}
-  \begin{tabular}{l|l|l|l|l}
+  \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
-  \# of Scenarios & running time of IP(s) & Benders (s) & \# of rows & \# of groups \\
-  1000  & 5.1  & 0.13 & 30 & 8 \\
-  5000  & 28.73 & 0.47 & 30 & 8 \\
-  10000 & 66.81  & 0.91 & 30 & 8 \\
-  50000 & 925.17 & 4.3 & 30 & 8 \\
+  \# of scenarios & demands & running time of IP(s) & Benders (s) & \# of rows & \# of groups & \# of seats\\
   \hline
-  1000  & 5.88 & 0.29 & 200 & 8 \\
-  5000  & 30.0 & 0.62 & 200 & 8 \\
-  10000 & 64.41 & 1.09 & 200 & 8 \\
-  50000 & 365.57 & 4.56 & 200 & 8 \\
+  1000  & (150, 350) & 5.1  & 0.13 & 30 & 8 & (21, 50)\\
+  5000  & & 28.73 & 0.47 & 30 & 8 \\
+  10000 & & 66.81  & 0.91 & 30 & 8 \\
+  50000 & & 925.17 & 4.3 & 30 & 8 \\
   \hline
-  1000  & 17.15  & 0.18 & 30 & 16  \\
-  5000  & 105.2  & 0.67 & 30 & 16  \\
-  10000 & 260.88 & 1.28 & 30 & 16  \\
-  50000 & 3873.16 & 6.18 & 30 & 16  \\
+  1000  & (1000, 2000) & 5.88 & 0.29 & 200 & 8 & (21, 50)\\
+  5000  & & 30.0 & 0.62 & 200 & 8 \\
+  10000 & & 64.41 & 1.09 & 200 & 8 \\
+  50000 & & 365.57 & 4.56 & 200 & 8 \\
+  \hline
+  1000  & (150, 250) & 17.15  & 0.18 & 30 & 16 & (41, 60) \\
+  5000  & & 105.2  & 0.67 & 30 & 16  \\
+  10000 & & 260.88 & 1.28 & 30 & 16  \\
+  50000 & & 3873.16 & 6.18 & 30 & 16  \\
   \hline
   \end{tabular}
 \end{table}
 
-The parameters of the experiments are listed below.
+The parameters in the columns of the table are the number of scenarios, the range of demands, running time of integer programming, running time of Benders decomposition method, the number of rows, the number of group types and the number of seats for each row, respectively. 
 
-The first one:
-The number of rows is 30.
-The number of groups is 8.
-The number of seats for each row L is generated from (21, 50) randomly, about 1000 seats.
-The scenarios of demands are generated from (150, 350) randomly.
+Take the first experiment as an example, the scenarios of demands are generated from (150, 350) randomly, the number of seats for each row is generated from (21, 50) randomly.
+% about 1000 seats.
 
-The second one:
-The number of rows is 200.
-The number of groups is 8.
-The number of seats for each row L is generated from (21, 50) randomly, about 7000 seats.
-The scenarios of demands are generated from (1000, 2000) randomly.
+% The second one:
+% The number of seats for each row L is generated from (21, 50) randomly, about 7000 seats.
+% The scenarios of demands are generated from (1000, 2000) randomly.
 
-The third one:
-The number of rows is 30.
-The number of groups is 16.
-The number of seats for each row L is generated from 41-60 randomly, about 1500 seats.
-The scenarios of demands are generated from (150, 250) randomly.
+% The third one:
+% The number of seats for each row L is generated from 41-60 randomly, about 1500 seats.
+% The scenarios of demands are generated from (150, 250) randomly.
 
-Then we compare the results of benders decomposition and IP under nested policy.
+
+\subsection{Near-optimal Solution versus IP Solution under Nested Policy}
+Then, we will show the near-optimal seat assignment has a close performance with IP when considering nested policy.
+
+% Then we compare the results of benders decomposition and IP under nested policy.
 
 \begin{table}[ht]
     \caption{Results of Decomposion and IP under nested policy}
-    \begin{tabular}{l|l|l|l|l|l}
+    \begin{tabular}{|l|l|l|l|l|l|}
     \hline
     \# samples & T & probabilities & \# rows & people served by decomposition & people served by IP \\
     1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 85.30 & 85.3 \\
@@ -93,21 +93,17 @@ Each entry of people served is the average of 50 instances.
 IP will spend more than 2 hours in some instances, as `NA' showed in the table.
 The number of seats is 20 when the number of rows is 8, the number of seats is 40 when the number of rows is 30.
 
-We can find that the people served by Benders decomposition and IP under nested policy are close. Thus, we can substitute IP with the Benders decomposition.
+We can find that the people served by Benders decomposition and IP under nested policy are close. But obtaining the near-optimal seat assignment will be faster.
 
-\subsection{Near-optimal and IP solution under nested policy}
-In this section, we want to show the near-optimal seat assignment has a close performance with IP when considering nested policy.
+% Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
+\subsection{Different Probabilities}
+We discuss the effect of different probabilities in this sub-section. Suppose that the group of up to 4 can sit together. Then we have $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$. Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$. Choose $T(E(D)/c)$ such that the supply is near the demand. Then we compare the number of people served under different values of $c$. 
 
-\subsection{Different probabilities}
-Discuss the effect of different probabilities.
-$E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$
-
-Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$. Choose $T(E(D)/c)$ such that the supply is near the demand. 
+% by FCFS-based.
 
 % Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
 
-Then we use M6 to compare the number of people served under different values of $c$.
 
 Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$. The number of rows is 10, and the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
 
@@ -168,7 +164,7 @@ $T =75$, the number of rows is 9, the number of seats each row is 25.
 Probabilities: 
 $p_1 = p_3 + 2p_4$. $p_3$ is from $0.05$ to $0.45$ with step size of 0.1. $p_4$ is from $0.05$ to $0.3$ with step size of 0.05.
 
-Results: M1-M6, the number of accepted people, the number of total people.
+% Results: M1-M6, the number of accepted people, the number of total people.
 
 % \includepdf{./Figures/Results_25T.pdf}
 
@@ -179,27 +175,14 @@ $T = 60$, the number of rows is 10, the number of seats each row is 21.
 Probabilities: 
 $2p_2 + 4p_3 + 6p_4 =3$. $p_2$ is from $0.05$ to $0.95$ with step size of $0.1$. $p_3$ is from $0.05$ to $0.75$ with step size of $0.1$.
 
-Results: M1-M6, the number of accepted people, the number of total people.
+% Results: M1-M6, the number of accepted people, the number of total people.
 
 % \includepdf{./Figures/Results_2T.pdf}
 
-\subsection{Different periods}
+\subsection{Different Periods}
 Discuss the effect of the number of periods: 
-Parameters: T = 70-80, step size =1.
 
-The expected number of period: 75
-The expected number of demand(people): 150
-Number of rows: 9
-Number of seats each row: 25
-Probabilities: $[0.4, 0.3, 0.2, 0.1], [0.3, 0.5, 0.1, 0.1]$.
-
-Results: M1-M6, the number of accepted people, the number of total people.
-
-% \includepdf{./Figures/Periods_3511.pdf}
-
-% \includepdf{./Figures/Periods_4321.pdf}
-
-T = 55-65, step size =1.
+Parameters: T = 10-100, step size =1.
 
 The expected number of period: 60
 The expected number of demand(people): 150
@@ -207,7 +190,22 @@ Number of rows: 10
 Number of seats each row: 21
 Probabilities: $[0.25, 0.25, 0.25, 0.25]$.
 
-Results: M1-M6, the number of accepted people, the number of total people.
+Parameters: T = 30-120, step size =1.
+
+The expected number of period: 72
+The expected number of demand(people): 137
+Number of rows: 10
+Number of seats each row: 21
+Probabilities: $[0.4, 0.4, 0.1, 0.1]$
+
+% [0.3, 0.5, 0.1, 0.1]$.
+% Results: M1-M6, the number of accepted people, the number of total people.
+
+% \includepdf{./Figures/Periods_3511.pdf}
+% \includepdf{./Figures/Periods_4321.pdf}
+
+
+% Results: M1-M6, the number of accepted people, the number of total people.
 
 We can find that the difference between the number of accepted people and the number of total people will increase with the period. 
 % When the number of periods is small, the seats 
@@ -235,6 +233,11 @@ Second stage: the gap is becoming larger as $T$ increases.
 
 Third stage: As $T$ continues to increase, the gap will converge when the capacity is limited.
 
+The gap point represents 
+
+The government can give how much attendance should be set.
+
+\subsection{Group of Different Sizes}
 
 \subsection{Measurement}
 

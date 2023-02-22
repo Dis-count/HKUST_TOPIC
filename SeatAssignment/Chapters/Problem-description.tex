@@ -46,7 +46,7 @@ To accommodate as many as people possible in the fixed rows, the IP formulation 
 
 $m$ indicates the number of group types. $x_{ij}$ indicates the number of group type $i$ placed in row $j$.
 
-When we need to consider the lower bound of the demand which represents the groups must be assigned seats, we can add a new constraint $\sum_{j =1}^{N} x_{ij} \geq d_{i}^{l}, i=1,\ldots,m$ in \eqref{deter_upper}, $d_{i}^{l}$ is the number of group type $i$ we have accepted.
+If we need to consider the lower bound of demand, which represents the groups that must be allocated seats, we can add a new constraint $\sum_{j =1}^{N} x_{ij} \geq d_{i}^{l}, i=1,\ldots,m$ in \eqref{deter_upper}, $d_{i}^{l}$ is the number of group type $i$ we have accepted.
 
 When a lower or upper bound is not needed, the corresponding constraint can be removed. Because the ratio of value to capacity is monotone for the size of groups, the solver can quickly solve this deterministic formulation without many branching operations.
 

@@ -1,8 +1,6 @@
 % !TEX root = ./sum1.tex
 % \section{Stochastic Demands Situation}
 
-
-
 \subsection{Two-stage Scenario-based Stochastic Programming}
 Now suppose the demand is stochastic, as mentioned above, the objective is to give a seat assignment that can accept as many groups as possible. We develop the stochastic programming by the scenarios modeling demand uncertainty as below.
 
@@ -78,7 +76,7 @@ As we can find, this formulation is a large-scale problem even if the number of 
 
 
 \section{Solve The Two-stage Problem by Benders Decomposition}
-We can change this problem to stochastic linear programming by relaxing the decisoin variables. After obtaining the optimal linear solution by decomposition approach, we can generate a near-optimal seat assignment.
+It is difficult to solve the above problem directly, we can change this problem to stochastic linear programming by relaxing the decisoin variables. After obtaining the optimal linear solution by decomposition approach, we can generate a near-optimal seat assignment.
 
 \subsection{Solve The Second Stage Problem}
 
@@ -185,7 +183,10 @@ $d_{i \omega} > d_{i 0} \Rightarrow y_{i \omega}^{-} >0$, then $\alpha_{i \omega
 
 When $d_{i \omega} = d_{i 0}$,  we can find that $\alpha_{i \omega} = \alpha_{i-1, \omega} + 1$ will minimize the objective function.
 
-Let $\Delta d = d_{\omega} - d_0$, then the elements in $\Delta d$ will be a negative integer, positive integer and zero. The value of $\alpha$ associated with zero will not directly affect the objective function, only the value of $\alpha$ associated with a negative integer. The larger the value of $\alpha$ associated with a negative integer is, the smaller the objective function will be. Thus, let $\alpha_{i \omega} = \alpha_{i-1, \omega} + 1$ when $d_{i \omega} = d_{i 0}$ can obtain the minimized objective function.
+Let $\Delta d = d_{\omega} - d_0$, then the elements in $\Delta d$ will be a negative integer, positive integer and zero. 
+% The value of $\alpha$ associated with zero does not directly affect the objective function. 
+Only the negative element will affect the objective function.
+The larger the value of $\alpha$ associated with a negative integer is, the smaller the objective function will be. Thus, let $\alpha_{i \omega} = \alpha_{i-1, \omega} + 1$ when $d_{i \omega} = d_{i 0}$ can obtain the minimized objective function.
 \qed
 \end{pf}
 
@@ -197,7 +198,7 @@ The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and 
 
 \subsection{Delayed Constraint Generation}
 
-Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master}, and take into account the optimality condition, we can conclude the master problem \eqref{BD_master} will have the form:
+Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master} and take into account the optimality cut, we can conclude the master problem \eqref{BD_master} will have the form:
 
 \begin{equation}\label{BD_master1}
   \begin{aligned}
@@ -272,7 +273,7 @@ We can describe the steps of the algorithm below,
     If $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{(0)}$, add one new constraint, $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to LP \eqref{BD_master2}.
 
     \item[Step 5.] Solve the updated LP \eqref{BD_master2}, obtain a new solution $(x_1, z_{\omega}^{1})$ and update UB.
-    \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(Or in our case, UB converges.)
+    \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(In our case, UB converges.)
    \end{description}
   \end{algorithm}
 
@@ -302,21 +303,23 @@ Thus, we make some changes to obtain the near-optimal seat assignment.
 \begin{algorithm}[H]\label{near-optimal}
   \caption{Near-optimal seat assignment algorithm}
     \begin{description}
-    \item[Step 1.] Obtain the solution from stochatic programming by benders decomposition.
+    \item[Step 1.] Obtain the solution from stochatic linear programming by benders decomposition.
 
     \item[Step 2.] Aggregate the solution to the supply for each group type.
 
     \item[Step 3.] Set the supply as the upper bound of demand in problem \eqref{deter_upper}. The lower bound is not included.
     
-    \item[Step 4.] Aggregate the solution from problem \eqref{deter_upper} to a supply for each group type.
+    \item[Step 4.] Aggregate the solution from Step 3 to a supply for each group type.
 
-    \item[Step 5.] Obtain the near-optimal assignment algorithm from \eqref{deter_upper} by setting the supply as the lower bound.
+    \item[Step 5.] Obtain the near-optimal assignment from \eqref{deter_upper} by setting the supply in Step 4 as the lower bound.
    \end{description}
   \end{algorithm}
 
 \begin{remark}
-  Step 3 can give a feasible integer supply. Then problem \eqref{deter_upper} with this supply as the lower bound can always give an integer solution.  
-  Thus, we can obtain the near-optimal seat assignment by setting the upper and lower bound alternately.
+  Step 3 can give a feasible integer supply. In Step 5, problem \eqref{deter_upper} with this supply as the lower bound can always give an integer solution.  
+  Thus, we can obtain the near-optimal seat assignment by solving stochastic programming once and deterministic programming twice.
+  
+  % setting the upper and lower bound alternately.
 \end{remark}
 
 

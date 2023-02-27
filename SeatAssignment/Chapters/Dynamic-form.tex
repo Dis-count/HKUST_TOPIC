@@ -1,7 +1,7 @@
 % !TEX root = sum1.tex
 \section{Dynamic Demand}\label{dynamic_demand}
 
-We also study the dynamic seating plan problem, which is more suitable for commercial use. In this situation, customers come dynamically, and the seating plan needs to be made without knowing the number and composition of future customers. 
+We also study the dynamic seating plan problem, which is more suitable for commercial use. In this situation, customers come dynamically and the seating plan needs to be made without knowing the number and composition of future customers. 
 
 It becomes a sequential stochastic optimization problem where conventional methods fall into the curse of dimensionality due to many seating plan combinations. To avoid this complexity, we develop an approach that aims directly at the final seating plans. As stated above, we can obtain such a seating plan from stochastic programming. However, it only gives the initial seat assignment without handling the dynamic situation. To further know how to make decisions when the group arrives dynamically, we discuss two different dynamic situations in the following section. 
 
@@ -10,16 +10,18 @@ It becomes a sequential stochastic optimization problem where conventional metho
 \subsection{Dynamic Demand Situations}
 Generally speaking, there are two ways to purchase tickets for concerts or movies: no seat selection when booking and seat selection when booking. We consider the following dynamic demand situations, ticket reservation without seat selection and seat assignment before arrival. % ticket reservation with row selection
 
-Since singing concert venues have more seats and higher demand for tickets, organizers usually do not take the approach of determining the seats at the time of booking, but only provide the seat sections that can be selected at the time of booking or simply do not provide seat information, and then inform customers of the seat information after the overall seat layout is determined. Movie theaters or small concert, however, have relatively few seats, the attendance rate is usually low enough to allow free selection of seats directly online.
+For reservations without seat selection, the seat assignment will not be made immediately, decision-maker only needs to reject or accept each request during the making-reservation stage. After the reservation deadline, the seat layout information will be informed to the customers before admission. For example, singing concert venues have more seats and higher demand for tickets, organizers usually do not take the approach of determining the seats at the time of booking, but not provide seat information, and then inform customers of the seat information after the overall seat layout is determined.
+
+% only provide the seat sections that can be selected at the time of booking or simply do 
+% (Row/second selection for extention)
 
 
-For reservations without seat selection, the seat assignment will not be made immediately, decision-maker only needs to reject or accept each request during the making-reservation stage. After the reservation deadline, the seat layout information will be informed to the customers before admission. 
-(Row/second selection for extention)
 % For example, some theaters only provide seat reservations for the audience.
 
-For seat assignment before arrival, the specific procedure will be changed under the requirement of social distancing. The seat assignment will be arranged before the groups book the tickets, the groups only need to find the corresponding-size seats when accepting services. For example, prior seat planning can satisfy the requirement of social distancing and also save costs without changing seat allocation. The seat assignment could remain for one day because the same film genre will attract the same feature of different group types.
-(Online for extention)
-% , the movie halls can seal the empty seats to prevent people from taking seats.
+For seat assignment before arrival, the specific procedure will be changed under the requirement of social distancing. The seat assignment will be arranged before the groups book the tickets, the groups only need to choose the corresponding-size seats when booking tickets. For example, movie theaters or small concert have relatively few seats, the attendance rate is usually low enough to allow free selection of seats directly online. The early seat planning can satisfy the requirement of social distancing and also save costs without changing seat allocation. The seat assignment could remain for one day because the same film genre will attract the same feature of different group types. 
+
+% (Online for extention)
+% the movie halls can seal the empty seats to prevent people from taking seats.
 
 % For reservation with row selection, 
 % the concerts will allow people to choose the section and row when making the reservation.
@@ -37,7 +39,7 @@ For seat assignment before arrival, the specific procedure will be changed under
 % \subsection{Generate Scenarios with Stochastic Information}
 
 \subsection{Mapping sequences to scenarios by discrete periods}\label{MappingSeq}
-We can use stochastic information to generate scenarios integrated from sequences. Suppose there are $T$ independent periods; at most, one group will arrive in each period.
+We can use stochastic information to generate scenarios integrated from arrival sequences. Suppose there are $T$ independent periods; at most, one group will arrive in each period.
 
 There are $J$ different group types(including the group with no people). Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = j) = p_j$, $j = 0,1,\ldots,J-1$ and $\sum_{j} p_{j} =1$. Then a sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. (It can be modeled as a multinomial distribution, $p(\mathbf{Y} \mid \mathbf{p})=\prod_{j=0}^{J-1} p_j N_j$).
 
@@ -49,12 +51,10 @@ Let $N_{j} = \sum_{t} I(y_t = j)$, i.e., the count number of times group type $j
 % Then, if we fix the seat assignment as $[3,3]$. For the sequence, $2,2,2,2,2,3,3,3,3,3$, we will place one $2$ in a three-seat. 
 % But for the sequence, $3,3,3,3,3,2,2,2,2,2$, we will accept three $3$ and three $2$.
 
-Show the complexity: the number of different sequences $J^{T}$, and the number of scenarios is $O(T^{J-1})$.
+It is clear that the number of different sequences is $J^{T}$. The number of different scenarios is $O(T^{J-1})$ which can be obtained by the following DP.
 
-Obtained by DP:
-Use $D(T,J) $ to denote the number of scenarios, which equals to the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$.
-Then we know the recursion relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and $D(i,2) = i+1, D(i,1) = 1$.
-$D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$.
+Use $D(T,J) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$.
+Then, we know the recurrence relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$.
 
 The number of scenarios is too large to enumerate all possible cases.
 Thus, we choose to sample some sequences from the multinomial distribution.
@@ -139,7 +139,7 @@ The stochastic seat assignment(SSA) method can give a seat assignment before the
 \begin{algorithm}[H]\label{general_method}
   \caption{Stochastic seat assignment method}
   \begin{description}
-    \item[Step 1.] Obtain a linear solution from stochastic programming \eqref{BD_master1}.
+    \item[Step 1.] Obtain a linear solution from stochastic programming \eqref{BD_master2}.
     \item[Step 2.] Obtain the near-optimal integral solution from deterministic model with lower and upper bounds.
     \item[Step 3.] Accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
 

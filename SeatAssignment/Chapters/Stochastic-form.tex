@@ -2,22 +2,32 @@
 % \section{Stochastic Demands Situation}
 
 \subsection{Two-stage Scenario-based Stochastic Programming}
-Now suppose the demand is stochastic, as mentioned above, the objective is to give a seat assignment that can accept as many groups as possible. We develop the stochastic programming by the scenarios modeling demand uncertainty as below.
+% We use the random demand(scenarios) to estimate the seat assignment. Then y indicate the recourse making decision.
 
-Consider the decision maker who has to assign the seats in two consecutive stages. The first stage involves the initial seat assignment denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{m \times N}$. These variables are scenario-independent and each component $x_{i,j}$ stands for the number of group type $i$ in row $j$.
+Now suppose the demand is stochastic, following some unknown distribution. The stochastic information can be obtained from scenarios through historical data. As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. Then we propose a two-stage scenario-based stochastic programming.
 
-In the second stage, the new information about demands is obtained. Regarding the nature of the obtained information, we assume that there are $S$ possible scenarios and that the true demand is only revealed after $\mathbf{x}$ is chosen. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega=\{1,2,\ldots,S\}$ corresponds to a particular realization of the demand vector, $\mathbf{D}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{m,\omega})$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive.
+Consider the decision maker who has to assign the seats in two consecutive stages. The seat assignment and demand take place in the first and second stages, respectively. The first stage involves the initial seat assignment denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{m \times N}$. These variables are scenario-independent and each component $x_{i,j}$ stands for the number of group type $i$ in row $j$.
 
-Then a new vector $\mathbf{y}$ of decisions is to be chosen. $\mathbf{y} \in \mathbb{Z}_{+}^{2mS}$ is the vector of second-stage scenario-dependent decision variables, which include the number of holding groups, $y_{i \omega}^{+}$, positive when the supply overestimates the actual demand and the number of short groups, $y_{i \omega}^{-}$, positive when the supply understimates the actual demand for group type $i$ in scenario $\omega$.
+Because the demand is unknown when the seat assignment is planned, there is no way to expect that the supply in the first stage can meet the demand exactly. Fortunately, we can find some remedies in practice, for example, seats of 5 can be assigned to a group of 4 with one empty seat as social distance. However, the decision maker will confront seats shortage or excess without these measures. Therefore, to deal with possible demands, the wait-and-see measures (called recourses) should be considered in planning seat assignment.
 
-% We use the exact definition above, the size of group type $i$, $s_i$.
+% If no group of 1 comes in the future, this wait-and-see measure may leave two empty seats. 
+
+Regarding the nature of the obtained information, we assume that there are $S$ possible scenarios and that the true demand is only revealed after $\mathbf{x}$ is chosen. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega=\{1,2,\ldots,S\}$ corresponds to a particular realization of the demand vector, $\mathbf{D}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{m,\omega})$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive.
+
+% The stochastic information about demands is obtained. 
+%  Write it specifically. what information.
+
+In the second stage, the second-stage scenario-dependent decision variable, $\mathbf{y}$, is to be  chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{m \times S}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{m \times S}$. Each component of $\mathbf{y}^{+}$, $y_{i \omega}^{+}$, represents the number of holding $i$-th groups, which is positive when the supply is larger than the actual demand, zero otherwise. Similarly, $y_{i \omega}^{-}$ represents the number of short groups, which is positive when the supply is less than the actual demand and zero otherwise.
+
+% which include the number of holding groups, $y_{i \omega}^{+}$, positive when the supply overestimates the actual demand and the number of short groups, $y_{i \omega}^{-}$, positive when the supply understimates the actual demand for group type $i$ in scenario $\omega$.
+
 
 % The assignment will be determined before the realization of the random demand, here-and-now policy.
 
 Considering that the group can take the seats assigned to the larger group type, we assume that the holding group type $i$ can be utilized by the smaller group type $j < i$ in order of size. That is,
 the holding group type $i$ can be taken by group type $j = i-2$ after group type $j = i-1$ is satisfied.
 
-Then we have the following scenario-based stochastic programming:
+Then we have the deterministic equivalent form of the scenario-based stochastic programming:
 
 \begin{equation}\label{sto_form}
     \begin{aligned}
@@ -41,16 +51,15 @@ Reformulate the objective function,
   =& \sum_{j =1}^{N} \sum_{i=1}^m (s_i-1) x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \left((s_1-1)y_{1 \omega}^{+} + \sum_{i=2}^{m}(s_{i}-s_{i-1}) y_{i \omega}^{+} \right)
 \end{align*}
 
-When $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
-
+Plug in $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
 % This programming is in a deterministic equivalent form. 
 
-Let $\mathbf{s} = (s_1, \ldots, s_m)$, $\mathbf{L} = (L_1, \ldots, L_N)$ where $s_i$ is the size of seats taken by group type $i$ and $L_j$ is the number of seats for row $j$. Then the row length constraint can be expressed as $\mathbf{s} \mathbf{x} \leq \mathbf{L}$.
+Let $\mathbf{s} = (s_1, \ldots, s_m)$, $\mathbf{L} = (L_1, \ldots, L_N)$ where $s_i$ is the size of seats taken by group type $i$ and $L_j$ is the length of row $j$ as we defined above. Then the row length constraint can be expressed as $\mathbf{s} \mathbf{x} \leq \mathbf{L}$.
 
 The linear constraints associated with scenarios can be written in a matrix form as
-\[\mathbf{x} \mathbf{1} + \mathbf{V}_\omega \mathbf{y}_\omega = \mathbf{d}_\omega, \omega\in \Omega\]
+\[\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_\omega = \mathbf{d}_\omega, \omega\in \Omega,\]
 
-$\mathbf{1}$ is the 1-vector of size $N$. $\mathbf{V}_s = [\mathbf{W} ~ \mathbf{I}]$.  
+where $\mathbf{1}$ is the 1-vector of size $N$, $\mathbf{V} = [\mathbf{W} ~ \mathbf{I}]$.  
 
 $$
 \mathbf{W}=\left[\begin{array}{ccccc}
@@ -61,49 +70,51 @@ $$
 \end{array}\right]_{m \times m}
 $$
 
-and $\mathbf{I}$ is the identity matrix.
-
+and $\mathbf{I}$ is the identity matrix. For each scenario $\omega \in \Omega$,
 $$
-\mathbf{y}_{s}=\left[\begin{array}{l}
-\mathbf{y}_{s}^{+} \\
-\mathbf{y}_{s}^{-}
-\end{array}\right], \quad s \in \Omega
+\mathbf{y}_{\omega}=\left[\begin{array}{l}
+\mathbf{y}_{\omega}^{+} \\
+\mathbf{y}_{\omega}^{-}
+\end{array}\right], \mathbf{y}_{\omega}^{+}=\left[\begin{array}{lllll}y_{1 \omega}^{+} & y_{2 \omega}^{+} & \cdots & y_{m \omega}^{+}\end{array}\right]^{T}, \mathbf{y}_{\omega}^{-}=\left[\begin{array}{llll}y_{1 \omega}^{-} & y_{2 \omega}^{-} & \cdots & y_{m \omega}^{-}\end{array}\right]^{T}.
 $$
 
-$\mathbf{y}_{s}^{+}=\left[\begin{array}{lllll}y_{1 s}^{+} & y_{2 s}^{+} & \cdots & y_{m s}^{+}\end{array}\right]^{T}, \mathbf{y}_{s}^{-}=\left[\begin{array}{llll}y_{1 s}^{-} & y_{2 s}^{-} & \cdots & y_{m s}^{-}\end{array}\right]^{T}$.
 
-As we can find, this formulation is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. However, the structured constraints allow us to simplify the problem using a decomposition approach.
+As we can find, this deterministic equivalent form is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. However, the structured constraints allow us to simplify the problem by using a decomposition approach.
 
-
-\section{Solve The Two-stage Problem by Benders Decomposition}
-It is difficult to solve the above problem directly, we can change this problem to stochastic linear programming by relaxing the decisoin variables. After obtaining the optimal linear solution by decomposition approach, we can generate a near-optimal seat assignment.
-
-\subsection{Solve The Second Stage Problem}
-
-Let $c{'}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^m (s_i-1) x_{ij}$, $f{'}y_{\omega} = -\left((s_1-1)y_{1 \omega}^{+} + \sum_{i=2}^{m}(s_{i}-s_{i-1}) y_{i \omega}^{+}\right)$. The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$.
-
-Consider a $\mathbf{x}$ such that $\mathbf{s x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents our seat assignment for the first stage decisions. Once $\mathbf{x}$ is fixed, the optimal second stage decisions $\mathbf{y}_{\omega}$ can be determined by solving the following problem for each $\omega$:
-
-\begin{equation}\label{BD_sub}
-\begin{aligned}
-  \max \quad & f{'} \mathbf{y}_{\omega} \\
-  \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_\omega = \mathbf{d}_\omega \\
-   & \mathbf{y}_{\omega} \geq 0
-\end{aligned}
-\end{equation}
-
-
-Let $z_{\omega}(\mathbf{x})$ be the optimal value of the problem \eqref{BD_sub}, together with the convention $z_{\omega}(x) = \infty$ if the problem is infeasible. 
-
-Now go back to consider the optimization of $\mathbf{x}$, we have the problem:
+Let $c{'}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^m i x_{ij}$, $f{'}y_{\omega} = -\sum_{i=1}^{m} y_{i \omega}^{+}$. Then the formulation \eqref{sto_form} can be expressed as below,
 
 \begin{equation}\label{BD_master}
   \begin{aligned}
-    \max \quad & c{'} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}) \\
-    \text {s.t.} \quad & \sum_{i=1}^{m} s_{i} x_{ij} \leq L_j, j =1,\ldots, N \\
-     & \mathbf{x} \geq 0
-  \end{aligned}
+\max \quad & c{'} \mathbf{x}+ z(\mathbf{x}) \\
+\text {s.t.} \quad & \mathbf{s} \mathbf{x} \leq \mathbf{L} \\
+& \mathbf{x} \in \mathbb{Z}_{+}^{m \times N},
+\end{aligned}
 \end{equation}
+
+where $z(\mathbf{x})$ is the recourse function defined as 
+
+$$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, 
+
+\begin{equation}\label{BD_sub}
+  \begin{aligned}
+    z_{\omega}(\mathbf{x}) := \max \quad & f{'} \mathbf{y}_{\omega} \\
+    \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} \\
+     & \mathbf{y}_{\omega} \geq 0.
+  \end{aligned}
+  \end{equation}
+
+% The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$. 
+Here $E$ is the expectation with respect to the scenario set. Problem \eqref{BD_sub} stands for the second-stage problem and $z_{\omega}(\mathbf{x})$ is the optimal value of problem \eqref{BD_sub}, together with the convention $z_{\omega}(x) = \infty$ if the problem is infeasible.
+
+It is difficult to solve the above problem directly, we can relax problem \eqref{BD_master} to stochastic linear programming firstly. In section \ref{solve_by_benders}, we obtain an optimal linear solution by decomposition approach and generate a near-optimal seat assignment.
+
+\section{Solve The Two-stage Problem}\label{solve_by_benders}
+
+% In section \ref{second_stage}, we obtain a closed-form solution to the second-stage problem.
+
+\subsection{Solve The Second Stage Problem}\label{second_stage}
+
+Consider a $\mathbf{x}$ such that $\mathbf{s x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents our seat assignment for the first stage decisions. Once $\mathbf{x}$ is fixed, the optimal second stage decisions $\mathbf{y}_{\omega}$ can be determined by solving problem \eqref{BD_sub} for each $\omega$.
 
 To solve this problem, we should only consider that $\mathbf{x}$ for which $z_{\omega}(\mathbf{x})$ are all finite. Notice that the feasible region of the dual of problem \eqref{BD_sub} does not depend on $x$. We can form its dual problem, which is 
 
@@ -145,6 +156,10 @@ Because the feasible region is bounded, then feasibility cuts are not needed. Le
   %   & \cdots, \\
   %   & 0 \leq \alpha_m \leq \alpha_{m-1} + 1
   % \end{align*}
+\end{corollary}
+
+\begin{corollary}
+The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
 \end{corollary}
 
 % When $s_i$ is integral, we can still use the same way to obtain the dual optimal solution.
@@ -192,15 +207,13 @@ The larger the value of $\alpha$ associated with a negative integer is, the smal
 
 We can use the forward method, calculating from $\alpha_{1 \omega}$ to $\alpha_{m \omega}$, to obtain the value of $\alpha_{\omega}$ instead of solving linear programming.
 
-
-The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
-
-
 \subsection{Delayed Constraint Generation}
+Benders decomposition works with only a subset of those exponentially many constraints and adds more constraints iteratively until the optimal solution of Benders Master Problem(BMP) is attained. This procedure is known as delayed constraint generation.
 
-Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master} and take into account the optimality cut, we can conclude the master problem \eqref{BD_master} will have the form:
+% Restricted Benders master problem:
+Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master} and take into account the optimality cut, we can conclude the BMP will have the form:
 
-\begin{equation}\label{BD_master1}
+\begin{equation}\label{BD_master2}
   \begin{aligned}
     \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \sum_{i=1}^{m} s_{i} x_{ij} \leq L_j, j =1,\ldots, N \\
@@ -209,22 +222,25 @@ Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master} and
   \end{aligned}
 \end{equation}
 
-Now use a small subset of $\mathcal{O}$, $\mathcal{O}^t$, to substitute the original one, then we have a relaxation of the master problem \eqref{BD_master1}:
+When substituting $\mathcal{O}$ with its subset, $\mathcal{O}^{t}$, the problem \eqref{BD_master2} becomes the Restricted Benders Master Problem(RBMP). 
 
-\begin{equation}\label{BD_master2}
-  \begin{aligned}
-    \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-    \text {s.t.} \quad & \sum_{i=1}^{m} s_{i} x_{ij} \leq L_j, j =1,\ldots, N \\
-    & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}^{t}, \forall \omega \\
-     & \mathbf{x} \geq 0
-  \end{aligned}
-\end{equation}
+
+% Then we have the restricted Benders master problem \eqref{BD_master2} by substituting $\mathcal{O}$ with its subset, $\mathcal{O}^t$.
+
+% \begin{equation}\label{BD_master1}
+%   \begin{aligned}
+%     \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+%     \text {s.t.} \quad & \sum_{i=1}^{m} s_{i} x_{ij} \leq L_j, j =1,\ldots, N \\
+%     & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
+%      & \mathbf{x} \geq 0
+%   \end{aligned}
+% \end{equation}
 
 
 To determine the initial $\mathcal{O}^{t}$, we have the following lemma.
 
 \begin{lem}\label{one_ep_feasible}
-The problem \eqref{BD_master2} is always bounded with at least any one optimality cut for each scenario.
+RBMP is always bounded with at least any one optimality cut for each scenario.
 \end{lem}
 
 \begin{pf}[Proof of lemma \ref{one_ep_feasible}]
@@ -245,34 +261,37 @@ The problem \eqref{BD_master2} is always bounded with at least any one optimalit
       & \mathbf{x} \geq 0
     \end{aligned}
   \end{equation}
-  Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more optimality cuts will not make the optimal value larger. Thus, the problem \eqref{BD_master2} is bounded. 
+  Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more optimality cuts will not make the optimal value larger. Thus, RBMP is bounded. 
   \qed
 \end{pf}
 
-Given the initial $\mathcal{O}^{t}$, we can obtain the optimal $\mathbf{x}^{*}$ and $\mathbf{z}^{*}=(z^{*}_1,\ldots, z^{*}_S)$. By solving problem \eqref{BD_sub_dual}, we can check whether $(\mathbf{x}^{*}, \mathbf{z}^{*})$ is an optimal solution to the full problem.
+Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}_{0}$ and $\mathbf{z}^{0} =(z^{0}_1,\ldots, z^{0}_S)$. Then $c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is an upper bound of problem \eqref{BD_master2}. 
 
 
-According to theorem \ref{optimal_sol_sub_dual}, we can obtain the optimal solution, $\alpha_{\omega}^{*}$, to problem \eqref{BD_sub_dual}. When $\mathbf{x}_0$ is given, $z_{\omega}^{0} = \alpha_{\omega}^{*}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ will give a minimal upper bound of $z_{\omega}$, thus all the left constraints associated with other extreme points are redundant.
+When $\mathbf{x}_0$ is given, the optimal solution, $\alpha_{\omega}^{1}$, to problem \eqref{BD_sub_dual} can be obtained according to Theorem \ref{optimal_sol_sub_dual}. $z_{\omega}^{(0)} = \alpha_{\omega}^{1}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ and $(\mathbf{x}_0, \mathbf{z}_{\omega}^{(0)})$ is a feasible solution to problem \eqref{BD_master2} because it satisfies all the constraints. Thus, $c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} \mathbf{z}_{\omega}^{(0)}$ is a lower bound of problem \eqref{BD_master2}.
 
-Notice that $(x_0, z_{\omega}^{0})$ is a feasible solution ($c{'} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is the lower bound) when the extreme points are $\alpha_{\omega}$. The problem \eqref{lemma_eq} associated with $\alpha_{\omega}$ will give an optimal solution $(x_1, z_{\omega}^{1})$. (Upper bound)
+If for every scenario, the optimal value of the corresponding problem \eqref{BD_sub_dual} is larger than or equal to $z_{\omega}^{0}$, all contraints are satisfied, we have an optimal solution, $(x_0, z_{\omega}^{0})$, to the BMP. Otherwise, add one new constraint, $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
+
+% $z_{\omega}^{(0)} = \alpha_{\omega}^{*}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ will give a minimal upper bound of $z_{\omega}$, thus all the left constraints associated with other extreme points are redundant.when the extreme points are $\alpha_{\omega}$.
+
+ 
+% The problem \eqref{lemma_eq} associated with $\alpha_{\omega}$ will give an optimal solution $(x_1, z_{\omega}^{1})$. (Upper bound)
 
 
-We can describe the steps of the algorithm below,
+The steps of the algorithm are described as below,
 
 \begin{algorithm}[H]\label{cut_algo}
   \caption{The benders decomposition algorithm}
     \begin{description}
     \item[Step 1.] Solve LP \eqref{lemma_eq} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
-    Then, obtain the solution $(x_0, z_{\omega}^{0})$ and dual solution $(\pi, \lambda)$.
+    Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
 
-    \item[Step 2.] Set the upper bound $UB = c{'} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ 
+    \item[Step 2.] Set the upper bound $UB = c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
     \item[Step 3.] 
     For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c{'} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$
-
     \item[Step 4.]
-    If $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{(0)}$, add one new constraint, $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to LP \eqref{BD_master2}.
-
-    \item[Step 5.] Solve the updated LP \eqref{BD_master2}, obtain a new solution $(x_1, z_{\omega}^{1})$ and update UB.
+    For each $\omega$, if $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
+    \item[Step 5.] Solve the updated RBMP, obtain a new solution $(x_1, z^{1})$ and update UB.
     \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(In our case, UB converges.)
    \end{description}
   \end{algorithm}
@@ -286,7 +305,7 @@ From the lemma \ref{one_ep_feasible}, we can set $\alpha_{\omega}^0 = \mathbf{0}
 \end{remark}
 
 
-After the algorithm terminates, we obtain the optimal $x^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = d_0 = (d_{1,0},\ldots,d_{m,0})$.
+After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = d_0 = (d_{1,0},\ldots,d_{m,0})$.
 Then we can obtain the value of $y_{i \omega}$ from equation \eqref{y_recursively}.
 
 We show the results of Benders and IP in the section \ref{Bender_IP}.
@@ -296,6 +315,12 @@ We show the results of Benders and IP in the section \ref{Bender_IP}.
 The stochastic model only gives a fractional solution; its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 Thus, we make some changes to obtain the near-optimal seat assignment.
 
+If we need to consider the lower bound of demand, which represents the groups that must be allocated seats, we can add a new constraint $\sum_{j =1}^{N} x_{ij} \geq d_{i}^{l}, i=1,\ldots,m$ in problem \eqref{deter_upper}, $d_{i}^{l}$ is the number of group type $i$ we have placed.
+
+When a lower or upper bound is not needed, the corresponding constraint can be removed. Because the ratio of value to capacity is monotone for the size of groups, the solver can quickly solve this deterministic formulation without many branching operations.
+
+% $d_{i}^{l}$ is the lower bound of the demand. (It can be the number of group type $i$ we have accepted.)
+% $d_{i}^{u}$ is the upper bound of the demand. (deterministic demand)
 
 % Firstly, we obtain the solution from stochatic programming. This solution corresponds to a supply for each group type. Then solve the deterministic model by setting the supply as the upper bound of demand to obtain another feasible supply. Finally, solve the deterministic model by setting this supply as the lower bound to obtain the seat assignment.
 

@@ -4,12 +4,12 @@
 % The nested structure makes the greedy method useful.
 % Remark: Similar to what we mentioned, the greedy method refers to using the largest groups to fill the seats.
 
-% For M2, Merit: The plan will be always feasible. Demerit: Cannot cover all possible demands.
+
 % Improvement:
 % For $\X^{0}$, we introduce one empty seat, $x_1$. But it cannot provide the feasibility.
 
-\subsection{Deterministic Model}\label{Deterministic_result}
-The integer programming \eqref{deter_upper} can be solved quickly because of the monotone ratio.
+% \subsection{Deterministic Model}\label{Deterministic_result}
+% The integer programming \eqref{deter_upper} can be solved quickly because of the monotone ratio.
 
 
 \subsection{Benders Decomposition versus IP}\label{Bender_IP}
@@ -128,20 +128,15 @@ Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$. The number
 Each blue point stands for the average number of people of 50 instances.
 Each red point stands for the expected number of people.
 
-Suppose we accept $D_a$ people with $T$ arrivals and the sum of $D_a$ and $T$ is equal to the total number of seats. Then the occupancy rate is $\frac{c * T}{(c+1) * T}= \frac{c}{c+1}$.($D_a = c * T$)
+Suppose we accept $D_a$ people with $T$ arrivals and the sum of $D_a$ and $T$ is equal to the total number of seats.($D_a = c * T$) Then the estimation of occupancy rate is $\frac{c * T}{(c+1) * T}= \frac{c}{c+1}$ when there are full patterns for all rows.
 
-$\frac{c}{c+1}$ is the estimation of occupancy rate when there are full patterns for all rows.
 
 The number of people served is near $\frac{c}{c+1} * 210$ on average.(Red points showed in the figure.) 
 
-Why some blue points are far from the red points? 
+If the largest pattern is assigned for each row, then the occupancy rate is $\frac{16}{21}$. The maximal number of people can be served is $210 * \frac{16}{21} =160$ which is the upper bound of the number of people served.
 
-Explanation:
-For the case of probability $[0.05, 0.05, 0.85, 0.05](c =2.9)$, the demand can be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$. We cannot construct all full patterns for every row. It violates the assumption, thus in this case there is a large gap between blue point and red point.
+From the above figure, we can also find that some blue points are far from the red points. For example, when the probability is $[0.05, 0.05, 0.85, 0.05](c =2.9)$, the demands can be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$. We cannot construct all full patterns for every row with these demands. It violates the assumption, thus in this case there is a large gap between blue point and red point.
 
-We can find that 160 is the upper bound of the number of people served. 
-
-If the largest pattern is assigned for each row, then the occupancy rate is $\frac{16}{21}$. The maximal number of people can be served is $210 * \frac{16}{21} =160$. 
 
 % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
 % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
@@ -180,7 +175,7 @@ $2p_2 + 4p_3 + 6p_4 =3$. $p_2$ is from $0.05$ to $0.95$ with step size of $0.1$.
 % \includepdf{./Figures/Results_2T.pdf}
 
 \subsection{Different Periods}
-Discuss the effect of the number of periods: 
+We discuss the effect of the number of periods this sub-section. 
 
 Parameters: T = 10-100, step size =1.
 
@@ -233,9 +228,9 @@ Second stage: the gap is becoming larger as $T$ increases.
 
 Third stage: As $T$ continues to increase, the gap will converge when the capacity is limited.
 
-The gap point represents 
+The gap point represents the first point where the people without social distancing is larger than that with social distancing. 
 
-The government can give how much attendance should be set.
+The government can make the policy about how much attendance rate.
 
 \subsection{Group of Different Sizes}
 

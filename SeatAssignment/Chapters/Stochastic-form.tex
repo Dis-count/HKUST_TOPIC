@@ -6,7 +6,7 @@
 
 Now suppose the demand is stochastic, following some unknown distribution. The stochastic information can be obtained from scenarios through historical data. As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. Then we propose a two-stage scenario-based stochastic programming.
 
-Consider the decision maker who has to assign the seats in two consecutive stages. The seat assignment and demand take place in the first and second stages, respectively. The first stage involves the initial seat assignment denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{m \times N}$. These variables are scenario-independent and each component $x_{i,j}$ stands for the number of group type $i$ in row $j$.
+Consider the decision makers who assign the groups to seats in two consecutive stages. The seat assignment and demand take place in the first and second stages, respectively. The first stage involves the initial seat assignment denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{m \times N}$. These variables are scenario-independent and each component $x_{i,j}$ stands for the number of group type $i$ in row $j$.
 
 Because the demand is unknown when the seat assignment is planned, there is no way to expect that the supply in the first stage can meet the demand exactly. Fortunately, we can find some remedies in practice, for example, seats of 5 can be assigned to a group of 4 with one empty seat as social distance. However, the decision maker will confront seats shortage or excess without these measures. Therefore, to deal with possible demands, the wait-and-see measures (called recourses) should be considered in planning seat assignment.
 
@@ -59,7 +59,7 @@ Let $\mathbf{s} = (s_1, \ldots, s_m)$, $\mathbf{L} = (L_1, \ldots, L_N)$ where $
 The linear constraints associated with scenarios can be written in a matrix form as
 \[\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_\omega = \mathbf{d}_\omega, \omega\in \Omega,\]
 
-where $\mathbf{1}$ is the 1-vector of size $N$, $\mathbf{V} = [\mathbf{W} ~ \mathbf{I}]$.  
+where $\mathbf{1}$ is the 1-vector of size $N$, $\mathbf{V} = [\mathbf{W}, ~\mathbf{I}]$.  
 
 $$
 \mathbf{W}=\left[\begin{array}{ccccc}
@@ -78,8 +78,7 @@ $$
 \end{array}\right], \mathbf{y}_{\omega}^{+}=\left[\begin{array}{lllll}y_{1 \omega}^{+} & y_{2 \omega}^{+} & \cdots & y_{m \omega}^{+}\end{array}\right]^{T}, \mathbf{y}_{\omega}^{-}=\left[\begin{array}{llll}y_{1 \omega}^{-} & y_{2 \omega}^{-} & \cdots & y_{m \omega}^{-}\end{array}\right]^{T}.
 $$
 
-
-As we can find, this deterministic equivalent form is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. However, the structured constraints allow us to simplify the problem by using a decomposition approach.
+As we can find, this deterministic equivalent form is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. However, the structured constraints allow us to simplify the problem by applying Benders decomposition approach. Before using this approach, let us write this problem in the form of the two-stage stochastic programming.
 
 Let $c{'}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^m i x_{ij}$, $f{'}y_{\omega} = -\sum_{i=1}^{m} y_{i \omega}^{+}$. Then the formulation \eqref{sto_form} can be expressed as below,
 
@@ -103,12 +102,14 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{aligned}
   \end{equation}
 
+(Do I need to mention the convergence of the scenario-based problem?)
+
 % The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$. 
 Here $E$ is the expectation with respect to the scenario set. Problem \eqref{BD_sub} stands for the second-stage problem and $z_{\omega}(\mathbf{x})$ is the optimal value of problem \eqref{BD_sub}, together with the convention $z_{\omega}(x) = \infty$ if the problem is infeasible.
 
 It is difficult to solve the above problem directly, we can relax problem \eqref{BD_master} to stochastic linear programming firstly. In section \ref{solve_by_benders}, we obtain an optimal linear solution by decomposition approach and generate a near-optimal seat assignment.
 
-\section{Solve The Two-stage Problem}\label{solve_by_benders}
+\section{Solve The Scenario-based Two-stage Problem}\label{solve_by_benders}
 
 % In section \ref{second_stage}, we obtain a closed-form solution to the second-stage problem.
 
@@ -135,7 +136,7 @@ Let $\mathcal{O}$ be the set of all extreme points of $P$ and $\mathcal{F}$ be t
 \end{lem}
 
 \begin{pf}[Proof of lemma \ref{feasible_region}]
-Notice that $V =(W,~I)$, $W$ is a totally unimodular matrix. Then, we have $\alpha{'}W \geq -\bar{s}, \alpha{'}I \geq 0$. Thus, the feasible region is bounded.
+Notice that $V =[W,~I]$, $W$ is a totally unimodular matrix. Then, we have $\alpha{'}W \geq -\bar{s}, \alpha{'}I \geq 0$. Thus, the feasible region is bounded.
 Further more, $\bar{s}_i = s_i - s_{i-1}, s_0 =1$ are integral, so the extreme points are all integral.
 \qed
 \end{pf}
@@ -148,7 +149,7 @@ Because the feasible region is bounded, then feasibility cuts are not needed. Le
 
 
 \begin{corollary}
-  When $s_i = i+1$, $f{'} = [-\mathbf{1},~\mathbf{0}], V =(W,~I)$, we have $\alpha{'}W \geq -1, \alpha{'}I \geq 0$. Thus, it is easy to find that the feasible region is bounded, i.e., $P$ does not contain any extreme rays. Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i = 1, \ldots, m$.
+  When $s_i = i+1$, $f{'} = [-\mathbf{1},~\mathbf{0}], V =[W,~I]$, we have $\alpha{'}W \geq -1, \alpha{'}I \geq 0$. Thus, it is easy to find that the feasible region is bounded, i.e., $P$ does not contain any extreme rays. Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i = 1, \ldots, m$.
 
   % \begin{align*}
   %   & 0 \leq \alpha_1 \leq 1,\\ 

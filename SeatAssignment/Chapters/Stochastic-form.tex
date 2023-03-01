@@ -4,7 +4,8 @@
 \subsection{Two-stage Scenario-based Stochastic Programming}
 % We use the random demand(scenarios) to estimate the seat assignment. Then y indicate the recourse making decision.
 
-Now suppose the demand is stochastic, following some unknown distribution. The stochastic information can be obtained from scenarios through historical data. As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. Then we propose a two-stage scenario-based stochastic programming.
+Now suppose the demand of groups is stochastic, following some unknown distribution. The stochastic information can be obtained from scenarios through historical data. To maximize the expected value of people over all the scenarios, we propose a two-stage scenario-based stochastic programming.
+% As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. 
 
 Consider the decision makers who assign the groups to seats in two consecutive stages. The seat assignment and demand take place in the first and second stages, respectively. The first stage involves the initial seat assignment denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{m \times N}$. These variables are scenario-independent and each component $x_{i,j}$ stands for the number of group type $i$ in row $j$.
 
@@ -111,7 +112,8 @@ It is difficult to solve the above problem directly, we can relax problem \eqref
 
 \section{Solve The Scenario-based Two-stage Problem}\label{solve_by_benders}
 
-% In section \ref{second_stage}, we obtain a closed-form solution to the second-stage problem.
+At first, we generate a closed-form solution to the second-stage problem in section \ref{second_stage}. Then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Finally, we obtain a near-optimal seat assignment from the linear solution.
+
 
 \subsection{Solve The Second Stage Problem}\label{second_stage}
 
@@ -208,7 +210,7 @@ The larger the value of $\alpha$ associated with a negative integer is, the smal
 
 We can use the forward method, calculating from $\alpha_{1 \omega}$ to $\alpha_{m \omega}$, to obtain the value of $\alpha_{\omega}$ instead of solving linear programming.
 
-\subsection{Delayed Constraint Generation}
+\subsection{Delayed Constraint Generation}\label{bender_stage}
 Benders decomposition works with only a subset of those exponentially many constraints and adds more constraints iteratively until the optimal solution of Benders Master Problem(BMP) is attained. This procedure is known as delayed constraint generation.
 
 % Restricted Benders master problem:

@@ -6,7 +6,7 @@ In this section, we give the description of the problem, then present the determ
 \subsection{Problem Description}
 % In this section we present the model that generates seat assignment under deterministic demands.
 
-Consider a set of groups, each consisting of no more than $m$ people, to be assigned to a set of seats. These groups are denoted by a demand vector, $\mathbf{d} = (d_1, \ldots, d_m)$. Each element, $d_i, 1 \leq i \leq m$, indicates the number of $i$-th group type containing $i$ people. For illustration, we consider the layout as $N$ rows, each row with $S_{j}$ seats, $j = 1, \ldots, N$. Let $x_{ij}$ indicate the number of group type $i$ placed in row $j$. Then $\sum_{j=1}^{N} x_{ij}$ indicates the supply for $i$-th group type.
+Consider a set of groups, each consisting of no more than $m$ people, to be assigned to a set of seats. These groups are denoted by a demand vector, $\mathbf{d} = (d_1, \ldots, d_m)$. Each element, $d_i, 1 \leq i \leq m$, indicates the number of group type $i$ containing $i$ people. For illustration, we consider the layout as $N$ rows, each row with $S_{j}$ seats, $j = 1, \ldots, N$. 
 
 % Let the $i-$th group type contain $i$ people. 
 % $(d_1, d_2, d_3, d_4) = (3,5,7,6)$
@@ -16,7 +16,7 @@ According to the epidemic prevention requirements, the customers from the same g
 Suppose that each group has to leave one seat to maintain social distancing from the adjacent groups and different rows have no effect on each other, i.e., a person from one group can sit directly behind a person from another group.
 
 % Considering the actual situation, social distancing is one seat in our paper 
-To implement the social distancing in the seat assignment, we add one to the original size of each group as the new size of the group and one dummy seat to each row. Take $s_{i} = i + 1$, $L_{j} = S_{j} +1$, $s_{i}$ is the new size of group type $i$ and $L_{j}$ is the length of row $j$.
+To simplify the social distancing in the seat assignment, we add one to the original size of each group as the new size of the group and one dummy seat to each row. Take $s_{i} = i + 1$, $L_{j} = S_{j} +1$, $s_{i}$ is the new size of group type $i$ and $L_{j}$ is the length of row $j$.
 
 Then we can illustrate the seat assignment for one row below. 
 
@@ -34,7 +34,7 @@ In this way, the social distancing can be integrated by solving this new seat as
 % The number of all seats in each row is called the length of the row.
 
 \subsection{Deterministic Model}
-When the demand is known in advance, to accommodate as many as people possible in the fixed rows, the deterministic model can be shown below:
+Let $x_{ij}$ indicate the number of group type $i$ placed in row $j$. When the demand is known in advance, to accommodate as many as people possible in the fixed rows, the deterministic model can be shown below:
 
 \begin{equation}\label{deter_upper}
     \begin{aligned}
@@ -45,8 +45,15 @@ When the demand is known in advance, to accommodate as many as people possible i
     \end{aligned}
 \end{equation}
 
-This Integer Programming is a special case of the Multiple Knapsack Problem. The solution to the linear relaxation of Problem \eqref{deter_upper} can be obtained easily because the ratio of value to capacity, $\frac{s_i-1}{s_i}, 1 \leq i \leq m$, is monotone in group type. Its has the form $(0,\ldots, x,d_{k}, \ldots, d_{m})$ based on the principle of placing large groups whenever possible.
- 
+Treat the groups as the items, the rows as the knapsacks. There are $m$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ in type $i$ has the profit $p_k = s_i-1$ and weight $w_k = s_i$. Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP).
+
+Consider the solution to the linear relaxation of this MKP. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_n}{w_n}$.
+Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L \sum_{j=1}^{N}$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes 
+$u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
+% $\frac{s_m-1}{s_m} \geq \ldots \geq \frac{s_2-1}{s_2} \geq \ldots \geq \frac{s_i-1}{s_i}$. because the ratio of value to capacity, $\frac{s_i-1}{s_i}, 1 \leq i \leq m$, is monotone in group type.
+
+Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $(\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{mj})$ the integrated solution to the linear relaxation of MKP.
+Suppose item $b$ is in type $h$, then the integrated solution is $(0,\ldots, x,d_{h+1}, \ldots, d_{m})$, where $x = (L- \sum_{i = h+1}^{m} {d_i s_i})/ s_h$. That is, we will place as large groups as possible when the capacity allows.
 
 
 % when the capacity allows accepting the groups from large to small as many as possible will give an optimal solution.

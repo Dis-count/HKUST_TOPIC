@@ -3,14 +3,16 @@
 
 We also study the dynamic seating plan problem, which is more suitable for commercial use. In this situation, customers come dynamically and the seating plan needs to be made without knowing the number and composition of future customers. 
 
-It becomes a sequential stochastic optimization problem where conventional methods fall into the curse of dimensionality due to many seating plan combinations. To avoid this complexity, we develop an approach that aims directly at the final seating plans. As stated above, we can obtain such a seating plan from stochastic programming. However, it only gives the initial seat assignment without handling the dynamic situation. To further know how to make decisions when the group arrives dynamically, we discuss two different dynamic situations in the following section. 
+It becomes a sequential stochastic optimization problem where conventional methods fall into the curse of dimensionality due to many seating plan combinations. To avoid this complexity, we develop an approach that aims directly at the final seating plans. As stated above, we can obtain such a seating plan from stochastic programming. However, it only gives the initial seat assignment without handling the dynamic situation. We discuss two dynamic situations in the following section to further know how to make decisions when the group arrives dynamically.
 
 % Specifically, we define the concept of target seating plans deemed satisfactory. In making the dynamic seating plan, we will try to maintain the possibility of achieving one of the target seating plans as much as possible.
 
 \subsection{Dynamic Demand Situations}
-Generally speaking, there are two ways to purchase tickets for concerts or movies: no seat selection when booking and seat selection when booking. We consider the following dynamic demand situations, ticket reservation without seat selection and seat assignment before arrival. % ticket reservation with row selection
+Generally speaking, there are two ways to purchase tickets for concerts or movies: no seat selection when booking and seat selection when booking. We consider the following dynamic demand situations, ticket reservation without seat selection and seat assignment before arrival.
 
-For reservations without seat selection, the seat assignment will not be made immediately, decision-maker only needs to reject or accept each request during the making-reservation stage. After the reservation deadline, the seat layout information will be informed to the customers before admission. For example, singing concert venues have more seats and higher demand for tickets, organizers usually do not take the approach of determining the seats at the time of booking, but not provide seat information, and then inform customers of the seat information after the overall seat layout is determined.
+The seat assignment will not be made immediately for reservations without seat selection. The decision-maker must only reject or accept each request during the making-reservation stage. After the reservation deadline, the seller will inform the seat layout information to the customers before admission. For example, singing concert venues have more seats and higher ticket demand. Organizers usually do not determine the seats when booking and then inform customers of the seat information after the overall seat layout is determined.
+
+% but not provide seat information, 
 
 % only provide the seat sections that can be selected at the time of booking or simply do 
 % (Row/second selection for extention)
@@ -68,11 +70,11 @@ Remark: this approach still works under the assumption that time is continuous.
 \subsection{Nested Policy with Given Supply}\label{nested_policy}
 % Recall that the stochastic programming only considers the situation that small-size groups can use the surplus large-size seats.
 
-Once we obtain a solution from the stochastic programming, we need to follow some basic rules to assign the seats.
+Once we obtain a solution from stochastic programming, we must follow some basic rules to assign seats.
 \begin{itemize}
     \item When the supply of one arriving group is enough, we will accept the group directly.
     \item When the supply of one arriving group is 0, the demand can be satisfied by only one larger-size supply.
-    \item When one group is accpected to occupy the larger-size seats, the rest empty seat(s) can be reserved for the future demand.
+    \item When one group is accepted to occupy the larger-size seats, the rest empty seat(s) can be reserved for future demand.
 \end{itemize}
 
 We can assign the seats to the corresponding-size group. But when a group comes while the corresponding supply is 0, should we give this group to the larger-size seats? Now we demonstrate the nested policy for this problem.
@@ -162,7 +164,6 @@ The stochastic seat assignment(SSA) method can give a seat assignment before the
 
 
 % Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
-
 
 
 % Partially dynamic: at the beginning stage, the capacity is sufficient, thus we will accept all arrivals. 

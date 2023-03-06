@@ -45,7 +45,6 @@ Then we have the deterministic equivalent form of the scenario-based stochastic 
 
 The objective function contains two parts, the number of the largest group type that can be accommodated is $\sum_{j= 1}^{N} x_{mj} - y_{m \omega}^{+}$. The number of group type $i$ that can be accommodated is $\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}$.
 
-Here is a gap you should mention in advance.
 
 Reformulate the objective function,
 
@@ -54,6 +53,9 @@ Reformulate the objective function,
   =& \sum_{j =1}^{N} \sum_{i=1}^m (s_i-1) x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \left(\sum_{i=1}^{m}(s_i-1)y_{i \omega}^{+} - \sum_{i=1}^{m-1}(s_i-1)y_{i+1, \omega}^{+}\right) \\
   =& \sum_{j =1}^{N} \sum_{i=1}^m (s_i-1) x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \left((s_1-1)y_{1 \omega}^{+} + \sum_{i=2}^{m}(s_{i}-s_{i-1}) y_{i \omega}^{+} \right)
 \end{align*}
+
+The objective is to obtain the maximal number of people placed, not the optimal seat assignment. It will not provide an appropriate seat assignment when the scenario demands are way less than the seats because it does not utilize all the empty seats. We will address this problem in Section 
+
 
 % Plug in $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
 
@@ -315,14 +317,17 @@ Then we can obtain the value of $y_{i \omega}$ from equation \eqref{y_recursivel
 
 We show the results of Benders and IP in the section \ref{Bender_IP}.
 
-\subsection{Obtain The Near-optimal Seat Assignment}
+\subsection{Obtain The Near-optimal Seat Assignment}\label{seat_assignment}
 
-The stochastic model only gives a fractional solution; its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
+The stochastic model only gives a fractional solution and not provides an expected seat assignment when scenario demands are smaller compared with the seats. 
 Thus, we make some changes to obtain the near-optimal seat assignment.
 
-If we need to consider the lower bound of demand, which represents the groups that must be allocated seats, we can add a new constraint $\sum_{j =1}^{N} x_{ij} \geq d_{i}^{l}, i=1,\ldots,m$ in problem \eqref{deter_upper}, $d_{i}^{l}$ is the number of group type $i$ we have placed.
+% its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 
-When a lower or upper bound is not needed, the corresponding constraint can be removed. Because the ratio of value to capacity is monotone for the size of groups, the solver can quickly solve this deterministic formulation without many branching operations.
+Suppose we obtain the optimal linear solution $x^{*}_{ij}$ from the stochastic model, set the supply $\mathbf{s}^{0} = \sum_{j} x^{*}_{ij}$ as the upper bound of demand in problem \eqref{deter_upper}. We can get a feasible integer solution by solving this problem, denote by $\mathbf{s}^{1}$ the corresponding supply. As we mentioned above, this solution does not utilize the empty seats when the demand is small. Thus, we should set the supply $\mathbf{s}^{1}$ as the lower bound of demand, then re-solve a seat assignment problem. We substitute the constraint $\sum_{j =1}^{N} x_{ij} \leq d_{i}, i=1,\ldots,m$ with the new constraint $\sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i=1,\ldots,m$ in problem \eqref{deter_upper}, $s_{i}^{1}$ represents the number of group type $i$ we must allocate seats. The optimal solution to this problem with the lower bound will give an near-optimal seat assignment. We cannot ensure this solution is optimal for the original stochastic programming, but the numerical results show that this seat assignment has a close result to the optimal one under stochastic demands, and even has a better result when dealing with the dynamic demands.  
+
+
+% Because the ratio of value to capacity is monotone for the size of groups, the solver can quickly solve this deterministic formulation without many branching operations.
 
 % $d_{i}^{l}$ is the lower bound of the demand. (It can be the number of group type $i$ we have accepted.)
 % $d_{i}^{u}$ is the upper bound of the demand. (deterministic demand)

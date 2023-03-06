@@ -48,7 +48,7 @@ Let $x_{ij}$ indicate the number of group type $i$ placed in row $j$. When the d
 Treat the groups as the items, the rows as the knapsacks. There are $m$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ in type $i$ has the profit $p_k = s_i-1$ and weight $w_k = s_i$. Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP).
 
 Consider the solution to the linear relaxation of this MKP. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_n}{w_n}$.
-Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L \sum_{j=1}^{N}$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes 
+Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes 
 $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
 % $\frac{s_m-1}{s_m} \geq \ldots \geq \frac{s_2-1}{s_2} \geq \ldots \geq \frac{s_i-1}{s_i}$. because the ratio of value to capacity, $\frac{s_i-1}{s_i}, 1 \leq i \leq m$, is monotone in group type.
 

@@ -54,7 +54,7 @@ Reformulate the objective function,
   =& \sum_{j =1}^{N} \sum_{i=1}^m (s_i-1) x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \left((s_1-1)y_{1 \omega}^{+} + \sum_{i=2}^{m}(s_{i}-s_{i-1}) y_{i \omega}^{+} \right)
 \end{align*}
 
-The objective is to obtain the maximal number of people placed, not the optimal seat assignment. It will not provide an appropriate seat assignment when the scenario demands are way less than the seats because it does not utilize all the empty seats. We will address this problem in Section 
+The objective is to obtain the maximal number of people placed, not the optimal seat assignment. It will not provide an appropriate seat assignment when the scenario demands are way less than the seats because it does not utilize all the empty seats. We will address this problem in Section \ref{seat_assignment}.
 
 
 % Plug in $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
@@ -110,7 +110,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 % (Do I need to mention the convergence of the scenario-based problem?)
 
 % The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$. 
-Here $E$ is the expectation with respect to the scenario set. Problem \eqref{BD_sub} stands for the second-stage problem and $z_{\omega}(\mathbf{x})$ is the optimal value of problem \eqref{BD_sub}, together with the convention $z_{\omega}(x) = \infty$ if the problem is infeasible.
+Here $E$ is the expectation with respect to the scenario set. Problem \eqref{BD_sub} stands for the second-stage problem and $z_{\omega}(\mathbf{x})$ is the optimal value of problem \eqref{BD_sub}, together with the convention $z_{\omega}(\mathbf{x}) = \infty$ if the problem is infeasible.
 
 It is difficult to solve the above problem directly, we can relax problem \eqref{BD_master} to stochastic linear programming firstly. In section \ref{solve_by_benders}, we obtain an optimal linear solution by decomposition approach and generate a near-optimal seat assignment.
 
@@ -123,17 +123,17 @@ At first, we generate a closed-form solution to the second-stage problem in sect
 
 Consider a $\mathbf{x}$ such that $\mathbf{s x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents our seat assignment for the first stage decisions. Once $\mathbf{x}$ is fixed, the optimal second stage decisions $\mathbf{y}_{\omega}$ can be determined by solving problem \eqref{BD_sub} for each $\omega$.
 
-To solve this problem, we should only consider that $\mathbf{x}$ for which $z_{\omega}(\mathbf{x})$ are all finite. Notice that the feasible region of the dual of problem \eqref{BD_sub} does not depend on $x$. We can form its dual problem, which is 
+To solve this problem, we should only consider that $\mathbf{x}$ for which $z_{\omega}(\mathbf{x})$ are all finite. Notice that the feasible region of the dual of problem \eqref{BD_sub} does not depend on $\mathbf{x}$. We can form its dual problem, which is 
 
 \begin{equation}\label{BD_sub_dual}
   \begin{aligned}
     \min \quad & \alpha{'}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
-    \text {s.t.} \quad & \alpha{'}_{\omega} \mathbf{V} \geq f{'}
+    \text {s.t.} \quad & \alpha{'}_{\omega} \mathbf{V} \geq \mathbf{f}{'}
   \end{aligned}
   \end{equation}
 
 Let $P = \{\alpha|\alpha{'}V \geq \mathbf{f}{'}\}$. 
-We assume that $P$ is nonempty and has at least one extreme point. Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(x)$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(x) = \infty$.  
+We assume that $P$ is nonempty and has at least one extreme point. Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
 
 Let $\mathcal{O}$ be the set of all extreme points of $P$ and $\mathcal{F}$ be the set of all extreme rays of $P$. Then $z_{\omega} > -\infty$ if and only if $(\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq 0, \alpha^{k} \in \mathcal{F}$, which stands for the feasibility cut. 
 

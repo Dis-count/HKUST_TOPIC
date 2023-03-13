@@ -136,19 +136,12 @@ After obtaining the pre-accepted sequence, we still need to check whether this s
 
 \subsubsection{Seat Assignment before Arrivals}
 % we make the decision according to the realized arrivals.
-The stochastic seat assignment(SSA) method can give a seat assignment before the group arrivals. The specific procedures are demonstrated in the above sections. The brief steps are shown below: 
+The stochastic seat assignment(SSA) method can give a seat assignment before the group arrivals. The specific procedures are demonstrated in the above sections. The first step is to obtain the feasible seat assignment from Algorithm \ref{feasible_seat}. Then accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
 
-\begin{algorithm}[H]\label{general_method}
-  \caption{Stochastic seat assignment method}
-  \begin{description}
-    \item[Step 1.] Obtain a linear solution from stochastic programming \eqref{BD_master2}.
-    \item[Step 2.] Obtain the near-optimal integral solution from deterministic model with lower and upper bounds.
-    \item[Step 3.] Accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
 
-    % update the scenario and the probability, add constraints when re-calculating stochastic programming.
-    % we can update the supply whenever some demand exceeds the supply.
-  \end{description}
-\end{algorithm}
+% update the scenario and the probability, add constraints when re-calculating stochastic programming.
+% we can update the supply whenever some demand exceeds the supply.
+
 
 % Then use Algorithm \ref{algo_nested_policy} to make the decision.
 

@@ -1,5 +1,7 @@
 # import gurobipy as grb
 # from gurobipy import GRB
+import random
+import statsmodels.api as sm
 import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
@@ -8,7 +10,7 @@ from Mist import generate_sequence, decision1
 import copy
 import time
 import matplotlib.pyplot as plt
-
+import pandas as pd
 # This function call different methods
 
 
@@ -137,7 +139,10 @@ if __name__ == "__main__":
 
         # c = x1 + 2 * x2 + 3 * x3 + 4* x4 
     cnt = 0
-    for probab in p:
+    count = 50
+    dataset = np.zeros((len(p)* count, 5))
+
+    for ind_probab, probab in enumerate(p):
 
         my_file.write('probabilities: \t' + str(probab) + '\n')
         # probab = [0.3, 0.5, 0.1, 0.1]
@@ -157,7 +162,6 @@ if __name__ == "__main__":
         c_p = multi @ probab
         c_value[cnt] = c_p
         
-        count = 50
         for j in range(count):
             sequence = a_instance.random_generate()
             # total_people = sum(sequence) - num_period
@@ -168,11 +172,14 @@ if __name__ == "__main__":
             seq = a_instance.binary_search_first(sequence)
             g = a_instance.offline(seq)
 
+            # num_people += total_people
+            data = np.append(probab, np.dot(multi, g))
+            dataset[j + ind_probab*count, :] = data
+
             ratio6 += np.dot(multi, g)
             accept_people += optimal
-            # num_people += total_people
 
-        my_file.write('M6: %.2f \n' % (ratio6/count))
+        my_file.write('Result: %.2f \n' % (ratio6/count))
         my_file.write('Number of accepted people: %.2f \t' %
                       (accept_people/count))
         # my_file.write('Number of people: %.2f \n' % (num_people/count))
@@ -194,8 +201,28 @@ if __name__ == "__main__":
             my_file.write('Deviated probability: ' + str(p[i]) + '\t')
             my_file.write('Deviated value: %.2f \n' % diff)
 
-    plt.scatter(c_value, people_value, c = "blue")
-    plt.scatter(c_value, occup_value, c = "red")
-    plt.show()
+    # plt.scatter(c_value, people_value, c = "blue")
+    # plt.scatter(c_value, occup_value, c = "red")
+    # plt.show()
 
-    my_file.close()
+
+
+dataA = pd.DataFrame(dataset, columns=["p1", "p2", "p3", "p4", 'y'])
+
+data_x = dataA[['p1','p2','p3']]
+
+data_y = dataA['y']
+
+# pd.DataFrame({"a": random.sample(range(100), 10), "b": random.sample(range(100), 10), "c": random.sample(range(100), 10)})
+
+mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
+res = mod.fit()
+
+my_file.write(str(res.summary()))
+
+my_file.close()
+
+# writer = pd.ExcelWriter('A50.xlsx')		# 写入Excel文件
+# dataA.to_excel(writer, 'page_1', float_format='%.5f')		# ‘page_1’是写入excel的sheet名
+# writer.save()
+# writer.close()

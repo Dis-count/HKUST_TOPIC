@@ -7,8 +7,9 @@
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega$ corresponds to a particular realization of the demand vector, $\mathbf{D}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{m,\omega})$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected value of people over all the scenarios, we propose a scenario-based stochastic programming.
 % As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. 
 
-Consider the decision makers who give the seat assignment based on the scenarios then assign the groups to seats according to the realized true demand. For example, When there is no seating for group of four, seats of 5 can be assigned to a group of 4 with one empty seat as social distance.
+Consider the decision makers who give the seat assignment based on the scenarios then assign the groups to seats according to the realized true demand. 
 
+% For example, When there is no seating for group of four, seats of 5 can be assigned to a group of 4 with one empty seat as social distance.
 
 The seat assignment can be denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{m \times N}$. Let $x_{i,j}$ stand for the number of group type $i$ in row $j$. The supply for group type $i$ can be represented by $\sum_{j=1}^N x_{ij}$.
 Regarding the nature of the obtained information, we assume that there are $S = |\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{m \times S}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{m \times S}$. Each component of $\mathbf{y}^{+}$, $y_{i \omega}^{+}$, represents the number of surplus seats for group type $i$. Similarly, $y_{i \omega}^{-}$ represents the number of inadequate seats for group type $i$.
@@ -354,14 +355,14 @@ The optimal solution to this problem with the lower bound will give a better sea
     \begin{description}
     \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition.
 
-    \item[Step 2.] Aggregate the solution to the supply, $\mathbf{s}^{0} = \sum_{j} x^{*}_{ij}$.
+    \item[Step 2.] Aggregate the solution to the supply, ${s}_{i}^{0} = \sum_{j} x^{*}_{ij}$.
 
-    \item[Step 3.] Set $\mathbf{s}^{0}$ as the upper bound of demand in problem \eqref{deter_upper}. Obtain the optimal solution $\mathbf{x}^{1}$.
+    \item[Step 3.] Set ${s}_{i}^{0}$ as the upper bound of demand in problem \eqref{deter_upper}. Obtain the optimal solution $\mathbf{x}^{1}$.
     
-    \item[Step 4.] Aggregate the solution to the supply, $\mathbf{s}^{1} = \sum_{j} x^{1}_{ij}$.
+    \item[Step 4.] Aggregate the solution to the supply, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}$.
 
     \item[Step 5.] Obtain the solution, $\mathbf{x}^{2}$, from \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
-    \item[Step 6.] Aggregate the solution to the supply, $\mathbf{s}^{2} = \sum_{j} x^{2}_{ij}$, which is the feasible seat assignment.
+    \item[Step 6.] Aggregate the solution to the supply, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}$, which is the feasible seat assignment.
    \end{description}
   \end{algorithm}
 

@@ -40,9 +40,10 @@ For seat assignment before arrival, the specific procedure will be changed under
 
 % \subsection{Generate Scenarios with Stochastic Information}
 
-\subsection{Mapping sequences to scenarios by discrete periods}\label{MappingSeq}
-We can use stochastic information to generate scenarios integrated from arrival sequences. Suppose there are $T$ independent periods; at most, one group will arrive in each period.
+\subsection{Generate scenarios by discrete periods}\label{MappingSeq}
+In the dynamic situation, we can use stochastic information to generate the sequences of group arrivals. The sequences can be integrated to obtain the scenario of demands.
 
+Suppose there are $T$ independent periods; at most, one group will arrive in each period.
 There are $J$ different group types(including the group with no people). Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = j) = p_j$, $j = 0,1,\ldots,J-1$ and $\sum_{j} p_{j} =1$. Then a sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. (It can be modeled as a multinomial distribution, $p(\mathbf{Y} \mid \mathbf{p})=\prod_{j=0}^{J-1} p_j N_j$).
 
 Let $N_{j} = \sum_{t} I(y_t = j)$, i.e., the count number of times group type $j$ arrives during $T$ periods. Then the set of counts $N_{j}$ (scenarios) follows a multinomial distribution, $$p\left(N_0, \ldots, N_{J-1} \mid \mathbf{p}\right)=\frac{T !}{N_{0}!, \ldots, N_{J-1}!} \prod_{j=0}^{J-1} p_{j}^{N_j}, T = \sum_{j=0}^{J-1} N_{j}$$

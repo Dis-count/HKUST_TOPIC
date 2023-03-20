@@ -129,6 +129,12 @@ if __name__ == "__main__":
     # np.random.seed(i)
     p = prop_list()
     p_len = len(p)
+    cp_len =0
+    for probab in p:
+        c_p = np.arange(1, I+1) @ probab
+        if c_p<= 3.2:
+            cp_len += 1
+
     c_value = np.zeros(p_len)
     people_value = np.zeros(p_len)
 
@@ -138,9 +144,11 @@ if __name__ == "__main__":
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
         # c = x1 + 2 * x2 + 3 * x3 + 4* x4 
+    my_cnt = 0
     cnt = 0
-    count = 50
-    dataset = np.zeros((len(p)* count, 5))
+    count = 20
+    # dataset = np.zeros((len(p)* count, 5))
+    dataset = np.zeros((cp_len * count, 5))
 
     for ind_probab, probab in enumerate(p):
 
@@ -160,7 +168,7 @@ if __name__ == "__main__":
         multi = np.arange(1, I+1)
 
         c_p = multi @ probab
-        c_value[cnt] = c_p
+        # c_value[cnt] = c_p
         
         for j in range(count):
             sequence = a_instance.random_generate()
@@ -173,27 +181,31 @@ if __name__ == "__main__":
             g = a_instance.offline(seq)
 
             # num_people += total_people
-            data = np.append(probab, np.dot(multi, g))
-            dataset[j + ind_probab*count, :] = data
-
+            if c_p <= 3.2:
+                data = np.append(probab, np.dot(multi, g))
+                #  -(1-1/(c_p+1))*210
+            # else:
+            #     data = np.append(probab, np.dot(multi, g) - 160)
+                dataset[j + my_cnt*count, :] = data
+                
             ratio6 += np.dot(multi, g)
             accept_people += optimal
-
+        if c_p <= 3.2:
+            my_cnt += 1
         my_file.write('Result: %.2f \n' % (ratio6/count))
         # my_file.write('Number of accepted people: %.2f \t' %(accept_people/count))
         # my_file.write('Number of people: %.2f \n' % (num_people/count))
         
-        y = -51.327 * probab[0] - 29.3098 * probab[1] - 13.2226 * probab[2] + 171.5823
-        my_file.write('Linear regression: %.2f \n' % y)
+        # y = -51.327 * probab[0] - 29.3098 * probab[1] - 13.2226 * probab[2] + 171.5823
 
         people_value[cnt] = ratio6/count
         cnt += 1
 
-        if c_p < 3.2:
-            occup_value = sum(roll_width) * (c_p/(c_p+1))
-        else:
-            occup_value = 160
-        my_file.write('Mean estimation: %.2f \n' % occup_value)
+        # if c_p < 3.2:
+        #     occup_value = sum(roll_width) * (c_p/(c_p+1))
+        # else:
+        #     occup_value = 160
+        # my_file.write('Mean estimation: %.2f \n' % occup_value)
 
     run_time = time.time() - begin_time
     my_file.write('Total Runtime\t %f \n' % run_time)
@@ -215,18 +227,18 @@ if __name__ == "__main__":
     # plt.show()
 
 
-# dataA = pd.DataFrame(dataset, columns=["p1", "p2", "p3", "p4", 'y'])
+dataA = pd.DataFrame(dataset, columns=["p1", "p2", "p3", "p4", 'y'])
 
-# data_x = dataA[['p1','p2','p3', 'p4']]
+data_x = dataA[['p1','p2','p3']]
 
-# data_y = dataA['y']
+data_y = dataA['y']
 
-# mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
-# res = mod.fit()
+mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
+res = mod.fit()
 
-# my_file.write(str(res.summary()))
+my_file.write(str(res.summary()))
 
-    my_file.close()
+my_file.close()
 
 # writer = pd.ExcelWriter('A50.xlsx')		# 写入Excel文件
 # dataA.to_excel(writer, 'page_1', float_format='%.5f')		# ‘page_1’是写入excel的sheet名

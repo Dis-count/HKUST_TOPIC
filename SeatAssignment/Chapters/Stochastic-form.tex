@@ -50,6 +50,7 @@ Then we have the deterministic equivalent form of the scenario-based stochastic 
     \end{aligned}
   \end{equation}
 
+
 The objective function contains two parts, the number of the largest group type that can be accommodated is $\sum_{j= 1}^{N} x_{mj} - y_{m \omega}^{+}$. The number of group type $i$ that can be accommodated is $\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}$.
 
 
@@ -326,6 +327,47 @@ Then we can obtain the value of $y_{i \omega}$ from equation \eqref{y_recursivel
 We show the results of Benders and IP in the section \ref{Bender_IP}.
 
 \subsection{Obtain The Feasible Seat Assignment}\label{seat_assignment}
+
+When $|\Omega| =1$ in problem \ref{sto_form}, the stochastic programming will be 
+
+\begin{equation}\label{one_form}
+  \begin{aligned}
+  \max \quad & \sum_{i=1}^{m}  \sum_{j= 1}^{N} (s_i-1) x_{ij} - \sum_{i=1}^{m} y_{i}^{+}  \\
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i =1,\ldots,m-1, \\
+  & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = m, \\
+  & \sum_{i=1}^{m} s_{i} x_{ij} \leq L_j, j =1,\ldots, N\\
+  & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i = 1,\ldots,m \\
+  & x_{ij} \in \mathbb{Z}_{+}, \quad i=1,\ldots,m, j = 1,\ldots,N.
+  \end{aligned}
+\end{equation}
+
+To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i}^{-} \geq 0$, thus the constraints $\sum_{j= 1}^{N} x_{ij} + y_{i}^{-} = d_{i}, i = 1,\ldots,m$ can be rewritten as $\sum_{j= 1}^{N} x_{ij} \leq d_{i}, i = 1,\ldots,m$, then we have
+
+\begin{equation}\label{deter_upper}
+  \begin{aligned}
+  \max \quad & \sum_{i=1}^{m}  \sum_{j= 1}^{N} (s_i-1) x_{ij} \\
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} + y_{i}^{-} \leq d_{i}, \quad i =1,\ldots,m, \\
+  & \sum_{i=1}^{m} s_{i} x_{ij} \leq L_j, j =1,\ldots, N \\
+  & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i = 1,\ldots,m \\
+  & x_{ij} \in \mathbb{Z}_{+}, \quad i=1,\ldots,m, j = 1,\ldots,N.
+  \end{aligned}
+\end{equation}
+
+Problem \ref{deter_upper} represents the deterministic model. Demand, $d_i, i = 1,\ldots,m$ is known in advance, our goal is to accommodate as many as people possible in the fixed rows.
+
+Treat the groups as the items, the rows as the knapsacks. There are $m$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
+
+% $ = s_i$  $ = s_i-1$  in type $i$
+
+Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP). 
+
+Consider the solution to the linear relaxation of this MKP. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$.
+Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes 
+$u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
+% $\frac{s_m-1}{s_m} \geq \ldots \geq \frac{s_2-1}{s_2} \geq \ldots \geq \frac{s_i-1}{s_i}$. because the ratio of value to capacity, $\frac{s_i-1}{s_i}, 1 \leq i \leq m$, is monotone in group type.
+
+Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $(\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{mj})$ the integrated solution to the linear relaxation of MKP.
+Suppose item $b$ is in type $h$, then the integrated solution is $(0,\ldots, x,d_{h+1}, \ldots, d_{m})$, where $x = (L- \sum_{i = h+1}^{m} {d_i s_i})/ s_h$. That is, we will place as large groups as possible when the capacity allows.
 
 The stochastic model only gives a fractional solution and not provides an expected seat assignment when scenario demands are smaller compared with the seats. 
 Thus, we make some changes to obtain the feasible seat assignment.

@@ -105,7 +105,7 @@ We discuss the effect of different probabilities in this sub-section. Suppose th
 % Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
 
 
-Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$. The number of rows is 10, and the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
+Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$, we call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$. The number of all sampled probability combinations is $n_p$. The number of rows is 10, and the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
 
 % \begin{figure}[h]
 %   \centering
@@ -151,21 +151,21 @@ Multiple linear regression:
 
 Because we have $p_1 + p_2 + p_3 + p_4 =1$, we just select three of four probabilities as the dependent variables. Select $y$, the number of people served, as the independent variable.
 
-Data points: $x = (p_{1i}, p_{2i}, p_{3i}), i = $,
+Data points: $x = (p_{1i}, p_{2i}, p_{3i}), i \in I$. $|I| = n_p \times n_s$, $n_s$ is the number of sequences generated for each probability combination.
 
-For each probability, we select 1, 20, 50 sequences to carry on the multiple linear regression.
+For each probability combination, we select 1, 20, 50 sequences to carry on the multiple linear regression.
 
 
 \begin{table}[ht]
   \centering
   \caption{Multiple linear regression results}
-  \begin{tabular}{|l|l|l|l|l|}
+  \begin{tabular}{|l|l|l|l|l|l|}
   \hline
-  \# of sequences & p1 & p2 & p3 & Intercept \\
+  \# of sequences & p1 & p2 & p3 & Intercept & R-squared \\
   \hline
-  1  & -50.7086 & -29.1060 & -12.9784 & 171.3059 \\
-  20 & -51.2565 & -29.4447 & -13.1312 &  171.6110 \\
-  50 & -51.3270 & -29.3098 & -13.2226 & 171.5823 \\
+  1  & -50.7086 & -29.1060 & -12.9784 & 171.3059 & 0.867 \\
+  20 & -51.2565 & -29.4447 & -13.1312 &  171.6110 & 0.875\\
+  50 & -51.3270 & -29.3098 & -13.2226 & 171.5823 & 0.874\\
   \hline
   \end{tabular}
 \end{table}
@@ -176,9 +176,28 @@ When $p_1 =1$, we know the number of people served is $1/2 * 210 = 105$, then we
 
 $y = 15.2553 p_1 + 37.2725 p_2 + 53.3597 p_3 + 66.5823 p_4 + 105$
 
+Fix the intercept at $160$, we can get $y = -39.7447 p_1 - 17.7275 p_2 - 1.6403 p_3 + 11.5823 p_4 + 160$.
+
 For $[0.05, 0.05, 0.85, 0.05]$, $y = 156.31125$. True value: $151.5$.
 
+Let $y = \frac{c}{c+1} * 210 + c_1 p_1 + c_2 p_2 + c_3 p_3 + \epsilon$
 
+\begin{table}[ht]
+  \centering
+  \caption{Regression results}
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+  \# of sequences & p1 & p2 & p3 & Intercept \\
+  \hline
+  1  & 1.3163 & 3.5121 & 0.4751 & -2.2182 \\
+  20 & 2.7481 & 3.4819 & 2.0804 & -2.9253 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+But the R-squared is 0.041, indicating that independent variables can not explain much in the variation of dependent variable.
+
+If we confine the region where $c$ is lower than $3.2$, the R-squared is 0.008. 
 
 % Lack of interpretability. 
 % It also should include the size of seat layout.

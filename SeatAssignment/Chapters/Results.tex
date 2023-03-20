@@ -147,21 +147,49 @@ From the above figure, we can also find that some blue points are far from the r
 
 % 2. The assumption that $T$ is fixed will be more reasonable for the continuous time. 
 
-Kernel Regression:
+Multiple linear regression:
 
-$K(x,z) = \sum_{j=1}^d x_j z_j$
+Because we have $p_1 + p_2 + p_3 + p_4 =1$, we just select three of four probabilities as the dependent variables. Select $y$, the number of people served, as the independent variable.
 
-$K(x, z) = (1 + \sum_{j=1}^{d} x_j z_j)^m$
+Data points: $x = (p_{1i}, p_{2i}, p_{3i}), i = $,
 
-Given a sequence, 50 sequences
+For each probability, we select 1, 20, 50 sequences to carry on the multiple linear regression.
 
-$v_i$ = the number of people served.
- 
-Data points: $p_1, p_2, p_3, p_4, v_1(result), v_2, v_{50}$
 
-It also should include the size of seat layout.
+\begin{table}[ht]
+  \centering
+  \caption{Multiple linear regression results}
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+  \# of sequences & p1 & p2 & p3 & Intercept \\
+  \hline
+  1  & -50.7086 & -29.1060 & -12.9784 & 171.3059 \\
+  20 & -51.2565 & -29.4447 & -13.1312 &  171.6110 \\
+  50 & -51.3270 & -29.3098 & -13.2226 & 171.5823 \\
+  \hline
+  \end{tabular}
+\end{table}
 
-Lack of interpretability.
+Let $y = -51.327 p_1 - 29.3098 p_2 - 13.2226 p_3 + 171.5823$, 
+
+When $p_1 =1$, we know the number of people served is $1/2 * 210 = 105$, then we fix the intercept at $105$.
+
+$y = 15.2553 p_1 + 37.2725 p_2 + 53.3597 p_3 + 66.5823 p_4 + 105$
+
+For $[0.05, 0.05, 0.85, 0.05]$, $y = 156.31125$. True value: $151.5$.
+
+
+
+% Lack of interpretability. 
+% It also should include the size of seat layout.
+
+
+% Kernel Regression:
+
+% $K(x,z) = \sum_{j=1}^d x_j z_j$
+
+% $K(x, z) = (1 + \sum_{j=1}^{d} x_j z_j)^m$
+
 
 \newpage
 

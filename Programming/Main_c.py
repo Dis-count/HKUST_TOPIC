@@ -180,49 +180,57 @@ if __name__ == "__main__":
             accept_people += optimal
 
         my_file.write('Result: %.2f \n' % (ratio6/count))
-        my_file.write('Number of accepted people: %.2f \t' %
-                      (accept_people/count))
+        # my_file.write('Number of accepted people: %.2f \t' %(accept_people/count))
         # my_file.write('Number of people: %.2f \n' % (num_people/count))
+        
+        y = -51.327 * probab[0] - 29.3098 * probab[1] - 13.2226 * probab[2] + 171.5823
+        my_file.write('Linear regression: %.2f \n' % y)
 
         people_value[cnt] = ratio6/count
         cnt += 1
 
+        if c_p < 3.2:
+            occup_value = sum(roll_width) * (c_p/(c_p+1))
+        else:
+            occup_value = 160
+        my_file.write('Mean estimation: %.2f \n' % occup_value)
+
     run_time = time.time() - begin_time
     my_file.write('Total Runtime\t %f \n' % run_time)
 
-    occup_value = np.zeros(p_len)
-    for i in range(p_len):
-        if c_value[i] < 3.2:
-            occup_value[i] = sum(roll_width) * (c_value[i]/(c_value[i]+1))
-        else:
-            occup_value[i] = 160
-        diff = occup_value[i]- people_value[i]
-        if abs(diff) >= 3:
-            my_file.write('Deviated probability: ' + str(p[i]) + '\t')
-            my_file.write('Deviated value: %.2f \n' % diff)
+    # occup_value = np.zeros(p_len)
+    # for i in range(p_len):
+    #     if c_value[i] < 3.2:
+    #         occup_value[i] = sum(roll_width) * (c_value[i]/(c_value[i]+1))
+    #     else:
+    #         occup_value[i] = 160
+
+        # diff = occup_value[i]- people_value[i]
+        # if abs(diff) >= 3:
+        #     my_file.write('Deviated probability: ' + str(p[i]) + '\t')
+        #     my_file.write('Deviated value: %.2f \n' % diff)
 
     # plt.scatter(c_value, people_value, c = "blue")
     # plt.scatter(c_value, occup_value, c = "red")
     # plt.show()
 
 
+# dataA = pd.DataFrame(dataset, columns=["p1", "p2", "p3", "p4", 'y'])
 
-dataA = pd.DataFrame(dataset, columns=["p1", "p2", "p3", "p4", 'y'])
+# data_x = dataA[['p1','p2','p3', 'p4']]
 
-data_x = dataA[['p1','p2','p3']]
+# data_y = dataA['y']
 
-data_y = dataA['y']
+# mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
+# res = mod.fit()
 
-# pd.DataFrame({"a": random.sample(range(100), 10), "b": random.sample(range(100), 10), "c": random.sample(range(100), 10)})
+# my_file.write(str(res.summary()))
 
-mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
-res = mod.fit()
-
-my_file.write(str(res.summary()))
-
-my_file.close()
+    my_file.close()
 
 # writer = pd.ExcelWriter('A50.xlsx')		# 写入Excel文件
 # dataA.to_excel(writer, 'page_1', float_format='%.5f')		# ‘page_1’是写入excel的sheet名
 # writer.save()
 # writer.close()
+
+

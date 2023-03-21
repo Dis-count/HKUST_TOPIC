@@ -62,8 +62,8 @@ Reformulate the objective function,
   =& \sum_{j =1}^{N} \sum_{i=1}^m (s_i-1) x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \left((s_1-1)y_{1 \omega}^{+} + \sum_{i=2}^{m}(s_{i}-s_{i-1}) y_{i \omega}^{+} \right)
 \end{align*}
 
-The objective is to obtain the maximal number of people placed, not the optimal seat assignment. It will not provide an appropriate seat assignment when the scenario demands are way less than the seats because there are multiple optimal solutions and the solution given by solver probably does not utilize all the empty seats.
-For example, there are 10 rows of seating arrangements, with 20 seats in each row. Suppose the size of group is up to 4, when the scenario demands are $[2,3,2,3], [2,3,3,3], [3,3,2,3]$, any solutions can provide a supply larger than $[3,3,3,3]$ will be the optimal, but it obviously leaves many seats vacant. We will address this problem in Section \ref{seat_assignment}.
+The objective is to obtain the maximal number of people placed according to the demand scenarios. It will not provide an appropriate seat assignment when the number of people associated with scenario demands is way less than the number of available seats because there are multiple optimal solutions and the solution given by solver probably does not utilize all the empty seats.
+For example, there are 10 rows of seating arrangements, with 20 seats in each row. Suppose the size of group is up to 4, when the scenario demands are $[2,3,2,3], [2,3,3,3], [3,3,2,3]$, any solutions can provide a supply more than $[3,3,3,3]$ will be the optimal, but the corresponding seat assignment obviously leaves many seats vacant. We will address this problem in Section \ref{seat_assignment}.
 
 
 % Plug in $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
@@ -313,7 +313,7 @@ The steps of the algorithm are described as below,
   \end{algorithm}
 
 \begin{remark}
-From the lemma \ref{one_ep_feasible}, we can set $\alpha_{\omega}^0 = \mathbf{0}$ initially in Step 1. 
+From the Lemma \ref{one_ep_feasible}, we can set $\alpha_{\omega}^0 = \mathbf{0}$ initially in Step 1. 
 \end{remark}
 
 \begin{remark}
@@ -327,8 +327,10 @@ Then we can obtain the value of $y_{i \omega}$ from equation \eqref{y_recursivel
 We show the results of Benders and IP in the section \ref{Bender_IP}.
 
 \subsection{Obtain The Feasible Seat Assignment}\label{seat_assignment}
+The decomposition method only gives a fractional solution and the stochastic model does not provide an appropriate seat assignment when the number of people in scenario demands is smaller than the number of the seats. 
+Thus, we change the linear solution from the decomposition method to obtain a feasible seat assignment. Before that, we will discuss the deterministic model that can help achieve the goal. 
 
-When $|\Omega| =1$ in problem \ref{sto_form}, the stochastic programming will be 
+When $|\Omega| =1$ in problem \eqref{sto_form}, the stochastic programming will be 
 
 \begin{equation}\label{one_form}
   \begin{aligned}
@@ -353,7 +355,7 @@ To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i
   \end{aligned}
 \end{equation}
 
-Problem \ref{deter_upper} represents the deterministic model. Demand, $d_i, i = 1,\ldots,m$ is known in advance, our goal is to accommodate as many as people possible in the fixed rows.
+Problem \eqref{deter_upper} represents the deterministic model. Demand, $d_i, i = 1,\ldots,m$ is known in advance, our goal is to accommodate as many as people possible in the fixed rows.
 
 Treat the groups as the items, the rows as the knapsacks. There are $m$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
 
@@ -369,8 +371,6 @@ $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac
 Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $(\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{mj})$ the integrated solution to the linear relaxation of MKP.
 Suppose item $b$ is in type $h$, then the integrated solution is $(0,\ldots, x,d_{h+1}, \ldots, d_{m})$, where $x = (L- \sum_{i = h+1}^{m} {d_i s_i})/ s_h$. That is, we will place as large groups as possible when the capacity allows.
 
-The stochastic model only gives a fractional solution and not provides an expected seat assignment when scenario demands are smaller compared with the seats. 
-Thus, we make some changes to obtain the feasible seat assignment.
 
 % its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 
@@ -399,11 +399,11 @@ The optimal solution to this problem with the lower bound will give a better sea
 
     \item[Step 2.] Aggregate the solution to the supply, ${s}_{i}^{0} = \sum_{j} x^{*}_{ij}$.
 
-    \item[Step 3.] Set ${s}_{i}^{0}$ as the upper bound of demand in problem \eqref{deter_upper}. Obtain the optimal solution $\mathbf{x}^{1}$.
+    \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{1}$, from problem \eqref{deter_upper} by setting the supply $\mathbf{s}^{0}$ as the upper bound. 
     
     \item[Step 4.] Aggregate the solution to the supply, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}$.
 
-    \item[Step 5.] Obtain the solution, $\mathbf{x}^{2}$, from \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
+    \item[Step 5.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
     \item[Step 6.] Aggregate the solution to the supply, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}$, which is the feasible seat assignment.
    \end{description}
   \end{algorithm}

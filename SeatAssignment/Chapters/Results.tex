@@ -153,15 +153,14 @@ Because we have $p_1 + p_2 + p_3 + p_4 =1$, we just select three of four probabi
 
 Data points: $x = (p_{1i}, p_{2i}, p_{3i}), i \in I$. $|I| = n_p \times n_s$, $n_s$ is the number of sequences generated for each probability combination.
 
-For each probability combination, we select 1, 20, 50 sequences to carry on the multiple linear regression.
-
+For each probability combination, we select 1, 20, 50 sequences to carry on the multiple linear regression.($y = c_1 p_1 + c_2 p_2 + c_3 p_3 + \epsilon$)
 
 \begin{table}[ht]
   \centering
   \caption{Multiple linear regression results}
   \begin{tabular}{|l|l|l|l|l|l|}
   \hline
-  \# of sequences & p1 & p2 & p3 & Intercept & R-squared \\
+  \# of sequences & c1 & c2 & c3 & Intercept & R-squared \\
   \hline
   1  & -50.7086 & -29.1060 & -12.9784 & 171.3059 & 0.867 \\
   20 & -51.2565 & -29.4447 & -13.1312 &  171.6110 & 0.875\\
@@ -187,7 +186,7 @@ Let $y = \frac{c}{c+1} * 210 + c_1 p_1 + c_2 p_2 + c_3 p_3 + \epsilon$
   \caption{Regression results}
   \begin{tabular}{|l|l|l|l|l|}
   \hline
-  \# of sequences & p1 & p2 & p3 & Intercept \\
+  \# of sequences & c1 & c2 & c3 & Intercept \\
   \hline
   1  & 1.3163 & 3.5121 & 0.4751 & -2.2182 \\
   20 & 2.7481 & 3.4819 & 2.0804 & -2.9253 \\
@@ -198,6 +197,8 @@ Let $y = \frac{c}{c+1} * 210 + c_1 p_1 + c_2 p_2 + c_3 p_3 + \epsilon$
 But the R-squared is 0.041, indicating that independent variables can not explain much in the variation of dependent variable.
 
 If we confine the region where $c$ is lower than $3.2$, the R-squared is 0.008. 
+
+% That means 
 
 % Lack of interpretability. 
 % It also should include the size of seat layout.

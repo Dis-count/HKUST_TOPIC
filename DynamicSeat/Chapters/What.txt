@@ -1,0 +1,17 @@
+Here is the outline：
+
+There are two parts:
+- Dynamic part
+
+
+- Deterministic part
+
+-- The corresponding algorithm to give the best patterns and placement.
+
+Literature: 
+
+dynamic multiple knapsack problem. Large dimension.
+
+social distancing.
+
+

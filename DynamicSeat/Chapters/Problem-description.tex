@@ -1,0 +1,49 @@
+% !TEX root = sum1.tex
+\section{Problem Formulation}
+In this section, we give the description of the problem, then present the stochastic formalution.
+% First, we will introduce some preliminary knowledge about our problem as follows.
+
+\subsection{Problem Description}
+% In this section we present the model that generates seat assignment under deterministic demands.
+
+Consider a set of groups, each consisting of no more than $m$ people, to be assigned to a set of seats. These groups are denoted by a demand vector, $\mathbf{d} = (d_1, \ldots, d_m)$. Each element, $d_i, 1 \leq i \leq m$, indicates the number of group type $i$ containing $i$ people. For illustration, we consider the layout as $N$ rows, each row with $S_{j}$ seats, $j = 1, \ldots, N$. 
+
+% Let the $i-$th group type contain $i$ people. 
+% $(d_1, d_2, d_3, d_4) = (3,5,7,6)$
+
+% But our model and formulation allow for a more general layout of the seats. 
+According to the epidemic prevention requirements, the customers from the same group can sit together, while different groups should sit with social distancing. 
+Suppose that each group has to leave one seat to maintain social distancing from the adjacent groups and different rows have no effect on each other, i.e., a person from one group can sit directly behind a person from another group.
+
+% Considering the actual situation, social distancing is one seat in our paper 
+To simplify the social distancing in the seat assignment, we add one to the original size of each group as the new size of the group and one dummy seat to each row. Take $s_{i} = i + 1$, $L_{j} = S_{j} +1$, $s_{i}$ is the new size of group type $i$ and $L_{j}$ is the length of row $j$.
+
+Then we can illustrate the seat assignment for one row below. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8\textwidth]{./Figures/dummy_seat.pdf}
+    \caption{Problem Conversion}
+\end{figure}
+
+On the left side, the blue squares stand for the empty seats as the social distancing. The orange squares represent the seats sat by the groups. 
+On the right side, one dummy seat is added at the end of the row. The orange squares surrounded by the red line are the seats taken by groups. Here, this row is placed two group of 1, one group of 2 and one group of 3.
+
+In this way, the social distancing can be integrated by solving this new seat assignment problem.
+
+% The number of all seats in each row is called the length of the row.
+
+
+
+
+% when the capacity allows accepting the groups from large to small as many as possible will give an optimal solution.
+
+
+% Why is it easy to solve this IP?
+
+% If the ratio is the same for the groups, IP will use more branches to obtain an optimal solution.
+
+% $[24,28,8,9]$ 10 rows.
+% Total loss: 60; loss of the largest pattern: 5.
+
+

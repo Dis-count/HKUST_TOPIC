@@ -1,0 +1,75 @@
+% !TEX program = xelatex
+\let\nofiles\relax
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{setspace}
+% \usepackage{ctex}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}  % 用于首行缩进
+
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amssymb}
+\usepackage{amsthm} % 使用定理环境
+% \usepackage{ntheorem}
+\usepackage{pdfpages}
+\usepackage{cite}   % 文献
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,CJKbookmarks=True]{hyperref}  % 使用链接 但不用默认属性
+% CJKbookmarks让链接支持中文
+% \usepackage{hyperref}
+% \usepackage{geometry}
+% \geometry{a4paper,scale=0.8}
+\usepackage{algorithm}
+% \usepackage{algorithmic}
+\usepackage{geometry}
+\geometry{a4paper,left=1in,right=1in,top =1in, bottom = 1in}
+\setstretch{1.5}   %  改变行间距
+% \newgeometry{left = 2 cm, top= 3 cm}
+
+\title{Seat assignment with the social distancing}
+\author{Dis$\cdot$ count}
+
+% \newtheorem{algorithm}{Algorithm}
+\newtheorem{thm}{\hspace{2em}Theorem}
+\newtheorem{lem}{\hspace{2em}Lemma}
+\newtheorem*{pf}{}
+\newtheorem{remark}{\hspace{2em}Remark}
+\newtheorem{corollary}{\hspace{2em}Corollary}
+\newtheorem{prop}{\hspace{2em}Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\DeclareMathOperator{\sign}{sign}
+% \newcommand{\sign}{\text{sign}}
+\newcommand{\X}{\mathbf{X}}
+
+
+\begin{document}
+\maketitle{}
+
+\input{Chapters/Abstract}
+
+\input{Chapters/Introduction}
+
+\input{Chapters/Literature-review}
+
+\input{Chapters/Problem-description}
+
+\input{Chapters/Dynamic-form}
+
+\input{Chapters/Stochastic-form}
+
+\input{Chapters/Results}
+
+\input{Chapters/Extension}
+
+\input{Chapters/Conclusion}
+
+\bibliographystyle{plain}
+\bibliography{refe}
+
+\input{Chapters/Res_appendix}
+
+\input{Chapters/Proof}
+
+\end{document}

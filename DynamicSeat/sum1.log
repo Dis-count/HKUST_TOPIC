@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  24 MAR 2023 16:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  26 MAR 2023 22:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -472,36 +472,40 @@ pdfTeX warning: pdflatex.exe (file ./Figures/dummy_seat.pdf): PDF inclusion: fou
 <./Figures/dummy_seat.pdf, id=170, 932.82928pt x 132.54417pt>
 File: ./Figures/dummy_seat.pdf Graphic file (type pdf)
 <use ./Figures/dummy_seat.pdf>
-Package pdftex.def Info: ./Figures/dummy_seat.pdf  used on input line 25.
+Package pdftex.def Info: ./Figures/dummy_seat.pdf  used on input line 26.
 (pdftex.def)             Requested size: 362.37569pt x 51.48976pt.
-) (./Chapters/Dynamic-form.tex [4 <./Figures/dummy_seat.pdf>] [5]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 114.
- [6] [7]) (./Chapters/Stochastic-form.tex [8] [9] [10] [11] [12] [13] [14] [15]) (./Chapters/Results.tex
+[4 <./Figures/dummy_seat.pdf>]) (./Chapters/Dynamic-form.tex) (./Chapters/Stochastic-form.tex [5] [6] [7] [8] [9]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 299.
+ [10] [11] [12]) (./Chapters/Methods.tex
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 7.
+
+[13] [14] [15]) (./Chapters/Results.tex
 Overfull \hbox (29.72743pt too wide) in paragraph at lines 26--46
  [][] 
  []
 
-
+[16]
 Overfull \hbox (20.97746pt too wide) in paragraph at lines 69--90
 [][] 
  []
 
-[16]
 <./Figures/diff_2.pdf, id=315, 462.52798pt x 346.89601pt>
 File: ./Figures/diff_2.pdf Graphic file (type pdf)
 <use ./Figures/diff_2.pdf>
 Package pdftex.def Info: ./Figures/diff_2.pdf  used on input line 124.
 (pdftex.def)             Requested size: 317.07614pt x 237.81818pt.
- [17] [18 <./Figures/diff_2.pdf>] [19]
-<./Figures/period_1.pdf, id=349, 462.52798pt x 346.89601pt>
+[17] [18 <./Figures/diff_2.pdf>] [19]
+<./Figures/period_1.pdf, id=350, 462.52798pt x 346.89601pt>
 File: ./Figures/period_1.pdf Graphic file (type pdf)
 <use ./Figures/period_1.pdf>
-Package pdftex.def Info: ./Figures/period_1.pdf  used on input line 280.
+Package pdftex.def Info: ./Figures/period_1.pdf  used on input line 288.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/period_2.pdf, id=350, 462.52798pt x 346.89601pt>
+<./Figures/period_2.pdf, id=351, 462.52798pt x 346.89601pt>
 File: ./Figures/period_2.pdf Graphic file (type pdf)
 <use ./Figures/period_2.pdf>
-Package pdftex.def Info: ./Figures/period_2.pdf  used on input line 283.
+Package pdftex.def Info: ./Figures/period_2.pdf  used on input line 291.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
  [20 <./Figures/period_1.pdf> <./Figures/period_2.pdf
 
@@ -510,21 +514,21 @@ pdfTeX warning: pdflatex.exe (file ./Figures/period_2.pdf): PDF inclusion: multi
 
 ] (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: 3F1E0C404DA9E8BE1ADEFEAB46A0BE83;6209.
+(rerunfilecheck)             Checksum: D10546ED6050788D9A0395037F5C021E;6279.
  ) 
 Here is how much of TeX's memory you used:
- 12698 strings out of 478599
- 191581 string characters out of 5853593
- 517449 words of memory out of 5000000
- 30240 multiletter control sequences out of 15000+600000
+ 12705 strings out of 478599
+ 191716 string characters out of 5853593
+ 512459 words of memory out of 5000000
+ 30243 multiletter control sequences out of 15000+600000
  413291 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,15n,75p,925b,427s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (27 pages, 342911 bytes).
+Output written on sum1.pdf (27 pages, 345000 bytes).
 PDF statistics:
- 570 PDF objects out of 1000 (max. 8388607)
- 428 compressed objects within 5 object streams
- 112 named destinations out of 1000 (max. 500000)
+ 571 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
+ 113 named destinations out of 1000 (max. 500000)
  277 words of extra memory for PDF output out of 10000 (max. 10000000)
 

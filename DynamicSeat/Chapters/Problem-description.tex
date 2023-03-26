@@ -1,9 +1,10 @@
 % !TEX root = sum1.tex
-\section{Problem Formulation}
-In this section, we give the description of the problem, then present the stochastic formalution.
+\section{Problem Description}
+In this section, we give the description of the seat planning problem with social distance. Then we consider the dynamic seat planning problem with social distance.
+
 % First, we will introduce some preliminary knowledge about our problem as follows.
 
-\subsection{Problem Description}
+\subsection{Seat Planning with Social Distance}
 % In this section we present the model that generates seat assignment under deterministic demands.
 
 Consider a set of groups, each consisting of no more than $m$ people, to be assigned to a set of seats. These groups are denoted by a demand vector, $\mathbf{d} = (d_1, \ldots, d_m)$. Each element, $d_i, 1 \leq i \leq m$, indicates the number of group type $i$ containing $i$ people. For illustration, we consider the layout as $N$ rows, each row with $S_{j}$ seats, $j = 1, \ldots, N$. 
@@ -33,9 +34,6 @@ In this way, the social distancing can be integrated by solving this new seat as
 
 % The number of all seats in each row is called the length of the row.
 
-
-
-
 % when the capacity allows accepting the groups from large to small as many as possible will give an optimal solution.
 
 
@@ -47,3 +45,23 @@ In this way, the social distancing can be integrated by solving this new seat as
 % Total loss: 60; loss of the largest pattern: 5.
 
 
+\subsection{Dynamic Seat Planning}\label{dynamic_demand}
+
+We study the dynamic seat planning problem, which is more suitable for commercial use. In this situation, customers come dynamically and the seating plan needs to be made without knowing the number and composition of future customers. It becomes a sequential stochastic optimization problem where conventional methods fall into the curse of dimensionality due to many seating plan combinations. 
+
+We use a vector to record the state of each row, in every period the group can decide which row to sit. Then the dynamic programming is
+
+$$V_{t}(\mathbf{S}_{t}) = \sum_{i \in N} p_i \max\{ {[V_{t-1}(\mathbf{S}_{t-1}^{1})+ s_i]}, {V_{t-1}(\mathbf{S}_{t}^{0})}\}$$
+
+where $\mathbf{S}_{t} = (S_1^{t}, S_2^{t}, \ldots, S_{N}^{t})$, $\mathbf{S}_{t-1}^{1} = (S_1^{t-1}, S_2^{t-1}, \ldots, S_{N}^{t-1})$ is the state when accepting the group. If placing the group type $i$ in row $j$, then $S_{j}^{t-1} = S_{j}-s_{i}-1$, $S_{k}^{t-1} = S_{j}^{t}, k \neq j$. $\mathbf{S}_{t-1}^{0} = \mathbf{S}_{t}$ is the state when rejecting the group. Initially, we have $\mathbf{S}_{T} = (S_1, S_2, \ldots, S_{N})$.
+
+As we can see, this dynamic programming is difficult to calculate with large dimension. 
+
+
+To avoid this complexity, we develop an approach that aims directly at the final seating plans. We discuss two dynamic situations in the following section to further know how to make decisions when the group arrives dynamically.
+
+
+% As stated above, we can obtain such a seating plan from stochastic programming. However, it only gives the initial seat assignment without handling the dynamic situation. 
+
+
+% Specifically, we define the concept of target seating plans deemed satisfactory. In making the dynamic seating plan, we will try to maintain the possibility of achieving one of the target seating plans as much as possible.

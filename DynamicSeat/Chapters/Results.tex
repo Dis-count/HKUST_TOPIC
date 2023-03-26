@@ -198,17 +198,25 @@ But the R-squared is 0.041, indicating that independent variables can not explai
 
 If we confine the region where $c$ is lower than $3.2$, the R-squared is 0.008. 
 
-% That means 
+
+\begin{table}[ht]
+  \centering
+  \caption{Difference Distribution}
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+  \# of sequences & larger than 1 & larger than 2 & larger than 3 & larger than 4 \\
+  \hline
+  1  & 70.26 \% & 45.44\% & 25.03\% & 11.18\% \\
+  20 & 32.92 \% & 5.13 \% & 1.74\% & 0.51 \% \\
+  50 & 22.46 \% & 4.31 \% & 1.54 \% & 0.31 \%  \\
+  \hline
+  \end{tabular}
+\end{table}
+
 
 % Lack of interpretability. 
 % It also should include the size of seat layout.
 
-
-% Kernel Regression:
-
-% $K(x,z) = \sum_{j=1}^d x_j z_j$
-
-% $K(x, z) = (1 + \sum_{j=1}^{d} x_j z_j)^m$
 
 
 \newpage

@@ -2,51 +2,6 @@
 
 \section{Extension}
 
-\subsection{Obtain Minimum Number of Rows to Cover Demand}
-
-To find the minimum number of rows to satisfy the demand, we can formulate this problem as a cutting stock problem form and use the column generation method to obtain an approximate solution.
-
-Similar to the concept of pattern in the CSP, let the $k$-th placing pattern of a line of seats with length $S$ into some of the $m$ group types be denoted as a vector $(t^k_1,t^k_2,\ldots,t^k_m)$. Here, $t^k_i$ represents the number of times group type $i$ is placed in the $k$-th placing pattern. For a pattern $(t^k_1,t^k_2,\ldots,t^k_m)$ to be feasible, it must satisfy: $\sum_{i=1}^m t^k_i s_i \leq S$, where $s_i$ is the size of group type $i$. Denote by $K$ the current number of placing patterns.
-
-
-This problem is to decide how to place a total number of group type $i$ at least $g_i$ times, from all the available placing patterns, so that the total number of rows of seats used is minimized.
-
-Immediately we have the master problem:
-
-\[\begin{split}\mbox{min}\quad & \sum_{k \in K}^K x_{k}\\
- \mbox{s.t.} \quad & \sum_{k \in K}^K t_i^k x_k \geq d_i  \quad  \mbox{ for } i=1,\ldots,m \\
-  & x_k \geq 0, \mbox{integer}\quad \mbox{for}~ k \in K,\ldots,K.\\
-\end{split}\]
-
-If $K$ includes all possible patterns, we can obtain the optimal solution by solving the corresponding IP. But it is clear that the patterns will be numerous, considering all possible patterns will be time-consuming.
-
-Thus, we need to consider the linear relaxation of the master problem, and the optimal dual variable vector $\lambda$. Using $\lambda$ as the value assigned to each group type $i$, the next problem is to find a feasible pattern $(y_1,y_2,\ldots,y_m)$ that maximizes the product of $\lambda$ and $y$.
-
-
-Then the corresponding sub-problem is:
-\[\begin{split}\mbox{max}\quad & \sum_{i=1}^m \lambda_i y_{i}\\
-        \mbox{s.t.} \quad & \sum_{i=1}^m w_i y_i \leq S  \\
-        & y_i \geq 0, \mbox{integer}\quad \mbox{for}~ i=1,\ldots,m.\\
-\end{split}\]
-
-This is a knapsack problem, its solution will be used as an additional pattern in the master problem.
-We should continue to add new pattern until all reduced costs are nonnegative. Then we have an optimal solution to the original linear programming problem.
-
-But note that column generation method cannot gaurantee an optimal solution. If we want to reach the optimal solution, we should tackle with the integer formulation.
-
-\begin{equation}
-\begin{aligned}
-\min \sum_{k \in K}^{K} y_{k} & \\
-\sum_{k=1}^{K} x_{i k} & \geq d_{i} \quad i=1, \ldots, n \\
-\sum_{i=1}^{n} a_{i} x_{i k} & \leq S y_{k} \quad k=1, \ldots, K \\
-y_{k} & \in\{0,1\} \quad k=1, \ldots, K \\
-x_{i k} & \geq 0 \text { and integer } i=1, \ldots, n ; k=1, \ldots, K
-\end{aligned}
-\end{equation}
-
-$y_k =1$ if line $k$ is used and 0 otherwise, $x_{ik}$ is the number of times group $i$ is placed in row $k$, and $K$ is the upper bound on the number of the rows needed.
-
-
 \subsection{Online booking} 
 
 The groups can select the seats arbitrarily but with some constraints.
@@ -56,12 +11,6 @@ When the customers book the tickets, they will be asked how many seats they are 
 The second step is based on the other choices of reserved groups, we need to check which rows in the seat assignment include the corresponding-size seats.
 
 In third step, we need to check whether the chosen number destroys the pattern of the row. Use subset sum problem to check every position in the row.
-
-\subsubsection{Mapping Sequences to Scenarios by Continuous Time}
-
-When the time is continuous, we only need to count the number of different group types, the method will be the same.
-
-For the nonhomogeneous Poisson process, $N_{i}(T) \sim Poisson (\int_0^{T} p_i(s)\lambda(s) \mathrm{d} s)$. If the Poisson process is homogeneous, $N_{i} \sim Poisson(\lambda p_i T)$ during the interval $[0, T]$. Then for a realization of the Poisson process, we can still apply the method in Section \ref{MappingSeq}.
 
 
 \subsection{How to give a balanced seat assignment}

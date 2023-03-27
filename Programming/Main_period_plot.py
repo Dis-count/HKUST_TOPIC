@@ -125,8 +125,9 @@ if __name__ == "__main__":
     given_lines = 10
     # np.random.seed(i)
     # probab = [0.25, 0.25, 0.25, 0.25]
-    probab = [0.4, 0.4, 0.1, 0.1]
-
+    # probab = [0.4, 0.4, 0.1, 0.1]
+    # probab = [0.1, 0.4, 0.4, 0.1]
+    probab = [0.5, 0.2, 0.2, 0.1]
 
     t_value = np.arange(30, 120, 1)
     people_value = np.zeros(len(period_range))

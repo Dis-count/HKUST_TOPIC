@@ -119,9 +119,18 @@ Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$, we call ea
 %   \label{Fig.lable}
 % \end{figure}
 
-\begin{figure}[ht]
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width = 0.7\textwidth]{./Figures/diff_2.pdf}
+%   \caption{The number of people served versus $c$}
+% \end{figure}
+
+\begin{figure}[h]
   \centering
-  \includegraphics[width = 0.7\textwidth]{./Figures/diff_2.pdf}
+  \subfigure[One instance for each probability combination]{
+    \includegraphics[width=0.48\textwidth]{./Figures/diff_1.jpg}}
+  \subfigure[Average of 50 instances for each probability combination]{
+    \includegraphics[width=0.48\textwidth]{./Figures/diff_2.jpg}}
   \caption{The number of people served versus $c$}
 \end{figure}
 
@@ -147,64 +156,14 @@ From the above figure, we can also find that some blue points are far from the r
 
 % 2. The assumption that $T$ is fixed will be more reasonable for the continuous time. 
 
-Multiple linear regression:
-
-Because we have $p_1 + p_2 + p_3 + p_4 =1$, we just select three of four probabilities as the dependent variables. Select $y$, the number of people served, as the independent variable.
-
-Data points: $x = (p_{1i}, p_{2i}, p_{3i}), i \in I$. $|I| = n_p \times n_s$, $n_s$ is the number of sequences generated for each probability combination.
-
-For each probability combination, we select 1, 20, 50 sequences to carry on the multiple linear regression.($y = c_1 p_1 + c_2 p_2 + c_3 p_3 + \epsilon$)
-
-\begin{table}[ht]
-  \centering
-  \caption{Multiple linear regression results}
-  \begin{tabular}{|l|l|l|l|l|l|}
-  \hline
-  \# of sequences & c1 & c2 & c3 & Intercept & R-squared \\
-  \hline
-  1  & -50.7086 & -29.1060 & -12.9784 & 171.3059 & 0.867 \\
-  20 & -51.2565 & -29.4447 & -13.1312 &  171.6110 & 0.875\\
-  50 & -51.3270 & -29.3098 & -13.2226 & 171.5823 & 0.874\\
-  \hline
-  \end{tabular}
-\end{table}
-
-Let $y = -51.327 p_1 - 29.3098 p_2 - 13.2226 p_3 + 171.5823$, 
-
-When $p_1 =1$, we know the number of people served is $1/2 * 210 = 105$, then we fix the intercept at $105$.
-
-$y = 15.2553 p_1 + 37.2725 p_2 + 53.3597 p_3 + 66.5823 p_4 + 105$
-
-Fix the intercept at $160$, we can get $y = -39.7447 p_1 - 17.7275 p_2 - 1.6403 p_3 + 11.5823 p_4 + 160$.
-
-For $[0.05, 0.05, 0.85, 0.05]$, $y = 156.31125$. True value: $151.5$.
-
-Let $y = \frac{c}{c+1} * 210 + c_1 p_1 + c_2 p_2 + c_3 p_3 + \epsilon$
-
-\begin{table}[ht]
-  \centering
-  \caption{Regression results}
-  \begin{tabular}{|l|l|l|l|l|}
-  \hline
-  \# of sequences & c1 & c2 & c3 & Intercept \\
-  \hline
-  1  & 1.3163 & 3.5121 & 0.4751 & -2.2182 \\
-  20 & 2.7481 & 3.4819 & 2.0804 & -2.9253 \\
-  \hline
-  \end{tabular}
-\end{table}
-
-But the R-squared is 0.041, indicating that independent variables can not explain much in the variation of dependent variable.
-
-If we confine the region where $c$ is lower than $3.2$, the R-squared is 0.008. 
-
+We can give the absolute difference between the blue point and red point for each probability combination as below.
 
 \begin{table}[ht]
   \centering
   \caption{Difference Distribution}
   \begin{tabular}{|l|l|l|l|l|}
   \hline
-  \# of sequences & larger than 1 & larger than 2 & larger than 3 & larger than 4 \\
+  \# of instances & abs\_diff $\geq$ 1 & abs\_diff $\geq$ 2 & abs\_diff $\geq$ 3 & abs\_diff $\geq$ 4 \\
   \hline
   1  & 70.26 \% & 45.44\% & 25.03\% & 11.18\% \\
   20 & 32.92 \% & 5.13 \% & 1.74\% & 0.51 \% \\
@@ -214,37 +173,21 @@ If we confine the region where $c$ is lower than $3.2$, the R-squared is 0.008.
 \end{table}
 
 
-% Lack of interpretability. 
-% It also should include the size of seat layout.
+\begin{figure}[h]
+  \centering
+  \subfigure[One instance for each probability combination]{
+    \label{Fig1}
+    \includegraphics[width=0.48\textwidth]{./Figures/Figure_1.pdf}}
+  \subfigure[Average of 50 instances for each probability combination]{
+    \label{Fig2}
+    \includegraphics[width=0.48\textwidth]{./Figures/Figure_50.pdf}}
+  \caption{The difference distribution}
+  \label{Fig}
+\end{figure}
 
-
+The results show that we can estimate attendance rate based on $c$ for most probability combinations. 
 
 \newpage
-
-Let $E(D) = 150$.
-
-Two experiments:
-When $E(D) = 2.5T$, which means on average 2.5 people arrive for each group.
-
-$T =75$, the number of rows is 9, the number of seats each row is 25.
-
-Probabilities: 
-$p_1 = p_3 + 2p_4$. $p_3$ is from $0.05$ to $0.45$ with step size of 0.1. $p_4$ is from $0.05$ to $0.3$ with step size of 0.05.
-
-% Results: M1-M6, the number of accepted people, the number of total people.
-
-% \includepdf{./Figures/Results_25T.pdf}
-
-When $E(D) = 2T$, which means on average 2 people arrive for each group.
-
-$T = 60$, the number of rows is 10, the number of seats each row is 21.
-
-Probabilities: 
-$2p_2 + 4p_3 + 6p_4 =3$. $p_2$ is from $0.05$ to $0.95$ with step size of $0.1$. $p_3$ is from $0.05$ to $0.75$ with step size of $0.1$.
-
-% Results: M1-M6, the number of accepted people, the number of total people.
-
-% \includepdf{./Figures/Results_2T.pdf}
 
 
 \subsection{Different Periods}
@@ -279,7 +222,9 @@ We can find that the difference between the number of accepted people and the nu
 % When the number of periods is small, the seats 
 
 Probability 1: $[0.25, 0.25, 0.25, 0.25]$,
-Probability 2: $[0.4, 0.4, 0.1, 0.1]$
+Probability 2: $[0.4, 0.4, 0.1, 0.1]$,
+Probability 3: $[0.4, 0.4, 0.1, 0.1]$,
+Probability 4: $[0.5, 0.2, 0.2, 0.1]$.
 
 \begin{figure}[h]
   \centering
@@ -293,6 +238,15 @@ Probability 2: $[0.4, 0.4, 0.1, 0.1]$
   \label{Fig.lable}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \subfigure[Probability 3]{
+    \includegraphics[width=0.48\textwidth]{./Figures/period_3.pdf}}
+  \subfigure[Probability 4]{
+    \includegraphics[width=0.48\textwidth]{./Figures/period_4.pdf}}
+  \caption{The number of people served versus periods}
+\end{figure}
+
 There are three stages, 
 
 First stage: the capacity is sufficient. The social distancing will not cause any effect.
@@ -303,9 +257,14 @@ Third stage: As $T$ continues to increase, the gap will converge when the capaci
 
 The gap point represents the first point where the people without social distancing is larger than that with social distancing. 
 
-The government can make the policy about how much attendance rate.
+With the conclusion of the last section, we can estimate the attendance rate from $\frac{c}{c+1}*$ the number of seats. The number of periods will be $E(D)/c$.
+
+
+The government can make the policy on how much attendance rate can be established.
 
 \subsection{Group of Different Sizes}
+
+
 
 % \subsection{Measurement}
 

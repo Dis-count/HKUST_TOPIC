@@ -128,6 +128,8 @@ if __name__ == "__main__":
     # probab = [0.4, 0.4, 0.1, 0.1]
     # probab = [0.1, 0.4, 0.4, 0.1]
     probab = [0.5, 0.2, 0.2, 0.1]
+    # probab = [0.1, 0.3, 0.6]
+    # probab = [0.3, 0.3, 0.1, 0.2, 0.1]
 
     t_value = np.arange(30, 120, 1)
     people_value = np.zeros(len(period_range))
@@ -163,14 +165,18 @@ if __name__ == "__main__":
         people_value[cnt] = accept_people/count/total_seat * 100
         if gap_if:
             if accept_people/count - M1/count > 1:
-                point = (num_period-1, occup_value[cnt-1])
+                point = [num_period-1, occup_value[cnt-1]]
                 gap_if = False
         cnt += 1
-
+    print(point)
     plt.plot(t_value, people_value, 'bs', label='Without social distancing')
     plt.plot(t_value, occup_value, 'r--', label='With social distancing')
     plt.xlabel('Periods')
     plt.ylabel('Percentage of total seats')
-    plt.annotate('Gap', xy = point, xytext=(point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
+    point[1] = round(point[1], 2)
+    plt.annotate(r'Gap $%s$' % str(point), xy=point, xytext=(
+        point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
     plt.legend()
     plt.show()
+    print(point)
+

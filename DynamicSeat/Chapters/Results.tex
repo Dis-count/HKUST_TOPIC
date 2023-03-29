@@ -105,7 +105,7 @@ We discuss the effect of different probabilities in this sub-section. Suppose th
 % Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
 
 
-Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.5$, we call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$. The number of all sampled probability combinations is $n_p$. The number of rows is 10, and the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
+Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.05$, we call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$. The number of all sampled probability combinations is $n_p$. The number of rows is 10, and the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
 
 % \begin{figure}[h]
 %   \centering
@@ -223,17 +223,17 @@ We can find that the difference between the number of accepted people and the nu
 
 Probability 1: $[0.25, 0.25, 0.25, 0.25]$,
 Probability 2: $[0.4, 0.4, 0.1, 0.1]$,
-Probability 3: $[0.4, 0.4, 0.1, 0.1]$,
+Probability 3: $[0.1, 0.4, 0.4, 0.1]$,
 Probability 4: $[0.5, 0.2, 0.2, 0.1]$.
 
 \begin{figure}[h]
   \centering
   \subfigure[Probability 1]{
     \label{Fig.sub.1}
-    \includegraphics[width=0.48\textwidth]{./Figures/period_1.pdf}}
+    \includegraphics[width=0.48\textwidth]{./Figures/p1.pdf}}
   \subfigure[Probability 2]{
     \label{Fig.sub.2}
-    \includegraphics[width=0.48\textwidth]{./Figures/period_2.pdf}}
+    \includegraphics[width=0.48\textwidth]{./Figures/p2.pdf}}
   \caption{The number of people served versus periods}
   \label{Fig.lable}
 \end{figure}
@@ -241,7 +241,7 @@ Probability 4: $[0.5, 0.2, 0.2, 0.1]$.
 \begin{figure}[h]
   \centering
   \subfigure[Probability 3]{
-    \includegraphics[width=0.48\textwidth]{./Figures/period_3.pdf}}
+    \includegraphics[width=0.48\textwidth]{./Figures/p3.pdf}}
   \subfigure[Probability 4]{
     \includegraphics[width=0.48\textwidth]{./Figures/period_4.pdf}}
   \caption{The number of people served versus periods}
@@ -263,8 +263,20 @@ With the conclusion of the last section, we can estimate the attendance rate fro
 The government can make the policy on how much attendance rate can be established.
 
 \subsection{Group of Different Sizes}
+Let $c$ be $2.5$ for groups of different sizes.
 
+Probability of group size of 3: $[0.1, 0.3, 0.6]$.
 
+Probability of group size of 5: $[0.3, 0.3, 0.1, 0.2, 0.1]$.
+
+\begin{figure}[h]
+  \centering
+  \subfigure[group size of 3]{
+    \includegraphics[width=0.48\textwidth]{./Figures/group3.pdf}}
+  \subfigure[group size of 5]{
+    \includegraphics[width=0.48\textwidth]{./Figures/group5.pdf}}
+  \caption{The number of people served versus periods}
+\end{figure}
 
 % \subsection{Measurement}
 

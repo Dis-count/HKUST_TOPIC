@@ -1,8 +1,11 @@
 % !TEX root = ./sum1.tex
 % \section{Stochastic Demands Situation}
 
-\section{Scenario-based Stochastic Programming}
+\section{Scenario-based Stochastic Programming Formulation}
 % We use the random demand(scenarios) to estimate the seat assignment. Then y indicate the recourse making decision.
+
+You should use one paragraph to summerize what you have done here.
+
 
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega$ corresponds to a particular realization of the demand vector, $\mathbf{D}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{m,\omega})$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected value of people over all the scenarios, we propose a scenario-based stochastic programming.
 % As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. 
@@ -119,7 +122,7 @@ Here $E$ is the expectation with respect to the scenario set. Problem \eqref{BD_
 
 It is difficult to solve the above problem directly, we can relax problem \eqref{BD_master} to stochastic linear programming firstly. In section \ref{solve_by_benders}, we obtain an optimal linear solution by decomposition approach and generate a near-optimal seat assignment.
 
-\section{Solve The Scenario-based Two-stage Problem}\label{solve_by_benders}
+\subsection{Solve The Scenario-based Two-stage Problem}\label{solve_by_benders}
 
 At first, we generate a closed-form solution to the second-stage problem in section \ref{second_stage}. Then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Finally, we obtain a near-optimal seat assignment from the linear solution.
 

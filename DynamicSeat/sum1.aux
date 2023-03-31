@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -18,102 +21,97 @@
 \citation{fischetti2021safe}
 \citation{salari2020social}
 \citation{ghorbani2020model}
-\citation{gilmore1961linear}
-\citation{scheithauer1995modified}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{3}{section.2}\protected@file@percent }
 \citation{feng2013scenario}
 \citation{casey2005scenario}
 \citation{henrion2018problem}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{3}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Problem Description}{4}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Seat Planning Problem with Social Distance}{4}{subsection.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Problem Conversion\relax }}{4}{figure.caption.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dynamic Seat Assignment Problem with Social Distance}{4}{subsection.3.2}\protected@file@percent }
-\newlabel{dynamic_demand}{{3.2}{4}{Dynamic Seat Assignment Problem with Social Distance}{subsection.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dynamic Situations}{5}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Scenario-based Stochastic Programming}{5}{section.4}\protected@file@percent }
-\newlabel{sto_form}{{1}{6}{Scenario-based Stochastic Programming}{equation.4.1}{}}
-\newlabel{BD_master}{{2}{7}{Scenario-based Stochastic Programming}{equation.4.2}{}}
-\newlabel{BD_sub}{{3}{7}{Scenario-based Stochastic Programming}{equation.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Solve The Scenario-based Two-stage Problem}{7}{section.5}\protected@file@percent }
-\newlabel{solve_by_benders}{{5}{7}{Solve The Scenario-based Two-stage Problem}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Solve The Second Stage Problem}{8}{subsection.5.1}\protected@file@percent }
-\newlabel{second_stage}{{5.1}{8}{Solve The Second Stage Problem}{subsection.5.1}{}}
-\newlabel{BD_sub_dual}{{4}{8}{Solve The Second Stage Problem}{equation.5.4}{}}
-\newlabel{feasible_region}{{1}{8}{}{lem.1}{}}
-\newlabel{y_recursively}{{5}{8}{Solve The Second Stage Problem}{equation.5.5}{}}
-\newlabel{optimal_sol_sub_dual}{{1}{9}{}{thm.1}{}}
-\newlabel{BD_sub_simplified}{{6}{9}{}{equation.5.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Delayed Constraint Generation}{9}{subsection.5.2}\protected@file@percent }
-\newlabel{bender_stage}{{5.2}{9}{Delayed Constraint Generation}{subsection.5.2}{}}
-\newlabel{BD_master2}{{7}{9}{Delayed Constraint Generation}{equation.5.7}{}}
-\newlabel{one_ep_feasible}{{2}{9}{}{lem.2}{}}
-\newlabel{lemma_eq}{{8}{10}{Proof of lemma \ref {one_ep_feasible}}{equation.5.8}{}}
-\newlabel{lemma_eq2}{{9}{10}{Proof of lemma \ref {one_ep_feasible}}{equation.5.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Problem Description}{5}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Dynamic Seat Assignment Problem with Social Distance}{5}{subsection.3.1}\protected@file@percent }
+\newlabel{dynamic_demand}{{3.1}{5}{Dynamic Seat Assignment Problem with Social Distance}{subsection.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Seat Planning Problem with Social Distance}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Problem Conversion\relax }}{6}{figure.caption.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dynamic Situations}{6}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Scenario-based Stochastic Programming Formulation}{6}{section.4}\protected@file@percent }
+\newlabel{sto_form}{{1}{7}{Scenario-based Stochastic Programming Formulation}{equation.4.1}{}}
+\newlabel{BD_master}{{2}{8}{Scenario-based Stochastic Programming Formulation}{equation.4.2}{}}
+\newlabel{BD_sub}{{3}{8}{Scenario-based Stochastic Programming Formulation}{equation.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Solve The Scenario-based Two-stage Problem}{8}{subsection.4.1}\protected@file@percent }
+\newlabel{solve_by_benders}{{4.1}{8}{Solve The Scenario-based Two-stage Problem}{subsection.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve The Second Stage Problem}{9}{subsection.4.2}\protected@file@percent }
+\newlabel{second_stage}{{4.2}{9}{Solve The Second Stage Problem}{subsection.4.2}{}}
+\newlabel{BD_sub_dual}{{4}{9}{Solve The Second Stage Problem}{equation.4.4}{}}
+\newlabel{feasible_region}{{1}{9}{}{lem.1}{}}
+\newlabel{y_recursively}{{5}{9}{Solve The Second Stage Problem}{equation.4.5}{}}
+\newlabel{optimal_sol_sub_dual}{{1}{10}{}{thm.1}{}}
+\newlabel{BD_sub_simplified}{{6}{10}{}{equation.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Delayed Constraint Generation}{10}{subsection.4.3}\protected@file@percent }
+\newlabel{bender_stage}{{4.3}{10}{Delayed Constraint Generation}{subsection.4.3}{}}
+\newlabel{BD_master2}{{7}{10}{Delayed Constraint Generation}{equation.4.7}{}}
+\newlabel{one_ep_feasible}{{2}{10}{}{lem.2}{}}
+\newlabel{lemma_eq}{{8}{11}{Proof of lemma \ref {one_ep_feasible}}{equation.4.8}{}}
+\newlabel{lemma_eq2}{{9}{11}{Proof of lemma \ref {one_ep_feasible}}{equation.4.9}{}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{cut_algo}{{\caption@xref {cut_algo}{ on input line 295}}{10}{Delayed Constraint Generation}{equation.5.9}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The benders decomposition algorithm\relax }}{10}{algorithm.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Obtain The Feasible Seat Planning}{11}{subsection.5.3}\protected@file@percent }
-\newlabel{seat_assignment}{{5.3}{11}{Obtain The Feasible Seat Planning}{subsection.5.3}{}}
-\newlabel{one_form}{{10}{11}{Obtain The Feasible Seat Planning}{equation.5.10}{}}
-\newlabel{deter_upper}{{11}{11}{Obtain The Feasible Seat Planning}{equation.5.11}{}}
+\newlabel{cut_algo}{{\caption@xref {cut_algo}{ on input line 298}}{11}{Delayed Constraint Generation}{equation.4.9}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The benders decomposition algorithm\relax }}{11}{algorithm.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Obtain The Feasible Seat Planning}{12}{subsection.4.4}\protected@file@percent }
+\newlabel{seat_assignment}{{4.4}{12}{Obtain The Feasible Seat Planning}{subsection.4.4}{}}
+\newlabel{one_form}{{10}{12}{Obtain The Feasible Seat Planning}{equation.4.10}{}}
+\newlabel{deter_upper}{{11}{12}{Obtain The Feasible Seat Planning}{equation.4.11}{}}
 \citation{dantzig1957discrete}
-\newlabel{deter_lower}{{12}{12}{Obtain The Feasible Seat Planning}{equation.5.12}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Feasible seat planning algorithm\relax }}{12}{algorithm.2}\protected@file@percent }
-\newlabel{feasible_seat}{{2}{12}{Feasible seat planning algorithm\relax }{algorithm.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Dynamic Situation with Stochastic Information}{13}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Dynamic Seat Assignment(DSA) Method}{13}{subsection.6.1}\protected@file@percent }
-\newlabel{nested_policy}{{6.1}{13}{Dynamic Seat Assignment(DSA) Method}{subsection.6.1}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Dynamic seat assignment(DSA) method\relax }}{14}{algorithm.3}\protected@file@percent }
-\newlabel{algo_nested_policy}{{3}{14}{Dynamic seat assignment(DSA) method\relax }{algorithm.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Seat assignment after booking period}{14}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Seat assignment during booking period}{15}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Benchmark}{15}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}FCFS}{15}{subsubsection.6.4.1}\protected@file@percent }
-\newlabel{FCFS-based}{{6.4.1}{15}{FCFS}{subsubsection.6.4.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Largest Patterns Planning}{15}{subsubsection.6.4.2}\protected@file@percent }
-\newlabel{largest_pattern}{{6.4.2}{15}{Largest Patterns Planning}{subsubsection.6.4.2}{}}
-\newlabel{algo_largest}{{\caption@xref {algo_largest}{ on input line 149}}{15}{Largest Patterns Planning}{subsubsection.6.4.2}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Method by using the largest patterns\relax }}{15}{algorithm.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Results}{16}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Benders Decomposition versus IP}{16}{subsection.7.1}\protected@file@percent }
-\newlabel{Bender_IP}{{7.1}{16}{Benders Decomposition versus IP}{subsection.7.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running time of Decomposion and IP\relax }}{16}{table.caption.3}\protected@file@percent }
-\newlabel{tab_1}{{1}{16}{Running time of Decomposion and IP\relax }{table.caption.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Near-optimal Solution versus IP Solution under Nested Policy}{16}{subsection.7.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Results of Decomposion and IP under nested policy\relax }}{16}{table.caption.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Different Probabilities}{17}{subsection.7.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The number of people served versus $c$\relax }}{17}{figure.caption.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{17}{figure.caption.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{17}{figure.caption.5}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Difference Distribution\relax }}{18}{table.caption.6}\protected@file@percent }
-\newlabel{Fig1}{{3(a)}{18}{Subfigure 3(a)}{subfigure.3.1}{}}
-\newlabel{sub@Fig1}{{(a)}{18}{Subfigure 3(a)\relax }{subfigure.3.1}{}}
-\newlabel{Fig2}{{3(b)}{18}{Subfigure 3(b)}{subfigure.3.2}{}}
-\newlabel{sub@Fig2}{{(b)}{18}{Subfigure 3(b)\relax }{subfigure.3.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The difference distribution\relax }}{18}{figure.caption.7}\protected@file@percent }
-\newlabel{Fig}{{3}{18}{The difference distribution\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{18}{figure.caption.7}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{18}{figure.caption.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Different Periods}{19}{subsection.7.4}\protected@file@percent }
-\newlabel{Fig.sub.1}{{4(a)}{19}{Subfigure 4(a)}{subfigure.4.1}{}}
-\newlabel{sub@Fig.sub.1}{{(a)}{19}{Subfigure 4(a)\relax }{subfigure.4.1}{}}
-\newlabel{Fig.sub.2}{{4(b)}{19}{Subfigure 4(b)}{subfigure.4.2}{}}
-\newlabel{sub@Fig.sub.2}{{(b)}{19}{Subfigure 4(b)\relax }{subfigure.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The number of people served versus periods\relax }}{19}{figure.caption.8}\protected@file@percent }
-\newlabel{Fig.lable}{{4}{19}{The number of people served versus periods\relax }{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Probability 1}}}{19}{figure.caption.8}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Probability 2}}}{19}{figure.caption.8}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The number of people served versus periods\relax }}{19}{figure.caption.9}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Probability 3}}}{19}{figure.caption.9}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Probability 4}}}{19}{figure.caption.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Group of Different Sizes}{20}{subsection.7.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The number of people served versus periods\relax }}{20}{figure.caption.10}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {group size of 3}}}{20}{figure.caption.10}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {group size of 5}}}{20}{figure.caption.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Extension}{21}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Online booking}{21}{subsection.8.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}How to give a balanced seat assignment}{21}{subsection.8.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Property}{21}{subsection.8.3}\protected@file@percent }
+\newlabel{deter_lower}{{12}{13}{Obtain The Feasible Seat Planning}{equation.4.12}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Feasible seat planning algorithm\relax }}{13}{algorithm.2}\protected@file@percent }
+\newlabel{feasible_seat}{{2}{13}{Feasible seat planning algorithm\relax }{algorithm.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Dynamic Situation with Stochastic Information}{14}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Dynamic Seat Assignment(DSA) Method}{14}{subsection.5.1}\protected@file@percent }
+\newlabel{nested_policy}{{5.1}{14}{Dynamic Seat Assignment(DSA) Method}{subsection.5.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Dynamic seat assignment(DSA) method\relax }}{15}{algorithm.3}\protected@file@percent }
+\newlabel{algo_nested_policy}{{3}{15}{Dynamic seat assignment(DSA) method\relax }{algorithm.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Seat assignment after booking period}{15}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Seat assignment during booking period}{16}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Benchmark}{16}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}FCFS}{16}{subsubsection.5.4.1}\protected@file@percent }
+\newlabel{FCFS-based}{{5.4.1}{16}{FCFS}{subsubsection.5.4.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Largest Patterns Planning}{16}{subsubsection.5.4.2}\protected@file@percent }
+\newlabel{largest_pattern}{{5.4.2}{16}{Largest Patterns Planning}{subsubsection.5.4.2}{}}
+\newlabel{algo_largest}{{\caption@xref {algo_largest}{ on input line 149}}{16}{Largest Patterns Planning}{subsubsection.5.4.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Method by using the largest patterns\relax }}{16}{algorithm.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{17}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Benders Decomposition versus IP}{17}{subsection.6.1}\protected@file@percent }
+\newlabel{Bender_IP}{{6.1}{17}{Benders Decomposition versus IP}{subsection.6.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running time of Decomposion and IP\relax }}{17}{table.caption.3}\protected@file@percent }
+\newlabel{tab_1}{{1}{17}{Running time of Decomposion and IP\relax }{table.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Near-optimal Solution versus IP Solution under Nested Policy}{17}{subsection.6.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Results of Decomposion and IP under nested policy\relax }}{17}{table.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Methods Versus Optimal Versus FCFS}{18}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Different Periods}{18}{subsection.6.4}\protected@file@percent }
+\newlabel{Fig.sub.1}{{2(a)}{18}{Subfigure 2(a)}{subfigure.2.1}{}}
+\newlabel{sub@Fig.sub.1}{{(a)}{18}{Subfigure 2(a)\relax }{subfigure.2.1}{}}
+\newlabel{Fig.sub.2}{{2(b)}{18}{Subfigure 2(b)}{subfigure.2.2}{}}
+\newlabel{sub@Fig.sub.2}{{(b)}{18}{Subfigure 2(b)\relax }{subfigure.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The number of people served versus periods\relax }}{18}{figure.caption.5}\protected@file@percent }
+\newlabel{Fig.lable}{{2}{18}{The number of people served versus periods\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Probability 1}}}{18}{figure.caption.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Probability 2}}}{18}{figure.caption.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The number of people served versus periods\relax }}{19}{figure.caption.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Probability 3}}}{19}{figure.caption.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Probability 4}}}{19}{figure.caption.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Different Probabilities}{19}{subsection.6.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The number of people served versus $c$\relax }}{19}{figure.caption.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{19}{figure.caption.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{19}{figure.caption.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Difference Distribution\relax }}{20}{table.caption.8}\protected@file@percent }
+\newlabel{Fig1}{{5(a)}{20}{Subfigure 5(a)}{subfigure.5.1}{}}
+\newlabel{sub@Fig1}{{(a)}{20}{Subfigure 5(a)\relax }{subfigure.5.1}{}}
+\newlabel{Fig2}{{5(b)}{20}{Subfigure 5(b)}{subfigure.5.2}{}}
+\newlabel{sub@Fig2}{{(b)}{20}{Subfigure 5(b)\relax }{subfigure.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The difference distribution\relax }}{20}{figure.caption.9}\protected@file@percent }
+\newlabel{Fig}{{5}{20}{The difference distribution\relax }{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{20}{figure.caption.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{20}{figure.caption.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Extension}{21}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Online booking}{21}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}How to give a balanced seat assignment}{21}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Property}{21}{subsection.7.3}\protected@file@percent }
 \newlabel{ex_largest}{{1}{21}{}{example.1}{}}
 \newlabel{prop_I_1}{{1}{22}{}{prop.1}{}}
 \newlabel{prop_I_2}{{2}{22}{}{prop.2}{}}
@@ -125,9 +123,7 @@
 \bibcite{feng2013scenario}{4}
 \bibcite{fischetti2021safe}{5}
 \bibcite{ghorbani2020model}{6}
-\bibcite{gilmore1961linear}{7}
-\bibcite{henrion2018problem}{8}
-\bibcite{salari2020social}{9}
-\bibcite{scheithauer1995modified}{10}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{23}{section.9}\protected@file@percent }
+\bibcite{henrion2018problem}{7}
+\bibcite{salari2020social}{8}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{23}{section.8}\protected@file@percent }
 \gdef \@abspage@last{24}

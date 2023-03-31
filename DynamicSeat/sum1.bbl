@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 
 \bibitem{barry2021optimal}
 Michael Barry, Claudio Gambella, Fabio Lorenzi, John Sheehan, and Joern
@@ -35,11 +35,6 @@ Elaheh Ghorbani, Hamid Molavian, and Fred Barez.
   their seating arrangements in aircrafts.
 \newblock {\em arXiv preprint arXiv:2010.10993}, 2020.
 
-\bibitem{gilmore1961linear}
-Paul~C Gilmore and Ralph~E Gomory.
-\newblock A linear programming approach to the cutting-stock problem.
-\newblock {\em Operations research}, 9(6):849--859, 1961.
-
 \bibitem{henrion2018problem}
 R{\'e}ne Henrion and Werner R{\"o}misch.
 \newblock Problem-based optimal scenario generation and reduction in stochastic
@@ -51,11 +46,5 @@ Mostafa Salari, R~John Milne, Camelia Delcea, Lina Kattan, and Liviu-Adrian
   Cotfas.
 \newblock Social distancing in airplane seat assignments.
 \newblock {\em Journal of Air Transport Management}, 89:101915, 2020.
-
-\bibitem{scheithauer1995modified}
-Guntram Scheithauer and Johannes Terno.
-\newblock The modified integer round-up property of the one-dimensional cutting
-  stock problem.
-\newblock {\em European Journal of Operational Research}, 84(3):562--571, 1995.
 
 \end{thebibliography}

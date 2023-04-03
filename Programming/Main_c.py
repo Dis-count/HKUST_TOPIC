@@ -227,14 +227,14 @@ if __name__ == "__main__":
     # plt.show()
 
 
-dataA = pd.DataFrame(dataset, columns=["p1", "p2", "p3", "p4", 'y'])
+# dataA = pd.DataFrame(dataset, columns=["p1", "p2", "p3", "p4", 'y'])
 
-data_x = dataA[['p1','p2','p3']]
+# data_x = dataA[['p1','p2','p3']]
 
-data_y = dataA['y']
+# data_y = dataA['y']
 
-mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
-res = mod.fit()
+# mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
+# res = mod.fit()
 
 my_file.write(str(res.summary()))
 

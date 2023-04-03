@@ -1,45 +1,28 @@
 % !TEX root = sum1.tex
 \section{Literature Review}
 
-Dynamic seat assignment is a process of assigning seats to passengers on a transportation vehicle, such as an airplane, train, or bus, in a way that maximizes the efficiency and convenience of the seating arrangements. Dynamic seat assignment takes into account various factors such as passenger preferences, seat availability, and the overall balance of the weight on the vehicle. This can be done manually by the staff, or through automated systems that use algorithms to optimize the seat assignments. Dynamic seat assignment is often used by airlines to manage their seating plans and to provide a better experience for their passengers.
+\subsection{Dynamic seat assignment}
+Dynamic seat assignment is a process of assigning seats to passengers on a transportation vehicle, such as an airplane, train, or bus, in a way that maximizes the efficiency and convenience of the seating arrangements \cite{hamdouch2011schedule, berge1993demand}. This approach is also used in cinemas and concert venues to optimize the seating arrangements for the audience, with the goal of providing the best possible experience for each audience member while maximizing ticket sales and revenue for the venue.
 
-It is also used in cinemas and concert venues to optimize the seating arrangements for the audience. The goal is to provide the best possible experience for each audience member while maximizing the ticket sales and revenue for the venue. In a cinema or theater, dynamic seat assignment can be used to accommodate groups and individuals with varying seating preferences, such as those who prefer front-row seats or those who prefer the back. It can also be used to ensure that seats are filled in an efficient manner, with as few empty seats as possible. In a concert venue, dynamic seat assignment can be used to optimize the sound quality and overall experience for each audience member. This may involve assigning seats based on the location of the stage, the acoustics of the venue, and the preferences of the audience members.
+However, implementing dynamic seat assignment with social distance in cinemas and concert venues presents several challenges. The primary challenge is to balance the need for safety with the desire to maximize revenue for the venue. This requires careful consideration of various factors, such as the layout of the venue, the number of available seats, and the preferences of the audience. To implement dynamic seat assignment with social distance, venues may need to adjust their seating plans to accommodate the recommended distance between audience members. This may involve reducing the overall number of seats or reconfiguring the seating arrangements.
 
-Dynamic seat assignment in cinemas and concert venues can be done manually by the staff or through automated systems that use algorithms to optimize the seat assignments based on various factors, such as ticket sales, seat availability, and customer preferences.
+Implementing dynamic seat assignment with social distance can be done manually by the staff or through automated systems that use algorithms to optimize the seat assignments based on various factors, such as ticket sales, seat availability, and customer preferences. However, the implementation of social distance measures poses unique challenges that require careful planning and consideration of various factors to balance safety with revenue generation.
 
-This paper considers the dynamic seat assignment with social distancing, where the groups should sit with 
+Despite these challenges, dynamic seat assignment with social distance is a promising approach to help ensure the safety of audience members in cinemas, concert venues, and other public spaces during the COVID-19 pandemic.
 
-%  Challenge
 
-There are several challenges that cinemas and concert venues face when implementing dynamic seat assignment. Some of these challenges include:
+\subsection{Seat assignemnt with social distance}
 
-Technical challenges: Implementing a dynamic seat assignment system requires a robust and reliable technical infrastructure, which can be expensive and time-consuming to set up. The system must be able to handle a large volume of data, such as seat availability, customer preferences, and ticket sales.
-
-Customer preferences: Audience members have different preferences when it comes to seating arrangements, and it can be challenging to accommodate everyone's preferences while maximizing the revenue for the venue. For example, some customers prefer to sit in the front row, while others prefer to sit in the middle or back of the venue.
-
-Unforeseen events: In the case of unforeseen events, such as cancellations or changes in the seating arrangements, the system may need to be adjusted quickly, which can be challenging for venue staff.
-
-Overall, implementing a dynamic seat assignment system in cinemas and concert venues requires careful planning, technical expertise, and clear communication with customers.
-
-Social distancing:
-
-Dynamic seat assignment with social distance is a relatively new concept that has emerged in response to the COVID-19 pandemic. It involves the use of dynamic seat assignment algorithms to optimize the seating arrangements in a way that maintains a safe distance between audience members.
-
-The primary challenge with dynamic seat assignment with social distance is to balance the need for safety with the desire to maximize revenue for the venue. This requires careful consideration of various factors, such as the layout of the venue, the number of available seats, and the preferences of the audience.
-
-To implement dynamic seat assignment with social distance, venues may need to adjust their seating plans to accommodate the recommended distance between audience members. This may involve reducing the overall number of seats or reconfiguring the seating arrangements.
-
-Dynamic seat assignment with social distance can be implemented manually by the venue staff, or through automated systems that use algorithms to optimize the seating arrangements based on various factors, such as the number of available seats, customer preferences, and the recommended distance between audience members.
-
-Overall, dynamic seat assignment with social distance is a promising approach to help ensure the safety of audience members in cinemas, concert venues, and other public spaces during the COVID-19 pandemic. However, it requires careful planning and consideration of various factors to balance safety with revenue generation.
+Almost all existing work focuses on the static version of seat assignment with social distance.
 
 
 
-% Firstly, multiple knapsack problem.
-%
-% Secondly, stochastic programming/ benders decomposition?
-% 
-%  Dynamic
+
+
+% Dynamic seat assignment with social distance can be implemented manually by the venue staff, or through automated systems that use algorithms to optimize the seating arrangements based on various factors, such as the number of available seats, customer preferences, and the recommended distance between audience members.
+
+
+\subsection{Scenario generation}
 
 It is challenging to consider all the possible realizations; thus, it is practicable to use discrete distributions with a finite number of scenarios to approximate the random demands. This procedure is often called scenario generation.
 
@@ -49,16 +32,15 @@ Some papers consider obtaining a set of scenarios that realistically represents 
 Another process to reduce the calculation is called scenario reduction. It tries to approximate the original scenario set with a smaller subset that retains essential features.
 
 
-% For the stochastic situation, we assume the group sizes are discretized from independent random variables following some distribution.(non-negative)
 
-Every time we can regenerate the scenario based on the realized demands. (Use the conditional distribution or the truncated distribution)
+% Every time we can regenerate the scenario based on the realized demands. (Use the conditional distribution or the truncated distribution)
 
 
-Suppose that the groups arrive from small to large according to their size. Once a larger group comes, the smaller one will never appear again.
+% Suppose that the groups arrive from small to large according to their size. Once a larger group comes, the smaller one will never appear again.
 
-When a new group arrives (suppose we have accepted $n$ groups with the same size), we accept or reject it according to the supply (when $n+1 < \text{supply}$, we accept it), then update the scenario set according to the truncated distribution. We can obtain a new supply with the new probability and scenario set.
+% When a new group arrives (suppose we have accepted $n$ groups with the same size), we accept or reject it according to the supply (when $n+1 < \text{supply}$, we accept it). 
+% then update the scenario set according to the truncated distribution. We can obtain a new supply with the new probability and scenario set.
 
-With the conclusion of section , we know how to reject a request. Once we reject one group, we will reject all groups of the same size. 
 
 
 \newpage

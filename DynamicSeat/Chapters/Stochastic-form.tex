@@ -1,11 +1,11 @@
 % !TEX root = ./sum1.tex
 % \section{Stochastic Demands Situation}
 
-\section{Scenario-based Stochastic Programming Formulation}
+\section{Scenario-based Stochastic Programming}
 % We use the random demand(scenarios) to estimate the seat assignment. Then y indicate the recourse making decision.
+Firstly, we give the formulation of the scenario-based stochastic programming. Then we develop the benders decomposition to obtain the optimal linear solution. Finally, we obtain a feasible seat planning. 
 
-You should use one paragraph to summerize what you have done here.
-
+\subsection{Formulation}
 
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega$ corresponds to a particular realization of the demand vector, $\mathbf{D}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{m,\omega})$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected value of people over all the scenarios, we propose a scenario-based stochastic programming.
 % As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. 
@@ -127,7 +127,7 @@ It is difficult to solve the above problem directly, we can relax problem \eqref
 At first, we generate a closed-form solution to the second-stage problem in section \ref{second_stage}. Then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Finally, we obtain a near-optimal seat assignment from the linear solution.
 
 
-\subsection{Solve The Second Stage Problem}\label{second_stage}
+\subsubsection{Solve The Second Stage Problem}\label{second_stage}
 
 Consider a $\mathbf{x}$ such that $\mathbf{s x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents our seat assignment for the first stage decisions. Once $\mathbf{x}$ is fixed, the optimal second stage decisions $\mathbf{y}_{\omega}$ can be determined by solving problem \eqref{BD_sub} for each $\omega$.
 
@@ -222,7 +222,7 @@ The larger the value of $\alpha$ associated with a negative integer is, the smal
 
 We can use the forward method, calculating from $\alpha_{1 \omega}$ to $\alpha_{m \omega}$, to obtain the value of $\alpha_{\omega}$ instead of solving linear programming.
 
-\subsection{Delayed Constraint Generation}\label{bender_stage}
+\subsubsection{Delayed Constraint Generation}\label{bender_stage}
 Benders decomposition works with only a subset of those exponentially many constraints and adds more constraints iteratively until the optimal solution of Benders Master Problem(BMP) is attained. This procedure is known as delayed constraint generation.
 
 % Restricted Benders master problem:

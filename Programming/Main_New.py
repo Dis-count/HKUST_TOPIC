@@ -332,7 +332,7 @@ if __name__ == "__main__":
 
         multi = np.arange(1, I+1)
 
-        count = 50
+        count = 1
         for j in range(count):
             sequence, ini_demand = a_instance.random_generate()
 

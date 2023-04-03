@@ -1,10 +1,16 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{barry2021optimal}
 Michael Barry, Claudio Gambella, Fabio Lorenzi, John Sheehan, and Joern
   Ploennigs.
 \newblock Optimal seat allocation under social distancing constraints.
 \newblock {\em arXiv preprint arXiv:2105.05017}, 2021.
+
+\bibitem{berge1993demand}
+Matthew~E Berge and Craig~A Hopperstad.
+\newblock Demand driven dispatch: A method for dynamic aircraft capacity
+  assignment, models and algorithms.
+\newblock {\em Operations research}, 41(1):153--168, 1993.
 
 \bibitem{casey2005scenario}
 Michael~S Casey and Suvrajeet Sen.
@@ -35,11 +41,23 @@ Elaheh Ghorbani, Hamid Molavian, and Fred Barez.
   their seating arrangements in aircrafts.
 \newblock {\em arXiv preprint arXiv:2010.10993}, 2020.
 
+\bibitem{hamdouch2011schedule}
+Younes Hamdouch, HW~Ho, Agachai Sumalee, and Guodong Wang.
+\newblock Schedule-based transit assignment model with vehicle capacity and
+  seat availability.
+\newblock {\em Transportation Research Part B: Methodological},
+  45(10):1805--1830, 2011.
+
 \bibitem{henrion2018problem}
 R{\'e}ne Henrion and Werner R{\"o}misch.
 \newblock Problem-based optimal scenario generation and reduction in stochastic
   programming.
 \newblock {\em Mathematical Programming}, pages 1--23, 2018.
+
+\bibitem{salari2022social}
+Mostafa Salari, R~John Milne, Camelia Delcea, and Liviu-Adrian Cotfas.
+\newblock Social distancing in airplane seat assignments for passenger groups.
+\newblock {\em Transportmetrica B: Transport Dynamics}, 10(1):1070--1098, 2022.
 
 \bibitem{salari2020social}
 Mostafa Salari, R~John Milne, Camelia Delcea, Lina Kattan, and Liviu-Adrian

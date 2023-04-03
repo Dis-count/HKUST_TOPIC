@@ -132,21 +132,31 @@ if __name__ == "__main__":
 
     c_value = np.zeros(p_len)
     people_value = np.zeros(p_len)
-
+    optimal_value = np.zeros(p_len)
     begin_time = time.time()
     filename = 'different_c' + str(time.time()) + '.txt'
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    count = 1
+    count = 50
 
     for ind_probab, probab in enumerate(p):
 
         my_file.write('probabilities: \t' + str(probab) + '\n')
         # probab = [0.3, 0.5, 0.1, 0.1]
 
-        roll_width = np.ones(given_lines) * 21
+        # roll_width = np.ones(given_lines) * 21
+        
+        # roll_width = np.arange(17,22)
+        # roll_width= np.append(roll_width, np.arange(21,26))
+        
+        roll_width = np.array([26, 21, 24, 20, 20, 17, 23, 19, 21, 19])
+
         # total_seat = np.sum(roll_width)
+        multi = np.arange(1, I+1)
+
+        c_p = multi @ probab
+        c_value[ind_probab] = c_p
 
         a_instance = CompareMethods(
             roll_width, given_lines, I, probab, num_period, num_sample)
@@ -155,11 +165,6 @@ if __name__ == "__main__":
         accept_people = 0
         # num_people = 0
 
-        multi = np.arange(1, I+1)
-
-        c_p = multi @ probab
-        c_value[ind_probab] = c_p
-        
         for j in range(count):
             sequence = a_instance.random_generate()
             # total_people = sum(sequence) - num_period
@@ -175,6 +180,7 @@ if __name__ == "__main__":
             ratio6 += np.dot(multi, g)
             accept_people += optimal
 
+        optimal_value[ind_probab] = accept_people/count
         people_value[ind_probab] = ratio6/count
         my_file.write('Result: %.2f \n' % (ratio6/count))
 
@@ -195,10 +201,10 @@ if __name__ == "__main__":
     diff = np.zeros(p_len)
     ratio = 0
     for i in range(p_len):
-        if c_value[i] < 3.2:
+        if c_value[i] <= 3.565:
             occup_value[i] = sum(roll_width) * (c_value[i]/(c_value[i]+1))
         else:
-            occup_value[i] = 160
+            occup_value[i] = 164
 
         diff[i] = occup_value[i]- people_value[i]
 
@@ -210,17 +216,18 @@ if __name__ == "__main__":
         #     my_file.write('Deviated probability: ' + str(p[i]) + '\t')
         #     my_file.write('Deviated value: %.2f \n' % diff[i])
     
-    print(sum(abs(diff) >= 4)/p_len)
-    print(sum(abs(diff) >= 3)/p_len)
-    print(sum(abs(diff) >= 2)/p_len)
-    print(sum(abs(diff) >= 1)/p_len)
+    # print(sum(abs(diff) >= 4)/p_len)
+    # print(sum(abs(diff) >= 3)/p_len)
+    # print(sum(abs(diff) >= 2)/p_len)
+    # print(sum(abs(diff) >= 1)/p_len)
 
-    plt.hist(diff, bins=20, color='red', alpha=0.75)
-    plt.title('Difference Distribution')
-    plt.show()
-    # plt.scatter(c_value, people_value, c = "blue")
-    # plt.scatter(c_value, occup_value, c = "red")
+    # plt.hist(diff, bins=20, color='red', alpha=0.75)
+    # plt.title('Difference Distribution')
     # plt.show()
+    plt.scatter(c_value, people_value, c = "blue")
+    plt.scatter(c_value, occup_value, c = "red")
+    # plt.scatter(c_value, optimal_value, c = "green")
+    plt.show()
 
 my_file.close()
 

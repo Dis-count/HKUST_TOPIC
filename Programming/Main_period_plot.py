@@ -121,17 +121,15 @@ class CompareMethods:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(30,120,1)
+    period_range = range(10,100,1)
     given_lines = 10
     # np.random.seed(i)
     # probab = [0.25, 0.25, 0.25, 0.25]
-    # probab = [0.4, 0.4, 0.1, 0.1]
-    # probab = [0.1, 0.4, 0.4, 0.1]
-    probab = [0.5, 0.2, 0.2, 0.1]
+    probab = [0.2, 0.3, 0.3, 0.2]
     # probab = [0.1, 0.3, 0.6]
     # probab = [0.3, 0.3, 0.1, 0.2, 0.1]
 
-    t_value = np.arange(30, 120, 1)
+    t_value = np.arange(10, 100, 1)
     people_value = np.zeros(len(period_range))
     occup_value = np.zeros(len(period_range))
 
@@ -169,7 +167,7 @@ if __name__ == "__main__":
                 gap_if = False
         cnt += 1
     print(point)
-    plt.plot(t_value, people_value, 'bs', label='Without social distancing')
+    plt.plot(t_value, people_value, 'b-', label='Without social distancing')
     plt.plot(t_value, occup_value, 'r--', label='With social distancing')
     plt.xlabel('Periods')
     plt.ylabel('Percentage of total seats')

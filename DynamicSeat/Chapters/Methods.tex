@@ -1,11 +1,13 @@
 % !TEX root = sum1.tex
 
-\section{Dynamic Situation with Stochastic Information}
+\section{Dynamic Seat Assignment(DSA)}
 In this section, we will present the methods to assign seats with stochastic information.
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i = 1,\ldots, J$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$.
 
 Suppose there are $T$ independent periods; at most, one group will arrive in each period.
-There are $J$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = j) = p_j$, $j = 1,\ldots,J$ and $\sum_{j} p_{j} =1$. Then a sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{j} = \sum_{t} I(y_t = j)$, i.e., the count number of times group type $j$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{J})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{J} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{J}!} \prod_{j=1}^{J} p_{j}^{N_j}, T = \sum_{j=1}^{J} N_{j}.$$
+There are $J$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = j) = p_j$, $j = 1,\ldots,J$ and $\sum_{j} p_{j} =1$. 
+
+
 
 % (It can be modeled as a multinomial distribution, $p(\mathbf{Y} \mid \mathbf{p})=\prod_{j=1}^{J} p_j N_j$).
 
@@ -20,10 +22,6 @@ There are $J$ different group types. Let $\mathbf{y}$ be a discrete random varia
 % Then, if we fix the seat assignment as $[3,3]$. For the sequence, $2,2,2,2,2,3,3,3,3,3$, we will place one $2$ in a three-seat. 
 % But for the sequence, $3,3,3,3,3,2,2,2,2,2$, we will accept three $3$ and three $2$.
 
-It is clear that the number of different sequences is $J^{T}$. The number of different scenarios is $O(T^{J-1})$ which can be obtained by the following DP.
-
-Use $D(T,J) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$.
-Then, we know the recurrence relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$.
 
 The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
 
@@ -32,7 +30,7 @@ The number of scenarios is too large to enumerate all possible cases. Thus, we c
 % Each group arrives with the same probability.
 % The number of sequences generating from multinomial distribution is $1000$. Then, we can obtain $[0,3,6,11]$ from stochastic programming. When the number of sequences is 5000, we still obtain $[0,3,6,11]$. It shows that sampling is practical.
 
-\subsection{Dynamic Seat Assignment(DSA) Method}\label{nested_policy}
+\subsection{Assign-to-Seat Rules}\label{nested_policy}
 % Recall that the stochastic programming only considers the situation that small-size groups can use the surplus large-size seats.
 
 Once we obtain a feasible seat planning, we must follow some basic rules to assign seats.
@@ -83,19 +81,21 @@ The algorithm is shown below:
 We show the results of Benders and IP under nested policy in section \ref{Bender_IP}.
 
 
-\subsection{Seat assignment after booking period}
-We develop a DP-based method by relaxing all rows to one row with the same capacity.
-Suppose there always exists one seat assignment under the total capacity. Then we can use DP to make the decision in each period.
-
-$$V(S,T) = \sum_{i \in N} p_i \max\{ {[V((S-s_i-1),T-1)+ s_i]}, {V(S,T-1)}\}$$
-
-After obtaining the pre-accepted sequence, we still need to check whether this sequence is feasible for the seat assignment. In most cases, it is feasible. That is the reason why we use relaxation. When it is not feasible, we should delete the group one by one from the last arrival of the sequence until it is feasible. In practice, we reject the request in the pre-accepted sequence until we cannot find a feasible seat assignment.
-
-% We need to assign seats to the group for each arrival. In each period, the group can select the row they want to sit when the capacity is enough. FCFS will be more appropriate. But M1 and M3 can also be used.
-
 \subsection{Seat assignment during booking period}
 % we make the decision according to the realized arrivals.
 The dynamic seat assignment method can give the seat planning before the group arrivals. The specific procedures are demonstrated in the above sections. The first step is to obtain the feasible seat planning from Algorithm \ref{feasible_seat}. Then accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
+
+\subsection{Seat assignment after booking period}
+
+We have developed a dynamic programming(DP)-based method by relaxing all rows to one row with the same capacity. Assuming that there always exists a seat assignment under the total capacity of seats, we can use DP to make decisions in each period.
+
+
+$$V_{t}(S) = \sum_{i \in m} p_i \max\{ {[V_{t-1}(S-s_i-1)+ s_i]}, {V_{t-1}(S)}\}$$
+
+After obtaining the pre-accepted sequence, we still need to check whether this sequence is feasible for the seat assignment. In most cases, the pre-accepted sequence is feasible, which is why we use relaxation. However, in cases where the sequence is not feasible, we must delete groups one by one from the last arrival of the sequence until it becomes feasible. In practice, we begin to reject the arrival until we cannot find a feasible seat assignment.
+
+
+% We need to assign seats to the group for each arrival. In each period, the group can select the row they want to sit when the capacity is enough. FCFS will be more appropriate. But M1 and M3 can also be used.
 
 
 % update the scenario and the probability, add constraints when re-calculating stochastic programming.
@@ -124,10 +124,10 @@ The dynamic seat assignment method can give the seat planning before the group a
 
 \subsection{Benchmark}
  
-The benchmarks for the above two situations are described below.
+% The benchmarks for the above two situations are described below.
 
 \subsubsection{FCFS}\label{FCFS-based}
-For ticket reservation without seat selection, the intuitive but trivial method will be on a first-come-first-served basis. Relax all rows to one row with the total number of seats. For the arrival sequence, find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity. 
+For seat assignment after booking period, the intuitive but trivial method will be on a first-come-first-served basis. Relax all rows to one row with the total number of seats. For the arrival sequence, find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity. 
 % And use the nested policy to accept or reject one group in the remaining arrivals. 
 Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. For the convenience of calculation, we check the feasibility of constructing a seat assignment from the end of the sub-sequence. When it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until a feasible seat assignment is found. In reality, we need to check the feasibility one group by one. 
 
@@ -135,6 +135,8 @@ Then we obtain a new sub-sequence, including the arrivals from the first to the 
 
 
 \subsubsection{Largest Patterns Planning}\label{largest_pattern}
+For seat assignment during booking period, we don't have a good benchmark.
+
 For each row, we choose the patterns from $I_1$. Accept the group such that the largest pattern can be maintained. When the arrival cannot be assigned in the planning patterns from $I_1$, we can change the largest pattern to a second largest pattern according to the coming arrival.
 
 

@@ -60,6 +60,14 @@ Take the first experiment as an example, the scenarios of demands are generated 
 
 
 \subsection{Near-optimal Solution versus IP Solution under Nested Policy}
+
+A sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{j} = \sum_{t} I(y_t = j)$, i.e., the count number of times group type $j$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{J})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{J} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{J}!} \prod_{j=1}^{J} p_{j}^{N_j}, T = \sum_{j=1}^{J} N_{j}.$$
+
+It is clear that the number of different sequences is $J^{T}$. The number of different scenarios is $O(T^{J-1})$ which can be obtained by the following DP.
+
+Use $D(T,J) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$.
+Then, we know the recurrence relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$.
+
 Then, we will show the near-optimal seat assignment has a close performance with IP when considering nested policy.
 
 % Then we compare the results of benders decomposition and IP under nested policy.
@@ -97,91 +105,106 @@ We can find that the people served by Benders decomposition and IP under nested 
 
 % Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
-\subsection{Methods Versus Optimal Versus FCFS}
+\subsection{Periods}
+\begin{table}[ht]
+  \centering
+  \caption{Results of Decomposion and IP under nested policy}
+  \begin{tabular}{|l|l|l|l|l|l|l|}
+  \hline
+   T & probabilities & \# of rows & DSA(\%) & Row by Row(\%) & DP(\%) & FCFS-based(\%) \\
+  \hline
+   60  & [0.45 0.05 0.05 0.45] & 10 & 98.24 & 97.39 & 99.49 & 99.08 \\
+   60  & [0.35 0.05 0.35 0.25] & 10 & 98.12 & 97.93 & 99.62 & 99.25 \\
+   60  & [0.25 0.05 0.65 0.05] & 10 & 98.55 & 97.91 & 99.39 & 99.28 \\ % slow
+   60  & [0.35 0.15 0.15 0.35] & 10 & 97.28 & 98.14 & 99.29 & 99.12 \\
+   60  & [0.25 0.15 0.45 0.15] & 10 & 96.30 & 97.59 & 99.46 & 99.09 \\
+  \hline
+  \end{tabular}
+\end{table}
 
 
+\subsection{Seat Layout}
 
-\subsection{Different Periods}
-We discuss the effect of the number of periods this sub-section. 
+The number of seats are $[17,18,19,20,21,21,22,23,24,25]$. The maximal number of people that can be served is 164.
 
-Parameters: T = 10-100, step size =1.
+Random seat layout: $[26, 21, 24, 20, 20, 17, 23, 19, 21, 19]$. The maximal number of people that can be served is 164.
 
-The expected number of period: 60
-The expected number of demand(people): 150
-Number of rows: 10
-Number of seats each row: 21
-Probabilities: $[0.25, 0.25, 0.25, 0.25]$.
+\begin{figure}[ht]
+  \centering
+  \subfigure[Average of 50 instances for step-size seat layout]{
+    \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
+  \subfigure[Average of 50 instances for random seat layout]{
+    \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
+  \caption{The number of people served versus $c$}
+\end{figure}
 
-Parameters: T = 30-120, step size =1.
+\subsection{Result of Different Demands}
 
-The expected number of period: 72
-The expected number of demand(people): 137
-Number of rows: 10
-Number of seats each row: 21
-Probabilities: $[0.4, 0.4, 0.1, 0.1]$
+In this subsection, we discuss the effect of the number of periods on the results of our experiments. Specifically, we consider two situations: c = 2.5 and c = 1.9.
 
-% [0.3, 0.5, 0.1, 0.1]$.
-% Results: M1-M6, the number of accepted people, the number of total people.
+When c = 2.5, we set the parameters as follows: T = 10-100, step size = 1, expected number of periods = 60, expected number of demand (people) = 150, number of rows = 10, and number of seats per row = 21.
 
-% \includepdf{./Figures/Periods_3511.pdf}
-% \includepdf{./Figures/Periods_4321.pdf}
+When c = 1.9, we set the parameters as follows: T = 30-120, step size = 1, expected number of periods = 72, expected number of demand (people) = 137, number of rows = 10, and number of seats per row = 21.
+
+For each $c$, we give several probabilities in the table. The gap point represents the first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats.
 
 
-% Results: M1-M6, the number of accepted people, the number of total people.
+% We can find that the difference between the number of accepted people and the number of total people will increase with the period. 
 
-We can find that the difference between the number of accepted people and the number of total people will increase with the period. 
-% When the number of periods is small, the seats 
 
-Probability 1: $[0.25, 0.25, 0.25, 0.25]$,
-Probability 2: $[0.4, 0.4, 0.1, 0.1]$,
-Probability 3: $[0.1, 0.4, 0.4, 0.1]$,
-Probability 4: $[0.5, 0.2, 0.2, 0.1]$.
+\begin{table}[ht]
+  \centering
+  \caption{Gap points of different probabilities}
+  \begin{tabular}{|l|l|l|l|}
+  \hline
+  c  & probabilities & gap point & gap percentage \\
+  \hline
+  2.5  & [0.25,0.25,0.25,0.25] & 56 & 65.21 \\
+  2.5  & [0.1,0.4,0.4,0.1] & 55 & 65.59 \\
+  2.5  & [0.1, 0.5, 0.2, 0.2] & 55 & 65.45 \\
+  2.5  & [0.2, 0.3, 0.3, 0.2] & 54 & 64.56 \\
+  2.5  & [0.3, 0.2, 0.2, 0.3] & 55 & 65.51\\
+  2.5  & [0.2, 0.4, 0.1, 0.3] & 55 & 65.41 \\
+  1.9  & [0.4, 0.4, 0.1, 0.1] & 67 & 60.35 \\
+  1.9  & [0.5, 0.2, 0.2, 0.1] & 67 & 58.9  \\
+  1.9  & [0.3, 0.5, 0.2, 0]  &  68 & 61.7  \\
+  1.9  & [0.6, 0.1, 0.1, 0.2] & 66 & 58.31 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+We provide the results of our experiments for people accepted when applying social distance and not applying social distance over different periods. The different probabilities with the same $c$ share the similar pattern of the figure, so we only provide one case to show the detailed figure.
+
 
 \begin{figure}[h]
   \centering
-  \subfigure[Probability 1]{
+  \subfigure[When $c =2.5$]{
     \label{Fig.sub.1}
     \includegraphics[width=0.48\textwidth]{./Figures/p1.pdf}}
-  \subfigure[Probability 2]{
+  \subfigure[When $c =1.9$]{
     \label{Fig.sub.2}
     \includegraphics[width=0.48\textwidth]{./Figures/p2.pdf}}
   \caption{The number of people served versus periods}
   \label{Fig.lable}
 \end{figure}
 
-\begin{figure}[h]
-  \centering
-  \subfigure[Probability 3]{
-    \includegraphics[width=0.48\textwidth]{./Figures/p3.pdf}}
-  \subfigure[Probability 4]{
-    \includegraphics[width=0.48\textwidth]{./Figures/period_4.pdf}}
-  \caption{The number of people served versus periods}
-\end{figure}
 
-There are three stages, 
+There are three stages, the first stage is when the capacity is sufficient. The measure of social distancing will not cause any effect. The gap is becoming larger as $T$ increases at the second stage. At the third stage, as $T$ continues to increase, the gap will converge when the capacity is limited.
 
-First stage: the capacity is sufficient. The social distancing will not cause any effect.
-
-Second stage: the gap is becoming larger as $T$ increases. 
-
-Third stage: As $T$ continues to increase, the gap will converge when the capacity is limited.
-
-The gap point represents the first point where the people without social distancing is larger than that with social distancing. 
-
-With the conclusion of the last section, we can estimate the attendance rate from $\frac{c}{c+1}*$ the number of seats. The number of periods will be $E(D)/c$.
+We can estimate the attendance rate from $\frac{c}{c+1}*$ the number of seats. The number of periods will be $E(D)/c$. Thus, the government can make the policy on how much attendance rate can be established.
 
 
-The government can make the policy on how much attendance rate can be established.
+\subsection{Results of Different Arriving People Per Period}
 
-\subsection{Different Probabilities}
-We discuss the effect of different probabilities in this sub-section. Suppose that the group of up to 4 can sit together. Then we have $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$. Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$. Choose $T(E(D)/c)$ such that the supply is near the demand. Then we compare the number of people served under different values of $c$. 
+In this subsection, we discuss the effect of different probabilities on our experimental results. Assuming that groups of up to four people can sit together, we calculate the expected number of demands as $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. We also define $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$ and choose $T(E(D)/c)$ such that the supply is near the demand. We then compare the number of people served under different values of $c$.
 
-% by FCFS-based.
 
 % Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
 
+We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. We call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$.
+The number of all sampled probability combinations is $n_p$. The number of rows is set at 10, and the number of seats per row is 21 (including one dummy seat). We simulate 200 periods, and the number of people served with respect to the value of $c$ is shown in the figure below. For each probability combination, the blue point represents the average number of people served from 50 instances and the red point represents the expected number of people served.
 
-Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.05$, we call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$. The number of all sampled probability combinations is $n_p$. The number of rows is 10, and the number of seats for each row is 21 (including one dummy seat). The number of periods is $200$. The number of people served with respect to the value of $c$ is shown below:
 
 % \begin{figure}[h]
 %   \centering
@@ -210,17 +233,13 @@ Sample $p_1, p_2, p_3$ from $0.05$ to $0.95$ with increment of $0.05$, we call e
   \caption{The number of people served versus $c$}
 \end{figure}
 
-Each blue point stands for the average number of people of 50 instances.
-Each red point stands for the expected number of people.
+Suppose we accept $D_a$ people with $T$ arrivals, where $D_a = c * T$, and the sum of $D_a$ and $T$ is equal to the total number of seats. In this case, the estimation of the occupancy rate is $\frac{c}{c+1}$. The number of people served is near $\frac{c}{c+1} * 210$ on average (as shown by the red points in the figure).
 
-Suppose we accept $D_a$ people with $T$ arrivals and the sum of $D_a$ and $T$ is equal to the total number of seats.($D_a = c * T$) Then the estimation of occupancy rate is $\frac{c * T}{(c+1) * T}= \frac{c}{c+1}$ when there are full patterns for all rows.
+% when there are full patterns for all rows.
 
+If the largest pattern is assigned for each row, the occupancy rate is $\frac{16}{21}$. The maximum number of people that can be served is $210 * \frac{16}{21} = 160$, which is the upper bound of the number of people served.
 
-The number of people served is near $\frac{c}{c+1} * 210$ on average.(Red points showed in the figure.) 
-
-If the largest pattern is assigned for each row, then the occupancy rate is $\frac{16}{21}$. The maximal number of people can be served is $210 * \frac{16}{21} =160$ which is the upper bound of the number of people served.
-
-From the above figure, we can also find that some blue points are far from the red points. For example, when the probability is $[0.05, 0.05, 0.85, 0.05](c =2.9)$, the demands can be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$. We cannot construct all full patterns for every row with these demands. It violates the assumption, thus in this case there is a large gap between blue point and red point.
+We also observe that some blue points are far from the red points in the figure. For example, when the probability is $[0.05, 0.05, 0.85, 0.05] (c = 2.9)$, the demands can be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$. It is not possible to construct all full patterns for every row with these demands, violating our assumption and resulting in a large gap between the blue and red points in this case.
 
 
 % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
@@ -243,7 +262,7 @@ We can give the absolute difference between the blue point and red point for eac
   \hline
   20 & 32.92 \% & 5.13 \% & 1.74\% & 0.51 \% \\
   50 & 22.46 \% & 4.31 \% & 1.54 \% & 0.31 \%  \\
-  100 & \\
+  100 & 20.00 \% & 4.21 \% & 1.54 \% & 0.31 \% \\
   \hline
   \end{tabular}
 \end{table}
@@ -251,17 +270,18 @@ We can give the absolute difference between the blue point and red point for eac
 
 \begin{figure}[ht]
   \centering
-  \subfigure[One instance for each probability combination]{
-    \label{Fig1}
-    \includegraphics[width=0.48\textwidth]{./Figures/Figure_1.pdf}}
   \subfigure[Average of 50 instances for each probability combination]{
-    \label{Fig2}
+    \label{Fig1}
     \includegraphics[width=0.48\textwidth]{./Figures/Figure_50.pdf}}
+  \subfigure[Average of 100 instances for each probability combination]{
+    \label{Fig2}
+    \includegraphics[width=0.48\textwidth]{./Figures/Figure_100.pdf}}
   \caption{The difference distribution}
   \label{Fig}
 \end{figure}
 
 The results show that we can estimate attendance rate based on $c$ for most probability combinations. 
+
 
 \newpage
 

@@ -59,3 +59,20 @@ if __name__ == "__main__":
     demand_upper = np.zeros(I)
 
     a_instance.IP_formulation(demand_lower, demand_upper)
+
+# import random
+
+# mu, sigma = 21, 3
+
+# sum = 0
+# numbers = []
+
+# while len(numbers) < 9:
+#     num = round(random.gauss(mu, sigma))
+#     if num > 0 and sum + num <= 210:
+#         sum += num
+#         numbers.append(num)
+
+# last = 210 - sum
+# numbers.append(last)
+# print(numbers)

@@ -4,6 +4,8 @@
 % The nested structure makes the greedy method useful.
 % Remark: Similar to what we mentioned, the greedy method refers to using the largest groups to fill the seats.
 
+We carried out several experiments, including comparing the running time of decomposition and Integer programming, comparing the number of people served using the feasible seat planning and Integer programming methods, analyzing different policies under the two booking situations, investigating the impact of seat layout on the number of served people, evaluating the results under varying demands, and finally assessing the results for different numbers of people in each period.
+
 
 % Improvement:
 % For $\X^{0}$, we introduce one empty seat, $x_1$. But it cannot provide the feasibility.
@@ -12,7 +14,7 @@
 % The integer programming \eqref{deter_upper} can be solved quickly because of the monotone ratio.
 
 
-\subsection{Benders Decomposition versus IP}\label{Bender_IP}
+\subsection{Running time of Benders Decomposition and IP}\label{Bender_IP}
 
 % In view of the fact that IP of the deterministic model can be solved quickly, the column generation method does not show an obvious advantage. 
 
@@ -59,14 +61,15 @@ Take the first experiment as an example, the scenarios of demands are generated 
 % The scenarios of demands are generated from (150, 250) randomly.
 
 
-\subsection{Near-optimal Solution versus IP Solution under Nested Policy}
+\subsection{Feasible Seat Planning versus IP Solution}
 
-A sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{j} = \sum_{t} I(y_t = j)$, i.e., the count number of times group type $j$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{J})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{J} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{J}!} \prod_{j=1}^{J} p_{j}^{N_j}, T = \sum_{j=1}^{J} N_{j}.$$
+A arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{j} = \sum_{t} I(y_t = j)$, i.e., the count number of times group type $j$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{J})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{J} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{J}!} \prod_{j=1}^{J} p_{j}^{N_j}, T = \sum_{j=1}^{J} N_{j}.$$
 
 It is clear that the number of different sequences is $J^{T}$. The number of different scenarios is $O(T^{J-1})$ which can be obtained by the following DP.
 
-Use $D(T,J) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$.
-Then, we know the recurrence relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$.
+Use $D(T,J) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$. 
+
+The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
 
 Then, we will show the near-optimal seat assignment has a close performance with IP when considering nested policy.
 
@@ -105,10 +108,17 @@ We can find that the people served by Benders decomposition and IP under nested 
 
 % Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
-\subsection{Periods}
+\subsection{Results of Different Policies}
+
+We present the results of policies compared to the optimal policy.
+
+For seat assignment after booking period, we have DSA.
+
+DP and FCFS-based are for seat assignment during booking period.
+
 \begin{table}[ht]
   \centering
-  \caption{Results of Decomposion and IP under nested policy}
+  \caption{Results of Policies}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
    T & probabilities & \# of rows & DSA(\%) & Row by Row(\%) & DP(\%) & FCFS-based(\%) \\
@@ -122,21 +132,6 @@ We can find that the people served by Benders decomposition and IP under nested 
   \end{tabular}
 \end{table}
 
-
-\subsection{Seat Layout}
-
-The number of seats are $[17,18,19,20,21,21,22,23,24,25]$. The maximal number of people that can be served is 164.
-
-Random seat layout: $[26, 21, 24, 20, 20, 17, 23, 19, 21, 19]$. The maximal number of people that can be served is 164.
-
-\begin{figure}[ht]
-  \centering
-  \subfigure[Average of 50 instances for step-size seat layout]{
-    \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
-  \subfigure[Average of 50 instances for random seat layout]{
-    \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
-  \caption{The number of people served versus $c$}
-\end{figure}
 
 \subsection{Result of Different Demands}
 
@@ -281,6 +276,22 @@ We can give the absolute difference between the blue point and red point for eac
 \end{figure}
 
 The results show that we can estimate attendance rate based on $c$ for most probability combinations. 
+
+
+\subsection{Seat Layout}
+
+The number of seats are $[17,18,19,20,21,21,22,23,24,25]$. The maximal number of people that can be served is 164.
+
+Random seat layout: $[26, 21, 24, 20, 20, 17, 23, 19, 21, 19]$. The maximal number of people that can be served is 164.
+
+\begin{figure}[ht]
+  \centering
+  \subfigure[Average of 50 instances for step-size seat layout]{
+    \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
+  \subfigure[Average of 50 instances for random seat layout]{
+    \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
+  \caption{The number of people served versus $c$}
+\end{figure}
 
 
 \newpage

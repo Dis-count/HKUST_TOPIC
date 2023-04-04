@@ -10,26 +10,38 @@ Implementing dynamic seat assignment with social distance can be done manually b
 
 Despite these challenges, dynamic seat assignment with social distance is a promising approach to help ensure the safety of audience members in cinemas, concert venues, and other public spaces during the COVID-19 pandemic.
 
+Dynamic Knapsack Problem?
 
-\subsection{Seat assignemnt with social distance}
+\subsection{Seat assignment with social distance}
 
-Almost all existing work focuses on the static version of seat assignment with social distance.
+Most of the current research on seat assignment with social distancing focuses on the static version of the problem. This typically involves creating an IP model with social distancing constraints, which is then solved either heuristically or directly. However, the social distancing constraint in their works- which requires individuals to maintain a certain distance from one another - means that a fixed seating layout cannot fully utilize available space and may not be practical for commercial use.
+
+As we transition into the post-pandemic era, many people may still be concerned about the risk of contracting the virus. This may lead to hesitancy in attending social events or gatherings that require close proximity to others.
+
+Maintaining social distancing can be challenging in crowded public spaces, which can cause further anxiety for individuals.
+
+Meanwhile, social distancing measures can have a significant economic impact, especially on businesses that rely on large crowds or close contact between individuals.
+
+However, if organizers can develop a scheme that balances the need for social distancing with economic considerations, it could help to alleviate people's concerns and protect their health. Such a scheme would go a long way in dispelling people's doubts and fears. Although social distance has reduced some seat income, people have less potential concerns and are more willing to buy tickets.
 
 
 
+
+% Almost all existing work focuses on the static version of seat assignment with social distance. They commonly build a IP model with social distance constraint, then solve it heuristically or directly.
+% The social distance constraint is that people should keep a certain distance. However, for a fixed seating layout, the setting cannot fully utilize seating space and cannot be applied in commerce.
 
 
 % Dynamic seat assignment with social distance can be implemented manually by the venue staff, or through automated systems that use algorithms to optimize the seating arrangements based on various factors, such as the number of available seats, customer preferences, and the recommended distance between audience members.
 
 
-\subsection{Scenario generation}
+% \subsection{Scenario generation}
 
-It is challenging to consider all the possible realizations; thus, it is practicable to use discrete distributions with a finite number of scenarios to approximate the random demands. This procedure is often called scenario generation.
+% It is challenging to consider all the possible realizations; thus, it is practicable to use discrete distributions with a finite number of scenarios to approximate the random demands. This procedure is often called scenario generation.
 
-Some papers consider obtaining a set of scenarios that realistically represents the distributions of the random parameters but is not too large. \cite{feng2013scenario} \cite{casey2005scenario}
-\cite{henrion2018problem}
+% Some papers consider obtaining a set of scenarios that realistically represents the distributions of the random parameters but is not too large. \cite{feng2013scenario} \cite{casey2005scenario}
+% \cite{henrion2018problem}
 
-Another process to reduce the calculation is called scenario reduction. It tries to approximate the original scenario set with a smaller subset that retains essential features.
+% Another process to reduce the calculation is called scenario reduction. It tries to approximate the original scenario set with a smaller subset that retains essential features.
 
 
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 
 \bibitem{barry2021optimal}
 Michael Barry, Claudio Gambella, Fabio Lorenzi, John Sheehan, and Joern
@@ -12,22 +12,10 @@ Matthew~E Berge and Craig~A Hopperstad.
   assignment, models and algorithms.
 \newblock {\em Operations research}, 41(1):153--168, 1993.
 
-\bibitem{casey2005scenario}
-Michael~S Casey and Suvrajeet Sen.
-\newblock The scenario generation algorithm for multistage stochastic linear
-  programming.
-\newblock {\em Mathematics of Operations Research}, 30(3):615--631, 2005.
-
 \bibitem{dantzig1957discrete}
 George~B Dantzig.
 \newblock Discrete-variable extremum problems.
 \newblock {\em Operations research}, 5(2):266--288, 1957.
-
-\bibitem{feng2013scenario}
-Yonghan Feng and Sarah~M Ryan.
-\newblock Scenario construction and reduction applied to stochastic power
-  generation expansion planning.
-\newblock {\em Computers \& Operations Research}, 40(1):9--23, 2013.
 
 \bibitem{fischetti2021safe}
 Martina Fischetti, Matteo Fischetti, and Jakob Stoustrup.
@@ -47,12 +35,6 @@ Younes Hamdouch, HW~Ho, Agachai Sumalee, and Guodong Wang.
   seat availability.
 \newblock {\em Transportation Research Part B: Methodological},
   45(10):1805--1830, 2011.
-
-\bibitem{henrion2018problem}
-R{\'e}ne Henrion and Werner R{\"o}misch.
-\newblock Problem-based optimal scenario generation and reduction in stochastic
-  programming.
-\newblock {\em Mathematical Programming}, pages 1--23, 2018.
 
 \bibitem{salari2022social}
 Mostafa Salari, R~John Milne, Camelia Delcea, and Liviu-Adrian Cotfas.

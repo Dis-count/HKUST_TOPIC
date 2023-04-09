@@ -1,12 +1,32 @@
 % !TEX root = sum1.tex
 \section{Introduction}
 
-Reducing the spread of the virus while minimizing the economic impact is a significant challenge for governments worldwide. During the epidemic, many companies and countries have implemented restrictive measures, including social distancing, as it is believed to be the most effective non-pharmaceutical treatment to reduce the health effects of Covid-19. Additional measures such as hand washing and the use of masks have also been strongly recommended or enforced by companies and governments.
+Governments worldwide face a significant challenge in reducing the spread of the virus while minimizing the economic impact. Social distancing has been implemented by many companies and countries as the most effective non-pharmaceutical treatment to reduce the health effects of Covid-19. For instance, in March 2020, the Hong Kong government implemented restrictive measures such as banning indoor and outdoor gatherings of more than four people, requiring restaurants to operate at half capacity and set tables 1.5 meters apart. As the epidemic worsened, the government tightened measures by limiting public gatherings to two people per group (except for members of the same family) in July 2020.
 
-While social distancing is a recognized and practiced method for containing the spread of infectious diseases, operational guidance for its implementation is still lacking, particularly in social distance measures that involve operational details. An example of such a measure is ensuring social distancing in seating plans.
+As the epidemic subsided, the Hong Kong government gradually relaxed social distancing restrictions, allowing public group gatherings of up to four people in September 2020. In October 2020, pubs were allowed to serve up to four people per table, and restaurants could serve up to six people per table. However, subsequent policy changes will be made based on the development of the Covid-19 situation, including daily confirmed cases, in Hong Kong.
 
-In this paper, we address the dynamic seating assignment problem with a given set of seats in the context of a pandemic. The government may issue minimum physical distance requirements between people, which must be implemented in the seating plan. The problem becomes further complicated by the existence of groups of guests who can sit together. To address this challenge, we develop a mechanism for seat planning, which includes a model to assess the riskiness of a seating plan and a solution approach to balance seat utilization rates and the associated risk of infection.
-Our proposed algorithm has the potential to help companies and governments optimize seat assignments while maintaining social distance measures and ensuring the safety of groups.
+% In view of the latest epidemic development and the need to contain relevant risks, the Government announced today (September 30, 2022) the relaxation of certain social distancing measures with effect from October 6, 2022.
+
+The catering businesses (excluding bars and pubs, which will be closed) will have different social distancing requirements depending on their mode of operation for dine-in services. They can operate at 50\%, 75\%, or 100\% of their normal seating capacity at any one time, with a maximum of 2, 2, or 4 people per table, respectively. Bars and pubs may open every day from 5am to 1.59am of the subsequent day with a maximum of 6 persons per table and a total number of patrons capped at 75\% of their capacity.
+
+The restrictions on the number of persons allowed in premises such as cinemas, performance venues, museums, event premises, and religious premises will remain at 85\% of their capacity. Patrons may eat and drink in cinema houses. These measures mainly focus on limiting the number of people in each group and the seat occupancy rate.
+
+% https://www.lexology.com/library/detail.aspx?g=21a43dd7-3159-4357-9b8c-e412c382d8a5
+
+% Live performance and dancing activity will remain prohibited therein.
+
+% Cap. 599F
+
+Generally speaking, there are two ways to purchase tickets for concerts or movies: no seat selection when booking and seat selection when booking. We consider the following dynamic demand situations, seat assignment after booking period and seat assignment when booking.
+
+For reservations without seat selection, the seat assignment will not be made immediately. Instead, the decision-maker must either accept or reject each request during the making-reservation stage. After the reservation deadline, the seller will inform the customers of the seat layout information before admission. For example, in singing concert venues with many seats and high ticket demand, organizers usually do not determine the seats when booking and then inform customers of the seat information after the overall seat layout is determined.
+
+In contrast, for seat assignment when booking, the specific procedure will be changed to meet the requirements of social distancing. The seat assignment will be arranged before groups book their tickets, and the groups will only need to choose seats of the corresponding size when booking. For example, in movie theaters or small concerts with relatively few seats, the attendance rate is usually low enough to allow free selection of seats directly online. Early seat planning can satisfy the requirement of social distancing and save costs without changing seat allocation. The seat assignment could remain for one day because the same film genre will attract the same feature of different group types.
+
+Our study mainly focuses on the latter situation where customers come dynamically, and the seat assignment needs to be made immediately without knowing the number and composition of future customers. In Section 6, we also consider the situation where the seat assignment can be made after the booking period.
+
+
+In this paper, we address the dynamic seating assignment problem with a given set of seats in the context of a pandemic. The government will issue a maximum of the number of people each group and a maximum of percent of the capacity, which must be implemented in the seating plan. The problem becomes further complicated by the existence of groups of guests who can sit together. To address this challenge, we develop a mechanism for seat planning, which includes a model to assess the riskiness of a seating plan and a solution approach to balance seat utilization rates and the associated risk of infection. Our proposed algorithm has the potential to help companies and governments optimize seat assignments while maintaining social distance measures and ensuring the safety of groups.
 
 
 % Note that the original global schedule could be changed as the price changes. Meanwhile, ...
@@ -16,10 +36,9 @@ Our main contributions in this paper are summarized as follows:
 
 First, this study presents the first attempt to consider the arrangement of seat assignments with social distancing under dynamic arrivals. While many studies in the literature highlight the importance of social distance in controlling the spread of the virus, they often focus too much on the model and do not provide much insight into the operational significance behind social distance \cite{barry2021optimal, fischetti2021safe}. Recent studies have explored the effects of social distance on health and economics, mainly in the context of aircraft \cite{salari2020social, ghorbani2020model, salari2022social}. Our study provides a new perspective to help the government adopt a mechanism for setting seat assignments to protect people in the post-pandemic era.
 
-
 Second, we establish a deterministic model to analyze the effects of social distancing when the demand is known. Due to the medium size of the problem, we can solve the IP model directly. We then consider the stochastic demand situation where the demands of different group types are random. By using two-stage stochastic programming and Benders decomposition methods, we obtain the optimal linear solution.
 
-Third, to address the dynamic scenario problem, we first obtain a feasible seating plan using scenario-based stochastic planning. We then make a decision for each incoming group based on a nested policy, either accepting or rejecting the group. Our results demonstrate a significant improvement over a first-come first-served baseline strategy and provide guidance on how to develop attendance policies.
+Third, to address the dynamic scenario problem, we first obtain a feasible seating plan using scenario-based stochastic programming. We then make a decision for each incoming group based on a nested policy, either accepting or rejecting the group. Our results demonstrate a significant improvement over a first-come first-served baseline strategy and provide guidance on how to develop attendance policies.
 
 This study focuses on dynamic seat assignment with social distancing, where a one-seat distance must be maintained between different groups. Our goal is to obtain the final seating plan that satisfies social distancing constraints and implement the seat assignment when groups arrive. Overall, our proposed approach provides a comprehensive solution for dynamic seat assignment with social distancing, taking into account both deterministic and stochastic demand scenarios.
 
@@ -28,6 +47,6 @@ This study focuses on dynamic seat assignment with social distancing, where a on
 % With this new .., we illustrate how to assign the seats by the govenment/stakeholder to balance health and economic issues. In addition, we also provide managerial guidance for the government on how to publish the related policy to make the tradeoff between economic maintenance and risk management.
 
 
-The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the model and analyze its properties. Section 5 demonstrates the dynamic form and its property. Section 6 gives the results. The conclusions are shown in Section 7.
+The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the stochastic model,analyze its properties and give the seating planning. Section 5 demonstrates the dynamic seat assignment during booking period and after booking period. Section 6 gives the results. The conclusions are shown in Section 7.
 
 \newpage

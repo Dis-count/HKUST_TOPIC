@@ -29,10 +29,44 @@ Then we can illustrate the seat planning for one row below.
 
 On the left side of the diagram, the blue squares represent the empty seats required for social distancing, while the orange squares represent the seats occupied by groups. On the right side, we have added one dummy seat at the end of each row. The orange squares surrounded by the red line represent the seats taken by groups in this row, which includes two groups of 1, one group of 2, and one group of 3.
 
-By incorporating these additional seats and designating certain seats for social distancing, we can integrate social distancing measures into the seat planning problem.
+By incorporating the additional seat and designating certain seats for social distancing, we can integrate social distancing measures into the seat planning problem.
 
 % As stated above, we can obtain such a seating plan from stochastic programming. However, it only gives the initial seat assignment without handling the dynamic situation. 
 
+Now, we analyses the effect of introducing social distancing for each row. At first, we consider the types of pattern, which refers to the seat planning for each row. For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left seats, respectively. Denote by $l(k) = \alpha_k + \beta_k -1$ the loss for pattern $k$. The loss represents the number of people lost compared to the situation without social distancing.
+
+Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. We use the descending form $(t_1, t_2, \ldots, t_k)$ to represent a pattern, where $t_i$ is the new group size. 
+
+\begin{example}
+  The length of one row is $L = 21$ and the new size of groups be $L = [2, 3, 4, 5]$. Then these patterns, $(5, 5, 5, 5, 1),(5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. The demand is $[10, 12, 9, 8]_d$.
+\end{example}
+
+To represent a pattern with a fixed length of form, we can use a $(m+1)-$dimensional vector with $m$ group types. The aggregated form can be expressed as $[n_0, n_1, \ldots, n_m]$, where $n_i$ is the number of $i$-th group type, $i=1,\ldots,m$. 
+$n_0$ is the number of left seat, its value can only be $0, 1$ because two or more left seats will be assigned to groups. Thus the pattern, $[1, 0, 0, 0, 4]$, is not full because there is one left seat.
+
+Suppose $u$ is the size of the largest group allowed, all possible seats can be assigned are the consecutive integers from 2 to $u$, i.e., $[2,3,\ldots,u]$.
+Then we can use the following greedy way to generate the largest pattern. Select the maximal group size, $u$, as many as possible and the left space is assigned to the group with the corresponding size. Let $L = u\cdot q + r$, where $q$ is the number of times $u$ selected. When $r>0$, there are $d[0][u-r][q+1]$ largest patterns with the same loss of $q$. When $r =0$, there is only one possible largest pattern.
+
+Use dynamic programming to solve. $d[k][i][j]$ indicates the number of assignment of using $i$ capacity to allocate $j$ units, $k$ is the number of capacity allocated on the last unit. In our case, $u-r$ is the capacity need to be allocated, $q+1$ is the number of units which corresponds to the groups. Notice that we only consider the number of combinations, so we fix the allocation in ascending order, which means the allocation in current unit should be no less than the last unit.  
+
+The number of largest patterns equals the number of different schemes that allocate $u-r$ on $q+1$ units,i.e., $d[0][u-r][q+1]$.
+
+The recurrence relation is $d[k][i][j] = \sum_{t=k}^{i-k} d[t][i-k][j-1]$. 
+When $i < k$, $d[k][i][j] =0$; when $i \geq k$, $d[k][i][1] =1$.
+
+\begin{lem}
+When given the length of row, $L$, and the size of the largest group allowed, $u$. Let $L = u\cdot q + r$, then the loss of the largest pattern is $q - f(r)$, where $f(r) =1$ if $r=0$; $f(r) =0$ if $r \neq 0$.
+\end{lem}
+
+\begin{lem}
+The seat assignment made up of the largest patterns is optimal.
+\end{lem}
+
+This lemma holds because we cannot find a better solution occupying more seats. When the demand can meet that the largest patterns can be generated in all rows, an optimal seat assignment can be obtained.
+
+\begin{prop}
+For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the total loss is $\sum_{j} (\lfloor \frac{S_j+1}{u}  \rfloor - f((S_j +1)\mod u))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+1}{u} \rfloor + f((S_j +1)\mod u))$.
+\end{prop}
 
 \subsection{Dynamic Seat Assignment with Social Distance}
 % In this section we present the model that generates seat planning under deterministic demands.

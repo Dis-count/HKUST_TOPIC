@@ -777,6 +777,7 @@ INPUT ./Chapters/Introduction.tex
 INPUT ./Chapters/Introduction.tex
 INPUT Chapters/Introduction.tex
 INPUT e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
 INPUT ./Chapters/Literature-review.tex
 INPUT ./Chapters/Literature-review.tex
 INPUT ./Chapters/Literature-review.tex
@@ -825,7 +826,6 @@ INPUT Chapters/Methods.tex
 INPUT ./Chapters/Methods.tex
 INPUT ./Chapters/Methods.tex
 INPUT Chapters/Methods.tex
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
 INPUT ./Chapters/Results.tex
 INPUT ./Chapters/Results.tex
 INPUT ./Chapters/Results.tex

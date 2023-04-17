@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  14 APR 2023 20:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  17 APR 2023 22:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -466,108 +466,102 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (./Chapters/Abstract.tex) (./Chapters/Introduction.tex [1
 
-{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]) (./Chapters/Literature-review.tex [4] [5] [6]) (./Chapters/Problem-description.tex
+{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]) (./Chapters/Literature-review.tex [5] [6] [7]) (./Chapters/Problem-description.tex
 
 pdfTeX warning: pdflatex.exe (file ./Figures/dummy_seat.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./Figures/dummy_seat.pdf, id=216, 932.82928pt x 132.54417pt>
+<./Figures/dummy_seat.pdf, id=222, 932.82928pt x 132.54417pt>
 File: ./Figures/dummy_seat.pdf Graphic file (type pdf)
 <use ./Figures/dummy_seat.pdf>
 Package pdftex.def Info: ./Figures/dummy_seat.pdf  used on input line 25.
 (pdftex.def)             Requested size: 362.37569pt x 51.48976pt.
-[7 <./Figures/dummy_seat.pdf>] [8]) (./Chapters/Stochastic-form.tex [9] [10] [11] [12] [13]
+[8 <./Figures/dummy_seat.pdf>] [9]) (./Chapters/Stochastic-form.tex [10] [11] [12] [13] [14]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 299.
- [14] [15]) (./Chapters/Methods.tex [16] [17] [18]) (./Chapters/Results.tex
+ [15] [16]
+Overfull \hbox (16.5233pt too wide) in paragraph at lines 385--388
+[]\OT1/cmr/m/n/10 Suppose that each row has the same length. Then the op-ti-mal in-te-grated so-lu-tion $(0\OML/cmm/m/it/10 ; [] ; x; d[]; [] ; d[]\OT1/cmr/m/n/10 )$
+ []
+
+[17]) (./Chapters/Methods.tex [18] [19]) (./Chapters/Results.tex [20]
 Overfull \hbox (29.72743pt too wide) in paragraph at lines 28--48
  [][] 
  []
 
-[19]
+[21]
 Overfull \hbox (20.97746pt too wide) in paragraph at lines 80--101
 [][] 
  []
 
-[20]
-<./Figures/p1.pdf, id=369, 462.52798pt x 346.89601pt>
+[22]
+<./Figures/p1.pdf, id=383, 462.52798pt x 346.89601pt>
 File: ./Figures/p1.pdf Graphic file (type pdf)
 <use ./Figures/p1.pdf>
 Package pdftex.def Info: ./Figures/p1.pdf  used on input line 179.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/p2.pdf, id=370, 462.52798pt x 346.89601pt>
+<./Figures/p2.pdf, id=384, 462.52798pt x 346.89601pt>
 File: ./Figures/p2.pdf Graphic file (type pdf)
 <use ./Figures/p2.pdf>
 Package pdftex.def Info: ./Figures/p2.pdf  used on input line 182.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
+ [23 <./Figures/p1.pdf> <./Figures/p2.pdf
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[21]
-<./Figures/diff_1.jpg, id=377, 526.96875pt x 462.97969pt>
+pdfTeX warning: pdflatex.exe (file ./Figures/p2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<./Figures/diff_1.jpg, id=471, 526.96875pt x 462.97969pt>
 File: ./Figures/diff_1.jpg Graphic file (type jpg)
 <use ./Figures/diff_1.jpg>
 Package pdftex.def Info: ./Figures/diff_1.jpg  used on input line 225.
 (pdftex.def)             Requested size: 217.42265pt x 191.02385pt.
-<./Figures/diff_2.jpg, id=379, 459.21562pt x 408.77719pt>
+<./Figures/diff_2.jpg, id=473, 459.21562pt x 408.77719pt>
 File: ./Figures/diff_2.jpg Graphic file (type jpg)
 <use ./Figures/diff_2.jpg>
 Package pdftex.def Info: ./Figures/diff_2.jpg  used on input line 227.
 (pdftex.def)             Requested size: 217.42265pt x 193.5412pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[22 <./Figures/p1.pdf> <./Figures/p2.pdf
-
-pdfTeX warning: pdflatex.exe (file ./Figures/p2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
-<./Figures/Figure_50.pdf, id=466, 462.52798pt x 346.89601pt>
+ [24 <./Figures/diff_1.jpg> <./Figures/diff_2.jpg>]
+<./Figures/Figure_50.pdf, id=483, 462.52798pt x 346.89601pt>
 File: ./Figures/Figure_50.pdf Graphic file (type pdf)
 <use ./Figures/Figure_50.pdf>
 Package pdftex.def Info: ./Figures/Figure_50.pdf  used on input line 270.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/Figure_100.pdf, id=467, 462.52798pt x 346.89601pt>
+<./Figures/Figure_100.pdf, id=484, 462.52798pt x 346.89601pt>
 File: ./Figures/Figure_100.pdf Graphic file (type pdf)
 <use ./Figures/Figure_100.pdf>
 Package pdftex.def Info: ./Figures/Figure_100.pdf  used on input line 273.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/stepsize_seat.pdf, id=468, 462.52798pt x 346.89601pt>
+<./Figures/stepsize_seat.pdf, id=485, 462.52798pt x 346.89601pt>
 File: ./Figures/stepsize_seat.pdf Graphic file (type pdf)
 <use ./Figures/stepsize_seat.pdf>
 Package pdftex.def Info: ./Figures/stepsize_seat.pdf  used on input line 290.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/random_seat.pdf, id=469, 462.52798pt x 346.89601pt>
+<./Figures/random_seat.pdf, id=486, 462.52798pt x 346.89601pt>
 File: ./Figures/random_seat.pdf Graphic file (type pdf)
 <use ./Figures/random_seat.pdf>
 Package pdftex.def Info: ./Figures/random_seat.pdf  used on input line 292.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
- [23 <./Figures/diff_1.jpg> <./Figures/diff_2.jpg>]) (./Chapters/Extension.tex [24 <./Figures/Figure_50.pdf> <./Figures/Figure_100.pdf
+ [25 <./Figures/Figure_50.pdf> <./Figures/Figure_100.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Figure_100.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./Figures/stepsize_seat.pdf
-
-pdfTeX warning: pdflatex.exe (file ./Figures/stepsize_seat.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./Figures/random_seat.pdf
+>]) (./Chapters/Extension.tex [26 <./Figures/stepsize_seat.pdf> <./Figures/random_seat.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Figures/random_seat.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] [25] [26]) (./Chapters/Conclusion.tex) (./sum1.bbl [27]) (./Chapters/Res_appendix.tex) (./Chapters/Proof.tex [28]) [29
+>] [27] [28]) (./Chapters/Conclusion.tex) (./sum1.bbl [29]) (./Chapters/Res_appendix.tex) (./Chapters/Proof.tex [30]) [31
 
 ] (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
 (rerunfilecheck)             Checksum: 4ACB37AC6EFF33340F1AA40D676AF78A;6284.
  ) 
 Here is how much of TeX's memory you used:
- 12783 strings out of 478599
- 193190 string characters out of 5853593
- 523065 words of memory out of 5000000
+ 12787 strings out of 478599
+ 193214 string characters out of 5853593
+ 516065 words of memory out of 5000000
  30290 multiletter control sequences out of 15000+600000
  413912 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,75p,981b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,9n,75p,1051b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (29 pages, 486541 bytes).
+Output written on sum1.pdf (31 pages, 488945 bytes).
 PDF statistics:
- 711 PDF objects out of 1000 (max. 8388607)
- 502 compressed objects within 6 object streams
- 139 named destinations out of 1000 (max. 500000)
+ 725 PDF objects out of 1000 (max. 8388607)
+ 514 compressed objects within 6 object streams
+ 143 named destinations out of 1000 (max. 500000)
  310 words of extra memory for PDF output out of 10000 (max. 10000000)
 

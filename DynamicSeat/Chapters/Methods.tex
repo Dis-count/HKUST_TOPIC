@@ -31,7 +31,8 @@ There are $J$ different group types. Let $\mathbf{y}$ be a discrete random varia
 \subsection{Assign-to-Seat Rules}\label{nested_policy}
 % Recall that the stochastic programming only considers the situation that small-size groups can use the surplus large-size seats.
 
-Once we obtain a feasible seat planning, we must follow some basic rules to assign seats.
+Recall that for each arrival, we should assign the seats to the group. 
+For a feasible seat planning, we must follow some basic rules to assign seats.
 \begin{itemize}
     \item When the supply of one arriving group is enough, we will accept the group directly.
     \item When the supply of one arriving group is 0, the demand can be satisfied by only one larger-size supply.
@@ -76,7 +77,7 @@ The algorithm is shown below:
 % \end{align*}
 % $\mathbf{x}$ is the remaining supply right now.
 
-We show the results of Benders and IP under nested policy in section \ref{Bender_IP}.
+We show the results of Benders and IP under this rule in section \ref{Bender_IP}.
 
 
 \subsection{Seat assignment during booking period}
@@ -88,7 +89,7 @@ The dynamic seat assignment method can give the seat planning before the group a
 We have developed a dynamic programming(DP)-based method by relaxing all rows to one row with the same capacity. Assuming that there always exists a seat assignment under the total capacity of seats, we can use DP to make decisions in each period.
 
 
-$$V_{t}(S) = \sum_{i \in m} p_i \max\{ {[V_{t-1}(S-s_i-1)+ s_i]}, {V_{t-1}(S)}\}$$
+$$V_{t}(L) = \sum_{i \in m} p_i \max\{ {[V_{t-1}(L-s_i-1)+ s_i]}, {V_{t-1}(L)}\}$$
 
 After obtaining the pre-accepted sequence, we still need to check whether this sequence is feasible for the seat assignment. In most cases, the pre-accepted sequence is feasible, which is why we use relaxation. However, in cases where the sequence is not feasible, we must delete groups one by one from the last arrival of the sequence until it becomes feasible. In practice, we begin to reject the arrival until we cannot find a feasible seat assignment.
 

@@ -376,15 +376,14 @@ Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $(
 Suppose item $b$ is in type $h$, then the integrated solution is $(0,\ldots, x,d_{h+1}, \ldots, d_{m})$, where $x = (L- \sum_{i = h+1}^{m} {d_i s_i})/ s_h$.  
 \end{lem}
 
-That is, we will place as large groups as possible when the capacity allows.
+% That is, we will place as large groups as possible when the capacity allows.
 
 \begin{thm}
 Problem \eqref{deter_upper} is NP-hard.
 \end{thm}
   
 Suppose that each row has the same length. Then the optimal integrated solution 
-$(0,\ldots, x,d_{h+1}, \ldots, d_{m})$ has the same objective value with an integer solution. Deciding if these items can fit into a specified number of rows is the decision problem of the bin-packing problem. If the items associated with the integer solution can be put in the given number of rows, this solution is optimal; otherwise, it is not optimal. Then we can decrease the lowest item to decide again.
-Since the bin-packing problem is NP-hard, problem \eqref{deter_upper} is also NP-hard.
+$(0,\ldots, x,d_{h+1}, \ldots, d_{m})$ has the same objective value with an integer solution. Deciding if these items can fit into a specified number of rows is the decision problem of the bin-packing problem. If the items associated with the integer solution can be put in the given number of rows, this solution is optimal; otherwise, it is not optimal. Since the bin-packing problem is NP-hard, problem \eqref{deter_upper} is also NP-hard.
 
 % its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 

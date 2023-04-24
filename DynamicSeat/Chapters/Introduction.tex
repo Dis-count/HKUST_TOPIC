@@ -9,7 +9,12 @@ As the epidemic subsided, the Hong Kong government gradually relaxed social dist
 
 The catering businesses (excluding bars and pubs, which will be closed) will have different social distancing requirements depending on their mode of operation for dine-in services. They can operate at 50\%, 75\%, or 100\% of their normal seating capacity at any one time, with a maximum of 2, 2, or 4 people per table, respectively. Bars and pubs may open every day from 5am to 1.59am of the subsequent day with a maximum of 6 persons per table and a total number of patrons capped at 75\% of their capacity. The restrictions on the number of persons allowed in premises such as cinemas, performance venues, museums, event premises, and religious premises will remain at 85\% of their capacity. Patrons may eat and drink in cinema houses. 
 
-The measures announced by the Hong Kong government mainly focus on limiting the number of people in each group and the seat occupancy rate. However, implementing these policies can be challenging, especially for venues with fixed seating layouts. In our study, we will focus on addressing this challenge in specific scenarios, such as cinemas and music concert venues. By proposing a seat assignment policy that takes into account social distancing requirements and the given seating layout, we aim to provide a practical tool for venues to optimize seat assignments while ensuring the safety of groups.
+The measures announced by the Hong Kong government mainly focus on limiting the number of people in each group and the seat occupancy rate. However, implementing these policies in operations can be challenging, especially for venues with fixed seating layouts. In our study, we will focus on addressing this challenge in specific scenarios, such as cinemas and music concert venues. 
+
+We aim to provide a practical tool for venues to optimize seat assignments while ensuring the safety of groups by proposing a seat assignment policy that takes into account social distancing requirements and the given seating layout. Additionally, we will provide guidance on how to set appropriate occupancy rates and group sizes.
+
+Our goal is to help venues effectively implement social distancing measures by providing them with a practical and customized solution that takes into account their unique seating arrangements and operational constraints.
+
 
 % https://www.lexology.com/library/detail.aspx?g=21a43dd7-3159-4357-9b8c-e412c382d8a5
 
@@ -18,9 +23,20 @@ The measures announced by the Hong Kong government mainly focus on limiting the 
 
 When purchasing tickets for movies or concerts, there are generally two approaches to seat assignment: seat assignment after the booking period and seat assignment during the booking period.
 
-In the seat assignment after booking period approach, seat assignment is not made immediately. Instead, the decision-maker must either accept or reject each request during the reservation stage. After the reservation deadline, the seller will inform customers of the seat layout information before admission. For example, in singing concert venues with high ticket demand and many seats, organizers usually do not determine the seats when booking. They will then inform customers of the seat information after the overall demands are determined. This approach allows more flexibility in seat assignments and can accommodate changes in group sizes or preferences. However, in other venues, it may be necessary to assign seats immediately upon accepting a group, especially if limited seating options are available.
+The seat assignment after booking period approach involves delaying seat assignment until after the reservation deadline has passed. This means that the organizer does not need to immediately allocate seats to customers, so implementing social distancing restrictions will not affect the booking process. Instead, the decision-maker must review and either accept or reject each seat request during the reservation stage. After the reservation deadline, the seller will inform customers of the seat layout information before admission.
 
-In contrast, for seat assignment during the booking period, when there is no social distancing limit, people can choose available seats based on the seating chart. However, the procedure needs to be changed due to the requirement of social distancing. Seat assignments are still arranged when groups book their tickets, but these groups can only choose seats of the same size as their number of people when such seats are available. If such seats are unavailable, the seat selection system will tell the group whether it can occupy the larger-size seat. For instance, in movie theaters with relatively few seats, the attendance rate is usually low enough to allow free selection of seats directly online. Early seat planning can satisfy the requirement of social distancing and save costs without changing seat allocation. The seat allocation could remain for one day because the same film genre will attract the same feature of different group types.
+For instance, in venues such as singing concert halls, where there is high ticket demand and numerous seats available, organizers usually do not determine the seats during booking. Instead, they will inform customers of the seat information after the overall demands are determined. This approach allows for more flexibility in seat assignments and can accommodate changes in group sizes or preferences. However, in other venues where seating options are limited, it may be necessary to assign seats immediately upon accepting a group.
+
+
+% In contrast, for seat assignment during the booking period, when there are no social distancing requirements, cinemas typically release seat distribution maps online, which are usually divided into available and unavailable seats. When customers book and pay for their tickets, they can select the desired seat, which will then be reserved for them. After a successful payment, the seat will be allocated to the customer.
+
+% However, the procedure needs to be changed due to the requirement of social distancing. Seat assignments are still arranged when groups book their tickets, but these groups can only choose seats of the same size as their number of people when such seats are available. If such seats are unavailable, the seat selection system will tell the group whether it can occupy the larger-size seat. For instance, in movie theaters with relatively few seats, the attendance rate is usually low enough to allow free selection of seats directly online. Early seat planning can satisfy the requirement of social distancing and save costs without changing seat allocation. The seat allocation could remain for one day because the same film genre will attract the same feature of different group types.
+
+On the other hand, the seat assignment during the booking period approach typically involves the cinema releasing the seating charts online, which show the available and unavailable seats, when there are no social distancing requirements. Customers can then choose their desired seats and reserve them by paying for their tickets. After successful payment, the seats are allocated to the customers.
+
+
+However, due to social distancing requirements, this approach needs to be modified. Seat assignments are still arranged when groups book their tickets, but they can only choose seats that are the same size as their group. If such seats are unavailable, the seat selection system will inform the group whether they can occupy a larger-size seat. For example, in movie theaters with relatively few seats, the demands for tickets are usually low enough to allow for free selection of seats directly online. 
+Early seat planning can satisfy the requirement of social distancing and save costs without changing seat allocation. The seat allocation could remain for one day because the same film genre will likely attract similar groups with similar seating preferences.
 
 
 % We consider the following dynamic demand situations, seat assignment after booking period and seat assignment during booking period.
@@ -29,17 +45,21 @@ In contrast, for seat assignment during the booking period, when there is no soc
 % Therefore, the decision to assign seats can vary depending on the specific needs and circumstances of each venue.
 
 
-Our study mainly focuses on the latter situation where customers come dynamically, and the seat assignment needs to be made immediately without knowing the number and composition of future customers. In Section 6, we also consider the situation where the seat assignment can be made after the booking period. Thus, we are going to solve the following research questions:
+Our study mainly focuses on the latter situation where customers come dynamically, and the seat assignment needs to be made immediately without knowing the number and composition of future customers. In Section 6, we also consider the situation where the seat assignment can be made after the booking period. 
 
-\begin{itemize}
-\item How to give a seat planning for the fixed seat layout? 
-\item Will larger-size seats be allocated to each arriving group when seats of the same size as the group are used up? 
-\item What policies regarding the attendance rate and group size should the government make?
-\end{itemize}
+% \begin{itemize}
+% \item How to give a seat planning for the fixed seat layout? 
+% \item Will larger-size seats be allocated to each arriving group when seats of the same size as the group are used up? 
+% \item What policies regarding the attendance rate and group size should the government make?
+% \end{itemize}
 
 
-In this paper, we address the dynamic seating assignment problem with a given set of seats in the context of a pandemic. The government will issue a maximum of the number of people each group and a maximum of percent of the capacity, which must be implemented in the seat planning. The problem becomes further complicated by the existence of groups of guests who can sit together. To address this challenge, we develop a mechanism for seat planning, which includes a model to assess the riskiness of a seating plan and a solution approach to balance seat utilization rates and the associated risk of infection. Our proposed algorithm has the potential to help companies and governments optimize seat assignments while maintaining social distance measures and ensuring the safety of groups. 
 
+This paper focuses on addressing the dynamic seating assignment problem with a given set of seats in the context of a pandemic. The government issues a maximum number of people allowed in each group and a maximum capacity percentage, which must be implemented in the seat planning. The problem becomes further complicated by the existence of groups of guests who can sit together.
+
+To address this challenge, we have developed a mechanism for seat planning. Our proposed algorithm includes a solution approach to balance seat utilization rates and the associated risk of infection. Our goal is to obtain the final seating plan that satisfies social distancing constraints and implement the seat assignment when groups arrive.
+
+Our approach provides a practical tool for venues to optimize seat assignments while ensuring the safety of their customers. The proposed algorithm has the potential to help companies and governments optimize seat assignments while maintaining social distance measures and ensuring the safety of groups. Overall, our study offers a comprehensive solution for dynamic seat assignment with social distancing in the context of a pandemic.
 
 % Note that the original global schedule could be changed as the price changes. Meanwhile, ...
 % To promote ..., it is of great importance to ...
@@ -52,8 +72,6 @@ Second, we establish a deterministic model to analyze the effects of social dist
 
 Third, to address the dynamic scenario problem, we first obtain a feasible seating plan using scenario-based stochastic programming. We then make a decision for each incoming group based on a nested policy, either accepting or rejecting the group. Our results demonstrate a significant improvement over a first-come first-served baseline strategy and provide guidance on how to develop attendance policies.
 
-This study focuses on dynamic seat assignment with social distancing, where a one-seat distance must be maintained between different groups. Our goal is to obtain the final seating plan that satisfies social distancing constraints and implement the seat assignment when groups arrive. Overall, our proposed approach provides a comprehensive solution for dynamic seat assignment with social distancing, taking into account both deterministic and stochastic demand scenarios.
-
 
 
 % Our results demonstrate the effectiveness of our approach in balancing social distancing requirements with revenue generation, providing valuable insights for policymakers and venue managers. Specifically, our proposed approach can help cinemas, concert venues, and other public spaces optimize seat assignments while ensuring the safety of patrons. It provides a practical tool for venues to implement social distancing measures in a flexible and efficient manner, adapting to changes in demand and maximizing revenue generation while maintaining social distancing measures.
@@ -62,7 +80,6 @@ This study focuses on dynamic seat assignment with social distancing, where a on
 
 
 The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the stochastic model,analyze its properties and give the seating planning. Section 5 demonstrates the dynamic seat assignment during booking period and after booking period. Section 6 gives the results. The conclusions are shown in Section 7.
-
 
 
 \newpage

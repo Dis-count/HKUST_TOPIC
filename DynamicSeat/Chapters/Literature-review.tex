@@ -1,27 +1,39 @@
 % !TEX root = sum1.tex
 \section{Literature Review}
 
-The present study is closedly connected to the following research areas -- seat assignment with social distancing, group seat reservation and dynamic seat assignment. The subsequent sections review literature pertaining to each perspective and highlight significant differences between the present study and previous research.
+The present study is closely connected to the following research areas -- seat assignment with social distancing, group seat reservation and dynamic seat assignment. The subsequent sections review literature pertaining to each perspective and highlight significant differences between the present study and previous research.
 
 \subsection{Seat assignment with social distance}
-
 While social distancing is a recognized and practiced method for containing the spread of infectious diseases \cite{moosa2020effectiveness}, operational guidance for its implementation is still lacking, particularly in social distance measures that involve operational details. An example of such a measure is ensuring social distancing in seating plans.
 
-Social distancing in seat assignment has attracted considerable attention from the research coterie since pandemics.  \cite{bortolete2022support} presents a tool for classroom layout planning that considers social distancing during the COVID-19 pandemic. The tool addresses both fixed and non-fixed position seat allocation problems, utilizing integer optimization models and circle packing techniques.
 
-Ghorbani et al. \cite{ghorbani2020model} proposes a model to minimize the economic impact of COVID-19 on businesses that have implemented social distancing measures, while also minimizing the health impact on customers and employees. The study applies the model to the scenario of aircraft seat layouts using the Annealing Monte Carlo technique, demonstrating the necessity of using the model to find optimal arrangements of passengers.
+Social distancing in seat planning has attacted considerable attention from the research area since pandemics. The scenarios include the allocation of seats on airplanes, (\cite{ghorbani2020model}), classroom layout planning, (\cite{bortolete2022support}), seat assignment in long-distance trains(\cite{haque2022optimization}). 
+
+The basic social distance can be the fixed distance or the fixed seat length. Fischetti et al. \cite{fischetti2021safe} applies the Euclidean distance between different positions in restaurants, beach umbrellas. But different scenarios may consider different social distancing forms, for example, in airplane, need to consider the distance between seat assignment and the aisle (\cite{salari2022social}), in classroom, need to consider the maximization of the social distance.
+
+
+% and family-group seat selection in a theater. \cite{fischetti2021safe}
+
+% 根据社交距离，可以分为固定社交距离（(classroom)，和固定
+% fixed social distance, 
+% distance between seat assignment and the aisle
+
+% 根据场景可以分为飞机，火车，教室。
+
+% 根据座位是否固定，分为固定座位和非固定座位。
+
+% \cite{bortolete2022support} presents a tool for classroom layout planning that considers social distancing during the COVID-19 pandemic. The tool addresses both fixed and non-fixed position seat allocation problems, utilizing integer optimization models and circle packing techniques.
+
+% Ghorbani et al. \cite{ghorbani2020model} proposes a model to minimize the economic impact of COVID-19 on businesses that have implemented social distancing measures, while also minimizing the health impact on customers and employees. The study applies the model to the scenario of aircraft seat layouts using the Annealing Monte Carlo technique, demonstrating the necessity of using the model to find optimal arrangements of passengers.
 
 % The COVID-19 pandemic has led to strict regulations that have affected major economies, prompting policymakers and planners to devise strategies that balance virus control with economic activities.
 
-Haque and Hamid \cite{haque2022optimization} discusses the potential implications of seat inventory management in long-distance passenger trains and proposes a novel seat assignment policy that aims to reduce virus diffusion risk among passengers by minimizing interaction. A mixed-integer linear programming problem is formulated to simultaneously maximize operator revenue and minimize virus diffusion, and tested using real-life data from Indian Railways. 
+% Haque and Hamid \cite{haque2022optimization} discusses the potential implications of seat inventory management in long-distance passenger trains and proposes a novel seat assignment policy that aims to reduce virus diffusion risk among passengers by minimizing interaction. A mixed-integer linear programming problem is formulated to simultaneously maximize operator revenue and minimize virus diffusion, and tested using real-life data from Indian Railways. 
 
-Fischetti et al. \cite{fischetti2021safe} proposes a parallel between this problem and that of locating wind turbines in an offshore area, allowing for the application of Mathematical Optimization algorithms to produce optimized facility layouts that minimize the overall risk of infection among customers.
 
-Haque and Hamid \cite{haque2023social} proposes a novel seating assignment policy that minimizes virus spread risk while maximizing revenue for a train operating company. The proposed mixed-integer programming model considers several factors that govern virus spread and includes valid inequalities and preprocessing steps to strengthen the formulation. The model is evaluated using real-life data from Indian Railways, demonstrating a significant reduction in the risk of contagion and an increase in seat utilization compared to the current approach employed by operators.
 
-However, these researchs focus on the static version of the problem. This typically involves creating an IP model with social distancing constraints, which is then solved either heuristically or directly. However, the social distancing constraint in their works- which requires individuals to maintain a certain distance from one another - means that a fixed seating layout cannot fully utilize available space and may not be practical for commercial use.
-
-Meanwhile, for seat assignment during booking period, once the group is accepted, the seats should be assigned and will not be changed. 
+However, these researchs focus on the static version of the problem. This typically involves creating an IP model with social distancing constraints(\cite{bortolete2022support, ghorbani2020model, haque2022optimization}), which is then solved either heuristically or directly. However, the seat allocation of the static form is useful for fixed people, for example, the students in one class. 
+But it is not be practical for the dynamic arrivals in commercial events.
 
 
 As we transition into the post-pandemic era, many people may still be concerned about the risk of contracting the virus. This may lead to hesitancy in attending social events or gatherings that require close proximity to others.
@@ -39,19 +51,36 @@ However, if organizers can develop a scheme that balances the need for social di
 % Dynamic seat assignment with social distance can be implemented manually by the venue staff, or through automated systems that use algorithms to optimize the seating arrangements based on various factors, such as the number of available seats, customer preferences, and the recommended distance between audience members.
 
 \subsection{Group seat reservation}
-In our setting, the groups must be accepted on an all-or-none basis, i.e., members of the same family or group are seated together.  
+In our setting, the groups must be accepted on an all-or-none basis, i.e., members of the same family or group are seated together. 
 This group seat reservation policy has various applications in industries such as hotels \cite{li2013modeling}, working spaces\cite{fischetti2021safe}, public transport\cite{deplano2019offline}, sports arenas\cite{kwag2022optimal}, and large-scale events \cite{lewis2016creating}. This policy has significant impacts on passenger satisfaction and revenue, with the study \cite{yuen2002group} showing that passenger groups increase revenue by filling seats that would otherwise be empty. Traditional works \cite{clausen2010off, deplano2019offline}in transportation focus on maximizing capacity utilization or reducing total capacity needed for passenger rail, typically modeling these problems as knapsack or binpacking problems.
 
-The group seat reservation policy arouses the biggest problem when we try to find the optimal policy.
-
-In contrast, there is a lack of research on group seat reservations for booking tickets for cinemas, where available seats are typically displayed for customers to choose from for low-demand movie tickets. For concerts with high demand, it is usually not possible to choose seats independently, and the organizer will inform seat information after confirming the order. However, the COVID-19 pandemic has shed new light on the potential benefits of group reservations, as they can improve revenue without increasing the risk of infection.
+In contrast, there is a lack of research on group seat reservations for booking tickets for cinemas, where available seats are typically displayed for customers to choose from for low-demand movie tickets. For concerts with high demand, it is usually not possible to choose seats independently, and the organizer will inform seat information after confirming the order. 
+For movies of the same time period, the ticket prices are the same, while for the same concert, although there are different ticket prices, for the same region, the ticket prices are the same. Therefore, we can consider different ticket prices separately. 
+In the absence of an epidemic, all requests for tickets can be considered one by one.However, the COVID-19 pandemic has shed new light on the potential benefits of group reservations, as they can improve revenue without increasing the risk of infection.
 
 % However, for booking tickets for cinemas or concerts, there are almost no articles discussing group seat reservations. For movie tickets with low demand, the system will display a table of available seats for customers to choose from. For concerts with high demand, it is usually not possible to choose seats independently. The organizer will inform the seat information after confirming the order.
 % The recent pandemic has offered new insights on group reservations as they exhibit improvement in revenue without an increase in the risk of getting infected. 
 
+In our study, the group seat reservation policy arouses a bigger problem when we try to find the seat assignment policy. Some related literature mentioned the seat assignment under pandemic for groups are represented below.
 
-Fischetti et al. \cite{fischetti2021safe} proposed a seating assignment policy for groups of customers entering restaurants or amphitheaters, with the objective of minimizing transmission risk by minimizing interactions. Dundar and Karakose \cite{dundar2021seat} proposed a two-stage algorithm for classroom seat assignment during the pandemic, with the first phase maximizing total allocations and the second phase maximizing the minimum interpersonal distance between students. Salari et al. \cite{salari2022social} performed group seat assignment in airplanes during the pandemic and found that increasing passenger groups can yield greater social distance than single passengers. Similarly, Moore et al. \cite{moore2021seat} suggest that relaxing social distancing norms within a family may increase occupancy without an significant increasing in virus transmission risk.
+Fischetti et al. \cite{fischetti2021safe} proposed a seating assignment for known groups of customers in amphitheaters, but in our setting, the specific number of groups is unknown in advance.  
 
+Haque and Hamid \cite{haque2022optimization} considers grouping passengers with the same origin-destination pair of travel and assigning seats in long-distance passenger trains.
+
+Salari et al. \cite{salari2022social} performed group seat assignment in airplanes during the pandemic and found that increasing passenger groups can yield greater social distance than single passengers. 
+
+Moore et al. \cite{moore2021seat} suggest that relaxing social distancing norms within a family may increase occupancy without an significant increasing in virus transmission risk.
+
+% discusses the potential implications of seat inventory management in long-distance passenger trains 
+
+
+% Dundar and Karakose \cite{dundar2021seat} proposed a two-stage algorithm for classroom seat assignment during the pandemic, with the first phase maximizing total allocations and the second phase maximizing the minimum interpersonal distance between students. 
+
+% Seat Assignments With Physical Distancing in Single-Destination Public Transit Settings
+
+Haque and Hamid \cite{haque2023social} proposes a seating assignment policy that minimizes virus spread risk while maximizing revenue. But the demand is known in advance.
+
+% spiral seat numbering
 
 % For the sake of convenience, we list some of the intricate characteristics of the related studies and our study in Table 1.
 

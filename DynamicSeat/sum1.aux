@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -17,13 +20,12 @@
 \citation{barry2021optimal,fischetti2021safe}
 \citation{salari2020social,ghorbani2020model,salari2022social}
 \citation{moosa2020effectiveness}
-\citation{bortolete2022support}
 \citation{ghorbani2020model}
+\citation{bortolete2022support}
 \citation{haque2022optimization}
 \citation{fischetti2021safe}
-\citation{haque2023social}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{5}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Seat assignment with social distance}{5}{subsection.2.1}\protected@file@percent }
+\citation{salari2022social}
+\citation{bortolete2022support,ghorbani2020model,haque2022optimization}
 \citation{li2013modeling}
 \citation{fischetti2021safe}
 \citation{deplano2019offline}
@@ -31,15 +33,18 @@
 \citation{lewis2016creating}
 \citation{yuen2002group}
 \citation{clausen2010off,deplano2019offline}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{5}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Seat assignment with social distance}{5}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Group seat reservation}{5}{subsection.2.2}\protected@file@percent }
 \citation{fischetti2021safe}
-\citation{dundar2021seat}
+\citation{haque2022optimization}
 \citation{salari2022social}
 \citation{moore2021seat}
+\citation{haque2023social}
 \citation{hamdouch2011schedule,berge1993demand}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Group seat reservation}{6}{subsection.2.2}\protected@file@percent }
 \citation{jiang2015dynamic}
 \citation{zhu2023assign}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Dynamic seat assignment}{7}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Dynamic seat assignment}{6}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Problem Description}{8}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Seat Planning Problem with Social Distance}{8}{subsection.3.1}\protected@file@percent }
 \newlabel{dynamic_demand}{{3.1}{8}{Seat Planning Problem with Social Distance}{subsection.3.1}{}}
@@ -74,8 +79,8 @@
 \newlabel{deter_upper}{{11}{16}{Obtain The Feasible Seat Planning}{equation.4.11}{}}
 \citation{dantzig1957discrete}
 \newlabel{deter_lower}{{12}{17}{Obtain The Feasible Seat Planning}{equation.4.12}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Feasible seat planning algorithm\relax }}{18}{algorithm.2}\protected@file@percent }
-\newlabel{feasible_seat}{{2}{18}{Feasible seat planning algorithm\relax }{algorithm.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Feasible seat planning algorithm\relax }}{17}{algorithm.2}\protected@file@percent }
+\newlabel{feasible_seat}{{2}{17}{Feasible seat planning algorithm\relax }{algorithm.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Dynamic Seat Assignment(DSA)}{18}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Assign-to-Seat Rules}{18}{subsection.5.1}\protected@file@percent }
 \newlabel{nested_policy}{{5.1}{18}{Assign-to-Seat Rules}{subsection.5.1}{}}
@@ -83,21 +88,21 @@
 \newlabel{algo_nested_policy}{{3}{19}{Dynamic seat assignment(DSA) method\relax }{algorithm.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Seat assignment during booking period}{19}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Seat assignment after booking period}{19}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Benchmark}{20}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}FCFS}{20}{subsubsection.5.4.1}\protected@file@percent }
-\newlabel{FCFS-based}{{5.4.1}{20}{FCFS}{subsubsection.5.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Benchmark}{19}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}FCFS}{19}{subsubsection.5.4.1}\protected@file@percent }
+\newlabel{FCFS-based}{{5.4.1}{19}{FCFS}{subsubsection.5.4.1}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}Largest Patterns Planning}{20}{subsubsection.5.4.2}\protected@file@percent }
 \newlabel{largest_pattern}{{5.4.2}{20}{Largest Patterns Planning}{subsubsection.5.4.2}{}}
 \newlabel{algo_largest}{{\caption@xref {algo_largest}{ on input line 150}}{20}{Largest Patterns Planning}{subsubsection.5.4.2}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Method by using the largest patterns\relax }}{20}{algorithm.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{21}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running time of Benders Decomposition and IP}{21}{subsection.6.1}\protected@file@percent }
-\newlabel{Bender_IP}{{6.1}{21}{Running time of Benders Decomposition and IP}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{20}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running time of Benders Decomposition and IP}{20}{subsection.6.1}\protected@file@percent }
+\newlabel{Bender_IP}{{6.1}{20}{Running time of Benders Decomposition and IP}{subsection.6.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running time of Decomposion and IP\relax }}{21}{table.caption.3}\protected@file@percent }
 \newlabel{tab_1}{{1}{21}{Running time of Decomposion and IP\relax }{table.caption.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Feasible Seat Planning versus IP Solution}{21}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Results of Different Policies}{21}{subsection.6.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Results of Decomposion and IP under nested policy\relax }}{22}{table.caption.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Results of Different Policies}{22}{subsection.6.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Results of Policies\relax }}{22}{table.caption.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Result of Different Demands}{22}{subsection.6.4}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Gap points of different probabilities\relax }}{23}{table.caption.6}\protected@file@percent }
@@ -109,11 +114,12 @@
 \newlabel{Fig.lable}{{2}{23}{The number of people served versus periods\relax }{figure.caption.7}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $c =2.5$}}}{23}{figure.caption.7}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $c =1.9$}}}{23}{figure.caption.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Results of Different Arriving People Per Period}{24}{subsection.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Results of Different Arriving People Per Period}{23}{subsection.6.5}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The number of people served versus $c$\relax }}{24}{figure.caption.8}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{24}{figure.caption.8}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{24}{figure.caption.8}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Difference Distribution\relax }}{25}{table.caption.9}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Difference Distribution\relax }}{24}{table.caption.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Seat Layout}{24}{subsection.6.6}\protected@file@percent }
 \newlabel{Fig1}{{4(a)}{25}{Subfigure 4(a)}{subfigure.4.1}{}}
 \newlabel{sub@Fig1}{{(a)}{25}{Subfigure 4(a)\relax }{subfigure.4.1}{}}
 \newlabel{Fig2}{{4(b)}{25}{Subfigure 4(b)}{subfigure.4.2}{}}
@@ -122,17 +128,16 @@
 \newlabel{Fig}{{4}{25}{The difference distribution\relax }{figure.caption.10}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for each probability combination}}}{25}{figure.caption.10}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 100 instances for each probability combination}}}{25}{figure.caption.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Seat Layout}{25}{subsection.6.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The number of people served versus $c$\relax }}{26}{figure.caption.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for step-size seat layout}}}{26}{figure.caption.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for random seat layout}}}{26}{figure.caption.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Extension}{26}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Online booking}{26}{subsection.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The number of people served versus $c$\relax }}{25}{figure.caption.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for step-size seat layout}}}{25}{figure.caption.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for random seat layout}}}{25}{figure.caption.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Extension}{25}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Online booking}{25}{subsection.7.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2}How to give a balanced seat assignment}{26}{subsection.7.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Property}{26}{subsection.7.3}\protected@file@percent }
-\newlabel{ex_largest}{{2}{27}{}{example.2}{}}
+\newlabel{ex_largest}{{2}{26}{}{example.2}{}}
 \newlabel{prop_I_1}{{2}{27}{}{prop.2}{}}
-\newlabel{prop_I_2}{{3}{28}{}{prop.3}{}}
+\newlabel{prop_I_2}{{3}{27}{}{prop.3}{}}
 \bibstyle{plain}
 \bibdata{refe}
 \bibcite{barry2021optimal}{1}
@@ -141,21 +146,20 @@
 \bibcite{clausen2010off}{4}
 \bibcite{dantzig1957discrete}{5}
 \bibcite{deplano2019offline}{6}
-\bibcite{dundar2021seat}{7}
-\bibcite{fischetti2021safe}{8}
-\bibcite{ghorbani2020model}{9}
-\bibcite{hamdouch2011schedule}{10}
-\bibcite{haque2022optimization}{11}
-\bibcite{haque2023social}{12}
-\bibcite{jiang2015dynamic}{13}
-\bibcite{kwag2022optimal}{14}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{29}{section.8}\protected@file@percent }
-\bibcite{lewis2016creating}{15}
-\bibcite{li2013modeling}{16}
-\bibcite{moore2021seat}{17}
-\bibcite{moosa2020effectiveness}{18}
-\bibcite{salari2022social}{19}
-\bibcite{salari2020social}{20}
-\bibcite{yuen2002group}{21}
-\bibcite{zhu2023assign}{22}
-\gdef \@abspage@last{31}
+\bibcite{fischetti2021safe}{7}
+\bibcite{ghorbani2020model}{8}
+\bibcite{hamdouch2011schedule}{9}
+\bibcite{haque2022optimization}{10}
+\bibcite{haque2023social}{11}
+\bibcite{jiang2015dynamic}{12}
+\bibcite{kwag2022optimal}{13}
+\bibcite{lewis2016creating}{14}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{28}{section.8}\protected@file@percent }
+\bibcite{li2013modeling}{15}
+\bibcite{moore2021seat}{16}
+\bibcite{moosa2020effectiveness}{17}
+\bibcite{salari2022social}{18}
+\bibcite{salari2020social}{19}
+\bibcite{yuen2002group}{20}
+\bibcite{zhu2023assign}{21}
+\gdef \@abspage@last{30}

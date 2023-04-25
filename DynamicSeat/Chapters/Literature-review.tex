@@ -7,9 +7,10 @@ The present study is closely connected to the following research areas -- seat a
 While social distancing is a recognized and practiced method for containing the spread of infectious diseases \cite{moosa2020effectiveness}, operational guidance for its implementation is still lacking, particularly in social distance measures that involve operational details. An example of such a measure is ensuring social distancing in seating plans.
 
 
-Social distancing in seat planning has attacted considerable attention from the research area since pandemics. The scenarios include the allocation of seats on airplanes, (\cite{ghorbani2020model}), classroom layout planning, (\cite{bortolete2022support}), seat assignment in long-distance trains(\cite{haque2022optimization}). 
+Social distancing in seat planning has attacted considerable attention from the research area since pandemics. The scenarios include the allocation of seats on airplanes \cite{ghorbani2020model}, classroom layout planning \cite{bortolete2022support}, seat assignment in long-distance trains \cite{haque2022optimization}. 
 
-The basic social distance can be the fixed distance or the fixed seat length. Fischetti et al. \cite{fischetti2021safe} applies the Euclidean distance between different positions in restaurants, beach umbrellas. But different scenarios may consider different social distancing forms, for example, in airplane, need to consider the distance between seat assignment and the aisle (\cite{salari2022social}), in classroom, need to consider the maximization of the social distance.
+
+Social distancing can be implemented in various forms, such as fixed distances or seat lengths. Fischetti et al.\cite{fischetti2021safe} used the Euclidean distance between positions in restaurants and beach umbrellas. However, different scenarios may require different forms of social distancing; for instance, on an airplane, the distance between seat assignments and the aisle must be considered \cite{salari2022social}, while in a classroom, maximizing social distance between students is a priority \cite{bortolete2022support}.
 
 
 % and family-group seat selection in a theater. \cite{fischetti2021safe}
@@ -56,20 +57,16 @@ This group seat reservation policy has various applications in industries such a
 
 In contrast, there is a lack of research on group seat reservations for booking tickets for cinemas, where available seats are typically displayed for customers to choose from for low-demand movie tickets. For concerts with high demand, it is usually not possible to choose seats independently, and the organizer will inform seat information after confirming the order. 
 For movies of the same time period, the ticket prices are the same, while for the same concert, although there are different ticket prices, for the same region, the ticket prices are the same. Therefore, we can consider different ticket prices separately. 
-In the absence of an epidemic, all requests for tickets can be considered one by one.However, the COVID-19 pandemic has shed new light on the potential benefits of group reservations, as they can improve revenue without increasing the risk of infection.
+In the absence of an epidemic, all requests for tickets can be considered one by one.However, the COVID-19 pandemic has shed new light on the potential benefits of group reservations, as they can improve revenue without increasing the risk of infection. Moore et al. \cite{moore2021seat} suggest that relaxing social distancing norms within a family may increase occupancy without an significant increasing in virus transmission risk.
 
 % However, for booking tickets for cinemas or concerts, there are almost no articles discussing group seat reservations. For movie tickets with low demand, the system will display a table of available seats for customers to choose from. For concerts with high demand, it is usually not possible to choose seats independently. The organizer will inform the seat information after confirming the order.
 % The recent pandemic has offered new insights on group reservations as they exhibit improvement in revenue without an increase in the risk of getting infected. 
 
 In our study, the group seat reservation policy arouses a bigger problem when we try to find the seat assignment policy. Some related literature mentioned the seat assignment under pandemic for groups are represented below.
 
-Fischetti et al. \cite{fischetti2021safe} proposed a seating assignment for known groups of customers in amphitheaters, but in our setting, the specific number of groups is unknown in advance.  
+Fischetti et al. \cite{fischetti2021safe} proposed a seating assignment for known groups of customers in amphitheaters. Haque and Hamid \cite{haque2022optimization} considers grouping passengers with the same origin-destination pair of travel and assigning seats in long-distance passenger trains. Salari et al. \cite{salari2022social} performed group seat assignment in airplanes during the pandemic and found that increasing passenger groups can yield greater social distance than single passengers. Haque and Hamid \cite{haque2023social} aim to optimize seating assignments on trains by minimizing the risk of virus spread while maximizing revenue. 
 
-Haque and Hamid \cite{haque2022optimization} considers grouping passengers with the same origin-destination pair of travel and assigning seats in long-distance passenger trains.
-
-Salari et al. \cite{salari2022social} performed group seat assignment in airplanes during the pandemic and found that increasing passenger groups can yield greater social distance than single passengers. 
-
-Moore et al. \cite{moore2021seat} suggest that relaxing social distancing norms within a family may increase occupancy without an significant increasing in virus transmission risk.
+The specific number of groups in their models is known in advance. But in our setting, we only know the arrival probabilities of different groups.
 
 % discusses the potential implications of seat inventory management in long-distance passenger trains 
 
@@ -78,7 +75,7 @@ Moore et al. \cite{moore2021seat} suggest that relaxing social distancing norms 
 
 % Seat Assignments With Physical Distancing in Single-Destination Public Transit Settings
 
-Haque and Hamid \cite{haque2023social} proposes a seating assignment policy that minimizes virus spread risk while maximizing revenue. But the demand is known in advance.
+
 
 % spiral seat numbering
 
@@ -98,7 +95,7 @@ Dynamic seat assignment is also used in cinemas and concert venues to optimize t
 
 However, implementing dynamic seat assignment with social distance in cinemas and concert venues presents several challenges. The primary challenge is to balance the need for safety with the desire to maximize revenue for the venue. This requires careful consideration of various factors, such as the layout of the venue, the number of available seats, and the preferences of the audience. To implement dynamic seat assignment with social distance, venues may need to adjust their seating plans to accommodate the recommended distance between audience members. This may involve reducing the overall number of seats or reconfiguring the seating arrangements.
 
-Implementing dynamic seat assignment with social distance can be done manually by the staff or through automated systems that use algorithms to optimize the seat assignments based on various factors, such as ticket sales, seat availability, and customer preferences. However, the implementation of social distance measures poses unique challenges that require careful planning and consideration of various factors to balance safety with revenue generation.
+% Implementing dynamic seat assignment with social distance can be done manually by the staff or through automated systems that use algorithms to optimize the seat assignments based on various factors, such as ticket sales, seat availability, and customer preferences. However, the implementation of social distance measures poses unique challenges that require careful planning and consideration of various factors to balance safety with revenue generation.
 
 Despite these challenges, dynamic seat assignment with social distance is a promising approach to help ensure the safety of audience members in cinemas, concert venues, and other public spaces during the COVID-19 pandemic.
 

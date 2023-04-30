@@ -12,7 +12,7 @@ Now suppose the demand of groups is stochastic, the stochastic information can b
 
 Consider the decision makers who give the seat assignment based on the scenarios then assign the groups to seats according to the realized true demand. 
 
-% For example, When there is no seating for group of four, seats of 5 can be assigned to a group of 4 with one empty seat as social distance.
+% For example, When there is no seating for group of four, seats of 5 can be assigned to a group of 4 with one empty seat as social distancing.
 
 The seat assignment can be denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{m \times N}$. Let $x_{i,j}$ stand for the number of group type $i$ in row $j$. The supply for group type $i$ can be represented by $\sum_{j=1}^N x_{ij}$.
 Regarding the nature of the obtained information, we assume that there are $S = |\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{m \times S}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{m \times S}$. Each component of $\mathbf{y}^{+}$, $y_{i \omega}^{+}$, represents the number of surplus seats for group type $i$. Similarly, $y_{i \omega}^{-}$ represents the number of inadequate seats for group type $i$.
@@ -22,7 +22,7 @@ Considering that the group can take the seats assigned to the larger group type,
 % $\mathbf{s}_{i}^{0} =$
 % These variables are scenario-independent and 
 
-% Because the demand is unknown when the seat assignment is planned, there is no way to expect that the supply in the first stage can meet the demand exactly. Fortunately, we can find some remedies in practice, for example, seats of 5 can be assigned to a group of 4 with one empty seat as social distance. However, the decision maker will confront seats shortage or excess without these measures. Therefore, to deal with possible demands, the wait-and-see measures (called recourses) should be considered in planning seat assignment.
+% Because the demand is unknown when the seat assignment is planned, there is no way to expect that the supply in the first stage can meet the demand exactly. Fortunately, we can find some remedies in practice, for example, seats of 5 can be assigned to a group of 4 with one empty seat as social distancing. However, the decision maker will confront seats shortage or excess without these measures. Therefore, to deal with possible demands, the wait-and-see measures (called recourses) should be considered in planning seat assignment.
 
 
 % If no group of 1 comes in the future, this wait-and-see measure may leave two empty seats. 

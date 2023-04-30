@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -32,7 +35,7 @@
 \citation{yuen2002group}
 \citation{clausen2010off,deplano2019offline}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{5}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Seat assignment with social distance}{5}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Seat assignment with social distancing}{5}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Group seat reservation}{5}{subsection.2.2}\protected@file@percent }
 \citation{moore2021seat}
 \citation{fischetti2021safe}
@@ -44,10 +47,10 @@
 \citation{zhu2023assign}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Dynamic seat assignment}{6}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Problem Description}{8}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Seat Planning Problem with Social Distance}{8}{subsection.3.1}\protected@file@percent }
-\newlabel{dynamic_demand}{{3.1}{8}{Seat Planning Problem with Social Distance}{subsection.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Seat Planning Problem with Social Distancing}{8}{subsection.3.1}\protected@file@percent }
+\newlabel{dynamic_demand}{{3.1}{8}{Seat Planning Problem with Social Distancing}{subsection.3.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Problem Conversion\relax }}{8}{figure.caption.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dynamic Seat Assignment with Social Distance}{10}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dynamic Seat Assignment with Social Distancing}{10}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Scenario-based Stochastic Programming}{10}{section.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Formulation}{10}{subsection.4.1}\protected@file@percent }
 \newlabel{sto_form}{{1}{11}{Formulation}{equation.4.1}{}}
@@ -118,6 +121,9 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{24}{figure.caption.8}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Difference Distribution\relax }}{24}{table.caption.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Seat Layout}{24}{subsection.6.6}\protected@file@percent }
+\bibstyle{plain}
+\bibdata{refe}
+\bibcite{barry2021optimal}{1}
 \newlabel{Fig1}{{4(a)}{25}{Subfigure 4(a)}{subfigure.4.1}{}}
 \newlabel{sub@Fig1}{{(a)}{25}{Subfigure 4(a)\relax }{subfigure.4.1}{}}
 \newlabel{Fig2}{{4(b)}{25}{Subfigure 4(b)}{subfigure.4.2}{}}
@@ -131,14 +137,6 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for random seat layout}}}{25}{figure.caption.11}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7}Extension}{25}{section.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Online booking}{25}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}How to give a balanced seat assignment}{26}{subsection.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Property}{26}{subsection.7.3}\protected@file@percent }
-\newlabel{ex_largest}{{2}{26}{}{example.2}{}}
-\newlabel{prop_I_1}{{2}{27}{}{prop.2}{}}
-\newlabel{prop_I_2}{{3}{27}{}{prop.3}{}}
-\bibstyle{plain}
-\bibdata{refe}
-\bibcite{barry2021optimal}{1}
 \bibcite{berge1993demand}{2}
 \bibcite{bortolete2022support}{3}
 \bibcite{clausen2010off}{4}
@@ -152,7 +150,7 @@
 \bibcite{jiang2015dynamic}{12}
 \bibcite{kwag2022optimal}{13}
 \bibcite{lewis2016creating}{14}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{28}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{26}{section.8}\protected@file@percent }
 \bibcite{li2013modeling}{15}
 \bibcite{moore2021seat}{16}
 \bibcite{moosa2020effectiveness}{17}
@@ -160,4 +158,4 @@
 \bibcite{salari2020social}{19}
 \bibcite{yuen2002group}{20}
 \bibcite{zhu2023assign}{21}
-\gdef \@abspage@last{30}
+\gdef \@abspage@last{28}

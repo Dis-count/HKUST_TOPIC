@@ -1,18 +1,18 @@
 % !TEX root = sum1.tex
 \section{Problem Description}
-In this section, we first consider the seat planning problem with social distance. Then we introduce the dynamic seat assignment problem with social distance.
+In this section, we first consider the seat planning problem with social distancing. Then we introduce the dynamic seat assignment problem with social distancing.
 
-% Then we incorporate the social distance into seat planning.
+% Then we incorporate the social distancing into seat planning.
 
-% give the description of the seat planning problem with social distance.
+% give the description of the seat planning problem with social distancing.
 
 % dynamic seat assignment problem, which is suitable for commercial use in cinemas and concerts.
 
 
-\subsection{Seat Planning Problem with Social Distance}\label{dynamic_demand}
+\subsection{Seat Planning Problem with Social Distancing}\label{dynamic_demand}
 We consider a set of groups, each of which consists of no more than $m$ people, to be assigned to a set of seats. There are $m$ different group types, with group type $i$ having a size of $s_i$, where $1 \leq i \leq m$. These groups can be represented by a demand vector, denoted by $\mathbf{d} = (d_1, \ldots, d_m)$. Each element $d_i$, where $1 \leq i \leq m$, indicates the number of group type $i$ containing $i$ people. For illustration, we consider a layout consisting of $N$ rows, each containing $S_j$ seats, where $j = 1, \ldots, N$.
 
-In accordance with epidemic prevention requirements, customers from the same group are allowed to sit together, while different groups must maintain social distancing which can be one seat or more seats. We consider the social distance of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distance of two or more seats.
+In accordance with epidemic prevention requirements, customers from the same group are allowed to sit together, while different groups must maintain social distancing which can be one seat or more seats. We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
 
 Specifically, each group must leave one seat empty to maintain social distancing from adjacent groups. Additionally, different rows do not affect each other, meaning that a person from one group can sit directly behind a person from another group.
 
@@ -44,8 +44,10 @@ Let $I_1$ be the set of patterns with the minimal loss. Then we call the pattern
 To represent a pattern with a fixed length of form, we can use a $(m+1)-$dimensional vector with $m$ group types. The aggregated form can be expressed as $[n_0, n_1, \ldots, n_m]$, where $n_i$ is the number of $i$-th group type, $i=1,\ldots,m$. 
 $n_0$ is the number of left seat, its value can only be $0, 1$ because two or more left seats will be assigned to groups. Thus the pattern, $[1, 0, 0, 0, 4]$, is not full because there is one left seat.
 
-Suppose $u$ is the size of the largest group allowed, all possible seats can be assigned are the consecutive integers from 2 to $u$.
-Then we can use the following greedy way to generate the largest pattern. Select the maximal group size, $u$, as many as possible and the left space is assigned to the group with the corresponding size. Let $L = u\cdot q + r$, where $q$ is the number of times $u$ selected. When $r>0$, there are $d[0][u-r][q+1]$ largest patterns with the same loss of $q$. When $r =0$, there is only one possible largest pattern.
+For ease of brevity, we suppose $u$ is the size of the largest group allowed, then $u =m+1$.
+We can use the following greedy way to generate the largest pattern. Select the maximal group size, $u$, as many as possible and the left space is assigned to the group with the corresponding size. Let $L = u\cdot q + r$, where $q$ is the number of times $u$ selected. When $r>0$, there are $d[0][u-r][q+1]$ largest patterns with the same loss of $q$. When $r =0$, there is only one possible largest pattern.
+
+% all possible seats can be assigned are the consecutive integers from 2 to $u$. 
 
 Use dynamic programming to solve. $d[k][i][j]$ indicates the number of assignment of using $i$ capacity to allocate $j$ units, $k$ is the number of capacity allocated on the last unit. In our case, $u-r$ is the capacity need to be allocated, $q+1$ is the number of units which corresponds to the groups. Notice that we only consider the number of combinations, so we fix the allocation in ascending order, which means the allocation in current unit should be no less than the last unit.  
 
@@ -68,7 +70,7 @@ This lemma holds because we cannot find a better solution occupying more seats. 
 For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the total loss is $\sum_{j} (\lfloor \frac{S_j+1}{u}  \rfloor - f((S_j +1)\mod u))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+1}{u} \rfloor + f((S_j +1)\mod u))$.
 \end{prop}
 
-\subsection{Dynamic Seat Assignment with Social Distance}
+\subsection{Dynamic Seat Assignment with Social Distancing}
 % In this section we present the model that generates seat planning under deterministic demands.
 
 % Let the $i-$th group type contain $i$ people. 
@@ -82,7 +84,7 @@ We use a vector $\mathbf{L}= (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$ to record th
 The dynamic programming formulation for this problem is
 $$V_{t}(\mathbf{L}) = E_{p_i} \left[ \max_{k \in N: L_k \geq s_i +1} \{ {[V_{t-1}(\mathbf{L}- (\mathbf{w} \circ \mathbf{e}_{i})U_{k})+ s_i]}, {V_{t-1}(\mathbf{L})}\} \right], \mathbf{L} \geq \mathbf{0}, V_{T+1}(\mathbf{L}) = 0,$$
 
-where $\mathbf{e}_{i}$ is the unit vector whose i-th element is 1. $U_k$ is a matrix of $m$ by $n$ with all elements in column $k$ being 1. $\circ$ is the element-wise product. Initially, we have $\mathbf{L}_{T} = (L_1, L_2, \ldots, L_{N})$. 
+where $\circ$ in $\mathbf{w} \circ \mathbf{e}_{i}$ is the element-wise product, $\mathbf{e}_{i}$ is the unit vector whose i-th element is 1, $U_k$ is a matrix of $m$ by $n$ with all elements in column $k$ being 1.  Initially, we have $\mathbf{L}_{T} = (L_1, L_2, \ldots, L_{N})$. 
 
 
 As we can observe, the dynamic programming algorithm has to make a decision on which row to assign group type $i$. This leads to the curse of dimensionality due to the numerous seating plan combinations. To avoid this complexity, we propose an approach that directly targets the final seating plan and then formulates a policy for assigning groups.

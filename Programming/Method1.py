@@ -109,9 +109,6 @@ class stochasticModel:
         m.optimize()
         return
 
-    def updateDemand(self, m, demand):
-        # This function is used to update the demands constraints in the model.
-        return
 
     def solve_IP(self, m):
         xvalue = m.getVars()[0: self.I * self.given_lines]

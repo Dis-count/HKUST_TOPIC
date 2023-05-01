@@ -39,6 +39,7 @@ class deterministicModel1:
         return newd, m.objVal
 
     def IP_formulation1(self, demand_lower, demand_upper):
+        # This function is used to check whether the model is optimal.
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]

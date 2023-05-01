@@ -73,7 +73,6 @@ class stochasticModel:
         alpha0 = np.delete(alpha, 0).tolist()
         return alpha0
 
-
     # def setupMasterModel(self):
     #     # Initially, add z<= 0
     #     m = grb.Model()
@@ -153,13 +152,6 @@ class stochasticModel:
         m.addConstrs(grb.quicksum(x_var[i*self.given_lines+j] for j in range(self.given_lines)) >= demand[i] for i in range(self.I))
         m.setParam('OutputFlag', 0)
         m.optimize()
-        return
-# two ways to add constraints
-# 1. keep the basic m model.
-
-
-    def updateDemand(self, m, demand):
-        # This function is used to update the demands constraints in the model.
         return
 
     def solve_IP(self, m):

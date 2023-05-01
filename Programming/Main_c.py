@@ -13,7 +13,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 # This function call different methods
 
-
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
         self.roll_width = roll_width  # array, mutable object
@@ -119,7 +118,6 @@ def prop_list():
     p = p[0:t]
 
     return p
-
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
@@ -236,7 +234,7 @@ if __name__ == "__main__":
 # mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
 # res = mod.fit()
 
-my_file.write(str(res.summary()))
+# my_file.write(str(res.summary()))
 
 my_file.close()
 

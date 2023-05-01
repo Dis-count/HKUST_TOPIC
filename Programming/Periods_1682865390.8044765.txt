@@ -1,0 +1,32 @@
+Run Start Time: Sun Apr 30 22:36:30 2023
+The number of periods: 	55
+M1: 100.00 ;M2: 100.00 ;M3: 100.00 ;M4: 100.00 ;M5: 100.00 ;M6: 100.00 
+;Number of accepted people: 143.00 	Number of people: 143.00 
+The number of periods: 	56
+M1: 100.00 ;M2: 100.00 ;M3: 100.00 ;M4: 100.00 ;M5: 100.00 ;M6: 100.00 
+;Number of accepted people: 127.00 	Number of people: 127.00 
+The number of periods: 	57
+M1: 100.00 ;M2: 100.00 ;M3: 100.00 ;M4: 100.00 ;M5: 100.00 ;M6: 100.00 
+;Number of accepted people: 130.00 	Number of people: 130.00 
+The number of periods: 	58
+M1: 95.95 ;M2: 100.00 ;M3: 100.00 ;M4: 100.00 ;M5: 100.00 ;M6: 100.00 
+;Number of accepted people: 148.00 	Number of people: 148.00 
+The number of periods: 	59
+M1: 100.00 ;M2: 100.00 ;M3: 100.00 ;M4: 100.00 ;M5: 100.00 ;M6: 100.00 
+;Number of accepted people: 144.00 	Number of people: 144.00 
+The number of periods: 	60
+M1: 97.99 ;M2: 100.00 ;M3: 100.00 ;M4: 100.00 ;M5: 98.66 ;M6: 100.00 
+;Number of accepted people: 149.00 	Number of people: 149.00 
+The number of periods: 	61
+M1: 97.99 ;M2: 100.00 ;M3: 97.99 ;M4: 97.99 ;M5: 97.99 ;M6: 97.99 
+;Number of accepted people: 149.00 	Number of people: 150.00 
+The number of periods: 	62
+M1: 98.05 ;M2: 100.00 ;M3: 98.05 ;M4: 98.05 ;M5: 96.10 ;M6: 98.70 
+;Number of accepted people: 154.00 	Number of people: 161.00 
+The number of periods: 	63
+M1: 97.28 ;M2: 98.64 ;M3: 98.64 ;M4: 98.64 ;M5: 98.64 ;M6: 98.64 
+;Number of accepted people: 147.00 	Number of people: 148.00 
+The number of periods: 	64
+M1: 93.51 ;M2: 98.70 ;M3: 97.40 ;M4: 97.40 ;M5: 94.16 ;M6: 96.10 
+;Number of accepted people: 154.00 	Number of people: 162.00 
+Total Runtime	11.130966

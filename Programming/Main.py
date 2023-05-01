@@ -1,5 +1,3 @@
-# import gurobipy as grb
-# from gurobipy import GRB
 import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
@@ -89,7 +87,6 @@ class CompareMethods:
             demand[i-1] += 1
 
         return demand
-
 
     def binary_search_first(self, sequence):
         # Return the index not less than the first
@@ -306,7 +303,6 @@ def prop_list1():
 
 
 if __name__ == "__main__":
-
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
     num_period = 60
@@ -338,7 +334,7 @@ if __name__ == "__main__":
 
         multi = np.arange(1, I+1)
 
-        count = 50
+        count = 1
         for j in range(count):
             sequence, ini_demand, ini_demand3 = a_instance.random_generate()
 

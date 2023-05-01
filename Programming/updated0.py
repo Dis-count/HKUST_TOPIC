@@ -132,10 +132,6 @@ class stochasticModel:
 # 1. keep the basic m model.
 
 
-    def updateDemand(self, m, demand):
-        # This function is used to update the demands constraints in the model.
-        return
-
     def solve_IP(self, m):
         xvalue = m.getVars()[0: self.I * self.given_lines]
         for var in xvalue:
@@ -517,7 +513,6 @@ def decisionSeveral(sequence, demand):
     return usedDemand, remaining_period
 
 def newScenario(usedDemand, remaining_period):
-
     sam1 = samplingmethod(I, num_sample, remaining_period, probab)
 
     dw, prop = sam1.get_prob()

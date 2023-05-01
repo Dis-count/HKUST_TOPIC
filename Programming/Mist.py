@@ -3,7 +3,6 @@ from scipy.stats import binom
 import numpy as np
 import copy
 
-
 def several_class(size_group, demand, remaining_period, probab):
     # The function is used to give the maximum difference and give the decision
     # j F(x_j -1, T, p_j) - (j-i-1) F(x_{j-i-1}, T, p_{j-i-1}) -1
@@ -28,7 +27,6 @@ def several_class(size_group, demand, remaining_period, probab):
         return index_diff
     else:
         return False
-
 
 def decision1(sequence, demand, probab):
     # the function is used to make a decision on several classes

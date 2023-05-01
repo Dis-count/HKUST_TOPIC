@@ -10,7 +10,7 @@ In this section, we first consider the seat planning problem with social distanc
 
 
 \subsection{Seat Planning Problem with Social Distancing}\label{dynamic_demand}
-We consider a set of groups, each of which consists of no more than $m$ people, to be assigned to a set of seats. There are $m$ different group types, with group type $i$ having a size of $s_i$, where $1 \leq i \leq m$. These groups can be represented by a demand vector, denoted by $\mathbf{d} = (d_1, \ldots, d_m)$. Each element $d_i$, where $1 \leq i \leq m$, indicates the number of group type $i$ containing $i$ people. For illustration, we consider a layout consisting of $N$ rows, each containing $S_j$ seats, where $j = 1, \ldots, N$.
+We consider a set of groups, each of which consists of no more than $m$ people, to be assigned to a set of seats. There are $m$ different group types, with group type $i$ having a size of $s_i$, where $i \in [M] \coloneqq \{1,2, \ldots, m\}$. These groups can be represented by a demand vector, denoted by $\mathbf{d} = (d_1, \ldots, d_m)$. Each element $d_i$, where $i \in [M]$, indicates the number of group type $i$ containing $i$ people. For illustration, we consider a layout consisting of $N$ rows, each containing $S_j$ seats, where $j = 1, \ldots, N$.
 
 In accordance with epidemic prevention requirements, customers from the same group are allowed to sit together, while different groups must maintain social distancing which can be one seat or more seats. We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
 

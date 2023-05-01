@@ -1,5 +1,3 @@
-# import gurobipy as grb
-# from gurobipy import GRB
 import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
@@ -24,22 +22,31 @@ class CompareMethods:
         self.num_sample = num_sample   # number, Immutable object
 
     def random_generate(self):
-        sam = samplingmethod(self.I, self.num_sample, self.num_period, self.probab)
+        sam = samplingmethod(self.I, self.num_sample,
+                             self.num_period, self.probab)
 
         dw, prop = sam.get_prob()
         W = len(dw)
 
         sequence = generate_sequence(self.num_period, self.probab)
+
         m1 = stochasticModel(self.roll_width, self.given_lines,
                              self.demand_width_array, W, self.I, prop, dw)
 
         ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
-        deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I)
+
+        deter = deterministicModel(
+            self.roll_width, self.given_lines, self.demand_width_array, self.I)
 
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
         ini_demand, _ = deter.IP_formulation(ini_demand, np.zeros(self.I))
 
-        return sequence, ini_demand
+        ini_demand1 = np.array(self.probab) * self.num_period
+
+        ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
+        ini_demand3, _ = deter.IP_formulation(ini_demand3, np.zeros(self.I))
+
+        return sequence, ini_demand, ini_demand3
 
     def offline(self, sequence):
         # This function is to obtain the optimal decision.
@@ -98,7 +105,6 @@ class CompareMethods:
         return demand
 
     def method1(self, sequence, ini_demand):
-
         decision_list = decision1(sequence, ini_demand, self.probab)
         sequence = [i-1 for i in sequence if i > 0]
 
@@ -112,11 +118,16 @@ class CompareMethods:
 
         return demand
 
-    def result(self, sequence, ini_demand):
+    def result(self, sequence, ini_demand, ini_demand3):
+        ini_demand4 = copy.deepcopy(ini_demand)
 
         final_demand1 = self.method1(sequence, ini_demand)
 
-        return final_demand1
+        final_demand3 = self.method4(sequence, ini_demand3)
+
+        final_demand4 = self.method4(sequence, ini_demand4)
+
+        return final_demand1, final_demand3, final_demand4
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
@@ -142,27 +153,30 @@ if __name__ == "__main__":
 
         a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
-        M1 = 0
+        M4 = 0
         accept_people = 0
 
         multi = np.arange(1, I+1)
         print(num_period)
-        count = 50
+        count = 1
         for j in range(count):
-            sequence, ini_demand = a_instance.random_generate()
+            sequence, ini_demand, ini_demand3 = a_instance.random_generate()
 
-            a = a_instance.result(sequence, ini_demand)
-            
+            a,c,d = a_instance.result(sequence, ini_demand, ini_demand3)
+
             f = a_instance.offline(sequence)  # optimal result
             optimal = np.dot(multi, f)
 
-            M1 += np.dot(multi, a)
+            # sequence, ini_demand = a_instance.random_generate()
+            # a = a_instance.result(sequence, ini_demand)
+
+            M4 += np.dot(multi, d)
             accept_people += optimal
 
-        occup_value[cnt] = M1/count/total_seat * 100
+        occup_value[cnt] = M4/count/total_seat * 100
         people_value[cnt] = accept_people/count/total_seat * 100
         if gap_if:
-            if accept_people/count - M1/count > 1:
+            if accept_people/count - M4/count > 1:
                 point = [num_period-1, occup_value[cnt-1]]
                 gap_if = False
         cnt += 1

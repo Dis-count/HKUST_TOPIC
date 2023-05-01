@@ -127,8 +127,6 @@ class stochasticModel:
         m.setParam('OutputFlag', 0)
         m.optimize()
         return
-# two ways to add constraints
-# 1. keep the basic m model.
 
 
     def solve_IP(self, m):
@@ -486,7 +484,7 @@ if __name__ == "__main__":
     dw, prop = sam.get_prob()
     W = len(dw)
     # roll_width = np.random.randint(21, size = given_lines) + 30
-    roll_width = np.arange(21,21 + given_lines)
+    roll_width = np.arange(21, 21 + given_lines)
     # total_seat = np.sum(roll_width)
 
     demand_width_array = np.array([2, 3, 4, 5])
@@ -537,7 +535,6 @@ def decisionSeveral(sequence, demand):
     return usedDemand, remaining_period
 
 def newScenario(usedDemand, remaining_period):
-
     sam1 = samplingmethod(I, num_sample, remaining_period, probab)
 
     dw, prop = sam1.get_prob()

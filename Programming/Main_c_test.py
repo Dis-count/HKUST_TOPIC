@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 
 # This function call different methods
 
-
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
         self.roll_width = roll_width  # array, mutable object

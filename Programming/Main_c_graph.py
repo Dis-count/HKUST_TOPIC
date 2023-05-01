@@ -138,7 +138,7 @@ if __name__ == "__main__":
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    count = 50
+    count = 1
 
     for ind_probab, probab in enumerate(p):
 

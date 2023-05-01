@@ -1,5 +1,3 @@
-# import gurobipy as grb
-# from gurobipy import GRB
 import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
@@ -11,6 +9,7 @@ from Mist import decisionSeveral, decisionOnce
 import time
 
 # This function call different methods(Use method_dynamic)
+# Difference is a,c,d introduced by the largest pattern.
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
@@ -47,32 +46,34 @@ class CompareMethods:
         # i is the i-th request in the sequence
         # j is the j-th row
         # sequence includes social distance.
-        remaining_capacity = np.zeros(self.given_lines)
         current_capacity = copy.deepcopy(self.roll_width)
         j = 0
-        period  = 0
+        period = 0
         for i in sequence:
-            if i in remaining_capacity:
-                inx = np.where(remaining_capacity == i)[0][0]
-                remaining_capacity[inx] = 0
+            if i in current_capacity:
+                inx = np.where(current_capacity == i)[0][0]
+                current_capacity[inx] = 0
+                period += 1
+                continue
 
-            if current_capacity[j] > i:
+            if current_capacity[j] >= i:
                 current_capacity[j] -= i
-            else:    
-                remaining_capacity[j] = current_capacity[j]
-                j +=1
+            else:
+                j += 1
                 if j > self.given_lines-1:
                     break
                 current_capacity[j] -= i
-            period +=1
-        
+            period += 1
+
         lis = [0] * (self.num_period - period)
         for k, i in enumerate(sequence[period:]):
-            if i in remaining_capacity:
-                inx = np.where(remaining_capacity == i)[0][0]
-                remaining_capacity[inx] = 0
+            if i in current_capacity:
+                inx = np.where(current_capacity == i)[0][0]
+                current_capacity[inx] = 0
+
                 lis[k] = 1
-        my_list111 = [1]* period + lis
+
+        my_list111 = [1] * period + lis
         sequence = [i-1 for i in sequence]
 
         final_demand = np.array(sequence) * np.array(my_list111)

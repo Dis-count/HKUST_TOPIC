@@ -11,10 +11,7 @@ The catering businesses (excluding bars and pubs, which will be closed) will hav
 
 The measures announced by the Hong Kong government mainly focus on limiting the number of people in each group and the seat occupancy rate. However, implementing these policies in operations can be challenging, especially for venues with fixed seating layouts. In our study, we will focus on addressing this challenge in specific scenarios, such as cinemas and music concert venues. 
 
-We aim to provide a practical tool for venues to optimize seat assignments while ensuring the safety of groups by proposing a seat assignment policy that takes into account social distancing requirements and the given seating layout. Additionally, we will provide guidance on how to set appropriate occupancy rates and group sizes.
-
-Our goal is to help venues effectively implement social distancing measures by providing them with a practical and customized solution that takes into account their unique seating arrangements and operational constraints.
-
+We aim to provide a practical tool for venues to optimize seat assignments while ensuring the safety of groups by proposing a seat assignment policy that takes into account social distancing requirements and the given seating layout. Additionally, we will offer guidance on setting appropriate occupancy rates and group sizes. We strive to enable venues to implement social distancing measures effectively by providing a tailored solution that accommodates their specific seating arrangements and operational constraints.
 
 % https://www.lexology.com/library/detail.aspx?g=21a43dd7-3159-4357-9b8c-e412c382d8a5
 
@@ -23,10 +20,10 @@ Our goal is to help venues effectively implement social distancing measures by p
 
 When purchasing tickets for movies or concerts, there are generally two approaches to seat assignment: seat assignment after the booking period and seat assignment during the booking period.
 
-The seat assignment after booking period approach involves delaying seat assignment until after the reservation deadline has passed. This means that the organizer does not need to immediately allocate seats to customers, so implementing social distancing restrictions will not affect the booking process. Instead, the decision-maker must review and either accept or reject each seat request during the reservation stage. After the reservation deadline, the seller will inform customers of the seat layout information before admission.
+The seat assignment after booking period approach involves delaying seat assignment until after the reservation deadline has passed. This means that the organizer does not need to immediately allocate seats to customers, so implementing social distancing restrictions will not affect the booking process. After the reservation deadline, the seller will inform customers of the seat layout information before admission. For instance, in venues such as singing concert halls, where there is high ticket demand and numerous seats available, organizers usually do not determine the seats during booking. Instead, they will inform customers of the seat information after the overall demands are determined. This approach allows for more flexibility in seat assignments and can accommodate changes in group sizes or preferences. However, in other venues where seating options are limited, it may be necessary to assign seats immediately upon accepting a group.
 
-For instance, in venues such as singing concert halls, where there is high ticket demand and numerous seats available, organizers usually do not determine the seats during booking. Instead, they will inform customers of the seat information after the overall demands are determined. This approach allows for more flexibility in seat assignments and can accommodate changes in group sizes or preferences. However, in other venues where seating options are limited, it may be necessary to assign seats immediately upon accepting a group.
 
+% Instead, the decision-maker must review and either accept or reject each seat request during the reservation stage. 
 
 % In contrast, for seat assignment during the booking period, when there are no social distancing requirements, cinemas typically release seat distribution maps online, which are usually divided into available and unavailable seats. When customers book and pay for their tickets, they can select the desired seat, which will then be reserved for them. After a successful payment, the seat will be allocated to the customer.
 
@@ -34,13 +31,14 @@ For instance, in venues such as singing concert halls, where there is high ticke
 
 On the other hand, the seat assignment during the booking period approach typically involves the cinema releasing the seating charts online, which show the available and unavailable seats, when there are no social distancing requirements. Customers can then choose their desired seats and reserve them by paying for their tickets. After successful payment, the seats are allocated to the customers.
 
+However, due to social distancing requirements, this approach needs to be modified. Seat assignments are still arranged when groups book their tickets, but the seller will provide the seat information directly. For example, in movie theaters with relatively few seats, the demands for tickets are usually low enough to allow for free selection of seats directly online. Early seat planning can satisfy the requirement of social distancing and save costs without changing seat allocation. The seat allocation could remain for one day because the same film genre will likely attract similar groups with similar seating preferences.
 
-However, due to social distancing requirements, this approach needs to be modified. Seat assignments are still arranged when groups book their tickets, but they can only choose seats that are the same size as their group. If such seats are unavailable, the seat selection system will inform the group whether they can occupy a larger-size seat. For example, in movie theaters with relatively few seats, the demands for tickets are usually low enough to allow for free selection of seats directly online. 
-Early seat planning can satisfy the requirement of social distancing and save costs without changing seat allocation. The seat allocation could remain for one day because the same film genre will likely attract similar groups with similar seating preferences.
+% but they can only choose seats that are the same size as their group. 
+
+% If such seats are unavailable, the seat selection system will inform the group whether they can occupy a larger-size seat. 
 
 
 % We consider the following dynamic demand situations, seat assignment after booking period and seat assignment during booking period.
-
 
 % Therefore, the decision to assign seats can vary depending on the specific needs and circumstances of each venue.
 
@@ -52,8 +50,6 @@ Our study mainly focuses on the latter situation where customers come dynamicall
 % \item Will larger-size seats be allocated to each arriving group when seats of the same size as the group are used up? 
 % \item What policies regarding the attendance rate and group size should the government make?
 % \end{itemize}
-
-
 
 This paper focuses on addressing the dynamic seating assignment problem with a given set of seats in the context of a pandemic. The government issues a maximum number of people allowed in each group and a maximum capacity percentage, which must be implemented in the seat planning. The problem becomes further complicated by the existence of groups of guests who can sit together.
 

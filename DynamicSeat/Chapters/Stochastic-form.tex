@@ -7,15 +7,15 @@ Firstly, we give the formulation of the scenario-based stochastic programming. T
 
 \subsection{Formulation}
 
-Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega$ corresponds to a particular realization of the demand vector, $\mathbf{D}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{m,\omega})$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected value of people over all the scenarios, we propose a scenario-based stochastic programming.
+Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega$ corresponds to a particular realization of the demand vector, $\mathbf{D}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected value of people over all the scenarios, we propose a scenario-based stochastic programming.
 % As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. 
 
 Consider the decision makers who give the seat assignment based on the scenarios then assign the groups to seats according to the realized true demand. 
 
 % For example, When there is no seating for group of four, seats of 5 can be assigned to a group of 4 with one empty seat as social distancing.
 
-The seat assignment can be denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{m \times N}$. Let $x_{i,j}$ stand for the number of group type $i$ in row $j$. The supply for group type $i$ can be represented by $\sum_{j=1}^N x_{ij}$.
-Regarding the nature of the obtained information, we assume that there are $S = |\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{m \times S}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{m \times S}$. Each component of $\mathbf{y}^{+}$, $y_{i \omega}^{+}$, represents the number of surplus seats for group type $i$. Similarly, $y_{i \omega}^{-}$ represents the number of inadequate seats for group type $i$.
+The seat assignment can be denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{M \times N}$. Let $x_{i,j}$ stand for the number of group type $i$ in row $j$. The supply for group type $i$ can be represented by $\sum_{j=1}^N x_{ij}$.
+Regarding the nature of the obtained information, we assume that there are $S = |\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times S}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times S}$. Each component of $\mathbf{y}^{+}$, $y_{i \omega}^{+}$, represents the number of surplus seats for group type $i$. Similarly, $y_{i \omega}^{-}$ represents the number of inadequate seats for group type $i$.
 Considering that the group can take the seats assigned to the larger group type, we assume that the surplus group type $i$ can be occupied by smaller group type $j<i$ in the descending order of the group size. That is, for any $\omega$, $i \leq m-1$, $y_{i \omega}^{+}=\left(\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}$ and $y_{i \omega}^{-}=\left(d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+} \right)^{+}$, where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest group type $m$, we have $y_{m \omega}^{+} = (\sum_{j=1}^N x_{ij} - d_{i \omega})^{+}$, $y_{m \omega}^{-} = (d_{i \omega}- \sum_{j=1}^N x_{ij})^{+}$.
 
 
@@ -122,12 +122,12 @@ Here $E$ is the expectation with respect to the scenario set. Problem \eqref{BD_
 
 It is difficult to solve the above problem directly, we can relax problem \eqref{BD_master} to stochastic linear programming firstly. In section \ref{solve_by_benders}, we obtain an optimal linear solution by decomposition approach and generate a near-optimal seat assignment.
 
-\subsection{Solve The Scenario-based Two-stage Problem}\label{solve_by_benders}
+\subsection{Solve the Scenario-based Two-stage Problem}\label{solve_by_benders}
 
 At first, we generate a closed-form solution to the second-stage problem in section \ref{second_stage}. Then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Finally, we obtain a near-optimal seat assignment from the linear solution.
 
 
-\subsubsection{Solve The Second Stage Problem}\label{second_stage}
+\subsubsection{Solve the Second Stage Problem}\label{second_stage}
 
 Consider a $\mathbf{x}$ such that $\mathbf{s x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents our seat assignment for the first stage decisions. Once $\mathbf{x}$ is fixed, the optimal second stage decisions $\mathbf{y}_{\omega}$ can be determined by solving problem \eqref{BD_sub} for each $\omega$.
 
@@ -325,7 +325,7 @@ Then we can obtain the value of $y_{i \omega}$ from equation \eqref{y_recursivel
 
 We show the results of Benders and IP in the section \ref{Bender_IP}.
 
-\subsection{Obtain The Feasible Seat Planning}\label{seat_assignment}
+\subsection{Obtain the Feasible Seat Planning}\label{seat_assignment}
 The decomposition method only gives a fractional solution and the stochastic model does not provide an appropriate seat planning when the number of people in scenario demands is way smaller than the number of the seats. Thus, we change the linear solution from the decomposition method to obtain a feasible seat planning. Before that, we will discuss the deterministic model that can help achieve the goal. 
 
 % The objective is to obtain the maximal number of people placed according to the demand scenarios. It will not provide an appropriate seat assignment when the number of people associated with scenario demands is way less than the number of available seats because there are multiple optimal solutions and the solution given by solver probably does not utilize all the empty seats.

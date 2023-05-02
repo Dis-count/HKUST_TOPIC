@@ -68,6 +68,16 @@ The algorithm is shown below:
   \end{description}
 \end{algorithm}
 
+% \begin{algorithm}[H]
+%   \caption{Dynamic seat assignment(DSA) method}\label{algo_nested_policy}
+%   \begin{description}
+%     \item[Step 1.] Obtain the supply, $\X^{0} = [x_1,\ldots,x_{m}]$, from the feasible seat planning algorithm.
+%     \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
+%     \item[Step 3.] If $x_{i} = 0$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, accpect group type $i$. Set $x_{j^{*}} = x_{j^{*}} -1$. Let $x_{j-i-1} = x_{j-i-1} + 1$ when $j-i-1>0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+%     \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
+%   \end{description}
+% \end{algorithm}
+
 % Example:
 % If the supply is $[0,3,6,11]$, then here comes a group of 1. There will be three choices.
 % \begin{align*}
@@ -85,11 +95,8 @@ We show the results of Benders and IP under this rule in section \ref{Bender_IP}
 The dynamic seat assignment method can give the seat planning before the group arrivals. The specific procedures are demonstrated in the above sections. The first step is to obtain the feasible seat planning from Algorithm \ref{feasible_seat}. Then accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
 
 \subsection{Seat Assignment after Booking Period}
-
 We have developed a dynamic programming(DP)-based method by relaxing all rows to one row with the same capacity. Assuming that there always exists a seat assignment under the total capacity of seats, we can use DP to make decisions in each period.
-
-
-$$V_{t}(L) = \sum_{i \in m} p_i \max\{ {[V_{t-1}(L-s_i-1)+ s_i]}, {V_{t-1}(L)}\}$$
+$$V_{t}(L) = E_{i} [\max\{ {[V_{t-1}(L-s_i-1)+ s_i]}, {V_{t-1}(L)}\}]$$
 
 After obtaining the pre-accepted sequence, we still need to check whether this sequence is feasible for the seat assignment. In most cases, the pre-accepted sequence is feasible, which is why we use relaxation. However, in cases where the sequence is not feasible, we must delete groups one by one from the last arrival of the sequence until it becomes feasible. In practice, we begin to reject the arrival until we cannot find a feasible seat assignment.
 
@@ -125,19 +132,15 @@ After obtaining the pre-accepted sequence, we still need to check whether this s
  
 % The benchmarks for the above two situations are described below.
 
-\subsubsection{FCFS}\label{FCFS-based}
+\subsubsection{FCFS-based}\label{FCFS-based}
 For seat assignment after booking period, the intuitive but trivial method will be on a first-come-first-served basis. Relax all rows to one row with the total number of seats. For the arrival sequence, find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity. 
 % And use the nested policy to accept or reject one group in the remaining arrivals. 
 Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. For the convenience of calculation, we check the feasibility of constructing a seat assignment from the end of the sub-sequence. When it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until a feasible seat assignment is found. In reality, we need to check the feasibility one group by one. 
 
 % Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in that row immediately. We check each request until the capacity is used up. 
 
-
-\subsubsection{Largest Patterns Planning}\label{largest_pattern}
-For seat assignment during booking period, we don't have a good benchmark.
-
-For each row, we choose the patterns from $I_1$. Accept the group such that the largest pattern can be maintained. When the arrival cannot be assigned in the planning patterns from $I_1$, we can change the largest pattern to a second largest pattern according to the coming arrival.
-
+\subsubsection{FCFS}\label{largest_pattern}
+During the booking period, we can continue to use the first-come, first-served (FCFS) approach for seat assignment across all rows. Each accepted request will be assigned a seat row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. We will continue to process requests in this manner until the capacity of all rows is fully utilized.
 
 % There is a reservation stage, we only decide to accept or reject.
 % After certain periods, there is a seat selection stage.
@@ -147,19 +150,22 @@ For each row, we choose the patterns from $I_1$. Accept the group such that the 
 % Multiple scenario approach:
 % Suppose that we know the probabilities, we can use the sampling demands to estimate which patterns we should use. For example, three rows with $I_1$, seven rows with $I_2$. For each arrival, if there exists one scenario containing this group, we accept it; otherwise we use nested policy to accept or reject it.
 
-\begin{algorithm}[H]\label{algo_largest}
-  \caption{Method by using the largest patterns}
-  \begin{description}
-    \item[Step 1.] Generate the largest pattern by the greedy way for each row.
-    \item[Step 2.] Denote the minimal and maximal size of group in the pattern of row $i$ as $\min_i$ and $\max_i$. 
-    \item[Step 3.] For the arrival with the size of $a$ in period $t$, if there exists $i$ such that $\min_i + \max_i >= a$ and $a > \min_i$, accept this arrival at row $i$, go to step 5; otherwise, go to step 4.
-    \item[Step 4.] Find a maximal group of seats to accept this arrival, otherwise, reject this arrival.
-    % Use the information of realized arrivals to make the decision.
-    \item[Step 5.] Move to the next period. Repeat step 3. 
-  \end{description}
-\end{algorithm}
+% \subsubsection{Largest Patterns Planning}\label{largest_pattern}
+% For each row, we choose the patterns from $I_1$. Accept the group such that the largest pattern can be maintained. When the arrival cannot be assigned in the planning patterns from $I_1$, we can change the largest pattern to a second largest pattern according to the coming arrival.
 
-Step 2: the pattern will have the same loss by these procedures. ($\min_i$ can be 0.)
+% \begin{algorithm}[H]\label{algo_largest}
+%   \caption{Method by using the largest patterns}
+%   \begin{description}
+%     \item[Step 1.] Generate the largest pattern by the greedy way for each row.
+%     \item[Step 2.] Denote the minimal and maximal size of group in the pattern of row $i$ as $\min_i$ and $\max_i$. 
+%     \item[Step 3.] For the arrival with the size of $a$ in period $t$, if there exists $i$ such that $\min_i + \max_i >= a$ and $a > \min_i$, accept this arrival at row $i$, go to step 5; otherwise, go to step 4.
+%     \item[Step 4.] Find a maximal group of seats to accept this arrival, otherwise, reject this arrival.
+%     % Use the information of realized arrivals to make the decision.
+%     \item[Step 5.] Move to the next period. Repeat step 3. 
+%   \end{description}
+% \end{algorithm}
+
+% Step 2: the pattern will have the same loss by these procedures. ($\min_i$ can be 0.)
 
 % \begin{lem}
 %   Any largest patterns can be generated by the largest pattern constructed from the greedy method.

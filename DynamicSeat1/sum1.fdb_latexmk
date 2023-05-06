@@ -1,19 +1,19 @@
 # Fdb version 3
-["bibtex sum1"] 1683285275 "sum1.aux" "sum1.bbl" "sum1" 1683291221
+["bibtex sum1"] 1683362160 "sum1.aux" "sum1.bbl" "sum1" 1683380380
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1630493868 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "refe.bib" 1683284132 10339 d524adc63e04994d30172fd31f403ee2 ""
-  "sum1.aux" 1683285582 12954 6c06943b45d38f649644a21b66309c8b "pdflatex"
+  "sum1.aux" 1683380379 12954 9a4a8bfa9e58ea6afcc8414156a330f3 "pdflatex"
   (generated)
-  "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1683285580 "f:/Files/Github/HKUST_TOPIC/DynamicSeat1/sum1.tex" "sum1.pdf" "sum1" 1683291221
+  "sum1.bbl"
+["pdflatex"] 1683380378 "f:/Files/Github/HKUST_TOPIC/DynamicSeat1/sum1.tex" "sum1.pdf" "sum1" 1683380380
   "Chapters/Abstract.tex" 1683278636 2819 6609a1c1faac75a54a3080e2d88030b3 ""
   "Chapters/Conclusion.tex" 1682939022 1774 97bb5ed781dd20c5821919b113568df7 ""
   "Chapters/Extension.tex" 1683032293 7179 786cdd8ea37659d5b37c2110be0f5605 ""
   "Chapters/Introduction.tex" 1683291220 9396 2eb1b56536d97b2d0039c5c6df9691a1 ""
-  "Chapters/Literature-review.tex" 1683266730 15146 67d651d49d2d9508fa4ce25269fda484 ""
+  "Chapters/Literature-review.tex" 1683362155 15146 8460171a32c285c5abc9b1812e8e9a50 ""
   "Chapters/Methods.tex" 1683032293 14697 7143d8dd2185f15701fb1ebc05929c15 ""
-  "Chapters/Problem-description.tex" 1682952020 10237 0119b6b2ec323e0a9d89ccc7fb7e6739 ""
+  "Chapters/Problem-description.tex" 1683380377 10284 d35b5de33e30623e05e2104e8b016bc7 ""
   "Chapters/Proof.tex" 1680069684 222 c881c09ecfaa9650e85e8c3437ddbe41 ""
   "Chapters/Res_appendix.tex" 1673186450 24 eb283fb1e8da68575e547e2d569d7218 ""
   "Chapters/Results.tex" 1683032293 16803 d34b6e972dcfe6affa5f0fe9da8b94bf ""
@@ -158,12 +158,12 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/DynamicSeat1/sum1.tex" 1683283388 1952 58863dd1070c249b879f80c66a9e7f82 ""
-  "sum1.aux" 1683285582 12954 6c06943b45d38f649644a21b66309c8b "pdflatex"
-  "sum1.bbl" 1683285275 5424 a7221e5fb2adf3a157e2bbb8efa26b2c "bibtex sum1"
-  "sum1.out" 1683285582 5756 06f45b2f2255bb0ac5575f6549a963c4 "pdflatex"
+  "sum1.aux" 1683380379 12954 9a4a8bfa9e58ea6afcc8414156a330f3 "pdflatex"
+  "sum1.bbl" 1683362160 5424 a7221e5fb2adf3a157e2bbb8efa26b2c "bibtex sum1"
+  "sum1.out" 1683380379 5756 8dec18bd50be0cd7209f05c75cdfcf94 "pdflatex"
   "sum1.tex" 1683283388 1952 58863dd1070c249b879f80c66a9e7f82 ""
   (generated)
-  "sum1.out"
-  "sum1.log"
   "sum1.aux"
   "sum1.pdf"
+  "sum1.out"
+  "sum1.log"

@@ -14,11 +14,16 @@ We consider a set of groups, each of which consists of no more than $M$ people, 
 
 These groups can be represented by a demand vector, denoted by $\mathbf{d} = (d_1, \ldots, d_M)$. Each element $d_i$, where $i \in [M]$, indicates the number of group type $i$ containing $i$ people. For illustration, we consider a layout consisting of $N$ rows, each containing $S_j$ seats, where $j \in [N]$.
 
-In accordance with epidemic prevention requirements, customers from the same group are allowed to sit together, while different groups must maintain social distancing which can be one seat or more seats. We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
+In accordance with epidemic prevention requirements, customers from the same group are allowed to sit together, while different groups must maintain social distancing which can be one seat or more seats. 
+
+We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
 
 Specifically, each group must leave one seat empty to maintain social distancing from adjacent groups. Additionally, different rows do not affect each other, meaning that a person from one group can sit directly behind a person from another group.
 
-To achieve the social distancing requirements in the seat planning process, we add one to the original size of each group to create the new size of the group. We also add one dummy seat to each row. Let $s_i = i + 1$ denote the new size of group type $i$ for each $i \in [M]$, and let $L_j = S_j + 1$ denote the length of row $j$ for each $j \in [N]$, where $S_j$ represents the number of seats in row $j$.
+Let $s$ denote the social distancing.
+
+To achieve the social distancing requirements in the seat planning process, we add one to the original size of each group to create the new size of the group. We also add one dummy seat to each row. Let $n_i = i + s$ denote the new size of group type $i$ for each $i \in [M]$, and let $L_j = S_j + s$ denote the length of row $j$ for each $j \in [N]$, where $S_j$ represents the number of seats in row $j$.
+
 
 Then we can illustrate the seat planning for one row below. 
 

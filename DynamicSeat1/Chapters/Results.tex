@@ -67,11 +67,11 @@ A arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N
 
 It is clear that the number of different sequences is $M^{T}$. The number of different scenarios is $O(T^{M-1})$ which can be obtained by the following DP.
 
-Use $D(T,J) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$. 
+Use $D(T, M) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{M} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, M) = \sum_{i= 0}^{T} D(i, M-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,M) = O(T^{M-1})$. 
 
 The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
 
-Then, we will show the near-optimal seat assignment has a close performance with IP when considering nested policy.
+Then, we will show the feasible seat assignment has a close performance with IP when considering nested policy.
 
 % Then we compare the results of benders decomposition and IP under nested policy.
 
@@ -200,24 +200,6 @@ In this subsection, we discuss the effect of different probabilities on our expe
 We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. We call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$.
 The number of all sampled probability combinations is $n_p$. The number of rows is set at 10, and the number of seats per row is 21 (including one dummy seat). We simulate 200 periods, and the number of people served with respect to the value of $c$ is shown in the figure below. For each probability combination, the blue point represents the average number of people served from 50 instances and the red point represents the expected number of people served.
 
-
-% \begin{figure}[h]
-%   \centering
-%   \subfigure[One instance for each data point]{
-%     \label{Fig.sub.1}
-%     \includegraphics[width=0.48\textwidth]{./Figures/Figure_1.pdf}}
-%   \subfigure[Average of 50 instances for each data point]{
-%     \label{Fig.sub.2}
-%     \includegraphics[width=0.48\textwidth]{./Figures/Figure_2.pdf}}
-%   \caption{The number of people served versus $c$}
-%   \label{Fig.lable}
-% \end{figure}
-
-% \begin{figure}[ht]
-%   \centering
-%   \includegraphics[width = 0.7\textwidth]{./Figures/diff_2.pdf}
-%   \caption{The number of people served versus $c$}
-% \end{figure}
 
 \begin{figure}[h]
   \centering

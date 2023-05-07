@@ -39,7 +39,9 @@ By incorporating the additional seat and designating certain seats for social di
 
 Now, we analyse the effect of introducing social distancing for each row. At first, we consider the types of pattern, which refers to the seat planning for each row. For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left seats, respectively. Denote by $l(k) = \alpha_k + \beta_k -1$ the loss for pattern $k$. The loss represents the number of people lost compared to the situation without social distancing.
 
-Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. Suppose there are $n$ groups in a row, we use the descending form $(t_1, t_2, \ldots, t_n)$ to represent the corresponding pattern, where $t_h$ is the new group size, $h \in [n]$. Let $P_{k}$ denote the set of group sizes for pattern $k$. We use $t \in P_{k}$ to denote a group with size of $t$ can be put into the pattern. 
+Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. Suppose there are $n$ groups in a row, we use a descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote pattern $k$, where $t_h$ is the new group size, $h \in [n]$. 
+
+% Let $P_{k}$ denote the set of group sizes for pattern $k$. We use $t \in P_{k}$ to denote a group with size of $t$ can be put into the pattern. 
 
 \begin{example}
   Suppose the social distancing is one seat, then the new sizes of groups are $2, 3, 4, 5$, respectively. The length of one row is $L = 21$ and the demand is $[10, 12, 9, 8]_d$. Then these patterns, $(5, 5, 5, 5, 1), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. For pattern 1, $(5, 5, 5, 5, 1)$, $P_{1} = \{5\}$, thus a group with a size smaller than 5 cannot be put in this pattern.

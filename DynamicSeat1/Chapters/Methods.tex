@@ -8,19 +8,8 @@ Suppose there are $T$ independent periods, one group will arrive in each period.
 There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = i) = p_i$, $i \in [M]$ and $\sum_{i} p_{i} =1$. 
 
 
-
-% (It can be modeled as a multinomial distribution, $p(\mathbf{Y} \mid \mathbf{p})=\prod_{j=1}^{J} p_j N_j$).
-
-
 % \subsection{Generate scenarios by discrete periods}\label{MappingSeq}
 % In the dynamic situation, we can use stochastic information to generate the sequences of group arrivals. The sequences can be integrated to obtain the scenario of demands.
-
-
-% scenario:
-
-% sequence will affect the result.
-% Then, if we fix the seat assignment as $[3,3]$. For the sequence, $2,2,2,2,2,3,3,3,3,3$, we will place one $2$ in a three-seat. 
-% But for the sequence, $3,3,3,3,3,2,2,2,2,2$, we will accept three $3$ and three $2$.
 
 
 % Example:
@@ -29,8 +18,6 @@ There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random
 % The number of sequences generating from multinomial distribution is $1000$. Then, we can obtain $[0,3,6,11]$ from stochastic programming. When the number of sequences is 5000, we still obtain $[0,3,6,11]$. It shows that sampling is practical.
 
 \subsection{Assign-to-Seat Rules}\label{nested_policy}
-% Recall that the stochastic programming only considers the situation that small-size groups can use the surplus large-size seats.
-
 Recall that for each arrival, we should assign the seats to the group. 
 For a feasible seat planning, we must follow some basic rules to assign seats.
 \begin{itemize}
@@ -56,17 +43,7 @@ Let $F_{j}(x;T)$ be the cumulative distribution function of the number of arriva
 
 Thus, $d(i,j) = j F_{j}(x_{j}-1; T) - (j-i-1) F_{j-i-1}(x_{j-i-1}; T) -1$. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group $i$ in $j^{*}$-size seats. Otherwise, reject the group.
 
-The algorithm is shown below:
 
-\begin{algorithm}[H]
-  \caption{Dynamic seat assignment(DSA) method}\label{algo_nested_policy}
-  \begin{description}
-    \item[Step 1.] Obtain the supply, $\X^{0} = [x_1,\ldots,x_{m}]$, from the feasible seat planning algorithm.
-    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
-    \item[Step 3.] If $x_{i} = 0$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, accpect group type $i$. Set $x_{j^{*}} = x_{j^{*}} -1$. Let $x_{j-i-1} = x_{j-i-1} + 1$ when $j-i-1>0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
-    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
-  \end{description}
-\end{algorithm}
 
 % \begin{algorithm}[H]
 %   \caption{Dynamic seat assignment(DSA) method}\label{algo_nested_policy}
@@ -87,18 +64,48 @@ The algorithm is shown below:
 % \end{align*}
 % $\mathbf{x}$ is the remaining supply right now.
 
-We show the results of Benders and IP under this rule in section \ref{Bender_IP}.
+We show the results of Benders and IP under this policy in section \ref{Bender_IP}.
 
 
 \subsection{Seat Assignment during Booking Period}
 % we make the decision according to the realized arrivals.
 The dynamic seat assignment method can give the seat planning before the group arrivals. The specific procedures are demonstrated in the above sections. The first step is to obtain the feasible seat planning from Algorithm \ref{feasible_seat}. Then accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
 
+The algorithm is shown below:
+
+\begin{algorithm}[H]
+  \caption{Dynamic seat assignment algorithm}\label{algo_nested_policy}
+  \begin{description}
+    \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregated supply is $\X = [x_{1}, \ldots, x_{M}]$.
+    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in [N]$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
+    \item[Step 3.] If $i \notin P_k, \forall k \in [N]$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in [N]$ such that $j^{*} \in P_k$. Accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-1} = x_{j-i-1} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-1)$ when $j^{*}-i-1 > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
+  \end{description}
+\end{algorithm}
+
 \subsection{Seat Assignment after Booking Period}
-We have developed a dynamic programming(DP)-based method by relaxing all rows to one row with the same capacity. Assuming that there always exists a seat assignment under the total capacity of seats, we can use DP to make decisions in each period.
+Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. We can develope a dynamic programming(DP)-based method:
 $$V_{t}(L) = E_{i} [\max\{ {[V_{t-1}(L-n_i)+ i]}, {V_{t-1}(L)}\}]$$
 
-After obtaining the pre-accepted sequence, we still need to check whether this sequence is feasible for the seat assignment. In most cases, the pre-accepted sequence is feasible, which is why we use relaxation. However, in cases where the sequence is not feasible, we must delete groups one by one from the last arrival of the sequence until it becomes feasible. In practice, we begin to reject the arrival until we cannot find a feasible seat assignment.
+% Assuming that there always exists a seat assignment under the total capacity of seats,
+
+We can use DP to make decisions in each period. But we don't know whether the accepted groups can be assigned to seats when the demand is close to supply. Thus, after obtaining the pre-accepted sequence, we still need to check whether this sequence is feasible for the seat assignment. In most cases, the pre-accepted sequence is feasible, which is why we use relaxation. In practice, we can accept the groups according to DP, reject the arrival until we cannot find a feasible seat assignment.
+
+% However, in cases where the sequence is not feasible, we must delete groups one by one from the last arrival of the sequence until it becomes feasible. 
+
+\subsection{Seat Planning Charts Online}
+We are able to provide an online seat planning solution by using our method. For a feasible seating arrangement, we provide a pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seating plan that meets practical needs.
+
+\begin{algorithm}[H]
+  \caption{Seat assignment based on online seat planning}\label{seat_online}
+  \begin{description}
+    \item[Step 1.] Construct a seat planning from the feasible seat planning algorithm, the aggregated supply is $\X^{0} = [x_1,\ldots,x_{m}]$.
+    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
+    \item[Step 3.] If $x_{i} = 0$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, accpect group type $i$. Set $x_{j^{*}} = x_{j^{*}} -1$. Let $x_{j-i-1} = x_{j-i-1} + 1$ when $j-i-1>0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
+  \end{description}
+\end{algorithm}
+
 
 
 % We need to assign seats to the group for each arrival. In each period, the group can select the row they want to sit when the capacity is enough. FCFS will be more appropriate. But M1 and M3 can also be used.

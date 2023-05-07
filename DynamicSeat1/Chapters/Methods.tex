@@ -2,10 +2,10 @@
 
 \section{Dynamic Seat Assignment(DSA)}
 In this section, we will present the methods to assign seats with stochastic information.
-We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i = 1,\ldots, m$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$.
+We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in [M]$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$.
 
-Suppose there are $T$ independent periods; at most, one group will arrive in each period.
-There are $J$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = i) = p_i$, $i = 1,\ldots,m$ and $\sum_{i} p_{i} =1$. 
+Suppose there are $T$ independent periods, one group will arrive in each period.
+There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = i) = p_i$, $i \in [M]$ and $\sum_{i} p_{i} =1$. 
 
 
 
@@ -96,7 +96,7 @@ The dynamic seat assignment method can give the seat planning before the group a
 
 \subsection{Seat Assignment after Booking Period}
 We have developed a dynamic programming(DP)-based method by relaxing all rows to one row with the same capacity. Assuming that there always exists a seat assignment under the total capacity of seats, we can use DP to make decisions in each period.
-$$V_{t}(L) = E_{i} [\max\{ {[V_{t-1}(L-s_i-1)+ s_i]}, {V_{t-1}(L)}\}]$$
+$$V_{t}(L) = E_{i} [\max\{ {[V_{t-1}(L-n_i)+ i]}, {V_{t-1}(L)}\}]$$
 
 After obtaining the pre-accepted sequence, we still need to check whether this sequence is feasible for the seat assignment. In most cases, the pre-accepted sequence is feasible, which is why we use relaxation. However, in cases where the sequence is not feasible, we must delete groups one by one from the last arrival of the sequence until it becomes feasible. In practice, we begin to reject the arrival until we cannot find a feasible seat assignment.
 

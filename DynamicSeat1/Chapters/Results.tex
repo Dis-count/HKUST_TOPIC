@@ -63,9 +63,9 @@ Take the first experiment as an example, the scenarios of demands are generated 
 
 \subsection{Feasible Seat Planning versus IP Solution}
 
-A arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{j} = \sum_{t} I(y_t = j)$, i.e., the count number of times group type $j$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{J})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{J} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{J}!} \prod_{j=1}^{J} p_{j}^{N_j}, T = \sum_{j=1}^{J} N_{j}.$$
+A arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{i} = \sum_{t} I(y_t = i)$, i.e., the count number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{M})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{M} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{M}!} \prod_{i=1}^{M} p_{i}^{N_i}, T = \sum_{i=1}^{M} N_{i}.$$
 
-It is clear that the number of different sequences is $J^{T}$. The number of different scenarios is $O(T^{J-1})$ which can be obtained by the following DP.
+It is clear that the number of different sequences is $M^{T}$. The number of different scenarios is $O(T^{M-1})$ which can be obtained by the following DP.
 
 Use $D(T,J) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{J} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, J) = \sum_{i= 0}^{T} D(i, J-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,J) = O(T^{J-1})$. 
 

@@ -44,19 +44,18 @@ In our dynamic form, the decision to accept or reject groups is made at each sta
 The related problem can be dynamic knapsack problem \cite{kleywegt1998dynamic}, where there is one knapsack and dynamic bin-packing problem \cite{coffman1983dynamic, berndt2020fully} where items arrive and depart online and all knapsacks are the same. 
 
 
-Dynamic seat assignment is a process of assigning seats to passengers on a transportation vehicle, such as an airplane, train, or bus, in a way that maximizes the efficiency and convenience of the seating arrangements \cite{hamdouch2011schedule, berge1993demand}. 
+Dynamic seat assignment is a process of assigning seats to passengers on a transportation vehicle, such as an airplane, train, or bus, in a way that maximizes the efficiency and convenience of the seating arrangements \cite{hamdouch2011schedule, berge1993demand, zhu2023assign}. 
 
-Zhu et al. \cite{zhu2023assign} addresses a revenue management problem arising from the selling of high-speed train tickets in China, where each request must be assigned to a single seat throughout the entire journey. The authors propose a modified network revenue management model and introduce a bid-price control policy based on a novel maximal sequence principle. They also propose a "re-solving a dynamic primal" policy that achieves uniformly bounded revenue loss. The study reveals connections between this problem and traditional network revenue management problems and shows that the impact of the assign-to-seat restriction can be limited with the proposed methods.
+% Zhu et al. \cite{zhu2023assign} addresses a revenue management problem arising from the selling of high-speed train tickets in China, where each request must be assigned to a single seat throughout the entire journey. The authors propose a modified network revenue management model and introduce a bid-price control policy based on a novel maximal sequence principle. They also propose a "re-solving a dynamic primal" policy that achieves uniformly bounded revenue loss. The study reveals connections between this problem and traditional network revenue management problems and shows that the impact of the assign-to-seat restriction can be limited with the proposed methods.
 
-Generally speaking, our problem is also related to network revenue management problem. The network RM problem can be fully characterized by a dynamic programming (DP) formulation. 
+Our problem is closely related to the network revenue management (RM) problem \cite{williamson1992airline}, which is typically formulated as a dynamic programming (DP) problem. However, for large-scale problems, the exponential growth of the state space and decision set makes the DP approach computationally intractable. 
 
-% However, as the state space grows exponentially in the number of knapsacks and the decision set grows exponentially in the number of group arrivals per period, the recursion is computationally intractable for large-scale problems.
+To address this challenge, we propose using scenario-based programming \cite{feng2013scenario, casey2005scenario, henrion2018problem} to determine the seat planning. In this approach, the aggregated supply can be considered as a protection level for each group type. Notably, in our model, the supply of larger groups can also be utilized by smaller groups. This is because our approach focuses on group arrival rather than individual unit, which sets it apart from traditional partitioned and nested approaches \cite{curry1990optimal, van2008simulation}.
 
 
 % Jiang et al. \cite{jiang2015dynamic} proposes a revenue management approach for high-speed rail (HSR) passenger ticket assignment with dynamic adjustments. The approach integrates short-term demand forecasting, ticket assignment, and dynamic ticket adjustment mechanisms to allocate passenger tickets during presale periods and avoid situations where tickets are insufficient at some stations while seats remain empty.
 
 
-% The difference is 
 
 
 % Implementing dynamic seat assignment with social distancing can be done manually by the staff or through automated systems that use algorithms to optimize the seat assignments based on various factors, such as ticket sales, seat availability, and customer preferences. However, the implementation of social distancing measures poses unique challenges that require careful planning and consideration of various factors to balance safety with revenue generation.

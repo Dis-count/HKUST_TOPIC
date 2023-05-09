@@ -4,8 +4,7 @@
 % The nested structure makes the greedy method useful.
 % Remark: Similar to what we mentioned, the greedy method refers to using the largest groups to fill the seats.
 
-We carried out several experiments, including comparing the running time of decomposition and Integer programming, comparing the number of people served using the feasible seat planning and Integer programming methods, analyzing different policies under the two booking situations, investigating the impact of seat layout on the number of served people, evaluating the results under varying demands, and finally assessing the results for different numbers of people in each period.
-
+We carried out several experiments, including comparing the running time of decomposition and Integer programming, comparing the number of people served using the feasible seat planning and Integer programming methods, analyzing different policies under the two booking situations, evaluating the results under varying demands, assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
 % Improvement:
 % For $\X^{0}$, we introduce one empty seat, $x_1$. But it cannot provide the feasibility.
@@ -124,6 +123,11 @@ We present the results of policies compared to the optimal policy. DSA and FCFS 
    60  & [0.25, 0.05, 0.65, 0.05] & 10 & 98.45 & 97.49 & 99.24 & 98.83 \\ % slow
    60  & [0.35, 0.15, 0.15, 0.35] & 10 & 99.10 & 97.94 & 99.41 & 99.12 \\
    60  & [0.25, 0.15, 0.45, 0.15] & 10 & 99.48 & 98.45 & 99.62 & 99.46 \\
+   80  & [0.45, 0.05, 0.05, 0.45] & 10 & 96.26 & 92.43 & 98.93 & 93.68 \\
+   80  & [0.35, 0.05, 0.35, 0.25] & 10 & 96.37 & 92.13 & 98.06 & 93.80 \\
+   80  & [0.25, 0.05, 0.65, 0.05] & 10 & 98.32 & 94.30 & 99.08 & 95.15 \\
+   80  & [0.35, 0.15, 0.15, 0.35] & 10 & 96.24 & 92.49 & 99.18 & 93.54 \\
+   80  & [0.25, 0.15, 0.45, 0.15] & 10 & 96.68 & 92.84 & 99.36 & 93.87 \\
   \hline
   \end{tabular}
 \end{table}

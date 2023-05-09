@@ -30,6 +30,12 @@ Juliano~Cavalcante Bortolete, Luis~Felipe Bueno, Renan Butkeraites,
   between students.
 \newblock {\em Computational and Applied Mathematics}, 41:1--23, 2022.
 
+\bibitem{casey2005scenario}
+Michael~S Casey and Suvrajeet Sen.
+\newblock The scenario generation algorithm for multistage stochastic linear
+  programming.
+\newblock {\em Mathematics of Operations Research}, 30(3):615--631, 2005.
+
 \bibitem{clausen2010off}
 Tommy Clausen, Allan~Nordlunde Hjorth, Morten Nielsen, and David Pisinger.
 \newblock The off-line group seat reservation problem.
@@ -41,6 +47,12 @@ Edward~G Coffman, Jr, Michael~R Garey, and David~S Johnson.
 \newblock Dynamic bin packing.
 \newblock {\em SIAM Journal on Computing}, 12(2):227--258, 1983.
 
+\bibitem{curry1990optimal}
+Renwick~E Curry.
+\newblock Optimal airline seat allocation with fare classes nested by origins
+  and destinations.
+\newblock {\em Transportation science}, 24(3):193--204, 1990.
+
 \bibitem{dantzig1957discrete}
 George~B Dantzig.
 \newblock Discrete-variable extremum problems.
@@ -51,6 +63,12 @@ Igor Deplano, Danial Yazdani, and Trung~Thanh Nguyen.
 \newblock The offline group seat reservation knapsack problem with profit on
   seats.
 \newblock {\em IEEE Access}, 7:152358--152367, 2019.
+
+\bibitem{feng2013scenario}
+Yonghan Feng and Sarah~M Ryan.
+\newblock Scenario construction and reduction applied to stochastic power
+  generation expansion planning.
+\newblock {\em Computers \& Operations Research}, 40(1):9--23, 2013.
 
 \bibitem{fischetti2021safe}
 Martina Fischetti, Matteo Fischetti, and Jakob Stoustrup.
@@ -94,6 +112,12 @@ Md~Tabish Haque and Faiz Hamid.
 {Healthcare}.
 \newblock Covid-19 timeline.
 \newblock \url{https://www.otandp.com/covid-19-timeline}, 2023.
+
+\bibitem{henrion2018problem}
+R{\'e}ne Henrion and Werner R{\"o}misch.
+\newblock Problem-based optimal scenario generation and reduction in stochastic
+  programming.
+\newblock {\em Mathematical Programming}, pages 1--23, 2018.
 
 \bibitem{kleywegt1998dynamic}
 Anton~J Kleywegt and Jason~D Papastavrou.
@@ -145,6 +169,18 @@ Mostafa Salari, R~John Milne, Camelia Delcea, Lina Kattan, and Liviu-Adrian
   Cotfas.
 \newblock Social distancing in airplane seat assignments.
 \newblock {\em Journal of Air Transport Management}, 89:101915, 2020.
+
+\bibitem{van2008simulation}
+Garrett Van~Ryzin and Gustavo Vulcano.
+\newblock Simulation-based optimization of virtual nesting controls for network
+  revenue management.
+\newblock {\em Operations research}, 56(4):865--880, 2008.
+
+\bibitem{williamson1992airline}
+Elizabeth~Louise Williamson.
+\newblock {\em Airline network seat inventory control: Methodologies and
+  revenue impacts}.
+\newblock PhD thesis, Massachusetts Institute of Technology, 1992.
 
 \bibitem{yuen2002group}
 Benson~B Yuen.

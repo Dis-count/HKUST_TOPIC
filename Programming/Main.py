@@ -305,7 +305,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 60
+    num_period = 80
     given_lines = 10
     # np.random.seed(i)
     p = prop_list()
@@ -334,7 +334,7 @@ if __name__ == "__main__":
 
         multi = np.arange(1, I+1)
 
-        count = 1
+        count = 50
         for j in range(count):
             sequence, ini_demand, ini_demand3 = a_instance.random_generate()
 

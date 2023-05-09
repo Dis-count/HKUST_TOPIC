@@ -110,24 +110,20 @@ We can find that the people served by Benders decomposition and IP under nested 
 
 \subsection{Results of Different Policies}
 
-We present the results of policies compared to the optimal policy.
-
-For seat assignment after booking period, we have DSA.
-
-DP and FCFS-based are for seat assignment during booking period.
+We present the results of policies compared to the optimal policy. DSA and FCFS are for seat assignment after booking period. DP-based and FCFS-based are for seat assignment during booking period.
 
 \begin{table}[ht]
   \centering
   \caption{Results of Policies}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
-   T & probabilities & \# of rows & DSA(\%) & Row by Row(\%) & DP(\%) & FCFS-based(\%) \\
+   T & probabilities & \# of rows & DSA(\%) & FCFS(\%) & DP-based(\%) & FCFS-based(\%) \\
   \hline
-   60  & [0.45 0.05 0.05 0.45] & 10 & 98.24 & 97.39 & 99.49 & 99.08 \\
-   60  & [0.35 0.05 0.35 0.25] & 10 & 98.12 & 97.93 & 99.62 & 99.25 \\
-   60  & [0.25 0.05 0.65 0.05] & 10 & 98.55 & 97.91 & 99.39 & 99.28 \\ % slow
-   60  & [0.35 0.15 0.15 0.35] & 10 & 97.28 & 98.14 & 99.29 & 99.12 \\
-   60  & [0.25 0.15 0.45 0.15] & 10 & 96.30 & 97.59 & 99.46 & 99.09 \\
+   60  & [0.45, 0.05, 0.05, 0.45] & 10 & 99.26 & 97.59 & 99.45 & 99.33 \\
+   60  & [0.35, 0.05, 0.35, 0.25] & 10 & 99.46 & 98.06 & 99.66 & 99.47 \\
+   60  & [0.25, 0.05, 0.65, 0.05] & 10 & 98.45 & 97.49 & 99.24 & 98.83 \\ % slow
+   60  & [0.35, 0.15, 0.15, 0.35] & 10 & 99.10 & 97.94 & 99.41 & 99.12 \\
+   60  & [0.25, 0.15, 0.45, 0.15] & 10 & 99.48 & 98.45 & 99.62 & 99.46 \\
   \hline
   \end{tabular}
 \end{table}
@@ -135,11 +131,12 @@ DP and FCFS-based are for seat assignment during booking period.
 
 \subsection{Result of Different Demands}
 
-In this subsection, we discuss the effect of the number of periods on the results of our experiments. Specifically, we consider two situations: c = 2.5 and c = 1.9.
+In this subsection, we discuss the effect of the number of periods on the results of our experiments. 
+Assuming that groups of up to four people can sit together, we calculate the expected number of demands as $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. We also define $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$. Specifically, we consider two situations: $c = 2.5$ and $c = 1.9$.
 
-When c = 2.5, we set the parameters as follows: T = 10-100, step size = 1, expected number of periods = 60, expected number of demand (people) = 150, number of rows = 10, and number of seats per row = 21.
+When $c = 2.5$, we set the parameters as follows: T = 10-100, step size = 1, expected number of periods = 60, expected number of demand (people) = 150, number of rows = 10, and number of seats per row = 21.
 
-When c = 1.9, we set the parameters as follows: T = 30-120, step size = 1, expected number of periods = 72, expected number of demand (people) = 137, number of rows = 10, and number of seats per row = 21.
+When $c = 1.9$, we set the parameters as follows: T = 30-120, step size = 1, expected number of periods = 72, expected number of demand (people) = 137, number of rows = 10, and number of seats per row = 21.
 
 For each $c$, we give several probabilities in the table. The gap point represents the first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats.
 
@@ -190,9 +187,9 @@ There are three stages, the first stage is when the capacity is sufficient. The 
 We can estimate the attendance rate from $\frac{c}{c+1}*$ the number of seats. The number of periods will be $E(D)/c$. Thus, the government can make the policy on how much attendance rate can be established.
 
 
-\subsection{Results of Different Arriving People Per Period}
+\subsection{Results of the Number of Arriving People per Period}
 
-In this subsection, we discuss the effect of different probabilities on our experimental results. Assuming that groups of up to four people can sit together, we calculate the expected number of demands as $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. We also define $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$ and choose $T(E(D)/c)$ such that the supply is near the demand. We then compare the number of people served under different values of $c$.
+In this subsection, we discuss the effect of different probabilities on our experimental results. We choose $T(E(D)/c)$ such that the supply is near the demand. We then compare the number of people served under different values of $c$.
 
 
 % Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
@@ -260,10 +257,8 @@ We can give the absolute difference between the blue point and red point for eac
 The results show that we can estimate attendance rate based on $c$ for most probability combinations. 
 
 
-\subsection{Seat Layout}
-The number of seats are $[17,18,19,20,21,21,22,23,24,25]$. The maximal number of people that can be served is 164.
-
-Random seat layout: $[26, 21, 24, 20, 20, 17, 23, 19, 21, 19]$. The maximal number of people that can be served is 164.
+\subsection{Results of Different Seat Layout}
+We compare two seat layouts with the same total number of seats. The first layout has rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the second layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to a largest pattern.
 
 \begin{figure}[ht]
   \centering
@@ -304,18 +299,3 @@ We can see that random seat layout will lead to a more accurate estimation, whic
 % WS(the value under wait-and-see policy with all possible scenarios)
 
 % EVPI(Expected Value of Perfect Information) = WS - the value of deterministic equivalent form
-
-% Regret.
-
-% Several things need to do:
-
-% What is greedy result like?
-
-% Why does period run so slowly?
-
-% Revise lemma
-
-% lack of the traits
-
-
-\newpage

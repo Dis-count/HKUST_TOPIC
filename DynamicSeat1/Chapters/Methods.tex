@@ -147,7 +147,7 @@ Then we obtain a new sub-sequence, including the arrivals from the first to the 
 % Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in that row immediately. We check each request until the capacity is used up. 
 
 \subsubsection{FCFS}\label{largest_pattern}
-During the booking period, we can continue to use the first-come, first-served (FCFS) approach for seat assignment across all rows. Each accepted request will be assigned a seat row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. We will continue to process requests in this manner until the capacity of all rows is fully utilized.
+During the booking period, we can continue to use the first-come, first-served (FCFS) approach for seat assignment across all rows. Each accepted request will be assigned a seat row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until the capacity of all rows is fully utilized.
 
 % There is a reservation stage, we only decide to accept or reject.
 % After certain periods, there is a seat selection stage.

@@ -928,13 +928,6 @@ INPUT Chapters/Res_appendix.tex
 INPUT ./Chapters/Res_appendix.tex
 INPUT ./Chapters/Res_appendix.tex
 INPUT Chapters/Res_appendix.tex
-INPUT ./Chapters/Proof.tex
-INPUT ./Chapters/Proof.tex
-INPUT ./Chapters/Proof.tex
-INPUT Chapters/Proof.tex
-INPUT ./Chapters/Proof.tex
-INPUT ./Chapters/Proof.tex
-INPUT Chapters/Proof.tex
 INPUT sum1.aux
 INPUT ./sum1.out
 INPUT ./sum1.out

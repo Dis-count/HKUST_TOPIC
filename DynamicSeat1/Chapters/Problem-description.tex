@@ -87,9 +87,9 @@ Now consider the scenario where groups arrive dynamically, the decision-maker mu
 We use a vector $\mathbf{L}= (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$ to record the remaining capacity of rows, where $L^{r}_{j}$ represents the number of remaining seats in row $j$. Let $V_{t}(\mathbf{L})$ denote the maximal expected value to go at period $t$ with capacity of rows. Let $\mathbf{w} = (n_1, \ldots, n_{M})$ be the number of seats occupied by each group type. There are $T$ periods and the arrival probability of the group type $i$ in each period is $p_i$. In every period, the group can decide which row to sit.
 
 The dynamic programming formulation for this problem is
-$$V_{t}(\mathbf{L}) = E_{i} \left[ \max_{k \in N: L_k \geq i + s} \{ {[V_{t-1}(\mathbf{L}- (\mathbf{w} \circ \mathbf{e}_{i})U_{k})+ i]}, {V_{t-1}(\mathbf{L})}\} \right], \mathbf{L} \geq \mathbf{0}, V_{T+1}(\mathbf{L}) = 0,$$
+$$V_{t}(\mathbf{L}) = E_{i} \left[ \max_{k \in N: L_k \geq i + s} \{ {[V_{t-1}(\mathbf{L}- U_{ik})+ i]}, {V_{t-1}(\mathbf{L})}\} \right], \mathbf{L} \geq \mathbf{0}, V_{T+1}(\mathbf{L}) = 0,$$
 
-where $\circ$ in $\mathbf{w} \circ \mathbf{e}_{i}$ is the element-wise product, $\mathbf{e}_{i}$ is the unit vector whose i-th element is 1, $U_k$ is a matrix of $m$ by $n$ with all elements in column $k$ being 1.  Initially, we have $\mathbf{L}_{T} = (L_1, L_2, \ldots, L_{N})$. 
+where $U_{ik}$ is a vector whose $k$-th element is $n_i$, with all other elements equal to 0. Initially, we have $\mathbf{L}_{T} = (L_1, L_2, \ldots, L_{N})$. 
 
 % use ei to denote a row vector of 0’s, but with 1 at the ith entry
 

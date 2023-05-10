@@ -97,3 +97,4 @@ Certainly, here are a few studies and articles that discuss the use of automated
 "A Novel Approach for Optimizing Seating Assignments in Social Distanced Auditoriums": This paper, published in the journal IEEE Access, presents a novel approach for optimizing seating assignments in social distanced auditoriums. The approach uses a hybrid genetic algorithm and simulated annealing technique to generate seat assignments that minimize the risk of transmission of infectious diseases.
 
 Overall, these studies and articles demonstrate the potential effectiveness of automated seating algorithms for social distancing in public venues. However, further research is needed to explore the effectiveness of these algorithms in different contexts and to identify the most effective approaches for different types of venues and events.
+

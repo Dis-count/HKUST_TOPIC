@@ -1,0 +1,30 @@
+\documentclass[aspectratio=43]{beamer}
+\usepackage[english]{babel}
+\input{chapters/preamble}
+\title{***} %->->->->-> Check hyperref title <-<-<-<-<-
+\subtitle{**}
+\author[LI]{LI $\cdot$ Zikang}
+\institute[HKUST]{
+    IEDA%
+    \\%
+    The Hong Kong University of Science and Technology%
+} %You can change the Institution if you are from somewhere else
+\date{}
+
+\begin{document}
+    \frame{\titlepage}
+    \begin{frame}{Table of contents}
+        \tableofcontents
+    \end{frame}
+
+    \input{chapters/Dynamic-Programming.tex}
+    \input{chapters/Deterministic.tex}
+    %You can put the frames directly into the presentation, but using the input command and writing them in separate .tex files might be more organized
+
+    \section{}
+    \begin{frame}{}
+        \centering
+            \Huge\bfseries
+        \textcolor{orange}{The End}
+    \end{frame}
+\end{document}

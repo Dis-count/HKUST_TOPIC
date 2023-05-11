@@ -1,0 +1,80 @@
+% !TeX root = ../main.tex
+
+\section{Scenario-based Stochastic Programming}
+    \frame{\sectionpage}
+
+    \begin{frame}
+        \centering
+        $$V_{t}(\mathbf{L}) = E_{i} \left[ \max_{k \in N: L_k \geq i + s} \{ {[V_{t-1}(\mathbf{L}- U_{ik})+ i]}, {V_{t-1}(\mathbf{L})}\} \right], \mathbf{L} \geq \mathbf{0}$$
+        $$V_{T+1}(\mathbf{L}) = 0,$$
+    \end{frame}
+
+    \begin{frame}
+      \begin{itemize}
+        \item $\mathbf{L}$, remaining capacity.
+        \vspace{10pt}
+        \item $n_i$.
+        \vspace{10pt}
+        \item $p_i$: the probability of an arrival of group type $i$.
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Scenario-based Stochastic Programming}
+      \small
+      \begin{equation}\label{sto_form}
+        \begin{aligned}
+        \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-s) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-s) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+        \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
+        y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i \in [M-1], \omega \in \Omega \\
+        & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
+        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N]\\
+        & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in [M], \omega \in \Omega \\
+        & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+        \end{aligned}
+      \end{equation}
+    \end{frame}
+
+\begin{frame}{Two-stage}
+  \begin{equation}\label{BD_master}
+    \begin{aligned}
+  \max \quad & c{'} \mathbf{x}+ z(\mathbf{x}) \\
+  \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+  & \mathbf{x} \in \mathbb{Z}_{+}^{M \times N},
+  \end{aligned}
+  \end{equation}
+
+  where $z(\mathbf{x})$ is the recourse function defined as 
+
+$$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, 
+
+  \begin{equation}\label{BD_sub}
+    \begin{aligned}
+      z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}{'} \mathbf{y}_{\omega} \\
+      \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} \\
+       & \mathbf{y}_{\omega} \geq 0.
+    \end{aligned}
+    \end{equation}
+\end{frame}
+
+\begin{frame}{Solve the Second Stage Problem}
+  \begin{equation}\label{BD_sub_dual}
+    \begin{aligned}
+      \min \quad & \alpha{'}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
+      \text {s.t.} \quad & \alpha{'}_{\omega} \mathbf{V} \geq \mathbf{f}{'}
+    \end{aligned}
+    \end{equation}
+
+    Let $P = \{\alpha|\alpha{'}V \geq \mathbf{f}{'}\}$. 
+    The feasible region of problem \eqref{BD_sub_dual}, $P$, is bounded. In addition, all the extreme points of $P$ are integral.
+\end{frame}
+
+\begin{frame}{Restricted Benders Master Problem}
+  \begin{equation}\label{BD_master2}
+    \begin{aligned}
+      \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+      \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
+      & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}^{t}, \forall \omega \\
+       & \mathbf{x} \geq 0
+    \end{aligned}
+  \end{equation}  
+\end{frame}

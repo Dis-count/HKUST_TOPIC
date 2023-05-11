@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  10 MAY 2023 16:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  11 MAY 2023 19:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -947,23 +947,11 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
  (e:/Software/texlive/2021/texmf-dist/tex/latex/biblatex/biblatex.cfg
 File: biblatex.cfg 
 )) (e:/Software/texlive/2021/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty) (e:/Software/texlive/2021/texmf-dist/tex/latex/beamer/beamerinnerthemerectangles.sty) (e:/Software/texlive/2021/texmf-dist/tex/latex/beamer/beamerfontthemeprofessionalfonts.sty) (e:/Software/texlive/2021/texmf-dist/tex/latex/beamer/beamercolorthemestructure.sty) (e:/Software/texlive/2021/texmf-dist/tex/latex/beamer/beamercolorthemesidebartab.sty) (e:/Software/texlive/2021/texmf-dist/tex/latex/beamer/beamercolorthemeorchid.sty) (e:/Software/texlive/2021/texmf-dist/tex/latex/beamer/beamercolorthemewhale.sty))
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 6.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cdot' on input line 6.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 6.
-
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-(./main.aux)
+ (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -1051,6 +1039,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 14.
 LaTeX Info: Redefining \pageref on input line 14.
 LaTeX Info: Redefining \nameref on input line 14.
+ (./main.out) (./main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
 
@@ -1095,14 +1084,7 @@ Overfull \hbox (2.12498pt too wide) in paragraph at lines 14--14
 [][]  
  []
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 15.
-(e:/Software/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
- (e:/Software/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1123,16 +1105,14 @@ Non-PDF special ignored!
 <special> ps:tx@Dict begin  gsave STV CP T /ps@rot 0 def grestore  end
 Non-PDF special ignored!
 <special> ps:tx@Dict begin  gsave STV CP T /ps@refangle 0.  def grestore  e...
-{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-No file main.toc.
-
+{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./main.toc)
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
 
 [2
 
-] (./chapters/Dynamic-Programming.tex
+] (./chapters/Stochastic-Programming.tex
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1140,6 +1120,14 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [3
 
 ]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 10.
+ (e:/Software/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
+ (e:/Software/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1168,18 +1156,6 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [7
 
 ]
-./chapters/Dynamic-Programming.tex:78: Undefined control sequence.
-<recently read> \justifying 
-                            
-l.78     \end{frame}
-                    
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1193,7 +1169,7 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 
 [9
 
-]
+]) (./chapters/Deterministic.tex
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1215,18 +1191,6 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [12
 
 ]
-./chapters/Dynamic-Programming.tex:144: Undefined control sequence.
-<recently read> \justifying 
-                            
-l.144     \end{frame}
-                     
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1241,68 +1205,6 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [14
 
 ]
-
-./chapters/Dynamic-Programming.tex:186: LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.186     \end{frame}
-                     
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-./chapters/Dynamic-Programming.tex:186: Missing $ inserted.
-<inserted text> 
-                $
-l.186     \end{frame}
-                     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./chapters/Dynamic-Programming.tex:186: Display math should end with $$.
-<to be read again> 
-                   \tex_par:D 
-l.186     \end{frame}
-                     
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-
-./chapters/Dynamic-Programming.tex:186: LaTeX Error: Bad math environment delimiter.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.186     \end{frame}
-                     
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-./chapters/Dynamic-Programming.tex:186: Missing $ inserted.
-<inserted text> 
-                $
-l.186     \end{frame}
-                     
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-./chapters/Dynamic-Programming.tex:186: Display math should end with $$.
-<to be read again> 
-                   \endgroup 
-l.186     \end{frame}
-                     
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1317,19 +1219,13 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [16
 
 ]
-<images/result1.png, id=466, 592.46344pt x 494.59781pt>
-File: images/result1.png Graphic file (type png)
-<use images/result1.png>
-Package pdftex.def Info: images/result1.png  used on input line 208.
-(pdftex.def)             Requested size: 239.60567pt x 200.02422pt.
-
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
 
 [17
 
- <./images/result1.png>]) (./chapters/Deterministic.tex
+]
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1365,199 +1261,25 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [22
 
 ]
-<images/illu.png, id=635, 505.13719pt x 327.47343pt>
-File: images/illu.png Graphic file (type png)
-<use images/illu.png>
-Package pdftex.def Info: images/illu.png  used on input line 53.
-(pdftex.def)             Requested size: 205.37926pt x 133.14568pt.
-
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
 
 [23
 
- <./images/illu.png>]
+]
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
 
 [24
 
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[25
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[26
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[27
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[28
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[29
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[30
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[31
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[32
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[33
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[34
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[35
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[36
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[37
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[38
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[39
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[40
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[41
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[42
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[43
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[44
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[45
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[46
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[47
-
-]
-Overfull \hbox (2.12498pt too wide) has occurred while \output is active
-[][] 
- []
-
-[48
-
 ])
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
 
-[49
+[25
 
 ]
 \tf@nav=\write7
@@ -1570,39 +1292,25 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 \openout9 = `main.snm'.
 
  (./main.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  8822CA79E0ACB396E97AF2A7EB57CEDA;287.
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                main
-(biblatex)                and rerun LaTeX afterwards.
-
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 816139F8108E915A043264C7B1C93B9D;410.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34507 strings out of 478599
- 655055 string characters out of 5853593
- 1421512 words of memory out of 5000000
- 51642 multiletter control sequences out of 15000+600000
- 410497 words of font info for 53 fonts, out of 8000000 for 9000
+ 34461 strings out of 478599
+ 655039 string characters out of 5853593
+ 1422882 words of memory out of 5000000
+ 51628 multiletter control sequences out of 15000+600000
+ 414957 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,16n,124p,772b,1646s stack positions out of 5000i,500n,10000p,200000b,80000s
-<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (49 pages, 301683 bytes).
+ 128i,16n,124p,772b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
+<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (25 pages, 239083 bytes).
 PDF statistics:
- 1464 PDF objects out of 1728 (max. 8388607)
- 1360 compressed objects within 14 object streams
- 102 named destinations out of 1000 (max. 500000)
- 53 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 833 PDF objects out of 1000 (max. 8388607)
+ 755 compressed objects within 8 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 67 words of extra memory for PDF output out of 10000 (max. 10000000)
 

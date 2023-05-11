@@ -232,7 +232,7 @@ Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master} and
 \begin{equation}\label{BD_master2}
   \begin{aligned}
     \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-    \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j =1,\ldots, N \\
+    \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
     & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
      & \mathbf{x} \geq 0
   \end{aligned}
@@ -340,7 +340,6 @@ To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i
   \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in [M], \\
   & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
-  & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in [M] \\
   & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
   \end{aligned}
 \end{equation}

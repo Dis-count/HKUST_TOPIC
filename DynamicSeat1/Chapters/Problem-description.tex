@@ -20,7 +20,6 @@ Specifically, each group must leave empty seat(s) to maintain social distancing 
 
 % We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
 
-
 To achieve the social distancing requirements in the seat planning process, we add $s$ to the original size of each group to create the new size of the group. Let $n_i = i + s$ denote the new size of group type $i$ for each $i \in [M]$. Construct new seat layout by adding $s$ to each row, i.e., let $L_j = S_j + s$ denote the length of row $j$ for each $j \in [N]$, where $S_j$ represents the number of seats in row $j$.
 
 
@@ -72,7 +71,7 @@ The seat assignment made up of the largest patterns is optimal.
 This lemma holds because we cannot find a better solution occupying more seats. When the demand can meet that the largest patterns can be generated in all rows, an optimal seat assignment can be obtained.
 
 \begin{prop}
-For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the total loss is $\sum_{j} (\lfloor \frac{S_j+1}{u}  \rfloor - f((S_j +1)\mod u))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+1}{u} \rfloor + f((S_j +1)\mod u))$.
+For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the total loss is $\sum_{j} (\lfloor \frac{S_j+1}{u} \rfloor - f((S_j +1)\mod u))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+1}{u} \rfloor + f((S_j +1)\mod u))$.
 \end{prop}
 
 \subsection{Dynamic Seat Assignment with Social Distancing}

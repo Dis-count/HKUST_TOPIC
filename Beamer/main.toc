@@ -3,4 +3,4 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {1}{Scenario-based Stochastic Programming}{3}{0}{1}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {2}{Deterministic Model}{10}{0}{2}
+\beamer@sectionintoc {2}{Deterministic Model}{13}{0}{2}

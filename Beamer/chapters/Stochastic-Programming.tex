@@ -68,7 +68,8 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     The feasible region of problem \eqref{BD_sub_dual}, $P$, is bounded. In addition, all the extreme points of $P$ are integral.
 \end{frame}
 
-\begin{frame}{Restricted Benders Master Problem}
+\begin{frame}{Delayed Constraint Generation}
+  Restricted Benders Master Problem
   \begin{equation}\label{BD_master2}
     \begin{aligned}
       \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
@@ -76,5 +77,28 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
       & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}^{t}, \forall \omega \\
        & \mathbf{x} \geq 0
     \end{aligned}
-  \end{equation}  
+  \end{equation} 
+\end{frame}
+
+\begin{frame}{Obtain the Feasible Seat Planning}
+      \begin{description}
+      \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition.
+  
+      \item[Step 2.] Aggregate the solution to the supply, ${s}_{i}^{0} = \sum_{j} x^{*}_{ij}$.
+  
+      \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{1}$, from problem \eqref{deter_upper} by setting the supply $\mathbf{s}^{0}$ as the upper bound. 
+      
+      \item[Step 4.] Aggregate the solution to the supply, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}$.
+  
+      \item[Step 5.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
+      \item[Step 6.] Aggregate the solution to the supply, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}$, which is the feasible seat planning.
+     \end{description}
+\end{frame}
+
+\begin{frame}{Dynamic Seat Assignment}
+  
+\end{frame}
+
+\begin{frame}{Results}
+    
 \end{frame}

@@ -1672,10 +1672,16 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
+INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT ./chapters/Deterministic.tex
 INPUT chapters/Deterministic.tex
 INPUT ./chapters/Deterministic.tex
 INPUT chapters/Deterministic.tex
+INPUT ./images/dummy_seat.pdf
+INPUT ./images/dummy_seat.pdf
+INPUT ./images/dummy_seat.pdf
+INPUT ./images/dummy_seat.pdf
+INPUT ./images/dummy_seat.pdf
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss17.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 OUTPUT main.nav
@@ -1693,7 +1699,6 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.p
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb

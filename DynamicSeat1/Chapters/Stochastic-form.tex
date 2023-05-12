@@ -61,7 +61,7 @@ Reformulate the objective function,
 \begin{align*}
   & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-s) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_M-s) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
   =& \sum_{j =1}^{N} \sum_{i=1}^M (n_i-s) x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \left(\sum_{i=1}^{M}(n_i-s)y_{i \omega}^{+} - \sum_{i=1}^{M-1}(n_i-s)y_{i+1, \omega}^{+}\right) \\
-  =& \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \left(y_{1 \omega}^{+} + \sum_{i=2}^{M} y_{i \omega}^{+} \right)
+  =& \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \left( y_{1 \omega}^{+} + \sum_{i=2}^{M} y_{i \omega}^{+} \right)
 \end{align*}
 
 
@@ -152,7 +152,7 @@ Let $\mathcal{O}$ be the set of all extreme points of $P$ and $\mathcal{F}$ be t
 
 \begin{pf}[Proof of lemma \ref{feasible_region}]
 Notice that $V =[W,~I]$, $W$ is a totally unimodular matrix. Then, we have $\alpha{'}W \geq -\bar{n}, \alpha{'}I \geq 0$. Thus, the feasible region is bounded.
-Further more, $\bar{n}_{i+1} = n_{i+1} - n_{i} = 1, i \in [M-1]$ are integral, so the extreme points are all integral.
+Furthermore, $\bar{n}_{i+1} = n_{i+1} - n_{i} = 1, i \in [M-1]$ are integral, so the extreme points are all integral.
 \qed
 \end{pf}
 

@@ -1,8 +1,20 @@
 % !TeX root = ../main.tex
 
 \section{Deterministic Model}
-
     \frame{\sectionpage}
+
+    \begin{frame}{Seat Planning with Social Distancing}
+      Group type $[M] = \{1, \ldots, M\}$
+      Row $[N] = \{1, \ldots, N\}$
+      Let $n_i = i + s$ denote the new size of group type $i$ for each $i \in [M]$.
+      Let $L_j = S_j + s$ denote the length of row $j$ for each $j \in [N]$, where $S_j$ represents the number of seats in row $j$.
+      \begin{figure}[ht]
+        \centering
+        \includegraphics[width = 0.8\textwidth]{./images/dummy_seat.pdf}
+        \caption{Problem Conversion}
+    \end{figure}
+
+    \end{frame}
 
     \begin{frame}{Formulation}
       When $|\Omega| =1$ in problem \eqref{sto_form}, the stochastic programming will be 
@@ -34,125 +46,25 @@
 
     \end{frame}
 
-
-    \begin{frame}{Branch and Price}
-        \begin{itemize}
-          \item Solve restricted master problem with the initial columns.
-          \item Use pricing problem to generate columns.
-          \item When column generation terminates, is the solution integral?
-
-          Yes, update lower bound.
-
-          No, update upper bound. And fathom node or branch to create two nodes.
-          \item Select the next node until all nodes are explored.
-        \end{itemize}
+    \begin{frame}{Example}
+      Suppose the social distancing is one seat, then the new sizes of groups are $2, 3, 4, 5$, respectively. The length of one row is $L = 21$ and the demand is $[10, 12, 9, 8]_d$. Then these patterns, $(5, 5, 5, 5, 1), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. For pattern 1, $(5, 5, 5, 5, 1)$, $P_{1} = \{5\}$, thus a group with a size smaller than 5 cannot be put in this pattern.
     \end{frame}
 
     \begin{frame}{Properties}
       \begin{itemize}
-        \item When column generation gives an integer solution at the first time, then we obtain the optimal solution.
         \item $\alpha_k$ indicates the number of items for pattern $k$. $\beta_k$ indicates the left space for maximal pattern $k$. Notice that the left space is the true loss.
-        \item Denote $(\alpha_k + \beta_k)$ as the loss for pattern k, $l(k)$. When $l(k)$ reaches minimum, the corresponding pattern $k$ is the optimal solution for a single line.
-        \item If the group sizes are consecutive integers starting from 2, $\{2,3,\ldots,u\}$, then a greedy-based pattern is optimal, i.e., select the maximal group size,$u$, as many as possible and the left space is occupied by the group with the corresponding size. The loss is $k+1$, where $k$ is the number of times $u$ selected. Let $S = u\cdot k + r$, when $r>0$, we will have at least $\lfloor \frac{r+u}{2} \rfloor -r +1$ optimal patterns with the same loss. When $r =0$, we have only one optimal pattern.
+        \item Denote $\alpha_k + \beta_k- 1$ as the loss for pattern k, $l(k)$. When $l(k)$ reaches minimum, the corresponding pattern $k$ is the optimal solution for a single row.
+        \item If the group sizes are consecutive integers starting from 2, $\{2,3,\ldots,u\}$, then a greedy-based pattern is optimal, i.e., select the maximal group size,$u$, as many as possible and the left space is occupied by the group with the corresponding size. The loss is $k+1$, where $k$ is the number of times $u$ selected. Let $S = u\cdot k + r$.
       \end{itemize}
     \end{frame}
 
     \begin{frame}
       \begin{itemize}
-        \item Let $I_1$ be the set of patterns with the minimal loss. And $I_i$ be the set of patterns with $i$-th minimal loss.
-        \item When supply is less than demand, we must select $I_1$.
-        \item When $N \leq \max_{k\in I_1} \min_{i} \{\lfloor \frac{d_i}{b_i^k}\rfloor\}$, select the corresponding pattern from $I_1$ and it is the optimal solution.
-        $N$ is the number of lines, $i = 1,2,\ldots, m$, $d_m$ is the demand of the largest size, $b_m^k$ is the number of group $m$ placed in pattern $k$.
-
+        \item Let $I_1$ be the set of patterns with the minimal loss.
+        \item For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the total loss is $\sum_{j} (\lfloor \frac{S_j+1}{u} \rfloor - f((S_j +1)\mod u))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+1}{u} \rfloor + f((S_j +1)\mod u))$.
       \end{itemize}
     \end{frame}
 
-    \begin{frame}{Integral Decomposition}
-      \begin{itemize}
-        \item Denote by $R_+^n$ the nonnegative orthant of Euclidean n-space. A polyhedron $P \subset R_+^n$ is called lower comprehensive if $0 \leq y \leq x \in P$ implies $y \in P$.
-        \item Let $M$ be the matrix whose rows are the maximal integral points of P.
-        \item An integral vector $x \in P$ is a maximal integral point of $P$ if there is no integral vector $y \in P$ with $x \neq y \geq x$.
-        \item Let $kP$ be defined as $\{kx|x \in P\}$.
-        The integral decomposition property holds for
-        $P$ if, for each integer $k \geq 1$ and each integral vector $x \in kP$, there exist integral vectors $x^i \in P, 1 \leq i \leq k$, for which $x = \sum_{i=1}^k x^i$.
-        \item The knapsack polyhedron, denoted by $P$, is the convex hull of the set $\{x \in Z_+^n|ax \leq b\}$.
-      \end{itemize}
-    \end{frame}
-
-    \begin{frame}{Integer Round Up for CSP}
-      \begin{itemize}
-        \item Cutting stock problem has the integer round-up property if and only if P has the integral decomposition property.
-        \item Any two-dimension CSP has the IRU property.
-        \item The numerical experiment shows that the form of $\{2,3,\ldots,n\}$ has the IRU property.
-        \item But we can check this property finitely. From S. BAUM and L.E. TROTTER.
-      \end{itemize}
-    \end{frame}
-
-    \begin{frame}{Integer Round Up for CSP}
-      \begin{itemize}
-        \item After the column generation gives the LP solution(fractional), calculate the supply quantity. If the number is integral, keep it.
-        If the supply is not integral, we can construct an integer vector which can provide the largest integral profit.
-        \item Construction: Calculate the space taken by fractional supply(the value must be integer), increase the corresponding supply having the same space, delete the fractional part.
-        \item Now we have an integral supply vector. If this case has IRU property, there exists an integral decomposition.
-        \item Minus the integral part of the patterns from the supply. Check if the rest can be placed in several lines.
-      \end{itemize}
-    \end{frame}
-
-
-    \begin{frame}{}
-      \[\begin{split}\mbox{min}\quad & \sum y \\
-      \mbox{s.t.} \quad & yM \geq w \\
-      & y \geq 0 \mbox{ and integer}\end{split}\]
-
-      \[\begin{split}\mbox{max}\quad & c w \\
-      \mbox{s.t.} \quad & w \in \{Nx| x \in P\} \\
-      & w \leq w_0\end{split}\]
-
-      When P has the integral decomposition property, there exist $N$ integer vectors decomposing every $w$.
-      Now, the question is how to find the maximal $w$.
-    \end{frame}
-
-
-    \begin{frame}{Lower Bound for Demand}
-      \[\begin{split}\mbox{max}\quad & \sum_{k=1}^K(\sum_{i=1}^m (s_i-1)t_i^k) x_{k}\\
-      \mbox{s.t.} \quad & \sum_{k=1}^K x_{k} \leq N \\
-      & \sum_{k=1}^K t_i^k x_k \leq g_i,\quad i=1,\ldots,m\\
-      & \sum_{k=1}^K t_i^k x_k \geq p_i,\quad i=1,\ldots,m\\
-      & x_{k} \geq 0, \quad k = 1,\ldots,K \\
-      \end{split}\]
-      \begin{itemize}
-        \item Use the similar method to solve.
-      \end{itemize}
-    \end{frame}
-
-    \begin{frame}{Sub-problem}
-      \[\begin{split}\mbox{max}\quad & \sum_{i=1}^m \left[(s_i-1) -\lambda_i - \mu_i \right] y_{i} - \tau \\
-      \mbox{s.t.} \quad & \sum_{i=1}^m s_i y_i \leq S  \\
-      & y_i \geq 0, \mbox{integer}\quad \mbox{for}~ i=1,\ldots,m.\\\end{split}\]
-      \begin{itemize}
-        \item Use column generation to generate a new pattern until all reduced costs are negative.
-      \end{itemize}
-    \end{frame}
-
-    \begin{frame}{IP Formulation}
-      \[\begin{split}\mbox{max}\quad & \sum_{j=1}^{m} \sum_{i=1}^n (s_i-1) x_{ij} \\
-      \mbox{s.t.} \quad & \sum_{i=1}^n s_i x_{ij} \leq S, \quad j=1,\ldots,m \\
-      & p_i \leq \sum_{j=1}^{m} x_{ij} \leq g_i ,\quad i=1,\ldots,n \\
-      & x_{ij} \geq 0 \mbox{ and integer}, \quad i=1,\ldots,n, j=1,\ldots,m \\\end{split}\]
-      \begin{itemize}
-        \item $m$ indicates the number of lines.
-        \item $x_{ij}$ indicates the number of group type $i$ placed in each line $j$.
-      \end{itemize}
-    \end{frame}
-
-    \begin{frame}{Question}
-        1. Feasibility. At first, use cutting stock model to check if the following constraints provide a feasible solution. If the minimal number of lines we need is less than the given number of lines, these constraints are feasible.
-        \[\begin{split}
-        & \sum_{i=1}^n s_i x_{ij} \leq S, \quad j=1,\ldots,m \\
-        & p_i \leq \sum_{j=1}^{m} x_{ij},\quad i=1,\ldots,n
-        \end{split}\]
-
-    \end{frame}
 
 
     % \begin{frame}{Extension}

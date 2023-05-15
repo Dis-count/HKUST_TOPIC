@@ -28,21 +28,19 @@ For a feasible seat planning, we must follow some basic rules to assign seats.
 
 We can assign the seats to the corresponding-size group. But when a group comes while the corresponding supply is 0, should we give this group to the larger-size seats? Now we demonstrate the nested policy for this problem.
 
-Suppose we accept a group of $i$ to take over $j$-size seats. In that case, the expected served people is $i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1)$, where $i < j$, $P(D_i \geq x_i)$ is the probability of that the expected demand of group type $i$ in the following periods is no less than $x_i$, the remaining supply of group type $i$.
+Suppose we accept a group of $i$ to take over $(j+s)$-size seats.(group type $j$) In that case, the expected served people is $i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1)$, where $i < j$, $P(D_i \geq x_i)$ is the probability of that the expected demand of group type $i$ in the following periods is no less than $x_i$, the remaining supply of group type $i$.
 
-When a group of $i$ occupies $j$-size seats, $(j-i-1)$ seats can be provided for one group of $j-i-1$ with one seat of social distancing.
-Thus, the term, $P(D_{j-i-1} \geq x_{j-i-1}+1)$, indicates the probability that the demand of group type $(j-i-1)$ in the future is no less than its current remaining supply plus 1. If $j -i-1 =0$, then this term equals 0.
+When a group of $i$ occupies $(j+s)$-size seats, $(j-i-1)$ seats can be provided for one group of $j-i-1$ with $s$ seats of social distancing.
+Thus, the term, $P(D_{j-i-1} \geq x_{j-i-1}+1)$, indicates the probability that the demand of group type $(j-i-1)$ in the future is no less than its current remaining supply plus 1. If $j -i- 1 =0$, then this term equals 0.
 
 Similarly, when the expected demand of a group of $j$ in the future is no less than its remaining supply currently, we would reject a group of $i$, the expected served people is $j P(D_{j} \geq x_{j})$.
 
-Let $d(i,j)$ be the difference of expected served people between acceptance and rejection on group $i$ occupying $j$-size seats. Then $d(i,j) = i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1) - j P(D_{j} \geq x_{j}), j >i$.
+Let $d(i,j)$ be the difference of expected served people between acceptance and rejection on group $i$ occupying $(j+s)$-size seats. Then $d(i,j) = i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1) - j P(D_{j} \geq x_{j}), j >i$.
 
 One intuitive decision is to choose the largest difference.
-We can obtain $d(i,j) = j P(D_{j} \leq x_{j} -1) - (j-i-1)P(D_{j-i-1} \leq x_{j-i-1}) -1$ after reformulating. 
-Let $F_{j}(x;T)$ be the cumulative distribution function of the number of arrival groups $D_{j}$ in $T$ periods. Then $F_{j}(x; T_{r}) = P(D_{j} \leq x)$, and $D_{j}$ follows a binomial distribution $B(T_{r}, p_{j})$, where $T_{r}$ is the numebr of remaining periods.
+We can obtain $d(i,j) = j P(D_{j} \leq x_{j} -1) - (j-i-1)P(D_{j-i-1} \leq x_{j-i-1}) -1$ after reformulating. Let $F_{j}(x;T)$ be the cumulative distribution function of the number of arrival groups $D_{j}$ in $T$ periods. Then $F_{j}(x; T_{r}) = P(D_{j} \leq x)$, and $D_{j}$ follows a binomial distribution $B(T_{r}, p_{j})$, where $T_{r}$ is the numebr of remaining periods.
 
 Thus, $d(i,j) = j F_{j}(x_{j}-1; T) - (j-i-1) F_{j-i-1}(x_{j-i-1}; T) -1$. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group $i$ in $j^{*}$-size seats. Otherwise, reject the group.
-
 
 
 % \begin{algorithm}[H]
@@ -67,7 +65,7 @@ Thus, $d(i,j) = j F_{j}(x_{j}-1; T) - (j-i-1) F_{j-i-1}(x_{j-i-1}; T) -1$. For a
 We show the results of Benders and IP under this policy in section \ref{Bender_IP}.
 
 
-\subsection{Seat Assignment during Booking Period}
+\subsection{Dynamic Seat Assignment for Each Group Arrival}
 % we make the decision according to the realized arrivals.
 The dynamic seat assignment method can give the seat planning before the group arrivals. The specific procedures are demonstrated in the above sections. The first step is to obtain the feasible seat planning from Algorithm \ref{feasible_seat}. Then accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
 
@@ -83,7 +81,7 @@ The algorithm is shown below:
   \end{description}
 \end{algorithm}
 
-\subsection{Seat Assignment after Booking Period}
+\subsection{Dynamic Seat Assignment after All Group Arrivals}
 Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. We can develop a dynamic programming(DP)-based method:
 $$V_{t}(L) = E_{i} [\max\{ {[V_{t-1}(L-n_i)+ i]}, {V_{t-1}(L)}\}]$$
 
@@ -95,20 +93,22 @@ When the remaining capacity is no smaller than $u$ for any row, we can always as
 
 The ratio can be $\frac{\sum_{j} (L_j -u +1)}{\sum_{j} L_j}$, when 
 
+
+
 % However, in cases where the sequence is not feasible, we must delete groups one by one from the last arrival of the sequence until it becomes feasible. 
 
-\subsection{Seat Planning Charts Online}
-We are able to provide an online seat planning solution by using our method. For a feasible seating arrangement, we provide a pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seating plan that meets practical needs.
+% \subsection{Seat Planning Charts Online}
+% We are able to provide an online seat planning solution by using our method. For a feasible seating arrangement, we provide a pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seating plan that meets practical needs.
 
-\begin{algorithm}[H]
-  \caption{Seat assignment based on online seat planning}\label{seat_online}
-  \begin{description}
-    \item[Step 1.] Construct a seat planning from the feasible seat planning algorithm, the aggregated supply is $\X^{0} = [x_1,\ldots,x_{m}]$.
-    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
-    \item[Step 3.] If $x_{i} = 0$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, accpect group type $i$. Set $x_{j^{*}} = x_{j^{*}} -1$. Let $x_{j-i-1} = x_{j-i-1} + 1$ when $j-i-1>0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
-    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
-  \end{description}
-\end{algorithm}
+% \begin{algorithm}[H]
+%   \caption{Seat assignment based on online seat planning}\label{seat_online}
+%   \begin{description}
+%     \item[Step 1.] Construct a seat planning from the feasible seat planning algorithm, the aggregated supply is $\X^{0} = [x_1,\ldots,x_{m}]$.
+%     \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
+%     \item[Step 3.] If $x_{i} = 0$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, accpect group type $i$. Set $x_{j^{*}} = x_{j^{*}} -1$. Let $x_{j-i-1} = x_{j-i-1} + 1$ when $j-i-1>0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+%     \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
+%   \end{description}
+% \end{algorithm}
 
 
 

@@ -1,0 +1,28 @@
+% !TeX root = ./main.tex
+
+\section{Dynamic Seat Assignment}
+    \frame{\sectionpage}
+
+    \begin{frame}{Assign-to-seat Rules}
+        \begin{itemize}
+          \item When the supply of one arriving group is enough, we will accept the group directly.
+          \item When the supply of one arriving group is 0, the demand can be satisfied by only one larger-size supply.
+          \item When one group is accepted to occupy the larger-size seats, the rest empty seat(s) can be reserved for future demand.
+      \end{itemize}
+        $d(i,j) = i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1) - j P(D_{j} \geq x_{j}), j >i$
+      \end{frame}
+
+    \begin{frame}{Dynamic Seat Assignment for Each Group Arrival}
+        \begin{description}
+          \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregated supply is $\mathbf{X} = [x_{1}, \ldots, x_{M}]$.
+          \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in [N]$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
+          \item[Step 3.] If $i \notin P_k, \forall k \in [N]$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in [N]$ such that $j^{*} \in P_k$. Accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-1} = x_{j-i-1} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-1)$ when $j^{*}-i-1 > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+          \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
+        \end{description}
+      \end{frame}
+      
+      \begin{frame}{Dynamic Seat Assignment after All Group Arrivals}
+        $$V_{t}(L) = E_{i} [\max\{ {[V_{t-1}(L-n_i)+ i]}, {V_{t-1}(L)}\}]$$
+         
+      \end{frame}
+      

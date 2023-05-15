@@ -3,22 +3,6 @@
 \section{Scenario-based Stochastic Programming}
     \frame{\sectionpage}
 
-    \begin{frame}
-        \centering
-        $$V_{t}(\mathbf{L}) = E_{i} \left[ \max_{k \in N: L_k \geq i + s} \{ {[V_{t-1}(\mathbf{L}- U_{ik})+ i]}, {V_{t-1}(\mathbf{L})}\} \right], \mathbf{L} \geq \mathbf{0}$$
-        $$V_{T+1}(\mathbf{L}) = 0,$$
-    \end{frame}
-
-    \begin{frame}
-      \begin{itemize}
-        \item $\mathbf{L}$, remaining capacity.
-        \vspace{10pt}
-        \item $n_i$.
-        \vspace{10pt}
-        \item $p_i$: the probability of an arrival of group type $i$.
-      \end{itemize}
-    \end{frame}
-
     \begin{frame}{Scenario-based Stochastic Programming}
       \small
       \begin{equation}\label{sto_form}
@@ -80,6 +64,51 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{equation} 
 \end{frame}
 
+\begin{frame}{Benders Decomposition Algorithm}
+  \begin{description}
+    \item[Step 1.] Solve LP ? with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
+    Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
+
+    \item[Step 2.] Set the upper bound $UB = c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
+    \item[Step 3.] 
+    For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c{'} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$
+    \item[Step 4.]
+    For each $\omega$, if $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
+    \item[Step 5.] Solve the updated RBMP, obtain a new solution $(x_1, z^{1})$ and update UB.
+    \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(In our case, UB converges.)
+   \end{description}
+\end{frame}
+
+\begin{frame}{Deterministic Formulation}
+  When $|\Omega| =1$ in problem \eqref{sto_form}, the stochastic programming will be 
+  \small
+  \begin{equation}\label{one_form}
+    \begin{aligned}
+    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-s) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i \in [M-1], \\
+    & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
+    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N]\\
+    & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in [M] \\
+    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+    \end{aligned}
+  \end{equation}
+\end{frame}
+
+\begin{frame}{Formulation}
+  \begin{equation}\label{deter_upper}
+    \begin{aligned}
+    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in [M], \\
+    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
+    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+    \end{aligned}
+  \end{equation}
+\end{frame}
+
+\begin{frame}{Analysis}
+
+\end{frame}
+
 \begin{frame}{Obtain the Feasible Seat Planning}
       \begin{description}
       \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition.
@@ -90,15 +119,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
       
       \item[Step 4.] Aggregate the solution to the supply, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}$.
   
-      \item[Step 5.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
+      \item[Step 5.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem ?? by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
       \item[Step 6.] Aggregate the solution to the supply, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}$, which is the feasible seat planning.
      \end{description}
-\end{frame}
-
-\begin{frame}{Dynamic Seat Assignment}
-  
-\end{frame}
-
-\begin{frame}{Results}
-    
 \end{frame}

@@ -416,11 +416,12 @@ The optimal solution to this problem with the lower bound will give a better sea
   % setting the upper and lower bound alternately.
 \end{remark}
 
-% \begin{lem}
-%   The feasible seat planning .
-% \end{lem}
 
 % 1. Why should we don't use the subset sum problem to decompose the whole problem, it will destroy global optimality. But notice that when we arrange row by row, it may also affect the optimality.
 
 % Many symmetry structure/ Every step we need to solve a multiple knapsack problem(difficult).
 
+\begin{remark}
+% We are able to provide an online seat planning by using our method.
+For a feasible seating arrangement, we provide a pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seat planning that meets practical needs.
+\end{remark}

@@ -1,8 +1,8 @@
 \documentclass[aspectratio=43]{beamer}
 \usepackage[english]{babel}
 \input{chapters/preamble}
-\title{***} %->->->->-> Check hyperref title <-<-<-<-<-
-\subtitle{**}
+\title{Scenario-based Dynamic Seat Assignment} %->->->->-> Check hyperref title <-<-<-<-<-
+\subtitle{with Social Distancing}
 % \author[LI]{LI $\cdot$ Zikang}
 \institute[HKUST]{
     IEDA%
@@ -16,9 +16,11 @@
     \begin{frame}{Table of contents}
         \tableofcontents
     \end{frame}
-
+    \input{chapters/Literature.tex}
+    \input{chapters/ProblemDefinition.tex}
     \input{chapters/Stochastic-Programming.tex}
-    \input{chapters/Deterministic.tex}
+    \input{chapters/DynamicSeat.tex}
+    \input{chapters/Results.tex}
     %You can put the frames directly into the presentation, but using the input command and writing them in separate .tex files might be more organized
 
     \section{}

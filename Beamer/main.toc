@@ -1,6 +1,6 @@
-\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {english}{}\relax 
-\defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {1}{Scenario-based Stochastic Programming}{3}{0}{1}
-\defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {2}{Deterministic Model}{13}{0}{2}
+\beamer@sectionintoc {1}{Literature Review}{3}{0}{1}
+\beamer@sectionintoc {2}{Problem Definition}{6}{0}{2}
+\beamer@sectionintoc {3}{Scenario-based Stochastic Programming}{12}{0}{3}
+\beamer@sectionintoc {4}{Dynamic Seat Assignment}{22}{0}{4}
+\beamer@sectionintoc {5}{Results}{26}{0}{5}

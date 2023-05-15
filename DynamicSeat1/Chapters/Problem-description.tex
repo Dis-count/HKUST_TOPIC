@@ -38,12 +38,13 @@ By incorporating the additional seat and designating certain seats for social di
 
 Now, we analyse the effect of introducing social distancing for each row. At first, we consider the types of pattern, which refers to the seat planning for each row. For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left seats, respectively. Denote by $l(k) = \alpha_k + \beta_k -1$ the loss for pattern $k$. The loss represents the number of people lost compared to the situation without social distancing.
 
-Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. Suppose there are $n$ groups in a row, we use a descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote pattern $k$, where $t_h$ is the new group size, $h \in [n]$. 
+Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are the largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. Suppose there are $n$ groups in a row, we use a descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote seat planning for pattern $k$, where $t_h$ is the new group size, $h \in [n]$.
 
 % Let $P_{k}$ denote the set of group sizes for pattern $k$. We use $t \in P_{k}$ to denote a group with size of $t$ can be put into the pattern. 
 
 \begin{example}
-  Suppose the social distancing is one seat, then the new sizes of groups are $2, 3, 4, 5$, respectively. The length of one row is $L = 21$ and the demand is $[10, 12, 9, 8]_d$. Then these patterns, $(5, 5, 5, 5, 1), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. For pattern 1, $(5, 5, 5, 5, 1)$, $P_{1} = \{5\}$, thus a group with a size smaller than 5 cannot be put in this pattern.
+  Suppose the social distancing is one seat and there are four types of groups, then the new sizes of groups are $2, 3, 4, 5$, respectively. The length of one row is $L = 21$  Then these patterns, $(5, 5, 5, 5, 1), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. 
+  % For pattern 1, $P_1 = (5, 5, 5, 5, 1)$, thus a group with a size smaller than 5 cannot be put in this pattern. The demand is $[10, 12, 9, 8]_d$.
 \end{example}
 
 % To represent a pattern with a fixed length of form, we can use a $(M+1)-$dimensional vector with $M$ group types. The aggregated form can be expressed as $[n_0, n_1, \ldots, n_M]$, where $n_i$ is the number of $i$-th group type, $i \in [M]$. $n_0$ is the number of left seat, its value can only be $0, 1$ because two or more left seats will be assigned to groups. Thus the pattern, $[1, 0, 0, 0, 4]$, is not full because there is one left seat.
@@ -74,7 +75,7 @@ This lemma holds because we cannot find a better solution occupying more seats. 
 For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the total loss is $\sum_{j} (\lfloor \frac{S_j+1}{u} \rfloor - f((S_j +1)\mod u))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+1}{u} \rfloor + f((S_j +1)\mod u))$.
 \end{prop}
 
-\subsection{Dynamic Seat Assignment with Social Distancing}
+\subsection{Dynamic Seat Assignment with Social Distancing}\label{sec_dynamic}
 % In this section we present the model that generates seat planning under deterministic demands.
 
 % Let the $i-$th group type contain $i$ people. 

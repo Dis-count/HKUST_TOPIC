@@ -15,7 +15,7 @@
       \begin{figure}[ht]
         \centering
         \includegraphics[width = 0.8\textwidth]{./images/dummy_seat.pdf}
-        \caption{Problem Conversion}
+        \caption{Problem Conversion with One Seat as Social Distancing}
     \end{figure}
     \end{frame}
 
@@ -26,38 +26,40 @@
       $$V_{T+1}(\mathbf{L}) = 0,$$
 
       \begin{itemize}
-        \item $\mathbf{L} = \{  \}$, remaining capacity.
+        \item $\mathbf{L} = (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$, remaining capacity. $L^{r}_{j}$ represents the number of remaining seats in row $j$.
         \vspace{10pt}
-        \item $U_{ik}$
+        \item $U_{ik}$ is a vector whose $k$-th element is $n_i$, with all other elements equal to 0.
         \vspace{10pt}
         \item $p_i$: the probability of an arrival of group type $i$.
       \end{itemize}
   \end{frame}
 
-
-  \begin{frame}{Example}
-    Suppose the social distancing is one seat, then the new sizes of groups are $2, 3, 4, 5$, respectively. 
-    
-    The length of one row is $L = 21$.
-    
-    The demand is $[10, 12, 9, 8]_d$. Then these patterns, $(5, 5, 5, 5, 1), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. 
-    
-    For pattern 1, $(5, 5, 5, 5, 1)$, $P_{1} = \{5\}$, thus a group with a size smaller than 5 cannot be put in this pattern.
+  \begin{frame}{Some Definitions}
+    \begin{itemize}
+      \item Pattern refers to the seat planning for each row.
+      \item For each pattern $k$, $\alpha_k, \beta_k$ indicate the number of groups and the left seats, respectively.
+      \item Denote by $\alpha_k + \beta_k- 1$ the loss for pattern k, $l(k)$. The loss represents the number of people lost compared to the situation without social distancing.
+      \item Let $I_1$ be the set of patterns with the minimal loss. We call the patterns from $I_1$ are the largest. The patterns with zero left seat are called full patterns.
+      \item Suppose there are $n$ groups in a row, we use a descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote seat planning for pattern $k$, where $t_h$ is the new group size, $h \in [n]$.
+    \end{itemize}
   \end{frame}
 
-  \begin{frame}{Properties}
+  \begin{frame}{Example}
     \begin{itemize}
-      \item $\alpha_k$ indicates the number of items for pattern $k$. $\beta_k$ indicates the left space for maximal pattern $k$. Notice that the left space is the true loss.
-      \item Denote $\alpha_k + \beta_k- 1$ as the loss for pattern k, $l(k)$. When $l(k)$ reaches minimum, the corresponding pattern $k$ is the optimal solution for a single row.
-      \item If the group sizes are consecutive integers starting from 2, $\{2,3,\ldots,u\}$, then a greedy-based pattern is optimal, i.e., select the maximal group size,$u$, as many as possible and the left space is occupied by the group with the corresponding size. The loss is $k+1$, where $k$ is the number of times $u$ selected. Let $S = u\cdot k + r$.
+      \item Suppose the social distancing is one seat and there are four types of groups. Then the new sizes of groups are $2, 3, 4, 5$, respectively. 
+      % \item The demand for each group type is $[10, 12, 9, 8]_d$. 
+      \item The length of one row is $L = 21$.
+      \item Then these patterns, $(5, 5, 5, 5), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$.
+      \item Pattern $(5, 5, 5, 5)$ is not full because there is one left seat.
     \end{itemize}
   \end{frame}
 
   \begin{frame}{Property}
     \begin{itemize}
-      \item Let $I_1$ be the set of patterns with the minimal loss.
-      \item 
+      \item Let $u = M + s$, then a largest pattern can be obtained greedily, i.e., select the maximal group size, $u$, as many as possible and the left space is occupied by the group with the corresponding size. 
+      \item Let $L = u\cdot q + r$. The loss of the largest pattern is $q - f(r)$, where $f(r) =1$ if $r=0$; $f(r) =0$ if $r \neq 0$.
       \item For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the total loss is $\sum_{j} (\lfloor \frac{S_j+1}{u} \rfloor - f((S_j +1)\mod u))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+1}{u} \rfloor + f((S_j +1)\mod u))$.
+      
     \end{itemize}
   \end{frame}
   

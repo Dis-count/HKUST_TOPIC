@@ -41,6 +41,8 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 \end{frame}
 
 \begin{frame}{Solve the Second Stage Problem}
+  The dual of problem \eqref{BD_sub} is
+
   \begin{equation}\label{BD_sub_dual}
     \begin{aligned}
       \min \quad & \alpha{'}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
@@ -53,7 +55,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 \end{frame}
 
 \begin{frame}{Delayed Constraint Generation}
-  Restricted Benders Master Problem
+  LP of problem \eqref{sto_form} can be obtained by solving following restricted benders master problem(RBMP):
   \begin{equation}\label{BD_master2}
     \begin{aligned}
       \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
@@ -62,11 +64,13 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
        & \mathbf{x} \geq 0
     \end{aligned}
   \end{equation} 
+
+  Constraints will be generated from problem \eqref{BD_sub_dual} until the value of RBMP converges.
 \end{frame}
 
 \begin{frame}{Benders Decomposition Algorithm}
   \begin{description}
-    \item[Step 1.] Solve LP ? with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
+    \item[Step 1.] Solve LP \ref{BD_master2} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
     Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
 
     \item[Step 2.] Set the upper bound $UB = c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
@@ -94,7 +98,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{equation}
 \end{frame}
 
-\begin{frame}{Formulation}
+\begin{frame}{Deterministic Formulation}
   \begin{equation}\label{deter_upper}
     \begin{aligned}
     \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
@@ -103,15 +107,18 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
     \end{aligned}
   \end{equation}
+
+  Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq d_{i}, i \in [M]$, we can obtain the problem with lower bound demand. \label{deter_lower}
+
 \end{frame}
 
-\begin{frame}{Analysis}
+% \begin{frame}{Analysis}
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}{Obtain the Feasible Seat Planning}
       \begin{description}
-      \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition.
+      \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from linear stochatic programming by benders decomposition.
   
       \item[Step 2.] Aggregate the solution to the supply, ${s}_{i}^{0} = \sum_{j} x^{*}_{ij}$.
   
@@ -119,7 +126,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
       
       \item[Step 4.] Aggregate the solution to the supply, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}$.
   
-      \item[Step 5.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem ?? by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
+      \item[Step 5.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
       \item[Step 6.] Aggregate the solution to the supply, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}$, which is the feasible seat planning.
      \end{description}
 \end{frame}

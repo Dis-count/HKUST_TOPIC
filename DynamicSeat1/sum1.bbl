@@ -12,11 +12,6 @@ Matthew~E Berge and Craig~A Hopperstad.
   assignment, models and algorithms.
 \newblock {\em Operations research}, 41(1):153--168, 1993.
 
-\bibitem{berndt2020fully}
-Sebastian Berndt, Klaus Jansen, and Kim-Manuel Klein.
-\newblock Fully dynamic bin packing revisited.
-\newblock {\em Mathematical Programming}, 179(1-2):109--155, 2020.
-
 \bibitem{blom2022filling}
 Danny Blom, Rudi Pendavingh, and Frits Spieksma.
 \newblock Filling a theater during the covid-19 pandemic.
@@ -41,11 +36,6 @@ Tommy Clausen, Allan~Nordlunde Hjorth, Morten Nielsen, and David Pisinger.
 \newblock The off-line group seat reservation problem.
 \newblock {\em European journal of operational research}, 207(3):1244--1253,
   2010.
-
-\bibitem{coffman1983dynamic}
-Edward~G Coffman, Jr, Michael~R Garey, and David~S Johnson.
-\newblock Dynamic bin packing.
-\newblock {\em SIAM Journal on Computing}, 12(2):227--258, 1983.
 
 \bibitem{curry1990optimal}
 Renwick~E Curry.

@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -43,18 +46,18 @@
 \citation{blom2022filling}
 \citation{pisinger1999exact}
 \citation{kleywegt1998dynamic}
-\citation{coffman1983dynamic,berndt2020fully}
 \citation{hamdouch2011schedule,berge1993demand,zhu2023assign}
-\citation{zhu2023assign}
 \citation{williamson1992airline}
 \citation{feng2013scenario,casey2005scenario,henrion2018problem}
 \citation{curry1990optimal,van2008simulation}
+\citation{zhu2023assign}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Dynamic Seat Assignment}{6}{subsection.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Problem Description}{7}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Seat Planning Problem with Social Distancing}{7}{subsection.3.1}\protected@file@percent }
 \newlabel{dynamic_demand}{{3.1}{7}{Seat Planning Problem with Social Distancing}{subsection.3.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Problem Conversion\relax }}{7}{figure.caption.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dynamic Seat Assignment with Social Distancing}{8}{subsection.3.2}\protected@file@percent }
+\newlabel{sec_dynamic}{{3.2}{8}{Dynamic Seat Assignment with Social Distancing}{subsection.3.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Scenario-based Stochastic Programming}{9}{section.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Formulation}{9}{subsection.4.1}\protected@file@percent }
 \newlabel{sto_form}{{1}{10}{Formulation}{equation.4.1}{}}
@@ -62,8 +65,8 @@
 \newlabel{BD_sub}{{3}{11}{Formulation}{equation.4.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve the Scenario-based Two-stage Problem}{11}{subsection.4.2}\protected@file@percent }
 \newlabel{solve_by_benders}{{4.2}{11}{Solve the Scenario-based Two-stage Problem}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Solve the Second Stage Problem}{12}{subsubsection.4.2.1}\protected@file@percent }
-\newlabel{second_stage}{{4.2.1}{12}{Solve the Second Stage Problem}{subsubsection.4.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Solve the Second Stage Problem}{11}{subsubsection.4.2.1}\protected@file@percent }
+\newlabel{second_stage}{{4.2.1}{11}{Solve the Second Stage Problem}{subsubsection.4.2.1}{}}
 \newlabel{BD_sub_dual}{{4}{12}{Solve the Second Stage Problem}{equation.4.4}{}}
 \newlabel{feasible_region}{{3}{12}{}{lem.3}{}}
 \newlabel{y_recursively}{{5}{12}{Solve the Second Stage Problem}{equation.4.5}{}}
@@ -93,81 +96,80 @@
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Dynamic seat assignment algorithm\relax }}{18}{algorithm.3}\protected@file@percent }
 \newlabel{algo_nested_policy}{{3}{18}{Dynamic seat assignment algorithm\relax }{algorithm.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Dynamic Seat Assignment after All Group Arrivals}{18}{subsection.5.3}\protected@file@percent }
+\newlabel{relax_deter}{{13}{18}{Dynamic Seat Assignment after All Group Arrivals}{equation.5.13}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Benchmark}{19}{subsection.5.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}FCFS-based}{19}{subsubsection.5.4.1}\protected@file@percent }
 \newlabel{FCFS-based}{{5.4.1}{19}{FCFS-based}{subsubsection.5.4.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}FCFS}{19}{subsubsection.5.4.2}\protected@file@percent }
-\newlabel{largest_pattern}{{5.4.2}{19}{FCFS}{subsubsection.5.4.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{19}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running time of Benders Decomposition and IP}{19}{subsection.6.1}\protected@file@percent }
-\newlabel{Bender_IP}{{6.1}{19}{Running time of Benders Decomposition and IP}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.2}FCFS}{20}{subsubsection.5.4.2}\protected@file@percent }
+\newlabel{largest_pattern}{{5.4.2}{20}{FCFS}{subsubsection.5.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{20}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running time of Benders Decomposition and IP}{20}{subsection.6.1}\protected@file@percent }
+\newlabel{Bender_IP}{{6.1}{20}{Running time of Benders Decomposition and IP}{subsection.6.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running time of Decomposion and IP\relax }}{20}{table.caption.3}\protected@file@percent }
 \newlabel{tab_1}{{1}{20}{Running time of Decomposion and IP\relax }{table.caption.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Feasible Seat Planning versus IP Solution}{20}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Results of Different Policies}{20}{subsection.6.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Results of Decomposion and IP under nested policy\relax }}{21}{table.caption.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Results of Policies\relax }}{21}{table.caption.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Result of Different Demands}{21}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Results of Different Policies}{21}{subsection.6.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Results of Policies\relax }}{22}{table.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Result of Different Demands}{22}{subsection.6.4}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Gap points of different probabilities\relax }}{22}{table.caption.6}\protected@file@percent }
-\newlabel{Fig.sub.1}{{2(a)}{22}{Subfigure 2(a)}{subfigure.2.1}{}}
-\newlabel{sub@Fig.sub.1}{{(a)}{22}{Subfigure 2(a)\relax }{subfigure.2.1}{}}
-\newlabel{Fig.sub.2}{{2(b)}{22}{Subfigure 2(b)}{subfigure.2.2}{}}
-\newlabel{sub@Fig.sub.2}{{(b)}{22}{Subfigure 2(b)\relax }{subfigure.2.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The number of people served versus periods\relax }}{22}{figure.caption.7}\protected@file@percent }
-\newlabel{Fig.lable}{{2}{22}{The number of people served versus periods\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $c =2.5$}}}{22}{figure.caption.7}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $c =1.9$}}}{22}{figure.caption.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Results of the Number of Arriving People per Period}{22}{subsection.6.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The number of people served versus $c$\relax }}{23}{figure.caption.8}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{23}{figure.caption.8}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{23}{figure.caption.8}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Difference Distribution\relax }}{23}{table.caption.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Results of Different Seat Layout}{23}{subsection.6.6}\protected@file@percent }
-\newlabel{Fig1}{{4(a)}{24}{Subfigure 4(a)}{subfigure.4.1}{}}
-\newlabel{sub@Fig1}{{(a)}{24}{Subfigure 4(a)\relax }{subfigure.4.1}{}}
-\newlabel{Fig2}{{4(b)}{24}{Subfigure 4(b)}{subfigure.4.2}{}}
-\newlabel{sub@Fig2}{{(b)}{24}{Subfigure 4(b)\relax }{subfigure.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The difference distribution\relax }}{24}{figure.caption.10}\protected@file@percent }
-\newlabel{Fig}{{4}{24}{The difference distribution\relax }{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for each probability combination}}}{24}{figure.caption.10}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 100 instances for each probability combination}}}{24}{figure.caption.10}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The number of people served versus $c$\relax }}{24}{figure.caption.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for step-size seat layout}}}{24}{figure.caption.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for random seat layout}}}{24}{figure.caption.11}\protected@file@percent }
+\newlabel{Fig.sub.1}{{2(a)}{23}{Subfigure 2(a)}{subfigure.2.1}{}}
+\newlabel{sub@Fig.sub.1}{{(a)}{23}{Subfigure 2(a)\relax }{subfigure.2.1}{}}
+\newlabel{Fig.sub.2}{{2(b)}{23}{Subfigure 2(b)}{subfigure.2.2}{}}
+\newlabel{sub@Fig.sub.2}{{(b)}{23}{Subfigure 2(b)\relax }{subfigure.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The number of people served versus periods\relax }}{23}{figure.caption.7}\protected@file@percent }
+\newlabel{Fig.lable}{{2}{23}{The number of people served versus periods\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $c =2.5$}}}{23}{figure.caption.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $c =1.9$}}}{23}{figure.caption.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Results of the Number of Arriving People per Period}{23}{subsection.6.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The number of people served versus $c$\relax }}{24}{figure.caption.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{24}{figure.caption.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{24}{figure.caption.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Difference Distribution\relax }}{24}{table.caption.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Results of Different Seat Layout}{24}{subsection.6.6}\protected@file@percent }
+\newlabel{Fig1}{{4(a)}{25}{Subfigure 4(a)}{subfigure.4.1}{}}
+\newlabel{sub@Fig1}{{(a)}{25}{Subfigure 4(a)\relax }{subfigure.4.1}{}}
+\newlabel{Fig2}{{4(b)}{25}{Subfigure 4(b)}{subfigure.4.2}{}}
+\newlabel{sub@Fig2}{{(b)}{25}{Subfigure 4(b)\relax }{subfigure.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The difference distribution\relax }}{25}{figure.caption.10}\protected@file@percent }
+\newlabel{Fig}{{4}{25}{The difference distribution\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for each probability combination}}}{25}{figure.caption.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 100 instances for each probability combination}}}{25}{figure.caption.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The number of people served versus $c$\relax }}{25}{figure.caption.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for step-size seat layout}}}{25}{figure.caption.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for random seat layout}}}{25}{figure.caption.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{25}{section.7}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refe}
 \bibcite{barry2021optimal}{1}
 \bibcite{berge1993demand}{2}
-\bibcite{berndt2020fully}{3}
-\bibcite{blom2022filling}{4}
-\bibcite{bortolete2022support}{5}
-\bibcite{casey2005scenario}{6}
-\bibcite{clausen2010off}{7}
-\bibcite{coffman1983dynamic}{8}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{25}{section.7}\protected@file@percent }
-\bibcite{curry1990optimal}{9}
-\bibcite{dantzig1957discrete}{10}
-\bibcite{deplano2019offline}{11}
-\bibcite{feng2013scenario}{12}
-\bibcite{fischetti2021safe}{13}
-\bibcite{ghorbani2020model}{14}
-\bibcite{Gov202209}{15}
-\bibcite{hamdouch2011schedule}{16}
-\bibcite{haque2022optimization}{17}
-\bibcite{haque2023social}{18}
-\bibcite{Covid19Timeline}{19}
-\bibcite{henrion2018problem}{20}
-\bibcite{kleywegt1998dynamic}{21}
-\bibcite{kwag2022optimal}{22}
-\bibcite{lewis2016creating}{23}
-\bibcite{li2013modeling}{24}
-\bibcite{moore2021seat}{25}
-\bibcite{moosa2020effectiveness}{26}
-\bibcite{pisinger1999exact}{27}
-\bibcite{salari2022social}{28}
-\bibcite{salari2020social}{29}
-\bibcite{van2008simulation}{30}
-\bibcite{williamson1992airline}{31}
-\bibcite{yuen2002group}{32}
-\bibcite{zhu2023assign}{33}
-\gdef \@abspage@last{27}
+\bibcite{blom2022filling}{3}
+\bibcite{bortolete2022support}{4}
+\bibcite{casey2005scenario}{5}
+\bibcite{clausen2010off}{6}
+\bibcite{curry1990optimal}{7}
+\bibcite{dantzig1957discrete}{8}
+\bibcite{deplano2019offline}{9}
+\bibcite{feng2013scenario}{10}
+\bibcite{fischetti2021safe}{11}
+\bibcite{ghorbani2020model}{12}
+\bibcite{Gov202209}{13}
+\bibcite{hamdouch2011schedule}{14}
+\bibcite{haque2022optimization}{15}
+\bibcite{haque2023social}{16}
+\bibcite{Covid19Timeline}{17}
+\bibcite{henrion2018problem}{18}
+\bibcite{kleywegt1998dynamic}{19}
+\bibcite{kwag2022optimal}{20}
+\bibcite{lewis2016creating}{21}
+\bibcite{li2013modeling}{22}
+\bibcite{moore2021seat}{23}
+\bibcite{moosa2020effectiveness}{24}
+\bibcite{pisinger1999exact}{25}
+\bibcite{salari2022social}{26}
+\bibcite{salari2020social}{27}
+\bibcite{van2008simulation}{28}
+\bibcite{williamson1992airline}{29}
+\bibcite{yuen2002group}{30}
+\bibcite{zhu2023assign}{31}
+\gdef \@abspage@last{28}

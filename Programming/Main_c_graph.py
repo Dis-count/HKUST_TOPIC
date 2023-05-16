@@ -138,19 +138,19 @@ if __name__ == "__main__":
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    count = 1
+    count = 50
 
     for ind_probab, probab in enumerate(p):
 
         my_file.write('probabilities: \t' + str(probab) + '\n')
         # probab = [0.3, 0.5, 0.1, 0.1]
 
-        # roll_width = np.ones(given_lines) * 21
+        roll_width = np.ones(given_lines) * 21
         
         # roll_width = np.arange(17,22)
         # roll_width= np.append(roll_width, np.arange(21,26))
         
-        roll_width = np.array([26, 21, 24, 20, 20, 17, 23, 19, 21, 19])
+        # roll_width = np.array([26, 21, 24, 20, 20, 17, 23, 19, 21, 19])
 
         # total_seat = np.sum(roll_width)
         multi = np.arange(1, I+1)
@@ -201,10 +201,10 @@ if __name__ == "__main__":
     diff = np.zeros(p_len)
     ratio = 0
     for i in range(p_len):
-        if c_value[i] <= 3.565:
+        if c_value[i] <= 3.2:
             occup_value[i] = sum(roll_width) * (c_value[i]/(c_value[i]+1))
         else:
-            occup_value[i] = 164
+            occup_value[i] = 160
 
         diff[i] = occup_value[i]- people_value[i]
 

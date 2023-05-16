@@ -11,7 +11,7 @@
       \end{itemize}
       The difference of expected served people between acceptance and rejection on group $i$ occupying $(j+s)$-size seats: $d(i,j) = i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1) - j P(D_{j} \geq x_{j}), j >i$.
 
-      Find the largest $d(i,j^{*})$, if $d(i,j^{*}) > 0$, accept group type $i$ in $j^{*}+s$-size seats; otherwise, reject it.
+      Find $d(i,j^{*}) = \max_{j} d(i,j)$, if $d(i,j^{*}) > 0$, accept group type $i$ in $j^{*}+s$-size seats; otherwise, reject it.
       \end{frame}
 
     \begin{frame}{Dynamic Seat Assignment for Each Group Arrival}

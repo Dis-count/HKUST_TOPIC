@@ -75,7 +75,7 @@ Then, we will show the feasible seat assignment has a close performance with IP 
 % Then we compare the results of benders decomposition and IP under nested policy.
 
 \begin{table}[ht]
-    \caption{Results of Decomposion and IP under nested policy}
+    \caption{Results of Feasible Seat Planning and IP solution}
     \begin{tabular}{|l|l|l|l|l|l|}
     \hline
     \# samples & T & probabilities & \# rows & people served by decomposition & people served by IP \\
@@ -109,25 +109,28 @@ We can find that the people served by Benders decomposition and IP under nested 
 
 \subsection{Results of Different Policies}
 
-We present the results of policies compared to the optimal policy. DSA and FCFS are for seat assignment after booking period. DP-based and FCFS-based are for seat assignment during booking period.
+We compare the performance of different policies to the optimal value. Specifically, we consider two policies for seat assignment after all group arrivals: DSA and FCFS. In addition, we evaluate two policies for seat assignment for each group arrival: one based on dynamic programming (DP) and the other based on first-come, first-served (FCFS) scheduling. 
+% We present the results of our experiments and discuss their implications.
+
+The seat layout consists of 10 rows, each containing 21 seats.
 
 \begin{table}[ht]
   \centering
   \caption{Results of Policies}
-  \begin{tabular}{|l|l|l|l|l|l|l|}
+  \begin{tabular}{|l|l|l|l|l|l|}
   \hline
-   T & probabilities & \# of rows & DSA(\%) & FCFS(\%) & DP-based(\%) & FCFS-based(\%) \\
+   T & probabilities &  DSA(\%) & FCFS(\%) & DP-based(\%) & FCFS-based(\%) \\
   \hline
-   60  & [0.45, 0.05, 0.05, 0.45] & 10 & 99.26 & 97.59 & 99.45 & 99.33 \\
-   60  & [0.35, 0.05, 0.35, 0.25] & 10 & 99.46 & 98.06 & 99.66 & 99.47 \\
-   60  & [0.25, 0.05, 0.65, 0.05] & 10 & 98.45 & 97.49 & 99.24 & 98.83 \\ % slow
-   60  & [0.35, 0.15, 0.15, 0.35] & 10 & 99.10 & 97.94 & 99.41 & 99.12 \\
-   60  & [0.25, 0.15, 0.45, 0.15] & 10 & 99.48 & 98.45 & 99.62 & 99.46 \\
-   80  & [0.45, 0.05, 0.05, 0.45] & 10 & 96.26 & 92.43 & 98.93 & 93.68 \\
-   80  & [0.35, 0.05, 0.35, 0.25] & 10 & 96.37 & 92.13 & 98.06 & 93.80 \\
-   80  & [0.25, 0.05, 0.65, 0.05] & 10 & 98.32 & 94.30 & 99.08 & 95.15 \\
-   80  & [0.35, 0.15, 0.15, 0.35] & 10 & 96.24 & 92.49 & 99.18 & 93.54 \\
-   80  & [0.25, 0.15, 0.45, 0.15] & 10 & 96.68 & 92.84 & 99.36 & 93.87 \\
+   60  & [0.45, 0.05, 0.05, 0.45]  & 99.26 & 97.59 & 99.45 & 99.33 \\
+   60  & [0.35, 0.05, 0.35, 0.25]  & 99.46 & 98.06 & 99.66 & 99.47 \\
+   60  & [0.25, 0.05, 0.65, 0.05]  & 98.45 & 97.49 & 99.24 & 98.83 \\ % slow
+   60  & [0.35, 0.15, 0.15, 0.35]  & 99.10 & 97.94 & 99.41 & 99.12 \\
+   60  & [0.25, 0.15, 0.45, 0.15]  & 99.48 & 98.45 & 99.62 & 99.46 \\
+   80  & [0.45, 0.05, 0.05, 0.45]  & 96.26 & 92.43 & 98.93 & 93.68 \\
+   80  & [0.35, 0.05, 0.35, 0.25]  & 96.37 & 92.13 & 98.06 & 93.80 \\
+   80  & [0.25, 0.05, 0.65, 0.05]  & 98.32 & 94.30 & 99.08 & 95.15 \\
+   80  & [0.35, 0.15, 0.15, 0.35]  & 96.24 & 92.49 & 99.18 & 93.54 \\
+   80  & [0.25, 0.15, 0.45, 0.15]  & 96.68 & 92.84 & 99.36 & 93.87 \\
   \hline
   \end{tabular}
 \end{table}
@@ -136,7 +139,7 @@ We present the results of policies compared to the optimal policy. DSA and FCFS 
 \subsection{Result of Different Demands}
 
 In this subsection, we discuss the effect of the number of periods on the results of our experiments. 
-Assuming that groups of up to four people can sit together, we calculate the expected number of demands as $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. We also define $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$. Specifically, we consider two situations: $c = 2.5$ and $c = 1.9$.
+Assuming that groups of up to four people can sit together, we calculate the expected number of demands as $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$ denote the number of people each period. Specifically, we consider two situations: $c = 2.5$ and $c = 1.9$.
 
 When $c = 2.5$, we set the parameters as follows: T = 10-100, step size = 1, expected number of periods = 60, expected number of demand (people) = 150, number of rows = 10, and number of seats per row = 21.
 
@@ -205,9 +208,9 @@ The number of all sampled probability combinations is $n_p$. The number of rows 
 \begin{figure}[h]
   \centering
   \subfigure[One instance for each probability combination]{
-    \includegraphics[width=0.48\textwidth]{./Figures/diff_1.jpg}}
+    \includegraphics[width=0.48\textwidth]{./Figures/diff_1.pdf}}
   \subfigure[Average of 50 instances for each probability combination]{
-    \includegraphics[width=0.48\textwidth]{./Figures/diff_2.jpg}}
+    \includegraphics[width=0.48\textwidth]{./Figures/diff_2.pdf}}
   \caption{The number of people served versus $c$}
 \end{figure}
 
@@ -261,7 +264,7 @@ We can give the absolute difference between the blue point and red point for eac
 The results show that we can estimate attendance rate based on $c$ for most probability combinations. 
 
 
-\subsection{Results of Different Seat Layout}
+\subsection{Results of Different Seat Layouts}
 We compare two seat layouts with the same total number of seats. The first layout has rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the second layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to a largest pattern.
 
 \begin{figure}[ht]

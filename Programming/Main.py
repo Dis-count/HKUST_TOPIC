@@ -383,4 +383,3 @@ if __name__ == "__main__":
         # print('%.2f' % (ratio5/count*100))
         # print('%.2f' % (ratio6/count*100))
     my_file.close()
-

@@ -46,9 +46,9 @@ Then we have the deterministic equivalent form of the scenario-based stochastic 
     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
     y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i \in [M-1], \omega \in \Omega \\
     & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N]\\
-    & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in [M], \omega \in \Omega \\
-    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
+    & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \\
+    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
     \end{aligned}
   \end{equation}
 
@@ -67,7 +67,7 @@ Reformulate the objective function,
 
 % Plug in $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
 
-The last equality holds because of $n_i-s = i, i \in [M]$. 
+The last equality holds because of $n_i-s = i, i \in \mathcal{M}$. 
 Let $\mathbf{n} = (n_1, \ldots, n_M)$, $\mathbf{L} = (L_1, \ldots, L_N)$ where $s_i$ is the size of seats taken by group type $i$ and $L_j$ is the length of row $j$ as we defined above. Then the row length constraint can be expressed as $\mathbf{n} \mathbf{x} \leq \mathbf{L}$.
 
 The linear constraints associated with scenarios can be written in a matrix form as
@@ -164,7 +164,7 @@ Because the feasible region is bounded, then feasibility cuts are not needed. Le
 
 
 \begin{corollary}
-  When $n_i = i+1$, $f{'} = [-\mathbf{1},~\mathbf{0}], V =[W,~I]$, we have $\alpha{'}W \geq -1, \alpha{'}I \geq 0$. Thus, it is easy to find that the feasible region is bounded, i.e., $P$ does not contain any extreme rays. Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i \in [M]$.
+  When $n_i = i+1$, $f{'} = [-\mathbf{1},~\mathbf{0}], V =[W,~I]$, we have $\alpha{'}W \geq -1, \alpha{'}I \geq 0$. Thus, it is easy to find that the feasible region is bounded, i.e., $P$ does not contain any extreme rays. Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i \in \mathcal{M}$.
 
   % \begin{align*}
   %   & 0 \leq \alpha_1 \leq 1,\\ 
@@ -198,8 +198,8 @@ The optimal value for scenario $\omega$ can be obtained by $f{'} y_{\omega}$, th
   The optimal solutions to problem \eqref{BD_sub_dual} are given by 
 \begin{equation}\label{BD_sub_simplified}
   \begin{aligned}
-    & \alpha_{i \omega} =0, i \in [M] \quad \text{if}~  y_{i \omega}^{-} > 0   \\
-    & \alpha_{i \omega} = \alpha_{i-1, \omega}+1, i \in [M] \quad \text{if}~ y_{i \omega}^{+} > 0
+    & \alpha_{i \omega} =0, i \in \mathcal{M} \quad \text{if}~  y_{i \omega}^{-} > 0   \\
+    & \alpha_{i \omega} = \alpha_{i-1, \omega}+1, i \in \mathcal{M} \quad \text{if}~ y_{i \omega}^{+} > 0
   \end{aligned}
 \end{equation}
 \end{thm}
@@ -210,7 +210,7 @@ if $y_{i+1, \omega}^{+} = 0$, $0 \leq \alpha_{i \omega} \leq \alpha_{i-1, \omega
 
 \begin{pf}[Proof of Theorem \ref{optimal_sol_sub_dual}]
   According to the complementary relaxation property, when
-$d_{i \omega} > d_{i 0} \Rightarrow y_{i \omega}^{-} >0$, then $\alpha_{i \omega} =0$ for all $i$; when $d_{i \omega} < d_{i 0} \Rightarrow y_{i \omega}^{+} >0$, then $\alpha_{i \omega} = \alpha_{i-1,\omega} +1, i \in [M]$. 
+$d_{i \omega} > d_{i 0} \Rightarrow y_{i \omega}^{-} >0$, then $\alpha_{i \omega} =0$ for all $i$; when $d_{i \omega} < d_{i 0} \Rightarrow y_{i \omega}^{+} >0$, then $\alpha_{i \omega} = \alpha_{i-1,\omega} +1, i \in \mathcal{M}$. 
 
 When $d_{i \omega} = d_{i 0}$,  we can find that $\alpha_{i \omega} = \alpha_{i-1, \omega} + 1$ will minimize the objective function.
 
@@ -232,7 +232,7 @@ Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master} and
 \begin{equation}\label{BD_master2}
   \begin{aligned}
     \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-    \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
+    \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
     & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
      & \mathbf{x} \geq 0
   \end{aligned}
@@ -252,7 +252,7 @@ RBMP is always bounded with at least any one optimality cut for each scenario.
   \begin{equation}\label{lemma_eq}
     \begin{aligned}
       \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-      \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
+      \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
       & (\alpha^{\omega}){'}\mathbf{d}_{\omega} \geq (\alpha^{\omega}){'} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega \\
        & \mathbf{x} \geq 0
     \end{aligned}
@@ -261,7 +261,7 @@ RBMP is always bounded with at least any one optimality cut for each scenario.
   \begin{equation}\label{lemma_eq2}
     \begin{aligned}
       \max \quad & c{'} x - \sum_{\omega}p_{\omega}(\alpha^{\omega}){'} \mathbf{x} \mathbf{1} + \sum_{\omega} p_{\omega} (\alpha^{\omega}){'} \mathbf{d}_{\omega} \\
-      \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
+      \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
       & \mathbf{x} \geq 0
     \end{aligned}
   \end{equation}
@@ -325,26 +325,26 @@ When $|\Omega| =1$ in problem \eqref{sto_form}, the stochastic programming will 
 \begin{equation}\label{one_form}
   \begin{aligned}
   \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-s) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
-  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i \in [M-1], \\
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1, \ldots, M-1, \\
   & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
-  & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N]\\
-  & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in [M] \\
-  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+  & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
+  & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M} \\
+  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
   \end{aligned}
 \end{equation}
 
-To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i}^{-} \geq 0$, thus the constraints $\sum_{j= 1}^{N} x_{ij} + y_{i}^{-} = d_{i}, i \in [M]$ can be rewritten as $\sum_{j= 1}^{N} x_{ij} \leq d_{i}, i \in [M]$, then we have
+To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i}^{-} \geq 0$, thus the constraints $\sum_{j= 1}^{N} x_{ij} + y_{i}^{-} = d_{i}, i \in \mathcal{M}$ can be rewritten as $\sum_{j= 1}^{N} x_{ij} \leq d_{i}, i \in \mathcal{M}$, then we have
 
 \begin{equation}\label{deter_upper}
   \begin{aligned}
   \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
-  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in [M], \\
-  & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
-  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
+  & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
+  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
   \end{aligned}
 \end{equation}
 
-Problem \eqref{deter_upper} represents the deterministic model. Demand, $d_i, i \in [M]$ is known in advance, our goal is to accommodate as many as people possible in the fixed rows.
+Problem \eqref{deter_upper} represents the deterministic model. Demand, $d_i, i \in \mathcal{M}$ is known in advance, our goal is to accommodate as many as people possible in the fixed rows.
 
 Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
 
@@ -352,8 +352,7 @@ Treat the groups as the items, the rows as the knapsacks. There are $M$ types of
 
 Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP), which is strongly NP-hard as we all known.
 
-
-Consider the solution to the linear relaxation of this MKP. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$.
+Consider the solution to the linear relaxation of \eqref{deter_upper}. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$.
 Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes 
 $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
 % $\frac{s_m-1}{s_m} \geq \ldots \geq \frac{s_2-1}{s_2} \geq \ldots \geq \frac{s_i-1}{s_i}$. because the ratio of value to capacity, $\frac{s_i-1}{s_i}, 1 \leq i \leq m$, is monotone in group type.
@@ -375,10 +374,10 @@ Suppose item $b$ is in type $h$, then the integrated solution is $(0,\ldots, x,d
 
 % its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 
-Suppose we obtain the optimal linear solution $x^{*}_{ij}$ from the stochastic model, set the supply $\mathbf{s}^{0} = \sum_{j} x^{*}_{ij}$ as the upper bound of demand in problem \eqref{deter_upper}. We can get a feasible integer solution by solving this problem, denote by $\mathbf{s}^{1}$ the corresponding supply. As we mentioned above, this solution does not utilize the empty seats when the scenario demands are smaller than supply. Thus, we should set the supply $\mathbf{s}^{1}$ as the lower bound of demand, then re-solve a seat assignment problem. We substitute the constraint $\sum_{j =1}^{N} x_{ij} \leq d_{i}, i \in [M]$ with the new constraint $\sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in [M]$ in problem \eqref{deter_upper}, $s_{i}^{1}$ represents the number of group type $i$ we must allocate seats.
+Suppose we obtain the optimal linear solution $x^{*}_{ij}$ from the stochastic model, set the supply $\mathbf{s}^{0} = \sum_{j} x^{*}_{ij}$ as the upper bound of demand in problem \eqref{deter_upper}. We can get a feasible integer solution by solving this problem, denote by $\mathbf{s}^{1}$ the corresponding supply. As we mentioned above, this solution does not utilize the empty seats when the scenario demands are smaller than supply. Thus, we should set the supply $\mathbf{s}^{1}$ as the lower bound of demand, then re-solve a seat assignment problem. We substitute the constraint $\sum_{j =1}^{N} x_{ij} \leq d_{i}, i \in \mathcal{M}$ with the new constraint $\sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in \mathcal{M}$ in problem \eqref{deter_upper}, $s_{i}^{1}$ represents the number of group type $i$ we must allocate seats.
 
 \begin{equation}\label{deter_lower}
-\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -s)x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in [N]; \sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in [M]; x_{ij} \in Z^{+} \}
+\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -s)x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in \mathcal{M}; x_{ij} \in Z^{+} \}
 \end{equation}
 
 

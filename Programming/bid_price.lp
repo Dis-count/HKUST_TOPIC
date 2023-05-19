@@ -1,6 +1,6 @@
 \ LP format - for model browsing. Use MPS format to capture full model detail.
 Minimize
-  2 C0 + 2 C1 + 0.5 C2 + 0.5 C3 + C4 + C5 + C6 + C10 + 4 C11
+  0.4 C0 + 0.4 C1 + 0.1 C2 + 0.1 C3 + C4 + C5 + C6 + 2 C9 + C10 + 2 C11
 Subject To
  R0: C0 + 2 C4 >= 1
  R1: C1 + 3 C4 >= 2

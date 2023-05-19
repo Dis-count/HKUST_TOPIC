@@ -81,7 +81,6 @@ class CompareMethods:
         final_demand = np.array(sequence) * np.array(my_list111)
         final_demand = final_demand[final_demand != 0]
 
-
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
@@ -187,6 +186,42 @@ class CompareMethods:
             demand[final_demand[-1]-1] -= 1
             final_demand = final_demand[:-1]
             indi = deter1.IP_formulation1(demand, np.zeros(self.I))
+        return demand
+
+    def bid_price(self, sequence):
+        decision_list = [0] * self.num_period
+        roll_width = copy.deepcopy(self.roll_width)
+
+        for t in range(self.num_period):
+            i = sequence[t]
+            if max(roll_width) < i:
+                decision_list[t] = 0
+            else:
+                demand = (self.num_period - t) * np.array(self.probab)
+
+                deterModel = deterministicModel(
+                    roll_width, self.given_lines, self.demand_width_array, self.I)
+                value, obj = deterModel.LP_formulation(demand, roll_width)
+                decision = (i-1) - value * i
+                for j in range(self.given_lines):
+                    if roll_width[j] < i:
+                        decision[j] = -1
+
+                val = max(decision)
+                decision_ind = np.array(decision).argmax()
+                if val >= 0 and roll_width[decision_ind]-i >= 0:
+                    decision_list[t] = 1
+                    roll_width[decision_ind] -= i
+                else:
+                    decision_list[t] = 0
+
+        sequence = [i-1 for i in sequence]
+        final_demand = np.array(sequence) * np.array(decision_list)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(I)
+        for i in final_demand:
+            demand[i-1] += 1
         return demand
 
     def offline(self, sequence):
@@ -305,7 +340,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 80
+    num_period = 60
     given_lines = 10
     # np.random.seed(i)
     p = prop_list()
@@ -329,6 +364,7 @@ if __name__ == "__main__":
         ratio4 = 0
         ratio5 = 0
         ratio6 = 0
+        ratio7 = 0
         accept_people = 0
         num_people = 0
 
@@ -349,6 +385,8 @@ if __name__ == "__main__":
 
             f = a_instance.offline(sequence)  # optimal result
             optimal = np.dot(multi, f)
+            
+            h = a_instance.bid_price(sequence)
 
             seq = a_instance.binary_search_first(sequence)
 
@@ -361,6 +399,7 @@ if __name__ == "__main__":
             ratio4 += np.dot(multi, d) / optimal
             ratio5 += np.dot(multi, e) / optimal
             ratio6 += np.dot(multi, g) / optimal
+            ratio7 += np.dot(multi, h) / optimal
             accept_people += optimal
             num_people += total_people
 
@@ -370,6 +409,7 @@ if __name__ == "__main__":
         my_file.write('M4: %.2f ;' % (ratio4/count*100))
         my_file.write('M5: %.2f ;' % (ratio5/count*100))
         my_file.write('M6: %.2f \n' % (ratio6/count*100))
+        my_file.write('M7: %.2f \n' % (ratio7/count*100))
         my_file.write('Number of accepted people: %.2f \t' % (accept_people/count))
         my_file.write('Number of people: %.2f \n' % (num_people/count))
         # f.write(str(ratio6/count*100) + '\n')

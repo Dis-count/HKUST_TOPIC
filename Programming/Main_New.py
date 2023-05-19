@@ -301,7 +301,7 @@ if __name__ == "__main__":
 
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 60
+    num_period = 80
     given_lines = 10
     # np.random.seed(i)
     p = prop_list()

@@ -85,21 +85,15 @@ def offline(sequence):
 if __name__ == "__main__":
     I = 4
     given_lines = 8
-    roll_width = np.arange(20, 20 + given_lines)
-    roll_width1 = np.arange(20, 20 + given_lines)
+    roll_width = np.arange(10, 10 + given_lines)
+    roll_width1 = np.arange(10, 10 + given_lines)
 
     probab = [0.4, 0.4, 0.1, 0.1]
 
-    number_period = 80
+    number_period = 60
     demand = number_period * np.array(probab)
 
     demand_width_array = np.arange(2, 2+I)
-
-    # deterModel = deterministicModel(
-    #     roll_width, given_lines, demand_width_array, I)
-
-    # value, obj = deterModel.LP_formulation(demand, roll_width)
-
 
     sequence = generate_sequence(number_period, probab)
     period = len(sequence)
@@ -107,7 +101,6 @@ if __name__ == "__main__":
     decision_list = [0] * period
     
     for t in range(number_period):
-        print(t)
         i = sequence[t]
         if max(roll_width) < i:
             decision_list[t] = 0
@@ -123,12 +116,13 @@ if __name__ == "__main__":
 
             val = max(decision)
             decision_ind = np.array(decision).argmax()
-            if val >= 0 and roll_width[decision_ind]-i >=0:
+            if val >= 0 and (roll_width[decision_ind]-i) >=0:
                 decision_list[t] = 1
                 roll_width[decision_ind] -= i
             else:
                 decision_list[t] = 0
 
+    print(roll_width)
     print(sequence)
     multi = np.arange(1, I+1)
     f = offline(sequence)  # optimal result
@@ -137,6 +131,7 @@ if __name__ == "__main__":
     sequence = [i-1 for i in sequence]
     total_people1 = np.dot(sequence, decision_list)
     print(total_people1)
+    print(decision_list)
     final_demand = np.array(sequence) * np.array(decision_list)
     final_demand = final_demand[final_demand != 0]
     

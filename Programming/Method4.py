@@ -16,6 +16,7 @@ class deterministicModel:
         self.demand_width_array = demand_width_array
         self.value_array = demand_width_array - 1
         self.I = I
+        self.s = 1
 
     def IP_formulation(self, demand_lower, demand_upper):
         m = grb.Model()
@@ -38,6 +39,23 @@ class deterministicModel:
         newx = np.reshape(x_ij, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
         return newd, m.objVal
+
+    def LP_formulation(self, demand, roll_width):
+        m = grb.Model()
+        z = m.addVars(self.I, lb=0, vtype=GRB.CONTINUOUS)
+        beta = m.addVars(self.given_lines, lb=0, vtype=GRB.CONTINUOUS)
+
+        m.addConstrs(z[i] + beta[j] * (i+1 + self.s) >= i +
+                     1 for j in range(self.given_lines) for i in range(self.I))
+
+        m.setObjective(grb.quicksum(demand[i] * z[i] for i in range(
+            self.I)) + grb.quicksum(roll_width[j] * beta[j] for j in range(
+                self.given_lines)), GRB.MINIMIZE)
+        m.setParam('OutputFlag', 0)
+        m.optimize()
+        # m.write('bid_price.lp')
+        x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
+        return x_ij, m.objVal
 
     def IP_formulation1(self, demand_lower, demand_upper):
         m = grb.Model()

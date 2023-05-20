@@ -36,7 +36,7 @@ class CompareMethods:
 
             demand_list = sequence[0:diff_period]
 
-            
+
 
             mylist += [1] * diff_period
 
@@ -84,3 +84,16 @@ class CompareMethods:
 # demand_list = []
 # for i in range(4):
 #     demand_list += [demand[i]] * mul[i]
+
+
+
+
+a = np.array([[1,2.0,3,4], [3,4,5,6]])
+b = a.tolist()
+
+
+for i in b:
+    i.remove(2)
+    print(i)
+
+

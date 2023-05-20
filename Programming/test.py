@@ -18,7 +18,8 @@ class CompareMethods:
         self.num_period = num_period   # number, Immutable object
         self.num_sample = num_sample   # number, Immutable object
 
-    def method4(self, sequence, ini_demand):
+    def method4(self, sequence, ini_demand, newx):
+
         mylist = []
         remaining_period0 = self.num_period
         sequence1 = copy.copy(sequence)
@@ -34,6 +35,8 @@ class CompareMethods:
             diff_period = remaining_period0 - remaining_period
 
             demand_list = sequence[0:diff_period]
+
+            
 
             mylist += [1] * diff_period
 

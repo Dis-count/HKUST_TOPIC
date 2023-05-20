@@ -1,7 +1,7 @@
 import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
-from Method4 import deterministicModel
+from Method10 import deterministicModel
 from Mist import generate_sequence, decision1
 import copy
 from Mist import decisionSeveral, decisionOnce
@@ -35,14 +35,14 @@ class CompareMethods:
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I)
 
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
-        ini_demand, _ = deter.IP_formulation(ini_demand, np.zeros(self.I))
+        ini_demand, newx4 = deter.IP_formulation(ini_demand, np.zeros(self.I))
 
         ini_demand1 = np.array(self.probab) * self.num_period
 
         ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
         ini_demand3, _ = deter.IP_formulation(ini_demand3, np.zeros(self.I))
 
-        return sequence, ini_demand, ini_demand3
+        return sequence, ini_demand, ini_demand3, newx4
 
     def row_by_row(self, sequence):
         # i is the i-th request in the sequence
@@ -236,7 +236,8 @@ class CompareMethods:
         
         return newd
 
-    def method4(self, sequence, ini_demand):
+    def method4(self, sequence, ini_demand, newx4):
+        print(newx4)
         mylist = []
         remaining_period0 = self.num_period
         sequence1 = copy.copy(sequence)
@@ -295,14 +296,14 @@ class CompareMethods:
 
         return demand
 
-    def result(self, sequence, ini_demand, ini_demand3):
+    def result(self, sequence, ini_demand, ini_demand3, newx4):
         ini_demand4 = copy.deepcopy(ini_demand)
 
         final_demand1 = self.method1(sequence, ini_demand)
 
-        final_demand3 = self.method4(sequence, ini_demand3)
+        final_demand3 = self.method4(sequence, ini_demand3, newx4)
 
-        final_demand4 = self.method4(sequence, ini_demand4)
+        final_demand4 = self.method4(sequence, ini_demand4, newx4)
 
         return final_demand1, final_demand3, final_demand4
 
@@ -370,13 +371,13 @@ if __name__ == "__main__":
 
         multi = np.arange(1, I+1)
 
-        count = 50
+        count = 1
         for j in range(count):
-            sequence, ini_demand, ini_demand3 = a_instance.random_generate()
+            sequence, ini_demand, ini_demand3, newx4 = a_instance.random_generate()
 
             total_people = sum(sequence) - num_period
 
-            a,c,d = a_instance.result(sequence, ini_demand, ini_demand3)
+            a,c,d = a_instance.result(sequence, ini_demand, ini_demand3, newx4)
             
             b = a_instance.dynamic_program(sequence)
 

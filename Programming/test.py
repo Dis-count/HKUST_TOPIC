@@ -18,7 +18,9 @@ class CompareMethods:
         self.num_period = num_period   # number, Immutable object
         self.num_sample = num_sample   # number, Immutable object
 
-    def method4(self, sequence, ini_demand, newx):
+    def method4(self, sequence, ini_demand, newx, roll_width):
+        # newx patterns for N rows.
+        newx = newx.T.tolist()
 
         mylist = []
         remaining_period0 = self.num_period
@@ -36,15 +38,30 @@ class CompareMethods:
 
             demand_list = sequence[0:diff_period]
 
-
+            for j in demand_list:
+                for k, pattern in enumerate(newx): 
+                    if pattern[j] > 0:
+                        newx[k][j] -= 1
+                        roll_width[k] -= j
+                        break
 
             mylist += [1] * diff_period
 
             if any(usedDemand) == 0:  # all are 0
                 usedDemand, decision_list = decisionOnce(
                     sequence, demand, self.probab)
+                
                 if decision_list:
                     mylist.append(1)
+
+                    # find the row can assign usedDemand（j)
+                    for k, pattern in enumerate(newx):
+                        if pattern[j] > 0:
+                            newx[k][j] -= 1
+                            newx[k][j-1] += 1
+                            roll_width[k] -= (j-1)
+                            break
+
                 else:
                     mylist.append(0)
                 remaining_period -= 1
@@ -52,16 +69,15 @@ class CompareMethods:
             remaining_period0 = remaining_period
             sequence = sequence[-remaining_period:]
 
-            for j in range(self.given_lines):
-                if i in demand_list:
-                    roll_width = 
-
             total_usedDemand += usedDemand
 
+            # m1 = stochasticModel(self.roll_width, self.given_lines,self.demand_width_array, W, self.I, prop, dw)
 
+            # ini_demand, newx = m1.solveBenders(eps=1e-4, maxit=20)
 
-            ini_demand, obj = deterModel.IP_formulation(
-                total_usedDemand, np.zeros(self.I))
+            # use stochastic calculate
+            demand =  deterModel.benders(roll_width, remaining period)
+            # ini_demand, obj = deterModel.IP_formulation(total_usedDemand, np.zeros(self.I))
 
         sequence1 = [i-1 for i in sequence1 if i > 0]
         # total_people1 = np.dot(sequence1, mylist)
@@ -84,8 +100,6 @@ class CompareMethods:
 # demand_list = []
 # for i in range(4):
 #     demand_list += [demand[i]] * mul[i]
-
-
 
 
 a = np.array([[1,2.0,3,4], [3,4,5,6]])

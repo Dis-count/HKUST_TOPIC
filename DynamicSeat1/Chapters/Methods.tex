@@ -81,7 +81,9 @@ The algorithm is shown below:
 \end{algorithm}
 
 \subsection{Dynamic Seat Assignment after All Group Arrivals}
-Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. The deterministic problem is 
+For this seat assignment situation, we only need to make the decision for each group arrival and assign the seats after all group arrivals.
+
+Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. The deterministic problem is
 
 \begin{equation}\label{relax_deter}
   \begin{aligned}
@@ -92,26 +94,47 @@ Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. Th
   \end{aligned}
 \end{equation}
 
-For this relaxation, we can always find the optimal solution for any given the deterministic demand, $(d_{1}, \ldots, d_{M})$. The upper bound is the same as what we mentioned above: $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The integrated solution is $\underbrace{(0, \ldots, x}_{h ~numbers},d_{h+1}, \ldots, d_{M})$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. Let $n_h \cdot x = t$, $t$ is an integer. When $t \geq 1+s$, suppose $t = n_{u}$, then $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 0, d_{h+1}, \ldots, d_{M})$ is an optimal solution. When $t < 1+s$, we can always find $u,v,w; u<h, v \geq h+1, w \leq h$ such that $n_{v} + t = n_{w} + n_{u}$, $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 1, d_{h+1}, \ldots,d_{v}-1, \ldots, d_{M})$; when $s=1$, $u = 1, v = h+1, w =h$. 
 
-Now denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper} as $v_{r}^{*}, v^{*}$, the gap is zero only when the groups corresponding to the optimal solution to problem \eqref{relax_deter} can be placed into $N$ rows. The result showes that the gap is zero for most cases, thus we can develop a dynamic programming(DP)-based method to solve dynamic seat assignment after all group arrivals.
+\begin{lem}
+  The upper bound of problem \eqref{relax_deter} is the same as that of problem \eqref{deter_upper}. Let $\mathbf{X}$ be the solution of linear relaxation of problem \eqref{relax_deter}. $\mathbf{X}$ is the same as the integrated solution of linear relaxation of problem \eqref{deter_upper}.
+\end{lem}
 
-Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
+% Recall that the solution 
+% $u=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
 
-$$V_{t}(L) = \sum_{i=1}^{M} p_i [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0, V_{T+1}(L) =0, \forall L$$
+We can always find the optimal solution of problem \eqref{relax_deter} for any given deterministic demand, $(d_{1}, \ldots, d_{M})$.
 
-$n_i$ is number of seats occupied by group type $i$.
+Let $e_{i}$ denote the unit size of the $i$-th element of $\mathbf{X}$. Then $\mathbf{X}$ can be expressed as $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. We can transform $\mathbf{X}$ to an integral solution without changing the corresponding objective value.
+
+Let $n_h \cdot x = t$, $t$ is an integer. When $t \geq 1+s$, suppose $t = n_{u}$, then $e_{u} + \sum_{i=h+1} ^{M} d_{i} e_{i}$ is an optimal solution. When $t < 1+s$, we can always find $u,v,w; u<h, v \geq h+1, w \leq h$ such that $n_{v} + t = n_{w} + n_{u}$, then $e_{w} + e_{u} -e_{v} + \sum_{i=h+1} ^{M} d_{i} e_{i}$ is an optimal solution; when $s=1$, $u = 1, v = h+1, w =h$. 
+
+
+Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. The difference between them is equal to zero only when the groups corresponding to the optimal solution of problem \eqref{relax_deter} can be accommodated in $N$ rows. The numerical results indicate that this is the case for most scenarios, which suggests that a DP-based approach can be used to solve the dynamic seat assignment problem after all groups have arrived.
+
+% The numerical result shows that the difference is zero for most cases, thus we can develop a dynamic programming(DP)-based method to solve dynamic seat assignment after all group arrivals.
+
+
+Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise. Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
+
+$$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0, V_{T+1}(L) =0, \forall L$$
+
+% $\underbrace{(0, \ldots, x}_{h ~numbers},d_{h+1}, \ldots, d_{M})$
+% $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 0, d_{h+1}, \ldots, d_{M})$
+% $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 1, d_{h+1}, \ldots,d_{v}-1, \ldots, d_{M})$
+
+% $n_i$ is number of seats occupied by group type $i$. 
+
 
 % Assuming that there always exists a seat assignment under the total capacity of seats,
 
-DP can be used to make decisions in each period, but after accepting each group, it is necessary to ensure that the accepted groups can be feasibly assigned seats. Conducting inspections at each stage can be cumbersome. To streamline the process, a threshold capacity can be developed. When the accepted groups fall within the prescribed threshold, they can be accepted directly using DP. However, when the accepted groups exceed the prescribed threshold, feasibility must be checked and the group should be rejected if a feasible seat assignment cannot be found.
+After accepting each group, it is necessary to ensure that the accepted groups can be feasibly assigned seats. Conducting inspections at each stage can be cumbersome. To streamline the process, a threshold capacity can be developed. When the accepted groups fall within the prescribed threshold, they can be accepted directly using DP. However, when the accepted groups exceed the prescribed threshold, feasibility must be checked and the group should be rejected if a feasible seat assignment cannot be found.
 
 % we don't know whether the accepted groups can be assigned to seats when the demand is close to supply. 
 
-The threshold can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j} (L_j -n_{M} +1)$.
+The threshold capacity can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j} (L_j -n_{M} +1)$.
 
 
-\subsection{bid-price}
+\subsection{Bid-price}
 
 The dual problem of LP relaxation of \eqref{deter_upper} is:
 
@@ -126,15 +149,14 @@ The dual problem of LP relaxation of \eqref{deter_upper} is:
 When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group. The bid-price control policy based on the static model is stated below.
 
 \begin{algorithm}[H]
-  \caption{bid-price algorithm}
+  \caption{Bid-price algorithm}
   \begin{description}
     \item[Step 1.] .
-    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in \mathcal{N}$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
+    \item[Step 2.] 
     \item[Step 3.] 
-    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
+    \item[Step 4.] 
   \end{description}
 \end{algorithm}
-
 
 
 % \subsection{Seat Planning Charts Online}
@@ -179,7 +201,7 @@ For dynamic seat assignment after all group arrivals, the intuitive but trivial 
 % And use the nested policy to accept or reject one group in the remaining arrivals. 
 Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. For the convenience of calculation, we check the feasibility of constructing a seat assignment from the end of the sub-sequence. When it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until a feasible seat assignment is found. In reality, we need to check the feasibility one group by one.
 
-The safe ratio is $\frac{(L -u +1)}{L}$.
+The threshold capacity is $(L -u +1)$.
 
 % Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in that row immediately. We check each request until the capacity is used up. 
 

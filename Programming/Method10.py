@@ -32,15 +32,38 @@ class deterministicModel:
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
             self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
+        m.write('test.lp')
         m.optimize()
         # print('************************************************')
         # print('Optimal value of IP is: %g' % m.objVal)
         x_ij = np.array(m.getAttr('X'))
         
         newx = np.reshape(x_ij, (self.I, self.given_lines))
-        print(newx.T)
         newd = np.sum(newx, axis=1)
         return newd, newx
+
+    def IP_formulation2(self, roll_width, num_period, probab):
+        demand = np.ceil(np.array(probab) * num_period)
+        m = grb.Model()
+
+        x = m.addVars(self.I, len(roll_width), lb=0, vtype= GRB.INTEGER)
+        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+                                  for i in range(self.I)) <= roll_width[j] for j in range(len(roll_width)))
+        m.addConstrs(grb.quicksum(x[i, j] for j in range(
+            len(roll_width))) <= demand[i] for i in range(self.I))
+
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
+            self.I) for j in range(len(roll_width))), GRB.MAXIMIZE)
+        m.setParam('OutputFlag', 0)
+        m.optimize()
+        # print('************************************************')
+        # print('Optimal value of IP is: %g' % m.objVal)
+        x_ij = np.array(m.getAttr('X'))
+        
+        newx = np.reshape(x_ij, (self.I, len(roll_width)))
+        newd = np.sum(newx, axis=1)
+        return newd, newx
+
 
     def LP_formulation(self, demand, roll_width):
         m = grb.Model()
@@ -59,28 +82,28 @@ class deterministicModel:
         x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
         return x_ij, m.objVal
 
-    # def IP_formulation1(self, demand_lower, demand_upper):
-    #     m = grb.Model()
-    #     x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
-    #     m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-    #                               for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
-    #     if sum(demand_upper) != 0:
-    #         m.addConstrs(grb.quicksum(x[i, j] for j in range(
-    #             self.given_lines)) <= demand_upper[i] for i in range(self.I))
-    #     if sum(demand_lower) != 0:
-    #         m.addConstrs(grb.quicksum(x[i, j] for j in range(
-    #             self.given_lines)) >= demand_lower[i] for i in range(self.I))
+    def IP_formulation1(self, demand_lower, demand_upper):
+        m = grb.Model()
+        x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
+        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+                                  for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
+        if sum(demand_upper) != 0:
+            m.addConstrs(grb.quicksum(x[i, j] for j in range(
+                self.given_lines)) <= demand_upper[i] for i in range(self.I))
+        if sum(demand_lower) != 0:
+            m.addConstrs(grb.quicksum(x[i, j] for j in range(
+                self.given_lines)) >= demand_lower[i] for i in range(self.I))
 
-    #     m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
-    #     m.setParam('OutputFlag', 0)
-    #     m.optimize()
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
+        m.setParam('OutputFlag', 0)
+        m.optimize()
 
-    #     if m.status == GRB.OPTIMAL:
-    #         x_ij = np.array(m.getAttr('X'))
-    #         newx = np.reshape(x_ij, (self.I, self.given_lines))
-    #         return True
-    #     else:
-    #         return False
+        if m.status == GRB.OPTIMAL:
+            x_ij = np.array(m.getAttr('X'))
+            newx = np.reshape(x_ij, (self.I, self.given_lines))
+            return True
+        else:
+            return False
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios

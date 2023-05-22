@@ -40,8 +40,8 @@ class CompareMethods:
 
             for j in demand_list:
                 for k, pattern in enumerate(newx): 
-                    if pattern[j] > 0:
-                        newx[k][j] -= 1
+                    if pattern[j-2] > 0:
+                        newx[k][j-2] -= 1
                         roll_width[k] -= j
                         break
 
@@ -51,15 +51,18 @@ class CompareMethods:
                 usedDemand, decision_list = decisionOnce(
                     sequence, demand, self.probab)
                 
+                Indi_Demand = np.dot(usedDemand, range(self.I))
+
                 if decision_list:
                     mylist.append(1)
 
                     # find the row can assign usedDemand（j)
                     for k, pattern in enumerate(newx):
-                        if pattern[j] > 0:
-                            newx[k][j] -= 1
-                            newx[k][j-1] += 1
-                            roll_width[k] -= (j-1)
+                        if pattern[decision_list] > 0:
+                            newx[k][decision_list] -= 1
+                            if decision_list - Indi_Demand -2 >= 0: 
+                                newx[k][decision_list - Indi_Demand - 2] += 1
+                            roll_width[k] -= (Indi_Demand+1)
                             break
 
                 else:
@@ -76,11 +79,10 @@ class CompareMethods:
             # ini_demand, newx = m1.solveBenders(eps=1e-4, maxit=20)
 
             # use stochastic calculate
-            demand =  deterModel.benders(roll_width, remaining period)
-            # ini_demand, obj = deterModel.IP_formulation(total_usedDemand, np.zeros(self.I))
+            # demand =  deterModel.benders(roll_width, remaining_period)
+            ini_demand, obj = deterModel.IP_formulation(total_usedDemand, np.zeros(self.I))
 
         sequence1 = [i-1 for i in sequence1 if i > 0]
-        # total_people1 = np.dot(sequence1, mylist)
 
         final_demand1 = np.array(sequence1) * np.array(mylist)
         final_demand1 = final_demand1[final_demand1 != 0]

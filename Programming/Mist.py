@@ -23,6 +23,7 @@ def several_class(size_group, demand, remaining_period, probab):
         count += 1
     max_diff = max(diff_set)
     index_diff = np.argmax(diff_set) + size_group
+
     if max_diff > 0:
         return index_diff
     else:
@@ -78,6 +79,7 @@ def decision_demand(sequence, decision_list):
 def decisionOnce(sequence, demand, probab):
     # the function is used to make a decision once on several classes
     # sequence is one possible sequence of the group arrival.
+    # decision_list is the index
     I = len(demand)
     record_demand = np.zeros(I)
     period = len(sequence)

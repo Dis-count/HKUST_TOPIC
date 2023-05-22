@@ -357,10 +357,12 @@ Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, wher
 $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
 % $\frac{s_m-1}{s_m} \geq \ldots \geq \frac{s_2-1}{s_2} \geq \ldots \geq \frac{s_i-1}{s_i}$. because the ratio of value to capacity, $\frac{s_i-1}{s_i}, 1 \leq i \leq m$, is monotone in group type.
 
-Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $(\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{Mj})$ the integrated solution to the linear relaxation of MKP.
+Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $\mathbf{X} = (\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{Mj})$ the integrated solution to the linear relaxation of problem \eqref{deter_upper}.
 
 \begin{lem}
-Suppose item $b$ is in type $h$, then the integrated solution is $(0,\ldots, x,d_{h+1}, \ldots, d_{M})$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.  
+Let $e_{i}$ denote the unit size of the $i$-th element of $\mathbf{X}$.
+Suppose item $b$ is in type $h$, then the integrated solution is $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.  
+% $(0,\ldots, x,d_{h+1}, \ldots, d_{M})$.
 \end{lem}
 
 % That is, we will place as large groups as possible when the capacity allows.

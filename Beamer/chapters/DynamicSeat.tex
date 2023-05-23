@@ -33,8 +33,8 @@
         The gap between the relaxed deterministic problem and original deterministic problem is zero for most cases. 
 
         Thus, we use DP to make the decision.
-        $$V_{t}(L) = E_{i} [\max\{ {[V_{t-1}(L-n_i)+ i]}, {V_{t-1}(L)}\}], L \geq 0$$
-        $$V_{T+1}(x) =0, \forall x$$
+        $$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0$$ 
+        $$V_{T+1}(x) =0, \forall x.$$
         
 
       \end{frame}

@@ -38,7 +38,7 @@ By incorporating the additional seat and designating certain seats for social di
 
 Now, we analyse the effect of introducing social distancing for each row. At first, we consider the types of pattern, which refers to the seat planning for each row. For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left seats, respectively. Denote by $l(k) = \alpha_k + \beta_k -1$ the loss for pattern $k$. The loss represents the number of people lost compared to the situation without social distancing.
 
-Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are the largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. Suppose there are $n$ groups in a row, we use a descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote seat planning for pattern $k$, where $t_h$ is the new group size, $h = 1,\ldots, n$.
+Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are the largest. Similarly, the patterns from $I_2$ are the second largest, so forth and so on. The patterns with zero left seat are called full patterns. Suppose there are $n$ groups in a row, for ease of brevity, we use a descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote pattern $k$, where $t_h$ is the new group size, $h = 1,\ldots, n$.
 
 % Let $P_{k}$ denote the set of group sizes for pattern $k$. We use $t \in P_{k}$ to denote a group with size of $t$ can be put into the pattern. 
 
@@ -98,9 +98,10 @@ $$V_{t}(\mathbf{L}) = \max_{u \in U(\mathbf{L})}\{ \sum_{i=1}^{M} p_i ( \sum_{j=
 
 $U(\mathbf{L}) = \{u_{i,j} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j} \leq 1, \forall i, n_{i}u_{i,j}\mathbf{e}_j^{\top} \mathbf{e}_{i} \leq \mathbf{L}, \forall i,j \}$
 
-The compact form can be written as:
+$\mathbf{e}_j$ is the unit row vector with $j$-th element being 1.
 
-$$V_{t}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant \mathbf{e}_{i}}}\left\{V_{T+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\top} \mathbf{e}_{i}\right)+ i, V_{T+1}(\mathbf{L})\right\}\right]$$
+The compact form can be written as:
+$$V_{t}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant \mathbf{e}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\top} \mathbf{e}_{i}\right)+ i, V_{t+1}(\mathbf{L})\right\}\right]$$
 
 
 Initially, we have $\mathbf{L}_{T} = (L_1, L_2, \ldots, L_{N})$. As we can observe, the dynamic programming algorithm has to make a decision on which row to assign group type $i$. This leads to the curse of dimensionality due to the numerous seat planning combinations. To avoid this complexity, we propose an approach that directly targets the final seat planning and then formulate a policy for assigning groups. To obtain the final seat planning firstly, we develop the scenario-based stochastic programming.

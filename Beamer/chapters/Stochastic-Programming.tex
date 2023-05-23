@@ -9,11 +9,11 @@
         \begin{aligned}
         \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-s) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-s) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
         \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
-        y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i \in [M-1], \omega \in \Omega \\
+        y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
-        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N]\\
-        & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in [M], \omega \in \Omega \\
-        & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
+        & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \\
+        & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
     \end{frame}
@@ -59,7 +59,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \begin{equation}\label{BD_master2}
     \begin{aligned}
       \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-      \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
+      \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
       & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}^{t}, \forall \omega \\
        & \mathbf{x} \geq 0
     \end{aligned}
@@ -89,11 +89,11 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \begin{equation}\label{one_form}
     \begin{aligned}
     \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-s) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i \in [M-1], \\
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1,\ldots, M-1, \\
     & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N]\\
-    & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in [M] \\
-    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
+    & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M} \\
+    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
     \end{aligned}
   \end{equation}
 \end{frame}
@@ -102,13 +102,13 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \begin{equation}\label{deter_upper}
     \begin{aligned}
     \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in [M], \\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in [N] \\
-    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in [M], j \in [N].
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
+    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
+    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
     \end{aligned}
   \end{equation}
 
-  Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq d_{i}, i \in [M]$, we can obtain the problem with lower bound demand. \label{deter_lower}
+  Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq d_{i}, i \in \mathcal{M}$, we can obtain the problem with lower bound demand. \label{deter_lower}
 
 \end{frame}
 

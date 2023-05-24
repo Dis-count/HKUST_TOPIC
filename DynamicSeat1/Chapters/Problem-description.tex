@@ -85,7 +85,7 @@ For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the total loss is $\sum_{j} (\
 % But our model and formulation allow for a more general layout of the seats. 
 Now consider the scenario where groups arrive dynamically, the decision-maker must determine whether to accept or reject each group and assign them to empty seats while ensuring that the social distancing constraint is met. Once the seats are confirmed and assigned to a group, they cannot be changed.
 
-We use a vector $\mathbf{L}= (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$ to record the remaining capacity of rows, where $L^{r}_{j}$ represents the number of remaining seats in row $j$. Let $V_{t}(\mathbf{L})$ denote the maximal expected value to go at period $t$ with capacity of rows. There are $T$ periods and the arrival probability of the group type $i$ in each period is $p_i$. In every period, the group can decide which row to sit. Let $u_{i,j}$ denote the decision, where $u_{i,j}(t) = 1$ if we accept a group type $i$ in row $j$ at period $t$, $u(t) =0$ otherwise.
+We use a vector $\mathbf{L}= (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$ to record the remaining capacity of rows, where $L^{r}_{j}$ represents the number of remaining seats in row $j$. Let $V_{t}(\mathbf{L})$ denote the maximal expected value to go at period $t$ with capacity of rows. There are $T$ periods and the arrival probability of the group type $i$ in each period is $p_i$. In every period, the group will be decided which row to assign. Let $u_{i,j}$ denote the decision, where $u_{i,j}(t) = 1$ if we accept a group type $i$ in row $j$ at period $t$, $u(t) =0$ otherwise.
 
 
 % Let $\mathbf{w} = (n_1, \ldots, n_{M})$ be the number of seats occupied by each group type.

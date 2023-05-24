@@ -131,7 +131,7 @@ After accepting each group, it is necessary to ensure that the accepted groups c
 
 % we don't know whether the accepted groups can be assigned to seats when the demand is close to supply. 
 
-The threshold capacity can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j} (L_j -n_{M} +1)$.
+The threshold capacity can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j=1}^{N} (L_j -n_{M} +1)$.
 
 
 \subsection{Bid-price}
@@ -197,16 +197,21 @@ When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ a
 
 \subsubsection{FCFS-based}\label{FCFS-based}
 
-For dynamic seat assignment after all group arrivals, the intuitive but trivial method will be on a first-come-first-served basis. Relax all rows to one row with the total number of seats. For the arrival sequence, find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity.
-% And use the nested policy to accept or reject one group in the remaining arrivals. 
-Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. For the convenience of calculation, we check the feasibility of constructing a seat assignment from the end of the sub-sequence. When it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until a feasible seat assignment is found. In reality, we need to check the feasibility one group by one.
+For dynamic seat assignment after all group arrivals, the intuitive but trivial method will be on a first-come-first-served basis. Relax all rows to one row with the total number of seats. For each arrival, we need to check the feasibility of constructing a seat assignment. If the seat assignment is feasible, we accept the request; otherwise, we reject it. The threshold capacity is $(L -u +1)$.
 
-The threshold capacity is $(L -u +1)$.
+% find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity.Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. 
+
+% And use the nested policy to accept or reject one group in the remaining arrivals. 
+
+
+% For the convenience of calculation, we check the feasibility of constructing a seat assignment from the end of the sub-sequence. When it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until a feasible seat assignment is found. In reality, we need to check the feasibility one group by one.
+
+
 
 % Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in that row immediately. We check each request until the capacity is used up. 
 
 \subsubsection{FCFS}\label{largest_pattern}
-For dynamic seat assignment for each group arrival, we can continue to use the first-come, first-served (FCFS) approach for seat assignment across all rows. Each accepted request will be assigned a seat row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until the capacity of all rows is fully utilized.
+For dynamic seat assignment for each group arrival, we can continue to use the first-come, first-served (FCFS) approach for seat assignment across all rows. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until the capacity of all rows is fully utilized.
 
 % There is a reservation stage, we only decide to accept or reject.
 % After certain periods, there is a seat selection stage.

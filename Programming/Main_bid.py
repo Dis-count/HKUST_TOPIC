@@ -250,10 +250,10 @@ class CompareMethods:
         # ini_demand1 = np.array(self.probab) * self.num_period
         deterModel = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
-
+        print(f'initial: {ini_demand}')
         while remaining_period0:
             demand = ini_demand
-
+            
             usedDemand, remaining_period = decisionSeveral(sequence, demand)
 
             diff_period = remaining_period0 - remaining_period
@@ -402,11 +402,13 @@ if __name__ == "__main__":
 
     h = a_instance.bid_price(sequence)
 
+    f = a_instance.offline(sequence)  # optimal result
+    optimal = np.dot(multi, f)
+
+    print(f'optimal: {f}')
+
     print(f'dy: {np.dot(multi, d)}')
 
     print(f'bid: {np.dot(multi, h)}')
 
-newx = np.zeros((10, 4))
-
-roll = np.array([5, 3, 5, 5, 5, 4, 4, 3, 5, 5])
-
+    print(f'optimal: {optimal}')

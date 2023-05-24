@@ -250,10 +250,10 @@ class CompareMethods:
         # ini_demand1 = np.array(self.probab) * self.num_period
         deterModel = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
-        print(f'initial: {ini_demand}')
+        
         while remaining_period0:
             demand = ini_demand
-            
+            print(f'initial: {ini_demand}')
             usedDemand, remaining_period = decisionSeveral(sequence, demand)
 
             diff_period = remaining_period0 - remaining_period
@@ -282,7 +282,7 @@ class CompareMethods:
             if any(usedDemand) == 0:  # all are 0
                 usedDemand, decision_list = decisionOnce(
                     sequence, demand, self.probab)
-
+                print(f'Decision: {decision_list}')
                 Indi_Demand = np.dot(usedDemand, range(self.I))
 
                 if decision_list:
@@ -383,7 +383,9 @@ if __name__ == "__main__":
     given_lines = 10
     # np.random.seed(0)
 
+    # probab = [0.25, 0.05, 0.65, 0.05]
     probab = [0.25, 0.25, 0.25, 0.25]
+
 
     roll_width = np.ones(given_lines) * 21
         # total_seat = np.sum(roll_width)
@@ -406,6 +408,8 @@ if __name__ == "__main__":
     optimal = np.dot(multi, f)
 
     print(f'optimal: {f}')
+
+    print(f'dy_mean: {np.dot(multi, c)}')
 
     print(f'dy: {np.dot(multi, d)}')
 

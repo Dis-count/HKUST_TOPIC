@@ -21,11 +21,12 @@ def several_class(size_group, demand, remaining_period, probab):
             binom.cdf(demand[j-size_group-2], remaining_period, probab[j-size_group-2])
         diff_set[count] = term1 - term2 - 1
         count += 1
-    max_diff = max(diff_set)
-    index_diff = np.argmax(diff_set) + size_group
+    print(diff_set)
+    # max_diff = max(diff_set)
+    # index_diff = np.argmax(diff_set) + size_group
 
-    if max_diff > 0:
-        return index_diff
+    if diff_set[0] > 0:
+        return size_group
     else:
         return False
 

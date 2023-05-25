@@ -345,6 +345,95 @@ class CompareMethods:
         print(f'dy: {demand}')
         return demand
 
+    def method5(self, sequence, ini_demand, newx, change_roll0):
+        # newx patterns for N rows.
+        change_roll = copy.deepcopy(change_roll0)
+        newx = newx.T.tolist()
+        mylist = []
+        remaining_period0 = self.num_period
+        sequence1 = copy.copy(sequence)
+        total_usedDemand = np.zeros(self.I)
+        # ini_demand1 = np.array(self.probab) * self.num_period
+        deterModel = deterministicModel(
+            self.roll_width, self.given_lines, self.demand_width_array, self.I)
+
+        while remaining_period0:
+            demand = ini_demand
+            print(f'initial: {ini_demand}')
+            usedDemand, remaining_period = decisionSeveral(sequence, demand)
+
+            diff_period = remaining_period0 - remaining_period
+
+            demand_list = sequence[0:diff_period]
+
+            for j in demand_list:
+                for k, pattern in enumerate(newx):
+                    if pattern[j-2] > 0 and change_roll[k] > (self.I + 1):
+                        newx[k][j-2] -= 1
+                        change_roll[k] -= j
+                        break
+
+                    if k == len(newx)-1:
+                        # for t, i in enumerate(change_roll):
+                        #     newx[t][i-2] = 1
+                        for kk, pat in enumerate(newx):
+                            if pat[j-2] > 0:
+                                newx[kk][j-2] -= 1
+                                change_roll[kk] -= j
+                                break
+
+            mylist += [1] * diff_period
+
+            if any(usedDemand) == 0:  # all are 0
+                usedDemand, decision_list = decisionOnce(
+                    sequence, demand, self.probab)
+                print(f'Decision: {decision_list}')
+                Indi_Demand = np.dot(usedDemand, range(self.I))
+
+                if decision_list:
+                    mylist.append(1)
+
+                    # find the row can assign usedDemand（j)
+                    for k, pattern in enumerate(newx):
+                        if pattern[decision_list] > 0 and change_roll[k] > (self.I + 1):
+                            newx[k][decision_list] -= 1
+                            if decision_list - Indi_Demand - 2 >= 0:
+                                newx[k][int(decision_list -
+                                            Indi_Demand - 2)] += 1
+                            change_roll[k] -= (Indi_Demand+2)
+                            break
+                        if k == len(newx)-1:
+                            for j, pat in enumerate(newx):
+                                if pat[decision_list] > 0:
+                                    newx[j][decision_list] -= 1
+                                    if decision_list - Indi_Demand - 2 >= 0:
+                                        newx[j][int(
+                                            decision_list - Indi_Demand - 2)] += 1
+                                    change_roll[j] -= (Indi_Demand+2)
+                                    break
+
+                else:
+                    mylist.append(0)
+                remaining_period -= 1
+
+            remaining_period0 = remaining_period
+            sequence = sequence[-remaining_period:]
+
+            ini_demand -= usedDemand
+
+        sequence1 = [i-1 for i in sequence1 if i > 0]
+
+        final_demand1 = np.array(sequence1) * np.array(mylist)
+        final_demand1 = final_demand1[final_demand1 != 0]
+
+        demand = np.zeros(self.I)
+        for i in final_demand1:
+            demand[i-1] += 1
+        print(f'dy: {change_roll}')
+        print(f'dy: {demand}')
+        return demand
+
+
     def method1(self, sequence, ini_demand):
 
         decision_list = decision1(sequence, ini_demand, self.probab)
@@ -364,7 +453,8 @@ class CompareMethods:
         ini_demand4 = copy.deepcopy(ini_demand)
         roll_width = copy.deepcopy(self.roll_width)
 
-        final_demand1 = self.method1(sequence, ini_demand)
+        # final_demand1 = self.method1(sequence, ini_demand)
+        final_demand1 = 0
 
         # final_demand3 = self.method4(sequence, ini_demand3, newx3, roll_width)
         final_demand3 = 0

@@ -32,7 +32,7 @@ class deterministicModel:
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
             self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
-        m.write('test.lp')
+        # m.write('test.lp')
         m.optimize()
         # print('************************************************')
         # print('Optimal value of IP is: %g' % m.objVal)

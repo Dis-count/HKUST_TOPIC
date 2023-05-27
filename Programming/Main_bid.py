@@ -247,13 +247,14 @@ class CompareMethods:
         remaining_period0 = self.num_period
         sequence1 = copy.copy(sequence)
         total_usedDemand = np.zeros(self.I)
+        print(f'initial: {ini_demand}')
         # ini_demand1 = np.array(self.probab) * self.num_period
         deterModel = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
         
         while remaining_period0:
             demand = ini_demand
-            print(f'initial: {ini_demand}')
+            
             usedDemand, remaining_period = decisionSeveral(sequence, demand)
 
             diff_period = remaining_period0 - remaining_period
@@ -262,7 +263,7 @@ class CompareMethods:
 
             for j in demand_list:
                 for k, pattern in enumerate(newx):
-                    if pattern[j-2] > 0 and change_roll[k] > (self.I + 1):
+                    if pattern[j-2] > 0 and (change_roll[k] > (self.I + 1) or change_roll[k] == j):
                         newx[k][j-2] -= 1
                         change_roll[k] -= j
                         break
@@ -282,7 +283,7 @@ class CompareMethods:
             if any(usedDemand) == 0:  # all are 0
                 usedDemand, decision_list = decisionOnce(
                     sequence, demand, self.probab)
-                print(f'Decision: {decision_list}')
+                # print(f'Decision: {decision_list}')
                 Indi_Demand = np.dot(usedDemand, range(self.I))
 
                 if decision_list:
@@ -330,7 +331,6 @@ class CompareMethods:
             
             # use deterministic calculate
             ini_demand, newx = deterModel.IP_formulation2(change_roll, remaining_period0, self.probab)
-            
             newx = newx.T.tolist()
 
         sequence1 = [i-1 for i in sequence1 if i > 0]
@@ -354,12 +354,12 @@ class CompareMethods:
         sequence1 = copy.copy(sequence)
         total_usedDemand = np.zeros(self.I)
         # ini_demand1 = np.array(self.probab) * self.num_period
-        deterModel = deterministicModel(
-            self.roll_width, self.given_lines, self.demand_width_array, self.I)
+        # deterModel = deterministicModel(
+            # self.roll_width, self.given_lines, self.demand_width_array, self.I)
 
         while remaining_period0:
             demand = ini_demand
-            print(f'initial: {ini_demand}')
+
             usedDemand, remaining_period = decisionSeveral(sequence, demand)
 
             diff_period = remaining_period0 - remaining_period
@@ -368,7 +368,7 @@ class CompareMethods:
 
             for j in demand_list:
                 for k, pattern in enumerate(newx):
-                    if pattern[j-2] > 0 and change_roll[k] > (self.I + 1):
+                    if pattern[j-2] > 0 and (change_roll[k] > (self.I + 1) or change_roll[k] == j):
                         newx[k][j-2] -= 1
                         change_roll[k] -= j
                         break
@@ -387,7 +387,7 @@ class CompareMethods:
             if any(usedDemand) == 0:  # all are 0
                 usedDemand, decision_list = decisionOnce(
                     sequence, demand, self.probab)
-                print(f'Decision: {decision_list}')
+                # print(f'Decision: {decision_list}')
                 Indi_Demand = np.dot(usedDemand, range(self.I))
 
                 if decision_list:
@@ -416,10 +416,30 @@ class CompareMethods:
                     mylist.append(0)
                 remaining_period -= 1
 
+
             remaining_period0 = remaining_period
             sequence = sequence[-remaining_period:]
 
-            ini_demand -= usedDemand
+            total_usedDemand += usedDemand
+
+            sam = samplingmethod(I, num_sample, remaining_period0, probab)
+            dw, prop = sam.get_prob()
+            W = len(dw)
+
+            
+            m1 = stochasticModel(change_roll, self.given_lines,
+                                 self.demand_width_array, W, self.I, prop, dw)
+
+            ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
+            
+            # #  use stochastic calculate
+            deterModel = deterministicModel(
+                change_roll, self.given_lines, self.demand_width_array, self.I)
+            ini_demand, _ = deterModel.IP_formulation(
+                np.zeros(self.I), ini_demand)
+            ini_demand, newx = deterModel.IP_formulation(ini_demand, np.zeros(self.I))
+
+            newx = newx.T.tolist()
 
         sequence1 = [i-1 for i in sequence1 if i > 0]
 
@@ -456,29 +476,27 @@ class CompareMethods:
         # final_demand1 = self.method1(sequence, ini_demand)
         final_demand1 = 0
 
-        # final_demand3 = self.method4(sequence, ini_demand3, newx3, roll_width)
-        final_demand3 = 0
+        final_demand3 = self.method4(sequence, ini_demand3, newx3, roll_width)
+        # final_demand3 = 0
 
-        final_demand4 = self.method4(sequence, ini_demand4, newx4, roll_width)
+        final_demand4 = self.method5(sequence, ini_demand4, newx4, roll_width)
 
         return final_demand1, final_demand3, final_demand4
-
-
 
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 80
+    num_period = 90
     given_lines = 10
     # np.random.seed(0)
 
     # probab = [0.25, 0.05, 0.65, 0.05]
-    probab = [0.25, 0.25, 0.25, 0.25]
+    probab = [0.25, 0.35, 0.15, 0.25]
 
-
-    roll_width = np.ones(given_lines) * 21
-        # total_seat = np.sum(roll_width)
+    roll_width = np.ones(given_lines) * 19
+    # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
+    # total_seat = np.sum(roll_width)
 
     a_instance = CompareMethods(
             roll_width, given_lines, I, probab, num_period, num_sample)

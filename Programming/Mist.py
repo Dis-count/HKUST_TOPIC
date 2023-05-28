@@ -25,10 +25,10 @@ def several_class(size_group, demand, remaining_period, probab):
     max_diff = max(diff_set)
     index_diff = np.argmax(diff_set) + size_group
 
-    # if max_diff > 0:
-    #     return index_diff
-    if diff_set[0] > 0:
-        return size_group
+    if max_diff > 0:
+        return index_diff
+    # if diff_set[0] > 0:
+    #     return size_group
     else:
         return False
 

@@ -42,16 +42,6 @@ We can obtain $d(i,j) = j P(D_{j} \leq x_{j} -1) - (j-i-1)P(D_{j-i-1} \leq x_{j-
 Thus, $d(i,j) = j F_{j}(x_{j}-1; T) - (j-i-1) F_{j-i-1}(x_{j-i-1}; T) -1$. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group $i$ in $j^{*}+s$-size seats. Otherwise, reject the group.
 
 
-% \begin{algorithm}[H]
-%   \caption{Dynamic seat assignment(DSA) method}\label{algo_nested_policy}
-%   \begin{description}
-%     \item[Step 1.] Obtain the supply, $\X^{0} = [x_1,\ldots,x_{m}]$, from the feasible seat planning algorithm.
-%     \item[Step 2.] For the arrival group type $i$ at period $T{'}$, if $x_{i} > 0$, accept it. Let $x_{i} = x_{i} -1$. Go to step 4.
-%     \item[Step 3.] If $x_{i} = 0$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, accpect group type $i$. Set $x_{j^{*}} = x_{j^{*}} -1$. Let $x_{j-i-1} = x_{j-i-1} + 1$ when $j-i-1>0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
-%     \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
-%   \end{description}
-% \end{algorithm}
-
 % Example:
 % If the supply is $[0,3,6,11]$, then here comes a group of 1. There will be three choices.
 % \begin{align*}
@@ -60,6 +50,18 @@ Thus, $d(i,j) = j F_{j}(x_{j}-1; T) - (j-i-1) F_{j-i-1}(x_{j-i-1}; T) -1$. For a
 % 1 + 2\cdot P(D_{2}\geq (1+ x_{2})) & \geq 4 P(D_{4}\geq x_{4})
 % \end{align*}
 % $\mathbf{x}$ is the remaining supply right now.
+
+Remark: Notice that this policy ensure a local optimization. We should add the period-control and loss-control. 
+
+When the period is large, we use group-type control and loss control. When the period is small, we just use group-type control. 
+
+Use loss-control, basically, the initial loss will be close to the optimal loss, we want to get a closer loss when we reach the final seat assignment. When the social distance is 1, accepting one group will incur a loss. Every time we break the original seat to smaller one, we will create another loss.
+
+According to the initial demand, we can obtain the loss. The initial ratio is loss/period. Use current loss and current period to record to update current ratio, if (current ratio +2)/(current period +1) < ratio, accept the group. Then current ratio += 2, total loss +=1. Otherwise, reject the group.
+
+group type control can help to make the full patterns. 
+
+This measure try to make the largest patterns.
 
 We show the results of Benders and IP under this policy in section \ref{Bender_IP}.
 

@@ -44,7 +44,7 @@ Then we have the deterministic equivalent form of the scenario-based stochastic 
     \begin{aligned}
     \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-s) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-s) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
-    y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i \in [M-1], \omega \in \Omega \\
+    y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega \\
     & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
     & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \\
@@ -152,7 +152,7 @@ Let $\mathcal{O}$ be the set of all extreme points of $P$ and $\mathcal{F}$ be t
 
 \begin{pf}[Proof of lemma \ref{feasible_region}]
 Notice that $V =[W,~I]$, $W$ is a totally unimodular matrix. Then, we have $\alpha{'}W \geq -\bar{n}, \alpha{'}I \geq 0$. Thus, the feasible region is bounded.
-Furthermore, $\bar{n}_{i+1} = n_{i+1} - n_{i} = 1, i \in [M-1]$ are integral, so the extreme points are all integral.
+Furthermore, $\bar{n}_{i+1} = n_{i+1} - n_{i} = 1, i = 1,\ldots, M-1$ are integral, so the extreme points are all integral.
 \qed
 \end{pf}
 
@@ -186,8 +186,8 @@ Then plug them in the subproblem \eqref{BD_sub}, we can obtain the value of $y_{
 \begin{aligned}
   & y_{M \omega}^{-}=\left(d_{M \omega}-d_{M 0}\right)^{+} \\
   & y_{M \omega}^{+}=\left(d_{M 0}-d_{M \omega}\right)^{+} \\
-  & y_{i \omega}^{-}=\left(d_{i \omega}-d_{i 0} - y_{i+1, \omega}^{+} \right)^{+}, i \in [M-1] \\
-  & y_{i \omega}^{+}=\left(d_{i 0}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}, i \in [M-1]
+  & y_{i \omega}^{-}=\left(d_{i \omega}-d_{i 0} - y_{i+1, \omega}^{+} \right)^{+}, i =1,\ldots, M-1 \\
+  & y_{i \omega}^{+}=\left(d_{i 0}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}, i =1,\ldots, M-1
 \end{aligned}
 \end{equation}
 
@@ -357,11 +357,11 @@ Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, wher
 $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
 % $\frac{s_m-1}{s_m} \geq \ldots \geq \frac{s_2-1}{s_2} \geq \ldots \geq \frac{s_i-1}{s_i}$. because the ratio of value to capacity, $\frac{s_i-1}{s_i}, 1 \leq i \leq m$, is monotone in group type.
 
-Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $\mathbf{X} = (\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{Mj})$ the integrated solution to the linear relaxation of problem \eqref{deter_upper}.
+Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $\mathbf{X} = (\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{Mj})$ the aggregate solution to the linear relaxation of problem \eqref{deter_upper}.
 
 \begin{lem}
 Let $e_{i}$ denote the unit size of the $i$-th element of $\mathbf{X}$.
-Suppose item $b$ is in type $h$, then the integrated solution is $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.  
+Suppose item $b$ is in type $h$, then the aggregate solution is $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.  
 % $(0,\ldots, x,d_{h+1}, \ldots, d_{M})$.
 \end{lem}
 

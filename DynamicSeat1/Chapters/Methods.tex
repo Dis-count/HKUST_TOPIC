@@ -1,10 +1,11 @@
 % !TEX root = sum1.tex
 
 \section{Dynamic Seat Assignment(DSA)}
-In this section, we present the methods to assign seats with stochastic information. Then we discuss the dynamic seat assignment under two situations. We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$.
+This section discusses policies for assigning seats under conditions of stochastic information. We first present the dynamic seat assignment policy for each group arrival, which incorporates group-type control and loss control to optimize resource utilization. We also compare this approach with the bid-price policy. Next, we discuss the dynamic seat assignment policy for all group arrivals together. Finally, we establish the FCFS policy as the benchmark.
 
-Suppose there are $T$ independent periods, one group will arrive in each period.
-There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$. 
+
+
+We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Suppose there are $T$ independent periods, one group will arrive in each period. There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
 
 % \subsection{Generate scenarios by discrete periods}\label{MappingSeq}
@@ -16,59 +17,58 @@ There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random
 % Each group arrives with the same probability.
 % The number of sequences generating from multinomial distribution is $1000$. Then, we can obtain $[0,3,6,11]$ from stochastic programming. When the number of sequences is 5000, we still obtain $[0,3,6,11]$. It shows that sampling is practical.
 
-\subsection{Assign-to-Seat Rules}\label{nested_policy}
-Recall that for each arrival, we should assign the seats to the group. 
+
+
+\subsection{Dynamic Seat Assignment for Each Group Arrival}
+% we make the decision according to the realized arrivals.
+In this situation, we not only need to decide whether to accept or reject an arrival, but also assign seats to each group if we accept it.
+
+\subsubsection{Group-type(Supply) Control}\label{nested_policy}
+
 For a feasible seat planning, we must follow some basic rules to assign seats.
+% Seat Planning Based Rules
 \begin{itemize}
     \item When the supply of one arriving group is enough, we will accept the group directly.
     \item When the supply of one arriving group is 0, the demand can be satisfied by only one larger-size supply.
     \item When one group is accepted to occupy the larger-size seats, the rest empty seat(s) can be reserved for future demand.
 \end{itemize}
 
-We can assign the seats to the corresponding-size group. But when a group comes while the corresponding supply is 0, should we give this group to the larger-size seats? Now we demonstrate the nested policy for this problem.
+We can assign the seats to the corresponding-size group. But when a group comes while the corresponding supply is 0, should we give this group to the larger-size seats? Now we demonstrate the split larger group rule for this problem.
 
-Suppose we accept a group of $i$ to take over $(j+s)$-size seats(of group type $j$). In that case, the expected served people is $i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1)$, where $i < j$, $P(D_i \geq x_i)$ is the probability of that the expected demand of group type $i$ in the following periods is no less than $x_i$, the remaining supply of group type $i$.
+Suppose we accept a group of $i$ to take over $(j+s)$-size seats(of group type $j$). In that case, the expected served people is $i + (j-i-s)P(D_{j-i-s} \geq x_{j-i-s}+1)$, where $i+s \leq j$, $P(D_i \geq x_i)$ is the probability of that the expected demand of group type $i$ in the following periods is no less than $x_i$, the remaining supply of group type $i$.
 
-When a group of $i$ occupies $(j+s)$-size seats, $(j-i-1)$ seats can be provided for one group of $j-i-1$ with $s$ seats of social distancing.
-Thus, the term, $P(D_{j-i-1} \geq x_{j-i-1}+1)$, indicates the probability that the demand of group type $(j-i-1)$ in the future is no less than its current remaining supply plus 1. If $j -i- 1 =0$, then this term equals 0.
+When a group of $i$ occupies $(j+s)$-size seats, $(j-i-s)$ seats can be provided for one group of $j-i-s$ with $s$ seats of social distancing.
+Thus, the term, $P(D_{j-i-s} \geq x_{j-i-s}+1)$, indicates the probability that the demand of group type $(j-i-s)$ in the future is no less than its current remaining supply plus 1. If $j -i- s \leq 0$, this term equals 0.
 
 Similarly, when the expected demand of a group of $j$ in the future is no less than its remaining supply currently, we would reject a group of $i$, the expected served people is $j P(D_{j} \geq x_{j})$.
 
-Let $d(i,j)$ be the difference of expected served people between acceptance and rejection on group $i$ occupying $(j+s)$-size seats. Then $d(i,j) = i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1) - j P(D_{j} \geq x_{j}), j >i$.
+Let $d(i,j)$ be the difference of expected served people between acceptance and rejection on group $i$ occupying $(j+s)$-size seats. If $j \geq i+s$, $d(i,j)$ equals $i + (j-i-s)P(D_{j-i-s} \geq x_{j-i-s}+1) - j P(D_{j} \geq x_{j})$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$.
 
-One intuitive decision is to choose the largest difference.
-We can obtain $d(i,j) = j P(D_{j} \leq x_{j} -1) - (j-i-1)P(D_{j-i-1} \leq x_{j-i-1}) -1$ after reformulating. Let $F_{j}(x;T)$ be the cumulative distribution function of the number of arrival groups $D_{j}$ in $T$ periods. Then $F_{j}(x; T_{r}) = P(D_{j} \leq x)$, and $D_{j}$ follows a binomial distribution $B(T_{r}, p_{j})$, where $T_{r}$ is the numebr of remaining periods.
+One intuitive decision is to choose the largest difference. We can obtain $d(i,j) = j P(D_{j} \leq x_{j} -1) - (j-i-s)P(D_{j-i-s} \leq x_{j-i-s}) -1$ after reformulating. Let $F_{j}(x;T_r)$ be the cumulative distribution function of the number of arrival groups $D_{j}$ in $T_r$ periods. Then $F_{j}(x; T_{r}) = P(D_{j} \leq x)$, and $D_{j}$ follows a binomial distribution $B(T_{r}, p_{j})$, where $T_{r}$ is the numebr of remaining periods.
 
-Thus, $d(i,j) = j F_{j}(x_{j}-1; T) - (j-i-1) F_{j-i-1}(x_{j-i-1}; T) -1$. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group $i$ in $j^{*}+s$-size seats. Otherwise, reject the group.
+Thus, $d(i,j) = j F_{j}(x_{j}-1; T_r) - (j-i-s) F_{j-i-s}(x_{j-i-s}; T_r) -1$. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group $i$ in $(j^{*}+s)$-size seats. Otherwise, reject the group.
 
+% Notice that this control ensures a local optimization. 
 
-% Example:
-% If the supply is $[0,3,6,11]$, then here comes a group of 1. There will be three choices.
-% \begin{align*}
-% 1 \geq 2 P(D_{2} & \geq x_{2}) \\
-% 1 + 1\cdot P(D_{1}\geq 1) & \geq 3 P(D_{3}\geq x_{3}) \\
-% 1 + 2\cdot P(D_{2}\geq (1+ x_{2})) & \geq 4 P(D_{4}\geq x_{4})
-% \end{align*}
-% $\mathbf{x}$ is the remaining supply right now.
+When the number of remaining period is large, the group-type control tends to accept smaller groups by breaking the largest group. But accepting one smaller group will result in permanent loss of seats as social distance, we need to reduce the number of accepting groups and try to accept the larger-size group as many as possible. Building on that idea, we have developed a loss control strategy. This approach enables us to minimize losses and optimize resource utilization under dynamic arrival conditions.
 
-Remark: Notice that this policy ensure a local optimization. We should add the period-control and loss-control. 
+\subsubsection{Loss Control}
+To implement this policy effectively, we need to incorporate the loss control. Specifically, when there is a large number of periods remaining, we employ both group-type control and loss control strategies. However, when there are only a few periods remaining, we rely solely on group-type control to accommodate as many people as possible within the limited periods available.
 
-When the period is large, we use group-type control and loss control. When the period is small, we just use group-type control. 
+Recall that the loss we defined above is the number of people lost. Denote by $l_{t}$ the loss of up to current period $t$. When the social distance is $s$, accepting one group will incur $s$ losses. Every time we break one group into smaller one, we will create another $s$ losses. According to the initial seat planning, we can obtain the ideal loss $l_{i}$. This loss is close to the optimal loss, we try to get a closer loss when we reach the final seat assignment. Thus, we can develop a loss-control. The target ratio is $\frac{l_{i}}{T}$. The ratio at period $t$ is $\frac{l_{t}}{t}$. At period $t+1$, if we accept one group according to seat planning, $l_{t+1} = l_{t} + s$; if we accept one group by breaking a larger group, $l_{t+1} = l_{t} + 2s$; if we reject the arrival, $l_{t+1} = l_{t}$. The decision rule is based on comparing the current ratio to the target ratio. If the current ratio is lower than the target ratio, we will accept the current arrival. However, if the current ratio is equal to or greater than the target ratio, we will reject the arrival.
 
-Use loss-control, basically, the initial loss will be close to the optimal loss, we want to get a closer loss when we reach the final seat assignment. When the social distance is 1, accepting one group will incur a loss. Every time we break the original seat to smaller one, we will create another loss.
-
-According to the initial demand, we can obtain the loss. The initial ratio is loss/period. Use current loss and current period to record to update current ratio, if (current ratio +2)/(current period +1) < ratio, accept the group. Then current ratio += 2, total loss +=1. Otherwise, reject the group.
-
-group type control can help to make the full patterns. 
-
-This measure try to make the largest patterns.
-
-We show the results of Benders and IP under this policy in section \ref{Bender_IP}.
+It's difficult to achieve the ideal loss with dynamic arrivals. To accommodate more people, we only use group-type control when there are fewer remaining periods. This approach allows us to make the most of the limited periods we have and serve as many people as possible.
 
 
-\subsection{Dynamic Seat Assignment for Each Group Arrival}
-% we make the decision according to the realized arrivals.
-The dynamic seat assignment method can give the seat planning before the group arrivals. The specific procedures are demonstrated in the above sections. The first step is to obtain the feasible seat planning from Algorithm \ref{feasible_seat}. Then accept or reject group arrivals according to the nested policy in section \ref{nested_policy}.
+% Group type control can help to make the full patterns. 
+% This measure try to make the largest patterns.
+
+% We show the results of Benders and IP under this policy in section \ref{Bender_IP}.
+
+\subsubsection{Algorithm}
+The feasible seat planning can be obtained from Algorithm \ref{feasible_seat} before the group arrivals. In accordance with the group-type control and loss control policies discussed in the previous section, we determine whether to accept or reject group arrivals.
+
+% The specific procedures are demonstrated in the above sections.
 
 The algorithm is shown below:
 
@@ -77,70 +77,16 @@ The algorithm is shown below:
   \begin{description}
     \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregated supply is $\X = [x_{1}, \ldots, x_{M}]$.
     \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in \mathcal{N}$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
-    \item[Step 3.] If $i \notin P_k, \forall k \in \mathcal{N}$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. Accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-1} = x_{j-i-1} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-1)$ when $j^{*}-i-1 > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+    \item[Step 3.] If $i \notin P_k, \forall k \in \mathcal{N}$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. Accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-s} = x_{j-i-s} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-s)$ when $j^{*}-i-s > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
     \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
-
-\subsection{Dynamic Seat Assignment after All Group Arrivals}
-For this seat assignment situation, we only need to make the decision for each group arrival and assign the seats after all group arrivals.
-
-Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. The deterministic problem is
-
-\begin{equation}\label{relax_deter}
-  \begin{aligned}
-  \max \quad & \sum_{i=1}^{M} (n_i- s) x_{i} \\
-  \text {s.t.} \quad & x_{i} \leq d_{i}, \quad i \in \mathcal{M}, \\
-  & \sum_{i=1}^{M} n_{i} x_{i} \leq L \\
-  & x_{i} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}.
-  \end{aligned}
-\end{equation}
-
-
-\begin{lem}
-  The upper bound of problem \eqref{relax_deter} is the same as that of problem \eqref{deter_upper}. Let $\mathbf{X}$ be the solution of linear relaxation of problem \eqref{relax_deter}. $\mathbf{X}$ is the same as the integrated solution of linear relaxation of problem \eqref{deter_upper}.
-\end{lem}
-
-% Recall that the solution 
-% $u=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
-
-We can always find the optimal solution of problem \eqref{relax_deter} for any given deterministic demand, $(d_{1}, \ldots, d_{M})$.
-
-Let $e_{i}$ denote the unit size of the $i$-th element of $\mathbf{X}$. Then $\mathbf{X}$ can be expressed as $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. We can transform $\mathbf{X}$ to an integral solution without changing the corresponding objective value.
-
-Let $n_h \cdot x = t$, $t$ is an integer. When $t \geq 1+s$, suppose $t = n_{u}$, then $e_{u} + \sum_{i=h+1} ^{M} d_{i} e_{i}$ is an optimal solution. When $t < 1+s$, we can always find $u,v,w; u<h, v \geq h+1, w \leq h$ such that $n_{v} + t = n_{w} + n_{u}$, then $e_{w} + e_{u} -e_{v} + \sum_{i=h+1} ^{M} d_{i} e_{i}$ is an optimal solution; when $s=1$, $u = 1, v = h+1, w =h$. 
-
-
-Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. The difference between them is equal to zero only when the groups corresponding to the optimal solution of problem \eqref{relax_deter} can be accommodated in $N$ rows. The numerical results indicate that this is the case for most scenarios, which suggests that a DP-based approach can be used to solve the dynamic seat assignment problem after all groups have arrived.
-
-% The numerical result shows that the difference is zero for most cases, thus we can develop a dynamic programming(DP)-based method to solve dynamic seat assignment after all group arrivals.
-
-
-Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise. Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
-
-$$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0, V_{T+1}(L) =0, \forall L$$
-
-% $\underbrace{(0, \ldots, x}_{h ~numbers},d_{h+1}, \ldots, d_{M})$
-% $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 0, d_{h+1}, \ldots, d_{M})$
-% $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 1, d_{h+1}, \ldots,d_{v}-1, \ldots, d_{M})$
-
-% $n_i$ is number of seats occupied by group type $i$. 
-
-
-% Assuming that there always exists a seat assignment under the total capacity of seats,
-
-After accepting each group, it is necessary to ensure that the accepted groups can be feasibly assigned seats. Conducting inspections at each stage can be cumbersome. To streamline the process, a threshold capacity can be developed. When the accepted groups fall within the prescribed threshold, they can be accepted directly using DP. However, when the accepted groups exceed the prescribed threshold, feasibility must be checked and the group should be rejected if a feasible seat assignment cannot be found.
-
-% we don't know whether the accepted groups can be assigned to seats when the demand is close to supply. 
-
-The threshold capacity can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j=1}^{N} (L_j -n_{M} +1)$.
-
 
 \subsection{Bid-price}
 
 The dual problem of LP relaxation of \eqref{deter_upper} is:
 
-\begin{equation}\label{dual}
+\begin{equation}\label{bid-price_dual}
   \begin{aligned}
   \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \beta_{j} \\
   \text {s.t.} \quad & z_{i} + \beta_j n_i \geq i, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
@@ -153,12 +99,67 @@ When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ a
 \begin{algorithm}[H]
   \caption{Bid-price algorithm}
   \begin{description}
-    \item[Step 1.] .
-    \item[Step 2.] 
-    \item[Step 3.] 
-    \item[Step 4.] 
+    \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
+    \item[Step 2.] Solve \eqref{bid-price_dual} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain an optimal solution $\beta_{j}^{t}$.
+    \item[Step 3.] Set $k = \arg \max_{j} \{i -\beta_{j} n_i | n_i \mathbf{e}_{k}^{\top} \leq \mathbf{L}\}$.
+    \item[Step 4.] If $i -\beta_{k} n_i \geq 0$, then assign the group to row $k$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject the group, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$. 
+    \item[Step 5.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
+
+\subsection{Dynamic Seat Assignment after All Group Arrivals}
+In this seat assignment situation, we first decide whether to accept or reject each group arrival based on the following DP. After all group arrivals have been considered, we then assign seats to each group.
+
+Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. The deterministic problem is
+
+\begin{equation}\label{relax_deter}
+  \begin{aligned}
+  \max \quad & \sum_{i=1}^{M} (n_i- s) x_{i} \\
+  \text {s.t.} \quad & x_{i} \leq d_{i}, \quad i \in \mathcal{M}, \\
+  & \sum_{i=1}^{M} n_{i} x_{i} \leq L \\
+  & x_{i} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}.
+  \end{aligned}
+\end{equation}
+
+\begin{lem}
+ Let $\mathbf{X}$ be the solution of linear relaxation of problem \eqref{relax_deter}. $\mathbf{X}$ is the same as the integrated solution of linear relaxation of problem \eqref{deter_upper}.
+\end{lem}
+
+% Recall that the solution 
+% $u=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
+
+We can always find the optimal solution of problem \eqref{relax_deter} for any given deterministic demand, $(d_{1}, \ldots, d_{M})$.
+
+Let $\mathbf{e}_{i}$ denote the unit row vector with $j$-th element being 1. Then $\mathbf{X}$ can be expressed as $x \mathbf{e}_{h} + \sum_{i=h+1} ^{M} d_{i} \mathbf{e}_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. We can transform $\mathbf{X}$ to an integral solution with optimal integral objective value.
+
+Let $r = (L- \sum_{i = h+1}^{M} {d_i n_i} - n_{h} \lfloor x \rfloor)$, $r$ is an integer. When $r \geq 1+s$, we can easily find $u$ such that $r = n_{u}$, then $\mathbf{e}_{u} + \lfloor x \rfloor \mathbf{e}_{h}+ \sum_{i=h+1} ^{M} d_{i} \mathbf{e}_{i}$ is an optimal solution. When $r < 1+s$, we can always find $u,v,w; u<h, v \geq h+1, w \leq h$ such that $n_{v} + r = n_{w} + n_{u}$, then $e_{w} + e_{u} -e_{v} + \lfloor x \rfloor \mathbf{e}_{h}+ \sum_{i=h+1} ^{M} d_{i} e_{i}$ is an optimal solution; when $s=1$, $u = 1, v = h+1, w =h$. 
+
+
+Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. The difference between them is equal to zero only when the groups corresponding to the optimal solution of problem \eqref{relax_deter} can be accommodated in $N$ rows. The numerical results indicate that this is the case for most scenarios, which suggests that a DP-based approach can be used to solve the dynamic seat assignment problem after all groups have arrived.
+
+% The numerical result shows that the difference is zero for most cases, thus we can develop a dynamic programming(DP)-based method to solve dynamic seat assignment after all group arrivals.
+
+
+Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise. Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
+
+$$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0, V_{T+1}(L) =0, \forall L$$
+
+$i \geq V_{t+1}(L) - V_{t+1}(L - n_i) \approx $
+
+% $\underbrace{(0, \ldots, x}_{h ~numbers},d_{h+1}, \ldots, d_{M})$
+% $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 0, d_{h+1}, \ldots, d_{M})$
+% $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 1, d_{h+1}, \ldots,d_{v}-1, \ldots, d_{M})$
+
+
+
+% Assuming that there always exists a seat assignment under the total capacity of seats,
+
+After accepting each group, it is necessary to ensure that the accepted groups can be feasibly assigned seats. Conducting inspections at each stage can be cumbersome. To streamline the process, a threshold capacity can be developed. When the accepted groups fall within the prescribed threshold, they can be accepted directly using DP. However, when the accepted groups exceed the prescribed threshold, feasibility must be checked and the group should be rejected if a feasible seat assignment cannot be found.
+
+% we don't know whether the accepted groups can be assigned to seats when the demand is close to supply. 
+
+The threshold capacity can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j=1}^{N} (L_j -n_{M} +1)$.
+
 
 
 % \subsection{Seat Planning Charts Online}

@@ -75,7 +75,7 @@ The algorithm is shown below:
 \begin{algorithm}[H]
   \caption{Dynamic seat assignment algorithm}\label{algo_nested_policy}
   \begin{description}
-    \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregated supply is $\X = [x_{1}, \ldots, x_{M}]$.
+    \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\X = [x_{1}, \ldots, x_{M}]$.
     \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in \mathcal{N}$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
     \item[Step 3.] If $i \notin P_k, \forall k \in \mathcal{N}$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. Accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-s} = x_{j-i-s} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-s)$ when $j^{*}-i-s > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
     \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
@@ -122,20 +122,20 @@ Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. Th
 \end{equation}
 
 \begin{lem}
- Let $\mathbf{X}$ be the solution of linear relaxation of problem \eqref{relax_deter}. $\mathbf{X}$ is the same as the integrated solution of linear relaxation of problem \eqref{deter_upper}.
+ Let $\mathbf{X}$ be the solution of linear relaxation of problem \eqref{relax_deter}. $\mathbf{X}$ is the same as the aggregate
+ solution of linear relaxation of problem \eqref{deter_upper}.
 \end{lem}
 
-% Recall that the solution 
-% $u=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
+% We can always find the optimal solution of problem \eqref{relax_deter} for any given deterministic demand, $(d_{1}, \ldots, d_{M})$.
 
-We can always find the optimal solution of problem \eqref{relax_deter} for any given deterministic demand, $(d_{1}, \ldots, d_{M})$.
+% Let $\mathbf{e}_{i}$ denote the unit row vector with $j$-th element being 1. Then $\mathbf{X}$ can be expressed as $x \mathbf{e}_{h} + \sum_{i=h+1} ^{M} d_{i} \mathbf{e}_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. We can transform $\mathbf{X}$ to an integral solution with optimal integral objective value.
 
-Let $\mathbf{e}_{i}$ denote the unit row vector with $j$-th element being 1. Then $\mathbf{X}$ can be expressed as $x \mathbf{e}_{h} + \sum_{i=h+1} ^{M} d_{i} \mathbf{e}_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. We can transform $\mathbf{X}$ to an integral solution with optimal integral objective value.
-
-Let $r = (L- \sum_{i = h+1}^{M} {d_i n_i} - n_{h} \lfloor x \rfloor)$, $r$ is an integer. When $r \geq 1+s$, we can easily find $u$ such that $r = n_{u}$, then $\mathbf{e}_{u} + \lfloor x \rfloor \mathbf{e}_{h}+ \sum_{i=h+1} ^{M} d_{i} \mathbf{e}_{i}$ is an optimal solution. When $r < 1+s$, we can always find $u,v,w; u<h, v \geq h+1, w \leq h$ such that $n_{v} + r = n_{w} + n_{u}$, then $e_{w} + e_{u} -e_{v} + \lfloor x \rfloor \mathbf{e}_{h}+ \sum_{i=h+1} ^{M} d_{i} e_{i}$ is an optimal solution; when $s=1$, $u = 1, v = h+1, w =h$. 
+% Let $r = (L- \sum_{i = h+1}^{M} {d_i n_i} - n_{h} \lfloor x \rfloor)$, $r$ is an integer. When $r \geq 1+s$, we can easily find $u$ such that $r = n_{u}$, then $\mathbf{e}_{u} + \lfloor x \rfloor \mathbf{e}_{h}+ \sum_{i=h+1} ^{M} d_{i} \mathbf{e}_{i}$ is an optimal solution. When $r < 1+s$, we can always find $u,v,w; u<h, v \geq h+1, w \leq h$ such that $n_{v} + r = n_{w} + n_{u}$, then $e_{w} + e_{u} -e_{v} + \lfloor x \rfloor \mathbf{e}_{h}+ \sum_{i=h+1} ^{M} d_{i} e_{i}$ is an optimal solution; when $s=1$, $u = 1, v = h+1, w =h$. 
 
 
-Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. The difference between them is equal to zero only when the groups corresponding to the optimal solution of problem \eqref{relax_deter} can be accommodated in $N$ rows. The numerical results indicate that this is the case for most scenarios, which suggests that a DP-based approach can be used to solve the dynamic seat assignment problem after all groups have arrived.
+Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. After relaxation, assume that each row has a capacity of $L$ seats, which can be filled. For each seperate row, the maximum number of empty seats in each row is $s$. Then, the total number of empty seats in $N$ rows is given by $Ns$. Therefore, the biggest difference between $v_{r}^{*}$ and $v^{*}$ is the number of people accommodated in the $Ns$ empty seats.
+The difference between them is zero only when the groups corresponding to the optimal solution of problem \eqref{relax_deter} can be accommodated in $N$ rows. The numerical results indicate that this is the case for most scenarios, which suggests that a DP-based approach can be used to solve the dynamic seat assignment problem after all groups have arrived.
+
 
 % The numerical result shows that the difference is zero for most cases, thus we can develop a dynamic programming(DP)-based method to solve dynamic seat assignment after all group arrivals.
 
@@ -144,7 +144,7 @@ Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $
 
 $$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0, V_{T+1}(L) =0, \forall L$$
 
-$i \geq V_{t+1}(L) - V_{t+1}(L - n_i) \approx $
+$i \geq V_{t+1}(L) - V_{t+1}(L - n_i) \approx \nabla V_{t+1}^{\top}(L) n_i$
 
 % $\underbrace{(0, \ldots, x}_{h ~numbers},d_{h+1}, \ldots, d_{M})$
 % $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 0, d_{h+1}, \ldots, d_{M})$
@@ -198,9 +198,14 @@ The threshold capacity can be obtained by the following analysis. When the remai
  
 % The benchmarks for the above two situations are described below.
 
-\subsubsection{FCFS-based}\label{FCFS-based}
+\subsubsection{FCFS}\label{largest_pattern}
+For dynamic seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until the capacity of all rows is fully utilized.
 
-For dynamic seat assignment after all group arrivals, the intuitive but trivial method will be on a first-come-first-served basis. Relax all rows to one row with the total number of seats. For each arrival, we need to check the feasibility of constructing a seat assignment. If the seat assignment is feasible, we accept the request; otherwise, we reject it. The threshold capacity is $(L -u +1)$.
+
+% we can continue to use the first-come, first-served approach for seat assignment across all rows. 
+
+\subsubsection{FCFS-based}\label{FCFS-based}
+For dynamic seat assignment after all group arrivals, we can continue to use the first-come, first-served approach for seat assignment. Relax all rows to one row with the total number of seats. For each arrival, we need to check the feasibility of constructing a seat assignment in $N$ rows. If the seat assignment is feasible, we accept the request; otherwise, we reject it. The threshold capacity is $(L -u +1)$.
 
 % find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity.Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. 
 
@@ -213,8 +218,7 @@ For dynamic seat assignment after all group arrivals, the intuitive but trivial 
 
 % Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in that row immediately. We check each request until the capacity is used up. 
 
-\subsubsection{FCFS}\label{largest_pattern}
-For dynamic seat assignment for each group arrival, we can continue to use the first-come, first-served (FCFS) approach for seat assignment across all rows. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until the capacity of all rows is fully utilized.
+
 
 % There is a reservation stage, we only decide to accept or reject.
 % After certain periods, there is a seat selection stage.

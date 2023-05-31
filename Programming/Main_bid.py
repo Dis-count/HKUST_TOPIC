@@ -365,7 +365,7 @@ class CompareMethods:
         # ini_demand1 = np.array(self.probab) * self.num_period
         deterModel = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
-
+        print(ini_demand)
         while remaining_period0:
             demand = ini_demand
 
@@ -628,14 +628,14 @@ class CompareMethods:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 70
+    num_period = 80
     given_lines = 10
     # np.random.seed(0)
 
     # probab = [0.25, 0.05, 0.65, 0.05]
     probab = [0.2, 0.2, 0.35, 0.25]
 
-    roll_width = np.ones(given_lines) * 19
+    roll_width = np.ones(given_lines) * 21
     # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
     # total_seat = np.sum(roll_width)
 
@@ -665,7 +665,7 @@ if __name__ == "__main__":
 
     print(f'dy_mean: {np.dot(multi, c)}')
 
-    print(f'dy: {np.dot(multi, d)}')
+    print(f'dy_sto: {np.dot(multi, d)}')
 
     print(f'bid: {np.dot(multi, h)}')
 

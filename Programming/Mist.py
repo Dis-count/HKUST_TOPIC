@@ -55,6 +55,7 @@ def decision1(sequence, demand, probab):
             accept_reject = several_class(
                 i-1, demand, remaining_period-1, probab)
             if accept_reject:
+                # print('Got!!')
                 decision_list[t] = 1
                 demand[accept_reject] -= 1
                 if accept_reject-position-2 >= 0:
@@ -70,13 +71,12 @@ def generate_sequence(period, prob):
     trials = [np.random.choice(group_type, p=prob) for _ in range(period)]
     return trials
 
-
-def decision_demand(sequence, decision_list):
-    accept_list = np.multiply(sequence, decision_list)
-    dic = Counter(accept_list)
-    # Sort the list according to the value of dictionary.
-    res_demand = [dic[key] for key in sorted(dic)]
-    return res_demand
+# def decision_demand(sequence, decision_list):
+#     accept_list = np.multiply(sequence, decision_list)
+#     dic = Counter(accept_list)
+#     # Sort the list according to the value of dictionary.
+#     res_demand = [dic[key] for key in sorted(dic)]
+#     return res_demand
 
 
 def decisionOnce(sequence, demand, probab):
@@ -107,7 +107,7 @@ def decisionOnce(sequence, demand, probab):
 
 
 def decisionSeveral(sequence, demand):
-    # the function is used to make several decisions
+    # The function is used to make several decisions
     # Sequence is one possible sequence of the group arrival.
     period = len(sequence)
     I = len(demand)
@@ -133,3 +133,27 @@ def decisionSeveral(sequence, demand):
     # decision_list = decision_list[0:t]
     return usedDemand, remaining_period
 
+
+def decision2(sequence, demand):
+    # The function is used to make a decision based on seat planning
+    # sequence is one possible sequence of the group arrival.
+    period = len(sequence)
+    I = len(demand)
+    group_type = [i+2 for i in range(I)]
+    decision_list = [0] * period
+    t = 0
+    for i in sequence:
+        position = group_type.index(i)
+        demand_posi = demand[position]
+        if demand_posi > 0:
+            decision_list[t] = 1
+            demand[position] = demand_posi - 1
+        elif i == group_type[-1] and demand[-1] == 0:
+            print('It is full.')
+            break
+        else:
+            decision_list[t] = 0
+        t += 1
+        # print('the period:', t)
+        # print('demand is:', demand)
+    return t, decision_list[0:t]

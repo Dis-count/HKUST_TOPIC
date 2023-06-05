@@ -101,8 +101,8 @@ When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ a
   \begin{description}
     \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
     \item[Step 2.] Solve \eqref{bid-price_dual} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain an optimal solution $\beta_{j}^{t}$.
-    \item[Step 3.] Set $k = \arg \max_{j} \{i -\beta_{j} n_i | n_i \mathbf{e}_{k}^{\top} \leq \mathbf{L}\}$.
-    \item[Step 4.] If $i -\beta_{k} n_i \geq 0$, then assign the group to row $k$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject the group, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$. 
+    \item[Step 3.] Set $k = \arg \max_{j} \{i -\beta_{j}^{t} n_i | n_i \mathbf{e}_{k}^{\top} \leq \mathbf{L}\}$.
+    \item[Step 4.] If $i -\beta_{k}^{t} n_i \geq 0$, then assign the group to row $k$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject the group, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$. 
     \item[Step 5.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
@@ -150,8 +150,6 @@ $i \geq V_{t+1}(L) - V_{t+1}(L - n_i) \approx \nabla V_{t+1}^{\top}(L) n_i$
 % $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 0, d_{h+1}, \ldots, d_{M})$
 % $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 1, d_{h+1}, \ldots,d_{v}-1, \ldots, d_{M})$
 
-
-
 % Assuming that there always exists a seat assignment under the total capacity of seats,
 
 After accepting each group, it is necessary to ensure that the accepted groups can be feasibly assigned seats. Conducting inspections at each stage can be cumbersome. To streamline the process, a threshold capacity can be developed. When the accepted groups fall within the prescribed threshold, they can be accepted directly using DP. However, when the accepted groups exceed the prescribed threshold, feasibility must be checked and the group should be rejected if a feasible seat assignment cannot be found.
@@ -160,6 +158,21 @@ After accepting each group, it is necessary to ensure that the accepted groups c
 
 The threshold capacity can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j=1}^{N} (L_j -n_{M} +1)$.
 
+
+\subsection{Break tie}
+To determine which row to place accepted groups in when there are multiple options, follow these steps:
+
+1. Number each row in ascending order.
+
+2. Prioritize placing groups in rows from smallest to largest.
+
+3. Check if the remaining capacity of the current row is greater than the maximum group size or equal to the current group size. If it is, accept the current arrival and place the group in that row.
+
+4. Otherwise, consider the next row with the next higher number.
+
+5. Repeat steps 3 and 4 until a row is found that can accommodate the current group size.
+
+By following this approach, it is possible to efficiently find rows to place accepted groups while maximizing capacity utilization. This is achieved by filling as many rows as possible, starting from the row with the smallest number and only moving to the row with the larger number if necessary.
 
 
 % \subsection{Seat Planning Charts Online}

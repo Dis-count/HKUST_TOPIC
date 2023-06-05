@@ -2,13 +2,15 @@ import numpy as np
 from collections import Counter
 
 class samplingmethod:
-    def __init__(self, I, number_sample, number_period, prob) -> None:
+    def __init__(self, I, number_sample, number_period, prob, seq) -> None:
         self.I = I
         self.number_sample = number_sample
         self.number_period = number_period
         # sample_multi = np.random.multinomial(self.number_period, [1/self.I]*self.I, size=self.number_sample)
         sample_multi = np.random.multinomial(
             self.number_period, prob, size=self.number_sample)
+        sample_multi[:, seq-2] = sample_multi[:, seq-2] + 1
+
         self.sample_multi = sample_multi.tolist()
 
     def convert(self):
@@ -46,5 +48,6 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     number_period = 80
     probab = [0.4, 0.4, 0.1, 0.1]
-    sam = samplingmethod(I, num_sample, number_period, probab)
+    seq = 4
+    sam = samplingmethod(I, num_sample, number_period, probab, seq)
     dw, prop = sam.get_prob()

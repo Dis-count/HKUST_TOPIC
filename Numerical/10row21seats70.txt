@@ -1,0 +1,150 @@
+Run Start Time: Mon Jun  5 14:28:05 2023
+probabilities: 	[0.45 0.05 0.05 0.45]
+M1: 96.12 ;Dy: 98.79 ;Mean: 97.53 ;Sto: 97.83 ;FCFS: 93.95 ;FCFS1: 95.95 ;bid-price: 96.54 
+Mean1: 96.25 
+Number of accepted people: 154.50 	Number of people: 172.46 
+probabilities: 	[0.41666667 0.05       0.15       0.38333333]
+M1: 95.58 ;Dy: 98.99 ;Mean: 97.35 ;Sto: 97.78 ;FCFS: 93.86 ;FCFS1: 95.50 ;bid-price: 95.40 
+Mean1: 95.39 
+Number of accepted people: 155.46 	Number of people: 172.88 
+probabilities: 	[0.38333333 0.05       0.25       0.31666667]
+M1: 95.92 ;Dy: 99.26 ;Mean: 97.92 ;Sto: 97.83 ;FCFS: 93.70 ;FCFS1: 95.40 ;bid-price: 95.66 
+Mean1: 95.63 
+Number of accepted people: 156.84 	Number of people: 175.54 
+probabilities: 	[0.35 0.05 0.35 0.25]
+M1: 95.10 ;Dy: 99.17 ;Mean: 97.45 ;Sto: 97.74 ;FCFS: 93.57 ;FCFS1: 95.64 ;bid-price: 95.18 
+Mean1: 95.54 
+Number of accepted people: 156.28 	Number of people: 176.58 
+probabilities: 	[0.31666667 0.05       0.45       0.18333333]
+M1: 95.26 ;Dy: 99.33 ;Mean: 97.44 ;Sto: 97.77 ;FCFS: 93.83 ;FCFS1: 95.61 ;bid-price: 95.38 
+Mean1: 95.60 
+Number of accepted people: 156.02 	Number of people: 174.04 
+probabilities: 	[0.28333333 0.05       0.55       0.11666667]
+M1: 95.91 ;Dy: 99.00 ;Mean: 97.88 ;Sto: 97.93 ;FCFS: 93.47 ;FCFS1: 95.16 ;bid-price: 96.26 
+Mean1: 95.69 
+Number of accepted people: 156.40 	Number of people: 175.38 
+probabilities: 	[0.25 0.05 0.65 0.05]
+M1: 97.34 ;Dy: 99.18 ;Mean: 98.73 ;Sto: 98.81 ;FCFS: 94.89 ;FCFS1: 95.76 ;bid-price: 98.02 
+Mean1: 96.72 
+Number of accepted people: 152.96 	Number of people: 176.14 
+probabilities: 	[0.38333333 0.15       0.05       0.41666667]
+M1: 95.80 ;Dy: 99.13 ;Mean: 97.38 ;Sto: 97.78 ;FCFS: 93.92 ;FCFS1: 95.44 ;bid-price: 96.16 
+Mean1: 95.96 
+Number of accepted people: 156.58 	Number of people: 176.38 
+probabilities: 	[0.35 0.15 0.15 0.35]
+M1: 95.42 ;Dy: 99.16 ;Mean: 97.79 ;Sto: 97.95 ;FCFS: 94.49 ;FCFS1: 95.63 ;bid-price: 96.35 
+Mean1: 95.61 
+Number of accepted people: 155.98 	Number of people: 174.66 
+probabilities: 	[0.31666667 0.15       0.25       0.28333333]
+M1: 94.70 ;Dy: 99.29 ;Mean: 97.54 ;Sto: 98.06 ;FCFS: 94.14 ;FCFS1: 95.50 ;bid-price: 95.89 
+Mean1: 94.37 
+Number of accepted people: 156.92 	Number of people: 177.08 
+probabilities: 	[0.28333333 0.15       0.35       0.21666667]
+M1: 95.10 ;Dy: 99.24 ;Mean: 97.89 ;Sto: 97.91 ;FCFS: 94.54 ;FCFS1: 95.67 ;bid-price: 96.20 
+Mean1: 94.93 
+Number of accepted people: 156.30 	Number of people: 175.34 
+probabilities: 	[0.25 0.15 0.45 0.15]
+M1: 95.03 ;Dy: 99.46 ;Mean: 98.30 ;Sto: 98.44 ;FCFS: 94.45 ;FCFS1: 95.83 ;bid-price: 96.48 
+Mean1: 95.20 
+Number of accepted people: 155.46 	Number of people: 173.28 
+probabilities: 	[0.21666667 0.15       0.55       0.08333333]
+M1: 96.79 ;Dy: 99.46 ;Mean: 98.71 ;Sto: 98.69 ;FCFS: 95.24 ;FCFS1: 96.52 ;bid-price: 97.12 
+Mean1: 96.07 
+Number of accepted people: 154.92 	Number of people: 175.82 
+probabilities: 	[0.18333333 0.15       0.65       0.01666667]
+M1: 97.64 ;Dy: 99.34 ;Mean: 99.15 ;Sto: 99.15 ;FCFS: 97.23 ;FCFS1: 98.54 ;bid-price: 98.31 
+Mean1: 97.64 
+Number of accepted people: 150.90 	Number of people: 176.10 
+probabilities: 	[0.31666667 0.25       0.05       0.38333333]
+M1: 95.54 ;Dy: 98.98 ;Mean: 97.38 ;Sto: 97.82 ;FCFS: 94.01 ;FCFS1: 95.64 ;bid-price: 96.38 
+Mean1: 95.27 
+Number of accepted people: 155.52 	Number of people: 173.54 
+probabilities: 	[0.28333333 0.25       0.15       0.31666667]
+M1: 95.03 ;Dy: 99.22 ;Mean: 97.93 ;Sto: 97.87 ;FCFS: 94.38 ;FCFS1: 95.68 ;bid-price: 96.10 
+Mean1: 94.78 
+Number of accepted people: 156.04 	Number of people: 174.84 
+probabilities: 	[0.25 0.25 0.25 0.25]
+M1: 94.43 ;Dy: 99.24 ;Mean: 98.00 ;Sto: 98.08 ;FCFS: 94.57 ;FCFS1: 95.86 ;bid-price: 96.21 
+Mean1: 94.94 
+Number of accepted people: 155.70 	Number of people: 173.96 
+probabilities: 	[0.21666667 0.25       0.35       0.18333333]
+M1: 95.38 ;Dy: 99.49 ;Mean: 97.88 ;Sto: 98.19 ;FCFS: 94.58 ;FCFS1: 95.85 ;bid-price: 96.68 
+Mean1: 95.09 
+Number of accepted people: 156.16 	Number of people: 176.34 
+probabilities: 	[0.18333333 0.25       0.45       0.11666667]
+M1: 95.96 ;Dy: 99.48 ;Mean: 98.54 ;Sto: 98.35 ;FCFS: 94.90 ;FCFS1: 96.28 ;bid-price: 96.58 
+Mean1: 95.71 
+Number of accepted people: 154.76 	Number of people: 173.16 
+probabilities: 	[0.15 0.25 0.55 0.05]
+M1: 97.17 ;Dy: 99.25 ;Mean: 98.89 ;Sto: 98.86 ;FCFS: 95.97 ;FCFS1: 97.42 ;bid-price: 97.44 
+Mean1: 97.06 
+Number of accepted people: 153.08 	Number of people: 173.72 
+probabilities: 	[0.25 0.35 0.05 0.35]
+M1: 95.27 ;Dy: 99.12 ;Mean: 97.92 ;Sto: 98.08 ;FCFS: 94.35 ;FCFS1: 95.94 ;bid-price: 96.22 
+Mean1: 95.25 
+Number of accepted people: 155.66 	Number of people: 174.32 
+probabilities: 	[0.21666667 0.35       0.15       0.28333333]
+M1: 95.80 ;Dy: 99.41 ;Mean: 98.20 ;Sto: 98.44 ;FCFS: 95.12 ;FCFS1: 96.17 ;bid-price: 96.65 
+Mean1: 95.55 
+Number of accepted people: 155.12 	Number of people: 173.62 
+probabilities: 	[0.18333333 0.35       0.25       0.21666667]
+M1: 95.43 ;Dy: 99.41 ;Mean: 98.17 ;Sto: 98.42 ;FCFS: 94.88 ;FCFS1: 96.23 ;bid-price: 96.62 
+Mean1: 95.79 
+Number of accepted people: 155.06 	Number of people: 174.26 
+probabilities: 	[0.15 0.35 0.35 0.15]
+M1: 95.81 ;Dy: 99.59 ;Mean: 98.66 ;Sto: 98.61 ;FCFS: 95.55 ;FCFS1: 96.75 ;bid-price: 96.41 
+Mean1: 95.51 
+Number of accepted people: 155.22 	Number of people: 177.34 
+probabilities: 	[0.11666667 0.35       0.45       0.08333333]
+M1: 97.48 ;Dy: 99.51 ;Mean: 98.75 ;Sto: 98.78 ;FCFS: 95.96 ;FCFS1: 97.34 ;bid-price: 96.67 
+Mean1: 97.01 
+Number of accepted people: 153.82 	Number of people: 175.50 
+probabilities: 	[0.08333333 0.35       0.55       0.01666667]
+M1: 97.92 ;Dy: 99.27 ;Mean: 99.17 ;Sto: 99.22 ;FCFS: 97.49 ;FCFS1: 98.76 ;bid-price: 97.24 
+Mean1: 97.72 
+Number of accepted people: 151.06 	Number of people: 175.36 
+probabilities: 	[0.18333333 0.45       0.05       0.31666667]
+M1: 96.02 ;Dy: 99.36 ;Mean: 98.30 ;Sto: 98.14 ;FCFS: 94.67 ;FCFS1: 96.13 ;bid-price: 96.24 
+Mean1: 95.58 
+Number of accepted people: 155.58 	Number of people: 175.84 
+probabilities: 	[0.15 0.45 0.15 0.25]
+M1: 96.00 ;Dy: 99.44 ;Mean: 98.43 ;Sto: 98.46 ;FCFS: 95.70 ;FCFS1: 96.85 ;bid-price: 96.40 
+Mean1: 95.94 
+Number of accepted people: 154.00 	Number of people: 173.02 
+probabilities: 	[0.11666667 0.45       0.25       0.18333333]
+M1: 96.55 ;Dy: 99.64 ;Mean: 98.60 ;Sto: 98.60 ;FCFS: 95.54 ;FCFS1: 96.87 ;bid-price: 96.07 
+Mean1: 96.24 
+Number of accepted people: 154.06 	Number of people: 174.88 
+probabilities: 	[0.08333333 0.45       0.35       0.11666667]
+M1: 96.53 ;Dy: 99.62 ;Mean: 98.54 ;Sto: 98.55 ;FCFS: 95.80 ;FCFS1: 97.56 ;bid-price: 95.86 
+Mean1: 96.49 
+Number of accepted people: 153.32 	Number of people: 175.16 
+probabilities: 	[0.05 0.45 0.45 0.05]
+M1: 97.67 ;Dy: 99.67 ;Mean: 98.43 ;Sto: 98.41 ;FCFS: 96.07 ;FCFS1: 98.23 ;bid-price: 95.86 
+Mean1: 97.87 
+Number of accepted people: 152.06 	Number of people: 174.72 
+probabilities: 	[0.11666667 0.55       0.05       0.28333333]
+M1: 96.63 ;Dy: 99.64 ;Mean: 98.25 ;Sto: 98.29 ;FCFS: 95.10 ;FCFS1: 96.85 ;bid-price: 95.51 
+Mean1: 96.33 
+Number of accepted people: 154.20 	Number of people: 175.70 
+probabilities: 	[0.08333333 0.55       0.15       0.21666667]
+M1: 97.09 ;Dy: 99.51 ;Mean: 98.42 ;Sto: 98.57 ;FCFS: 96.03 ;FCFS1: 97.43 ;bid-price: 95.71 
+Mean1: 96.97 
+Number of accepted people: 153.20 	Number of people: 174.38 
+probabilities: 	[0.05 0.55 0.25 0.15]
+M1: 97.13 ;Dy: 99.72 ;Mean: 98.57 ;Sto: 98.45 ;FCFS: 96.01 ;FCFS1: 98.12 ;bid-price: 96.30 
+Mean1: 97.23 
+Number of accepted people: 152.20 	Number of people: 174.32 
+probabilities: 	[0.01666667 0.55       0.35       0.08333333]
+M1: 96.94 ;Dy: 99.71 ;Mean: 98.53 ;Sto: 98.34 ;FCFS: 95.59 ;FCFS1: 98.36 ;bid-price: 96.27 
+Mean1: 97.42 
+Number of accepted people: 151.82 	Number of people: 175.30 
+probabilities: 	[0.05 0.65 0.05 0.25]
+M1: 97.61 ;Dy: 99.59 ;Mean: 98.71 ;Sto: 98.71 ;FCFS: 95.54 ;FCFS1: 97.90 ;bid-price: 95.21 
+Mean1: 97.61 
+Number of accepted people: 152.34 	Number of people: 173.86 
+probabilities: 	[0.01666667 0.65       0.15       0.18333333]
+M1: 96.91 ;Dy: 99.62 ;Mean: 98.78 ;Sto: 98.46 ;FCFS: 95.29 ;FCFS1: 98.29 ;bid-price: 95.76 
+Mean1: 97.17 
+Number of accepted people: 151.78 	Number of people: 174.92 
+Total Runtime	1574.925802

@@ -21,12 +21,11 @@ class CompareMethods:
         self.num_sample = num_sample   # number, Immutable object
 
     def random_generate(self):
-        sam = samplingmethod(self.I, self.num_sample, self.num_period, self.probab)
+        sequence = generate_sequence(self.num_period, self.probab)
+        sam = samplingmethod(self.I, self.num_sample, self.num_period-1, self.probab, sequence[0])
 
         dw, prop = sam.get_prob()
         W = len(dw)
-
-        sequence = generate_sequence(self.num_period, self.probab)
 
         m1 = stochasticModel(self.roll_width, self.given_lines,
                              self.demand_width_array, W, self.I, prop, dw)
@@ -463,14 +462,16 @@ class CompareMethods:
                     remaining_period -= 1
 
             remaining_period0 = remaining_period
+            if remaining_period0 <= 0:
+                break
             sequence = sequence[-remaining_period:]
 
             total_usedDemand += usedDemand
 
             # use deterministic calculate
-            print(change_roll)
+
             ini_demand, newx = deterModel.IP_formulation2(
-                change_roll, remaining_period0, self.probab)
+                change_roll, remaining_period0-1, self.probab, sequence[0])
             newx = newx.T.tolist()
 
         sequence1 = [i-1 for i in sequence1 if i > 0]
@@ -704,29 +705,31 @@ class CompareMethods:
                     remaining_period -= 1
 
             remaining_period0 = remaining_period
+            if remaining_period0 <=0:
+                break
             sequence = sequence[-remaining_period:]
 
             total_usedDemand += usedDemand
 
             # use stochastic calculate
-            sam = samplingmethod(I, num_sample, remaining_period0, probab)
+            sam = samplingmethod(I, num_sample, remaining_period0-1, probab, sequence[0])
             dw, prop = sam.get_prob()
             W = len(dw)
             
-            m2 = originalModel(change_roll, self.given_lines, self.demand_width_array, self.num_sample, self.I, prop, dw)
+            # m2 = originalModel(change_roll, self.given_lines, self.demand_width_array, self.num_sample, self.I, prop, dw)
 
-            ini_demand, newx = m2.solveModelGurobi()
+            # ini_demand, newx = m2.solveModelGurobi()
 
-            # m1 = stochasticModel(change_roll, self.given_lines,self.demand_width_array, W, self.I, prop, dw)
+            m1 = stochasticModel(change_roll, self.given_lines,self.demand_width_array, W, self.I, prop, dw)
 
-            # ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
+            ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
 
-            # deterModel = deterministicModel(
-            #     change_roll, self.given_lines, self.demand_width_array, self.I)
-            # ini_demand, _ = deterModel.IP_formulation(
-            #     np.zeros(self.I), ini_demand)
-            # ini_demand, newx = deterModel.IP_formulation(
-            #     ini_demand, np.zeros(self.I))
+            deterModel = deterministicModel(
+                change_roll, self.given_lines, self.demand_width_array, self.I)
+            ini_demand, _ = deterModel.IP_formulation(
+                np.zeros(self.I), ini_demand)
+            ini_demand, newx = deterModel.IP_formulation(
+                ini_demand, np.zeros(self.I))
             newx = newx.T.tolist()
 
         sequence1 = [i-1 for i in sequence1 if i > 0]

@@ -1,7 +1,7 @@
 1. DSA -- after all arrivals
 (Without Assign-to-seat)
 
-Method: seat planning with scenario demands/ seat planning with mean demand
+Method: seat planning with scenario demands / seat planning with mean demand
 
 2. Consider current arrival in scenarios.
 
@@ -13,9 +13,9 @@ Method: seat planning with scenario demands/ seat planning with mean demand
 
 6. Bid price update every time.
 
-7. Demand variance?
+7. Demand variance?[0.1, 0.1, 0.1, 0.7] [0.25, 0.25, 0.25, 0.25]
 
 8. Stochastic and mean demand without resolving.
 
-9. When the number of seats is not large, even DP-based performs not well. 
+9. When the number of seats is not large, even DP-based performs not well.
 Because it is not easy to construct a full pattern.

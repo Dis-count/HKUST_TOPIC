@@ -474,18 +474,28 @@ class CompareMethods:
 
             remaining_period0 = remaining_period
             sequence = sequence[-remaining_period:]
-
+            if remaining_period0 <= 0:
+                break
             total_usedDemand += usedDemand
-
+            # print('Mean-re-optimize')
+            # print(f'remaining:{remaining_period0}')
             # use deterministic calculate
             ini_demand, newx = deterModel.IP_formulation2(
-                change_roll, remaining_period0, self.probab)
+                change_roll, remaining_period0-1, self.probab, sequence[0])
             newx = newx.T.tolist()
 
         sequence1 = [i-1 for i in sequence1 if i > 0]
 
         final_demand1 = np.array(sequence1) * np.array(mylist)
+        print(len(final_demand1))
+        print(f'Mean:{final_demand1}')
         final_demand1 = final_demand1[final_demand1 != 0]
+
+
+        # for i in range(12):
+        #     demand_period = np.array(
+        #                 sequence1[0:5*i]) * np.array(mylist[0:5*i])
+        #     print(f'Mean: {demand_period}')
 
         demand = np.zeros(self.I)
         for i in final_demand1:
@@ -609,8 +619,11 @@ class CompareMethods:
 
             remaining_period0 = remaining_period
             sequence = sequence[-remaining_period:]
-
+            if remaining_period0 <= 0:
+                break
             total_usedDemand += usedDemand
+            # print('Sto-re-optimize')
+            # print(f'remaining:{remaining_period0}')
 
             # use stochastic calculate
             sam = samplingmethod(
@@ -641,6 +654,13 @@ class CompareMethods:
         sequence1 = [i-1 for i in sequence1 if i > 0]
 
         final_demand1 = np.array(sequence1) * np.array(mylist)
+        print(len(final_demand1))
+        print(f'Sto1:{final_demand1}')
+        # for i in range(12):
+        #     demand_period = np.array(
+        #                 sequence1[0:5*i]) * np.array(mylist[0:5*i])
+        #     print(f'Sto:{demand_period}')
+
         final_demand1 = final_demand1[final_demand1 != 0]
 
         demand = np.zeros(self.I)
@@ -838,7 +858,7 @@ class CompareMethods:
 
         final_demand3 = self.method6(sequence, ini_demand3, newx3, roll_width)
         # final_demand3 = self.method1(sequence, ini_demand3)
-        final_demand4 = self.method6(sequence, ini_demand4, newx4, roll_width)
+        final_demand4 = self.method7(sequence, ini_demand4, newx4, roll_width)
         # final_demand4 = 0
 
         return final_demand1, final_demand3, final_demand4
@@ -849,10 +869,10 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     num_period = 60
     given_lines = 10
-    # np.random.seed(0)
+    # np.random.seed(4)
 
     # probab = [0.3, 0.15, 0.15, 0.15, 0.15, 0.1]
-    probab = [0.15, 0.25, 0.25, 0.35]
+    probab = [0.45, 0.05, 0.05, 0.45]
 
     roll_width = np.ones(given_lines) * 21
     # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])

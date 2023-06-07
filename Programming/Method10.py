@@ -42,8 +42,9 @@ class deterministicModel:
         newd = np.sum(newx, axis=1)
         return newd, newx
 
-    def IP_formulation2(self, roll_width, num_period, probab):
+    def IP_formulation2(self, roll_width, num_period, probab, seq):
         demand = np.ceil(np.array(probab) * num_period)
+        demand[seq-2] +=1
         m = grb.Model()
 
         x = m.addVars(self.I, len(roll_width), lb=0, vtype= GRB.INTEGER)

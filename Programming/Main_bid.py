@@ -374,6 +374,8 @@ class CompareMethods:
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
         # print(ini_demand)
         while remaining_period0:
+            print(change_roll)
+            print(newx)
             demand = ini_demand
 
             usedDemand, remaining_period = decisionSeveral(sequence, demand)
@@ -487,7 +489,6 @@ class CompareMethods:
         sequence1 = [i-1 for i in sequence1 if i > 0]
 
         final_demand1 = np.array(sequence1) * np.array(mylist)
-        print(len(final_demand1))
         print(f'Mean:{final_demand1}')
         final_demand1 = final_demand1[final_demand1 != 0]
 
@@ -584,6 +585,7 @@ class CompareMethods:
                     mylist.append(0)
                     remaining_period -= 1
             else:
+                print(change_roll)
                 if any(usedDemand) == 0:
                     usedDemand, decision_list = decisionOnce(
                         sequence, demand, self.probab)
@@ -654,12 +656,7 @@ class CompareMethods:
         sequence1 = [i-1 for i in sequence1 if i > 0]
 
         final_demand1 = np.array(sequence1) * np.array(mylist)
-        print(len(final_demand1))
-        print(f'Sto1:{final_demand1}')
-        # for i in range(12):
-        #     demand_period = np.array(
-        #                 sequence1[0:5*i]) * np.array(mylist[0:5*i])
-        #     print(f'Sto:{demand_period}')
+        # print(f'Sto1:{final_demand1}')
 
         final_demand1 = final_demand1[final_demand1 != 0]
 
@@ -869,7 +866,7 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     num_period = 60
     given_lines = 10
-    # np.random.seed(4)
+    np.random.seed(4)
 
     # probab = [0.3, 0.15, 0.15, 0.15, 0.15, 0.1]
     probab = [0.45, 0.05, 0.05, 0.45]

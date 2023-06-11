@@ -326,7 +326,6 @@ class CompareMethods:
 
             # ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
 
-
             # #  use stochastic calculate
             # ini_demand, _ = deterModel.IP_formulation(
             #     np.zeros(self.I), ini_demand)
@@ -565,7 +564,6 @@ class CompareMethods:
             dw, prop = sam.get_prob()
             W = len(dw)
 
-            
             m1 = stochasticModel(change_roll, self.given_lines,
                                  self.demand_width_array, W, self.I, prop, dw)
 
@@ -810,7 +808,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 60
+    num_period = 70
     given_lines = 10
     # np.random.seed(i)
     p = prop_list()
@@ -842,7 +840,7 @@ if __name__ == "__main__":
 
         multi = np.arange(1, I+1)
 
-        count = 50
+        count = 100
         for j in range(count):
             sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 

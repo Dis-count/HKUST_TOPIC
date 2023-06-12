@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  5 JUN 2023 15:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  12 JUN 2023 14:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -506,7 +506,7 @@ Overfull \hbox (20.97746pt too wide) in paragraph at lines 79--100
  []
 
 [23]
-Overfull \hbox (46.08873pt too wide) in paragraph at lines 120--136
+Overfull \hbox (46.08873pt too wide) in paragraph at lines 120--135
  [][] 
  []
 
@@ -514,22 +514,22 @@ Overfull \hbox (46.08873pt too wide) in paragraph at lines 120--136
 <./Figures/p1.pdf, id=427, 462.52798pt x 346.89601pt>
 File: ./Figures/p1.pdf Graphic file (type pdf)
 <use ./Figures/p1.pdf>
-Package pdftex.def Info: ./Figures/p1.pdf  used on input line 183.
+Package pdftex.def Info: ./Figures/p1.pdf  used on input line 182.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 <./Figures/p2.pdf, id=428, 462.52798pt x 346.89601pt>
 File: ./Figures/p2.pdf Graphic file (type pdf)
 <use ./Figures/p2.pdf>
-Package pdftex.def Info: ./Figures/p2.pdf  used on input line 186.
+Package pdftex.def Info: ./Figures/p2.pdf  used on input line 185.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 <./Figures/diff_1.pdf, id=429, 462.52798pt x 346.89601pt>
 File: ./Figures/diff_1.pdf Graphic file (type pdf)
 <use ./Figures/diff_1.pdf>
-Package pdftex.def Info: ./Figures/diff_1.pdf  used on input line 211.
+Package pdftex.def Info: ./Figures/diff_1.pdf  used on input line 210.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 <./Figures/diff_2.pdf, id=430, 462.52798pt x 346.89601pt>
 File: ./Figures/diff_2.pdf Graphic file (type pdf)
 <use ./Figures/diff_2.pdf>
-Package pdftex.def Info: ./Figures/diff_2.pdf  used on input line 213.
+Package pdftex.def Info: ./Figures/diff_2.pdf  used on input line 212.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 
 
@@ -542,12 +542,12 @@ pdfTeX warning: pdflatex.exe (file ./Figures/p2.pdf): PDF inclusion: multiple pd
 <./Figures/Figure_50.pdf, id=517, 462.52798pt x 346.89601pt>
 File: ./Figures/Figure_50.pdf Graphic file (type pdf)
 <use ./Figures/Figure_50.pdf>
-Package pdftex.def Info: ./Figures/Figure_50.pdf  used on input line 256.
+Package pdftex.def Info: ./Figures/Figure_50.pdf  used on input line 255.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 <./Figures/Figure_100.pdf, id=518, 462.52798pt x 346.89601pt>
 File: ./Figures/Figure_100.pdf Graphic file (type pdf)
 <use ./Figures/Figure_100.pdf>
-Package pdftex.def Info: ./Figures/Figure_100.pdf  used on input line 259.
+Package pdftex.def Info: ./Figures/Figure_100.pdf  used on input line 258.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
  [26 <./Figures/diff_1.pdf> <./Figures/diff_2.pdf> <./Figures/Figure_50.pdf
 
@@ -559,12 +559,12 @@ pdfTeX warning: pdflatex.exe (file ./Figures/Figure_100.pdf): PDF inclusion: mul
 <./Figures/stepsize_seat.pdf, id=609, 462.52798pt x 346.89601pt>
 File: ./Figures/stepsize_seat.pdf Graphic file (type pdf)
 <use ./Figures/stepsize_seat.pdf>
-Package pdftex.def Info: ./Figures/stepsize_seat.pdf  used on input line 273.
+Package pdftex.def Info: ./Figures/stepsize_seat.pdf  used on input line 272.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 <./Figures/random_seat.pdf, id=610, 462.52798pt x 346.89601pt>
 File: ./Figures/random_seat.pdf Graphic file (type pdf)
 <use ./Figures/random_seat.pdf>
-Package pdftex.def Info: ./Figures/random_seat.pdf  used on input line 275.
+Package pdftex.def Info: ./Figures/random_seat.pdf  used on input line 274.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
  [27 <./Figures/stepsize_seat.pdf> <./Figures/random_seat.pdf
 
@@ -576,13 +576,13 @@ Package rerunfilecheck Info: File `sum1.out' has not changed.
 Here is how much of TeX's memory you used:
  13291 strings out of 478599
  202675 string characters out of 5853593
- 531032 words of memory out of 5000000
+ 530032 words of memory out of 5000000
  30784 multiletter control sequences out of 15000+600000
  414080 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,10n,75p,1679b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (30 pages, 452703 bytes).
+Output written on sum1.pdf (30 pages, 452536 bytes).
 PDF statistics:
  793 PDF objects out of 1000 (max. 8388607)
  559 compressed objects within 6 object streams

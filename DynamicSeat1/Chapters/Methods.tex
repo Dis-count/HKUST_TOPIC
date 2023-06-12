@@ -89,7 +89,7 @@ The dual problem of LP relaxation of \eqref{deter_upper} is:
 \begin{equation}\label{bid-price_dual}
   \begin{aligned}
   \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \beta_{j} \\
-  \text {s.t.} \quad & z_{i} + \beta_j n_i \geq i, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+  \text {s.t.} \quad & z_{i} + \beta_j n_i \geq (n_i-s), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
   & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
   \end{aligned}
 \end{equation}

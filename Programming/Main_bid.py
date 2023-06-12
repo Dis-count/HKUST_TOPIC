@@ -1,5 +1,6 @@
 import numpy as np
 from SamplingMethod import samplingmethod
+from SamplingMethodNew import samplingmethod1
 from Method1 import stochasticModel
 from Method2 import originalModel
 from Method10 import deterministicModel
@@ -372,8 +373,6 @@ class CompareMethods:
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
         # print(ini_demand)
         while remaining_period0:
-            print(change_roll)
-            print(newx)
             demand = ini_demand
 
             usedDemand, remaining_period = decisionSeveral(sequence, demand)
@@ -427,8 +426,7 @@ class CompareMethods:
                                     if pat[decision_list] > 0:
                                         newx[j][decision_list] -= 1
                                         if decision_list - Indi_Demand - 2 >= 0:
-                                            newx[j][int(
-                                                decision_list - Indi_Demand - 2)] += 1
+                                            newx[j][int(decision_list - Indi_Demand - 2)] += 1
                                         change_roll[j] -= (Indi_Demand+2)
                                         break
 
@@ -658,28 +656,19 @@ class CompareMethods:
         # print(f'dy_loss: {demand}')
         return demand
 
-    def method5(self, sequence, ini_demand, newx, change_roll0):
-        # newx patterns for N rows.
+    def method_new(self, sequence, ini_demand, newx, change_roll0):
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         mylist = []
-        remaining_period0 = self.num_period
-        sequence1 = copy.copy(sequence)
-        total_usedDemand = np.zeros(self.I)
-        # ini_demand1 = np.array(self.probab) * self.num_period
-        # deterModel = deterministicModel(
-            # self.roll_width, self.given_lines, self.demand_width_array, self.I)
+        periods = len(sequence)
 
-        while remaining_period0:
-            demand = ini_demand
-
-            usedDemand, remaining_period = decisionSeveral(sequence, demand)
-
-            diff_period = remaining_period0 - remaining_period
-
-            demand_list = sequence[0:diff_period]
-
-            for j in demand_list:
+        for num, j in enumerate(sequence):
+            newd = np.sum(newx, axis=0)
+            print(f'd: {newd}')
+            print(change_roll)
+            remaining_period = periods - num
+            if newd[j-2] > 0:
+                mylist.append(1)
                 for k, pattern in enumerate(newx):
                     if pattern[j-2] > 0 and (change_roll[k] > (self.I + 1) or change_roll[k] == j):
                         newx[k][j-2] -= 1
@@ -687,26 +676,18 @@ class CompareMethods:
                         break
 
                     if k == len(newx)-1:
-                        # for t, i in enumerate(change_roll):
-                        #     newx[t][i-2] = 1
                         for kk, pat in enumerate(newx):
                             if pat[j-2] > 0:
                                 newx[kk][j-2] -= 1
                                 change_roll[kk] -= j
                                 break
 
-            mylist += [1] * diff_period
-
-            if any(usedDemand) == 0:  # all are 0
+            else:
                 usedDemand, decision_list = decisionOnce(
-                    sequence, demand, self.probab)
-                # print(f'Decision: {decision_list}')
+                    sequence[-remaining_period:], newd, self.probab)
                 Indi_Demand = np.dot(usedDemand, range(self.I))
-
+                change_deny = copy.deepcopy(change_roll)
                 if decision_list:
-                    mylist.append(1)
-
-                    # find the row can assign usedDemand（j)
                     for k, pattern in enumerate(newx):
                         if pattern[decision_list] > 0 and change_roll[k] > (self.I + 1):
                             newx[k][decision_list] -= 1
@@ -716,58 +697,60 @@ class CompareMethods:
                             change_roll[k] -= (Indi_Demand+2)
                             break
                         if k == len(newx)-1:
-                            for j, pat in enumerate(newx):
+                            for jj, pat in enumerate(newx):
                                 if pat[decision_list] > 0:
-                                    newx[j][decision_list] -= 1
+                                    newx[jj][decision_list] -= 1
                                     if decision_list - Indi_Demand - 2 >= 0:
-                                        newx[j][int(
+                                        newx[jj][int(
                                             decision_list - Indi_Demand - 2)] += 1
-                                    change_roll[j] -= (Indi_Demand+2)
+                                    change_roll[jj] -= (Indi_Demand+2)
                                     break
+                    change_accept = copy.deepcopy(change_roll)
+                    sam_accept = samplingmethod(I, num_sample, remaining_period-1, probab, sequence[-remaining_period:][0])
+                    dw_acc, prop_acc = sam_accept.get_prob()
+                    W_acc = len(dw_acc)
+                    m_acc = stochasticModel(change_accept, self.given_lines,
+                                 self.demand_width_array, W_acc, self.I, prop_acc, dw_acc)
+                    ini_demand_acc, val_acc = m_acc.solveBenders(eps=1e-4, maxit=20)
 
+                    sam_deny = samplingmethod1(I, num_sample, remaining_period-1, probab)
+                    dw_deny, prop_deny = sam_deny.get_prob()
+                    W_deny = len(dw_deny)
+                    m_deny = stochasticModel(change_deny, self.given_lines,
+                                 self.demand_width_array, W_deny, self.I, prop_deny, dw_deny)
+                    ini_demand_deny, val_deny = m_deny.solveBenders(eps=1e-4, maxit=20)
+                    if val_acc + (j-1) < val_deny:
+                        mylist.append(0)
+                        change_roll = change_deny
+
+                    else:
+                        mylist.append(1)
+                        deterModel = deterministicModel(change_accept, self.given_lines, self.demand_width_array, self.I)
+                        ini_demand, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand_acc)
+                        ini_demand, newx = deterModel.IP_formulation(ini_demand, np.zeros(self.I))
+                        print(f'test: {ini_demand}')
+                        newx = newx.T.tolist()
+                        change_roll = change_accept
                 else:
                     mylist.append(0)
-                remaining_period -= 1
 
+        sequence = [i-1 for i in sequence if i > 0]
 
-            remaining_period0 = remaining_period
-            sequence = sequence[-remaining_period:]
-
-            total_usedDemand += usedDemand
-
-            sam = samplingmethod(I, num_sample, remaining_period0, probab)
-            dw, prop = sam.get_prob()
-            W = len(dw)
-
-            m1 = stochasticModel(change_roll, self.given_lines,
-                                 self.demand_width_array, W, self.I, prop, dw)
-
-            ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
-            
-            # #  use stochastic calculate
-            deterModel = deterministicModel(
-                change_roll, self.given_lines, self.demand_width_array, self.I)
-            ini_demand, _ = deterModel.IP_formulation(
-                np.zeros(self.I), ini_demand)
-            ini_demand, newx = deterModel.IP_formulation(ini_demand, np.zeros(self.I))
-
-            newx = newx.T.tolist()
-
-        sequence1 = [i-1 for i in sequence1 if i > 0]
-
-        final_demand1 = np.array(sequence1) * np.array(mylist)
-        final_demand1 = final_demand1[final_demand1 != 0]
+        final_demand = np.array(sequence) * np.array(mylist)
+        final_demand = final_demand[final_demand != 0]
 
         demand = np.zeros(self.I)
-        for i in final_demand1:
+        for i in final_demand:
             demand[i-1] += 1
-        print(f'dy: {change_roll}')
-        print(f'dy: {demand}')
+        print(demand)
+        print(mylist)
+        print(change_roll)
         return demand
 
     def method2(self, sequence, ini_demand, newx, change_roll0):
-        times = 12
-        print(f'm2: {ini_demand}')
+        times = 15
+        total_loss = self.loss(ini_demand)
+        current_loss = 0
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         s =[]
@@ -778,12 +761,17 @@ class CompareMethods:
             seq1 = sequence[i: i+par]
             s.append(seq1)
 
-        for i in range(times-1):
+        if periods/times > par:
+            pre_time = times
+        else:
+            pre_time = times -1
+        for i in range(pre_time):
             for num, j in enumerate(s[i]):
                 newd = np.sum(newx, axis=0)
-                remaining_periods = periods - (i * par + num)
+                remaining_period = periods - (i * par + num)
                 if newd[j-2] > 0:
                     mylist.append(1)
+                    current_loss += 1
                     for k, pattern in enumerate(newx):
                         if pattern[j-2] > 0 and (change_roll[k] > (self.I + 1) or change_roll[k] == j):
                             newx[k][j-2] -= 1
@@ -799,11 +787,13 @@ class CompareMethods:
 
                 else:
                     usedDemand, decision_list = decisionOnce(
-                        sequence[-remaining_periods:], newd, self.probab)
+                        sequence[-remaining_period:], newd, self.probab)
                     Indi_Demand = np.dot(usedDemand, range(self.I))
 
-                    if decision_list:
+                    if decision_list and (current_loss+2)/(self.num_period - remaining_period + 1) < total_loss/self.num_period:
                         mylist.append(1)
+                        current_loss += 2
+                        total_loss += 1
 
                         for k, pattern in enumerate(newx):
                             if pattern[decision_list] > 0 and change_roll[k] > (self.I + 1):
@@ -842,7 +832,6 @@ class CompareMethods:
             newx = newx.T.tolist()
 
         last = decision1(s[-1], ini_demand, self.probab)
-        
         decision_list = mylist + last
 
         print(decision_list)
@@ -859,8 +848,9 @@ class CompareMethods:
         return demand
 
     def method_mean(self, sequence, ini_demand, newx, change_roll0):
-        times = 12
-        print(f'm2: {ini_demand}')
+        times = 10
+        total_loss = self.loss(ini_demand)
+        current_loss = 0
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         s =[]
@@ -871,12 +861,17 @@ class CompareMethods:
             seq1 = sequence[i: i+par]
             s.append(seq1)
 
-        for i in range(times-1):
+        if periods/times > par:
+            pre_time = times
+        else:
+            pre_time = times -1
+        for i in range(pre_time):
             for num,j in enumerate(s[i]):
                 newd = np.sum(newx, axis=0)
-                remaining_periods =  periods - (i * par + num) -1
+                remaining_period =  periods - (i * par + num)
                 if newd[j-2] > 0:
                     mylist.append(1)
+                    current_loss += 1
                     for k, pattern in enumerate(newx):
                         if pattern[j-2] > 0 and (change_roll[k] > (self.I + 1) or change_roll[k] == j):
                             newx[k][j-2] -= 1
@@ -892,12 +887,13 @@ class CompareMethods:
                     
                 else:
                     usedDemand, decision_list = decisionOnce(
-                        sequence[-remaining_periods:], newd, self.probab)
+                        sequence[-remaining_period:], newd, self.probab)
                     Indi_Demand = np.dot(usedDemand, range(self.I))
 
-                    if decision_list:
+                    if decision_list and (current_loss+2)/(self.num_period - remaining_period + 1) < total_loss/self.num_period:
                         mylist.append(1)
-
+                        current_loss += 2
+                        total_loss += 1
                         for k, pattern in enumerate(newx):
                             if pattern[decision_list] > 0 and change_roll[k] > (self.I + 1):
                                 newx[k][decision_list] -= 1
@@ -933,7 +929,6 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        print(f'result: {demand}')
         return demand
 
     def method1(self, sequence, ini_demand):
@@ -962,7 +957,7 @@ class CompareMethods:
         final_demand3 = self.method_mean(sequence, ini_demand3, newx3, roll_width)
         # final_demand3 = self.method1(sequence, ini_demand3)
 
-        final_demand4 = self.method2(sequence, ini_demand4, newx4, roll_width)
+        final_demand4 = self.method_new(sequence, ini_demand4, newx4, roll_width)
         # final_demand4 = 0
 
         return final_demand1, final_demand3, final_demand4

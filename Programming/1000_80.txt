@@ -1,0 +1,12 @@
+Run Start Time: Tue Jun 13 15:17:30 2023
+Ben_value: 156.93 ;dynamic: 160.00 ;mean: 159.00 ;sto: 157.00 ;optimal: 160.00 ;
+Ben_value: 156.11 ;dynamic: 159.00 ;mean: 157.00 ;sto: 155.00 ;optimal: 159.00 ;
+Ben_value: 156.21 ;dynamic: 158.00 ;mean: 157.00 ;sto: 153.00 ;optimal: 158.00 ;
+Ben_value: 156.88 ;dynamic: 159.00 ;mean: 155.00 ;sto: 156.00 ;optimal: 159.00 ;
+Ben_value: 156.45 ;dynamic: 154.00 ;mean: 152.00 ;sto: 152.00 ;optimal: 156.00 ;
+Ben_value: 156.90 ;dynamic: 155.00 ;mean: 153.00 ;sto: 151.00 ;optimal: 155.00 ;
+Ben_value: 156.04 ;dynamic: 155.00 ;mean: 154.00 ;sto: 150.00 ;optimal: 156.00 ;
+Ben_value: 156.29 ;dynamic: 160.00 ;mean: 159.00 ;sto: 156.00 ;optimal: 160.00 ;
+Ben_value: 156.81 ;dynamic: 158.00 ;mean: 158.00 ;sto: 159.00 ;optimal: 160.00 ;
+Ben_value: 156.40 ;dynamic: 157.00 ;mean: 158.00 ;sto: 156.00 ;optimal: 160.00 ;
+optimal_mean: 158.30 ;

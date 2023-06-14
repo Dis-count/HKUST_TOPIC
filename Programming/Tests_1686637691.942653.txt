@@ -1,0 +1,11 @@
+Run Start Time: Tue Jun 13 14:28:11 2023
+dynamic: 152.00 ;once: 142.00 ;
+dynamic: 147.00 ;once: 140.00 ;
+dynamic: 148.00 ;once: 148.00 ;
+dynamic: 145.00 ;once: 145.00 ;
+dynamic: 154.00 ;once: 149.00 ;
+dynamic: 150.00 ;once: 147.00 ;
+dynamic: 149.00 ;once: 147.00 ;
+dynamic: 153.00 ;once: 149.00 ;
+dynamic: 152.00 ;once: 149.00 ;
+dynamic: 149.00 ;once: 135.00 ;

@@ -1,0 +1,11 @@
+Run Start Time: Tue Jun 13 14:29:38 2023
+dynamic: 136.00 ;once: 136.00 ;optimal: 136.00 ;
+dynamic: 153.00 ;once: 146.00 ;optimal: 154.00 ;
+dynamic: 152.00 ;once: 149.00 ;optimal: 153.00 ;
+dynamic: 135.00 ;once: 135.00 ;optimal: 135.00 ;
+dynamic: 144.00 ;once: 144.00 ;optimal: 144.00 ;
+dynamic: 148.00 ;once: 145.00 ;optimal: 148.00 ;
+dynamic: 145.00 ;once: 145.00 ;optimal: 145.00 ;
+dynamic: 153.00 ;once: 147.00 ;optimal: 156.00 ;
+dynamic: 146.00 ;once: 146.00 ;optimal: 146.00 ;
+dynamic: 151.00 ;once: 141.00 ;optimal: 151.00 ;

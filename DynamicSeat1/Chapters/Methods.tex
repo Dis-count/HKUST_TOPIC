@@ -158,21 +158,23 @@ After accepting each group, it is necessary to ensure that the accepted groups c
 
 The threshold capacity can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j=1}^{N} (L_j -n_{M} +1)$.
 
+\subsection{}
+Use scenario demands to make the decision: compare the values of accepting and rejecting requests that are not in the plan.
 
-\subsection{Break tie}
-To determine which row to place accepted groups in when there are multiple options, follow these steps:
+% \subsection{Break tie}
+% To determine which row to place accepted groups in when there are multiple options, follow these steps:
 
-1. Number each row in ascending order.
+% 1. Number each row in ascending order.
 
-2. Prioritize placing groups in rows from smallest to largest.
+% 2. Prioritize placing groups in rows from smallest to largest.
 
-3. Check if the remaining capacity of the current row is greater than the maximum group size or equal to the current group size. If it is, accept the current arrival and place the group in that row.
+% 3. Check if the remaining capacity of the current row is greater than the maximum group size or equal to the current group size. If it is, accept the current arrival and place the group in that row.
 
-4. Otherwise, consider the next row with the next higher number.
+% 4. Otherwise, consider the next row with the next higher number.
 
-5. Repeat steps 3 and 4 until a row is found that can accommodate the current group size.
+% 5. Repeat steps 3 and 4 until a row is found that can accommodate the current group size.
 
-By following this approach, it is possible to efficiently find rows to place accepted groups while maximizing capacity utilization. This is achieved by filling as many rows as possible, starting from the row with the smallest number and only moving to the row with the larger number if necessary.
+% By following this approach, it is possible to efficiently find rows to place accepted groups while maximizing capacity utilization. This is achieved by filling as many rows as possible, starting from the row with the smallest number and only moving to the row with the larger number if necessary.
 
 
 % \subsection{Seat Planning Charts Online}

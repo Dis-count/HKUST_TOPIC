@@ -39,7 +39,6 @@ class CompareMethods:
 
         ini_demand, ben = m1.solveBenders(eps=1e-4, maxit=20)
 
-        my_file.write('Ben_value: %.2f ;' % (ben))
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
         ini_demand, newx4 = deter.IP_formulation(ini_demand, np.zeros(self.I))
 
@@ -505,10 +504,10 @@ class CompareMethods:
         remaining_period0 = copy.deepcopy(self.num_period)
         sequence1 = copy.copy(sequence)
         total_usedDemand = np.zeros(self.I)
-        # ini_demand1 = np.array(self.probab) * self.num_period
+
         deterModel = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
-        # print(ini_demand)
+
         while remaining_period0:
             demand = ini_demand
 
@@ -541,7 +540,7 @@ class CompareMethods:
                 if any(usedDemand) == 0 and (current_loss+2)/(self.num_period - remaining_period + 1) < total_loss/self.num_period:  # all are 0
                     usedDemand, decision_list = decisionOnce(
                         sequence, demand, self.probab)
-                    # print(f'Decision: {decision_list}')
+
                     Indi_Demand = np.dot(usedDemand, range(self.I))
 
                     if decision_list:
@@ -574,11 +573,10 @@ class CompareMethods:
                     mylist.append(0)
                     remaining_period -= 1
             else:
-                print(change_roll)
                 if any(usedDemand) == 0:
                     usedDemand, decision_list = decisionOnce(
                         sequence, demand, self.probab)
-                    # print(f'Decision: {decision_list}')
+
                     Indi_Demand = np.dot(usedDemand, range(self.I))
 
                     if decision_list:
@@ -613,8 +611,6 @@ class CompareMethods:
             if remaining_period0 <= 0:
                 break
             total_usedDemand += usedDemand
-            # print('Sto-re-optimize')
-            # print(f'remaining:{remaining_period0}')
 
             # use stochastic calculate
             sam = samplingmethod(
@@ -623,22 +619,18 @@ class CompareMethods:
             W = len(dw)
 
             # m2 = originalModel(change_roll, self.given_lines, self.demand_width_array, self.num_sample, self.I, prop, dw)
-
             # ini_demand, newx = m2.solveModelGurobi()
 
             m1 = stochasticModel(change_roll, self.given_lines,self.demand_width_array, W, self.I, prop, dw)
 
             ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
-
+            print(f'test: {ini_demand}')
             deterModel = deterministicModel(
                 change_roll, self.given_lines, self.demand_width_array, self.I)
             ini_demand, _ = deterModel.IP_formulation(
                 np.zeros(self.I), ini_demand)
             ini_demand, newx = deterModel.IP_formulation(ini_demand, np.zeros(self.I))
 
-            # print(ini_demand)
-            # print(f'remaining: {change_roll}')
-            
             newx = newx.T.tolist()
 
 
@@ -652,8 +644,6 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand1:
             demand[i-1] += 1
-        # print(f'dy_loss: {change_roll}')
-        # print(f'dy_loss: {demand}')
         return demand
 
     def method_new(self, sequence, ini_demand, newx, change_roll0):
@@ -1067,58 +1057,46 @@ class CompareMethods:
 
 
 if __name__ == "__main__":
-    filename = 'Tests_' + str(time.time()) + '.txt'
-    my_file = open(filename, 'w')
-    my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
-    optimal_mean =0
-    for i in range(10):
-        num_sample = 2000  # the number of scenarios
-        I = 4  # the number of group types
-        num_period = 100
-        given_lines = 10
-        np.random.seed(10+i)
 
-        # probab = [0.3, 0.15, 0.15, 0.15, 0.15, 0.1]
-        probab = [0.25, 0.25, 0.25, 0.25]
+    num_sample = 2000  # the number of scenarios
+    I = 4  # the number of group types
+    num_period = 70
+    given_lines = 10
+    # np.random.seed(10)
 
-        roll_width = np.ones(given_lines) * 21
-        # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
-        # total_seat = np.sum(roll_width)
+    # probab = [0.3, 0.15, 0.15, 0.15, 0.15, 0.1]
+    probab = [0.25, 0.25, 0.25, 0.25]
 
-        a_instance = CompareMethods(
-                roll_width, given_lines, I, probab, num_period, num_sample)
+    roll_width = np.ones(given_lines) * 21
+    # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
+    # total_seat = np.sum(roll_width)
 
-        multi = np.arange(1, I+1)
+    a_instance = CompareMethods(
+            roll_width, given_lines, I, probab, num_period, num_sample)
 
-        sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+    multi = np.arange(1, I+1)
 
-        # print(f'loss of sto: {loss(ini_demand)}')
-        # print(f'loss of mean: {loss(ini_demand3)}')
-        total_people = sum(sequence) - num_period
+    sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 
-        a, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
+    total_people = sum(sequence) - num_period
 
-        b = a_instance.dynamic_program(sequence)
+    a, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
 
-        h = a_instance.bid_price(sequence)
+    b = a_instance.dynamic_program(sequence)
 
-        f = a_instance.offline(sequence)  # optimal result
+    h = a_instance.bid_price(sequence)
 
-        # print(f'loss of optimal: {loss(f)}')
-        optimal = np.dot(multi, f)
+    f = a_instance.offline(sequence)  # optimal result
 
-        my_file.write('dynamic: %.2f ;' % (np.dot(multi, b)))
-        # print(f'dynamic: {np.dot(multi, b)}')
-        my_file.write('mean: %.2f ;' % (np.dot(multi, c)))
-        my_file.write('sto: %.2f ;' % (np.dot(multi, d)))
-        # print(f'once: {np.dot(multi, a)}')
-        # print(f'dy_mean: {np.dot(multi, c)}')
-        my_file.write('optimal: %.2f ;\n' % (optimal))
-        optimal_mean += optimal
-        # print(f'dy_sto: {np.dot(multi, d)}')
+    # print(f'loss of optimal: {loss(f)}')
+    optimal = np.dot(multi, f)
 
-        # print(f'bid: {np.dot(multi, h)}')
+    print(f'dynamic: {np.dot(multi, b)}')
+    print(f'once: {np.dot(multi, a)}')
+    print(f'dy_mean: {np.dot(multi, c)}')
+    print(f'dy_sto: {np.dot(multi, d)}')
 
-        # print(f'optimal: {optimal}')
-    my_file.write('optimal_mean: %.2f ;\n' % (optimal_mean/10))
-    my_file.close()
+    print(f'bid: {np.dot(multi, h)}')
+
+    print(f'optimal: {optimal}')
+

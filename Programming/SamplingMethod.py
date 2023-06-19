@@ -20,7 +20,6 @@ class samplingmethod:
             self.number_period, prob, size = self.number_sample)
         sample_multi[:, seq-2] = sample_multi[:, seq-2] + 1
         self.sample_multi = sample_multi.tolist()
-
     # def partSeq(self, number):
     #     demand_multi = [0] * self.number_sample
     #     demand = [0] * self.I 
@@ -66,9 +65,8 @@ class samplingmethod:
 if __name__ == "__main__":
     num_sample = 5  # the number of scenarios
     I = 4  # the number of group types
-    number_period = 10
+    number_period = 0
     probab = [0.4, 0.2, 0.2, 0.2]
     seq = 4
     sam = samplingmethod(I, num_sample, number_period, probab, seq)
     dw, prop = sam.get_prob()
-    sam.partSeq(6)

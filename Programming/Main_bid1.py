@@ -802,8 +802,8 @@ if __name__ == "__main__":
     num_period = 70
     given_lines = 10
     # np.random.seed(i)
-    p = prop_list()
-    # p = [[0.25, 0.25, 0.25, 0.25], [0.25, 0.35, 0.05, 0.35], [0.15, 0.25, 0.55, 0.05]]
+    # p = prop_list()
+    p = [[0.25, 0.25, 0.25, 0.25], [0.25, 0.35, 0.05, 0.35], [0.15, 0.25, 0.55, 0.05]]
 
     begin_time = time.time()
     filename = 'Results_' + str(time.time()) + '.txt'

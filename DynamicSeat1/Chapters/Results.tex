@@ -136,6 +136,29 @@ The seat layout consists of 10 rows, each containing 21 seats.
   \end{tabular}
 \end{table}
 
+\begin{table}[ht]
+  \centering
+  \caption{Results of Policies}
+  \begin{tabular}{|l|l|l|l|l|l|l|l|}
+  \hline
+   T & probabilities &  Sto+ Bid(\%) & Mean+bid & Bid-price & FCFS(\%) & DP-based(\%) & FCFS-based(\%) \\
+  \hline
+   60  & [0.25, 0.25, 0.25, 0.25]  & 99.11 & 98.45 & 98.08 & 98.17 & 99.44 & 99.31 \\
+   70  & [0.25, 0.25, 0.25, 0.25]  & 98.57 & 98.22 & 96.78 & 94.75 & 99.19 & 95.88 \\
+   80  & [0.25, 0.25, 0.25, 0.25]  & 98.74 & 98.59 & 95.99 & 93.18 & 99.28 & 94.29 \\
+   \hline
+   60  & [0.15, 0.25, 0.55, 0.05]  & 99.15 & 98.31 & 98.26 & 98.07 & 99.45 & 99.39 \\
+   70  & [0.15, 0.25, 0.55, 0.05]  & 99.45 & 99.05 & 97.38 & 96.25 & 99.39 & 97.64 \\
+   80  & [0.15, 0.25, 0.55, 0.05]  & 99.70 & 99.14 & 97.71 & 95.81 & 99.17 & 97.08 \\
+   \hline
+   60  & [0.25, 0.35, 0.05, 0.35]  & 99.21 & 98.40 & 98.49 & 98.62 & 99.65 & 99.64 \\
+   70  & [0.25, 0.35, 0.05, 0.35]  & 98.32 & 97.86 & 96.08 & 93.96 & 99.27 & 95.65 \\
+   80  & [0.25, 0.35, 0.05, 0.35]  & 98.56 & 98.22 & 96.27 & 92.88 & 99.41 & 94.26 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
 \subsection{Results of the Mean Arriving People per Period}
 
 In this subsection, we discuss the effect of different probabilities on our experimental results. We choose $T(E(D)/c)$ such that the supply is near the demand. We then compare the number of people served under different values of $c$.

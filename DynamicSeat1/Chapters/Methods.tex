@@ -144,7 +144,7 @@ Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $
 
 $$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0, V_{T+1}(L) =0, \forall L$$
 
-$i \geq V_{t+1}(L) - V_{t+1}(L - n_i) \approx \nabla V_{t+1}^{\top}(L) n_i$
+
 
 % $\underbrace{(0, \ldots, x}_{h ~numbers},d_{h+1}, \ldots, d_{M})$
 % $\underbrace{(0, \ldots, 1}_{u ~numbers}, \ldots, 0, d_{h+1}, \ldots, d_{M})$
@@ -159,7 +159,13 @@ After accepting each group, it is necessary to ensure that the accepted groups c
 The threshold capacity can be obtained by the following analysis. When the remaining capacity is no smaller than $n_{M}$ for any row, we can always assign any group to this row. Thus, the largest number of taken seats for row $j$ is $L_j -n_{M} +1$ to ensure the next group can be placed. For $N$ rows, the threshold capacity can be $\sum_{j=1}^{N} (L_j -n_{M} +1)$.
 
 \subsection{}
-Use scenario demands to make the decision: compare the values of accepting and rejecting requests that are not in the plan.
+Supply control + bid-price.
+
+Firstly, if supply control and bid-price both decide to accept a small group, then accept it; otherwise, reject it.
+
+$$V_{t}(L_1, L_2) = \sum_{i} p_i [\max \{ {[V_{t+1}(L_1, L_2), V_{t+1}(L_1- n_i, L_2)+ i, V_{t+1}(L_1, L_2 - n_i)+i]}\}]$$
+
+$V_{T+1}(L_1, L_2) = 0, \forall L_1, L_2$
 
 % \subsection{Break tie}
 % To determine which row to place accepted groups in when there are multiple options, follow these steps:

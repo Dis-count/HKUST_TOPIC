@@ -192,6 +192,66 @@ class CompareMethods:
             indi = deter1.IP_formulation1(demand, np.zeros(self.I))
         return demand
 
+    def dynamic_program2(self, sequence):
+        S1 = int(self.roll_width[0])
+        S = int(sum(self.roll_width[1:]))
+        p = self.probab
+        T = self.num_period
+        capa = 0 # used to indicate whether the capacity is enough
+        option = self.I
+        value = [[[0 for _ in range(T + 1)] for _ in range(S + 1)] for _ in range(S1 +1)]
+        record = [[[[0] * option for _ in range(T + 1)] for _ in range(S+1)] for _ in range(S1 + 1)]
+
+        for i2 in range(1, S1+1):
+            for i in range(1, S + 1):
+                for j in range(1, T + 1):
+                    value[i2][i][j] = value[i2][i][j-1]
+
+                    everyvalue = 0
+                    totalvalue = 0
+                    for k in range(option):
+                        if  (i - self.value_array[k]) >= 1:
+                            everyvalue2 = value[i2][i - self.value_array[k] -1][j - 1] + self.value_array[k]
+                            capa = 1
+                        elif (i2 - self.value_array[k]) >= 1:
+                            everyvalue1 = value[i2 - self.value_array[k] -1][i][j - 1] + self.value_array[k]
+                            capa = 1
+                        else:
+                            everyvalue = value[i][j-1]
+                            capa = 0
+
+                        if value[i][j-1] <= everyvalue and capa:  # delta_k
+                            totalvalue += p[k] * everyvalue
+                            record[i][j][k] = 1
+                        else:
+                            totalvalue += p[k] * value[i][j-1]
+                    value[i][j] = totalvalue
+
+        decision_list = [0] * T
+        sequence = [i-1 for i in sequence if i > 0]
+
+        for k, i in enumerate(sequence):  # i = 1,2,3,4
+            decision = record[S][T][i-1]
+            if decision:
+                S -= i+1
+            T -= 1
+            decision_list[k] = decision
+        final_demand = np.array(sequence) * np.array(decision_list)
+
+        final_demand = final_demand[final_demand!=0]
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+
+        deter1 = deterministicModel(self.roll_width, self.given_lines,
+                                    self.demand_width_array, self.I)
+        indi = deter1.IP_formulation1(demand, np.zeros(self.I))
+        while not indi:
+            demand[final_demand[-1]-1] -= 1
+            final_demand = final_demand[:-1]
+            indi = deter1.IP_formulation1(demand, np.zeros(self.I))
+        return demand
+
     def bid_price(self, sequence):
         decision_list = [0] * self.num_period
         roll_width = copy.deepcopy(self.roll_width)

@@ -36,6 +36,14 @@ class CompareMethods:
 
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
         ini_demand, newx4 = deter.IP_formulation(ini_demand, np.zeros(self.I))
+        for new_num, new_i in enumerate(newx4.T):
+            occu = np.dot(new_i, np.arange(2, I+2))
+            if occu < self.roll_width[new_num]:
+                for d_num, d_i in enumerate(new_i):
+                    if d_i > 0 and d_num < I-1:
+                        new_i[d_num] -= 1
+                        new_i[d_num+1] += 1
+                        break
 
         ini_demand1 = np.array(self.probab) * self.num_period
         ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
@@ -644,10 +652,10 @@ class CompareMethods:
                 deterModel = deterministicModel(
                     change_roll, self.given_lines, self.demand_width_array, self.I)
                 ini_demand = np.ceil(ini_demand1)
-                ini_demand, _ = deterModel.IP_formulation(
+                ini_demand2, _ = deterModel.IP_formulation(
                     np.zeros(self.I), ini_demand)
                 ini_demand, newx = deterModel.IP_formulation(
-                    ini_demand, np.zeros(self.I))
+                    ini_demand2, np.zeros(self.I))
                 #  Make a full pattern.
                 for new_num, new_i in enumerate(newx.T):
                     occu = np.dot(new_i, np.arange(2, I+2))
@@ -791,7 +799,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 60
+    num_period = 70
     given_lines = 10
     # np.random.seed(i)
     p = prop_list()
@@ -864,7 +872,7 @@ if __name__ == "__main__":
         my_file.write('Sto: %.2f ;' % (ratio4/count*100))
         my_file.write('FCFS: %.2f ;' % (ratio5/count*100))
         my_file.write('FCFS1: %.2f ;' % (ratio6/count*100))
-        my_file.write('bid-price: %.2f \n' % (ratio7/count*100))
+        my_file.write('bid-price: %.2f;' % (ratio7/count*100))
         my_file.write('Mean1: %.2f \n' % (ratio8/count*100))
         my_file.write('Number of accepted people: %.2f \t' %
                       (accept_people/count))

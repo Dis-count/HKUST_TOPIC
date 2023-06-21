@@ -50,6 +50,15 @@ class CompareMethods:
 
         ini_demand3, newx3 = deter.IP_formulation(ini_demand3, np.zeros(self.I))
 
+        for new_num, new_i in enumerate(newx3.T):
+            occu = np.dot(new_i, np.arange(2, I+2))
+            if occu < self.roll_width[new_num]:
+                for d_num, d_i in enumerate(new_i):
+                    if d_i > 0 and d_num < I-1:
+                        new_i[d_num] -= 1
+                        new_i[d_num+1] += 1
+                        break
+
         return sequence, ini_demand, ini_demand3, newx3, newx4
 
     def row_by_row(self, sequence):
@@ -753,6 +762,15 @@ class CompareMethods:
                 _, newx = deterModel.IP_formulation2(
                     change_roll, remaining_period-2, self.probab, sequence[num+1])
 
+                for new_num, new_i in enumerate(newx.T):
+                    occu = np.dot(new_i, np.arange(2, I+2))
+                    if  occu < change_roll[new_num]:
+                        for d_num, d_i in enumerate(new_i):
+                            if d_i > 0 and d_num < I-1:
+                                new_i[d_num] -= 1
+                                new_i[d_num+1] += 1
+                                break
+
                 newx = newx.T.tolist()
 
         sequence1 = [i-1 for i in sequence if i > 0]
@@ -799,7 +817,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 70
+    num_period = 80
     given_lines = 10
     # np.random.seed(i)
     # p = prop_list()
@@ -832,7 +850,7 @@ if __name__ == "__main__":
 
         multi = np.arange(1, I+1)
 
-        count = 100
+        count = 50
         for j in range(count):
             sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 

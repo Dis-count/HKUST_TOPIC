@@ -161,7 +161,9 @@ The seat layout consists of 10 rows, each containing 21 seats.
 
 \subsection{Results of the Mean Arriving People per Period}
 
-In this subsection, we discuss the effect of different probabilities on our experimental results. We choose $T(E(D)/c)$ such that the supply is near the demand. We then compare the number of people served under different values of $c$.
+In this subsection, we discuss the effect of different probabilities on our experimental results. The expected number of demands can be calculated as $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$ denote the number of people each period.
+
+We choose $T(E(D)/c)$ such that the supply is near the demand. We then compare the number of people served under different values of $c$.
 
 
 % Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
@@ -230,8 +232,7 @@ The results show that we can estimate attendance rate based on $c$ for most prob
 
 \subsection{Result of Different Demands}
 
-In this subsection, we discuss the effect of the number of periods on the results of our experiments. 
-Assuming that groups of up to four people can sit together, we calculate the expected number of demands as $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Let $c = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$ denote the number of people each period. Specifically, we consider two situations: $c = 2.5$ and $c = 1.9$.
+In this subsection, we discuss the effect of the number of periods on the results of our experiments. Specifically, we consider two situations: $c = 2.5$ and $c = 1.9$.
 
 When $c = 2.5$, we set the parameters as follows: T = 10-100, step size = 1, expected number of periods = 60, expected number of demand (people) = 150, number of rows = 10, and number of seats per row = 21.
 

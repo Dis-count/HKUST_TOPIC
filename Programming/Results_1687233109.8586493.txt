@@ -1,0 +1,11 @@
+Run Start Time: Tue Jun 20 11:51:49 2023
+probabilities: 	[0.25, 0.25, 0.25, 0.25]
+M1: 97.41 ;Dy: 99.47 ;Mean: 98.40 ;Sto: 99.11 ;FCFS: 98.31 ;FCFS1: 99.37 ;bid-price: 98.19;Mean1: 95.63 
+Number of accepted people: 148.30 	Number of people: 150.10 
+probabilities: 	[0.25, 0.35, 0.05, 0.35]
+M1: 97.35 ;Dy: 99.47 ;Mean: 98.49 ;Sto: 99.28 ;FCFS: 98.15 ;FCFS1: 99.27 ;bid-price: 98.57;Mean1: 95.22 
+Number of accepted people: 148.44 	Number of people: 150.78 
+probabilities: 	[0.15, 0.25, 0.55, 0.05]
+M1: 97.45 ;Dy: 99.59 ;Mean: 98.33 ;Sto: 99.10 ;FCFS: 98.31 ;FCFS1: 99.58 ;bid-price: 98.11;Mean1: 95.81 
+Number of accepted people: 148.46 	Number of people: 150.00 
+Total Runtime	122.302870

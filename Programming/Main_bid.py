@@ -882,6 +882,15 @@ class CompareMethods:
                 _, newx = deterModel.IP_formulation2(
                 change_roll, remaining_period-2, self.probab, sequence[num+1])
 
+                for new_num, new_i in enumerate(newx.T):
+                    occu = np.dot(new_i, np.arange(2, I+2))
+                    if  occu < change_roll[new_num]:
+                        for d_num, d_i in enumerate(new_i):
+                            if d_i > 0 and d_num < I-1:
+                                new_i[d_num] -= 1
+                                new_i[d_num+1] += 1
+                                break
+
                 newx = newx.T.tolist()
 
         sequence1 = [i-1 for i in sequence if i > 0]

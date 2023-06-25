@@ -5,7 +5,7 @@ from Method10 import deterministicModel
 from Mist import generate_sequence, decision1, decision2
 import copy
 from itertools import combinations
-
+import time
 # This function call different methods
 
 class CompareMethods:
@@ -252,26 +252,31 @@ class CompareMethods:
                     min_value = current_value
         return min_value
 
-    def each_row(self, arrival, roll_width0, T, cur_bound):
-        max_value = cur_bound
+    def each_row(self, arrival, roll_width0, T):
+        max_value = self.com_dy(roll_width0, T)
         index = -1
+        roll_width = copy.deepcopy(roll_width0)
         for i in range(self.given_lines):
-            roll_width0[i] = roll_width0[i] - arrival
-            if roll_width0[i] >= 0:
-                upper_bound = self.com_dy(roll_width0, T)
-                if upper_bound > max_value:
-                    max_value = upper_bound
+            roll_width[i] = roll_width0[i] - arrival
+            if roll_width[i] >= 0:
+                upper_bound = self.com_dy(roll_width, T)
+                if upper_bound + arrival-1 > max_value:
+                    max_value = upper_bound + arrival-1
                     index = i
+            roll_width[i] = roll_width0[i]
+        
         return  max_value, index
 
     def main_dy(self, sequence):
-        max_value = 0
         decision_list = [0] * self.num_period
+        cur_roll_width = copy.deepcopy(self.roll_width)
         for num, i in enumerate(sequence):
-            max_value, index = self.each_row(i, self.roll_width, self.num_period - num, max_value)
+            max_value, index = self.each_row(i, cur_roll_width, self.num_period - num)
             if index >= 0:
                 decision_list[num] = 1
-
+                cur_roll_width[index] -= i
+        
+        sequence = [i-1 for i in sequence if i > 0]
         final_demand = np.array(sequence) * np.array(decision_list)
 
         final_demand = final_demand[final_demand!=0]
@@ -369,9 +374,9 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     num_period = 70
     given_lines = 10
-    np.random.seed(16)
+    # np.random.seed(16)
 
-    probab = [0.25, 0.15, 0.45, 0.15]
+    probab = [0.25, 0.25, 0.25, 0.25]
 
     roll_width = np.ones(given_lines) * 21
     # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
@@ -383,7 +388,14 @@ if __name__ == "__main__":
     sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 
     h = a_instance.bid_price(sequence)
-    value = a_instance.dynamic2(220, 220, 71)
+
+    # value = a_instance.dynamic2(220, 220, 71)
+
+    # a = np.array(value)
+    # np.save('a.npy', a)
+
+    a = np.load('a.npy')
+    value = a.tolist()
 
     b = a_instance.main_dy(sequence)
 

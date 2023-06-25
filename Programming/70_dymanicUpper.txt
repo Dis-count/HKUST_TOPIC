@@ -1,0 +1,5 @@
+Run Start Time: Sun Jun 25 19:25:24 2023
+probabilities: 	[0.25, 0.25, 0.25, 0.25]
+Dy: 94.28 ;bid-price: 96.46;Number of accepted people: 155.89 	probabilities: 	[0.25, 0.35, 0.05, 0.35]
+Dy: 94.11 ;bid-price: 96.19;Number of accepted people: 156.19 	probabilities: 	[0.15, 0.25, 0.55, 0.05]
+Dy: 95.93 ;bid-price: 97.10;Number of accepted people: 153.01 	Total Runtime	406.977844

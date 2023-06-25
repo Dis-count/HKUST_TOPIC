@@ -25,22 +25,18 @@ In this situation, we not only need to decide whether to accept or reject an arr
 
 \subsubsection{Group-type(Supply) Control}\label{nested_policy}
 
-For a feasible seat planning, we must follow some basic rules to assign seats.
-% Seat Planning Based Rules
-\begin{itemize}
-    \item When the supply of one arriving group is enough, we will accept the group directly.
-    \item When the supply of one arriving group is 0, the demand can be satisfied by only one larger-size supply.
-    \item When one group is accepted to occupy the larger-size seats, the rest empty seat(s) can be reserved for future demand.
-\end{itemize}
+For a feasible seat planning, when there is the supply of one arriving group, we will accept the group directly. When the supply of one arriving group is 0, the demand can be satisfied by only one larger-size supply. When one group is accepted to occupy the larger-size seats, the rest empty seat(s) can be reserved for future demand.
+
 
 We can assign the seats to the corresponding-size group. But when a group comes while the corresponding supply is 0, should we give this group to the larger-size seats? Now we demonstrate the split larger group rule for this problem.
 
-Suppose we accept a group of $i$ to take over $(j+s)$-size seats(of group type $j$). In that case, the expected served people is $i + (j-i-s)P(D_{j-i-s} \geq x_{j-i-s}+1)$, where $i+s \leq j$, $P(D_i \geq x_i)$ is the probability of that the expected demand of group type $i$ in the following periods is no less than $x_i$, the remaining supply of group type $i$.
+
+Suppose we accept a group of $i$ to take over $(j+s)$-size seats(of group type $j$). In that case, the expected served people is $i + (j-i-s)P(D_{j-i-s} \geq x_{j-i-s}+1)$, where $i+s \leq j$, $P(D_i \geq x_i)$ is the probability of that the demand of group type $i$ in the following periods is no less than $x_i$, the remaining supply of group type $i$.
 
 When a group of $i$ occupies $(j+s)$-size seats, $(j-i-s)$ seats can be provided for one group of $j-i-s$ with $s$ seats of social distancing.
 Thus, the term, $P(D_{j-i-s} \geq x_{j-i-s}+1)$, indicates the probability that the demand of group type $(j-i-s)$ in the future is no less than its current remaining supply plus 1. If $j -i- s \leq 0$, this term equals 0.
 
-Similarly, when the expected demand of a group of $j$ in the future is no less than its remaining supply currently, we would reject a group of $i$, the expected served people is $j P(D_{j} \geq x_{j})$.
+Similarly, when the demand of a group of $j$ in the future is no less than its remaining supply currently, we would reject a group of $i$, the expected served people is $j P(D_{j} \geq x_{j})$.
 
 Let $d(i,j)$ be the difference of expected served people between acceptance and rejection on group $i$ occupying $(j+s)$-size seats. If $j \geq i+s$, $d(i,j)$ equals $i + (j-i-s)P(D_{j-i-s} \geq x_{j-i-s}+1) - j P(D_{j} \geq x_{j})$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$.
 
@@ -166,6 +162,9 @@ Firstly, if supply control and bid-price both decide to accept a small group, th
 $$V_{t}(L_1, L_2) = \sum_{i} p_i [\max \{ {[V_{t+1}(L_1, L_2), V_{t+1}(L_1- n_i, L_2)+ i, V_{t+1}(L_1, L_2 - n_i)+i]}\}]$$
 
 $V_{T+1}(L_1, L_2) = 0, \forall L_1, L_2$
+
+To simplify the problem, we can combine several rows together and consider them as two rows. The value of two combined rows represents an upper bound on the original problem. For each seat layout, we examine all possible combinations of rows and choose the one with the lowest upper bound as the target value. When a new group arrives, we can either accept them and assign them to a row or reject them, based on the maximum upper bound of all the possible seat layouts.
+
 
 % \subsection{Break tie}
 % To determine which row to place accepted groups in when there are multiple options, follow these steps:

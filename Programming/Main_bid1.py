@@ -6,6 +6,7 @@ from Method10 import deterministicModel
 from Mist import generate_sequence, decision1
 import copy
 from Mist import decisionSeveral, decisionOnce
+from itertools import combinations
 import time
 # This function call different methods
 
@@ -783,6 +784,89 @@ class CompareMethods:
             demand[i-1] += 1
         return demand
 
+    def dynamic2(self, S1, S, T):
+        p = self.probab
+        option = self.I
+        value = [[[0 for _ in range(T + 1)] for _ in range(S + 1)]
+                 for _ in range(S1 + 1)]
+        record = [
+            [[[0] * option for _ in range(T + 1)] for _ in range(S+1)] for _ in range(S1 + 1)]
+
+        for i2 in range(1, S1+1):
+            for i in range(1, S + 1):
+                for j in range(1, T + 1):
+                    value[i2][i][j] = value[i2][i][j-1]
+
+                    everyvalue = value[i2][i][j-1]
+                    everyvalue1 = value[i2][i][j-1]
+                    everyvalue2 = value[i2][i][j-1]
+                    totalvalue = 0
+                    for k in range(option):
+                        if (i - self.value_array[k]) >= 1:
+                            everyvalue2 = value[i2][i - self.value_array[k] -
+                                                    1][j - 1] + self.value_array[k]
+
+                        if (i2 - self.value_array[k]) >= 1:
+                            everyvalue1 = value[i2 - self.value_array[k] -
+                                                1][i][j - 1] + self.value_array[k]
+                        value_list = [everyvalue, everyvalue1, everyvalue2]
+
+                        max_value = max(value_list)
+                        record[i2][i][j][k] = value_list.index(max_value)
+
+                        totalvalue += p[k] * max_value
+
+                    value[i2][i][j] = totalvalue
+
+        return value
+
+    def com_dy(self, length, T):
+        # Consider all combinations of each status of length.
+        total = sum(length)
+        min_value = 1e6
+        for j in range(int(self.given_lines/2)+1):
+            for i in combinations(length, j):
+                sum1 = int(sum(i))
+                sum2 = int(total - sum1)
+                current_value = min(value[sum1][sum2][T], value[sum2][sum1][T])
+                if min_value > current_value:
+                    min_value = current_value
+        return min_value
+
+    def each_row(self, arrival, roll_width0, T):
+        max_value = self.com_dy(roll_width0, T)
+        index = -1
+        roll_width = copy.deepcopy(roll_width0)
+        for i in range(self.given_lines):
+            roll_width[i] = roll_width0[i] - arrival
+            if roll_width[i] >= 0:
+                upper_bound = self.com_dy(roll_width, T)
+                if upper_bound + arrival-1 > max_value:
+                    max_value = upper_bound + arrival-1
+                    index = i
+            roll_width[i] = roll_width0[i]
+
+        return max_value, index
+
+    def main_dy(self, sequence):
+        decision_list = [0] * self.num_period
+        cur_roll_width = copy.deepcopy(self.roll_width)
+        for num, i in enumerate(sequence):
+            max_value, index = self.each_row(
+                i, cur_roll_width, self.num_period - num)
+            if index >= 0:
+                decision_list[num] = 1
+                cur_roll_width[index] -= i
+
+        sequence = [i-1 for i in sequence if i > 0]
+        final_demand = np.array(sequence) * np.array(decision_list)
+
+        final_demand = final_demand[final_demand != 0]
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+
+        return demand
 
 def prop_list():
     x = np.arange(0.05, 1, 0.1)
@@ -817,7 +901,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 80
+    num_period = 60
     given_lines = 10
     # np.random.seed(i)
     # p = prop_list()
@@ -836,6 +920,9 @@ if __name__ == "__main__":
 
         a_instance = CompareMethods(
             roll_width, given_lines, I, probab, num_period, num_sample)
+        value = a_instance.dynamic2(220, 220, num_period+1)
+        file_a = np.array(value)
+        np.save('a.npy', file_a)
 
         ratio1 = 0
         ratio2 = 0
@@ -850,51 +937,52 @@ if __name__ == "__main__":
 
         multi = np.arange(1, I+1)
 
-        count = 50
+        count = 100
         for j in range(count):
             sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 
-            total_people = sum(sequence) - num_period
+            # total_people = sum(sequence) - num_period
 
-            a, k, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
+            # a, k, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
 
-            b = a_instance.dynamic_program(sequence)
+            # b = a_instance.dynamic_program(sequence)
 
-            e = a_instance.row_by_row(sequence)
-            baseline = np.dot(multi, e)
+            # e = a_instance.row_by_row(sequence)
+            # baseline = np.dot(multi, e)
 
             f = a_instance.offline(sequence)  # optimal result
             optimal = np.dot(multi, f)
 
             h = a_instance.bid_price(sequence)
 
-            seq = a_instance.binary_search_first(sequence)
+            # seq = a_instance.binary_search_first(sequence)
 
-            g = a_instance.offline(seq)
-            # ratio1 += (np.dot(multi, a)-baseline)/ baseline
-
-            ratio1 += np.dot(multi, a) / optimal
+            # g = a_instance.offline(seq)
+            a = np.load('a.npy')
+            value = a.tolist()
+            b = a_instance.main_dy(sequence)
+            # ratio1 += np.dot(multi, a) / optimal
             ratio2 += np.dot(multi, b) / optimal
-            ratio3 += np.dot(multi, c) / optimal
-            ratio4 += np.dot(multi, d) / optimal
-            ratio5 += np.dot(multi, e) / optimal
-            ratio6 += np.dot(multi, g) / optimal
+            # ratio3 += np.dot(multi, c) / optimal
+            # ratio4 += np.dot(multi, d) / optimal
+            # ratio5 += np.dot(multi, e) / optimal
+            # ratio6 += np.dot(multi, g) / optimal
             ratio7 += np.dot(multi, h) / optimal
-            ratio8 += np.dot(multi, k) / optimal
+            # ratio8 += np.dot(multi, k) / optimal
             accept_people += optimal
-            num_people += total_people
+            # num_people += total_people
 
-        my_file.write('M1: %.2f ;' % (ratio1/count*100))
+        # my_file.write('M1: %.2f ;' % (ratio1/count*100))
         my_file.write('Dy: %.2f ;' % (ratio2/count*100))
-        my_file.write('Mean: %.2f ;' % (ratio3/count*100))
-        my_file.write('Sto: %.2f ;' % (ratio4/count*100))
-        my_file.write('FCFS: %.2f ;' % (ratio5/count*100))
-        my_file.write('FCFS1: %.2f ;' % (ratio6/count*100))
+        # my_file.write('Mean: %.2f ;' % (ratio3/count*100))
+        # my_file.write('Sto: %.2f ;' % (ratio4/count*100))
+        # my_file.write('FCFS: %.2f ;' % (ratio5/count*100))
+        # my_file.write('FCFS1: %.2f ;' % (ratio6/count*100))
         my_file.write('bid-price: %.2f;' % (ratio7/count*100))
-        my_file.write('Mean1: %.2f \n' % (ratio8/count*100))
+        # my_file.write('Mean1: %.2f \n' % (ratio8/count*100))
         my_file.write('Number of accepted people: %.2f \t' %
                       (accept_people/count))
-        my_file.write('Number of people: %.2f \n' % (num_people/count))
+        # my_file.write('Number of people: %.2f \n' % (num_people/count))
         # f.write(str(ratio6/count*100) + '\n')
 
     run_time = time.time() - begin_time

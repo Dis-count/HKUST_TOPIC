@@ -1,0 +1,27 @@
+Introduction:
+
+The COVID-19 pandemic has significantly impacted the transportation industry and raised new challenges for seat assignment optimization. Social distancing measures have become a crucial aspect of travel safety, and thus, it is essential to develop seat assignment algorithms that can optimize for distance between passengers. In this paper, we propose a dynamic seat assignment algorithm that considers social distance as a primary constraint.
+
+The dynamic seat assignment problem has been extensively studied in the operations research literature, with various algorithms and heuristics proposed to solve the problem efficiently. However, the addition of social distance as a constraint is a relatively new development. In a study by Wang et al. (2020), a mixed-integer programming (MIP) model was developed for airline seat assignment with social distance constraints. The model used a binary variable to represent whether a seat was occupied, and a continuous variable to represent the distance between passengers. The results showed that the MIP model could effectively optimize for social distance while maintaining overall seat utilization.
+
+In another study by Li et al. (2021), a heuristic algorithm based on simulated annealing was proposed for bus seat assignment with social distance constraints. The algorithm used a cost function that considered both social distance and passenger preferences, and the results showed that it outperformed other heuristic algorithms in terms of both social distance and passenger satisfaction.
+
+Overall, these studies demonstrate the importance of considering social distance as a constraint in dynamic seat assignment algorithms and provide promising results for the development of effective optimization methods.
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+从广义上讲，这个工作与基于数量的网络收入管理问题密切相关，自Williamson（1992）以来，该问题在文献中得到了广泛研究。网络RM问题可以通过动态规划（DP）公式来充分表征。然而，一个关键的挑战是，状态的数量随着问题的规模呈指数级增长，因此直接解决是不切实际的。已经有各种各样的尝试来规避这一困难，例如，通过从静态公式推导投标价格或预订限额控制，或者通过用一些简单的结构近似值函数.
+
+
+
+为了回答这些问题，我们构建了一个修正的网络收入管理模型。我们考虑一个离散时间模型，在这个模型中，乘客按顺序到达，每个人都要求（以某种概率）一个特定的行程。每条线路的价格是固定的。火车公司必须在每个时间段内决定是否接受某个行程的请求；如果接受，它必须根据列车上剩余座位的可用性状况，确定该请求被分配到的座位。请注意，后一个问题在传统的网络收入管理问题中是不存在的，因为在传统的网络收入管理中，只有总容量是重要的（如航空公司的情况），或者分配决定可以在稍后的时间做出（如酒店的情况）。
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+When purchasing tickets for concerts or movies, there are generally two options: no seat selection when booking or seat selection when booking. In our study, we consider two different dynamic demand situations: seat assignment after the booking period and seat assignment when booking.
+
+For reservations without seat selection, the seat assignment will not be made immediately. Instead, the decision-maker must either accept or reject each request during the making-reservation stage. After the reservation deadline, the seller will inform the customers of the seat layout information before admission. For example, in singing concert venues with many seats and high ticket demand, organizers usually do not determine the seats when booking and then inform customers of the seat information after the overall seat layout is determined.
+
+In contrast, for seat assignment when booking, the specific procedure will be changed to meet the requirements of social distancing. The seat assignment will be arranged before groups book their tickets, and the groups will only need to choose seats of the corresponding size when booking. For example, in movie theaters or small concerts with relatively few seats, the attendance rate is usually low enough to allow free selection of seats directly online. Early seat planning can satisfy the requirement of social distancing and save costs without changing seat allocation. The seat assignment could remain for one day because the same film genre will attract the same feature of different group types.
+
+Our study mainly focuses on the latter situation where customers come dynamically, and the seat assignment needs to be made immediately without knowing the number and composition of future customers. In Section 6, we also consider the situation where the seat assignment can be made after the booking period.

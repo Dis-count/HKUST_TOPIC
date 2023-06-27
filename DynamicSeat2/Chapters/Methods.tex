@@ -1,9 +1,9 @@
 % !TEX root = sum1.tex
 
 \section{Dynamic Seat Assignment(DSA)}
-This section discusses policies for assigning seats under dynamic situation. We first present the dynamic seat assignment policy for each group arrival, which incorporates group-type control and bid-price to optimize resource utilization. Next, we discuss the seat assignment policy for all group arrivals together. Finally, we establish the FCFS policy as the benchmark.
+This section discusses policies for assigning seats under conditions of stochastic information. We first present the dynamic seat assignment policy for each group arrival, which incorporates group-type control and loss control to optimize resource utilization. We also compare this approach with the bid-price policy. Next, we discuss the dynamic seat assignment policy for all group arrivals together. Finally, we establish the FCFS policy as the benchmark.
 
-% We also compare this approach with the bid-price policy. 
+
 
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Suppose there are $T$ independent periods, one group will arrive in each period. There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
@@ -20,10 +20,7 @@ We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N
 
 \subsection{Dynamic Seat Assignment for Each Group Arrival}
 % we make the decision according to the realized arrivals.
-In this section, we explore a dynamic seat assignment approach for each group arrival. This approach requires us to not only decide whether to accept or reject an arrival, but also to assign seats to each group if we accept it.
-
-To accomplish this, we first develop a supply control policy based on feasible seat planning. Next, we utilize a bid-price policy to further improve the performance.
-
+In this situation, we not only need to decide whether to accept or reject an arrival, but also assign seats to each group if we accept it.
 
 \subsubsection{Group-type(Supply) Control}\label{nested_policy}
 The feasible seat planning represents the supply for each group type. We can use the supply control to accept group, i.e., when there is a supply for one arriving group, we will accept the group. When there is no the corresponding supply for the arriving group, we need to determine whether to use a larger group supply to meet the arriving group's needs. When one group is accepted to occupy the larger-size seats, the rest empty seat(s) can be reserved for future demand.
@@ -240,14 +237,6 @@ To simplify the problem, we can combine several rows together and consider them 
 % Partially dynamic: at the beginning stage, the capacity is sufficient, thus we will accept all arrivals. 
 % Multiple planning approach 
 
-\begin{equation}
-  \begin{aligned}
-  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} \sum_{k = 1}^{K} (n_i- s) x_{ijk} \\
-  \text {s.t.} \quad & \sum_{j= 1}^{N} \sum_{k= 1}^{K} x_{ijk} \leq d_{i}, \quad i \in \mathcal{M}, \\
-  & \sum_{i=1}^{M} \sum_{k=1}^{K} n_{i} x_{ijk} \leq L_j, j \in \mathcal{N} \\
-  & x_{ijk} \in \{0, 1\}, \quad i \in \mathcal{M}, j \in \mathcal{N}, k \in \mathcal{K}.
-  \end{aligned}
-\end{equation}
 
 \subsection{Benchmark}
  

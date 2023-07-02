@@ -1,7 +1,7 @@
 import numpy as np
 import copy
 from collections import Counter
-# cnrongrong
+
 class samplingmethod:
     def __init__(self, I, number_sample, number_period, prob, seq) -> None:
         self.I = I
@@ -12,7 +12,6 @@ class samplingmethod:
         # for i in range(self.number_sample):
         #     sample_seq[i] = np.random.choice(
         #         range(self.I), self.number_period, replace=True, p=prob)
-        
         # self.sample_seq = sample_seq
 
         # sample_multi = np.random.multinomial(self.number_period, [1/self.I]*self.I, size=self.number_sample)

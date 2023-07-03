@@ -33,6 +33,17 @@ class stochasticModel:
                 yplus[j] = - ind_dw[j] + d0[j] + yplus[j+1]
         return yplus, yminus
 
+    def value(self, d0):
+        part1 = self.value_array @ d0
+        part2 = 0
+        for w in range(self.W):
+            yplus, _ = self.obtainY(self.dw[w], d0)
+            part2 -= self.prop[w] * sum(yplus)
+
+        obj_value = part1 + part2
+
+        return obj_value
+
     def solveSub(self, yplus, yminus):
         # the first element is dummy
         # Thus, we should notice that the positions of \alpha and y are different.

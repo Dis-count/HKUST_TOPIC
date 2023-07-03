@@ -30,9 +30,9 @@ class originalModel:
         self.prop = self.prop * self.num_sample
         m2 = grb.Model()
         x = m2.addVars(self.I, self.given_lines, lb=0,
-                       vtype=GRB.INTEGER, name='varx')
-        y1 = m2.addVars(self.I, self.W, lb=0,  vtype=GRB.CONTINUOUS)
-        y2 = m2.addVars(self.I, self.W, lb=0,  vtype=GRB.CONTINUOUS)
+                       vtype = GRB.INTEGER, name = 'varx')
+        y1 = m2.addVars(self.I, self.W, lb = 0,  vtype = GRB.CONTINUOUS)
+        y2 = m2.addVars(self.I, self.W, lb = 0,  vtype = GRB.CONTINUOUS)
         W0 = self.Wmatrix()
         m2.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                    for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))

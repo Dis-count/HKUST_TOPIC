@@ -739,8 +739,7 @@ class CompareMethods:
                         if pattern[decision_list] > 0 and change_roll[k] > (self.I + 1):
                             newx[k][decision_list] -= 1
                             if decision_list - Indi_Demand - 2 >= 0:
-                                newx[k][int(decision_list -
-                                            Indi_Demand - 2)] += 1
+                                newx[k][int(decision_list -Indi_Demand - 2)] += 1
                             change_roll[k] -= (Indi_Demand+2)
                             break
                         if k == len(newx)-1:
@@ -748,8 +747,7 @@ class CompareMethods:
                                 if pat[decision_list] > 0:
                                     newx[jj][decision_list] -= 1
                                     if decision_list - Indi_Demand - 2 >= 0:
-                                        newx[jj][int(
-                                            decision_list - Indi_Demand - 2)] += 1
+                                        newx[jj][int(decision_list - Indi_Demand - 2)] += 1
                                     change_roll[jj] -= (Indi_Demand+2)
                                     break
                     change_accept = copy.deepcopy(change_roll)
@@ -770,57 +768,52 @@ class CompareMethods:
                                  self.demand_width_array, W_deny, self.I, prop_deny, dw_deny)
                     ini_demand_deny, val_deny = m_deny.solveBenders(eps=1e-4, maxit=20)
 
+                    deterModel_deny = deterministicModel(
+                        change_deny, self.given_lines, self.demand_width_array, self.I)
+                    ini_demand1 = np.ceil(ini_demand_deny)
+                    ini_demand2, _ = deterModel_deny.IP_formulation(
+                        np.zeros(self.I), ini_demand1)
+                    ini_demand1, newx = deterModel_deny.IP_formulation(
+                        ini_demand2, np.zeros(self.I))
 
-                    if val_acc + (j-1) < val_deny:
+                    for new_num, new_i in enumerate(newx.T):
+                        occu = np.dot(new_i, np.arange(2, I+2))
+                        if occu < change_deny[new_num]:
+                            for d_num, d_i in enumerate(new_i):
+                                if d_i > 0 and d_num < I-1:
+                                    new_i[d_num] -= 1
+                                    new_i[d_num+1] += 1
+                                    break
+                    newx = newx.T.tolist()
+                    demand_new = np.sum(newx, axis=0)
+                    deny1 = m_deny.value(demand_new)
+
+                    deterModel_acc = deterministicModel(
+                                            change_accept, self.given_lines, self.demand_width_array, self.I)
+                    ini_demand01 = np.ceil(ini_demand_acc)
+                    ini_demand02, _ = deterModel_acc.IP_formulation(np.zeros(self.I), ini_demand01)
+                    ini_demand01, newx = deterModel_acc.IP_formulation(ini_demand02, np.zeros(self.I))
+
+                    for new_num, new_i in enumerate(newx.T):
+                        occu = np.dot(new_i, np.arange(2, I+2))
+                        if occu < change_accept[new_num]:
+                            for d_num, d_i in enumerate(new_i):
+                                if d_i > 0 and d_num < I-1:
+                                    new_i[d_num] -= 1
+                                    new_i[d_num+1] += 1
+                                    break
+
+                    newx = newx.T.tolist()
+                    demand_new = np.sum(newx, axis=0)
+                    acc1 = m_acc.value(demand_new)
+
+                    if acc1 + (j-1) < deny1:
                         mylist.append(0)
-                        deterModel = deterministicModel(change_deny, self.given_lines, self.demand_width_array, self.I)
-                        ini_demand1 = np.ceil(ini_demand_deny)
-                        ini_demand2, _ = deterModel.IP_formulation(
-                            np.zeros(self.I), ini_demand1)
-                        ini_demand1, newx = deterModel.IP_formulation(
-                            ini_demand2, np.zeros(self.I))
-                        
-                        for new_num, new_i in enumerate(newx.T):
-                            occu = np.dot(new_i, np.arange(2, I+2))
-                            if occu < change_deny[new_num]:
-                                for d_num, d_i in enumerate(new_i):
-                                    if d_i > 0 and d_num < I-1:
-                                        new_i[d_num] -= 1
-                                        new_i[d_num+1] += 1
-                                        break                        
-                        newx = newx.T.tolist()
                         change_roll = change_deny
-                        demand_new = np.sum(newx, axis=0)
-                        deny1 = m_deny.value(demand_new)
-
-                        print(f'test: {deny1}')
-                        print(f'acc_deny: {val_deny}')
-
-                        # newx = newx0
                     else:
                         mylist.append(1)
-                        deterModel = deterministicModel(change_accept, self.given_lines, self.demand_width_array, self.I)
-                        ini_demand1 = np.ceil(ini_demand_acc)
-                        ini_demand2, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
-                        ini_demand1, newx = deterModel.IP_formulation(ini_demand2, np.zeros(self.I))
-
-                        # print(f'test: {acc1}')
-                        # print(f'deny_value: {val_deny}')
-                        for new_num, new_i in enumerate(newx.T):
-                            occu = np.dot(new_i, np.arange(2, I+2))
-                            if occu < change_accept[new_num]:
-                                for d_num, d_i in enumerate(new_i):
-                                    if d_i > 0 and d_num < I-1:
-                                        new_i[d_num] -= 1
-                                        new_i[d_num+1] += 1
-                                        break
-
-                        newx = newx.T.tolist()
                         change_roll = change_accept
-                        demand_new = np.sum(newx, axis=0)
-                        acc1 = m_acc.value(demand_new)
-                        print(f'test_acc: {acc1}')
-                        print(f'acc_value: {val_acc}')
+
                 else:
                     mylist.append(0)
 
@@ -832,8 +825,136 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        print(f'new: {demand}')
-        print(f'new: {change_roll}')
+
+        return demand
+
+    def method_new2(self, sequence, ini_demand, newx, change_roll0):
+        change_roll = copy.deepcopy(change_roll0)
+        newx = newx.T.tolist()
+        mylist = []
+        periods = len(sequence)
+
+        for num, j in enumerate(sequence):
+            newd = np.sum(newx, axis=0)
+
+            remaining_period = periods - num
+            if newd[j-2] > 0:
+                mylist.append(1)
+                for k, pattern in enumerate(newx):
+                    if pattern[j-2] > 0 and (change_roll[k] > (self.I + 1) or change_roll[k] == j):
+                        newx[k][j-2] -= 1
+                        change_roll[k] -= j
+                        break
+
+                    if k == len(newx)-1:
+                        for kk, pat in enumerate(newx):
+                            if pat[j-2] > 0:
+                                newx[kk][j-2] -= 1
+                                change_roll[kk] -= j
+                                break
+
+            else:
+                usedDemand, decision_list = decisionOnce(
+                    sequence[-remaining_period:], newd, self.probab)
+                Indi_Demand = np.dot(usedDemand, range(self.I))
+
+                change_deny = copy.deepcopy(change_roll)
+                if decision_list:
+                    newx0 = copy.deepcopy(newx)
+                    for k, pattern in enumerate(newx):
+                        if pattern[decision_list] > 0 and change_roll[k] > (self.I + 1):
+                            newx[k][decision_list] -= 1
+                            if decision_list - Indi_Demand - 2 >= 0:
+                                newx[k][int(decision_list -
+                                            Indi_Demand - 2)] += 1
+                            change_roll[k] -= (Indi_Demand+2)
+                            break
+                        if k == len(newx)-1:
+                            for jj, pat in enumerate(newx):
+                                if pat[decision_list] > 0:
+                                    newx[jj][decision_list] -= 1
+                                    if decision_list - Indi_Demand - 2 >= 0:
+                                        newx[jj][int(
+                                            decision_list - Indi_Demand - 2)] += 1
+                                    change_roll[jj] -= (Indi_Demand+2)
+                                    break
+                    change_accept = copy.deepcopy(change_roll)
+                    # sam_accept = samplingmethod(I, num_sample, remaining_period-1, probab, sequence[-remaining_period:][0])
+                    # dw_acc, prop_acc = sam_accept.get_prob()
+                    sam_multi = samplingmethod1(
+                        I, num_sample, remaining_period-1, probab)
+
+                    dw_acc, prop_acc = sam_multi.accept_sample(
+                        sequence[-remaining_period:][0])
+
+                    W_acc = len(dw_acc)
+                    m_acc = stochasticModel(change_accept, self.given_lines,
+                                            self.demand_width_array, W_acc, self.I, prop_acc, dw_acc)
+                    ini_demand_acc, val_acc = m_acc.solveBenders(
+                        eps=1e-4, maxit=20)
+
+                    dw_deny, prop_deny = sam_multi.get_prob()
+                    W_deny = len(dw_deny)
+                    m_deny = stochasticModel(change_deny, self.given_lines,
+                                             self.demand_width_array, W_deny, self.I, prop_deny, dw_deny)
+                    ini_demand_deny, val_deny = m_deny.solveBenders(
+                        eps=1e-4, maxit=20)
+                    if val_acc + (j-1) < val_deny:
+                        mylist.append(0)
+                        deterModel = deterministicModel(
+                            change_deny, self.given_lines, self.demand_width_array, self.I)
+                        ini_demand1 = np.ceil(ini_demand_deny)
+                        ini_demand2, _ = deterModel.IP_formulation(
+                            np.zeros(self.I), ini_demand1)
+                        ini_demand1, newx = deterModel.IP_formulation(
+                            ini_demand2, np.zeros(self.I))
+
+                        for new_num, new_i in enumerate(newx.T):
+                            occu = np.dot(new_i, np.arange(2, I+2))
+                            if occu < change_deny[new_num]:
+                                for d_num, d_i in enumerate(new_i):
+                                    if d_i > 0 and d_num < I-1:
+                                        new_i[d_num] -= 1
+                                        new_i[d_num+1] += 1
+                                        break
+                        newx = newx.T.tolist()
+                        change_roll = change_deny
+
+                        # newx = newx0
+                    else:
+                        mylist.append(1)
+                        deterModel = deterministicModel(
+                            change_accept, self.given_lines, self.demand_width_array, self.I)
+                        ini_demand1 = np.ceil(ini_demand_acc)
+                        ini_demand2, _ = deterModel.IP_formulation(
+                            np.zeros(self.I), ini_demand1)
+                        ini_demand1, newx = deterModel.IP_formulation(
+                            ini_demand2, np.zeros(self.I))
+
+                        for new_num, new_i in enumerate(newx.T):
+                            occu = np.dot(new_i, np.arange(2, I+2))
+                            if occu < change_accept[new_num]:
+                                for d_num, d_i in enumerate(new_i):
+                                    if d_i > 0 and d_num < I-1:
+                                        new_i[d_num] -= 1
+                                        new_i[d_num+1] += 1
+                                        break
+
+                        newx = newx.T.tolist()
+                        change_roll = change_accept
+                else:
+                    mylist.append(0)
+
+        sequence = [i-1 for i in sequence if i > 0]
+
+        final_demand = np.array(sequence) * np.array(mylist)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+        # print(f'new: {demand}')
+        # print(f'new: {change_roll}')
         return demand
 
     def method_new1(self, sequence, ini_demand, newx, change_roll0):
@@ -1141,7 +1262,7 @@ class CompareMethods:
         # final_demand3 = 0
 
         # final_demand3 = self.bid_price(sequence)
-        final_demand3 = self.method6(sequence, ini_demand3, newx3, roll_width)
+        final_demand3 = self.method_new2(sequence, ini_demand4, newx4, roll_width)
 
         final_demand4 = self.method_new(sequence, ini_demand4, newx4, roll_width)
         # final_demand4 = 0
@@ -1157,7 +1278,7 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     num_period = 70
     given_lines = 10
-    np.random.seed(10)
+    # np.random.seed(10)
 
     # probab = [0.3, 0.15, 0.15, 0.15, 0.15, 0.1]
     probab = [0.25, 0.25, 0.25, 0.25]
@@ -1190,7 +1311,7 @@ if __name__ == "__main__":
 
     print(f'dynamic: {np.dot(multi, b)}')
     # print(f'once: {np.dot(multi, a)}')
-    print(f'dy_mean: {np.dot(multi, c)}')
+    print(f'dy_sto2: {np.dot(multi, c)}')
     print(f'dy_sto: {np.dot(multi, d)}')
 
     print(f'bid: {np.dot(multi, h)}')

@@ -758,14 +758,12 @@ class CompareMethods:
                     dw_acc, prop_acc = sam_multi.accept_sample(sequence[-remaining_period:][0])
 
                     W_acc = len(dw_acc)
-                    m_acc = stochasticModel(change_accept, self.given_lines,
-                                 self.demand_width_array, W_acc, self.I, prop_acc, dw_acc)
+                    m_acc = stochasticModel(change_accept, self.given_lines, self.demand_width_array, W_acc, self.I, prop_acc, dw_acc)
                     ini_demand_acc, val_acc = m_acc.solveBenders(eps=1e-4, maxit=20)
 
                     dw_deny, prop_deny = sam_multi.get_prob()
                     W_deny = len(dw_deny)
-                    m_deny = stochasticModel(change_deny, self.given_lines,
-                                 self.demand_width_array, W_deny, self.I, prop_deny, dw_deny)
+                    m_deny = stochasticModel(change_deny, self.given_lines, self.demand_width_array, W_deny, self.I, prop_deny, dw_deny)
                     ini_demand_deny, val_deny = m_deny.solveBenders(eps=1e-4, maxit=20)
 
                     deterModel_deny = deterministicModel(
@@ -773,8 +771,7 @@ class CompareMethods:
                     ini_demand1 = np.ceil(ini_demand_deny)
                     ini_demand2, _ = deterModel_deny.IP_formulation(
                         np.zeros(self.I), ini_demand1)
-                    ini_demand1, newx = deterModel_deny.IP_formulation(
-                        ini_demand2, np.zeros(self.I))
+                    ini_demand1, newx = deterModel_deny.IP_formulation(ini_demand2, np.zeros(self.I))
 
                     for new_num, new_i in enumerate(newx.T):
                         occu = np.dot(new_i, np.arange(2, I+2))
@@ -787,7 +784,8 @@ class CompareMethods:
                     newx = newx.T.tolist()
                     demand_new = np.sum(newx, axis=0)
                     deny1 = m_deny.value(demand_new)
-
+                    print(f'deny: {deny1}')
+                    print(f'deny: {val_deny}')
                     deterModel_acc = deterministicModel(
                                             change_accept, self.given_lines, self.demand_width_array, self.I)
                     ini_demand01 = np.ceil(ini_demand_acc)
@@ -804,9 +802,10 @@ class CompareMethods:
                                     break
 
                     newx = newx.T.tolist()
-                    demand_new = np.sum(newx, axis=0)
-                    acc1 = m_acc.value(demand_new)
-
+                    demand_new2 = np.sum(newx, axis=0)
+                    acc1 = m_acc.value(demand_new2)
+                    print(f'acc: {acc1}')
+                    print(f'acc: {val_acc}')
                     if acc1 + (j-1) < deny1:
                         mylist.append(0)
                         change_roll = change_deny
@@ -825,7 +824,8 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-
+        print(f'sto: {demand}')
+        print(f'sto: {change_roll}')
         return demand
 
     def method_new2(self, sequence, ini_demand, newx, change_roll0):
@@ -953,8 +953,8 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        # print(f'new: {demand}')
-        # print(f'new: {change_roll}')
+        print(f'sto2: {demand}')
+        print(f'sto2: {change_roll}')
         return demand
 
     def method_new1(self, sequence, ini_demand, newx, change_roll0):
@@ -1278,7 +1278,7 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     num_period = 70
     given_lines = 10
-    # np.random.seed(10)
+    np.random.seed(10)
 
     # probab = [0.3, 0.15, 0.15, 0.15, 0.15, 0.1]
     probab = [0.25, 0.25, 0.25, 0.25]
@@ -1307,9 +1307,9 @@ if __name__ == "__main__":
     # print(f'loss of optimal: {loss(f)}')
     optimal = np.dot(multi, f)
     print(f'optimal: {f}')
-    print(f'dynamic: {b}')
+    # print(f'dynamic: {b}')
 
-    print(f'dynamic: {np.dot(multi, b)}')
+    # print(f'dynamic: {np.dot(multi, b)}')
     # print(f'once: {np.dot(multi, a)}')
     print(f'dy_sto2: {np.dot(multi, c)}')
     print(f'dy_sto: {np.dot(multi, d)}')

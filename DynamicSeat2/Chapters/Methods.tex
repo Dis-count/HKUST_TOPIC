@@ -191,6 +191,32 @@ To simplify the problem, we can combine several rows together and consider them 
   \end{tabular}
 \end{table}
 
+Stochastic planning: Use the objective value of accepting or rejecting the arrival to make the decision. 
+Acceptance: 
+rejection: 
+
+
+\begin{table}[ht]
+  \centering
+  \caption{Results of stochastic planning versus bid-price}
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+   T & probabilities & Sto(\%) & DP1 & Bid-price(\%)  \\
+  \hline
+   60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 \\
+   70  & [0.25, 0.25, 0.25, 0.25]  & 98.34 & 96.87 & 96.24 \\
+   80  & [0.25, 0.25, 0.25, 0.25]  & 98.61 & 95.69 & 96.02  \\
+   \hline
+   60  & [0.25, 0.35, 0.05, 0.35]  & 98.94 & 98.26 & 98.25 \\
+   70  & [0.25, 0.35, 0.05, 0.35]  & 98.05 & 96.62 & 96.06 \\
+   80  & [0.25, 0.35, 0.05, 0.35]  & 98.37 & 96.01 & 95.89 \\
+  \hline
+  60  & [0.15, 0.25, 0.55, 0.05]  & 99.14 & 98.72 & 98.74 \\
+  70  & [0.15, 0.25, 0.55, 0.05]  & 99.30 & 96.38 & 96.90 \\
+  80  & [0.15, 0.25, 0.55, 0.05]  & 99.59 & 97.75 & 97.87 \\
+  \hline
+  \end{tabular}
+\end{table}
 
 % \subsection{Break tie}
 % To determine which row to place accepted groups in when there are multiple options, follow these steps:

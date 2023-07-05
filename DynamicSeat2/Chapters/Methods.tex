@@ -191,9 +191,15 @@ To simplify the problem, we can combine several rows together and consider them 
   \end{tabular}
 \end{table}
 
-Stochastic planning: Use the objective value of accepting or rejecting the arrival to make the decision. 
-Acceptance: 
-rejection: 
+
+\subsection{Use the objective value of Stochastic planning}
+Stochastic planning involves using the objective value of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival (i.e., the Value of Acceptance), as well as the potential outcomes that could result from rejecting it (i.e., the Value of Rejection).
+
+% Value of Acceptance: consider the scenarios when accepting current arrival.
+
+% Value of Rejection: consider the same scenarios when rejecting current arrival.
+
+By comparing the Value of Acceptance and the Value of Rejection, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made.
 
 
 \begin{table}[ht]
@@ -222,9 +228,7 @@ rejection:
 % To determine which row to place accepted groups in when there are multiple options, follow these steps:
 
 % 1. Number each row in ascending order.
-
 % 2. Prioritize placing groups in rows from smallest to largest.
-
 % 3. Check if the remaining capacity of the current row is greater than the maximum group size or equal to the current group size. If it is, accept the current arrival and place the group in that row.
 
 % 4. Otherwise, consider the next row with the next higher number.

@@ -6,7 +6,8 @@ from Mist import generate_sequence, decision1, decision2
 import copy
 from itertools import combinations
 import time
-# This function call different methods
+
+# This function use two-dimensional dynamic programming as the upper bound.
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
@@ -49,50 +50,6 @@ class CompareMethods:
             ini_demand3, np.zeros(self.I))
 
         return sequence, ini_demand, ini_demand3, newx3, newx4
-
-    def binary_search_first(self, sequence):
-        # Return the index not less than the first
-        target = sum(self.roll_width)
-        arr = np.cumsum(sequence)
-        low = 0
-        high = len(arr)-1
-        res = -1
-        while low <= high:
-            mid = (low + high)//2
-            if target <= arr[mid]:
-                res = mid
-                high = mid-1
-            else:
-                low = mid+1
-        if res == -1:
-            total = sum(sequence)
-            seq = sequence
-        else:
-            seq = sequence[0:res]
-            total = sum(seq)
-
-        remaining = target - total
-        if remaining > 0 and res > 0:
-            for i in sequence[res:]:
-                if i <= remaining:
-                    seq = sequence[0:res] + [i]
-                    remaining -= i
-
-        seq = [i-1 for i in seq]
-        demand = np.zeros(self.I)
-        for i in seq:
-            demand[i-1] += 1
-
-        deter1 = deterministicModel(self.roll_width, self.given_lines,
-                                    self.demand_width_array, self.I)
-        indi = deter1.IP_formulation1(demand, np.zeros(self.I))
-        while not indi:  # If indi doesnot exist, then delete the arrival from the seq.
-            demand[seq[-1]-1] -= 1
-            seq.pop()
-            indi = deter1.IP_formulation1(demand, np.zeros(self.I))
-        seq = [i+1 for i in seq]
-
-        return seq
 
     def dynamic_program(self, sequence):
         S = int(sum(self.roll_width))
@@ -337,39 +294,8 @@ class CompareMethods:
 
         return newd
 
-    def method1(self, sequence, ini_demand):
-        decision_list = decision1(sequence, ini_demand, self.probab)
-        sequence = [i-1 for i in sequence if i > 0]
-
-        final_demand = np.array(sequence) * np.array(decision_list)
-        # print('The result of Method 1--------------')
-        final_demand = final_demand[final_demand != 0]
-
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
-
-        return demand
-
-    def result(self, sequence, ini_demand, ini_demand3, newx3, newx4):
-        ini_demand4 = copy.deepcopy(ini_demand)
-        roll_width = copy.deepcopy(self.roll_width)
-
-        final_demand1 = self.method1(sequence, ini_demand)
-
-        # final_demand1 = 0
-
-        final_demand3 = self.method_final_mean(sequence, newx3, roll_width)
-        # final_demand3 = self.method1(sequence, ini_demand3)
-
-        final_demand4 = self.method_final(sequence, newx4, roll_width)
-        # final_demand4 = 0
-
-        return final_demand1, final_demand3, final_demand4
-
 
 if __name__ == "__main__":
-
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
     num_period = 70
@@ -389,10 +315,10 @@ if __name__ == "__main__":
 
     h = a_instance.bid_price(sequence)
 
-    # value = a_instance.dynamic2(220, 220, 71)
+    value = a_instance.dynamic2(220, 220, 71)
 
-    # a = np.array(value)
-    # np.save('a.npy', a)
+    a = np.array(value)
+    np.save('a.npy', a)
 
     a = np.load('a.npy')
     value = a.tolist()

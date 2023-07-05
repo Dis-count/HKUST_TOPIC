@@ -290,7 +290,6 @@ if __name__ == "__main__":
         my_file.write('The number of periods: \t' + str(num_period) + '\n')
         
         roll_width = np.ones(given_lines) * 21
-        # total_seat = np.sum(roll_width)
 
         a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 

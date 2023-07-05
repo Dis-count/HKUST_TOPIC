@@ -38,7 +38,7 @@ class dynamicWay:
         #  For each arrival, use the largest pattern to accept
         patterns = self.greedyLargest()
         which_row = []
-        accept_list =[]
+        accept_list = []
         remaining_period = len(sequence)
 
         for arrival in sequence:

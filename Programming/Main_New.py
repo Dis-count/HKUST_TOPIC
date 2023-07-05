@@ -8,8 +8,7 @@ import copy
 from Mist import decisionSeveral, decisionOnce
 import time
 
-# This function call different methods(Use method_dynamic)
-# Difference is a,c,d introduced by the largest pattern.
+# This function Use method_dynamic/largest pattern to make the decision.
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):

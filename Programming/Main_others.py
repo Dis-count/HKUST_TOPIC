@@ -371,7 +371,6 @@ class CompareMethods:
                                  self.demand_width_array, W_deny, self.I, prop_deny, dw_deny)
                     ini_demand_deny, val_deny = m_deny.solveBenders(eps=1e-4, maxit=20)
 
-
                     if val_acc + (j-1) < val_deny:
                         mylist.append(0)
                         deterModel = deterministicModel(change_deny, self.given_lines, self.demand_width_array, self.I)
@@ -391,11 +390,6 @@ class CompareMethods:
                                         break                        
                         newx = newx.T.tolist()
                         change_roll = change_deny
-                        demand_new = np.sum(newx, axis=0)
-                        deny1 = m_deny.value(demand_new)
-
-                        print(f'test: {deny1}')
-                        print(f'acc_deny: {val_deny}')
 
                         # newx = newx0
                     else:
@@ -418,10 +412,6 @@ class CompareMethods:
 
                         newx = newx.T.tolist()
                         change_roll = change_accept
-                        demand_new = np.sum(newx, axis=0)
-                        acc1 = m_acc.value(demand_new)
-                        print(f'test_acc: {acc1}')
-                        print(f'acc_value: {val_acc}')
                 else:
                     mylist.append(0)
 
@@ -433,8 +423,6 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        print(f'new: {demand}')
-        print(f'new: {change_roll}')
         return demand
 
     def method1(self, sequence, ini_demand):

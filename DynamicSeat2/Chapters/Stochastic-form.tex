@@ -7,7 +7,7 @@ Firstly, we give the formulation of the scenario-based stochastic programming. T
 
 \subsection{Formulation}
 
-Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega$ corresponds to a particular realization of the demand vector, $\mathbf{D}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected value of people over all the scenarios, we propose a scenario-based stochastic programming.
+Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega, \Omega$ corresponds to a particular realization of the demand vector, $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected value of people over all the scenarios, we propose a scenario-based stochastic programming.
 % As mentioned above, the objective is to give a seat assignment that can place as many groups as possible. 
 
 Consider the decision makers who give the seat assignment based on the scenarios then assign the groups to seats according to the realized true demand. 
@@ -73,7 +73,7 @@ Let $\mathbf{n} = (n_1, \ldots, n_M)$, $\mathbf{L} = (L_1, \ldots, L_N)$ where $
 The linear constraints associated with scenarios can be written in a matrix form as
 \[\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_\omega = \mathbf{d}_\omega, \omega\in \Omega,\]
 
-where $\mathbf{1}$ is the 1-vector of size $N$, $\mathbf{V} = [\mathbf{W}, ~\mathbf{I}]$.  
+where $\mathbf{1}$ is a column vector of size $N$ with all 1s, $\mathbf{V} = [\mathbf{W}, ~\mathbf{I}]$.
 
 $$
 \mathbf{W}=\left[\begin{array}{ccccc}
@@ -89,16 +89,16 @@ $$
 \mathbf{y}_{\omega}=\left[\begin{array}{l}
 \mathbf{y}_{\omega}^{+} \\
 \mathbf{y}_{\omega}^{-}
-\end{array}\right], \mathbf{y}_{\omega}^{+}=\left[\begin{array}{lllll}y_{1 \omega}^{+} & y_{2 \omega}^{+} & \cdots & y_{M \omega}^{+}\end{array}\right]^{T}, \mathbf{y}_{\omega}^{-}=\left[\begin{array}{llll}y_{1 \omega}^{-} & y_{2 \omega}^{-} & \cdots & y_{M \omega}^{-}\end{array}\right]^{T}.
+\end{array}\right], \mathbf{y}_{\omega}^{+}=\left[\begin{array}{lllll}y_{1 \omega}^{+} & y_{2 \omega}^{+} & \cdots & y_{M \omega}^{+}\end{array}\right]^{\intercal}, \mathbf{y}_{\omega}^{-}=\left[\begin{array}{llll}y_{1 \omega}^{-} & y_{2 \omega}^{-} & \cdots & y_{M \omega}^{-}\end{array}\right]^{\intercal}.
 $$
 
 As we can find, this deterministic equivalent form is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. However, the structured constraints allow us to simplify the problem by applying Benders decomposition approach. Before using this approach, let us write this problem in the form of the two-stage stochastic programming.
 
-Let $\mathbf{c}{'}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$, $\mathbf{f}{'}\mathbf{y}_{\omega} = -\sum_{i=1}^{M} y_{i \omega}^{+}$. Then the formulation \eqref{sto_form} can be expressed as below,
+Let $\mathbf{c}^{\intercal}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$, $\mathbf{f}^{\intercal}\mathbf{y}_{\omega} = -\sum_{i=1}^{M} y_{i \omega}^{+}$. Then the formulation \eqref{sto_form} can be expressed as below,
 
 \begin{equation}\label{BD_master}
   \begin{aligned}
-\max \quad & c{'} \mathbf{x}+ z(\mathbf{x}) \\
+\max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
 \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
 & \mathbf{x} \in \mathbb{Z}_{+}^{M \times N},
 \end{aligned}
@@ -110,13 +110,11 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
 \begin{equation}\label{BD_sub}
   \begin{aligned}
-    z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}{'} \mathbf{y}_{\omega} \\
+    z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
     \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} \\
      & \mathbf{y}_{\omega} \geq 0.
   \end{aligned}
   \end{equation}
-
-% (Do I need to mention the convergence of the scenario-based problem?)
 
 % The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$. 
 Here $E$ is the expectation with respect to the scenario set. Problem \eqref{BD_sub} stands for the second-stage problem and $z_{\omega}(\mathbf{x})$ is the optimal value of problem \eqref{BD_sub}, together with the convention $z_{\omega}(\mathbf{x}) = \infty$ if the problem is infeasible.
@@ -136,35 +134,35 @@ To solve this problem, we should only consider that $\mathbf{x}$ for which $z_{\
 
 \begin{equation}\label{BD_sub_dual}
   \begin{aligned}
-    \min \quad & \alpha{'}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
-    \text {s.t.} \quad & \alpha{'}_{\omega} \mathbf{V} \geq \mathbf{f}{'}
+    \min \quad & \alpha^{\intercal}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
+    \text {s.t.} \quad & \alpha^{\intercal}_{\omega} \mathbf{V} \geq \mathbf{f}^{\intercal}
   \end{aligned}
   \end{equation}
 
-Let $P = \{\alpha|\alpha{'}V \geq \mathbf{f}{'}\}$. 
+Let $P = \{\alpha|\alpha^{\intercal} V \geq \mathbf{f}^{\intercal}\}$. 
 We assume that $P$ is nonempty and has at least one extreme point. Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
 
-Let $\mathcal{O}$ be the set of all extreme points of $P$ and $\mathcal{F}$ be the set of all extreme rays of $P$. Then $z_{\omega} > -\infty$ if and only if $(\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq 0, \alpha^{k} \in \mathcal{F}$, which stands for the feasibility cut. 
+Let $\mathcal{O}$ be the set of all extreme points of $P$ and $\mathcal{F}$ be the set of all extreme rays of $P$. Then $z_{\omega} > -\infty$ if and only if $(\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq 0, \alpha^{k} \in \mathcal{F}$, which stands for the feasibility cut. 
 
 \begin{lem}\label{feasible_region}
   The feasible region of problem \eqref{BD_sub_dual}, $P$, is bounded. In addition, all the extreme points of $P$ are integral.
 \end{lem}
 
 \begin{pf}[Proof of lemma \ref{feasible_region}]
-Notice that $V =[W,~I]$, $W$ is a totally unimodular matrix. Then, we have $\alpha{'}W \geq -\bar{n}, \alpha{'}I \geq 0$. Thus, the feasible region is bounded.
+Notice that $V =[W,~I]$, $W$ is a totally unimodular matrix. Then, we have $\alpha^{\intercal}W \geq -\bar{n}, \alpha^{\intercal} I \geq 0$. Thus, the feasible region is bounded.
 Furthermore, $\bar{n}_{i+1} = n_{i+1} - n_{i} = 1, i = 1,\ldots, M-1$ are integral, so the extreme points are all integral.
 \qed
 \end{pf}
 
-Because the feasible region is bounded, then feasibility cuts are not needed. Let $z_{\omega}$ be the lower bound of $z_{\omega}(x)$ such that $(\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}$, which is the optimality cut.
+Because the feasible region is bounded, then feasibility cuts are not needed. Let $z_{\omega}$ be the lower bound of $z_{\omega}(x)$ such that $(\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}$, which is the optimality cut.
 
 \begin{corollary}
-  Only the optimality cuts, $\alpha{'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, will be included in the decomposition approach.
+  Only the optimality cuts, $\alpha^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, will be included in the decomposition approach.
 \end{corollary}
 
 
 \begin{corollary}
-  When $n_i = i+1$, $f{'} = [-\mathbf{1},~\mathbf{0}], V =[W,~I]$, we have $\alpha{'}W \geq -1, \alpha{'}I \geq 0$. Thus, it is easy to find that the feasible region is bounded, i.e., $P$ does not contain any extreme rays. Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i \in \mathcal{M}$.
+  When $n_i = i+1$, $f^{\intercal} = [-\mathbf{1},~\mathbf{0}], V =[W,~I]$, we have $\alpha^{\intercal}W \geq -1, \alpha^{\intercal}I \geq 0$. Thus, it is easy to find that the feasible region is bounded, i.e., $P$ does not contain any extreme rays. Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i \in \mathcal{M}$.
 
   % \begin{align*}
   %   & 0 \leq \alpha_1 \leq 1,\\ 
@@ -175,7 +173,7 @@ Because the feasible region is bounded, then feasibility cuts are not needed. Le
 \end{corollary}
 
 \begin{corollary}
-The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
+The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(x)$, is finite and will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(x) = \min_{\alpha^j \in \mathcal{O}} (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
 \end{corollary}
 
 % When $s_i$ is integral, we can still use the same way to obtain the dual optimal solution.
@@ -191,7 +189,7 @@ Then plug them in the subproblem \eqref{BD_sub}, we can obtain the value of $y_{
 \end{aligned}
 \end{equation}
 
-The optimal value for scenario $\omega$ can be obtained by $f{'} y_{\omega}$, then we need to find the dual optimal solution.
+The optimal value for scenario $\omega$ can be obtained by $f^{\intercal} y_{\omega}$, then we need to find the dual optimal solution.
 
 
 \begin{thm}\label{optimal_sol_sub_dual}
@@ -231,9 +229,9 @@ Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master} and
 
 \begin{equation}\label{BD_master2}
   \begin{aligned}
-    \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+    \max \quad & c^{\intercal} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
-    & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
+    & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
      & \mathbf{x} \geq 0
   \end{aligned}
 \end{equation}
@@ -251,16 +249,16 @@ RBMP is always bounded with at least any one optimality cut for each scenario.
   Suppose we have one extreme point $\alpha^{\omega}$ for each scenario. Then we have the following problem.
   \begin{equation}\label{lemma_eq}
     \begin{aligned}
-      \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+      \max \quad & c^{\intercal} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
       \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
-      & (\alpha^{\omega}){'}\mathbf{d}_{\omega} \geq (\alpha^{\omega}){'} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega \\
+      & (\alpha^{\omega})^{\intercal}\mathbf{d}_{\omega} \geq (\alpha^{\omega})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega \\
        & \mathbf{x} \geq 0
     \end{aligned}
   \end{equation}
-  Problem \eqref{lemma_eq} reaches its maximum when $(\alpha^{\omega}){'}\mathbf{d}_{\omega} = (\alpha^{\omega}){'} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega$. Substitute $z_{\omega}$ with these equations, we have 
+  Problem \eqref{lemma_eq} reaches its maximum when $(\alpha^{\omega})^{\intercal}\mathbf{d}_{\omega} = (\alpha^{\omega})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega$. Substitute $z_{\omega}$ with these equations, we have 
   \begin{equation}\label{lemma_eq2}
     \begin{aligned}
-      \max \quad & c{'} x - \sum_{\omega}p_{\omega}(\alpha^{\omega}){'} \mathbf{x} \mathbf{1} + \sum_{\omega} p_{\omega} (\alpha^{\omega}){'} \mathbf{d}_{\omega} \\
+      \max \quad & c^{\intercal} x - \sum_{\omega}p_{\omega}(\alpha^{\omega})^{\intercal} \mathbf{x} \mathbf{1} + \sum_{\omega} p_{\omega} (\alpha^{\omega})^{\intercal} \mathbf{d}_{\omega} \\
       \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
       & \mathbf{x} \geq 0
     \end{aligned}
@@ -269,12 +267,12 @@ RBMP is always bounded with at least any one optimality cut for each scenario.
   \qed
 \end{pf}
 
-Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}_{0}$ and $\mathbf{z}^{0} =(z^{0}_1,\ldots, z^{0}_S)$. Then $c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is an upper bound of problem \eqref{BD_master2}. 
+Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}_{0}$ and $\mathbf{z}^{0} =(z^{0}_1,\ldots, z^{0}_S)$. Then $c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is an upper bound of problem \eqref{BD_master2}. 
 
 
-When $\mathbf{x}_0$ is given, the optimal solution, $\alpha_{\omega}^{1}$, to problem \eqref{BD_sub_dual} can be obtained according to Theorem \ref{optimal_sol_sub_dual}. $z_{\omega}^{(0)} = \alpha_{\omega}^{1}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ and $(\mathbf{x}_0, \mathbf{z}_{\omega}^{(0)})$ is a feasible solution to problem \eqref{BD_master2} because it satisfies all the constraints. Thus, $c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} \mathbf{z}_{\omega}^{(0)}$ is a lower bound of problem \eqref{BD_master2}.
+When $\mathbf{x}_0$ is given, the optimal solution, $\alpha_{\omega}^{1}$, to problem \eqref{BD_sub_dual} can be obtained according to Theorem \ref{optimal_sol_sub_dual}. $z_{\omega}^{(0)} = \alpha_{\omega}^{1}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ and $(\mathbf{x}_0, \mathbf{z}_{\omega}^{(0)})$ is a feasible solution to problem \eqref{BD_master2} because it satisfies all the constraints. Thus, $c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} \mathbf{z}_{\omega}^{(0)}$ is a lower bound of problem \eqref{BD_master2}.
 
-If for every scenario, the optimal value of the corresponding problem \eqref{BD_sub_dual} is larger than or equal to $z_{\omega}^{0}$, all contraints are satisfied, we have an optimal solution, $(x_0, z_{\omega}^{0})$, to the BMP. Otherwise, add one new constraint, $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
+If for every scenario, the optimal value of the corresponding problem \eqref{BD_sub_dual} is larger than or equal to $z_{\omega}^{0}$, all contraints are satisfied, we have an optimal solution, $(x_0, z_{\omega}^{0})$, to the BMP. Otherwise, add one new constraint, $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
 
 % $z_{\omega}^{(0)} = \alpha_{\omega}^{*}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ will give a minimal upper bound of $z_{\omega}$, thus all the left constraints associated with other extreme points are redundant.when the extreme points are $\alpha_{\omega}$.
 
@@ -290,11 +288,11 @@ The steps of the algorithm are described as below,
     \item[Step 1.] Solve LP \eqref{lemma_eq} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
     Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
 
-    \item[Step 2.] Set the upper bound $UB = c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
+    \item[Step 2.] Set the upper bound $UB = c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
     \item[Step 3.] 
-    For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c{'} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$
+    For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c^{\intercal} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$
     \item[Step 4.]
-    For each $\omega$, if $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
+    For each $\omega$, if $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
     \item[Step 5.] Solve the updated RBMP, obtain a new solution $(x_1, z^{1})$ and update UB.
     \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(In our case, UB converges.)
    \end{description}

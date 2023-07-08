@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -77,7 +80,7 @@
 \newlabel{lemma_eq}{{8}{14}{Proof of lemma \ref {one_ep_feasible}}{equation.4.8}{}}
 \newlabel{lemma_eq2}{{9}{14}{Proof of lemma \ref {one_ep_feasible}}{equation.4.9}{}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{cut_algo}{{\caption@xref {cut_algo}{ on input line 287}}{15}{Delayed Constraint Generation}{equation.4.9}{}}
+\newlabel{cut_algo}{{\caption@xref {cut_algo}{ on input line 285}}{15}{Delayed Constraint Generation}{equation.4.9}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The benders decomposition algorithm\relax }}{15}{algorithm.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Obtain the Feasible Seat Planning}{15}{subsection.4.3}\protected@file@percent }
 \newlabel{seat_assignment}{{4.3}{15}{Obtain the Feasible Seat Planning}{subsection.4.3}{}}
@@ -123,7 +126,7 @@
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Results of Policies\relax }}{25}{table.caption.7}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Results of Policies\relax }}{25}{table.caption.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Results of the Mean Arriving People per Period}{25}{subsection.6.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The number of people served versus $c$\relax }}{26}{figure.caption.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The number of people served versus $\gamma $\relax }}{26}{figure.caption.9}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{26}{figure.caption.9}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{26}{figure.caption.9}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Difference Distribution\relax }}{26}{table.caption.10}\protected@file@percent }
@@ -144,9 +147,9 @@
 \newlabel{sub@Fig.sub.2}{{(b)}{28}{Subfigure 4(b)\relax }{subfigure.4.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The number of people served versus periods\relax }}{28}{figure.caption.13}\protected@file@percent }
 \newlabel{Fig.lable}{{4}{28}{The number of people served versus periods\relax }{figure.caption.13}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $c =2.5$}}}{28}{figure.caption.13}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $c =1.9$}}}{28}{figure.caption.13}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The number of people served versus $c$\relax }}{28}{figure.caption.14}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $\gamma =2.5$}}}{28}{figure.caption.13}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $\gamma =1.9$}}}{28}{figure.caption.13}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The number of people served versus $\gamma $\relax }}{28}{figure.caption.14}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for step-size seat layout}}}{28}{figure.caption.14}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for random seat layout}}}{28}{figure.caption.14}\protected@file@percent }
 \bibstyle{plain}

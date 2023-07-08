@@ -120,7 +120,6 @@ class stochasticModel:
         m.optimize()
         return
 
-
     def solve_IP(self, m):
         xvalue = m.getVars()[0: self.I * self.given_lines]
         for var in xvalue:
@@ -132,14 +131,13 @@ class stochasticModel:
         return m.objVal, [m.getVarByName('varx[' + str(i) + ',' + str(j) + ']').x for i in range(self.I) for j in range(self.given_lines)]
 
     def solveBenders(self, eps=1e-4, maxit=20):
-
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0,
                       vtype=GRB.CONTINUOUS, name='varx')
         z = m.addVars(self.W, lb=-float('inf'),
                       vtype=GRB.CONTINUOUS, name='varz')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-                                  for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
+                                  for i in range(self.I)) == self.roll_width[j] for j in range(self.given_lines))
         m.addConstrs(z[i] <= 0 for i in range(self.W))
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(
             self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)

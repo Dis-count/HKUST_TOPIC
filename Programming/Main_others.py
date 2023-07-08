@@ -33,15 +33,13 @@ class CompareMethods:
         W = len(dw)
 
         # m2 = originalModel(self.roll_width, self.given_lines, self.demand_width_array, self.num_sample, self.I, prop, dw)
-
         # ini_demand, newx4 = m2.solveModelGurobi()
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I)
-
         m1 = stochasticModel(self.roll_width, self.given_lines,self.demand_width_array, W, self.I, prop, dw)
 
         ini_demand, ben = m1.solveBenders(eps=1e-4, maxit=20)
-
+        print(f'benders: {ini_demand}')
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
         ini_demand, newx4 = deter.IP_formulation(ini_demand, np.zeros(self.I))
 
@@ -446,10 +444,7 @@ class CompareMethods:
         print(f'Mean1: {ini_demand3}')
         final_demand1 = self.method1(sequence, ini_demand)
         
-        # final_demand3 = 0
-
-        # final_demand3 = self.bid_price(sequence)
-        final_demand3 = self.method6(sequence, ini_demand3, newx3, roll_width)
+        final_demand3 = 0
 
         final_demand4 = self.method_new(sequence, ini_demand4, newx4, roll_width)
         # final_demand4 = 0
@@ -462,44 +457,44 @@ class CompareMethods:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 70
+    num_period = 60
     given_lines = 10
     # np.random.seed(10)
 
     probab = [0.25, 0.25, 0.25, 0.25]
 
     roll_width = np.ones(given_lines) * 21
-    # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
-    # total_seat = np.sum(roll_width)
 
-    a_instance = CompareMethods(
-            roll_width, given_lines, I, probab, num_period, num_sample)
+    for i in range(1000):
 
-    multi = np.arange(1, I+1)
+        a_instance = CompareMethods(
+                roll_width, given_lines, I, probab, num_period, num_sample)
 
-    sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+        # multi = np.arange(1, I+1)
 
-    total_people = sum(sequence) - num_period
+        sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 
-    a, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
+        # total_people = sum(sequence) - num_period
 
-    b = a_instance.dynamic_program1(sequence)
+    # a, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
 
-    h = a_instance.bid_price(sequence)
+    # b = a_instance.dynamic_program1(sequence)
 
-    f = a_instance.offline(sequence)  # optimal result
+    # h = a_instance.bid_price(sequence)
 
-    # print(f'loss of optimal: {loss(f)}')
-    optimal = np.dot(multi, f)
-    print(f'optimal: {f}')
-    print(f'dynamic: {b}')
+    # f = a_instance.offline(sequence)  # optimal result
 
-    print(f'dynamic: {np.dot(multi, b)}')
-    # print(f'once: {np.dot(multi, a)}')
-    print(f'dy_mean: {np.dot(multi, c)}')
-    print(f'dy_sto: {np.dot(multi, d)}')
+    # # print(f'loss of optimal: {loss(f)}')
+    # optimal = np.dot(multi, f)
+    # print(f'optimal: {f}')
+    # print(f'dynamic: {b}')
 
-    print(f'bid: {np.dot(multi, h)}')
+    # print(f'dynamic: {np.dot(multi, b)}')
+    # # print(f'once: {np.dot(multi, a)}')
+    # print(f'dy_mean: {np.dot(multi, c)}')
+    # print(f'dy_sto: {np.dot(multi, d)}')
 
-    print(f'optimal: {optimal}')
+    # print(f'bid: {np.dot(multi, h)}')
+
+    # print(f'optimal: {optimal}')
 

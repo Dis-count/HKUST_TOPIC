@@ -2,7 +2,7 @@ import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
 import time
-from SamplingMethod import samplingmethod
+from SamplingMethodNew import samplingmethod1
 from Mist import generate_sequence, decision1
 from collections import Counter
 from Method3 import deterministicModel
@@ -182,10 +182,10 @@ class stochasticModel:
         # print('The number of iterations is:', it)
         # obj_IP, x0 = self.solve_IP(m)
         newx = np.reshape(x0, (self.I, self.given_lines))
-        # print('each row:', newx)
+        print('each row:', newx)
         newd = np.sum(newx, axis=1)
         # print("IP took...", round(time.time() - start, 3), "seconds")
-        # print('optimal demand:', newd)
+        print('optimal demand:', newd)
         # print('optimal solution:', newx)
         # print('optimal LP objective:', obj)
         # print('optimal IP objective:', obj_IP)
@@ -196,16 +196,17 @@ if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
     number_period = 55
-    given_lines = 8
+    given_lines = 6
     np.random.seed(0)
 
     probab = [0.4, 0.4, 0.1, 0.1]
-    sam = samplingmethod(I, num_sample, number_period, probab)
+    sam = samplingmethod1(I, num_sample, number_period, probab)
 
     dw, prop = sam.get_prob()
     W = len(dw)
 
-    roll_width = np.arange(21, 21 + given_lines)
+    # roll_width = np.arange(21, 21 + given_lines)
+    roll_width = np.ones(given_lines) * 21
     total_seat = np.sum(roll_width)
 
     demand_width_array = np.arange(2, 2+I)

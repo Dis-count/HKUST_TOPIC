@@ -12,7 +12,6 @@ import time
 # This function incorporates
 # DP1 and bid-price, FCFS, optimal, planning once and several times
 
-
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
         self.roll_width = roll_width  # array, mutable object
@@ -39,7 +38,6 @@ class CompareMethods:
         m1 = stochasticModel(self.roll_width, self.given_lines,self.demand_width_array, W, self.I, prop, dw)
 
         ini_demand, ben = m1.solveBenders(eps=1e-4, maxit=20)
-        print(f'benders: {ini_demand}')
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
         ini_demand, newx4 = deter.IP_formulation(ini_demand, np.zeros(self.I))
 
@@ -47,7 +45,6 @@ class CompareMethods:
         ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
 
         ini_demand3, newx3 = deter.IP_formulation(ini_demand3, np.zeros(self.I))
-
         return sequence, ini_demand, ini_demand3, newx3, newx4
 
     def row_by_row(self, sequence):
@@ -288,6 +285,43 @@ class CompareMethods:
         
         return demand
 
+    def bid_price2(self, sequence):
+        decision_list = [0] * self.num_period
+        roll_width = copy.deepcopy(self.roll_width)
+
+        for t in range(self.num_period):
+            i = sequence[t]
+            if max(roll_width) < i:
+                decision_list[t] = 0
+            else:
+                demand = (self.num_period - t) * np.array(self.probab)
+
+                deterModel = deterministicModel(
+                    roll_width, self.given_lines, self.demand_width_array, self.I)
+                value, value1, obj = deterModel.LP_formulation2(
+                    demand, roll_width)
+                decision = (i-1)*value1[i-2] - value * i
+                for j in range(self.given_lines):
+                    if roll_width[j] < i:
+                        decision[j] = -1
+
+                val = max(decision)
+                decision_ind = np.array(decision).argmax()
+                if val >= 0 and roll_width[decision_ind]-i >= 0:
+                    decision_list[t] = 1
+                    roll_width[decision_ind] -= i
+                else:
+                    decision_list[t] = 0
+
+        sequence = [i-1 for i in sequence]
+        final_demand = np.array(sequence) * np.array(decision_list)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(I)
+        for i in final_demand:
+            demand[i-1] += 1
+        return demand
+
     def offline(self, sequence):
         # This function is to obtain the optimal decision.
         demand = np.zeros(self.I)
@@ -457,7 +491,7 @@ class CompareMethods:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 60
+    num_period = 70
     given_lines = 10
     # np.random.seed(10)
 
@@ -465,36 +499,37 @@ if __name__ == "__main__":
 
     roll_width = np.ones(given_lines) * 21
 
-    for i in range(1000):
 
-        a_instance = CompareMethods(
-                roll_width, given_lines, I, probab, num_period, num_sample)
+    a_instance = CompareMethods(
+            roll_width, given_lines, I, probab, num_period, num_sample)
 
-        # multi = np.arange(1, I+1)
+    multi = np.arange(1, I+1)
 
-        sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+    sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 
-        # total_people = sum(sequence) - num_period
+    # total_people = sum(sequence) - num_period
 
     # a, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
 
     # b = a_instance.dynamic_program1(sequence)
 
-    # h = a_instance.bid_price(sequence)
+    h = a_instance.bid_price(sequence)
 
-    # f = a_instance.offline(sequence)  # optimal result
+    a = a_instance.bid_price2(sequence)
+
+    f = a_instance.offline(sequence)  # optimal result
 
     # # print(f'loss of optimal: {loss(f)}')
-    # optimal = np.dot(multi, f)
+    optimal = np.dot(multi, f)
     # print(f'optimal: {f}')
     # print(f'dynamic: {b}')
 
     # print(f'dynamic: {np.dot(multi, b)}')
-    # # print(f'once: {np.dot(multi, a)}')
+    print(f'once: {np.dot(multi, a)}')
     # print(f'dy_mean: {np.dot(multi, c)}')
     # print(f'dy_sto: {np.dot(multi, d)}')
 
-    # print(f'bid: {np.dot(multi, h)}')
+    print(f'bid: {np.dot(multi, h)}')
 
-    # print(f'optimal: {optimal}')
+    print(f'optimal: {optimal}')
 

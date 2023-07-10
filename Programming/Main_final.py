@@ -254,7 +254,6 @@ class CompareMethods:
                         roll_width_dy1[j] -= (i+1)
                         decision_list[k] = decision
                         break
-
             T -= 1
 
         final_demand = np.array(sequence) * np.array(decision_list)
@@ -301,6 +300,42 @@ class CompareMethods:
         for i in final_demand:
             demand[i-1] += 1
         return demand
+
+    # def bid_price2(self, sequence):
+    #     decision_list = [0] * self.num_period
+    #     roll_width = copy.deepcopy(self.roll_width)
+
+    #     for t in range(self.num_period):
+    #         i = sequence[t]
+    #         if max(roll_width) < i:
+    #             decision_list[t] = 0
+    #         else:
+    #             demand = (self.num_period - t) * np.array(self.probab)
+
+    #             deterModel = deterministicModel(
+    #                 roll_width, self.given_lines, self.demand_width_array, self.I)
+    #             value, value1, obj = deterModel.LP_formulation2(demand, roll_width)
+    #             decision = (i-1)*value1[i-2] - value * i
+    #             for j in range(self.given_lines):
+    #                 if roll_width[j] < i:
+    #                     decision[j] = -1
+
+    #             val = max(decision)
+    #             decision_ind = np.array(decision).argmax()
+    #             if val >= 0 and roll_width[decision_ind]-i >= 0:
+    #                 decision_list[t] = 1
+    #                 roll_width[decision_ind] -= i
+    #             else:
+    #                 decision_list[t] = 0
+
+    #     sequence = [i-1 for i in sequence]
+    #     final_demand = np.array(sequence) * np.array(decision_list)
+    #     final_demand = final_demand[final_demand != 0]
+
+    #     demand = np.zeros(I)
+    #     for i in final_demand:
+    #         demand[i-1] += 1
+    #     return demand
 
     def bid_price1(self, sequence):
         decision_list = [0] * self.num_period
@@ -573,6 +608,11 @@ if __name__ == "__main__":
         multi = np.arange(1, I+1)
 
         count = 100
+
+        less = 0
+        large = 0
+        equal = 0
+
         for j in range(count):
             sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 
@@ -584,7 +624,7 @@ if __name__ == "__main__":
 
             # b = a_instance.dynamic_program(sequence)
 
-            e = a_instance.bid_price1(sequence)
+            # e = a_instance.bid_price1(sequence)
             # baseline = np.dot(multi, e)
 
             f = a_instance.offline(sequence)  # optimal result
@@ -593,26 +633,33 @@ if __name__ == "__main__":
             h = a_instance.bid_price(sequence)
 
             # seq = a_instance.binary_search_first(sequence)
-
             # g = a_instance.offline(seq)
+            if np.dot(multi, a) > np.dot(multi, h):
+                large += 1
+            elif np.dot(multi, a) < np.dot(multi, h):
+                less += 1
+            else:
+                equal += 1
 
-            
             ratio1 += np.dot(multi, a) / optimal
             # ratio2 += np.dot(multi, b) / optimal
             # ratio3 += np.dot(multi, c) / optimal
             # ratio4 += np.dot(multi, d) / optimal
-            ratio5 += np.dot(multi, e) / optimal
+            # ratio5 += np.dot(multi, e) / optimal
             # ratio6 += np.dot(multi, g) / optimal
             ratio7 += np.dot(multi, h) / optimal
             # ratio8 += np.dot(multi, k) / optimal
             accept_people += optimal
             # num_people += total_people
+        my_file.write('Number of Larger: %d;' % large)
+        my_file.write('Number of Less: %d;' % less)
+        my_file.write('Number of Equal: %d; \n' % equal)
 
         my_file.write('Sto: %.2f ;' % (ratio1/count*100))
-        my_file.write('Sto-1: %.2f ;' % (ratio2/count*100))
+        # my_file.write('Sto-1: %.2f ;' % (ratio2/count*100))
         # my_file.write('Mean: %.2f ;' % (ratio3/count*100))
         # my_file.write('Sto: %.2f ;' % (ratio4/count*100))
-        my_file.write('bid-1: %.2f ;' % (ratio5/count*100))
+        # my_file.write('bid-1: %.2f ;' % (ratio5/count*100))
         # my_file.write('FCFS1: %.2f ;' % (ratio6/count*100))
         my_file.write('bid-price: %.2f;' % (ratio7/count*100))
         # my_file.write('Mean1: %.2f \n' % (ratio8/count*100))

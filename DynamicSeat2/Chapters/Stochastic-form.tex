@@ -13,7 +13,7 @@ Consider the decision makers who give the seat planniing based on the scenarios 
 
 
 The seat planning can be denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{M \times N}$. Let $x_{i,j}$ stand for the number of group type $i$ in row $j$. The supply for group type $i$ can be represented by $\sum_{j=1}^N x_{ij}$.
-Regarding the nature of the obtained information, we assume that there are $S = |\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times S}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times S}$. Each component of $\mathbf{y}^{+}$, $y_{i \omega}^{+}$, represents the number of surplus seats for group type $i$. Similarly, $y_{i \omega}^{-}$ represents the number of inadequate seats for group type $i$.
+Regarding the nature of the obtained information, we assume that there are $S = |\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times S}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times S}$. Each component of $\mathbf{y}^{+}$, $y_{i}^{\omega(+)}$, represents the number of surplus seats for group type $i$. Similarly, $y_{i}^{\omega(-)}$ represents the number of inadequate seats for group type $i$.
 Considering that the group can take the seats planned for the larger group type, we assume that the surplus seats for group type $i$ can be occupied by smaller group type $j<i$ in the descending order of the group size. That is, for any $\omega$, $i \leq M-1$, $y_{i \omega}^{+}=\left(\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}$ and $y_{i \omega}^{-}=\left(d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+} \right)^{+}$, where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest group type $M$, we have $y_{M \omega}^{+} = (\sum_{j=1}^N x_{ij} - d_{i \omega})^{+}$, $y_{M \omega}^{-} = (d_{i \omega}- \sum_{j=1}^N x_{ij})^{+}$.
 
 
@@ -219,7 +219,7 @@ Use the characterization of $z_{\omega}(x)$ in the problem \eqref{BD_master} and
 \begin{equation}\label{BD_master2}
   \begin{aligned}
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-    \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
+    \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
     & \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}, \forall \omega \\
      & \mathbf{x} \geq 0, z_{\omega} ~\text{is free}
   \end{aligned}
@@ -362,7 +362,7 @@ Suppose we obtain the optimal linear solution $x^{*}_{ij}$ from the stochastic m
 \end{equation}
 
 
-The optimal solution to this problem with the lower bound will give a better seat assignment. The numerical results show that this seat assignment has good performances under any stochastic demands, and also shows good results when dealing with the dynamic demands. 
+The optimal solution to this problem with the lower bound will give a better seat planning. The numerical results show that this seat planning has good performances under any stochastic demands, and also shows good results when dealing with the dynamic demands. 
 
 
 % Because the ratio of value to capacity is monotone for the size of groups, the solver can quickly solve this deterministic formulation without many branching operations.
@@ -376,32 +376,27 @@ The optimal solution to this problem with the lower bound will give a better sea
 \begin{algorithm}[H]
   \caption{Feasible seat planning algorithm}\label{feasible_seat}
     \begin{description}
-    \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition.
+    \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
 
-    \item[Step 2.] Aggregate the solution and round it up to the supply, ${s}_{i}^{0} =\lceil \sum_{j} x^{*}_{ij} \rceil \forall i$.
-
-    \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{1}$, from problem \eqref{deter_upper} by setting the supply $\mathbf{s}^{0}$ as the upper bound. 
+    \item[Step 2.] Obtain the optimal solution, $\mathbf{x}^{1}$, from problem \eqref{deter_upper} by setting the supply $\mathbf{s}^{0}$ as the upper bound. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
     
-    \item[Step 4.] Aggregate the solution to the supply, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}$.
+    \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
 
-    \item[Step 5.] Obtain the optimal solution, $\mathbf{x}^{1}$, from problem \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound.
-
-    \item[Step 6.] Aggregate the solution to the supply, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}$, for each row, check if $\sum_{i} n_i x_{ij} = L_j$ for all $j$. When $\sum_{i} n_i x_{ij} < L_j$ for $j^{*}$, decrease the smallest group
-    % 找到该行中最小的组别大小记为 i，如果最小的组别恰为最大的，则该行对应于最大模式，结束；否则将最小组别的数量减一，将i+1 组别数量加一
-    which is the feasible seat planning.
+    \item[Step 4.] Check if $\sum_{i} n_i x_{ij} = L_j$ for all $j$. When $\sum_{i} n_i x_{ij} < L_j$, find the smallest group size in the row and mark it as $i^0$. If the smallest group is exactly the largest, then the row corresponds to the largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $(i^0+1)$ by one. 
    \end{description}
   \end{algorithm}
 
+% 找到该行中最小的组别大小记为 i，如果最小的组别恰为最大的，则该行对应于最大模式，结束；否则将最小组别的数量减一，将i+1 组别数量加一
+
 \begin{lem}
-  In step 6, only one row is not fully occupied and the number of unoccupied seat is $\delta$.
+  For the seat planning obtained in step 3, the number of unoccupied seats is at most $\delta$ for each row.
 \end{lem}
 
-
 \begin{remark}
-  Step 3 can give a feasible integer supply. In Step 5, problem \eqref{deter_upper} with this supply as the lower bound can always give an integer solution.  
-  Thus, we can obtain a feasible seat planning by solving stochastic programming once and deterministic programming twice.
+  Step 2 can give a feasible seat planning. Step 3 and Step 4 can give the full or largest patterns for each row.
 \end{remark}
 
+% Thus, we can obtain a feasible seat planning by solving stochastic programming once and deterministic programming twice.
 
 % 1. Why should we don't use the subset sum problem to decompose the whole problem, it will destroy global optimality. But notice that when we arrange row by row, it may also affect the optimality.
 

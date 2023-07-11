@@ -261,7 +261,11 @@ class CompareMethods:
 
                 deterModel = deterministicModel(
                     roll_width, self.given_lines, self.demand_width_array, self.I)
-                value, obj = deterModel.LP_formulation(demand, roll_width)
+                value, value1, obj = deterModel.LP_formulation2(
+                    demand, roll_width)
+                # value, obj = deterModel.LP_formulation(demand, roll_width)
+                print(f'z: {value1}')
+                print(f'beta: {value}')
                 decision = (i-1) - value * i
                 for j in range(self.given_lines):
                     if roll_width[j] < i:
@@ -285,6 +289,46 @@ class CompareMethods:
         
         return demand
 
+    def bid_price1(self, sequence):
+        # Use the current arrival to update demand.
+        decision_list = [0] * self.num_period
+        roll_width = copy.deepcopy(self.roll_width)
+
+        for t in range(self.num_period):
+            i = sequence[t]
+            if max(roll_width) < i:
+                decision_list[t] = 0
+            else:
+                demand = (self.num_period - t - 1) * np.array(self.probab)
+                demand[i-2] += 1
+                deterModel = deterministicModel(
+                    roll_width, self.given_lines, self.demand_width_array, self.I)
+                value, obj = deterModel.LP_formulation(demand, roll_width)
+                print(f'arrival: {i}')
+                print(f'beta: {value}')
+                decision = (i-1) - value * i
+                for j in range(self.given_lines):
+                    if roll_width[j] < i:
+                        decision[j] = -1
+
+                val = max(decision)
+                decision_ind = np.array(decision).argmax()
+                if val >= 0 and roll_width[decision_ind]-i >= 0:
+                    decision_list[t] = 1
+                    roll_width[decision_ind] -= i
+                else:
+                    decision_list[t] = 0
+
+        sequence = [i-1 for i in sequence]
+        final_demand = np.array(sequence) * np.array(decision_list)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(I)
+        for i in final_demand:
+            demand[i-1] += 1
+
+        return demand
+
     def bid_price2(self, sequence):
         decision_list = [0] * self.num_period
         roll_width = copy.deepcopy(self.roll_width)
@@ -300,6 +344,8 @@ class CompareMethods:
                     roll_width, self.given_lines, self.demand_width_array, self.I)
                 value, value1, obj = deterModel.LP_formulation2(
                     demand, roll_width)
+                print(f'z: {value1}')
+                print(f'beta: {value}')
                 decision = (i-1)*value1[i-2] - value * i
                 for j in range(self.given_lines):
                     if roll_width[j] < i:
@@ -495,7 +541,7 @@ if __name__ == "__main__":
     given_lines = 10
     # np.random.seed(10)
 
-    probab = [0.25, 0.25, 0.25, 0.25]
+    probab = [0.2, 0.3, 0.3, 0.2]
 
     roll_width = np.ones(given_lines) * 21
 
@@ -515,7 +561,7 @@ if __name__ == "__main__":
 
     h = a_instance.bid_price(sequence)
 
-    a = a_instance.bid_price2(sequence)
+    # a = a_instance.bid_price1(sequence)
 
     f = a_instance.offline(sequence)  # optimal result
 
@@ -525,11 +571,11 @@ if __name__ == "__main__":
     # print(f'dynamic: {b}')
 
     # print(f'dynamic: {np.dot(multi, b)}')
-    print(f'once: {np.dot(multi, a)}')
+    # print(f'once: {np.dot(multi, a)}')
     # print(f'dy_mean: {np.dot(multi, c)}')
     # print(f'dy_sto: {np.dot(multi, d)}')
 
-    print(f'bid: {np.dot(multi, h)}')
+    # print(f'bid: {np.dot(multi, h)}')
 
-    print(f'optimal: {optimal}')
+    # print(f'optimal: {optimal}')
 

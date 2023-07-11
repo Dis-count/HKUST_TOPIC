@@ -83,23 +83,23 @@ class deterministicModel:
         x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
         return x_ij, m.objVal
 
-    # def LP_formulation2(self, demand, roll_width):
-    #     m = grb.Model()
-    #     z = m.addVars(self.I, lb=0, vtype=GRB.CONTINUOUS)
-    #     beta = m.addVars(self.given_lines, lb=0, vtype=GRB.CONTINUOUS)
+    def LP_formulation2(self, demand, roll_width):
+        m = grb.Model()
+        z = m.addVars(self.I, lb=0, vtype=GRB.CONTINUOUS)
+        beta = m.addVars(self.given_lines, lb=0, vtype=GRB.CONTINUOUS)
 
-    #     m.addConstrs(z[i] + beta[j] * (i+1 + self.s) >= i +
-    #                  1 for j in range(self.given_lines) for i in range(self.I))
+        m.addConstrs(z[i] + beta[j] * (i+1 + self.s) >= i +
+                     1 for j in range(self.given_lines) for i in range(self.I))
 
-    #     m.setObjective(grb.quicksum(demand[i] * z[i] for i in range(
-    #         self.I)) + grb.quicksum(roll_width[j] * beta[j] for j in range(
-    #             self.given_lines)), GRB.MINIMIZE)
-    #     m.setParam('OutputFlag', 0)
-    #     m.optimize()
-    #     # m.write('bid_price.lp')
-    #     x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
-    #     y_ij = np.array(m.getAttr('X'))[:self.I]
-    #     return x_ij, y_ij, m.objVal
+        m.setObjective(grb.quicksum(demand[i] * z[i] for i in range(
+            self.I)) + grb.quicksum(roll_width[j] * beta[j] for j in range(
+                self.given_lines)), GRB.MINIMIZE)
+        m.setParam('OutputFlag', 0)
+        m.optimize()
+        # m.write('bid_price.lp')
+        x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
+        y_ij = np.array(m.getAttr('X'))[:self.I]
+        return x_ij, y_ij, m.objVal
 
     def IP_formulation1(self, demand_lower, demand_upper):
         m = grb.Model()

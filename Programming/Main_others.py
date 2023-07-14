@@ -545,7 +545,6 @@ if __name__ == "__main__":
 
     roll_width = np.ones(given_lines) * 21
 
-
     a_instance = CompareMethods(
             roll_width, given_lines, I, probab, num_period, num_sample)
 

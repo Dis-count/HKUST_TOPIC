@@ -176,7 +176,7 @@ if __name__ == "__main__":
             g = a_instance.offline(seq)
 
             # num_people += total_people
-                
+
             ratio6 += np.dot(multi, g)
             accept_people += optimal
 
@@ -187,7 +187,6 @@ if __name__ == "__main__":
         # my_file.write('Number of accepted people: %.2f \t' %(accept_people/count))
         # my_file.write('Number of people: %.2f \n' % (num_people/count))
         
-
         # if c_p < 3.2:
         #     occup_value = sum(roll_width) * (c_p/(c_p+1))
         # else:

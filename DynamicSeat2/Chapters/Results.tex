@@ -158,18 +158,18 @@ The seat layout consists of 10 rows, each containing 21 seats.
   \end{tabular}
 \end{table}
 
+% The number of rows is set at 10, and the number of seats per row is 21 (including one dummy seat).
 
 \subsection{Results of the Mean Arriving People per Period}
+In this subsection, we discuss the effect of different probabilities on our experimental results. Let $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$ denote the number of people each period, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. The expected number of demands can be calculated as $E(D) = \gamma T$,  
 
-In this subsection, we discuss the effect of different probabilities on our experimental results. The expected number of demands can be calculated as $E(D) = (p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4) T$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Let $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$ denote the number of people each period.
-
-We choose $T(E(D)/\gamma)$ such that the supply is near the demand. We then compare the number of people served under different values of $\gamma$.
+We choose $T = E(D)/\gamma$ such that the supply is near the demand. We then compare the number of people served under different values of $\gamma$.
 
 
-% Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served. 
+% Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served.
 
 We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. We call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$.
-The number of all sampled probability combinations is $n_p$. The number of rows is set at 10, and the number of seats per row is 21 (including one dummy seat). We simulate 200 periods, and the number of people served with respect to the value of $\gamma$ is shown in the figure below. For each probability combination, the blue point represents the average number of people served from 50 instances and the red point represents the expected number of people served.
+The number of all sampled probability combinations is $n_p$. The number of people served with respect to the value of $\gamma$ is shown in the figure below. For each probability combination, the blue point represents the average number of people served from 50 instances and the red point represents the estimated number of people served.
 
 
 \begin{figure}[h]
@@ -242,8 +242,6 @@ For each $\gamma$, we give several probabilities in the table. The gap point rep
 
 
 % We can find that the difference between the number of accepted people and the number of total people will increase with the period. 
-
-$c^{\intercal}$
 
 \begin{table}[ht]
   \centering

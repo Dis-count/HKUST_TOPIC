@@ -99,7 +99,6 @@ class CompareMethods:
 
         return final_demand1, final_demand3, final_demand4
 
-
 def prop_list():
     x1 = np.arange(0.05, 1, 0.05)
     x2 = np.arange(0.05, 1, 0.05)
@@ -119,6 +118,7 @@ def prop_list():
 
     return p
 
+
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
@@ -127,26 +127,16 @@ if __name__ == "__main__":
     # np.random.seed(i)
     p = prop_list()
     p_len = len(p)
-    cp_len = 0
-    for probab in p:
-        c_p = np.arange(1, I+1) @ probab
-        if c_p<= 3.2:
-            cp_len += 1
 
     c_value = np.zeros(p_len)
     people_value = np.zeros(p_len)
-
+    optimal_value = np.zeros(p_len)
     begin_time = time.time()
     filename = 'different_c' + str(time.time()) + '.txt'
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    # c = x1 + 2 * x2 + 3 * x3 + 4* x4 
-    my_cnt = 0
-    cnt = 0
-    count = 20
-    # dataset = np.zeros((len(p)* count, 5))
-    dataset = np.zeros((cp_len * count, 6))
+    count = 50
 
     for ind_probab, probab in enumerate(p):
 
@@ -154,7 +144,16 @@ if __name__ == "__main__":
         # probab = [0.3, 0.5, 0.1, 0.1]
 
         roll_width = np.ones(given_lines) * 21
+        # roll_width = np.arange(17,22)
+        # roll_width= np.append(roll_width, np.arange(21,26))
+        
+        # roll_width = np.array([26, 21, 24, 20, 20, 17, 23, 19, 21, 19])
+
         # total_seat = np.sum(roll_width)
+        multi = np.arange(1, I+1)
+
+        c_p = multi @ probab
+        c_value[ind_probab] = c_p
 
         a_instance = CompareMethods(
             roll_width, given_lines, I, probab, num_period, num_sample)
@@ -162,12 +161,6 @@ if __name__ == "__main__":
         ratio6 = 0
         accept_people = 0
         # num_people = 0
-
-        multi = np.arange(1, I+1)
-
-        c_p = multi @ probab
-        # c_value[cnt] = c_p
-        gamma = c_p/(c_p + 1) * 210
 
         for j in range(count):
             sequence = a_instance.random_generate()
@@ -180,27 +173,17 @@ if __name__ == "__main__":
             g = a_instance.offline(seq)
 
             # num_people += total_people
-            if c_p <= 3.2:
-                data = np.append(probab, gamma)
-                data = np.append(data, np.dot(multi, g))
-                #  (1-1/(c_p+1))*210
-            # else:
-            #     data = np.append(probab, np.dot(multi, g) - 160)
-                dataset[j + my_cnt*count, :] = data
-                
+
             ratio6 += np.dot(multi, g)
             accept_people += optimal
-        if c_p <= 3.2:
-            my_cnt += 1
+
+        optimal_value[ind_probab] = accept_people/count
+        people_value[ind_probab] = ratio6/count
         my_file.write('Result: %.2f \n' % (ratio6/count))
+
         # my_file.write('Number of accepted people: %.2f \t' %(accept_people/count))
         # my_file.write('Number of people: %.2f \n' % (num_people/count))
         
-        # y = -51.327 * probab[0] - 29.3098 * probab[1] - 13.2226 * probab[2] + 171.5823
-
-        people_value[cnt] = ratio6/count
-        cnt += 1
-
         # if c_p < 3.2:
         #     occup_value = sum(roll_width) * (c_p/(c_p+1))
         # else:
@@ -210,38 +193,39 @@ if __name__ == "__main__":
     run_time = time.time() - begin_time
     my_file.write('Total Runtime\t %f \n' % run_time)
 
-    # occup_value = np.zeros(p_len)
+    occup_value = np.zeros(p_len)
+    diff = np.zeros(p_len)
+    ratio = 0
+    for i in range(p_len):
+        if c_value[i] <= 3.2:
+            occup_value[i] = sum(roll_width) * (c_value[i]/(c_value[i]+1))
+        else:
+            occup_value[i] = 160
+
+        diff[i] = occup_value[i]- people_value[i]
+
     # for i in range(p_len):
-    #     if c_value[i] < 3.2:
-    #         occup_value[i] = sum(roll_width) * (c_value[i]/(c_value[i]+1))
-    #     else:
-    #         occup_value[i] = 160
-
-        # diff = occup_value[i]- people_value[i]
-        # if abs(diff) >= 3:
+    #     if c_value[i] ==2:
+            
+        # if abs(diff[i]) >= 4:
+        #     ratio += 1
         #     my_file.write('Deviated probability: ' + str(p[i]) + '\t')
-        #     my_file.write('Deviated value: %.2f \n' % diff)
+        #     my_file.write('Deviated value: %.2f \n' % diff[i])
+    
+    # print(sum(abs(diff) >= 4)/p_len)
+    # print(sum(abs(diff) >= 3)/p_len)
+    # print(sum(abs(diff) >= 2)/p_len)
+    # print(sum(abs(diff) >= 1)/p_len)
 
-    # plt.scatter(c_value, people_value, c = "blue")
-    # plt.scatter(c_value, occup_value, c = "red")
+    # plt.hist(diff, bins=20, color='red', alpha=0.75)
+    # plt.title('Difference Distribution')
     # plt.show()
 
-
-dataA = pd.DataFrame(dataset, columns=["p1", "p2", "p3", "p4", 'gamma', 'y'])
-
-# data_x = dataA[['p1','p2','p3']]
-data_x = dataA['gamma']
-
-data_y = dataA['y']
-
-mod = sm.OLS(data_y, sm.add_constant(data_x))  # 需要用sm.add_constant 手动添加截距项
-res = mod.fit()
-
-my_file.write(str(res.summary()))
+    gamma = c_value/(c_value+1)
+    plt.scatter(gamma, people_value, c = "blue")
+    plt.scatter(gamma, occup_value, c = "red")
+    # plt.scatter(c_value, optimal_value, c = "green")
+    plt.show()
 
 my_file.close()
 
-# writer = pd.ExcelWriter('A50.xlsx')		# 写入Excel文件
-# dataA.to_excel(writer, 'page_1', float_format='%.5f')		# ‘page_1’是写入excel的sheet名
-# writer.save()
-# writer.close()

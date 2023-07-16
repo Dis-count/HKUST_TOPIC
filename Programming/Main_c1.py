@@ -171,7 +171,6 @@ if __name__ == "__main__":
 
         for j in range(count):
             sequence = a_instance.random_generate()
-            # total_people = sum(sequence) - num_period
 
             f = a_instance.offline(sequence)  # optimal result
             optimal = np.dot(multi, f)
@@ -179,25 +178,18 @@ if __name__ == "__main__":
             seq = a_instance.binary_search_first(sequence)
             g = a_instance.offline(seq)
 
-            # num_people += total_people
-            if c_p <= 3.2:
-                data = np.append(probab, gamma)
-                data = np.append(data, np.dot(multi, g))
-                #  (1-1/(c_p+1))*210
-            # else:
-            #     data = np.append(probab, np.dot(multi, g) - 160)
-                dataset[j + my_cnt*count, :] = data
-                
             ratio6 += np.dot(multi, g)
             accept_people += optimal
         if c_p <= 3.2:
+            data = np.append(probab, gamma)
+            data = np.append(data, ratio6/count)
+            dataset[my_cnt, :] = data
             my_cnt += 1
+
         my_file.write('Result: %.2f \n' % (ratio6/count))
         # my_file.write('Number of accepted people: %.2f \t' %(accept_people/count))
         # my_file.write('Number of people: %.2f \n' % (num_people/count))
         
-        # y = -51.327 * probab[0] - 29.3098 * probab[1] - 13.2226 * probab[2] + 171.5823
-
         people_value[cnt] = ratio6/count
         cnt += 1
 

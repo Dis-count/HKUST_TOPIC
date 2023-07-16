@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  14 JUL 2023 10:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  16 JUL 2023 14:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -549,12 +549,12 @@ Package pdftex.def Info: ./Figures/Figure_100.pdf  used on input line 226.
 <./Figures/p1.pdf, id=473, 462.52798pt x 346.89601pt>
 File: ./Figures/p1.pdf Graphic file (type pdf)
 <use ./Figures/p1.pdf>
-Package pdftex.def Info: ./Figures/p1.pdf  used on input line 277.
+Package pdftex.def Info: ./Figures/p1.pdf  used on input line 275.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 <./Figures/p2.pdf, id=474, 462.52798pt x 346.89601pt>
 File: ./Figures/p2.pdf Graphic file (type pdf)
 <use ./Figures/p2.pdf>
-Package pdftex.def Info: ./Figures/p2.pdf  used on input line 280.
+Package pdftex.def Info: ./Figures/p2.pdf  used on input line 278.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 
 
@@ -567,12 +567,12 @@ pdfTeX warning: pdflatex.exe (file ./Figures/Figure_100.pdf): PDF inclusion: mul
 <./Figures/stepsize_seat.pdf, id=533, 462.52798pt x 346.89601pt>
 File: ./Figures/stepsize_seat.pdf Graphic file (type pdf)
 <use ./Figures/stepsize_seat.pdf>
-Package pdftex.def Info: ./Figures/stepsize_seat.pdf  used on input line 296.
+Package pdftex.def Info: ./Figures/stepsize_seat.pdf  used on input line 294.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 <./Figures/random_seat.pdf, id=534, 462.52798pt x 346.89601pt>
 File: ./Figures/random_seat.pdf Graphic file (type pdf)
 <use ./Figures/random_seat.pdf>
-Package pdftex.def Info: ./Figures/random_seat.pdf  used on input line 298.
+Package pdftex.def Info: ./Figures/random_seat.pdf  used on input line 296.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
  [26 <./Figures/p1.pdf> <./Figures/p2.pdf
 
@@ -583,23 +583,23 @@ pdfTeX warning: pdflatex.exe (file ./Figures/stepsize_seat.pdf): PDF inclusion: 
 > <./Figures/random_seat.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Figures/random_seat.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] [27]) (./Chapters/Extension.tex) (./Chapters/Conclusion.tex) (./sum1.bbl [28] [29]) (./Chapters/Res_appendix.tex) [30] (./sum1.aux)
+>]) (./Chapters/Extension.tex) (./Chapters/Conclusion.tex) (./sum1.bbl [27] [28]) (./Chapters/Res_appendix.tex) [29] (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
 (rerunfilecheck)             Checksum: 5E0710585017093CB7DC6E80A8B89289;6420.
  ) 
 Here is how much of TeX's memory you used:
- 13400 strings out of 478599
- 203879 string characters out of 5853593
+ 13399 strings out of 478599
+ 203872 string characters out of 5853593
  545965 words of memory out of 5000000
  30872 multiletter control sequences out of 15000+600000
  417416 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,10n,75p,1679b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on sum1.pdf (30 pages, 461125 bytes).
+Output written on sum1.pdf (29 pages, 460687 bytes).
 PDF statistics:
- 805 PDF objects out of 1000 (max. 8388607)
- 569 compressed objects within 6 object streams
- 158 named destinations out of 1000 (max. 500000)
+ 801 PDF objects out of 1000 (max. 8388607)
+ 566 compressed objects within 6 object streams
+ 157 named destinations out of 1000 (max. 500000)
  302 words of extra memory for PDF output out of 10000 (max. 10000000)
 

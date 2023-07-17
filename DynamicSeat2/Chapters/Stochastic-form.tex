@@ -308,7 +308,7 @@ When $|\Omega| =1$ in DEF formulation, the stochastic programming will be
 
 \begin{equation}\label{one_form}
   \begin{aligned}
-  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-s) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
+  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-\delta) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1, \ldots, M-1, \\
   & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
   & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
@@ -321,7 +321,7 @@ To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i
 
 \begin{equation}\label{deter_upper}
   \begin{aligned}
-  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
+  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
   & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
   & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
@@ -355,14 +355,23 @@ Suppose item $b$ is in type $h$, then the aggregate solution is $x e_{h} + \sum_
 
 % its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 
-Suppose we obtain the optimal linear solution $x^{*}_{ij}$ from the stochastic model, set the supply $\mathbf{s}^{0} = \sum_{j} x^{*}_{ij}$ as the upper bound of demand in problem \eqref{deter_upper}. We can get a feasible integer solution by solving this problem, denote by $\mathbf{s}^{1}$ the corresponding supply. As we mentioned above, this solution does not utilize the empty seats when the scenario demands are smaller than supply. Thus, we should set the supply $\mathbf{s}^{1}$ as the lower bound of demand, then re-solve a seat assignment problem. We substitute the constraint $\sum_{j =1}^{N} x_{ij} \leq d_{i}, i \in \mathcal{M}$ with the new constraint $\sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in \mathcal{M}$ in problem \eqref{deter_upper}, $s_{i}^{1}$ represents the number of group type $i$ we must allocate seats.
+Let the optimal solution obtained from the stochastic linear problem be $x^{*}_{ij}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Replace the vector $\mathbf{d}$ with $\mathbf{s}^{0}$ in problem \eqref{deter_upper}, then solve the resulting problem to obtain the optimal solution, $\mathbf{x}^{1}$, which represents a feasible seat planning. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$, which represents the supply for each group type.
+
+To fully utilize the seats, we should set the supply $\mathbf{s}^{1}$ as the lower bound, then re-solve a seat planning problem. We substitute the constraint $\sum_{j =1}^{N} x_{ij} \leq d_{i}, i \in \mathcal{M}$ with the new constraint $\sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in \mathcal{M}$ in problem \eqref{deter_upper}.
+
+% $s_{i}^{1}$ represents the number of group type $i$ we must allocate seats.
 
 \begin{equation}\label{deter_lower}
-\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -s)x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in \mathcal{M}; x_{ij} \in Z^{+} \}
+\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in \mathcal{M}; x_{ij} \in Z^{+} \}
 \end{equation}
 
+\begin{lem}
+  The number of unoccupied seats in the seat planning obtained from problem \eqref{deter_lower} is at most $\delta$ for each row, given any feasible supply, $\mathbf{s}^{1}$, as the lower bound.
+\end{lem}
 
-The optimal solution to this problem with the lower bound will give a better seat planning. The numerical results show that this seat planning has good performances under any stochastic demands, and also shows good results when dealing with the dynamic demands. 
+To maximize the utilization of seats, we should assign full or largest patterns to each row. This procedure can be described in step 4 of the following algorithm.
+
+% The numerical results show that this seat planning has good performances under any stochastic demands, and also shows good results when dealing with the dynamic demands. 
 
 
 % Because the ratio of value to capacity is monotone for the size of groups, the solver can quickly solve this deterministic formulation without many branching operations.
@@ -378,18 +387,14 @@ The optimal solution to this problem with the lower bound will give a better sea
     \begin{description}
     \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
 
-    \item[Step 2.] Obtain the optimal solution, $\mathbf{x}^{1}$, from problem \eqref{deter_upper} by setting the supply $\mathbf{s}^{0}$ as the upper bound. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+    \item[Step 2.] 
+    Replace the vector $\mathbf{d}$ with $\mathbf{s}^{0}$ in problem \eqref{deter_upper}, then solve the resulting problem to obtain the optimal solution, $\mathbf{x}^{1}$. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
     
-    \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
+    \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} with supply $\mathbf{s}^{1}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
 
-    \item[Step 4.] Check if $\sum_{i} n_i x_{ij} = L_j$ for all $j$. When $\sum_{i} n_i x_{ij} < L_j$, find the smallest group size in the row and mark it as $i^0$. If the smallest group is exactly the largest, then the row corresponds to the largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $(i^0+1)$ by one. 
+    \item[Step 4.] Check if $\sum_{i} n_i x_{ij} = L_j$ for all $j$. When $\sum_{i} n_i x_{ij} < L_j$, find the smallest group size in the row and mark it as $i^0$. If the smallest group is exactly the largest, then the row corresponds to the largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $(i^0+1)$ by one.
    \end{description}
   \end{algorithm}
-
-
-\begin{lem}
-  For any feasible supply as the lower bound, the number of unoccupied seats in seat planning obtained in step 3, is at most $\delta$ for each row.
-\end{lem}
 
 \begin{remark}
   Step 2 can give a feasible seat planning. Step 3 and Step 4 can give the full or largest patterns for each row.

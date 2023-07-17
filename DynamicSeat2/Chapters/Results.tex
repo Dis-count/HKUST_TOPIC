@@ -161,15 +161,11 @@ The seat layout consists of 10 rows, each containing 21 seats.
 % The number of rows is set at 10, and the number of seats per row is 21 (including one dummy seat).
 
 \subsection{Results of the Mean Arriving People per Period}
-In this subsection, we discuss the effect of different probabilities on our experimental results. Let $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$ denote the number of people each period, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. The expected number of demands can be calculated as $E(D) = \gamma T$,  
+In this subsection, we discuss the effect of different probabilities on our experimental results. Let $\gamma$ denote the number of people each period, $L$ denote the total number of seats. The expected number of people is $E(D) = \gamma T$. Suppose we accept $E(D)$ people with $T$ arrivals and the sum of $E(D)$ and $T$ is equal to the total number of seats. In this case, $T = L/(\gamma + 1)$, the estimation of the occupancy rate is $\frac{\gamma}{\gamma+1}$. 
+% We choose $T = E(D)/\gamma$ such that the supply is near the demand. 
 
-We choose $T = E(D)/\gamma$ such that the supply is near the demand. We then compare the number of people served under different values of $\gamma$.
-
-
-% Different $T$ has little effect on the number of people served using M6 because it is based on first-come-first-served.
-
-We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. We call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$.
-The number of all sampled probability combinations is $n_p$. The number of people served with respect to the value of $\gamma$ is shown in the figure below. For each probability combination, the blue point represents the average number of people served from 50 instances and the red point represents the estimated number of people served.
+When we confine the number of group types as 4, $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively.
+We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. We call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$. The number of people served with respect to the value of $\gamma$ is shown in the figure below. For each probability combination, the blue point represents the average number of people served from 50 instances and the red point represents the estimated number of people served.
 
 
 \begin{figure}[h]
@@ -181,9 +177,9 @@ The number of all sampled probability combinations is $n_p$. The number of peopl
   \caption{The number of people served versus $\gamma$}
 \end{figure}
 
-Suppose we accept $D_a$ people with $T$ arrivals, where $D_a = \gamma * T$, and the sum of $D_a$ and $T$ is equal to the total number of seats. In this case, the estimation of the occupancy rate is $\frac{\gamma}{\gamma+1}$. The number of people served is near $\frac{\gamma}{\gamma+1} * 210$ on average (as shown by the red points in the figure).
+The estimation is accurate when all rows represent full patterns.
 
-% when there are full patterns for all rows.
+% The number of people served is near $\frac{\gamma}{\gamma+1} * 210$ on average (as shown by the red points in the figure).
 
 If the largest pattern is assigned for each row, the occupancy rate is $\frac{16}{21}$. The maximum number of people that can be served is $210 * \frac{16}{21} = 160$, which is the upper bound of the number of people served.
 
@@ -195,7 +191,6 @@ We also observe that some blue points are far from the red points in the figure.
 
 % 1: When $E(D)$ is fixed, case3,4 need a larger hall to accept the same number of people.
 
-% Different layout may make a difference.
 
 % 2. The assumption that $T$ is fixed will be more reasonable for the continuous time. 
 
@@ -232,6 +227,7 @@ The results show that we can estimate attendance rate based on $\gamma$ for most
 
 \subsection{Result of Different Demands}
 
+% We then compare the number of people served under different values of $\gamma$.
 In this subsection, we discuss the effect of the number of periods on the results of our experiments. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$.
 
 When $\gamma = 2.5$, we set the parameters as follows: T = 10-100, step size = 1, expected number of periods = 60, expected number of demand (people) = 150, number of rows = 10, and number of seats per row = 21.

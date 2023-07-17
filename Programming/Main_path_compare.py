@@ -501,7 +501,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    num_period = 80
+    num_period = 70
     given_lines = 10
     # np.random.seed(i)
     # p = prop_list()
@@ -525,7 +525,7 @@ if __name__ == "__main__":
     equal = 0
 
     sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
-    sequence = [5, 4, 5, 3, 4, 2, 2, 2, 2, 5, 2, 4, 2, 4, 2, 3, 2, 3, 3, 4, 5, 4, 2, 5, 4, 2, 3, 2, 2, 2, 3, 3, 3, 3, 5, 2, 2, 3, 4, 4, 2, 4, 2, 3, 4, 3, 3, 5, 3, 3, 5, 3, 3, 2, 5, 3, 2, 4, 5, 3, 4, 2, 3, 4, 5, 4, 4, 3, 5, 2, 5, 4, 5, 3, 4, 2, 5, 5, 3, 5]
+    sequence = [2, 4, 5, 3, 5, 2, 4, 5, 4, 4, 2, 5, 3, 5, 2, 4, 3, 3, 5, 5, 2, 3, 4, 3, 3, 5, 2, 4, 5, 2, 4, 3, 4, 2, 4, 2, 3, 4, 2, 2, 4, 2, 5, 4, 4, 2, 5, 2, 5, 2, 2, 3, 3, 2, 3, 2, 5, 5, 5, 5, 5, 5, 2, 2, 4, 2, 3, 4, 2, 4]
     a, decision_sto = a_instance.method_new(sequence, ini_demand, newx4, roll_width)
     
     f = a_instance.offline(sequence)  # optimal result
@@ -545,3 +545,5 @@ if __name__ == "__main__":
     plt.scatter(path, sto_path, c = "blue")
     plt.scatter(path, bid_path, c = "red")
     plt.show()
+    print(sto_path[num_period-1])
+    print(bid_path[num_period-1])

@@ -7,15 +7,6 @@ This section discusses policies for assigning seats under conditions of stochast
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Suppose there are $T$ independent periods, one group will arrive in each period. There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
 
-% \subsection{Generate scenarios by discrete periods}\label{MappingSeq}
-% In the dynamic situation, we can use stochastic information to generate the sequences of group arrivals. The sequences can be integrated to obtain the scenario of demands.
-
-
-% Example:
-% The group types are $[2,3,4,5]$. The number of periods is $20$. The number of given rows is 4 and the number of seats is 22.
-% Each group arrives with the same probability.
-% The number of sequences generating from multinomial distribution is $1000$. Then, we can obtain $[0,3,6,11]$ from stochastic programming. When the number of sequences is 5000, we still obtain $[0,3,6,11]$. It shows that sampling is practical.
-
 
 \subsection{Dynamic Seat Assignment for Each Group Arrival}
 % we make the decision according to the realized arrivals.
@@ -82,7 +73,25 @@ The dual problem of LP relaxation of \eqref{deter_upper} is:
   \end{aligned}
 \end{equation}
 
-When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group. The bid-price control policy based on the static model is stated below.
+
+\begin{lem}
+  If the optimal solution to relaxation of problem (16) takes the form $(0, \ldots, 0, X_{bj}, \ldots, X_{Mj})$. The optimal solution is $z_1 ,\ldots, z_b =0$, $z_{i} = \frac{\delta(n_i-n_b)}{n_b}, i = b+1, \ldots, M$ and $\beta_j = \frac{n_i - \delta}{n_i}, \forall j$.
+\end{lem}
+
+When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group. 
+
+\begin{corollary}
+  When the capacity allows, the bid-price policy will always accept the large group. 
+\end{corollary}
+
+If the optimal solution to relaxation of problem (16) takes the form $(0, \ldots, 0, X_{bj}, \ldots, X_{Mj})$, then according to Lemma 5 and the complementary slackness property, we know that $z_1, \ldots, z_b = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, b$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_b - \delta}{n_b}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_b - \delta}{n_b} = \frac{\delta(n_i-n_b)}{n_b}$ for $i = b+1, \ldots, M$.
+
+Given that $d$ and $L$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_b - \delta}{n_b}$ for all $j$, and $z_i = \frac{\delta(n_i-n_b)}{n_b}$ for $i = b+1, \ldots, M$.
+
+Then the bid-price decision $i -\beta_{j} n_i = i - \frac{n_b -\delta}{n_b} n_i = \frac{\delta (i-b)}{n_b}$. When $i < b$, $i -\beta_{j} n_i <0$. When $i \geq b$, $i -\beta_{j} n_i \geq 0$.
+
+
+The bid-price control policy based on the static model is stated below.
 
 \begin{algorithm}[H]
   \caption{Bid-price algorithm}

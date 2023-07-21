@@ -272,25 +272,21 @@ The steps of the algorithm are described as below,
 \begin{algorithm}[H]\label{cut_algo}
   \caption{The benders decomposition algorithm}
     \begin{description}
-    \item[Step 1.] Solve LP \eqref{lemma_eq} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
-    Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
-
+    \item[Step 1.] Solve LP \eqref{lemma_eq} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario. Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
     \item[Step 2.] Set the upper bound $UB = c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
-    \item[Step 3.] 
-    For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c^{\intercal} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$.
-    \item[Step 4.]
-    For each $\omega$, if $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
+    \item[Step 3.] For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c^{\intercal} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$.
+    \item[Step 4.] For each $\omega$, if $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
     \item[Step 5.] Solve the updated RBMP, obtain a new solution $(x_1, z^{1})$ and update UB.
     \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(In our case, UB converges.)
    \end{description}
   \end{algorithm}
 
 \begin{remark}
-From the Lemma \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega}^0 = \mathbf{0}$ initially in Step 1.
+From the Lemma \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega}^0 = \mathbf{0}$ initially in {\bf Step 1}.
 \end{remark}
 
 \begin{remark}
-  Notice that only contraints are added in each iteration, thus $LB$ and $UB$ are both monotone. Then we can use $UB - LB < \epsilon$ to terminate the algorithm in Step 6.
+Notice that only contraints are added in each iteration, thus $LB$ and $UB$ are both monotone. Then we can use $UB - LB < \epsilon$ to terminate the algorithm in {\bf Step 6}.
 \end{remark}
 
 After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})$.
@@ -302,7 +298,7 @@ Then we can obtain the value of $\mathbf{y}_{\omega}$ from equation \eqref{y_rec
 The decomposition method only gives a fractional solution and the stochastic model does not provide an appropriate seat planning when the number of people in scenario demands is way smaller than the number of the seats. Thus, we change the linear solution from the decomposition method to obtain a feasible seat planning. Before that, we will discuss the deterministic model that can help to achieve the goal. 
 
 % The objective is to obtain the maximal number of people placed according to the demand scenarios. It will not provide an appropriate seat assignment when the number of people associated with scenario demands is way less than the number of available seats because there are multiple optimal solutions and the solution given by solver probably does not utilize all the empty seats.
-% For example, there are 10 rows of seating arrangements, with 20 seats in each row. Suppose the size of group is up to 4, when the scenario demands are $[2,3,2,3], [2,3,3,3], [3,3,2,3]$, any solutions can provide a supply more than $[3,3,3,3]$ will be the optimal, but the corresponding seat assignment obviously leaves many seats vacant. We will address this problem in Section \ref{seat_assignment}.
+
 
 When $|\Omega| =1$ in DEF formulation, the stochastic programming will be 
 
@@ -341,14 +337,12 @@ $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac
 
 Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $\mathbf{X} = (\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{Mj})$ the aggregate solution to the linear relaxation of problem \eqref{deter_upper}.
 
-\begin{lem}
+\begin{lem}\label{sol_relax_deter}
 Let $e_{i}$ denote the unit size of the $i$-th element of $\mathbf{X}$.
 Suppose item $b$ is in type $h$, then the aggregate solution is $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.  
-% $(0,\ldots, x,d_{h+1}, \ldots, d_{M})$.
 \end{lem}
 
 % That is, we will place as large groups as possible when the capacity allows.
-
 
 % Suppose that each row has the same length. Then the optimal integrated solution 
 % $(0,\ldots, x,d_{h+1}, \ldots, d_{m})$ has the same objective value with an integer solution. Deciding if these items can fit into a specified number of rows is the decision problem of the bin-packing problem. If the items associated with the integer solution can be put in the given number of rows, this solution is optimal; otherwise, it is not optimal. Since the bin-packing problem is NP-hard, problem \eqref{deter_upper} is also NP-hard.
@@ -359,7 +353,7 @@ Let the optimal solution obtained from the stochastic linear problem be $x^{*}_{
 
 \begin{equation}\label{deter_upper1}
   \{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq s_{i}^{0}, i \in \mathcal{M}; x_{ij} \in Z^{+} \}
-  \end{equation}
+\end{equation}
 
 then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{x}^{1}$, which represents a feasible seat planning. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$, which represents the supply for each group type.
 
@@ -370,13 +364,12 @@ To fully utilize the seats, we should set the supply $\mathbf{s}^{1}$ as the low
 \end{equation}
 
 \begin{lem}
-  The number of unoccupied seats in the seat planning obtained from problem \eqref{deter_lower} is at most $\delta$ for each row, given any feasible supply, $\mathbf{s}^{1}$, as the lower bound.
+  The number of unoccupied seats in the seat planning obtained from problem \eqref{deter_lower} is at most $\delta$ for each row, given any feasible supply, $\mathbf{s}^{1}$.
 \end{lem}
 
-To maximize the utilization of seats, we should assign full or largest patterns to each row. This procedure can be described in step 4 of the following algorithm.
+To maximize the utilization of seats, we should assign full or largest patterns to each row. This procedure can be described in {\bf Step 4} of the following algorithm.
 
 % The numerical results show that this seat planning has good performances under any stochastic demands, and also shows good results when dealing with the dynamic demands. 
-
 
 % Because the ratio of value to capacity is monotone for the size of groups, the solver can quickly solve this deterministic formulation without many branching operations.
 
@@ -385,14 +378,12 @@ To maximize the utilization of seats, we should assign full or largest patterns 
 
 % Firstly, we obtain the solution from stochatic programming. This solution corresponds to a supply for each group type. Then solve the deterministic model by setting the supply as the upper bound of demand to obtain another feasible supply. Finally, solve the deterministic model by setting this supply as the lower bound to obtain the seat assignment.
 
-
 \begin{algorithm}[H]
   \caption{Feasible seat planning algorithm}\label{feasible_seat}
     \begin{description}
     \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
 
-    \item[Step 2.] 
-    Replace the vector $\mathbf{d}$ with $\mathbf{s}^{0}$ in problem \eqref{deter_upper}, then solve the resulting problem to obtain the optimal solution, $\mathbf{x}^{1}$. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+    \item[Step 2.] Solve problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{x}^{1}$. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
     
     \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} with supply $\mathbf{s}^{1}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
 
@@ -412,5 +403,5 @@ To maximize the utilization of seats, we should assign full or largest patterns 
 
 \begin{remark}
 % We are able to provide an online seat planning by using our method.
-For a feasible seat planning, we provide a pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seat planning that meets practical needs.
+For a feasible seat planning, we provide a full or largest pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seat planning that meets practical needs.
 \end{remark}

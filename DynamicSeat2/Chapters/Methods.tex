@@ -1,21 +1,17 @@
 % !TEX root = sum1.tex
 
-\section{Dynamic Seat Assignment(DSA)}
-This section discusses policies for assigning seats under conditions of stochastic information. We first present the dynamic seat assignment policy for each group arrival, which incorporates group-type control and loss control to optimize resource utilization. We also compare this approach with the bid-price policy. Next, we discuss the dynamic seat assignment policy for all group arrivals together. Finally, we establish the FCFS policy as the benchmark.
+\section{Dynamic Seat Assignment(DSA) for Each Group Arrival}
+In this section, we discuss policies for assigning seats dynamically. We need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. We first present the dynamic seat assignment policy for each group arrival, which incorporates group-type control to optimize resource utilization. We also compare this approach with the bid-price policy. Finally, we establish the FCFS policy as the benchmark.
 
+We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
-We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Suppose there are $T$ independent periods, one group will arrive in each period. There are still $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group. Let $\mathbf{p}$ be the vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
+% Next, we discuss the dynamic seat assignment policy for all group arrivals together.
 
+\subsection{Group-type(Supply) Control}\label{nested_policy}
+Feasible seat planning represents the supply for each group type. We can use supply control to determine whether to accept a group. Specifically, if there is a supply available for an arriving group, we will accept the group. However, if there is no corresponding supply for the arriving group, we need to decide whether to use a larger group supply to meet the group's needs. When a group is accepted to occupy larger-size seats, the remaining empty seat(s) can be reserved for future demand.
 
+In the following section, we will demonstrate how to decide whether to accept the current group to occupy larger-size seats when there is no corresponding supply available.
 
-\subsection{Dynamic Seat Assignment for Each Group Arrival}
-% we make the decision according to the realized arrivals.
-In this situation, we not only need to decide whether to accept or reject an arrival, but also assign seats to each group if we accept it.
-
-\subsubsection{Group-type(Supply) Control}\label{nested_policy}
-The feasible seat planning represents the supply for each group type. We can use the supply control to accept group, i.e., when there is a supply for one arriving group, we will accept the group. When there is no the corresponding supply for the arriving group, we need to determine whether to use a larger group supply to meet the arriving group's needs. When one group is accepted to occupy the larger-size seats, the rest empty seat(s) can be reserved for future demand.
-
-Now we demonstrate whether to accept the current group to occupy larger-size seats when there is no corresponding supply. 
 
 When the number of remaining periods is $T_r$, for any $j>i$, we can use one supply of group type $j$ to accept a group of $i$. In that case, when $i+\delta \leq j$, $(j-i-\delta)$ seats can be provided for one group of $j-i-\delta$ with $\delta$ seats of social distancing. Let $D_j$ be the random variable indicates the number of group type $j$ in $T_r$ periods. The expected number of accepted people is $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r)$, where $P(D_i \geq x_i; T_r)$ is the probability of that the demand of group type $i$ in $T_r$ periods is no less than $x_i$, the remaining supply of group type $i$. Thus, the term, $P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r)$, indicates the probability that the demand of group type $(j-i-\delta)$ in $T_r$ periods is no less than its current remaining supply plus 1. When $i <j < i+\delta$, the expected number of accepted people is $i$.
 
@@ -32,11 +28,7 @@ Let $d(i,j)$ be the difference of expected number of accepted people between acc
 \subsection{Use the objective value of Stochastic planning}
 Stochastic planning involves using the objective value of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival (i.e., the Value of Acceptance), as well as the potential outcomes that could result from rejecting it (i.e., the Value of Rejection).
 
-% Value of Acceptance: consider the scenarios when accepting current arrival.
-
-% Value of Rejection: consider the same scenarios when rejecting current arrival.
-
-By comparing the Value of Acceptance and the Value of Rejection, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made.
+The Value of Acceptance considers the scenarios that could arise if we accept the current arrival, while the Value of Rejection considers the same scenarios if we reject it. By comparing the Value of Acceptance and the Value of Rejection, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made.
 
 
 \begin{table}[ht]
@@ -61,9 +53,8 @@ By comparing the Value of Acceptance and the Value of Rejection, we can make an 
   \end{tabular}
 \end{table}
 
-
 \subsection{Bid-price}
-The dual problem of LP relaxation of \eqref{deter_upper} is:
+The dual problem of LP relaxation of problem \eqref{deter_upper} is:
 
 \begin{equation}\label{bid-price_dual}
   \begin{aligned}
@@ -75,20 +66,24 @@ The dual problem of LP relaxation of \eqref{deter_upper} is:
 
 
 \begin{lem}
-  If the optimal solution to relaxation of problem (16) takes the form $(0, \ldots, 0, X_{bj}, \ldots, X_{Mj})$. The optimal solution is $z_1 ,\ldots, z_b =0$, $z_{i} = \frac{\delta(n_i-n_b)}{n_b}, i = b+1, \ldots, M$ and $\beta_j = \frac{n_i - \delta}{n_i}, \forall j$.
+If the optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, as mentioned in Lemma \ref{sol_relax_deter}, then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$.
 \end{lem}
 
 When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group. 
 
+We can find that $\beta_{j}$ does not change with $j$, which means bid-price cannot decide which row to assign the group.
+% $i -\beta_{j} n_i$ 
+The bid-price refers to the marginal value or the opportunity cost of a seat.
+
 \begin{corollary}
-  When the capacity allows, the bid-price policy will always accept the large group. 
+  If the optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, then the bid-price policy will accept group type $i$, $i \geq h$, when the capacity allows.
 \end{corollary}
 
-If the optimal solution to relaxation of problem (16) takes the form $(0, \ldots, 0, X_{bj}, \ldots, X_{Mj})$, then according to Lemma 5 and the complementary slackness property, we know that $z_1, \ldots, z_b = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, b$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_b - \delta}{n_b}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_b - \delta}{n_b} = \frac{\delta(n_i-n_b)}{n_b}$ for $i = b+1, \ldots, M$.
+\begin{pf}
+  If the optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to Lemma 5 and the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
 
-Given that $d$ and $L$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_b - \delta}{n_b}$ for all $j$, and $z_i = \frac{\delta(n_i-n_b)}{n_b}$ for $i = b+1, \ldots, M$.
-
-Then the bid-price decision $i -\beta_{j} n_i = i - \frac{n_b -\delta}{n_b} n_i = \frac{\delta (i-b)}{n_b}$. When $i < b$, $i -\beta_{j} n_i <0$. When $i \geq b$, $i -\beta_{j} n_i \geq 0$.
+Given that $d$ and $L$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$, and $z_i = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$. Then the bid-price decision $i -\beta_{j} n_i = i - \frac{n_h -\delta}{n_h} n_i = \frac{\delta (i-h)}{n_h}$. When $i < h$, $i -\beta_{j} n_i <0$. When $i \geq h$, $i -\beta_{j} n_i \geq 0$. \qed
+\end{pf}
 
 
 The bid-price control policy based on the static model is stated below.

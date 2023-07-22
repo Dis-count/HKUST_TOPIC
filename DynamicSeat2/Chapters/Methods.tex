@@ -30,28 +30,20 @@ Stochastic planning involves using the objective value of accepting or rejecting
 
 The Value of Acceptance considers the scenarios that could arise if we accept the current arrival, while the Value of Rejection considers the same scenarios if we reject it. By comparing the Value of Acceptance and the Value of Rejection, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made.
 
+\subsubsection{Algorithm Based on Stocahstic Planning}
+The feasible seat planning can be obtained from Algorithm \ref{feasible_seat} before the group arrivals. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
 
-\begin{table}[ht]
-  \centering
-  \caption{Results of stochastic planning versus bid-price}
-  \begin{tabular}{|l|l|l|l|l|}
-  \hline
-   T & probabilities & Sto(\%) & DP1 & Bid-price(\%)  \\
-  \hline
-   60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 \\
-   70  & [0.25, 0.25, 0.25, 0.25]  & 98.34 & 96.87 & 96.24 \\
-   80  & [0.25, 0.25, 0.25, 0.25]  & 98.61 & 95.69 & 96.02  \\
-   \hline
-   60  & [0.25, 0.35, 0.05, 0.35]  & 98.94 & 98.26 & 98.25 \\
-   70  & [0.25, 0.35, 0.05, 0.35]  & 98.05 & 96.62 & 96.06 \\
-   80  & [0.25, 0.35, 0.05, 0.35]  & 98.37 & 96.01 & 95.89 \\
-  \hline
-  60  & [0.15, 0.25, 0.55, 0.05]  & 99.14 & 98.72 & 98.74 \\
-  70  & [0.15, 0.25, 0.55, 0.05]  & 99.30 & 96.38 & 96.90 \\
-  80  & [0.15, 0.25, 0.55, 0.05]  & 99.59 & 97.75 & 97.87 \\
-  \hline
-  \end{tabular}
-\end{table}
+The algorithm is shown below:
+
+\begin{algorithm}[H]
+  \caption{Dynamic seat assignment algorithm}\label{algo_dynamic_policy}
+  \begin{description}
+    \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\X = [x_{1}, \ldots, x_{M}]$.
+    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in \mathcal{N}$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
+    \item[Step 3.] If $i \notin P_k, \forall k \in \mathcal{N}$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-\delta} = x_{j-i-\delta} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-\delta)$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
+  \end{description}
+\end{algorithm}
 
 \subsection{Bid-price}
 The dual problem of LP relaxation of problem \eqref{deter_upper} is:
@@ -69,11 +61,8 @@ The dual problem of LP relaxation of problem \eqref{deter_upper} is:
 If the optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, as mentioned in Lemma \ref{sol_relax_deter}, then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$.
 \end{lem}
 
-When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group. 
+The bid-price is a term used to describe the marginal value or opportunity cost of a seat. When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group. However, we can find that $\beta_{j}$ does not vary with $j$, which means bid-price cannot decide which row to assign the group to.
 
-We can find that $\beta_{j}$ does not change with $j$, which means bid-price cannot decide which row to assign the group.
-% $i -\beta_{j} n_i$ 
-The bid-price refers to the marginal value or the opportunity cost of a seat.
 
 \begin{corollary}
   If the optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, then the bid-price policy will accept group type $i$, $i \geq h$, when the capacity allows.
@@ -96,22 +85,6 @@ The bid-price control policy based on the static model is stated below.
     \item[Step 3.] Set $k = \arg \max_{j} \{i -\beta_{j}^{t} n_i | n_i \mathbf{e}_{k}^{\top} \leq \mathbf{L}\}$.
     \item[Step 4.] If $i -\beta_{k}^{t} n_i \geq 0$, then assign the group to row $k$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject the group, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$. 
     \item[Step 5.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
-  \end{description}
-\end{algorithm}
-
-\subsubsection{Algorithm}
-% Firstly, if supply control and bid-price both decide to accept a small group, then accept it; otherwise, reject it.
-The feasible seat planning can be obtained from Algorithm \ref{feasible_seat} before the group arrivals. In accordance with the group-type control and bid-price policy discussed in the previous section, we determine whether to accept or reject group arrivals.
-
-The algorithm is shown below:
-
-\begin{algorithm}[H]
-  \caption{Dynamic seat assignment algorithm}\label{algo_dynamic_policy}
-  \begin{description}
-    \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\X = [x_{1}, \ldots, x_{M}]$.
-    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in \mathcal{N}$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
-    \item[Step 3.] If $i \notin P_k, \forall k \in \mathcal{N}$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, and bid-price also accepts it, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. Accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-\delta} = x_{j-i-\delta} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-\delta)$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
-    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
 

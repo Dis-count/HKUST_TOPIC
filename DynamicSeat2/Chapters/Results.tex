@@ -1,25 +1,12 @@
 % !TEX root = sum1.tex
-
 \section{Results}
-% The nested structure makes the greedy method useful.
-% Remark: Similar to what we mentioned, the greedy method refers to using the largest groups to fill the seats.
-
 We carried out several experiments, including comparing the running time of decomposition and Integer programming, comparing the number of people served using the feasible seat planning and Integer programming methods, analyzing different policies under the two booking situations, evaluating the results under varying demands, assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
-
-% Improvement:
-% For $\X^{0}$, we introduce one empty seat, $x_1$. But it cannot provide the feasibility.
-
-% \subsection{Deterministic Model}\label{Deterministic_result}
-% The integer programming \eqref{deter_upper} can be solved quickly because of the monotone ratio.
 
 
 \subsection{Running time of Benders Decomposition and IP}\label{Bender_IP}
-
-% In view of the fact that IP of the deterministic model can be solved quickly, the column generation method does not show an obvious advantage. 
-
 % At first, we compare the running time of these two methods. 
 
-The running times of solving IP directly and using Benders decomposition are shown in Table \ref{tab_1}. 
+The running times of solving DEF directly and solving the relaxation of DEF with Benders decomposition are shown in Table \ref{tab_1}.
 
 \begin{table}[ht]
   \centering
@@ -61,7 +48,6 @@ Take the first experiment as an example, the scenarios of demands are generated 
 
 
 \subsection{Feasible Seat Planning versus IP Solution}
-
 An arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{i} = \sum_{t} I(y_t = i)$, i.e., the number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{M})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{M} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{M}!} \prod_{i=1}^{M} p_{i}^{N_i}, T = \sum_{i=1}^{M} N_{i}.$$
 
 It is clear that the number of different sequences is $M^{T}$. The number of different scenarios is $O(T^{M-1})$ which can be obtained by the following DP.
@@ -76,7 +62,7 @@ Then, we will show the feasible seat assignment has a close performance with IP 
 
 \begin{table}[ht]
     \caption{Results of Feasible Seat Planning and IP solution}
-    \begin{tabular}{|l|l|l|l|l|l|}
+    \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
     \# samples & T & probabilities & \# rows & people served by decomposition & people served by IP \\
     1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 85.30 & 85.3 \\
@@ -108,7 +94,6 @@ We can find that the people served by Benders decomposition and IP under nested 
 % Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
 \subsection{Results of Different Policies}
-
 We compare the performance of different policies to the optimal value. Specifically, we consider four policies for seat assignment for each group arrival: DSA, DSA(mean), bid-price and FCFS. In addition, we evaluate two policies for seat assignment after all group arrivals: one is based on dynamic programming (DP) and the other is based on first-come, first-served (FCFS) scheduling.
 % We present the results of our experiments and discuss their implications.
 
@@ -116,57 +101,37 @@ The seat layout consists of 10 rows, each containing 21 seats.
 
 \begin{table}[ht]
   \centering
-  \caption{Results of Policies}
-  \begin{tabular}{|l|l|l|l|l|l|l|l|}
+  \caption{Results of stochastic planning versus bid-price}
+  \begin{tabular}{|l|l|l|l|l|l|}
   \hline
-   T & probabilities &  DSA(\%) & DSA(mean) & Bid-price & FCFS(\%) & DP-based(\%) & FCFS-based(\%) \\
+   T & probabilities & Sto(\%) & DP1(\%) & Bid-price(\%) & FCFS(\%) \\
   \hline
-   60  & [0.25, 0.25, 0.25, 0.25]  & 98.92 & 99.10 & 98.19 & 98.48 & 99.48 & 99.31 \\
-   70  & [0.25, 0.25, 0.25, 0.25]  & 98.22 & 98.00 & 96.27 & 94.70 & 99.23 & 95.99 \\
-   80  & [0.25, 0.25, 0.25, 0.25]  & 98.04 & 98.42 & 96.00 & 93.08 & 99.39 & 94.08 \\
+   60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 & 98.17 \\
+   70  & [0.25, 0.25, 0.25, 0.25]  & 98.34 & 96.87 & 96.24 & 94.75 \\
+   80  & [0.25, 0.25, 0.25, 0.25]  & 98.61 & 95.69 & 96.02 & 93.18 \\
    \hline
-   60  & [0.15, 0.25, 0.55, 0.05]  & 99.13 & 98.71 & 98.27 & 98.45 & 99.72 & 99.53 \\
-   70  & [0.15, 0.25, 0.55, 0.05]  & 99.19 & 99.12 & 97.16 & 96.24 & 99.30 & 97.65 \\
-   80  & [0.15, 0.25, 0.55, 0.05]  & 99.60 & 99.39 & 97.85 & 95.87 & 99.21 & 97.11 \\
-   \hline
-   60  & [0.25, 0.35, 0.05, 0.35]  & 98.98 & 98.64 & 98.14 & 98.19 & 99.62 & 99.33 \\
-   70  & [0.25, 0.35, 0.05, 0.35]  & 98.06 & 97.81 & 96.18 & 94.34 & 99.14 & 95.89 \\
-   80  & [0.25, 0.35, 0.05, 0.35]  & 97.97 & 98.33 & 95.81 & 92.82 & 99.31 & 94.16 \\
+   60  & [0.25, 0.35, 0.05, 0.35]  & 98.94 & 98.26 & 98.25 & 98.62 \\
+   70  & [0.25, 0.35, 0.05, 0.35]  & 98.05 & 96.62 & 96.06 & 93.96 \\
+   80  & [0.25, 0.35, 0.05, 0.35]  & 98.37 & 96.01 & 95.89 & 92.88 \\
+  \hline
+  60  & [0.15, 0.25, 0.55, 0.05]  & 99.14 & 98.72 & 98.74 & 98.07 \\
+  70  & [0.15, 0.25, 0.55, 0.05]  & 99.30 & 96.38 & 96.90 & 96.25 \\
+  80  & [0.15, 0.25, 0.55, 0.05]  & 99.59 & 97.75 & 97.87 & 95.81 \\
   \hline
   \end{tabular}
 \end{table}
 
-\begin{table}[ht]
-  \centering
-  \caption{Results of Policies}
-  \begin{tabular}{|l|l|l|l|l|l|l|l|}
-  \hline
-   T & probabilities &  Sto+ Bid(\%) & Mean+bid & Bid-price & FCFS(\%) & DP-based(\%) & FCFS-based(\%) \\
-  \hline
-   60  & [0.25, 0.25, 0.25, 0.25]  & 99.11 & 98.45 & 98.08 & 98.17 & 99.44 & 99.31 \\
-   70  & [0.25, 0.25, 0.25, 0.25]  & 98.57 & 98.22 & 96.78 & 94.75 & 99.19 & 95.88 \\
-   80  & [0.25, 0.25, 0.25, 0.25]  & 98.74 & 98.59 & 95.99 & 93.18 & 99.28 & 94.29 \\
-   \hline
-   60  & [0.15, 0.25, 0.55, 0.05]  & 99.15 & 98.31 & 98.26 & 98.07 & 99.45 & 99.39 \\
-   70  & [0.15, 0.25, 0.55, 0.05]  & 99.45 & 99.05 & 97.38 & 96.25 & 99.39 & 97.64 \\
-   80  & [0.15, 0.25, 0.55, 0.05]  & 99.70 & 99.14 & 97.71 & 95.81 & 99.17 & 97.08 \\
-   \hline
-   60  & [0.25, 0.35, 0.05, 0.35]  & 99.21 & 98.40 & 98.49 & 98.62 & 99.65 & 99.64 \\
-   70  & [0.25, 0.35, 0.05, 0.35]  & 98.32 & 97.86 & 96.08 & 93.96 & 99.27 & 95.65 \\
-   80  & [0.25, 0.35, 0.05, 0.35]  & 98.56 & 98.22 & 96.27 & 92.88 & 99.41 & 94.26 \\
-  \hline
-  \end{tabular}
-\end{table}
 
 % The number of rows is set at 10, and the number of seats per row is 21 (including one dummy seat).
 
+%  social distance
 \subsection{Results of the Mean Arriving People per Period}
-In this subsection, we discuss the effect of different probabilities on our experimental results. Let $\gamma$ denote the number of people each period, $L$ denote the total number of seats. The expected number of people is $E(D) = \gamma T$. Suppose we accept $E(D)$ people with $T$ arrivals and the sum of $E(D)$ and $T$ is equal to the total number of seats. In this case, $T = L/(\gamma + 1)$, the estimation of the occupancy rate is $\frac{\gamma}{\gamma+1}$. 
+In this subsection, we examine how different probabilities affect our experimental results. Let $\gamma$ represent the average group size, and $L$ represent the total number of seats available. The expected number of people arriving is given by $E(D) = \gamma T$, where $T$ is the total number of arrivals. Assuming we accept all of the expected arrivals, and the sum of $E(D)$ and $T$ equals the total number of seats, we can calculate $T$ as $L/(\gamma + 1)$. In this case, the estimated occupancy rate is given by $\frac{\gamma}{\gamma+1}$. According to the assumption, the estimation is accurate when all rows represent full patterns.
+
+If we limit the number of group types to 4, we can express $\gamma$ as $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05, and define each combination $(p_1, p_2, p_3, p_4)$ such that $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. The figure below shows the number of people served for each value of $\gamma$. For each probability combination, the blue point represents the average number of people served over 50 instances, and the red point represents the estimated number of people served.
+
+
 % We choose $T = E(D)/\gamma$ such that the supply is near the demand. 
-
-When we confine the number of group types as 4, $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively.
-We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. We call each realization $(p_1, p_2, p_3, p_4)$ the probability combination when $p_1 + p_2 + p_3 + p_4 = 1$. The number of people served with respect to the value of $\gamma$ is shown in the figure below. For each probability combination, the blue point represents the average number of people served from 50 instances and the red point represents the estimated number of people served.
-
 
 \begin{figure}[h]
   \centering
@@ -174,25 +139,17 @@ We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. W
     \includegraphics[width=0.48\textwidth]{./Figures/diff_1.pdf}}
   \subfigure[Average of 50 instances for each probability combination]{
     \includegraphics[width=0.48\textwidth]{./Figures/diff_2.pdf}}
-  \caption{The number of people served versus $\gamma$}
+  \caption{The number of people accepted versus $\gamma$}
 \end{figure}
 
-The estimation is accurate when all rows represent full patterns.
 
-% The number of people served is near $\frac{\gamma}{\gamma+1} * 210$ on average (as shown by the red points in the figure).
+If the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{21}$. The maximum number of people that can be accepted is $210 * \frac{16}{21} = 160$, which is the upper bound on the number of people that can be accepted. The estimated number of people accepted is given by $\frac{\gamma}{\gamma+1} * 210$, as indicated by the red points in the figure.
 
-If the largest pattern is assigned for each row, the occupancy rate is $\frac{16}{21}$. The maximum number of people that can be served is $210 * \frac{16}{21} = 160$, which is the upper bound of the number of people served.
-
-We also observe that some blue points are far from the red points in the figure. For example, when the probability is $[0.05, 0.05, 0.85, 0.05] (\gamma = 2.9)$, the demands can be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$. It is not possible to construct all full patterns for every row with these demands, violating our assumption and resulting in a large gap between the blue and red points in this case.
+However, we have also observed that some blue points in the figure are significantly far from the corresponding red points. For instance, when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), the demands may be such that they cannot be accommodated by constructing full patterns for every row. This does not satisfy our assumption and results in a large gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$.
 
 
 % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
 % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
-
-% 1: When $E(D)$ is fixed, case3,4 need a larger hall to accept the same number of people.
-
-
-% 2. The assumption that $T$ is fixed will be more reasonable for the continuous time. 
 
 We can give the absolute difference between the blue point and red point for each probability combination as below.
 
@@ -226,7 +183,6 @@ We can give the absolute difference between the blue point and red point for eac
 The results show that we can estimate attendance rate based on $\gamma$ for most probability combinations. 
 
 \subsection{Result of Different Demands}
-
 % We then compare the number of people served under different values of $\gamma$.
 In this subsection, we discuss the effect of the number of periods on the results of our experiments. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$.
 

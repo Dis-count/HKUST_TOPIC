@@ -34,6 +34,7 @@ class stochasticModel:
         return yplus, yminus
 
     def value(self, d0):
+        # this funtion is used to calculate objective value when we know the optimal solution 
         part1 = self.value_array @ d0
         part2 = 0
         for w in range(self.W):
@@ -189,6 +190,25 @@ class stochasticModel:
         # print('optimal IP objective:', obj_IP)
         return newd, LB
 
+    # def setupMasterModel(self):
+    #     # Initially, add z<= 0
+    #     m = grb.Model()
+    #     x = m.addVars(self.I, self.given_lines, lb=0, vtype= GRB.CONTINUOUS, name = 'varx')
+    #     z = m.addVars(self.W, lb = -float('inf'), vtype= GRB.CONTINUOUS, name = 'varz')
+    #     m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+    #                             for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
+    #     for i in range(self.W):
+    #         #     yplus1, yminus1 = obtainY(dw[i])
+    #         #     alpha0 = solveSub(yplus1, yminus1)
+    #         m.addConstr(z[i] <= 0)
+    #     #     print('Initial cut:', alpha0)
+    #     m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
+    #     # m.update()
+    #     m.setParam('OutputFlag', 0)
+    #     # m.write('Master.lp')
+    #     m.optimize()
+
+    #     return m, [m.getVarByName('varx[' + str(i) + ',' + str(j) + ']').x for i in range(self.I) for j in range(self.given_lines)], [m.getVarByName('varz[' + str(w) + ']').x for w in range(self.W)]
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios

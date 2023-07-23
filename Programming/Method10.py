@@ -37,7 +37,6 @@ class deterministicModel:
         # print('************************************************')
         # print('Optimal value of IP is: %g' % m.objVal)
         x_ij = np.array(m.getAttr('X'))
-        
         newx = np.reshape(x_ij, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
         return newd, newx
@@ -64,7 +63,6 @@ class deterministicModel:
         newx = np.reshape(x_ij, (self.I, len(roll_width)))
         newd = np.sum(newx, axis=1)
         return newd, newx
-
 
     def LP_formulation(self, demand, roll_width):
         m = grb.Model()

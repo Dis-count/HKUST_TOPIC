@@ -6,7 +6,8 @@ from collections import Counter
 from scipy.stats import binom
 import copy
 # This function is used to calculate the revised benders (without benders decomposition)
-# Use another way to update 
+# For each sub-problem, solve IP instead. 
+# Can be used to compare IP and original model
 
 class stochasticModel:
     def __init__(self, roll_width, given_lines, demand_width_array, W,I, prop, dw):
@@ -18,7 +19,6 @@ class stochasticModel:
         self.I = I
         self.dw = dw
         self.prop = prop
-
 
     def obtainY(self, ind_dw, d0):
         # the last element is dummy
@@ -32,7 +32,6 @@ class stochasticModel:
                 yplus[j] = - ind_dw[j] + d0[j] + yplus[j+1]
         return yplus, yminus
 
-
     def solveSub(self, yplus, yminus):
         # the first element is dummy
         # Thus, we should notice that the positions of \alpha and y are different.
@@ -45,7 +44,6 @@ class stochasticModel:
                     alpha[j+1] = alpha[j] + 1
         alpha0 = np.delete(alpha, 0).tolist()
         return alpha0
-
 
     # def setupMasterModel(self):
     #     # Initially, add z<= 0
@@ -128,6 +126,8 @@ class stochasticModel:
         m.optimize()
         return
 
+# two ways to add constraints
+# 1. keep the basic m model.
 
     def solve_IP(self, m):
         xvalue = m.getVars()[0: self.I * self.given_lines]
@@ -140,7 +140,6 @@ class stochasticModel:
         return m.objVal, [m.getVarByName('varx[' + str(i) + ',' + str(j) + ']').x for i in range(self.I) for j in range(self.given_lines)]
 
     def solveBenders(self, eps = 1e-4, maxit = 10):
-
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.CONTINUOUS, name='varx')
         z = m.addVars(self.W, lb=-float('inf'), vtype=GRB.CONTINUOUS, name='varz')
@@ -318,14 +317,13 @@ class originalModel():
                                    for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         M_identity = np.identity(self.I)
 
-            # add demand constraints
+        # add demand constraints
         m2.addConstrs(grb.quicksum(x[i,j] for j in range(self.given_lines)) >= demand[i] for i in range(self.I))
 
         m2.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) + grb.quicksum(W0[i, j] * y1[j, w] +
                       M_identity[i, j]*y2[j, w] for j in range(self.I)) == self.dw[w][i] for i in range(self.I) for w in range(self.W))
         # print("Constructing second took...", round(time.time() - start, 2), "seconds")
-        m2.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(
-            self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
+        m2.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
 
         m2.setParam('OutputFlag', 0)
         m2.optimize()
@@ -338,260 +336,11 @@ class originalModel():
         # print('optimal demand:', newd)
         return newd, m2.objVal
 
-class samplingmethod:
-    def __init__(self, I, number_sample, number_period, prob) -> None:
-        self.I = I
-        self.number_sample = number_sample
-        self.number_period = number_period
-        # sample_multi = np.random.multinomial(self.number_period, [1/self.I]*self.I, size=self.number_sample)
-        sample_multi = np.random.multinomial(self.number_period, prob, size=self.number_sample)
-        self.sample_multi = sample_multi.tolist()
-
-    def convert(self):
-        # Converting integer list to string list
-        number_arrivals = 0
-        for i in self.sample_multi:
-            s = [str(j) for j in i]
-        # Join list items using join()
-            res = " ".join(s)
-            self.sample_multi[number_arrivals] = res
-            number_arrivals += 1
-        return self.sample_multi
-
-    # counter_list = convert()
-    # sample_result = Counter(counter_list)
-
-    def get_prob(self):
-        # Return the scenarios and the corresponding probability through sampling.
-        counter_list = self.convert()
-        sample_result = Counter(counter_list)
-        number_scenario = len(sample_result)
-        scenario_set = np.array([[0]*self.I] * number_scenario)
-        count = 0
-        prob_set = [0] * number_scenario
-        for key, value in sample_result.items():
-            key = key.split()
-            int1 = [int(i) for i in key]
-            prob = value / self.number_sample
-            scenario_set[count] = int1
-            prob_set[count] = prob
-            count += 1
-
-        return scenario_set, np.array(prob_set)
-
-def several_class(size_group, demand, remaining_period, probab):
-    # The function is used to give the maximum difference and give the decision
-    # j F(x_j -1, T, p_j) - (j-i-1) F(x_{j-i-1}, T, p_{j-i-1}) -1
-    # here probab should be a vector of arrival rate
-    # demand is the current left demand
-    # size_group is the actual size of group i
-    max_size = I
-    diff_set = np.zeros(max_size - size_group)
-    count = 0
-    for j in range(size_group+1, max_size+1, 1):
-        term1 = j * binom.cdf(demand[j-1]-1, remaining_period, probab[j-1])
-        term2 = (j-size_group-1) * binom.cdf(demand[j-size_group-2],remaining_period, probab[j-size_group-2])
-        diff_set[count] = term1 - term2 - 1
-        count += 1
-    max_diff = max(diff_set)
-    index_diff = np.argmax(diff_set) + size_group
-    if max_diff > 0:
-        return index_diff
-    else:
-        return False
-
-def decision1(sequence, demand, probab):
-    # the function is used to make a decision on several classes
-    # sequence is one possible sequence of the group arrival.
-    period = len(sequence)
-    group_type = sorted(list(set(sequence)))
-    decision_list = [0] * period
-    t = 0
-    for i in sequence:
-        remaining_period = period - t
-        position = group_type.index(i)
-        demand_posi = demand[position]
-        if demand_posi > 0:
-            decision_list[t] = 1
-            demand[position] = demand_posi - 1
-        elif sum(demand) == 0:
-            break
-        elif i == group_type[-1] and demand[-1]==0:
-            decision_list[t] = 0
-        else:
-            accept_reject = several_class(i-1, demand, remaining_period-1, probab)
-            if accept_reject:
-                decision_list[t] = 1
-                demand[accept_reject] -= 1
-                if accept_reject-position-2 >= 0:
-                    demand[accept_reject-position-2] += 1
-        t += 1
-        # print('the period:', t)
-        # print('demand is:', demand)
-    return decision_list
-
-def decisionOnce(sequence, demand, probab):
-    # the function is used to make a decision once on several classes
-    # sequence is one possible sequence of the group arrival.
-    record_demand = np.zeros(len(demand))
-    period = len(sequence)
-    group_type = sorted(list(set(sequence)))
-    decision_list = 0
-    i = sequence[0]
-    remaining_period = period
-    position = group_type.index(i)
-
-    if i == group_type[-1] and demand[-1] == 0:
-        decision_list = 0
-    else:
-        accept_reject = several_class(
-            i-1, demand, remaining_period-1, probab)
-        if accept_reject:
-            decision_list = accept_reject
-            demand[accept_reject] -= 1
-            if accept_reject-position-2 >= 0:
-                demand[accept_reject-position-2] += 1
-            record_demand[position] = 1
-    return record_demand, decision_list
-
-
-def generate_sequence(period, prob):
-    trials = [np.random.choice([2, 3, 4, 5], p=prob) for i in range(period)]
-    return trials
-
-
-def decision_demand(sequence, decision_list):
-    accept_list = np.multiply(sequence, decision_list)
-    dic = Counter(accept_list)
-    # Sort the list according to the value of dictionary.
-    res_demand = [dic[key] for key in sorted(dic)]
-    return res_demand
 # print('----------------------For the whole model-------------------')
 # print('The optimal value for the whole model:', t)
 # print('The optimal solution for the whole model:', bb[0:I])
 
-if __name__ == "__main__":
-    num_sample = 1000  # the number of scenarios
-    I = 4  # the number of group types
-    number_period = 100
-    given_lines = 7
-    np.random.seed(0)
-    # dw = np.random.randint(20, size=(W, I)) + 20
-    # dw = np.random.randint(low = 50, high= 100, size=(W, I))
-    probab = [0.25, 0.25, 0.25, 0.25]
-    sam = samplingmethod(I, num_sample, number_period, probab)
-
-    dw, prop = sam.get_prob()
-    W = len(dw)
-    # roll_width = np.random.randint(21, size = given_lines) + 30
-    roll_width = np.arange(21, 21 + given_lines)
-    # total_seat = np.sum(roll_width)
-
-    demand_width_array = np.array([2, 3, 4, 5])
-
-    my = stochasticModel(roll_width, given_lines,
-                         demand_width_array, W, I, prop, dw)
-
-    # my1 = originalModel(roll_width, given_lines, demand_width_array, W, I, prop, dw)
-
-    # obj = my1.solveModelGurobi()
-
-    ini_demand, upperbound = my.solveBenders(eps = 1e-4, maxit= 15)
-    sequence = generate_sequence(number_period, probab)
-    sequence1 = copy.deepcopy(sequence)
-    decision_list = decision1(sequence, ini_demand, probab)
-    total_people = np.dot(sequence, decision_list)
-    print(total_people)    
-    final_demand = np.array(sequence) * np.array(decision_list)
-    print(Counter(final_demand))
 
 # when demand =0, return used demands, remaining period, decision_list
 # Use remaining period, generate new dw and + used demands -> new scenarios
 # call benders again.
-
-
-def decisionSeveral(sequence, demand):
-    # the function is used to make several decisions
-    # Sequence is one possible sequence of the group arrival.
-    period = len(sequence)
-    group_type = sorted(list(set(sequence)))
-    # decision_list = [0] * period
-    originalDemand = copy.deepcopy(demand)
-    t = 0
-    for i in sequence:
-        remaining_period = period - t
-        position = group_type.index(i)
-        demand_posi = demand[position]
-        if demand_posi > 0:
-            # decision_list[t] = 1
-            demand[position] = demand_posi - 1
-        else:
-            usedDemand = originalDemand - demand
-            break
-        t += 1
-        # print('the period:', t)
-        # print('demand is:', demand)
-    # decision_list = decision_list[0:t]
-    return usedDemand, remaining_period
-
-def newScenario(usedDemand, remaining_period):
-    sam1 = samplingmethod(I, num_sample, remaining_period, probab)
-
-    dw, prop = sam1.get_prob()
-    newDemand = dw + usedDemand
-    return newDemand, prop
-
-
-total_usedDemand = np.zeros(I)
-
-mylist = []
-remaining_period0 = number_period
-for i in range(100):
-
-    demand = ini_demand - total_usedDemand
-
-    usedDemand, remaining_period = decisionSeveral(sequence, demand)
-    
-    diff_period = remaining_period0 - remaining_period
-
-    mylist += [1]* diff_period
-    
-    if any(usedDemand) == 0: # all are 0
-        useDemand, decision_list = decisionOnce(sequence, demand, probab)
-        if decision_list:
-            mylist.append(1)
-        else:
-            mylist.append(0)
-        remaining_period -=1
-
-    remaining_period0 = remaining_period
-    sequence = sequence[-remaining_period:]
-
-    total_usedDemand += usedDemand
-
-    newDemand, prop = newScenario(total_usedDemand, remaining_period)
-
-    W = len(prop)
-    print(i)
-    newModel = originalModel(roll_width, given_lines,
-                               demand_width_array, W, I, prop, newDemand)
-
-    ini_demand1, obj = newModel.solveModelGurobiDynamic(total_usedDemand)
-    print('Total used demand:', total_usedDemand)
-    print('supply:', ini_demand1)
-
-    if len(sequence) < 10:
-        break
-    else:
-        ini_demand = ini_demand1
-
-remaining_demand = ini_demand - total_usedDemand
-
-decision_list = decision1(sequence, remaining_demand, probab)
-
-mylist += decision_list
-
-total_people1 = np.dot(sequence1, mylist)
-final_demand1 = np.array(sequence1) * np.array(mylist)
-print(total_people1)
-print(Counter(final_demand1))

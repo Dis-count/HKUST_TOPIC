@@ -21,7 +21,6 @@ def several_class(size_group, demand, remaining_period, probab):
             binom.cdf(demand[j-size_group-2], remaining_period, probab[j-size_group-2])
         diff_set[count] = term1 - term2 - 1
         count += 1
-    # print(diff_set)
     max_diff = max(diff_set)
     index_diff = np.argmax(diff_set) + size_group
 
@@ -55,14 +54,11 @@ def decision1(sequence, demand, probab):
             accept_reject = several_class(
                 i-1, demand, remaining_period-1, probab)
             if accept_reject:
-                # print('Got!!')
                 decision_list[t] = 1
                 demand[accept_reject] -= 1
                 if accept_reject-position-2 >= 0:
                     demand[accept_reject-position-2] += 1
         t += 1
-        # print('the period:', t)
-        # print('demand is:', demand)
     return decision_list
 
 def generate_sequence(period, prob):
@@ -77,7 +73,6 @@ def generate_sequence(period, prob):
 #     # Sort the list according to the value of dictionary.
 #     res_demand = [dic[key] for key in sorted(dic)]
 #     return res_demand
-
 
 def decisionOnce(sequence, demand0, probab):
     # the function is used to make a decision once on several classes
@@ -106,7 +101,6 @@ def decisionOnce(sequence, demand0, probab):
             record_demand[position] = 1
     return record_demand, decision_list
 
-
 def decisionSeveral(sequence, demand):
     # The function is used to make several decisions
     # Sequence is one possible sequence of the group arrival.
@@ -134,7 +128,6 @@ def decisionSeveral(sequence, demand):
     # decision_list = decision_list[0:t]
     return usedDemand, remaining_period
 
-
 def decision2(sequence, demand):
     # The function is used to make a decision based on seat planning
     # sequence is one possible sequence of the group arrival.
@@ -158,3 +151,24 @@ def decision2(sequence, demand):
         # print('the period:', t)
         # print('demand is:', demand)
     return t, decision_list[0:t]
+
+# def decisionSeveral(sequence, demand):
+#     # the function is used to make several decisions
+#     # Sequence is one possible sequence of the group arrival.
+#     period = len(sequence)
+#     group_type = sorted(list(set(sequence)))
+#     originalDemand = copy.deepcopy(demand)
+#     t = 0
+#     for i in sequence:
+#         remaining_period = period - t
+#         position = group_type.index(i)
+#         demand_posi = demand[position]
+#         if demand_posi > 0:
+#             # decision_list[t] = 1
+#             demand[position] = demand_posi - 1
+#         else:
+#             usedDemand = originalDemand - demand
+#             break
+#         t += 1
+#     # decision_list = decision_list[0:t]
+#     return usedDemand, remaining_period

@@ -24,7 +24,8 @@ class CompareMethods:
 
     def random_generate(self):
         sequence = generate_sequence(self.num_period, self.probab)
-        sam = samplingmethod(self.I, self.num_sample, self.num_period-1, self.probab, sequence[0])
+        sam = samplingmethod(self.I, self.num_sample,
+                             self.num_period-1, self.probab, sequence[0])
 
         dw, prop = sam.get_prob()
         W = len(dw)
@@ -34,7 +35,8 @@ class CompareMethods:
 
         ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
         ini_demand = np.ceil(ini_demand)
-        deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I)
+        deter = deterministicModel(
+            self.roll_width, self.given_lines, self.demand_width_array, self.I)
 
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
         ini_demand, newx4 = deter.IP_formulation(ini_demand, np.zeros(self.I))
@@ -50,7 +52,8 @@ class CompareMethods:
         ini_demand1 = np.array(self.probab) * self.num_period
         ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
 
-        ini_demand3, newx3 = deter.IP_formulation(ini_demand3, np.zeros(self.I))
+        ini_demand3, newx3 = deter.IP_formulation(
+            ini_demand3, np.zeros(self.I))
 
         for new_num, new_i in enumerate(newx3.T):
             occu = np.dot(new_i, np.arange(2, I+2))
@@ -140,9 +143,9 @@ class CompareMethods:
             demand[i-1] += 1
 
         deter1 = deterministicModel(self.roll_width, self.given_lines,
-                                            self.demand_width_array, self.I)
+                                    self.demand_width_array, self.I)
         indi = deter1.IP_formulation1(demand, np.zeros(self.I))
-        while not indi:  # If indi doesnot exist, then delete the arrival from the seq. 
+        while not indi:  # If indi doesnot exist, then delete the arrival from the seq.
             demand[seq[-1]-1] -= 1
             seq.pop()
             indi = deter1.IP_formulation1(demand, np.zeros(self.I))
@@ -154,7 +157,7 @@ class CompareMethods:
         S = int(sum(self.roll_width))
         p = self.probab
         T = self.num_period
-        capa =0 # used to indicate whether the capacity is enough
+        capa = 0  # used to indicate whether the capacity is enough
         option = self.I
         value = [[0 for _ in range(T + 1)] for _ in range(S + 1)]
         record = [[[0] * option for _ in range(T + 1)] for _ in range(S+1)]
@@ -165,11 +168,13 @@ class CompareMethods:
                 everyvalue = 0
                 totalvalue = 0
                 for k in range(option):
-                    if k == (option -1) and (i - self.value_array[k]) >= 1:
-                        everyvalue = value[i - self.value_array[k] -1][j - 1] + self.value_array[k]
+                    if k == (option - 1) and (i - self.value_array[k]) >= 1:
+                        everyvalue = value[i - self.value_array[k] -
+                                           1][j - 1] + self.value_array[k]
                         capa = 1
                     elif (i - self.value_array[k]) >= 1:
-                        everyvalue = value[i - self.value_array[k]-1][j - 1] + self.value_array[k]
+                        everyvalue = value[i - self.value_array[k] -
+                                           1][j - 1] + self.value_array[k]
                         capa = 1
                     else:
                         everyvalue = value[i][j-1]
@@ -193,7 +198,7 @@ class CompareMethods:
             decision_list[k] = decision
         final_demand = np.array(sequence) * np.array(decision_list)
 
-        final_demand = final_demand[final_demand!=0]
+        final_demand = final_demand[final_demand != 0]
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
@@ -310,7 +315,7 @@ class CompareMethods:
         test = deterministicModel(
             self.roll_width, self.given_lines, self.demand_width_array, self.I)
         newd, _ = test.IP_formulation(np.zeros(self.I), demand)
-        
+
         return newd
 
     def method_new(self, sequence, newx, change_roll0):
@@ -447,7 +452,7 @@ class CompareMethods:
 
         final_demand = np.array(sequence) * np.array(decision_list)
         # print('The result of Method 1--------------')
-        final_demand = final_demand[final_demand!=0]
+        final_demand = final_demand[final_demand != 0]
 
         demand = np.zeros(self.I)
         for i in final_demand:
@@ -461,148 +466,79 @@ class CompareMethods:
         roll_width = copy.deepcopy(self.roll_width)
 
         final_demand1 = self.method1(sequence, ini_demand)
-        final_demand2 = self.method1(sequence, ini_demand2)
 
         final_demand3 = self.method_new(sequence, newx3, roll_width)
         # final_demand3 = 0
         final_demand4 = self.method_final(sequence, newx4, roll_width)
 
-        return final_demand1, final_demand2, final_demand3, final_demand4
+        return final_demand1, final_demand3, final_demand4
 
-def prop_list():
-    x = np.arange(0.05, 1, 0.1)
-    y = np.arange(0.05, 0.8, 0.1)
-    p = np.zeros((len(x)*len(y), 4))
-
-    t = 0
-    for i in x:
-        for j in y:
-            if 3-2*i-4*j > 0 and 3-4*i-2*j > 0:
-                p[t] = [(3 - 4*i - 2*j)/6, i, j, (3 - 2*i - 4*j)/6]
-                t += 1
-    p = p[0:t]
-
-    return p
-
-def prop_list1():
-    x = np.arange(0.05, 0.5, 0.1)  # p3
-    y = np.arange(0.05, 0.35, 0.05)  # p4
-    p = np.zeros((len(x)*len(y), 4))
-
-    t = 0
-    for i in x:
-        for j in y:
-            if 1-2*i-3*j > 0:
-                p[t] = [(i + 2*j), (1 - 2*i - 3*j), i, j]
-                t += 1
-    p = p[0:t]
-
-    return p
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
     num_period = 80
     given_lines = 10
-    # np.random.seed(i)
-    # p = prop_list()
-    p = [[0.25, 0.25, 0.25, 0.25], [0.25, 0.35, 0.05, 0.35], [0.15, 0.25, 0.55, 0.05]]
 
+    p = [0.25, 0.25, 0.25, 0.25]
     begin_time = time.time()
-    filename = 'Results_' + str(time.time()) + '.txt'
-    my_file = open(filename, 'w')
-    my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    for probab in p:
-        my_file.write('probabilities: \t' + str(probab) + '\n')
-        # probab = [0.3, 0.5, 0.1, 0.1]
-        roll_width = np.ones(given_lines) * 21
+    roll_width = np.ones(given_lines) * 21
         # total_seat = np.sum(roll_width)
 
-        a_instance = CompareMethods(
-            roll_width, given_lines, I, probab, num_period, num_sample)
+    a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample)
 
-        ratio1 = 0
-        ratio2 = 0
-        ratio3 = 0
-        ratio4 = 0
-        ratio5 = 0
-        ratio6 = 0
-        ratio7 = 0
-        ratio8 = 0
-        accept_people = 0
-        num_people = 0
+    ratio1 = 0
+    ratio2 = 0
+    ratio3 = 0
+    ratio4 = 0
+    ratio5 = 0
+    ratio6 = 0
+    ratio7 = 0
+    ratio8 = 0
+    accept_people = 0
+    num_people = 0
 
-        multi = np.arange(1, I+1)
+    multi = np.arange(1, I+1)
 
-        count = 100
+    count = 100
 
-        less = 0
-        large = 0
-        equal = 0
+    for j in range(count):
+        sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 
-        for j in range(count):
-            sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+        # total_people = sum(sequence) - num_period
 
-            # total_people = sum(sequence) - num_period
-            a = a_instance.method_new(sequence, ini_demand, newx4, roll_width)
-            
-            # b = a_instance.method_new2(sequence, ini_demand, newx4, roll_width)
-            # a, k, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
+        a, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
 
-            # b = a_instance.dynamic_program(sequence)
+        b = a_instance.dynamic_program(sequence)
 
-            # e = a_instance.bid_price1(sequence)
-            # baseline = np.dot(multi, e)
+        # e = a_instance.bid_price1(sequence)
+        # baseline = np.dot(multi, e)
 
-            f = a_instance.offline(sequence)  # optimal result
-            optimal = np.dot(multi, f)
+        f = a_instance.offline(sequence)  # optimal result
+        optimal = np.dot(multi, f)
 
-            h = a_instance.bid_price(sequence)
+        h = a_instance.bid_price(sequence)
 
-            # seq = a_instance.binary_search_first(sequence)
-            # g = a_instance.offline(seq)
-            if np.dot(multi, a) > np.dot(multi, h):
-                large += 1
-            elif np.dot(multi, a) < np.dot(multi, h):
-                less += 1
-                my_file.write('sequence:  ' + str(sequence))
-            else:
-                equal += 1
+        # seq = a_instance.binary_search_first(sequence)
+        # g = a_instance.offline(seq)
 
-            ratio1 += np.dot(multi, a) / optimal
-            # ratio2 += np.dot(multi, b) / optimal
-            # ratio3 += np.dot(multi, c) / optimal
-            # ratio4 += np.dot(multi, d) / optimal
-            # ratio5 += np.dot(multi, e) / optimal
-            # ratio6 += np.dot(multi, g) / optimal
-            ratio7 += np.dot(multi, h) / optimal
-            # ratio8 += np.dot(multi, k) / optimal
-            accept_people += optimal
-            # num_people += total_people
-        my_file.write('Number of Larger: %d;' % large)
-        my_file.write('Number of Less: %d;' % less)
-        my_file.write('Number of Equal: %d; \n' % equal)
+        ratio1 += np.dot(multi, a) / optimal
+        # ratio2 += np.dot(multi, b) / optimal
+        # ratio3 += np.dot(multi, c) / optimal
+        # ratio4 += np.dot(multi, d) / optimal
+        # ratio5 += np.dot(multi, e) / optimal
+        # ratio6 += np.dot(multi, g) / optimal
+        ratio7 += np.dot(multi, h) / optimal
+        # ratio8 += np.dot(multi, k) / optimal
+        accept_people += optimal
+        # num_people += total_people
 
-        my_file.write('Sto: %.2f ;' % (ratio1/count*100))
-        # my_file.write('Sto-1: %.2f ;' % (ratio2/count*100))
-        # my_file.write('Mean: %.2f ;' % (ratio3/count*100))
-        # my_file.write('Sto: %.2f ;' % (ratio4/count*100))
-        # my_file.write('bid-1: %.2f ;' % (ratio5/count*100))
-        # my_file.write('FCFS1: %.2f ;' % (ratio6/count*100))
-        my_file.write('bid-price: %.2f;' % (ratio7/count*100))
-        # my_file.write('Mean1: %.2f \n' % (ratio8/count*100))
-        my_file.write('Number of accepted people: %.2f \t' %
-                      (accept_people/count))
-        # my_file.write('Number of people: %.2f \n' % (num_people/count))
-        # f.write(str(ratio6/count*100) + '\n')
 
-    run_time = time.time() - begin_time
-    my_file.write('Total Runtime\t%f\n' % run_time)
     # print('%.2f' % (ratio1/count*100))
     # print('%.2f' % (ratio2/count*100))
     # print('%.2f' % (ratio3/count*100))
     # print('%.2f' % (ratio4/count*100))
     # print('%.2f' % (ratio5/count*100))
     # print('%.2f' % (ratio6/count*100))
-    my_file.close()
+

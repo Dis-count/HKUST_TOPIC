@@ -372,7 +372,7 @@ class CompareMethods:
                     # sam_accept = samplingmethod(I, num_sample, remaining_period-1, probab, sequence[-remaining_period:][0])
                     # dw_acc, prop_acc = sam_accept.get_prob()
                     sam_multi = samplingmethod1(
-                        I, num_sample, remaining_period-1, probab)
+                        I, num_sample, remaining_period-1, self.probab)
 
                     dw_acc, prop_acc = sam_multi.accept_sample(
                         sequence[-remaining_period:][0])
@@ -460,18 +460,15 @@ class CompareMethods:
 
         return demand
 
-    def result(self, sequence, ini_demand, ini_demand3, newx3, newx4):
-        ini_demand4 = copy.deepcopy(ini_demand)
-        ini_demand2 = copy.deepcopy(ini_demand3)
+    def result(self, sequence, ini_demand, ini_demand3, newx3):
+        
         roll_width = copy.deepcopy(self.roll_width)
 
         final_demand1 = self.method1(sequence, ini_demand)
 
         final_demand3 = self.method_new(sequence, newx3, roll_width)
-        # final_demand3 = 0
-        final_demand4 = self.method_final(sequence, newx4, roll_width)
 
-        return final_demand1, final_demand3, final_demand4
+        return final_demand1, final_demand3
 
 
 if __name__ == "__main__":
@@ -493,11 +490,7 @@ if __name__ == "__main__":
     ratio3 = 0
     ratio4 = 0
     ratio5 = 0
-    ratio6 = 0
-    ratio7 = 0
-    ratio8 = 0
     accept_people = 0
-    num_people = 0
 
     multi = np.arange(1, I+1)
 
@@ -506,39 +499,27 @@ if __name__ == "__main__":
     for j in range(count):
         sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
 
-        # total_people = sum(sequence) - num_period
-
-        a, c, d = a_instance.result(sequence, ini_demand, ini_demand3, newx3, newx4)
+        a, c = a_instance.result(sequence, ini_demand, ini_demand3, newx3)
 
         b = a_instance.dynamic_program(sequence)
 
-        # e = a_instance.bid_price1(sequence)
-        # baseline = np.dot(multi, e)
+        d = a_instance.dynamic_program1(sequence)
+
+        e = a_instance.bid_price(sequence)
 
         f = a_instance.offline(sequence)  # optimal result
         optimal = np.dot(multi, f)
 
-        h = a_instance.bid_price(sequence)
-
-        # seq = a_instance.binary_search_first(sequence)
-        # g = a_instance.offline(seq)
-
-        ratio1 += np.dot(multi, a) / optimal
-        # ratio2 += np.dot(multi, b) / optimal
-        # ratio3 += np.dot(multi, c) / optimal
-        # ratio4 += np.dot(multi, d) / optimal
-        # ratio5 += np.dot(multi, e) / optimal
-        # ratio6 += np.dot(multi, g) / optimal
-        ratio7 += np.dot(multi, h) / optimal
-        # ratio8 += np.dot(multi, k) / optimal
+        ratio1 += np.dot(multi, a) / optimal   # once
+        ratio2 += np.dot(multi, b) / optimal   # DP
+        ratio3 += np.dot(multi, c) / optimal   # sto-planning
+        ratio4 += np.dot(multi, d) / optimal   # DP1
+        ratio5 += np.dot(multi, e) / optimal   # bid-price
         accept_people += optimal
-        # num_people += total_people
 
-
-    # print('%.2f' % (ratio1/count*100))
-    # print('%.2f' % (ratio2/count*100))
-    # print('%.2f' % (ratio3/count*100))
-    # print('%.2f' % (ratio4/count*100))
-    # print('%.2f' % (ratio5/count*100))
-    # print('%.2f' % (ratio6/count*100))
+    print('%.2f' % (ratio1/count*100))
+    print('%.2f' % (ratio2/count*100))
+    print('%.2f' % (ratio3/count*100))
+    print('%.2f' % (ratio4/count*100))
+    print('%.2f' % (ratio5/count*100))
 

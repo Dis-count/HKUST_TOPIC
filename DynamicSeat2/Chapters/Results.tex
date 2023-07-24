@@ -124,7 +124,10 @@ The seat layout consists of 10 rows, each containing 21 seats.
 
 % The number of rows is set at 10, and the number of seats per row is 21 (including one dummy seat).
 
-%  social distance
+%  social distance affect occupancy rate
+%  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
+%  大于 gamma/gamma+1， 则最大损失是（  ）
+
 \subsection{Results of the Mean Arriving People per Period}
 In this subsection, we examine how different probabilities affect our experimental results. Let $\gamma$ represent the average group size, and $L$ represent the total number of seats available. The expected number of people arriving is given by $E(D) = \gamma T$, where $T$ is the total number of arrivals. Assuming we accept all of the expected arrivals, and the sum of $E(D)$ and $T$ equals the total number of seats, we can calculate $T$ as $L/(\gamma + 1)$. In this case, the estimated occupancy rate is given by $\frac{\gamma}{\gamma+1}$. According to the assumption, the estimation is accurate when all rows represent full patterns.
 
@@ -146,6 +149,22 @@ If we limit the number of group types to 4, we can express $\gamma$ as $\gamma =
 If the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{21}$. The maximum number of people that can be accepted is $210 * \frac{16}{21} = 160$, which is the upper bound on the number of people that can be accepted. The estimated number of people accepted is given by $\frac{\gamma}{\gamma+1} * 210$, as indicated by the red points in the figure.
 
 However, we have also observed that some blue points in the figure are significantly far from the corresponding red points. For instance, when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), the demands may be such that they cannot be accommodated by constructing full patterns for every row. This does not satisfy our assumption and results in a large gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$.
+% 改变 seat layout,  outlier 会消失。 
+% 
+
+\subsubsection{Results of Different Seat Layouts}
+We compare two seat layouts with the same total number of seats. The first layout has rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the second layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to a largest pattern.
+
+\begin{figure}[ht]
+  \centering
+  \subfigure[Average of 50 instances for step-size seat layout]{
+    \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
+  \subfigure[Average of 50 instances for random seat layout]{
+    \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
+  \caption{The number of people served versus $\gamma$}
+\end{figure}
+
+We can see that random seat layout will lead to a more accurate estimation, which means a random seat layout is likely to construct a full pattern so that to accept more people when facing the uncertain demands.
 
 
 % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
@@ -166,7 +185,6 @@ We can give the absolute difference between the blue point and red point for eac
   \hline
   \end{tabular}
 \end{table}
-
 
 \begin{figure}[ht]
   \centering
@@ -237,19 +255,6 @@ There are three stages, the first stage is when the capacity is sufficient. The 
 
 We can estimate the attendance rate from $\frac{\gamma}{\gamma+1}*$ the number of seats. The number of periods will be $E(D)/\gamma$. Thus, the government can make the policy on how much attendance rate can be established.
 
-\subsection{Results of Different Seat Layouts}
-We compare two seat layouts with the same total number of seats. The first layout has rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the second layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to a largest pattern.
-
-\begin{figure}[ht]
-  \centering
-  \subfigure[Average of 50 instances for step-size seat layout]{
-    \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
-  \subfigure[Average of 50 instances for random seat layout]{
-    \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
-  \caption{The number of people served versus $\gamma$}
-\end{figure}
-
-We can see that random seat layout will lead to a more accurate estimation, which means a random seat layout is likely to construct a full pattern so that to accept more people when facing the uncertain demands.
 
 \newpage
 

@@ -481,7 +481,7 @@ if __name__ == "__main__":
     begin_time = time.time()
 
     roll_width = np.ones(given_lines) * 21
-        # total_seat = np.sum(roll_width)
+    # total_seat = np.sum(roll_width)
 
     a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample)
 

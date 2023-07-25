@@ -24,13 +24,12 @@ Let $d(i,j)$ be the difference of expected number of accepted people between acc
   This control is based on the current feasible seat planning. We can combine other methods when a new seat planning can be regenerated.
 \end{remark}
 
-
-\subsection{Use the objective value of Stochastic planning}
-Stochastic planning involves using the objective value of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival (i.e., the Value of Acceptance), as well as the potential outcomes that could result from rejecting it (i.e., the Value of Rejection).
+\subsection{Stochastic Planning Policy}
+Stochastic planning policy involves using the objective value of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival (i.e., the Value of Acceptance), as well as the potential outcomes that could result from rejecting it (i.e., the Value of Rejection).
 
 The Value of Acceptance considers the scenarios that could arise if we accept the current arrival, while the Value of Rejection considers the same scenarios if we reject it. By comparing the Value of Acceptance and the Value of Rejection, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made.
 
-\subsubsection{Algorithm Based on Stocahstic Planning}
+\subsubsection{Algorithm Based on Stocahstic Planning Policy}
 The feasible seat planning can be obtained from Algorithm \ref{feasible_seat} before the group arrivals. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
 
 The algorithm is shown below:

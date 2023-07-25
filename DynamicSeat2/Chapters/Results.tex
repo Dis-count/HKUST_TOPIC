@@ -2,7 +2,6 @@
 \section{Results}
 We carried out several experiments, including comparing the running time of decomposition and Integer programming, comparing the number of people served using the feasible seat planning and Integer programming methods, analyzing different policies under the two booking situations, evaluating the results under varying demands, assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
-
 \subsection{Running time of Benders Decomposition and IP}\label{Bender_IP}
 % At first, we compare the running time of these two methods. 
 
@@ -123,9 +122,6 @@ The seat layout consists of 10 rows, each containing 21 seats.
 \end{table}
 
 
-% The number of rows is set at 10, and the number of seats per row is 21 (including one dummy seat).
-
-%  social distance affect occupancy rate
 %  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
 %  大于 gamma/gamma+1， 则最大损失是（  ）
 
@@ -205,7 +201,7 @@ We can give the absolute difference between the blue point and red point for eac
 
 \begin{table}[ht]
   \centering
-  \caption{Difference Distribution}
+  \caption{Absolute Difference Proportion}\label{tab_diff}
   \begin{tabular}{|l|l|l|l|l|}
   \hline
   \# of instances & abs\_diff $\geq$ 1 & abs\_diff $\geq$ 2 & abs\_diff $\geq$ 3 & abs\_diff $\geq$ 4 \\
@@ -226,15 +222,15 @@ We can give the absolute difference between the blue point and red point for eac
     \label{Fig2}
     \includegraphics[width=0.48\textwidth]{./Figures/Figure_100.pdf}}
   \caption{The difference distribution}
-  \label{Fig}
+  \label{fig_diff}
 \end{figure}
 
-The results show that we can estimate attendance rate based on $\gamma$ for most probability combinations. 
+Table \ref{tab_diff} displays the absolute difference proportion for the average of 20, 50, and 100 instances, while Figure \ref{fig_diff} shows the difference distribution for the average of 50 and 100 instances. These results suggest that we can estimate the attendance rate based on $\gamma$ for most probability combinations.
 
-However, we have also observed that some blue points in the figure are significantly far from the corresponding red points. For instance, when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), the demands may be such that they cannot be accommodated by constructing full patterns for every row. This does not satisfy our assumption and results in a large gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$.
+However, we have also observed that some blue points in the figure are significantly distant from their corresponding red points. This is evident when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
 
 \subsubsection{Results of Different Seat Layouts}
-If we modify the uniform seat layout, the differences between the red and blue points will decrease, and some outliers may be eliminated. To maintain the same total seating capacity, we compare two layouts with the uniform seat layout. The first layout consists of rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the second layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to the largest pattern.
+If we modify the even seat layout, the differences between the red and blue points will decrease, and some outliers may be eliminated. To maintain the same total seating capacity, we compare two layouts with the even seat layout. The step-size seat layout consists of rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the random seat layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to the largest pattern.
 
 \begin{figure}[ht]
   \centering
@@ -269,7 +265,6 @@ The results suggest that a random seat layout may provide a more accurate estima
 % \end{figure}
 
 % \subsection{Measurement}
-
 % Suppose a real scenario with a fixed sequence, $s^{r}$. Solving the following program can obtain the optimal value, $V_{s^{r}}$. (Offline)
 
 % Then the difference is $V_{s^{r}} - \text{our result}$.

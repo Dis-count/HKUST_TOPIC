@@ -37,17 +37,17 @@ Let $I_1$ be the set of patterns with the minimal loss. Then we call the pattern
 
 
 \begin{example}
-  Suppose the social distancing is one seat and there are four types of groups, then the new sizes of groups are $2, 3, 4, 5$, respectively. The length of one row is $L = 21$. Then these patterns, $(5, 5, 5, 5, 1), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. 
+  Suppose the social distancing is one seat and there are four types of groups, then the new sizes of groups are $2, 3, 4, 5$, respectively. The length of one row is $L = 21$. Then these patterns, $(5, 5, 5, 5), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$. 
 \end{example}
 
 % To represent a pattern with a fixed length of form, we can use a $(M+1)-$dimensional vector with $M$ group types. The aggregated form can be expressed as $[n_0, n_1, \ldots, n_M]$, where $n_i$ is the number of $i$-th group type, $i \in \mathcal{M}$. $n_0$ is the number of left seat, its value can only be $0, 1$ because two or more left seats will be assigned to groups. Thus the pattern, $[1, 0, 0, 0, 4]$, is not full because there is one left seat.
 
-We can use the following greedy way to generate the largest pattern. Select the maximal group size, $n_M$, as many as possible and the left space is assigned to the group with the corresponding size. Let $L = n_M \cdot q + r, 0 \leq r < n_M$, where $q$ is the number of times $n_M$ selected. 
-
+We can use the following greedy way to generate the largest pattern. Select the maximal group size, $n_M$, as many as possible and the left space is assigned to the group with the corresponding size. Let $L = n_M \cdot q + r, 0 \leq r < n_M$, where $q$ is the quotient representing the number of times $n_M$ selected and $r$ is the remainder representing the number of remaining seats.
 
 \begin{lem}
-When given the length of row, $L$, and the new size of the largest group allowed, $n_M$. Let $L = n_M \cdot q + r$, then the loss of the largest pattern is $q - f(r)$, where $f(r) =1$ if $r=0$; $f(r) =0$ if $r \neq 0$.
+The loss of the largest pattern is $q - f(r)$, where $f(r) =1$ if $r=0$, and $f(r) =0$ if $r \neq 0$ when given the length of a row, $L$, and the new size of the largest group allowed, $n_M$.
 \end{lem}
+
 
 \begin{lem}
 The seat assignment made up of the largest patterns is optimal.

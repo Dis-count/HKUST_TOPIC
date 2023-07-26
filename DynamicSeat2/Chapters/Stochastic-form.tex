@@ -326,23 +326,25 @@ To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i
 
 Problem \eqref{deter_upper} represents the deterministic model. Demand, $d_i, i \in \mathcal{M}$ is known in advance, our goal is to accommodate as many as people possible in the fixed rows.
 
-Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
 
-Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP), which is strongly NP-hard as we all known.
-
-Consider the solution to the linear relaxation of \eqref{deter_upper}. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$.
-Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes 
-$u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. 
 % $\frac{s_m-1}{s_m} \geq \ldots \geq \frac{s_2-1}{s_2} \geq \ldots \geq \frac{s_i-1}{s_i}$. because the ratio of value to capacity, $\frac{s_i-1}{s_i}, 1 \leq i \leq m$, is monotone in group type.
 
-Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $\mathbf{X} = (\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{Mj})$ the aggregate solution to the linear relaxation of problem \eqref{deter_upper}.
+ 
+Let $\sum_{j=1}^{N} x_{ij}$ indicate the supply for group type $i$. Denote by $\mathbf{X} = (\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{Mj})$ the aggregate solution to the linear relaxation of problem \eqref{deter_upper}. Let $x_{ij}^{*}$ denote the optimal solution to the linear relaxation of problem \eqref{deter_upper}.
 
 \begin{lem}\label{sol_relax_deter}
-Let $e_{i}$ denote the unit size of the $i$-th element of $\mathbf{X}$.
-Suppose item $b$ is in type $h$, then the aggregate solution is $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.  
+There exists $h$ such that for $i < h$, $x_{ij}^{*} = 0$; for $i > h$, $x_{ij}^{*} = d_{i}$; for $i = h$, $\sum_{j} x_{ij}^{*} = (L - \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. 
 \end{lem}
 
-% That is, we will place as large groups as possible when the capacity allows.
+Let $e_{i}$ denote the unit size of the $i$-th element of $\mathbf{X}$. Then the aggregate optimal solution is $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, where $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
+
+\begin{pf}
+Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
+
+Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP). Consider the solution to the linear relaxation of \eqref{deter_upper}. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$.
+Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(L-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $h$, then for $i < h$, $x_{ij}^{*} = 0$; for $i > h$, $x_{ij}^{*} = d_{i}$; for $i = h$, $\sum_{j} x_{ij}^{*} = (L - \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
+\end{pf}
+
 
 % Suppose that each row has the same length. Then the optimal integrated solution 
 % $(0,\ldots, x,d_{h+1}, \ldots, d_{m})$ has the same objective value with an integer solution. Deciding if these items can fit into a specified number of rows is the decision problem of the bin-packing problem. If the items associated with the integer solution can be put in the given number of rows, this solution is optimal; otherwise, it is not optimal. Since the bin-packing problem is NP-hard, problem \eqref{deter_upper} is also NP-hard.

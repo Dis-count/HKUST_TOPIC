@@ -45,7 +45,7 @@ The algorithm is shown below:
 \end{algorithm}
 
 \subsection{Bid-price}
-The dual problem of LP relaxation of problem \eqref{deter_upper} is:
+The dual problem of linear relaxation of problem \eqref{deter_upper} is:
 
 \begin{equation}\label{bid-price_dual}
   \begin{aligned}
@@ -55,24 +55,19 @@ The dual problem of LP relaxation of problem \eqref{deter_upper} is:
   \end{aligned}
 \end{equation}
 
+The bid-price is a term used to describe the marginal value or opportunity cost of a seat. When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
 
 \begin{lem}
-If the optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, as mentioned in Lemma \ref{sol_relax_deter}, then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$.
+According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. Then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. The bid-price policy will accept group type $i$, $i \geq h$, when the capacity allows.
 \end{lem}
 
-The bid-price is a term used to describe the marginal value or opportunity cost of a seat. When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group. However, we can find that $\beta_{j}$ does not vary with $j$, which means bid-price cannot decide which row to assign the group to.
-
-
-\begin{corollary}
-  If the optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, then the bid-price policy will accept group type $i$, $i \geq h$, when the capacity allows.
-\end{corollary}
+However, we can find that $\beta_{j}$ does not vary with $j$, which means bid-price cannot decide which row to assign the group to.
 
 \begin{pf}
-  If the optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to Lemma 5 and the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
+According to the Lemma \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
 
 Given that $d$ and $L$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$, and $z_i = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$. Then the bid-price decision $i -\beta_{j} n_i = i - \frac{n_h -\delta}{n_h} n_i = \frac{\delta (i-h)}{n_h}$. When $i < h$, $i -\beta_{j} n_i <0$. When $i \geq h$, $i -\beta_{j} n_i \geq 0$. \qed
 \end{pf}
-
 
 The bid-price control policy based on the static model is stated below.
 

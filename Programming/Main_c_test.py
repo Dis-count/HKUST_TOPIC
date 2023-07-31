@@ -86,7 +86,6 @@ class CompareMethods:
 
         return newd
 
-
     def result(self, sequence, ini_demand, ini_demand3):
         ini_demand4 = copy.deepcopy(ini_demand)
 
@@ -115,7 +114,6 @@ if __name__ == "__main__":
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-        # c = x1 + 2 * x2 + 3 * x3 + 4* x4 
     cnt = 0
     for probab in p:
 

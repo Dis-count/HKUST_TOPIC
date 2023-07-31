@@ -94,9 +94,6 @@ We can find that the people served by Benders decomposition and IP under nested 
 \subsection{Results of Different Policies}
 The optimal value can be obtained by solving the deterministic model after observing all arrivals. We compare the performance of different policies to the optimal value. Specifically, we consider four policies for seat assignment for each group arrival: based-on stochastic planning, DP Base-heuristic bid-price and FCFS. 
 
-% In addition, we evaluate two policies for seat assignment after all group arrivals: one is based on dynamic programming (DP) and the other is based on first-come, first-served (FCFS) scheduling.
-% We present the results of our experiments and discuss their implications.
-
 The seat layout consists of 10 rows, each containing 21 seats.
 
 \begin{table}[ht]
@@ -109,14 +106,20 @@ The seat layout consists of 10 rows, each containing 21 seats.
    60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 & 98.17 \\
    70  & [0.25, 0.25, 0.25, 0.25]  & 98.34 & 96.87 & 96.24 & 94.75 \\
    80  & [0.25, 0.25, 0.25, 0.25]  & 98.61 & 95.69 & 96.02 & 93.18 \\
+   90  & [0.25, 0.25, 0.25, 0.25]  &       &  &  &  \\
+   100 & [0.25, 0.25, 0.25, 0.25]  &       &  &  &  \\
    \hline
    60  & [0.25, 0.35, 0.05, 0.35]  & 98.94 & 98.26 & 98.25 & 98.62 \\
    70  & [0.25, 0.35, 0.05, 0.35]  & 98.05 & 96.62 & 96.06 & 93.96 \\
    80  & [0.25, 0.35, 0.05, 0.35]  & 98.37 & 96.01 & 95.89 & 92.88 \\
+   90  & [0.25, 0.35, 0.05, 0.35]  &       &  &  &  \\
+   100 & [0.25, 0.35, 0.05, 0.35]  &       &  &  &  \\
   \hline
   60  & [0.15, 0.25, 0.55, 0.05]  & 99.14 & 98.72 & 98.74 & 98.07 \\
   70  & [0.15, 0.25, 0.55, 0.05]  & 99.30 & 96.38 & 96.90 & 96.25 \\
   80  & [0.15, 0.25, 0.55, 0.05]  & 99.59 & 97.75 & 97.87 & 95.81 \\
+  90  & [0.15, 0.25, 0.55, 0.05]  &       &  &  &  \\
+  100 & [0.15, 0.25, 0.55, 0.05]  &       &  &  &  \\
   \hline
   \end{tabular}
 \end{table}
@@ -181,7 +184,7 @@ The figure below displays the outcomes of groups who were accepted under two dif
 The analysis comprises three stages. In the first stage, where the capacity is sufficient, social distancing measures have no impact on the outcome. In the second stage, the gap between the outcomes with and without social distancing measures widens as $T$ increases. Finally, in the third stage, as $T$ continues to increase, the gap between the outcomes with and without social distancing measures converges when both situations accept the maximum number of people.
 
 \subsection{Comparison of Different Probabilities When Supply and Demand Are Close}
-When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities. In this case, the estimated occupancy rate is given by $\frac{\gamma}{\gamma+1}$. It is important to note that this estimation is accurate only when all rows represent full patterns, as per our assumption.
+When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities. In this case, the estimated occupancy rate is given by $\frac{\gamma T'}{(\gamma+1)T' - N}$. It is important to note that this estimation is accurate only when all rows represent full patterns, as per our assumption.
 
 We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. The seat layout still remains the same as the above experiments. The figure below shows the number of people served for each value of $\gamma$. For each probability combination, the blue point represents the average number of people served over 50 instances, and the red point represents the estimated number of people served. 
 
@@ -246,24 +249,26 @@ The results suggest that a random seat layout may provide a more accurate estima
 % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
 % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
 
-\subsection{Group of Different Sizes}
-Let $\gamma$ be $2.5$ for groups of different sizes.
+% \subsection{Group of Different Sizes}
+% Let $\gamma$ be $2.5$ for groups of different sizes.
 
-Probability of group size of 3: $[0.1, 0.3, 0.6]$.
+% Probability of group size of 3: $[0.1, 0.3, 0.6]$.
 
-Probability of group size of 5: $[0.3, 0.3, 0.1, 0.2, 0.1]$.
+% Probability of group size of 5: $[0.3, 0.3, 0.1, 0.2, 0.1]$.
 
-\begin{figure}[h]
-  \centering
-  \subfigure[group size of 3]{
-    \includegraphics[width=0.48\textwidth]{./Figures/group3.pdf}}
-  \subfigure[group size of 5]{
-    \includegraphics[width=0.48\textwidth]{./Figures/group5.pdf}}
-  \caption{The number of people served versus periods}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \subfigure[group size of 3]{
+%     \includegraphics[width=0.48\textwidth]{./Figures/group3.pdf}}
+%   \subfigure[group size of 5]{
+%     \includegraphics[width=0.48\textwidth]{./Figures/group5.pdf}}
+%   \caption{The number of people served versus periods}
+% \end{figure}
 
 \newpage
 
+% In addition, we evaluate two policies for seat assignment after all group arrivals: one is based on dynamic programming (DP) and the other is based on first-come, first-served (FCFS) scheduling.
+% We present the results of our experiments and discuss their implications.
 
 
 % \subsection{Measurement}

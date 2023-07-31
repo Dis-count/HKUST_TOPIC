@@ -2,7 +2,6 @@ import numpy as np
 from SamplingMethod import samplingmethod
 from Mist import generate_sequence, several_class
 
-
 # This function uses dynamic way to solve the problem directly.
 
 class dynamicWay:

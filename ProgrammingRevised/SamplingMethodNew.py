@@ -2,7 +2,7 @@ import numpy as np
 from collections import Counter
 
 class samplingmethod1:
-    def __init__(self, I, number_sample, number_period, prob) -> None:
+    def __init__(self, I, number_sample, number_period, prob, sd) -> None:
         self.I = I
         self.number_sample = number_sample
         self.number_period = number_period
@@ -10,10 +10,11 @@ class samplingmethod1:
         sample_multi = np.random.multinomial(
             self.number_period, prob, size = self.number_sample)
         self.sample_multi = sample_multi.tolist()
+        self.s = sd
 
     def accept_sample(self, seq):
         sample = np.array(self.sample_multi)
-        sample[:, seq-2] = sample[:, seq-2] + 1
+        sample[:, seq-1-self.s] = sample[:, seq-1-self.s] + 1
         self.sample_acc = sample.tolist()
         counter_list = self.convert_acc(self.sample_acc)
         sample_result = Counter(counter_list)

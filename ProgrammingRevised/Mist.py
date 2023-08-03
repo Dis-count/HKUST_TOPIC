@@ -3,14 +3,14 @@ from scipy.stats import binom
 import numpy as np
 import copy
 
-def several_class(size_group, demand, remaining_period, probab, delta):
+def several_class(size_group, demand, remaining_period, probab, sd):
     # The function is used to give the maximum difference and give the decision
     # j F(x_j -1, T, p_j) - (j-i-\delta) F(x_{j-i-\delta}, T, p_{j-i-\delta}) -\delta
     # here probab should be a vector of arrival rate
     # demand is the current left demand
     # size_group is the actual size of group i
     #  return 0-index
-    # delta = 1
+    delta = sd
     max_size = len(demand)
     if size_group == max_size:
         return False
@@ -36,7 +36,7 @@ def several_class(size_group, demand, remaining_period, probab, delta):
     else:
         return False
 
-def decision1(sequence, demand, probab):
+def decision1(sequence, demand, probab, sd):
     # the function is used to make a decision on several classes
     # sequence is one possible sequence of the group arrival.
     period = len(sequence)
@@ -56,8 +56,7 @@ def decision1(sequence, demand, probab):
         elif i == group_type[-1] and demand[-1] == 0:
             decision_list[t] = 0
         else:
-            accept_reject = several_class(
-                i-1, demand, remaining_period-1, probab)
+            accept_reject = several_class(i-1, demand, remaining_period-1, probab, sd)
             if accept_reject:
                 decision_list[t] = 1
                 demand[accept_reject] -= 1
@@ -66,20 +65,13 @@ def decision1(sequence, demand, probab):
         t += 1
     return decision_list
 
-def generate_sequence(period, prob):
+def generate_sequence(period, prob, sd):
     I = len(prob)
-    group_type = np.arange(2, 2 + I)
+    group_type = np.arange(1+ sd, 1+ sd+ I)
     trials = [np.random.choice(group_type, p=prob) for _ in range(period)]
     return trials
 
-# def decision_demand(sequence, decision_list):
-#     accept_list = np.multiply(sequence, decision_list)
-#     dic = Counter(accept_list)
-#     # Sort the list according to the value of dictionary.
-#     res_demand = [dic[key] for key in sorted(dic)]
-#     return res_demand
-
-def decisionOnce(sequence, demand0, probab):
+def decisionOnce(sequence, demand0, probab, sd):
     # the function is used to make a decision once on several classes
     # sequence is one possible sequence of the group arrival.
     # decision_list is the index
@@ -87,7 +79,7 @@ def decisionOnce(sequence, demand0, probab):
     I = len(demand)
     record_demand = np.zeros(I)
     period = len(sequence)
-    group_type = [i+2 for i in range(I)]
+    group_type = [i+1+ sd for i in range(I)]
     decision_list = 0
     i = sequence[0]
     remaining_period = period
@@ -96,40 +88,12 @@ def decisionOnce(sequence, demand0, probab):
     if i == group_type[-1] and demand[-1] == 0:
         decision_list = 0
     else:
-        accept_reject = several_class(
-            i-1, demand, remaining_period-1, probab)
+        accept_reject = several_class(i-sd, demand, remaining_period-1, probab, sd)
         if accept_reject:
             decision_list = accept_reject
             demand[accept_reject] -= 1
-            if accept_reject-position-2 >= 0:
-                demand[accept_reject-position-2] += 1
-            record_demand[position] = 1
-    return record_demand, decision_list
-
-def decisionOnceDelta(sequence, demand0, probab, delta):
-    # the function is used to make a decision once on several classes
-    # sequence is one possible sequence of the group arrival.
-    # decision_list is the index
-    demand = copy.deepcopy(demand0)
-    I = len(demand)
-    record_demand = np.zeros(I)
-    period = len(sequence)
-    group_type = [i+2 for i in range(I)]
-    decision_list = 0
-    i = sequence[0]
-    remaining_period = period
-    position = group_type.index(i)
-
-    if i == group_type[-1] and demand[-1] == 0:
-        decision_list = 0
-    else:
-        accept_reject = several_class(
-            i-1, demand, remaining_period-1, probab)
-        if accept_reject:
-            decision_list = accept_reject
-            demand[accept_reject] -= 1
-            if accept_reject-position-1- delta >= 0:
-                demand[accept_reject-position-1-delta] += 1
+            if accept_reject-position-1-sd >= 0:
+                demand[accept_reject-position-1-sd] += 1
             record_demand[position] = 1
     return record_demand, decision_list
 

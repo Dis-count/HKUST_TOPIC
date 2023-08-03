@@ -2,10 +2,8 @@ import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
 import copy
-from SamplingMethod import samplingmethod
+from SamplingMethodNew import samplingmethod1
 from Mist import generate_sequence, decision1
-from collections import Counter
-from Mist import decisionSeveral, decisionOnce
 from Method1 import stochasticModel
 # This function uses deterministicModel to make several decisions with initial stochastic solution.
 
@@ -16,10 +14,11 @@ class deterministicModel1:
         self.demand_width_array = demand_width_array
         self.value_array = demand_width_array
         self.I = I
+        # self.value_array = np.array([i*(1-0.001*(self.I - i)) for i in self.demand_width_array])
 
     def IP_formulation(self, demand_lower, demand_upper):
         m = grb.Model()
-        x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
+        x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.INTEGER)
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         if sum(demand_upper)!= 0:
@@ -36,7 +35,7 @@ class deterministicModel1:
         x_ij = np.array(m.getAttr('X'))
         newx = np.reshape(x_ij, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
-        return newd, m.objVal
+        return newd, newx
 
     def IP_formulation1(self, demand_lower, demand_upper):
         # This function is used to check whether the model is optimal.
@@ -66,24 +65,20 @@ class deterministicModel1:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    number_period = 80
-    given_lines = 8
-    np.random.seed(0)
+    number_period = 200
+    given_lines = 10
+    # np.random.seed(0)
 
-    probab = [0.4, 0.4, 0.1, 0.1]
-    sam = samplingmethod(I, num_sample, number_period, probab)
+    probab = [0.3, 0.2, 0.2, 0.3]
+    sam = samplingmethod1(I, num_sample, number_period, probab)
 
     dw, prop = sam.get_prob()
     W = len(dw)
 
-    roll_width = np.arange(21, 21 + given_lines)
-    total_seat = np.sum(roll_width)
-
-    demand_width_array = np.arange(2, 2+I)
+    roll_width = np.ones(given_lines) * 21
+    demand_width_array = np.arange(1, 1+I)
 
     sequence = generate_sequence(number_period, probab)
-    sequence1 = copy.deepcopy(sequence)
-    total_usedDemand = np.zeros(I)
     ini_demand1 = np.array(probab) * number_period
 
     my = stochasticModel(roll_width, given_lines,
@@ -91,44 +86,6 @@ if __name__ == "__main__":
 
     ini_demand, upperbound = my.solveBenders(eps=1e-4, maxit=20)
 
-    mylist = []
-    remaining_period0 = number_period
-    deterModel = deterministicModel1(
-        roll_width, given_lines, demand_width_array, I)
-        
-    while remaining_period0:
-        demand = ini_demand - total_usedDemand
-
-        usedDemand, remaining_period = decisionSeveral(sequence, demand)
-
-        diff_period = remaining_period0 - remaining_period
-
-        mylist += [1] * diff_period
-
-        if any(usedDemand) == 0:  # all are 0
-            usedDemand, decision_list = decisionOnce(sequence, demand, probab)
-            if decision_list:
-                mylist.append(1)
-            else:
-                mylist.append(0)
-            remaining_period -= 1
-
-        remaining_period0 = remaining_period
-        sequence = sequence[-remaining_period:]
-
-        total_usedDemand += usedDemand
-
-        ini_demand1 = total_usedDemand + \
-            np.ceil(np.array(probab) * remaining_period)
-
-
-        ini_demand, obj = deterModel.IP_formulation(total_usedDemand, ini_demand1)
-
-    sequence1 = [i-1 for i in sequence1 if i > 0]
-    total_people1 = np.dot(sequence1, mylist)
-    final_demand1 = np.array(sequence1) * np.array(mylist)
-
-    print(f'The number of seats: {total_seat}')
-    print(f'The number of people:{total_people1}')
-    print(Counter(final_demand1))
-
+    deterModel = deterministicModel1(roll_width, given_lines, demand_width_array, I)
+    ini_demand, _ = deterModel.IP_formulation(np.zeros(I), ini_demand)
+    deterModel.IP_formulation(ini_demand, np.zeros(I))

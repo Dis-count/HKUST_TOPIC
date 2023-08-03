@@ -3,33 +3,14 @@ import copy
 from collections import Counter
 
 class samplingmethod:
-    def __init__(self, I, number_sample, number_period, prob, seq) -> None:
+    def __init__(self, I, number_sample, number_period, prob, seq, sd) -> None:
         self.I = I
         self.number_sample = number_sample
         self.number_period = number_period
-
-        # sample_seq = np.zeros((self.number_sample,self.number_period))
-        # for i in range(self.number_sample):
-        #     sample_seq[i] = np.random.choice(
-        #         range(self.I), self.number_period, replace=True, p=prob)
-        # self.sample_seq = sample_seq
-
-        # sample_multi = np.random.multinomial(self.number_period, [1/self.I]*self.I, size=self.number_sample)
-        sample_multi = np.random.multinomial(
-            self.number_period, prob, size = self.number_sample)
-        sample_multi[:, seq-2] = sample_multi[:, seq-2] + 1
+        self.s = sd
+        sample_multi = np.random.multinomial(self.number_period, prob, size = self.number_sample)
+        sample_multi[:, seq-1-self.s] = sample_multi[:, seq-1-self.s] + 1
         self.sample_multi = sample_multi.tolist()
-    # def partSeq(self, number):
-    #     demand_multi = [0] * self.number_sample
-    #     demand = [0] * self.I 
-    #     for i in range(self.number_sample):
-    #         sample = self.sample_seq[i][-number:]
-    #         dic_a = Counter(sample)
-    #         for j in range(self.I):
-    #             demand[j] = dic_a[j]
-    #         demand_multi[i] = copy.deepcopy(demand)
-    #         print(demand_multi)
-    #     return demand_multi
 
     def convert(self):
         # Converting integer list to string list

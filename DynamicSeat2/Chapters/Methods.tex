@@ -12,12 +12,11 @@ Feasible seat planning represents the supply for each group type. We can use sup
 
 In the following section, we will demonstrate how to decide whether to accept the current group to occupy larger-size seats when there is no corresponding supply available.
 
-
 When the number of remaining periods is $T_r$, for any $j>i$, we can use one supply of group type $j$ to accept a group of $i$. In that case, when $i+\delta \leq j$, $(j-i-\delta)$ seats can be provided for one group of $j-i-\delta$ with $\delta$ seats of social distancing. Let $D_j$ be the random variable indicates the number of group type $j$ in $T_r$ periods. The expected number of accepted people is $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r)$, where $P(D_i \geq x_i; T_r)$ is the probability of that the demand of group type $i$ in $T_r$ periods is no less than $x_i$, the remaining supply of group type $i$. Thus, the term, $P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r)$, indicates the probability that the demand of group type $(j-i-\delta)$ in $T_r$ periods is no less than its current remaining supply plus 1. When $i <j < i+\delta$, the expected number of accepted people is $i$.
 
 Similarly, when we retain the supply of group type $j$ by rejecting a group of $i$, the expected number of accepted people is $j P(D_{j} \geq x_{j}; T_r)$. $P(D_{j} \geq x_{j}; T_r)$ indicates the probability that the demand of group type $j$ in $T_r$ periods is no less than its current remaining supply.
 
-Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1) - j P(D_{j} \geq x_{j})$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$.One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
+Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1) - j P(D_{j} \geq x_{j})$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
 
 
 \begin{remark}
@@ -38,13 +37,14 @@ The algorithm is shown below:
   \caption{Dynamic seat assignment algorithm}\label{algo_dynamic_policy}
   \begin{description}
     \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\X = [x_{1}, \ldots, x_{M}]$.
-    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in \mathcal{N}$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
-    \item[Step 3.] If $i \notin P_k, \forall k \in \mathcal{N}$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-\delta} = x_{j-i-\delta} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-\delta)$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, 
+    If $\exists k \in \mathcal{N}$ such that $i \in P_k$, accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4. Otherwise, go to step 3.
+    \item[Step 3.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j^{*}-i-\delta} = x_{j^{*}-i-\delta} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-\delta)$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
     \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
 
-\subsection{Bid-price}
+\subsection{Bid-price Control}
 The dual problem of linear relaxation of problem \eqref{deter_upper} is:
 
 \begin{equation}\label{bid-price_dual}
@@ -55,16 +55,15 @@ The dual problem of linear relaxation of problem \eqref{deter_upper} is:
   \end{aligned}
 \end{equation}
 
-% $\beta_{j}$ can be interpreted as the 
-% $z_{i}$
+$\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. For the arrival of a group type $i$, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
 
-The bid-price is a term used to describe the marginal value or opportunity cost of a seat. When a group type $i$ arrives, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
+% The bid-price is a term used to describe the marginal value or opportunity cost of a seat.
 
 \begin{lem}
-According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. Then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. The bid-price policy will accept group type $i$, $i \geq h$, when the capacity allows.
+According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. Then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. The bid-price policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
 \end{lem}
 
-However, we can find that $\beta_{j}$ does not vary with $j$, which means bid-price cannot decide which row to assign the group to.
+However, we can find that $\beta_{j}$ does not vary with $j$, which means bid-price control cannot decide which row to assign the group to.
 
 \begin{pf}
 According to the Lemma \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
@@ -73,7 +72,6 @@ Given that $d$ and $L$ are both no less than zero, the minimum value will be att
 \end{pf}
 
 The bid-price control policy based on the static model is stated below.
-
 \begin{algorithm}[H]
   \caption{Bid-price algorithm}
   \begin{description}
@@ -84,7 +82,6 @@ The bid-price control policy based on the static model is stated below.
     \item[Step 5.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
-
 
 \subsection{Dynamic Programming Base-heuristic}
 Since the original dynamic programming problem is too complex to solve directly, we can instead consider a simplified version of the problem, known as the relaxation problem. By solving the relaxation problem, we can make decisions for each group arrival based on the dynamic programming approach.
@@ -126,7 +123,6 @@ After accepting one group, assign it in some row arbitrarily when the capacity o
 A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including one larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group.
 
 By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
-
 
 
 % \subsection{Seat Planning Charts Online}

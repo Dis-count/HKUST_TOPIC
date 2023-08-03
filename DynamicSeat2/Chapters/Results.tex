@@ -92,9 +92,15 @@ We can find that the people served by Benders decomposition and IP under nested 
 % Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
 \subsection{Results of Different Policies}
-The optimal value can be obtained by solving the deterministic model after observing all arrivals. We compare the performance of different policies to the optimal value. Specifically, we consider four policies for seat assignment for each group arrival: based-on stochastic planning, DP Base-heuristic bid-price and FCFS. 
+The optimal value can be obtained by solving the deterministic model after observing all arrivals. We compare the performance of different policies to the optimal value. Specifically, we consider four policies for seat assignment for each group arrival: based-on stochastic planning, DP Base-heuristic bid-price and FCFS.
 
 The seat layout consists of 10 rows, each containing 21 seats.
+
+Each entry is the average of 200 instances.
+
+We have the experiments from 60 periods to 100 periods.
+
+
 
 \begin{table}[ht]
   \centering
@@ -106,20 +112,20 @@ The seat layout consists of 10 rows, each containing 21 seats.
    60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 & 98.17 \\
    70  & [0.25, 0.25, 0.25, 0.25]  & 98.34 & 96.87 & 96.24 & 94.75 \\
    80  & [0.25, 0.25, 0.25, 0.25]  & 98.61 & 95.69 & 96.02 & 93.18 \\
-   90  & [0.25, 0.25, 0.25, 0.25]  &       &  &  &  \\
-   100 & [0.25, 0.25, 0.25, 0.25]  &       &  &  &  \\
+   90  & [0.25, 0.25, 0.25, 0.25]  & 99.10 & 96.05 & 96.41 & 92.48 \\
+   100 & [0.25, 0.25, 0.25, 0.25]  & 99.58 & 95.09 & 96.88 & 92.54 \\
    \hline
    60  & [0.25, 0.35, 0.05, 0.35]  & 98.94 & 98.26 & 98.25 & 98.62 \\
    70  & [0.25, 0.35, 0.05, 0.35]  & 98.05 & 96.62 & 96.06 & 93.96 \\
    80  & [0.25, 0.35, 0.05, 0.35]  & 98.37 & 96.01 & 95.89 & 92.88 \\
-   90  & [0.25, 0.35, 0.05, 0.35]  &       &  &  &  \\
-   100 & [0.25, 0.35, 0.05, 0.35]  &       &  &  &  \\
+   90  & [0.25, 0.35, 0.05, 0.35]  & 99.01 & 96.77 & 96.62 & 92.46 \\
+   100 & [0.25, 0.35, 0.05, 0.35]  & 99.23 & 97.04 & 97.14 & 92.00 \\
   \hline
   60  & [0.15, 0.25, 0.55, 0.05]  & 99.14 & 98.72 & 98.74 & 98.07 \\
   70  & [0.15, 0.25, 0.55, 0.05]  & 99.30 & 96.38 & 96.90 & 96.25 \\
   80  & [0.15, 0.25, 0.55, 0.05]  & 99.59 & 97.75 & 97.87 & 95.81 \\
-  90  & [0.15, 0.25, 0.55, 0.05]  &       &  &  &  \\
-  100 & [0.15, 0.25, 0.55, 0.05]  &       &  &  &  \\
+  90  & [0.15, 0.25, 0.55, 0.05]  & 99.53 & 98.45 & 98.69 & 95.50 \\
+  100 & [0.15, 0.25, 0.55, 0.05]  & 99.47 & 98.62 & 98.94 & 95.25 \\
   \hline
   \end{tabular}
 \end{table}
@@ -197,7 +203,7 @@ We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. T
   \caption{The number of people accepted versus $\gamma$}
 \end{figure}
 
-If the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{21}$. The maximum number of people that can be accepted is $210 * \frac{16}{21} = 160$, which is the upper bound on the number of people that can be accepted. The estimated number of people accepted is given by $\frac{\gamma}{\gamma+1} * 210$, as indicated by the red points in the figure.
+If the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{21}$. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted. The estimated number of people accepted is given by $\frac{\gamma}{\gamma+1} * 200$, as indicated by the red points in the figure.
 
 \subsubsection{Analysis on The Difference Between Blue and Red Points}
 We can give the absolute difference between the blue point and red point for each probability combination as below.

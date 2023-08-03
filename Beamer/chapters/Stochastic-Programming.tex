@@ -4,10 +4,10 @@
     \frame{\sectionpage}
 
     \begin{frame}{Scenario-based Stochastic Programming}
-      \small
+      \footnotesize
       \begin{equation}\label{sto_form}
         \begin{aligned}
-        \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-s) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-s) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+       (DEF) \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
         \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
         y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
@@ -16,12 +16,13 @@
         & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
+      For any $i, \omega$, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive. 
     \end{frame}
 
 \begin{frame}{Two-stage}
   \begin{equation}\label{BD_master}
     \begin{aligned}
-  \max \quad & c{'} \mathbf{x}+ z(\mathbf{x}) \\
+  \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
   \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
   & \mathbf{x} \in \mathbb{Z}_{+}^{M \times N},
   \end{aligned}
@@ -33,7 +34,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
   \begin{equation}\label{BD_sub}
     \begin{aligned}
-      z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}{'} \mathbf{y}_{\omega} \\
+      z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
       \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} \\
        & \mathbf{y}_{\omega} \geq 0.
     \end{aligned}
@@ -45,12 +46,12 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
   \begin{equation}\label{BD_sub_dual}
     \begin{aligned}
-      \min \quad & \alpha{'}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
-      \text {s.t.} \quad & \alpha{'}_{\omega} \mathbf{V} \geq \mathbf{f}{'}
+      \min \quad & \alpha^{\intercal}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
+      \text {s.t.} \quad & \alpha^{\intercal}_{\omega} \mathbf{V} \geq \mathbf{f}^{\intercal}
     \end{aligned}
     \end{equation}
 
-    Let $P = \{\alpha|\alpha{'}V \geq \mathbf{f}{'}\}$. 
+    Let $P = \{\alpha|\alpha^{\intercal} V \geq \mathbf{f}^{\intercal}\}$. 
     The feasible region of problem \eqref{BD_sub_dual}, $P$, is bounded. In addition, all the extreme points of $P$ are integral.
 \end{frame}
 
@@ -58,9 +59,9 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   LP of problem \eqref{sto_form} can be obtained by solving following restricted benders master problem(RBMP):
   \begin{equation}\label{BD_master2}
     \begin{aligned}
-      \max \quad & c{'} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+      \max \quad & \mathbf{c}^{\intercal} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
       \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
-      & (\alpha^{k}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}^{t}, \forall \omega \\
+      & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}^{t}, \forall \omega \\
        & \mathbf{x} \geq 0
     \end{aligned}
   \end{equation} 
@@ -70,7 +71,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
 \begin{frame}{Benders Decomposition Algorithm}
   \begin{description}
-    \item[Step 1.] Solve LP \ref{BD_master2} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
+    \item[Step 1.] Solve LP \eqref{BD_master2} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
     Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
 
     \item[Step 2.] Set the upper bound $UB = c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
@@ -102,13 +103,13 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \begin{equation}\label{deter_upper}
     \begin{aligned}
     \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq s_{i}, \quad i \in \mathcal{M}, \\
     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
     \end{aligned}
   \end{equation}
 
-  Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq d_{i}, i \in \mathcal{M}$, we can obtain the problem with lower bound demand. \label{deter_lower}
+  Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq s_{i}, i \in \mathcal{M}$, we can obtain the problem with lower bound supply. \label{deter_lower}
 
 \end{frame}
 

@@ -1,41 +1,55 @@
 % !TeX root = ./main.tex
 
-\section{Dynamic Seat Assignment}
+\section{Dynamic Seat Assignment for Each Group Arrival}
     \frame{\sectionpage}
 
-    \begin{frame}{Assign-to-seat Rules}
-        \begin{itemize}
-          \item When the supply of one arriving group is enough, we will accept the group directly.
-          \item When the supply of one arriving group is 0, the demand can be satisfied by only one larger-size supply.
-          \item When one group is accepted to occupy the larger-size seats, the rest empty seat(s) can be reserved for future demand.
-      \end{itemize}
-      The difference of expected served people between acceptance and rejection on group $i$ occupying $(j+s)$-size seats: $d(i,j) = i + (j-i-1)P(D_{j-i-1} \geq x_{j-i-1}+1) - j P(D_{j} \geq x_{j}), j >i$.
-
-      Find $d(i,j^{*}) = \max_{j} d(i,j)$, if $d(i,j^{*}) > 0$, accept group type $i$ in $j^{*}+s$-size seats; otherwise, reject it.
+    \begin{frame}{Group-type(Supply) Control}
+    Feasible seat planning represents the supply for each group type. We can use supply control to
+determine whether to accept a group. Specifically, if there is a supply available for an arriving group, we will accept the group. However, if there is no corresponding supply for the arriving group, we need to decide whether to use a larger group supply to meet the group’s needs. When a group is accepted to occupy larger-size seats, the remaining empty seat(s) can be reserved for future demand.
+    
+The difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats: $d(i,j) = i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1) - j P(D_{j} \geq x_{j})$ if $j \geq i+\delta$; otherwise, $d(i,j) = i - j P(D_{j} \geq x_{j})$.
+Find $d(i,j^{*}) = \max_{j} d(i,j)$, if $d(i,j^{*}) > 0$, accept group type $i$ in $(j^{*}+\delta)$-size seats; otherwise, reject it.
       \end{frame}
+
+\begin{frame}{Stochastic Planning Policy}
+  Stochastic planning policy involves using the objective value of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival (i.e., the Value of Acceptance), as well as the potential outcomes that could result from rejecting it (i.e., the Value of Rejection).
+
+  The Value of Acceptance considers the scenarios that could arise if we accept the current arrival, while the Value of Rejection considers the same scenarios if we reject it. By comparing the Value of Acceptance and the Value of Rejection, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value.
+\end{frame}
 
     \begin{frame}{Dynamic Seat Assignment for Each Group Arrival}
         \begin{description}
-          \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregated supply is $\mathbf{X} = [x_{1}, \ldots, x_{M}]$.
-          \item[Step 2.] For the arrival group type $i$ at period $T{'}$, find the first $k \in [N]$ such that $i \in P_k$. Accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4.
-          \item[Step 3.] If $i \notin P_k, \forall k \in [N]$, find $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in [N]$ such that $j^{*} \in P_k$. Accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j-i-1} = x_{j-i-1} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-1)$ when $j^{*}-i-1 > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+          \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\mathbf{X} = [x_{1}, \ldots, x_{M}]$.
+          \item[Step 2.] For the arrival group type $i$ at period $T{'}$, 
+          If $\exists k \in \mathcal{N}$ such that $i \in P_k$, accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4. Otherwise, go to step 3.
+          \item[Step 3.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j^{*}-i-\delta} = x_{j^{*}-i-\delta} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-\delta)$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
           \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
         \end{description}
       \end{frame}
       
-      \begin{frame}{Dynamic Seat Assignment after All Group Arrivals}
+      \begin{frame}{Bid-price Control}
+        The dual problem of linear relaxation of problem \eqref{deter_upper} is:
+        \begin{equation}\label{bid-price_dual}
+          \begin{aligned}
+          \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \beta_{j} \\
+          \text {s.t.} \quad & z_{i} + \beta_j n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+          & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
+          \end{aligned}
+        \end{equation}
+        \small There exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
+
+        The bid-price policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
+      \end{frame}
+
+      \begin{frame}{Dynamic Programming Base-heuristic}
         Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
         
-        Deterministic problem is: $\{\max \sum_{i=1}^{M} (n_i- s) x_{i}: x_{i} \leq d_{i}, i \in [M], \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.
+        Deterministic problem is: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.
         
-        The optimal solution can be easily obtained. 
-
-        The gap between the relaxed deterministic problem and original deterministic problem is zero for most cases. 
-
-        Thus, we use DP to make the decision.
+        Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise, the DP with one row can be expressed as:
         $$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0$$ 
         $$V_{T+1}(x) =0, \forall x.$$
-        
 
+        After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
       \end{frame}
       

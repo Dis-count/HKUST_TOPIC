@@ -25,6 +25,8 @@ def prop_list():
 
     return p
 
+# different layout
+
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
@@ -67,7 +69,7 @@ if __name__ == "__main__":
             f = a_instance.offline(sequence)  # optimal result
             optimal = np.dot(multi, f)
 
-            g = a_instance.method_new(sequence, ini_demand, newx4, roll_width)
+            g = a_instance.method_new(sequence, newx4, roll_width)
             # num_people += total_people
 
             ratio_sto += np.dot(multi, g)
@@ -100,28 +102,8 @@ if __name__ == "__main__":
 
         diff[i] = occup_value[i]- people_value[i]
 
-    # for i in range(p_len):
-    #     if c_value[i] ==2:
-            
-        # if abs(diff[i]) >= 4:
-        #     ratio += 1
-        #     my_file.write('Deviated probability: ' + str(p[i]) + '\t')
-        #     my_file.write('Deviated value: %.2f \n' % diff[i])
-    
-    # print(sum(abs(diff) >= 4)/p_len)
-    # print(sum(abs(diff) >= 3)/p_len)
-    # print(sum(abs(diff) >= 2)/p_len)
-    # print(sum(abs(diff) >= 1)/p_len)
-    # plt.hist(diff, bins=20, color='red', alpha=0.75)
-    # plt.title('Difference Distribution')
-    # plt.show()
-
-    gamma = c_value/(c_value+1)
-    plt.scatter(gamma, people_value, c = "blue")
-    plt.scatter(gamma, occup_value, c = "red")
+    plt.scatter(c_value, people_value, c = "blue")
+    plt.scatter(c_value, occup_value, c = "red")
     plt.show()
 
-my_file.close()
-
-    # plt.scatter(c_value, people_value, c = "blue")
-    # plt.scatter(c_value, occup_value, c = "red")
+    my_file.close()

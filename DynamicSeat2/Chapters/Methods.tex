@@ -44,6 +44,11 @@ The algorithm is shown below:
   \end{description}
 \end{algorithm}
 
+\subsubsection{Break Tie for Stochastic Planning}
+A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including one larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group.
+
+By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
+
 \subsection{Bid-price Control}
 The dual problem of linear relaxation of problem \eqref{deter_upper} is:
 
@@ -119,11 +124,6 @@ After accepting one group, assign it in some row arbitrarily when the capacity o
 % 3. Repeat steps 3 and 4 until a row is found that can accommodate the current group size.
 
 
-\subsection{Break Tie for Stochastic Planning}
-A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including one larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group.
-
-By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
-
 
 % \subsection{Seat Planning Charts Online}
 % We are able to provide an online seat planning solution by using our method. For a feasible seating arrangement, we provide a pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seating plan that meets practical needs.
@@ -155,18 +155,14 @@ By following this approach, the number of unused seats in each row can be reduce
 % Multiple planning approach 
 
 
-\subsection{Benchmark}
- 
-% The benchmarks for the above two situations are described below.
-
-\subsubsection{FCFS}\label{largest_pattern}
+\subsection{First Come First Served(FCFS) Policy}\label{largest_pattern}
 For dynamic seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until the capacity of all rows is fully utilized.
 
 
 % we can continue to use the first-come, first-served approach for seat assignment across all rows. 
 
-\subsubsection{FCFS-based}\label{FCFS-based}
-For dynamic seat assignment after all group arrivals, we can continue to use the first-come, first-served approach for seat assignment. Relax all rows to one row with the total number of seats. For each arrival, we need to check the feasibility of constructing a seat assignment in $N$ rows. If the seat assignment is feasible, we accept the request; otherwise, we reject it. The threshold capacity is $(L -u +1)$.
+% \subsubsection{FCFS-based}\label{FCFS-based}
+% For dynamic seat assignment after all group arrivals, we can continue to use the first-come, first-served approach for seat assignment. Relax all rows to one row with the total number of seats. For each arrival, we need to check the feasibility of constructing a seat assignment in $N$ rows. If the seat assignment is feasible, we accept the request; otherwise, we reject it. The threshold capacity is $(L -u +1)$.
 
 % find the target arrival when the number of seats taken by the preceding arrivals does not exceed the capacity.Then we obtain a new sub-sequence, including the arrivals from the first to the target and a possible arrival. 
 
@@ -174,7 +170,6 @@ For dynamic seat assignment after all group arrivals, we can continue to use the
 
 
 % For the convenience of calculation, we check the feasibility of constructing a seat assignment from the end of the sub-sequence. When it is not feasible for the seat assignment, we should delete the group one by one from this sub-sequence until a feasible seat assignment is found. In reality, we need to check the feasibility one group by one.
-
 
 
 % Each request will be assigned row by row. When the capacity of one row is not enough for the request, we arrange it in the next row. If the following request can take up the remaining capacity of some row exactly, we place it in that row immediately. We check each request until the capacity is used up. 

@@ -63,7 +63,7 @@ if __name__ == "__main__":
     period_range = range(50,70,1)
     given_lines = 10
     # probab = [0.3, 0.2, 0.2, 0.3]
-    p = prop_list()
+    p = prop_list()[24:]
 
     begin_time = time.time()
     filename = 'Periods_' + str(time.time()) + '.txt'

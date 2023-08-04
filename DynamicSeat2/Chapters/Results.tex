@@ -92,15 +92,7 @@ We can find that the people served by Benders decomposition and IP under nested 
 % Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
 \subsection{Results of Different Policies}
-The optimal value can be obtained by solving the deterministic model after observing all arrivals. We compare the performance of different policies to the optimal value. Specifically, we consider four policies for seat assignment for each group arrival: based-on stochastic planning, DP Base-heuristic bid-price and FCFS.
-
-The seat layout consists of 10 rows, each containing 21 seats.
-
-Each entry is the average of 200 instances.
-
-We have the experiments from 60 periods to 100 periods.
-
-
+In this section, we compare the performance of four dynamic seat assignment policies to the optimal value, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the stochastic planning policy, DP Base-heuristic, bid-price policy and FCFS policy. The seat layout consists of 10 rows, each with 21 seats (including one dummy seat), and the group size can range up to 4 people. We conducted experiments over 60 to 100 periods to demonstrate the policies' performance under varying demand levels. We selected three probabilities to ensure that the expected number of people for each period is consistent. The table below displays the average of 200 instances for each number.
 
 \begin{table}[ht]
   \centering
@@ -130,6 +122,10 @@ We have the experiments from 60 periods to 100 periods.
   \end{tabular}
 \end{table}
 
+We can find that the stochastic planning policy are better than DP Base-heuristic and bid-price policy consistently, and FCFS policy works worst. As we mentioned previously, DP Base-heuristic and bid-price policy can only make the decision to accept or deny, cannot decide which row to assign the group to. FCFS accepts groups in sequential order until the capacity cannot accommodate more.
+
+
+For the first three policies, their performance tends to initially drop and then increase as the number of periods increases. When the number of periods is small, the demand for capacity is relatively low, and the policies can achieve relatively optimal performance. However, as the number of periods increases, the policies may struggle to always obtain a perfect allocation plan, leading to a decrease in performance. Nevertheless, when the number of periods continue to become larger, these policies tend to accept larger groups, and as a result, narrow the gap with the optimal value, leading to an increase in performance.
 
 %  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
 %  大于 gamma/gamma+1， 则最大损失是（  ）
@@ -143,10 +139,6 @@ $T{'}$ represents the ideal first period where the number of people without soci
 % 尽管如此，对于不同的
 
 If we limit the number of group types to 4, we can express $\gamma$ as $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Define each combination $(p_1, p_2, p_3, p_4)$ such that $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. When $\gamma = 2.5$, we set the parameters as follows: $T$ varies from 10 to 100, the step size is 1. When $\gamma = 1.9$, we set the parameters as follows: $T$ varies from 30 to 120, the step size is 1. The seat layout consists 10 rows and the number of seats per row is 21.
-
-% expected number of periods = 72, expected number of demand (people) = 137
-% expected number of periods = 60, expected number of demand (people) = 150, 
-
 
 For each $\gamma$, we give several probabilities in the table. We can find the actual gap points with the same $\gamma$ are close.
 

@@ -2,7 +2,7 @@ import numpy as np
 from collections import Counter
 
 class samplingmethod1:
-    def __init__(self, I, number_sample, number_period, prob, sd) -> None:
+    def __init__(self, I: int, number_sample, number_period: int, prob, sd: int) -> None:
         self.I = I
         self.number_sample = number_sample
         self.number_period = number_period

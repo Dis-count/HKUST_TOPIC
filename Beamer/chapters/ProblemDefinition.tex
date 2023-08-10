@@ -5,10 +5,10 @@
 
     \begin{frame}{Seat Planning with Social Distancing}
       \begin{itemize}
-      \item Group type $\mathcal{M} = \{1, \ldots, M\}$
-      \item Row $\mathcal{N} = \{1, \ldots, N\}$
-      \item The number of seats in row $j$: $S_j, j \in \mathcal{N}$
-      \item $\delta$ seat(s) as the social distancing
+      \item Group type $\mathcal{M} = \{1, \ldots, M\}$.
+      \item Row $\mathcal{N} = \{1, \ldots, N\}$.
+      \item The number of seats in row $j$: $S_j, j \in \mathcal{N}$.
+      \item $\delta$ seat(s) as the social distancing.
       \item Let $n_i = i + \delta$ denote the new size of group type $i$ for each $i \in \mathcal{M}$.
       \item Let $L_j = S_j + \delta$ denote the length of row $j$ for each $j \in \mathcal{N}$.
       \end{itemize}
@@ -40,10 +40,10 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Property}
+  \begin{frame}{Loss from Social Distancing}
     \begin{itemize}
-      \item Select the maximal group size, $n_{M}$, as many as possible and the left space is occupied by the group with the corresponding size.
-      \item Let $L = n_{M} \cdot q + r, 0 \leq r < n_{M}$. The loss of the largest pattern is $q \delta -\delta + f(r)$, where $f(r) =0$ if $r > \delta$; $f(r) = r$ if $r \leq \delta$.
+      \item The largest pattern can be obtained by the greedy way: select the maximal group size, $n_{M}$, as many times as possible, then $L = n_{M} \cdot q + r, 0 \leq r < n_{M}$, $r$ is the number of empty seats. When $r > \delta$, these seats can be occupied by the group type $(r-\delta)$; when $r \leq \delta$, leave these seats empty.
+      \item The loss of the largest pattern is $q \delta -\delta + f(r)$, where $f(r) =0$ if $r > \delta$; $f(r) = r$ if $r \leq \delta$.
       \item For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the minimal total loss is $\sum_{j} (\lfloor \frac{S_j+\delta}{n_{M}} \rfloor -\delta + f((S_j + \delta) \mod n_{M}))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+\delta}{n_{M}} \rfloor + \delta - f((S_j +\delta)\mod n_{M}))$.
     \end{itemize}
   \end{frame}

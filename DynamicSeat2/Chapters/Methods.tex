@@ -1,13 +1,13 @@
 % !TEX root = sum1.tex
-
 \section{Dynamic Seat Assignment(DSA) for Each Group Arrival}
-In this section, we discuss policies for assigning seats dynamically. We need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. We first present the dynamic seat assignment policy for each group arrival, which incorporates group-type control to optimize resource utilization. We also compare this approach with the bid-price policy. Finally, we establish the FCFS policy as the benchmark.
+In this section, we discuss policies for assigning seats dynamically. We need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. We first present the dynamic seat assignment based on stochastic planning policy, which incorporates group-type control to optimize resource utilization. We also compare this approach with the bid-price control policy. Finally, we establish the FCFS policy as the benchmark.
 
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
-% Next, we discuss the dynamic seat assignment policy for all group arrivals together.
+\subsection{Seat Assignment Based on Stochastic Planning Policy}
+Seat assignment based on stochastic planning policy involves seat planning and 
 
-\subsection{Group-type(Supply) Control}\label{nested_policy}
+\subsubsection{Group-type(Supply) Control}\label{nested_policy}
 Feasible seat planning represents the supply for each group type. We can use supply control to determine whether to accept a group. Specifically, if there is a supply available for an arriving group, we will accept the group. However, if there is no corresponding supply for the arriving group, we need to decide whether to use a larger group supply to meet the group's needs. When a group is accepted to occupy larger-size seats, the remaining empty seat(s) can be reserved for future demand.
 
 In the following section, we will demonstrate how to decide whether to accept the current group to occupy larger-size seats when there is no corresponding supply available.
@@ -18,18 +18,16 @@ Similarly, when we retain the supply of group type $j$ by rejecting a group of $
 
 Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1) - j P(D_{j} \geq x_{j})$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
 
-
 \begin{remark}
-  This control is based on the current feasible seat planning. We can combine other methods when a new seat planning can be regenerated.
+This control is based on the current feasible seat planning. We can decide which row to place according to the pattern instead of placing it when the capacity is sufficient. When a new seat planning can be regenerated, we can use the objective value of stochastic programming to make the decision.
 \end{remark}
 
-\subsection{Stochastic Planning Policy}
 Stochastic planning policy involves using the objective value of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival (i.e., the Value of Acceptance), as well as the potential outcomes that could result from rejecting it (i.e., the Value of Rejection).
 
 The Value of Acceptance considers the scenarios that could arise if we accept the current arrival, while the Value of Rejection considers the same scenarios if we reject it. By comparing the Value of Acceptance and the Value of Rejection, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made.
 
 \subsubsection{Algorithm Based on Stocahstic Planning Policy}
-The feasible seat planning can be obtained from Algorithm \ref{feasible_seat} before the group arrivals. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
+The feasible seat planning can be obtained from Algorithm \ref{feasible_seat}. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
 
 The algorithm is shown below:
 
@@ -50,6 +48,13 @@ A tie occurs when a small group is accepted by a larger planned group. To accept
 By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
 
 \subsection{Bid-price Control}
+Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row.
+
+In this section, we will demonstrate the implementation of the bid-price control policy, highlighting its equivalence to the booking limit control policy. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy. The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
+
+The equivalence between the bid-price control and booking limit control policies lies in the fact that the bid price can be interpreted as the implicit marginal value of reservation. When bid prices are set appropriately, the customers who are willing to pay higher prices will be accepted for reservations until the booking limit is reached. Therefore, by adjusting bid prices and booking limits in a coordinated manner, revenue managers can achieve the same revenue outcomes.
+
+
 The dual problem of linear relaxation of problem \eqref{deter_upper} is:
 
 \begin{equation}\label{bid-price_dual}
@@ -60,33 +65,46 @@ The dual problem of linear relaxation of problem \eqref{deter_upper} is:
   \end{aligned}
 \end{equation}
 
-$\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. For the arrival of a group type $i$, we can calculate $i -\beta_{j} n_i$ for all $j$ and choose $\arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
+$\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. A request is only accepted if the revenue it generates is above the sum of the bid prices of the seats it uses. Thus, if its revenue is more than its opportunity costs, i.e., $i -\beta_{j} n_i >0$, we will accept the group type $i$. And choose $j^{*} = \arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
 
 % The bid-price is a term used to describe the marginal value or opportunity cost of a seat.
 
-\begin{lem}
-According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. Then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. The bid-price policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
+\begin{lem}\label{bid-price}
+According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. Then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. 
 \end{lem}
 
-However, we can find that $\beta_{j}$ does not vary with $j$, which means bid-price control cannot decide which row to assign the group to.
-
-\begin{pf}
-According to the Lemma \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
-
-Given that $d$ and $L$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$, and $z_i = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$. Then the bid-price decision $i -\beta_{j} n_i = i - \frac{n_h -\delta}{n_h} n_i = \frac{\delta (i-h)}{n_h}$. When $i < h$, $i -\beta_{j} n_i <0$. When $i \geq h$, $i -\beta_{j} n_i \geq 0$. \qed
-\end{pf}
+The bid-price policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows. It coincides with the booking limit control policy. However, we can find that $\beta_{j}$ does not vary with $j$, which means bid-price control cannot decide which row to assign the group to.
 
 The bid-price control policy based on the static model is stated below.
 \begin{algorithm}[H]
-  \caption{Bid-price algorithm}
+  \caption{Bid-price control algorithm}
   \begin{description}
     \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
-    \item[Step 2.] Solve \eqref{bid-price_dual} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain an optimal solution $\beta_{j}^{t}$.
-    \item[Step 3.] Set $k = \arg \max_{j} \{i -\beta_{j}^{t} n_i | n_i \mathbf{e}_{k}^{\top} \leq \mathbf{L}\}$.
-    \item[Step 4.] If $i -\beta_{k}^{t} n_i \geq 0$, then assign the group to row $k$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject the group, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$. 
-    \item[Step 5.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
+    \item[Step 2.] Solve \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain the aggregate optimal solution $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$.
+    \item[Step 3.] If $i \geq h$, accept the arrival and assign the group to row $k$ arbitrarily, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
+    \item[Step 4.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
+
+\begin{equation}
+  \begin{aligned}
+  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
+  & \sum_{i} L_{ij} \leq L_j, \quad j \in \mathcal{N}, \\
+  & n_{i} x_{ij} - L_{ij}, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+  & x_{ij} \geq 0, L_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+  \end{aligned}
+\end{equation}
+
+
+\begin{equation}
+  \begin{aligned}
+  \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \kappa_{j} \\
+  \text {s.t.} \quad & z_{i} + \beta_{ij} n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+  & \kappa_{j} - \beta_{ij} \geq 0, \\
+  & z_{i} \geq 0, i \in \mathcal{M}, \beta_{ij} \geq 0, j \in \mathcal{N}.
+  \end{aligned}
+\end{equation}
 
 \subsection{Dynamic Programming Base-heuristic}
 Since the original dynamic programming problem is too complex to solve directly, we can instead consider a simplified version of the problem, known as the relaxation problem. By solving the relaxation problem, we can make decisions for each group arrival based on the dynamic programming approach.

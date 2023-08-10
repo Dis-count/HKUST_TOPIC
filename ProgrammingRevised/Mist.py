@@ -74,7 +74,8 @@ def generate_sequence(period, prob, sd):
 def decisionOnce(sequence, demand0, probab, sd):
     # the function is used to make a decision once on several classes
     # sequence is one possible sequence of the group arrival.
-    # decision_list is the index
+    # decision_list is the index of the larger group
+    # record_demand is the index of request
     demand = copy.deepcopy(demand0)
     I = len(demand)
     record_demand = np.zeros(I)
@@ -83,7 +84,7 @@ def decisionOnce(sequence, demand0, probab, sd):
     decision_list = 0
     i = sequence[0]
     remaining_period = period
-    position = group_type.index(i)
+    position = i -1 -sd
 
     if i == group_type[-1] and demand[-1] == 0:
         decision_list = 0

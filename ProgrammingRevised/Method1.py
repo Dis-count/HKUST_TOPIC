@@ -134,16 +134,17 @@ class stochasticModel:
     def solveBenders(self, eps=1e-4, maxit=20):
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0,
-                      vtype=GRB.CONTINUOUS, name='varx')
+                      vtype= GRB.CONTINUOUS, name='varx')
         z = m.addVars(self.W, lb=-float('inf'),
-                      vtype=GRB.CONTINUOUS, name='varz')
+                      vtype= GRB.CONTINUOUS, name='varz')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-                                  for i in range(self.I)) == self.roll_width[j] for j in range(self.given_lines))
+                                  for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         m.addConstrs(z[i] <= 0 for i in range(self.W))
-        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(
-            self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
         m.optimize()
+        if m.status !=2:
+            m.write('test1.lp')
         var = np.array(m.getAttr('X'))
         x0 = var[0: self.I*self.given_lines]
         zstar = var[-self.W:]
@@ -153,8 +154,7 @@ class stochasticModel:
         # UB = float("inf")
         LB = 0  # Any feasible solution gives a lower bound.
         while eps < tol and it < maxit:
-            alpha_set, w_set, LB = self.add_Constrs(
-                x0, zstar)  # give the constraints
+            alpha_set, w_set, LB = self.add_Constrs(x0, zstar)  # give the constraints
             # m.addConstrs(grb.quicksum(alpha_set[t][i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + z[w_set[t]-1] <= grb.quicksum(alpha_set[t][i] * self.dw[w_set[t]-1][i] for i in range(self.I)) for t in range(len(w_set)))
 
             # m.addConstrs(grb.quicksum(alpha_set[t][i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + z[k-1] <= grb.quicksum(alpha_set[t][i] * self.dw[k-1][i] for i in range(self.I)) for t,k in enumerate(w_set))

@@ -40,29 +40,14 @@ class CompareMethods0:
 
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
         ini_demand, newx4 = deter.IP_formulation(ini_demand, np.zeros(self.I))
-        for new_num, new_i in enumerate(newx4.T):
-            occu = np.dot(new_i, np.arange(2, self.I+2))
-            if occu < self.roll_width[new_num]:
-                for d_num, d_i in enumerate(new_i):
-                    if d_i > 0 and d_num < self.I-1:
-                        new_i[d_num] -= 1
-                        new_i[d_num+1] += 1
-                        break
+
+        newx4 = self.full_largest(newx4, self.roll_width)
 
         ini_demand1 = np.array(self.probab) * self.num_period
         ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
+        ini_demand3, newx3 = deter.IP_formulation(ini_demand3, np.zeros(self.I))
 
-        ini_demand3, newx3 = deter.IP_formulation(
-            ini_demand3, np.zeros(self.I))
-
-        for new_num, new_i in enumerate(newx3.T):
-            occu = np.dot(new_i, np.arange(2, self.I+2))
-            if occu < self.roll_width[new_num]:
-                for d_num, d_i in enumerate(new_i):
-                    if d_i > 0 and d_num < self.I-1:
-                        new_i[d_num] -= 1
-                        new_i[d_num+1] += 1
-                        break
+        newx3 = self.full_largest(newx3, self.roll_width)
 
         return sequence, ini_demand, ini_demand3, newx3, newx4
 
@@ -280,20 +265,39 @@ class CompareMethods0:
 
         return newd
 
+    def full_largest(self, newx, change_roll):
+        for new_num, new_i in enumerate(newx.T):
+            occu = np.dot(new_i, self.demand_width_array)
+            delta =  change_roll[new_num] - int(occu)
+            while delta> 0:
+                if new_i[-1] * self.demand_width_array[-1] + delta == change_roll[new_num]:
+                    break
+                for d_num, d_i in enumerate(new_i):
+                    if d_i > 0 and d_num + delta >= self.I-1:
+                        new_i[d_num] -= 1
+                        new_i[self.I-1] += 1
+                        delta -= (self.I-1-d_num)
+                        break
+                    elif d_i > 0:  # exactly use all empty seats
+                        new_i[d_num] -= 1
+                        new_i[d_num + delta] += 1
+                        break
+        return newx
+
     def method_new(self, sequence, newx, change_roll0):
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         mylist = []
         periods = len(sequence)
 
-        for num, j in enumerate(sequence):
+        for num, j in enumerate(sequence): # j is the new size
             newd = np.sum(newx, axis=0)
 
             remaining_period = periods - num
             if newd[j-1-self.s] > 0:
                 mylist.append(1)
                 for k, pattern in enumerate(newx):
-                    if pattern[j-1-self.s] > 0 and (change_roll[k] > (self.I + 1) or change_roll[k] == j):
+                    if pattern[j-1-self.s] > 0:
                         newx[k][j-1-self.s] -= 1
                         change_roll[k] -= j
                         break
@@ -311,9 +315,8 @@ class CompareMethods0:
 
                 change_deny = copy.deepcopy(change_roll)
                 if decision_list:
-                    newx0 = copy.deepcopy(newx)
                     for k, pattern in enumerate(newx):
-                        if pattern[decision_list] > 0 and change_roll[k] > (self.I + 1):
+                        if pattern[decision_list] > 0 and change_roll[k] > (self.I + self.s):
                             newx[k][decision_list] -= 1
                             if decision_list -Indi_Demand - 1- self.s >= 0:
                                 newx[k][int(decision_list -Indi_Demand - 1 -self.s)] += 1
@@ -342,30 +345,15 @@ class CompareMethods0:
                     W_deny = len(dw_deny)
                     m_deny = stochasticModel(change_deny, self.given_lines,
                                              self.demand_width_array, W_deny, self.I, prop_deny, dw_deny)
-                    ini_demand_deny, val_deny = m_deny.solveBenders(
-                        eps=1e-4, maxit=20)
+                    ini_demand_deny, val_deny = m_deny.solveBenders(eps=1e-4, maxit=20)
                     if val_acc + (j-self.s) < val_deny:
                         mylist.append(0)
                         deterModel = deterministicModel1(change_deny, self.given_lines, self.demand_width_array, self.I)
                         ini_demand1 = np.ceil(ini_demand_deny)
-                        ini_demand2, _ = deterModel.IP_formulation(
-                            np.zeros(self.I), ini_demand1)
-                        ini_demand1, newx = deterModel.IP_formulation(
-                            ini_demand2, np.zeros(self.I))
+                        ini_demand2, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
+                        ini_demand1, newx = deterModel.IP_formulation(ini_demand2, np.zeros(self.I))
 
-                        for new_num, new_i in enumerate(newx.T):
-                            occu = np.dot(new_i, np.arange(1+self.s, self.I+1+self.s))
-                            if occu < change_deny[new_num]:
-                                left = change_deny[new_num] - occu
-                                for d_num, d_i in enumerate(new_i):
-                                    if d_i > 0 and d_num + left >= self.I-1:
-                                        new_i[d_num] -= 1
-                                        new_i[self.I-1] += 1
-                                        break
-                                    elif d_i > 0:
-                                        new_i[d_num] -= 1
-                                        new_i[d_num + left] += 1
-                                        break
+                        newx = self.full_largest(newx, change_deny)
                         newx = newx.T.tolist()
                         change_roll = change_deny
 
@@ -373,24 +361,10 @@ class CompareMethods0:
                         mylist.append(1)
                         deterModel = deterministicModel1(change_accept, self.given_lines, self.demand_width_array, self.I)
                         ini_demand1 = np.ceil(ini_demand_acc)
-                        ini_demand2, _ = deterModel.IP_formulation(
-                            np.zeros(self.I), ini_demand1)
-                        ini_demand1, newx = deterModel.IP_formulation(
-                            ini_demand2, np.zeros(self.I))
+                        ini_demand2, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
+                        ini_demand1, newx = deterModel.IP_formulation(ini_demand2, np.zeros(self.I))
 
-                        for new_num, new_i in enumerate(newx.T):
-                            occu = np.dot(new_i, np.arange(2, self.I+2))
-                            if occu < change_accept[new_num]:
-                                for d_num, d_i in enumerate(new_i):
-                                    if d_i > 0 and d_num + self.s >= self.I-1:
-                                        new_i[d_num] -= 1
-                                        new_i[self.I-1] += 1
-                                        break
-                                    elif d_i > 0:
-                                        new_i[d_num] -= 1
-                                        new_i[d_num + self.s] += 1
-                                        break
-
+                        newx = self.full_largest(newx, change_accept)
                         newx = newx.T.tolist()
                         change_roll = change_accept
                 else:

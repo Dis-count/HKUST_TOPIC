@@ -1,6 +1,6 @@
 % !TeX root = ../main.tex
 
-\section{Scenario-based Stochastic Programming}
+\section{Seat Planning by Stochastic Programming}
     \frame{\sectionpage}
 
     \begin{frame}{Scenario-based Stochastic Programming}
@@ -19,7 +19,7 @@
       For any $i, \omega$, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive. 
     \end{frame}
 
-\begin{frame}{Two-stage}
+\begin{frame}{Two-stage Stochastic Programming}
   \begin{equation}\label{BD_master}
     \begin{aligned}
   \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
@@ -84,20 +84,6 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
    \end{description}
 \end{frame}
 
-\begin{frame}{Deterministic Formulation}
-  When $|\Omega| =1$ in problem \eqref{sto_form}, the stochastic programming will be 
-  \small
-  \begin{equation}\label{one_form}
-    \begin{aligned}
-    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-s) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1,\ldots, M-1, \\
-    & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
-    & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M} \\
-    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-    \end{aligned}
-  \end{equation}
-\end{frame}
 
 \begin{frame}{Deterministic Formulation}
   \begin{equation}\label{deter_upper}
@@ -110,8 +96,22 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{equation}
 
   Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq s_{i}, i \in \mathcal{M}$, we can obtain the problem with lower bound supply. \label{deter_lower}
-
 \end{frame}
+
+  \begin{frame}{Equivalent with Deterministic Formulation}
+    When $|\Omega| =1$ in problem \eqref{sto_form}, the stochastic programming will be 
+    \small
+    \begin{equation}\label{one_form}
+      \begin{aligned}
+      \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-s) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
+      \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1,\ldots, M-1, \\
+      & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
+      & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
+      & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M} \\
+      & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+      \end{aligned}
+    \end{equation}
+  \end{frame}
 
 % \begin{frame}{Analysis}
 

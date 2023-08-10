@@ -50,13 +50,9 @@ An arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $
 
 It is clear that the number of different sequences is $M^{T}$. The number of different scenarios is $O(T^{M-1})$ which can be obtained by the following DP.
 
-Use $D(T, M) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{M} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, M) = \sum_{i= 0}^{T} D(i, M-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,M) = O(T^{M-1})$. 
+Use $D(T, M) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{M} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, M) = \sum_{i= 0}^{T} D(i, M-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,M) = O(T^{M-1})$. The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
 
-The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
-
-Then, we will show the feasible seat assignment has a close performance with IP when considering nested policy.
-
-% Then we compare the results of benders decomposition and IP under nested policy.
+Then, we will show the feasible seat assignment has a close performance with IP when considering group-type control policy.
 
 \begin{table}[ht]
     \caption{Results of Feasible Seat Planning and IP solution}
@@ -87,7 +83,7 @@ Each entry of people served is the average of 50 instances.
 IP will spend more than 2 hours in some instances, as `NA' showed in the table.
 The number of seats is 20 when the number of rows is 8, the number of seats is 40 when the number of rows is 30.
 
-We can find that the people served by Benders decomposition and IP under nested policy are close. But obtaining the near-optimal seat assignment will be faster.
+% We can find that the people served by Benders decomposition and IP under nested policy are close. But obtaining the near-optimal seat assignment will be faster.
 
 % Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
@@ -136,7 +132,6 @@ In this section, we will explore how social distancing affects the occupancy rat
 If we assume that we accept all incoming groups within the $T{'}$ periods and they fill all the available seats, then we have $E(D) + T{'} = L$. Solving for $T{'}$, we get $T{'} = L/(\gamma + 1)$. 
 $T{'}$ represents the ideal first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats. But the actual first period will be smaller than the ideal one because we cannot always exactly fill the seats with accepted groups. 
 
-% 尽管如此，对于不同的
 
 If we limit the number of group types to 4, we can express $\gamma$ as $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Define each combination $(p_1, p_2, p_3, p_4)$ such that $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. When $\gamma = 2.5$, we set the parameters as follows: $T$ varies from 10 to 100, the step size is 1. When $\gamma = 1.9$, we set the parameters as follows: $T$ varies from 30 to 120, the step size is 1. The seat layout consists 10 rows and the number of seats per row is 21.
 
@@ -180,6 +175,26 @@ The figure below displays the outcomes of groups who were accepted under two dif
 
 
 The analysis comprises three stages. In the first stage, where the capacity is sufficient, social distancing measures have no impact on the outcome. In the second stage, the gap between the outcomes with and without social distancing measures widens as $T$ increases. Finally, in the third stage, as $T$ continues to increase, the gap between the outcomes with and without social distancing measures converges when both situations accept the maximum number of people.
+
+\begin{table}[ht]
+  \centering
+  \caption{Gap points and gap percentage of different probabilities}
+  \begin{tabular}{|l|l|l|}
+  \hline
+  $\gamma$  & gap point & gap percentage \\
+  \hline
+  $[1.5,1.7]$   & [56, ] & [65.21, ] \\
+  $[1.7,1.9]$   & [56, ] & [65.21, ] \\
+  $[1.9,2.1]$   & [56, ] & [65.21, ] \\
+  $[2.1,2.3]$   & [56, ] & [65.21, ] \\
+  $[2.1,2.3]$   & [56, ] & [65.21, ] \\
+  $[2.3,2.5]$   & [    ] & [] \\
+  $[2.5,2.7]$   & [    ] & [] \\
+  $[2.9,3.1]$   & [    ] & [] \\
+  $[3.1,3.3]$   & [    ] & [] \\
+  \hline
+  \end{tabular}
+\end{table}
 
 \subsection{Comparison of Different Probabilities When Supply and Demand Are Close}
 When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities. In this case, the estimated occupancy rate is given by $\frac{\gamma T'}{(\gamma+1)T' - N}$. It is important to note that this estimation is accurate only when all rows represent full patterns, as per our assumption.
@@ -247,21 +262,6 @@ The results suggest that a random seat layout may provide a more accurate estima
 % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
 % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
 
-% \subsection{Group of Different Sizes}
-% Let $\gamma$ be $2.5$ for groups of different sizes.
-
-% Probability of group size of 3: $[0.1, 0.3, 0.6]$.
-
-% Probability of group size of 5: $[0.3, 0.3, 0.1, 0.2, 0.1]$.
-
-% \begin{figure}[h]
-%   \centering
-%   \subfigure[group size of 3]{
-%     \includegraphics[width=0.48\textwidth]{./Figures/group3.pdf}}
-%   \subfigure[group size of 5]{
-%     \includegraphics[width=0.48\textwidth]{./Figures/group5.pdf}}
-%   \caption{The number of people served versus periods}
-% \end{figure}
 
 \newpage
 

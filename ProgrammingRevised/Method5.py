@@ -5,7 +5,8 @@ import copy
 from SamplingMethodNew import samplingmethod1
 from Mist import generate_sequence, decision1
 from Method1 import stochasticModel
-# This function uses deterministicModel to make several decisions with initial stochastic solution.
+
+# This function solves deterministicModel without social distancing.
 
 class deterministicModel1:
     def __init__(self, roll_width, given_lines, demand_width_array, I):
@@ -34,6 +35,7 @@ class deterministicModel1:
 
         x_ij = np.array(m.getAttr('X'))
         newx = np.reshape(x_ij, (self.I, self.given_lines))
+        newx = np.rint(newx)
         newd = np.sum(newx, axis=1)
         return newd, newx
 

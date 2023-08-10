@@ -1,0 +1,20 @@
+% !TEX root = sum1.tex
+\clearpage
+\section*{Proof}
+
+\begin{pf}[Proof of Lemma \ref{sol_relax_deter}]
+  Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
+  
+  Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP). Consider the solution to the linear relaxation of \eqref{deter_upper}. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. 
+  % $\delta$ is no less than 1, different types have
+  Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(L-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $h$, then for $i < h$, $x_{ij}^{*} = 0$; for $i > h$, $x_{ij}^{*} = d_{i}$; for $i = h$, $\sum_{j} x_{ij}^{*} = (L - \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. \qed
+\end{pf}
+
+\begin{pf}[Proof of Lemma \ref{bid-price}]
+  According to the Lemma \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
+  
+  Given that $d$ and $L$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$, and $z_i = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$. Then the bid-price decision $i -\beta_{j} n_i = i - \frac{n_h -\delta}{n_h} n_i = \frac{\delta (i-h)}{n_h}$. When $i < h$, $i -\beta_{j} n_i <0$. When $i \geq h$, $i -\beta_{j} n_i \geq 0$. \qed
+  \end{pf}
+
+
+\newpage

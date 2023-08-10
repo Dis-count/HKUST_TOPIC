@@ -5,7 +5,7 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {2}{Problem Definition}{6}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {3}{Scenario-based Stochastic Programming}{12}{0}{3}
+\beamer@sectionintoc {3}{Seat Planning by Stochastic Programming}{12}{0}{3}
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {4}{Dynamic Seat Assignment for Each Group Arrival}{21}{0}{4}
 \defcounter {refsection}{0}\relax 

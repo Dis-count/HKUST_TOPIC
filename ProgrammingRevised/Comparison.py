@@ -7,6 +7,7 @@ from Mist import generate_sequence, decision1
 import copy
 from Mist import decisionOnce
 import time
+from typing import List
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
@@ -35,6 +36,7 @@ class CompareMethods:
 
         ini_demand, _ = deter.IP_formulation(np.zeros(self.I), ini_demand)
         ini_demand, newx4 = deter.IP_formulation(ini_demand, np.zeros(self.I))
+
         for new_num, new_i in enumerate(newx4.T):
             occu = np.dot(new_i, self.demand_width_array)
             if occu < self.roll_width[new_num]:
@@ -50,7 +52,6 @@ class CompareMethods:
 
         ini_demand1 = np.array(self.probab) * self.num_period
         ini_demand3, _ = deter.IP_formulation(np.zeros(self.I), ini_demand1)
-
         ini_demand3, newx3 = deter.IP_formulation(ini_demand3, np.zeros(self.I))
 
         for new_num, new_i in enumerate(newx3.T):
@@ -318,7 +319,7 @@ class CompareMethods:
 
         return newd
 
-    def method_new(self, sequence, newx, change_roll0):
+    def method_new(self, sequence: List[int], newx, change_roll0):
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         mylist = []
@@ -326,7 +327,6 @@ class CompareMethods:
 
         for num, j in enumerate(sequence):
             newd = np.sum(newx, axis=0)
-
             remaining_period = periods - num
             if newd[j-2] > 0:
                 mylist.append(1)
@@ -349,13 +349,11 @@ class CompareMethods:
 
                 change_deny = copy.deepcopy(change_roll)
                 if decision_list:
-                    newx0 = copy.deepcopy(newx)
                     for k, pattern in enumerate(newx):
                         if pattern[decision_list] > 0 and change_roll[k] > (self.I + 1):
                             newx[k][decision_list] -= 1
                             if decision_list - Indi_Demand - 2 >= 0:
-                                newx[k][int(decision_list -
-                                            Indi_Demand - 2)] += 1
+                                newx[k][int(decision_list -Indi_Demand - 2)] += 1
                             change_roll[k] -= (Indi_Demand+2)
                             break
                         if k == len(newx)-1:
@@ -367,33 +365,29 @@ class CompareMethods:
                                     change_roll[jj] -= (Indi_Demand+2)
                                     break
                     change_accept = copy.deepcopy(change_roll)
-
+                    if (change_accept < 0).any() or (change_deny < 0).any():
+                        print(f'seq: {sequence}')
+                        print(f'new: {newx}')
                     sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
 
-                    dw_acc, prop_acc = sam_multi.accept_sample(
-                        sequence[-remaining_period:][0])
+                    dw_acc, prop_acc = sam_multi.accept_sample(sequence[-remaining_period:][0])
 
                     W_acc = len(dw_acc)
                     m_acc = stochasticModel(change_accept, self.given_lines,
                                             self.demand_width_array, W_acc, self.I, prop_acc, dw_acc)
-                    ini_demand_acc, val_acc = m_acc.solveBenders(
-                        eps=1e-4, maxit=20)
+                    ini_demand_acc, val_acc = m_acc.solveBenders(eps=1e-4, maxit=20)
 
                     dw_deny, prop_deny = sam_multi.get_prob()
                     W_deny = len(dw_deny)
                     m_deny = stochasticModel(change_deny, self.given_lines,
                                              self.demand_width_array, W_deny, self.I, prop_deny, dw_deny)
-                    ini_demand_deny, val_deny = m_deny.solveBenders(
-                        eps=1e-4, maxit=20)
+                    ini_demand_deny, val_deny = m_deny.solveBenders(eps=1e-4, maxit=20)
                     if val_acc + (j-1) < val_deny:
                         mylist.append(0)
-                        deterModel = deterministicModel(
-                            change_deny, self.given_lines, self.demand_width_array, self.I)
+                        deterModel = deterministicModel(change_deny, self.given_lines, self.demand_width_array, self.I)
                         ini_demand1 = np.ceil(ini_demand_deny)
-                        ini_demand2, _ = deterModel.IP_formulation(
-                            np.zeros(self.I), ini_demand1)
-                        ini_demand1, newx = deterModel.IP_formulation(
-                            ini_demand2, np.zeros(self.I))
+                        ini_demand2, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
+                        ini_demand1, newx = deterModel.IP_formulation(ini_demand2, np.zeros(self.I))
 
                         for new_num, new_i in enumerate(newx.T):
                             occu = np.dot(new_i, self.demand_width_array)
@@ -412,13 +406,10 @@ class CompareMethods:
 
                     else:
                         mylist.append(1)
-                        deterModel = deterministicModel(
-                            change_accept, self.given_lines, self.demand_width_array, self.I)
+                        deterModel = deterministicModel(change_accept, self.given_lines, self.demand_width_array, self.I)
                         ini_demand1 = np.ceil(ini_demand_acc)
-                        ini_demand2, _ = deterModel.IP_formulation(
-                            np.zeros(self.I), ini_demand1)
-                        ini_demand1, newx = deterModel.IP_formulation(
-                            ini_demand2, np.zeros(self.I))
+                        ini_demand2, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
+                        ini_demand1, newx = deterModel.IP_formulation(ini_demand2, np.zeros(self.I))
 
                         for new_num, new_i in enumerate(newx.T):
                             occu = np.dot(new_i, self.demand_width_array)
@@ -438,7 +429,7 @@ class CompareMethods:
                 else:
                     mylist.append(0)
 
-        sequence = [i-1 for i in sequence if i > 0]
+        sequence = [i-1 for i in sequence]
 
         final_demand = np.array(sequence) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
@@ -446,7 +437,6 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-
         return demand
 
     def method1(self, sequence, ini_demand):
@@ -481,8 +471,11 @@ if __name__ == "__main__":
     given_lines = 10
     roll_width = np.ones(given_lines) * 21
     I = 4
-    probab = np.array([0.25, 0.25, 0.25, 0.25])
-    num_period = 80
+    probab = np.array([0.1, 0.6, 0.25, 0.05])
+    sequence = [3, 3, 3, 3, 2, 3, 2, 4, 4, 3, 3, 4, 4, 2, 4, 5, 3, 3, 4, 4, 3, 3, 4, 4, 3, 4, 4, 4, 2, 4, 2, 2, 3, 3, 3, 4, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 3, 2, 5, 5, 3, 3, 3]
+    num_period = len(sequence)
     num_sample = 1000
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
-    a.random_generate()
+    _, ini_demand, ini_demand3, newx3, newx4 = a.random_generate()
+    
+    a.method_new(sequence, newx4, roll_width)

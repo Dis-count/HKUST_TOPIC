@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  1 AUG 2023 20:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  10 AUG 2023 10:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1099,8 +1099,18 @@ Package biblatex Info: ... file 'main.bbl' found.
 Package biblatex Info: Reference section=0 on input line 16.
 Package biblatex Info: Reference segment=0 on input line 16.
  (./main.nav)
+Overfull \hbox (40.62773pt too wide) in paragraph at lines 16--16
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) in paragraph at lines 16--16
 [][]  
+ []
+
+
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
  []
 
 
@@ -1125,6 +1135,11 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 <special> ps:tx@Dict begin  gsave STV CP T /ps@refangle 0.  def grestore  e...
 {e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./main.toc)
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1132,6 +1147,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [2
 
 ] (./chapters/Literature.tex
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1139,6 +1159,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [3
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1146,6 +1171,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [4
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1153,6 +1183,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [5
 
 ]) (./chapters/ProblemDefinition.tex
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1176,6 +1211,11 @@ File: ./images/dummy_seat.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./images/dummy_seat.pdf  used on input line 21.
 (pdftex.def)             Requested size: 273.83728pt x 38.90805pt.
 
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1183,6 +1223,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [7
 
  <./images/dummy_seat.pdf>]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1190,6 +1235,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [8
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1197,6 +1247,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [9
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1204,6 +1259,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [10
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1211,6 +1271,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [11
 
 ]) (./chapters/Stochastic-Programming.tex
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1218,6 +1283,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [12
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1225,6 +1295,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [13
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1232,6 +1307,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [14
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1239,6 +1319,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [15
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1246,6 +1331,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [16
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1253,6 +1343,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [17
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1260,6 +1355,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [18
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1267,6 +1367,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [19
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1274,6 +1379,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [20
 
 ]) (./chapters/DynamicSeat.tex
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1281,6 +1391,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [21
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1288,6 +1403,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [22
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1295,6 +1415,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [23
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1302,6 +1427,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [24
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1309,6 +1439,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [25
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1316,6 +1451,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [26
 
 ]) (./chapters/Results.tex
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1328,6 +1468,11 @@ Overfull \hbox (70.49274pt too wide) in paragraph at lines 31--31
  []
 
 
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1335,6 +1480,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [28
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1342,6 +1492,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [29
 
 ]
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1359,6 +1514,11 @@ File: ./images/p2.pdf Graphic file (type pdf)
 <use ./images/p2.pdf>
 Package pdftex.def Info: ./images/p2.pdf  used on input line 103.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
+
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
 
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
@@ -1381,6 +1541,11 @@ File: ./images/diff_2.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./images/diff_2.pdf  used on input line 116.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
 
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1399,6 +1564,11 @@ File: ./images/random_seat.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./images/random_seat.pdf  used on input line 129.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
 
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1409,6 +1579,11 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 
 pdfTeX warning: pdflatex.exe (file ./images/random_seat.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >])
+Overfull \hbox (40.62773pt too wide) has occurred while \output is active
+ [][][][]  
+ []
+
+
 Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 [][] 
  []
@@ -1427,21 +1602,21 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 
  (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: AE96B42835B7C126BA804B7B33FB6657;905.
+(rerunfilecheck)             Checksum: AAFBCFE684D35E5DBECEAB37A6A2343D;921.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34797 strings out of 478599
- 660787 string characters out of 5853593
- 1435515 words of memory out of 5000000
- 51912 multiletter control sequences out of 15000+600000
+ 34789 strings out of 478599
+ 660610 string characters out of 5853593
+ 1435507 words of memory out of 5000000
+ 51904 multiletter control sequences out of 15000+600000
  417116 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,124p,772b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (34 pages, 408125 bytes).
+Output written on main.pdf (34 pages, 408903 bytes).
 PDF statistics:
  1297 PDF objects out of 1440 (max. 8388607)
  1081 compressed objects within 11 object streams

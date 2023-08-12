@@ -394,6 +394,39 @@ class CompareMethods0:
             demand[i-1] += 1
         return demand
 
+    def method_IP(self, sequence, newx, change_roll):
+        newx = newx.T.tolist()
+        mylist = []
+        periods = len(sequence)
+        for num, j in enumerate(sequence):
+            newd = np.sum(newx, axis=0)
+            remaining_period = periods - num
+            if newd[j-1-self.s] > 0:
+                mylist.append(1)
+                for k, pattern in enumerate(newx):
+                    if pattern[j-1-self.s] > 0:
+                        newx[k][j-1-self.s] -= 1
+                        change_roll[k] -= j
+                        break
+            else:
+                mylist.append(0)
+                deterModel = deterministicModel1(change_roll, self.given_lines, self.demand_width_array, self.I)
+                ini_demand1 = np.array(self.probab) * remaining_period
+                _, newx = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
+                newx = newx.T.tolist()
+
+        sequence = [i-self.s for i in sequence]
+
+        final_demand = np.array(sequence) * np.array(mylist)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+
+        return demand
+
+
     def result(self, sequence, ini_demand, ini_demand3, newx3, newx4):
         ini_demand4 = copy.deepcopy(ini_demand)
         ini_demand2 = copy.deepcopy(ini_demand3)

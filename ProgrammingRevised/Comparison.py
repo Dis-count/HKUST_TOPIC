@@ -305,6 +305,7 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
+        # print(f'bid: {roll_width}')
         return demand
 
     def offline(self, sequence):
@@ -437,6 +438,43 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
+        # print(f'sto: {change_roll}')
+        return demand
+
+    def method_IP(self, sequence, newx, change_roll0):
+        change_roll = copy.deepcopy(change_roll0)
+        newx = newx.T.tolist()
+        mylist = []
+        periods = len(sequence)
+        for num, j in enumerate(sequence):
+            newd = np.sum(newx, axis=0)
+            remaining_period = periods - num
+            if newd[j-1-self.s] > 0:
+                mylist.append(1)
+                for k, pattern in enumerate(newx):
+                    if pattern[j-1-self.s] > 0:
+                        newx[k][j-1-self.s] -= 1
+                        change_roll[k] -= j
+                        break
+            else:
+                mylist.append(0)
+                deterModel = deterministicModel(
+                    change_roll, self.given_lines, self.demand_width_array, self.I)
+                ini_demand1 = np.array(self.probab) * remaining_period
+                ini_demand1 = np.ceil(ini_demand1)
+                _, newx = deterModel.IP_formulation(
+                    np.zeros(self.I), ini_demand1)
+                newx = newx.T.tolist()
+
+        sequence = [i-self.s for i in sequence]
+
+        final_demand = np.array(sequence) * np.array(mylist)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+        print(f'mean: {change_roll}')
         return demand
 
     def method1(self, sequence, ini_demand):
@@ -470,12 +508,22 @@ class CompareMethods:
 if __name__ == "__main__":
     given_lines = 10
     roll_width = np.ones(given_lines) * 21
+    num_period = 90
     I = 4
-    probab = np.array([0.1, 0.6, 0.25, 0.05])
-    sequence = [3, 3, 3, 3, 2, 3, 2, 4, 4, 3, 3, 4, 4, 2, 4, 5, 3, 3, 4, 4, 3, 3, 4, 4, 3, 4, 4, 4, 2, 4, 2, 2, 3, 3, 3, 4, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 3, 2, 5, 5, 3, 3, 3]
-    num_period = len(sequence)
+    probab = np.array([0.25, 0.25, 0.25, 0.25])
+
     num_sample = 1000
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
-    _, ini_demand, ini_demand3, newx3, newx4 = a.random_generate()
+    sequence, ini_demand, ini_demand3, newx3, newx4 = a.random_generate()
     
-    a.method_new(sequence, newx4, roll_width)
+    new = a.method_new(sequence, newx4, roll_width)
+    new1 = a.method_IP(sequence, newx3, roll_width)
+    bid = a.bid_price(sequence)
+    multi = np.arange(1,1+I)
+    new_value = np.dot(multi, new)
+    new_value1 = np.dot(multi, new1)
+    bid_value = np.dot(multi, bid)
+    print(f'sto: {new_value}')
+    print(f'mean: {new_value1}')
+    print(f'bid: {bid_value}')
+

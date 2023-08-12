@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  10 AUG 2023 10:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  12 AUG 2023 08:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1533,12 +1533,12 @@ pdfTeX warning: pdflatex.exe (file ./images/p2.pdf): PDF inclusion: multiple pdf
 <./images/diff_1.pdf, id=1027, 462.52798pt x 346.89601pt>
 File: ./images/diff_1.pdf Graphic file (type pdf)
 <use ./images/diff_1.pdf>
-Package pdftex.def Info: ./images/diff_1.pdf  used on input line 116.
+Package pdftex.def Info: ./images/diff_1.pdf  used on input line 114.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
 <./images/diff_2.pdf, id=1028, 462.52798pt x 346.89601pt>
 File: ./images/diff_2.pdf Graphic file (type pdf)
 <use ./images/diff_2.pdf>
-Package pdftex.def Info: ./images/diff_2.pdf  used on input line 116.
+Package pdftex.def Info: ./images/diff_2.pdf  used on input line 114.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
 
 Overfull \hbox (40.62773pt too wide) has occurred while \output is active
@@ -1556,12 +1556,12 @@ Overfull \hbox (2.12498pt too wide) has occurred while \output is active
 <./images/stepsize_seat.pdf, id=1087, 462.52798pt x 346.89601pt>
 File: ./images/stepsize_seat.pdf Graphic file (type pdf)
 <use ./images/stepsize_seat.pdf>
-Package pdftex.def Info: ./images/stepsize_seat.pdf  used on input line 129.
+Package pdftex.def Info: ./images/stepsize_seat.pdf  used on input line 126.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
 <./images/random_seat.pdf, id=1088, 462.52798pt x 346.89601pt>
 File: ./images/random_seat.pdf Graphic file (type pdf)
 <use ./images/random_seat.pdf>
-Package pdftex.def Info: ./images/random_seat.pdf  used on input line 129.
+Package pdftex.def Info: ./images/random_seat.pdf  used on input line 126.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
 
 Overfull \hbox (40.62773pt too wide) has occurred while \output is active
@@ -1616,7 +1616,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  128i,15n,124p,772b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (34 pages, 408903 bytes).
+Output written on main.pdf (34 pages, 409325 bytes).
 PDF statistics:
  1297 PDF objects out of 1440 (max. 8388607)
  1081 compressed objects within 11 object streams

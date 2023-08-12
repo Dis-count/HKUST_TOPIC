@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 data = [[0 for i in range(2)] for j in range(200)]
 
-with open("Periods_200.txt", 'r') as f:
+with open("Periods_204.txt", 'r') as f:
     lines = f.readlines()[1:]
     cnt = 0
     for line in lines:
@@ -29,7 +29,6 @@ def gamma(data):
 
 result = gamma(data)
 # print(result[:, 0])
-
 
 plt.scatter(result[:, 0], result[:, 1], c="blue")
 plt.scatter(result[:, 0], result[:, 2], c="red")

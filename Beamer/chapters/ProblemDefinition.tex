@@ -20,7 +20,7 @@
     \end{figure}
     \end{frame}
 
-  \begin{frame}{Some Definitions}
+  \begin{frame}{Basic Concepts}
     \begin{itemize}
       \item Pattern refers to the seat planning for one row.
       \item For each pattern $k$, $\alpha_k, \beta_k$ indicate the number of groups and the left seats, respectively.
@@ -40,23 +40,24 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Loss from Social Distancing}
+  \begin{frame}{Loss of The Largest Patterns}
     \begin{itemize}
-      \item The largest pattern can be obtained by the greedy way: select the maximal group size, $n_{M}$, as many times as possible, then $L = n_{M} \cdot q + r, 0 \leq r < n_{M}$, $r$ is the number of empty seats. When $r > \delta$, these seats can be occupied by the group type $(r-\delta)$; when $r \leq \delta$, leave these seats empty.
-      \item The loss of the largest pattern is $q \delta -\delta + f(r)$, where $f(r) =0$ if $r > \delta$; $f(r) = r$ if $r \leq \delta$.
-      \item For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the minimal total loss is $\sum_{j} (\lfloor \frac{S_j+\delta}{n_{M}} \rfloor -\delta + f((S_j + \delta) \mod n_{M}))$. The maximal number of people assigned is $\sum_{j} (S_j - \lfloor \frac{S_j+\delta}{n_{M}} \rfloor + \delta - f((S_j +\delta)\mod n_{M}))$.
+      \item[-] The largest pattern can be obtained by the greedy way: select the maximal group size, $n_{M}$, as many times as possible, then $L = n_{M} \cdot q + r, 0 \leq r < n_{M}$, $r$ is the number of empty seats. 
+      \item[-] When $r > \delta$, these seats can be occupied by the group type $(r-\delta)$; when $r \leq \delta$, leave these seats empty.
+      \item[*] Loss of the largest pattern: $q \delta -\delta + f(r)$, where $f(r) =0$ if $r > \delta$; $f(r) = r$ if $r \leq \delta$.
+      \item[*] For a seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the minimal total loss: $\sum_{j} (\lfloor \frac{S_j+\delta}{n_{M}} \rfloor -\delta + f((S_j + \delta) \mod n_{M}))$. The maximal number of people assigned: $\sum_{j} (S_j - \lfloor \frac{S_j+\delta}{n_{M}} \rfloor + \delta - f((S_j +\delta)\mod n_{M}))$.
     \end{itemize}
   \end{frame}
   
-  \begin{frame}{Dynamic Programming}
+  \begin{frame}{Dynamic Seat Assignment Problem}
     \centering
     Dynamic seat assignment can be characterized by DP:
     $$V_{t}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)+ i, V_{t+1}(\mathbf{L})\right\}\right]$$
     $$V_{T+1}(\mathbf{L}) = 0,$$
 
     \begin{itemize}
-      \item $\mathbf{L} = (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$, remaining capacity. $L^{r}_{j}$ represents the number of remaining seats in row $j$.
-      \vspace{10pt}
-      \item $p_i$: the probability of an arrival of group type $i$.
+      \item[-] $L^{r}_{j}$: the number of remaining seats in row $j$.
+      \item[-] $\mathbf{L} = (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$: remaining capacity. 
+      \item[-] $p_i$: the probability of an arrival of group type $i$.
     \end{itemize}
 \end{frame}

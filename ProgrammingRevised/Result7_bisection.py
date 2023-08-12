@@ -75,7 +75,6 @@ if __name__ == "__main__":
         ran_prop = random.randint(0, all_number-1)
         p = probab[ran_prop]
         my_file.write(str(p) + '\t')
-
         a = 40
         b = 90
         num_period = int((a+b)/2)

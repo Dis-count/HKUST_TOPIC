@@ -119,15 +119,12 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
 \begin{frame}{Obtain the Feasible Seat Planning}
       \begin{description}
-      \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from linear stochatic programming by benders decomposition.
-  
-      \item[Step 2.] Aggregate the solution to the supply, ${s}_{i}^{0} = \sum_{j} x^{*}_{ij}$.
-  
-      \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{1}$, from problem \eqref{deter_upper} by setting the supply $\mathbf{s}^{0}$ as the upper bound. 
-      
-      \item[Step 4.] Aggregate the solution to the supply, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}$.
-  
-      \item[Step 5.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} by setting the supply $\mathbf{s}^{1}$ as the lower bound. 
-      \item[Step 6.] Aggregate the solution to the supply, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}$, which is the feasible seat planning.
+        \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
+
+        \item[Step 2.] Solve problem \eqref{deter_upper} to obtain the optimal solution, $\mathbf{x}^{1}$. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+        
+        \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} with supply $\mathbf{s}^{1}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
+    
+        \item[Step 4.] For each row, construct a full pattern.
      \end{description}
 \end{frame}

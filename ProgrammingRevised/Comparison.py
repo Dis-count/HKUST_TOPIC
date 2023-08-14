@@ -474,7 +474,6 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        print(f'mean: {change_roll}')
         return demand
 
     def method1(self, sequence, ini_demand):

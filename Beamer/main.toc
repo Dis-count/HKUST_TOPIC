@@ -9,4 +9,4 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {4}{Dynamic Seat Assignment for Each Group Arrival}{21}{0}{4}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {5}{Results}{27}{0}{5}
+\beamer@sectionintoc {5}{Numerical Results}{27}{0}{5}

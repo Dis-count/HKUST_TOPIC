@@ -48,12 +48,7 @@ A tie occurs when a small group is accepted by a larger planned group. To accept
 By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
 
 \subsection{Bid-price Control}
-Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row.
-
-In this section, we will demonstrate the implementation of the bid-price control policy, highlighting its equivalence to the booking limit control policy. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy. The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
-
-The equivalence between the bid-price control and booking limit control policies lies in the fact that the bid price can be interpreted as the implicit marginal value of reservation. When bid prices are set appropriately, the customers who are willing to pay higher prices will be accepted for reservations until the booking limit is reached. Therefore, by adjusting bid prices and booking limits in a coordinated manner, revenue managers can achieve the same revenue outcomes.
-
+Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
 
 The dual problem of linear relaxation of problem \eqref{deter_upper} is:
 
@@ -80,31 +75,48 @@ The bid-price control policy based on the static model is stated below.
   \caption{Bid-price control algorithm}
   \begin{description}
     \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
-    \item[Step 2.] Solve \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain the aggregate optimal solution $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$.
+    \item[Step 2.] Solve the linear relaxation of problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain the aggregate optimal solution $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$.
     \item[Step 3.] If $i \geq h$, accept the arrival and assign the group to row $k$ arbitrarily, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
     \item[Step 4.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
 
-\begin{equation}
-  \begin{aligned}
-  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
-  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
-  & \sum_{i} L_{ij} \leq L_j, \quad j \in \mathcal{N}, \\
-  & n_{i} x_{ij} - L_{ij}, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
-  & x_{ij} \geq 0, L_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-  \end{aligned}
-\end{equation}
+\subsection{Booking limit Control}
+The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
+
+In this policy, we replace the real demand by the expected one and solve the corresponding static problem using the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests. When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy. 
+
+When we solve problem \eqref{deter_upper} directly, we can develop the booking limit control policy.
+
+\begin{algorithm}[H]
+  \caption{Booking limit control algorithm}
+  \begin{description}
+    \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
+    \item[Step 2.] Solve problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$.
+    \item[Step 3.] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
+    \item[Step 4.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
+  \end{description}
+\end{algorithm}
 
 
-\begin{equation}
-  \begin{aligned}
-  \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \kappa_{j} \\
-  \text {s.t.} \quad & z_{i} + \beta_{ij} n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
-  & \kappa_{j} - \beta_{ij} \geq 0, \\
-  & z_{i} \geq 0, i \in \mathcal{M}, \beta_{ij} \geq 0, j \in \mathcal{N}.
-  \end{aligned}
-\end{equation}
+% \begin{equation}
+%   \begin{aligned}
+%   \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
+%   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
+%   & \sum_{i} L_{ij} \leq L_j, \quad j \in \mathcal{N}, \\
+%   & n_{i} x_{ij} - L_{ij} \leq 0, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+%   & x_{ij} \geq 0, L_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+%   \end{aligned}
+% \end{equation}
+
+% \begin{equation}
+%   \begin{aligned}
+%   \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \kappa_{j} \\
+%   \text {s.t.} \quad & z_{i} + \beta_{ij} n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+%   & \kappa_{j} - \beta_{ij} \geq 0, \\
+%   & z_{i} \geq 0, i \in \mathcal{M}, \beta_{ij} \geq 0, j \in \mathcal{N}.
+%   \end{aligned}
+% \end{equation}
 
 \subsection{Dynamic Programming Base-heuristic}
 Since the original dynamic programming problem is too complex to solve directly, we can instead consider a simplified version of the problem, known as the relaxation problem. By solving the relaxation problem, we can make decisions for each group arrival based on the dynamic programming approach.

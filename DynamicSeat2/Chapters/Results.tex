@@ -55,7 +55,7 @@ Use $D(T, M) $ to denote the number of scenarios, which equals the number of dif
 Then, we will show the feasible seat assignment has a close performance with IP when considering group-type control policy.
 
 \begin{table}[ht]
-    \caption{Results of Feasible Seat Planning and IP solution}
+    \caption{Feasible seat planning versus IP solution}
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
     \# samples & T & probabilities & \# rows & people served by decomposition & people served by IP \\
@@ -87,12 +87,12 @@ The number of seats is 20 when the number of rows is 8, the number of seats is 4
 
 % Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
-\subsection{Results of Different Policies}
+\subsection{Performances of Different Policies to Optimal}
 In this section, we compare the performance of four dynamic seat assignment policies to the optimal value, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the stochastic planning policy, DP Base-heuristic, bid-price policy and FCFS policy. The seat layout consists of 10 rows, each with 21 seats (including one dummy seat), and the group size can range up to 4 people. We conducted experiments over 60 to 100 periods to demonstrate the policies' performance under varying demand levels. We selected three probabilities to ensure that the expected number of people for each period is consistent. The table below displays the average of 200 instances for each number.
 
 \begin{table}[ht]
   \centering
-  \caption{Results of different policies}
+  \caption{Performances of Different Policies to Optimal}
   \begin{tabular}{|l|l|l|l|l|l|}
   \hline
    T & probabilities & Sto(\%) & DP1(\%) & Bid-price(\%) & FCFS(\%) \\
@@ -126,7 +126,7 @@ For the first three policies, their performance tends to initially drop and then
 %  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
 %  大于 gamma/gamma+1， 则最大损失是（  ）
 
-\subsection{Impact of Social Distance under Different Demands}
+\subsection{Impact of Social Distance as Demands Increase}
 In this section, we will explore how social distancing affects the occupancy rate of a venue under different demands. Let $\gamma$ represent the average number of people who arrive in each period, and let $L$ represent the total number of seats available. We can calculate the expected number of people arriving using the formula $E(D) = \gamma T$, where $T$ is the number of periods. 
 
 If we assume that we accept all incoming groups within the $T{'}$ periods and they fill all the available seats, then we have $E(D) + T{'} = L$. Solving for $T{'}$, we get $T{'} = L/(\gamma + 1)$. 
@@ -176,25 +176,25 @@ The figure below displays the outcomes of groups who were accepted under two dif
 
 The analysis comprises three stages. In the first stage, where the capacity is sufficient, social distancing measures have no impact on the outcome. In the second stage, the gap between the outcomes with and without social distancing measures widens as $T$ increases. Finally, in the third stage, as $T$ continues to increase, the gap between the outcomes with and without social distancing measures converges when both situations accept the maximum number of people.
 
-\begin{table}[ht]
-  \centering
-  \caption{Gap points and gap percentage of different probabilities}
-  \begin{tabular}{|l|l|l|}
-  \hline
-  $\gamma$  & gap point & gap percentage \\
-  \hline
-  $[1.5,1.7]$   & [56, ] & [65.21, ] \\
-  $[1.7,1.9]$   & [56, ] & [65.21, ] \\
-  $[1.9,2.1]$   & [56, ] & [65.21, ] \\
-  $[2.1,2.3]$   & [56, ] & [65.21, ] \\
-  $[2.1,2.3]$   & [56, ] & [65.21, ] \\
-  $[2.3,2.5]$   & [    ] & [] \\
-  $[2.5,2.7]$   & [    ] & [] \\
-  $[2.9,3.1]$   & [    ] & [] \\
-  $[3.1,3.3]$   & [    ] & [] \\
-  \hline
-  \end{tabular}
-\end{table}
+% \begin{table}[ht]
+%   \centering
+%   \caption{Gap points and gap percentage of different probabilities}
+%   \begin{tabular}{|l|l|l|}
+%   \hline
+%   $\gamma$  & gap point & gap percentage \\
+%   \hline
+%   $[1.5,1.7]$   & [56, ] & [65.21, ] \\
+%   $[1.7,1.9]$   & [56, ] & [65.21, ] \\
+%   $[1.9,2.1]$   & [56, ] & [65.21, ] \\
+%   $[2.1,2.3]$   & [56, ] & [65.21, ] \\
+%   $[2.1,2.3]$   & [56, ] & [65.21, ] \\
+%   $[2.3,2.5]$   & [    ] & [] \\
+%   $[2.5,2.7]$   & [    ] & [] \\
+%   $[2.9,3.1]$   & [    ] & [] \\
+%   $[3.1,3.3]$   & [    ] & [] \\
+%   \hline
+%   \end{tabular}
+% \end{table}
 
 \subsection{Comparison of Different Probabilities When Supply and Demand Are Close}
 When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities. In this case, the estimated occupancy rate is given by $\frac{\gamma T'}{(\gamma+1)T' - N}$. It is important to note that this estimation is accurate only when all rows represent full patterns, as per our assumption.

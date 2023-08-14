@@ -1,0 +1,13 @@
+Run Start Time: Sun Aug 13 20:28:17 2023
+probability：[0.15, 0.25, 0.55, 0.05]
+The number of periods: 	60
+Sto: 98.95 ;Bid: 98.39 ;DP1: 98.37 ;Booking: 96.61 ;FCFS: 98.55 
+;Number of accepted people: 148.01 	The number of periods: 	70
+Sto: 99.18 ;Bid: 97.12 ;DP1: 96.60 ;Booking: 97.88 ;FCFS: 96.17 
+;Number of accepted people: 153.22 	The number of periods: 	80
+Sto: 99.54 ;Bid: 97.64 ;DP1: 97.76 ;Booking: 98.55 ;FCFS: 95.74 
+;Number of accepted people: 153.98 	The number of periods: 	90
+Sto: 99.56 ;Bid: 98.74 ;DP1: 98.60 ;Booking: 98.81 ;FCFS: 95.65 
+;Number of accepted people: 154.58 	The number of periods: 	100
+Sto: 99.39 ;Bid: 98.96 ;DP1: 98.63 ;Booking: 98.90 ;FCFS: 95.43 
+;Number of accepted people: 154.99 	Total Runtime	4463.905746

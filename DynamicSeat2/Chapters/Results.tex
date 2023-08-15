@@ -124,7 +124,7 @@ We can find that the stochastic planning policy are better than DP Base-heuristi
 For the first three policies, their performance tends to initially drop and then increase as the number of periods increases. When the number of periods is small, the demand for capacity is relatively low, and the policies can achieve relatively optimal performance. However, as the number of periods increases, the policies may struggle to always obtain a perfect allocation plan, leading to a decrease in performance. Nevertheless, when the number of periods continue to become larger, these policies tend to accept larger groups, and as a result, narrow the gap with the optimal value, leading to an increase in performance.
 
 %  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
-%  大于 gamma/gamma+1， 则最大损失是（  ）
+%  大于 gamma/gamma+1， 则最大损失是（ ）
 
 \subsection{Impact of Social Distance as Demands Increase}
 In this section, we will explore how social distancing affects the occupancy rate of a venue under different demands. Let $\gamma$ represent the average number of people who arrive in each period, and let $L$ represent the total number of seats available. We can calculate the expected number of people arriving using the formula $E(D) = \gamma T$, where $T$ is the number of periods. 
@@ -135,28 +135,28 @@ $T{'}$ represents the ideal first period where the number of people without soci
 
 If we limit the number of group types to 4, we can express $\gamma$ as $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Define each combination $(p_1, p_2, p_3, p_4)$ such that $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. When $\gamma = 2.5$, we set the parameters as follows: $T$ varies from 10 to 100, the step size is 1. When $\gamma = 1.9$, we set the parameters as follows: $T$ varies from 30 to 120, the step size is 1. The seat layout consists 10 rows and the number of seats per row is 21.
 
-For each $\gamma$, we give several probabilities in the table. We can find the actual gap points with the same $\gamma$ are close.
+% For each $\gamma$, we give several probabilities in the table. We can find the actual gap points with the same $\gamma$ are close.
 
-\begin{table}[ht]
-  \centering
-  \caption{Actual Gap points of different probabilities}
-  \begin{tabular}{|l|l|l|l|}
-  \hline
-  $\gamma$  & probabilities & gap point & gap percentage \\
-  \hline
-  2.5  & [0.25,0.25,0.25,0.25] & 56 & 65.21 \\
-  2.5  & [0.1,0.4,0.4,0.1] & 55 & 65.59 \\
-  2.5  & [0.1, 0.5, 0.2, 0.2] & 55 & 65.45 \\
-  2.5  & [0.2, 0.3, 0.3, 0.2] & 54 & 64.56 \\
-  2.5  & [0.3, 0.2, 0.2, 0.3] & 55 & 65.51\\
-  2.5  & [0.2, 0.4, 0.1, 0.3] & 55 & 65.41 \\
-  1.9  & [0.4, 0.4, 0.1, 0.1] & 67 & 60.35 \\
-  1.9  & [0.5, 0.2, 0.2, 0.1] & 67 & 58.9  \\
-  1.9  & [0.3, 0.5, 0.2, 0]  &  68 & 61.7  \\
-  1.9  & [0.6, 0.1, 0.1, 0.2] & 66 & 58.31 \\
-  \hline
-  \end{tabular}
-\end{table}
+% \begin{table}[ht]
+%   \centering
+%   \caption{Actual Gap points of different probabilities}
+%   \begin{tabular}{|l|l|l|l|}
+%   \hline
+%   $\gamma$  & probabilities & gap point & gap percentage \\
+%   \hline
+%   2.5  & [0.25,0.25,0.25,0.25] & 56 & 65.21 \\
+%   2.5  & [0.1,0.4,0.4,0.1] & 55 & 65.59 \\
+%   2.5  & [0.1, 0.5, 0.2, 0.2] & 55 & 65.45 \\
+%   2.5  & [0.2, 0.3, 0.3, 0.2] & 54 & 64.56 \\
+%   2.5  & [0.3, 0.2, 0.2, 0.3] & 55 & 65.51\\
+%   2.5  & [0.2, 0.4, 0.1, 0.3] & 55 & 65.41 \\
+%   1.9  & [0.4, 0.4, 0.1, 0.1] & 67 & 60.35 \\
+%   1.9  & [0.5, 0.2, 0.2, 0.1] & 67 & 58.9  \\
+%   1.9  & [0.3, 0.5, 0.2, 0]  &  68 & 61.7  \\
+%   1.9  & [0.6, 0.1, 0.1, 0.2] & 66 & 58.31 \\
+%   \hline
+%   \end{tabular}
+% \end{table}
 
 
 The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ stochastic planning to obtain the results. For the latter case, we utilize a deterministic model with hindsight to generate the outcomes. Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
@@ -244,6 +244,12 @@ We can give the absolute difference between the blue point and red point for eac
 Table \ref{tab_diff} displays the absolute difference proportion for the average of 20, 50, and 100 instances, while Figure \ref{fig_diff} shows the difference distribution for the average of 50 and 100 instances. These results suggest that we can estimate the attendance rate based on $\gamma$ for most probability combinations.
 
 However, we have also observed that some blue points in the figure are significantly distant from their corresponding red points. This is evident when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
+
+\begin{figure}[ht]
+  \centering
+    \includegraphics[width=0.8\textwidth]{./Figures/scatter.pdf}
+  \caption{Gap points under 200 probabilities}
+\end{figure}
 
 \subsubsection{Results of Different Seat Layouts}
 If we modify the even seat layout, the differences between the red and blue points will decrease, and some outliers may be eliminated. To maintain the same total seating capacity, we compare two layouts with the even seat layout. The step-size seat layout consists of rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the random seat layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to the largest pattern.

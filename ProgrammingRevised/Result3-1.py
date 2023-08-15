@@ -10,7 +10,7 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     period_range = range(60,101,10)
     given_lines = 10
-    probab = [0.25, 0.35, 0.05, 0.35]
+    probab = [0.25, 0.15, 0.6, 0]
 
     begin_time = time.time()
     filename = 'Periods_' + str(time.time()) + '.txt'

@@ -7,9 +7,9 @@
       \begin{itemize}
       \item Group type $\mathcal{M} = \{1, \ldots, M\}$.
       \item Row $\mathcal{N} = \{1, \ldots, N\}$.
-      \item The number of seats in row $j$: $S_j, j \in \mathcal{N}$.
       \item The social distancing: $\delta$ seat(s).
       \item $n_i = i + \delta$: the new size of group type $i$ for each $i \in \mathcal{M}$.
+      \item The number of seats in row $j$: $S_j, j \in \mathcal{N}$.
       \item $L_j = S_j + \delta$: the length of row $j$ for each $j \in \mathcal{N}$.
       \end{itemize}
       
@@ -23,22 +23,17 @@
   \begin{frame}{Basic Concepts}
     \begin{itemize}
       \item Pattern refers to the seat planning for one row.
+      \item A descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote pattern $k$, where $t_h$ is the new group size, $h = 1,\ldots, n$.
       \item For each pattern $k$, $\alpha_k, \beta_k$ indicate the number of groups and the left seats, respectively.
-      \item Denote by $\alpha_k \delta + \beta_k - \delta$ the loss for pattern k, $l(k)$. The loss represents the number of people lost compared to the situation without social distancing.
-      \item Let $I_1$ be the set of patterns with the minimal loss. We call the patterns from $I_1$ are the largest. The patterns with zero left seat are called full patterns.
-      \item Suppose there are $n$ groups in a row, for ease of brevity, we use a descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote pattern $k$, where $t_h$ is the new group size, $h = 1,\ldots, n$.
+      \item Loss for pattern $k$: $\alpha_k \delta + \beta_k - \delta$.
+      \item $I_1$: the set of patterns with the minimal loss-- the largest. 
+      \item Full patterns: $\beta_k =0$.
+      \item[-] Example: $\delta = 1$, $M =4$, $n_i = i+1, i \in \mathcal{M}$, $L = 21$.
+      Largest pattern: $(5, 5, 5, 5), (5, 4, 4, 4, 4), (5, 5, 5, 3, 3)$.
+      Full pattern: $(5, 5, 5, 5)$. 
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Example}
-    \begin{itemize}
-      \item Suppose the social distancing is one seat and there are four types of groups. Then the new sizes of groups are $2, 3, 4, 5$, respectively. 
-      % \item The demand for each group type is $[10, 12, 9, 8]_d$. 
-      \item The length of one row is $L = 21$.
-      \item Then these patterns, $(5, 5, 5, 5), (5, 4, 4, 4, 4),(5, 5, 5, 3, 3)$, belong to $I_1$.
-      \item Pattern $(5, 5, 5, 5)$ is not full because there is one left seat.
-    \end{itemize}
-  \end{frame}
 
   \begin{frame}{Loss of The Largest Patterns}
     \begin{itemize}
@@ -51,13 +46,19 @@
   
   \begin{frame}{Dynamic Seat Assignment Problem}
     \centering
-    Dynamic seat assignment can be characterized by DP:
-    $$V_{t}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)+ i, V_{t+1}(\mathbf{L})\right\}\right]$$
-    $$V_{T+1}(\mathbf{L}) = 0,$$
-
+    \small
     \begin{itemize}
-      \item[-] $L^{r}_{j}$: the number of remaining seats in row $j$.
-      \item[-] $\mathbf{L} = (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$: remaining capacity. 
-      \item[-] $p_i$: the probability of an arrival of group type $i$.
+    \item[-] There is and only one group arrival each period. $T+1$ periods in total.
+    \item[-] The probability of an arrival of group type $i$: $p_i$. Value function: $V_{t}(\mathbf{L})$. 
+    \item[*] Remaining capacity: $\mathbf{L} = (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$.  
+    \item[*] The number of remaining seats in row $j$: $L^{r}_{j}$. 
+    \end{itemize}
+
+    Dynamic seat assignment can be characterized by DP:
+    $$V_{t}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)+ i, V_{t+1}(\mathbf{L})\right\}\right], V_{T+1}(\mathbf{L}) = 0.$$
+    \small
+    \begin{itemize}
+      \item[-] DP is computationally complex due to the curse of dimensionality.
+      \item[-] We give a seat planning by stochastic programming firstly, then apply stochastic planning policy to make the decision.
     \end{itemize}
 \end{frame}

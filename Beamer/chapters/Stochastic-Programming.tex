@@ -3,6 +3,14 @@
 \section{Seat Planning by Stochastic Programming}
     \frame{\sectionpage}
 
+    \begin{frame}{Algorithm Flow}
+      \begin{itemize}
+        \item Transform deterministic equivalent form(DEF) to the two-stage stochastic programming. 
+              Problem (1) $\rightarrow$ Problem (2).
+        \item Transform Problem (2) to restricted benders master problem.
+      \end{itemize}
+    \end{frame}
+
     \begin{frame}{Scenario-based Stochastic Programming}
       \footnotesize
       \begin{equation}\label{sto_form}
@@ -83,7 +91,6 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(In our case, UB converges.)
    \end{description}
 \end{frame}
-
 
 \begin{frame}{Deterministic Formulation}
   \begin{equation}\label{deter_upper}

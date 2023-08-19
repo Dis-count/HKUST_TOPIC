@@ -426,7 +426,6 @@ class CompareMethods0:
 
         return demand
 
-
     def result(self, sequence, ini_demand, ini_demand3, newx3, newx4):
         ini_demand4 = copy.deepcopy(ini_demand)
         ini_demand2 = copy.deepcopy(ini_demand3)

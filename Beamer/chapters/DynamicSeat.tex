@@ -2,12 +2,12 @@
 
 \section{Dynamic Seat Assignment for Each Group Arrival}
     \frame{\sectionpage}
-    \begin{frame}{Stochatic Planning Policy}
-      Stochastic planning policy involves
+    \begin{frame}{Stochastic Planning Policy}
+      % Stochastic planning policy involves
       \begin{itemize}
-        \item Group-type Control
-        \item[-] Seat planning.
-        \item[-] Small assigned to larger seats. $\rightarrow$ Find an arbitrary row to assign.
+        \item Group-type control
+        \item[-] Seat planning from stochastic programming.
+        \item[-] Small group assigned to larger seats.
         \item Value of Acceptance and Rejection
         \item[-] Compare the value of stochastic programming when assigning in the row versus not assigning.
       \end{itemize}
@@ -38,10 +38,10 @@
         \end{equation}
         \small There exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
 
-        The bid-price control policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
+        % The bid-price control policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
       \end{frame}
 
-      \begin{frame}{Dynamic Programming Base-heuristic}
+      \begin{frame}{Dynamic Programming Based Heuristic}
         Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
         
         Deterministic problem is: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.

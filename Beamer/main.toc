@@ -9,6 +9,6 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {4}{Seat Planning by Stochastic Programming}{13}{0}{4}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {5}{Dynamic Seat Assignment for Each Group Arrival}{23}{0}{5}
+\beamer@sectionintoc {5}{Dynamic Seat Assignment for Each Group Arrival}{22}{0}{5}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {6}{Numerical Results}{27}{0}{6}
+\beamer@sectionintoc {6}{Numerical Results}{26}{0}{6}

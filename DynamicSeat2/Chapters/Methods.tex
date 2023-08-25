@@ -60,7 +60,7 @@ The dual problem of linear relaxation of problem \eqref{deter_upper} is:
   \end{aligned}
 \end{equation}
 
-In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. A request is only accepted if the revenue it generates is above the sum of the bid prices of the seats it uses. Thus, if its revenue is more than its opportunity costs, i.e., $i -\beta_{j} n_i >0$, we will accept the group type $i$. And choose $j^{*} = \arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
+In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. A request is only accepted if the revenue it generates is above the sum of the bid prices of the seats it uses. Thus, if its revenue is more than its opportunity costs, i.e., $i -\beta_{j} n_i \geq 0$, we will accept the group type $i$. And choose $j^{*} = \arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
 
 % The bid-price is a term used to describe the marginal value or opportunity cost of a seat.
 
@@ -80,6 +80,16 @@ The bid-price control policy based on the static model is stated below.
     \item[Step 4.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
+
+$V_{t}(\mathbf{L}) - V_{t+1}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)- V_{t+1}(\mathbf{L}) + i, 0 \right\}\right]$
+
+Approximation: $V_{t}(\mathbf{L}) = \theta^{t} + \sum_{j=1}^{N} L_j \beta_j$, substitute it to the above DP, we have 
+
+$V_{t}(\mathbf{L}) - V_{t+1}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{-n_i \beta_j + i, 0 \right\}\right] = \sum_i p_i \max_{j} \{-n_i \beta_j + i, 0\}$.
+
+Let $z_i = \max_{j} \{-n_i \beta_j + i, 0\}$, the constraints of dual form can be developed.
+
+The objective funtion: $V_{1} = \sum_{t=1}^{T} (V_{t} - V_{t+1}) = \sum_{i} d_{i} z_{i} + \sum_{j}^{N} L_{j} \beta_j$.
 
 \subsection{Booking limit Control}
 The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.

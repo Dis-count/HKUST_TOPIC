@@ -3,11 +3,14 @@
 \section{Seat Planning by Stochastic Programming}
     \frame{\sectionpage}
 
-    \begin{frame}{Algorithm Flow}
+    \begin{frame}{Method Flow}
       \begin{itemize}
-        \item Transform deterministic equivalent form(DEF) to the two-stage stochastic programming. 
+        \item The formulation of scenario-based stochastic programming(SSP).
+        \item Transform (SSP) to stochastic programming. 
               Problem (1) $\rightarrow$ Problem (2).
-        \item Transform Problem (2) to restricted benders master problem.
+        \item Transform Problem (2) to a restricted benders master problem(RBMP) with generative constraints.
+        \item (RBMP) can be solved iteratively.
+        \item Obtain seat planning by deterministic model.
       \end{itemize}
     \end{frame}
 
@@ -15,7 +18,7 @@
       \footnotesize
       \begin{equation}\label{sto_form}
         \begin{aligned}
-       (DEF) \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+       (SSP) \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
         \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
         y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
@@ -24,10 +27,9 @@
         & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
-      For any $i, \omega$, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive. 
     \end{frame}
 
-\begin{frame}{Two-stage Stochastic Programming}
+\begin{frame}{Stochastic Programming}
   \begin{equation}\label{BD_master}
     \begin{aligned}
   \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
@@ -50,17 +52,18 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 \end{frame}
 
 \begin{frame}{Solve The Second Stage Problem}
-  The dual of problem \eqref{BD_sub} is
+  Problem (3) is easy to solve with the given $x$ which can be seen by the dual problem:
 
+  The dual of problem \eqref{BD_sub} is
   \begin{equation}\label{BD_sub_dual}
     \begin{aligned}
       \min \quad & \alpha^{\intercal}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
       \text {s.t.} \quad & \alpha^{\intercal}_{\omega} \mathbf{V} \geq \mathbf{f}^{\intercal}
     \end{aligned}
     \end{equation}
-
     Let $P = \{\alpha|\alpha^{\intercal} V \geq \mathbf{f}^{\intercal}\}$. 
     The feasible region of problem \eqref{BD_sub_dual}, $P$, is bounded. In addition, all the extreme points of $P$ are integral.
+
 \end{frame}
 
 \begin{frame}{Delayed Constraint Generation}
@@ -92,7 +95,14 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
    \end{description}
 \end{frame}
 
-\begin{frame}{Deterministic Formulation}
+% \begin{frame}{Deterministic Formulation}
+%   Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq s_{i}, i \in \mathcal{M}$, we can obtain the problem with lower bound supply. 
+% \end{frame}
+
+\begin{frame}{Deterministic Formulation}  %开始一张幻灯片
+  \begin{columns}[c]  %开始进入分栏环境，居中设置
+  \column{5cm}  %第一栏（左栏）宽度为5cm
+  \scriptsize
   \begin{equation}\label{deter_upper}
     \begin{aligned}
     \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
@@ -101,24 +111,19 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
     \end{aligned}
   \end{equation}
-
-  Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq s_{i}, i \in \mathcal{M}$, we can obtain the problem with lower bound supply. \label{deter_lower}
+  \column{5cm}
+  \scriptsize
+  \begin{equation}\label{deter_lower}
+    \begin{aligned}
+    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \geq s_{i}, \quad i \in \mathcal{M}, \\
+    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
+    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+    \end{aligned}
+  \end{equation}
+  \end{columns}  %分栏环境结束
+  Generate integral seat planning.
 \end{frame}
-
-  \begin{frame}{Equivalent with Deterministic Model}
-    When $|\Omega| =1$ in problem \eqref{sto_form}, the stochastic programming will be 
-    \small
-    \begin{equation}\label{one_form}
-      \begin{aligned}
-      \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-s) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
-      \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1,\ldots, M-1, \\
-      & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
-      & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
-      & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M} \\
-      & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-      \end{aligned}
-    \end{equation}
-  \end{frame}
 
 
 \begin{frame}{Obtain The Feasible Seat Planning}

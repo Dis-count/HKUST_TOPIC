@@ -1711,7 +1711,6 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx9.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT ./chapters/DynamicSeat.tex
 INPUT chapters/DynamicSeat.tex
 INPUT ./chapters/DynamicSeat.tex
@@ -1747,6 +1746,7 @@ INPUT main.run.xml
 OUTPUT main.run.xml
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb

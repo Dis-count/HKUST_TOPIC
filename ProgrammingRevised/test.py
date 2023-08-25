@@ -11,7 +11,7 @@ with open("Periods_202.txt", 'r') as f:
         a = line.split('\t')
         data[cnt] = a
         cnt += 1
-        # gamma = np.dot(p, np.arange(1,5))
+
 
 def gamma(data):
     result = np.zeros((len(data),3))

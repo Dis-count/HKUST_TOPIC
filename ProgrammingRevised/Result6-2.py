@@ -103,7 +103,7 @@ if __name__ == "__main__":
     # for i in range(p_len):
     #     if c_value[i] ==2:
             
-        # if abs(diff[i]) >= 4:
+        # if abs(diff[i]) >= 3:
         #     ratio += 1
         #     my_file.write('Deviated probability: ' + str(p[i]) + '\t')
         #     my_file.write('Deviated value: %.2f \n' % diff[i])

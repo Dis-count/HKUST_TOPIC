@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -106,14 +109,14 @@
 \@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Booking limit control algorithm\relax }}{21}{algorithm.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Dynamic Programming Base-heuristic}{21}{subsection.5.4}\protected@file@percent }
 \newlabel{relax_deter}{{20}{21}{Dynamic Programming Base-heuristic}{equation.5.20}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}First Come First Served(FCFS) Policy}{21}{subsection.5.5}\protected@file@percent }
-\newlabel{largest_pattern}{{5.5}{21}{First Come First Served(FCFS) Policy}{subsection.5.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}First Come First Served(FCFS) Policy}{22}{subsection.5.5}\protected@file@percent }
+\newlabel{largest_pattern}{{5.5}{22}{First Come First Served(FCFS) Policy}{subsection.5.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Results}{22}{section.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running time of Benders Decomposition and IP}{22}{subsection.6.1}\protected@file@percent }
 \newlabel{Bender_IP}{{6.1}{22}{Running time of Benders Decomposition and IP}{subsection.6.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running time of Decomposion and IP\relax }}{22}{table.caption.3}\protected@file@percent }
 \newlabel{tab_1}{{1}{22}{Running time of Decomposion and IP\relax }{table.caption.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Feasible Seat Planning versus IP Solution}{22}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Feasible Seat Planning versus IP Solution}{23}{subsection.6.2}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Feasible seat planning versus IP solution\relax }}{23}{table.caption.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Performances of Different Policies to Optimal}{23}{subsection.6.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performances of Different Policies to Optimal\relax }}{24}{table.caption.5}\protected@file@percent }
@@ -127,37 +130,37 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $\gamma =2.5$}}}{25}{figure.caption.6}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $\gamma =1.9$}}}{25}{figure.caption.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Comparison of Different Probabilities When Supply and Demand Are Close}{25}{subsection.6.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.1}Analysis on The Difference Between Blue and Red Points}{25}{subsubsection.6.5.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The number of people accepted versus $\gamma $\relax }}{26}{figure.caption.7}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {One instance for each probability combination}}}{26}{figure.caption.7}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for each probability combination}}}{26}{figure.caption.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.1}Analysis on The Difference Between Blue and Red Points}{26}{subsubsection.6.5.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Absolute Difference Proportion\relax }}{26}{table.caption.8}\protected@file@percent }
 \newlabel{tab_diff}{{4}{26}{Absolute Difference Proportion\relax }{table.caption.8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.2}Results of Different Seat Layouts}{26}{subsubsection.6.5.2}\protected@file@percent }
-\newlabel{Fig1}{{4(a)}{27}{Subfigure 4(a)}{subfigure.4.1}{}}
-\newlabel{sub@Fig1}{{(a)}{27}{Subfigure 4(a)\relax }{subfigure.4.1}{}}
-\newlabel{Fig2}{{4(b)}{27}{Subfigure 4(b)}{subfigure.4.2}{}}
-\newlabel{sub@Fig2}{{(b)}{27}{Subfigure 4(b)\relax }{subfigure.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The difference distribution\relax }}{27}{figure.caption.9}\protected@file@percent }
-\newlabel{fig_diff}{{4}{27}{The difference distribution\relax }{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for each probability combination}}}{27}{figure.caption.9}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 100 instances for each probability combination}}}{27}{figure.caption.9}\protected@file@percent }
+\newlabel{Fig1}{{4(a)}{26}{Subfigure 4(a)}{subfigure.4.1}{}}
+\newlabel{sub@Fig1}{{(a)}{26}{Subfigure 4(a)\relax }{subfigure.4.1}{}}
+\newlabel{Fig2}{{4(b)}{26}{Subfigure 4(b)}{subfigure.4.2}{}}
+\newlabel{sub@Fig2}{{(b)}{26}{Subfigure 4(b)\relax }{subfigure.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The difference distribution\relax }}{26}{figure.caption.9}\protected@file@percent }
+\newlabel{fig_diff}{{4}{26}{The difference distribution\relax }{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for each probability combination}}}{26}{figure.caption.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 100 instances for each probability combination}}}{26}{figure.caption.9}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Gap points under 200 probabilities\relax }}{27}{figure.caption.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{27}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.2}Results of Different Seat Layouts}{27}{subsubsection.6.5.2}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refe}
 \bibcite{barry2021optimal}{1}
 \bibcite{berge1993demand}{2}
 \bibcite{blom2022filling}{3}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The number of people served versus $\gamma $\relax }}{28}{figure.caption.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for step-size seat layout}}}{28}{figure.caption.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for random seat layout}}}{28}{figure.caption.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{28}{section.7}\protected@file@percent }
 \bibcite{bortolete2022support}{4}
 \bibcite{casey2005scenario}{5}
 \bibcite{clausen2010off}{6}
 \bibcite{curry1990optimal}{7}
 \bibcite{dantzig1957discrete}{8}
 \bibcite{deplano2019offline}{9}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The number of people served versus $\gamma $\relax }}{28}{figure.caption.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Average of 50 instances for step-size seat layout}}}{28}{figure.caption.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Average of 50 instances for random seat layout}}}{28}{figure.caption.11}\protected@file@percent }
 \bibcite{feng2013scenario}{10}
 \bibcite{fischetti2021safe}{11}
 \bibcite{gallego1997multiproduct}{12}

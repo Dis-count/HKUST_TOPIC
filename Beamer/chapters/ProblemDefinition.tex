@@ -22,15 +22,20 @@
 
   \begin{frame}{Basic Concepts}
     \begin{itemize}
-      \item Pattern refers to the seat planning for one row.
-      \item A descending form $P_{k} = (t_1, t_2, \ldots, t_n)$ to denote pattern $k$, where $t_h$ is the new group size, $h = 1,\ldots, n$.
+      \item Pattern: the seat planning for each group type in one row. 
+      
+      Denoted by $P_{k} = (t_1, \ldots, t_M)$, where $t_i$ is the number of group type $i$.
       \item For each pattern $k$, $\alpha_k, \beta_k$ indicate the number of groups and the left seats, respectively.
       \item Loss for pattern $k$: $\alpha_k \delta + \beta_k - \delta$.
-      \item $I_1$: the set of patterns with the minimal loss-- the largest. 
+      \item The largest patterns: patterns with the minimal loss. 
       \item Full patterns: $\beta_k =0$.
-      \item[-] Example: $\delta = 1$, $M =4$, $n_i = i+1, i \in \mathcal{M}$, $L = 21$.
-      Largest pattern: $(5, 5, 5, 5), (5, 4, 4, 4, 4), (5, 5, 5, 3, 3)$.
-      Full pattern: $(5, 5, 5, 5)$. 
+      \item[-] Example: 
+      
+      $\delta = 1$, $M =4$, $n_i = i+1, i \in \mathcal{M}$, $L = 21$.
+      
+      Largest patterns: $(0, 0, 0, 4), (0, 0, 4, 1), (0, 2, 0, 3)$.
+      
+      Not a Full pattern: $(0, 0, 0, 4)$.
     \end{itemize}
   \end{frame}
 
@@ -48,17 +53,18 @@
     \centering
     \small
     \begin{itemize}
-    \item[-] There is and only one group arrival each period. $T+1$ periods in total.
-    \item[-] The probability of an arrival of group type $i$: $p_i$. Value function: $V_{t}(\mathbf{L})$. 
-    \item[*] Remaining capacity: $\mathbf{L} = (L^{r}_1, L^{r}_2, \ldots, L^{r}_{N})$.  
-    \item[*] The number of remaining seats in row $j$: $L^{r}_{j}$. 
+    \item[-] $T+1$ periods in total.
+    \item[-] There is one and only one group arrival each period. 
+    \item[-] The probability of an arrival of group type $i$: $p_i$.  
+    \item[*] Remaining capacity: $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$.
+    \item[-] Value function: $V_{t}(\mathbf{L})$.
+    \item[-] $\mathbf{e}_j^{\intercal}$: decision variable whether to assign the current group to row $j$.
     \end{itemize}
 
-    Dynamic seat assignment can be characterized by DP:
-    $$V_{t}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)+ i, V_{t+1}(\mathbf{L})\right\}\right], V_{T+1}(\mathbf{L}) = 0.$$
+    $$V_{t}(\mathbf{L}) = \sum_{i} p_i \left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)+ i, V_{t+1}(\mathbf{L})\right\}\right], V_{T+1}(\mathbf{L}) = 0.$$
     \small
     \begin{itemize}
-      \item[-] DP is computationally complex due to the curse of dimensionality.
+      \item[-] DP is computationally complex caused by the curse of dimensionality.
       \item[-] We give a seat planning by stochastic programming firstly, then apply stochastic planning policy to make the decision.
     \end{itemize}
 \end{frame}

@@ -16,5 +16,462 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{berge1993demand}{article}{}
+      \name{author}{2}{}{%
+        {{hash=13b0099995fe689e17fc60051cf8647f}{%
+           family={Berge},
+           familyi={B\bibinitperiod},
+           given={Matthew\bibnamedelima E},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=f65787312a6143cc2881304ef03bd842}{%
+           family={Hopperstad},
+           familyi={H\bibinitperiod},
+           given={Craig\bibnamedelima A},
+           giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {INFORMS}%
+      }
+      \strng{namehash}{a0c4db443a1b5c229d16a7e9563079cc}
+      \strng{fullhash}{a0c4db443a1b5c229d16a7e9563079cc}
+      \strng{bibnamehash}{a0c4db443a1b5c229d16a7e9563079cc}
+      \strng{authorbibnamehash}{a0c4db443a1b5c229d16a7e9563079cc}
+      \strng{authornamehash}{a0c4db443a1b5c229d16a7e9563079cc}
+      \strng{authorfullhash}{a0c4db443a1b5c229d16a7e9563079cc}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Operations research}
+      \field{number}{1}
+      \field{title}{Demand driven dispatch: A method for dynamic aircraft capacity assignment, models and algorithms}
+      \field{volume}{41}
+      \field{year}{1993}
+      \field{pages}{153\bibrangedash 168}
+      \range{pages}{16}
+    \endentry
+    \entry{blom2022filling}{article}{}
+      \name{author}{3}{}{%
+        {{hash=947820dc02b4389937cdaa40779fc3c9}{%
+           family={Blom},
+           familyi={B\bibinitperiod},
+           given={Danny},
+           giveni={D\bibinitperiod}}}%
+        {{hash=5545e77b8e2b7eef81784c818e43c966}{%
+           family={Pendavingh},
+           familyi={P\bibinitperiod},
+           given={Rudi},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ef7b7016f74ac155a6f7e52a5c622267}{%
+           family={Spieksma},
+           familyi={S\bibinitperiod},
+           given={Frits},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {INFORMS}%
+      }
+      \strng{namehash}{8ffa64b870e339c1f911965cd68f7b2b}
+      \strng{fullhash}{8ffa64b870e339c1f911965cd68f7b2b}
+      \strng{bibnamehash}{8ffa64b870e339c1f911965cd68f7b2b}
+      \strng{authorbibnamehash}{8ffa64b870e339c1f911965cd68f7b2b}
+      \strng{authornamehash}{8ffa64b870e339c1f911965cd68f7b2b}
+      \strng{authorfullhash}{8ffa64b870e339c1f911965cd68f7b2b}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{INFORMS Journal on Applied Analytics}
+      \field{number}{6}
+      \field{title}{Filling a theater during the covid-19 pandemic}
+      \field{volume}{52}
+      \field{year}{2022}
+      \field{pages}{473\bibrangedash 484}
+      \range{pages}{12}
+    \endentry
+    \entry{bortolete2022support}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{10}{}{%
+        {{hash=1cd0fc13ead7cec68a3da3338bebf08e}{%
+           family={Bortolete},
+           familyi={B\bibinitperiod},
+           given={Juliano\bibnamedelima Cavalcante},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=8567afaf59b7c461e65bc06ceba50d90}{%
+           family={Bueno},
+           familyi={B\bibinitperiod},
+           given={Luis\bibnamedelima Felipe},
+           giveni={L\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=f503555b6e49397853ed1c4f4e337353}{%
+           family={Butkeraites},
+           familyi={B\bibinitperiod},
+           given={Renan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=dc7f63097322265ed3c0f5c73ee7521d}{%
+           family={Chaves},
+           familyi={C\bibinitperiod},
+           given={Antônio\bibnamedelima Augusto},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=7f855687169ef8f7e188af0d044a0527}{%
+           family={Collaço},
+           familyi={C\bibinitperiod},
+           given={Gustavo},
+           giveni={G\bibinitperiod}}}%
+        {{hash=2a75ed3418a0992433ae3ee468a24bb4}{%
+           family={Magueta},
+           familyi={M\bibinitperiod},
+           given={Marcos},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a2e3c46f1075387de3b92847bd5eb849}{%
+           family={Pelogia},
+           familyi={P\bibinitperiod},
+           given={FJR},
+           giveni={F\bibinitperiod}}}%
+        {{hash=ea8026e98860aa7b8bc6fce3743fce53}{%
+           family={Neto},
+           familyi={N\bibinitperiod},
+           given={LL\bibnamedelima Salles},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=165e5322710266b1d074256c99efe90c}{%
+           family={Santos},
+           familyi={S\bibinitperiod},
+           given={TS},
+           giveni={T\bibinitperiod}}}%
+        {{hash=48271a6d9b29e52ecdee112b1621e3ae}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={TS},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{df411afc7b282d51e0b52e8289f5b52c}
+      \strng{fullhash}{d2dee89e8a0d2347d10c17ed15f18022}
+      \strng{bibnamehash}{df411afc7b282d51e0b52e8289f5b52c}
+      \strng{authorbibnamehash}{df411afc7b282d51e0b52e8289f5b52c}
+      \strng{authornamehash}{df411afc7b282d51e0b52e8289f5b52c}
+      \strng{authorfullhash}{d2dee89e8a0d2347d10c17ed15f18022}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computational and Applied Mathematics}
+      \field{title}{A support tool for planning classrooms considering social distancing between students}
+      \field{volume}{41}
+      \field{year}{2022}
+      \field{pages}{1\bibrangedash 23}
+      \range{pages}{23}
+    \endentry
+    \entry{ghorbani2020model}{article}{}
+      \name{author}{3}{}{%
+        {{hash=ce295277c95268b9e4b2fb3e4a5c3ecb}{%
+           family={Ghorbani},
+           familyi={G\bibinitperiod},
+           given={Elaheh},
+           giveni={E\bibinitperiod}}}%
+        {{hash=57d68929ec86b21477e7ce25d94ca475}{%
+           family={Molavian},
+           familyi={M\bibinitperiod},
+           given={Hamid},
+           giveni={H\bibinitperiod}}}%
+        {{hash=1e930fd6ae44f54b27524244cd2cbb4e}{%
+           family={Barez},
+           familyi={B\bibinitperiod},
+           given={Fred},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{5a44c37ff576750a889a469a0b19fb85}
+      \strng{fullhash}{5a44c37ff576750a889a469a0b19fb85}
+      \strng{bibnamehash}{5a44c37ff576750a889a469a0b19fb85}
+      \strng{authorbibnamehash}{5a44c37ff576750a889a469a0b19fb85}
+      \strng{authornamehash}{5a44c37ff576750a889a469a0b19fb85}
+      \strng{authorfullhash}{5a44c37ff576750a889a469a0b19fb85}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2010.10993}
+      \field{title}{A Model for Optimizing the Health and Economic Impacts of Covid-19 under Social Distancing Measures; A Study for the Number of Passengers and their Seating Arrangements in Aircrafts}
+      \field{year}{2020}
+    \endentry
+    \entry{hamdouch2011schedule}{article}{}
+      \name{author}{4}{}{%
+        {{hash=6562b0eb6fbfb20550a12e694e27a508}{%
+           family={Hamdouch},
+           familyi={H\bibinitperiod},
+           given={Younes},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=a5f12b28882426c3b408cbfc0b8cd9f5}{%
+           family={Ho},
+           familyi={H\bibinitperiod},
+           given={HW},
+           giveni={H\bibinitperiod}}}%
+        {{hash=14c3fcb9196ec37a3a5d1f5e8bf13904}{%
+           family={Sumalee},
+           familyi={S\bibinitperiod},
+           given={Agachai},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a04a3a168f6aad1e4623f23b6ed8e783}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Guodong},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{471eac236235c9a7f9e3e6c151902787}
+      \strng{fullhash}{6fa1d226ba0c2bea08b3b93496bdc0f4}
+      \strng{bibnamehash}{471eac236235c9a7f9e3e6c151902787}
+      \strng{authorbibnamehash}{471eac236235c9a7f9e3e6c151902787}
+      \strng{authornamehash}{471eac236235c9a7f9e3e6c151902787}
+      \strng{authorfullhash}{6fa1d226ba0c2bea08b3b93496bdc0f4}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Research Part B: Methodological}
+      \field{number}{10}
+      \field{title}{Schedule-based transit assignment model with vehicle capacity and seat availability}
+      \field{volume}{45}
+      \field{year}{2011}
+      \field{pages}{1805\bibrangedash 1830}
+      \range{pages}{26}
+    \endentry
+    \entry{haque2022optimization}{article}{}
+      \name{author}{2}{}{%
+        {{hash=58fe3aaccee9283b6f231c8b69721b41}{%
+           family={Haque},
+           familyi={H\bibinitperiod},
+           given={Md\bibnamedelima Tabish},
+           giveni={M\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=d6a8b975f5027e1abac46bd6b8a6904d}{%
+           family={Hamid},
+           familyi={H\bibinitperiod},
+           given={Faiz},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{35835d41b0429e66545886335afdde27}
+      \strng{fullhash}{35835d41b0429e66545886335afdde27}
+      \strng{bibnamehash}{35835d41b0429e66545886335afdde27}
+      \strng{authorbibnamehash}{35835d41b0429e66545886335afdde27}
+      \strng{authornamehash}{35835d41b0429e66545886335afdde27}
+      \strng{authorfullhash}{35835d41b0429e66545886335afdde27}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportation Research Part A: Policy and Practice}
+      \field{title}{An optimization model to assign seats in long distance trains to minimize SARS-CoV-2 diffusion}
+      \field{volume}{162}
+      \field{year}{2022}
+      \field{pages}{104\bibrangedash 120}
+      \range{pages}{17}
+    \endentry
+    \entry{kleywegt1998dynamic}{article}{}
+      \name{author}{2}{}{%
+        {{hash=52ec314ca774889b226931986605c5e2}{%
+           family={Kleywegt},
+           familyi={K\bibinitperiod},
+           given={Anton\bibnamedelima J},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=740f9d3f9017541a992e50af60446344}{%
+           family={Papastavrou},
+           familyi={P\bibinitperiod},
+           given={Jason\bibnamedelima D},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {INFORMS}%
+      }
+      \strng{namehash}{54c5755ec08b2959990360e688ac1a8a}
+      \strng{fullhash}{54c5755ec08b2959990360e688ac1a8a}
+      \strng{bibnamehash}{54c5755ec08b2959990360e688ac1a8a}
+      \strng{authorbibnamehash}{54c5755ec08b2959990360e688ac1a8a}
+      \strng{authornamehash}{54c5755ec08b2959990360e688ac1a8a}
+      \strng{authorfullhash}{54c5755ec08b2959990360e688ac1a8a}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Operations research}
+      \field{number}{1}
+      \field{title}{The dynamic and stochastic knapsack problem}
+      \field{volume}{46}
+      \field{year}{1998}
+      \field{pages}{17\bibrangedash 35}
+      \range{pages}{19}
+    \endentry
+    \entry{moore2021seat}{article}{}
+      \name{author}{5}{}{%
+        {{hash=5ec0eacd94d3c93ee03fe416c5b1abfb}{%
+           family={Moore},
+           familyi={M\bibinitperiod},
+           given={Jane\bibnamedelima F},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=0300f89b5b6f4aed336a142e1d7345c7}{%
+           family={Carvalho},
+           familyi={C\bibinitperiod},
+           given={Arthur},
+           giveni={A\bibinitperiod}}}%
+        {{hash=63a1e4311ce2bc607f2298462537ac19}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={Gerard\bibnamedelima A},
+           giveni={G\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=acc3d1396d598dfc95f8999cf0021b6b}{%
+           family={Abulhassan},
+           familyi={A\bibinitperiod},
+           given={Yousif},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=2c7d3cb6b60776b6b31b6cc61ddbdeaa}{%
+           family={Megahed},
+           familyi={M\bibinitperiod},
+           given={Fadel\bibnamedelima M},
+           giveni={F\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{759418f32b1356a4b57527de83119ebc}
+      \strng{fullhash}{4130ceb47c3e7aea5729e42f5dfc5bb9}
+      \strng{bibnamehash}{759418f32b1356a4b57527de83119ebc}
+      \strng{authorbibnamehash}{759418f32b1356a4b57527de83119ebc}
+      \strng{authornamehash}{759418f32b1356a4b57527de83119ebc}
+      \strng{authorfullhash}{4130ceb47c3e7aea5729e42f5dfc5bb9}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Ieee Access}
+      \field{title}{Seat assignments with physical distancing in single-destination public transit settings}
+      \field{volume}{9}
+      \field{year}{2021}
+      \field{pages}{42985\bibrangedash 42993}
+      \range{pages}{9}
+    \endentry
+    \entry{pisinger1999exact}{article}{}
+      \name{author}{1}{}{%
+        {{hash=27c28bde78e62d4964a22364b7887154}{%
+           family={Pisinger},
+           familyi={P\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{27c28bde78e62d4964a22364b7887154}
+      \strng{fullhash}{27c28bde78e62d4964a22364b7887154}
+      \strng{bibnamehash}{27c28bde78e62d4964a22364b7887154}
+      \strng{authorbibnamehash}{27c28bde78e62d4964a22364b7887154}
+      \strng{authornamehash}{27c28bde78e62d4964a22364b7887154}
+      \strng{authorfullhash}{27c28bde78e62d4964a22364b7887154}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{European Journal of Operational Research}
+      \field{number}{3}
+      \field{title}{An exact algorithm for large multiple knapsack problems}
+      \field{volume}{114}
+      \field{year}{1999}
+      \field{pages}{528\bibrangedash 541}
+      \range{pages}{14}
+    \endentry
+    \entry{salari2022social}{article}{}
+      \name{author}{4}{}{%
+        {{hash=9982d6091f20831af3392e965889e42d}{%
+           family={Salari},
+           familyi={S\bibinitperiod},
+           given={Mostafa},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9714dd82a88baf8e9d9a7494f4fe84fa}{%
+           family={Milne},
+           familyi={M\bibinitperiod},
+           given={R\bibnamedelima John},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=6299706129c01a2124f41c3d64744438}{%
+           family={Delcea},
+           familyi={D\bibinitperiod},
+           given={Camelia},
+           giveni={C\bibinitperiod}}}%
+        {{hash=ef7594661531c301c59e02242fec8082}{%
+           family={Cotfas},
+           familyi={C\bibinitperiod},
+           given={Liviu-Adrian},
+           giveni={L\bibinithyphendelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{ac7d40c421348db936a60aa6bec36c8f}
+      \strng{fullhash}{6033f476ba0c565bff77982746faf92d}
+      \strng{bibnamehash}{ac7d40c421348db936a60aa6bec36c8f}
+      \strng{authorbibnamehash}{ac7d40c421348db936a60aa6bec36c8f}
+      \strng{authornamehash}{ac7d40c421348db936a60aa6bec36c8f}
+      \strng{authorfullhash}{6033f476ba0c565bff77982746faf92d}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transportmetrica B: Transport Dynamics}
+      \field{number}{1}
+      \field{title}{Social distancing in airplane seat assignments for passenger groups}
+      \field{volume}{10}
+      \field{year}{2022}
+      \field{pages}{1070\bibrangedash 1098}
+      \range{pages}{29}
+    \endentry
+    \entry{zhu2023assign}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c527382ce6a2bdfc4548a1f28e479d85}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Feng},
+           giveni={F\bibinitperiod}}}%
+        {{hash=9b2cc8e2ded10b409e9976bca585f08c}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Shaoxuan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=958669bac8c42630d7c954914786cdbc}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Rowan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=355d4806f1d39ffcac567cdb29c0b56e}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Zizhuo},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {INFORMS}%
+      }
+      \strng{namehash}{a01d75b0f79d0fd687dc7c4961e4ff4e}
+      \strng{fullhash}{33614e0edf426d63a6744770f7b28e25}
+      \strng{bibnamehash}{a01d75b0f79d0fd687dc7c4961e4ff4e}
+      \strng{authorbibnamehash}{a01d75b0f79d0fd687dc7c4961e4ff4e}
+      \strng{authornamehash}{a01d75b0f79d0fd687dc7c4961e4ff4e}
+      \strng{authorfullhash}{33614e0edf426d63a6744770f7b28e25}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Manufacturing \& Service Operations Management}
+      \field{title}{Assign-to-seat: Dynamic capacity control for selling high-speed train tickets}
+      \field{year}{2023}
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

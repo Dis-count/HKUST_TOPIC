@@ -31,7 +31,7 @@ if __name__ == "__main__":
         accept_people =0
 
         multi = np.arange(1, I+1)
-        count = 200
+        count = 100
 
         for j in range(count):
             sequence, newx3, newx4 = a_instance.random_generate()
@@ -56,8 +56,8 @@ if __name__ == "__main__":
         my_file.write('Bid: %.2f ;' % (ratio2/count*100))
         my_file.write('DP1: %.2f ;' % (ratio3/count*100))
         my_file.write('Booking: %.2f ;' % (ratio4/count*100))
-        my_file.write('FCFS: %.2f \n;' % (ratio5/count*100))
-        my_file.write('Number of accepted people: %.2f \t' % (accept_people/count))
+        my_file.write('FCFS: %.2f ;' % (ratio5/count*100))
+        my_file.write('Number of accepted people: %.2f \n' % (accept_people/count))
 
     run_time = time.time() - begin_time
     my_file.write('Total Runtime\t%f\n' % run_time)

@@ -6,27 +6,14 @@
       % Stochastic planning policy involves
       \begin{itemize}
         \item Group-type control
-        \item[-] Seat planning from stochastic programming.
-        \item[-] Small group assigned to larger seats.
+        \item[-] Feasible Seat planning from stochastic programming.
+        \item[-] When there is no small group, decide which group type to be assigned.
+        \vspace*{1cm}
         \item Value of Acceptance and Rejection
         \item[-] Compare the value of stochastic programming when assigning in the row versus not assigning.
       \end{itemize}
     \end{frame}
 
-    % \begin{Booking limit Control}
-
-    % \end{Booking limit Control}
-
-    % \begin{frame}{Algorithm Based on Stochastic Planning Policy}
-    %     \begin{description}
-    %       \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\mathbf{X} = [x_{1}, \ldots, x_{M}]$.
-    %       \item[Step 2.] For the arrival group type $i$ at period $T{'}$, 
-    %       If $\exists k \in \mathcal{N}$ such that $i \in P_k$, accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4. Otherwise, go to step 3.
-    %       \item[Step 3.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j^{*}-i-\delta} = x_{j^{*}-i-\delta} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-\delta)$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
-    %       \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
-    %     \end{description}
-    %   \end{frame}
-      
       \begin{frame}{Bid-price Control}
         The dual problem of linear relaxation of problem \eqref{deter_upper} is:
         \begin{equation}\label{bid-price_dual}
@@ -53,3 +40,9 @@
         After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
       \end{frame}
       
+      \begin{frame}{Booking limit Control}
+        Solve problem \eqref{deter_upper} using the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
+        \vspace*{1cm}
+        
+        When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
+      \end{frame}

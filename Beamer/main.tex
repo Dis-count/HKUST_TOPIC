@@ -1,6 +1,6 @@
 \documentclass[aspectratio=43]{beamer}
 \usepackage[english]{babel}
-\input{chapters/preamble}
+\input{preamble}
 \title{Dynamic Seat Assignment with Social Distancing} %->->->->-> Check hyperref title <-<-<-<-<-
 \subtitle{}
 % \author[LI]{LI $\cdot$ Zikang}
@@ -25,10 +25,10 @@
     \input{chapters/DynamicSeat.tex}
     \input{chapters/Results.tex}
     %You can put the frames directly into the presentation, but using the input command and writing them in separate .tex files might be more organized
-
-    % \begin{frame}{Reference}
-    %     \printbibliography
-    % \end{frame}
+    \renewcommand*{\bibfont}{\scriptsize}
+    \begin{frame}{References}
+        \printbibliography
+    \end{frame}
 
     \section{}
     \begin{frame}{}

@@ -6,11 +6,10 @@
     \begin{frame}{Method Flow}
       \begin{itemize}
         \item The formulation of scenario-based stochastic programming(SSP).
-        \item Transform (SSP) to stochastic programming. 
-              Problem (1) $\rightarrow$ Problem (2).
-        \item Transform Problem (2) to a restricted benders master problem(RBMP) with generative constraints.
-        \item (RBMP) can be solved iteratively.
-        \item Obtain seat planning by deterministic model.
+        \item Reformulate (SSP) to the benders master problem(BMP) and subproblem.
+        \item The optimal solution can be obtained by solving (BMP) iteratively.
+        \item To avoid solving IP directly, we consider the LP relaxation form. 
+        \item Obtain integral seat planning by deterministic model.
       \end{itemize}
     \end{frame}
 
@@ -29,7 +28,7 @@
       \end{equation}
     \end{frame}
 
-\begin{frame}{Stochastic Programming}
+\begin{frame}{Reformulation}
   \begin{equation}\label{BD_master}
     \begin{aligned}
   \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
@@ -38,61 +37,55 @@
   \end{aligned}
   \end{equation}
 
-  where $z(\mathbf{x})$ is the recourse function defined as 
+  where $z(\mathbf{x})$ is defined as 
 
 $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, 
 
   \begin{equation}\label{BD_sub}
     \begin{aligned}
-      z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
-      \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} \\
-       & \mathbf{y}_{\omega} \geq 0.
+      z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y} \\
+      \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y} = \mathbf{d}_{\omega} \\
+       & \mathbf{y} \geq 0.
     \end{aligned}
     \end{equation}
 \end{frame}
 
-\begin{frame}{Solve The Second Stage Problem}
-  Problem (3) is easy to solve with the given $x$ which can be seen by the dual problem:
+\begin{frame}{Solution to Subproblem}
+  Problem (3) is easy to solve with a given $\mathbf{x}$ which can be seen by the dual problem:
 
-  The dual of problem \eqref{BD_sub} is
   \begin{equation}\label{BD_sub_dual}
     \begin{aligned}
       \min \quad & \alpha^{\intercal}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
       \text {s.t.} \quad & \alpha^{\intercal}_{\omega} \mathbf{V} \geq \mathbf{f}^{\intercal}
     \end{aligned}
     \end{equation}
-    Let $P = \{\alpha|\alpha^{\intercal} V \geq \mathbf{f}^{\intercal}\}$. 
-    The feasible region of problem \eqref{BD_sub_dual}, $P$, is bounded. In addition, all the extreme points of $P$ are integral.
 
+    \begin{itemize}
+      \item The feasible region of problem \eqref{BD_sub_dual}, $P= \{\alpha|\alpha^{\intercal} V \geq \mathbf{f}^{\intercal}\}$, is bounded. In addition, all the extreme points of $P$ are integral.
+      \item The optimal solution to this problem can be obtained directly according to the complementary slackness property.
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Delayed Constraint Generation}
-  LP of problem \eqref{sto_form} can be obtained by solving following restricted benders master problem(RBMP):
+\begin{frame}{Bneders Decomposition Procedure}
+  \small
+  (SSP) can be obtained by solving following restricted benders master problem(BMP):
   \begin{equation}\label{BD_master2}
     \begin{aligned}
-      \max \quad & \mathbf{c}^{\intercal} x + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-      \text {s.t.} \quad & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
-      & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}^{t}, \forall \omega \\
-       & \mathbf{x} \geq 0
+      \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+      \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+      & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
+       & \mathbf{x} \in \mathbb{Z}_{+}
     \end{aligned}
   \end{equation} 
 
-  Constraints will be generated from problem \eqref{BD_sub_dual} until the value of RBMP converges.
-\end{frame}
+  Constraints will be generated from problem \eqref{BD_sub_dual} until an optimal solution is found.
 
-\begin{frame}{Benders Decomposition Algorithm}
-  \begin{description}
-    \item[Step 1.] Solve LP \eqref{BD_master2} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario.
-    Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6\textwidth]{./images/BD.png}
+  \end{figure}
 
-    \item[Step 2.] Set the upper bound $UB = c{'} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
-    \item[Step 3.] 
-    For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c{'} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$
-    \item[Step 4.]
-    For each $\omega$, if $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1}){'}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
-    \item[Step 5.] Solve the updated RBMP, obtain a new solution $(x_1, z^{1})$ and update UB.
-    \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(In our case, UB converges.)
-   \end{description}
+  To avoid solving IP directly, we consider the LP relaxation of Problem \eqref{BD_master2}.
 \end{frame}
 
 % \begin{frame}{Deterministic Formulation}
@@ -100,13 +93,14 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 % \end{frame}
 
 \begin{frame}{Deterministic Formulation}  %开始一张幻灯片
+  To obtain an integral seat planning, we consider the following two deterministic formulations.
   \begin{columns}[c]  %开始进入分栏环境，居中设置
   \column{5cm}  %第一栏（左栏）宽度为5cm
   \scriptsize
   \begin{equation}\label{deter_upper}
     \begin{aligned}
     \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq s_{i}, \quad i \in \mathcal{M}, \\
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} {\color{red} \leq} s_{i}^{0}, \quad i \in \mathcal{M}, \\
     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
     \end{aligned}
@@ -116,23 +110,25 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \begin{equation}\label{deter_lower}
     \begin{aligned}
     \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \geq s_{i}, \quad i \in \mathcal{M}, \\
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} {\color{red} \geq} s_{i}^{1}, \quad i \in \mathcal{M}, \\
     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
     \end{aligned}
   \end{equation}
   \end{columns}  %分栏环境结束
-  Generate integral seat planning.
+  Problem \eqref{deter_upper} can generate a feasible seat planning.
+
+  Problem \eqref{deter_lower} can generate a seat planning no inferior than any given feasible seat planning.
 \end{frame}
 
 
 \begin{frame}{Obtain The Feasible Seat Planning}
       \begin{description}
-        \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
+        \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
 
         \item[Step 2.] Solve problem \eqref{deter_upper} to obtain the optimal solution, $\mathbf{x}^{1}$. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
         
-        \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} with supply $\mathbf{s}^{1}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
+        \item[Step 3.] Solve problem \eqref{deter_lower} to obtain the optimal solution, $\mathbf{x}^{2}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
     
         \item[Step 4.] For each row, construct a full pattern.
      \end{description}

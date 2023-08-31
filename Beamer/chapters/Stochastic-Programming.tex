@@ -66,7 +66,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Bneders Decomposition Procedure}
+\begin{frame}{Benders Decomposition Procedure}
   \small
   (SSP) can be obtained by solving following restricted benders master problem(BMP):
   \begin{equation}\label{BD_master2}
@@ -118,7 +118,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{columns}  %分栏环境结束
   Problem \eqref{deter_upper} can generate a feasible seat planning.
 
-  Problem \eqref{deter_lower} can generate a seat planning no inferior than any given feasible seat planning.
+  Problem \eqref{deter_lower} can generate a seat planning no inferior than given feasible seat planning.
 \end{frame}
 
 
@@ -130,6 +130,6 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
         
         \item[Step 3.] Solve problem \eqref{deter_lower} to obtain the optimal solution, $\mathbf{x}^{2}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
     
-        \item[Step 4.] For each row, construct a full pattern.
+        \item[Step 4.] For each row, construct a full or largest pattern.
      \end{description}
 \end{frame}

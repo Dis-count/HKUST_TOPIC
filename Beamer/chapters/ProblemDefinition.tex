@@ -22,9 +22,7 @@
 
   \begin{frame}{Basic Concepts}
     \begin{itemize}
-      \item Pattern: the seat planning for each group type in one row. 
-      
-      Denoted by $P_{k} = (t_1, \ldots, t_M)$, where $t_i$ is the number of group type $i$.
+      \item $P_{k} = (t_1, \ldots, t_M)$, pattern, the seat planning for each group type $i, i \in \mathcal{M}$ in one row.
       \item For each pattern $k$, $\alpha_k, \beta_k$ indicate the number of groups and the left seats, respectively.
       \item Loss for pattern $k$: $\alpha_k \delta + \beta_k - \delta$.
       \item The largest patterns: patterns with the minimal loss. 
@@ -53,12 +51,11 @@
     \centering
     \small
     \begin{itemize}
-    \item[-] $T+1$ periods in total.
-    \item[-] There is one and only one group arrival at each period. 
+    \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
     \item[-] The probability of an arrival of group type $i$: $p_i$.  
     \item[-] Remaining capacity: $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$.
     \item[-] $\mathbf{e}_j^{\intercal}$: decision variable whether to assign the current group to row $j$.
-    \item[-] Value function: $V_{t}(\mathbf{L})$.
+    \item[-] $V_{t}(\mathbf{L})$: Value function with $t$ periods to go.
     \end{itemize}
 
     $$V_{t}(\mathbf{L}) = \sum_{i} p_i \left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)+ i, V_{t+1}(\mathbf{L})\right\}\right], V_{T+1}(\mathbf{L}) = 0.$$

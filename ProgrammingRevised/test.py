@@ -30,6 +30,8 @@ def gamma(data):
 result = gamma(data)
 # print(result[:, 0])
 
+
+
 plt.scatter(result[:, 0], result[:, 1], c="blue")
 plt.scatter(result[:, 0], result[:, 2], c="red")
 

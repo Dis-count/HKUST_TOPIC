@@ -1,7 +1,14 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {english}{}\relax 
+\defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {2}{Literature Review}{5}{0}{2}
+\defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {3}{Problem Definition}{8}{0}{3}
+\defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {4}{Seat Planning by Stochastic Programming}{13}{0}{4}
+\defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {5}{Dynamic Seat Assignment for Each Group Arrival}{21}{0}{5}
+\defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {6}{Numerical Results}{26}{0}{6}

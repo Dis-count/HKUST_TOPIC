@@ -8,7 +8,7 @@
         \item The formulation of scenario-based stochastic programming(SSP).
         \item Reformulate (SSP) to the benders master problem(BMP) and subproblem.
         \item The optimal solution can be obtained by solving (BMP) iteratively.
-        \item To avoid solving IP directly, we consider the LP relaxation form. 
+        \item To avoid solving IP directly, we consider the linear relaxation form.
         \item Obtain integral seat planning by deterministic model.
       \end{itemize}
     \end{frame}
@@ -85,14 +85,14 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     \includegraphics[width = 0.6\textwidth]{./images/BD.png}
   \end{figure}
 
-  To avoid solving IP directly, we consider the LP relaxation of Problem \eqref{BD_master2}.
+  To avoid solving IP directly, we consider the linear relaxation of Problem \eqref{BD_master2}.
 \end{frame}
 
 % \begin{frame}{Deterministic Formulation}
 %   Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq s_{i}, i \in \mathcal{M}$, we can obtain the problem with lower bound supply. 
 % \end{frame}
 
-\begin{frame}{Deterministic Formulation}  %开始一张幻灯片
+\begin{frame}{Deterministic Formulations}  %开始一张幻灯片
   To obtain an integral seat planning, we consider the following two deterministic formulations.
   \begin{columns}[c]  %开始进入分栏环境，居中设置
   \column{5cm}  %第一栏（左栏）宽度为5cm

@@ -68,7 +68,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
 \begin{frame}{Benders Decomposition Procedure}
   \small
-  (SSP) can be obtained by solving following restricted benders master problem(BMP):
+  Let $z_{\omega}$ be the lower bound of problem \eqref{BD_sub_dual}, (SSP) can be obtained by solving following restricted benders master problem(BMP):
   \begin{equation}\label{BD_master2}
     \begin{aligned}
       \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\

@@ -2,15 +2,38 @@
 
 \section{Dynamic Seat Assignment for Each Group Arrival}
     \frame{\sectionpage}
-    \begin{frame}{Stochastic Planning Policy}
+    \begin{frame}{Policies}
+      \begin{itemize}
+        \item Stochastic planning policy
+        \item Bid-price control
+        \item Dynamic programming based heuristic
+        \item Booking limit control
+        \item First come first served
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Stochastic Planning Policy(SPP)}
       % Stochastic planning policy involves
       \begin{itemize}
         \item Group-type control
         \item[-] Feasible Seat planning from stochastic programming.
         \item[-] When there is no small group, decide which group type to be assigned.
-        \vspace*{1cm}
+        Let $d(i, j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j + \delta)$-size seats.
+
+        Find the largest $d(i, j)$, denoted as $d(i, j^{*})$. If $d(i, j^{*}) > 0$, we will place
+the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Stochastic Planning Policy(SPP)}
+      % Stochastic planning policy involves
+      \begin{itemize}
         \item Value of Acceptance and Rejection
         \item[-] Compare the value of stochastic programming when assigning in the row versus not assigning.
+        \item[] 
+        Value of Acceptance: use the value of stochastic programming as the approximation of $V_{t} (\mathbf{L-n_i \mathbf{e}_j^{\top}})$ + $i$.
+        
+        Value of Rejection: approximation of $V_{t} (\mathbf{L})$.
       \end{itemize}
     \end{frame}
 

@@ -6,10 +6,10 @@
     \begin{frame}{Method Flow}
       \begin{itemize}
         \item The formulation of scenario-based stochastic programming(SSP).
-        \item Reformulate (SSP) to the benders master problem(BMP) and subproblem.
-        \item The optimal solution can be obtained by solving (BMP) iteratively.
+        \item Reformulate SSP to the benders master problem(BMP) and subproblem.
+        \item The optimal solution can be obtained by solving BMP iteratively.
         \item To avoid solving IP directly, we consider the linear relaxation form.
-        \item Obtain integral seat planning by deterministic model.
+        \item Obtain integral seat planning composed of full or largest patterns by deterministic model.
       \end{itemize}
     \end{frame}
 
@@ -68,7 +68,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
 \begin{frame}{Benders Decomposition Procedure}
   \small
-  Let $z_{\omega}$ be the lower bound of problem \eqref{BD_sub_dual}, (SSP) can be obtained by solving following restricted benders master problem(BMP):
+  Let $z_{\omega}$ be the lower bound of problem \eqref{BD_sub_dual}, SSP can be obtained by solving following restricted benders master problem:
   \begin{equation}\label{BD_master2}
     \begin{aligned}
       \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
@@ -118,11 +118,11 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{columns}  %分栏环境结束
   Problem \eqref{deter_upper} can generate a feasible seat planning.
 
-  Problem \eqref{deter_lower} can generate a seat planning no inferior than given feasible seat planning.
+  Problem \eqref{deter_lower} can generate a seat planning no inferior than a given feasible seat planning.
 \end{frame}
 
 
-\begin{frame}{Obtain The Feasible Seat Planning}
+\begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
       \begin{description}
         \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
 

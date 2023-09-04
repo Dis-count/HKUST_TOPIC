@@ -23,13 +23,13 @@
   \begin{frame}{Basic Concepts}
     \begin{itemize}
       \item $P_{k} = (t_1, \ldots, t_M)$, pattern, the seat planning for each group type $i, i \in \mathcal{M}$ in one row.
-      \item For each pattern $k$, $\alpha_k, \beta_k$ indicate the number of groups and the left seats, respectively.
-      \item Loss for pattern $k$: $\alpha_k \delta + \beta_k - \delta$.
-      \item The largest patterns: patterns with the minimal loss. 
-      \item Full patterns: $\beta_k =0$.
+      \item For each pattern $k$, $a_k, b_k$ indicate the number of groups and the unused seats, respectively.
+      \item Loss for pattern $k$: $a_k \delta + b_k - \delta$.
+      \item Largest patterns: Minimal loss with fixed length $L$. 
+      \item Full patterns: $b_k =0$.
       \item[-] {\color{blue} Example}: 
       
-      $\delta = 1$, $M =4$, $n_i = i+1, i \in \mathcal{M}$, $L = 21$.
+      $\delta = 1$, $M =4$, $n_1 = 2, n_2 = 3, n_3 = 4, n_4 = 5$, $L = 21$.
       
       Largest patterns: $(0, 0, 0, 4), (0, 0, 4, 1), (0, 2, 0, 3)$.
       
@@ -37,16 +37,6 @@
     \end{itemize}
   \end{frame}
 
-
-  \begin{frame}{Loss of The Largest Patterns}
-    \begin{itemize}
-      \item[-] Find a largest pattern: consider $L = n_{M} \cdot q + r, 0 \leq r < n_{M}$, where $q$ is the qutionet and $r$ is remainder. If the remainder $r$ is greater than $\delta$, the seats can be occupied by a group of size $(r-\delta)$. However, if $r$ is less than or equal to $\delta$, the seats should be left empty.
-      \item[-] {\color{blue} Example}: $\delta =1$, $M =4$, $L=21$, $n_M = 5$, $q =4$, $(0,0,0,4)$ is a largest pattern.
-      \item[*] Loss of the largest patterns: $l(L) = \lfloor \frac{L}{n_{M}} \rfloor \delta -\delta + f((L \mod n_{M}))$, where $f(r) =0$ if $r > \delta$; $f(r) = r$ if $r \leq \delta$.
-      \item[*] For a original seat layout, $\{S_1, S_2, \ldots, S_{N}\}$, the minimal total loss: $\sum_{j} l(S_j + \delta)$.
-    \end{itemize}
-  \end{frame}
-  
   \begin{frame}{Dynamic Seat Assignment Problem}
     \centering
     \small
@@ -55,7 +45,8 @@
     \item[-] The probability of an arrival of group type $i$: $p_i$.  
     \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
     \item[-] $u_{i,j}$: Decision. Assign group type $i$ to row $j$, $u_{i,j} =1$.
-    \item[-] $V_{t}(\mathbf{L})$: Value function with $t$ periods to go.
+    \item[-] $\mathbf{e}_j^{\top}$: Unit row vector with $j$-th element being 1.
+    \item[-] $V_{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
     \end{itemize}
 
     $$V_{t}(\mathbf{L}) = \max_{u \in U(\mathbf{L})}\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j} + V_{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}\mathbf{e}_j^{\top} ))\}$$

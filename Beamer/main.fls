@@ -1776,7 +1776,6 @@ INPUT ./chapters/Conclusion.tex
 INPUT chapters/Conclusion.tex
 INPUT ./chapters/Conclusion.tex
 INPUT chapters/Conclusion.tex
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssi8.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss17.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 OUTPUT main.nav
@@ -1789,7 +1788,6 @@ INPUT main.run.xml
 OUTPUT main.run.xml
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb
@@ -1808,7 +1806,6 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb

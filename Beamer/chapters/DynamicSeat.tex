@@ -3,6 +3,7 @@
 \section{Dynamic Seat Assignment for Each Group Arrival}
     \frame{\sectionpage}
     \begin{frame}{Policies}
+      The main idea is how we approximate the value function $V_t(\mathbf{L})$.
       \begin{itemize}
         \item Stochastic planning policy
         \item Bid-price control
@@ -18,22 +19,25 @@
         \item Group-type control
         \item[-] Feasible Seat planning from stochastic programming.
         \item[-] When there is no small group, decide which group type to be assigned.
-        Let $d(i, j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j + \delta)$-size seats.
-
-        Find the largest $d(i, j)$, denoted as $d(i, j^{*})$. If $d(i, j^{*}) > 0$, we will place
-the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
       \end{itemize}
+      \vspace*{1cm}
+      $d(i, j)$ = $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r)$ - $j P(D_{j} \geq x_{j})$, $j > i$.
+      \vspace*{1cm}
+
+      If $d(i, j^{*}) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
     \end{frame}
 
     \begin{frame}{Stochastic Planning Policy(SPP)}
       % Stochastic planning policy involves
       \begin{itemize}
-        \item Value of Acceptance and Rejection
-        \item[-] Compare the value of stochastic programming when assigning in the row versus not assigning.
-        \item[] 
-        Value of Acceptance: use the value of stochastic programming as the approximation of $V_{t} (\mathbf{L-n_i \mathbf{e}_j^{\top}})$ + $i$.
+        \item Use the value of stochastic programming as the approximation of value function in DP.
+
+        \item[-] Value of Acceptance(VoA): approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j}^{\top})$ + $i$. (Find a pattern containing group type $j^{*}$)
         
-        Value of Rejection: approximation of $V_{t} (\mathbf{L})$.
+        \item[-] Value of Rejection(VoR): approximation of $V_{t} (\mathbf{L})$.
+
+        % \item[-] Compare the value of stochastic programming when assigning in the row versus not assigning.
+        \item[-] If VoA is no less than VoR, accept group type $i$, otherwise, reject it.
       \end{itemize}
     \end{frame}
 
@@ -52,20 +56,25 @@ the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
       \end{frame}
 
       \begin{frame}{Dynamic Programming Based Heuristic}
-        Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
-        
-        Deterministic problem is: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.
-        
-        Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise, the DP with one row can be expressed as:
+        \begin{itemize}
+        \item Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
+        \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.
+        \item Decision: $u$. If we accept a request in period $t$, $u(t) = 1$; otherwise, $u(t) =0$.  
+        \item[-] DP with one row can be expressed as:
         $$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0$$ 
         $$V_{T+1}(x) =0, \forall x.$$
-
-        After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
+        \item After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
+        \end{itemize}
       \end{frame}
       
       \begin{frame}{Booking limit Control}
-        Solve problem \eqref{deter_upper} using the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
-        \vspace*{1cm}
-        
-        When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
+        Basic idea: for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
+        \begin{itemize}
+          \item[1] Observe the arrival group type $i$.
+          \item[2] Solve problem \eqref{deter_upper} using the expected demand.
+          \item[3] Obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$.
+          \item[4] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
+        \end{itemize}
+                 
+        % When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
       \end{frame}

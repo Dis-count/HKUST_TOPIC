@@ -5,29 +5,30 @@ We carried out several experiments, including comparing the running time of deco
 \subsection{Running time of Benders Decomposition and IP}\label{Bender_IP}
 % At first, we compare the running time of these two methods. 
 
-The running times of solving DEF directly and solving the relaxation of DEF with Benders decomposition are shown in Table \ref{tab_1}.
+The running times of solving SSP directly and solving the LP relaxation of SSP with Benders decomposition are shown in Table \ref{tab_1}.
 
 \begin{table}[ht]
   \centering
+  \scriptsize
   \caption{Running time of Decomposion and IP}\label{tab_1}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
-  \# of scenarios & demands & running time of IP(s) & Benders (s) & \# of rows & \# of groups & \# of seats\\
+  \# of scenarios & demands & \# of rows & \# of groups & \# of seats & running time of IP(s) & Benders (s) \\
   \hline
-  1000  & (150, 350) & 5.1  & 0.13 & 30 & 8 & (21, 50)\\
-  5000  & & 28.73 & 0.47 & 30 & 8 \\
-  10000 & & 66.81  & 0.91 & 30 & 8 \\
-  50000 & & 925.17 & 4.3 & 30 & 8 \\
+  1000  & (150, 350) & 30 & 8 & (21, 50) & 5.1  & 0.13 \\
+  5000  &            & 30 & 8 &         & 28.73 & 0.47  \\
+  10000 &            & 30 & 8 &         & 66.81  & 0.91 \\
+  50000 &            & 30 & 8 &         & 925.17 & 4.3 \\
   \hline
-  1000  & (1000, 2000) & 5.88 & 0.29 & 200 & 8 & (21, 50)\\
-  5000  & & 30.0 & 0.62 & 200 & 8 \\
-  10000 & & 64.41 & 1.09 & 200 & 8 \\
-  50000 & & 365.57 & 4.56 & 200 & 8 \\
+  1000  & (1000, 2000) & 200 & 8 & (21, 50) & 5.88 & 0.29 \\
+  5000  &              & 200 & 8 &          & 30.0 & 0.62 \\
+  10000 &              & 200 & 8 &          & 64.41 & 1.09 \\
+  50000 &              & 200 & 8 &          & 365.57 & 4.56\\
   \hline
-  1000  & (150, 250) & 17.15  & 0.18 & 30 & 16 & (41, 60) \\
-  5000  & & 105.2  & 0.67 & 30 & 16  \\
-  10000 & & 260.88 & 1.28 & 30 & 16  \\
-  50000 & & 3873.16 & 6.18 & 30 & 16  \\
+  1000  & (150, 250) & 30 & 16 & (41, 60) & 17.15  & 0.18 \\
+  5000  &            & 30 & 16 &          & 105.2  & 0.67 \\
+  10000 &            & 30 & 16 &          & 260.88 & 1.28 \\
+  50000 &            & 30 & 16 &          & 3873.16 & 6.18 \\
   \hline
   \end{tabular}
 \end{table}
@@ -59,6 +60,7 @@ Then, we will show the feasible seat assignment has a close performance with IP 
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
     \# samples & T & probabilities & \# rows & people served by decomposition & people served by IP \\
+    \hline
     1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 85.30 & 85.3 \\
     1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & 97.32 & 97.32 \\
     1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & 102.40 & 102.40  \\ % slow
@@ -87,12 +89,12 @@ The number of seats is 20 when the number of rows is 8, the number of seats is 4
 
 % Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
-\subsection{Performances of Different Policies to Optimal}
+\subsection{Performances of Different Policies}
 In this section, we compare the performance of four dynamic seat assignment policies to the optimal value, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the stochastic planning policy, DP Base-heuristic, bid-price policy and FCFS policy. The seat layout consists of 10 rows, each with 21 seats (including one dummy seat), and the group size can range up to 4 people. We conducted experiments over 60 to 100 periods to demonstrate the policies' performance under varying demand levels. We selected three probabilities to ensure that the expected number of people for each period is consistent. The table below displays the average of 200 instances for each number.
 
 \begin{table}[ht]
   \centering
-  \caption{Performances of Different Policies to Optimal}
+  \caption{Performances of Different Policies}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
    T & probabilities & Sto(\%) & DP1(\%) & Bid-price(\%) & Booking & FCFS(\%) \\
@@ -247,33 +249,32 @@ However, we have also observed that some blue points in the figure are significa
 
 \begin{figure}[ht]
   \centering
-    \includegraphics[width=0.8\textwidth]{./Figures/scatter.pdf}
+    \includegraphics[width=0.8\textwidth]{./Figures/gamma_estimation.pdf}
   \caption{Gap points under 200 probabilities}
 \end{figure}
 
-\subsubsection{Results of Different Seat Layouts}
-If we modify the even seat layout, the differences between the red and blue points will decrease, and some outliers may be eliminated. To maintain the same total seating capacity, we compare two layouts with the even seat layout. The step-size seat layout consists of rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the random seat layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to the largest pattern.
+% \subsubsection{Results of Different Seat Layouts}
+% If we modify the even seat layout, the differences between the red and blue points will decrease, and some outliers may be eliminated. To maintain the same total seating capacity, we compare two layouts with the even seat layout. The step-size seat layout consists of rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the random seat layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to the largest pattern.
 
-\begin{figure}[ht]
-  \centering
-  \subfigure[Average of 50 instances for step-size seat layout]{
-    \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
-  \subfigure[Average of 50 instances for random seat layout]{
-    \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
-  \caption{The number of people served versus $\gamma$}
-\end{figure}
+% \begin{figure}[ht]
+%   \centering
+%   \subfigure[Average of 50 instances for step-size seat layout]{
+%     \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
+%   \subfigure[Average of 50 instances for random seat layout]{
+%     \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
+%   \caption{The number of people served versus $\gamma$}
+% \end{figure}
 
-The results suggest that a random seat layout may provide a more accurate estimation, implying that such a layout is more capable of accommodating uncertain demands and achieving a full pattern that can accept more people.
+% The results suggest that a random seat layout may provide a more accurate estimation, implying that such a layout is more capable of accommodating uncertain demands and achieving a full pattern that can accept more people.
 
-% When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
-% Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
+% % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
+% % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
 
 
-\newpage
+% \newpage
 
-% In addition, we evaluate two policies for seat assignment after all group arrivals: one is based on dynamic programming (DP) and the other is based on first-come, first-served (FCFS) scheduling.
-% We present the results of our experiments and discuss their implications.
-
+% % In addition, we evaluate two policies for seat assignment after all group arrivals: one is based on dynamic programming (DP) and the other is based on first-come, first-served (FCFS) scheduling.
+% % We present the results of our experiments and discuss their implications.
 
 % \subsection{Measurement}
 % Suppose a real scenario with a fixed sequence, $s^{r}$. Solving the following program can obtain the optimal value, $V_{s^{r}}$. (Offline)

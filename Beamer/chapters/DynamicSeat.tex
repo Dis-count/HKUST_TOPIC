@@ -3,7 +3,6 @@
 \section{Dynamic Seat Assignment for Each Group Arrival}
     \frame{\sectionpage}
     \begin{frame}{Policies}
-      The main idea is how we approximate the value function $V_t(\mathbf{L})$.
       \begin{itemize}
         \item Stochastic planning policy
         \item Bid-price control
@@ -21,10 +20,11 @@
         \item[-] When there is no small group, decide which group type to be assigned.
       \end{itemize}
       \vspace*{1cm}
-      $d(i, j)$ = $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r)$ - $j P(D_{j} \geq x_{j})$, $j > i$.
+      \small
+      $d(i, j; t)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; t)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j} \geq x_{j}; t)}_{\text{rejection}}$, $j > i$.
       \vspace*{1cm}
 
-      If $d(i, j^{*}) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
+      If $d(i, j^{*}; t) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
     \end{frame}
 
     \begin{frame}{Stochastic Planning Policy(SPP)}

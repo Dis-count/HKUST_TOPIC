@@ -1698,11 +1698,11 @@ INPUT ./images/seat_sc.png
 INPUT ./images/seat_sc.png
 INPUT ./images/seat_sc.png
 INPUT ./images/seat_sc.png
-INPUT ./images/cinema2.jpg
-INPUT ./images/cinema2.jpg
-INPUT ./images/cinema2.jpg
-INPUT ./images/cinema2.jpg
-INPUT ./images/cinema2.jpg
+INPUT ./images/cinema.jpg
+INPUT ./images/cinema.jpg
+INPUT ./images/cinema.jpg
+INPUT ./images/cinema.jpg
+INPUT ./images/cinema.jpg
 INPUT ./chapters/Literature.tex
 INPUT chapters/Literature.tex
 INPUT ./chapters/Literature.tex

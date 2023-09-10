@@ -22,18 +22,22 @@
 
   \begin{frame}{Basic Concepts}
     \begin{itemize}
-      \item $P_{k} = (t_1, \ldots, t_M)$, pattern, the seat planning for each group type $i, i \in \mathcal{M}$ in one row.
-      \item For each pattern $k$, $a_k, b_k$ indicate the number of groups and the unused seats, respectively.
-      \item Loss for pattern $k$: $a_k \delta + b_k - \delta$.
-      \item Largest patterns: Minimal loss with fixed length $L$. 
+      \item $P_{k} = (t_1, \ldots, t_M)$, pattern, the seat planning for each group type in one row.
+          
+          - For each pattern $k$, $a_k, b_k$ indicate the number of groups and the unused seats, respectively.
+          
+          - Loss for pattern $k$: $a_k \delta + b_k - \delta$.
+      \item Largest patterns: Minimal loss. 
       \item Full patterns: $b_k =0$.
       \item[-] {\color{blue} Example}: 
       
       $\delta = 1$, $M =4$, $n_1 = 2, n_2 = 3, n_3 = 4, n_4 = 5$, $L = 21$.
       
       Largest patterns: $(0, 0, 0, 4), (0, 0, 4, 1), (0, 2, 0, 3)$.
-      
-      Not a Full pattern: $(0, 0, 0, 4)$.
+
+      Largest may not be full: $(0, 0, 0, 4)$.
+
+      Full may not be largest: $(1, 1, 4, 0)$.
     \end{itemize}
   \end{frame}
 
@@ -45,15 +49,38 @@
     \item[-] The probability of an arrival of group type $i$: $p_i$.  
     \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
     \item[-] $u_{i,j}$: Decision. Assign group type $i$ to row $j$, $u_{i,j} =1$.
+    \item[-] $U(\mathbf{L}) = \{u_{i,j} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j} \leq 1, \forall i, n_{i}u_{i,j}\mathbf{e}_j^{\top} \leq \mathbf{L}, \forall i,j \}$.
     \item[-] $\mathbf{e}_j^{\top}$: Unit row vector with $j$-th element being 1.
     \item[-] $V_{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
     \end{itemize}
 
     $$V_{t}(\mathbf{L}) = \max_{u \in U(\mathbf{L})}\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j} + V_{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}\mathbf{e}_j^{\top} ))\}$$
-
     \small
-    \begin{itemize}
-      \item[-] DP is computationally complex caused by the curse of dimensionality.
-      \item[-] We give a seat planning by stochastic programming firstly, then apply stochastic planning policy to make the decision.
-    \end{itemize}
+
+    % \begin{itemize}
+    %   \item[-] DP is computationally complex caused by the curse of dimensionality.
+    %   \item[-] We give a seat planning by stochastic programming firstly, then apply stochastic planning policy to make the decision.
+    % \end{itemize}
+\end{frame}
+
+\begin{frame}{Method Overview}
+  \begin{itemize}
+    \item Obtain seat planning composed of full or largest patterns.
+    
+    - Linear seat planning from stochastic programming
+    
+    - Integral seat planning from deterministic model
+
+    - Construct largest or full patterns.
+
+    \item Stochastic planning policy.
+
+    - Group type control
+% Tell us which group type should be broke which determines which rows can be placed. 
+
+    - Value of stochastic programming
+% decide whether to accept 
+% Both acceptance can decide 
+
+  \end{itemize}
 \end{frame}

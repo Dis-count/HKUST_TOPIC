@@ -1,6 +1,6 @@
 % !TEX root = sum1.tex
 \section{Dynamic Seat Assignment(DSA) for Each Group Arrival}
-In this section, we discuss policies for assigning seats dynamically. We need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. We first present the dynamic seat assignment based on stochastic planning policy, which incorporates group-type control to optimize resource utilization. We also compare this approach with the bid-price control policy. Finally, we establish the FCFS policy as the benchmark.
+In this section, we discuss different policies for assigning seats dynamically. We need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. We first present the dynamic seat assignment based on stochastic planning policy, which incorporates group-type control to optimize resource utilization. We also compare this approach with bid-price control, dynamic programming based heuristic and booking limit control. Finally, we establish the FCFS policy as the benchmark.
 
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
@@ -19,15 +19,24 @@ Similarly, when we retain the supply of group type $j$ by rejecting a group of $
 Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1) - j P(D_{j} \geq x_{j})$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
 
 \begin{remark}
-This control is based on the current feasible seat planning. We can decide which row to place according to the pattern instead of placing it when the capacity is sufficient. When a new seat planning can be regenerated, we can use the objective value of stochastic programming to make the decision.
+This control is based on the current seat planning. We still need further comparison of values of accepting or rejecting an arrival to decide whether to accept it. That is, the group-type control is a necessary condition to accept a group.
 \end{remark}
 
-Stochastic planning policy involves using the objective value of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival (i.e., the Value of Acceptance), as well as the potential outcomes that could result from rejecting it (i.e., the Value of Rejection).
+% according to the pattern instead of placing it when the capacity is sufficient.
 
-The Value of Acceptance considers the scenarios that could arise if we accept the current arrival, while the Value of Rejection considers the same scenarios if we reject it. By comparing the Value of Acceptance and the Value of Rejection, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made.
+\subsubsection{Make Decision by Value of Stochastic Programming}
+After we decide to assign a small group to a larger one, we need to compare the objective values of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival, i.e., the Value of Acceptance(VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection(VoR).
+
+The VoA considers the scenarios that could arise if we accept the current arrival, while the VoR considers the same scenarios if we reject it. By comparing the VoA and the VoR, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made. 
+
+If the VoA is larger than the VoR, it indicates that accepting the arrival would result in a higher objective value. In such cases, we refer to the corresponding planning group row in the group-type control, where we determine which group to break in order to accommodate the incoming group. If the VoA is less than the VoR, we will reject the incoming group.
+
+In essence, this decision-making approach weighs the potential benefits and costs associated with accepting or rejecting an arrival, allowing us to select the option that maximizes the objective value and aligns with our overall goals.
+
+% When a new seat planning can be regenerated, we can use the objective value of stochastic programming to make the decision.
 
 \subsubsection{Algorithm Based on Stochastic Planning Policy}
-The feasible seat planning can be obtained from Algorithm \ref{feasible_seat}. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
+The seat planning can be obtained from Algorithm \ref{feasible_seat}. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
 
 The algorithm is shown below:
 
@@ -50,7 +59,7 @@ By following this approach, the number of unused seats in each row can be reduce
 \subsection{Bid-price Control}
 Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
 
-The dual problem of linear relaxation of problem \eqref{deter_upper} is:
+The dual problem of LP relaxation of problem \eqref{deter_upper} is:
 
 \begin{equation}\label{bid-price_dual}
   \begin{aligned}

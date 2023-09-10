@@ -99,7 +99,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \scriptsize
   \begin{equation}\label{deter_upper}
     \begin{aligned}
-    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
+    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} {\color{red} \leq} s_{i}^{0}, \quad i \in \mathcal{M}, \\
     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
@@ -109,7 +109,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \scriptsize
   \begin{equation}\label{deter_lower}
     \begin{aligned}
-    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- s) x_{ij} \\
+    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} {\color{red} \geq} s_{i}^{1}, \quad i \in \mathcal{M}, \\
     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.

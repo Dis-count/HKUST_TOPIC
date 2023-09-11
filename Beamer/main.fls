@@ -1767,11 +1767,11 @@ INPUT ./images/p2.pdf
 INPUT ./images/p2.pdf
 INPUT ./images/p2.pdf
 INPUT ./images/p2.pdf
-INPUT ./images/scatter.pdf
-INPUT ./images/scatter.pdf
-INPUT ./images/scatter.pdf
-INPUT ./images/scatter.pdf
-INPUT ./images/scatter.pdf
+INPUT ./images/gamma_estimation.pdf
+INPUT ./images/gamma_estimation.pdf
+INPUT ./images/gamma_estimation.pdf
+INPUT ./images/gamma_estimation.pdf
+INPUT ./images/gamma_estimation.pdf
 INPUT ./chapters/Conclusion.tex
 INPUT chapters/Conclusion.tex
 INPUT ./chapters/Conclusion.tex

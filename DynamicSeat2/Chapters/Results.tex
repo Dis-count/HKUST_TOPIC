@@ -1,6 +1,9 @@
 % !TEX root = sum1.tex
 \section{Results}
-We carried out several experiments, including comparing the running time of decomposition and Integer programming, comparing the number of people served using the feasible seat planning and Integer programming methods, analyzing different policies under the two booking situations, evaluating the results under varying demands, assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
+We carried out several experiments, including comparing the running time of decomposition and integer programming, comparing the number of people served using the feasible seat planning and integer programming methods, analyzing different policies, evaluating the impact of implementing social distancing.
+
+% assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
+
 
 \subsection{Running time of Benders Decomposition and IP}\label{Bender_IP}
 % At first, we compare the running time of these two methods. 
@@ -46,14 +49,14 @@ Take the first experiment as an example, the scenarios of demands are generated 
 % The number of seats for each row L is generated from 41-60 randomly, about 1500 seats.
 % The scenarios of demands are generated from (150, 250) randomly.
 
-\subsection{Feasible Seat Planning versus IP Solution}
+\subsection{Seat Planning Composed of Full or Largest Patterns versus IP Solution}
 An arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{i} = \sum_{t} I(y_t = i)$, i.e., the number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{M})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{M} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{M}!} \prod_{i=1}^{M} p_{i}^{N_i}, T = \sum_{i=1}^{M} N_{i}.$$
 
 It is clear that the number of different sequences is $M^{T}$. The number of different scenarios is $O(T^{M-1})$ which can be obtained by the following DP.
 
 Use $D(T, M) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{M} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, M) = \sum_{i= 0}^{T} D(i, M-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,M) = O(T^{M-1})$. The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
 
-Then, we will show the feasible seat assignment has a close performance with IP when considering group-type control policy.
+Then, we will show the seat planning has a close performance with IP when considering group-type control policy.
 
 \begin{table}[ht]
     \caption{Feasible seat planning versus IP solution}
@@ -97,7 +100,7 @@ In this section, we compare the performance of four dynamic seat assignment poli
   \caption{Performances of Different Policies}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
-   T & probabilities & Sto(\%) & DP1(\%) & Bid-price(\%) & Booking & FCFS(\%) \\
+   T & probabilities & SSP(\%) & DP1(\%) & Bid-price(\%) & Booking & FCFS(\%) \\
   \hline
    60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 & 96.74 & 98.17 \\
    70  & [0.25, 0.25, 0.25, 0.25]  & 98.34 & 96.87 & 96.24 & 97.18 & 94.75 \\
@@ -128,40 +131,40 @@ For the first three policies, their performance tends to initially drop and then
 %  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
 %  大于 gamma/gamma+1， 则最大损失是（ ）
 
-\subsection{Impact of Social Distance as Demands Increase}
-In this section, we will explore how social distancing affects the occupancy rate of a venue under different demands. Let $\gamma$ represent the average number of people who arrive in each period, and let $L$ represent the total number of seats available. We can calculate the expected number of people arriving using the formula $E(D) = \gamma T$, where $T$ is the number of periods. 
+\subsection{Impact of Implementing Social Distancing in SPP}
+In this section, we will examine the impact of social distancing on the number of accepted individuals. Specifically, we are interested in identifying the first time period where the number of people accepted without social distancing exceeds the number accepted with social distancing, along with the corresponding occupancy rate.
 
-If we assume that we accept all incoming groups within the $T{'}$ periods and they fill all the available seats, then we have $E(D) + T{'} = L$. Solving for $T{'}$, we get $T{'} = L/(\gamma + 1)$. 
-$T{'}$ represents the ideal first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats. But the actual first period will be smaller than the ideal one because we cannot always exactly fill the seats with accepted groups. 
+It is evident that as the demand increases, the effect of social distancing becomes more pronounced. We aim to determine the specific time period where the absence of social distancing results in a higher number of accepted individuals compared to when social distancing measures are in place. Additionally, we will calculate the corresponding occupancy rate during this period.
 
+By analyzing and comparing the data, we can gain insights into the relationship between demand, social distancing, the number of accepted individuals, and occupancy rates. This information is valuable for understanding the impact of social distancing policies on overall capacity utilization and making informed decisions regarding resource allocation and operational strategies.
 
-If we limit the number of group types to 4, we can express $\gamma$ as $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Define each combination $(p_1, p_2, p_3, p_4)$ such that $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. When $\gamma = 2.5$, we set the parameters as follows: $T$ varies from 10 to 100, the step size is 1. When $\gamma = 1.9$, we set the parameters as follows: $T$ varies from 30 to 120, the step size is 1. The seat layout consists 10 rows and the number of seats per row is 21.
+\subsubsection{Estimation of Gap Point}
+Let $\gamma$ represent the average number of people who arrive in each period, and let $L$ represent the total number of seats available. We can calculate the expected number of people arriving using the formula $D(T) = \gamma T$, where $T$ is the number of periods. 
 
-% For each $\gamma$, we give several probabilities in the table. We can find the actual gap points with the same $\gamma$ are close.
-
-% \begin{table}[ht]
-%   \centering
-%   \caption{Actual Gap points of different probabilities}
-%   \begin{tabular}{|l|l|l|l|}
-%   \hline
-%   $\gamma$  & probabilities & gap point & gap percentage \\
-%   \hline
-%   2.5  & [0.25,0.25,0.25,0.25] & 56 & 65.21 \\
-%   2.5  & [0.1,0.4,0.4,0.1] & 55 & 65.59 \\
-%   2.5  & [0.1, 0.5, 0.2, 0.2] & 55 & 65.45 \\
-%   2.5  & [0.2, 0.3, 0.3, 0.2] & 54 & 64.56 \\
-%   2.5  & [0.3, 0.2, 0.2, 0.3] & 55 & 65.51\\
-%   2.5  & [0.2, 0.4, 0.1, 0.3] & 55 & 65.41 \\
-%   1.9  & [0.4, 0.4, 0.1, 0.1] & 67 & 60.35 \\
-%   1.9  & [0.5, 0.2, 0.2, 0.1] & 67 & 58.9  \\
-%   1.9  & [0.3, 0.5, 0.2, 0]  &  68 & 61.7  \\
-%   1.9  & [0.6, 0.1, 0.1, 0.2] & 66 & 58.31 \\
-%   \hline
-%   \end{tabular}
-% \end{table}
+If we assume that we accept all incoming groups within the $T{'}$ periods and they fill all the available seats, then we have $D(T{'}) + \delta T{'} = L$. Solving for $T{'}$, we get $T{'} = L/(\gamma + \delta)$. $T{'}$ represents the ideal first period where the number of people without social distancing is larger than that with social distancing and the corresponding occupancy rate is given by $\frac{\gamma T'}{(\gamma+1)T' - N \delta}$. It is important to note that this estimation is accurate only when we accepted groups in $T{'}$ periods and all rows represent full patterns, as per our assumption.
 
 
-The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ stochastic planning to obtain the results. For the latter case, we utilize a deterministic model with hindsight to generate the outcomes. Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
+% But the actual first period will be smaller than the ideal one because we cannot always exactly accept groups to fill all seats.
+
+We limit the number of group types to 4, then $\gamma$ can be expressed as $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Suppose these probabilities are all positive.
+Define each combination $(p_1, p_2, p_3, p_4)$ such that $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. 
+
+The figure presented below illustrates the gap point as a function of the increment of $\gamma$, along with the corresponding estimations. Our analysis incorporates a sample of 200 probability combinations. For each combination, we observe the gap point over 100 instances, represented by blue points, as well as the occupancy rate at the gap point, represented by red points.
+
+To provide estimations, we utilize the equations $y = c_1 \frac{\gamma}{\gamma+1}$(blue line in the figure) and $y = \frac{c_2}{\gamma +1}$(orange line in the figure), which are fitted to the data. These equations capture the relationship between the gap point and the increment of $\gamma$, allowing us to approximate the values.
+
+\begin{figure}[ht]
+  \centering
+    \includegraphics[width=0.8\textwidth]{./Figures/gamma_estimation.pdf}
+  \caption{Gap points under 200 probabilities}
+\end{figure}
+
+By examining the relationship between the gap point and the increment of $\gamma$, we can find that $\gamma$ can be used to estimate gap point.
+
+\subsubsection{Impact of Social Distancing as Demands Increase}
+Now, we consider impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. When $\gamma = 2.5$, we set the parameters as follows: $T$ varies from 10 to 100, the step size is 1. When $\gamma = 1.9$, we set the parameters as follows: $T$ varies from 30 to 120, the step size is 1. The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
+
+The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ SPP to obtain the results. For the latter case, we utilize a deterministic model with hindsight to generate the outcomes. Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
 
 \begin{figure}[h]
   \centering
@@ -175,106 +178,124 @@ The figure below displays the outcomes of groups who were accepted under two dif
   \label{Fig.lable}
 \end{figure}
 
-
 The analysis comprises three stages. In the first stage, where the capacity is sufficient, social distancing measures have no impact on the outcome. In the second stage, the gap between the outcomes with and without social distancing measures widens as $T$ increases. Finally, in the third stage, as $T$ continues to increase, the gap between the outcomes with and without social distancing measures converges when both situations accept the maximum number of people.
+
+According to Lemma \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted.
+
+% \subsection{Comparison of Different Probabilities When Supply and Demand Are Close}
+% When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities.
+
+% We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. The seat layout still remains the same as the above experiments. The figure below shows the number of people served for each value of $\gamma$. For each probability combination, the blue point represents the average number of people served over 50 instances, and the red point represents the estimated number of people served. 
+
+% \begin{figure}[h]
+%   \centering
+%   \subfigure[One instance for each probability combination]{
+%     \includegraphics[width=0.48\textwidth]{./Figures/diff_1.pdf}}
+%   \subfigure[Average of 50 instances for each probability combination]{
+%     \includegraphics[width=0.48\textwidth]{./Figures/diff_2.pdf}}
+%   \caption{The number of people accepted versus $\gamma$}
+% \end{figure}
+
+% If the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{21}$. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted. The estimated number of people accepted is given by $\frac{\gamma}{\gamma+1} * 200$, as indicated by the red points in the figure.
+
+% \subsubsection{Analysis on The Difference Between Blue and Red Points}
+% We can give the absolute difference between the blue point and red point for each probability combination as below.
 
 % \begin{table}[ht]
 %   \centering
-%   \caption{Gap points and gap percentage of different probabilities}
-%   \begin{tabular}{|l|l|l|}
+%   \caption{Absolute Difference Proportion}\label{tab_diff}
+%   \begin{tabular}{|l|l|l|l|l|}
 %   \hline
-%   $\gamma$  & gap point & gap percentage \\
+%   \# of instances & abs\_diff $\geq$ 1 & abs\_diff $\geq$ 2 & abs\_diff $\geq$ 3 & abs\_diff $\geq$ 4 \\
 %   \hline
-%   $[1.5,1.7]$   & [56, ] & [65.21, ] \\
-%   $[1.7,1.9]$   & [56, ] & [65.21, ] \\
-%   $[1.9,2.1]$   & [56, ] & [65.21, ] \\
-%   $[2.1,2.3]$   & [56, ] & [65.21, ] \\
-%   $[2.1,2.3]$   & [56, ] & [65.21, ] \\
-%   $[2.3,2.5]$   & [    ] & [] \\
-%   $[2.5,2.7]$   & [    ] & [] \\
-%   $[2.9,3.1]$   & [    ] & [] \\
-%   $[3.1,3.3]$   & [    ] & [] \\
+%   20 & 32.92 \% & 5.13 \% & 1.74\% & 0.51 \% \\
+%   50 & 22.46 \% & 4.31 \% & 1.54 \% & 0.31 \%  \\
+%   100 & 20.00 \% & 4.21 \% & 1.54 \% & 0.31 \% \\
 %   \hline
 %   \end{tabular}
 % \end{table}
 
-\subsection{Comparison of Different Probabilities When Supply and Demand Are Close}
-When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities. In this case, the estimated occupancy rate is given by $\frac{\gamma T'}{(\gamma+1)T' - N}$. It is important to note that this estimation is accurate only when all rows represent full patterns, as per our assumption.
-
-We sample $p_1$, $p_2$, and $p_3$ from 0.05 to 0.95 with an increment of 0.05. The seat layout still remains the same as the above experiments. The figure below shows the number of people served for each value of $\gamma$. For each probability combination, the blue point represents the average number of people served over 50 instances, and the red point represents the estimated number of people served. 
-
-\begin{figure}[h]
-  \centering
-  \subfigure[One instance for each probability combination]{
-    \includegraphics[width=0.48\textwidth]{./Figures/diff_1.pdf}}
-  \subfigure[Average of 50 instances for each probability combination]{
-    \includegraphics[width=0.48\textwidth]{./Figures/diff_2.pdf}}
-  \caption{The number of people accepted versus $\gamma$}
-\end{figure}
-
-If the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{21}$. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted. The estimated number of people accepted is given by $\frac{\gamma}{\gamma+1} * 200$, as indicated by the red points in the figure.
-
-\subsubsection{Analysis on The Difference Between Blue and Red Points}
-We can give the absolute difference between the blue point and red point for each probability combination as below.
-
-\begin{table}[ht]
-  \centering
-  \caption{Absolute Difference Proportion}\label{tab_diff}
-  \begin{tabular}{|l|l|l|l|l|}
-  \hline
-  \# of instances & abs\_diff $\geq$ 1 & abs\_diff $\geq$ 2 & abs\_diff $\geq$ 3 & abs\_diff $\geq$ 4 \\
-  \hline
-  20 & 32.92 \% & 5.13 \% & 1.74\% & 0.51 \% \\
-  50 & 22.46 \% & 4.31 \% & 1.54 \% & 0.31 \%  \\
-  100 & 20.00 \% & 4.21 \% & 1.54 \% & 0.31 \% \\
-  \hline
-  \end{tabular}
-\end{table}
-
-\begin{figure}[ht]
-  \centering
-  \subfigure[Average of 50 instances for each probability combination]{
-    \label{Fig1}
-    \includegraphics[width=0.48\textwidth]{./Figures/Figure_50.pdf}}
-  \subfigure[Average of 100 instances for each probability combination]{
-    \label{Fig2}
-    \includegraphics[width=0.48\textwidth]{./Figures/Figure_100.pdf}}
-  \caption{The difference distribution}
-  \label{fig_diff}
-\end{figure}
-
-Table \ref{tab_diff} displays the absolute difference proportion for the average of 20, 50, and 100 instances, while Figure \ref{fig_diff} shows the difference distribution for the average of 50 and 100 instances. These results suggest that we can estimate the attendance rate based on $\gamma$ for most probability combinations.
-
-However, we have also observed that some blue points in the figure are significantly distant from their corresponding red points. This is evident when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
-
-\begin{figure}[ht]
-  \centering
-    \includegraphics[width=0.8\textwidth]{./Figures/gamma_estimation.pdf}
-  \caption{Gap points under 200 probabilities}
-\end{figure}
-
-% \subsubsection{Results of Different Seat Layouts}
-% If we modify the even seat layout, the differences between the red and blue points will decrease, and some outliers may be eliminated. To maintain the same total seating capacity, we compare two layouts with the even seat layout. The step-size seat layout consists of rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the random seat layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to the largest pattern.
-
 % \begin{figure}[ht]
 %   \centering
-%   \subfigure[Average of 50 instances for step-size seat layout]{
-%     \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
-%   \subfigure[Average of 50 instances for random seat layout]{
-%     \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
-%   \caption{The number of people served versus $\gamma$}
+%   \subfigure[Average of 50 instances for each probability combination]{
+%     \label{Fig1}
+%     \includegraphics[width=0.48\textwidth]{./Figures/Figure_50.pdf}}
+%   \subfigure[Average of 100 instances for each probability combination]{
+%     \label{Fig2}
+%     \includegraphics[width=0.48\textwidth]{./Figures/Figure_100.pdf}}
+%   \caption{The difference distribution}
+%   \label{fig_diff}
 % \end{figure}
 
-% The results suggest that a random seat layout may provide a more accurate estimation, implying that such a layout is more capable of accommodating uncertain demands and achieving a full pattern that can accept more people.
+% Table \ref{tab_diff} displays the absolute difference proportion for the average of 20, 50, and 100 instances, while Figure \ref{fig_diff} shows the difference distribution for the average of 50 and 100 instances. These results suggest that we can estimate the attendance rate based on $\gamma$ for most probability combinations.
 
-% % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
-% % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
+% However, we have also observed that some blue points in the figure are significantly distant from their corresponding red points. This is evident when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
 
 
-% \newpage
+% % \begin{table}[ht]
+% %   \centering
+% %   \caption{Gap points and gap percentage of different probabilities}
+% %   \begin{tabular}{|l|l|l|}
+% %   \hline
+% %   $\gamma$  & gap point & gap percentage \\
+% %   \hline
+% %   $[1.5,1.7]$   & [56, ] & [65.21, ] \\
+% %   $[1.7,1.9]$   & [56, ] & [65.21, ] \\
+% %   $[1.9,2.1]$   & [56, ] & [65.21, ] \\
+% %   $[2.1,2.3]$   & [56, ] & [65.21, ] \\
+% %   $[2.1,2.3]$   & [56, ] & [65.21, ] \\
+% %   \hline
+% %   \end{tabular}
+% % \end{table}
 
-% % In addition, we evaluate two policies for seat assignment after all group arrivals: one is based on dynamic programming (DP) and the other is based on first-come, first-served (FCFS) scheduling.
-% % We present the results of our experiments and discuss their implications.
+
+% % For each $\gamma$, we give several probabilities in the table. We can find the actual gap points with the same $\gamma$ are close.
+
+% % \begin{table}[ht]
+% %   \centering
+% %   \caption{Actual Gap points of different probabilities}
+% %   \begin{tabular}{|l|l|l|l|}
+% %   \hline
+% %   $\gamma$  & probabilities & gap point & gap percentage \\
+% %   \hline
+% %   2.5  & [0.25,0.25,0.25,0.25] & 56 & 65.21 \\
+% %   2.5  & [0.1,0.4,0.4,0.1] & 55 & 65.59 \\
+% %   2.5  & [0.1, 0.5, 0.2, 0.2] & 55 & 65.45 \\
+% %   2.5  & [0.2, 0.3, 0.3, 0.2] & 54 & 64.56 \\
+% %   2.5  & [0.3, 0.2, 0.2, 0.3] & 55 & 65.51\\
+% %   2.5  & [0.2, 0.4, 0.1, 0.3] & 55 & 65.41 \\
+% %   1.9  & [0.4, 0.4, 0.1, 0.1] & 67 & 60.35 \\
+% %   1.9  & [0.5, 0.2, 0.2, 0.1] & 67 & 58.9  \\
+% %   1.9  & [0.3, 0.5, 0.2, 0]  &  68 & 61.7  \\
+% %   1.9  & [0.6, 0.1, 0.1, 0.2] & 66 & 58.31 \\
+% %   \hline
+% %   \end{tabular}
+% % \end{table}
+
+
+% % \subsubsection{Results of Different Seat Layouts}
+% % If we modify the even seat layout, the differences between the red and blue points will decrease, and some outliers may be eliminated. To maintain the same total seating capacity, we compare two layouts with the even seat layout. The step-size seat layout consists of rows with 17, 18, 19, 20, 21, 21, 22, 23, 24, and 25 seats, while the random seat layout has rows with 19, 20, 21, 21, 23, 24, 26, 17, 19, and 20 seats. Both layouts can accommodate a maximum of 164 people when each row corresponds to the largest pattern.
+
+% % \begin{figure}[ht]
+% %   \centering
+% %   \subfigure[Average of 50 instances for step-size seat layout]{
+% %     \includegraphics[width=0.48\textwidth]{./Figures/stepsize_seat.pdf}}
+% %   \subfigure[Average of 50 instances for random seat layout]{
+% %     \includegraphics[width=0.48\textwidth]{./Figures/random_seat.pdf}}
+% %   \caption{The number of people served versus $\gamma$}
+% % \end{figure}
+
+% % The results suggest that a random seat layout may provide a more accurate estimation, implying that such a layout is more capable of accommodating uncertain demands and achieving a full pattern that can accept more people.
+
+% % % When $p = [0.25, 0.25, 0.25, 0.25]$, $E(D) = 2.5 T$. Let $p_1*1 + p_2*2 + p_3*3 + p_4*4 = 2.5$, 
+% % % Let $E(D) = 150, T = 50, 60, 75$. The number of seats: 200, 210, 225.
+
+
+% % \newpage
+
+% % % In addition, we evaluate two policies for seat assignment after all group arrivals: one is based on dynamic programming (DP) and the other is based on first-come, first-served (FCFS) scheduling.
+% % % We present the results of our experiments and discuss their implications.
+
 
 % \subsection{Measurement}
 % Suppose a real scenario with a fixed sequence, $s^{r}$. Solving the following program can obtain the optimal value, $V_{s^{r}}$. (Offline)

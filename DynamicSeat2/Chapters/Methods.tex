@@ -16,7 +16,7 @@ When the number of remaining periods is $T_r$, for any $j>i$, we can use one sup
 
 Similarly, when we retain the supply of group type $j$ by rejecting a group of $i$, the expected number of accepted people is $j P(D_{j} \geq x_{j}; T_r)$. $P(D_{j} \geq x_{j}; T_r)$ indicates the probability that the demand of group type $j$ in $T_r$ periods is no less than its current remaining supply.
 
-Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1) - j P(D_{j} \geq x_{j})$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
+Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r) - j P(D_{j} \geq x_{j}; T_r)$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
 
 \begin{remark}
 This control is based on the current seat planning. We still need further comparison of values of accepting or rejecting an arrival to decide whether to accept it. That is, the group-type control is a necessary condition to accept a group.
@@ -90,15 +90,6 @@ The bid-price control policy based on the static model is stated below.
   \end{description}
 \end{algorithm}
 
-$V_{t}(\mathbf{L}) - V_{t+1}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)- V_{t+1}(\mathbf{L}) + i, 0 \right\}\right]$
-
-Approximation: $V_{t}(\mathbf{L}) = \theta^{t} + \sum_{j=1}^{N} L_j \beta_j$, substitute it to the above DP, we have 
-
-$V_{t}(\mathbf{L}) - V_{t+1}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{-n_i \beta_j + i, 0 \right\}\right] = \sum_i p_i \max_{j} \{-n_i \beta_j + i, 0\}$.
-
-Let $z_i = \max_{j} \{-n_i \beta_j + i, 0\}$, the constraints of dual form can be developed.
-
-The objective funtion: $V_{1} = \sum_{t=1}^{T} (V_{t} - V_{t+1}) = \sum_{i} d_{i} z_{i} + \sum_{j}^{N} L_{j} \beta_j$.
 
 \subsection{Booking limit Control}
 The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
@@ -152,8 +143,7 @@ Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. Th
 \end{equation}
 
 \begin{lem}
- Let $\mathbf{X}$ be the solution of linear relaxation of problem \eqref{relax_deter}. $\mathbf{X}$ is the same as the aggregate
- solution of linear relaxation of problem \eqref{deter_upper}.
+ Let $\mathbf{X}$ be the solution of LP relaxation of problem \eqref{relax_deter}. $\mathbf{X}$ is the same as the aggregate solution of LP relaxation of problem \eqref{deter_upper}.
 \end{lem}
 
 % Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. After relaxation, assume that each row has a capacity of $L$ seats, which can be filled. For each seperate row, the maximum number of empty seats in each row is $s$. Then, the total number of empty seats in $N$ rows is given by $Ns$. Therefore, the biggest difference between $v_{r}^{*}$ and $v^{*}$ is the number of people accommodated in the $Ns$ empty seats.
@@ -205,8 +195,7 @@ After accepting one group, assign it in some row arbitrarily when the capacity o
 
 
 \subsection{First Come First Served(FCFS) Policy}\label{largest_pattern}
-For dynamic seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until the capacity of all rows is fully utilized.
-
+For dynamic seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until all rows cannot accommodate any groups.
 
 % we can continue to use the first-come, first-served approach for seat assignment across all rows. 
 

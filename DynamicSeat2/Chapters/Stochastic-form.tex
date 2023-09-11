@@ -85,7 +85,7 @@ $$
 As we can find, this deterministic equivalent form is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. However, the structured constraints allow us to simplify the problem by applying Benders decomposition approach. Before using this approach, we could reformulate this problem as the following form. Let $\mathbf{c}^{\intercal}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$, $\mathbf{f}^{\intercal}\mathbf{y}_{\omega} = -\sum_{i=1}^{M} y_{i \omega}^{+}$. Then the SSP formulation can be expressed as below,
 
 \begin{equation}\label{BD_master}
-  \begin{aligned}
+\begin{aligned}
 \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
 \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
 & \mathbf{x} \in \mathbb{Z}_{+}^{M \times N},
@@ -133,12 +133,6 @@ Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$ and $\mathcal
   The feasible region of problem \eqref{BD_sub_dual}, $\mathbb{P}$, is bounded. In addition, all the extreme points of $\mathbb{P}$ are integral.
 \end{lem}
 
-\begin{pf}[Proof of lemma \ref{feasible_region}]
-Notice that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}], V =[W,~I]$, $W$ is a totally unimodular matrix. Then, we have $\bm{\alpha}^{\intercal}W \geq -\mathbf{1}, \bm{\alpha}^{\intercal} I \geq \mathbf{0}$. Thus, the feasible region is bounded. 
-Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i \in \mathcal{M}$, so the extreme points are all integral.
-\qed
-\end{pf}
-
 Because the feasible region is bounded, then feasibility cuts are not needed. Let $z_{\omega}$ be the lower bound of $z_{\omega}(x)$ such that $\bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}$, which is the optimality cut.
 
 \begin{corollary}\label{coro_1}
@@ -176,21 +170,6 @@ For scenario $\omega$, the optimal value is $\mathbf{f}^{\intercal} y_{\omega}$,
 \end{equation}
 \end{thm}
 
-\begin{pf}[Proof of Theorem \ref{optimal_sol_sub_dual}]
-According to the complementary slackness property, we can obtain the following equations
-\begin{align*}
-  & \alpha_{i} (d_{i0} - d_{i \omega} - y_{i \omega}^{+} + y_{i+1, \omega}^{+} + y_{i \omega}^{-}) = 0, i =1,\ldots, M-1 \\
-  & \alpha_{i} (d_{i0} - d_{i \omega} - y_{i \omega}^{+}+ y_{i \omega}^{-}) = 0, i = M \\
-  & y_{i \omega}^{+}(\alpha_{i} - \alpha_{i-1}-1) = 0, i =1,\ldots, M \\
-  & y_{i \omega}^{-} \alpha_{i} = 0, i =1,\ldots, M.
-\end{align*}
-
-When $y_{i \omega}^{-} >0$, we have $\alpha_{i} =0$; when $y_{i \omega}^{+} >0$, we have $\alpha_{i} = \alpha_{i-1} +1$.
-Let $\Delta d = d_{\omega} - d_0$, then the elements of $\Delta d$ will be a negative integer, positive integer and zero.
-When $y_{i \omega}^{+} = y_{i \omega}^{-} = 0$, if $i = M$, $\Delta d_{M} =0$, the value of objective function associated with $\alpha_{M}$ is always $0$, thus we have $0 \leq \alpha_{M} \leq \alpha_{M-1}+1$; if $i < M$, we have $y_{i+1, \omega}^{+} = \Delta d_{i} \geq 0$. If $y_{i+1, \omega}^{+} > 0$, the objective function associated with $\alpha_i$ is $\alpha_{i} \Delta d_{i} = \alpha_{i} y_{i+1, \omega}^{+}$, thus to minimize the objective value, we have $\alpha_i =0$; if $y_{i+1, \omega}^{+} = 0$, we have $0 \leq \alpha_{i} \leq \alpha_{i-1} +1$.
-\qed
-\end{pf}
-
 % \begin{remark}
 % During the calculation, we choose the optimal solution $\alpha_{i} = \alpha_{i-1} +1$ when $0 \leq \alpha_{i} \leq \alpha_{i-1} +1$.
 % \end{remark}
@@ -217,27 +196,6 @@ When substituting $\mathcal{O}$ with its subset, $\mathcal{O}^{t}$, the problem 
 RBMP is always bounded with at least any one optimality cut for each scenario.
 \end{lem}
 
-\begin{pf}[Proof of lemma \ref{one_ep_feasible}]
-  Suppose we have one extreme point $\bm{\alpha}_{\omega}^{0}$ for each scenario. Then we have the following problem.
-  \begin{equation}\label{lemma_eq}
-    \begin{aligned}
-      \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-      \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-      & (\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} \geq (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega \\
-       & \mathbf{x} \in \mathbb{Z}_{+}
-    \end{aligned}
-  \end{equation}
-  Problem \eqref{lemma_eq} reaches its maximum when $(\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} = (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega$. Substitute $z_{\omega}$ with these equations, we have 
-  \begin{equation}\label{lemma_eq2}
-    \begin{aligned}
-      \max \quad & \mathbf{c}^{\intercal} \mathbf{x} - \sum_{\omega}p_{\omega}(\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + \sum_{\omega} p_{\omega} (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{d}_{\omega} \\
-      \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-      & \mathbf{x} \in \mathbb{Z}_{+}
-    \end{aligned}
-  \end{equation}
-  Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more optimality cuts will not make the optimal value larger. Thus, RBMP is bounded. 
-  \qed
-\end{pf}
 
 Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}_{0}$ and $\mathbf{z}^{0} =(z^{0}_1,\ldots, z^{0}_S)$. Then $c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is an upper bound of problem \eqref{BD_master2}. 
 

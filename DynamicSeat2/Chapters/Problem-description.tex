@@ -40,7 +40,7 @@ When the length of row is fixed, we call the patterns with the minimal loss are 
 % To represent a pattern with a fixed length of form, we can use a $(M+1)-$dimensional vector with $M$ group types. The aggregated form can be expressed as $[n_0, n_1, \ldots, n_M]$, where $n_i$ is the number of $i$-th group type, $i \in \mathcal{M}$. $n_0$ is the number of left seat, its value can only be $0, 1$ because two or more left seats will be assigned to groups. Thus the pattern, $[1, 0, 0, 0, 4]$, is not full because there is one left seat.
 
 
-\begin{lem}
+\begin{lem}\label{lem_pattern}
 When given the length of a row, $L$, the social distancing, $\delta$, the new size of the largest group allowed, $n_M$, the loss of the largest pattern is $\lfloor \frac{L}{n_M} \rfloor \delta - \delta + f(L - \lfloor \frac{L}{n_M} \rfloor n_M)$, where $f(r)=0$ if $r> \delta$, and $f(r)=r$ if $r \leq \delta$.
 \end{lem}
 

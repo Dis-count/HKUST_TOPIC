@@ -855,11 +855,6 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmi
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm
-INPUT ./Figures/dummy_seat.pdf
-INPUT ./Figures/dummy_seat.pdf
-INPUT ./Figures/dummy_seat.pdf
-INPUT ./Figures/dummy_seat.pdf
-INPUT ./Figures/dummy_seat.pdf
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT ./Chapters/Stochastic-form.tex
 INPUT ./Chapters/Stochastic-form.tex
@@ -951,3 +946,4 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb

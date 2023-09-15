@@ -2,6 +2,16 @@
 \clearpage
 \section*{Proof}
 
+\begin{pf}[Proof of Lemma \ref{lem_pattern}]
+% To obtain a largest patterm, we need assign as less groups as possible.  
+We can employ a greedy approach to generate a pattern by following these steps. First, we select the maximum group size, denoted as $n_M$, as many times as possible, filling up the available space. The remaining seats are then allocated to the group with the corresponding size. Let $L = n_M \cdot q + r$, where $q$ represents the number of times $n_M$ is selected (the quotient), and $r$ represents the remainder, indicating the number of remaining seats. It holds that $0 \leq r < n_M$. The loss of the pattern is $q \delta -\delta + \mathbb{1}(r)$. We can prove that it is the smallest loss by contradiction. 
+Suppose the loss is not the smallest, there exists one pattern with a loss of $p < q \delta -\delta + \mathbb{1}(r)$. Then the largest number of seats occupied in this pattern is $\lfloor \frac{p}{\delta} \rfloor \cdot n_M$, which is always less than $L$ due to the inequality $\frac{\mathbb{1}}{\delta} \cdot n_M < r + n_M$. Consequently, the loss of $p$ cannot exist as it would contradict the maximum number of seats taken.
+\qed
+\end{pf}
+
+
+% By employing this greedy approach, we can generate patterns that minimize the loss while maximizing seat utilization, ensuring efficient seat planning configurations that adhere to social distancing guidelines.
+
 \begin{pf}[Proof of Lemma \ref{feasible_region}]
   Notice that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}], V =[W,~I]$, $W$ is a totally unimodular matrix. Then, we have $\bm{\alpha}^{\intercal}W \geq -\mathbf{1}, \bm{\alpha}^{\intercal} I \geq \mathbf{0}$. Thus, the feasible region is bounded. 
   Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i \in \mathcal{M}$, so the extreme points are all integral.

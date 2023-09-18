@@ -7,6 +7,7 @@ import copy
 import time
 # Without social distance: 累加 直到capacity
 # x-axis: number of people
+# gap point
 # Group graphs
 
 def withoutSD(sequence, total_seat):
@@ -24,7 +25,7 @@ if __name__ == "__main__":
     period_range = range(30,100,1)
     given_lines = 10
     # np.random.seed(i)
-    p = [[0.25, 0.25, 0.25, 0.25], [0.2, 0.2, 0.3, 0.3], [0.3, 0.3, 0.2, 0.2], ]
+    p = [[0.25, 0.25, 0.25, 0.25], [0.4, 0.4, 0.1, 0.1]]
     # probab = [0.4, 0.2, 0.3, 0.1]
     #  [0.4, 0.4, 0.1, 0.1]
 
@@ -44,8 +45,8 @@ if __name__ == "__main__":
         gap_if = True
         for num_period in period_range:
             roll_width = np.ones(given_lines) * 21
-            total_seat = np.sum(roll_width)
-            # total_seat = np.sum(roll_width) - given_lines
+            # total_seat = np.sum(roll_width)
+            total_seat = np.sum(roll_width) - given_lines
 
             a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
@@ -53,7 +54,7 @@ if __name__ == "__main__":
             accept_people = 0
 
             multi = np.arange(1, I+1)
-            count = 1
+            count = 50
             for j in range(count):
                 sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
                 sequence1 = copy.deepcopy(sequence)
@@ -62,7 +63,7 @@ if __name__ == "__main__":
                 g = a_instance.method_new(sequence1, newx4, roll_width)
                 sto += np.dot(multi, g)
 
-                accept_people += withoutSD(sequence, total_seat- given_lines)
+                accept_people += withoutSD(sequence, total_seat)
 
             occup_value[cnt] = sto/count/total_seat * 100
             people_value[cnt] = accept_people/count/total_seat * 100
@@ -74,7 +75,7 @@ if __name__ == "__main__":
 
         plt.plot(t_value* gamma, people_value, 'b-', label = 'Without social distancing')
         plt.plot(t_value* gamma, occup_value, 'r--', label = 'With social distancing')
-        plt.xlim((t_value[0]*gamma, 250))
+        plt.xlim((50, 250))
         plt.ylim((0, 100))
         plt.xlabel('Expected number of people')
         plt.ylabel('Percentage of total seats')
@@ -84,7 +85,7 @@ if __name__ == "__main__":
         
         plt.annotate(r'Gap $%s$' % str(point), xy= (point[0]*gamma, point[1]), xytext=(point[0]*gamma + 10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
 
-        my_x_ticks = np.arange(t_value[0]*gamma, 250, 50)
+        my_x_ticks = np.arange(50, 250, 50)
         plt.xticks(my_x_ticks)
         plt.legend()
         graphname = './test' + str(probab[0]) + '.pdf'

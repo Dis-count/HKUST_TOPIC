@@ -49,8 +49,8 @@ if __name__ == "__main__":
 
         for num_period in period_range:
             roll_width = np.ones(given_lines) * 21
-            total_seat = np.sum(roll_width)
-            # total_seat = np.sum(roll_width) - given_lines
+            # total_seat = np.sum(roll_width)
+            total_seat = np.sum(roll_width) - given_lines
 
             a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
 
@@ -67,14 +67,14 @@ if __name__ == "__main__":
                 g = a_instance.method_new(sequence1, newx4, roll_width)
                 sto += np.dot(multi, g)
 
-                accept_people += withoutSD(sequence, total_seat- given_lines)
+                accept_people += withoutSD(sequence, total_seat)
 
             occup_value[cnt] = sto/count/total_seat * 100
             people_value[cnt] = accept_people/count/total_seat * 100
 
             cnt += 1
         diff = people_value - occup_value
-        my_file.write(str(diff) + '\n')
+        my_file.write(str(people_value) + '\t' + str(occup_value) + '\n')
 
     run_time = time.time() - begin_time
     my_file.write('Total Runtime\t %f \n' % run_time)

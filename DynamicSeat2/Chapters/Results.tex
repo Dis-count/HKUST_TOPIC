@@ -132,39 +132,43 @@ For the first three policies, their performance tends to initially drop and then
 %  大于 gamma/gamma+1， 则最大损失是（ ）
 
 \subsection{Impact of Implementing Social Distancing in SPP}
-In this section, we will examine the impact of social distancing on the number of accepted individuals. Specifically, we are interested in identifying the first time period where the number of people accepted without social distancing exceeds the number accepted with social distancing, along with the corresponding occupancy rate.
+In this section, our focus is to analyze the influence of social distancing on the number of accepted individuals. Our primary objective is to determine the earliest time period at which the number of people accepted without social distancing surpasses the number accepted with social distancing. This critical point, referred to as the "gap point," is of interest to us. Additionally, we will examine the corresponding occupancy rate at this gap point.
 
 It is evident that as the demand increases, the effect of social distancing becomes more pronounced. We aim to determine the specific time period where the absence of social distancing results in a higher number of accepted individuals compared to when social distancing measures are in place. Additionally, we will calculate the corresponding occupancy rate during this period.
 
 By analyzing and comparing the data, we can gain insights into the relationship between demand, social distancing, the number of accepted individuals, and occupancy rates. This information is valuable for understanding the impact of social distancing policies on overall capacity utilization and making informed decisions regarding resource allocation and operational strategies.
 
 \subsubsection{Estimation of Gap Point}
-Let $\gamma$ represent the average number of people who arrive in each period, and let $L$ represent the total number of seats available. We can calculate the expected number of people arriving using the formula $D(T) = \gamma T$, where $T$ is the number of periods. 
+Based on our findings, we observed that the seat allocation derived from the optimal solution consistently satisfies the formation of either the largest pattern or the full pattern, regardless of different probability combinations. However, certain counterexamples arise when the requirements associated with specific probability combinations are unable to form a complete pattern, resulting in gaps in the seating arrangement. The occurrence of these counterexamples is closely tied to the seat layout itself. The ratio of the number of largest patterns to the number of full patterns in the final seat allocation is influenced by the expected number of people in each period.
 
-If we assume that we accept all incoming groups within the $T{'}$ periods and they fill all the available seats, then we have $D(T{'}) + \delta T{'} = L$. Solving for $T{'}$, we get $T{'} = L/(\gamma + \delta)$. $T{'}$ represents the ideal first period where the number of people without social distancing is larger than that with social distancing and the corresponding occupancy rate is given by $\frac{\gamma T'}{(\gamma+1)T' - N \delta}$. It is important to note that this estimation is accurate only when we accepted groups in $T{'}$ periods and all rows represent full patterns, as per our assumption.
+Given the stable gap between the seat assignment policy obtained from SPP and the optimal policy, we can leverage the expected number of people in each period to estimate the gap point when utilizing the SPP. This approach allows us to approximate the period at which the number of people accepted without social distancing surpasses the number accepted with social distancing, based on the performance characteristics observed in the SPP.
 
 
-% But the actual first period will be smaller than the ideal one because we cannot always exactly accept groups to fill all seats.
+Let $\gamma$ represent the average number of people who arrive in each period, and let $L$ represent the total number of seats available. Assuming that we accept all incoming groups within $T'$ periods, filling all the available seats, the total number of people, taking social distancing into account, would be equal to the number of all seats. This can be expressed as $\gamma T' + \delta T' = L$, where $\gamma T'$ is the expected number of people. Thus, the expected period for reaching this point is given by $T' = \frac{L}{\gamma + \delta}$. The corresponding occupancy rate at this period can be calculated as $\frac{\gamma T'}{(\gamma+1)T' - N \delta} = \frac{\gamma L}{(\gamma +1)L - N \delta (\gamma + \delta)}$. However, it is important to note that the actual first period will be smaller than the ideal one because it is impossible to accept groups to fill all seats exactly. To estimate the gap point when applying SPP, we can use $y_1 = c_1 \frac{L}{\gamma + \delta}$, where $c_1$ is a discount rate compared to the ideal situation. Similarly, we can estimate the corresponding occupancy rate as $y_2 = c_2 \frac{\gamma L}{(\gamma +1)L - N \delta (\gamma + \delta)}$, where $c_2$ is a discount rate for the occupancy rate compared to the ideal scenario.
 
-We limit the number of group types to 4, then $\gamma$ can be expressed as $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. Suppose these probabilities are all positive.
-Define each combination $(p_1, p_2, p_3, p_4)$ such that $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. 
+% It is important to note that this estimation is accurate only when we accepted groups in $T{'}$ periods and all rows represent full patterns, as per our assumption. 
+% $T{'}$ represents the ideal first period where the number of people without social distancing is larger than that with social distancing 
 
-The figure presented below illustrates the gap point as a function of the increment of $\gamma$, along with the corresponding estimations. Our analysis incorporates a sample of 200 probability combinations. For each combination, we observe the gap point over 100 instances, represented by blue points, as well as the occupancy rate at the gap point, represented by red points.
+We consider the scenario where the number of group types is limited to 4. In this case, the average number of people per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. We assume that $p_4$ always has a positive value. Additionally, the social distancing requirement is set to one seat.
 
-To provide estimations, we utilize the equations $y = c_1 \frac{\gamma}{\gamma+1}$(blue line in the figure) and $y = \frac{c_2}{\gamma +1}$(orange line in the figure), which are fitted to the data. These equations capture the relationship between the gap point and the increment of $\gamma$, allowing us to approximate the values.
+To analyze the relationship between the increment of $\gamma$ and the gap point, we define each combination $(p_1, p_2, p_3, p_4)$ satisfying $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. We conducted an analysis using a sample of 200 probability combinations. The figure below illustrates the gap point as a function of the increment of $\gamma$, along with the corresponding estimations. For each probability combination, we considered 100 instances and plotted the gap point as blue points. Additionally, the occupancy rate at the gap point is represented by red points.
+
+To provide estimations, we utilize the equations $y_1 = \frac{c_1}{\gamma +1}$(blue line in the figure) and $y_2 = c_2 \frac{L}{L-N} \frac{\gamma}{\gamma+1}$(orange line in the figure), which are fitted to the data. These equations capture the relationship between the gap point and the increment of $\gamma$, allowing us to approximate the values.
+
+% when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
 
 \begin{figure}[ht]
   \centering
     \includegraphics[width=0.8\textwidth]{./Figures/gamma_estimation.pdf}
-  \caption{Gap points under 200 probabilities}
+  \caption{Gap points and their estimation under 200 probabilities}
 \end{figure}
 
 By examining the relationship between the gap point and the increment of $\gamma$, we can find that $\gamma$ can be used to estimate gap point.
 
 \subsubsection{Impact of Social Distancing as Demands Increase}
-Now, we consider impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. When $\gamma = 2.5$, we set the parameters as follows: $T$ varies from 10 to 100, the step size is 1. When $\gamma = 1.9$, we set the parameters as follows: $T$ varies from 30 to 120, the step size is 1. The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
+Now, we consider impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. We set the parameters as follows: $T$ varies from 30 to 120, the step size is 1.  The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
 
-The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ SPP to obtain the results. For the latter case, we utilize a deterministic model with hindsight to generate the outcomes. Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
+The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ SPP to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt a different approach. We simply accept all incoming groups as long as the capacity allows, without considering the constraints of groups needing to sit together. This means that we prioritize filling the available seats without enforcing any specific seating arrangements or social distancing requirements. Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
 
 \begin{figure}[h]
   \centering
@@ -174,30 +178,31 @@ The figure below displays the outcomes of groups who were accepted under two dif
   \subfigure[When $\gamma =1.9$]{
     \label{Fig.sub.2}
     \includegraphics[width=0.48\textwidth]{./Figures/p2.pdf}}
-  \caption{The number of people served versus periods}
+  \caption{The occupancy rate over the number of arriving people}
   \label{Fig.lable}
 \end{figure}
 
 The analysis comprises three stages. In the first stage, where the capacity is sufficient, social distancing measures have no impact on the outcome. In the second stage, the gap between the outcomes with and without social distancing measures widens as $T$ increases. Finally, in the third stage, as $T$ continues to increase, the gap between the outcomes with and without social distancing measures converges when both situations accept the maximum number of people.
 
-According to Lemma \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted.
-
+The table below presents the gap points and the percentage gaps for different demand levels (130, 150, 170, 190, 210).
 
 \begin{table}[ht]
   \centering
-  \caption{Gap points and percentage difference of different gammas}
+  \caption{Gap points of different gammas and percentage differences under different demands}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
   $\gamma$  & gap point & 130 & 150 & 170 & 190 & 210 \\
   \hline
-  1.9   & [56, ] & [65.21, ] &   &   &  &  \\
-  2.1   & [56, ] & [65.21, ] &   &   &  &  \\
-  2.3   & [56, ] & [65.21, ] &   &   &  &  \\
-  2.5   & [56, ] & [65.21, ] &   &   &  &  \\
-  2.7   & [56, ] & [65.21, ] &   &   &  &  \\
+  1.9   & [67, 63.37] & 0.25 &  5.82 & 12.82 & 20.38 & 24.56 \\
+  2.1   & [64, 66.74] & 0.05 & 4.11 & 11.51 & 18.77 & 21.87 \\
+  2.3   & [61, 69.79] & 0 & 2.29 & 10.21 & 17.36 & 21.16 \\
+  2.5   & [57, 70.89] & 0 & 1.45 & 9.30 & 15.78 & 19.80 \\
+  2.7   & [53, 71.28] & 0 & 1.38 & 7.39 & 14.91 & 19.14 \\
   \hline
   \end{tabular}
 \end{table}
+
+According to Lemma \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted.
 
 
 

@@ -1,5 +1,5 @@
 % !TEX root = sum1.tex
-\section{Dynamic Seat Assignment(DSA) for Each Group Arrival}
+\section{Dynamic Seat Assignment for Each Group Arrival}
 In this section, we discuss different policies for assigning seats dynamically. We need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. We first present the dynamic seat assignment based on stochastic planning policy, which incorporates group-type control to optimize resource utilization. We also compare this approach with bid-price control, dynamic programming based heuristic and booking limit control. Finally, we establish the FCFS policy as the benchmark.
 
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
@@ -41,7 +41,7 @@ The seat planning can be obtained from Algorithm \ref{feasible_seat}. In accorda
 The algorithm is shown below:
 
 \begin{algorithm}[H]
-  \caption{Dynamic seat assignment algorithm}\label{algo_dynamic_policy}
+  \caption{Stochastic planning policy algorithm}\label{algo_dynamic_policy}
   \begin{description}
     \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\X = [x_{1}, \ldots, x_{M}]$.
     \item[Step 2.] For the arrival group type $i$ at period $T{'}$, 
@@ -51,7 +51,7 @@ The algorithm is shown below:
   \end{description}
 \end{algorithm}
 
-\subsubsection{Break Tie for Stochastic Planning}
+\subsubsection{Break Tie for Stochastic Planning Policy}
 A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including one larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group.
 
 By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
@@ -91,7 +91,7 @@ The bid-price control policy based on the static model is stated below.
 \end{algorithm}
 
 
-\subsection{Booking limit Control}
+\subsection{Booking Limit Control}
 The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
 
 In this policy, we replace the real demand by the expected one and solve the corresponding static problem using the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests. When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.

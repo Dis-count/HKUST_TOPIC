@@ -31,37 +31,37 @@ def gamma(data):
 result = gamma(data)
 
 
-plt.scatter(result[:, 0], result[:, 1], c="blue")
-plt.scatter(result[:, 0], result[:, 2], c="red")
+# plt.scatter(result[:, 0], result[:, 1], c="blue")
+# plt.scatter(result[:, 0], result[:, 2], c="red")
 
-x = np.arange(1.5, 3.5, 0.01)
-y1 = 200.02 /(x+1)
-y2 = 95.475 * x/(x+1)
+# x = np.arange(1.5, 3.5, 0.01)
+# y1 = 200.02 /(x+1)
+# y2 = 95.475 * x/(x+1)
 
-plt.plot(x, y1, label="Blue_estimated")
-plt.plot(x, y2, label="Red_estimated")
+# plt.plot(x, y1, label="Blue_estimated")
+# plt.plot(x, y2, label="Red_estimated")
 
-plt.xlabel('Gamma')
-plt.ylabel('Percentage of total seats/Periods')
+# plt.xlabel('Gamma')
+# plt.ylabel('Percentage of total seats/Periods')
 
-plt.legend()
-plt.show()
+# plt.legend()
+# plt.show()
 
 
 #  根据已有数据拟合 + 画出拟合之后的图
 #  Result 6-3
 
-# data_x = result[:, 0]
+data_x = result[:, 0]
 
-# data_x1 = 1/(data_x+1)
-# data_y1 = result[:, 1]
+data_x1 = 1/(data_x+1)
+data_y1 = result[:, 1]
 
-# data_x2 = data_x/(data_x+1)
-# data_y2 = result[:, 2]
+data_x2 = data_x/(data_x+1)
+data_y2 = result[:, 2]
 
-# # mod = sm.OLS(data_y, sm.add_constant(data_x2))  # 需要用sm.add_constant 手动添加截距项
-# mod = sm.OLS(data_y1, data_x1)  # 无截距项
+# mod = sm.OLS(data_y, sm.add_constant(data_x2))  # 需要用sm.add_constant 手动添加截距项
+mod = sm.OLS(data_y2, data_x2)  # 无截距项
 
-# res = mod.fit()
-# print(res.summary())
+res = mod.fit()
+print(res.summary())
 

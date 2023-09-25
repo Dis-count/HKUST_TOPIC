@@ -15,13 +15,11 @@ To incorporate the social distancing requirements into the seat planning process
 % We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
 
 
-Next, we will analyze the impact of implementing social distancing on each row. We define seat planning as the arrangement of seats within a row, specifically, the number of different groups present in each row. To simplify the discussion, we will use a vector $P_k = (t_1, \ldots, t_M)$ to represent pattern $k$, where each element corresponds to the seat planning for a specific group type.
+Next, we will analyze the impact of implementing social distancing on each row. We define seat planning as the arrangement of seats within a row, specifically, the number of different group types present in each row, as long as the sum of the sizes of all groups is no larger than the length of the row. To simplify the discussion, we will use a vector $(t_1, \ldots, t_i, \ldots, t_M)$ to represent the pattern, where $t_i$ corresponds to the number of group type $i$.
 
-To quantify the effect of each pattern, we introduce the notion of "loss." Here, the term "loss" denotes the number of individuals that cannot be accommodated due to the implementation of social distancing measures, compared to a scenario without social distancing.
+To quantify the effect of each pattern, we introduce the notion of loss. Here, the term loss denotes the number of empty seats. The loss provides a measure of the number of people who cannot be seated due to the implementation of social distancing constraints. By examining the losses associated with different patterns, we can assess the effectiveness of various seat planning configurations with respect to accommodating the desired number of individuals while adhering to social distancing requirements. 
 
-For a given pattern $k$, we denote the loss as $l(k)$. The loss provides a measure of the number of people who cannot be seated due to social distancing constraints. By examining the losses associated with different patterns, we can assess the effectiveness of various seat planning configurations with respect to accommodating the desired number of individuals while adhering to social distancing requirements. 
-
-In cases where the length of a row is fixed, we refer to the patterns with the minimal loss as the largest patterns. These largest patterns are characterized by having the least number of people unable to be seated due to social distancing requirements. Furthermore, we classify patterns that have no empty seats, except for those required for social distancing, as "full" patterns. These full patterns are designed to maximize seating capacity while still maintaining the necessary spacing between groups.
+In cases where the length of a row is fixed and the largest group size is confirmed, we refer to the patterns with the minimal loss as the largest patterns. These largest patterns are characterized by having the least number of people unable to be seated due to social distancing requirements. Furthermore, we define patterns that have no empty seats, except for those required for social distancing, as full patterns. These full patterns are designed to maximize seating capacity while still maintaining the necessary spacing between groups.
 
 By distinguishing the largest and full patterns from other configurations, we can gain valuable insights into the most efficient seat planning strategies that prioritize accommodating the maximum number of people while adhering to social distancing guidelines.
 
@@ -36,10 +34,29 @@ Overall, by considering both the largest and full patterns, we can optimize seat
 \end{lem}
 
 \begin{example}
-  Suppose that the social distancing requirement is one seat, and there are four types of groups. In this case, the new sizes of the groups would be 2, 3, 4, and 5, respectively. Additionally, the length of a single row is determined to be L = 21. 
+  Suppose that the social distancing requirement is one seat, and there are four types of groups. In this case, the new sizes of the groups would be 2, 3, 4, and 5, respectively. Additionally, the length of a single row is determined to be L = 21. Then the loss of the largest pattern is $\lfloor \frac{21}{5} \rfloor  - 1 + g(1) = 5$.
   
   We find that the patterns (0, 0, 0, 4), (0, 0, 4, 1), and (0, 2, 0, 3) are the largest patterns with the same loss value of 5. However, it's important to note that the largest pattern may not necessarily be a full pattern. For instance, the pattern (0, 0, 0, 4) is the largest pattern in terms of accommodating the maximum number of individuals, but it does not meet the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$. Conversely, a full pattern may not always be the largest pattern. For example, the pattern (1, 1, 4, 0) is considered a full pattern since it utilizes all seats, but its loss value is 6.
 \end{example}
+
+Then, considering all rows, we have a deterministic model where our goal is to accommodate as many people as possible.
+\begin{equation}\label{deter_upper}
+  \begin{aligned}
+  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
+  & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
+  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+  \end{aligned}
+\end{equation}
+
+
+\begin{lem}\label{sol_relax_deter}
+For the LP relaxation of problem \eqref{deter_upper}, there exists $h$ such that the optimal solutions $x_{ij}^{*} = 0$ when $i < h$; $\sum_{j} x_{ij}^{*} = d_{i}$, when $i > h$; $\sum_{j} x_{ij}^{*} = (L - \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, when $i = h$.
+\end{lem}
+
+Let $\sum_{j=1}^{N} x_{ij}$ represent the supply for group type $i$. We define $\mathbf{X} = (\sum_{j=1}^{N} x_{1j},\ldots, \sum_{j=1}^{N} x_{Mj})$ as the aggregate solution to the linear relaxation of problem \eqref{deter_upper}. Furthermore, let $e_{i}$ denote the unit size of the $i$-th element of $\mathbf{X}$.
+
+In the aggregate optimal solution, denoted as $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, the following components are present: $x e_{h}$: This term represents the allocation of resources for group type $h$. The value of $x$ is calculated as $(L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, indicating the remaining capacity after satisfying the demands of indices greater than $h$, divided by the unit size $n_h$. $\sum_{i=h+1} ^{M} d_{i} e_{i}$: This term accounts for the allocation of resources for group types $h+1$ to $M$. It represents the total demand for these group types, where $d_i$ denotes the demand of group type $i$, and $e_{i}$ represents the unit size of the corresponding element in $\mathbf{X}$. Together, the aggregate optimal solution combines the allocation of resources for group type $h$ with the aggregated demands for group types $h+1$ to $M$ to achieve an optimal solution to the linear relaxation of the problem.
 
 
 % Therefore, it is crucial to consider both the largest and full patterns separately, as they represent different trade-offs. While the largest pattern maximizes the number of accommodated individuals, the full pattern aims to utilize all available seats. By carefully evaluating these patterns, we can make informed decisions that optimize seat planning configurations while minimizing the loss of seating capacity.
@@ -66,13 +83,13 @@ We address the problem of dynamic seat assignment with social distancing, which 
 
 To model this problem, we adopt a discrete-time framework. The time is divided into $T$ periods, with each period representing the arrival of exactly one group. Time is discretized as $1, \ldots, T$, where the first period corresponds to the beginning of the selling horizon and the last period represents the end. In each period $t$, a group of size $i$ arrives with a probability denoted as $p_i$. It is assumed that the arrivals of different group types are independent. During each period, the decision-maker determines whether to accept or reject the incoming group and assigns them to a specific row. Once seats are confirmed and assigned to a group, they cannot be changed.
 
-To keep track of the remaining capacity of rows, we utilize a vector $\mathbf{L} = (l_1, l_2, \ldots, l_N)$, where $l_j$ represents the number of remaining seats in row $j$. Specifically, we define $V_t(\mathbf{L})$ as the maximum expected value at period $t$, given the current capacity $\mathbf{L}$. Additionally, we introduce the decision variable $u_{i,j}$, where $u_{i,j}(t) = 1$ denotes the decision to accept group type $i$ in row $j$ at period $t$, while $u_{i,j}(t) = 0$ indicates the rejection of that group type in row $j$ at that period.
+To keep track of the remaining capacity of rows, we utilize a vector $\mathbf{L} = (l_1, l_2, \ldots, l_N)$, where $l_j$ represents the number of remaining seats in row $j$. Specifically, we define $V_t(\mathbf{L})$ as the maximum expected value at period $t$, given the current capacity $\mathbf{L}$. Additionally, we introduce the decision variable $u_{i,j}$, where $u_{i,j}(t) = 1$ denotes the decision to accept group type $i$ in row $j$ at period $t$, while $u_{i,j}(t) = 0$ indicates the rejection of that group type in row $j$ at that period. The decision set is defined as: $U(\mathbf{L}) = \{u_{i,j} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j} \leq 1, \forall i; n_{i}u_{i,j}\mathbf{e}_j^{\top} \leq \mathbf{L}, \forall i,j \}$. Essentially, $U(\mathbf{L})$ represents the feasible assignment decisions, where each group type $i$ can be assigned to at most one row, and the corresponding capacity requirements are satisfied.
 
 The dynamic programming formula for this problem can be expressed as:
 
 $$V_{t}(\mathbf{L}) = \max_{u \in U(\mathbf{L})}\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j} + V_{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}\mathbf{e}_j^{\top} ))\}, \mathbf{L} \geq 0, V_{T+1}(\mathbf{L}) =0, \forall \mathbf{L}$$
 
-Here, $\mathbf{e}_j$ represents an N-dimensional unit row vector with $j$-th element being 1. In the above formula, the decision set $U(\mathbf{L})$ represents the feasible set of decisions for a given seat availability $\mathbf{L}$. It is defined as: $U(\mathbf{L}) = \{u_{i,j} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j} \leq 1, \forall i; n_{i}u_{i,j}\mathbf{e}_j^{\top} \leq \mathbf{L}, \forall i,j \}$. Essentially, $U(\mathbf{L})$ represents the feasible assignment decisions, where each group type $i$ can be assigned to at most one row, and the corresponding capacity requirements are satisfied.
+Here, $\mathbf{e}_j$ represents an N-dimensional unit row vector with $j$-th element being 1. In the above formula, the decision set $U(\mathbf{L})$ represents the feasible set of decisions for a given seat availability $\mathbf{L}$. 
 
 Initially, we have $\mathbf{L} = (L_1, L_2, \ldots, L_{N})$. The objective function is $V_1(\mathbf{L})$. By applying the dynamic programming formula, we can recursively compute the optimal value function $V_t(\mathbf{L})$, representing the maximum expected value at time $t$ for a given seat availability $\mathbf{L}$. This approach allows us to make optimal decisions regarding group acceptance and seat assignment in order to maximize the overall value while considering social distancing constraints and group arrival probabilities. However, this leads to the curse of dimensionality due to the numerous seat planning combinations. To avoid this complexity, we propose an approach that directly targets the final seat planning and then formulate a policy to assign arriving groups. To obtain the final seat planning firstly, we develop the scenario-based stochastic programming.
 

@@ -1,6 +1,6 @@
 % !TEX root = sum1.tex
 \section{Dynamic Seat Assignment for Each Group Arrival}
-In this section, we discuss different policies for assigning seats dynamically. We need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. We first present the dynamic seat assignment based on stochastic planning policy, which incorporates group-type control to optimize resource utilization. We also compare this approach with bid-price control, dynamic programming based heuristic and booking limit control. Finally, we establish the FCFS policy as the benchmark.
+In this section, we discuss two policies for assigning seats dynamically. Recall that we need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. First, we will present the dynamic seat assignment based on stochastic planning policy, which incorporates group-type control to optimize resource utilization. Then we will consider the classical bid-price control.
 
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
@@ -77,7 +77,7 @@ In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a
 According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. Then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. 
 \end{lem}
 
-The bid-price policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows. It coincides with the booking limit control policy. However, we can find that $\beta_{j}$ does not vary with $j$, which means bid-price control cannot decide which row to assign the group to.
+The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_h - \delta}{n_h} n_i = \frac{\delta (i - h)}{n_h}$. When $i < h$, $i - \beta_j n_i < 0$. When $i \geq h$, $i - \beta_j n_i \geq 0$. This means that group type $i$ with $i$ greater than or equal to $h$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. In practice, groups are often assigned arbitrarily based on availability when the capacity allows, which can result in a large number of empty seats.
 
 The bid-price control policy based on the static model is stated below.
 \begin{algorithm}[H]
@@ -90,70 +90,6 @@ The bid-price control policy based on the static model is stated below.
   \end{description}
 \end{algorithm}
 
-
-\subsection{Booking Limit Control}
-The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
-
-In this policy, we replace the real demand by the expected one and solve the corresponding static problem using the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests. When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
-
-When we solve problem \eqref{deter_upper} directly, we can develop the booking limit control policy.
-
-\begin{algorithm}[H]
-  \caption{Booking limit control algorithm}
-  \begin{description}
-    \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
-    \item[Step 2.] Solve problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$.
-    \item[Step 3.] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
-    \item[Step 4.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
-  \end{description}
-\end{algorithm}
-
-
-% \begin{equation}
-%   \begin{aligned}
-%   \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
-%   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
-%   & \sum_{i} L_{ij} \leq L_j, \quad j \in \mathcal{N}, \\
-%   & n_{i} x_{ij} - L_{ij} \leq 0, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
-%   & x_{ij} \geq 0, L_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-%   \end{aligned}
-% \end{equation}
-
-% \begin{equation}
-%   \begin{aligned}
-%   \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \kappa_{j} \\
-%   \text {s.t.} \quad & z_{i} + \beta_{ij} n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
-%   & \kappa_{j} - \beta_{ij} \geq 0, \\
-%   & z_{i} \geq 0, i \in \mathcal{M}, \beta_{ij} \geq 0, j \in \mathcal{N}.
-%   \end{aligned}
-% \end{equation}
-
-\subsection{Dynamic Programming Base-heuristic}
-Since the original dynamic programming problem is too complex to solve directly, we can instead consider a simplified version of the problem, known as the relaxation problem. By solving the relaxation problem, we can make decisions for each group arrival based on the dynamic programming approach.
-
-Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. The deterministic problem is
-
-\begin{equation}\label{relax_deter}
-  \begin{aligned}
-  \max \quad & \sum_{i=1}^{M} (n_i- \delta) x_{i} \\
-  \text {s.t.} \quad & x_{i} \leq d_{i}, \quad i \in \mathcal{M}, \\
-  & \sum_{i=1}^{M} n_{i} x_{i} \leq L \\
-  & x_{i} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}.
-  \end{aligned}
-\end{equation}
-
-\begin{lem}
- Let $\mathbf{X}$ be the solution of LP relaxation of problem \eqref{relax_deter}. $\mathbf{X}$ is the same as the aggregate solution of LP relaxation of problem \eqref{deter_upper}.
-\end{lem}
-
-% Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. After relaxation, assume that each row has a capacity of $L$ seats, which can be filled. For each seperate row, the maximum number of empty seats in each row is $s$. Then, the total number of empty seats in $N$ rows is given by $Ns$. Therefore, the biggest difference between $v_{r}^{*}$ and $v^{*}$ is the number of people accommodated in the $Ns$ empty seats.
-% The difference between them is zero only when the groups corresponding to the optimal solution of problem \eqref{relax_deter} can be accommodated in $N$ rows. The numerical results indicate that this is the case for most scenarios, which suggests that a DP-based approach can be used to solve the dynamic seat assignment problem after all groups have arrived.
-
-Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise. Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
-
-$$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0, V_{T+1}(L) =0, \forall L$$
-
-After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
 
 % \subsection{Break tie for Bid-price and DP base-heuristic}
 % To determine which row to place accepted groups in when there are multiple options, follow these steps:
@@ -191,13 +127,8 @@ After accepting one group, assign it in some row arbitrarily when the capacity o
 
 
 % Partially dynamic: at the beginning stage, the capacity is sufficient, thus we will accept all arrivals. 
-% Multiple planning approach 
+% Multiple planning approach
 
-
-\subsection{First Come First Served(FCFS) Policy}\label{largest_pattern}
-For dynamic seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until all rows cannot accommodate any groups.
-
-% we can continue to use the first-come, first-served approach for seat assignment across all rows. 
 
 % \subsubsection{FCFS-based}\label{FCFS-based}
 % For dynamic seat assignment after all group arrivals, we can continue to use the first-come, first-served approach for seat assignment. Relax all rows to one row with the total number of seats. For each arrival, we need to check the feasibility of constructing a seat assignment in $N$ rows. If the seat assignment is feasible, we accept the request; otherwise, we reject it. The threshold capacity is $(L -u +1)$.

@@ -66,19 +66,19 @@ Suppose the loss is not the smallest, there exists one pattern with a loss of $p
 \begin{pf}[Proof of Lemma \ref{bid-price}]
   According to the Lemma \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
   
-  Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$, and $z_i = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$. Then the bid-price decision $i -\beta_{j} n_i = i - \frac{n_h -\delta}{n_h} n_i = \frac{\delta (i-h)}{n_h}$. When $i < h$, $i -\beta_{j} n_i <0$. When $i \geq h$, $i -\beta_{j} n_i \geq 0$. \qed
+  Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$, and $z_i = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.  \qed
   \end{pf}
 
-Problem \ref{bid-price_dual} can also be obtained by the following approximation:
+% Problem \ref{bid-price_dual} can also be obtained by the following approximation:
 
-$V_{t}(\mathbf{L}) - V_{t+1}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)- V_{t+1}(\mathbf{L}) + i, 0 \right\}\right]$
+% $V_{t}(\mathbf{L}) - V_{t+1}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{V_{t+1}\left(\mathbf{L}- n_{i}\mathbf{e}_j^{\intercal} \right)- V_{t+1}(\mathbf{L}) + i, 0 \right\}\right]$
 
-Approximation: $V_{t}(\mathbf{L}) = \theta^{t} + \sum_{j=1}^{N} L_j \beta_j$, substitute it to the above DP, we have 
+% Approximation: $V_{t}(\mathbf{L}) = \theta^{t} + \sum_{j=1}^{N} L_j \beta_j$, substitute it to the above DP, we have 
 
-$V_{t}(\mathbf{L}) - V_{t+1}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{-n_i \beta_j + i, 0 \right\}\right] = \sum_i p_i \max_{j} \{-n_i \beta_j + i, 0\}$.
+% $V_{t}(\mathbf{L}) - V_{t+1}(\mathbf{L}) = \mathbb{E}_{i \sim p}\left[\max_{\substack{j \in \mathcal{N}: \\ L_j \geqslant {n}_{i}}}\left\{-n_i \beta_j + i, 0 \right\}\right] = \sum_i p_i \max_{j} \{-n_i \beta_j + i, 0\}$.
 
-Let $z_i = \max_{j} \{-n_i \beta_j + i, 0\}$, the constraints of dual form can be developed.
+% Let $z_i = \max_{j} \{-n_i \beta_j + i, 0\}$, the constraints of dual form can be developed.
 
-The objective funtion: $V_{1} = \sum_{t=1}^{T} (V_{t} - V_{t+1}) = \sum_{i} d_{i} z_{i} + \sum_{j}^{N} L_{j} \beta_j$.
+% The objective funtion: $V_{1} = \sum_{t=1}^{T} (V_{t} - V_{t+1}) = \sum_{i} d_{i} z_{i} + \sum_{j}^{N} L_{j} \beta_j$.
 
 \newpage

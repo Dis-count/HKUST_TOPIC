@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -38,8 +41,8 @@
 \citation{haque2022optimization}
 \citation{salari2022social}
 \citation{haque2023social}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{5}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Seat Planning with Social Distancing}{5}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{4}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Seat Planning with Social Distancing}{4}{subsection.2.1}\protected@file@percent }
 \citation{blom2022filling}
 \citation{pisinger1999exact}
 \citation{kleywegt1998dynamic}
@@ -49,96 +52,95 @@
 \citation{curry1990optimal,van2008simulation}
 \citation{gallego1997multiproduct}
 \citation{zhu2023assign}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Dynamic Seat Assignment}{6}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Problem Description}{7}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Seat Planning Problem with Social Distancing}{7}{subsection.3.1}\protected@file@percent }
-\newlabel{dynamic_demand}{{3.1}{7}{Seat Planning Problem with Social Distancing}{subsection.3.1}{}}
-\newlabel{lem_pattern}{{1}{8}{}{lem.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Dynamic Seat Assignment}{5}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Problem Description}{6}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Seat Planning Problem with Social Distancing}{6}{subsection.3.1}\protected@file@percent }
+\newlabel{dynamic_demand}{{3.1}{6}{Seat Planning Problem with Social Distancing}{subsection.3.1}{}}
+\newlabel{lem_pattern}{{1}{7}{}{lem.1}{}}
+\newlabel{deter_upper}{{1}{7}{Seat Planning Problem with Social Distancing}{equation.3.1}{}}
+\newlabel{sol_relax_deter}{{2}{7}{}{lem.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dynamic Seat Assignment with Social Distancing}{8}{subsection.3.2}\protected@file@percent }
 \newlabel{sec_dynamic}{{3.2}{8}{Dynamic Seat Assignment with Social Distancing}{subsection.3.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Seat Planning Composed of Full or Largest Patterns}{9}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Scenario-based Stochastic Programming(SSP) Formulation}{10}{subsection.4.1}\protected@file@percent }
-\newlabel{DEF_constr1}{{2}{10}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.2}{}}
-\newlabel{DEF_constr2}{{3}{10}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.3}{}}
-\newlabel{DEF_constr3}{{4}{10}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.4}{}}
-\newlabel{BD_master}{{7}{11}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.7}{}}
-\newlabel{BD_sub}{{8}{12}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve SSP by Benders Decomposition}{12}{subsection.4.2}\protected@file@percent }
-\newlabel{solve_by_benders}{{4.2}{12}{Solve SSP by Benders Decomposition}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Scenario-based Stochastic Programming(SSP) Formulation}{9}{subsection.4.1}\protected@file@percent }
+\newlabel{DEF_constr1}{{3}{10}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.3}{}}
+\newlabel{DEF_constr2}{{4}{10}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.4}{}}
+\newlabel{DEF_constr3}{{5}{10}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.5}{}}
+\newlabel{BD_master}{{8}{11}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.8}{}}
+\newlabel{BD_sub}{{9}{11}{Scenario-based Stochastic Programming(SSP) Formulation}{equation.4.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve SSP by Benders Decomposition}{11}{subsection.4.2}\protected@file@percent }
+\newlabel{solve_by_benders}{{4.2}{11}{Solve SSP by Benders Decomposition}{subsection.4.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Solve The Subproblem}{12}{subsubsection.4.2.1}\protected@file@percent }
 \newlabel{second_stage}{{4.2.1}{12}{Solve The Subproblem}{subsubsection.4.2.1}{}}
-\newlabel{BD_sub_dual}{{9}{12}{Solve The Subproblem}{equation.4.9}{}}
-\newlabel{feasible_region}{{2}{12}{}{lem.2}{}}
+\newlabel{BD_sub_dual}{{10}{12}{Solve The Subproblem}{equation.4.10}{}}
+\newlabel{feasible_region}{{3}{12}{}{lem.3}{}}
 \newlabel{coro_1}{{1}{12}{}{corollary.1}{}}
-\newlabel{y_recursively}{{10}{13}{Solve The Subproblem}{equation.4.10}{}}
-\newlabel{optimal_sol_sub_dual}{{1}{13}{}{thm.1}{}}
-\newlabel{BD_sub_simplified}{{11}{13}{}{equation.4.11}{}}
+\newlabel{y_recursively}{{11}{12}{Solve The Subproblem}{equation.4.11}{}}
+\newlabel{optimal_sol_sub_dual}{{1}{12}{}{thm.1}{}}
+\newlabel{BD_sub_simplified}{{12}{12}{}{equation.4.12}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Delayed Constraint Generation}{13}{subsubsection.4.2.2}\protected@file@percent }
 \newlabel{bender_stage}{{4.2.2}{13}{Delayed Constraint Generation}{subsubsection.4.2.2}{}}
-\newlabel{BD_master2}{{12}{13}{Delayed Constraint Generation}{equation.4.12}{}}
-\newlabel{one_ep_feasible}{{3}{13}{}{lem.3}{}}
+\newlabel{BD_master2}{{13}{13}{Delayed Constraint Generation}{equation.4.13}{}}
+\newlabel{one_ep_feasible}{{4}{13}{}{lem.4}{}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{cut_algo}{{\caption@xref {cut_algo}{ on input line 214}}{14}{Delayed Constraint Generation}{lem.3}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The benders decomposition algorithm\relax }}{14}{algorithm.1}\protected@file@percent }
+\newlabel{cut_algo}{{\caption@xref {cut_algo}{ on input line 214}}{13}{Delayed Constraint Generation}{lem.4}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The benders decomposition algorithm\relax }}{13}{algorithm.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Obtain The Seat Planning Composed of Full or Largest Patterns}{14}{subsection.4.3}\protected@file@percent }
 \newlabel{seat_assignment}{{4.3}{14}{Obtain The Seat Planning Composed of Full or Largest Patterns}{subsection.4.3}{}}
-\newlabel{one_form}{{13}{15}{Obtain The Seat Planning Composed of Full or Largest Patterns}{equation.4.13}{}}
-\newlabel{deter_upper}{{14}{15}{Obtain The Seat Planning Composed of Full or Largest Patterns}{equation.4.14}{}}
-\newlabel{sol_relax_deter}{{4}{15}{}{lem.4}{}}
-\newlabel{deter_upper1}{{15}{16}{Obtain The Seat Planning Composed of Full or Largest Patterns}{equation.4.15}{}}
-\newlabel{deter_lower}{{16}{16}{Obtain The Seat Planning Composed of Full or Largest Patterns}{equation.4.16}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Feasible seat planning algorithm\relax }}{16}{algorithm.2}\protected@file@percent }
-\newlabel{feasible_seat}{{2}{16}{Feasible seat planning algorithm\relax }{algorithm.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Dynamic Seat Assignment for Each Group Arrival}{17}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Seat Assignment Based on Stochastic Planning Policy}{17}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Group-type(Supply) Control}{17}{subsubsection.5.1.1}\protected@file@percent }
-\newlabel{nested_policy}{{5.1.1}{17}{Group-type(Supply) Control}{subsubsection.5.1.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Make Decision by Value of Stochastic Programming}{18}{subsubsection.5.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}Algorithm Based on Stochastic Planning Policy}{18}{subsubsection.5.1.3}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Stochastic planning policy algorithm\relax }}{19}{algorithm.3}\protected@file@percent }
-\newlabel{algo_dynamic_policy}{{3}{19}{Stochastic planning policy algorithm\relax }{algorithm.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.4}Break Tie for Stochastic Planning Policy}{19}{subsubsection.5.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Bid-price Control}{19}{subsection.5.2}\protected@file@percent }
-\newlabel{bid-price_dual}{{17}{19}{Bid-price Control}{equation.5.17}{}}
-\newlabel{bid-price}{{5}{20}{}{lem.5}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Bid-price control algorithm\relax }}{20}{algorithm.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Booking Limit Control}{20}{subsection.5.3}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Booking limit control algorithm\relax }}{20}{algorithm.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Dynamic Programming Base-heuristic}{21}{subsection.5.4}\protected@file@percent }
-\newlabel{relax_deter}{{18}{21}{Dynamic Programming Base-heuristic}{equation.5.18}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}First Come First Served(FCFS) Policy}{21}{subsection.5.5}\protected@file@percent }
-\newlabel{largest_pattern}{{5.5}{21}{First Come First Served(FCFS) Policy}{subsection.5.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{21}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running time of Benders Decomposition and IP}{22}{subsection.6.1}\protected@file@percent }
-\newlabel{Bender_IP}{{6.1}{22}{Running time of Benders Decomposition and IP}{subsection.6.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running time of Decomposion and IP\relax }}{22}{table.caption.2}\protected@file@percent }
-\newlabel{tab_1}{{1}{22}{Running time of Decomposion and IP\relax }{table.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Seat Planning Composed of Full or Largest Patterns versus IP Solution}{22}{subsection.6.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Feasible seat planning versus IP solution\relax }}{23}{table.caption.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Performances of Different Policies}{23}{subsection.6.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performances of Different Policies\relax }}{23}{table.caption.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Impact of Implementing Social Distancing in SPP}{24}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Estimation of Gap Point}{24}{subsubsection.6.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Gap points and their estimation under 200 probabilities\relax }}{25}{figure.caption.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Impact of Social Distancing as Demands Increase}{26}{subsubsection.6.4.2}\protected@file@percent }
-\newlabel{Fig.sub.1}{{2(a)}{26}{Subfigure 2(a)}{subfigure.2.1}{}}
-\newlabel{sub@Fig.sub.1}{{(a)}{26}{Subfigure 2(a)\relax }{subfigure.2.1}{}}
-\newlabel{Fig.sub.2}{{2(b)}{26}{Subfigure 2(b)}{subfigure.2.2}{}}
-\newlabel{sub@Fig.sub.2}{{(b)}{26}{Subfigure 2(b)\relax }{subfigure.2.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The occupancy rate over the number of arriving people\relax }}{26}{figure.caption.6}\protected@file@percent }
-\newlabel{Fig.lable}{{2}{26}{The occupancy rate over the number of arriving people\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $\gamma =2.5$}}}{26}{figure.caption.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $\gamma =1.9$}}}{26}{figure.caption.6}\protected@file@percent }
+\newlabel{one_form}{{14}{14}{Obtain The Seat Planning Composed of Full or Largest Patterns}{equation.4.14}{}}
+\newlabel{deter_upper1}{{15}{14}{Obtain The Seat Planning Composed of Full or Largest Patterns}{equation.4.15}{}}
+\newlabel{deter_lower}{{16}{15}{Obtain The Seat Planning Composed of Full or Largest Patterns}{equation.4.16}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Feasible seat planning algorithm\relax }}{15}{algorithm.2}\protected@file@percent }
+\newlabel{feasible_seat}{{2}{15}{Feasible seat planning algorithm\relax }{algorithm.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Dynamic Seat Assignment for Each Group Arrival}{15}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Seat Assignment Based on Stochastic Planning Policy}{16}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Group-type(Supply) Control}{16}{subsubsection.5.1.1}\protected@file@percent }
+\newlabel{nested_policy}{{5.1.1}{16}{Group-type(Supply) Control}{subsubsection.5.1.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}Make Decision by Value of Stochastic Programming}{16}{subsubsection.5.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}Algorithm Based on Stochastic Planning Policy}{17}{subsubsection.5.1.3}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Stochastic planning policy algorithm\relax }}{17}{algorithm.3}\protected@file@percent }
+\newlabel{algo_dynamic_policy}{{3}{17}{Stochastic planning policy algorithm\relax }{algorithm.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.4}Break Tie for Stochastic Planning Policy}{17}{subsubsection.5.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Bid-price Control}{18}{subsection.5.2}\protected@file@percent }
+\newlabel{bid-price_dual}{{17}{18}{Bid-price Control}{equation.5.17}{}}
+\newlabel{bid-price}{{5}{18}{}{lem.5}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Bid-price control algorithm\relax }}{19}{algorithm.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{19}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running time of Benders Decomposition and IP}{19}{subsection.6.1}\protected@file@percent }
+\newlabel{Bender_IP}{{6.1}{19}{Running time of Benders Decomposition and IP}{subsection.6.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running time of Decomposion and IP\relax }}{19}{table.caption.2}\protected@file@percent }
+\newlabel{tab_1}{{1}{19}{Running time of Decomposion and IP\relax }{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Seat Planning Composed of Full or Largest Patterns versus IP Solution}{19}{subsection.6.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Feasible seat planning versus IP solution\relax }}{20}{table.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Performances of Different Policies}{20}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.1}Booking Limit Control}{21}{subsubsection.6.3.1}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Booking limit control algorithm\relax }}{21}{algorithm.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.2}Dynamic Programming Base-heuristic}{21}{subsubsection.6.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.3}First Come First Served(FCFS) Policy}{21}{subsubsection.6.3.3}\protected@file@percent }
+\newlabel{largest_pattern}{{6.3.3}{21}{First Come First Served(FCFS) Policy}{subsubsection.6.3.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performances of Different Policies\relax }}{22}{table.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Impact of Implementing Social Distancing in SPP}{22}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Estimation of Gap Point}{23}{subsubsection.6.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Gap points and their estimation under 200 probabilities\relax }}{24}{figure.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Impact of Social Distancing as Demands Increase}{24}{subsubsection.6.4.2}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refe}
 \bibcite{barry2021optimal}{1}
+\newlabel{Fig.sub.1}{{2(a)}{25}{Subfigure 2(a)}{subfigure.2.1}{}}
+\newlabel{sub@Fig.sub.1}{{(a)}{25}{Subfigure 2(a)\relax }{subfigure.2.1}{}}
+\newlabel{Fig.sub.2}{{2(b)}{25}{Subfigure 2(b)}{subfigure.2.2}{}}
+\newlabel{sub@Fig.sub.2}{{(b)}{25}{Subfigure 2(b)\relax }{subfigure.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The occupancy rate over the number of arriving people\relax }}{25}{figure.caption.6}\protected@file@percent }
+\newlabel{Fig.lable}{{2}{25}{The occupancy rate over the number of arriving people\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $\gamma =2.5$}}}{25}{figure.caption.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $\gamma =1.9$}}}{25}{figure.caption.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Gap points of different gammas and percentage differences under different demands\relax }}{25}{table.caption.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{25}{section.7}\protected@file@percent }
 \bibcite{berge1993demand}{2}
 \bibcite{blom2022filling}{3}
 \bibcite{bortolete2022support}{4}
 \bibcite{casey2005scenario}{5}
 \bibcite{clausen2010off}{6}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Gap points of different gammas and percentage differences under different demands\relax }}{27}{table.caption.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{27}{section.7}\protected@file@percent }
 \bibcite{curry1990optimal}{7}
 \bibcite{dantzig1957discrete}{8}
 \bibcite{deplano2019offline}{9}
@@ -165,7 +167,7 @@
 \bibcite{williamson1992airline}{30}
 \bibcite{yuen2002group}{31}
 \bibcite{zhu2023assign}{32}
-\newlabel{lemma_eq}{{19}{30}{Proof of lemma \ref {one_ep_feasible}}{equation.7.19}{}}
+\newlabel{lemma_eq}{{18}{29}{Proof of lemma \ref {one_ep_feasible}}{equation.7.18}{}}
 \citation{dantzig1957discrete}
-\newlabel{lemma_eq2}{{20}{31}{Proof of lemma \ref {one_ep_feasible}}{equation.7.20}{}}
-\gdef \@abspage@last{31}
+\newlabel{lemma_eq2}{{19}{30}{Proof of lemma \ref {one_ep_feasible}}{equation.7.19}{}}
+\gdef \@abspage@last{30}

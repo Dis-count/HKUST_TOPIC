@@ -7,24 +7,22 @@ We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N
 \subsection{Seat Assignment Based on Stochastic Planning Policy}
 % Seat assignment based on stochastic planning policy involves seat planning and 
 
-\subsubsection{Group-type(Supply) Control}\label{nested_policy}
+\subsubsection{Group-type Control}\label{nested_policy}
 Feasible seat planning represents the supply for each group type. We can use supply control to determine whether to accept a group. Specifically, if there is a supply available for an arriving group, we will accept the group. However, if there is no corresponding supply for the arriving group, we need to decide whether to use a larger group supply to meet the group's needs. When a group is accepted to occupy larger-size seats, the remaining empty seat(s) can be reserved for future demand.
 
 In the following section, we will demonstrate how to decide whether to accept the current group to occupy larger-size seats when there is no corresponding supply available.
 
 When the number of remaining periods is $T_r$, for any $j>i$, we can use one supply of group type $j$ to accept a group of $i$. In that case, when $i+\delta \leq j$, $(j-i-\delta)$ seats can be provided for one group of $j-i-\delta$ with $\delta$ seats of social distancing. Let $D_j$ be the random variable indicates the number of group type $j$ in $T_r$ periods. The expected number of accepted people is $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r)$, where $P(D_i \geq x_i; T_r)$ is the probability of that the demand of group type $i$ in $T_r$ periods is no less than $x_i$, the remaining supply of group type $i$. Thus, the term, $P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r)$, indicates the probability that the demand of group type $(j-i-\delta)$ in $T_r$ periods is no less than its current remaining supply plus 1. When $i <j < i+\delta$, the expected number of accepted people is $i$.
 
-Similarly, when we retain the supply of group type $j$ by rejecting a group of $i$, the expected number of accepted people is $j P(D_{j} \geq x_{j}; T_r)$. $P(D_{j} \geq x_{j}; T_r)$ indicates the probability that the demand of group type $j$ in $T_r$ periods is no less than its current remaining supply.
+Similarly, when we retain the supply of group type $j$ by rejecting a group of $i$, the expected number of accepted people is $j P(D_{j} \geq x_{j}; T_r)$. The probability, $P(D_{j} \geq x_{j}; T_r)$, indicates the probability that the demand of group type $j$ in $T_r$ periods is no less than its current remaining supply.
 
 Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r) - j P(D_{j} \geq x_{j}; T_r)$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
 
-\begin{remark}
 This control is based on the current seat planning. We still need further comparison of values of accepting or rejecting an arrival to decide whether to accept it. That is, the group-type control is a necessary condition to accept a group.
-\end{remark}
 
 % according to the pattern instead of placing it when the capacity is sufficient.
 
-\subsubsection{Make Decision by Value of Stochastic Programming}
+\subsubsection{Value of Stochastic Programming}
 After we decide to assign a small group to a larger one, we need to compare the objective values of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival, i.e., the Value of Acceptance(VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection(VoR).
 
 The VoA considers the scenarios that could arise if we accept the current arrival, while the VoR considers the same scenarios if we reject it. By comparing the VoA and the VoR, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made. 
@@ -73,8 +71,9 @@ In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a
 
 % The bid-price is a term used to describe the marginal value or opportunity cost of a seat.
 
+% According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
 \begin{lem}\label{bid-price}
-According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. Then the optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. 
+ The optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. 
 \end{lem}
 
 The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_h - \delta}{n_h} n_i = \frac{\delta (i - h)}{n_h}$. When $i < h$, $i - \beta_j n_i < 0$. When $i \geq h$, $i - \beta_j n_i \geq 0$. This means that group type $i$ with $i$ greater than or equal to $h$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. In practice, groups are often assigned arbitrarily based on availability when the capacity allows, which can result in a large number of empty seats.

@@ -5,41 +5,15 @@ In this section, to incorporate the social distancing into seat planning, we fir
 % dynamic seat assignment problem, which is suitable for commercial use in cinemas and concerts.
 
 \subsection{Seat Planning Problem with Social Distancing}\label{dynamic_demand}
-We consider a layout comprising $N$ rows, with each row containing $S_j$ seats, where $j \in \mathcal{N}$. The seating arrangement is intended for various groups, where each group consists of no more than $M$ individuals. There are $M$ distinct group types, denoted by group type $i$ containing $i$ people, where $i \in \mathcal{M} \coloneqq {1,2, \ldots, M}$. Represented by a demand vector $\mathbf{d} = [d_1, \ldots, d_M]$, each element $d_i$ represents the number of group type $i$.
+We consider a layout comprising $N$ rows, with each row containing $S_j$ seats, where $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. The seating arrangement is intended for various groups, where each group consists of no more than $M$ individuals. There are $M$ distinct group types, denoted by group type $i$ containing $i$ people, where $i \in \mathcal{M} \coloneqq \{1,2, \ldots, M\}$. Represented by a demand vector $\mathbf{d} = [d_1, \ldots, d_M]$, each element $d_i$ represents the number of group type $i$.
 
 
-In order to comply with the social distancing requirements, individuals from the same group may sit together, while maintaining a distance from other groups. Let $\delta$ denote the social distancing measure, which could entail leaving one or more empty seats. Specifically, each group must ensure that there are empty seat(s) between them and adjacent groups. Importantly, the seating arrangement of different rows does not affect each other, meaning that individuals from one group can be seated directly behind individuals from another group.
+In order to comply with the social distancing requirements, individuals from the same group may sit together, while maintaining a distance from other groups. Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure that there are empty seat(s) between them and adjacent groups. Importantly, the seating arrangement of different rows does not affect each other, meaning that individuals from one group can be seated directly behind individuals from another group.
 
 To incorporate the social distancing requirements into the seat planning process, we adjust the original group sizes by adding $\delta$. Consequently, the new size of group type $i$ is denoted as $n_i = i + \delta$, where $i \in \mathcal{M}$. Similarly, to accommodate the adjusted group sizes, the seat layout is modified by adding $\delta$ to the length of each row. Thus, $L_j = S_j + \delta$ represents the length of row $j$, where $S_j$ indicates the number of seats in row $j$. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat planning problem.
 
-% We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
+The deterministic seat planning problem is formulated below, with the objective of maximizing the number of people accommodated.
 
-
-Next, we will analyze the impact of implementing social distancing on each row. We define seat planning as the arrangement of seats within a row, specifically, the number of different group types present in each row, as long as the sum of the sizes of all groups is no larger than the length of the row. To simplify the discussion, we will use a vector $(t_1, \ldots, t_i, \ldots, t_M)$ to represent the pattern, where $t_i$ corresponds to the number of group type $i$.
-
-To quantify the effect of each pattern, we introduce the notion of loss. Here, the term loss denotes the number of empty seats. The loss provides a measure of the number of people who cannot be seated due to the implementation of social distancing constraints. By examining the losses associated with different patterns, we can assess the effectiveness of various seat planning configurations with respect to accommodating the desired number of individuals while adhering to social distancing requirements. 
-
-In cases where the length of a row is fixed and the largest group size is confirmed, we refer to the patterns with the minimal loss as the largest patterns. These largest patterns are characterized by having the least number of people unable to be seated due to social distancing requirements. Furthermore, we define patterns that have no empty seats, except for those required for social distancing, as full patterns. These full patterns are designed to maximize seating capacity while still maintaining the necessary spacing between groups.
-
-By distinguishing the largest and full patterns from other configurations, we can gain valuable insights into the most efficient seat planning strategies that prioritize accommodating the maximum number of people while adhering to social distancing guidelines.
-
-In scenarios where the demand for seating is high, it is advantageous to adopt the largest pattern, as it allows for the accommodation of a larger number of individuals. The largest pattern becomes particularly beneficial when the demand exceeds the capacity of full patterns.
-
-Conversely, when the demand is moderate or not excessively high, adopting the full pattern becomes more feasible. The full pattern maximizes seating capacity by utilizing all available seats, except those required for social distancing measures. By adopting the full pattern, we strive to accommodate as many people as possible while still maintaining the necessary spacing between groups.
-
-Overall, by considering both the largest and full patterns, we can optimize seat planning configurations to efficiently accommodate a significant number of individuals while adhering to social distancing guidelines.
-
-\begin{lem}\label{lem_pattern}
-  When given the length of a row, $L$, the social distancing, $\delta$, the adjusted size of the largest group allowed, $n_M$, the loss of the largest pattern is $\lfloor \frac{L}{n_M} \rfloor \delta - \delta + g(L - \lfloor \frac{L}{n_M} \rfloor n_M)$, where $g(r)=0$ if $r> \delta$, and $g(r)= r$ if $r \leq \delta$.
-\end{lem}
-
-\begin{example}
-  Suppose that the social distancing requirement is one seat, and there are four types of groups. In this case, the new sizes of the groups would be 2, 3, 4, and 5, respectively. Additionally, the length of a single row is determined to be L = 21. Then the loss of the largest pattern is $\lfloor \frac{21}{5} \rfloor  - 1 + g(1) = 5$.
-  
-  We find that the patterns (0, 0, 0, 4), (0, 0, 4, 1), and (0, 2, 0, 3) are the largest patterns with the same loss value of 5. However, it's important to note that the largest pattern may not necessarily be a full pattern. For instance, the pattern (0, 0, 0, 4) is the largest pattern in terms of accommodating the maximum number of individuals, but it does not meet the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$. Conversely, a full pattern may not always be the largest pattern. For example, the pattern (1, 1, 4, 0) is considered a full pattern since it utilizes all seats, but its loss value is 6.
-\end{example}
-
-Then, considering all rows, we have a deterministic model where our goal is to accommodate as many people as possible.
 \begin{equation}\label{deter_upper}
   \begin{aligned}
   \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
@@ -49,6 +23,39 @@ Then, considering all rows, we have a deterministic model where our goal is to a
   \end{aligned}
 \end{equation}
 
+This seat planning problem can be viewed as a special case of the multiple knapsack problem. Given the small size of the problem, it is relatively easy to obtain the optimal solution.
+
+To simplify the discussion, we will use a vector $(t_1, \ldots, t_i, \ldots, t_M)$ to represent the pattern, where $t_i$ corresponds to the number of group type $i$. To quantify the effect of each pattern, we introduce the notion of loss, denoting the number of unoccupied seats. 
+
+\begin{lem}\label{lem_pattern}
+When given the length of a row, $L$, the social distancing, $\delta$, the adjusted size of the largest group allowed, $n_M$, the loss of the largest pattern is $\lfloor \frac{L}{n_M} \rfloor \delta - \delta + g(L - \lfloor \frac{L}{n_M} \rfloor n_M)$, where $g(r)=0$ if $r> \delta$, and $g(r)= r$ if $r \leq \delta$.
+\end{lem}
+
+The loss provides a measure of the number of people who cannot be seated due to the implementation of social distancing constraints. By examining the losses associated with different patterns, we can assess the effectiveness of various seat planning configurations with respect to accommodating the desired number of individuals while adhering to social distancing requirements.
+
+\begin{definition}
+Given the length of row and the largest group size, we call the pattern with the minimal loss as the largest patterns. Additionally, we refer to patterns that have no empty seats, except for those reserved for social distancing purposes, as full patterns.
+\end{definition}
+
+The largest patterns are characterized by having the least number of people unable to be seated due to social distancing requirements. The full patterns are designed to maximize seating capacity while still maintaining the necessary spacing between groups. 
+
+In most cases, we observe that the optimal solution tends to consist of rows with either full patterns or the largest patterns.
+By distinguishing the largest and full patterns from other configurations, we can gain valuable insights into the most efficient seat planning strategies that prioritize accommodating the maximum number of people while adhering to social distancing guidelines.
+
+In scenarios where the demand for seats is high, it is advantageous to adopt the largest pattern, as it allows for the accommodation of a larger number of individuals. The largest pattern becomes particularly beneficial when the demand exceeds the capacity of full patterns. In scenarios where the demand is moderate, adopting the full pattern becomes more feasible. The full pattern maximizes seating capacity by utilizing all available seats, except those required for social distancing measures. Overall, by considering both the largest and full patterns, we can optimize seat planning configurations to efficiently accommodate a significant number of individuals while adhering to social distancing guidelines.
+
+\begin{example}
+  Suppose that the social distancing requirement is one seat, and there are four types of groups. In this case, the new sizes of the groups would be 2, 3, 4, and 5, respectively. Additionally, the length of a single row is determined to be L = 21. Then the loss of the largest pattern is $\lfloor \frac{21}{5} \rfloor  - 1 + g(1) = 5$.
+  
+  We find that the patterns (0, 0, 0, 4), (0, 0, 4, 1), and (0, 2, 0, 3) are the largest patterns with the same loss value of 5. However, it's important to note that the largest pattern may not necessarily be a full pattern. For instance, the pattern (0, 0, 0, 4) is the largest pattern in terms of accommodating the maximum number of individuals, but it does not meet the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$. Conversely, a full pattern may not always be the largest pattern. For example, the pattern (1, 1, 4, 0) is considered a full pattern since it utilizes all seats, but its loss value is 6.
+\end{example}
+
+
+% We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
+
+% Next, we will analyze the impact of implementing social distancing on each row. We define seat planning as the arrangement of seats within a row, specifically, the number of different group types present in each row, as long as the sum of the sizes of all groups is no larger than the length of the row.  
+
+The optimal solution to the seat planning problem can be complex. However, the LP relaxation of problem \eqref{deter_upper} has nice properties.
 
 \begin{lem}\label{sol_relax_deter}
 For the LP relaxation of problem \eqref{deter_upper}, there exists $h$ such that the optimal solutions $x_{ij}^{*} = 0$ when $i < h$; $\sum_{j} x_{ij}^{*} = d_{i}$, when $i > h$; $\sum_{j} x_{ij}^{*} = (L - \sum_{i = h+1}^{M} {d_i n_i})/ n_h$, when $i = h$.

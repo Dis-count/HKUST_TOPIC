@@ -1,14 +1,13 @@
 % !TEX root = sum1.tex
-\section{Dynamic Seat Assignment for Each Group Arrival}
-In this section, we discuss two policies for assigning seats dynamically. Recall that we need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. First, we will present the dynamic seat assignment based on stochastic planning policy, which incorporates group-type control to optimize resource utilization. Then we will consider the classical bid-price control.
+\section{Dynamic Seat Assignment Based on Stochastic Planning Policy}
+In this section, we discuss dynamic seat assignment based on stochastic planning policy(SPP). Recall that we need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. First, we will present the dynamic seat assignment based on stochastic planning policy, which incorporates group-type control to optimize resource utilization.
 
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
-\subsection{Seat Assignment Based on Stochastic Planning Policy}
 % Seat assignment based on stochastic planning policy involves seat planning and 
 
-\subsubsection{Group-type Control}\label{nested_policy}
-Feasible seat planning represents the supply for each group type. We can use supply control to determine whether to accept a group. Specifically, if there is a supply available for an arriving group, we will accept the group. However, if there is no corresponding supply for the arriving group, we need to decide whether to use a larger group supply to meet the group's needs. When a group is accepted to occupy larger-size seats, the remaining empty seat(s) can be reserved for future demand.
+\subsection{Group-type Control}\label{nested_policy}
+Seat planning represents the supply for each group type. We can use supply control to determine whether to accept a group. Specifically, if there is a supply available for an arriving group, we will accept the group. However, if there is no corresponding supply for the arriving group, we need to decide whether to use a larger group supply to meet the group's needs. When a group is accepted to occupy larger-size seats, the remaining empty seat(s) can be reserved for future demand.
 
 In the following section, we will demonstrate how to decide whether to accept the current group to occupy larger-size seats when there is no corresponding supply available.
 
@@ -22,7 +21,7 @@ This control is based on the current seat planning. We still need further compar
 
 % according to the pattern instead of placing it when the capacity is sufficient.
 
-\subsubsection{Value of Stochastic Programming}
+\subsection{Value of Stochastic Programming}
 After we decide to assign a small group to a larger one, we need to compare the objective values of accepting or rejecting an arrival to make a decision. To determine this objective value, we need to consider the potential outcomes that could result from accepting the current arrival, i.e., the Value of Acceptance(VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection(VoR).
 
 The VoA considers the scenarios that could arise if we accept the current arrival, while the VoR considers the same scenarios if we reject it. By comparing the VoA and the VoR, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made. 
@@ -53,41 +52,6 @@ The algorithm is shown below:
 A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including one larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group.
 
 By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
-
-\subsection{Bid-price Control}
-Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
-
-The dual problem of LP relaxation of problem \eqref{deter_upper} is:
-
-\begin{equation}\label{bid-price_dual}
-  \begin{aligned}
-  \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \beta_{j} \\
-  \text {s.t.} \quad & z_{i} + \beta_j n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
-  & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
-  \end{aligned}
-\end{equation}
-
-In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. A request is only accepted if the revenue it generates is above the sum of the bid prices of the seats it uses. Thus, if its revenue is more than its opportunity costs, i.e., $i -\beta_{j} n_i \geq 0$, we will accept the group type $i$. And choose $j^{*} = \arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
-
-% The bid-price is a term used to describe the marginal value or opportunity cost of a seat.
-
-% According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
-\begin{lem}\label{bid-price}
- The optimal solution to probelm \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_h =0$, $z_{i} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$ and $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$. 
-\end{lem}
-
-The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_h - \delta}{n_h} n_i = \frac{\delta (i - h)}{n_h}$. When $i < h$, $i - \beta_j n_i < 0$. When $i \geq h$, $i - \beta_j n_i \geq 0$. This means that group type $i$ with $i$ greater than or equal to $h$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. In practice, groups are often assigned arbitrarily based on availability when the capacity allows, which can result in a large number of empty seats.
-
-The bid-price control policy based on the static model is stated below.
-\begin{algorithm}[H]
-  \caption{Bid-price control algorithm}
-  \begin{description}
-    \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
-    \item[Step 2.] Solve the linear relaxation of problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain the aggregate optimal solution $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$.
-    \item[Step 3.] If $i \geq h$, accept the arrival and assign the group to row $k$ arbitrarily, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
-    \item[Step 4.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
-  \end{description}
-\end{algorithm}
 
 
 % \subsection{Break tie for Bid-price and DP base-heuristic}

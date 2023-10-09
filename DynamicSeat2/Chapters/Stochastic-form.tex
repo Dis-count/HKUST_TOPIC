@@ -223,13 +223,8 @@ The steps of the algorithm are described as below,
    \end{description}
   \end{algorithm}
 
-\begin{remark}
-From the Lemma \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega}^0 = \mathbf{0}$ initially in {\bf Step 1}.
-\end{remark}
+From the Lemma \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega}^0 = \mathbf{0}$ initially in {\bf Step 1}. Notice that only contraints are added in each iteration, thus $LB$ and $UB$ are both monotone. Then we can use $UB - LB < \epsilon$ to terminate the algorithm in {\bf Step 6}.
 
-\begin{remark}
-Notice that only contraints are added in each iteration, thus $LB$ and $UB$ are both monotone. Then we can use $UB - LB < \epsilon$ to terminate the algorithm in {\bf Step 6}.
-\end{remark}
 
 After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})$. Solving problem \eqref{lemma_eq} directly can be computationally challenging in some cases, so practically we first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. From this solution, we generate an integral seat planning.
 
@@ -291,9 +286,8 @@ To maximize the utilization of seats, we should assign full or largest patterns 
    \end{description}
   \end{algorithm}
 
-\begin{remark}
-  {\bf Step 2} can give a feasible seat planning. {\bf Step 4} can give the full or largest patterns for each row.
-\end{remark}
+
+{\bf Step 2} can give a feasible seat planning. {\bf Step 4} can give the full or largest patterns for each row.
 
 % Thus, we can obtain a feasible seat planning by solving stochastic programming once and deterministic programming twice.
 

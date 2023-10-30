@@ -5,7 +5,7 @@ We carried out several experiments, including comparing the running time of deco
 % assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
 
-\subsection{Running time of Benders Decomposition and IP}\label{Bender_IP}
+\subsection{Running time of solving SSP and relaxation of SSP with Benders Decomposition}\label{Bender_IP}
 % At first, we compare the running time of these two methods. 
 
 The running times of solving SSP directly and solving the LP relaxation of SSP with Benders decomposition are shown in Table \ref{tab_1}.
@@ -13,7 +13,7 @@ The running times of solving SSP directly and solving the LP relaxation of SSP w
 \begin{table}[ht]
   \centering
   \scriptsize
-  \caption{Running time of Decomposion and IP}\label{tab_1}
+  \caption{Running time of solving SSP and relaxation of SSP with Benders Decomposition}\label{tab_1}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
   \# of scenarios & demands & \# of rows & \# of groups & \# of seats & running time of IP(s) & Benders (s) \\
@@ -36,7 +36,7 @@ The running times of solving SSP directly and solving the LP relaxation of SSP w
   \end{tabular}
 \end{table}
 
-The parameters in the columns of the table are the number of scenarios, the range of demands, running time of integer programming, running time of Benders decomposition method, the number of rows, the number of group types and the number of seats for each row, respectively. 
+The parameters in the columns of the table are the number of scenarios, the range of demands, running time of SSP, running time of Benders decomposition method, the number of rows, the number of group types and the number of seats for each row, respectively. 
 
 Take the first experiment as an example, the scenarios of demands are generated from (150, 350) randomly, the number of seats for each row is generated from (21, 50) randomly.
 % about 1000 seats.

@@ -1,6 +1,6 @@
 % !TEX root = sum1.tex
 \section{Dynamic Seat Assignment Based on Stochastic Assignment Policy}
-In this section, we discuss dynamic seat assignment based on stochastic assignment policy(SAP). Recall that we need to make decisions not only on whether to accept or reject an arrival but also on how to assign seats to each group if we decide to accept it. First, we will present the dynamic seat assignment based on stochastic assignment policy, which incorporates group-type control to optimize resource utilization.
+In this section, we discuss dynamic seat assignment based on stochastic assignment policy(SAP). Recall that our decision-making process involves not only determining whether to accept or reject an arrival but also selecting the specific row for seat assignment if we decide to accept the group.First, we will present the dynamic seat assignment based on stochastic assignment policy, which incorporates group-type control to optimize resource utilization.
 
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
@@ -17,7 +17,7 @@ Similarly, when we retain the supply of group type $j$ by rejecting a group of $
 
 Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r) - j P(D_{j} \geq x_{j}; T_r)$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
 
-Group-type policy can only tell us which group will be assigned to smaller group, we still need to further find the specific row to assign the group. Then we compare the values of stocahstic programming when accepting or rejecting an group.
+Group-type policy can only tell us which group-type supply will be provided for the smaller group, we still need to further find the specific row to assign the group. Then we compare the values of stocahstic programming when accepting or rejecting an group.
 
 % That is, the group-type control is a necessary condition to accept a group.
 
@@ -45,15 +45,14 @@ The algorithm is shown below:
   \caption{Stochastic assignment policy algorithm}\label{algo_dynamic_policy}
   \begin{description}
     \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\X = [x_{1}, \ldots, x_{M}]$.
-    \item[Step 2.] For the arrival group type $i$ at period $T{'}$, 
-    If $\exists k \in \mathcal{N}$ such that $i \in P_k$, accept the group, update $P_{k} = P_{k}/(i)$ and $x_{i} = x_{i} -1$. Go to step 4. Otherwise, go to step 3.
-    \item[Step 3.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $j^{*} \in P_k$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k} = P_{k}/(j^{*})$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j^{*}-i-\delta} = x_{j^{*}-i-\delta} + 1$ and $P_{k}= P_{k} \cup (j^{*}-i-\delta)$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+    \item[Step 2.] For the arrival group type $i$ at initial period $T{'} =1$, if $\exists k \in \mathcal{N}$ such that $P_{ki} > 0$, accept the group, update $P_{ki} = P_{ki} -1$ and $x_{i} = x_{i} -1$. Go to step 4. Otherwise, go to step 3.
+    \item[Step 3.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $P_{k j^{*}} >0$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k j^{*}} = P_{k j^{*}}-1$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j^{*}-i-\delta} = x_{j^{*}-i-\delta} + 1$ and $P_{k, j^{*}-i-\delta} = P_{k, j^{*}-i-\delta} +1$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
     \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
 
 \subsubsection{Break Tie for Stochastic Assignment Policy}
-A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including one larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group.
+A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including this larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group.
 
 By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
 

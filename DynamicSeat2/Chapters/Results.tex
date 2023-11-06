@@ -5,7 +5,7 @@ We carried out several experiments, including comparing the running time of deco
 % assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
 
-\subsection{Running time of solving SSP and relaxation of SSP with Benders Decomposition}\label{Bender_IP}
+\subsection{Running times of solving SSP and relaxation of SSP with Benders Decomposition}\label{Bender_IP}
 % At first, we compare the running time of these two methods. 
 
 The running times of solving SSP directly and solving the LP relaxation of SSP with Benders decomposition are shown in Table \ref{tab_1}.
@@ -13,10 +13,10 @@ The running times of solving SSP directly and solving the LP relaxation of SSP w
 \begin{table}[ht]
   \centering
   \scriptsize
-  \caption{Running time of solving SSP and relaxation of SSP with Benders Decomposition}\label{tab_1}
+  \caption{Running times of solving SSP and relaxation of SSP with Benders Decomposition}\label{tab_1}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
-  \# of scenarios & demands & \# of rows & \# of groups & \# of seats & running time of IP(s) & Benders (s) \\
+  \# of scenarios & Demands & \# of rows & \# of groups & \# of seats & Running time of IP(s) & Benders (s) \\
   \hline
   1000  & (150, 350) & 30 & 8 & (21, 50) & 5.1  & 0.13 \\
   5000  &            & 30 & 8 &         & 28.73 & 0.47  \\
@@ -36,9 +36,10 @@ The running times of solving SSP directly and solving the LP relaxation of SSP w
   \end{tabular}
 \end{table}
 
-The parameters in the columns of the table are the number of scenarios, the range of demands, running time of SSP, running time of Benders decomposition method, the number of rows, the number of group types and the number of seats for each row, respectively. 
+The parameters in the columns of the table are the number of scenarios, the range of demands, running time of SSP, running time of Benders decomposition method, the number of rows, the number of group types and the number of seats for each row, respectively. Take the first experiment as an example, the scenarios of demands are generated from (150, 350) randomly, the number of seats for each row is generated from (21, 50) randomly.
 
-Take the first experiment as an example, the scenarios of demands are generated from (150, 350) randomly, the number of seats for each row is generated from (21, 50) randomly.
+It is evident that the utilization of Benders decomposition can enhance computational efficiency.
+
 % about 1000 seats.
 
 % The second one:
@@ -49,20 +50,24 @@ Take the first experiment as an example, the scenarios of demands are generated 
 % The number of seats for each row L is generated from 41-60 randomly, about 1500 seats.
 % The scenarios of demands are generated from (150, 250) randomly.
 
-\subsection{Seat Planning Composed of Full or Largest Patterns versus IP Solution}
+\subsection{Seat Planning From SSP Relaxation versus Seat Planning From SSP}
+In this section, we compare the accpected people of seat plannings from SSP relaxation and SSP under group-type control policy.
+
 An arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{i} = \sum_{t} I(y_t = i)$, i.e., the number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{M})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{M} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{M}!} \prod_{i=1}^{M} p_{i}^{N_i}, T = \sum_{i=1}^{M} N_{i}.$$
 
 It is clear that the number of different sequences is $M^{T}$. The number of different scenarios is $O(T^{M-1})$ which can be obtained by the following DP.
 
 Use $D(T, M) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{M} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, M) = \sum_{i= 0}^{T} D(i, M-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,M) = O(T^{M-1})$. The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
 
-Then, we will show the seat planning has a close performance with IP when considering group-type control policy.
+Then, we will show these two seat plannings have a close performance when considering group-type control policy.
 
 \begin{table}[ht]
-    \caption{Feasible seat planning versus IP solution}
+    \centering
+    \small
+    \caption{Seat planning from SSP relaxation versus seat planning from SSP}
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
-    \# samples & T & probabilities & \# rows & people served by decomposition & people served by IP \\
+    \# samples & T & probabilities & \# rows & people served by SSP relaxation & people served by SSP \\
     \hline
     1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 85.30 & 85.3 \\
     1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & 97.32 & 97.32 \\
@@ -220,7 +225,7 @@ For the first three policies, their performance tends to initially drop and then
 %  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
 %  大于 gamma/gamma+1， 则最大损失是（ ）
 
-\subsection{Impact of Implementing Social Distancing in SPP}
+\subsection{Impact of Implementing Social Distancing in SAP}
 In this section, our focus is to analyze the influence of social distancing on the number of accepted individuals. Intuitively, when demand is small, we will accept all arrivals, thus there is no difference whether we implement the social distancing. What is interesting for us is when the difference occurs. Our primary objective is to determine the first time period at which, on average, the number of people accepted without social distancing is not less than the number accepted with social distancing plus one. This critical point, referred to as the gap point, is of interest to us. Additionally, we will examine the corresponding occupancy rate at this gap point. It should be noted that the difference at a specific time period may vary depending on the total number of periods considered. Therefore, when evaluating the difference at a particular time period, we assume that there are a total of such periods under consideration.
 
 
@@ -229,13 +234,14 @@ It is evident that as the demand increases, the effect of social distancing beco
 By analyzing and comparing the data, we can gain insights into the relationship between demand, social distancing, the number of accepted individuals, and occupancy rates. This information is valuable for understanding the impact of social distancing policies on overall capacity utilization and making informed decisions regarding resource allocation and operational strategies.
 
 \subsubsection{Estimation of Gap Point}
-Based on our findings, we observed that the seat allocation derived from the optimal solution consistently satisfies the formation of either the largest pattern or the full pattern, regardless of different probability combinations. However, certain counterexamples arise when the requirements associated with specific probability combinations are unable to form a full pattern, resulting in gaps in the seating arrangement. The occurrence of these counterexamples is closely tied to the seat layout itself. The ratio of the number of largest patterns to the number of full patterns in the final seat allocation is influenced by the expected number of people in each period.
+Based on our findings, we observed that the seat allocation derived from the optimal solution consistently satisfies the formation of either the largest pattern or the full pattern, regardless of different probability combinations. However, certain counterexamples arise when the requirements associated with specific probability combinations are unable to form a full pattern, resulting in gaps in the seating arrangement. The occurrence of these counterexamples is closely tied to the seat layout itself. The ratio of the number of largest patterns to the number of full patterns in the final seat allocation is influenced by the expected number of people in each period. We can leverage the expected number of people in each period to estimate the gap point when utilizing the SAP. This approach allows us to approximate the period at which the number of people accepted without social distancing surpasses the number accepted with social distancing, based on the performance characteristics observed in the SAP.
 
 % Given the stable gap between the seat assignment policy obtained from SPP and the optimal policy, 
-We can leverage the expected number of people in each period to estimate the gap point when utilizing the SPP. This approach allows us to approximate the period at which the number of people accepted without social distancing surpasses the number accepted with social distancing, based on the performance characteristics observed in the SPP.
+To find such a first period, we aim to find the maximum period such that we could assign all the groups during these periods into the seats, i.e., for each group type $i$, we have $\sum_{j} x_{ij} \geq d_i$, where $x_{ij}$ is the number of group type $i$ in row $j$. Meanwhile, we have the capacity constraint $\sum_{i} n_{i} x_{ij} \leq L_j$, thus, $\sum_{i} n_i d_i \leq \sum_{i} n_i \sum_{j} x_{ij} \leq \sum_{j} L_{j}$. Notice that $E(d_i) = p_i T$, we have $\sum_{i} n_i p_i T \leq \sum_{j} L_{j}$ by taking the expectation. Let $L = \sum_{j} L_{j}$, representing the total number of seats, $\gamma = \sum_{i} i p_i$, representing the average number of people who arrive in each period, we can obtain $T \leq \frac{L}{\gamma + \delta}$, then the upper bound of the expected maximum period is $T' = \frac{L}{\gamma + \delta}$.
+Assuming that we accept all incoming groups within $T'$ periods, filling all the available seats, the corresponding occupancy rate at this period can be calculated as $\frac{\gamma T'}{(\gamma+ \delta)T' - N \delta} = \frac{\gamma}{\gamma +\delta} \frac{L}{L-N \delta}$. However, it is important to note that the actual maximum period will be smaller than $T{'}$ because it is impossible to accept groups to fill all seats exactly. To estimate the gap point when applying SAP, we can use $y_1 = c_1 \frac{L}{\gamma + \delta}$, where $c_1$ is a discount rate compared to the ideal assumption. Similarly, we can estimate the corresponding occupancy rate as $y_2 = c_2 \frac{\gamma}{\gamma +\delta} \frac{L}{L-N \delta}$, where $c_2$ is a discount rate for the occupancy rate compared to the ideal scenario.
 
+% Assuming that we accept all incoming groups within $T'$ periods, filling all the available seats, the total number of people, taking social distancing into account, would be equal to the number of all seats. This can be expressed as $\gamma T' + \delta T' = L$, where $\gamma T'$ is the expected number of people. Thus, the expected period for reaching this point is given by $T' = \frac{L}{\gamma + \delta}$.
 
-Let $\gamma$ represent the average number of people who arrive in each period, and let $L$ represent the total number of seats available. Assuming that we accept all incoming groups within $T'$ periods, filling all the available seats, the total number of people, taking social distancing into account, would be equal to the number of all seats. This can be expressed as $\gamma T' + \delta T' = L$, where $\gamma T'$ is the expected number of people. Thus, the expected period for reaching this point is given by $T' = \frac{L}{\gamma + \delta}$. The corresponding occupancy rate at this period can be calculated as $\frac{\gamma T'}{(\gamma+ \delta)T' - N \delta} = \frac{\gamma}{\gamma +\delta} \frac{L}{L-N \delta}$. However, it is important to note that the actual first period will be smaller than the ideal one because it is impossible to accept groups to fill all seats exactly. To estimate the gap point when applying SPP, we can use $y_1 = c_1 \frac{L}{\gamma + \delta}$, where $c_1$ is a discount rate compared to the ideal situation. Similarly, we can estimate the corresponding occupancy rate as $y_2 = c_2 \frac{\gamma}{\gamma +\delta} \frac{L}{L-N \delta}$, where $c_2$ is a discount rate for the occupancy rate compared to the ideal scenario.
 
 % It is important to note that this estimation is accurate only when we accepted groups in $T{'}$ periods and all rows represent full patterns, as per our assumption. 
 % $T{'}$ represents the ideal first period where the number of people without social distancing is larger than that with social distancing 
@@ -259,7 +265,7 @@ By examining the relationship between the gap point and the increment of $\gamma
 \subsubsection{Impact of Social Distancing as Demands Increase}
 Now, we consider impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. We set the parameters as follows: $T$ varies from 30 to 120, the step size is 1.  The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
 
-The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ SPP to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt a different approach. We simply accept all incoming groups as long as the capacity allows, without considering the constraints of groups needing to sit together. This means that we prioritize filling the available seats without enforcing any specific seating arrangements or social distancing requirements. Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
+The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ SAP to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt a different approach. We simply accept all incoming groups as long as the capacity allows, without considering the constraints of groups needing to sit together. This means that we prioritize filling the available seats without enforcing any specific seating arrangements or social distancing requirements. Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
 
 \begin{figure}[h]
   \centering
@@ -277,25 +283,57 @@ The analysis comprises three stages. In the first stage, where the capacity is s
 
 The table below presents the gap points and the percentage gaps for different demand levels (130, 150, 170, 190, 210).
 
+% \begin{table}[]
+%   \centering
+%   \caption{Gap points of different gammas and percentage differences under different demands}
+% \begin{tabular}{lllllll}
+%   \hline
+%   \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{l|}{\multirow{2}{*}{gap point}} & \multicolumn{5}{l|}{difference under different demands}   \\ 
+%   \cline{3-7} 
+%   \multicolumn{1}{|l|}{}                      & \multicolumn{1}{l|}{}                    & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
+%   \hline
+%   \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\ 
+%   \hline                                    
+%   \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\ 
+%   \hline           
+%   \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\ 
+%   \hline           
+%   \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
+%   \hline          
+%   \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
+%   \hline            
+% \end{tabular}
+% \end{table}
+
 \begin{table}[]
   \centering
-  \caption{Gap points of different gammas and percentage differences under different demands}
-\begin{tabular}{lllllll}
+  \caption{Gap points of different gammas and percentage gaps under different demands}
+\begin{tabular}{llllllll}
   \hline
-  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{l|}{\multirow{2}{*}{gap point}} & \multicolumn{5}{l|}{difference under different demands}   \\ 
-  \cline{3-7} 
-  \multicolumn{1}{|l|}{}                      & \multicolumn{1}{l|}{}                    & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
+  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{|l|}{\multirow{2}{*}{Probability}} & \multicolumn{1}{l|}{\multirow{2}{*}{Gap point}} & \multicolumn{5}{l|}{Percentage gaps under different demands}   \\ 
+  \cline{4-8} 
+  \multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
   \hline
-  \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\ 
+  \multicolumn{1}{|l|}{1.9} & \multicolumn{1}{l|}{[0.4, 0.4, 0.1, 0.1]}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\
+  \hline
+  \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{[0.45, 0.35, 0.05, 0.15]}  & \multicolumn{1}{l|}{[69, 66.0]}  & \multicolumn{1}{l|}{0.42}  & \multicolumn{1}{l|}{5.99}  & \multicolumn{1}{l|}{13.96} & \multicolumn{1}{l|}{22.08} & \multicolumn{1}{l|}{25.26} \\ 
   \hline                                    
-  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\ 
+  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[0.4, 0.2, 0.3, 0.1]} & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\
+  \hline 
+  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[0.35, 0.35, 0.15, 0.15]} & \multicolumn{1}{l|}{[64, 67.12]}  & \multicolumn{1}{l|}{0.22}  & \multicolumn{1}{l|}{3.89}  & \multicolumn{1}{l|}{12.0} & \multicolumn{1}{l|}{19.48} & \multicolumn{1}{l|}{23.96} \\
+  \hline       
+  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[0.3, 0.3, 0.2, 0.2]} & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\
+  \hline
+  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[0.35, 0.25, 0.15, 0.25]} & \multicolumn{1}{l|}{[61, 70.74]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.59}  & \multicolumn{1}{l|}{10.42} & \multicolumn{1}{l|}{17.98} & \multicolumn{1}{l|}{21.34} \\ 
   \hline           
-  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\ 
-  \hline           
-  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
+  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[0.25, 0.25, 0.25, 0.25]} & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
+  \hline
+  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[0.3, 0.2, 0.2, 0.3]} & \multicolumn{1}{l|}{[57, 70.66]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.47}  & \multicolumn{1}{l|}{8.42} & \multicolumn{1}{l|}{16.33} & \multicolumn{1}{l|}{20.42} \\ 
   \hline          
-  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
-  \hline            
+  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[0.2, 0.2, 0.3, 0.3]} & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
+  \hline
+  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[0.25, 0.15, 0.25, 0.35]} & \multicolumn{1}{l|}{[54, 72.62]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.46}  & \multicolumn{1}{l|}{8.17} & \multicolumn{1}{l|}{14.95} & \multicolumn{1}{l|}{19.8} \\ 
+  \hline
 \end{tabular}
 \end{table}
 

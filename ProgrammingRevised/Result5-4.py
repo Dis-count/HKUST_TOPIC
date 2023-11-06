@@ -21,10 +21,11 @@ def withoutSD(sequence, total_seat):
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(30,100,1)
+    # period_range = range(30,100,1)
     given_lines = 10
     # np.random.seed(i)
-    p = [[0.25, 0.25, 0.25, 0.25], [0.2, 0.2, 0.3, 0.3], [0.3, 0.3, 0.2, 0.2], [0.4, 0.2, 0.3, 0.1], [0.4, 0.4, 0.1, 0.1]]
+    # p = [[0.2, 0.2, 0.3, 0.3], [0.25, 0.25, 0.25, 0.25], [0.3, 0.3, 0.2, 0.2], [0.4, 0.2, 0.3, 0.1], [0.4, 0.4, 0.1, 0.1]]
+    p = [[0.45, 0.35, 0.05, 0.15], [0.35, 0.35, 0.15, 0.15], [0.35, 0.25, 0.15, 0.25], [0.3, 0.2, 0.2, 0.3], [0.25, 0.15, 0.25, 0.35]]
     # probab = [0.4, 0.2, 0.3, 0.1]
     #  [0.4, 0.4, 0.1, 0.1]
 
@@ -62,7 +63,6 @@ if __name__ == "__main__":
             for j in range(count):
                 sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
                 sequence1 = copy.deepcopy(sequence)
-                sequence0 = [i-1 for i in sequence]
 
                 g = a_instance.method_new(sequence1, newx4, roll_width)
                 sto += np.dot(multi, g)
@@ -75,6 +75,7 @@ if __name__ == "__main__":
             cnt += 1
         diff = people_value - occup_value
         my_file.write(str(people_value) + '\t' + str(occup_value) + '\n')
+        my_file.write(str(diff) + '\n')
 
     run_time = time.time() - begin_time
     my_file.write('Total Runtime\t %f \n' % run_time)

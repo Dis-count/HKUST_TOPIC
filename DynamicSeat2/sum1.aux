@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -98,12 +101,12 @@
 \newlabel{algo_dynamic_policy}{{3}{17}{Stochastic assignment policy algorithm\relax }{algorithm.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Break Tie for Stochastic Assignment Policy}{17}{subsubsection.5.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {6}Results}{18}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running time of solving SSP and relaxation of SSP with Benders Decomposition}{18}{subsection.6.1}\protected@file@percent }
-\newlabel{Bender_IP}{{6.1}{18}{Running time of solving SSP and relaxation of SSP with Benders Decomposition}{subsection.6.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running time of solving SSP and relaxation of SSP with Benders Decomposition\relax }}{18}{table.caption.2}\protected@file@percent }
-\newlabel{tab_1}{{1}{18}{Running time of solving SSP and relaxation of SSP with Benders Decomposition\relax }{table.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Seat Planning Composed of Full or Largest Patterns versus IP Solution}{18}{subsection.6.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Feasible seat planning versus IP solution\relax }}{19}{table.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Running times of solving SSP and relaxation of SSP with Benders Decomposition}{18}{subsection.6.1}\protected@file@percent }
+\newlabel{Bender_IP}{{6.1}{18}{Running times of solving SSP and relaxation of SSP with Benders Decomposition}{subsection.6.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Running times of solving SSP and relaxation of SSP with Benders Decomposition\relax }}{18}{table.caption.2}\protected@file@percent }
+\newlabel{tab_1}{{1}{18}{Running times of solving SSP and relaxation of SSP with Benders Decomposition\relax }{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Seat Planning From SSP Relaxation versus Seat Planning From SSP}{18}{subsection.6.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Seat planning from SSP relaxation versus seat planning from SSP\relax }}{19}{table.caption.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Performances of Different Policies}{19}{subsection.6.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.1}Bid-price Control}{19}{subsubsection.6.3.1}\protected@file@percent }
 \newlabel{bid-price_dual}{{17}{20}{Bid-price Control}{equation.6.17}{}}
@@ -115,7 +118,7 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.4}First Come First Served(FCFS) Policy}{21}{subsubsection.6.3.4}\protected@file@percent }
 \newlabel{largest_pattern}{{6.3.4}{21}{First Come First Served(FCFS) Policy}{subsubsection.6.3.4}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performances of Different Policies\relax }}{22}{table.caption.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Impact of Implementing Social Distancing in SPP}{22}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Impact of Implementing Social Distancing in SAP}{22}{subsection.6.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.1}Estimation of Gap Point}{23}{subsubsection.6.4.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Gap points and their estimation under 200 probabilities\relax }}{24}{figure.caption.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.4.2}Impact of Social Distancing as Demands Increase}{24}{subsubsection.6.4.2}\protected@file@percent }
@@ -127,7 +130,7 @@
 \newlabel{Fig.lable}{{2}{25}{The occupancy rate over the number of arriving people\relax }{figure.caption.6}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {When $\gamma =2.5$}}}{25}{figure.caption.6}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {When $\gamma =1.9$}}}{25}{figure.caption.6}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Gap points of different gammas and percentage differences under different demands\relax }}{25}{table.caption.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Gap points of different gammas and percentage gaps under different demands\relax }}{25}{table.caption.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{25}{section.7}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refe}

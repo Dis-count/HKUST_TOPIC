@@ -9,7 +9,7 @@ Now suppose the demand of groups is stochastic, the stochastic information can b
 
 Consider the decision makers who give the seat planning based on the scenarios then assign the groups to seats according to the realized true demand. 
 
-The seat planning can be denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{M \times N}$. Let $x_{i,j}$ stand for the number of group type $i$ in row $j$. The supply for group type $i$ can be represented by $\sum_{j=1}^N x_{ij}$.
+The seat planning can be denoted by decision variables $\mathbf{x}\in \mathbb{Z}_{+}^{M \times N}$. Let $x_{ij}$ stand for the number of group type $i$ in row $j$. The supply for group type $i$ can be represented by $\sum_{j=1}^N x_{ij}$.
 Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times |\Omega|}$. Each component of $\mathbf{y}^{+}$, $y_{i}^{\omega(+)}$, represents the number of surplus supply for group type $i$. Similarly, $y_{i}^{\omega(-)}$ represents the number of inadequate supply for group type $i$.
 Considering that the group can take the seats planned for the larger group type, we assume that the surplus seats for group type $i$ can be occupied by smaller group type $j<i$ in the descending order of the group size. That is, for any $\omega$, $i \leq M-1$, $y_{i \omega}^{+}=\left(\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}$ and $y_{i \omega}^{-}=\left(d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+} \right)^{+}$, where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest group type $M$, we have $y_{M \omega}^{+} = (\sum_{j=1}^N x_{ij} - d_{i \omega})^{+}$, $y_{M \omega}^{-} = (d_{i \omega}- \sum_{j=1}^N x_{ij})^{+}$.
 
@@ -287,15 +287,15 @@ To maximize the utilization of seats, we should assign full or largest patterns 
   \end{algorithm}
 
 
-{\bf Step 2} can give a feasible seat planning. {\bf Step 4} can give the full or largest patterns for each row.
+For Algorithm \ref{feasible_seat}, {\bf Step 2} can give a feasible seat planning, {\bf Step 4} can give the full or largest patterns for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. 
+
+% Therefore, any fixed sequence of groups within each pattern can be used to construct a seat planning that meets practical needs.
 
 % Thus, we can obtain a feasible seat planning by solving stochastic programming once and deterministic programming twice.
 
-% 1. Why should we don't use the subset sum problem to decompose the whole problem, it will destroy global optimality. But notice that when we arrange row by row, it may also affect the optimality.
+% 1. Why should not we use the subset sum problem to decompose the whole problem, it will destroy global optimality. But notice that when we arrange row by row, it may also affect the optimality.
 
 % Many symmetry structure/ Every step we need to solve a multiple knapsack problem(difficult).
 
-\begin{remark}
 % We are able to provide an online seat planning by using our method.
-For the integral seat planning, we provide a full or largest pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seat planning that meets practical needs.
-\end{remark}
+

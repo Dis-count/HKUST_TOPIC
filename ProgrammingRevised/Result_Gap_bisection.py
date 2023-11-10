@@ -44,8 +44,8 @@ if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
     given_lines = 10    
-    probab = [[0.45, 0.35, 0.05, 0.15], [0.35, 0.35, 0.15, 0.15], [0.35, 0.25, 0.15, 0.25], [0.3, 0.2, 0.2, 0.3], [0.25, 0.15, 0.25, 0.35]]
-
+    # probab = [[0.45, 0.35, 0.05, 0.15], [0.35, 0.35, 0.15, 0.15], [0.35, 0.25, 0.15, 0.25], [0.3, 0.2, 0.2, 0.3], [0.25, 0.15, 0.25, 0.35]]
+    probab = prop_list()
     begin_time = time.time()
     filename = 'Periods_prop25' + str(time.time()) + '.txt'
     my_file = open(filename, 'w')

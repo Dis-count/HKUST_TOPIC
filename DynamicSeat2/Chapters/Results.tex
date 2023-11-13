@@ -1,108 +1,16 @@
 % !TEX root = sum1.tex
 \section{Results}
-We carried out several experiments, including comparing the running time of decomposition and integer programming, comparing the number of people served using the seat planning and integer programming methods, analyzing different policies, evaluating the impact of implementing social distancing.
+We carried out several experiments, including analyzing different policies, evaluating the impact of implementing social distancing.
 
 % assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
-
-
-\subsection{Running times of solving SSP and relaxation of SSP with Benders Decomposition}\label{Bender_IP}
-% At first, we compare the running time of these two methods. 
-
-The running times of solving SSP directly and solving the LP relaxation of SSP with Benders decomposition are shown in Table \ref{tab_1}.
-
-\begin{table}[ht]
-  \centering
-  \scriptsize
-  \caption{Running times of solving SSP and relaxation of SSP with Benders Decomposition}\label{tab_1}
-  \begin{tabular}{|l|l|l|l|l|l|l|}
-  \hline
-  \# of scenarios & Demands & \# of rows & \# of groups & \# of seats & Running time of IP(s) & Benders (s) \\
-  \hline
-  1000  & (150, 350) & 30 & 8 & (21, 50) & 5.1  & 0.13 \\
-  5000  &            & 30 & 8 &         & 28.73 & 0.47  \\
-  10000 &            & 30 & 8 &         & 66.81  & 0.91 \\
-  50000 &            & 30 & 8 &         & 925.17 & 4.3 \\
-  \hline
-  1000  & (1000, 2000) & 200 & 8 & (21, 50) & 5.88 & 0.29 \\
-  5000  &              & 200 & 8 &          & 30.0 & 0.62 \\
-  10000 &              & 200 & 8 &          & 64.41 & 1.09 \\
-  50000 &              & 200 & 8 &          & 365.57 & 4.56\\
-  \hline
-  1000  & (150, 250) & 30 & 16 & (41, 60) & 17.15  & 0.18 \\
-  5000  &            & 30 & 16 &          & 105.2  & 0.67 \\
-  10000 &            & 30 & 16 &          & 260.88 & 1.28 \\
-  50000 &            & 30 & 16 &          & 3873.16 & 6.18 \\
-  \hline
-  \end{tabular}
-\end{table}
-
-The parameters in the columns of the table are the number of scenarios, the range of demands, running time of SSP, running time of Benders decomposition method, the number of rows, the number of group types and the number of seats for each row, respectively. Take the first experiment as an example, the scenarios of demands are generated from (150, 350) randomly, the number of seats for each row is generated from (21, 50) randomly.
-
-It is evident that the utilization of Benders decomposition can enhance computational efficiency.
-
-% about 1000 seats.
-
-% The second one:
-% The number of seats for each row L is generated from (21, 50) randomly, about 7000 seats.
-% The scenarios of demands are generated from (1000, 2000) randomly.
-
-% The third one:
-% The number of seats for each row L is generated from 41-60 randomly, about 1500 seats.
-% The scenarios of demands are generated from (150, 250) randomly.
-
-\subsection{Seat Planning From SSP Relaxation versus Seat Planning From SSP}
-In this section, we compare the accpected people of seat plannings from SSP relaxation and SSP under group-type control policy.
-
-An arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{i} = \sum_{t} I(y_t = i)$, i.e., the number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{M})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{M} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{M}!} \prod_{i=1}^{M} p_{i}^{N_i}, T = \sum_{i=1}^{M} N_{i}.$$
-
-It is clear that the number of different sequences is $M^{T}$. The number of different scenarios is $O(T^{M-1})$ which can be obtained by the following DP.
-
-Use $D(T, M) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{M} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, M) = \sum_{i= 0}^{T} D(i, M-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,M) = O(T^{M-1})$. The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
-
-Then, we will show these two seat plannings have a close performance when considering group-type control policy.
-
-\begin{table}[ht]
-    \centering
-    \small
-    \caption{Seat planning from SSP relaxation versus seat planning from SSP}
-    \begin{tabular}{|l|l|l|l|l|l|l|}
-    \hline
-    \# samples & T & probabilities & \# rows & people served by SSP relaxation & people served by SSP \\
-    \hline
-    1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 85.30 & 85.3 \\
-    1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & 97.32 & 97.32 \\
-    1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & 102.40 & 102.40  \\ % slow
-    1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & 106.70 & NA  \\
-    1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & 108.84 & 108.84 \\
-    \hline
-    1000  & 35  & [0.25,0.25,0.25,0.25] & 8 & 87.16 & 87.08 \\
-    1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & 101.32 & 101.24 \\
-    1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & 110.62 & 110.52 \\
-    1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & 115.46 & NA \\
-    1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & 117.06 & 117.26 \\
-    \hline
-    5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & 749.76 & 749.76 \\
-    5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & 866.02 & 866.42 \\
-    5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & 889.02 & 889.44 \\
-    5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & 916.16 & 916.66 \\
-    \hline
-    \end{tabular}
-\end{table}
-
-Each entry of people served is the average of 50 instances.
-IP will spend more than 2 hours in some instances, as `NA' showed in the table.
-The number of seats is 20 when the number of rows is 8, the number of seats is 40 when the number of rows is 30.
-
-% We can find that the people served by Benders decomposition and IP under nested policy are close. But obtaining the near-optimal seat assignment will be faster.
-
-% Thus, we can use the near-optimal seat assignment from the decomposition approach.
 
 \subsection{Performances of Different Policies}
 In this section, we compare the performance of four dynamic seat assignment policies to the optimal value, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the stochastic planning policy, DP Base-heuristic, bid-price policy and FCFS policy. The seat layout consists of 10 rows, each with 21 seats (including one dummy seat), and the group size can range up to 4 people. We conducted experiments over 60 to 100 periods to demonstrate the policies' performance under varying demand levels. We selected three probabilities to ensure that the expected number of people for each period is consistent. The table below displays the average of 200 instances for each number.
 
 % dynamic programming based heuristic and booking limit control. Finally, we establish the FCFS policy as the benchmark.
 
-\subsubsection{Bid-price Control}
+{\bf{Bid-price Control}}
+
 Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
 
 The dual problem of LP relaxation of problem \eqref{deter_upper} is:
@@ -137,7 +45,8 @@ The bid-price control policy based on the static model is stated below.
   \end{description}
 \end{algorithm}
 
-\subsubsection{Booking Limit Control}
+{\bf{Booking Limit Control}}
+
 The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
 
 In this policy, we replace the real demand by the expected one and solve the corresponding static problem using the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests. When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
@@ -174,7 +83,8 @@ When we solve problem \eqref{deter_upper} directly, we can develop the booking l
 %   \end{aligned}
 % \end{equation}
 
-\subsubsection{Dynamic Programming Base-heuristic}
+{\bf{Dynamic Programming Base-heuristic}}
+
 Since the original dynamic programming problem is too complex to solve directly, we can instead consider a simplified version of the problem, known as the relaxation problem. By solving the relaxation problem, we can make decisions for each group arrival based on the dynamic programming approach.
 
 % Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. After relaxation, assume that each row has a capacity of $L$ seats, which can be filled. For each seperate row, the maximum number of empty seats in each row is $s$. Then, the total number of empty seats in $N$ rows is given by $Ns$. Therefore, the biggest difference between $v_{r}^{*}$ and $v^{*}$ is the number of people accommodated in the $Ns$ empty seats.
@@ -186,7 +96,8 @@ $$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ 
 
 After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
 
-\subsubsection{First Come First Served(FCFS) Policy}\label{largest_pattern}
+{\bf{First Come First Served (FCFS) Policy}}
+
 For dynamic seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until all rows cannot accommodate any groups.
 
 \begin{table}[ht]
@@ -194,7 +105,7 @@ For dynamic seat assignment for each group arrival, the intuitive but trivial me
   \caption{Performances of Different Policies}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
-   T & probabilities & SSP(\%) & DP1(\%) & Bid-price(\%) & Booking & FCFS(\%) \\
+   T & probabilities & SSP (\%) & DP1 (\%) & Bid-price (\%) & Booking (\%) & FCFS (\%) \\
   \hline
    60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 & 96.74 & 98.17 \\
    70  & [0.25, 0.25, 0.25, 0.25]  & 98.34 & 96.87 & 96.24 & 97.18 & 94.75 \\
@@ -250,9 +161,7 @@ We consider the scenario where the number of group types is limited to 4. In thi
 
 To analyze the relationship between the increment of $\gamma$ and the gap point, we define each combination $(p_1, p_2, p_3, p_4)$ satisfying $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. We conducted an analysis using a sample of 200 probability combinations. The figure below illustrates the gap point as a function of the increment of $\gamma$, along with the corresponding estimations. For each probability combination, we considered 100 instances and plotted the gap point as blue points. Additionally, the occupancy rate at the gap point is represented by red points.
 
-To provide estimations, we utilize the equations $y_1 = \frac{c_1}{\gamma +1}$(blue line in the figure) and $y_2 = c_2 \frac{L}{L-N} \frac{\gamma}{\gamma+1}$(orange line in the figure), which are fitted to the data. These equations capture the relationship between the gap point and the increment of $\gamma$, allowing us to approximate the values. We utilized an Ordinary Least Squares (OLS) model to fit the data and obtain the parameter values. For the first function, we found that $c_1 = 200.0208$, with a standard error of 0.203. For the second function, we obtained $c_2 = 90.9284$, with a standard error of 0.099. The R-square values for both models are 1.000, indicating a perfect fit between the data and the models.
-
-% when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
+To provide estimations, we utilize the equations $y_1 = \frac{c_1 L}{\gamma +1}$(blue line in the figure) and $y_2 = c_2 \frac{\gamma}{\gamma + \delta} \frac{L}{L-N \delta}$(orange line in the figure), which are fitted to the data. These equations capture the relationship between the gap point and the increment of $\gamma$, allowing us to approximate the values. By examining the relation between the gap point and the increment of $\gamma$, we can find that $\gamma$ can be used to estimate gap point.
 
 \begin{figure}[ht]
   \centering
@@ -260,7 +169,29 @@ To provide estimations, we utilize the equations $y_1 = \frac{c_1}{\gamma +1}$(b
   \caption{Gap points and their estimation under 200 probabilities}
 \end{figure}
 
-By examining the relationship between the gap point and the increment of $\gamma$, we can find that $\gamma$ can be used to estimate gap point.
+% For the first function, we found that $c_1 = 200.0208$, with a standard error of 0.203. For the second function, we obtained $c_2 = 90.9284$, with a standard error of 0.099. 
+
+
+The estimation of $c_1$ and $c_2$ can be affected by different seat layouts. To investigate this impact, we conducted several experiments using different seat layouts, specifically with row $\times$ the number of seats configurations set as 1 $\times$ 210, 5 $\times$ 42, and 10 $\times$ 21. We employed an Ordinary Least Squares (OLS) model to fit the data and derive the parameter values. The goodness of fit was assessed using the R-square values, which were found to be 1.000 for all models, indicating a perfect fit between the data and the models.
+
+The results of the estimation of $c_1$ and $c_2$ are presented in the table below:
+
+\begin{table}[ht]
+  \centering
+  \caption{Estimation of $c_1$ and $c_2$}
+  \begin{tabular}{|c|c|c|}
+  \hline
+   Seat layout(row $\times$ \# of seats) & Estimation of $c_1$ & Estimation of $c_2$  \\
+  \hline
+   1 $\times$ 210 & 0.9569 & 95.997 \\
+   5 $\times$ 42 & 0.9547 & 95.709 \\
+   10 $\times$ 21 & 0.9525 & 95.475 \\
+   \hline
+  \end{tabular}
+\end{table}
+
+% when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
+
 
 \subsubsection{Impact of Social Distancing as Demands Increase}
 Now, we consider impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. We set the parameters as follows: $T$ varies from 30 to 120, the step size is 1.  The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
@@ -337,8 +268,29 @@ The table below presents the gap points and the percentage gaps for different de
 \end{tabular}
 \end{table}
 
-According to Lemma \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted.
+According to Proposition \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted.
 
+
+\begin{table}[]
+  \centering
+\begin{tabular}{llllllll}
+  \hline
+  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{|l|}{\multirow{2}{*}{Probability}} & \multicolumn{1}{l|}{\multirow{2}{*}{Gap point}} & \multicolumn{5}{l|}{Percentage gaps under different demands}   \\ 
+  \cline{4-8} 
+  \multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
+  \hline
+  \multicolumn{1}{|l|}{1.9} & \multicolumn{1}{l|}{[0.4, 0.4, 0.1, 0.1]}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{[0.25, 0.42]}  & \multicolumn{1}{l|}{[5.82, 5.99]}  & \multicolumn{1}{l|}{[12.82, 13.96]} & \multicolumn{1}{l|}{[20.38, 22.08]} & \multicolumn{1}{l|}{[24.56, 25.26]} \\
+  \hline                                    
+  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[0.4, 0.2, 0.3, 0.1]} & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{[0.05,0.22]}  & \multicolumn{1}{l|}{[3.89, 4.11]}  & \multicolumn{1}{l|}{[11.51, 12.0]} & \multicolumn{1}{l|}{[18.77, 19.48]} & \multicolumn{1}{l|}{[21.87, 23.96]} \\
+  \hline        
+  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[0.3, 0.3, 0.2, 0.2]} & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{[0,0]}  & \multicolumn{1}{l|}{[2.29, 2.59]}  & \multicolumn{1}{l|}{[10.21, 10.42]} & \multicolumn{1}{l|}{[17.36, 17.98]} & \multicolumn{1}{l|}{[21.16, 21.34]} \\
+  \hline      
+  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[0.25, 0.25, 0.25, 0.25]} & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{[0, 0]}  & \multicolumn{1}{l|}{[1.45, 1.47]}  & \multicolumn{1}{l|}{[8.42, 9.30]} & \multicolumn{1}{l|}{[15.78, 16.33]} & \multicolumn{1}{l|}{[19.80, 20.42]} \\ 
+  \hline
+  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[0.2, 0.2, 0.3, 0.3]} & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{[0,0]}  & \multicolumn{1}{l|}{[1.38, 1.46]}  & \multicolumn{1}{l|}{[7.39, 8.17]} & \multicolumn{1}{l|}{[14.91, 14.95]} & \multicolumn{1}{l|}{[19.14, 19.8]} \\ 
+  \hline
+\end{tabular}
+\end{table}
 
 % \subsection{Comparison of Different Probabilities When Supply and Demand Are Close}
 % When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities.

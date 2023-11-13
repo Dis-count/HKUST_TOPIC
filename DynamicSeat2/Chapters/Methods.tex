@@ -1,6 +1,6 @@
 % !TEX root = sum1.tex
 \section{Dynamic Seat Assignment Based on Stochastic Assignment Policy}
-In this section, we discuss dynamic seat assignment based on stochastic assignment policy(SAP). Recall that our decision-making process involves not only determining whether to accept or reject an arrival but also selecting the specific row for seat assignment if we decide to accept the group.First, we will present the dynamic seat assignment based on stochastic assignment policy, which incorporates group-type control to optimize resource utilization.
+In this section, we discuss dynamic seat assignment based on stochastic assignment policy (SAP). Recall that our decision-making process involves not only determining whether to accept or reject an arrival but also selecting the specific row for seat assignment if we decide to accept the group.First, we will present the dynamic seat assignment based on stochastic assignment policy, which incorporates group-type control to optimize resource utilization.
 
 We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
@@ -26,7 +26,7 @@ Group-type policy can only tell us which group-type supply will be provided for 
 % According to the pattern instead of placing it when the capacity is sufficient.
 
 \subsection{Value of Stochastic Programming}
-After we determine the larger group to assign the arriving group, we need to compare the objective values of stochastic programming when accepting or rejecting this group to make a decision. For the objective values of stochastic programming, we need to consider the potential outcomes that could result from accepting the current arrival, i.e., the Value of Acceptance(VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection(VoR).
+After we determine the larger group to assign the arriving group, we need to compare the objective values of stochastic programming when accepting or rejecting this group to make a decision. For the objective values of stochastic programming, we need to consider the potential outcomes that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR).
 
 The VoA considers the scenarios that could arise if we accept the current arrival, while the VoR considers the same scenarios if we reject it. By comparing the VoA and the VoR, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made. 
 

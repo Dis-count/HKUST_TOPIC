@@ -61,7 +61,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    given_lines = 5
+    given_lines = 1
     probab = prop_all()
     all_number = len(probab)
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    for i in range(21):
+    for i in range(200):
         print(i)
         ran_prop = random.randint(0, all_number-1)
         p = probab[ran_prop]
@@ -80,7 +80,7 @@ if __name__ == "__main__":
         num_period = int((a+b)/2)
         while num_period > a:
             # roll_width = np.ones(given_lines) * 21
-            roll_width = np.array([42, 42, 42, 42, 42])
+            roll_width = np.array([210])
             total_seat = np.sum(roll_width)
             # total_seat = np.sum(roll_width) - given_lines
             a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample)
@@ -89,7 +89,7 @@ if __name__ == "__main__":
             accept_people = 0
 
             multi = np.arange(1, I+1)
-            count = 50
+            count = 100
             for j in range(count):
                 sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
                 sequence1 = copy.deepcopy(sequence)

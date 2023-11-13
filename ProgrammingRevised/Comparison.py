@@ -329,6 +329,36 @@ class CompareMethods:
         for num, j in enumerate(sequence):
             newd = np.sum(newx, axis=0)
             remaining_period = periods - num
+
+            if newd[-1] == 0:
+                without_max = copy.deepcopy(change_roll)
+                sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
+                dw_without, prop_without = sam_multi.accept_sample(j)
+                W_without = len(dw_without)
+                m_without = stochasticModel(without_max, self.given_lines,
+                                        self.demand_width_array, W_without, self.I, prop_without, dw_without)
+                ini_demand_without, _ = m_without.solveBenders(eps=1e-4, maxit=20)
+                deterModel = deterministicModel(without_max, self.given_lines, self.demand_width_array, self.I)
+                ini_demand1 = np.ceil(ini_demand_without)
+                ini_demand2, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
+                ini_demand1, newx = deterModel.IP_formulation(ini_demand2, np.zeros(self.I))
+
+                for new_num, new_i in enumerate(newx.T):
+                    occu = np.dot(new_i, self.demand_width_array)
+                    if occu < without_max[new_num]:
+                        for d_num, d_i in enumerate(new_i):
+                            if d_i > 0 and d_num + self.s >= self.I-1:
+                                new_i[d_num] -= 1
+                                new_i[self.I-1] += 1
+                                break
+                            elif d_i > 0:
+                                new_i[d_num] -= 1
+                                new_i[d_num + self.s] += 1
+                                break
+
+                newx = newx.T.tolist()
+                newd = np.sum(newx, axis=0)
+
             if newd[j-2] > 0:
                 mylist.append(1)
                 for k, pattern in enumerate(newx):
@@ -366,9 +396,7 @@ class CompareMethods:
                                     change_roll[jj] -= (Indi_Demand+2)
                                     break
                     change_accept = copy.deepcopy(change_roll)
-                    if (change_accept < 0).any() or (change_deny < 0).any():
-                        print(f'seq: {sequence}')
-                        print(f'new: {newx}')
+
                     sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
 
                     dw_acc, prop_acc = sam_multi.accept_sample(sequence[-remaining_period:][0])
@@ -431,7 +459,6 @@ class CompareMethods:
                     mylist.append(0)
 
         sequence = [i-1 for i in sequence]
-
         final_demand = np.array(sequence) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
 
@@ -505,24 +532,24 @@ class CompareMethods:
 
 
 if __name__ == "__main__":
-    given_lines = 10
-    roll_width = np.ones(given_lines) * 21
-    num_period = 90
+    given_lines = 1
+    # roll_width = np.ones(given_lines) * 21
+    roll_width = np.array([210])
+    num_period = 52
     I = 4
-    probab = np.array([0.25, 0.25, 0.25, 0.25])
+    probab = np.array([0.1, 0.4, 0.2, 0.3])
 
     num_sample = 1000
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
     sequence, ini_demand, ini_demand3, newx3, newx4 = a.random_generate()
-    
+
+    sequence = [4, 4, 3, 4, 2, 5, 3, 5, 4, 5, 5, 5, 5, 5, 3, 5, 4, 3, 3, 3, 3, 4, 5, 4,
+                3, 5, 3, 2, 5, 4, 4, 3, 4, 5, 4, 3, 5, 5, 3, 5, 5, 3, 5, 5, 3, 3, 5, 5, 5, 5, 3, 2]
     new = a.method_new(sequence, newx4, roll_width)
-    new1 = a.method_IP(sequence, newx3, roll_width)
-    bid = a.bid_price(sequence)
+
     multi = np.arange(1,1+I)
     new_value = np.dot(multi, new)
-    new_value1 = np.dot(multi, new1)
-    bid_value = np.dot(multi, bid)
-    print(f'sto: {new_value}')
-    print(f'mean: {new_value1}')
-    print(f'bid: {bid_value}')
 
+    print(f'sto: {new_value}')
+
+#  

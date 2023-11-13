@@ -1,6 +1,102 @@
-% !TEX root = sum1.tex
+!TEX root = sum1.tex
 
-% \section{Extension}
+\section{Other Results}
+
+% comparing the running time of decomposition and integer programming, comparing the number of people served using the seat planning and integer programming methods,
+
+\subsection{Running times of solving SSP and relaxation of SSP with Benders Decomposition}\label{Bender_IP}
+% At first, we compare the running time of these two methods. 
+
+The running times of solving SSP directly and solving the LP relaxation of SSP with Benders decomposition are shown in Table \ref{tab_1}.
+
+\begin{table}[ht]
+  \centering
+  \scriptsize
+  \caption{Running times of solving SSP and relaxation of SSP with Benders Decomposition}\label{tab_1}
+  \begin{tabular}{|l|l|l|l|l|l|l|}
+  \hline
+  \# of scenarios & Demands & \# of rows & \# of groups & \# of seats & Running time of IP(s) & Benders (s) \\
+  \hline
+  1000  & (150, 350) & 30 & 8 & (21, 50) & 5.1  & 0.13 \\
+  5000  &            & 30 & 8 &         & 28.73 & 0.47  \\
+  10000 &            & 30 & 8 &         & 66.81  & 0.91 \\
+  50000 &            & 30 & 8 &         & 925.17 & 4.3 \\
+  \hline
+  1000  & (1000, 2000) & 200 & 8 & (21, 50) & 5.88 & 0.29 \\
+  5000  &              & 200 & 8 &          & 30.0 & 0.62 \\
+  10000 &              & 200 & 8 &          & 64.41 & 1.09 \\
+  50000 &              & 200 & 8 &          & 365.57 & 4.56\\
+  \hline
+  1000  & (150, 250) & 30 & 16 & (41, 60) & 17.15  & 0.18 \\
+  5000  &            & 30 & 16 &          & 105.2  & 0.67 \\
+  10000 &            & 30 & 16 &          & 260.88 & 1.28 \\
+  50000 &            & 30 & 16 &          & 3873.16 & 6.18 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+The parameters in the columns of the table are the number of scenarios, the range of demands, running time of SSP, running time of Benders decomposition method, the number of rows, the number of group types and the number of seats for each row, respectively. Take the first experiment as an example, the scenarios of demands are generated from (150, 350) randomly, the number of seats for each row is generated from (21, 50) randomly.
+
+It is evident that the utilization of Benders decomposition can enhance computational efficiency.
+
+% about 1000 seats.
+
+% The second one:
+% The number of seats for each row L is generated from (21, 50) randomly, about 7000 seats.
+% The scenarios of demands are generated from (1000, 2000) randomly.
+
+% The third one:
+% The number of seats for each row L is generated from 41-60 randomly, about 1500 seats.
+% The scenarios of demands are generated from (150, 250) randomly.
+
+\subsection{Seat Planning From SSP Relaxation versus Seat Planning From SSP}
+In this section, we compare the accpected people of seat plannings from SSP relaxation and SSP under group-type control policy.
+
+An arrival sequence can be expressed as $\{y_{1}, y_{2}, \ldots, y_{T}\}$. Let $N_{i} = \sum_{t} I(y_t = i)$, i.e., the number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_{M})$, follow a multinomial distribution, $$p\left(N_1, \ldots, N_{M} \mid \mathbf{p}\right)=\frac{T !}{N_{1}!, \ldots, N_{M}!} \prod_{i=1}^{M} p_{i}^{N_i}, T = \sum_{i=1}^{M} N_{i}.$$
+
+It is clear that the number of different sequences is $M^{T}$. The number of different scenarios is $O(T^{M-1})$ which can be obtained by the following DP.
+
+Use $D(T, M) $ to denote the number of scenarios, which equals the number of different solutions to $x_{1}+\ldots + x_{M} = T, \mathbf{x} \geq 0$. Then, we know the recurrence relation $D(T, M) = \sum_{i= 0}^{T} D(i, M-1)$ and boundary condition, $D(i,1) = 1$. So we have $D(T,2) = T+1$, $D(T,3) = \frac{(T+2)(T+1)}{2}, D(T,M) = O(T^{M-1})$. The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
+
+Then, we will show these two seat plannings have a close performance when considering group-type control policy.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \caption{Seat planning from SSP relaxation versus seat planning from SSP}
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+    \hline
+    \# samples & T & probabilities & \# rows & people served by SSP relaxation & people served by SSP \\
+    \hline
+    1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 85.30 & 85.3 \\
+    1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & 97.32 & 97.32 \\
+    1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & 102.40 & 102.40  \\ % slow
+    1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & 106.70 & NA  \\
+    1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & 108.84 & 108.84 \\
+    \hline
+    1000  & 35  & [0.25,0.25,0.25,0.25] & 8 & 87.16 & 87.08 \\
+    1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & 101.32 & 101.24 \\
+    1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & 110.62 & 110.52 \\
+    1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & 115.46 & NA \\
+    1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & 117.06 & 117.26 \\
+    \hline
+    5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & 749.76 & 749.76 \\
+    5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & 866.02 & 866.42 \\
+    5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & 889.02 & 889.44 \\
+    5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & 916.16 & 916.66 \\
+    \hline
+    \end{tabular}
+\end{table}
+
+Each entry of people served is the average of 50 instances.
+IP will spend more than 2 hours in some instances, as `NA' showed in the table.
+The number of seats is 20 when the number of rows is 8, the number of seats is 40 when the number of rows is 30.
+
+% We can find that the people served by Benders decomposition and IP under nested policy are close. But obtaining the near-optimal seat assignment will be faster.
+
+% Thus, we can use the near-optimal seat assignment from the decomposition approach.
+
+% --------------------------------------------------
 
 % \subsection{Seat Planning Charts Online}
 % We are able to provide an online seat planning solution using our method. For a feasible seating arrangement, we provide a pattern for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. Therefore, any fixed sequence of groups within each pattern can be used to construct a seating plan that meets practical needs.

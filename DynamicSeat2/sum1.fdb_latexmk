@@ -1,21 +1,21 @@
 # Fdb version 3
-["bibtex sum1"] 1699858739 "sum1.aux" "sum1.bbl" "sum1" 1699858741
+["bibtex sum1"] 1699858739 "sum1.aux" "sum1.bbl" "sum1" 1699929727
   "c:/texlive/2022/texmf-dist/bibtex/bst/base/plain.bst" 1655131109 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "refe.bib" 1688379002 13635 9c377f91590797706262154edf3de412 ""
-  "sum1.aux" 1699858740 12472 51ff500ea6ddd8f251467da6b578d58e "pdflatex"
+  "sum1.aux" 1699929727 12472 51ff500ea6ddd8f251467da6b578d58e "pdflatex"
   (generated)
   "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1699858739 "c:/Github/HKUST_TOPIC/DynamicSeat2/sum1.tex" "sum1.pdf" "sum1" 1699858741
+["pdflatex"] 1699929725 "c:/Github/HKUST_TOPIC/DynamicSeat2/sum1.tex" "sum1.pdf" "sum1" 1699929727
   "Chapters/Abstract.tex" 1699253382 1143 edc279a6a6c73884a8960dc989831f0f ""
-  "Chapters/Appendix_proof.tex" 1699858734 8778 79bbff830e97386bbec76f1a51e28977 ""
+  "Chapters/Appendix_proof.tex" 1699929697 7942 40c963847ea102e998b5d67bcb190942 ""
   "Chapters/Conclusion.tex" 1698648972 5931 b77d4c7ee6d8ed04c1d5be0f5faa0bd6 ""
   "Chapters/Extension.tex" 1699858688 12948 2551a06869427d68fac19f5f4db7dc0f ""
   "Chapters/Introduction.tex" 1699253382 11609 e44feb0ebe3c9e7a4dd5228bd7baaa92 ""
   "Chapters/Literature-review.tex" 1693203023 11602 4bc9b431a7ce1fc9f8d272a0113e79d7 ""
   "Chapters/Methods.tex" 1699858688 15483 84f540de71581a9126fa7777bc33fe4c ""
   "Chapters/Problem-description.tex" 1699858688 14721 9edee749dce6da9ae0b8bf96dcd44497 ""
-  "Chapters/Results.tex" 1699858688 38116 9d8425c12ec43800c5647167f1c7f4f6 ""
+  "Chapters/Results.tex" 1699929724 38954 da39aeebebc8abc5da5efbd628c5bfd0 ""
   "Chapters/Stochastic-form.tex" 1699858688 27307 72277b3452dbacbb10d5be944a58f219 ""
   "Figures/gamma_estimation.pdf" 1694414518 18173 3df6f040bd5e59190ea6ccab0e16f06e ""
   "Figures/p1.pdf" 1695019443 15828 79da640441bad17c02b913b517cdadb5 ""
@@ -172,9 +172,9 @@
   "c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1655133700 4628057 1230c9ff463314e58cdc6fb8d990e1df ""
   "c:/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1655133851 2864036 5058cbe5a7ce3f6410406be02aec448e ""
   "c:/texlive/2022/texmf.cnf" 1655133674 713 e69b156964470283e0530f5060668171 ""
-  "sum1.aux" 1699858740 12472 51ff500ea6ddd8f251467da6b578d58e "pdflatex"
+  "sum1.aux" 1699929727 12472 51ff500ea6ddd8f251467da6b578d58e "pdflatex"
   "sum1.bbl" 1699858739 7331 63abb2c252ba635ec995f3847f1f0320 "bibtex sum1"
-  "sum1.out" 1699858741 6659 c4991bdf4d0910284e7cda5874e6a260 "pdflatex"
+  "sum1.out" 1699929727 6659 c4991bdf4d0910284e7cda5874e6a260 "pdflatex"
   "sum1.tex" 1699858688 1986 1956cb92d107f8aa6534335659317375 ""
   (generated)
   "sum1.aux"

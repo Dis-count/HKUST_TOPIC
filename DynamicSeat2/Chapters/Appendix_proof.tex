@@ -81,6 +81,4 @@ Suppose the loss is not the smallest, there exists one pattern with a loss of $p
 
 % The objective funtion: $V_{1} = \sum_{t=1}^{T} (V_{t} - V_{t+1}) = \sum_{i} d_{i} z_{i} + \sum_{j}^{N} L_{j} \beta_j$.
 
-
-% To find such a first period, we aim to find the maximum period such that we could assign all the groups during these periods into the seats, i.e., for each group type $i$, we have $\sum_{j} x_{ij} \geq d_i$, where $x_{ij}$ is the number of group type $i$ in row $j$. Meanwhile, we have the capacity constraint $\sum_{i} n_{i} x_{ij} \leq L_j$, thus, $\sum_{i} n_i d_i \leq \sum_{i} n_i \sum_{j} x_{ij} \leq \sum_{j} L_{j}$. Notice that $E(d_i) = p_i T$, we have $\sum_{i} n_i p_i T \leq \sum_{j} L_{j}$ by taking the expectation. Let $L = \sum_{j} L_{j}$, representing the total number of seats, $\gamma = \sum_{i} i p_i$, representing the average number of people who arrive in each period, we can obtain $T \leq \frac{L}{\gamma + \delta}$, then the upper bound of the expected maximum period is $T' = \frac{L}{\gamma + \delta}$.
 \newpage

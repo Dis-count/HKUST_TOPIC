@@ -102,7 +102,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y} = \mathbf{d}_{\omega} \\
      & \mathbf{y} \geq 0.
   \end{aligned}
-  \end{equation}
+\end{equation}
 
 % The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$. 
 Problem \eqref{BD_sub} stands for the subproblem and $z_{\omega}(\mathbf{x})$ is the optimal value of problem \eqref{BD_sub}, together with the convention $z_{\omega}(\mathbf{x}) = \infty$ if the problem is infeasible.
@@ -111,21 +111,20 @@ Problem \eqref{BD_sub} stands for the subproblem and $z_{\omega}(\mathbf{x})$ is
 At first, we generate a closed-form solution to problem \eqref{BD_sub}. Then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Based on the solution, we obtain a seat planning by deterministic model. Finally, we construct an integral seat planning composed of full or largest patterns.
 
 \subsubsection{Solve The Subproblem}\label{second_stage}
+Consider a $\mathbf{x}$ such that $\mathbf{n x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents the seat planning. 
 
-Consider a $\mathbf{x}$ such that $\mathbf{n x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents the seat planning. Once $\mathbf{x}$ is fixed, the optimal decisions $\mathbf{y}_{\omega}$ can be determined by solving problem \eqref{BD_sub} for each $\omega$.
+% To solve this problem, we should only consider that $\mathbf{x}$ for which $z_{\omega}(\mathbf{x})$ are all finite.
 
-% To solve this problem, we should only consider that $\mathbf{x}$ for which $z_{\omega}(\mathbf{x})$ are all finite. 
-Notice that the feasible region of the dual of problem \eqref{BD_sub} does not depend on $\mathbf{x}$. Let $\bm{\alpha}$ be the vector of dual variable. For each $\omega$, we can form its dual problem, which is 
+Once $\mathbf{x}$ is fixed, the optimal decisions $\mathbf{y}_{\omega}$ can be determined by solving problem \eqref{BD_sub} for each $\omega$.  Let $\bm{\alpha}$ be the vector of dual variable. For each $\omega$, we can form its dual problem, which is 
 
 \begin{equation}\label{BD_sub_dual}
   \begin{aligned}
     \min \quad & \bm{\alpha}^{\intercal} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
     \text {s.t.} \quad & \bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}
   \end{aligned}
-  \end{equation}
+\end{equation}
 
-Let $\mathbb{P} = \{\bm{\alpha} \in \mathbb{R}^{M}|\bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$. 
-We assume that $\mathbb{P}$ is nonempty and has at least one extreme point. Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
+Let $\mathbb{P} = \{\bm{\alpha} \in \mathbb{R}^{M}|\bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$. We assume that $\mathbb{P}$ is nonempty and has at least one extreme point. Notice that the feasible region of the dual of problem \eqref{BD_sub} does not depend on $\mathbf{x}$. Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
 
 Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$ and $\mathcal{F}$ be the set of all extreme rays of $\mathbb{P}$. 
 

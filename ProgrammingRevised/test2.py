@@ -5,7 +5,7 @@ import statsmodels.api as sm
 
 data = [[0 for i in range(2)] for j in range(200)]
 
-with open("Periods_1row.txt", 'r') as f:
+with open("Periods_1.txt", 'r') as f:
     lines = f.readlines()[1:]
     cnt = 0
     for line in lines:
@@ -32,12 +32,12 @@ def gamma(data):
 
 result = gamma(data)
 
-plt.scatter(result[:, 0], result[:, 1], c="blue")
-plt.scatter(result[:, 0], result[:, 2], c="red")
+# plt.scatter(result[:, 0], result[:, 1], c="blue")
+# plt.scatter(result[:, 0], result[:, 2], c="red")
 
-x = np.arange(1.2, 3.5, 0.01)
-y1 = 200.9392 /(x+1)
-y2 = 95.9972 * x/(x+1)
+# x = np.arange(1.2, 3.5, 0.01)
+# y1 = 200.9392 /(x+1)
+# y2 = 95.9972 * x/(x+1)
 
 # 200.02
 # 95.475
@@ -48,37 +48,37 @@ y2 = 95.9972 * x/(x+1)
 # 200.9392
 # 95.9972
 
-plt.plot(x, y1, label="Blue_estimated")
-plt.plot(x, y2, label="Red_estimated")
+# plt.plot(x, y1, label="Blue_estimated")
+# plt.plot(x, y2, label="Red_estimated")
 
-plt.xlabel('Gamma')
-plt.ylabel('Percentage of total seats/Periods')
+# plt.xlabel('Gamma')
+# plt.ylabel('Percentage of total seats/Periods')
 
-plt.legend()
-plt.show()
+# plt.legend()
+# plt.show()
 
 
 #  根据已有数据拟合 + 画出拟合之后的图
 #  Result 6-3
 
-# data_x = result[:, 0]
+data_x = result[:, 0]
 
 
-# data_x1 = 1/(data_x+1)
-# data_y1 = result[:, 1]
+data_x1 = 1/(data_x+1)
+data_y1 = result[:, 1]
 
-# data_x2 = data_x/(data_x+1)
-# data_y2 = result[:, 2]
+data_x2 = data_x/(data_x+1)
+data_y2 = result[:, 2]
 
 # mod = sm.OLS(data_y, sm.add_constant(data_x2))  # 需要用sm.add_constant 手动添加截距项
 
 
-# mod = sm.OLS(data_y1, data_x1)  # 无截距项
+mod = sm.OLS(data_y1, data_x1)  # 无截距项
 
 # mod = sm.OLS(data_y2, data_x2)
 
-# res = mod.fit()
-# print(res.summary())
+res = mod.fit()
+print(res.summary())
 
 
 

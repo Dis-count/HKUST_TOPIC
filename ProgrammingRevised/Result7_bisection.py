@@ -61,7 +61,7 @@ def prop_list1():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    given_lines = 1
+    given_lines = 10
     probab = prop_all()
     all_number = len(probab)
 
@@ -79,8 +79,8 @@ if __name__ == "__main__":
         b = 90
         num_period = int((a+b)/2)
         while num_period > a:
-            # roll_width = np.ones(given_lines) * 21
-            roll_width = np.array([210])
+            roll_width = np.ones(given_lines) * 21
+            # roll_width = np.array([210])
             total_seat = np.sum(roll_width)
             # total_seat = np.sum(roll_width) - given_lines
             a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample)

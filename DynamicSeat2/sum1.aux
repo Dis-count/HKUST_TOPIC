@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -67,8 +70,8 @@
 \newlabel{BD_sub}{{9}{11}{Scenario-based Stochastic Programming (SSP) Formulation}{equation.4.9}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve SSP by Benders Decomposition}{11}{subsection.4.2}\protected@file@percent }
 \newlabel{solve_by_benders}{{4.2}{11}{Solve SSP by Benders Decomposition}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Solve The Subproblem}{12}{subsubsection.4.2.1}\protected@file@percent }
-\newlabel{second_stage}{{4.2.1}{12}{Solve The Subproblem}{subsubsection.4.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Solve The Subproblem}{11}{subsubsection.4.2.1}\protected@file@percent }
+\newlabel{second_stage}{{4.2.1}{11}{Solve The Subproblem}{subsubsection.4.2.1}{}}
 \newlabel{BD_sub_dual}{{10}{12}{Solve The Subproblem}{equation.4.10}{}}
 \newlabel{feasible_region}{{3}{12}{}{prop.3}{}}
 \newlabel{coro_1}{{1}{12}{}{corollary.1}{}}
@@ -80,7 +83,7 @@
 \newlabel{BD_master2}{{13}{13}{Delayed Constraint Generation}{equation.4.13}{}}
 \newlabel{one_ep_feasible}{{5}{13}{}{prop.5}{}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{cut_algo}{{\caption@xref {cut_algo}{ on input line 218}}{13}{Delayed Constraint Generation}{prop.5}{}}
+\newlabel{cut_algo}{{\caption@xref {cut_algo}{ on input line 217}}{13}{Delayed Constraint Generation}{prop.5}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The benders decomposition algorithm\relax }}{13}{algorithm.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Obtain The Seat Planning Composed of Full or Largest Patterns}{14}{subsection.4.3}\protected@file@percent }
 \newlabel{seat_assignment}{{4.3}{14}{Obtain The Seat Planning Composed of Full or Largest Patterns}{subsection.4.3}{}}

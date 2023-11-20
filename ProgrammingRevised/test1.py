@@ -64,19 +64,19 @@ result = gamma(data)
 # data_x = result[40:60, 0]
 data_x = result[60:80, 0]
 
-# data_x1 = 1/(data_x+1)
-# data_y1 = result[0:20, 1]
+data_x1 = 310/(data_x+1)
+data_y1 = result[60:80, 1]
 # data_y1 = result[60:80, 1]
 
-data_x2 = data_x/(data_x+1)
-data_y2 = result[60:80, 2]
+# data_x2 = data_x/(data_x+1)
+# data_y2 = result[60:80, 2]
 
 # mod = sm.OLS(data_y, sm.add_constant(data_x2))  # 需要用sm.add_constant 手动添加截距项
 
 
-# mod = sm.OLS(data_y1, data_x1)  # 无截距项
+mod = sm.OLS(data_y1, data_x1)  # 无截距项
 
-mod = sm.OLS(data_y2, data_x2)
+# mod = sm.OLS(data_y2, data_x2)
 
 res = mod.fit()
 print(res.summary())

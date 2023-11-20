@@ -105,17 +105,18 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 \end{equation}
 
 % The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$. 
-Problem \eqref{BD_sub} stands for the subproblem and $z_{\omega}(\mathbf{x})$ is the optimal value of problem \eqref{BD_sub}, together with the convention $z_{\omega}(\mathbf{x}) = \infty$ if the problem is infeasible.
+Problem \eqref{BD_sub} stands for the subproblem and $z_{\omega}(\mathbf{x})$ is the optimal value.
+% together with the convention $z_{\omega}(\mathbf{x}) = \infty$ if the problem is infeasible.
 
 \subsection{Solve SSP by Benders Decomposition}\label{solve_by_benders}
-At first, we generate a closed-form solution to problem \eqref{BD_sub}. Then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Based on the solution, we obtain a seat planning by deterministic model. Finally, we construct an integral seat planning composed of full or largest patterns.
+To solve SSP, we generate a closed-form solution to problem \eqref{BD_sub} firstly. Then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Based on the solution, we obtain a seat planning by deterministic model. Finally, we construct an integral seat planning composed of full or largest patterns.
 
 \subsubsection{Solve The Subproblem}\label{second_stage}
-Consider a $\mathbf{x}$ such that $\mathbf{n x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents the seat planning. 
+% Consider a $\mathbf{x}$ such that $\mathbf{n x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents the seat planning. 
 
 % To solve this problem, we should only consider that $\mathbf{x}$ for which $z_{\omega}(\mathbf{x})$ are all finite.
 
-Once $\mathbf{x}$ is fixed, the optimal decisions $\mathbf{y}_{\omega}$ can be determined by solving problem \eqref{BD_sub} for each $\omega$.  Let $\bm{\alpha}$ be the vector of dual variable. For each $\omega$, we can form its dual problem, which is 
+Notice that the feasible region of the dual problem \eqref{BD_sub} remains unaffected by the variable $\mathbf{x}$. This observation provides insight into the properties of this problem. Let $\bm{\alpha}$ denote the vector of dual variables. For each $\omega$, we can form its dual problem, which is 
 
 \begin{equation}\label{BD_sub_dual}
   \begin{aligned}
@@ -124,20 +125,32 @@ Once $\mathbf{x}$ is fixed, the optimal decisions $\mathbf{y}_{\omega}$ can be d
   \end{aligned}
 \end{equation}
 
-Let $\mathbb{P} = \{\bm{\alpha} \in \mathbb{R}^{M}|\bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$. We assume that $\mathbb{P}$ is nonempty and has at least one extreme point. Notice that the feasible region of the dual of problem \eqref{BD_sub} does not depend on $\mathbf{x}$. Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
 
-Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$ and $\mathcal{F}$ be the set of all extreme rays of $\mathbb{P}$. 
+\begin{lem}\label{feasible_region}
+  Let $\mathbb{P} = \{\bm{\alpha} \in \mathbb{R}^{M}|\bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$. The feasible region of problem \eqref{BD_sub_dual}, $\mathbb{P}$, is bounded. In addition, all the extreme points of $\mathbb{P}$ are integral.
+\end{lem}
+
+% We assume that $\mathbb{P}$ is nonempty and has at least one extreme point.  Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
+
+According to Lemma \ref{feasible_region}, the feasible region $\mathbb{P}$ does not contain extreme rays, thus the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite. Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$, we have the following corollary.
+
+\begin{corollary}\label{coro_1}
+  The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(\mathbf{x})$, is finite and will be attained at extreme points of the set $P$. That is, we have $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha} \in \mathcal{O}} \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
+\end{corollary}
+
+Since the optimal value of problem \eqref{BD_sub} can be represented as $\min_{\bm{\alpha} \in \mathcal{O}} \bm{\alpha}^{\intercal}(\mathbf{d}{\omega}- \mathbf{x} \mathbf{1})$. Let us define $z{\omega}$ as the lower bound of $z_{\omega}(x)$. Problem \eqref{BD_master} can thus be expressed as follows:
+
+\begin{equation}\label{BD_master2}
+  \begin{aligned}
+    \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+    \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+    & \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}, \forall \omega \\
+     & \mathbf{x} \in \mathbb{Z}_{+}, z_{\omega} ~\text{is free}
+  \end{aligned}
+\end{equation}
 
 % Then $z_{\omega}(\mathbf{x}) > -\infty$ if and only if $\bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq 0, \bm{\alpha} \in \mathcal{F}$, which stands for the feasibility cut.
 
-\begin{definition}
-  Feasibility cut: $\bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq 0, \bm{\alpha} \in \mathcal{F}$ when $z_{\omega}(\mathbf{x}) > -\infty$.
-  Optimality cut: $\bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}$, where $z_{\omega}$ is the lower bound of $z_{\omega}(x)$.
-\end{definition}
-
-\begin{prop}\label{feasible_region}
-  The feasible region of problem \eqref{BD_sub_dual}, $\mathbb{P}$, is bounded. In addition, all the extreme points of $\mathbb{P}$ are integral.
-\end{prop}
 
 % Because the feasible region is bounded, then feasibility cuts are not needed. Let $z_{\omega}$ be the lower bound of $z_{\omega}(x)$ such that $\bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}$, which is the optimality cut.
 
@@ -145,11 +158,11 @@ Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$ and $\mathcal
 %   Only the optimality cuts, $\alpha^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, will be included in the decomposition approach.
 % \end{corollary}
 
-\begin{corollary}\label{coro_1}
-The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(\mathbf{x})$, is finite and will be attained at extreme points of the set $P$. Thus, we have $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha} \in \mathcal{O}} \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
-\end{corollary}
+
+% When $\mathbf{x}$ is fixed, we can give the optimal solution to problem \eqref{BD_sub_dual} rather than solving this linear programming. 
 
 
+Before applying Benders decomposition to solve Problem \eqref{BD_master2}, it is important to address the efficient computation of the optimal solution to Problem \eqref{BD_sub_dual}.
 When we are given $\mathbf{x}^{*}$, the demand that can be satisfied by the seat planning is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})^{\intercal}$.
 By plugging them in the subproblem \eqref{BD_sub}, we can obtain the value of $y_{i \omega}$ recursively:
 \begin{equation}\label{y_recursively}
@@ -161,7 +174,7 @@ By plugging them in the subproblem \eqref{BD_sub}, we can obtain the value of $y
 \end{aligned}
 \end{equation}
 
-For scenario $\omega$, the optimal value is $\mathbf{f}^{\intercal} y_{\omega}$, then we need to find the dual optimal solution.
+For scenario $\omega$, the optimal value is $\mathbf{f}^{\intercal} y_{\omega}$. The dual optimal solution can be obtained by the following Proposition.
 
 \begin{prop}\label{optimal_sol_sub_dual}
   The optimal solutions to problem \eqref{BD_sub_dual} are given by 
@@ -180,30 +193,33 @@ For scenario $\omega$, the optimal value is $\mathbf{f}^{\intercal} y_{\omega}$,
 % During the calculation, we choose the optimal solution $\alpha_{i} = \alpha_{i-1} +1$ when $0 \leq \alpha_{i} \leq \alpha_{i-1} +1$.
 % \end{remark}
 
-We can use the forward method, calculating from $\alpha_{1 \omega}$ to $\alpha_{M \omega}$, to obtain the value of $\alpha_{\omega}$ instead of solving problem \eqref{BD_sub_dual}.
+Instead of solving this linear programming directly, we can compute the values of $\alpha_{\omega}$ by performing a forward calculation from $\alpha_{1\omega}$ to $\alpha_{M\omega}$.
 
 \subsubsection{Delayed Constraint Generation}\label{bender_stage}
-Benders decomposition works with only a subset of those exponentially many constraints and adds more constraints iteratively until the optimal solution of Benders Master Problem(BMP) is attained. This procedure is known as delayed constraint generation.
+% Benders decomposition works with only a subset of those exponentially many constraints and adds more constraints iteratively until the optimal solution of Benders Master Problem(BMP) is attained. This procedure is known as delayed constraint generation.
 
-According to Corollary \ref{coro_1} and take into account the optimality cuts, we can conclude the BMP will have the form:
+Due to the computational infeasibility of solving Problem \eqref{BD_master2} with an exponentially large number of constraints, it is common practice to use a subset, denoted as $\mathcal{O}^t$, to replace $\mathcal{O}$ in Problem \eqref{BD_master2}. This results in a modified problem known as the Restricted Benders Master Problem(RBMP). To find the optimal solution of Problem \eqref{BD_master2}, we employ a technique called delayed constraint generation. It involves iteratively solving the RBMP and incrementally adding more constraints until the optimal solution of Problem \eqref{BD_master2} is obtained. 
 
-\begin{equation}\label{BD_master2}
+% This iterative process allows for a more manageable and efficient computation.
+
+We can conclude the Restricted Benders Master Problem will have the form:
+
+\begin{equation}\label{BD_master3}
   \begin{aligned}
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-    & \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}, \forall \omega \\
+    & \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}^{t}, \forall \omega \\
      & \mathbf{x} \in \mathbb{Z}_{+}, z_{\omega} ~\text{is free}
   \end{aligned}
 \end{equation}
 
-When substituting $\mathcal{O}$ with its subset, $\mathcal{O}^{t}$, the problem \eqref{BD_master2} becomes the Restricted Benders Master Problem(RBMP). To determine the initial $\mathcal{O}^{t}$, we have the following lemma.
+To determine the initial $\mathcal{O}^{t}$, we have the following Proposition.
 
 \begin{prop}\label{one_ep_feasible}
-RBMP is always bounded with at least any one optimality cut for each scenario.
+RBMP is always bounded with at least any one feasible constraint for each scenario.
 \end{prop}
 
-
-Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}_{0}$ and $\mathbf{z}^{0} =(z^{0}_1,\ldots, z^{0}_S)$. Then $c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is an upper bound of problem \eqref{BD_master2}. When $\mathbf{x}_0$ is given, the optimal solution, $\bm{\alpha}_{\omega}^{1}$, to problem \eqref{BD_sub_dual} can be obtained according to Theorem \ref{optimal_sol_sub_dual}. $z_{\omega}^{(0)} = \bm{\alpha}_{\omega}^{1}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ and $(\mathbf{x}_0, \mathbf{z}^{(0)})$ is a feasible solution to problem \eqref{BD_master2} because it satisfies all the constraints. Thus, $\mathbf{c}^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$ is a lower bound of problem \eqref{BD_master2}.
+Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}_{0}$ and $\mathbf{z}^{0} =(z^{0}_1,\ldots, z^{0}_S)$. Then $c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is an upper bound of problem \eqref{BD_master3}. When $\mathbf{x}_0$ is given, the optimal solution, $\bm{\alpha}_{\omega}^{1}$, to problem \eqref{BD_sub_dual} can be obtained according to Theorem \ref{optimal_sol_sub_dual}. $z_{\omega}^{(0)} = \bm{\alpha}_{\omega}^{1}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ and $(\mathbf{x}_0, \mathbf{z}^{(0)})$ is a feasible solution to problem \eqref{BD_master3} because it satisfies all the constraints. Thus, $\mathbf{c}^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$ is a lower bound of problem \eqref{BD_master2}.
 
 If for every scenario $\omega$, the optimal value of the corresponding problem \eqref{BD_sub_dual} is larger than or equal to $z_{\omega}^{0}$, all contraints are satisfied, we have an optimal solution, $(\mathbf{x}_{0}, \mathbf{z}_{\omega}^{0})$, to the BMP. Otherwise, add one new constraint, $(\bm{\alpha}_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
 
@@ -222,14 +238,15 @@ The steps of the algorithm are described as below,
     \item[Step 3.] For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c^{\intercal} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$.
     \item[Step 4.] For each $\omega$, if $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
     \item[Step 5.] Solve the updated RBMP, obtain a new solution $(x_1, z^{1})$ and update UB.
-    \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.(In our case, UB converges.)
+    \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.
+    % (In our case, UB converges.)
    \end{description}
   \end{algorithm}
 
 From the Lemma \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega}^0 = \mathbf{0}$ initially in {\bf Step 1}. Notice that only contraints are added in each iteration, thus $LB$ and $UB$ are both monotone. Then we can use $UB - LB < \epsilon$ to terminate the algorithm in {\bf Step 6}.
 
 
-After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})$. Solving problem \eqref{lemma_eq} directly can be computationally challenging in some cases, so practically we first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. From this solution, we generate an integral seat planning.
+After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})$. Solving problem \eqref{lemma_eq} directly can be computationally challenging in some cases, so practically we first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. Then, we generate an integral seat planning from this solution.
 
 \subsection{Obtain The Seat Planning Composed of Full or Largest Patterns}\label{seat_assignment}
 As we mentioned above, seat planning with full or largest patterns can accommodate more groups. Thus, we need to obtain the seat planning composed of full or largest patterns. Before that, we will discuss the deterministic model that can help to achieve the goal.
@@ -283,8 +300,9 @@ To maximize the utilization of seats, we should assign full or largest patterns 
     
     \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} with supply $\mathbf{s}^{1}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
 
-    \item[Step 4.] Check if row $j$ is full for all $j$. When row $j^{0}$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j^{0}}$, let $\beta = L_{j^{0}} - \sum_{i} n_{i} x_{ij}$. 
-    Find the smallest group size in row $j^{0}$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row corresponds to the largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
+    \item[Step 4.] Check if row $j$ is full for all $j$. 
+    \item[Step 4.1] When row $j^{0}$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j^{0}}$, let $\beta = L_{j^{0}} - \sum_{i} n_{i} x_{ij}$. Find the smallest group size in row $j^{0}$ and mark it as $i^0$.
+    \item[Step 4.2] If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
    \end{description}
   \end{algorithm}
 

@@ -168,14 +168,14 @@ To provide estimations, we utilize the equations $y_1 = \frac{c_1 L}{\gamma +1}$
 
 \begin{figure}[ht]
   \centering
-    \includegraphics[width=0.8\textwidth]{./Figures/gamma_estimation.pdf}
+    \includegraphics[width=0.8\textwidth]{./Figures/re2.pdf}
   \caption{Gap points and their estimation under 200 probabilities}
 \end{figure}
 
 % For the first function, we found that $c_1 = 200.0208$, with a standard error of 0.203. For the second function, we obtained $c_2 = 90.9284$, with a standard error of 0.099. 
 
 
-The estimation of $c_1$ and $c_2$ can be affected by different seat layouts. To investigate this impact, we conducted several experiments using different seat layouts, specifically with row $\times$ the number of seats configurations set as 1 $\times$ 210, 5 $\times$ 42, and 10 $\times$ 21. We employed an Ordinary Least Squares (OLS) model to fit the data and derive the parameter values. The goodness of fit was assessed using the R-square values, which were found to be 1.000 for all models, indicating a perfect fit between the data and the models.
+The estimation of $c_1$ and $c_2$ can be affected by different seat layouts. To investigate this impact, we conduct several experiments using different seat layouts, specifically with the number of rows $\times$ the number of seats configurations set as 10 $\times$ 16, 10 $\times$ 21, 10 $\times$ 26 and 10 $\times$ 31. Similarly, we perform an analysis using a sample of 100 probability combinations, each with a mean equal to $\gamma$. The values of $\gamma$ range from 1.5 to 3.4. We employed an Ordinary Least Squares (OLS) model to fit the data and derive the parameter values. The goodness of fit is assessed using the R-square values, which are found to be 1.000 for all models, indicating a perfect fit between the data and the models.
 
 The results of the estimation of $c_1$ and $c_2$ are presented in the table below:
 
@@ -184,38 +184,61 @@ The results of the estimation of $c_1$ and $c_2$ are presented in the table belo
   \caption{Estimation of $c_1$ and $c_2$}
   \begin{tabular}{|c|c|c|}
   \hline
-   Seat layout(row $\times$ \# of seats) & Estimation of $c_1$ & Estimation of $c_2$  \\
+   Seat layout(\# of rows $\times$ \# of seats) & Estimation of $c_1$ & Estimation of $c_2$  \\
   \hline
-   1 $\times$ 210 & 0.9569 & 95.997 \\
-   5 $\times$ 42 & 0.9547 & 95.709 \\
-   10 $\times$ 21 & 0.9525 & 95.475 \\
+   10 $\times$ 16 & 0.948 & 0.947 \\
+   10 $\times$ 21 & 0.955 & 0.954 \\
+   10 $\times$ 26 & 0.966 & 0.962 \\
+   10 $\times$ 31 & 0.965 & 0.967 \\
    \hline
   \end{tabular}
 \end{table}
+
 
 % when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
 
 
 \subsubsection{Impact of Social Distancing as Demands Increase}
-Now, we consider impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 2.5$ and $\gamma = 1.9$. We set the parameters as follows: $T$ varies from 30 to 120, the step size is 1.  The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
+Now, we consider impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 1.9$ and $\gamma = 2.5$. We set the parameters as follows: $T$ varies from 30 to 120, the step size is 1.  The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
 
-The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ SAP to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt a different approach. We simply accept all incoming groups as long as the capacity allows, without considering the constraints of groups needing to sit together. This means that we prioritize filling the available seats without enforcing any specific seating arrangements or social distancing requirements. Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
+The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ SAP to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt a different approach. We simply accept all incoming groups as long as the capacity allows, without considering the constraints of groups needing to sit together. This means that we prioritize filling the available seats without enforcing any specific seating arrangements or social distancing requirements. We conduct an analysis using a sample of 100 probability combinations associated with the same $\gamma$. The occupancy rate at different demands is calculated as the mean of these 100 samples. The figures depicting the results are presented below.
+
+% Since the various probabilities with the same $\gamma$ exhibit similar patterns as shown in the figure, we present only one case of probabilities to illustrate the detailed figure.
 
 \begin{figure}[h]
   \centering
-  \subfigure[When $\gamma =2.5$]{
-    \label{Fig.sub.1}
-    \includegraphics[width=0.48\textwidth]{./Figures/p1.pdf}}
   \subfigure[When $\gamma =1.9$]{
-    \label{Fig.sub.2}
+    \label{Fig.sub.1}
     \includegraphics[width=0.48\textwidth]{./Figures/p2.pdf}}
+  \subfigure[When $\gamma =2.5$]{
+    \label{Fig.sub.2}
+    \includegraphics[width=0.48\textwidth]{./Figures/p1.pdf}}
   \caption{The occupancy rate over the number of arriving people}
   \label{Fig.lable}
 \end{figure}
 
-The analysis comprises three stages. In the first stage, where the capacity is sufficient, social distancing measures have no impact on the outcome. In the second stage, the gap between the outcomes with and without social distancing measures widens as $T$ increases. Finally, in the third stage, as $T$ continues to increase, the gap between the outcomes with and without social distancing measures converges when both situations accept the maximum number of people.
+The analysis consists of three stages. 
+In the first stage, when the capacity is sufficient, the outcome remains unaffected by the implementation of social distancing measures. In the second stage, as the value of $T$ increases, the difference between the outcomes with and without social distancing measures becomes more pronounced. Finally, in the third stage, as $T$ continues to increase, both scenarios reach their maximum capacity acceptance. At this point, the gap between the outcomes with and without social distancing measures begins to converge. For the social distancing situation, according to Proposition \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate.
 
-The table below presents the gap points and the percentage gaps for different demand levels (130, 150, 170, 190, 210).
+% The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted.
+
+The below table presents the percentage differences for different demand levels (130, 150, 170, 190, 210).
+
+\begin{table}[ht]
+  \centering
+  \caption{Percentage differences under different demands}
+\begin{tabular}{llllll}
+  \hline
+  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}}  &  \multicolumn{5}{l|}{Percentage gaps under different demands}   \\ 
+  \cline{2-6} 
+  \multicolumn{1}{|l|}{}   & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
+  \hline
+  \multicolumn{1}{|l|}{1.9} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
+  \hline      
+  \multicolumn{1}{|l|}{2.5}   & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.46}  & \multicolumn{1}{l|}{9.23} & \multicolumn{1}{l|}{17.32} & \multicolumn{1}{l|}{21.59} \\ 
+  \hline
+\end{tabular}
+\end{table}
 
 % \begin{table}[]
 %   \centering
@@ -239,61 +262,10 @@ The table below presents the gap points and the percentage gaps for different de
 % \end{tabular}
 % \end{table}
 
-\begin{table}[]
-  \centering
-  \caption{Gap points of different gammas and percentage gaps under different demands}
-\begin{tabular}{llllllll}
-  \hline
-  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{|l|}{\multirow{2}{*}{Probability}} & \multicolumn{1}{l|}{\multirow{2}{*}{Gap point}} & \multicolumn{5}{l|}{Percentage gaps under different demands}   \\ 
-  \cline{4-8} 
-  \multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
-  \hline
-  \multicolumn{1}{|l|}{1.9} & \multicolumn{1}{l|}{[0.4, 0.4, 0.1, 0.1]}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\
-  \hline
-  \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{[0.45, 0.35, 0.05, 0.15]}  & \multicolumn{1}{l|}{[69, 66.0]}  & \multicolumn{1}{l|}{0.42}  & \multicolumn{1}{l|}{5.99}  & \multicolumn{1}{l|}{13.96} & \multicolumn{1}{l|}{22.08} & \multicolumn{1}{l|}{25.26} \\ 
-  \hline                                    
-  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[0.4, 0.2, 0.3, 0.1]} & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\
-  \hline 
-  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[0.35, 0.35, 0.15, 0.15]} & \multicolumn{1}{l|}{[64, 67.12]}  & \multicolumn{1}{l|}{0.22}  & \multicolumn{1}{l|}{3.89}  & \multicolumn{1}{l|}{12.0} & \multicolumn{1}{l|}{19.48} & \multicolumn{1}{l|}{23.96} \\
-  \hline       
-  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[0.3, 0.3, 0.2, 0.2]} & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\
-  \hline
-  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[0.35, 0.25, 0.15, 0.25]} & \multicolumn{1}{l|}{[61, 70.74]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.59}  & \multicolumn{1}{l|}{10.42} & \multicolumn{1}{l|}{17.98} & \multicolumn{1}{l|}{21.34} \\ 
-  \hline           
-  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[0.25, 0.25, 0.25, 0.25]} & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
-  \hline
-  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[0.3, 0.2, 0.2, 0.3]} & \multicolumn{1}{l|}{[57, 70.66]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.47}  & \multicolumn{1}{l|}{8.42} & \multicolumn{1}{l|}{16.33} & \multicolumn{1}{l|}{20.42} \\ 
-  \hline          
-  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[0.2, 0.2, 0.3, 0.3]} & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
-  \hline
-  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[0.25, 0.15, 0.25, 0.35]} & \multicolumn{1}{l|}{[54, 72.62]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.46}  & \multicolumn{1}{l|}{8.17} & \multicolumn{1}{l|}{14.95} & \multicolumn{1}{l|}{19.8} \\ 
-  \hline
-\end{tabular}
-\end{table}
 
-According to Proposition \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted.
+% [ 0.275  6.395 13.23  21.85  25.695] 1.9
+% [ 0.04  4.97 13.55 20.99 24.81] 2
 
-
-\begin{table}[]
-  \centering
-\begin{tabular}{llllllll}
-  \hline
-  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{|l|}{\multirow{2}{*}{Probability}} & \multicolumn{1}{l|}{\multirow{2}{*}{Gap point}} & \multicolumn{5}{l|}{Percentage gaps under different demands}   \\ 
-  \cline{4-8} 
-  \multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
-  \hline
-  \multicolumn{1}{|l|}{1.9} & \multicolumn{1}{l|}{[0.4, 0.4, 0.1, 0.1]}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{[0.25, 0.42]}  & \multicolumn{1}{l|}{[5.82, 5.99]}  & \multicolumn{1}{l|}{[12.82, 13.96]} & \multicolumn{1}{l|}{[20.38, 22.08]} & \multicolumn{1}{l|}{[24.56, 25.26]} \\
-  \hline                                    
-  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[0.4, 0.2, 0.3, 0.1]} & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{[0.05,0.22]}  & \multicolumn{1}{l|}{[3.89, 4.11]}  & \multicolumn{1}{l|}{[11.51, 12.0]} & \multicolumn{1}{l|}{[18.77, 19.48]} & \multicolumn{1}{l|}{[21.87, 23.96]} \\
-  \hline        
-  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[0.3, 0.3, 0.2, 0.2]} & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{[0,0]}  & \multicolumn{1}{l|}{[2.29, 2.59]}  & \multicolumn{1}{l|}{[10.21, 10.42]} & \multicolumn{1}{l|}{[17.36, 17.98]} & \multicolumn{1}{l|}{[21.16, 21.34]} \\
-  \hline      
-  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[0.25, 0.25, 0.25, 0.25]} & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{[0, 0]}  & \multicolumn{1}{l|}{[1.45, 1.47]}  & \multicolumn{1}{l|}{[8.42, 9.30]} & \multicolumn{1}{l|}{[15.78, 16.33]} & \multicolumn{1}{l|}{[19.80, 20.42]} \\ 
-  \hline
-  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[0.2, 0.2, 0.3, 0.3]} & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{[0,0]}  & \multicolumn{1}{l|}{[1.38, 1.46]}  & \multicolumn{1}{l|}{[7.39, 8.17]} & \multicolumn{1}{l|}{[14.91, 14.95]} & \multicolumn{1}{l|}{[19.14, 19.8]} \\ 
-  \hline
-\end{tabular}
-\end{table}
 
 % \subsection{Comparison of Different Probabilities When Supply and Demand Are Close}
 % When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities.

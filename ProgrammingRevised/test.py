@@ -3,16 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
+# not useful fitting with variance and prob_1
+
 data = [[0 for i in range(2)] for j in range(200)]
 
-with open("Periods_1row.txt", 'r') as f:
+with open("Periods_10.txt", 'r') as f:
     lines = f.readlines()[1:]
     cnt = 0
     for line in lines:
         a = line.split('\t')
         data[cnt] = a
         cnt += 1
-
 
 def gamma(data):
     result = np.zeros((len(data),4))

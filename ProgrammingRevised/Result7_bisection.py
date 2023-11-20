@@ -58,22 +58,39 @@ def prop_list1():
 
     return p
 
+
+def prop_list_19():
+    x = np.arange(0.05, 0.9, 0.05)  # p2
+    y = np.arange(0.05, 0.45, 0.05)  # p3
+    p = np.zeros((len(x)*len(y), 4))
+
+    t = 0
+    for i in x:
+        for j in y:
+            if 0.7 - 2*i/3 - j/3 > 0 and 0.3 - i/3 - 2*j/3 > 0:
+                p[t] = [(0.7 - 2*i/3 - j/3), i, j, (0.3 - i/3 - 2*j/3)]
+                t += 1
+    p = p[0:t]
+
+    return p
+
+
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
     given_lines = 10
-    probab = prop_all()
-    all_number = len(probab)
+    # probab = prop_all()
+    # all_number = len(probab)
 
     begin_time = time.time()
     filename = 'Periods_' + str(time.time()) + '.txt'
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    for i in range(200):
+    for i in range(1):
         print(i)
-        ran_prop = random.randint(0, all_number-1)
-        p = probab[ran_prop]
+        # ran_prop = random.randint(0, all_number-1)
+        p = [0.3, 0.2, 0.1, 0.4]
         my_file.write(str(p) + '\t')
         a = 40
         b = 90
@@ -96,6 +113,9 @@ if __name__ == "__main__":
                 f = a_without.offline(sequence)  # optimal result
                 optimal = np.dot(multi, f)
                 g = a_instance.method_new(sequence1, newx4, roll_width)
+                print(num_period)
+                print(f'0: {np.dot(multi, g)}')
+                print(f'1: {optimal}')
                 sto += np.dot(multi, g)
                 accept_people += optimal
 

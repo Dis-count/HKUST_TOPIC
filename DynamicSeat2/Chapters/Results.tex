@@ -105,25 +105,25 @@ For dynamic seat assignment for each group arrival, the intuitive but trivial me
   \caption{Performances of Different Policies}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
-   T & probabilities & SSP (\%) & DP1 (\%) & Bid-price (\%) & Booking (\%) & FCFS (\%) \\
+   T & probabilities & SAP (\%) & DP1 (\%) & Bid-price (\%) & Booking (\%) & FCFS (\%) \\
   \hline
    60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 & 96.74 & 98.17 \\
-   70  & [0.25, 0.25, 0.25, 0.25]  & 98.34 & 96.87 & 96.24 & 97.18 & 94.75 \\
-   80  & [0.25, 0.25, 0.25, 0.25]  & 98.61 & 95.69 & 96.02 & 98.00 & 93.18 \\
-   90  & [0.25, 0.25, 0.25, 0.25]  & 99.10 & 96.05 & 96.41 & 98.31 & 92.48 \\
-   100 & [0.25, 0.25, 0.25, 0.25]  & 99.58 & 95.09 & 96.88 & 98.70 & 92.54 \\
+   70  &                           & 98.34 & 96.87 & 96.24 & 97.18 & 94.75 \\
+   80  &                           & 98.61 & 95.69 & 96.02 & 98.00 & 93.18 \\
+   90  &                           & 99.10 & 96.05 & 96.41 & 98.31 & 92.48 \\
+   100 &                           & 99.58 & 95.09 & 96.88 & 98.70 & 92.54 \\
    \hline
    60  & [0.25, 0.35, 0.05, 0.35]  & 98.94 & 98.26 & 98.25 & 96.74 & 98.62 \\
-   70  & [0.25, 0.35, 0.05, 0.35]  & 98.05 & 96.62 & 96.06 & 96.90 & 93.96 \\
-   80  & [0.25, 0.35, 0.05, 0.35]  & 98.37 & 96.01 & 95.89 & 97.75 & 92.88 \\
-   90  & [0.25, 0.35, 0.05, 0.35]  & 99.01 & 96.77 & 96.62 & 98.42 & 92.46 \\
-   100 & [0.25, 0.35, 0.05, 0.35]  & 99.23 & 97.04 & 97.14 & 98.67 & 92.00 \\
+   70  &                           & 98.05 & 96.62 & 96.06 & 96.90 & 93.96 \\
+   80  &                           & 98.37 & 96.01 & 95.89 & 97.75 & 92.88 \\
+   90  &                           & 99.01 & 96.77 & 96.62 & 98.42 & 92.46 \\
+   100 &                           & 99.23 & 97.04 & 97.14 & 98.67 & 92.00 \\
   \hline
   60  & [0.15, 0.25, 0.55, 0.05]  & 99.14 & 98.72 & 98.74 & 96.61 & 98.07 \\
-  70  & [0.15, 0.25, 0.55, 0.05]  & 99.30 & 96.38 & 96.90 & 97.88 & 96.25 \\
-  80  & [0.15, 0.25, 0.55, 0.05]  & 99.59 & 97.75 & 97.87 & 98.55 & 95.81 \\
-  90  & [0.15, 0.25, 0.55, 0.05]  & 99.53 & 98.45 & 98.69 & 98.81 & 95.50 \\
-  100 & [0.15, 0.25, 0.55, 0.05]  & 99.47 & 98.62 & 98.94 & 98.90 & 95.25 \\
+  70  &                           & 99.30 & 96.38 & 96.90 & 97.88 & 96.25 \\
+  80  &                           & 99.59 & 97.75 & 97.87 & 98.55 & 95.81 \\
+  90  &                           & 99.53 & 98.45 & 98.69 & 98.81 & 95.50 \\
+  100 &                           & 99.47 & 98.62 & 98.94 & 98.90 & 95.25 \\
   \hline
   \end{tabular}
 \end{table}
@@ -186,10 +186,12 @@ The results of the estimation of $c_1$ and $c_2$ are presented in the table belo
   \hline
    Seat layout(\# of rows $\times$ \# of seats) & Estimation of $c_1$ & Estimation of $c_2$  \\
   \hline
-   10 $\times$ 16 & 0.948 & 0.947 \\
-   10 $\times$ 21 & 0.955 & 0.954 \\
-   10 $\times$ 26 & 0.966 & 0.962 \\
-   10 $\times$ 31 & 0.965 & 0.967 \\
+   10 $\times$ 11 & 0.909 $\pm$ 0.013  & 89.89 $\pm$ 1.436 \\
+   10 $\times$ 16 & 0.948 $\pm$ 0.008  & 94.69 $\pm$ 0.802 \\
+   10 $\times$ 21 & 0.955 $\pm$ 0.004 & 95.44 $\pm$ 0.571 \\
+   10 $\times$ 26 & 0.966 $\pm$ 0.004 & 96.23 $\pm$ 0.386 \\
+   10 $\times$ 31 & 0.965 $\pm$ 0.003 & 96.67 $\pm$ 0.434 \\
+   10 $\times$ 36 & 0.968 $\pm$ 0.003 & 97.04 $\pm$ 0.289 \\
    \hline
   \end{tabular}
 \end{table}
@@ -224,47 +226,54 @@ In the first stage, when the capacity is sufficient, the outcome remains unaffec
 
 The below table presents the percentage differences for different demand levels (130, 150, 170, 190, 210).
 
-\begin{table}[ht]
-  \centering
-  \caption{Percentage differences under different demands}
-\begin{tabular}{llllll}
-  \hline
-  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}}  &  \multicolumn{5}{l|}{Percentage gaps under different demands}   \\ 
-  \cline{2-6} 
-  \multicolumn{1}{|l|}{}   & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
-  \hline
-  \multicolumn{1}{|l|}{1.9} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
-  \hline      
-  \multicolumn{1}{|l|}{2.5}   & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.46}  & \multicolumn{1}{l|}{9.23} & \multicolumn{1}{l|}{17.32} & \multicolumn{1}{l|}{21.59} \\ 
-  \hline
-\end{tabular}
-\end{table}
-
-% \begin{table}[]
+% \begin{table}[ht]
 %   \centering
-%   \caption{Gap points of different gammas and percentage differences under different demands}
-% \begin{tabular}{lllllll}
+%   \caption{Percentage differences under different demands}
+% \begin{tabular}{llllll}
 %   \hline
-%   \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{l|}{\multirow{2}{*}{gap point}} & \multicolumn{5}{l|}{difference under different demands}   \\ 
-%   \cline{3-7} 
-%   \multicolumn{1}{|l|}{}                      & \multicolumn{1}{l|}{}                    & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
+%   \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}}  &  \multicolumn{5}{l|}{Percentage gaps under different demands}   \\ 
+%   \cline{2-6} 
+%   \multicolumn{1}{|l|}{}   & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
 %   \hline
-%   \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\ 
-%   \hline                                    
-%   \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\ 
-%   \hline           
-%   \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\ 
-%   \hline           
-%   \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
-%   \hline          
-%   \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
-%   \hline            
+%   \multicolumn{1}{|l|}{1.9} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
+%   \hline
+%   \multicolumn{1}{|l|}{2.1} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
+%   \hline
+%   \multicolumn{1}{|l|}{2.3} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
+%   \hline      
+%   \multicolumn{1}{|l|}{2.5}   & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.46}  & \multicolumn{1}{l|}{9.23} & \multicolumn{1}{l|}{17.32} & \multicolumn{1}{l|}{21.59} \\ 
+%   \hline
+%   \multicolumn{1}{|l|}{2.7} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
+%   \hline  
 % \end{tabular}
 % \end{table}
 
+\begin{table}[ht]
+  \centering
+  \caption{Gap points and percentage differences under different demands of different gammas}
+\begin{tabular}{lllllll}
+  \hline
+  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{l|}{\multirow{2}{*}{gap point}} & \multicolumn{5}{l|}{percentage differences under different demands}   \\ 
+  \cline{3-7} 
+  \multicolumn{1}{|l|}{}                      & \multicolumn{1}{l|}{}                    & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
+  \hline
+  \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\ 
+  \hline                                    
+  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\ 
+  \hline           
+  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\ 
+  \hline           
+  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
+  \hline          
+  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
+  \hline            
+\end{tabular}
+\end{table}
 
-% [ 0.275  6.395 13.23  21.85  25.695] 1.9
+
+% [0.27 6.39 13.23 21.85 25.69] 1.9
 % [ 0.04  4.97 13.55 20.99 24.81] 2
+% [0 1.46 9.23 17.32 21.59] 2.5
 
 
 % \subsection{Comparison of Different Probabilities When Supply and Demand Are Close}

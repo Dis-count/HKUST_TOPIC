@@ -21,7 +21,7 @@ def gamma(data):
     for i in range(len(data)):
         prob = re.findall(r"\d+\.?\d*", data[i][0])
         p = [float(i) for i in prob]
-        theta = p[0]  # np.var  np.std
+        theta = p[-1]  # np.var  np.std
         p = np.dot(p, np.arange(1,5))
         gap_point = re.findall(r"\d+\.?\d*", data[i][1])
         period = int(gap_point[0])
@@ -56,20 +56,20 @@ data_x = result[:, 0]
 
 theta = result[:, -1]
 
-data_x1 = 1/(data_x+1)
-data_y1 = result[:, 1]
+# data_x1 = 1/(data_x+1)
+# data_y1 = result[:, 1]
 
-data_x2 = data_x/(data_x+1)
+data_x2 = data_x/(data_x+1) * 26/25
 data_y2 = result[:, 2]
 
 # mod = sm.OLS(data_y, sm.add_constant(data_x2))  # 需要用sm.add_constant 手动添加截距项
 
-datax1 = np.array([data_x1]).T
+datax1 = np.array([data_x2]).T
 theta = np.array([theta]).T
 
 data_x1 = np.concatenate((datax1, theta), axis=1)
 
-mod = sm.OLS(data_y1, data_x1)  # 无截距项
+mod = sm.OLS(data_y2, data_x1)  # 无截距项
 
 res = mod.fit()
 print(res.summary())
@@ -77,7 +77,6 @@ print(res.summary())
 # print(a.reshape(-1, 1))
 
 # print(np.concatenate((a.T, b.T), axis=1))
-
 
 # const         -1.2799      0.446     -2.867      0.005      -2.160      -0.399
 # x1           203.6197      1.517    134.253      0.000     200.629     206.611

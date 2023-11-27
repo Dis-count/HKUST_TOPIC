@@ -32,7 +32,7 @@ if __name__ == "__main__":
     filename = 'Periods_' + str(time.time()) + '.txt'
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
-    lengths = [11]
+    lengths = [36]
     for length in lengths:
         my_file.write(str(length) + '\n')
         for gamma in np.arange(1.5, 3.5, 0.1):
@@ -41,8 +41,8 @@ if __name__ == "__main__":
             all_number = len(probab)
 
             my_file.write(str(gamma) + '\n')
-            a = 20
-            b = 50
+            a = 70
+            b = 160
             num_period = int((a+b)/2)
             while num_period > a:
                 roll_width = np.ones(given_lines) * length

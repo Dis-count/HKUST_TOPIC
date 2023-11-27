@@ -45,16 +45,15 @@ The algorithm is shown below:
   \caption{Stochastic assignment policy algorithm}\label{algo_dynamic_policy}
   \begin{description}
     \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\X = [x_{1}, \ldots, x_{M}]$.
-    \item[Step 2.] For the arrival group type $i$ at initial period $T{'} =1$, if $\exists k \in \mathcal{N}$ such that $P_{ki} > 0$, accept the group, update $P_{ki} = P_{ki} -1$ and $x_{i} = x_{i} -1$. Go to step 4. Otherwise, go to step 3.
-    \item[Step 3.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $P_{k j^{*}} >0$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k j^{*}} = P_{k j^{*}}-1$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j^{*}-i-\delta} = x_{j^{*}-i-\delta} + 1$ and $P_{k, j^{*}-i-\delta} = P_{k, j^{*}-i-\delta} +1$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
-    \item[Step 4.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 2. Otherwise, terminate this algorithm.
+    \item[Step 2.] Observe the arrival group type $i$ at period $T{'} =1$.
+    \item[Step 3.] If $\exists k \in \mathcal{N}$ such that $P_{ki} > 0$, accept the group, update $P_{ki} = P_{ki} -1$ and $x_{i} = x_{i} -1$, then go to step 5. Otherwise, go to step 4.
+    \item[Step 4.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $P_{k j^{*}} >0$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k j^{*}} = P_{k j^{*}}-1$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j^{*}-i-\delta} = x_{j^{*}-i-\delta} + 1$ and $P_{k, j^{*}-i-\delta} = P_{k, j^{*}-i-\delta} +1$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+    \item[Step 5.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 3. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
 
 \subsubsection{Break Tie for Stochastic Assignment Policy}
-A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including this larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group.
-
-By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
+A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including this larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group. By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
 
 
 % \subsection{Break tie for Bid-price and DP base-heuristic}
@@ -74,7 +73,6 @@ By following this approach, the number of unused seats in each row can be reduce
 
 % update the scenario and the probability, add constraints when re-calculating stochastic programming.
 % we can update the supply whenever some demand exceeds the supply.
-
 
 % Then use Algorithm \ref{algo_nested_policy} to make the decision.
 

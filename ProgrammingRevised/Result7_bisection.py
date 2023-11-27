@@ -88,7 +88,6 @@ if __name__ == "__main__":
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
     for i in range(1):
-        print(i)
         # ran_prop = random.randint(0, all_number-1)
         p = [0.3, 0.2, 0.1, 0.4]
         my_file.write(str(p) + '\t')
@@ -113,9 +112,6 @@ if __name__ == "__main__":
                 f = a_without.offline(sequence)  # optimal result
                 optimal = np.dot(multi, f)
                 g = a_instance.method_new(sequence1, newx4, roll_width)
-                print(num_period)
-                print(f'0: {np.dot(multi, g)}')
-                print(f'1: {optimal}')
                 sto += np.dot(multi, g)
                 accept_people += optimal
 

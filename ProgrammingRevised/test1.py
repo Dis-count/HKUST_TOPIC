@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
-data = [[0 for i in range(2)] for j in range(80)]
+data = [[0 for i in range(2)] for j in range(120)]
 
 with open("Periods_layout.txt", 'r') as f:
     lines = f.readlines()[1:]
@@ -61,26 +61,30 @@ result = gamma(data)
 # data_x = result[0:20, 0]
 
 # data_x = result[20:40, 0]
-# data_x = result[40:60, 0]
-data_x = result[60:80, 0]
+# data_x = result[60:80, 0]
+data_x = result[100:120, 0]
 
-data_x1 = 310/(data_x+1)
-data_y1 = result[60:80, 1]
+# data_x1 = 360/(data_x+1)
+# data_y1 = result[100:120, 1]
 # data_y1 = result[60:80, 1]
 
-# data_x2 = data_x/(data_x+1)
-# data_y2 = result[60:80, 2]
+data_x2 = data_x/(data_x+1)*36/35
+data_y2 = result[100:120, 2]
 
 # mod = sm.OLS(data_y, sm.add_constant(data_x2))  # 需要用sm.add_constant 手动添加截距项
 
 
-mod = sm.OLS(data_y1, data_x1)  # 无截距项
+# mod = sm.OLS(data_y1, data_x1)  # 无截距项
 
-# mod = sm.OLS(data_y2, data_x2)
+mod = sm.OLS(data_y2, data_x2)
 
 res = mod.fit()
 print(res.summary())
 
+
+# 0.9089    0.895       0.922   
+
+# 89.8863   88.450      91.323
 
 # 151.6723/160   100.9988
 

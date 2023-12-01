@@ -9,15 +9,15 @@ This section focuses on obtaining the seat planning with available capacity. We 
 \subsection{Scenario-based Stochastic Programming (SSP) Formulation}
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega$. A particular realization of the demand vector can be represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of people accommodated over all the scenarios, we propose a scenario-based stochastic programming to obtain a seat planning.
 
-The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{Z}{+}^{M \times N}$. Here, $x{ij}$ denotes the number of group type $i$ assigned to row $j$. The total supply for group type $i$ can be calculated as the sum of $x_{ij}$ over all rows $j$, i.e., $\sum_{j=1}^N x_{ij}$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times |\Omega|}$. Each component of $\mathbf{y}^{+}$, $y_{i}^{\omega(+)}$, represents the number of surplus supply for group type $i$. Similarly, $y_{i}^{\omega(-)}$ represents the number of inadequate supply for group type $i$.
-Considering that the group can occupy the seats planned for the larger group type when the corresponding supply is not enough, we assume that the surplus seats for group type $i$ can be occupied by smaller group type $j<i$ in the descending order of the group size. That is, for any $\omega$, $i \leq M-1$, $y_{i \omega}^{+}=\left(\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}$ and $y_{i \omega}^{-}=\left(d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+} \right)^{+}$, where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest group type $M$, we have $y_{M \omega}^{+} = (\sum_{j=1}^N x_{ij} - d_{i \omega})^{+}$, $y_{M \omega}^{-} = (d_{i \omega}- \sum_{j=1}^N x_{ij})^{+}$.
+The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{Z}{+}^{M \times N}$. Here, $x_{ij}$ denotes the number of group type $i$ assigned to row $j$. The total supply for group type $i$ can be calculated as the sum of $x_{ij}$ over all rows $j$, i.e., $\sum_{j=1}^N x_{ij}$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times |\Omega|}$. Each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the surplus supply for group type $i$ for each scenario $\omega$. On the other hand, $y_{i\omega}^{-}$ represents the inadequate supply for group type $i$ for each scenario $\omega$.
 
-% These variables are scenario-independent and 
+
+Considering that the group can occupy the seats planned for the larger group type when the corresponding supply is not enough, we assume that the surplus seats for group type $i$ can be occupied by smaller group type $j<i$ in the descending order of the group size. That is, for any $\omega$, $i \leq M-1$, $y_{i \omega}^{+}=\left(\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}$ and $y_{i \omega}^{-}=\left(d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+} \right)^{+}$, where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest group type $M$, we have $y_{M \omega}^{+} = (\sum_{j=1}^N x_{ij} - d_{i \omega})^{+}$, $y_{M \omega}^{-} = (d_{i \omega}- \sum_{j=1}^N x_{ij})^{+}$. This assumption is reasonable because, as stated in Proposition \ref{prop_onescenario}, when there is only one scenario, stochastic programming simplifies to a deterministic problem.
+
 
 % Because the demand is unknown when the seat assignment is planned, there is no way to expect that the supply in the first stage can meet the demand exactly. Fortunately, we can find some remedies in practice, for example, seats of 5 can be assigned to a group of 4 with one empty seat as social distancing. However, the decision maker will confront seats shortage or excess without these measures. Therefore, to deal with possible demands, the wait-and-see measures (called recourses) should be considered in planning seat assignment.
 
 % If no group of 1 comes in the future, this wait-and-see measure may leave two empty seats. 
-
 % and that the true demand is only revealed after $\mathbf{x}$ is chosen.
 
 % which is positive when the supply is larger than the actual demand, zero otherwise.
@@ -29,7 +29,7 @@ Considering that the group can occupy the seats planned for the larger group typ
 
 Then we have the formulation of SSP:
     \begin{align}
-    \quad \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+    \quad \max \quad & E_{\omega}\left[(n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}) + \sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+})\right] \\
     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
     y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega \label{DEF_constr1} \\
     & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \label{DEF_constr2}\\
@@ -58,20 +58,9 @@ For any $i, \omega$, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ ca
 Suppose there exist $i_0$ and $\omega_0$ such that $y_{i_0 \omega_0}^{+}$ and $y_{i_0 \omega_0}^{-}$ are positive. Substracting $\min\{y_{i_0, \omega_0}^{+}, y_{i_0, \omega_0}^{-}\}$ from these two values will still satisfy constraints \eqref{DEF_constr1} and \eqref{DEF_constr2} but increase the objective value when $p_{\omega_0}$ is positive. Thus, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive. 
 \end{remark}
 
-When $|\Omega| =1$ in SSP formulation, the stochastic programming will be 
-
-\begin{equation}\label{one_form}
-  \begin{aligned}
-  \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-\delta) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
-  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1, \ldots, M-1, \\
-  & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
-  & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
-  & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M} \\
-  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-  \end{aligned}
-\end{equation}
-
-To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i}^{-} \geq 0$, thus the constraints $\sum_{j= 1}^{N} x_{ij} + y_{i}^{-} = d_{i}, i \in \mathcal{M}$ can be rewritten as $\sum_{j= 1}^{N} x_{ij} \leq d_{i}, i \in \mathcal{M}$. That is to say, problem \eqref{one_form} is equivalent to the deterministic model.
+\begin{prop}\label{prop_onescenario}
+  The stochastic programming is equivalent to the deterministic model when $|\Omega| =1$.
+\end{prop}
 
 Let $\mathbf{n} = (n_1, \ldots, n_M)$, $\mathbf{L} = (L_1, \ldots, L_N)$ where $n_i$ is the size of seats taken by group type $i$ and $L_j$ is the length of row $j$ as we defined above. Then the constraint \eqref{DEF_constr3} can be expressed as $\mathbf{n} \mathbf{x} \leq \mathbf{L}$.
 
@@ -120,16 +109,14 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 \end{equation}
 
 % The objective function of problem \eqref{sto_form} can be expressed as $c{'}\mathbf{x} + \sum_{\omega} p_{\omega}f{'}y_{\omega}$. 
-Problem \eqref{BD_sub} stands for the subproblem and $z_{\omega}(\mathbf{x})$ is the optimal value.
-% together with the convention $z_{\omega}(\mathbf{x}) = \infty$ if the problem is infeasible.
+
+Problem \eqref{BD_sub} maintains the same mathematical form across different scenarios. Therefore, if we can efficiently solve problem \eqref{BD_sub}, it implies that we can also solve problem \eqref{BD_master} quickly.
 
 \subsection{Solve SSP by Benders Decomposition}\label{solve_by_benders}
-To solve SSP, we generate a closed-form solution to problem \eqref{BD_sub} firstly. Then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Based on the solution, we obtain a seat planning by deterministic model. Finally, we construct an integral seat planning composed of full or largest patterns.
+In this section, we employ Benders decomposition to solve SSP, after transforming problem \eqref{BD_sub} into a master problem and a subproblem \eqref{BD_sub}. Firstly, we generate a closed-form solution to problem \eqref{BD_sub}, then we obtain the solution to the linear relaxation of problem \eqref{BD_master} by the delayed constraint generation. Based on the solution, we obtain a seat planning by deterministic model. Finally, we construct an integral seat planning composed of full or largest patterns.
 
 \subsubsection{Solve The Subproblem}\label{second_stage}
 % Consider a $\mathbf{x}$ such that $\mathbf{n x} \leq \mathbf{L}$ and $\mathbf{x} \geq 0$ and suppose that this represents the seat planning. 
-
-% To solve this problem, we should only consider that $\mathbf{x}$ for which $z_{\omega}(\mathbf{x})$ are all finite.
 
 Notice that the feasible region of the dual problem \eqref{BD_sub} remains unaffected by the variable $\mathbf{x}$. This observation provides insight into the properties of this problem. Let $\bm{\alpha}$ denote the vector of dual variables. For each $\omega$, we can form its dual problem, which is 
 
@@ -140,17 +127,16 @@ Notice that the feasible region of the dual problem \eqref{BD_sub} remains unaff
   \end{aligned}
 \end{equation}
 
-\begin{lem}\label{feasible_region}
-  Let $\mathbb{P} = \{\bm{\alpha} \in \mathbb{R}^{M}|\bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$. The feasible region of problem \eqref{BD_sub_dual}, $\mathbb{P}$, is not empty and bounded. In addition, all the extreme points of $\mathbb{P}$ are integral.
-\end{lem}
+
+\begin{prop}\label{feasible_region}
+Let $\mathbb{P} = \{\bm{\alpha} \in \mathbb{R}^{M}|\bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$. The feasible region of problem \eqref{BD_sub_dual}, $\mathbb{P}$, is not empty and bounded. Furthermore, all the extreme points of $\mathbb{P}$ are integral. 
+\end{prop}
+
+Therefore, the optimal value of the problem \eqref{BD_sub}, $z_{\omega}(\mathbf{x})$, is finite and can be achieved at extreme points of the set $P$. Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$. That is, we have $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha} \in \mathcal{O}} \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$.
 
 % We assume that $\mathbb{P}$ is nonempty and has at least one extreme point.  Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
 
-According to Lemma \ref{feasible_region}, the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite. Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$, we have the following proposition.
-
-\begin{prop}\label{coro_1}
-  The optimal value of the problem \eqref{BD_sub}, $z_{\omega}(\mathbf{x})$, is finite and will be attained at extreme points of the set $P$. That is, we have $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha} \in \mathcal{O}} \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. 
-\end{prop}
+% The dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite.
 
 % Let $z_{\omega}$ be the lower bound of $z_{\omega}(x)$. 
 
@@ -278,7 +264,7 @@ As we mentioned above, seat planning with full or largest patterns can accommoda
 
 % its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 
-Let the optimal solution to the relaxation of SSP be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Replace the vector $\mathbf{d}$ with $\mathbf{s}^{0}$, we have the following problem, 
+Let the optimal solution to the relaxation of SSP be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Replace the vector $\mathbf{d}$ with $\mathbf{s}^{0}$ in the deterministic model, we have the following problem, 
 
 \begin{equation}\label{deter_upper1}
   \{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq s_{i}^{0}, i \in \mathcal{M}; x_{ij} \in Z^{+} \}
@@ -286,14 +272,10 @@ Let the optimal solution to the relaxation of SSP be $\mathbf{x}^{*}$. Aggregate
 
 then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{x}^{1}$, which represents a feasible seat planning. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$, which represents the supply for each group type.
 
-To fully utilize the seats, we should set the supply $\mathbf{s}^{1}$ as the lower bound, then re-solve a seat planning problem. We substitute the constraint $\sum_{j =1}^{N} x_{ij} \leq s_{i}^{0}, i \in \mathcal{M}$ in problem \eqref{deter_upper1} with the new constraint $\sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in \mathcal{M}$.
+To maximize the utilization of seats, we should assign full or largest patterns to each row. We will check if every row is full. When row $j$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j}$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. If $\beta$ is no less than $n_M$, then let $\beta = \beta - n_M$, $s_M = s_M +1$ until $\beta$ is less than $n_M$. If row $j$ is still not full, then find the smallest group size in row $j$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
 
-\begin{equation}\label{deter_lower}
-\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \geq s_{i}^{1}, i \in \mathcal{M}; x_{ij} \in Z^{+} \}
-\end{equation}
 
-Notice that the number of unoccupied seats in the seat planning obtained from problem \eqref{deter_lower} is at most $\delta$ for each row, given any feasible supply, $\mathbf{s}^{1}$.
-To maximize the utilization of seats, we should assign full or largest patterns to each row. This procedure can be described in {\bf Step 4} of the following algorithm.
+This procedure can be described in {\bf Step 4} of the following algorithm.
 
 \begin{algorithm}[H]
   \caption{Feasible seat planning algorithm}\label{feasible_seat}
@@ -302,9 +284,7 @@ To maximize the utilization of seats, we should assign full or largest patterns 
 
     \item[Step 2.] Solve problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{x}^{1}$. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
     
-    \item[Step 3.] Obtain the optimal solution, $\mathbf{x}^{2}$, from problem \eqref{deter_lower} with supply $\mathbf{s}^{1}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
-
-    \item[Step 4.] Check if row $j$ is full for all $j$. 
+    \item[Step 3.] Check if row $j$ is full for all $j$. 
     \item[Step 4.1] When row $j^{0}$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j^{0}}$, let $\beta = L_{j^{0}} - \sum_{i} n_{i} x_{ij}$. Find the smallest group size in row $j^{0}$ and mark it as $i^0$.
     \item[Step 4.2] If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
    \end{description}

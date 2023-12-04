@@ -13,7 +13,8 @@ class deterministicModel1:
         self.roll_width = roll_width
         self.given_lines = given_lines
         self.demand_width_array = demand_width_array
-        self.value_array = demand_width_array
+        self.s = 0
+        self.value_array = demand_width_array - self.s
         self.I = I
         # self.value_array = np.array([i*(1-0.001*(self.I - i)) for i in self.demand_width_array])
 
@@ -40,7 +41,7 @@ class deterministicModel1:
         return newd, newx
 
     def IP_formulation1(self, demand_lower, demand_upper):
-        # This function is used to check whether the model is optimal.
+        # This function is used to check whether the model have the optimal solution.
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
@@ -58,8 +59,6 @@ class deterministicModel1:
         m.optimize()
 
         if m.status == GRB.OPTIMAL:
-            x_ij = np.array(m.getAttr('X'))
-            newx = np.reshape(x_ij, (self.I, self.given_lines))
             return True
         else:
             return False

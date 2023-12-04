@@ -1,6 +1,6 @@
 % !TEX root = sum1.tex
 \section{Dynamic Seat Assignment Based on Stochastic Assignment Policy}
-In this section, we discuss dynamic seat assignment based on stochastic assignment policy (SAP), which incorporates group-type control to optimize resource utilization.
+In this section, we discuss dynamic seat assignment based on stochastic assignment policy (SAP), which includes the group-type control and value of stochastic programming control to assign the seats to groups.
 
 Recall that our decision-making process involves not only determining whether to accept or reject an arrival but also selecting the specific row for seat assignment if we decide to accept the group. We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
@@ -13,9 +13,9 @@ In the following part, we will demonstrate how to decide whether to accept the c
 
 Similarly, when we retain the supply of group type $j$ by rejecting a group of $i$, the expected number of accepted people is $j P(D_{j} \geq x_{j}; T_r)$. The probability, $P(D_{j} \geq x_{j}; T_r)$, indicates the probability that the demand of group type $j$ in $T_r$ periods is no less than its current remaining supply.
 
-Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r) - j P(D_{j} \geq x_{j}; T_r)$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
+Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r) - j P(D_{j} \geq x_{j}; T_r)$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. One intuitive decision is to choose $j$ with the largest difference. For all $j >i$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
 
-Group-type policy can only tell us which group-type supply will be provided for the smaller group, we still need to further find the specific row to assign the group. Then we compare the values of stocahstic programming when accepting or rejecting an group.
+Group-type policy can only tell us which group type will be provided for the smaller group based on the current planning, we still need to further compare the values of stocahstic programming when accepting or rejecting an group on the specific row. 
 
 % That is, the group-type control is a necessary condition to accept a group.
 
@@ -23,10 +23,10 @@ Group-type policy can only tell us which group-type supply will be provided for 
 
 % According to the pattern instead of placing it when the capacity is sufficient.
 
-\subsection{Value of Stochastic Programming}
+\subsection{Value of Stochastic Programming Control}
 After we determine the larger group to assign the arriving group, we need to compare the objective values of stochastic programming when accepting or rejecting this group to make a decision. For the objective values of stochastic programming, we need to consider the potential outcomes that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR).
 
-The VoA considers the scenarios that could arise if we accept the current arrival, while the VoR considers the same scenarios if we reject it. By comparing the VoA and the VoR, we can make an informed decision about whether to accept or reject the arrival based on which option has the higher objective value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made. 
+The VoA considers the scenarios that could arise if we accept the current arrival, while the VoR considers the same scenarios if we reject it. By comparing the VoA and the VoR, we can make an decision about whether to accept or reject the arrival based on which option has the higher expected value. This approach takes into account the uncertain nature of the decision-making environment and allows for a more optimal decision to be made. 
 
 If the VoA is larger than the VoR, it indicates that accepting the arrival would result in a higher objective value. In such cases, we refer to the corresponding planning group row in the group-type control, where we determine which group to break in order to accommodate the incoming group. If the VoA is less than the VoR, we will reject the incoming group.
 
@@ -35,17 +35,19 @@ In essence, this decision-making approach weighs the potential benefits associat
 % When a new seat planning can be regenerated, we can use the objective value of stochastic programming to make the decision.
 
 \subsubsection{Algorithm Based on Stochastic Assignment Policy}
-The seat planning can be obtained from Algorithm \ref{feasible_seat}. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
+We do not need to regenerate the seat planning in every period. Instead, when the available supply is sufficient for the arriving group, we can directly assign the group and keep the remaining supply. Only when comparing the VoA and VoR, we need to update the seat planning that is generated during the stochastic programming calculation. There is one exception to regenerating the seat planning, which occurs when the arriving group is the largest and the corresponding supply is only 1. In this case, after accepting the largest group, the supply becomes 0, necessitating the generation of a new seat planning.
+
+% The seat planning can be obtained from Algorithm \ref{seat_construction}. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
 
 The algorithm is shown below:
 
 \begin{algorithm}[H]
   \caption{Stochastic assignment policy algorithm}\label{algo_dynamic_policy}
   \begin{description}
-    \item[Step 1.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from the feasible seat planning algorithm. The corresponding aggregate supply is $\X = (x_{1}, \ldots, x_{M})$.
-    \item[Step 2.] Observe the arrival group type $i$ at period $T{'} =1$.
-    \item[Step 3.] If $\exists k \in \mathcal{N}$ such that $P_{ki} > 0$, accept the group, update $P_{ki} = P_{ki} -1$ and $x_{i} = x_{i} -1$, then go to step 5. Otherwise, go to step 4.
-    \item[Step 4.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $P_{k j^{*}} >0$. If value of acceptance is larger than value of rejection, accept group type $i$ and update $P_{k j^{*}} = P_{k j^{*}}-1$, $x_{j^{*}} = x_{j^{*}} -1$. Then update $x_{j^{*}-i-\delta} = x_{j^{*}-i-\delta} + 1$ and $P_{k, j^{*}-i-\delta} = P_{k, j^{*}-i-\delta} +1$ when $j^{*}-i-\delta > 0$. If $d(i,j^{*}) \leq 0$, reject group type $i$.
+    \item[Step 1.] Observe the arrival group type $i$ at period $T{'} =1$.
+    \item[Step 2.] Obtain the set of patterns, $\mathbf{P} = \{P_1,\ldots,P_{N}\}$, from algorithm \ref{seat_construction}. The corresponding aggregate supply is $\X = (x_{1}, \ldots, x_{M})$.
+    \item[Step 3.] If $\exists k \in \mathcal{N}$ such that $P_{ki} > 0$, accept the group, update $P_{ki} = P_{ki} -1$ and $x_{i} = x_{i} -1$. When $i = M$ and $x_{M} = 0$, obtain the new pattern $\mathbf{P}$ from algorithm \ref{seat_construction}. Then go to step 5. If there does not exist $k \in \mathcal{N}$ such that $P_{ki} > 0$, go to step 4.
+    \item[Step 4.] Calculate $d(i,j^{*})$. If $d(i,j^{*})>0$, find the first $k \in \mathcal{N}$ such that $P_{k j^{*}} >0$. If VoA is larger than VoR, accept group type $i$; otherwise, reject group type $i$. Obtain the new pattern $\mathbf{P}$ from algorithm \ref{seat_construction}. If $d(i,j^{*}) \leq 0$, reject group type $i$.
     \item[Step 5.] If $T{'} \leq T$, move to next period, set $T{'} = T{'}+1$, go to step 3. Otherwise, terminate this algorithm.
   \end{description}
 \end{algorithm}
@@ -85,7 +87,7 @@ A tie occurs when a small group is accepted by a larger planned group. To accept
 % The second one is named the seat row selection method based on the stochastic seat assignment method. The initial supply is obtained from the stochastic model, then update the supply from the deterministic model after the first period. After accepting one group, we update the accepted demand and remaining seats. The policy follows section \ref{nested_policy}.
 
 
-% Set the mean demand as the initial supply, update the supply from deterministic model by setting accpected demand as the lower bound. / can be used in scenario 1,2.
+% Set the mean demand as the initial supply, update the supply from deterministic model by setting accepcted demand as the lower bound. / can be used in scenario 1,2.
 
 
 % Partially dynamic: at the beginning stage, the capacity is sufficient, thus we will accept all arrivals. 

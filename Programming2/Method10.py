@@ -15,9 +15,9 @@ class deterministicModel:
         self.roll_width = roll_width
         self.given_lines = given_lines
         self.demand_width_array = demand_width_array
-        self.value_array = demand_width_array - 1
-        self.I = I
         self.s = 1
+        self.value_array = demand_width_array - self.s
+        self.I = I
 
     def IP_formulation(self, demand_lower, demand_upper):
         m = grb.Model()
@@ -45,28 +45,27 @@ class deterministicModel:
         newd = np.rint(newd)
         return newd, newx
 
-    def IP_formulation2(self, roll_width, num_period, probab, seq):
-        demand = np.ceil(np.array(probab) * num_period)
-        demand[seq-2] +=1
-        m = grb.Model()
+    # def IP_formulation2(self, roll_width, num_period, probab, seq):
+    #     # used to test the booking performance when knowing the coming group
+    #     demand = np.ceil(np.array(probab) * num_period)
+    #     demand[seq-2] +=1
+    #     m = grb.Model()
 
-        x = m.addVars(self.I, len(roll_width), lb=0, vtype= GRB.INTEGER)
-        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-                                  for i in range(self.I)) <= roll_width[j] for j in range(len(roll_width)))
-        m.addConstrs(grb.quicksum(x[i, j] for j in range(
-            len(roll_width))) <= demand[i] for i in range(self.I))
+    #     x = m.addVars(self.I, len(roll_width), lb=0, vtype= GRB.INTEGER)
+    #     m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+    #                               for i in range(self.I)) <= roll_width[j] for j in range(len(roll_width)))
+    #     m.addConstrs(grb.quicksum(x[i, j] for j in range(
+    #         len(roll_width))) <= demand[i] for i in range(self.I))
 
-        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
-            self.I) for j in range(len(roll_width))), GRB.MAXIMIZE)
-        m.setParam('OutputFlag', 0)
-        m.optimize()
-        # print('************************************************')
-        # print('Optimal value of IP is: %g' % m.objVal)
-        x_ij = np.array(m.getAttr('X'))
+    #     m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
+    #         self.I) for j in range(len(roll_width))), GRB.MAXIMIZE)
+    #     m.setParam('OutputFlag', 0)
+    #     m.optimize()
+    #     x_ij = np.array(m.getAttr('X'))
         
-        newx = np.reshape(x_ij, (self.I, len(roll_width)))
-        newd = np.sum(newx, axis=1)
-        return newd, newx
+    #     newx = np.reshape(x_ij, (self.I, len(roll_width)))
+    #     newd = np.sum(newx, axis=1)
+    #     return newd, newx
 
     def LP_formulation(self, demand, roll_width):
         m = grb.Model()
@@ -85,25 +84,26 @@ class deterministicModel:
         x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
         return x_ij, m.objVal
 
-    def LP_formulation2(self, demand, roll_width):
-        m = grb.Model()
-        z = m.addVars(self.I, lb=0, vtype=GRB.CONTINUOUS)
-        beta = m.addVars(self.given_lines, lb=0, vtype=GRB.CONTINUOUS)
+    # def LP_formulation2(self, demand, roll_width):
+    #     #  used to test the performance of bid-price
+    #     m = grb.Model()
+    #     z = m.addVars(self.I, lb=0, vtype=GRB.CONTINUOUS)
+    #     beta = m.addVars(self.given_lines, lb=0, vtype=GRB.CONTINUOUS)
 
-        m.addConstrs(z[i] + beta[j] * (i+1 + self.s) >= i +
-                     1 for j in range(self.given_lines) for i in range(self.I))
+    #     m.addConstrs(z[i] + beta[j] * (i+1 + self.s) >= i +
+    #                  1 for j in range(self.given_lines) for i in range(self.I))
 
-        m.setObjective(grb.quicksum(demand[i] * z[i] for i in range(
-            self.I)) + grb.quicksum(roll_width[j] * beta[j] for j in range(
-                self.given_lines)), GRB.MINIMIZE)
-        m.setParam('OutputFlag', 0)
-        m.optimize()
-        # m.write('bid_price.lp')
-        x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
-        y_ij = np.array(m.getAttr('X'))[:self.I]
-        return x_ij, y_ij, m.objVal
+    #     m.setObjective(grb.quicksum(demand[i] * z[i] for i in range(
+    #         self.I)) + grb.quicksum(roll_width[j] * beta[j] for j in range(
+    #             self.given_lines)), GRB.MINIMIZE)
+    #     m.setParam('OutputFlag', 0)
+    #     m.optimize()
+    #     x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
+    #     y_ij = np.array(m.getAttr('X'))[:self.I]
+    #     return x_ij, y_ij, m.objVal
 
     def IP_formulation1(self, demand_lower, demand_upper):
+        # This function is used to check whether the model have the optimal solution.
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
@@ -120,8 +120,6 @@ class deterministicModel:
         m.optimize()
 
         if m.status == GRB.OPTIMAL:
-            x_ij = np.array(m.getAttr('X'))
-            newx = np.reshape(x_ij, (self.I, self.given_lines))
             return True
         else:
             return False

@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import copy
 import time
 import random
+
 # Find all the probability combinations
+# 100 instances every random probability 
 
 def prop_all():
     x2 = np.arange(0.05, 1, 0.05)
@@ -45,11 +47,11 @@ for i in range(100):
     p = probab[ran_prop]
     my_file.write(str(p) + '\t')
     gamma = np.dot(p, np.arange(1, 5))
-    a = 25
-    b = 50
+    a = 70
+    b = 160
     num_period = int((a+b)/2)
     while num_period > a:
-        roll_width = np.ones(given_lines) * 11
+        roll_width = np.ones(given_lines) * 36
         # total_seat = np.sum(roll_width)
         total_seat = np.sum(roll_width) - given_lines
         a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample)
@@ -83,5 +85,3 @@ for i in range(100):
     my_file.write(str(point) + '\n')
 
 my_file.close()
-# [5, 5, 3, 5, 2, 5, 5, 5, 2, 5, 2, 3, 5, 5, 5, 5, 5, 5, 5, 2, 5, 5, 5, 2, 5,
-    # 5, 5, 5, 5, 5, 5, 2, 2, 5, 5, 5, 2, 5, 2, 5, 5, 5, 5, 5, 5, 5, 2, 5, 2]

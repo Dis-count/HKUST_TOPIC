@@ -7,6 +7,7 @@ from Mist import generate_sequence, decision1
 from collections import Counter
 from Method3 import deterministicModel
 
+# Without social distancing
 # This function uses benders' decomposition to solve stochastic Model directly.
 # And give the once decision.
 
@@ -22,7 +23,7 @@ class stochasticModel:
         self.prop = prop
 
     def obtainY(self, ind_dw, d0):
-        # the last element is dummy
+        # The last element is dummy
         yplus = np.zeros(self.I+1)
         yminus = np.zeros(self.I+1)
 

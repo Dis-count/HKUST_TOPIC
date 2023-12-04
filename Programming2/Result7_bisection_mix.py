@@ -8,8 +8,8 @@ import time
 import random
 # Without social distance: 累加 直到capacity
 # x-axis: number of people
-# Difference at specific periods
 
+# Difference at specific periods under different gamma
 
 # gamma = 2
 def prop_list1():

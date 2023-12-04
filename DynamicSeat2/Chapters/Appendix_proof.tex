@@ -18,22 +18,22 @@ Suppose the loss is not the smallest, there exists one pattern with a loss of $p
 \end{pf}
 
 
-\begin{pf}[Proof of Proposition \ref{prop_onescenario}]
-  When $|\Omega| =1$ in SSP formulation, the stochastic programming will be 
+% \begin{pf}[Proof of Proposition \ref{prop_onescenario}]
+%   When $|\Omega| =1$ in SSP formulation, the stochastic programming will be 
 
-  \begin{equation}\label{one_form}
-    \begin{aligned}
-    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-\delta) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1, \ldots, M-1, \\
-    & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
-    & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M} \\
-    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-    \end{aligned}
-  \end{equation}
+%   \begin{equation}\label{one_form}
+%     \begin{aligned}
+%     \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i-\delta) x_{ij} - \sum_{i=1}^{M} y_{i}^{+}  \\
+%     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} - y_{i}^{+}+ y_{i+1}^{+} + y_{i}^{-} = d_{i}, \quad i = 1, \ldots, M-1, \\
+%     & \sum_{j= 1}^{N} x_{ij} -y_{i}^{+} + y_{i}^{-} = d_{i}, \quad i = M, \\
+%     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
+%     & y_{i}^{+}, y_{i}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M} \\
+%     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+%     \end{aligned}
+% \end{equation}
   
-  To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i}^{-} \geq 0$, thus the constraints $\sum_{j= 1}^{N} x_{ij} + y_{i}^{-} = d_{i}, i \in \mathcal{M}$ can be rewritten as $\sum_{j= 1}^{N} x_{ij} \leq d_{i}, i \in \mathcal{M}$. That is to say, problem \eqref{one_form} is equivalent to the deterministic model. \qed
-\end{pf}
+%   To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i}^{-} \geq 0$, thus the constraints $\sum_{j= 1}^{N} x_{ij} + y_{i}^{-} = d_{i}, i \in \mathcal{M}$ can be rewritten as $\sum_{j= 1}^{N} x_{ij} \leq d_{i}, i \in \mathcal{M}$. That is to say, problem \eqref{one_form} is equivalent to the deterministic model. \qed
+% \end{pf}
 
 
 \begin{pf}[Proof of Proposition \ref{feasible_region}]

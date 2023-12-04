@@ -7,6 +7,7 @@ from Mist import generate_sequence, decision1
 from collections import Counter
 from Method3 import deterministicModel
 
+# x is integer in the master problem
 # This function uses benders' decomposition to solve stochastic Model directly.
 # And give the once decision.
 

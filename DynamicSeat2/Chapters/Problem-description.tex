@@ -118,7 +118,7 @@ Hence, the corresponding supply values can be summarized as follows: $X_h = \fra
 % \end{prop}
 
 \subsection{Dynamic Seat Assignment with Social Distancing}\label{sec_dynamic}
-In a more realistic scenario, groups arrive dynamically, and the seller needs to make sequential decisions regarding group assignments while ensuring the required spacing between groups. When a group is accepted, the seller must also determine which seats should be assigned to that group. It is essential to note that each group must be either accepted in its entirety or rejected entirely; partial acceptance is not permitted. Once the seats are confirmed and assigned to a group, they cannot be changed or reassigned to other groups.
+In a more realistic scenario, groups arrive sequentially over time, and the seller must promptly make group assignments upon each arrival while maintaining the required spacing between groups. When a group is accepted, the seller must also determine which seats should be assigned to that group. It is essential to note that each group must be either accepted in its entirety or rejected entirely; partial acceptance is not permitted. Once the seats are confirmed and assigned to a group, they cannot be changed or reassigned to other groups.
 
 % We address the problem of dynamic seat assignment with social distancing, which involves the real-time allocation of seats to incoming groups while ensuring adherence to social distancing guidelines.
 % We assume at most one arrival in each period, more than one arrival is negligible. 
@@ -128,15 +128,14 @@ To model this problem, we adopt a discrete-time framework. Time is divided into 
 The state of remaining capacity in each row is represented by a vector $\mathbf{L} = (l_1, l_2, \ldots, l_N)$, where $l_j$ denotes the number of remaining seats in row $j$. Upon the arrival of a group type $i$ in period $t$, the seller needs to make a decision denoted by $u_{i,j}$, where $u_{i,j}(t) = 1$ indicates acceptance of group type $i$ in row $j$ during period $t$, while $u_{i,j}(t) = 0$ signifies rejection of that group type in row $j$ at that period. The feasible decision set is defined as $$U(\mathbf{L}) = \{u_{i,j} \in \{0,1\}, \forall i \in \mathcal{M}, \forall j \in \mathcal{N} | \sum_{j=1}^{N} u_{i,j} \leq 1, \forall i \in \mathcal{M}; n_{i}u_{i,j}\mathbf{e}_j \leq \mathbf{L}, \forall i \in \mathcal{M}, \forall j \in \mathcal{N}\}.$$ Here, $\mathbf{e}_j$ represents an N-dimensional unit column vector with the $j$-th element being 1, i.e., $\mathbf{e}_j = (\underbrace{0, \cdots, 0}_{j-1}, 1, \underbrace{0, \cdots, 0}_{n-j})$. In other words, the decision set $U(\mathbf{L})$ consists of all possible combinations of acceptance and rejection decisions for each group type in each row, subject to the constraints that at most one group of each type can be accepted in any row, and the number of seats occupied by each accepted group must not exceed the remaining capacity of the row.
 
 
-Let $V_t(\mathbf{L})$ denote the maximum expected value to go, given remaining capacity $\mathbf{L}$ in period $t$. Then, the dynamic programming formula for this problem can be expressed as:
+Let $V_t(\mathbf{L})$ denote the maximum expected revenue earned by the best decisions regarding group seat assignments in period $t$, given remaining capacity $\mathbf{L}$. Then, the dynamic programming formula for this problem can be expressed as:
 
 \begin{equation}\label{DP}
 V_{t}(\mathbf{L}) = \max_{u_{i,j} \in U(\mathbf{L})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j} + V_{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}\mathbf{e}_j)) + p_0 V_{t+1}(\mathbf{L})\right\}
 \end{equation}
+with the boundary conditions $V_{T+1}(\mathbf{L}) = 0, \forall \mathbf{L}, V_{t}(\mathbf{0}) =0, \forall t$. Implying that 
 
-with the boundary conditions $V_{T+1}(\mathbf{L}) = 0, \forall \mathbf{L}, V_{t}(\mathbf{0}) =0, \forall t$.
-
-At the beginning of period $t$, we have the current remaining capacity vector denoted as $\mathbf{L} = (L_1, L_2, \ldots, L_N)$. Our objective is to make decisions that maximize the total expected revenue during the selling horizon from period 1 to $T$. This maximum expected revenue is represented by $V_1(\mathbf{L})$, which captures the optimal value obtained by making the best decisions regarding group acceptance and seat assignments starting from the first period with the initial remaining capacity vector $\mathbf{L}$.
+At the beginning of period $t$, we have the current remaining capacity vector denoted as $\mathbf{L} = (L_1, L_2, \ldots, L_N)$. Our objective is to make group assignments that maximize the total expected revenue during the selling horizon from period 1 to $T$ which is represented by $V_1(\mathbf{L})$.
 
 It is difficult to solve the DP \eqref{DP} due to the curse of dimensionality. To avoid this complexity, we seek to develop the heuristic method to assign arriving groups. It consists of generating the seat planning in Section 4 and stochastic assignment policy in Section 5.
 

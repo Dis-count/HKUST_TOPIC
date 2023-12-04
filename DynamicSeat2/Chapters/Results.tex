@@ -92,7 +92,9 @@ Since the original dynamic programming problem is too complex to solve directly,
 
 Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise. Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
 
-$$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0, V_{T+1}(L) =0, \forall L$$
+$$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}]$$
+
+with the boundary conditions $V_{T+1}(L) =0, \forall L \geq 0$, $V_{t}(0) =0, \forall t$.
 
 After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
 
@@ -274,7 +276,6 @@ The below table presents the percentage differences for different demand levels 
 % [0.27 6.39 13.23 21.85 25.69] 1.9
 % [ 0.04  4.97 13.55 20.99 24.81] 2
 % [0 1.46 9.23 17.32 21.59] 2.5
-
 
 % \subsection{Comparison of Different Probabilities When Supply and Demand Are Close}
 % When we set the number of periods $T$ to be equal to $T'$, representing a state where the expected demand and supply are in balance, we can observe differences among the outcomes for different probabilities.

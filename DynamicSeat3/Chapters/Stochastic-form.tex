@@ -10,13 +10,14 @@ In this section, we develop the scenario-based stochastic programming(SSP) to ob
 \subsection{Scenario-based Stochastic Programming (SSP) Formulation}
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. A particular realization of the demand vector can be represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of people accommodated over all the scenarios, we propose a scenario-based stochastic programming to obtain a seat planning.
 
-The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{Z}{+}^{M \times N}$. Here, $x_{ij}$ denotes the number of group type $i$ assigned to row $j$. The total supply for group type $i$ can be calculated as the sum of $x_{ij}$ over all rows $j$, i.e., $\sum_{j=1}^N x_{ij}$. There is a scenario-dependent decision variable, $\mathbf{y}$, to be chosen. It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times |\Omega|}$. Each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the surplus supply for group type $i$ for each scenario $\omega$. On the other hand, $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ for each scenario $\omega$.
+The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{Z}_{+}^{M \times N}$. Here, $x{ij}$ represents the number of group type $i$ assigned to row $j$ in the seat planning. To ensure that the supply for group type $i$ is accounted for, we calculate it as the sum of $x_{ij}$ over all rows $j$, denoted as $\sum_{j=1}^N x_{ij}$. However, considering the variability across different scenarios, it is necessary to model the potential excess or shortage of supply. To capture this characteristic, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$. 
+It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times |\Omega|}$. Each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the excess supply for group type $i$ for each scenario $\omega$. On the other hand, $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ for each scenario $\omega$.
 
-Considering that the group can occupy the seats planned for the larger group type when the corresponding supply is not enough, we assume that the surplus seats for group type $i$ can be occupied by smaller group type $j<i$ in the descending order of the group size. That is, for any $\omega$, $i \leq M-1$, 
+Taking into account the possibility of groups occupying seats planned for larger group types when the corresponding supply is insufficient, we make the assumption that surplus seats for group type $i$ can be occupied by smaller group types $j<i$ in descending order of group size. This means that if there are excess supply available after assigning groups of type $i$ to rows, we can provide the supply to groups of type $j<i$ in a hierarchical manner based on their sizes. That is, for any $\omega$, $i \leq M-1$, 
 
-$$y_{i \omega}^{+}=\left(\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}, y_{i \omega}^{-}=\left(d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+} \right)^{+}.$$
+$$y_{i \omega}^{+}=\left(\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}, y_{i \omega}^{-}=\left(d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+} \right)^{+},$$
 
-where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest group type $M$, we have $y_{M \omega}^{+} = (\sum_{j=1}^N x_{Mj} - d_{M \omega})^{+}$, $y_{M \omega}^{-} = (d_{M \omega}- \sum_{j=1}^N x_{Mj})^{+}$.
+where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest group type $M$, we have $y_{M \omega}^{+} = (\sum_{j=1}^N x_{Mj} - d_{M \omega})^{+}$, $y_{M \omega}^{-} = (d_{M \omega}- \sum_{j=1}^N x_{Mj})^{+}$. Based on the above mentioned considerations, the total supply of group type $i$ under scenario $\omega$ can be expressed as $\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}, i = 1, \ldots, M-1$. For the special case of group type $M$, the total supply under scenario $\omega$ is $\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}$.
 
 
 % Because the demand is unknown when the seat assignment is planned, there is no way to expect that the supply in the first stage can meet the demand exactly. Fortunately, we can find some remedies in practice, for example, seats of 5 can be assigned to a group of 4 with one empty seat as social distancing. However, the decision maker will confront seats shortage or excess without these measures. Therefore, to deal with possible demands, the wait-and-see measures (called recourses) should be considered in planning seat assignment.
@@ -39,7 +40,8 @@ Then we have the formulation of SSP:
     & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
     \end{align}
 
-The objective function consists of two parts. The first part represents the number of the largest group type that can be accommodated, given by $\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+}$. Here, $\sum_{j=1}^{N} x_{Mj}$ represents the total supply for group type $M$ and $y_{M\omega}^{+}$ represents the number of surplus supply for group type $M$ in scenario $\omega$. The second part represents the number of group type $i$, excluding $M$, that can be accommodated. It is given by $\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}$. Similarly, $\sum_{j=1}^{N} x_{ij}$ represents the total supply for group type $i$, $y_{i\omega}^{+}$ represents the number of surplus supply for group type $i$ in scenario $\omega$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios in the set.
+The objective function consists of two parts. The first part represents the number of people in
+the largest group type that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of people in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
 
 
 By reformulating the objective function, we have
@@ -53,15 +55,43 @@ By reformulating the objective function, we have
 % Plug in $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
 % The last equality holds because of $n_i- \delta = i, i \in \mathcal{M}$. 
 
-The stochastic programming has the following properties.
 
-For any $i, \omega$, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive of the optimal solution. Suppose there exist $i_0$ and $\omega_0$ such that $y_{i_0 \omega_0}^{+}$ and $y_{i_0 \omega_0}^{-}$ are positive. Substracting $\min\{y_{i_0, \omega_0}^{+}, y_{i_0, \omega_0}^{-}\}$ from these two values will still satisfy constraints \eqref{DEF_constr1} and \eqref{DEF_constr2} but increase the objective value when $p_{\omega_0}$ is positive. Thus, in the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive.
+In the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive for any $i, \omega$. Suppose there exist $i_0$ and $\omega_0$ such that $y_{i_0 \omega_0}^{+}$ and $y_{i_0 \omega_0}^{-}$ are positive. Substracting $\min\{y_{i_0, \omega_0}^{+}, y_{i_0, \omega_0}^{-}\}$ from these two values will still satisfy constraints \eqref{DEF_constr1} and \eqref{DEF_constr2} but increase the objective value when $p_{\omega_0}$ is positive. Thus, in the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive.
 
 % \begin{prop}\label{prop_onescenario}
 %   The deterministic problem \eqref{deter_upper} is a special case of stochastic programming when the number of scenarios $|\Omega|$ is equal to 1.
 % \end{prop}
 
 % That is to say, the optimal solution to the deterministic problem is one of the optimal solutions to the stochastic programming problem, while the optimal values remain unchanged.
+
+Because patterns are independent, for any given seat planning, we can convert the patterns row by row.
+
+Considering the analysis provided earlier, we find it advantageous to obtain a seat planning that primarily consists of full or largest patterns. Given a specific pattern, we have the ability to convert it into a large or full pattern while ensuring that the original group type requirements are met. When converting a pattern to a full pattern, we strive to generate a pattern that minimizes the loss. Since patterns are independent of each other, we can convert them row by row within a given seat planning. This approach allows us to optimize the seat planning by maximizing the utilization of available seats.
+
+% By adopting this strategy of converting patterns row by row and prioritizing full or largest patterns, we can enhance the effectiveness of the seat planning process, optimize seat utilization, and minimize any potential losses.
+
+Suppose there is a seat planning where at least one corresponding pattern is not full or largest. In such a case, we can utilize the following algorithm to construct the full or the largest patterns.
+
+\begin{algorithm}
+  \caption{Construct The Full or Largest Pattern}\label{construction}
+  \KwIn{Integral $\mathbf{x}$, $P=\{P_1,P_2,\ldots,P_n\}$}
+  \KwOut{$P$}
+  \For{$j=1, \ldots, N$}
+  {\While{$\beta > 0$}
+    {\While{$\beta \geq n_M$}
+    {$\beta \gets \beta - n_M$\; $P_{jM} \gets P_{jM} + 1$\;}
+    \eIf{$n_{1} \leq \beta < n_{M}$}
+    {$P_{j,\beta-n_1+1} \gets P_{j,\beta-n_1+1} + 1$\; $\beta = 0$\;}
+    {$i^{0} = \min_{k}\{P_{jk} \neq 0\}$\;
+    \eIf{$i^{0} \neq M$}
+    {$\beta \gets \beta - \max\{1, M - i^{0}\}$\; $P_{j,i^{0}} \gets P_{j,i^{0}} - 1$\;
+    $P_{j,\min\{i^{0}+\beta, M\}} \gets P_{j,\min\{i^{0}+\beta, M\}} + 1$\;}
+    {$\beta = 0$}}}
+    }
+\end{algorithm}
+
+Notice that this procedure does not impact the optimality of the solution. Instead, it maximizes the utilization of available seats. Thus, we have the following Proposition.
+
 
 \begin{prop}\label{prop_solution}
 There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
@@ -80,32 +110,11 @@ To allocate the remaining unoccupied seats in row $j$, we can follow the followi
 By repeating these steps for each row, we can ensure that each row in the seat planning becomes either full or largest. This allocation scheme maintains the optimality of the solution while maximizing the utilization of available seats. \qed
 \end{pf}
 
-% 对于任何最优解，如果相应的pattern 不是full 或者 最大的，则我们可以通过将剩下未被占据的座位重新划分。可以分配给一个新的group,或者分配给原有的group. 由于小组可以利用大组的座位，保留原有最优解对应的分配方案，将剩下未被占据的座位重新划分不会影响最优性。现在我们需要说明存在一种分配方案使得每排都是full 或者是最大的。
-
-
-Suppose there exists an optimal solution where at least one corresponding pattern is not full or largest. In such a case, we can utilize the following algorithm to construct another optimal solution in which all patterns are both full and the largest.
-
-% \begin{algorithm}[H]
-%   \caption{Construct The Full or Largest Pattern Algorithm}\label{construction}
-%     \begin{description}
-%     \item[Step 1] Given the solution $\{x_{ij}\}$. Let $X$ represent the supply of the given solution. Check if every pattern is full or largest. Start from $j =1$. 
-%     \item[Step 2] Let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. 
-%     \item[Step 2.1] If $\beta = 0$, let $j =j + 1$. Continue step 2.
-%     \item[Step 2.2] If $\beta \geq n_{M}$, let $\beta = \beta - n_{M}$, $X_{M} = X_{M} + 1$. Continue this step until $\beta < n_{M}$. Go to step 2.3 or 2.4.
-%     \item[Step 2.3] If $n_{1} \leq \beta < n_{M}$, let $\beta = 0$, $X_{\beta-n_{1}+1} = X_{\beta-n_{1}+1} + 1$, $j = j+1$. Go to step 2. 
-%     \item[Step 2.4] If $n_{1} > \beta > 0$, find the smallest group type denoted as $i^0$ in row $j$.
-%     \item[Step 3] If $i^0 = M$, then the row represents a largest pattern and let $j = j +1$, go to Step 2. If $i^0 \neq M$, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Go to Step 2.
-%    \end{description}
-% \end{algorithm}
-
-Notice that this procedure does not impact the optimality of the solution. Instead, it maximizes the utilization of available seats.
-
 
 Let $\mathbf{n} = (n_1, \ldots, n_M)$, $\mathbf{L} = (L_1, \ldots, L_N)$ where $n_i$ is the size of seats taken by group type $i$ and $L_j$ is the length of row $j$ as we defined above. Then the constraint \eqref{DEF_constr3} can be expressed as $\mathbf{n} \mathbf{x} \leq \mathbf{L}$.
 
 The linear constraints associated with scenarios, i.e., constraints \eqref{DEF_constr1} and \eqref{DEF_constr2}, can be written in a matrix form as
 \[\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_\omega = \mathbf{d}_\omega, \omega\in \Omega,\]
-
 where $\mathbf{1}$ is a column vector of size $N$ with all 1s, $\mathbf{V} = [\mathbf{W}, ~\mathbf{I}]$.
 
 $$
@@ -177,17 +186,14 @@ Therefore, the optimal value of the problem \eqref{BD_sub}, $z_{\omega}(\mathbf{
 
 % We assume that $\mathbb{P}$ is nonempty and has at least one extreme point.  Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
 
-% The dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite.
 
-% Let $z_{\omega}$ be the lower bound of $z_{\omega}(x)$. 
-
-Alternatively, $z_{\omega}(\mathbf{x})$ is the largest number $z_{\omega}$ such that $\bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_w, \forall \bm{\alpha} \in \mathcal{O}$. We use this characterization of $z_w(\mathbf{x})$ in problem \eqref{BD_master} and conclude that problem \eqref{BD_master} can thus be put in the form:
+Alternatively, $z_{\omega}(\mathbf{x})$ is the largest number $z_{\omega}$ such that $\bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_w, \forall \bm{\alpha_{\omega}} \in \mathcal{O}$. We use this characterization of $z_w(\mathbf{x})$ in problem \eqref{BD_master} and conclude that problem \eqref{BD_master} can thus be put in the form:
 
 \begin{equation}\label{BD_master2}
   \begin{aligned}
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-    & \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}, \forall \omega \\
+    & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha}_{\omega} \in \mathcal{O}, \forall \omega \\
      & \mathbf{x} \in \mathbb{Z}_{+}, z_{\omega} ~\text{is free}
   \end{aligned}
 \end{equation}
@@ -249,7 +255,7 @@ We can conclude that the RBMP will have the form:
   \begin{aligned}
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-    & \bm{\alpha}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha} \in \mathcal{O}^{t}, \forall \omega \\
+    & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha}_{\omega} \in \mathcal{O}^{t}, \forall \omega \\
      & \mathbf{x} \in \mathbb{Z}_{+}, z_{\omega} ~\text{is free}
   \end{aligned}
 \end{equation}
@@ -273,23 +279,26 @@ However, if there exists at least one scenario $\omega$ for which the optimal va
 
 The steps of the algorithm are described as below,
 
-% \begin{algorithm}[H]\label{cut_algo}
-%   \caption{The benders decomposition algorithm}
-%     \begin{description}
-%     \item[Step 1.] Solve problem \eqref{BD_master3} with all $\alpha_{\omega}^0 = \mathbf{0}$ for each scenario. Then, obtain the solution $(\mathbf{x}_0, \mathbf{z}^{0})$.
-%     \item[Step 2.] Set the upper bound $UB = c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$.
-%     \item[Step 3.] For $x_0$, we can obtain $\alpha_{\omega}^{1}$ and $z_{\omega}^{(0)}$ for each scenario, set the lower bound $LB = c^{\intercal} x_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$.
-%     \item[Step 4.] For each $\omega$, if $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1}) < z_{\omega}^{0}$, add one new constraint, $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to RBMP.
-%     \item[Step 5.] Solve the updated RBMP, obtain a new solution $(x_1, z^{1})$ and update UB.
-%     \item[Step 6.] Repeat step 3 until $UB - LB < \epsilon$.
-%     % (In our case, UB converges.)
-%    \end{description}
-%   \end{algorithm}
+\begin{algorithm}
+  \caption{Benders Decomposition}\label{cut_algo}
+  \KwIn{Initial problem \eqref{BD_master3} with $\alpha_{\omega} = 0, \forall \omega$, $LB = 0$, $UB = \infty$, $\epsilon$.}
+  \KwOut{$\mathbf{x}_{0}$}
+  \While{$UB - LB > \epsilon$}
+    {Obtain $(\mathbf{x}_{0}, \mathbf{z}^{0})$ from problem \eqref{BD_master3}\;
+    $UB = c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$\;
+    \For{$\omega= 1, \ldots, |\Omega|$}
+    {Obtain $\alpha_{\omega}^{1}$ from Proposition 6\; $z_{\omega}^{(0)} = (\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1})$\;
+    \If{$z_{\omega}^{(0)} < z_{\omega}^{0}$}
+    {Add one new constraint, $(\alpha_{\omega}^{1})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to problem \eqref{BD_master3}\;}
+    }
+    {$LB \gets c^{\intercal} \mathbf{x}_{0} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)} $\;}
+    }
+\end{algorithm}
 
-From the Lemma \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega}^0 = \mathbf{0}$ initially in {\bf Step 1}. Notice that only contraints are added in each iteration, thus $LB$ and $UB$ are both monotone. Then we can use $UB - LB < \epsilon$ to terminate the algorithm in {\bf Step 6}.
+From the Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega}^0 = \mathbf{0}$ initially. Notice that only contraints are added in each iteration, thus $LB$ and $UB$ are both monotone. Then we can use $UB - LB < \epsilon$ to terminate the algorithm.
 
 
-After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})$. Solving problem \eqref{BD_master3} directly can be computationally challenging in some cases, so practically we first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. Then, we generate an integral seat planning from this solution.
+After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})^{\intercal}$. Solving problem \eqref{BD_master3} directly can be computationally challenging in some cases, so practically we first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. Then, we generate an integral seat planning from this solution.
 
 \subsection{Obtain The Seat Planning Composed of Full or Largest Patterns}\label{seat_assignment}
 We may obtain a fractional solution using the decomposition method. This solution represents the optimal allocations of groups to seats but may involve fractional values, indicating partial assignments. Based on the fractional solution obtained, we use the deterministic model to generate a feasible seat planning. The objective of this model is to allocate groups to seats in a way that satisfies the supply requirements for each group without exceeding the corresponding supply values obtained from the fractional solution. To accommodate more groups and optimize seat utilization, we aim to construct a seat planning composed of full or largest patterns based on the feasible seat planning obtained in the previous step. 
@@ -298,8 +307,6 @@ We may obtain a fractional solution using the decomposition method. This solutio
 % This involves adjusting the allocation of seats within the seat planning to maximize the utilization of available seats. The goal is to create patterns where each row is either completely filled or consists of the largest possible group.
 
 % these constraints while potentially resulting in patterns that are not necessarily full or largest.
-
-
 
 % The decomposition method only gives a fractional solution and the stochastic model does not provide an appropriate seat planning when the number of people in scenario demands is way smaller than the number of the seats.
 % The objective is to obtain the maximal number of people placed according to the demand scenarios. It will not provide an appropriate seat assignment when the number of people associated with scenario demands is way less than the number of available seats because there are multiple optimal solutions and the solution given by solver probably does not utilize all the empty seats.
@@ -312,7 +319,7 @@ We may obtain a fractional solution using the decomposition method. This solutio
 Let the optimal solution to the relaxation of SSP be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${X}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Replace the vector $\mathbf{d}$ with $\mathbf{X}^{0}$ in the deterministic model, we have the following problem, 
 
 \begin{equation}\label{deter_upper1}
-  \{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq X_{i}^{0}, i \in \mathcal{M}; x_{ij} \in Z^{+} \}
+  \{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq X_{i}^{0}, i \in \mathcal{M}; x_{ij} \in Z_{+} \}
 \end{equation}
 
 Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{x}^{1}$, which represents a feasible seat planning.
@@ -320,26 +327,23 @@ Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solu
 To maximize the utilization of seats, we should assign full or largest patterns to each row. We will check if every row is full. When row $j$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j}$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. If $\beta$ is no less than $n_M$, then let $\beta = \beta - n_M$, $s_M = s_M +1$ until $\beta$ is less than $n_M$. If row $j$ is still not full, then find the smallest group size in row $j$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
 
 
-This procedure can be described in {\bf Step 4} of the following algorithm.
+\begin{algorithm}
+  \caption{Seat Planning Construction}\label{seat_construction}
+  \KwIn{Scenarios set $\Omega$, Seat layout}
+  \KwOut{$\mathbf{x}, P$}
+    {Obtain the optimal solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition\;}
+    {${X}_{i}^{0} \gets \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$\;}
+    {Obtain the optimal solution, $\mathbf{x}^{1}$, and the corresponding pattern, $P$, from problem \eqref{deter_upper1}\;}
+    {Construct the full or largest patterns by algorithm \ref{construction} with $\mathbf{x}^{1}$ and $P$\;}
+\end{algorithm}
 
-% \begin{algorithm}[H]
-%   \caption{Seat Planning Construction Algorithm}\label{seat_construction}
-%     \begin{description}
-%     \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, from stochatic linear programming by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
-%     \item[Step 2.] Solve problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{x}^{1}$. 
-%     \item[Step 3.] Construct the full or largest patterns mentioned in algorithm \ref{construction}.
-%    \end{description}
-%   \end{algorithm}
+% For Algorithm \ref{seat_construction}, {\bf Step 2} can give a feasible seat planning, {\bf Step 4} can give the full or largest patterns for each row. 
 
-For Algorithm \ref{seat_construction}, {\bf Step 2} can give a feasible seat planning, {\bf Step 4} can give the full or largest patterns for each row. The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. 
+The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. 
 
 % Therefore, any fixed sequence of groups within each pattern can be used to construct a seat planning that meets practical needs.
 
-% Thus, we can obtain a feasible seat planning by solving stochastic programming once and deterministic programming twice.
 
-% 1. Why should not we use the subset sum problem to decompose the whole problem, it will destroy global optimality. But notice that when we arrange row by row, it may also affect the optimality.
-
-% Many symmetry structure/ Every step we need to solve a multiple knapsack problem(difficult).
 
 % We are able to provide an online seat planning by using our method.
 

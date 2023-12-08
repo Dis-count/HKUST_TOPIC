@@ -35,8 +35,11 @@ We introduce the term pattern to refer to the seat planning arrangement for a si
 In order to quantify the impact of each pattern, we introduce the concept of loss, which is the number of unoccupied seats. Mathematically, the loss is defined as $L- \delta - \sum_{i =1}^{M} i t_i$, where $L$ denotes the length of the row. The loss provides a measure of the number of seats which cannot be taken due to the implementation of social distancing constraints. By examining the losses associated with different patterns, we can assess the effectiveness of various seat planning configurations with respect to accommodating the desired number of individuals while adhering to social distancing requirements.
 
 \begin{definition}
-Consider the length of the row is $L$, the social distancing is $\delta=1$ and a pattern $(t_1, \ldots, t_M)$.
-We call the pattern $\bm{t}$ a full pattern if it satisfies the condition $\sum_{i=1}^{M} t_i n_i = L$. We call the pattern $\bm{t}$ a largest pattern if it belongs to $\arg\min_{\bm{t}} \{L - \delta - \sum_{i =1}^{M} i t_i\}$.
+Consider a feasible pattern $\bm{t} = (t_1, \ldots, t_M)$. 
+We call $\bm{t}$ a full pattern if it satisfies the condition $\sum_{i=1}^{M} t_i n_i = L$. We call $\bm{t}$ a largest pattern if 
+$|t| \geq |t^{\prime}|$ for any $t^{\prime}$.
+
+$t_i t_j = 0 \text{if} n_i + n_j leq n_M$
 
 % minimizes the loss $L - \delta - \sum_{i =1}^{M} t_i \cdot i$ for all $\bm{t}$ that satisfy the constraint $\sum_{i=1}^{M} t_i n_i \leq L$. 
 

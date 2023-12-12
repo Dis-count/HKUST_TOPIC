@@ -29,15 +29,15 @@ where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest g
 % The assignment will be determined before the realization of the random demand, here-and-now policy.
 
 Then we have the formulation of SSP:
-    \begin{align}
-    \quad \max \quad & E_{\omega}\left[(n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}) + \sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+})\right] \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
-    y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega \label{DEF_constr1} \\
-    & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \label{DEF_constr2}\\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}  \label{DEF_constr3} \\
-    & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \notag \\
-    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
-    \end{align}
+  \begin{align}
+  \quad \max \quad & E_{\omega}\left[(n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}) + \sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+})\right] \\
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
+  y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega \label{DEF_constr1} \\
+  & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \label{DEF_constr2}\\
+  & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}  \label{DEF_constr3} \\
+  & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \notag \\
+  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
+  \end{align}
 
 The objective function consists of two parts. The first part represents the number of people in
 the largest group type that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of people in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
@@ -59,11 +59,20 @@ In the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}
 % \begin{prop}\label{prop_onescenario}
 %   The deterministic problem \eqref{deter_upper} is a special case of stochastic programming when the number of scenarios $|\Omega|$ is equal to 1.
 % \end{prop}
-
 % That is to say, the optimal solution to the deterministic problem is one of the optimal solutions to the stochastic programming problem, while the optimal values remain unchanged.
 
 
-Considering the analysis provided earlier, we find it advantageous to obtain a seat planning that primarily consists of full or largest patterns. Given a specific pattern, we can convert it into a large or full pattern while ensuring that the original group type requirements are met. When we can convert more than one full pattern, we strive to generate the pattern with the minimal loss. Since patterns are independent of each other, we can convert them row by row within a given seat planning. This approach allows us to optimize the seat planning by maximizing the utilization of available seats.
+Considering the analysis provided earlier, we find it advantageous to obtain a seat planning that only consists of full or largest patterns.
+
+\begin{prop}\label{prop_solution}
+There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+\end{prop}
+
+$P = (p_1, \ldots, p_N)$
+
+We want to find another pattern $t = (t_1, \ldots, t_N)$ such that $p_1 \leq t_1$, $p_1+ p_2 \leq t_1 + t_2$, $p_1 + \ldots + p_N \geq t_1 + \ldots + t_N$.
+
+Given a specific pattern, we can convert it into a large or full pattern while ensuring that the original group type requirements are met. When we can convert more than one full pattern, we strive to generate the pattern with the minimal loss. Since patterns are independent of each other, we can convert them row by row within a given seat planning. This approach allows us to optimize the seat planning by maximizing the utilization of available seats.
 
 % By adopting this strategy of converting patterns row by row and prioritizing full or largest patterns, we can enhance the effectiveness of the seat planning process, optimize seat utilization, and minimize any potential losses.
 
@@ -72,28 +81,25 @@ Suppose there is a seat planning where at least one corresponding pattern is not
 
 \begin{algorithm}
   \caption{Construct The Full or Largest Pattern}\label{construction}
-  \KwIn{Seat planning $\bm{H}=\{\bm{h}_1,\ldots,\bm{h}_N\}$}
-  \KwOut{$\bm{H}$}
-  \For{$j=1, \ldots, N$}
-  {\While{$\beta > 0$}
-    {$i^{0} \gets \min_{k}\{H_{j,k} \neq 0\}$\;
-    \eIf{$i^{0} \neq M$}
-    {$\beta \gets \beta - \max\{1, M - i^{0}\}$\; $H_{j,i^{0}} \gets H_{j,i^{0}} - 1$\;
-    $H_{j,\min\{i^{0}+\beta, M\}} \gets H_{j,\min\{i^{0}+\beta, M\}} + 1$\;}
+  \KwIn{Pattern $\bm{h}$}
+  \KwOut{Pattern}
+  \While{$\beta > 0$}
+    {$k \gets \min_{i}\{h_{i} \neq 0\}$\;
+    \eIf{$k \neq M$}
+    {$\beta \gets \beta - \max\{1, M - k\}$\; $h_{k} \gets h_{k} - 1$\;
+    $h_{\min\{k+\beta, M\}} \gets h_{\min\{k+\beta, M\}} + 1$\;}
     {\eIf{$\beta \geq n_{M}$}
     {$q \gets \lfloor\frac{\beta}{n_M}\rfloor$\;
-     $\beta \gets \beta - q n_M$\; $H_{j,M} \gets H_{j,M} + q$\Comment*[r]{This is a comment}}
+     $\beta \gets \beta - q n_M$\; $h_{M} \gets h_{M} + q$\Comment*[r]{This is a comment}}
     {\eIf{$n_{1} \leq \beta < n_{M}$}
-    {$H_{j,\beta-n_1+1} \gets H_{j,\beta-n_1+1} + 1$\; $\beta = 0$\;}
-    {$\bm{h}_j$ is the largest}}
-    }}}
+    {$h_{\beta-n_1+1} \gets h_{\beta-n_1+1} + 1$\; $\beta = 0$\;}
+    {$\bm{h}$ is the largest}}
+    }}
 \end{algorithm}
 
 Notice that this procedure does not impact the optimality of the solution. Instead, it maximizes the utilization of available seats. Thus, we have the following Proposition.
 
-\begin{prop}\label{prop_solution}
-There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
-\end{prop}
+
 
 \begin{pf}[Proof of Proposition \ref{prop_solution}]
 In any optimal solution where one of the corresponding patterns is not full or largest, we have the flexibility to allocate the remaining unoccupied seats. These seats can be assigned to either a new seat planning or added to an existing seat planning. Importantly, since a group can utilize the seat planning of a larger group, the allocation scheme based on the original optimal solution will not affect the optimality of the overall solution. Next, we explain the allocation scheme that ensures each row becomes full or largest. Let $\beta= L_{j} - \sum_{i} n_{i} x_{ij}$. If row $j$ is not full or largest, then $\beta > 0$. 

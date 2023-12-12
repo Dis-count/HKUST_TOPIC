@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -65,10 +68,10 @@
 \newlabel{DEF_constr1}{{4}{11}{Scenario-based Stochastic Programming (SSP) Formulation}{equation.4.4}{}}
 \newlabel{DEF_constr2}{{5}{11}{Scenario-based Stochastic Programming (SSP) Formulation}{equation.4.5}{}}
 \newlabel{DEF_constr3}{{6}{11}{Scenario-based Stochastic Programming (SSP) Formulation}{equation.4.6}{}}
+\newlabel{prop_solution}{{3}{11}{}{prop.3}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Construct The Full or Largest Pattern\relax }}{12}{algocf.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{construction}{{1}{12}{Scenario-based Stochastic Programming (SSP) Formulation}{algocf.1}{}}
-\newlabel{prop_solution}{{3}{12}{}{prop.3}{}}
 \newlabel{BD_master}{{7}{14}{Scenario-based Stochastic Programming (SSP) Formulation}{equation.4.7}{}}
 \newlabel{BD_sub}{{8}{14}{Scenario-based Stochastic Programming (SSP) Formulation}{equation.4.8}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve SSP by Benders Decomposition}{14}{subsection.4.2}\protected@file@percent }

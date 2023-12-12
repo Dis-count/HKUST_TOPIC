@@ -99,7 +99,7 @@ There exists an optimal solution to the stochastic programming problem such that
 In any optimal solution where one of the corresponding patterns is not full or largest, we have the flexibility to allocate the remaining unoccupied seats. These seats can be assigned to either a new seat planning or added to an existing seat planning. Importantly, since a group can utilize the seat planning of a larger group, the allocation scheme based on the original optimal solution will not affect the optimality of the overall solution. Next, we explain the allocation scheme that ensures each row becomes full or largest. Let $\beta= L_{j} - \sum_{i} n_{i} x_{ij}$. If row $j$ is not full or largest, then $\beta > 0$. 
 
 We aim to allocate the remaining unoccupied seats in row $j$ in a way that maximizes the number of planned groups that become the largest in size.
-Find the smallest group type in the pattern denoted as $i^0$. If $i^0 = M$, it means that this row represents a largest pattern, we already change this row to a largest pattern. If $i^0 \neq M$, we reduce the number of group type $i^0$ by one and increase the number of group type $\min {(i^0+\beta), M}$ by one. 
+Find the smallest group type in the pattern denoted as $i^0$. If $i^0 = M$, it means that this row represents a largest pattern, we already change this row to a largest pattern. If $i^0 \neq M$, we reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. 
 
 We repeat this procedure until all the planned groups become the largest or $\beta = 0$. The latter situation means the pattern is full. If all the planned groups become the largest and $\beta \neq 0$, we can follow the following steps to obtain the largest pattern.
 

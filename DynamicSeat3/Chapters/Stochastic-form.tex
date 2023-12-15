@@ -53,7 +53,6 @@ By reformulating the objective function, we have
 % Plug in $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
 % The last equality holds because of $n_i- \delta = i, i \in \mathcal{M}$. 
 
-
 In the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive for any $i, \omega$. Suppose there exist $i_0$ and $\omega_0$ such that $y_{i_0 \omega_0}^{+}$ and $y_{i_0 \omega_0}^{-}$ are positive. Substracting $\min\{y_{i_0, \omega_0}^{+}, y_{i_0, \omega_0}^{-}\}$ from these two values will still satisfy constraints \eqref{DEF_constr1} and \eqref{DEF_constr2} but increase the objective value when $p_{\omega_0}$ is positive. Thus, in the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive.
 
 % \begin{prop}\label{prop_onescenario}
@@ -61,62 +60,60 @@ In the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}
 % \end{prop}
 % That is to say, the optimal solution to the deterministic problem is one of the optimal solutions to the stochastic programming problem, while the optimal values remain unchanged.
 
-
-Considering the analysis provided earlier, we find it advantageous to obtain a seat planning that only consists of full or largest patterns.
+Considering the analysis provided earlier, we find it advantageous to obtain a seat planning that only consists of full or largest patterns. However, the seat planning associated with the optimal solution obtained by solver to SSP may not only consist of full or largest patterns. We can convert the optimal solution to another optimal solution which is composed of the full or largest patterns.
 
 \begin{prop}\label{prop_solution}
 There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
 \end{prop}
 
-$P = (p_1, \ldots, p_N)$
+\begin{pf}[Proof of Proposition \ref{prop_solution}]
+In any optimal solution where one of the corresponding patterns is not full or largest, we have the flexibility to allocate the remaining unoccupied seats. These seats can be assigned to either a new seat planning or added to an existing seat planning. Importantly, since a group can utilize the seat planning of a larger group, the allocation scheme based on the original optimal solution will not affect the optimality of the solution. 
+For each row, there are three situations to allocate the seats. First, when the rest seats can be allocated to the existing groups, then the corresponding pattern becomes a full pattern. Second, when all the existing groups are the largest groups and the rest seats cannot construct a new group, the pattern becomes the largest. Third, when all the existing groups are the largest groups and the rest seats can construct new groups, the rest seats can be used to construct the largest groups until there is no enough capacity, then the pattern becomes the largest. Finally, we can allocate the seats such that each row in the seat planning becomes either full or largest. \qed
+\end{pf}
 
-We want to find another pattern $t = (t_1, \ldots, t_N)$ such that $p_1 \leq t_1$, $p_1+ p_2 \leq t_1 + t_2$, $p_1 + \ldots + p_N \geq t_1 + \ldots + t_N$.
+Given a specific pattern, we can convert it into a largest or full pattern while ensuring that the original group type requirements are met. When multiple full patterns are possible, our objective is to generate the pattern with minimal loss.
 
-Given a specific pattern, we can convert it into a large or full pattern while ensuring that the original group type requirements are met. When we can convert more than one full pattern, we strive to generate the pattern with the minimal loss. Since patterns are independent of each other, we can convert them row by row within a given seat planning. This approach allows us to optimize the seat planning by maximizing the utilization of available seats.
+Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_N)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_N{'})$ that maximizes $|\bm{h}{'}|$ while satisfying the following constraints: $h_1{'} \geq h_1$, $h_1{'} + h_2{'} \geq h_1 + h_2$, $\cdots$, $h_1{'} + \ldots + h_N{'} \geq h_1 + \ldots + h_N$. In other words, we want to find a pattern $\bm{h}'$ where each element $h_i'$ is greater than or equal to the corresponding element $h_i$ in $\bm{h}$, and the cumulative sums of the elements in $\bm{h}'$ are greater than or equal to the cumulative sums of the elements in $\bm{h}$.
+By finding such a pattern $\bm{h}'$, we can ensure that the transformed pattern meets or exceeds the requirements of the original group types. Among the possible full patterns that satisfy these constraints, we prioritize the one with the smallest loss.
 
-% By adopting this strategy of converting patterns row by row and prioritizing full or largest patterns, we can enhance the effectiveness of the seat planning process, optimize seat utilization, and minimize any potential losses.
+Now, we demonstrate the specific allocation scheme.
+Let $\beta= L_{j} - \sum_{i} n_{i} x_{ij}$. If row $j$ is not full or largest, then $\beta > 0$. 
+We aim to allocate the remaining unoccupied seats in row $j$ in a way that maximizes the number of planned groups that become the largest in size. Find the smallest group type in the pattern denoted as $i^0$. If $i^0 = M$, it means that this row represents a largest pattern, we already change this row to a largest pattern. If $i^0 \neq M$, we reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. 
 
-Suppose there is a seat planning where at least one corresponding pattern is not full or largest. In such a case, we can utilize the following algorithm to construct the full or the largest patterns.
+We continue this procedure until either all the planned groups become the largest or $\beta = 0$. If $\beta = 0$, it indicates that the pattern is full. In this case, we have assigned all the available seats to the existing groups without incurring any additional loss. However, if all the planned groups become the largest and $\beta \neq 0$, we can follow the steps outlined below to obtain the largest pattern:
 
+\begin{itemize}
+  \item If $\beta \geq n_{M}$, we can assign $n_M$ seats to a new group type $M$. We repeat this step until $\beta < n_{M}$, ensuring that we use all remaining seats in increments of $n_M$.
+
+  \item If $n_{1} \leq \beta < n_{M}$, we can assign $\beta$ seats to a new group type $\beta-n_{1}+1$.
+  \item If $0 < \beta < n_{1}$, it means that the current pattern is already the largest possible pattern because all the planned groups in the pattern are the largest.
+\end{itemize}
+
+By following these steps, always utilizing the largest group type for assignment, we can obtain either the largest pattern or a full pattern with minimal loss. This approach ensures efficient seat allocation, maximizing the utilization of available seats while satisfying the requirements of the original groups.
+
+We can utilize the following algorithm to construct the full or the largest patterns.
 
 \begin{algorithm}
   \caption{Construct The Full or Largest Pattern}\label{construction}
   \KwIn{Pattern $\bm{h}$}
   \KwOut{Pattern}
   \While{$\beta > 0$}
-    {$k \gets \min_{i}\{h_{i} \neq 0\}$\;
+    {$k \gets \min_{i}\{h_{i} \neq 0\}$\Comment*[r]{Find the smallest group type in the pattern}
     \eIf{$k \neq M$}
     {$\beta \gets \beta - \max\{1, M - k\}$\; $h_{k} \gets h_{k} - 1$\;
-    $h_{\min\{k+\beta, M\}} \gets h_{\min\{k+\beta, M\}} + 1$\;}
+    $h_{\min\{k+\beta, M\}} \gets h_{\min\{k+\beta, M\}} + 1$\Comment*[r]{Change the current group type to a group type as large as possible}}
     {\eIf{$\beta \geq n_{M}$}
     {$q \gets \lfloor\frac{\beta}{n_M}\rfloor$\;
-     $\beta \gets \beta - q n_M$\; $h_{M} \gets h_{M} + q$\Comment*[r]{This is a comment}}
+     $\beta \gets \beta - q n_M$\; $h_{M} \gets h_{M} + q$\Comment*[r]{Assign seats to as many the largest group type as possible}}
     {\eIf{$n_{1} \leq \beta < n_{M}$}
-    {$h_{\beta-n_1+1} \gets h_{\beta-n_1+1} + 1$\; $\beta = 0$\;}
-    {$\bm{h}$ is the largest}}
+    {$h_{\beta-n_1+1} \gets h_{\beta-n_1+1} + 1$\; $\beta \gets 0$\;}
+    {$\bm{h}$ is the largest\; $\beta \gets 0$\;}}
     }}
 \end{algorithm}
 
-Notice that this procedure does not impact the optimality of the solution. Instead, it maximizes the utilization of available seats. Thus, we have the following Proposition.
 
+Since patterns are independent of each other, we can convert them row by row within a given seat planning. This approach allows us to optimize the seat planning by maximizing the utilization of available seats.
 
-
-\begin{pf}[Proof of Proposition \ref{prop_solution}]
-In any optimal solution where one of the corresponding patterns is not full or largest, we have the flexibility to allocate the remaining unoccupied seats. These seats can be assigned to either a new seat planning or added to an existing seat planning. Importantly, since a group can utilize the seat planning of a larger group, the allocation scheme based on the original optimal solution will not affect the optimality of the overall solution. Next, we explain the allocation scheme that ensures each row becomes full or largest. Let $\beta= L_{j} - \sum_{i} n_{i} x_{ij}$. If row $j$ is not full or largest, then $\beta > 0$. 
-
-We aim to allocate the remaining unoccupied seats in row $j$ in a way that maximizes the number of planned groups that become the largest in size.
-Find the smallest group type in the pattern denoted as $i^0$. If $i^0 = M$, it means that this row represents a largest pattern, we already change this row to a largest pattern. If $i^0 \neq M$, we reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. 
-
-We repeat this procedure until all the planned groups become the largest or $\beta = 0$. The latter situation means the pattern is full. If all the planned groups become the largest and $\beta \neq 0$, we can follow the following steps to obtain the largest pattern.
-
-\begin{itemize}
-  \item If $\beta \geq n_{M}$, we can assign $n_M$ seats to a new group type $M$. We repeat this procedure until $\beta < n_{M}$. 
-  \item If $n_{1} \leq \beta < n_{M}$, we can assign $\beta$ seats to a new group type $\beta-n_{1}+1$.
-  \item If $0 < \beta < n_{1}$, the current pattern is the largest.
-\end{itemize}
-
-By repeating these steps for each row, we can ensure that each row in the seat planning becomes either full or largest. This allocation scheme maintains the optimality of the solution while maximizing the utilization of available seats. \qed
-\end{pf}
 
 Let $\mathbf{n} = (n_1, \ldots, n_M)$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)$ represent the vector of row lengths, where $L_j$ denotes the length of row $j$ as defined previously.
 The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{n} \mathbf{x} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{n} \mathbf{x}$, does not exceed the available row lengths $\mathbf{L}$.
@@ -236,18 +233,13 @@ The optimal solutions to problem \eqref{BD_sub_dual} can be obtained according t
   The optimal solutions to problem \eqref{BD_sub_dual} are given by 
 \begin{equation}\label{BD_sub_simplified}
   \begin{aligned}
-    & \alpha_{i} = 0 \quad \text{if}~  y_{i \omega}^{-} > 0,  i =1,\ldots, M \\
-    & \alpha_{i} = \alpha_{i-1}+1 \quad \text{if}~ y_{i \omega}^{+} > 0, i =1,\ldots, M \\
-    & \alpha_{i} = 0 \quad \text{if}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}> 0, i = 1,\ldots, M-1 \\
-    & 0 \leq \alpha_{i} \leq \alpha_{i-1}+1 \quad \text{if}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}= 0, i = 1,\ldots, M-1 \\
-    & 0 \leq \alpha_{i} \leq \alpha_{i-1}+1 \quad \text{if}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, i = M
+    \alpha_{i} = 0 \quad & \text{if}~  y_{i \omega}^{-} > 0,  i =1,\ldots, M~\text{or}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}> 0, i = 1,\ldots, M-1 \\
+    \alpha_{i} = \alpha_{i-1}+1 \quad & \text{if}~ y_{i \omega}^{+} > 0, i =1,\ldots, M \\
+    0 \leq \alpha_{i} \leq \alpha_{i-1}+1 \quad & \text{if}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, i = M~\text{or}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}= 0, i = 1,\ldots, M-1
   \end{aligned}
 \end{equation}
 \end{prop}
 
-% \begin{remark}
-% During the calculation, we choose the optimal solution $\alpha_{i} = \alpha_{i-1} +1$ when $0 \leq \alpha_{i} \leq \alpha_{i-1} +1$.
-% \end{remark}
 
 Instead of solving this linear programming directly, we can compute the values of $\alpha_{\omega}$ by performing a forward calculation from $\alpha_{1\omega}$ to $\alpha_{M\omega}$.
 
@@ -274,30 +266,28 @@ To determine the initial $\mathcal{O}^{t}$, we have the following proposition.
 RBMP is always bounded with at least any one feasible constraint for each scenario.
 \end{prop}
 
-Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}_{0}$ and $\mathbf{z}^{0} =(z^{0}_1,\ldots, z^{0}_{|\Omega|})$. Then $c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$ is an upper bound of problem \eqref{BD_master3}. When $\mathbf{x}_0$ is given, the optimal solution, $\bm{\tilde{\alpha}}_{\omega}$, to problem \eqref{BD_sub_dual} can be obtained according to Proposition \ref{optimal_sol_sub_dual}. Let $z_{\omega}^{(0)} = \bm{\tilde{\alpha}}_{\omega}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ and $(\mathbf{x}_0, \mathbf{z}^{(0)})$ is a feasible solution to problem \eqref{BD_master3} because it satisfies all the constraints. Thus, $\mathbf{c}^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)}$ is a lower bound of problem \eqref{BD_master2}.
+Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}^{*}$ and $\mathbf{z}^{*} =(z^{*}_1,\ldots, z^{*}_{|\Omega|})$. Then $c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{*}$ is an upper bound of problem \eqref{BD_master3}. When $\mathbf{x}^{*}$ is given, the optimal solution, $\bm{\tilde{\alpha}}_{\omega}$, to problem \eqref{BD_sub_dual} can be obtained according to Proposition \ref{optimal_sol_sub_dual}. Let $\tilde{z}_{\omega} = \bm{\tilde{\alpha}}_{\omega}(d_{\omega} - \mathbf{x}^{*} \mathbf{1})$ and $(\mathbf{x}^{*}, \mathbf{\tilde{z}})$ is a feasible solution to problem \eqref{BD_master3} because it satisfies all the constraints. Thus, $\mathbf{c}^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} \tilde{z}_{\omega}$ is a lower bound of problem \eqref{BD_master2}.
 
-If for every scenario $\omega$, the optimal value of the corresponding problem \eqref{BD_sub_dual} is larger than or equal to $z_{\omega}^{0}$, which means all contraints are satisfied, then we have an optimal solution, $(\mathbf{x}_{0}, \mathbf{z}_{\omega}^{0})$, to the BMP. However, if there exists at least one scenario $\omega$ for which the optimal value of problem \eqref{BD_sub_dual} is less than $z_{\omega}^{0}$, indicating that the constraints are not fully satisfied, we need to add a new constraint $(\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega} - \mathbf{x} \mathbf{1}) \geq z_{\omega}$ to RBMP.
+If for every scenario $\omega$, the optimal value of the corresponding problem \eqref{BD_sub_dual} is larger than or equal to $z_{\omega}^{*}$, which means all contraints are satisfied, then we have an optimal solution, $(\mathbf{x}^{*}, \mathbf{z}_{\omega}^{*})$, to the BMP. However, if there exists at least one scenario $\omega$ for which the optimal value of problem \eqref{BD_sub_dual} is less than $z_{\omega}^{*}$, indicating that the constraints are not fully satisfied, we need to add a new constraint $(\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega} - \mathbf{x} \mathbf{1}) \geq z_{\omega}$ to RBMP.
 
 % $z_{\omega}^{(0)} = \alpha_{\omega}^{*}(d_{\omega} - \mathbf{x}_0 \mathbf{1})$ will give a minimal upper bound of $z_{\omega}$, thus all the left constraints associated with other extreme points are redundant.when the extreme points are $\alpha_{\omega}$.
 
 % The problem \eqref{lemma_eq} associated with $\alpha_{\omega}$ will give an optimal solution $(x_1, z_{\omega}^{1})$. (Upper bound)
 
 
-The steps of the algorithm are described as below,
-
-\begin{algorithm}
+\begin{algorithm}[ht]
   \caption{Benders Decomposition}\label{cut_algo}
   \KwIn{Initial problem \eqref{BD_master3} with $\bm{\alpha}_{\omega} = 0, \forall \omega$, $LB = 0$, $UB = \infty$, $\epsilon$.}
-  \KwOut{$\mathbf{x}_{0}$}
+  \KwOut{$\mathbf{x}^{*}$}
   \While{$UB - LB > \epsilon$}
-    {Obtain $(\mathbf{x}_{0}, \mathbf{z}^{0})$ from problem \eqref{BD_master3}\;
-    $UB \gets c^{\intercal} \mathbf{x}_0 + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{0}$\;
+    {Obtain $(\mathbf{x}^{*}, \mathbf{z}^{*})$ from problem \eqref{BD_master3}\;
+    $UB \gets c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{*}$\;
     \For{$\omega= 1, \ldots, |\Omega|$}
-    {Obtain $\bm{\tilde{\alpha}}_{\omega}$ from Proposition \ref{optimal_sol_sub_dual}\; $z_{\omega}^{(0)} = (\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}_0 \mathbf{1})$\;
-    \If{$z_{\omega}^{(0)} < z_{\omega}^{0}$}
+    {Obtain $\bm{\tilde{\alpha}}_{\omega}$ from Proposition \ref{optimal_sol_sub_dual}\; $\tilde{z}_{\omega}= (\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}^{*} \mathbf{1})$\;
+    \If{$\tilde{z}_{\omega} < z_{\omega}^{*}$}
     {Add one new constraint, $(\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to problem \eqref{BD_master3}\;}
     }
-    {$LB \gets c^{\intercal} \mathbf{x}_{0} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{(0)} $\;}
+    {$LB \gets c^{\intercal} \mathbf{x}_{0} + \sum_{\omega \in \Omega} p_{\omega} \tilde{z}_{\omega} $\;}
     }
 \end{algorithm}
 
@@ -327,9 +317,10 @@ Let the optimal solution to the relaxation of SSP be $\mathbf{x}^{*}$. Aggregate
   \{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq X_{i}^{0}, i \in \mathcal{M}; x_{ij} \in Z_{+} \}
 \end{equation}
 
-Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{x}^{1}$, which represents a feasible seat planning.
+Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{x}^{1}$, which represents a feasible seat planning. Then we can construct the full or largest patterns by Algorithm 1.
 
-To maximize the utilization of seats, we should assign full or largest patterns to each row. We will check if every row is full. When row $j$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j}$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. If $\beta$ is no less than $n_M$, then let $\beta = \beta - n_M$, $s_M = s_M +1$ until $\beta$ is less than $n_M$. If row $j$ is still not full, then find the smallest group size in row $j$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
+% To maximize the utilization of seats, we should assign full or largest patterns to each row. 
+% We will check if every row is full. When row $j$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j}$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. If $\beta$ is no less than $n_M$, then let $\beta = \beta - n_M$, $s_M = s_M +1$ until $\beta$ is less than $n_M$. If row $j$ is still not full, then find the smallest group size in row $j$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
 
 
 \begin{algorithm}
@@ -345,8 +336,3 @@ To maximize the utilization of seats, we should assign full or largest patterns 
 % For Algorithm \ref{seat_construction}, {\bf Step 2} can give a feasible seat planning, {\bf Step 4} can give the full or largest patterns for each row. 
 
 The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints. 
-
-% Therefore, any fixed sequence of groups within each pattern can be used to construct a seat planning that meets practical needs.
-
-% We are able to provide an online seat planning by using our method.
-

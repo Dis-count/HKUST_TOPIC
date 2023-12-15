@@ -1,11 +1,27 @@
 % !TEX root = sum1.tex
 \section{Dynamic Seat Assignment Policy}
-% In this section, we discuss dynamic seat assignment policy, which includes the group-type control and value of stochastic programming control to assign the seats to groups. 
+% identify possible rows and assign to specific row.
+In this section, we discuss the dynamic seat assignment policy, which involves making decisions on seat allocations for each group arrival based on the seat planning obtained from Section 4.
 
-Considering that the seat planning obtained may not align perfectly with the actual group arrivals, we need to make decisions regarding whether to use a larger group type to accommodate smaller group arrivals. This decision-making process is referred to as group-type control. Once we have determined which group type to utilize for accommodating smaller groups, we then need to compare the values of stochastic programming when accepting the group at a specific row versus denying it. This evaluation helps us assess the potential revenues of accepting or rejecting the group. During the calculation of the stochastic programming values, we can generate a new seat planning simultaneously. By integrating the group-type control and the value of stochastic programming, we can make informed decisions regarding the acceptance or rejection of an incoming group, as well as determine the appropriate row for their assignment when accepting it.
+When a group arrives, we first check if the corresponding supply is sufficient. If the supply is enough, we can directly accept the group and assign seats to it in the row with the corresponding supply. However, if the supply is insufficient, we need to consider alternative options. Based on our previous considerations, we know that groups can be assigned seats for a larger group type if the supply for their own group type is insufficient. To determine whether to use larger seats to accommodate the incoming group, we assess the potential benefits by comparing the expected values of accepting the group with larger seats and rejecting the group based on the current seat planning.
+To make this decision, we identify the possible rows where the incoming group can be assigned based on the group types and seat availability. This policy is called group-type control, which helps us narrow down the option of rows for seat assignment.
+
+If we make decisions based on the seat planning generated from SSP, when the corresponding supply is sufficient, we will accept the group, without considering that larger seats can accommodate smaller groups, which will result in rejecting too many smaller groups. Therefore, it is necessary to assess whether to accept a group with the larger seats based on the current seat planning. 
+
+While it would be ideal to obtain the integral seat planning by solving the SSP directly, this may not be feasible due to the computational complexity and the need to calculate the value of the SSP for each potential seat assignment. The process of solving the integer programming and evaluating the stochastic programming value for each row is time-consuming, making it impractical for real-time decision-making.
+
+In practice, to optimize computation cost, we can calculate the value of the linear relaxation of the SSP. This approach provides the same value under the same scenario set, regardless of which row the group is placed in. Therefore, we only need to compare the values of accepting the group at any one row with the value of rejecting the group to make a decision.
+
+After determining the possible rows for seat assignment using the strategies mentioned earlier, we can apply a tie-breaking rule to select a specific row. This rule helps us decide on a particular row when there are multiple options available. Next, we compare the values of the stochastic programming problem when accepting the group at the chosen row versus rejecting it. This evaluation allows us to assess the potential revenues associated with each decision. Simultaneously, during this calculation, we can generate a new seat planning that reflects the acceptance or rejection of the incoming group.
 
 
-% By incorporating this decision-making within the framework of stochastic programming, we can effectively adapt the seat planning to maximize the overall value while considering the uncertainty associated with group arrivals. This approach enables us to make informed decisions and generate an optimized seat planning that aligns with both group arrivals and the objectives of the stochastic programming model.
+By combining the group-type control strategy with the evaluation of stochastic programming values, we obtain a comprehensive decision-making process within a single stage. This integrated approach enables us to make informed decisions regarding the acceptance or rejection of incoming groups, as well as determine the appropriate row for their assignment when acceptance is the chosen option. By considering both computation time savings and potential revenues, we can optimize the overall performance of the seat assignment process.
+
+
+
+% We need to make decisions regarding whether to use a larger group type to accommodate smaller group arrivals. This decision-making process is referred to as group-type control. Once we have determined which group type to utilize for accommodating smaller groups, we then need to compare the values of stochastic programming when accepting the group at a specific row versus denying it. This evaluation helps us assess the potential revenues of accepting or rejecting the group. During the calculation of the stochastic programming values, we can generate a new seat planning simultaneously. By integrating the group-type control and the value of stochastic programming, we can make informed decisions regarding the acceptance or rejection of an incoming group, as well as determine the appropriate row for their assignment when accepting it.
+
+
 
 % We can estimate the arrival rate from the historical data, $p_i = \frac{N_{i}}{N_{0}}, i \in \mathcal{M}$, where $N_{0}$ is the number of total groups, $N_{i}$ is the number of group type $i$. Recall that we assume there are $T$ independent periods, with one group arriving in each period. There are $M$ different group types. Let $\mathbf{y}$ be a discrete random variable indicating the number of people in the group, and let $\mathbf{p}$ be a vector probability, where $p(y = i) = p_i$, $i \in \mathcal{M}$ and $\sum_{i} p_{i} =1$.
 
@@ -15,32 +31,28 @@ Considering that the seat planning obtained may not align perfectly with the act
 Seat planning serves as a representation of the supply available for each group type. Based on the supply, we can determine whether to accept an incoming group. If there is sufficient supply available for an arriving group, we will accept the group and allocate seats accordingly. However, if there is no corresponding supply available for the arriving group, we need to decide whether to use a larger group's supply to meet the needs of the arriving group. When a group is accepted and assigned to larger-size seats, the remaining empty seat(s) can be reserved for future demand without affecting the rest of the seat planning.
 
 Specifically, suppose the supply is $(x_1, \ldots, x_M)$ at period $t$, the number of remaining periods is $(T-t)$. For the coming group type $i$, if $x_i > 0$, then accept it, let $x_i = x_i -1$.
-If $x_i = 0$, in the following part, we will demonstrate how to decide whether to accept the current group to occupy larger-size seats when there is no corresponding supply available. For any $j=i+1, \ldots, M$, we can use one supply of group type $j$ to accept a group of $i$. In that case, when $i <j < i+\delta$, the expected number of accepted people is $i$. When $i+\delta \leq j$, the rest $(j-i-\delta)$ seats can be provided for one group of $j-i-\delta$ with $\delta$ seats of social distancing. Let $D_j$ be the random variable indicates the number of group type $j$ in $(T-t)$ periods. The expected number of accepted people is $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; (T-t))$, where $P(D_i \geq x_i; (T-t))$ is the probability of that the demand of group type $i$ in $(T-t)$ periods is no less than $x_i$, the remaining supply of group type $i$. Thus, the term, $P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; (T-t))$, indicates the probability that the demand of group type $(j-i-\delta)$ in $(T-t)$ periods is no less than its current remaining supply plus 1. 
+If $x_i = 0$, in the following part, we will demonstrate how to decide whether to accept the current group to occupy larger-size seats when there is no corresponding supply available. For any $j=i+1, \ldots, M$, we can use one supply of group type $j$ to accept a group of $i$. In that case, when $i <j < i+\delta$, the expected number of accepted people is $i$. When $i+\delta \leq j$, the rest $(j-i-\delta)$ seats can be provided for one group of $j-i-\delta$ with $\delta$ seats of social distancing. Let $D_j$ be the random variable indicates the number of group type $j$ in $(T-t)$ periods. The expected number of accepted people is $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t)$, where $P(D_i \geq x_i; T-t)$ is the probability of that the demand of group type $i$ in $(T-t)$ periods is no less than $x_i$, the remaining supply of group type $i$. Thus, the term, $P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t)$, indicates the probability that the demand of group type $(j-i-\delta)$ in $(T-t)$ periods is no less than its current remaining supply plus 1. 
 
-Similarly, when we retain the supply of group type $j$ by rejecting a group of $i$, the expected number of accepted people is $j P(D_{j} \geq x_{j}; (T-t))$. The probability, $P(D_{j} \geq x_{j}; (T-t))$, indicates the probability that the demand of group type $j$ in $(T-t)$ periods is no less than its current remaining supply.
+Similarly, when we retain the supply of group type $j$ by rejecting a group of $i$, the expected number of accepted people is $j P(D_{j} \geq x_{j}; T-t)$. The probability, $P(D_{j} \geq x_{j}; (T-t))$, indicates the probability that the demand of group type $j$ in $(T-t)$ periods is no less than its current remaining supply.
 
-Let $d(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats. Then we have
+Let $d^{t}(i,j)$ be the difference of expected number of accepted people between acceptance and rejection on group $i$ occupying $(j+\delta)$-size seats at period $t$. Then we have
 \begin{equation*}
-	d(i,j) = \begin{cases}
-    i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r) - j P(D_{j} \geq x_{j}; T_r), &\text{if}~ j = i+\delta, \ldots, M \\
-    i - j P(D_{j} \geq x_{j}; T_r), &\text{if}~ j = i+1, \ldots, i+\delta-1.
+	d^{t}(i,j) = \begin{cases}
+    i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t) - j P(D_{j} \geq x_{j}; T-t), &\text{if}~ j = i+\delta, \ldots, M \\
+    i - j P(D_{j} \geq x_{j}; T-t), &\text{if}~ j = i+1, \ldots, i+\delta-1.
 		\end{cases}
 \end{equation*}
 
 
 % If $j \geq i+\delta$, $d(i,j)$ equals $i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T_r) - j P(D_{j} \geq x_{j}; T_r)$, otherwise, $d(i,j)$ equals $i - j P(D_{j} \geq x_{j})$. 
 
-One intuitive decision is to choose $j$ with the largest difference. For all $j = i+1, \ldots, M$, find the largest $d(i,j)$, denoted as $d(i,j^{*})$. If $d(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
+One intuitive decision is to choose $j$ with the largest difference. For all $j = i+1, \ldots, M$, find the largest $d^{t}(i,j)$, denoted as $d^{t}(i,j^{*})$. If $d^{t}(i,j^{*}) >0$, we will place the group of $i$ in $(j^{*}+\delta)$-size seats. Otherwise, reject the group.
 
-Group-type policy can only tell us which group type will be provided for the smaller group based on the current planning, we still need to further compare the values of stocahstic programming when accepting or rejecting an group on the specific row. 
+Group-type control policy can only tell us which group type will be provided for the smaller group based on the current planning, we still need to further compare the values of stocahstic programming when accepting or rejecting an group on the specific row. 
 
 
-% This control is based on the current seat planning, which is not accurate.
-
-% According to the pattern instead of placing it when the capacity is sufficient.
-
-\subsection{Value of Stochastic Programming Control}
-After we determine the larger group to assign the arriving group, we need to compare the objective values of stochastic programming to accept or reject this group. For the objective values of stochastic programming, we need to consider the potential revenues that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR).
+\subsection{Assign The Group to A Specific Row}
+We determine whether to place the group arrival in a specific row based on the values of stochastic programming. After we plan to use the larger group to assign the arriving group, we need to compare the objective values of stochastic programming to accept or reject this group. For the objective values of stochastic programming, we need to consider the potential revenues that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR).
 
 Let us consider two sets of scenarios, denoted as $\Omega^{t}_{A}$ and $\Omega^{t}_{R}$, at period $t$. The only difference between these two sets is the acceptance or rejection of an arrival of group type $i$ at that specific period. The VoA is calculated by considering the scenario set $\Omega^{t}_{A}$ when we accept the current arrival. This involves evaluating the stochastic programming model using the scenario set $\Omega^{t}_{A}$. On the other hand, the VoR is calculated by considering the scenario set $\Omega^{t}_{R}$ when we reject the current arrival. In this case, the stochastic programming model is evaluated using the scenario set $\Omega^{t}_{R}$, which reflects the potential outcomes when group type $i$ is rejected.
 
@@ -65,35 +77,38 @@ Another situation that requires seat planning regeneration is when we assign a s
 
 % There is one exception to regenerating the seat planning, which occurs when the arriving group is the largest and the corresponding supply is only 1. In this case, after accepting the largest group, the supply becomes 0, necessitating the generation of a new seat planning.
 
-
 % The seat planning can be obtained from Algorithm \ref{seat_construction}. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
-
-
-\begin{algorithm}[h]
-  \caption{Seat Planning Construction}\label{algo_dynamic_policy}
-  \KwIn{$P$, $\mathbf{L}$}
-  \KwOut{Decision}
-  \For{$t =1, \ldots, T$}
-  { Observe group type $i$\;
-    \eIf{$P_{ki} > 0, \exists k \in N$}
-    {Accept group type $i$ in row $k$, $L_{k} \gets L_{k} -n_{i}$\; $P_{ki} \gets P_{ki} -1$\;
-    \If{$i = M$ and $n_{M} =0$}
-    {Regenerate $P$ from Algorithm 3}
-    }
-    {Calculate $d(i, j^{*})$\;
-    \eIf{$d(i, j^{*}) >0 $}
-    {Find a row $k$ such that $P_{kj^{*}} > 0$\; 
-    Calculate $VoA$ under scenario $\Omega^{t}_{A}$ and $VoR$ under scenario $\Omega^{t}_{R}$\;
-    \eIf{$VoA > VoR$}
-    {Accept group type $i$, $L_{k} \gets L_{k} - n_{i}$\; Regenerate $P$ from Algorithm 3\;}
-    {Reject group type $i$\; Regenerate $P$ from Algorithm 3\;}}
-    {Reject group type $i$}
-    }}
-\end{algorithm}
 
 {\bf{Break Tie for Dynamic Seat Assignment Policy}}
 
-A tie occurs when a small group is accepted by a larger planned group. To accept the smaller group, check if the current row contains at least two planned groups, including this larger group. If so, accept the smaller group in that row. If not, move on to the next row and repeat the check. If no available row is found after checking all rows, place the smaller group in the first row that contains the larger group. By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
+A tie occurs when there are serveral rows to accommodate the group. When the supply is sufficient for the group type, we assign the group at a row with the smallest remaining capacity. 
+When the supply is insufficient and the small group is planned to be assigned to the seats for larger groups, we assign the group at a row that contains at least two planned groups, including this larger group. If the row does not exist, we assign the group at a row that contains the larger group and have the smallest remaining capacity.
+By following this approach, the number of unused seats in each row can be reduced, leading to better capacity utilization.
+
+
+\begin{algorithm}[h]
+  \caption{Dynamic Seat Assignment}\label{algo_dynamic_policy}
+  \KwIn{Seat planning $\bm{H}$, Supply $\bm{X}$, $\mathbf{L}$}
+  \KwOut{Decision}
+  \For{$t =1, \ldots, T$}
+  { Observe group type $i$\;
+    \eIf{$X_{i} > 0$}
+    {Find row $k$ such that $H_{ki} >0$ according to tie-breaking rule\; Accept group type $i$ in row $k$, $L_{k} \gets L_{k} -n_{i}$\; $H_{ki} \gets H_{ki} -1$, $X_{i} \gets X_{i} -1$\Comment*[r]{Accept group type $i$ when the supply is sufficient}
+    \If{$i = M$ and $X_{M} =0$}
+    {Regenerate $\bm{H}$ from Algorithm 3\; Update the corresponding $\bm{X}$\Comment*[r]{Regenerate the seat planning when the supply of the largest group type is 0}}
+    }
+    {Calculate $d^{t}(i, j^{*})$\;
+    \eIf{$d^{t}(i, j^{*}) >0 $}
+    {Find row $k$ such that $H_{kj^{*}} > 0$ according to tie-breaking rule\; 
+    Calculate the VoA under scenario $\Omega^{t}_{A}$ and the VoR under scenario $\Omega^{t}_{R}$\;
+    \eIf{VoA $>$ VoR}
+    {Accept group type $i$, $L_{k} \gets L_{k} - n_{i}$\; Regenerate $\bm{H}$ from Algorithm 3\; Update the corresponding $\bm{X}$\;}
+    {Reject group type $i$\; Regenerate $\bm{H}$ from Algorithm 3\; Update the corresponding $\bm{X}$\;}}
+    {Reject group type $i$\;}
+    }}
+\end{algorithm}
+
+
 
 
 % \subsection{Break tie for Bid-price and DP base-heuristic}

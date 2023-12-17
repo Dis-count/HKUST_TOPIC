@@ -1,6 +1,6 @@
 % !TEX root = sum1.tex
 \section{Results}
-We carried out several experiments, including analyzing different policies, evaluating the impact of implementing social distancing.
+We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing.
 
 % assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
@@ -37,14 +37,18 @@ The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_h - \d
 The bid-price control policy based on the static model is stated below.
 
 \begin{algorithm}[H]
-  \caption{Bid-price control algorithm}
-  \begin{description}
-    \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
-    \item[Step 2.] Solve the linear relaxation of problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain the aggregate optimal solution $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$.
-    \item[Step 3.] If $i \geq h$, accept the arrival and assign the group to row $k$ arbitrarily, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
-    \item[Step 4.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
-  \end{description}
+  \caption{Bid-price Control Algorithm}\label{algo_bid}
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    {Solve the LP relaxation of problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$\;
+    Obtain $v$ such that the aggregate optimal solution is $x e_{v} + \sum_{i=v+1} ^{M} d_{i} e_{i}$\;}
+    \eIf{$i \geq v$ and $\max_j{L_j} \geq n_i$}
+    {Accept the group and assign the group to row $k$ such that $L_{k} \geq n_{i}$\;  
+    $\mathbf{L}^{t+1} \gets \mathbf{L}^{t} - n_i \mathbf{e}_{k}$\;}
+    {Reject the group\; $\mathbf{L}^{t+1} \gets \mathbf{L}^{t}$\;}}
 \end{algorithm}
+
+
 
 {\bf{Booking Limit Control}}
 
@@ -55,13 +59,15 @@ In this policy, we replace the real demand by the expected one and solve the cor
 When we solve problem \eqref{deter_upper} directly, we can develop the booking limit control policy.
 
 \begin{algorithm}[H]
-  \caption{Booking limit control algorithm}
-  \begin{description}
-    \item[Step 1.] Observe the arrival group type $i$ at period $t = 1, \ldots, T$.
-    \item[Step 2.] Solve problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$, obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$.
-    \item[Step 3.] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
-    \item[Step 4.] If $t \leq T$, move to next period, set $t = t+1$, go to step 2. Otherwise, terminate this algorithm.
-  \end{description}
+  \caption{Booking limit Control Algorithm}\label{algo_booking}
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    {Solve problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$\;
+    Obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$\;}
+    \eIf{$X_i > 0$}
+    {Accept the group and assign the group to row $k$ such that $x_{ik} > 0$\;  
+    $\mathbf{L}^{t+1} \gets \mathbf{L}^{t} - n_i \mathbf{e}_{k}$\;}
+    {Reject the group\; $\mathbf{L}^{t+1} \gets \mathbf{L}^{t}$\;}}
 \end{algorithm}
 
 
@@ -85,16 +91,15 @@ When we solve problem \eqref{deter_upper} directly, we can develop the booking l
 % \end{equation}
 
 {\bf{Dynamic Programming Base-heuristic}}
+To simplify the complexity of the original dynamic programming problem, we can consider a simplified version by relaxing all rows to a single row with the same total capacity, denoted as $L = \sum_{j=1}^{N} L_j$. With this simplification, we can make decisions for each group arrival based on the relaxed dynamic programming. By relaxing the rows to a single row, we aggregate the capacities of all individual rows into a single capacity value. This allows us to treat the seat assignment problem as a one-dimensional problem, reducing the computational complexity. Using the relaxed dynamic programming approach, we can determine the seat assignment decisions for each group arrival based on the simplified problem.
 
-Since the original dynamic programming problem is too complex to solve directly, we can instead consider a simplified version of the problem, known as the relaxation problem. By solving the relaxation problem, we can make decisions for each group arrival based on the dynamic programming approach.
 
 % Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. After relaxation, assume that each row has a capacity of $L$ seats, which can be filled. For each seperate row, the maximum number of empty seats in each row is $s$. Then, the total number of empty seats in $N$ rows is given by $Ns$. Therefore, the biggest difference between $v_{r}^{*}$ and $v^{*}$ is the number of people accommodated in the $Ns$ empty seats.
 % The difference between them is zero only when the groups corresponding to the optimal solution of problem \eqref{relax_deter} can be accommodated in $N$ rows. The numerical results indicate that this is the case for most scenarios, which suggests that a DP-based approach can be used to solve the dynamic seat assignment problem after all groups have arrived.
 
-Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$. Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise. Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
+Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise. Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
 
-$$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}]$$
-
+$$V_{t}(L) =  \max_{u \in \{0,1\}} \left\{ \sum_{i} p_i [V_{t+1}(L-n_i u)+ i u] + p_0 V_{t+1}(L)\right\} $$
 with the boundary conditions $V_{T+1}(L) =0, \forall L \geq 0$, $V_{t}(0) =0, \forall t$.
 
 After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.

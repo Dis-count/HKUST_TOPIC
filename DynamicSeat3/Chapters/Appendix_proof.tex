@@ -14,7 +14,7 @@ Suppose the loss is not the smallest, there exists one pattern with a loss of $p
   
   Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP). Consider the solution to the linear relaxation of \eqref{deter_upper}. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. 
   % $\delta$ is no less than 1, different types have
-  Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(L-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $h$, then for $i < h$, $x_{ij}^{*} = 0$; for $i > h$, $x_{ij}^{*} = d_{i}$; for $i = h$, $\sum_{j} x_{ij}^{*} = (L - \sum_{i = h+1}^{M} {d_i n_i})/ n_h$. \qed
+  Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(L-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $v$, then for $i < v$, $x_{ij}^{*} = 0$; for $i > v$, $x_{ij}^{*} = d_{i}$; for $i = v$, $\sum_{j} x_{ij}^{*} = (L - \sum_{i = v+1}^{M} {d_i n_i})/ n_v$. \qed
 \end{pf}
 
 
@@ -37,8 +37,9 @@ Suppose the loss is not the smallest, there exists one pattern with a loss of $p
 
 
 \begin{pf}[Proof of Proposition \ref{feasible_region}]
-  Notice that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}], V =[W,~I]$, $W$ is a totally unimodular matrix. Then, we have $\bm{\alpha}^{\intercal}W \geq -\mathbf{1}, \bm{\alpha}^{\intercal} I \geq \mathbf{0}$. Thus, the feasible region is bounded. 
-  Furthermore, let $\alpha_0 = 0$, then we have $0 \leq \alpha_i \leq \alpha_{i-1} +1$, $i \in \mathcal{M}$, so the extreme points are all integral.
+% $W$ and $V$ are the totally unimodular matrix because 
+
+Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$. Based on this, we can derive the following inequalities: $\bm{\alpha}^{\intercal}W \geq -\mathbf{1}$ and $\bm{\alpha}^{\intercal} I \geq \mathbf{0}$. These inequalities indicate that the feasible region is nonempty and bounded. Moreover, let $\alpha_0 = 0$. From this, we can deduce that $0 \leq \alpha_i \leq \alpha_{i-1} +1$ for $i \in \mathcal{M}$. Consequently, all extreme points within the feasible region are integral.
   \qed
 \end{pf}
 

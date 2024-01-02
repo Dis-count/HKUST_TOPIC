@@ -10,11 +10,12 @@ from Mist import decisionSeveral, decisionOnce
 # This function uses deterministicModel to make several decisions with initial deterministic solution.
 
 class deterministicModel:
-    def __init__(self, roll_width, given_lines, demand_width_array, I):
+    def __init__(self, roll_width, given_lines, demand_width_array, I, s):
         self.roll_width = roll_width
         self.given_lines = given_lines
         self.demand_width_array = demand_width_array
-        self.value_array = demand_width_array - 1
+        self.s = s
+        self.value_array = demand_width_array - self.s
         self.I = I
 
     def IP_formulation(self, demand_lower, demand_upper):

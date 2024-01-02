@@ -313,28 +313,25 @@ class CompareMethods:
         for new_num, new_i in enumerate(newx.T):
             occu = np.dot(new_i, self.demand_width_array)
             delta = int(change_roll[new_num] - occu)
-            
-            while delta >= self.I + self.s:
-                delta -= self.I + self.s
-                new_i[self.I-1] += 1
 
             while delta > 0:
-                #  largest pattern
-                if new_i[-1] * self.demand_width_array[-1] + delta == change_roll[new_num]:
-                    if delta > self.s:   # the left seats are for group(delta-s)
-                        new_i[delta-self.s-1] += 1
-                    break
                 for d_num, d_i in enumerate(new_i[0:-1]):
-                    if d_i > 0 and d_num + delta >= self.I-1:
+                    if d_i > 0:
+                        k1 = max(1, self.I- d_num-1)
                         new_i[d_num] -= 1
-                        new_i[self.I-1] += 1
-                        delta -= (self.I- 1- d_num)
+                        k2 = min(d_num+1+delta, self.I)-1
+                        new_i[k2] += 1
+                        delta -= k1
                         break
-                    elif d_i > 0:  # Exactly use all empty seats
-                        new_i[d_num] -= 1
-                        new_i[d_num + delta] += 1
-                        delta = 0
-                        break
+                while delta >= self.I + self.s:
+                    delta -= self.I + self.s
+                    new_i[self.I-1] += 1
+
+                if delta > self.s:
+                    new_i[delta-self.s-1] += 1
+                    delta = 0
+                else:
+                    delta = 0
         return newx
 
     def method_new(self, sequence: List[int], newx, change_roll0):
@@ -350,17 +347,10 @@ class CompareMethods:
             if newd[j-1-self.s] > 0:
                 mylist.append(1)
                 for k, pattern in enumerate(newx):
-                    if pattern[j-1-self.s] > 0 and (change_roll[k] > (self.I + 1) or change_roll[k] == j):
+                    if pattern[j-1-self.s] > 0:
                         newx[k][j-1-self.s] -= 1
                         change_roll[k] -= j
                         break
-
-                    if k == len(newx)-1:
-                        for kk, pat in enumerate(newx):
-                            if pat[j-1-self.s] > 0:
-                                newx[kk][j-1-self.s] -= 1
-                                change_roll[kk] -= j
-                                break
 
                 newd = np.sum(newx, axis=0)
                 # if after accept j, the supply is 0, we should generate another newx.
@@ -374,20 +364,13 @@ class CompareMethods:
                 change_deny = copy.deepcopy(change_roll)
                 if decision_list:
                     for k, pattern in enumerate(newx):
-                        if pattern[decision_list] > 0 and change_roll[k] > (self.I + self.s):
+                        if pattern[decision_list] > 0:
                             newx[k][decision_list] -= 1
                             if decision_list - Indi_Demand - 1 - self.s >= 0:
                                 newx[k][int(decision_list - Indi_Demand - 1 - self.s)] += 1
                             change_roll[k] -= (Indi_Demand + 1 + self.s)
                             break
-                        if k == len(newx)-1:
-                            for jj, pat in enumerate(newx):
-                                if pat[decision_list] > 0:
-                                    newx[jj][decision_list] -= 1
-                                    if decision_list - Indi_Demand - 1- self.s >= 0:
-                                        newx[jj][int(decision_list - Indi_Demand - 1-self.s)] += 1
-                                    change_roll[jj] -= (Indi_Demand+1 +self.s)
-                                    break
+
                     change_accept = copy.deepcopy(change_roll)
 
                     sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)

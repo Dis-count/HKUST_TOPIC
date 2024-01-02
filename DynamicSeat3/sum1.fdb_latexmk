@@ -1,22 +1,22 @@
 # Fdb version 3
-["bibtex sum1"] 1702815297 "sum1.aux" "sum1.bbl" "sum1" 1702815332
+["bibtex sum1"] 1703736433 "sum1.aux" "sum1.bbl" "sum1" 1704185139
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1630493868 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "refe.bib" 1684914165 13635 9c377f91590797706262154edf3de412 ""
-  "sum1.aux" 1702815331 12872 917b86293f3ec02c602cd6887ba11374 "pdflatex"
+  "sum1.aux" 1704185034 12796 8353d089b89208e9de1ea6915e6fa82e "pdflatex"
   (generated)
   "sum1.blg"
   "sum1.bbl"
-["pdflatex"] 1702815330 "f:/Files/Github/HKUST_TOPIC/DynamicSeat3/sum1.tex" "sum1.pdf" "sum1" 1702815332
+["pdflatex"] 1704185032 "f:/Files/Github/HKUST_TOPIC/DynamicSeat3/sum1.tex" "sum1.pdf" "sum1" 1704185139
   "Chapters/Abstract.tex" 1699248844 1143 edc279a6a6c73884a8960dc989831f0f ""
   "Chapters/Appendix_proof.tex" 1702813962 9030 866060b08fbd67e808fcec6923a556f8 ""
   "Chapters/Conclusion.tex" 1698584837 5931 b77d4c7ee6d8ed04c1d5be0f5faa0bd6 ""
   "Chapters/Extension.tex" 1700459731 12950 3ff37ca84bb98f6e24ff0a66a61bc21e ""
   "Chapters/Introduction.tex" 1699249358 11609 e44feb0ebe3c9e7a4dd5228bd7baaa92 ""
   "Chapters/Literature-review.tex" 1693129140 11602 4bc9b431a7ce1fc9f8d272a0113e79d7 ""
-  "Chapters/Methods.tex" 1702813309 23590 40f91cd609740a50d8b3f985ef32afd2 ""
-  "Chapters/Problem-description.tex" 1702813927 18412 90de48df7031a2c480ee2fbbae3b7082 ""
-  "Chapters/Results.tex" 1702815329 35893 17246e4488ca68db19aa78ad519c362f ""
-  "Chapters/Stochastic-form.tex" 1702806455 34380 ea5bb8127932261755361fb0f87c5270 ""
+  "Chapters/Methods.tex" 1704176229 24125 e0f46acfcf59cc7a4f976e74b0971d81 ""
+  "Chapters/Problem-description.tex" 1704180971 19802 6ac9e34f26ada927298c7f9075d813a1 ""
+  "Chapters/Results.tex" 1704185031 36007 d3bfb0e9835ede0f63ebebb2528b56e6 ""
+  "Chapters/Stochastic-form.tex" 1703592223 34386 de038182b23cba9f450fc084c46d8d1a ""
   "Figures/p1.pdf" 1695010587 15828 79da640441bad17c02b913b517cdadb5 ""
   "Figures/p2.pdf" 1695018242 15699 0a2e490a34bba8dcd8f82f950752ba2d ""
   "Figures/re2.pdf" 1700289266 17633 52c88bd64ab4df8c833b2b30147b360a ""
@@ -178,12 +178,12 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/DynamicSeat3/sum1.tex" 1702273656 2072 47dc03a62de000c62232a02b9c30413d ""
-  "sum1.aux" 1702815331 12872 917b86293f3ec02c602cd6887ba11374 "pdflatex"
-  "sum1.bbl" 1702815297 7331 63abb2c252ba635ec995f3847f1f0320 "bibtex sum1"
-  "sum1.out" 1702815331 6150 b63fa79e08279504211935bc3fa23c13 "pdflatex"
+  "sum1.aux" 1704185034 12796 8353d089b89208e9de1ea6915e6fa82e "pdflatex"
+  "sum1.bbl" 1703736433 7331 63abb2c252ba635ec995f3847f1f0320 "bibtex sum1"
+  "sum1.out" 1704185034 6162 ac732b402b3b1b0b7ce2cbd94d2be5df "pdflatex"
   "sum1.tex" 1702273656 2072 47dc03a62de000c62232a02b9c30413d ""
   (generated)
-  "sum1.log"
-  "sum1.out"
-  "sum1.aux"
   "sum1.pdf"
+  "sum1.out"
+  "sum1.log"
+  "sum1.aux"

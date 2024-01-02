@@ -90,13 +90,13 @@ We can utilize the following algorithm to construct the largest or full patterns
 
 \begin{algorithm}
   \caption{Construct The Largest or Full Pattern}\label{construction}
-  \KwIn{Pattern $\bm{h}$}
-  \KwOut{Pattern}
+  % \KwIn{Pattern $\bm{h}$}
+  % \KwOut{Pattern}
   \While{$\beta > 0$}
     {$k \gets \min_{i}\{h_{i} \neq 0\}$\Comment*[r]{Find the smallest group type in the pattern}
     \eIf{$k \neq M$}
-    {$\beta \gets \beta - \max\{1, M - k\}$\; $h_{k} \gets h_{k} - 1$\;
-    $h_{\min\{k+\beta, M\}} \gets h_{\min\{k+\beta, M\}} + 1$\Comment*[r]{Change the current group type to a group type as large as possible}}
+    {$h_{k} \gets h_{k} - 1$\; $h_{\min\{k+\beta, M\}} \gets h_{\min\{k+\beta, M\}} + 1$\;
+    $\beta \gets \beta - \max\{1, M - k\}$\Comment*[r]{Change the current group type to a group type as large as possible}}
     {\eIf{$\beta \geq n_{M}$}
     {$q \gets \lfloor\frac{\beta}{n_M}\rfloor$\;
      $\beta \gets \beta - q n_M$\; $h_{M} \gets h_{M} + q$\Comment*[r]{Assign seats to as many the largest group type as possible}}
@@ -143,7 +143,6 @@ As we can find, this deterministic equivalent form is a large-scale problem even
 & \mathbf{x} \in \mathbb{Z}_{+}^{M \times N},
 \end{aligned}
 \end{equation}
-
 where $z(\mathbf{x})$ is defined as
 
 $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, 
@@ -318,8 +317,8 @@ Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solu
 
 \begin{algorithm}
   \caption{Seat Planning Construction}\label{seat_construction}
-  \KwIn{Scenarios set $\Omega$, Seat layout}
-  \KwOut{$\mathbf{x}, \bm{H}$}
+  % \KwIn{Scenarios set $\Omega$, Seat layout}
+  % \KwOut{$\mathbf{x}, \bm{H}$}
     {Obtain the optimal solution, $\mathbf{x}^{*}$, from the LP relaxation of problem \eqref{BD_master3}\;}
     {Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} = \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$\;}
     {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from problem \eqref{deter_upper1} with $\tilde{X}$\;}

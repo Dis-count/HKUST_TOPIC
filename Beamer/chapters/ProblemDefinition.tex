@@ -9,8 +9,8 @@
       \item Row $\mathcal{N} = \{1, \ldots, N\}$.
       \item The social distancing: $\delta$ seat(s).
       \item $n_i = i + \delta$: the new size of group type $i$ for each $i \in \mathcal{M}$.
-      \item The number of seats in row $j$: $S_j, j \in \mathcal{N}$.
-      \item $L_j = S_j + \delta$: the length of row $j$ for each $j \in \mathcal{N}$.
+      \item The number of seats in row $j$: $L_j^{0}, j \in \mathcal{N}$.
+      \item $L_j = L_j^{0} + \delta$: the length of row $j$ for each $j \in \mathcal{N}$.
       \end{itemize}
       
       \begin{figure}[ht]
@@ -22,13 +22,14 @@
 
   \begin{frame}{Basic Concepts}
     \begin{itemize}
-      \item $P_{k} = (t_1, \ldots, t_M)$, pattern, the seat planning for each group type in one row.
-          
-          - For each pattern $k$, $a_k, b_k$ indicate the number of groups and the unused seats, respectively.
-          
-          - Loss for pattern $k$: $a_k \delta + b_k - \delta$.
-      \item Largest patterns: Minimal loss. 
-      \item Full patterns: $b_k =0$.
+      \item $\bm{h} = (h_1, \ldots, h_M)$, pattern, the seat planning for each group type in one row.
+      Let $L = q(M + \delta) + r$.
+
+      - The number of people accommodated: $|\bm{h}| = \sum_{i =1}^{M} i h_i = qM + \max\{r-\delta, 0\}$.
+      
+      - Loss for pattern $\bm{h}$: $L- \delta - |\bm{h}| = q \delta - \delta + \min\{r, \delta\}$.
+      \item Largest patterns: $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any $\bm{h}^{\prime}$. 
+      \item Full patterns: $\sum_{i=1}^{M} n_i h_i = L$.
       \item[-] {\color{blue} Example}: 
       
       $\delta = 1$, $M =4$, $n_1 = 2, n_2 = 3, n_3 = 4, n_4 = 5$, $L = 21$.
@@ -48,13 +49,13 @@
     \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
     \item[-] The probability of an arrival of group type $i$: $p_i$.  
     \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
-    \item[-] $u_{i,j}$: Decision. Assign group type $i$ to row $j$, $u_{i,j} =1$.
-    \item[-] $U(\mathbf{L}) = \{u_{i,j} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j} \leq 1, \forall i, n_{i}u_{i,j}\mathbf{e}_j^{\top} \leq \mathbf{L}, \forall i,j \}$.
+    \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
+    \item[-] $U^{t}(\mathbf{L}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j^{\top} \leq \mathbf{L}, \forall i,j \}$.
     \item[-] $\mathbf{e}_j^{\top}$: Unit row vector with $j$-th element being 1.
-    \item[-] $V_{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
+    \item[-] $V^{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
     \end{itemize}
 
-    $$V_{t}(\mathbf{L}) = \max_{u \in U(\mathbf{L})}\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j} + V_{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}\mathbf{e}_j^{\top} ))\}$$
+    $$V^{t}(\mathbf{L}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L})\right\}$$
     \small
 
     % \begin{itemize}
@@ -78,7 +79,7 @@
     - Group type control
 % Tell us which group type should be broke which determines which rows can be placed. 
 
-    - Value of stochastic programming
+    - Assign The Group by Stochastic Values
 % decide whether to accept 
 % Both acceptance can decide 
 

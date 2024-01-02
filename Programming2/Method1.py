@@ -11,11 +11,12 @@ from Method3 import deterministicModel
 # And give the once decision.
 
 class stochasticModel:
-    def __init__(self, roll_width, given_lines, demand_width_array, W, I, prop, dw):
+    def __init__(self, roll_width, given_lines, demand_width_array, W, I, prop, dw, s):
         self.roll_width = roll_width
         self.given_lines = given_lines
         self.demand_width_array = demand_width_array
-        self.value_array = demand_width_array - 1
+        self.s = s
+        self.value_array = demand_width_array - self.s
         self.W = W
         self.I = I
         self.dw = dw
@@ -190,26 +191,6 @@ class stochasticModel:
         # print('optimal IP objective:', obj_IP)
         return newd, LB
 
-    # def setupMasterModel(self):
-    #     # Initially, add z<= 0
-    #     m = grb.Model()
-    #     x = m.addVars(self.I, self.given_lines, lb=0, vtype= GRB.CONTINUOUS, name = 'varx')
-    #     z = m.addVars(self.W, lb = -float('inf'), vtype= GRB.CONTINUOUS, name = 'varz')
-    #     m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-    #                             for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
-    #     for i in range(self.W):
-    #         #     yplus1, yminus1 = obtainY(dw[i])
-    #         #     alpha0 = solveSub(yplus1, yminus1)
-    #         m.addConstr(z[i] <= 0)
-    #     #     print('Initial cut:', alpha0)
-    #     m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
-    #     # m.update()
-    #     m.setParam('OutputFlag', 0)
-    #     # m.write('Master.lp')
-    #     m.optimize()
-
-    #     return m, [m.getVarByName('varx[' + str(i) + ',' + str(j) + ']').x for i in range(self.I) for j in range(self.given_lines)], [m.getVarByName('varz[' + str(w) + ']').x for w in range(self.W)]
-
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
@@ -231,7 +212,7 @@ if __name__ == "__main__":
 
     sequence = generate_sequence(number_period, probab)
 
-    my = stochasticModel(roll_width, given_lines, demand_width_array, W, I, prop, dw)
+    my = stochasticModel(roll_width, given_lines, demand_width_array, W, I, prop, dw, 1)
 
     start = time.time()
     ini_demand, upperbound = my.solveBenders(eps=1e-4, maxit=20)

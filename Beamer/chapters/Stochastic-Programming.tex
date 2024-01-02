@@ -76,7 +76,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
       & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
        & \mathbf{x} \in \mathbb{Z}_{+}
     \end{aligned}
-  \end{equation} 
+\end{equation} 
 
   Constraints will be generated from problem \eqref{BD_sub_dual} until an optimal solution is found.
 
@@ -94,31 +94,16 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
 \begin{frame}{Deterministic Formulations}  %开始一张幻灯片
   To obtain an integral seat planning, we consider the following two deterministic formulations.
-  \begin{columns}[c]  %开始进入分栏环境，居中设置
-  \column{5cm}  %第一栏（左栏）宽度为5cm
-  \scriptsize
   \begin{equation}\label{deter_upper}
     \begin{aligned}
-    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} {\color{red} \leq} s_{i}^{0}, \quad i \in \mathcal{M}, \\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
-    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+      \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+      \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+      & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
+       & \mathbf{x} \in \mathbb{Z}_{+}
     \end{aligned}
-  \end{equation}
-  \column{5cm}
-  \scriptsize
-  \begin{equation}\label{deter_lower}
-    \begin{aligned}
-    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} {\color{red} \geq} s_{i}^{1}, \quad i \in \mathcal{M}, \\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N} \\
-    & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-    \end{aligned}
-  \end{equation}
-  \end{columns}  %分栏环境结束
+  \end{equation} 
   Problem \eqref{deter_upper} can generate a feasible seat planning.
 
-  Problem \eqref{deter_lower} can generate a seat planning no inferior than a given feasible seat planning.
 \end{frame}
 
 
@@ -127,9 +112,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
         \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
 
         \item[Step 2.] Solve problem \eqref{deter_upper} to obtain the optimal solution, $\mathbf{x}^{1}$. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
-        
-        \item[Step 3.] Solve problem \eqref{deter_lower} to obtain the optimal solution, $\mathbf{x}^{2}$. Aggregate $\mathbf{x}^{2}$ to the number of each group type, ${s}_{i}^{2} = \sum_{j} x^{2}_{ij}, i \in \mathbf{M}$.
-    
-        \item[Step 4.] For each row, construct a full or largest pattern.
+         
+        \item[Step 3.] For each row, construct a full or largest pattern.
      \end{description}
 \end{frame}

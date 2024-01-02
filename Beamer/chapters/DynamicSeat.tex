@@ -12,7 +12,7 @@
       \end{itemize}
     \end{frame}
 
-    \begin{frame}{Stochastic Planning Policy(SPP)}
+    \begin{frame}{Dynamic Seat Assignment(DSA)}
       % Stochastic planning policy involves
       \begin{itemize}
         \item Group-type control
@@ -21,13 +21,15 @@
       \end{itemize}
       \vspace*{1cm}
       \small
-      $d(i, j; t)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; t)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j} \geq x_{j}; t)}_{\text{rejection}}$, $j > i$.
+      $d^{t}(i, j)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j} \geq x_{j}; T-t)}_{\text{rejection}}.$
       \vspace*{1cm}
 
-      If $d(i, j^{*}; t) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
+      For all $j > i$, find the maximum value denoted as $d^{t}(i, j^{*})$.
+      
+      If $d^{t}(i, j^{*}) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
     \end{frame}
 
-    \begin{frame}{Stochastic Planning Policy(SPP)}
+    \begin{frame}{Dynamic Seat Assignment(DSA)}
       % Stochastic planning policy involves
       \begin{itemize}
         \item Use the value of stochastic programming as the approximation of value function in DP.

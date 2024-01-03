@@ -37,9 +37,14 @@ Let $|\bm{h}|$ indicate the number of people that can be assigned according to p
 % $|h(L)| \geq |h(L+1)| -1$.
 
 \begin{definition}
-Consider a feasible pattern $\bm{h} = (h_1, \ldots, h_M)$. 
-We call $\bm{h}$ a full pattern if it satisfies the condition $\sum_{i=1}^{M} n_i h_i = L$. We call $\bm{h}$ a largest pattern if $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any $\bm{h}^{\prime}$.
+Given the length of a row, denoted as $L$, and the maximum size of a group allowed, denoted as $M$, we can define certain characteristics of a pattern $\bm{h} = (h_1, \ldots, h_M)$.
+We refer to a pattern $\bm{h}$ as a full pattern if it satisfies the condition $\sum_{i=1}^{M} n_i h_i = L$. In other words, a full pattern is one in which the sum of the product of the number of occurrences $h_i$ and the size $n_i$ of each group in the pattern is equal to the length of the row $L$. This ensures that the pattern fully occupies the available row seats.
+Furthermore, we define a pattern $\bm{h}$ as a largest pattern if it has a size $|\bm{h}|$ that is greater than or equal to the size $|\bm{h}^{\prime}|$ of any other feasible pattern $\bm{h}^{\prime}$. In other words, a largest pattern is one that either has the maximum size or is equal in size to other patterns, ensuring that it can accommodate the most number of people within the given row length.
 \end{definition}
+
+% We call $\bm{h}$ a largest pattern if $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any $\bm{h}^{\prime}$.
+
+% These definitions allow us to distinguish between full patterns, which completely occupy the row space, and largest patterns, which have the maximum or equal size compared to other patterns. By understanding and identifying these characteristics, we can effectively analyze and optimize the allocation of groups within a row.
 
 % minimizes the loss $L - \delta - \sum_{i =1}^{M} t_i \cdot i$ for all $\bm{t}$ that satisfy the constraint $\sum_{i=1}^{M} t_i n_i \leq L$. 
 
@@ -56,13 +61,20 @@ When there is high demand for seats, it is advantageous to prioritize the larges
 
 % Build the connection of largest and full pattern
 % Then we have $h_i h_j = 0 ~\text{if}~ n_i + n_j \leq n_M$.
+
 % \begin{prop}\label{lem_pattern}
-% When given the length of a row, $L$, the social distancing, $\delta$, the size of the largest group allowed, $M$, let $L = q(M + \delta) +r$, for the largest pattern $\bm{h}$, $|\bm{h}| = q M + \max\{r-\delta, 0\}$ and the loss of the largest pattern is $q \delta - \delta + \min\{r, \delta\}$. $\bm{h}$ is unique if $r =0$, $\bm{h}$ is full if $r = \delta$.
+% When given the length of a row, $L$, the social distancing, $\delta$, the size of the largest group allowed, $M$, let $L = q(M + \delta) +r$, for the largest pattern $\bm{h}$, $|\bm{h}| = q M + \max\{r-\delta, 0\}$ and the loss of the largest pattern is $q \delta - \delta + \min\{r, \delta\}$. $\bm{h}$ is unique if $r =0$, $\bm{h}$ is full if $r > \delta$ or $r = 0$.
 % \end{prop}
 
-Given the parameters of a row, including its length $L$, the social distancing requirement $\delta$, and the maximum size of a group allowed $M$, we can analyze the row's characteristics. Let us express the row length as $L = q(M + \delta) + r$, where $q$ represents the number of groups that can fit in the row, and $r$ denotes the number of remaining seats in the row after accommodating the groups.
-For the largest possible pattern $\bm{h}$ in the row, the maximum number of people that can be accommodated is given by $|\bm{h}| = qM + \max\{r-\delta, 0\}$. This expression takes into account the placement of $q$ largest groups in the row, and any remaining seats $r$ (if they exceed the social distancing requirement $\delta$) are utilized to accommodate additional individuals.
-The loss of the largest pattern equals $q \delta - \delta + \min\{r, \delta\}$, represents the amount of empty seats due to the social distancing requirement.
+\begin{prop}\label{lem_pattern}
+Given the parameters of a row, including its length $L$, the social distancing requirement $\delta$, and the maximum size of a group allowed $M$, for one possible largest pattern $\bm{h}$, the maximum number of people that can be accommodated is given by $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where $q = \lfloor \frac{L}{M + \delta} \rfloor$, $r \equiv L \bmod (M + \delta)$. The corresponding loss of the largest pattern equals $q \delta - \delta + \min\{r, \delta\}$, represents the amount of empty seats due to the social distancing requirement. 
+\end{prop}
+
+The largest pattern $\bm{h}$ is unique and full when $r = 0$, indicating that only one pattern can accommodate the maximal number of people. On the other hand, if $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
+
+% Let us express the row length as $L = q(M + \delta) + r$, where $q$ represents the number of groups that can fit in the row, and $r$ denotes the number of remaining seats in the row after accommodating the groups.
+% For the largest possible pattern $\bm{h}$ in the row, the maximum number of people that can be accommodated is given by $|\bm{h}| = qM + \max\{r-\delta, 0\}$. This expression takes into account the placement of $q$ largest groups in the row, and any remaining seats $r$ (if they exceed the social distancing requirement $\delta$) are utilized to accommodate additional individuals.
+% The loss of the largest pattern equals $q \delta - \delta + \min\{r, \delta\}$, represents the amount of empty seats due to the social distancing requirement.
 
 % The largest pattern $\bm{h}$ is unique and full when $r = 0$, indicating that only one pattern can accommodate the maximal number of people. On the other hand, if $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
 
@@ -74,7 +86,6 @@ Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. In this case, we
 % Please note that the pattern sizes and specific patterns may vary depending on the values of $L$, $M$, and $n_i$.
 
 Through this example, we observe that the largest pattern does not exclusively consist of large groups but can also include smaller groups. This highlights the importance of considering the various group sizes when using the largest pattern. Another observation relates to the relationship between the largest patterns and full patterns. It is apparent that a full pattern may not necessarily be the largest pattern. For instance, consider the pattern $(1, 1, 4, 0)$, which is a full pattern as it utilizes all available seats. However, its loss value is 6, indicating that it is not the largest pattern. Conversely, a largest pattern may also not necessarily be a full pattern. Take the pattern $(0, 0, 0, 4)$ as an example. It is a largest pattern as it can accommodate the maximum number of individuals. However, it does not satisfy the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$.
-
 
 % We consider the social distancing of one empty seat throughout the rest of this paper, which is more practical and reasonable in the seat planning. However, our methods are still applicable to the social distancing of two or more seats.
 

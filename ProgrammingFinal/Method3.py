@@ -2,7 +2,7 @@ import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
 import copy
-from SamplingMethod import samplingmethod
+from SamplingMethodSto import samplingmethod1
 from Mist import generate_sequence, decision1
 from collections import Counter
 from Mist import decisionSeveral, decisionOnce
@@ -10,11 +10,12 @@ from Mist import decisionSeveral, decisionOnce
 # This function uses deterministicModel to make several decisions with initial deterministic solution.
 
 class deterministicModel:
-    def __init__(self, roll_width, given_lines, demand_width_array, I):
+    def __init__(self, roll_width, given_lines, demand_width_array, I, s):
         self.roll_width = roll_width
         self.given_lines = given_lines
         self.demand_width_array = demand_width_array
-        self.value_array = demand_width_array - 1
+        self.s = s
+        self.value_array = demand_width_array - s
         self.I = I
 
     def IP_formulation(self, demand_lower, demand_upper):
@@ -46,13 +47,11 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     number_period = 80
     given_lines = 8
+    sd = 1
     np.random.seed(0)
 
     probab = [0.4, 0.4, 0.1, 0.1]
-    sam = samplingmethod(I, num_sample, number_period, probab)
-
-    dw, prop = sam.get_prob()
-    W = len(dw)
+    sam = samplingmethod1(I, num_sample, number_period, probab, sd)
 
     roll_width = np.arange(21, 21 + given_lines)
     total_seat = np.sum(roll_width)
@@ -60,6 +59,10 @@ if __name__ == "__main__":
     demand_width_array = np.arange(2, 2+I)
 
     sequence = generate_sequence(number_period, probab)
+    
+    dw, prop = sam.get_prob_ini(sequence[0])
+    W = len(dw)
+    
     sequence1 = copy.deepcopy(sequence)
     total_usedDemand = np.zeros(I)
     ini_demand1 = np.array(probab) * number_period

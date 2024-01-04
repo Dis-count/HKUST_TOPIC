@@ -1,6 +1,5 @@
 import numpy as np
-from SamplingMethod import samplingmethod
-from SamplingMethodNew import samplingmethod1
+from SamplingMethodSto import samplingmethod1
 from Method1 import stochasticModel
 from Method10 import deterministicModel
 from Mist import generate_sequence, decision1
@@ -23,9 +22,9 @@ class CompareMethods:
 
     def random_generate(self):
         sequence = generate_sequence(self.num_period, self.probab, self.s)
-        sam = samplingmethod(self.I, self.num_sample, self.num_period-1, self.probab, sequence[0], self.s)
+        sam = samplingmethod1(self.I, self.num_sample, self.num_period-1, self.probab, self.s)
 
-        dw, prop = sam.get_prob()
+        dw, prop = sam.get_prob_ini(sequence[0])
         W = len(dw)
         m1 = stochasticModel(self.roll_width, self.given_lines,
                              self.demand_width_array, W, self.I, prop, dw, self.s)
@@ -436,12 +435,10 @@ class CompareMethods:
                         break
             else:
                 mylist.append(0)
-                deterModel = deterministicModel(
-                    change_roll, self.given_lines, self.demand_width_array, self.I, self.s)
+                deterModel = deterministicModel(change_roll, self.given_lines, self.demand_width_array, self.I, self.s)
                 ini_demand1 = np.array(self.probab) * remaining_period
                 ini_demand1 = np.ceil(ini_demand1)
-                _, newx = deterModel.IP_formulation(
-                    np.zeros(self.I), ini_demand1)
+                _, newx = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
                 newx = newx.T.tolist()
 
         sequence = [i-self.s for i in sequence]
@@ -490,7 +487,7 @@ if __name__ == "__main__":
     I = 4
     probab = np.array([0.3, 0.2, 0.1, 0.4])
     num_sample = 1000
-    s = 2
+    s = 1
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
     sequence, ini_demand, ini_demand3, newx3, newx4 = a.random_generate()
 

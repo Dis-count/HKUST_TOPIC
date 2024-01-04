@@ -2,7 +2,7 @@ import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
 import copy
-from SamplingMethod import samplingmethod
+from SamplingMethodSto import samplingmethod1
 from Mist import generate_sequence, decision1
 from collections import Counter
 from Mist import decisionSeveral, decisionOnce
@@ -128,9 +128,9 @@ if __name__ == "__main__":
     number_period = 80
     given_lines = 8
     np.random.seed(0)
-
+    sd = 1
     probab = [0.4, 0.4, 0.1, 0.1]
-    sam = samplingmethod(I, num_sample, number_period, probab)
+    sam = samplingmethod1(I, num_sample, number_period, probab, sd)
 
     dw, prop = sam.get_prob()
     W = len(dw)

@@ -11,7 +11,7 @@ if __name__ == "__main__":
     period_range = range(60,61,10)
     given_lines = 10
     probab = [0.25, 0.25, 0.25, 0.25]
-    s =2
+    s = 2
     begin_time = time.time()
     filename = 'Periods_' + str(time.time()) + '.txt'
     my_file = open(filename, 'w')

@@ -2,7 +2,6 @@ import numpy as np
 from Comparison import CompareMethods
 import time
 
-
 def prop_list():
     x = np.arange(0.05, 1, 0.05)
     y = np.arange(0.05, 0.8, 0.05)
@@ -11,11 +10,10 @@ def prop_list():
     t = 0
     for i in x:
         for j in y:
-            if 3-2*i-4*j > 0 and 3-4*i-2*j > 0:
+            if 3-2*i-4*j > 0 and 3- 4*i- 2*j > 0:
                 p[t] = [(3 - 4*i - 2*j)/6, i, j, (3 - 2*i - 4*j)/6]
                 t += 1
     p = p[0:t]
-
     return p
 
 # Results of Different Policies under one period and one probability
@@ -24,7 +22,7 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     num_period = 70
     given_lines = 10
-
+    sd = 1
     prop = prop_list()
     roll_width = np.ones(given_lines) * 21
 
@@ -36,7 +34,7 @@ if __name__ == "__main__":
     for p in prop:
         my_file.write('Probability: \t' + str(p) + '\n')
         print(p)
-        a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample)
+        a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample, sd)
 
         ratio1 = 0
         ratio2 = 0
@@ -46,7 +44,7 @@ if __name__ == "__main__":
         accept_people = 0
 
         multi = np.arange(1, I+1)
-        count = 200
+        count = 1
 
         for j in range(count):
             sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()

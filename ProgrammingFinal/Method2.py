@@ -2,24 +2,22 @@ import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
 from collections import Counter
-from SamplingMethod import samplingmethod
+from SamplingMethodSto import samplingmethod1
 from Mist import generate_sequence, decision1
 import time
 
 # This function uses IP to solve stochastic Model directly.
-
 class originalModel:
-    def __init__(self, roll_width, given_lines, demand_width_array, num_sample, I, prop, dw):
+    def __init__(self, roll_width, given_lines, demand_width_array, num_sample, I, prop, dw, s):
         self.roll_width = roll_width
         self.given_lines = given_lines
         self.demand_width_array = demand_width_array
-        self.value_array = demand_width_array - 1
+        self.s = s
+        self.value_array = demand_width_array - self.s
         self.W = len(prop)
         self.I = I
         self.dw = dw
         self.prop = prop
-        seat = np.insert(demand_width_array, 0, 1)
-        self.seat_value = np.diff(seat)
         self.num_sample = num_sample
 
     def Wmatrix(self):
@@ -40,8 +38,7 @@ class originalModel:
 
         m2.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) + grb.quicksum(W0[i, j] * y1[j, w] + M_identity[i, j]*y2[j, w] for j in range(self.I)) == self.dw[w][i] for i in range(self.I) for w in range(self.W))
         # print("Constructing second took...", round(time.time() - start, 2), "seconds")
-        m2.setObjective(grb.quicksum(self.num_sample* self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(
-            self.seat_value[i]*y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
+        m2.setObjective(grb.quicksum(self.num_sample* self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
 
         m2.setParam('OutputFlag', 0)
         # m2.Params.MIPGapAbs = 1
@@ -61,31 +58,23 @@ if __name__ == "__main__":
     number_period = 55
     given_lines = 8
     np.random.seed(0)
-
+    sd = 1
     probab = [0.4, 0.4, 0.1, 0.1]
-    sam = samplingmethod(I, num_sample, number_period, probab)
-
-    dw, prop = sam.get_prob()
-    W = len(dw)
+    sam = samplingmethod1(I, num_sample, number_period, probab, sd)
 
     roll_width = np.arange(21, 21 + given_lines)
     # roll_width = np.ones(given_lines) * 20
 
     demand_width_array = np.arange(2, 2+I)
 
-    sequence = generate_sequence(number_period, probab)
-
+    sequence = generate_sequence(number_period, probab, sd)
+    dw, prop = sam.get_prob_ini(sequence[0])
+    W = len(dw)
+    
     my = originalModel(roll_width, given_lines,
-                         demand_width_array, num_sample, I, prop, dw)
+                         demand_width_array, num_sample, I, prop, dw, sd)
 
     start = time.time()
     ini_demand, upperbound = my.solveModelGurobi()
+    print(ini_demand)
     print("LP took...", round(time.time() - start, 3), "seconds")
-
-    decision_list = decision1(sequence, ini_demand, probab)
-    sequence = [i-1 for i in sequence if i > 0]
-    total_people = np.dot(sequence, decision_list)
-    final_demand = np.array(sequence) * np.array(decision_list)
-
-    print(total_people)
-    print(Counter(final_demand))

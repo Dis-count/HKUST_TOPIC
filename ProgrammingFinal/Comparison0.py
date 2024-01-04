@@ -1,6 +1,5 @@
 import numpy as np
-from SamplingMethod import samplingmethod
-from SamplingMethodNew import samplingmethod1
+from SamplingMethodSto import samplingmethod1
 from Method7 import stochasticModel
 from Method5 import deterministicModel1
 from Mist import generate_sequence, decision1
@@ -25,10 +24,10 @@ class CompareMethods0:
 
     def random_generate(self):
         sequence = generate_sequence(self.num_period, self.probab, self.s)
-        sam = samplingmethod(self.I, self.num_sample,
-                             self.num_period-1, self.probab, sequence[0], self.s)
+        sam = samplingmethod1(self.I, self.num_sample,
+                             self.num_period-1, self.probab, self.s)
 
-        dw, prop = sam.get_prob()
+        dw, prop = sam.get_prob_ini(sequence[0])
         W = len(dw)
 
         m1 = stochasticModel(self.roll_width, self.given_lines,

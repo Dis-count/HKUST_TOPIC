@@ -41,27 +41,28 @@ def decision1(sequence, demand, probab, sd):
     # sequence is one possible sequence of the group arrival.
     period = len(sequence)
     I = len(demand)
-    group_type = [i+2 for i in range(I)]
+    group_type = [i+1+sd for i in range(I)]
     decision_list = [0] * period
     t = 0
     for i in sequence:
         remaining_period = period - t
-        position = group_type.index(i)
+        position = i -1 - sd
         demand_posi = demand[position]
+
         if demand_posi > 0:
             decision_list[t] = 1
             demand[position] = demand_posi - 1
-        elif sum(demand) == 0:
+        elif sum(demand) < 1e-4:
             break
         elif i == group_type[-1] and demand[-1] == 0:
             decision_list[t] = 0
         else:
-            accept_reject = several_class(i-1, demand, remaining_period-1, probab, sd)
+            accept_reject = several_class(i-sd, demand, remaining_period-1, probab, sd)
             if accept_reject:
                 decision_list[t] = 1
                 demand[accept_reject] -= 1
-                if accept_reject-position-2 >= 0:
-                    demand[accept_reject-position-2] += 1
+                if accept_reject-position-1-sd >= 0:
+                    demand[accept_reject-position-1-sd] += 1
         t += 1
     return decision_list
 

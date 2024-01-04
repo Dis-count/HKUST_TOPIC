@@ -93,6 +93,11 @@ When the supply is insufficient for the group type and we plan to assign the gro
 By considering the row with the smallest $\beta$ value in both scenarios, we prioritize filling seats and aim to minimize the fragmentation of available seating capacity. This approach helps optimize the utilization of seats and leads to better capacity management.
 
 
+\begin{figure}[ht]
+  \centering
+    \includegraphics[width=1\textwidth]{./Figures/test.pdf}
+\end{figure}
+
 % If the row does not exist, we assign the group at a row that contains the larger group and have the smallest remaining capacity.
 
 \begin{algorithm}[H]
@@ -116,6 +121,7 @@ By considering the row with the smallest $\beta$ value in both scenarios, we pri
     {Reject group type $i$\;}
     }}
 \end{algorithm}
+
 
 
 

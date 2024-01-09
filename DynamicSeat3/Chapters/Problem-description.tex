@@ -31,10 +31,7 @@ In other words, $X$ captures the number each group type that can be allocated to
 Although the problem size is small and the optimal solution can be easily obtained using a solver, it is still important to analyze the problem further to gain additional insights and understanding.
 We introduce the term pattern to refer to the seat planning arrangement for a single row. A specific pattern can be represented by a vector $\bm{h} = (h_1, \ldots, h_M)$, where $h_i$ represents the number of group type $i$ in the row for $i = 1,\ldots, M$. This vector $\bm{h}$ must satisfy the condition $\sum_{i=1}^{M} h_i n_i \leq L$ and belong to the set of non-negative integer values, denoted as $\bm{h} \in \mathbb{Z}_{+}^{M}$. Then a seat planning with $N$ rows can be represented by $\bm{H} = \{\bm{h}_1; \ldots; \bm{h}_N\}$, where $H_{ji}$ represents the number of group type $i$ in pattern $j$.
 
-
 Let $|\bm{h}|$ indicate the number of people that can be assigned according to pattern $\bm{h}$, i.e., $|\bm{h}| = \sum_{i =1}^{M} i h_i$. We also introduce the concept of loss, which is the number of unoccupied seats. Mathematically, the loss is defined as $L- \delta - |\bm{h}|$, where $L$ denotes the length of the row. The loss provides a measure of the number of seats which cannot be taken due to the implementation of social distancing constraints. By examining the losses associated with different patterns, we can assess the effectiveness of various seat planning configurations with respect to accommodating the desired number of individuals while adhering to social distancing requirements.
-
-% $|h(L)| \geq |h(L+1)| -1$.
 
 \begin{definition}
 Given the length of a row, denoted as $L$, and the maximum size of a group allowed, denoted as $M$, we can define certain characteristics of a pattern $\bm{h} = (h_1, \ldots, h_M)$.

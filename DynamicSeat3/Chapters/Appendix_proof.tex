@@ -3,9 +3,39 @@
 \section*{Proof}
 
 \begin{pf}[Proof of Proposition \ref{lem_pattern}]
-% To obtain a largest patterm, we need assign as less groups as possible.  
-We can employ a greedy approach to generate a pattern by following these steps. First, we select the maximum group size, denoted as $n_M$, as many times as possible, filling up the available space. The remaining seats are then allocated to the group with the corresponding size. Let $L = n_M \cdot q + r$, where $q$ represents the number of times $n_M$ is selected (the quotient), and $r$ represents the remainder, indicating the number of remaining seats. It holds that $0 \leq r < n_M$. The loss of the pattern is $q \delta -\delta + g(r)$. We can prove that it is the smallest loss by contradiction. 
-Suppose the loss is not the smallest, there exists one pattern with a loss of $p < q \delta -\delta + g(r)$. Then the largest number of seats occupied in this pattern is $\lfloor \frac{p}{\delta} \rfloor \cdot n_M$, which is always less than $L$ due to the inequality $\frac{g(r)}{\delta} \cdot n_M < r + n_M$. Consequently, the loss of $p$ cannot exist as it would contradict the maximum number of seats taken.
+We can utilize a greedy approach to construct a pattern, denoted as $\bm{h}_{g}$, by following the steps outlined below. This approach aims to generate a pattern that maximizes the number of people accommodated within the given constraints.
+
+\begin{itemize}
+ \item Begin by selecting the maximum group size, denoted as $n_M$, as many times as possible to fill up the available seats in the row.
+ \item Allocate the remaining seats(if possible) in the row to the group with the corresponding size.
+\end{itemize}
+
+Let $L = n_M \cdot q + r$, where $q$ represents the number of times $n_M$ is selected (the quotient), and $r$ represents the remainder, indicating the number of remaining seats. It holds that $0 \leq r < n_M$. 
+
+The number of people accommodated in the pattern $\bm{h}_{g}$ is given by $|\bm{h}_{g}| = q M + \max\{r-\delta, 0\}$. To establish the optimality of $|\bm{h}_{g}|$ as the largest possible number of people accommodated given the constraints of $L$, $\delta$, and $M$, we can employ a proof by contradiction.
+
+% This expression takes into account the complete groups of size $M$ (represented by the product $q M$) and any remaining seats beyond the complete groups (represented by $\max{r-\delta, 0}$) that can be utilized to accommodate additional individuals, considering the social distancing requirement $\delta$.
+% That is we need to prove $\max\{\sum_{i} (n_i - \delta)h_i| n_{i} h_{i} \leq L, h_{i} \in \mathbb{Z}\}$.
+
+% With the capacity constraint, we have $L \geq \sum_{i} n_i h_i > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\}$. By substituting $L = n_M \cdot q + r$, we have $q(M + \delta) + r > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\}$.
+
+Assuming the existence of a pattern $\bm{h}$ such that $|\bm{h}| > |\bm{h}_{g}|$, we can derive the following inequalities: 
+
+\begin{align*}
+  & \sum_{i} (n_i - \delta) h_i > q M + \max\{r-\delta, 0\} \\
+  \Rightarrow ~& L \geq \sum_{i} n_i h_i > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\} \\
+  \Rightarrow ~& q(M + \delta) + r > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\} \\
+  \Rightarrow ~& q \delta + r > \sum_{i} \delta h_i + \max\{r-\delta, 0\}
+\end{align*}
+
+Breaking down the above inequality into two cases:
+
+\begin{enumerate}[(i)]
+  \item When $r > \delta$, the inequality becomes $q+1 > \sum_{i} h_i$. It should be noted that $h_i$ represents the number of group type $i$ in the pattern. Since $\sum_{i} h_i \leq q$, the maximum number of people that can be accommodated is $q M < q M + r-\delta$.  
+  \item When $r \leq \delta$, we have the inequality $q \delta + \delta \geq q \delta + r > \sum_{i} \delta h_i$. Similarly, we obtain $q+1 > \sum_{i} h_i$. Thus, the maximum number of people that can be accommodated is $q M$, which is not greater than $|\bm{h}_{g}|$.  
+\end{enumerate}
+
+Therefore, $\bm{h}$ cannot exist. All largest patterns can accommodate the same maximum number of people and have the same loss. Hence, the maximum number of people that can be accommodated in the largest pattern is $q M + \max\{r-\delta, 0\}$. Correspondingly, the loss of the largest pattern $|\bm{h}_{g}|$ is $q \delta -\delta + \min\{r, \delta\}$.
 \qed
 \end{pf}
 
@@ -36,7 +66,7 @@ Suppose the loss is not the smallest, there exists one pattern with a loss of $p
 % \end{pf}
 
 
-\begin{pf}[Proof of Proposition \ref{feasible_region}]
+\begin{pf}[Proof of Lemma \ref{feasible_region}]
 % $W$ and $V$ are the totally unimodular matrix because 
 
 Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$. Based on this, we can derive the following inequalities: $\bm{\alpha}^{\intercal}W \geq -\mathbf{1}$ and $\bm{\alpha}^{\intercal} I \geq \mathbf{0}$. These inequalities indicate that the feasible region is nonempty and bounded. Moreover, let $\alpha_0 = 0$. From this, we can deduce that $0 \leq \alpha_i \leq \alpha_{i-1} +1$ for $i \in \mathcal{M}$. Consequently, all extreme points within the feasible region are integral.
@@ -80,9 +110,13 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
     \qed
   \end{pf}
 
+\begin{pf}[Proof of Proposition \ref{prop_solution}]
+In any optimal solution where one of the corresponding patterns is not full or largest, we have the flexibility to allocate the remaining unoccupied seats. These seats can be assigned to either a new seat planning or added to an existing seat planning. Importantly, since a group can utilize the seat planning of a larger group, the allocation scheme based on the original optimal solution will not affect the optimality of the solution. 
+For each row, there are three situations to allocate the seats. First, when the rest seats can be allocated to the existing groups, then the corresponding pattern becomes a full pattern. Second, when all the existing groups are the largest groups and the rest seats cannot construct a new group, the pattern becomes the largest. Third, when all the existing groups are the largest groups and the rest seats can construct new groups, the rest seats can be used to construct the largest groups until there is no enough capacity, then the pattern becomes the largest. Finally, we can allocate the seats such that each row in the seat planning becomes either full or largest. \qed
+\end{pf}
 
 \begin{pf}[Proof of Lemma \ref{bid-price}]
-  According to the Lemma \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
+  According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
   
   Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$, and $z_i = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.  \qed
 \end{pf}

@@ -14,6 +14,7 @@ def prop_list():
                 p[t] = [(3 - 4*i - 2*j)/6, i, j, (3 - 2*i - 4*j)/6]
                 t += 1
     p = p[0:t]
+    print(len(p))
     return p
 
 # Results of Different Policies under one period and one probability
@@ -48,28 +49,22 @@ if __name__ == "__main__":
 
         for j in range(count):
             sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+            new_test = np.zeros((I, given_lines))
+            new_test = a_instance.full_largest(new_test, roll_width)
 
             a = a_instance.method_new(sequence, newx4, roll_width)
-            b = a_instance.bid_price(sequence)
-            c = a_instance.dynamic_program1(sequence)
-            d = a_instance.method_IP(sequence, newx3, roll_width)
-            e = a_instance.row_by_row(sequence)
+
+            b = a_instance.method_new(sequence, new_test, roll_width)
 
             f = a_instance.offline(sequence)  # optimal result
             optimal = np.dot(multi, f)
 
             ratio1 += np.dot(multi, a) / optimal   # sto-planning
             ratio2 += np.dot(multi, b) / optimal   # bid-price
-            ratio3 += np.dot(multi, c) / optimal   # DP1
-            ratio4 += np.dot(multi, d) / optimal   # booking
-            ratio5 += np.dot(multi, e) / optimal   # FCFS
             accept_people += optimal
 
         my_file.write('Sto: %.2f ;' % (ratio1/count*100))
-        my_file.write('Bid: %.2f ;' % (ratio2/count*100))
-        my_file.write('DP1: %.2f ;' % (ratio3/count*100))
-        my_file.write('Booking: %.2f ;' % (ratio4/count*100))
-        my_file.write('FCFS: %.2f ;' % (ratio5/count*100))
+        my_file.write('Largest: %.2f ;' % (ratio2/count*100))
         my_file.write('Number of accepted people: %.2f \n' % (accept_people/count))
 
     run_time = time.time() - begin_time

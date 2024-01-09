@@ -41,7 +41,6 @@ class CompareMethods:
         ini_demand3, newx3 = deter.IP_formulation(np.zeros(self.I), ini_demand1)
 
         newx3 = self.full_largest(newx3, self.roll_width)
-
         return sequence, ini_demand, ini_demand3, newx3, newx4
 
     def row_by_row(self, sequence):

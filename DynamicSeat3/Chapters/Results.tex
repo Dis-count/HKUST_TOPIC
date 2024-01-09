@@ -69,25 +69,6 @@ When we solve problem \eqref{deter_upper} directly, we can develop the booking l
 \end{algorithm}
 
 
-% \begin{equation}
-%   \begin{aligned}
-%   \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
-%   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
-%   & \sum_{i} L_{ij} \leq L_j, \quad j \in \mathcal{N}, \\
-%   & n_{i} x_{ij} - L_{ij} \leq 0, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
-%   & x_{ij} \geq 0, L_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-%   \end{aligned}
-% \end{equation}
-
-% \begin{equation}
-%   \begin{aligned}
-%   \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \kappa_{j} \\
-%   \text {s.t.} \quad & z_{i} + \beta_{ij} n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
-%   & \kappa_{j} - \beta_{ij} \geq 0, \\
-%   & z_{i} \geq 0, i \in \mathcal{M}, \beta_{ij} \geq 0, j \in \mathcal{N}.
-%   \end{aligned}
-% \end{equation}
-
 \subsubsection*{Dynamic Programming Base-heuristic}
 To simplify the complexity of the original dynamic programming problem, we can consider a simplified version by relaxing all rows to a single row with the same total capacity, denoted as $L = \sum_{j=1}^{N} L_j$. With this simplification, we can make decisions for each group arrival based on the relaxed dynamic programming. By relaxing the rows to a single row, we aggregate the capacities of all individual rows into a single capacity value. This allows us to treat the seat assignment problem as a one-dimensional problem, reducing the computational complexity. Using the relaxed dynamic programming approach, we can determine the seat assignment decisions for each group arrival based on the simplified problem.
 
@@ -108,6 +89,15 @@ For dynamic seat assignment for each group arrival, the intuitive but trivial me
 
 \subsubsection*{Numerical Results}
 The seat layout consists of 10 rows, each with 21 seats (including one dummy seat as the social distance), and the group size can range up to 4 people. We conducted experiments over 60 to 100 periods to demonstrate the policies' performance under varying demand levels. We selected three probabilities to ensure that the expected number of people for each period is consistent. The table below displays the average of 200 instances for each number.
+
+An arrival sequence during $T$ periods can be expressed as ${y_1, y_2, \ldots, y_T}$. Let $N_i = \sum_{t} I(y_t = i)$, i.e., the count number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_M)$, follow a multinomial distribution, 
+$$
+p\left(N_1, \ldots, N_M \mid \mathbf{p}\right)=\frac{T !}{N_{1} !, \ldots, N_{M} !} \prod_{i=1}^M p_i^{N_i}, T=\sum_{i=1}^M N_i.
+$$
+
+It is clear that the number of different sequences is $M^T$. The number of different scenarios is
+$O(T^{M-1})$ which can be obtained by the following DP. The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
+
 
 \begin{table}[ht]
   \centering

@@ -1,0 +1,264 @@
+Run Start Time: Mon Jan  8 14:13:00 2024
+Probability: 	[0.45 0.05 0.05 0.45]
+Sto: 97.44 ;Largest: 97.57 ;Number of accepted people: 156.40 
+Probability: 	[0.43333333 0.05       0.1        0.41666667]
+Sto: 97.20 ;Largest: 97.33 ;Number of accepted people: 155.72 
+Probability: 	[0.41666667 0.05       0.15       0.38333333]
+Sto: 97.27 ;Largest: 97.37 ;Number of accepted people: 156.06 
+Probability: 	[0.4  0.05 0.2  0.35]
+Sto: 97.42 ;Largest: 97.45 ;Number of accepted people: 156.32 
+Probability: 	[0.38333333 0.05       0.25       0.31666667]
+Sto: 97.76 ;Largest: 97.83 ;Number of accepted people: 155.77 
+Probability: 	[0.36666667 0.05       0.3        0.28333333]
+Sto: 97.55 ;Largest: 97.57 ;Number of accepted people: 156.51 
+Probability: 	[0.35 0.05 0.35 0.25]
+Sto: 97.55 ;Largest: 97.81 ;Number of accepted people: 156.76 
+Probability: 	[0.33333333 0.05       0.4        0.21666667]
+Sto: 97.57 ;Largest: 97.57 ;Number of accepted people: 156.45 
+Probability: 	[0.31666667 0.05       0.45       0.18333333]
+Sto: 97.57 ;Largest: 97.69 ;Number of accepted people: 156.87 
+Probability: 	[0.3  0.05 0.5  0.15]
+Sto: 97.66 ;Largest: 97.88 ;Number of accepted people: 156.32 
+Probability: 	[0.28333333 0.05       0.55       0.11666667]
+Sto: 97.95 ;Largest: 97.91 ;Number of accepted people: 155.74 
+Probability: 	[0.26666667 0.05       0.6        0.08333333]
+Sto: 98.35 ;Largest: 98.30 ;Number of accepted people: 154.88 
+Probability: 	[0.25 0.05 0.65 0.05]
+Sto: 98.52 ;Largest: 98.56 ;Number of accepted people: 152.97 
+Probability: 	[0.23333333 0.05       0.7        0.01666667]
+Sto: 98.58 ;Largest: 98.54 ;Number of accepted people: 150.83 
+Probability: 	[0.41666667 0.1        0.05       0.43333333]
+Sto: 97.36 ;Largest: 97.46 ;Number of accepted people: 156.20 
+Probability: 	[0.4 0.1 0.1 0.4]
+Sto: 97.46 ;Largest: 97.59 ;Number of accepted people: 155.92 
+Probability: 	[0.38333333 0.1        0.15       0.36666667]
+Sto: 97.66 ;Largest: 97.72 ;Number of accepted people: 156.29 
+Probability: 	[0.36666667 0.1        0.2        0.33333333]
+Sto: 97.38 ;Largest: 97.44 ;Number of accepted people: 156.46 
+Probability: 	[0.35 0.1  0.25 0.3 ]
+Sto: 97.78 ;Largest: 97.74 ;Number of accepted people: 156.66 
+Probability: 	[0.33333333 0.1        0.3        0.26666667]
+Sto: 97.61 ;Largest: 97.55 ;Number of accepted people: 156.68 
+Probability: 	[0.31666667 0.1        0.35       0.23333333]
+Sto: 97.84 ;Largest: 97.93 ;Number of accepted people: 155.99 
+Probability: 	[0.3 0.1 0.4 0.2]
+Sto: 97.67 ;Largest: 97.70 ;Number of accepted people: 156.64 
+Probability: 	[0.28333333 0.1        0.45       0.16666667]
+Sto: 97.93 ;Largest: 97.96 ;Number of accepted people: 156.01 
+Probability: 	[0.26666667 0.1        0.5        0.13333333]
+Sto: 98.07 ;Largest: 98.01 ;Number of accepted people: 155.49 
+Probability: 	[0.25 0.1  0.55 0.1 ]
+Sto: 98.28 ;Largest: 98.37 ;Number of accepted people: 155.15 
+Probability: 	[0.23333333 0.1        0.6        0.06666667]
+Sto: 98.90 ;Largest: 98.89 ;Number of accepted people: 154.18 
+Probability: 	[0.21666667 0.1        0.65       0.03333333]
+Sto: 99.35 ;Largest: 99.40 ;Number of accepted people: 152.24 
+Probability: 	[0.38333333 0.15       0.05       0.41666667]
+Sto: 97.55 ;Largest: 97.54 ;Number of accepted people: 155.67 
+Probability: 	[0.36666667 0.15       0.1        0.38333333]
+Sto: 97.80 ;Largest: 97.58 ;Number of accepted people: 155.49 
+Probability: 	[0.35 0.15 0.15 0.35]
+Sto: 97.77 ;Largest: 97.80 ;Number of accepted people: 155.91 
+Probability: 	[0.33333333 0.15       0.2        0.31666667]
+Sto: 97.52 ;Largest: 97.52 ;Number of accepted people: 157.03 
+Probability: 	[0.31666667 0.15       0.25       0.28333333]
+Sto: 97.81 ;Largest: 97.85 ;Number of accepted people: 156.38 
+Probability: 	[0.3  0.15 0.3  0.25]
+Sto: 97.85 ;Largest: 97.91 ;Number of accepted people: 156.59 
+Probability: 	[0.28333333 0.15       0.35       0.21666667]
+Sto: 97.97 ;Largest: 97.92 ;Number of accepted people: 157.06 
+Probability: 	[0.26666667 0.15       0.4        0.18333333]
+Sto: 98.00 ;Largest: 98.10 ;Number of accepted people: 156.26 
+Probability: 	[0.25 0.15 0.45 0.15]
+Sto: 98.26 ;Largest: 98.35 ;Number of accepted people: 155.75 
+Probability: 	[0.23333333 0.15       0.5        0.11666667]
+Sto: 98.41 ;Largest: 98.41 ;Number of accepted people: 155.96 
+Probability: 	[0.21666667 0.15       0.55       0.08333333]
+Sto: 98.67 ;Largest: 98.69 ;Number of accepted people: 155.24 
+Probability: 	[0.2  0.15 0.6  0.05]
+Sto: 99.25 ;Largest: 99.20 ;Number of accepted people: 153.47 
+Probability: 	[0.18333333 0.15       0.65       0.01666667]
+Sto: 99.54 ;Largest: 99.49 ;Number of accepted people: 150.86 
+Probability: 	[0.35 0.2  0.05 0.4 ]
+Sto: 97.67 ;Largest: 97.83 ;Number of accepted people: 156.48 
+Probability: 	[0.33333333 0.2        0.1        0.36666667]
+Sto: 97.69 ;Largest: 97.78 ;Number of accepted people: 156.55 
+Probability: 	[0.31666667 0.2        0.15       0.33333333]
+Sto: 97.79 ;Largest: 97.85 ;Number of accepted people: 156.85 
+Probability: 	[0.3 0.2 0.2 0.3]
+Sto: 97.73 ;Largest: 97.88 ;Number of accepted people: 156.80 
+Probability: 	[0.28333333 0.2        0.25       0.26666667]
+Sto: 97.90 ;Largest: 97.92 ;Number of accepted people: 156.70 
+Probability: 	[0.26666667 0.2        0.3        0.23333333]
+Sto: 98.35 ;Largest: 98.43 ;Number of accepted people: 156.64 
+Probability: 	[0.25 0.2  0.35 0.2 ]
+Sto: 98.30 ;Largest: 98.30 ;Number of accepted people: 155.89 
+Probability: 	[0.23333333 0.2        0.4        0.16666667]
+Sto: 98.41 ;Largest: 98.27 ;Number of accepted people: 155.84 
+Probability: 	[0.21666667 0.2        0.45       0.13333333]
+Sto: 98.50 ;Largest: 98.55 ;Number of accepted people: 155.68 
+Probability: 	[0.2 0.2 0.5 0.1]
+Sto: 98.71 ;Largest: 98.70 ;Number of accepted people: 155.80 
+Probability: 	[0.18333333 0.2        0.55       0.06666667]
+Sto: 98.92 ;Largest: 99.04 ;Number of accepted people: 154.22 
+Probability: 	[0.16666667 0.2        0.6        0.03333333]
+Sto: 99.24 ;Largest: 99.29 ;Number of accepted people: 152.57 
+Probability: 	[0.31666667 0.25       0.05       0.38333333]
+Sto: 97.92 ;Largest: 97.78 ;Number of accepted people: 156.51 
+Probability: 	[0.3  0.25 0.1  0.35]
+Sto: 97.97 ;Largest: 97.87 ;Number of accepted people: 156.36 
+Probability: 	[0.28333333 0.25       0.15       0.31666667]
+Sto: 98.03 ;Largest: 98.00 ;Number of accepted people: 156.03 
+Probability: 	[0.26666667 0.25       0.2        0.28333333]
+Sto: 98.27 ;Largest: 98.41 ;Number of accepted people: 155.66 
+Probability: 	[0.25 0.25 0.25 0.25]
+Sto: 98.19 ;Largest: 98.30 ;Number of accepted people: 156.47 
+Probability: 	[0.23333333 0.25       0.3        0.21666667]
+Sto: 98.37 ;Largest: 98.39 ;Number of accepted people: 155.75 
+Probability: 	[0.21666667 0.25       0.35       0.18333333]
+Sto: 98.47 ;Largest: 98.51 ;Number of accepted people: 155.89 
+Probability: 	[0.2  0.25 0.4  0.15]
+Sto: 98.74 ;Largest: 98.71 ;Number of accepted people: 155.53 
+Probability: 	[0.18333333 0.25       0.45       0.11666667]
+Sto: 98.64 ;Largest: 98.61 ;Number of accepted people: 155.31 
+Probability: 	[0.16666667 0.25       0.5        0.08333333]
+Sto: 98.78 ;Largest: 98.88 ;Number of accepted people: 154.66 
+Probability: 	[0.15 0.25 0.55 0.05]
+Sto: 99.09 ;Largest: 99.10 ;Number of accepted people: 153.23 
+Probability: 	[0.13333333 0.25       0.6        0.01666667]
+Sto: 99.35 ;Largest: 99.38 ;Number of accepted people: 151.26 
+Probability: 	[0.28333333 0.3        0.05       0.36666667]
+Sto: 97.96 ;Largest: 97.95 ;Number of accepted people: 155.87 
+Probability: 	[0.26666667 0.3        0.1        0.33333333]
+Sto: 97.98 ;Largest: 98.08 ;Number of accepted people: 156.78 
+Probability: 	[0.25 0.3  0.15 0.3 ]
+Sto: 98.29 ;Largest: 98.24 ;Number of accepted people: 156.09 
+Probability: 	[0.23333333 0.3        0.2        0.26666667]
+Sto: 98.33 ;Largest: 98.26 ;Number of accepted people: 155.86 
+Probability: 	[0.21666667 0.3        0.25       0.23333333]
+Sto: 98.68 ;Largest: 98.68 ;Number of accepted people: 155.91 
+Probability: 	[0.2 0.3 0.3 0.2]
+Sto: 98.66 ;Largest: 98.57 ;Number of accepted people: 155.49 
+Probability: 	[0.18333333 0.3        0.35       0.16666667]
+Sto: 98.84 ;Largest: 98.80 ;Number of accepted people: 155.26 
+Probability: 	[0.16666667 0.3        0.4        0.13333333]
+Sto: 98.72 ;Largest: 98.73 ;Number of accepted people: 155.03 
+Probability: 	[0.15 0.3  0.45 0.1 ]
+Sto: 98.89 ;Largest: 98.93 ;Number of accepted people: 154.63 
+Probability: 	[0.13333333 0.3        0.5        0.06666667]
+Sto: 98.92 ;Largest: 98.95 ;Number of accepted people: 153.79 
+Probability: 	[0.11666667 0.3        0.55       0.03333333]
+Sto: 99.16 ;Largest: 99.19 ;Number of accepted people: 152.21 
+Probability: 	[0.25 0.35 0.05 0.35]
+Sto: 98.15 ;Largest: 98.21 ;Number of accepted people: 155.14 
+Probability: 	[0.23333333 0.35       0.1        0.31666667]
+Sto: 98.30 ;Largest: 98.31 ;Number of accepted people: 156.07 
+Probability: 	[0.21666667 0.35       0.15       0.28333333]
+Sto: 98.50 ;Largest: 98.38 ;Number of accepted people: 155.80 
+Probability: 	[0.2  0.35 0.2  0.25]
+Sto: 98.49 ;Largest: 98.46 ;Number of accepted people: 155.93 
+Probability: 	[0.18333333 0.35       0.25       0.21666667]
+Sto: 98.84 ;Largest: 98.76 ;Number of accepted people: 154.78 
+Probability: 	[0.16666667 0.35       0.3        0.18333333]
+Sto: 98.74 ;Largest: 98.79 ;Number of accepted people: 155.13 
+Probability: 	[0.15 0.35 0.35 0.15]
+Sto: 98.80 ;Largest: 98.85 ;Number of accepted people: 154.62 
+Probability: 	[0.13333333 0.35       0.4        0.11666667]
+Sto: 98.82 ;Largest: 98.94 ;Number of accepted people: 154.45 
+Probability: 	[0.11666667 0.35       0.45       0.08333333]
+Sto: 98.82 ;Largest: 98.75 ;Number of accepted people: 154.24 
+Probability: 	[0.1  0.35 0.5  0.05]
+Sto: 98.90 ;Largest: 98.91 ;Number of accepted people: 152.86 
+Probability: 	[0.08333333 0.35       0.55       0.01666667]
+Sto: 99.12 ;Largest: 98.99 ;Number of accepted people: 151.32 
+Probability: 	[0.21666667 0.4        0.05       0.33333333]
+Sto: 98.42 ;Largest: 98.37 ;Number of accepted people: 155.08 
+Probability: 	[0.2 0.4 0.1 0.3]
+Sto: 98.51 ;Largest: 98.42 ;Number of accepted people: 155.53 
+Probability: 	[0.18333333 0.4        0.15       0.26666667]
+Sto: 98.53 ;Largest: 98.62 ;Number of accepted people: 155.20 
+Probability: 	[0.16666667 0.4        0.2        0.23333333]
+Sto: 98.69 ;Largest: 98.70 ;Number of accepted people: 154.95 
+Probability: 	[0.15 0.4  0.25 0.2 ]
+Sto: 98.82 ;Largest: 98.79 ;Number of accepted people: 154.81 
+Probability: 	[0.13333333 0.4        0.3        0.16666667]
+Sto: 98.89 ;Largest: 98.91 ;Number of accepted people: 154.29 
+Probability: 	[0.11666667 0.4        0.35       0.13333333]
+Sto: 98.96 ;Largest: 98.85 ;Number of accepted people: 153.94 
+Probability: 	[0.1 0.4 0.4 0.1]
+Sto: 98.88 ;Largest: 98.81 ;Number of accepted people: 153.86 
+Probability: 	[0.08333333 0.4        0.45       0.06666667]
+Sto: 98.73 ;Largest: 98.67 ;Number of accepted people: 153.17 
+Probability: 	[0.06666667 0.4        0.5        0.03333333]
+Sto: 98.79 ;Largest: 98.65 ;Number of accepted people: 152.05 
+Probability: 	[0.18333333 0.45       0.05       0.31666667]
+Sto: 98.65 ;Largest: 98.65 ;Number of accepted people: 154.79 
+Probability: 	[0.16666667 0.45       0.1        0.28333333]
+Sto: 98.67 ;Largest: 98.65 ;Number of accepted people: 154.47 
+Probability: 	[0.15 0.45 0.15 0.25]
+Sto: 98.71 ;Largest: 98.61 ;Number of accepted people: 154.36 
+Probability: 	[0.13333333 0.45       0.2        0.21666667]
+Sto: 98.81 ;Largest: 98.78 ;Number of accepted people: 154.52 
+Probability: 	[0.11666667 0.45       0.25       0.18333333]
+Sto: 98.79 ;Largest: 98.74 ;Number of accepted people: 154.04 
+Probability: 	[0.1  0.45 0.3  0.15]
+Sto: 98.88 ;Largest: 98.82 ;Number of accepted people: 153.60 
+Probability: 	[0.08333333 0.45       0.35       0.11666667]
+Sto: 98.79 ;Largest: 98.82 ;Number of accepted people: 153.30 
+Probability: 	[0.06666667 0.45       0.4        0.08333333]
+Sto: 98.80 ;Largest: 98.72 ;Number of accepted people: 152.63 
+Probability: 	[0.05 0.45 0.45 0.05]
+Sto: 98.61 ;Largest: 98.52 ;Number of accepted people: 152.11 
+Probability: 	[0.03333333 0.45       0.5        0.01666667]
+Sto: 98.97 ;Largest: 98.91 ;Number of accepted people: 150.98 
+Probability: 	[0.15 0.5  0.05 0.3 ]
+Sto: 98.59 ;Largest: 98.58 ;Number of accepted people: 154.49 
+Probability: 	[0.13333333 0.5        0.1        0.26666667]
+Sto: 98.64 ;Largest: 98.52 ;Number of accepted people: 154.31 
+Probability: 	[0.11666667 0.5        0.15       0.23333333]
+Sto: 98.71 ;Largest: 98.72 ;Number of accepted people: 153.62 
+Probability: 	[0.1 0.5 0.2 0.2]
+Sto: 98.65 ;Largest: 98.59 ;Number of accepted people: 153.82 
+Probability: 	[0.08333333 0.5        0.25       0.16666667]
+Sto: 98.81 ;Largest: 98.82 ;Number of accepted people: 153.69 
+Probability: 	[0.06666667 0.5        0.3        0.13333333]
+Sto: 98.77 ;Largest: 98.76 ;Number of accepted people: 152.54 
+Probability: 	[0.05 0.5  0.35 0.1 ]
+Sto: 98.75 ;Largest: 98.89 ;Number of accepted people: 152.21 
+Probability: 	[0.03333333 0.5        0.4        0.06666667]
+Sto: 98.56 ;Largest: 98.65 ;Number of accepted people: 152.20 
+Probability: 	[0.01666667 0.5        0.45       0.03333333]
+Sto: 98.39 ;Largest: 98.71 ;Number of accepted people: 151.07 
+Probability: 	[0.11666667 0.55       0.05       0.28333333]
+Sto: 98.60 ;Largest: 98.49 ;Number of accepted people: 153.91 
+Probability: 	[0.1  0.55 0.1  0.25]
+Sto: 98.72 ;Largest: 98.73 ;Number of accepted people: 153.52 
+Probability: 	[0.08333333 0.55       0.15       0.21666667]
+Sto: 98.65 ;Largest: 98.75 ;Number of accepted people: 153.16 
+Probability: 	[0.06666667 0.55       0.2        0.18333333]
+Sto: 98.57 ;Largest: 98.53 ;Number of accepted people: 153.02 
+Probability: 	[0.05 0.55 0.25 0.15]
+Sto: 98.67 ;Largest: 98.59 ;Number of accepted people: 152.89 
+Probability: 	[0.03333333 0.55       0.3        0.11666667]
+Sto: 98.44 ;Largest: 98.46 ;Number of accepted people: 152.25 
+Probability: 	[0.01666667 0.55       0.35       0.08333333]
+Sto: 98.71 ;Largest: 98.58 ;Number of accepted people: 151.54 
+Probability: 	[0.08333333 0.6        0.05       0.26666667]
+Sto: 98.58 ;Largest: 98.61 ;Number of accepted people: 153.32 
+Probability: 	[0.06666667 0.6        0.1        0.23333333]
+Sto: 98.55 ;Largest: 98.65 ;Number of accepted people: 152.84 
+Probability: 	[0.05 0.6  0.15 0.2 ]
+Sto: 98.60 ;Largest: 98.65 ;Number of accepted people: 152.16 
+Probability: 	[0.03333333 0.6        0.2        0.16666667]
+Sto: 98.74 ;Largest: 98.69 ;Number of accepted people: 151.78 
+Probability: 	[0.01666667 0.6        0.25       0.13333333]
+Sto: 98.68 ;Largest: 98.56 ;Number of accepted people: 151.94 
+Probability: 	[0.05 0.65 0.05 0.25]
+Sto: 98.50 ;Largest: 98.45 ;Number of accepted people: 152.68 
+Probability: 	[0.03333333 0.65       0.1        0.21666667]
+Sto: 98.61 ;Largest: 98.50 ;Number of accepted people: 151.88 
+Probability: 	[0.01666667 0.65       0.15       0.18333333]
+Sto: 98.34 ;Largest: 98.40 ;Number of accepted people: 151.91 
+Probability: 	[0.01666667 0.7        0.05       0.23333333]
+Sto: 98.55 ;Largest: 98.54 ;Number of accepted people: 151.35 
+Total Runtime	76074.316483

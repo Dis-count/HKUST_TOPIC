@@ -76,16 +76,38 @@ To simplify the complexity of the original dynamic programming problem, we can c
 % Let $v_{r}^{*}$ and $v^{*}$ denote the optimal values of problem \eqref{relax_deter} and \eqref{deter_upper}, respectively. After relaxation, assume that each row has a capacity of $L$ seats, which can be filled. For each seperate row, the maximum number of empty seats in each row is $s$. Then, the total number of empty seats in $N$ rows is given by $Ns$. Therefore, the biggest difference between $v_{r}^{*}$ and $v^{*}$ is the number of people accommodated in the $Ns$ empty seats.
 % The difference between them is zero only when the groups corresponding to the optimal solution of problem \eqref{relax_deter} can be accommodated in $N$ rows. The numerical results indicate that this is the case for most scenarios, which suggests that a DP-based approach can be used to solve the dynamic seat assignment problem after all groups have arrived.
 
-Let $u$ denote the decision, where $u(t) = 1$ if we accept a request in period $t$, $u(t) =0$ otherwise. Similar to the DP in section \ref{sec_dynamic}, the DP with one row can be expressed as:
+Let $u$ denote the decision, where $u^{t} = 1$ if we accept a request in period $t$, $u^{t} =0$ otherwise. Similar to the DP in section \ref{sec_dynamic_seat}, the DP with one row can be expressed as:
 
-$$V_{t}(L) =  \max_{u \in \{0,1\}} \left\{ \sum_{i} p_i [V_{t+1}(L-n_i u)+ i u] + p_0 V_{t+1}(L)\right\} $$
-with the boundary conditions $V_{T+1}(L) =0, \forall L \geq 0$, $V_{t}(0) =0, \forall t$.
+$$V^{t}(l) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l)\right\} $$
+with the boundary conditions $V^{T+1}(l) =0, \forall l \geq 0$, $V^{t}(0) =0, \forall t$.
 
 After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
 
-\subsubsection*{First Come First Served (FCFS) Policy}
+\begin{algorithm}[H]
+  \caption{Dynamic Programming Base-heuristic Algorithm}\label{algo_dp_heuris}
+  Calculate $V^{t}(l)$, $\forall t =2, \ldots, T; \forall l = 1, \ldots, L$\;
+  $l^{1} \gets L$\;
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    \eIf{$V^{t+1}(l^{t}) \leq V^{t+1}(l^{t}-n_i) + i$}
+    {Accept the group and assign the group to an arbitrary row $k$ such that $L_{k} \geq n_i$\;  
+    $L_{k}^{t+1} \gets L_{k}^{t} - n_i$, $l^{t+1} \gets l^{t} - n_i$\;}
+    {Reject the group\;
+    $L_{k}^{t+1} \gets L_{k}^{t}$, $l^{t+1} \gets l^{t}$\;}}
+\end{algorithm}
 
+\subsubsection*{First Come First Served (FCFS) Policy}
 For dynamic seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until all rows cannot accommodate any groups.
+
+\begin{algorithm}[H]
+  \caption{FCFS Policy Algorithm}\label{algo_fcfs}
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    \eIf{$\exists k$ such that $L_{k} \geq n_i$}
+    {Accept the group and assign the group to row $k$\;  
+    $L_{k} \gets L_{k} - n_i$\;}
+    {Reject the group\;}}
+\end{algorithm}
 
 \subsubsection*{Numerical Results}
 The seat layout consists of 10 rows, each with 21 seats (including one dummy seat as the social distance), and the group size can range up to 4 people. We conducted experiments over 60 to 100 periods to demonstrate the policies' performance under varying demand levels. We selected three probabilities to ensure that the expected number of people for each period is consistent. The table below displays the average of 200 instances for each number.
@@ -163,7 +185,7 @@ We consider the scenario where the number of group types is limited to 4. In thi
 
 To analyze the relation between the increment of $\gamma$ and the gap point, we define each combination $(p_1, p_2, p_3, p_4)$ satisfying $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. We conducted an analysis using a sample of 200 probability combinations. The figure below illustrates the gap point as a function of the increment of $\gamma$, along with the corresponding estimations. For each probability combination, we considered 100 instances and plotted the gap point as blue points. Additionally, the occupancy rate at the gap point is represented by red points.
 
-To provide estimations, we utilize the equations $y_1 = \frac{c_1 L}{\gamma +1}$(blue line in the figure) and $y_2 = c_2 \frac{\gamma}{\gamma + \delta} \frac{L}{L-N \delta}$(orange line in the figure), which are fitted to the data. These equations capture the relation between the gap point and the increment of $\gamma$, allowing us to approximate the values. By examining the relation between the gap point and the increment of $\gamma$, we can find that $\gamma$ can be used to estimate gap point.
+To provide estimations, we utilize the equations $y_1 = \frac{c_1 L}{\gamma + \delta}$(blue line in the figure) and $y_2 = c_2 \frac{\gamma}{\gamma + \delta} \frac{L}{L-N \delta}$(orange line in the figure), which are fitted to the data. These equations capture the relation between the gap point and the increment of $\gamma$, allowing us to approximate the values. By examining the relation between the gap point and the increment of $\gamma$, we can find that $\gamma$ can be used to estimate gap point.
 
 \begin{figure}[ht]
   \centering

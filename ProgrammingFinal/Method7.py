@@ -2,7 +2,7 @@ import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
 import time
-from SamplingMethodNew import samplingmethod1
+from SamplingMethodSto import samplingmethod1
 from Mist import generate_sequence, decision1
 from collections import Counter
 from Method3 import deterministicModel

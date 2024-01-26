@@ -918,11 +918,6 @@ INPUT Chapters/Methods.tex
 INPUT ./Chapters/Methods.tex
 INPUT ./Chapters/Methods.tex
 INPUT Chapters/Methods.tex
-INPUT ./Figures/test.pdf
-INPUT ./Figures/test.pdf
-INPUT ./Figures/test.pdf
-INPUT ./Figures/test.pdf
-INPUT ./Figures/test.pdf
 INPUT ./Chapters/Results.tex
 INPUT ./Chapters/Results.tex
 INPUT ./Chapters/Results.tex

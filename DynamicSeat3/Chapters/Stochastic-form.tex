@@ -1,6 +1,6 @@
 % !TEX root = ./sum1.tex
 \section{Seat Planning Composed of Full or Largest Patterns}\label{sec_seat_planning}
-In this section, we develop the scenario-based stochastic programming(SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
+In this section, we develop the scenario-based stochastic programming (SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
 
 % Consider the seller who give the seat planning based on the scenarios then assign the groups to seats according to the realized true demand.
 
@@ -80,9 +80,9 @@ We continue this procedure until either all the planned groups become the larges
   \item If $0 < \beta < n_{1}$, it means that the current pattern is already the largest possible pattern because all the planned groups in the pattern are the largest.
 \end{itemize}
 
-By following these steps, always utilizing the largest group type for assignment, we can obtain either the largest pattern or a full pattern with minimal loss. This approach ensures efficient seat allocation, maximizing the utilization of available seats while satisfying the requirement of the original groups.
+By following these steps and always prioritizing the largest group type for seat planning, we can achieve either the largest pattern or a full pattern with minimal loss. This approach guarantees efficient seat allocation, maximizing the utilization of available seats while still accommodating the original groups' requirements.
 
-We can utilize the following algorithm to construct the largest or full patterns.
+To construct the largest or full pattern for each row, we can employ the following algorithm. Since patterns are independent of each other, we can process them row by row within a given seat planning. This enables us to optimize the seat planning by maximizing the utilization of available seats and effectively accommodating the arriving groups.
 
 \begin{algorithm}
   \caption{Construct The Largest or Full Pattern}\label{construction}
@@ -102,7 +102,6 @@ We can utilize the following algorithm to construct the largest or full patterns
     }}
 \end{algorithm}
 
-Since patterns are independent of each other, we can convert them row by row within a given seat planning. This approach allows us to optimize the seat planning by maximizing the utilization of available seats.
 
 Let $\mathbf{n} = (n_1, \ldots, n_M)$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)$ represent the vector of row lengths, where $L_j$ denotes the length of row $j$ as defined previously.
 The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{n} \mathbf{x} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{n} \mathbf{x}$, does not exceed the available row lengths $\mathbf{L}$. We can use the product $\mathbf{x} \mathbf{1}$ to indicate the supply of group types, where $\mathbf{1}$ is a column vector of size $N$ with all elements equal to 1. 
@@ -273,11 +272,11 @@ If for every scenario $\omega$, the optimal value of the corresponding problem \
     \If{$\tilde{z}_{\omega} < z_{\omega}^{*}$}
     {Add one new constraint, $(\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to problem \eqref{BD_master3}\;}
     }
-    {$LB \gets c^{\intercal} \mathbf{x}_{0} + \sum_{\omega \in \Omega} p_{\omega} \tilde{z}_{\omega} $\;}
+    {$LB \gets c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} \tilde{z}_{\omega} $\;}
     }
 \end{algorithm}
 
-From Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \mathbf{0}$ initially. Notice that only contraints are added in each iteration, thus $UB$ is decreasing monotone over iterations and $LB$ is increasing monotone over iterations. Then we can use $UB - LB < \epsilon$ to terminate the algorithm.
+From Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \mathbf{0}$ initially. Notice that only contraints are added in each iteration, thus $UB$ is decreasing monotone over iterations. Then we can use $UB - LB < \epsilon$ to terminate the algorithm.
 
 % After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})^{\intercal}$. 
 
@@ -302,10 +301,10 @@ We may obtain a fractional optimal solution when we solve the LP relaxation of p
 Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${X}^{*}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Replace the vector $\mathbf{d}$ with ${X}^{*}$ in the deterministic model, we have the following problem, 
 
 \begin{equation}\label{deter_upper1}
-  \{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq {X}^{*}_{i}, i \in \mathcal{M}; x_{ij} \in Z_{+} \}
+  \left\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq {X}^{*}_{i}, i \in \mathcal{M}; x_{ij} \in Z_{+} \right\}
 \end{equation}
 
-Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{\tilde{x}}$, which represents a feasible seat planning. Then we can construct the largest or full patterns by Algorithm \ref{construction}.
+Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{\tilde{x}}$, which represents a feasible seat planning. We can construct the largest or full patterns by Algorithm \ref{construction}.
 
 % To maximize the utilization of seats, we should assign full or largest patterns to each row. 
 % We will check if every row is full. When row $j$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j}$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. If $\beta$ is no less than $n_M$, then let $\beta = \beta - n_M$, $s_M = s_M +1$ until $\beta$ is less than $n_M$. If row $j$ is still not full, then find the smallest group size in row $j$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.

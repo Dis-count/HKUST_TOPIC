@@ -24,6 +24,7 @@ if __name__ == "__main__":
     period_range = range(30,100,1)
     given_lines = 10
     # np.random.seed(i)
+    sd = 1
     probab = [0.3, 0.3, 0.2, 0.2]
     # probab = [0.3, 0.2, 0.2, 0.3]
     gamma = np.dot(probab, np.arange(1,5))
@@ -39,7 +40,7 @@ if __name__ == "__main__":
         # total_seat = np.sum(roll_width)
         total_seat = np.sum(roll_width) - given_lines
 
-        a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample)
+        a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, sd)
 
         sto = 0
         accept_people = 0

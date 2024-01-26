@@ -2,7 +2,7 @@ import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
 import time
-from SamplingMethodNew import samplingmethod1
+from SamplingMethodSto import samplingmethod1
 from Mist import generate_sequence, decision1
 from collections import Counter
 from Method3 import deterministicModel
@@ -88,7 +88,6 @@ class stochasticModel:
         return alphaset, wset, LB
 
     # This function add new set to model m.
-    
     def solve_LP(self, m, alphaset, wset):
         start = time.time()
         if len(wset) == 0:
@@ -122,9 +121,9 @@ class stochasticModel:
     def solveBenders(self, eps=1e-4, maxit=20):
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0,
-                      vtype= GRB.INTEGER, name='varx')
-        z = m.addVars(self.W, lb=- float('inf'),
-                      vtype= GRB.CONTINUOUS, name='varz')
+                      vtype = GRB.INTEGER, name = 'varx')
+        z = m.addVars(self.W, lb= -float('inf'),
+                      vtype = GRB.CONTINUOUS, name = 'varz')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         m.addConstrs(z[i] <= 0 for i in range(self.W))
@@ -160,8 +159,7 @@ class stochasticModel:
 
             tol = abs(obj - LB)
             it += 1
-            # print('----------------------iteration ' +
-            #       str(it) + '-------------------')
+            # print('----------------------iteration ' + str(it) + '-------------------')
             # print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
             # print('optimal solution:', newx)
         # print('The number of iterations is:', it)
@@ -169,8 +167,8 @@ class stochasticModel:
         newx = np.reshape(x0, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
         # print("IP took...", round(time.time() - start, 3), "seconds")
-        print('optimal solution:', newd)
-        print('optimal IP objective:', obj)
+        # print('optimal solution:', newd)
+        # print('optimal IP objective:', obj)
         # print('optimal IP objective:', obj_IP)
         return newd, LB
 
@@ -183,8 +181,7 @@ class stochasticModel:
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         m.addConstrs(z[i] <= 0 for i in range(self.W))
-        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(
-            self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
         m.optimize()
         if m.status != 2:
@@ -198,8 +195,7 @@ class stochasticModel:
         # UB = float("inf")
         LB = 0  # Any feasible solution gives a lower bound.
         while eps < tol and it < maxit:
-            alpha_set, w_set, LB = self.add_Constrs(
-                x0, zstar)  # give the constraints
+            alpha_set, w_set, LB = self.add_Constrs(x0, zstar)  # Give the constraints
 
             x_var = m.getVars()[0: self.I * self.given_lines]
             for t in range(len(w_set)):
@@ -217,17 +213,17 @@ class stochasticModel:
 
             tol = abs(obj - LB)
             it += 1
-            # print('----------------------iteration ' +
-            #       str(it) + '-------------------')
+            # print('----------------------iteration ' + str(it) + '-------------------')
             # print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
             # print('optimal solution:', newx)
         # print('The number of iterations is:', it)
         # obj_IP, x0 = self.solve_IP(m)
         newx = np.reshape(x0, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
-        # print("IP took...", round(time.time() - start, 3), "seconds")
-        print('optimal solution:', newd)
-        print('optimal LP objective:', obj)
+        start = time.time()
+        # print("LP took...", round(time.time() - start, 3), "seconds")
+        # print('optimal solution:', newd)
+        # print('optimal LP objective:', obj)
         # print('optimal IP objective:', obj_IP)
         return newd, LB
 
@@ -237,7 +233,7 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     number_period = 70
     given_lines = 10
-    np.random.seed(13)
+    # np.random.seed(13)
 
     probab = [0.25, 0.25, 0.2, 0.3]
     sam = samplingmethod1(I, num_sample, number_period, probab, 1)
@@ -257,6 +253,7 @@ if __name__ == "__main__":
 
     start = time.time()
     ini_demand, upperbound = my.solveBenders(eps=1e-4, maxit=20)
+    print(upperbound)
     print("Benders took...", round(time.time() - start, 3), "seconds")
     ini_demand, upperbound = my.solveBenders_LP(eps=1e-4, maxit=20)
-
+    print(upperbound)

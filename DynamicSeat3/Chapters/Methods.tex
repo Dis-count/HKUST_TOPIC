@@ -227,11 +227,12 @@ The decision-making algorithm is shown below.
 
 
 \subsection{Use Scenarios to Make Decisions}
-For each seat planning, we perform the following calculations. First, we calculate $y_{i+1}^{+}$ for each scenario. Next, we count the number of scenarios in which $y_{i+1, \omega}^{+} > 0$ and separately count the number of scenarios in which $y_{i+1}^{+} = 0$.
-
-To make a decision on whether to accept or reject the group, we calculate the value $i P(y_{i+1, \omega}^{+} > 0) - (i+1) P(y_{i+1, \omega}^{+} = 0)$. If this value is greater than 0, we accept the group. Otherwise, if the value is less than or equal to 0, we reject the group.
-
-However, this approach cannot help us find the specific row to assign the group.
-% We still need the breaking tie rule to assign the group to the specific row
-
-
+\begin{align*}
+  \quad \max \quad & \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+} + k x_{j}^{k} \\
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
+  y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega  \\
+  & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
+  & \sum_{i=1}^{M} n_{i} x_{ij} + n_{k}x_{j}^{k}  \leq L_j, j \in \mathcal{N} \\
+  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag \\
+  & x_{j}^{k} \in \{0,1\}, j \in \mathcal{N}
+\end{align*}

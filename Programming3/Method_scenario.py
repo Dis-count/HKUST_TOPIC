@@ -11,7 +11,7 @@ from Method3 import deterministicModel
 # This function uses benders' decomposition to solve stochastic Model directly.
 # And give the once decision.
 
-class stochasticModel:
+class stochasticModel1:
     def __init__(self, roll_width, given_lines, demand_width_array, W, I, prop, dw, sd):
         self.roll_width = roll_width
         self.given_lines = given_lines
@@ -163,18 +163,18 @@ class stochasticModel:
             
             tol = abs(obj - LB)
             it += 1
-            print('----------------------iteration ' + str(it) + '-------------------')
-            print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
-            print('optimal solution:', xk_var)
+            # print('----------------------iteration ' + str(it) + '-------------------')
+            # print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
+            # print('optimal solution:', xk_var)
         # print('The number of iterations is:', it)
         # obj_IP, x0 = self.solve_IP(m)
         newx = np.reshape(x0, (self.I, self.given_lines))
-        newd = np.sum(newx, axis=1)
+        # newd = np.sum(newx, axis=1)
         # print("IP took...", round(time.time() - start, 3), "seconds")
         # print('optimal solution:', newd)
         # print('optimal IP objective:', obj)
         # print('optimal IP objective:', obj_IP)
-        return newd, LB
+        return newx, xk_var
 
     def solveBenders_LP(self, k, eps=1e-4, maxit=20):
         m = grb.Model()
@@ -223,18 +223,18 @@ class stochasticModel:
 
             tol = abs(obj - LB)
             it += 1
-            print('----------------------iteration ' + str(it) + '-------------------')
-            print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
-            print('optimal solution:', xk_var)
+            # print('----------------------iteration ' + str(it) + '-------------------')
+            # print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
+            # print('optimal solution:', xk_var)
         # print('The number of iterations is:', it)
         # obj_IP, x0 = self.solve_IP(m)
         newx = np.reshape(x0, (self.I, self.given_lines))
-        newd = np.sum(newx, axis=1)
+        # newd = np.sum(newx, axis=1)
         # print("IP took...", round(time.time() - start, 3), "seconds")
         # print('optimal solution:', newd)
         # print('optimal IP objective:', obj)
         # print('optimal IP objective:', obj_IP)
-        return newd, LB
+        return newx, xk_var
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
@@ -261,8 +261,9 @@ if __name__ == "__main__":
                          demand_width_array, W, I, prop, dw, sd)
 
     start = time.time()
-    # ini_demand, upperbound = my.solveBenders(3, eps=1e-4, maxit=20)
-    # print(upperbound)
+    # _, xk = my.solveBenders(3, eps=1e-4, maxit=20)
+    # print(xk)
     # print("Benders took...", round(time.time() - start, 3), "seconds")
-    ini_demand, upperbound = my.solveBenders_LP(3, eps=1e-4, maxit=20)
-    print(upperbound)
+    _, xk = my.solveBenders_LP(3, eps=1e-4, maxit=20)
+    
+    print(xk)

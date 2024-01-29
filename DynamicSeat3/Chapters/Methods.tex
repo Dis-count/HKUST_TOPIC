@@ -228,11 +228,12 @@ The decision-making algorithm is shown below.
 
 \subsection{Use Scenarios to Make Decisions}
 \begin{align*}
-  \quad \max \quad & \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+} + k x_{j}^{k} \\
+  \quad \max \quad & \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+} + \sum_{j=1}^{N} k x_{j}^{k} \\
   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
   y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega  \\
   & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
   & \sum_{i=1}^{M} n_{i} x_{ij} + n_{k}x_{j}^{k}  \leq L_j, j \in \mathcal{N} \\
+  & \sum_{j=1}^{N} x_{j}^{k} \leq 1 \\
   & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag \\
   & x_{j}^{k} \in \{0,1\}, j \in \mathcal{N}
 \end{align*}

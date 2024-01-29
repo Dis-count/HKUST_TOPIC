@@ -123,18 +123,21 @@ class stochasticModel:
                       vtype= GRB.INTEGER, name='varx')
         z = m.addVars(self.W, lb=-float('inf'),
                       vtype= GRB.CONTINUOUS, name='varz')
-        xk = m.addVar(vtype=GRB.BINARY, name='varxk')
+        xk = m.addVars(self.given_lines, vtype=GRB.BINARY, name='varxk')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-                                  for i in range(self.I)) <= (self.roll_width[j]-self.demand_width_array[k]*xk) for j in range(self.given_lines))
+                                  for i in range(self.I)) <= (self.roll_width[j]-self.demand_width_array[k-1]*xk[j]) for j in range(self.given_lines))
+        m.addConstr(grb.quicksum(xk[j] for j in range(self.given_lines)) <= 1)
         m.addConstrs(z[i] <= 0 for i in range(self.W))
-        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)) + k * xk, GRB.MAXIMIZE)
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)) + grb.quicksum(k * xk[j] for j in range(self.given_lines)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
         m.optimize()
         if m.status != 2:
             m.write('test1.lp')
         var = np.array(m.getAttr('X'))
-        x0 = var[0: self.I*self.given_lines]
-        zstar = var[-(self.W+1):-1]
+        nn = self.I*self.given_lines
+        x0 = var[0: nn]
+        zstar = var[nn:nn + self.W]
+        xk_var = var[-self.given_lines:]
 
         tol = float("inf")
         it = 0
@@ -142,7 +145,7 @@ class stochasticModel:
         LB = 0  # Any feasible solution gives a lower bound.
         while eps < tol and it < maxit:
             alpha_set, w_set, LB = self.add_Constrs(x0, zstar)  # give the constraints
-
+            LB += np.dot(xk_var, np.ones(self.given_lines)*k)
             x_var = m.getVars()[0: self.I * self.given_lines]
             for t in range(len(w_set)):
                 coff = alpha_set[t].repeat(self.given_lines)
@@ -154,15 +157,15 @@ class stochasticModel:
             m.optimize()
             obj = m.objVal
             var = np.array(m.getAttr('X'))
-            x0 = var[0: self.I * self.given_lines]
-            zstar = var[-(self.W+1):-1]
-            xk = var[-1]
-
+            x0 = var[0: nn]
+            zstar = var[nn: nn+ self.W]
+            xk_var = var[-self.given_lines:]
+            
             tol = abs(obj - LB)
             it += 1
             print('----------------------iteration ' + str(it) + '-------------------')
             print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
-            print('optimal solution:', xk)
+            print('optimal solution:', xk_var)
         # print('The number of iterations is:', it)
         # obj_IP, x0 = self.solve_IP(m)
         newx = np.reshape(x0, (self.I, self.given_lines))
@@ -173,32 +176,35 @@ class stochasticModel:
         # print('optimal IP objective:', obj_IP)
         return newd, LB
 
-    def solveBenders_LP(self, eps=1e-4, maxit=20):
+    def solveBenders_LP(self, k, eps=1e-4, maxit=20):
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0,
                       vtype=GRB.CONTINUOUS, name='varx')
-        z = m.addVars(self.W, lb=- float('inf'),
-                      vtype=GRB.CONTINUOUS, name='varz')
+        z = m.addVars(self.W, lb=-float('inf'),
+                      vtype= GRB.CONTINUOUS, name='varz')
+        xk = m.addVars(self.given_lines, vtype=GRB.BINARY, name='varxk')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-                                  for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
+                                  for i in range(self.I)) <= (self.roll_width[j]-self.demand_width_array[k-1]*xk[j]) for j in range(self.given_lines))
+        m.addConstr(grb.quicksum(xk[j] for j in range(self.given_lines)) <= 1)
         m.addConstrs(z[i] <= 0 for i in range(self.W))
-        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(
-            self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)) + grb.quicksum(k * xk[j] for j in range(self.given_lines)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
         m.optimize()
         if m.status != 2:
             m.write('test1.lp')
         var = np.array(m.getAttr('X'))
-        x0 = var[0: self.I*self.given_lines]
-        zstar = var[-self.W:]
+        nn = self.I*self.given_lines
+        x0 = var[0: nn]
+        zstar = var[nn:nn + self.W]
+        xk_var = var[-self.given_lines:]
 
         tol = float("inf")
         it = 0
         # UB = float("inf")
         LB = 0  # Any feasible solution gives a lower bound.
         while eps < tol and it < maxit:
-            alpha_set, w_set, LB = self.add_Constrs(
-                x0, zstar)  # Give the constraints
+            alpha_set, w_set, LB = self.add_Constrs(x0, zstar)  # give the constraints
+            LB += np.dot(xk_var, np.ones(self.given_lines)*k)
 
             x_var = m.getVars()[0: self.I * self.given_lines]
             for t in range(len(w_set)):
@@ -211,25 +217,24 @@ class stochasticModel:
             m.optimize()
             obj = m.objVal
             var = np.array(m.getAttr('X'))
-            x0 = var[0: self.I * self.given_lines]
-            zstar = var[-self.W:]
+            x0 = var[0: nn]
+            zstar = var[nn: nn+ self.W]
+            xk_var = var[-self.given_lines:]
 
             tol = abs(obj - LB)
             it += 1
-            # print('----------------------iteration ' + str(it) + '-------------------')
-            # print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
-            # print('optimal solution:', newx)
+            print('----------------------iteration ' + str(it) + '-------------------')
+            print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
+            print('optimal solution:', xk_var)
         # print('The number of iterations is:', it)
         # obj_IP, x0 = self.solve_IP(m)
         newx = np.reshape(x0, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
-        start = time.time()
-        # print("LP took...", round(time.time() - start, 3), "seconds")
+        # print("IP took...", round(time.time() - start, 3), "seconds")
         # print('optimal solution:', newd)
-        # print('optimal LP objective:', obj)
+        # print('optimal IP objective:', obj)
         # print('optimal IP objective:', obj_IP)
         return newd, LB
-
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
@@ -256,8 +261,8 @@ if __name__ == "__main__":
                          demand_width_array, W, I, prop, dw, sd)
 
     start = time.time()
-    ini_demand, upperbound = my.solveBenders(1, eps=1e-4, maxit=20)
-    print(upperbound)
-    # print("Benders took...", round(time.time() - start, 3), "seconds")
-    # ini_demand, upperbound = my.solveBenders_LP(1, eps=1e-4, maxit=20)
+    # ini_demand, upperbound = my.solveBenders(3, eps=1e-4, maxit=20)
     # print(upperbound)
+    # print("Benders took...", round(time.time() - start, 3), "seconds")
+    ini_demand, upperbound = my.solveBenders_LP(3, eps=1e-4, maxit=20)
+    print(upperbound)

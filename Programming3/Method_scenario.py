@@ -257,7 +257,7 @@ if __name__ == "__main__":
 
     sequence = generate_sequence(number_period, probab, 3)
 
-    my = stochasticModel(roll_width, given_lines,
+    my = stochasticModel1(roll_width, given_lines,
                          demand_width_array, W, I, prop, dw, sd)
 
     start = time.time()

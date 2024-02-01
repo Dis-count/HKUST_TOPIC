@@ -8,7 +8,10 @@
 % 因此我们采用线性松弛的随机规划来作为近似值进行比较接受和拒绝，但线性松弛导致接受组别在任意可能的一排得到的目标值都是一样的，我们还需要辨别接受组别时将其放在哪一排。
 
 
-In this section, we discuss how to assign the arriving groups in the dynamic situation. Our policy involves making decisions regarding seat allocations for each arriving group based on a seat planning which can be obtained from Section \ref{sec_seat_planning}. Within each period, the seat assignment process involves two main steps. First, we determine the appropriate group type for the arriving group. If there is an adequate supply for the arriving group, the group type is simply determined by the size of the arriving group. However, if the supply of the arriving group is insufficient, we consider the expected values associated with placing the arriving group in different group types. This allows us to make an informed decision on whether to assign the group to a larger group type that has a higher expected value. The second step is to make the final decision. We choose a specific row that contains the group type obtained in the first step and use stochastic programming to evaluate whether we should accept or reject the group.
+In this section, we discuss how to assign the arriving groups in the dynamic situation. Our policy involves making decisions regarding seat allocations for each arriving group based on a seat planning which can be obtained from Section \ref{sec_seat_planning}. Within each period, the seat assignment process involves two main steps. First, we determine the appropriate group type used to accommodated the arriving group. The second step is to choose a specific row according to the group type and make the final decision by evaluating stochastic programming. For the whole periods, we regenerate the seat planning under certain conditions to optimize computational efficiency.
+
+
+% If there is an adequate supply for the arriving group, the group type is simply determined by the size of the arriving group. However, if the supply of the arriving group is insufficient, we consider the expected values associated with placing the arriving group in different group types. This allows us to make an informed decision on whether to assign the group to a larger group type that has a higher expected value.
 
 
 % we consider the possible options to assign the group according to the current seat planning.
@@ -24,7 +27,6 @@ In this section, we discuss how to assign the arriving groups in the dynamic sit
 % The specific row the group should be placed in is selected from the options provided by the group-type control and the tie-breaking rule.
 
 
-
 % We need to make decisions regarding whether to use a larger group type to accommodate smaller group arrivals. This decision-making process is referred to as group-type control. Once we have determined which group type to utilize for accommodating smaller groups, we then need to compare the values of stochastic programming when accepting the group at a specific row versus denying it. This evaluation helps us assess the potential revenues of accepting or rejecting the group. During the calculation of the stochastic programming values, we can generate a new seat planning simultaneously. By integrating the group-type control and the value of stochastic programming, we can make informed decisions regarding the acceptance or rejection of an incoming group, as well as determine the appropriate row for their assignment when accepting it.
 
 
@@ -32,12 +34,12 @@ In this section, we discuss how to assign the arriving groups in the dynamic sit
 
 % Seat assignment based on stochastic assignment policy involves seat planning and 
 
-\subsubsection*{Challenge of Dynamic Seat Assignment}
+
+\subsection{Determine The Group Type}\label{nested_policy}
 One intuitive approach is to utilize stochastic programming to make decisions by comparing the values obtained when accepting or rejecting the currently arriving group. Stochastic programming aids in generating seat planning, and when there are available seats planned for the group, we readily accept and allocate it to the corresponding position according to the seat planning. When there are no suitable supply available for the current group, we need to perform calculations of stochastic programming by considering the placement of the group in each possible row, then compare these values to make a decision. However, it is important to note that integer stochastic programming can be computationally expensive and will be unsolvable in some instances. Additionally, when there is no supply in the seat planning available for the current group, evaluating the values associated with placing the group in each possible row can require a significant amount of computation.
 
-Therefore, in order to mitigate the computational challenges, we utilize the LP relaxation of stochastic programming as an approximation to compare the values when deciding whether to accept or reject a group. However, one challenge arises from the fact that the LP relaxation results in the same objective values for the acceptance group in any possible row. This poses the question of determining which row to place the group in when we accept it. To address this challenge, we developed the group-type control policy which narrow down the row options based on the seat planning.
+Therefore, in order to mitigate the computational challenges, we utilize the LP relaxation of stochastic programming as an approximation to compare the values when deciding whether to accept or reject a group. However, one challenge arises from the fact that the LP relaxation results in the same objective values for the acceptance group in any possible row. This poses the question of determining which row to place the group in when we accept it. To address this challenge, we developed the group-type control policy which narrows down the row options based on the seat planning.
 
-\subsection{Group-type Control}\label{nested_policy}
 The group-type control aims to find the group type to assign the arriving group, that helps us narrow down the option of rows for seat assignment. Seat planning serves as a representation of the supply available for each group type. Based on the supply, we can determine whether to accept an incoming group. When a group arrives, if there is sufficient supply available for an arriving group, we will accept the group and choose the group type accordingly. However, if there is no corresponding supply available for the arriving group, we need to decide whether to use a larger group's supply to meet the need of the arriving group. When a group is accepted and assigned to larger-size seats, the remaining empty seat(s) can be reserved for future demand without affecting the rest of the seat planning. To determine whether to use larger seats to accommodate the incoming group, we compare the expected values of accepting the group in the larger seats and rejecting the group based on the current seat planning. Then we identify the possible rows where the incoming group can be assigned based on the group types and seat availability.
 
 % Based on our previous considerations, we know that groups can be assigned to the seats which are planned for a larger group type if the supply for their own group type is insufficient. 
@@ -60,18 +62,23 @@ One intuitive decision is to choose $j$ with the largest difference. For all $j 
 
 Group-type control policy can only tell us which group type's seats are planned to provide for the smaller group based on the current planning, we still need to further compare the values of the stochastic programming problem when accepting or rejecting a group on the specific row. 
 
-\subsection{Assign The Groups}
-In the second step, we assign the groups by the tie-breaking rule and values of relaxed stochastic programming.
-To determine the appropriate row for seat assignment, we can apply a tie-breaking rule among the possible options obtained through the group-type control. This rule helps us decide on a particular row when there are multiple choices available. 
+\subsection{Decision on Assigning The Group to A Specific Row}
+To make the final decision, first, we determine a specific row by the tie-breaking rule, then we assign the group based on the values of relaxed stochastic programming. To determine the appropriate row for seat assignment, we can apply a tie-breaking rule among the possible options obtained by the group-type control. This rule helps us decide on a particular row when there are multiple choices available. 
 
-\subsubsection*{Break Tie for Dynamic Seat Assignment Policy}
+\subsubsection*{Break Tie for Determining A Specific Row}
 A tie occurs when there are serveral rows to accommodate the group. As mentioned above, let $\beta$ represents the remaining capacity in a row after considering the seat allocation for other groups.
 When the supply is sufficient for the particular group type, we assign the group to the row with the smallest $\beta$ value. That allows us to fill in the row according to the full pattern. When the supply is insufficient for the group type and we plan to assign the group to seats designated for larger groups, we follow a similar approach. In this case, we assign the group to a row that contains the larger group and has the largest $\beta$ value. That helps to reconstruct the pattern with smaller $\beta$ value. When there are multiple rows with the same $\beta$, we can choose randomly. By considering the row with the $\beta$ value in both scenarios, we prioritize filling seats and aim to minimize the fragmentation of available seating capacity. This approach helps optimize the utilization of seats and leads to better capacity management.
+
+As an example to illustrate group-type control and the tie-breaking rule, consider a scenario where we have four rows with available seats as follows: row 1 has 3 seats, row 2 has 4 seats, row 3 has 5 seats and row 4 has 6 seats. The corresponding patterns for each row are $(0,1,0,0)$, $(0,0,1,0)$, $(0,0,0,1)$ and $(0,0,0,1)$, respectively. There are $M =4$ groups, the social distance is $\delta =1$. Now, a group of one arrives,  and the group-type control indicates the possible rows where the group can be assigned. We assume this group can be assigned to the seats of the largest group according to the group-type control, then we have two choices: row 3 or row 4. To determine which row to select, we can apply the breaking tie rule. The $\beta$ value of the rows will be used as the criterion, we would choose row 4 because its $\beta$ value is larger. Because when we assign it in row 4, there will be two seats reserved for future group of one, but when we assign it in row 3, there will be one seat remaining unused.
+
+In the above example, the group of one can be assigned to any row with the available seats. The group-type control can help us find the larger group type that can be used to place the arriving group while maximizing the expected values. Maybe there are multiple rows containing the larger group type. Then we can choose the row containing the larger group type according to the breaking tie rule. 
+Finally, we use the stochastic programming to calculate the VoA and VoR. Comparing these values allows us to make the decision on whether to accept or reject the group.
 
 % When the available supply is sufficient to accommodate an arriving group, we can directly assign the group seats and update the remaining supply accordingly.
 
 % Notice that the relaxed stochastic programming will have the same value.
-\subsubsection*{Compare Values of Relaxed Stochastic Programming} 
+
+\subsubsection*{Decision on Assigning The Group}
 Then, we compare the values of the relaxed stochastic programming when accepting the group at the chosen row versus rejecting it. This evaluation allows us to assess the potential revenues and make the final decision. Simultaneously, after this calculation, we can generate a new seat planning according to Algorithm 3. For the situation where the supply is enough in the first step, we can skip the final step because we already accept the group. Specifically, after we plan to assign the arriving group in a specific row, we determine whether to place the arriving group in the row based on the values of the stochastic programming problem. For the objective values of the relaxed stochastic programming, we consider the potential revenues that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR). 
 
 Let us consider the set of scenarios, denoted as $\Omega^{t}$, at period $t$. The VoA is the value of 
@@ -87,7 +94,7 @@ By combining the group-type control strategy with the evaluation of relaxed stoc
 
 % In essence, this decision-making approach weighs the potential benefits associated with accepting or rejecting an arrival, allowing us to select the option that maximizes the objective value and aligns with our overall goals.
 
-\subsection{Algorithm of Dynamic Seat Assignment Policy}
+\subsection{Regenerate The Seat Planning}
 % For the whole decison-making process, there is no need to generate the seat planning every period when the supply is sufficient. In such cases, we can simply follow the current seat planning and assign the group accordingly. However, when the supply of the largest group drops from 1 to 0 or when we need to make a decision about whether to assign a group to the larger seats, we can generate the seat planning at that specific period. By generating the seat planning only when necessary, we can optimize the computational cost and ensure that our decisions accurately reflect the current state of seat availability. This approach strikes a balance between efficiency and accuracy in the dynamic seat assignment process.
 
 To optimize computational efficiency, it is not necessary to regenerate the seat planning for every period. Instead, we can employ a more streamlined approach. Considering that largest group type can meet the needs of all smaller group types, thus, if the supply for the largest group type diminishes from one to zero, it becomes necessary to regenerate the seat planning. This avoids rejecting the largest group due to infrequent regenerations. Another situation that requires seat planning regeneration is when we determine whether to assign the arriving group to a larger group. In such case, we can obtain the corresponding seat planning after solving the relaxed stochastic programmings. By regenerating the seat planning in such situations, we ensure that we have an accurate supply and can give the allocation of seats based on the group-type control and the comparisons of VoA and VoR.
@@ -133,11 +140,6 @@ The decision-making algorithm is shown below.
 \end{algorithm}
 
 
-
-% As an example to illustrate our policy, consider a scenario where we have four rows with available seats as follows: row 1 has 3 seats, row 2 has 4 seats, row 3 has 5 seats and row 4 has 6 seats. The corresponding patterns for each row are $(0,1,0,0)$, $(0,0,1,0)$, $(0,0,0,1)$ and $(0,0,0,1)$, respectively. There are $M =4$ groups, the social distance is $\delta =1$. Now, a group of one arrives, and the group-type control indicates the possible rows where the group can be assigned. We assume this group can be assigned to the seats of the largest group, then we have two choices: row 3 or row 4. To determine which row to select, we can apply the breaking tie rule. The $\beta$ value of the rows will be used as the criterion, we would choose row 4 because its $\beta$ value is larger. 
-
-% In the above example, the group of one can be assigned to any row with the available seats. The group-type control can help us find the larger group type that can be used to place the arriving group while maximizing the expected values. Maybe there are multiple rows containing the larger group type. Then we can choose the row containing the larger group type according to the breaking tie rule. 
-% Finally, we use the stochastic programming to calculate the VoA and VoR. Comparing these values allows us to make the decision on whether to accept or reject the group.
 
 
 % \subsection{Break tie for Bid-price and DP base-heuristic}
@@ -225,15 +227,3 @@ The decision-making algorithm is shown below.
 % Some important information:
 % The government will give the restriction: 入座人数50% /相连座位 4个
 
-
-\subsection{Use Scenarios to Make Decisions}
-\begin{align*}
-  \quad \max \quad & \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+} + \sum_{j=1}^{N} k x_{j}^{k} \\
-  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
-  y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega  \\
-  & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
-  & \sum_{i=1}^{M} n_{i} x_{ij} + n_{k}x_{j}^{k}  \leq L_j, j \in \mathcal{N} \\
-  & \sum_{j=1}^{N} x_{j}^{k} \leq 1 \\
-  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag \\
-  & x_{j}^{k} \in \{0,1\}, j \in \mathcal{N}
-\end{align*}

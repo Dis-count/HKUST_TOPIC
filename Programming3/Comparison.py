@@ -339,6 +339,15 @@ class CompareMethods:
         a_min = a[np.argmin(b)][0]   # find the minimum index in a
         return a_min
 
+    def break_tie2(self, newx, change_roll, group_type):
+        newx = np.array(newx).T
+        a = np.argwhere(newx[group_type] > 1e-4)
+        length = np.dot(np.arange(self.s+1, self.I+self.s+1), newx)
+        beta = change_roll - length
+        b = beta[a]
+        a_max = a[np.argmax(b)][0]   # find the maximum index in a
+        return a_max
+
     def method_new(self, sequence: List[int], newx, change_roll0):
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
@@ -366,7 +375,7 @@ class CompareMethods:
 
                 change_deny = copy.deepcopy(change_roll)
                 if decision_list:
-                    k = self.break_tie(newx, change_roll, decision_list)
+                    k = self.break_tie2(newx, change_roll, decision_list)
                     newx[k][decision_list] -= 1
                     if decision_list - Indi_Demand - 1 - self.s >= 0:
                         newx[k][int(decision_list - Indi_Demand - 1 - self.s)] += 1
@@ -416,42 +425,6 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        print(change_roll)
-        print(mylist)
-        return demand
-
-    def method_scenario(self, sequence: List[int], change_roll0):
-        change_roll = copy.deepcopy(change_roll0)
-        mylist = []
-        periods = len(sequence)
-
-        for num, j in enumerate(sequence):
-            remaining_period = periods - num
-
-            sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
-            dw_acc, prop_acc = sam_multi.get_prob()
-            W_acc = len(dw_acc)
-            m = stochasticModel1(change_roll, self.given_lines,
-                                self.demand_width_array, W_acc, self.I, prop_acc, dw_acc, self.s)
-
-            _, xk = m.solveBenders(j-self.s, eps=1e-4, maxit=20)
-
-            if sum(xk) < 1e-4:
-                mylist.append(0)
-            else:
-                k = np.nonzero(xk)
-                change_roll[k[0][0]] -= j
-                mylist.append(1)
-
-        sequence = [i-self.s for i in sequence]
-        final_demand = np.array(sequence) * np.array(mylist)
-        final_demand = final_demand[final_demand != 0]
-
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
-        print(change_roll)
-        print(mylist)
         return demand
 
     def method_IP(self, sequence, newx, change_roll0):

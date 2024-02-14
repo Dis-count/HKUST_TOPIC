@@ -1,0 +1,210 @@
+% !TEX root = sum1.tex
+\section{Model}
+% There are some rules: time Distancing:  The time gap of each used room. Space Distancing:  Enlarge the space distancing of each room as much as possible. 
+
+% That is, if we have a room contains $q_k$ seat numbers, and distance ratio is r, then the number of customers who can be served $p_i$ is less than $q_k\cdot r$. This condition can be set as a constraint.
+
+Virables:
+
+Room numbers $k \in K = \{1,\ldots,|K|\}$. 
+
+Room $k$ contains seat number $q_k$. 
+
+Number of customers in session $i$ is $p_i$ for each $i \in N = \{1,\ldots,n\}$. $w_{ik}$ is the session i's start time in the room $k$. $s_i$ is the service time for session $i$.(Given, in our case, we set all the service times are 2 hours.)
+
+Feasibility:
+
+% Time window constraints:
+% Time window $[a_{i},b_{i}]$ for each group, but it satisfies the time constraints during opening time $[E, L]$ for the room.
+
+Capacity constraint:
+The number of customers in a session $p_i$ cannot exceed the product of the largest room capacity and ratio r, that is $p_i \leq q_k\cdot r$.
+
+Solution:
+
+Define the time interval $t_{i}$ for session $i$. It can be variable or the constant. In our case, we set the time interval as the variable and it should be larger than half an hour.
+
+Define a binary variable $x_{ijk}$ for each room. If the room k is used by $(i,j)$ and $i$ followed by $j$, then $x_{ijk} = 1$, else $x_{ijk} = 0$.
+
+Define
+$w_{ik}$ is the session i's start time in the room $k$.
+
+$s_i$ is the service time for each session.(Given)
+
+% Set it as a time window VRP problem and add the distance constraints.
+
+Analysis:
+
+Add two virtual nodes (0,n+1) for each room. One is the start node, its time window can be a time point E meaning the room is open; the other is the end node, its time window is also a time point L meaning the room is closed.
+
+Expected result:
+Show the specific scheduling for the sessions.
+
+Give the corresponding service start time.
+
+% First in First out.
+
+Benchmark: Manual work.
+
+Question: How to determine the objective function?
+
+        %   How to determine the distance for the only one group in a room?
+
+          How to compare the result with the benchmark?
+
+
+MODEL:
+
+\begin{align}
+\min_{i,j,k} \quad & \sum_{(i,j) \in A} \sum_{k \in K} c_{ij} x_{ijk} \\
+s.t. \quad  & \sum_{k \in K} \sum_{j \in \delta^+ (i)} x_{ijk} =1 & \forall i \in N  \\
+& \sum_{j \in \delta^+ (0)} x_{0jk} =1 & \forall k \in K \\
+& \sum_{i \in \delta^- (n+1)} x_{i,n+1,k} =1 & \forall k \in K \\
+& \sum_{i \in \delta^- (j)} x_{ijk} - \sum_{i \in \delta^+ (j)} x_{ijk} = 0  & \forall k \in K, j \in N \\
+& w_{ik} + s_i + t_{i} - w_{jk} \leq (1-x_{ijk}) M_{ij} & \forall k \in K, (i,j) \in A \\
+% & a_i \sum_{j \in \delta^+ (i)} x_{ijk} \leq w_{ik} \leq b_i \sum_{j \in \delta^+ (i)} x_{ijk} & \forall k \in K, i \in N \\
+& w_{0k}=E, w_{n+1,k}=L  & \forall k \in K \\
+& t_{i} \geq 0.5 \sum_{j \in \delta^+(i)} x_{ijk}  & \forall k \in K, i \in N  \\
+& p_i \sum_{j \in \delta^+ (i)} x_{ijk} \leq 0.3 q_k & \forall k \in K, i \in N \\
+& x_{ijk} \in \{0,1\} & \forall k \in K, (i,j) \in A
+\end{align}
+
+The constraint (1) is to minimize the cost resulted by opening sessions.
+
+The constraint (2) Every session i which is followed by session j is only served once by one room k.
+
+The constraint (3) For every room k, start from session 0.
+
+The constraint (4) For every room k, end at session (n+1).
+
+The constraint (5) For every room k, session j will leave when it is served.
+
+The constraint (6) session i start time + service time + interval(required) less than next session j start time. M for linearization.
+
+% The constraint (7) Time window constraints for every session.?
+
+The constraint (7) Add two node indicate the start node and end node.
+
+The constraint (8) Time interval constraint.
+
+The constraint (9) Space distance constraint.
+
+
+\subsection{M0}
+Maximize the distance.
+
+Input: Service time $s_i$ for each session instead of the time window [a,b].
+
+Add $p_0 = 0, s_0 = 0, E = 0/8, L=24.$
+
+MODEL:
+
+
+\begin{align}
+max_{i,j,k} \quad & \sum_{(i,j) \in A} \sum_{k \in K} \frac{p_i}{q_k} x_{ijk} + \frac{1}{24} T_{ijk} \\
+s.t. \quad  & \sum_{k \in K} \sum_{j \in \delta^+ (i)} x_{ijk} =1 & \forall i \in N  \\
+& \sum_{j \in \delta^+ (0)} x_{0jk} =1 & \forall k \in K \\
+& \sum_{i \in \delta^- (n+1)} x_{i,n+1,k} =1 & \forall k \in K \\
+& \sum_{i \in \delta^- (j)} x_{ijk} - \sum_{i \in \delta^+ (j)} x_{ijk} = 0  & \forall k \in K, j \in N \\
+& y_{ijk} \geq (x_{ijk}-1) M_{ij} & \forall k \in K, (i,j) \in A \\
+& w_{0k}=E, w_{n+1,k}=L  & \forall k \in K \\
+& x_{ijk} \in \{0,1\} & \forall k \in K, (i,j) \in A
+\end{align}
+
+How to change the quadratic terms to the linear terms(linearization)
+
+Note that the
+$y =x_1 x_2$  where $x_1 \in \{0,1\}, x_2 \in [l,u] \to$
+$$
+\begin{aligned}
+& y \leq x_2 \\
+& y \geq x_2 - u(1-x_1)    \\
+& l x_1 \leq y \leq u x_1
+\end{aligned}$$
+
+Let $(w_{jk}-w_{ik}-s_i) = y_{ijk}$ and $T_{ijk} = x_{ijk} y_{ijk}$
+
+% 多加三个 i*j*k 数量的约束. Let $l = 0$.
+
+$$
+\begin{aligned}
+& T_{ijk} \leq y_{ijk} \\
+& T_{ijk} \geq y_{ijk} - u(1-x_{ijk})    \\
+& T_{ijk} \leq u x_{ijk}
+\end{aligned}$$
+
+The constraint (1) Maximize the distance.
+
+The constraint (2) Every session i which is followed by session j is only served once by one room k.
+
+The constraint (3) For every room k, start from group 0.
+
+The constraint (4) For every room k, end at group (n+1).
+
+The constraint (5) For every room k, group j will leave when it is served.
+
+The constraint (6) i start time + service time + interval(required) < next j start time. M for linearization.
+
+The constraint (7) Time window constraints for every group. 
+
+The constraint (8) Add two node which indicate the start node and end node.
+
+
+---------------------------------------------------------
+可行性：
+
+影院有自主排片权
+
+排片的重要性：
+
+排片决定观影人次数；
+
+决定收入：、票房、食品酒水、衍生品、广告场租；
+
+排片是影院的核心竞争力；
+
+Factors to consider:
+
+Sequence/Assignment/Time/Price
+
+1. 黄金时间段是上座率最高的时间段，两小时内每厅至少排一场， 黄金时间段会随季节以及地域变化
+
+2. 将票房最高的影片，在最黄金时间，排入最优最大厅
+
+3. 把黄金时间段、黄金厅给黄金影片，从黄金向两边排起
+
+4. 如果给一部电影相邻两个场次，最好两个影厅一大一小
+
+5. 在同一个厅里，尽量避免插排两部不同的影片 A/B/A/B/A/B，只需安排同部电影 AAA，或 BBB 即可
+
+6. 避免同时开场、同时散场。最短场间隔10分钟
+
+7. 中文版、英文版都有的进口片，要根据观众的偏好排映
+
+8. 进口动画影片，白天应更多安排中文版场次
+
+9. 周六周日节假日应多排大片，票价可以考虑适当提高
+
+10. 每日开场时间：节假日和有大片时可以适当提前，六一儿童节应提前早场开映时间
+
+11. 影片每日结场时间：周五、周六、及各种节假日可以考虑推迟
+
+12. 考虑成本控制。普通厅放映成本: 4张票. 巨幕厅：9张票.
+
+Existing problems
+
+1. 排片时缺少预估
+
+2. 人流情况预估不够细化
+
+3. 场次安排很少有影院个性化估算
+
+4. 除最大厅和最小厅外，其他厅的安排随意
+
+% 已知平均排片率，附近人员时间流量，对影片的preference
+
+--------------------------------------------------
+
+self-study room (Reusable resources)
+
+有social distance, 不考虑 group 比较简单，考虑 group 不符合实际。 

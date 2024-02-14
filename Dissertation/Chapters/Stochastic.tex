@@ -1,0 +1,185 @@
+% !TEX root = ./sum1.tex
+\section{Stochastic Situation}
+\subsection{M1}
+$q_k$ capacity. 
+
+$k\in K$  The Number of room
+
+$s_i$ service time for each group.
+
+$p_i$ demand number of people.  $i \in N$
+
+- Length for time.          24 for K. $s_i$ for N.
+- Width for the capacity.   $q_k$ for K. $p_i$  for N.
+- variable $x_{ik}$ indicates group i served by room k.
+
+Now we change the objective function $q_k$ to a concave function $f(q_k)$. How to influence the result?
+
+Search for the minimization makespan problem. 
+% (最小最大完工时间)
+
+To be specific, how to deal/handle with minimax format?
+
+% 基本想法是比较两种方法，minimax is what we want, and maxmin will provide a lower bound, but we are still not sure how this method can improve our results.
+
+% Define 面积： S = F(t,s)  t for time, s for space.
+% For example, at here, F(t,s) can be t*f(s), where f(s) is a concave function.
+
+% 具体方法和需要注意的细节：
+% 1. 将 items 根据实际的 room size 按从小到大的顺序排列。(如 [4,4,4,6],[8,8],[10,10,10]  room size [6,8,10])
+% 2. 从小到大 装 room ，用 DP 求解. (矛盾点在于如果要用DP 需要知道时间 这个时候就不能用占比控制时间，一个可行的方法是 先求出占比r, 用 DP 在24 小时内进行求解 占比会大于r 利用二分求解时间，找到最接近的 r 的方案，要么大要么小(可以用反证证明只有这两种选择)。可以把大小作为每个room 分出来的枝，前面的 room 分支会影响后面 room 的分支。如果可以证明前者的序列是最优的，则后面也是最优的，这样遍历的复杂度是2^(|room|).)
+% 3. 减去使用过的 item 加入新的 item, 继续用 DP 求解.
+% 4. 如何在求解过程中剪去前面得到的分支而不是使用遍历的方法还需要思考。(比如 当room 很大时，这个时候取大会较好，因为如果它小的话，别的小的room 超出会更大，这样 minmax 就会变大。)
+
+% The Original model:
+% 最小化 (最大 占据空间 k \in K)
+$$
+\begin{aligned}
+\min \quad (\max & (\sum_i { x_{ik} s_i p_i})/(24 * f(q_k)),\quad \forall k \in K) \\
+s.t. \quad  & x_{ik} p_i \leq q_k,\quad  \forall i \in N, \forall k \in K  \\
+& \sum_{i\in N} x_{ik} s_i \leq T_k = 24 - (\sum_{i\in N} x_{ik} - 1)*0.5,\quad \forall k \in K \\
+& \sum_{k} x_{ik} =1,\quad \forall i \in N
+\end{aligned}$$
+
+To:
+$$
+\begin{aligned}
+(M1) = max \quad & t \\
+s.t. \quad  & x_{ik} p_i \leq q_k, \quad \forall i \in N,  \forall k \in K  \\
+& \sum_{i\in N} x_{ik} s_i \leq T_k = 24 - (\sum_{i\in N} x_{ik} - 1)*0.5,\quad\forall k \in K \\
+& t \leq \sum_i{x_{ik} s_i p_i}/(24 * q_k),\quad  \forall k \in K \\
+& \sum_{k} x_{ik} =1,\quad \forall i \in N
+\end{aligned}$$
+
+$$
+\begin{aligned}
+(M2) = min \quad & t \\
+s.t. \quad  & x_{ik} p_i \leq q_k, \quad \forall i \in N,  \forall k \in K  \\
+& \sum_{i\in N} x_{ik} s_i \leq T_k = 24 - (\sum_{i\in N} x_{ik} - 1)*0.5,\quad\forall k \in K \\
+& t \geq \sum_i{x_{ik} s_i p_i}/(24 * q_k),\quad  \forall k \in K \\
+& \sum_{k} x_{ik} =1,\quad \forall i \in N
+\end{aligned}$$
+
+At first, it is clear that M1(max min) less than M2(min max).
+Thus, the true value will be between M1 and M2.
+
+
+So what is the difference?
+
+The constraint (1) Capacity ratio.
+
+The constraint (2) Capacity constraints $|N|*|K|$.
+
+The constraint (3) Time constraints $|K|$.
+
+The constraint (4) Objective capacity ratio constraints $|K|$.
+
+The constraint (5) Every group is served once $|N|$.
+
+Virables: $|N|*|K|+1$, refers to $x_{ik},t$
+
+--------------------------------------------
+
+Besides, when we convert the original problem into several sub-problems.
+Each sub-problem can be expressed as:
+Let $k = k_0$,
+$$
+\begin{aligned}
+(Sub) = \min \quad & |\sum_i{x_{ik_0} f(s_i,p_i)}-r*f(24, q_{k_0})| \\
+s.t. \quad  & x_{ik_0} p_i \leq q_{k_0}, \quad \forall i \in N_0  \\
+& \sum_{i\in N_0} x_{ik_0} s_i \leq 24 \\
+\end{aligned}$$
+
+Here, f(ServiceTime, Space) represents the area function.
+In fact, (12) is obviously satisfied because of the pretreatment which is used to get rid of the trouble of assignment constraints.
+Thus when we calculate the situation of under ratio, this sub-problem can be converted into
+
+$$
+\begin{aligned}
+(Sub1) = max \quad & \sum_{i\in N_0}{x_{ik_0} f(s_i,p_i)} \\
+s.t. \quad  & \sum_{i\in N_0} x_{ik_0} f(s_i,p_i) \leq r*f(24, q_{k_0}) \\
+& \sum_{i\in N_0} x_{ik_0} s_i \leq 24 \\
+\end{aligned}$$
+The final value equals to (-Sub1+$r*f(24, q_{k_0})$)
+This is a two-dimentional knapsack problem.
+
+For any fixed $m\geq 2$, these problems do admit a pseudo-polynomial time algorithm (similar to the one for basic knapsack) and a PTAS.
+
+Add one dimentional variable to the basic DP algorithm for knapsack.
+
+Next time finish the code.
+
+% https://www.bilibili.com/read/cv6360104/
+$$
+\begin{aligned}
+(Sub2) = min \quad & \sum_{i\in N_0}{x_{ik_0} f(s_i,p_i)} \\
+s.t. \quad  & \sum_{i\in N_0} x_{ik_0} f(s_i,p_i) \geq r*f(24, q_{k_0}) \\
+& \sum_{i\in N_0} x_{ik_0} s_i \leq 24 \\
+\end{aligned}$$
+
+The final value equals to (Sub2 - $r*f(24, q_{k_0})$)
+
+In fact, we do not need to calculate this form.
+We can obtain Sub1 firstly, then add a rest item with the minimum area.
+
+% https://www.quora.com/A-group-of-N-integer-numbers-need-to-be-divided-fairly-into-K-subgroups-A-fair-division-is-that-the-max-of-the-sums-of-K-subgroups-is-minimal
+
+% https://my.oschina.net/u/3242615/blog/1940533?tdsourcetag=s_pcqq_aiomsg
+
+% https://blog.csdn.net/chun2674/article/details/100591973
+
+\subsection{M2}
+$q_k$ capacity. 
+
+$k\in K$  The Number of room
+
+$s_i$ service time for each group.
+
+$p_i$ demand number of people.  $i \in N$
+
+- Length for time.          24 for K. $s_i$ for N.
+- Width for the capacity.   $q_k$ for K. $p_i$  for N.
+- variable $x_{ik}$ indicates group i served by room k.
+
+The Original model:
+% 最小化 (最大 占据空间 k \in K)
+$$
+\begin{aligned}
+\min \quad (\max & (\sum_i {x_{ik} s_i p_i})/(24 * q_k ),\quad \forall k \in K) \\
+s.t. \quad  & x_{ik} p_i \leq q_k,\quad  \forall i \in N, \forall k \in K  \\
+& \sum_{i\in N} x_{ik} s_i \leq T_k = 24 - (\sum_{i\in N} x_{ik} - 1)*0.5,\quad \forall k \in K \\
+& \sum_{k} x_{ik} =1,\quad \forall i \in N
+\end{aligned}$$
+
+To:
+$$
+\begin{aligned}
+\max \quad & t \\
+s.t. \quad  & x_{ik} p_i \leq q_k, \quad \forall i \in N,  \forall k \in K  \\
+& \sum_{i\in N} x_{ik} s_i \leq T_k = 24 - (\sum_{i\in N} x_{ik} - 1)*0.5,\quad\forall k \in K \\
+& t \leq \sum_i{x_{ik} s_i p_i}/(24 * q_k),\quad  \forall k \in K \\
+& \sum_{k} x_{ik} =1,\quad \forall i \in N
+\end{aligned}$$
+
+$$
+\begin{aligned}
+\min \quad & t \\
+s.t. \quad  & x_{ik} p_i \leq q_k, \quad \forall i \in N,  \forall k \in K  \\
+& \sum_{i\in N} x_{ik} s_i \leq T_k = 24 - (\sum_{i\in N} x_{ik} - 1)*0.5,\quad\forall k \in K \\
+& t \geq \sum_i{x_{ik} s_i p_i}/(24 * q_k),\quad  \forall k \in K \\
+& \sum_{k} x_{ik} =1,\quad \forall i \in N
+\end{aligned}$$
+
+So what is the difference?
+
+The constraint (1) Capacity ratio.
+
+The constraint (2) Capacity constraints $|N|*|K|$.
+
+The constraint (3) Time constraints $|K|$.
+
+The constraint (4) Objective capacity ratio constraints $|K|$.
+
+The constraint (5) Every group is served once $|N|$.
+
+Virables: $|N|*|K|+1$

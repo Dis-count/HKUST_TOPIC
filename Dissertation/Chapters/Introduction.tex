@@ -1,18 +1,16 @@
 % !TEX root = sum1.tex
 \section{Introduction}
-1. define a different social distancing rule.
 
-use the expected demand as the group portfolio to obtain the seat planning.
-
-2. consider `departure'
-
-Each arrival has an arrive time and leave time.
+Firstly, we consider the deterministic model under social distancing constraints. When we have precise information about the number of people, we can utilize this model to arrange seats accordingly. For instance, during a company meeting where different group members need to sit together, we can determine the venue size based on a fixed number of attendees or accept only a portion of the demand based on the venue's capacity. The objective is to maximize the number of people sitting. The solver can solve this problem quickly with the moderate problem size. However, we find that the results show that most rows will not leave any empty seats. Based on this, we introduce the concepts of the largest pattern and full pattern for each row, and we can always use the largest pattern or full pattern as the optimal solution to meet the demand.
 
 
-3. different price regions in cinemas.
+Secondly, we consider the stochastic model under social distancing constraints. In certain scenarios, we may have demand data for multiple days, which includes information about the number of people in each group size. Examples of such scenarios could be assembling in a church or seating groups in a cathedral. In these cases, we can utilize the stochastic model to generate a seat planning that ensures social distancing requirements are met. To maintain social distancing effectively, the venue manager needs to enforce a fixed seat planning. It is crucial for the group to adhere to the designated seating arrangement.
+% By utilizing the stochastic model and implementing a fixed seat planning approach, we can optimize the seating arrangements and ensure the well-being of all attendees by minimizing the risk of virus transmission.
 
 
-4. How to assign the high-speed train tickets fairly?
+Thirdly, we consider the dynamic model under social distancing constraints. In this scenario, we encounter two different situations. The first situation involves a fixed seat planning that is set based on the management's requirements. When a group arrives, they can choose seats from the available planning options. The predetermined seat arrangements ensure that social distancing measures are maintained, and groups can select seats that best suit their needs while adhering to the established seating arrangement. The second situation involves a flexible seat planning approach, where decisions need to be made when a group requests seats. In this case, we dynamically determine the optimal seat planning based on the group's size and the current availability of seats, taking into account social distancing requirements. By utilizing the dynamic model and considering both fixed and flexible seat planning approaches, we can effectively manage the seating arrangements while adhering to social distancing guidelines.
 
 
+
+By considering these different models under social distancing constraints, we can effectively allocate seats and ensure a safe and comfortable environment for all attendees.
 \newpage

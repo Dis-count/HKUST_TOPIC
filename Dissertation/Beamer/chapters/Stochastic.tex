@@ -1,0 +1,116 @@
+% !TeX root = ../main.tex
+
+\section{Stochastic Demand Situation}
+    \frame{\sectionpage}
+
+    \begin{frame}{Method Flow}
+      We aim to obtain a seat planning before the demand realization.
+      \begin{itemize}
+        \item The formulation of scenario-based stochastic programming(SSP).
+        \item Reformulate SSP to the benders master problem(BMP) and subproblem.
+        \item The optimal solution can be obtained by solving BMP iteratively.
+        \item To avoid solving IP directly, we consider the linear relaxation form.
+        \item Obtain integral seat planning composed of full or largest patterns by deterministic model.
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Scenario-based Stochastic Programming}
+      \footnotesize
+      \begin{equation}\label{sto_form}
+        \begin{aligned}
+       (SSP) \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+        \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
+        y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
+        & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
+        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
+        & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \\
+        & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+        \end{aligned}
+      \end{equation}
+    \end{frame}
+
+\begin{frame}{Reformulation}
+  \begin{equation}\label{BD_master}
+    \begin{aligned}
+  \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
+  \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+  & \mathbf{x} \in \mathbb{Z}_{+}^{M \times N},
+  \end{aligned}
+  \end{equation}
+
+  where $z(\mathbf{x})$ is defined as 
+
+$$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, 
+
+  \begin{equation}\label{BD_sub}
+    \begin{aligned}
+      z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y} \\
+      \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y} = \mathbf{d}_{\omega} \\
+       & \mathbf{y} \geq 0.
+    \end{aligned}
+    \end{equation}
+\end{frame}
+
+\begin{frame}{Solution to Subproblem}
+  Problem (3) is easy to solve with a given $\mathbf{x}$ which can be seen by the dual problem:
+
+  \begin{equation}\label{BD_sub_dual}
+    \begin{aligned}
+      \min \quad & \alpha^{\intercal}_{\omega} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
+      \text {s.t.} \quad & \alpha^{\intercal}_{\omega} \mathbf{V} \geq \mathbf{f}^{\intercal}
+    \end{aligned}
+    \end{equation}
+
+    \begin{itemize}
+      \item The feasible region of problem \eqref{BD_sub_dual}, $P= \{\alpha|\alpha^{\intercal} V \geq \mathbf{f}^{\intercal}\}$, is bounded. In addition, all the extreme points of $P$ are integral.
+      \item The optimal solution to this problem can be obtained directly according to the complementary slackness property.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Benders Decomposition Procedure}
+  \small
+  Let $z_{\omega}$ be the lower bound of problem \eqref{BD_sub_dual}, SSP can be obtained by solving following restricted benders master problem:
+  \begin{equation}\label{BD_master2}
+    \begin{aligned}
+      \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+      \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+      & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
+       & \mathbf{x} \in \mathbb{Z}_{+}
+    \end{aligned}
+\end{equation} 
+
+  Constraints will be generated from problem \eqref{BD_sub_dual} until an optimal solution is found.
+
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6\textwidth]{./images/BD.png}
+  \end{figure}
+
+  To avoid solving IP directly, we consider the linear relaxation of Problem \eqref{BD_master2}.
+\end{frame}
+
+% \begin{frame}{Deterministic Formulation}
+%   Substitute the first constraint with $\sum_{j= 1}^{N} x_{ij} \geq s_{i}, i \in \mathcal{M}$, we can obtain the problem with lower bound supply. 
+% \end{frame}
+
+\begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
+      \begin{description}
+        \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
+
+        \item[Step 2.] Solve problem \eqref{deter_upper} to obtain the optimal solution, $\mathbf{x}^{1}$. Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+         
+        \item[Step 3.] For each row, construct a full or largest pattern.
+     \end{description}
+\end{frame}
+
+\begin{frame}{Construction}
+There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+
+Algorithm to obtain the solution of problem \eqref{full_largest}.
+\end{frame}
+
+\begin{frame}{Verify the performance}
+  To verify the performance of the seat planning obtained from stochastic programming, we 
+
+  % under the setting of fixed seat planning
+\end{frame}

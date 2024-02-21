@@ -1,0 +1,128 @@
+% !TeX root = ./main.tex
+
+\section{Dynamic Demand Situation}
+    \frame{\sectionpage}
+
+    \begin{frame}{Dynamic Seat Assignment Problem}
+      \centering
+      \small
+      \begin{itemize}
+      \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
+      \item[-] The probability of an arrival of group type $i$: $p_i$.  
+      \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
+      \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
+      \item[-] $U^{t}(\mathbf{L}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j^{\top} \leq \mathbf{L}, \forall i,j \}$.
+      \item[-] $\mathbf{e}_j^{\top}$: Unit row vector with $j$-th element being 1.
+      \item[-] $V^{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
+      \end{itemize}
+  
+      $$V^{t}(\mathbf{L}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L})\right\}$$
+      \small
+  \end{frame}
+
+  \begin{frame}{Method Overview}
+    We make the decision based on the flexible seat planning.
+    \begin{itemize}
+      \item Obtain seat planning composed of full or largest patterns.
+      
+      - Linear seat planning from stochastic programming
+      
+      - Integral seat planning from deterministic model
+  
+      - Construct largest or full patterns.
+  
+      \item Dynamic seat assignment
+  
+      - Group type control
+  % Tell us which group type should be broke which determines which rows can be placed. 
+  
+      - Assign The Group by Stochastic Values
+  % decide whether to accept 
+  % Both acceptance can decide 
+    \end{itemize}
+  \end{frame}
+    
+    \begin{frame}{Policies}
+      We have the following policies when we make the instant allocation.
+
+      \begin{itemize}
+        \item Dynamic seat assignment
+        \item Bid-price control
+        \item Dynamic programming based heuristic
+        \item Booking limit control
+        \item First come first served
+      \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Dynamic Seat Assignment(DSA)}
+      % Stochastic planning policy involves
+      \begin{itemize}
+        \item Group-type control
+        \item[-] Seat planning from stochastic programming.
+        \item[-] When there is no small group, decide which group type to be assigned.
+      \end{itemize}
+      \vspace*{1cm}
+      \small
+      $d^{t}(i, j)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j} \geq x_{j}; T-t)}_{\text{rejection}}.$
+      \vspace*{1cm}
+
+      For all $j > i$, find the maximum value denoted as $d^{t}(i, j^{*})$.
+      
+      If $d^{t}(i, j^{*}) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
+    \end{frame}
+
+    \begin{frame}{Dynamic Seat Assignment(DSA)}
+      % Stochastic planning policy involves
+      \begin{itemize}
+        \item Use the value of stochastic programming as the approximation of value function in DP.
+
+        \item[-] Value of Acceptance(VoA): approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j}^{\top})$ + $i$. (Find a pattern containing group type $j^{*}$)
+        
+        \item[-] Value of Rejection(VoR): approximation of $V_{t} (\mathbf{L})$.
+
+        % \item[-] Compare the value of stochastic programming when assigning in the row versus not assigning.
+        \item[-] If VoA is no less than VoR, accept group type $i$, otherwise, reject it.
+      \end{itemize}
+    \end{frame}
+
+      \begin{frame}{Bid-price Control}
+        The dual problem of LP relaxation of problem \eqref{deter_upper} is:
+        \begin{equation}\label{bid-price_dual}
+          \begin{aligned}
+          \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \beta_{j} \\
+          \text {s.t.} \quad & z_{i} + \beta_j n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+          & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
+          \end{aligned}
+        \end{equation}
+        \small There exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
+
+        % The bid-price control policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
+      \end{frame}
+
+      \begin{frame}{Dynamic Programming Based Heuristic}
+        \begin{itemize}
+        \item Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
+        \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.
+        \item Decision: $u$. If we accept a request in period $t$, $u(t) = 1$; otherwise, $u(t) =0$.  
+        \item[-] DP with one row can be expressed as:
+        $$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0$$ 
+        $$V_{T+1}(x) =0, \forall x.$$
+        \item After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
+        \end{itemize}
+      \end{frame}
+      
+      \begin{frame}{Booking limit Control}
+        Basic idea: for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
+        \begin{itemize}
+          \item[1] Observe the arrival group type $i$.
+          \item[2] Solve problem \eqref{deter_upper} using the expected demand.
+          \item[3] Obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$.
+          \item[4] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
+        \end{itemize}
+                 
+        % When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
+      \end{frame}
+
+      \begin{frame}{Make A Later Allocation}
+        At 
+      \end{frame}

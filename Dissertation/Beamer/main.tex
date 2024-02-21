@@ -1,0 +1,41 @@
+\documentclass[aspectratio=43]{beamer}
+\usepackage[english]{babel}
+\input{preamble}
+\title{Dynamic Seat Assignment with Social Distancing} %->->->->-> Check hyperref title <-<-<-<-<-
+\subtitle{}
+% \author[LI]{LI $\cdot$ Zikang}
+\institute[HKUST]{
+    IEDA%
+    \\%
+    The Hong Kong University of Science and Technology%
+} %You can change the Institution if you are from somewhere else
+\date{}
+
+% \setbeamertemplate{bibliography item}[text]
+
+\begin{document}
+    \frame{\titlepage}
+    \begin{frame}{Table of Contents}
+        \tableofcontents
+    \end{frame}
+    \input{chapters/Intro.tex}
+    \input{chapters/Literature.tex}
+    \input{chapters/Deterministic.tex}
+    \input{chapters/Stochastic.tex}
+    \input{chapters/Dynamic.tex}
+    \input{chapters/Results.tex}
+    \input{chapters/Conclusion.tex}
+    
+    %You can put the frames directly into the presentation, but using the input command and writing them in separate .tex files might be more organized
+    % \renewcommand*{\bibfont}{\scriptsize}
+    % \begin{frame}{References}
+    %     \printbibliography
+    % \end{frame}
+
+    \section{}
+    \begin{frame}{}
+        \centering
+            \Huge\bfseries
+        \textcolor{orange}{The End}
+    \end{frame}
+\end{document}

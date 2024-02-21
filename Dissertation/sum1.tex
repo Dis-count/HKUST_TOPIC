@@ -7,6 +7,7 @@
 \usepackage{indentfirst}
 \setlength{\parindent}{2em}  % 用于首行缩进
 
+\usepackage{bm}
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{caption}
@@ -21,8 +22,7 @@
 % \usepackage{hyperref}
 % \usepackage{geometry}
 % \geometry{a4paper,scale=0.8}
-\usepackage{algorithm}
-% \usepackage{algorithmic}
+
 \usepackage{geometry}
 \geometry{a4paper,left=1in,right=1in,top =1in, bottom = 1in}
 \setstretch{1.5}   %  改变行间距
@@ -32,6 +32,10 @@
 % \author{Dis$\cdot$ count}
 
 % \newtheorem{algorithm}{Algorithm}
+\usepackage[linesnumbered,tworuled]{algorithm2e}
+\SetKwComment{Comment}{/* }{ */}
+\RestyleAlgo{ruled}
+
 \newtheorem{thm}{\hspace{2em}Theorem}
 \newtheorem{lem}{\hspace{2em}Lemma}
 \newtheorem*{pf}{}
@@ -64,8 +68,8 @@
 
 \input{Chapters/Conclusion}
 
-% \bibliographystyle{plain}
-% \bibliography{refe}
+\bibliographystyle{plain}
+\bibliography{refe}
 
 
 \input{Chapters/Proof}

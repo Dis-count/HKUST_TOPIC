@@ -2,64 +2,6 @@
 
 \section{Numerical Results}
     \frame{\sectionpage}
-
-    \begin{frame}{Running time of Benders Decomposition and IP}
-        \tiny
-        \begin{table}[ht]
-            \centering
-            \begin{tabular}{|l|l|l|l|l|l|l|}
-            \hline
-            \# of scenarios & demands & running time of IP(s) & Benders (s) & \# of rows & \# of groups & \# of seats\\
-            \hline
-            1000  & (150, 350) & 5.1  & 0.13 & 30 & 8 & (21, 50)\\
-            5000  & & 28.73 & 0.47 & 30 & 8 & \\
-            10000 & & 66.81  & 0.91 & 30 & 8 & \\
-            50000 & & 925.17 & 4.3 & 30 & 8 & \\
-            \hline
-            1000  & (1000, 2000) & 5.88 & 0.29 & 200 & 8 & (21, 50)\\
-            5000  & & 30.0 & 0.62 & 200 & 8 & \\
-            10000 & & 64.41 & 1.09 & 200 & 8 & \\
-            50000 & & 365.57 & 4.56 & 200 & 8 & \\
-            \hline
-            1000  & (150, 250) & 17.15  & 0.18 & 30 & 16 & (41, 60) \\
-            5000  & & 105.2  & 0.67 & 30 & 16 & \\
-            10000 & & 260.88 & 1.28 & 30 & 16 & \\
-            50000 & & 3873.16 & 6.18 & 30 & 16 & \\
-            \hline
-            \end{tabular}
-          \end{table}
-    \end{frame}
-      
-    \begin{frame}{Feasible Seat Planning versus IP Solution}
-        \scriptsize
-        \begin{table}[ht]
-            \begin{tabular}{|l|l|l|l|l|l|}
-            \hline
-            \# samples & T & probabilities & \# rows & people served by FSP & IP \\
-            \hline
-            1000  & 45  & [0.4,0.4,0.1,0.1] & 8 & 85.30 & 85.3 \\
-            1000  & 50  & [0.4,0.4,0.1,0.1] & 8 & 97.32 & 97.32 \\
-            1000  & 55  & [0.4,0.4,0.1,0.1] & 8 & 102.40 & 102.40  \\ % slow
-            1000  & 60  & [0.4,0.4,0.1,0.1] & 8 & 106.70 & NA  \\
-            1000  & 65  & [0.4,0.4,0.1,0.1] & 8 & 108.84 & 108.84 \\
-            \hline
-            1000  & 35  & [0.25,0.25,0.25,0.25] & 8 & 87.16 & 87.08 \\
-            1000  & 40  & [0.25,0.25,0.25,0.25] & 8 & 101.32 & 101.24 \\
-            1000  & 45  & [0.25,0.25,0.25,0.25] & 8 & 110.62 & 110.52 \\
-            1000  & 50  & [0.25,0.25,0.25,0.25] & 8 & 115.46 & NA \\
-            1000  & 55  & [0.25,0.25,0.25,0.25] & 8 & 117.06 & 117.26 \\
-            \hline
-            5000  & 300  & [0.25,0.25,0.25,0.25] & 30 & 749.76 & 749.76 \\
-            5000  & 350  & [0.25,0.25,0.25,0.25] & 30 & 866.02 & 866.42 \\
-            5000  & 400  & [0.25,0.25,0.25,0.25] & 30 & 889.02 & 889.44 \\
-            5000  & 450  & [0.25,0.25,0.25,0.25] & 30 & 916.16 & 916.66 \\
-            \hline
-            \end{tabular}
-        \end{table}
-
-    Each entry of people served is the average of 50 instances.
-    IP will spend more than 2 hours in some instances, as `NA' showed in the table.
-    \end{frame}
       
     \begin{frame}{Performances of Different Policies}
         \scriptsize

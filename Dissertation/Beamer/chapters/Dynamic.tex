@@ -33,12 +33,11 @@
   
       \item Dynamic seat assignment
   
-      - Group type control
+      - Determine the group type
   % Tell us which group type should be broke which determines which rows can be placed. 
   
-      - Assign The Group by Stochastic Values
-  % decide whether to accept 
-  % Both acceptance can decide 
+      - Decision on assigning the group to a specific row
+
     \end{itemize}
   \end{frame}
     
@@ -57,7 +56,7 @@
     \begin{frame}{Dynamic Seat Assignment(DSA)}
       % Stochastic planning policy involves
       \begin{itemize}
-        \item Group-type control
+        \item Determine the group type
         \item[-] Seat planning from stochastic programming.
         \item[-] When there is no small group, decide which group type to be assigned.
       \end{itemize}
@@ -72,16 +71,20 @@
     \end{frame}
 
     \begin{frame}{Dynamic Seat Assignment(DSA)}
-      % Stochastic planning policy involves
+      Decision on assigning the group to a specific row
       \begin{itemize}
-        \item Use the value of stochastic programming as the approximation of value function in DP.
-
+        \item Break Tie for Determining A Specific Row
+        \item Decision on Assigning The Group
         \item[-] Value of Acceptance(VoA): approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j}^{\top})$ + $i$. (Find a pattern containing group type $j^{*}$)
         
         \item[-] Value of Rejection(VoR): approximation of $V_{t} (\mathbf{L})$.
 
-        % \item[-] Compare the value of stochastic programming when assigning in the row versus not assigning.
         \item[-] If VoA is no less than VoR, accept group type $i$, otherwise, reject it.
+      \end{itemize}
+      Regenerate the seat planning
+      \begin{itemize}
+      \item[-] When $X_{M} =0$
+      \item[-] When comparing VoA and VoR 
       \end{itemize}
     \end{frame}
 
@@ -124,5 +127,12 @@
       \end{frame}
 
       \begin{frame}{Make A Later Allocation}
-        At 
+          This setting is particularly applicable to larger venues, such as stadiums, where an immediate decision is made when a group arrives, but the actual allocation of seats for that group is deferred to a later time.
+
+          Policies:
+
+          \begin{itemize}
+            \item Dynamic programming based heuristic
+          \end{itemize}
+
       \end{frame}

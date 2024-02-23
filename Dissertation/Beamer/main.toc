@@ -9,8 +9,8 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {4}{Stochastic Demand Situation}{16}{0}{4}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {5}{Dynamic Demand Situation}{25}{0}{5}
+\beamer@sectionintoc {5}{Dynamic Demand Situation}{29}{0}{5}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {6}{Numerical Results}{35}{0}{6}
+\beamer@sectionintoc {6}{Numerical Results}{39}{0}{6}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {7}{Conclusion}{41}{0}{7}
+\beamer@sectionintoc {7}{Conclusion}{43}{0}{7}

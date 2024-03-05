@@ -77,16 +77,20 @@
       \begin{itemize}
         \item Deterministic Demand
         
-        We know the specific demand for each group, then make the seat planning.
+        Make the seat planning with the known the specific demand for each group.
         \item Stochastic Demand
         
-        We know the demand distribution, need to give a seat planning before the demand realization.
-    
+        Make the seat planning with the known demand distribution before the demand realization.
+            
         \item Dynamic Demand
+
+        1. Assign seats to each group under fixed seat planning.
+
+        2. Assign seats to each group under flexible seat planning.
+        
+        2.1: Assign seats to each group after its realization.
     
-        1. We assign seats to each group after its realization.
-    
-        2. We accept or reject each group after its realization, but assign them later.
+        2.2: Accept or reject each group after its realization, but assign them later.
     
       \end{itemize}
     \end{frame}

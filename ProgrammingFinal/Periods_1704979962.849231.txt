@@ -1,4 +1,0 @@
-Run Start Time: Thu Jan 11 21:32:42 2024
-The number of periods: 	60
-Sto: 99.35 ;Bid: 98.70 ;DP1: 98.51 ;FCFS: 98.77 
-;Number of accepted people: 147.40 	Total Runtime	10.989928

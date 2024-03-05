@@ -1,31 +1,126 @@
 % !TeX root = ./main.tex
 
-\section{Dynamic Demand Situation}
+\section{Seat Assignment with Dynamic Demand}
     \frame{\sectionpage}
 
-    \begin{frame}{Dynamic Seat Assignment Problem}
-      \centering
-      \small
-      \begin{itemize}
+  \begin{frame}{Seat Assignment under Fixed Seat Planning}
+    % To evaluate the effectiveness of the initial seat planning, we employ a dynamic situation where decisions are made based on real-time feedback. In this context, we utilize a fixed seat planning as the foundation, and then make informed decisions accordingly.
+
+    In certain situations, it is necessary to determine the seat planning prior to the actual demand realization. When each group arrives, we make decisions regarding whether to accept or reject them based on the predetermined seat planning.
+    \vspace{0.5cm}
+    
+    \begin{itemize}
       \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
       \item[-] The probability of an arrival of group type $i$: $p_i$.  
-      \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
-      \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
-      \item[-] $U^{t}(\mathbf{L}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j^{\top} \leq \mathbf{L}, \forall i,j \}$.
-      \item[-] $\mathbf{e}_j^{\top}$: Unit row vector with $j$-th element being 1.
-      \item[-] $V^{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
-      \end{itemize}
+    \end{itemize}
+
+    After acceptance, customers have more freedom to choose their seats with the seat planning.
+  \end{frame}
   
-      $$V^{t}(\mathbf{L}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L})\right\}$$
-      \small
+  \begin{frame}{Group-type Control}
+    \begin{itemize}
+      \item Obtain the seat planning from stochastic programming. Suppose the corresponding supply is $[X_1, \ldots, X_M]$. 
+      \item[-] When the supply for the current group is sufficient, accept it directly.
+      \item[-] When the supply is insufficient, decide which group type to be assigned to.
+    \end{itemize}
+    \scriptsize
+    \vspace{0.5cm}
+    Let $D^t_j$ be the random variable indicates the number of group type $j$ in $t$ periods.
+    $P(D_{i}^{T-t} \geq x_i)$ is the probability that the demand of group type $i$ in $(T - t)$ periods is no less than $x_i$.
+
+    $d^{t}(i, j)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j} \geq x_{j}; T-t)}_{\text{rejection}}.$
+
+    For all $j > i$, find the maximum value denoted as $d^{t}(i, j^{*})$.
+    
+    If $d^{t}(i, j^{*}) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
   \end{frame}
 
-  \begin{frame}{Method Overview}
-    We make the decision based on the flexible seat planning.
+  \begin{frame}{Performance}
+    \scriptsize
+    \begin{table}[ht]
+        \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \# of samples & T & probabilities & \# of rows &  IP \\
+        \hline
+        1000  & 45  & [0.4,0.4,0.1,0.1] & 8  & 85.3 \\
+          & 50  &  &   & 97.32 \\
+          & 55  &  &   & 102.40  \\ % slow
+          & 60  &  &   & 106.02  \\
+         & 65  &  &   & 108.84 \\
+        \hline
+        1000  & 35  & [0.25,0.25,0.25,0.25] & 8  & 87.08 \\
+          & 40  &  &   & 101.24 \\
+          & 45  &  &   & 110.52 \\
+          & 50  &  &   & 114.39 \\
+          & 55  &  &   & 117.26 \\
+        \hline
+        5000  & 300  & [0.25,0.25,0.25,0.25] & 30  & 749.76 \\
+         & 350  &  &   & 866.42 \\
+          & 400  &  &   & 889.44 \\
+          & 450  &  &   & 916.66 \\
+        \hline
+        \end{tabular}
+    \end{table}
+  
+  Each entry of people served is the average of 50 instances.
+  % IP will spend more than 2 hours in some instances, as `NA' showed in the table.
+  \end{frame}
+
+  \begin{frame}{Assign seats to each group after its realization}
+    \centering
+    Dynamic Seat Assignment Problem
+    \small
     \begin{itemize}
-      \item Obtain seat planning composed of full or largest patterns.
+    \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
+    \item[-] The probability of an arrival of group type $i$: $p_i$.  
+    \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
+    \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
+    \item[-] $U^{t}(\mathbf{L}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}, \forall i,j \}$.
+    \item[-] $\mathbf{e}_j$: Unit column vector with $j$-th element being 1.
+    \item[-] $V^{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
+    \end{itemize}
+
+    $$V^{t}(\mathbf{L}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L})\right\}$$
+    \small
+\end{frame}
+
+  % \begin{frame}{Proposed Methods}
+  %   We make the decision based on the flexible seat planning.
+
+  %   1. Based on the seat planning from SSP.
+
+  %   2. Based on the seat planning from the relaxation of SSP.
+  % \end{frame}
+
+  \begin{frame}{Method 1}
+    \scriptsize
+    \begin{itemize}
+      \item Obtain the seat planning after the realization of group.
+      \begin{tiny}
+        \begin{equation}
+        \begin{aligned}
+        \max \quad & \sum_{j} k a_j + E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+        \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
+        y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
+        & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
+        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - n_k a_j, j \in \mathcal{N} \\
+        & \sum_{j} a_j \leq 1 \\
+        & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
+        \end{aligned}
+      \end{equation}
+    \end{tiny}
+      \item Suppose the supply is $[X_{1}, \ldots, X_M]$.
+      \item[-] For the arriving group type $i$, if $X_i > 0$, accept it. 
       
-      - Linear seat planning from stochastic programming
+      \item[-] If $X_i = 0$, regenerate a seat planning.
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Method 2 Overview}
+    \begin{itemize}
+      \item Obtain the seat planning composed of full or largest patterns.
+      
+      - Linear seat planning from relaxed stochastic programming
       
       - Integral seat planning from deterministic model
   
@@ -33,7 +128,7 @@
   
       \item Dynamic seat assignment
   
-      - Determine the group type
+      - Determine the group type by group-type control
   % Tell us which group type should be broke which determines which rows can be placed. 
   
       - Decision on assigning the group to a specific row
@@ -41,41 +136,41 @@
     \end{itemize}
   \end{frame}
     
-    \begin{frame}{Policies}
-      We have the following policies when we make the instant allocation.
+  \begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
+    \begin{description}
+      \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
 
-      \begin{itemize}
-        \item Dynamic seat assignment
-        \item Bid-price control
-        \item Dynamic programming based heuristic
-        \item Booking limit control
-        \item First come first served
-      \end{itemize}
-    \end{frame}
+      \item[Step 2.] Solve problem \eqref{deter_upper} to obtain the optimal solution, $\mathbf{x}^{1}$. 
+      % Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+       
+      \item[Step 3.] Construct the full or largest patterns with $\mathbf{x}^{1}$.
+   \end{description}
+\end{frame}
 
-    \begin{frame}{Dynamic Seat Assignment(DSA)}
-      % Stochastic planning policy involves
-      \begin{itemize}
-        \item Determine the group type
-        \item[-] Seat planning from stochastic programming.
-        \item[-] When there is no small group, decide which group type to be assigned.
-      \end{itemize}
-      \vspace*{1cm}
-      \small
-      $d^{t}(i, j)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j} \geq x_{j}; T-t)}_{\text{rejection}}.$
-      \vspace*{1cm}
+% \begin{frame}{Construction}
+% There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+% \end{frame}
 
-      For all $j > i$, find the maximum value denoted as $d^{t}(i, j^{*})$.
-      
-      If $d^{t}(i, j^{*}) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
-    \end{frame}
+\begin{frame}{Policies}
+  We have the following policies when we make the instant allocation.
+
+  \begin{itemize}
+    \item Dynamic seat assignment(Method 2)
+    \item Bid-price control
+    \item Dynamic programming based heuristic
+    \item Booking limit control
+    \item First come first served
+  \end{itemize}
+\end{frame}
 
     \begin{frame}{Dynamic Seat Assignment(DSA)}
-      Decision on assigning the group to a specific row
+      1. Determine the group type by the group-type control.
+
+      2. Make the decision on assigning the group to a specific row.
       \begin{itemize}
-        \item Break Tie for Determining A Specific Row
-        \item Decision on Assigning The Group
-        \item[-] Value of Acceptance(VoA): approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j}^{\top})$ + $i$. (Find a pattern containing group type $j^{*}$)
+        \item Break tie for determining a specific row
+        \item Decision on assigning the group
+        \item[-] Value of Acceptance(VoA): approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j})$ + $i$. (Find a pattern containing group type $j^{*}$)
         
         \item[-] Value of Rejection(VoR): approximation of $V_{t} (\mathbf{L})$.
 
@@ -106,9 +201,10 @@
         \begin{itemize}
         \item Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
         \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.
-        \item Decision: $u$. If we accept a request in period $t$, $u(t) = 1$; otherwise, $u(t) =0$.  
+        \item Decision: $u$. If we accept a request in period $t$, $u^t = 1$; otherwise, $u^t =0$.  
         \item[-] DP with one row can be expressed as:
-        $$V_{t}(L) = \mathbb{E}_{i \sim p} [\max_{u \in \{0,1\}} \{ {[V_{t+1}(L-n_i u)+ i u]}\}], L \geq 0$$ 
+        $$V^{t}(l) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l)\right\}, l \geq 0 $$
+
         $$V_{T+1}(x) =0, \forall x.$$
         \item After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
         \end{itemize}
@@ -120,19 +216,8 @@
           \item[1] Observe the arrival group type $i$.
           \item[2] Solve problem \eqref{deter_upper} using the expected demand.
           \item[3] Obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$.
-          \item[4] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}^{\top}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
+          \item[4] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
         \end{itemize}
                  
         % When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
-      \end{frame}
-
-      \begin{frame}{Make A Later Allocation}
-          This setting is particularly applicable to larger venues, such as stadiums, where an immediate decision is made when a group arrives, but the actual allocation of seats for that group is deferred to a later time.
-
-          Policies:
-
-          \begin{itemize}
-            \item Dynamic programming based heuristic
-          \end{itemize}
-
       \end{frame}

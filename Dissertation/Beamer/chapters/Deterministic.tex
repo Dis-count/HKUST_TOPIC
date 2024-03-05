@@ -1,50 +1,11 @@
 % !TeX root = ../main.tex
 
-\section{Deterministic Demand Situation}
+\section{Seat Planning with Deterministic Demand}
     \frame{\sectionpage}
 
-    \begin{frame}{Seat Planning with Social Distancing}
-      \begin{itemize}
-      \item Group type $\mathcal{M} = \{1, \ldots, M\}$.
-      \item Row $\mathcal{N} = \{1, \ldots, N\}$.
-      \item The social distancing: $\delta$ seat(s).
-      \item $n_i = i + \delta$: the new size of group type $i$ for each $i \in \mathcal{M}$.
-      \item The number of seats in row $j$: $L_j^{0}, j \in \mathcal{N}$.
-      \item $L_j = L_j^{0} + \delta$: the length of row $j$ for each $j \in \mathcal{N}$.
-      \end{itemize}
-      
-      \begin{figure}[ht]
-        \centering
-        \includegraphics[width = 0.8\textwidth]{./images/dummy_seat.pdf}
-        \caption{Problem Conversion with One Seat as Social Distancing}
-    \end{figure}
-    \end{frame}
-
-  \begin{frame}{Basic Concepts}
-    \begin{itemize}
-      \item $\bm{h} = (h_1, \ldots, h_M)$, pattern, the seat planning for each group type in one row.
-      Let $L = q(M + \delta) + r$.
-
-      - The number of people accommodated: $|\bm{h}| = \sum_{i =1}^{M} i h_i = qM + \max\{r-\delta, 0\}$.
-      
-      - Loss for pattern $\bm{h}$: $L- \delta - |\bm{h}| = q \delta - \delta + \min\{r, \delta\}$.
-      \item Largest patterns: $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any $\bm{h}^{\prime}$. 
-      \item Full patterns: $\sum_{i=1}^{M} n_i h_i = L$.
-      \item[-] {\color{blue} Example}: 
-      
-      $\delta = 1$, $M =4$, $n_1 = 2, n_2 = 3, n_3 = 4, n_4 = 5$, $L = 21$.
-      
-      Largest patterns: $(0, 0, 0, 4), (0, 0, 4, 1), (0, 2, 0, 3)$.
-
-      Largest may not be full: $(0, 0, 0, 4)$.
-
-      Full may not be largest: $(1, 1, 4, 0)$.
-    \end{itemize}
-  \end{frame}
-
   \begin{frame}{Deterministic Formulation}  %开始一张幻灯片
-    To obtain an integral seat planning, we use the deterministic formulation.
-    
+    Seat planning problem with given demand $\bm{d}$:
+
     \begin{equation}\label{deter_upper}
       \begin{aligned}
       \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
@@ -53,34 +14,50 @@
       & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
       \end{aligned}
     \end{equation}
-  
-    Problem \eqref{deter_upper} can generate a feasible seat planning.
-    
+    Objective: maximize the number of people accommodated.
   \end{frame}
 
-  \begin{frame}
+  \begin{frame}{Property}
     In the LP relaxation of problem \eqref{deter_upper}, there exists an index $v$ such that the optimal solutions satisfy the following conditions:
 
     \begin{itemize}
-      \item For $i = 1,\ldots, v-1$, $x_{ij}^{*} = 0$ for all rows, indicating that no group type $i$ are assigned to any rows before index $v$.
-      \item For $i = v+1,\ldots, M$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = d_{i}$ group type $i$ to meet the demand for group type $i$.
-      \item For $i = v$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = \frac{L - \sum_{i = v+1}^{M} {d_i n_i}}{n_v}$ group type $v$ to the rows. This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $v+1$ to $M$, divided by the size of group type $v$, denoted as $n_v$.
+      \item For $i = 1,\ldots, v-1$ and for all $j$, $x_{ij}^{*} = 0$. 
+      % indicating that no group type $i$ are assigned to any rows before index $v$.
+      \item For $i = v+1,\ldots, M$, $\sum_{j} x_{ij}^{*} = d_{i}$. 
+
+      \item For $i = v$, $\sum_{j} x_{ij}^{*} = \frac{L - \sum_{i = v+1}^{M} {d_i n_i}}{n_v}$ 
+      % This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $v+1$ to $M$, divided by the size of group type $v$, denoted as $n_v$.
     \end{itemize}
+
+    When the demand is way smaller than the number of seats, the seat planning obtained from problem \eqref{deter_upper} does not utilize all seats. We aim to generate a seat planning utilizing all seats while ensuring that the demand requirements are met.
   \end{frame}
 
   \begin{frame}{Generate The Full or Largest Pattern}
-    Given a specific pattern, we can convert it into a largest or full pattern while ensuring that the
-    original group type requirements are met. When multiple full patterns are possible, our objective is to generate the pattern with minimal loss.
+    Specifically, we can convert a given specific pattern into a largest or full pattern while ensuring that the original group type requirements are met. Our objective is to generate the pattern with maximal people.
 
-    Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_N)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_N{'})$ that satisfies the following programming.
+    Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_M)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_M{'})$ that satisfies the following programming.
 
-    \begin{equation}\label{full_largest}
+    \begin{equation*}\label{full_largest}
       \begin{aligned}
       \max \quad & |\bm{h}{'}| \\
       \text {s.t.} \quad & h_1{'} \geq h_1 \\
       &  h_1{'} + h_2{'} \geq h_1 + h_2 \\
       & \cdots \\
-      & h_1{'} + \ldots + h_N{'} \geq h_1 + \ldots + h_N.
+      & h_1{'} + \ldots + h_M{'} \geq h_1 + \ldots + h_M.
       \end{aligned}
-    \end{equation}
+    \end{equation*}
+  \end{frame}
+
+  \begin{frame}{Algorithm}
+    For each row $j$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. We aim to allocate the remaining unoccupied seats($\beta$) in row $j$ in a way that maximizes the number of planned groups that become the largest in size.
+    \vspace{0.5cm}
+    
+    \begin{itemize}
+      \item $k$: the smallest group type.
+      If $k \neq M$, $h_{k} \gets h_{k} -1$, $h_{\min_{\{(k+\beta), M\}}} \gets h_{\min_{\{(k+\beta), M\}}} +1$, $\beta \gets \beta - \max\{1, M - k\}$. Continue this procedure until the pattern is largest or $\beta =0$.
+      \item If $k = M$ and $\beta > 0$, assign $\beta$ in a greedy way.
+      \item[-] When $\beta \geq n_{M}$, $q \gets \lfloor\frac{\beta}{n_M}\rfloor$, $\beta \gets \beta - q n_M$, $h_{M} \gets h_{M} + q$.
+      \item[-] When $n_{1} \leq \beta < n_{M}$, $h_{\beta-n_1+1} \gets h_{\beta-n_1+1} + 1$, $\beta \gets 0$.
+      \item[-] When $0 < \beta < n_{1}$, $\beta \gets 0$.
+    \end{itemize}
   \end{frame}

@@ -7,6 +7,7 @@ import copy
 from Mist import decisionOnce
 from typing import List
 from Method_scenario import stochasticModel1
+import time
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample, s):
@@ -23,23 +24,24 @@ class CompareMethods:
     def random_generate(self):
         sequence = generate_sequence(self.num_period, self.probab, self.s)
         sam = samplingmethod1(self.I, self.num_sample, self.num_period-1, self.probab, self.s)
-
-        dw, prop = sam.get_prob_ini(sequence[0])
+        first_arrival = sequence[0]
+        dw, prop = sam.get_prob_ini(first_arrival)
         W = len(dw)
         m1 = stochasticModel(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
+        m_sce = stochasticModel1(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
 
         ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
 
         ini_demand, newx4 = deter.IP_formulation(np.zeros(self.I), ini_demand)
-
         newx4 = self.full_largest(newx4, self.roll_width)
 
-        ini_demand1 = np.array(self.probab) * self.num_period
-        ini_demand3, newx3 = deter.IP_formulation(np.zeros(self.I), ini_demand1)
-
-        newx3 = self.full_largest(newx3, self.roll_width)
+        # ini_demand1 = np.array(self.probab) * self.num_period
+        # ini_demand3, newx3 = deter.IP_formulation(np.zeros(self.I), ini_demand1)
+        # newx3 = self.full_largest(newx3, self.roll_width)
+        newx3, _ = m_sce.solveBenders(first_arrival-self.s, eps=1e-4, maxit=20)
+        ini_demand3 = np.sum(newx3, axis=1)
         return sequence, ini_demand, ini_demand3, newx3, newx4
 
     def row_by_row(self, sequence):
@@ -421,10 +423,91 @@ class CompareMethods:
         sequence = [i-self.s for i in sequence]
         final_demand = np.array(sequence) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
+        print(change_roll)
+        print(mylist)
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+        return demand
+
+    def method_scenario(self, sequence: List[int], change_roll0):
+        change_roll = copy.deepcopy(change_roll0)
+        mylist = []
+        periods = len(sequence)
+
+        for num, j in enumerate(sequence):
+            remaining_period = periods - num
+
+            sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
+            dw_acc, prop_acc = sam_multi.get_prob()
+            W_acc = len(dw_acc)
+            m = stochasticModel1(change_roll, self.given_lines,
+                                 self.demand_width_array, W_acc, self.I, prop_acc, dw_acc, self.s)
+
+            _, xk = m.solveBenders(j-self.s, eps=1e-4, maxit=20)
+
+            if sum(xk) < 1e-4:
+                mylist.append(0)
+            else:
+                k = np.nonzero(xk)
+                change_roll[k[0][0]] -= j
+                mylist.append(1)
+
+        sequence = [i-self.s for i in sequence]
+        final_demand = np.array(sequence) * np.array(mylist)
+        final_demand = final_demand[final_demand != 0]
 
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
+        print(change_roll)
+        print(mylist)
+        return demand
+
+    def method_scenario1(self, sequence: List[int], newx, change_roll0):
+        change_roll = copy.deepcopy(change_roll0)
+        newx = newx.T.tolist()
+        mylist = []
+        periods = len(sequence)
+
+        for num, j in enumerate(sequence):
+            newd = np.sum(newx, axis=0)
+            remaining_period = periods - num
+
+            if newd[j-1-self.s] > 1e-4:
+                mylist.append(1)
+                k = self.break_tie(newx, change_roll, j-1-self.s)
+                newx[k][j-1-self.s] -= 1
+                change_roll[k] -= j
+
+                newd = np.sum(newx, axis=0)
+                
+            else:
+                sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
+                dw_acc, prop_acc = sam_multi.get_prob()
+                W_acc = len(dw_acc)
+                m = stochasticModel1(change_roll, self.given_lines,
+                                 self.demand_width_array, W_acc, self.I, prop_acc, dw_acc, self.s)
+
+                newx, xk = m.solveBenders(j-self.s, eps=1e-4, maxit=20)
+                newx = newx.T.tolist()
+
+                if sum(xk) < 1e-4:
+                    mylist.append(0)
+                else:
+                    k = np.nonzero(xk)
+                    change_roll[k[0][0]] -= j
+                    mylist.append(1)
+
+        sequence = [i-self.s for i in sequence]
+        final_demand = np.array(sequence) * np.array(mylist)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+        print(change_roll)
+        print(mylist)
         return demand
 
     def method_IP(self, sequence, newx, change_roll0):
@@ -538,22 +621,28 @@ class CompareMethods:
 
 if __name__ == "__main__":
     given_lines = 10
+    np.random.seed(3)
     roll_width = np.ones(given_lines) * 21
     # roll_width = np.array([210])
-    num_period = 60
+    num_period = 70
     I = 4
-    probab = np.array([0.2, 0.2, 0.2, 0.4])
+    probab = np.array([0.25, 0.25, 0.25, 0.25])
     num_sample = 1000
     s = 1
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
     sequence, ini_demand, ini_demand3, newx3, newx4 = a.random_generate()
 
     # sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2, 5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
-    # print(sum(sequence))
+    t1 = time.time()
     new = a.method_new(sequence, newx4, roll_width)
+    
     newx = copy.deepcopy(newx4)
     print(sequence)
-    test = a.method_scenario(sequence, roll_width)
+    t2 = time.time()
+    test = a.method_scenario1(sequence, newx3, roll_width)
+    t3 = time.time()
+    print("Sto took...", round(t2 - t1, 3), "seconds")
+    print("Scenario took...", round(t3 - t2, 3), "seconds")
     optimal = a.offline(sequence)
 
     multi = np.arange(1,1+I)

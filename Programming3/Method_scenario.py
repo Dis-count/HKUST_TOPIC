@@ -7,7 +7,7 @@ from Mist import generate_sequence, decision1
 from collections import Counter
 from Method3 import deterministicModel
 
-# x is integer in the master problem
+# xk is binary in the master problem to indicate which row we assign the group in.
 # This function uses benders' decomposition to solve stochastic Model directly.
 # And give the once decision.
 
@@ -130,11 +130,12 @@ class stochasticModel1:
         m.addConstrs(z[i] <= 0 for i in range(self.W))
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)) + grb.quicksum(k * xk[j] for j in range(self.given_lines)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
+        m.setParam('TimeLimit', 60)
         m.optimize()
         if m.status != 2:
             m.write('test1.lp')
         var = np.array(m.getAttr('X'))
-        nn = self.I*self.given_lines
+        nn = self.I * self.given_lines
         x0 = var[0: nn]
         zstar = var[nn:nn + self.W]
         xk_var = var[-self.given_lines:]

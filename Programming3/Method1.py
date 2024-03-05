@@ -135,9 +135,9 @@ class stochasticModel:
     def solveBenders(self, eps=1e-4, maxit=20):
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0,
-                      vtype= GRB.CONTINUOUS, name='varx')
+                      vtype=GRB.CONTINUOUS, name='varx')
         z = m.addVars(self.W, lb=-float('inf'),
-                      vtype= GRB.CONTINUOUS, name='varz')
+                      vtype = GRB.CONTINUOUS, name='varz')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         m.addConstrs(z[i] <= 0 for i in range(self.W))
@@ -214,8 +214,8 @@ class stochasticModel:
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    number_period = 55
-    given_lines = 6
+    number_period = 60
+    given_lines = 8
     np.random.seed(0)
     sd = 1
     probab = [0.4, 0.4, 0.1, 0.1]
@@ -238,17 +238,17 @@ if __name__ == "__main__":
     ini_demand, upperbound = my.solveBenders(eps=1e-4, maxit=20)
     print("Benders took...", round(time.time() - start, 3), "seconds")
 
-    ini_demand = np.ceil(ini_demand)  # take the ceiling of the upper demand
+    # ini_demand = np.ceil(ini_demand)  # take the ceiling of the upper demand
 
-    deter = deterministicModel(roll_width, given_lines, demand_width_array, I, sd)
+    # deter = deterministicModel(roll_width, given_lines, demand_width_array, I, sd)
 
-    ini_demand, obj = deter.IP_formulation(np.zeros(I), ini_demand)
+    # ini_demand, obj = deter.IP_formulation(np.zeros(I), ini_demand)
 
-    decision_list = decision1(sequence, ini_demand, probab, sd)
+    # decision_list = decision1(sequence, ini_demand, probab, sd)
 
-    sequence = [i-1 for i in sequence if i > 0]
-    total_people = np.dot(sequence, decision_list)
-    final_demand = np.array(sequence) * np.array(decision_list)
-    print(f'The total seats: {total_seat}')
-    print(f'The total people:{total_people}')
-    print(Counter(final_demand))
+    # sequence = [i-1 for i in sequence if i > 0]
+    # total_people = np.dot(sequence, decision_list)
+    # final_demand = np.array(sequence) * np.array(decision_list)
+    # print(f'The total seats: {total_seat}')
+    # print(f'The total people:{total_people}')
+    # print(Counter(final_demand))

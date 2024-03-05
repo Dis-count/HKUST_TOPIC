@@ -25,10 +25,10 @@ class originalModel:
         return - np.identity(self.I) + np.eye(self.I, k=1)
 
     def solveModelGurobi(self):
-        self.prop = self.prop * self.num_sample
+        # self.prop = self.prop * self.num_sample
         m2 = grb.Model()
         x = m2.addVars(self.I, self.given_lines, lb=0,
-                       vtype = GRB.INTEGER, name = 'varx')
+                       vtype=GRB.INTEGER, name='varx')
         y1 = m2.addVars(self.I, self.W, lb = 0,  vtype = GRB.CONTINUOUS)
         y2 = m2.addVars(self.I, self.W, lb = 0,  vtype = GRB.CONTINUOUS)
         W0 = self.Wmatrix()
@@ -38,32 +38,34 @@ class originalModel:
 
         m2.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) + grb.quicksum(W0[i, j] * y1[j, w] + M_identity[i, j]*y2[j, w] for j in range(self.I)) == self.dw[w][i] for i in range(self.I) for w in range(self.W))
         # print("Constructing second took...", round(time.time() - start, 2), "seconds")
-        m2.setObjective(grb.quicksum(self.num_sample* self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
+        m2.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) - grb.quicksum(y1[i, w]*self.prop[w] for i in range(self.I) for w in range(self.W)), GRB.MAXIMIZE)
 
-        m2.setParam('OutputFlag', 0)
+        # m2.setParam('OutputFlag', 0)
         # m2.Params.MIPGapAbs = 1
+        m2.setParam('TimeLimit', 60)
         m2.optimize()
 
         sol = np.array(m2.getAttr('X'))
-        solx = sol[0:self.I * self.given_lines]
+        solx = sol[0: self.I * self.given_lines]
         # soly2 = sol[-self.I * self.W:]
         # print(f'check the result:{any(soly2)}')
         newx = np.reshape(solx, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
+        print('obj:', m2.ObjVal)
         return newd, newx
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    number_period = 55
+    number_period = 60
     given_lines = 8
     np.random.seed(0)
     sd = 1
     probab = [0.4, 0.4, 0.1, 0.1]
     sam = samplingmethod1(I, num_sample, number_period, probab, sd)
 
-    roll_width = np.arange(21, 21 + given_lines)
-    # roll_width = np.ones(given_lines) * 20
+    # roll_width = np.arange(21, 21 + given_lines)
+    roll_width = np.ones(given_lines) * 21
 
     demand_width_array = np.arange(2, 2+I)
 

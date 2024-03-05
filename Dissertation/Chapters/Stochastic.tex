@@ -1,5 +1,5 @@
 % !TEX root = ./sum1.tex
-\section{Stochastic Situation}\label{sec_seat_planning}
+\section{Seat Planning with Stochastic Demand}\label{sec_seat_planning}
 
 % for given arrival demand distribution but not realization-- scenarios
 
@@ -7,7 +7,7 @@ Secondly, we consider the stochastic model under social distancing constraints. 
 % By utilizing the stochastic model and implementing a fixed seat planning approach, we can optimize the seating arrangements and ensure the well-being of all attendees by minimizing the risk of virus transmission.
 
 
-\subsection*{scenario-based}
+\subsection*{Scenario-based stochastic programming}
 In this section, we develop the scenario-based stochastic programming (SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
 
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. A particular realization of the demand vector can be represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of people accommodated over all the scenarios, we propose a scenario-based stochastic programming to obtain a seat planning.
@@ -50,7 +50,7 @@ Considering the analysis provided earlier, we find it advantageous to obtain a s
 There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
 \end{prop}
 
-Given a specific pattern, we can convert it into a largest or full pattern while ensuring that the original group type requirements are met. When multiple full patterns are possible, our objective is to generate the pattern with minimal loss. Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_N)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_N{'})$ that maximizes $|\bm{h}{'}|$ while satisfying the following constraints: $h_1{'} \geq h_1$, $h_1{'} + h_2{'} \geq h_1 + h_2$, $\cdots$, $h_1{'} + \ldots + h_N{'} \geq h_1 + \ldots + h_N$. In other words, we want to find a pattern $\bm{h}'$ where each element $h_i'$ is greater than or equal to the corresponding element $h_i$ in $\bm{h}$, and the cumulative sums of the elements in $\bm{h}'$ are greater than or equal to the cumulative sums of the elements in $\bm{h}$.
+Given a specific pattern, we can convert it into a largest or full pattern while ensuring that the original group type requirements are met. When multiple full patterns are possible, our objective is to generate the pattern with minimal loss. Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_M)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_M{'})$ that maximizes $|\bm{h}{'}|$ while satisfying the following constraints: $h_1{'} \geq h_1$, $h_1{'} + h_2{'} \geq h_1 + h_2$, $\cdots$, $h_1{'} + \ldots + h_M{'} \geq h_1 + \ldots + h_M$. In other words, we want to find a pattern $\bm{h}'$ where each element $h_i'$ is greater than or equal to the corresponding element $h_i$ in $\bm{h}$, and the cumulative sums of the elements in $\bm{h}'$ are greater than or equal to the cumulative sums of the elements in $\bm{h}$.
 By finding such a pattern $\bm{h}'$, we can ensure that the converted pattern meets or exceeds the requirements of the original group types. Among the possible full patterns that satisfy these constraints, we prioritize the one with the smallest loss.
 
 Now, we demonstrate the specific allocation scheme.

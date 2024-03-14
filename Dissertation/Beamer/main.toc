@@ -3,14 +3,12 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {1}{Introduction}{3}{0}{1}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {2}{Literature Review}{7}{0}{2}
+\beamer@sectionintoc {2}{Literature Review}{8}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {3}{Seat Planning with Deterministic Demand}{12}{0}{3}
+\beamer@sectionintoc {3}{Seat Planning with Deterministic Demand}{14}{0}{3}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {4}{Seat Planning with Stochastic Demand}{17}{0}{4}
+\beamer@sectionintoc {4}{Seat Planning with Stochastic Demand}{19}{0}{4}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {5}{Seat Assignment with Dynamic Demand}{25}{0}{5}
+\beamer@sectionintoc {5}{Seat Assignment with Dynamic Demand}{27}{0}{5}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {6}{Numerical Results}{38}{0}{6}
-\defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {7}{Conclusion}{43}{0}{7}
+\beamer@sectionintoc {6}{Conclusion}{45}{0}{6}

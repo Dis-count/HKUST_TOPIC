@@ -38,6 +38,7 @@
   \end{itemize}
   \end{frame}
 
+
   \begin{frame}{Social Distancing under Pandemic}
     \begin{itemize}
       \item Social distancing in seating areas.
@@ -73,11 +74,37 @@
     \end{itemize}
     \end{frame}
 
+    \begin{frame}{Seat Planning And Seat Assignment}
+      There is a requirement for the maximum number of people in one group.
+      
+      People in one group should sit together.
+      
+      \vspace{1cm}
+
+      \begin{columns}
+        \column{5cm}  %第一栏（左栏）宽度为5cm
+        Seat planning: 
+          \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 0.8\textwidth]{./images/seat_planning.png}
+          \end{figure}
+          \column{5cm}
+        Seat assignment: 
+          \scriptsize
+          \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 0.8\textwidth]{./images/seat_assignment.png}
+          \end{figure}
+      \end{columns}
+    
+    \end{frame}
+    
+
     \begin{frame}{Situations}
       \begin{itemize}
         \item Deterministic Demand
         
-        Make the seat planning with the known the specific demand for each group.
+        Make the seat planning with the known specific demand for each group.
         \item Stochastic Demand
         
         Make the seat planning with the known demand distribution before the demand realization.
@@ -86,7 +113,7 @@
 
         1. Assign seats to each group under fixed seat planning.
 
-        2. Assign seats to each group under flexible seat planning.
+        2. Assign seats to each group.
         
         2.1: Assign seats to each group after its realization.
     

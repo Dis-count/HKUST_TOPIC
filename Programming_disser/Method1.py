@@ -134,13 +134,13 @@ class stochasticModel:
     def solveBenders(self, eps=1e-4, maxit=20):
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0,
-                      vtype= GRB.INTEGER, name='varx')
+                      vtype=GRB.CONTINUOUS, name='varx')
         z = m.addVars(self.W, lb = -float('inf'), ub = 0, vtype = GRB.CONTINUOUS, name='varz')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         # m.addConstrs(z[i] <= 0 for i in range(self.W))
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
-        # m.setParam('OutputFlag', 0)
+        m.setParam('OutputFlag', 0)
 
         m.optimize()
         # if m.status !=2:
@@ -171,7 +171,7 @@ class stochasticModel:
             # UB = min(UB, obj)
             # start = time.time()
             # m.setParam('TimeLimit', 40)
-            m.Params.MIPGap = 5e-4
+            # m.Params.MIPGap = 5e-4
             m.optimize()
             # if time.time() - start > 30:
             #     m.write('test1.lp')
@@ -182,9 +182,9 @@ class stochasticModel:
 
             tol = abs(obj - LB)
             it += 1
-            print('----------------------iteration ' +
-                  str(it) + '-------------------')
-            print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
+            # print('----------------------iteration ' +
+                #   str(it) + '-------------------')
+            # print('LB = ', LB, ', UB = ', obj, ', tol = ', tol)
             # print('optimal solution:', newx)
         # print('The number of iterations is:', it)
         # obj_IP, x0 = self.solve_IP(m)
@@ -195,7 +195,7 @@ class stochasticModel:
         # print('optimal solution:', newx)
         # print('optimal LP objective:', obj)
         # print('optimal IP objective:', obj_IP)
-        print('obj:', m.objVal)
+        # print('obj:', m.objVal)
         return newd, LB
 
     def solveBenders_LP(self, eps=1e-4, maxit=20):

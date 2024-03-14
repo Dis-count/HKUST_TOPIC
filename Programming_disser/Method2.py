@@ -43,7 +43,7 @@ class originalModel:
 
         m2.setParam('OutputFlag', 0)
         # m2.Params.MIPGapAbs = 1
-        m2.Params.MIPGap = 1e-6
+        m2.Params.MIPGap = 1e-4
         # m2.setParam('TimeLimit', 120)
         m2.optimize()
 

@@ -1,10 +1,9 @@
 % !TeX root = ../main.tex
 
-\section{Numerical Results}
-    \frame{\sectionpage}
       
     \begin{frame}{Performances of Different Policies}
         \scriptsize
+        $M =4$, $\delta =1$, $N =10$, $L_j =21, j \in \mathcal{N}$, $p_0 = 0$.
         \begin{table}[ht]
           \centering
           \begin{tabular}{|l|l|l|l|l|l|l|}
@@ -64,11 +63,47 @@
     \begin{frame}{Make A Later Allocation}
       This setting is particularly applicable to larger venues, such as stadiums, where an immediate decision is made when a group arrives, but the actual allocation of seats for that group is deferred to a later time.
 
+      \vspace{0.5cm}
+
+      The critical part is to make the decision, thus, we choose the following policies associated with relaxation forms.
+
+      \vspace{0.5cm}
+
       Policies: 
 
       \begin{itemize}
         \item Dynamic programming based heuristic
         \item Bid-price control
       \end{itemize}
+    \end{frame}
 
-  \end{frame}
+      \begin{frame}{Performances of Different Policies}
+        \scriptsize
+        \begin{table}[ht]
+          \centering
+          \begin{tabular}{|l|l|l|l|l|l|}
+          \hline
+           T & Probabilities &  DP1-L (\%) & Bid-L (\%) & DP1 (\%) & Bid (\%) \\
+          \hline
+          60  & [0.25, 0.25, 0.25, 0.25]  & 99.52 & 99.44 & 98.42 & 98.38 \\
+          70  &   & 99.32 & 98.97 & 96.87 & 96.24 \\
+          80  &   & 99.34 & 99.30 & 95.69 & 96.02 \\
+          90  &   & 99.55 & 99.49 & 96.05 & 96.41  \\
+          100 &   & 99.78 & 99.66 & 95.09 & 96.88 \\
+          \hline
+          60  & [0.25, 0.35, 0.05, 0.35]  & 99.50 & 99.37 & 98.26 & 98.25  \\
+          70  &   & 99.40 & 98.97 & 96.62 & 96.06 \\
+          80  &   & 99.46 & 99.24 & 96.01 & 95.89 \\
+          90  &   & 99.59 & 99.35 & 96.77 & 96.62 \\
+          100 &   & 99.77 & 99.61 & 97.04 & 97.14  \\
+          \hline
+          60  & [0.15, 0.25, 0.55, 0.05]  & 99.57 & 99.54 & 98.72 & 98.74 \\
+          70  &   & 99.46 & 99.39  & 96.38 & 96.90 \\
+          80  &   & 99.50 & 99.30  & 97.75 & 97.87 \\
+          90  &   & 99.34 & 99.44  & 98.45 & 98.69 \\
+          100 &   & 99.34 & 99.55  & 98.62 & 98.94 \\
+          \hline
+          \end{tabular}
+        \end{table}
+
+    \end{frame}

@@ -1,0 +1,9 @@
+Run Start Time: Wed Mar 13 10:30:26 2024
+The number of periods: 	60
+Bid: 99.54 ;DP1: 99.57 ;Number of accepted people: 148.16 	The number of periods: 	70
+Bid: 99.39 ;DP1: 99.46 ;Number of accepted people: 153.24 	The number of periods: 	80
+Bid: 99.30 ;DP1: 99.50 ;Number of accepted people: 154.16 	The number of periods: 	90
+Bid: 99.44 ;DP1: 99.34 ;Number of accepted people: 154.41 	The number of periods: 	100
+Bid: 99.55 ;DP1: 99.34 ;Number of accepted people: 154.73 	Total Runtime	340.173432
+
+[0.15, 0.25, 0.55, 0.05]

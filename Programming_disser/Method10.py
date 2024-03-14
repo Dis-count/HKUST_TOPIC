@@ -77,6 +77,23 @@ class deterministicModel:
         x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
         return x_ij, m.objVal
 
+    def LP_formulation_relax(self, demand, roll_width):
+        m = grb.Model()
+        z = m.addVars(self.I, lb=0, vtype=GRB.CONTINUOUS)
+        beta = m.addVar(lb=0, vtype=GRB.CONTINUOUS)
+
+        m.addConstrs(z[i] + beta * (i+1 + self.s) >= i +
+                     1 for j in range(self.given_lines) for i in range(self.I))
+
+        m.setObjective(grb.quicksum(demand[i] * z[i] for i in range(
+            self.I)) + roll_width * beta, GRB.MINIMIZE)
+        m.setParam('OutputFlag', 0)
+        m.optimize()
+        # m.write('bid_price.lp')
+        x_i = np.array(m.getAttr('X'))[-1]
+        return x_i, m.objVal
+
+
     # def LP_formulation2(self, demand, roll_width):
     #     #  used to test the performance of bid-price
     #     m = grb.Model()

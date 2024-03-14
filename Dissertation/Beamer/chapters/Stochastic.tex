@@ -127,17 +127,34 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{figure}
 \end{frame}
 
-\begin{frame}{Issue of Optimality}
-  \begin{itemize}
-  \item In most cases, the optimal solution can be obtained.
-  \vspace{0.5cm}
-  \item For the extreme case where the optimal solution cannot be obtained, obtaining a feasible solution did not take too much time. 
-  \vspace{0.5cm}
-  \item It is more time-consuming to verify that it is the optimal solution. Thus, we set a time limit to obtain a feasible solution.
-  \vspace{0.5cm}
-  \item There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
-  \end{itemize}
+\begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
+  % In most cases, we 
+
+  There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+
+  \begin{description}
+    \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
+
+    \item[Step 2.] Solve problem \eqref{deter_upper} to obtain the optimal solution, $\mathbf{x}^{1}$. 
+    % Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+     
+    \item[Step 3.] Construct the full or largest patterns with $\mathbf{x}^{1}$.
+ \end{description}
 \end{frame}
+
+% There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+
+% \begin{frame}{Issue of Optimality}
+%   \begin{itemize}
+%   \item In most cases, the optimal solution can be obtained.
+%   \vspace{0.5cm}
+%   \item For the extreme case where the optimal solution cannot be obtained, obtaining a feasible solution did not take too much time. 
+%   \vspace{0.5cm}
+%   \item It is more time-consuming to verify that it is the optimal solution. Thus, we set a time limit to obtain a feasible solution.
+%   \vspace{0.5cm}
+%   \item 
+%   \end{itemize}
+% \end{frame}
 
 
 \begin{frame}{Running time of Benders Decomposition and IP}

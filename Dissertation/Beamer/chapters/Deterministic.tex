@@ -15,6 +15,8 @@
       \end{aligned}
     \end{equation}
     Objective: maximize the number of people accommodated.
+
+    $x_{ij}$: the number of group type $i$ in row $j$.
   \end{frame}
 
   \begin{frame}{Property}
@@ -48,16 +50,23 @@
     \end{equation*}
   \end{frame}
 
-  \begin{frame}{Algorithm}
-    For each row $j$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. We aim to allocate the remaining unoccupied seats($\beta$) in row $j$ in a way that maximizes the number of planned groups that become the largest in size.
+  \begin{frame}{Algorithm to Generate The Full or Largest Pattern}
+    For each row $j$, let $\beta_{j} = L_{j} - \sum_{i} n_{i} x_{ij}$. We aim to allocate the remaining unoccupied seats($\beta_{j}$) in row $j$ in a way that maximizes the number of planned groups that become the largest in size.
     \vspace{0.5cm}
     
-    \begin{itemize}
-      \item $k$: the smallest group type.
-      If $k \neq M$, $h_{k} \gets h_{k} -1$, $h_{\min_{\{(k+\beta), M\}}} \gets h_{\min_{\{(k+\beta), M\}}} +1$, $\beta \gets \beta - \max\{1, M - k\}$. Continue this procedure until the pattern is largest or $\beta =0$.
-      \item If $k = M$ and $\beta > 0$, assign $\beta$ in a greedy way.
-      \item[-] When $\beta \geq n_{M}$, $q \gets \lfloor\frac{\beta}{n_M}\rfloor$, $\beta \gets \beta - q n_M$, $h_{M} \gets h_{M} + q$.
-      \item[-] When $n_{1} \leq \beta < n_{M}$, $h_{\beta-n_1+1} \gets h_{\beta-n_1+1} + 1$, $\beta \gets 0$.
-      \item[-] When $0 < \beta < n_{1}$, $\beta \gets 0$.
-    \end{itemize}
+    Allocation scheme of $\beta_{j}$:
+    \vspace{0.5cm}
+
+    \begin{scriptsize}
+      Let $k = \min\{i | h_i > 0\}$ for a pattern $\bm{h}$.
+
+      \begin{itemize}
+        \item If $k \neq M$, $h_{k} \gets h_{k} -1$, $h_{\min_{\{(k+\beta_{j}), M\}}} \gets h_{\min_{\{(k+\beta_{j}), M\}}} +1$, $\beta_{j} \gets \beta_{j} - \max\{1, M - k\}$. Continue this procedure until the pattern is largest or $\beta_{j} =0$.
+        \item If $k = M$ and $\beta_{j} > 0$, continue the following procedure until $\beta < n_{1}$.
+        \item[-] When $\beta \geq n_{M}$, $q \gets \lfloor\frac{\beta}{n_M}\rfloor$, $\beta_{j} \gets \beta_{j} - q n_M$, $h_{M} \gets h_{M} + q$.
+        \item[-] When $n_{1} \leq \beta_{j} < n_{M}$, $h_{\beta_{j}-n_1+1} \gets h_{\beta_{j}-n_1+1} + 1$, $\beta_{j} \gets 0$.
+        % \item[] assign $\beta$ in a greedy way.
+      \end{itemize}  
+    \end{scriptsize}
+    
   \end{frame}

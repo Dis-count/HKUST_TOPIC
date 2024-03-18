@@ -31,27 +31,33 @@
       % This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $v+1$ to $M$, divided by the size of group type $v$, denoted as $n_v$.
     \end{itemize}
 
-    When the demand is way smaller than the number of seats, the seat planning obtained from problem \eqref{deter_upper} does not utilize all seats. We aim to generate a seat planning utilizing all seats while ensuring that the demand requirements are met.
+    \vspace{0.5cm}
+    When the demand is way smaller than the number of seats, the seat planning obtained from problem \eqref{deter_upper} does not utilize all seats. 
+    \vspace{0.5cm}
+
+    We aim to generate a seat planning utilizing all seats while ensuring that the demand requirements are met.
   \end{frame}
 
   \begin{frame}{Generate The Full or Largest Pattern}
     Specifically, we can convert a given specific pattern into a largest or full pattern while ensuring that the original group type requirements are met. Our objective is to generate the pattern with maximal people.
 
-    Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_M)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_M{'})$ that satisfies the following programming.
+    Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_M)$, we seek to find a pattern $\bm{h}^{'} = (h_1^{'}, \ldots, h_M^{'})$ that satisfies the following programming.
 
     \begin{equation*}\label{full_largest}
       \begin{aligned}
-      \max \quad & |\bm{h}{'}| \\
-      \text {s.t.} \quad & h_1{'} \geq h_1 \\
-      &  h_1{'} + h_2{'} \geq h_1 + h_2 \\
+      \max \quad & |\bm{h}^{'}| \\
+      \text {s.t.} \quad & h_M^{'} \geq h_M \\
+      &  h_{M-1}^{'} + h_M^{'} \geq h_{M-1} + h_M \\
       & \cdots \\
-      & h_1{'} + \ldots + h_M{'} \geq h_1 + \ldots + h_M.
+      & h_1^{'} + \ldots + h_M^{'} \geq h_1 + \ldots + h_M.
       \end{aligned}
     \end{equation*}
+
+    Constraints: a smaller group can take the larger seats.
   \end{frame}
 
   \begin{frame}{Algorithm to Generate The Full or Largest Pattern}
-    For each row $j$, let $\beta_{j} = L_{j} - \sum_{i} n_{i} x_{ij}$. We aim to allocate the remaining unoccupied seats($\beta_{j}$) in row $j$ in a way that maximizes the number of planned groups that become the largest in size.
+    For each row $j$, let $\beta_{j} = L_{j} - \sum_{i} n_{i} x_{ij}$. We aim to allocate the remaining unoccupied seats ($\beta_{j}$) in row $j$ to maximize the number of people while satisfying the original group type requirements.
     \vspace{0.5cm}
     
     Allocation scheme of $\beta_{j}$:
@@ -61,8 +67,8 @@
       Let $k = \min\{i | h_i > 0\}$ for a pattern $\bm{h}$.
 
       \begin{itemize}
-        \item If $k \neq M$, $h_{k} \gets h_{k} -1$, $h_{\min_{\{(k+\beta_{j}), M\}}} \gets h_{\min_{\{(k+\beta_{j}), M\}}} +1$, $\beta_{j} \gets \beta_{j} - \max\{1, M - k\}$. Continue this procedure until the pattern is largest or $\beta_{j} =0$.
-        \item If $k = M$ and $\beta_{j} > 0$, continue the following procedure until $\beta < n_{1}$.
+        \item If $k \neq M$, $h_{k} \gets h_{k} -1$, $h_{\min_{\{(k+\beta_{j}), M\}}} \gets h_{\min_{\{(k+\beta_{j}), M\}}} +1$, $\beta_{j} \gets \beta_{j} - \max\{1, M - k\}$. Continue this procedure until all groups are largest or $\beta_{j} =0$. 
+        \item If $k = M$ and $\beta_{j} > 0$, continue the following procedure until $\beta_{j} < n_{1}$.
         \item[-] When $\beta \geq n_{M}$, $q \gets \lfloor\frac{\beta}{n_M}\rfloor$, $\beta_{j} \gets \beta_{j} - q n_M$, $h_{M} \gets h_{M} + q$.
         \item[-] When $n_{1} \leq \beta_{j} < n_{M}$, $h_{\beta_{j}-n_1+1} \gets h_{\beta_{j}-n_1+1} + 1$, $\beta_{j} \gets 0$.
         % \item[] assign $\beta$ in a greedy way.

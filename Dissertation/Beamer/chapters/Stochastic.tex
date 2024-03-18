@@ -89,6 +89,10 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
        & \mathbf{y} \geq 0.
     \end{aligned}
     \end{equation}
+
+    \begin{tiny}
+    $\mathbf{c}^{\intercal} \mathbf{x} =\sum_{j=1}^{N} \sum_{i=1}^{M} i x_{ij}$, $\mathbf{f}^{\intercal} \mathbf{y} = - \sum_{i=1}^{M} y_{i \omega}^{+}$, $\mathbf{V}$ is the system matrix for $\mathbf{y}$.
+    \end{tiny}
 \end{frame}
 
 \begin{frame}{Solution to Subproblem}
@@ -109,7 +113,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
 \begin{frame}{Benders Decomposition Procedure}
   \small
-  Let $z_{\omega}$ be the lower bound of problem \eqref{BD_sub_dual}, SSP can be obtained by solving following restricted benders master problem:
+  Let $z_{\omega}$ be the lower bound of problem \eqref{BD_sub_dual}, SSP can be obtained by solving following benders master problem:
   \begin{equation}\label{BD_master2}
     \begin{aligned}
       \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
@@ -127,20 +131,6 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{figure}
 \end{frame}
 
-\begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
-  % In most cases, we 
-
-  There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
-
-  \begin{description}
-    \item[Step 1.] Obtain the solution, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i}^{0} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
-
-    \item[Step 2.] Solve problem \eqref{deter_upper} to obtain the optimal solution, $\mathbf{x}^{1}$. 
-    % Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
-     
-    \item[Step 3.] Construct the full or largest patterns with $\mathbf{x}^{1}$.
- \end{description}
-\end{frame}
 
 % There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
 
@@ -169,8 +159,8 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     \begin{tabular}{|l|l|l|l|l|l|l|}
     \hline
     \# of scenarios & Demands & \# of rows & \# of groups & \# of seats & Running time of IP(s) & Benders (s) \\
-    1000 & (20, 30) & 10 & 4 & (21, 30) & 1.6 & 0.1 \\
-    1000 & (20, 30) & 10 & 4 & (21, 40) & 1.6 & 0.1 \\
+    % 1000 & (20, 30) & 10 & 4 & (21, 30) & 1.6 & 0.1 \\
+    % 1000 & (20, 30) & 10 & 4 & (21, 40) & 1.6 & 0.1 \\
     \hline
     1000  & (150, 350) & 30 & 8 & (21, 50) & 4.1  & 0.23 \\
     5000  &            &    &   &         & 28.73 & 0.47  \\
@@ -189,4 +179,19 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     \hline
     \end{tabular}
   \end{table}
+\end{frame}
+
+\begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
+  % In most cases, we 
+
+  There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+
+  \begin{itemize}
+    \item[-] Obtain the solution to the relaxed SSP, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
+
+    \item[-] Obtain the optimal solution, $\mathbf{x}^{1}$, by solving problem \eqref{deter_upper} with $d_{i} = {s}_{i}$. 
+    % Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+     
+    \item[-] Construct the full or largest patterns with $\mathbf{x}^{1}$.
+ \end{itemize}
 \end{frame}

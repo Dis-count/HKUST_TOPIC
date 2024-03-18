@@ -838,6 +838,13 @@ INPUT Chapters/Introduction.tex
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT ./Chapters/Deterministic.tex
+INPUT ./Chapters/Deterministic.tex
+INPUT ./Chapters/Deterministic.tex
+INPUT Chapters/Deterministic.tex
+INPUT ./Chapters/Deterministic.tex
+INPUT ./Chapters/Deterministic.tex
+INPUT Chapters/Deterministic.tex
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
@@ -857,13 +864,6 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
-INPUT ./Chapters/Deterministic.tex
-INPUT ./Chapters/Deterministic.tex
-INPUT ./Chapters/Deterministic.tex
-INPUT Chapters/Deterministic.tex
-INPUT ./Chapters/Deterministic.tex
-INPUT ./Chapters/Deterministic.tex
-INPUT Chapters/Deterministic.tex
 INPUT ./Chapters/Stochastic.tex
 INPUT ./Chapters/Stochastic.tex
 INPUT ./Chapters/Stochastic.tex

@@ -29,16 +29,19 @@
     \small
     \begin{itemize}
       \item Group-type Control
-      \item[-] Obtain the seat planning from stochastic programming. Suppose the corresponding supply is $[X_1, \ldots, X_M]$. 
-      \item[-] When the supply for the current group is sufficient, accept it directly.
-      \item[-] When the supply is insufficient, decide which group type to be assigned to.
+      \item[-] Obtain the seat planning from stochastic programming. Suppose the corresponding supply is $[X_1, \ldots, X_M]$.
+      
+      For the arrival of group type $i$,
+
+      \item[-] if $X_i > 0$, accept it directly;
+      \item[-] if $X_i = 0$, determine which group type to accept it.
     \end{itemize}
 
     $d^{t}(i, j)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j} \geq x_{j}; T-t)}_{\text{rejection}}.$
 
     For all $j > i$, find the maximum value denoted as $d^{t}(i, j^{*})$.
     
-    If $d^{t}(i, j^{*}) > 0$, we will place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
+    If $d^{t}(i, j^{*}) > 0$, we place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
 
     % After acceptance, customers have more freedom to choose their seats with the seat planning.
   \end{frame}
@@ -50,7 +53,7 @@
   % \end{frame}
 
   \begin{frame}{Performance}
-    The assignemnt is based on the fixed seat planning and we use the group type to make the decision. 
+    The assignment is based on the fixed seat planning and we use the group type to make the decision. 
     \scriptsize
     \begin{table}[ht]
         \begin{tabular}{|l|l|l|l|l|}
@@ -123,7 +126,7 @@
 
   \begin{frame}{Method 1}
     \scriptsize
-    To determine the appropriate row assignment for a group, we developed a formulation that incorporates decision variables $a_j, j \in \mathcal{N}$ after the realization of group type $k$.
+    To determine the appropriate row assignment for a group, we introduce the decision variables $a_j, j \in \mathcal{N}$ indicating whether we accept the current group type $k$ in row $j$.
     
       % \item Obtain the seat planning after the realization of group.
       \begin{tiny}
@@ -144,27 +147,27 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Method 2 Overview}
-    \begin{itemize}
-      \item Obtain the seat planning composed of full or largest patterns.
+  % \begin{frame}{Method 2 Overview}
+  %   \begin{itemize}
+  %     \item Obtain the seat planning composed of full or largest patterns.
       
-      - Linear seat planning from relaxed stochastic programming
+  %     - Obtain the optimal solution from the relaxed SSP
       
-      - Integral seat planning from deterministic model
+  %     - Integral seat planning from deterministic model
   
-      - Construct largest or full patterns.
+  %     - Construct largest or full patterns.
   
-      \vspace{0.5cm}
+  %     \vspace{0.5cm}
 
-      \item Dynamic seat assignment
+  %     \item Dynamic seat assignment
   
-      - Determine the group type by group-type control
-  % Tell us which group type should be broke which determines which rows can be placed. 
+  %     - Determine the group type by group-type control
+  % % Tell us which group type should be broke which determines which rows can be placed. 
   
-      - Decision on assigning the group to a specific row
+  %     - Decision on assigning the group to a specific row
 
-    \end{itemize}
-  \end{frame}
+  %   \end{itemize}
+  % \end{frame}
     
 
 % \begin{frame}{Construction}
@@ -172,13 +175,17 @@
 % \end{frame}
 
     \begin{frame}{Dynamic Seat Assignment (DSA)}
-      1. Determine the group type by the group-type control.
+      1. Obtain the seat planning composed of full or largest patterns. The supply is $[X_1, \ldots, X_M]$.
 
-      2. Make the decision on assigning the group to a specific row.
+      2. For the arriving group type $i$, if $X_i > 0$, accept it; if $X_i = 0$
+      
+      2.1. Determine the group type by the group-type control.
+
+      2.2. Make the decision on assigning the group to a specific row.
       \begin{itemize}
         \item Break tie for determining a specific row
         \item Decision on assigning the group
-        \item[-] Value of Acceptance (VoA): approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j})$ + $i$. (Find a pattern containing group type $j^{*}$)
+        \item[-] Value of Acceptance (VoA): approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j^{*}})$ + $i$. (Find a pattern containing group type $j^{*}$)
         
         \item[-] Value of Rejection (VoR): approximation of $V_{t} (\mathbf{L})$.
 
@@ -199,6 +206,7 @@
         \item Dynamic programming based heuristic
         \item Booking limit control
         \item First come first served
+        \item[-] Optimal: full knowledge of demands
       \end{itemize}
     \end{frame}
 
@@ -211,7 +219,11 @@
           & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
           \end{aligned}
         \end{equation}
-        \small There exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
+        
+        \small
+        If $i - \beta_j n_i \geq 0$, accept the group type $i$. 
+
+        The optimal solution to problem \eqref{bid-price_dual} is $\beta_j = \frac{n_v - \delta}{n_v}$ for all $j$.
 
         % The bid-price control policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
       \end{frame}
@@ -220,7 +232,7 @@
         \begin{itemize}
         \item Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
         \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.
-        \item Decision: $u$. If we accept a request in period $t$, $u^t = 1$; otherwise, $u^t =0$.  
+        \item Decision: $u^{t}$. If we accept a request in period $t$, $u^t = 1$; otherwise, $u^t =0$.  
         \item[-] DP with one row can be expressed as:
         $$V^{t}(l) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l)\right\}, l \geq 0 $$
 

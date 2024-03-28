@@ -1,0 +1,666 @@
+My prelim title is seat planning and assignment with social distancing.
+
+
+I divide the content into the following 6 parts. In the introduction, since the outbreak of the pandemic, social distancing as a valid physical measure to restrict the spread of the virus has been used in many places. For instance, in the dining hall and office, the staff paste social distancing tape on the floor to remind people to keep social distance. In the restaurant, plastic boards have been used to separate the adjacent groups. In the park, the square line is drawn to confine the scope of group activity. Social distancing has also been used in seating areas, such as in amusement parks, shopping malls, restaurants and theaters, and we mainly focus on the dynamic seat assignment problem with social distancing.
+
+
+To implement the social distancing , the government often require the size of group, that is, the maximum number of people in one group, meanwhile, people in one group should sit together. Then, I clarify the two terms seat planning and seat assignment used in the following part.
+
+Here are two forms of seat planning available. In the fixed seat planning, the seats designated (used) for social distancing will be dismantled beforehand. In the flexible seat planning, seat partitions are arranged for the coming group. If the current planned seats do not match the size of the group, the seat planning can be modified accordingly.
+
+The seat assignment refers to the process of assigning the seats to the coming group. For example, here is a group of 2, we assign 3 seats to it, then three seats will be occupied and will not used in the future.
+
+
+For the literature review, there have been many works about seat planning with social distancing, including allocation of seats on airplanes, classrooms, trains, theaters. However, they all focus on the static model and the specific scenario not the real-time seat assignment.
+
+For dynamic seat assignment, we model our problem as dynamic multiple knapsack problem, which is related to multiple knapsack problem and dynamic knapsack problem. Dynamic seat assignment without social distancing has applications in the context of airplanes and trains.
+
+Our work makes the first attempt to implement dynamic seat assignments
+
+xij stands for the number of group type i in row j.
+yi represents the number of surplus supply for group type i.
+yi represents the number of inadequate supply for group type i.
+
+We assume that the surplus supply for group type i can be occupied by smaller group type
+
+
+The objective function is to maximize the expected number of people that can be assigned across multiple demand scenarios.
+
+we could reformulate ssp in a vector form as problem 2, here for each scenario, problem 3 has the same form, if we can solve it efficiently which is helpful to solve problem 2. Fortunately, it is easy to solve problem 3 by the dual problem. 
+
+The solution to SSP can be obtained by solving the master problem iteratively. We develop other approach to obtain the seat planning composed of full or largest pattern.
+
+Now we see how to do the dynamic seat assignment. It contains two parts, seat planning can be seen as the supply for each group type, when the supply is enough, we will accept the corresponding request, if there is no supply for small group, we should decide whether to use a larger group type supply to cover the smaller one. Let dij represent the expected difference between the acceptance and rejection of group type i on the supply of group type j.
+
+For each j larger than i, we find the largest one, denoted as j star. It is a necessary condition based on the current planning, we also use the value of stochastic programming to make the final decision.
+
+The optimal policy is to make the decision when we have complete knowledge of all future requests in advance.
+
+--------------------------------------------------------------------------------------
+
+Hello, my supervisors! My research topic is dynamic city assignment with social distancing
+
+2
+For the introduction. Since the outbreak of the pandemic, it has been widely recognized that social distancing is a crucial measure to contain the spread of the virus and It's being used in many places.
+
+
+For example, in the dining hall and in the office the stuff paste as a social, distancing tape on the floor, to remind people to keep social distancing.
+
+And in the restaurant the plastic boards are used to separate the adjacent tables, and in park the square line is drawn to restrict the scope of group activities.
+
+
+And social distancing has also been used in seating areas such as in the amusement park, the shopping mall, the restaurant, and the theaters. And our research is mainly focused on the dynamic seat assignment with social distancing
+
+15
+In the Literature Review, there are many works about seat planning with social distancing, including the allocation of seeds on airplanes, classrooms and trains. However, these works only considered the static model, not a real-time seat assignment. That is a main difference.
+
+In the literature review, several studies have been conducted on seat planning with social distancing, encompassing various settings such as airplanes, classrooms, and trains. However, it is important to note that these works primarily focused on static seat allocation models, lacking consideration for real-time seat assignments. This distinction forms a significant gap in the existing research.
+
+
+For the dynamic Seat assignment, we model our problem as a dynamic multiple knapsack problem which is related to multiple knapsack problem and dynamic knapsack problem and dynamic seat assignment without social distancing has the applications in the context of airplanes and trains. 
+
+And our research is the first attempt to research the dynamic seat assignment with social distancing.
+
+25
+00:02:26.590 --> 00:02:28.150
+Zikang LI: To
+
+26
+00:02:28.230 --> 00:02:32.379
+Zikang LI: to consider is a dynamic state assignment with social distancing.
+
+27
+00:02:33.910 --> 00:02:37.169
+Zikang LI: And for the problem definition.
+
+28
+00:02:39.510 --> 00:02:45.779
+Zikang LI: At first we can see there's a state planning problem with social distancing. I suppose there are M
+
+29
+00:02:45.950 --> 00:02:51.160
+Zikang LI: group types and each group type I contains, I. People
+
+30
+00:02:51.450 --> 00:03:01.679
+Zikang LI: and the seed layout contains N. Rows from one to N. And H. And the number of seeds in zo, J.
+
+31
+00:03:01.700 --> 00:03:03.320
+Zikang LI: Is Sj.
+
+32
+00:03:04.070 --> 00:03:08.959
+and here we start the social distancing at as delta seeds.
+
+33
+00:03:09.120 --> 00:03:18.199
+Zikang LI: To incorporate the social distancing in the C planning problem, we should change the original size. I
+
+34
+00:03:18.320 --> 00:03:20.190
+Zikang LI: to an eye.
+
+35
+00:03:20.520 --> 00:03:22.710
+Zikang LI: In this way
+
+36
+00:03:22.850 --> 00:03:50.950
+Zikang LI: the social distancing can be considered in the seat planning, and do the same procedure for the for the size of the row. And here, as the length of the row is changed, form as as J. To Lj. To illustrate this, we can see this picture. The blue screen represents a social distancing, just one seed, and here that is a group of 2.
+
+37
+00:03:51.160 --> 00:03:57.020
+Zikang LI: And when we consider it Tizer, we can. Converse this problem.
+
+
+39
+00:03:58.800 --> 00:04:14.500
+Zikang LI: like this, we just use group of 3 to represent the group of 2 with one social distance, with one seat as a social distancing. In this way the social distancing can be considered in state planning.
+
+40
+00:04:16.860 --> 00:04:20.810
+Zikang LI: And here are some basic concepts. And
+
+41
+00:04:21.529 --> 00:04:31.569
+Zikang LI: the basic one is a python pattern, refers to the Cpr name for each group type in Wang Zhou, and here Ti is a
+
+42
+00:04:33.050 --> 00:04:34.100
+Ti.
+
+43
+00:04:34.190 --> 00:04:37.450
+Zikang LI: It's a number of group type one.
+
+44
+00:04:38.150 --> 00:04:45.239
+Zikang LI: T one is a number of group type one. And here's a loss. Loss represents the number of
+
+45
+00:04:45.300 --> 00:04:52.450
+Zikang LI: occupied seed in one python, and we call a python with a minimum loss
+
+46
+00:04:53.540 --> 00:04:55.320
+Zikang LI: as the largest patent.
+
+47
+00:04:55.500 --> 00:05:08.039
+Zikang LI: and for the full pattern. If a python satisfies that as a number of unusual seed is 0, except as a social, distancing way we call that python
+
+48
+00:05:08.220 --> 00:05:09.770
+Zikang LI: is a full patent.
+
+49
+00:05:09.930 --> 00:05:16.629
+Zikang LI: So we just we use an example to explain this kind, these concepts?
+
+50
+00:05:16.810 --> 00:05:28.880
+Zikang LI: Here we set the social distancing as one C, and there are 4 different group types, their size? From 2,
+
+51
+00:05:29.750 --> 00:05:33.610
+Zikang LI: 3, 4, 5 respectively.
+
+52
+00:05:33.800 --> 00:05:39.890
+and Zip. and the length of the show is 21,
+
+53
+00:05:39.900 --> 00:05:53.430
+Zikang LI: and here these 3 pythons are largest. By the way, we only list 3. There are also many other largest patents in this case.
+
+54
+00:05:54.760 --> 00:06:01.689
+and we can see these 3 pythons have the same loss of 4 at 5,
+
+55
+00:06:03.120 --> 00:06:08.740
+Zikang LI: and we cannot find a python with a loss of less than 5. So
+
+56
+00:06:09.190 --> 00:06:11.890
+these 3 patents are the largest python.
+
+57
+00:06:12.300 --> 00:06:30.049
+Zikang LI: and here are some interesting things. That is a largest item may not be for python. Here 0 0 0 4 is the largest python, but it's now full patent, because we can see we have 4
+
+58
+00:06:31.680 --> 00:06:43.279
+Zikang LI: group type 4. So it occupies. It occupies 4 times 5 equals 20, not 21 seats. So there is one unused state.
+
+59
+00:06:43.390 --> 00:06:45.680
+Zikang LI: So this python is not full python.
+
+60
+00:06:45.910 --> 00:06:50.899
+Zikang LI: and and also full pattern, may not be the largest pattern.
+
+61
+00:06:51.740 --> 00:06:57.020
+Zikang LI: and here the python, 1, 1, 4. As usual.
+
+62
+00:06:58.110 --> 00:07:00.750
+Zikang LI: it has a loss of 6,
+
+63
+00:07:00.780 --> 00:07:05.619
+Zikang LI: one plus one plus 4, and it's not largest.
+
+64
+00:07:05.670 --> 00:07:16.619
+Zikang LI: because the loss is 6, but it's 4, because we can calculate one times 2 plus one times 3 plus 4 times
+
+65
+00:07:16.890 --> 00:07:19.510
+Zikang LI: 4, and there are
+
+66
+00:07:19.610 --> 00:07:26.439
+Zikang LI: 21. That means the and user seed is 0. So this pipe chain is full.
+
+67
+00:07:28.330 --> 00:07:39.309
+Zikang LI: and and next. We will. So we will define as a dynamic state assignment problem, and we just use a discrete time period.
+
+68
+00:07:39.450 --> 00:07:53.090
+Zikang LI: And suppose there is one and only one group arrival at each period T ranges from one to T plus one the probability of an arrival of group type I is PI.
+
+69
+00:07:53.830 --> 00:07:56.199
+Zikang LI: And we use aisle
+
+70
+00:07:56.740 --> 00:08:01.120
+Zikang LI: to represent the remaining capacity, and Lj isn't
+
+71
+00:08:02.590 --> 00:08:06.200
+Zikang LI: Lj. Is a class day for Zhou J
+
+72
+00:08:06.910 --> 00:08:14.970
+Zikang LI: here. UIJ. Represent at use. We use Uij to denote the decision. If we assign group type I to
+
+73
+00:08:15.080 --> 00:08:22.520
+Zikang LI: so J. Uij, because because one is otherwise, Uij equals 0.
+
+74
+00:08:22.910 --> 00:08:25.250
+And here we use a capital U.
+
+75
+00:08:25.360 --> 00:08:28.670
+Zikang LI: L. To denote the decision side.
+
+76
+00:08:29.400 --> 00:08:34.610
+Zikang LI: That is, the Ui. J. Should satisfy a 2 constraint, one a zip.
+
+77
+00:08:34.929 --> 00:08:35.980
+and if we
+
+78
+00:08:36.590 --> 00:08:47.760
+Zikang LI: we can only assign group type I to at most one show that that is the summation of this Ui J should be no larger than
+
+79
+00:08:48.060 --> 00:08:55.689
+Zikang LI: what should be no larger than one, and if we are assigned group type of I to Jo J.
+
+80
+00:08:56.160 --> 00:09:03.110
+Zikang LI: Georgia should have enough capacity to accept the slides. That is a capacity, constraint.
+
+81
+00:09:03.400 --> 00:09:10.089
+And here, EJ is a unitial vector with this element being one.
+
+82
+00:09:11.120 --> 00:09:12.699
+3 TL.
+
+83
+00:09:13.610 --> 00:09:18.800
+Zikang LI: Is a value function at period given remaining capacity. L,
+
+84
+00:09:19.400 --> 00:09:25.630
+Zikang LI: and we can write down the dynamic programming formulation like this.
+
+85
+00:09:28.230 --> 00:09:33.070
+Zikang LI: and we know that it's dynamic and Ddp is very difficult to solve.
+
+86
+00:09:33.360 --> 00:09:40.050
+Zikang LI: caused by the case of dimensionality. So we develop
+
+87
+00:09:40.760 --> 00:09:43.879
+Zikang LI: the master to solve that problem.
+
+88
+00:09:44.090 --> 00:09:53.359
+Zikang LI: It. It basically contains 2 parts. The first one is, we obtain the planning composed of 4 or largest pipelines.
+
+89
+00:09:53.420 --> 00:09:54.820
+Zikang LI: and then we use
+
+90
+00:09:54.910 --> 00:10:02.959
+Zikang LI: stochastic planning policy to make the decision wiser to accept or reject as a govern request.
+
+91
+00:10:05.170 --> 00:10:06.030
+Zikang LI: And
+
+92
+00:10:07.060 --> 00:10:09.430
+Zikang LI: this this part is about
+
+93
+00:10:09.660 --> 00:10:17.480
+how to obtain the C priming by stochastic programming. At first we build the scenario-based stochastic programming
+
+94
+00:10:19.190 --> 00:10:19.980
+Zikang LI: alright.
+
+95
+00:10:20.980 --> 00:10:32.420
+Zikang LI: That programming is short for Ssp. And here the decision variable. XIJ. Is a number of group type I, Angel J.
+
+96
+00:10:32.500 --> 00:10:41.429
+Zikang LI: And YI. Omega plus, is a number of supply for group type. I under.
+
+97
+00:10:41.650 --> 00:10:47.740
+Zikang LI: It's never Omega and YI Omega minors is a number of
+
+98
+00:10:47.800 --> 00:10:57.490
+Zikang LI: number of inadequate supply for group type. I, under Snapu Omega and see
+
+99
+00:10:57.910 --> 00:11:01.620
+objective function is to maximize the expected
+
+100
+00:11:02.070 --> 00:11:05.860
+Zikang LI: number of people that can be assigned
+
+101
+00:11:06.160 --> 00:11:12.690
+Zikang LI: under many scenario demands. And here the scenario is a
+
+102
+00:11:12.760 --> 00:11:15.370
+demand for each group type.
+
+103
+00:11:15.600 --> 00:11:20.809
+Zikang LI: So here we have the many, many scenarios.
+
+104
+00:11:22.580 --> 00:11:25.139
+Zikang LI: And to solve this problem, we
+
+105
+00:11:25.600 --> 00:11:27.930
+at first, we we formulate
+
+106
+00:11:27.960 --> 00:11:30.440
+Zikang LI: as they evolve problem
+
+107
+00:11:31.120 --> 00:11:34.500
+in a vector form as problem 2.
+
+108
+00:11:34.850 --> 00:11:39.009
+Zikang LI: And here we can see for each scenario
+
+109
+00:11:39.810 --> 00:11:44.640
+Zikang LI: the Omega X hat has the same form.
+
+110
+00:11:45.050 --> 00:12:02.700
+Zikang LI: So if we can solve problem 3 very efficiently, which will be helpful to solve. Problem 2. Luckily. The subproblem problem 3 is easy to solve by considering the dual problem
+
+111
+00:12:02.880 --> 00:12:09.039
+Zikang LI: as a feasible region of problem 4 is bounding and the optimal solution to this problem
+
+112
+00:12:09.380 --> 00:12:10.370
+Zikang LI: and
+
+113
+00:12:10.550 --> 00:12:11.970
+can be obtained.
+
+114
+00:12:12.440 --> 00:12:16.959
+Zikang LI: According to the complementary selectner's property.
+
+115
+00:12:19.210 --> 00:12:27.620
+Zikang LI: And then we can apply the vendors decomposition to solve this problem like today, Omega, be the lower bound of problem
+
+116
+00:12:27.960 --> 00:12:32.099
+Zikang LI: problem. For the optimal solution to Ssb
+
+117
+00:12:32.360 --> 00:12:40.940
+Zikang LI: can be obtained by solving the following vendors, master problem. And we need to solve this master problem
+
+118
+00:12:41.750 --> 00:12:45.909
+Zikang LI: iteratively, we will get the optimal solution.
+
+119
+00:12:46.250 --> 00:12:47.599
+Zikang LI: And to
+
+120
+00:12:47.850 --> 00:12:50.070
+specifically, we
+
+121
+00:12:50.790 --> 00:12:58.109
+Zikang LI: at first we consider the master problem and solve aid. We provide a solution to the sub problem.
+
+122
+00:12:58.130 --> 00:13:08.309
+Zikang LI: We mentioned that subproblem is very easy to solve, and it will provide the constraint to the master problem. And we continue this procedure until we get it.
+
+123
+00:13:08.480 --> 00:13:10.270
+Optimal solution.
+
+124
+00:13:10.360 --> 00:13:18.829
+Zikang LI: And one thing to mention is that, and although if we apply, if we solve is a problem 5,
+
+125
+00:13:20.200 --> 00:13:21.720
+Zikang LI: we can gaze at
+
+126
+00:13:21.780 --> 00:13:23.919
+optimal integer
+
+127
+00:13:24.160 --> 00:13:31.040
+Zikang LI: solution. However, solve this problem. This integer programming in some cases is
+
+128
+00:13:31.090 --> 00:13:43.900
+Zikang LI: still time consuming. So in practice, we consider the Lp relaxation. Problem file. And then we develop other approach to get the integral still finding
+
+129
+00:13:44.530 --> 00:13:51.139
+Zikang LI: with time limited. We didn't or didn't. Right. That's that approach here.
+
+130
+00:13:52.510 --> 00:13:57.420
+Zikang LI: And then we see how to do this dynamic state assignment
+
+131
+00:13:58.230 --> 00:14:06.000
+Zikang LI: it contains 2 parts that is a stochastic planning policy
+
+132
+00:14:07.170 --> 00:14:15.110
+Zikang LI: we call it as PP, in short, and it contains 2 parts. The first one is a group type control.
+
+133
+00:14:15.940 --> 00:14:21.630
+Zikang LI: Since we got the seed planning the seed planning can be seen as a supply for
+
+134
+00:14:22.230 --> 00:14:23.790
+Zikang LI: each group type.
+
+135
+00:14:23.810 --> 00:14:32.589
+Zikang LI: If we have the supply for one group type and we can accept the corresponding group requires.
+
+136
+00:14:32.880 --> 00:14:34.439
+Zikang LI: However, if we jump
+
+137
+00:14:35.070 --> 00:14:46.160
+Zikang LI: the corresponding supply, we should decide wiser. We use where? Whether we use a supply of a larger group type to cover the smaller.
+
+138
+00:14:46.200 --> 00:14:47.929
+Zikang LI: the smaller one.
+
+139
+00:14:48.140 --> 00:14:53.919
+Zikang LI: And here, like DIJT. Represents a difference between
+
+140
+00:14:54.270 --> 00:14:57.560
+Zikang LI: acceptance and rejection
+
+141
+00:14:57.730 --> 00:15:02.320
+Zikang LI: of of group type I on the group type J,
+
+142
+00:15:02.720 --> 00:15:04.970
+Zikang LI: and for the HJ.
+
+143
+00:15:05.080 --> 00:15:16.750
+Zikang LI: We calculate DIJT. And find the largest one denoted as DIJ. Star, T. If this value is larger than one, we will accept Group I
+
+144
+00:15:16.900 --> 00:15:21.350
+Zikang LI: otherwise I would review the chat as a group. But notice that
+
+145
+00:15:21.840 --> 00:15:28.579
+Zikang LI: this control policy is made based on the current planning.
+
+146
+00:15:29.280 --> 00:15:38.149
+Zikang LI: So it's not accurate. We should also consider the value of stochastic programming to do the final decision.
+
+147
+00:15:39.520 --> 00:15:41.900
+Zikang LI: And the stochastic programming
+
+148
+00:15:42.320 --> 00:15:43.700
+is the same.
+
+149
+00:15:43.800 --> 00:15:50.280
+Zikang LI: What do we mention about? There's a scenario based stochastic programming, and we
+
+150
+00:15:50.330 --> 00:15:58.929
+Zikang LI: should compare the value of acceptance and a value of rejection of the the of the stochastic programmings.
+
+151
+00:15:59.030 --> 00:16:06.469
+Zikang LI: and if voa is no less than Vo R. We will accept the group type. I otherwise prove the rejoicing.
+
+152
+00:16:06.530 --> 00:16:09.090
+Zikang LI: So that's a whole.
+
+153
+00:16:09.460 --> 00:16:11.699
+Zikang LI: stochastic! Planning policy!
+
+154
+00:16:13.560 --> 00:16:29.210
+Zikang LI: For the numerical result we only will mainly consider 2 parts. The first one is running time of vendors, the conversation, and sof the IP. Directly we can see the
+
+155
+00:16:30.570 --> 00:16:33.819
+Zikang LI: the writing time have been. The accommodation
+
+156
+00:16:33.950 --> 00:16:35.410
+Zikang LI: is very small
+
+157
+00:16:35.790 --> 00:16:38.679
+Zikang LI: compared with the IP.
+
+158
+00:16:38.770 --> 00:16:43.499
+Zikang LI: Under different scenarios demands those groups and seeds.
+
+159
+00:16:43.990 --> 00:16:45.110
+Zikang LI: and
+
+160
+00:16:45.530 --> 00:16:54.689
+Zikang LI: we also consider the performance of different policies compared with the optimal policy. The optimal policy
+
+161
+00:16:56.290 --> 00:16:59.140
+Zikang LI: is that we make the decision.
+
+162
+00:16:59.560 --> 00:17:08.869
+Zikang LI: And there's a under the assumptions. Either we have the full knowledge of the all the future requires, and then we make the decision.
+
+163
+00:17:10.400 --> 00:17:23.249
+Zikang LI: And here this row is, this column is about Sp. PP. Compared to the optimal policy. And we also consider the classical
+
+164
+00:17:23.270 --> 00:17:27.630
+Zikang LI: classical policies, including bit bid, pricing
+
+165
+00:17:28.780 --> 00:17:33.190
+Zikang LI: and the booking limited policy in in the revenue management.
+
+166
+00:17:33.380 --> 00:17:35.880
+Zikang LI: And here DP. One represent.
+
+167
+00:17:36.920 --> 00:17:38.869
+Zikang LI: because that way.
+
+168
+00:17:38.990 --> 00:17:51.219
+Zikang LI: We write as a Dp in angels right? And here with DP. One representative relaxation of, and we relax the angels to one Joe.
+
+169
+00:17:52.590 --> 00:17:56.080
+Zikang LI: and then we do the
+
+170
+00:17:56.290 --> 00:18:06.050
+Zikang LI: We. We make the decision based on this relaxation! And here at Fc. Fis is a first come first serve policy.
+
+171
+00:18:07.120 --> 00:18:12.389
+Zikang LI: and we can see Spp has better performance than other policy under different demand
+
+172
+00:18:14.180 --> 00:18:17.799
+Zikang LI: and a final way to include.
+
+173
+00:18:18.090 --> 00:18:23.769
+Zikang LI: To conclude our work, we will address the problem
+
+174
+00:18:23.810 --> 00:18:30.730
+Zikang LI: of dynamic city assignment with social distancing. That's a first attempt by our knowledge
+
+175
+00:18:31.770 --> 00:18:45.140
+Zikang LI: and our approach stochastic program. Planning policy provides a comprehensive solution for optimizing seat assignment while ensuring the safety of customers and their dynamic situation.
+
+Okay, that's all. Thank you for your lessoning.
+

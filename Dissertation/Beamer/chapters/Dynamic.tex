@@ -12,15 +12,17 @@
   1. Assign the seats under the fixed seat planning
 
   \begin{footnotesize}
-  In certain situations, it is necessary to determine a fixed seat planning prior to the actual demand realization. When each group arrives, we make decisions regarding whether to accept or reject them based on the predetermined seat planning.
+    The seats, which were arranged for social distancing purposes, need to be dismantled before people arrive to prevent them from occupying those seats. When each group arrives, we make decisions regarding whether to accept or reject them based on the predetermined seat planning.
   \end{footnotesize}
 
-  2. Assign the seats
+  \vspace{0.3cm}
+
+  2. Assign the seats under the flexible seat planning
 
   \begin{footnotesize}
-  One scenario is that the seller need to assign seats each time a group arrives. 
+  Scenario 1: the seller need to assign seats each time a group arrives. 
   
-  Another scenario is that the seller only needs to accept or reject the group's request and then assign the seats after the selling period.
+  Scenario 2: the seller only needs to accept or reject the group's request and then assign the seats after the selling period.
   \end{footnotesize}
 \end{frame}
 
@@ -53,44 +55,74 @@
   % \end{frame}
 
   \begin{frame}{Performance}
-    The assignment is based on the fixed seat planning and we use the group type to make the decision. 
     \scriptsize
+    The assignment is based on the fixed seat planning and we use the group-type to make the decision. 
+    % \begin{table}[ht]
+    %     \begin{tabular}{|l|l|l|l|l|}
+    %     \hline
+    %     \# of samples & T & probabilities & \# of rows & \# of people \\
+    %     \hline
+    %     1000  & 45  & [0.4,0.4,0.1,0.1] & 8  & 85.3 \\
+    %       & 50  &  &   & 97.32 \\
+    %       & 55  &  &   & 102.40  \\ % slow
+    %       & 60  &  &   & 106.02  \\
+    %      & 65  &  &   & 108.84 \\
+    %     \hline
+    %     1000  & 35  & [0.25,0.25,0.25,0.25] & 8  & 87.08 \\
+    %       & 40  &  &   & 101.24 \\
+    %       & 45  &  &   & 110.52 \\
+    %       & 50  &  &   & 114.39 \\
+    %       & 55  &  &   & 117.26 \\
+    %     \hline
+    %     5000  & 300  & [0.25,0.25,0.25,0.25] & 30  & 749.76 \\
+    %      & 350  &  &   & 866.42 \\
+    %       & 400  &  &   & 889.44 \\
+    %       & 450  &  &   & 916.66 \\
+    %     \hline
+    %     \end{tabular}
+    % \end{table}
+
+    $M =4$, $\delta =1$, $L_j =21, j \in \mathcal{N}$, $p_0 = 0$, $|\Omega| = 1000$.
     \begin{table}[ht]
-        \begin{tabular}{|l|l|l|l|l|}
-        \hline
-        \# of samples & T & probabilities & \# of rows & \# of people \\
-        \hline
-        1000  & 45  & [0.4,0.4,0.1,0.1] & 8  & 85.3 \\
-          & 50  &  &   & 97.32 \\
-          & 55  &  &   & 102.40  \\ % slow
-          & 60  &  &   & 106.02  \\
-         & 65  &  &   & 108.84 \\
-        \hline
-        1000  & 35  & [0.25,0.25,0.25,0.25] & 8  & 87.08 \\
-          & 40  &  &   & 101.24 \\
-          & 45  &  &   & 110.52 \\
-          & 50  &  &   & 114.39 \\
-          & 55  &  &   & 117.26 \\
-        \hline
-        5000  & 300  & [0.25,0.25,0.25,0.25] & 30  & 749.76 \\
-         & 350  &  &   & 866.42 \\
-          & 400  &  &   & 889.44 \\
-          & 450  &  &   & 916.66 \\
-        \hline
-        \end{tabular}
+      \centering
+      \begin{tabular}{|l|l|l|l|l|}
+      \hline
+       T & Probabilities & \# of rows & SSP (\%) & Expected demand (\%) \\
+      \hline
+      70  & [0.25, 0.25, 0.25, 0.25]  & 10 & 94.97 & 94.71  \\
+      80  &   &  & 96.48 & 96.16  \\
+      90  &   &  & 97.94 & 97.36  \\
+      100  &   &  & 98.91 & 96.27  \\
+      \hline
+      70  & [0.25, 0.35, 0.05, 0.35]  & 10 & 95.90 & 95.60 \\
+      80  &   &  & 97.06 & 96.69 \\
+      90  &   &  & 98.58 & 98.58 \\
+      100  &   &  & 99.47 & 95.97 \\
+      \hline
+      70  & [0.15, 0.25, 0.55, 0.05]  & 10 & 97.41 & 96.70 \\
+      80  &   &  & 98.85 & 96.06 \\
+      90  &   &  & 98.73 & 97.63 \\
+      100  &   &  & 98.46 & 98.19 \\
+      \hline
+      140  & [0.25, 0.25, 0.25, 0.25]  & 20 & 95.83 & 95.78 \\
+      160  &   &  & 97.46 & 96.89 \\
+      180  &   &  & 99.05 & 96.42 \\
+      200  &   &  & 99.74 & 97.57 \\
+      \hline
+      \end{tabular}
     \end{table}
-  
-  Each entry in the last column is the average of 50 instances.
+
+  % Each entry is the average of 50 instances.
   % IP will spend more than 2 hours in some instances, as `NA' showed in the table.
   \end{frame}
 
-  \begin{frame}{Assign Seats to Each Group After Its Realization}
+  \begin{frame}{Real-time Seat Assignment}
     \centering
     Dynamic Seat Assignment Problem
     \small
     \begin{itemize}
     \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
-    \item[-] The probability of an arrival of group type $i$: $p_i$.  
+    \item[-] The probability of an arrival of group type $i$: $p_i$.
     \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
     \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
     \item[-] $U^{t}(\mathbf{L}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}, \forall i,j \}$.
@@ -114,23 +146,24 @@
 
       \item[-] if $X_i > 0$, accept the group; 
       
-      \item[-] if $X_i = 0$, different criterions for updating the seat planning or reject the group.
+      \item[-] if $X_i = 0$, different methods:
+      
+      \vspace{0.5cm}
+
+      1. Based on the seat planning from adjusted SSP.
+
+      2. Based on the seat planning from the relaxation of SSP.
+
     \end{itemize}
-    
-    \vspace{0.5cm}
-
-    1. Based on the seat planning from adjusted SSP.
-
-    2. Based on the seat planning from the relaxation of SSP.
   \end{frame}
 
   \begin{frame}{Method 1}
     \scriptsize
-    To determine the appropriate row assignment for a group, we introduce the decision variables $a_j, j \in \mathcal{N}$ indicating whether we accept the current group type $k$ in row $j$.
+    To determine the appropriate row assignment for the current group type $k$, we introduce the decision variables $a_j, j \in \mathcal{N}$ indicating whether we accept it in row $j$.
     
       % \item Obtain the seat planning after the realization of group.
       \begin{tiny}
-        \begin{equation}
+        \begin{equation}\label{adjusted_SSP}
         \begin{aligned}
         \max \quad & \sum_{j} k a_j + E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
         \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
@@ -143,7 +176,7 @@
       \end{equation}
     \end{tiny}
     \begin{itemize}      
-      \item[-] If $X_i = 0$, regenerate a seat planning.
+      \item[-] If $X_i = 0$, solve problem \eqref{adjusted_SSP}, make the decision and update the seat planning.
     \end{itemize}
   \end{frame}
 
@@ -174,14 +207,12 @@
 % There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
 % \end{frame}
 
-    \begin{frame}{Dynamic Seat Assignment (DSA)}
-      1. Obtain the seat planning composed of full or largest patterns. The supply is $[X_1, \ldots, X_M]$.
-
-      2. For the arriving group type $i$, if $X_i > 0$, accept it; if $X_i = 0$
+    \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
+      If $X_i = 0$,
       
-      2.1. Determine the group type by the group-type control.
+      1. Determine the group type by the group-type control.
 
-      2.2. Make the decision on assigning the group to a specific row.
+      2. Make the decision on assigning the group to a specific row.
       \begin{itemize}
         \item Break tie for determining a specific row
         \item Decision on assigning the group
@@ -198,7 +229,7 @@
       \end{itemize}
     \end{frame}
 
-    \begin{frame}{Policies}
+    \begin{frame}{Compared with Other Policies}
       We have the following policies compared with DSA when we make the instant allocation.
     
       \begin{itemize}
@@ -221,10 +252,11 @@
         \end{equation}
         
         \small
-        If $i - \beta_j n_i \geq 0$, accept the group type $i$. 
+        
+        The optimal solution to problem \eqref{bid-price_dual} is given by $z_1, \ldots, z_v =0, z_i = \frac{\delta (n_i - n_v)}{n_v}$, for $i = v + 1, \ldots, M$, $\beta_j = \frac{n_v - \delta}{n_v}$ for all $j$.
+        \vspace{0.5cm}
 
-        The optimal solution to problem \eqref{bid-price_dual} is $\beta_j = \frac{n_v - \delta}{n_v}$ for all $j$.
-
+        For the group type $i$, if $i - \beta_j n_i \geq 0$, accept it. 
         % The bid-price control policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
       \end{frame}
 

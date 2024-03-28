@@ -134,7 +134,7 @@ class stochasticModel:
     def solveBenders(self, eps=1e-4, maxit=20):
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0,
-                      vtype=GRB.CONTINUOUS, name='varx')
+                      vtype = GRB.CONTINUOUS, name='varx')
         z = m.addVars(self.W, lb = -float('inf'), ub = 0, vtype = GRB.CONTINUOUS, name='varz')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
@@ -246,7 +246,6 @@ class stochasticModel:
         # obj_IP, x0 = self.solve_IP(m)
         newx = np.reshape(x0, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
-        start = time.time()
         # print("LP took...", round(time.time() - start, 3), "seconds")
         # print('optimal solution:', newd)
         # print('optimal LP objective:', obj)

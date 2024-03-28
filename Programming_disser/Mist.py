@@ -20,7 +20,7 @@ def several_class(size_group, demand, remaining_period, probab, sd):
         term1 = j * binom.cdf(demand[j-1]-1, remaining_period, probab[j-1])
         term2 = (j- size_group - delta) * \
             binom.cdf(demand[j-size_group-delta-1], remaining_period, probab[j-size_group-delta-1])
-        if j < size_group + delta:
+        if j <= size_group + delta:
             diff_set[count] = size_group - j + term1
         else:
             diff_set[count] = term1 - term2 - delta

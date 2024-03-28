@@ -53,7 +53,7 @@ class originalModel:
         # print(f'check the result:{any(soly2)}')
         newx = np.reshape(solx, (self.I, self.given_lines))
         newd = np.sum(newx, axis=1)
-        print('obj:', m2.objVal)
+        # print('obj:', m2.objVal)
         return newd, newx
 
 if __name__ == "__main__":

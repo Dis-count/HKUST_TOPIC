@@ -5,6 +5,8 @@ import copy
 import time
 # Find all the probability combinations
 
+# gap point
+
 def prop_all():
     x1 = np.arange(0.05, 1, 0.05)
     x2 = np.arange(0.05, 1, 0.05)

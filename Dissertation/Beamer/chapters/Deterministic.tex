@@ -20,25 +20,25 @@
   \end{frame}
 
   \begin{frame}{Property}
-    In the LP relaxation of problem \eqref{deter_upper}, there exists an index $v$ such that the optimal solutions satisfy the following conditions:
+    In the LP relaxation of problem \eqref{deter_upper}, there is a threshold $\tilde{i} \in \mathcal{M}$ such that the optimal solutions satisfy the following conditions:
 
     \begin{itemize}
-      \item For $i = 1,\ldots, v-1$ and for all $j$, $x_{ij}^{*} = 0$. 
+      \item For $i = 1,\ldots, \tilde{i} -1$ and for all $j$, $x_{ij}^{*} = 0$. 
       % indicating that no group type $i$ are assigned to any rows before index $v$.
-      \item For $i = v+1,\ldots, M$, $\sum_{j} x_{ij}^{*} = d_{i}$. 
+      \item For $i = \tilde{i} +1,\ldots, M$, $\sum_{j} x_{ij}^{*} = d_{i}$. 
 
-      \item For $i = v$, $\sum_{j} x_{ij}^{*} = \frac{L - \sum_{i = v+1}^{M} {d_i n_i}}{n_v}$ 
+      \item For $i = \tilde{i}$, $\sum_{j} x_{ij}^{*} = \frac{L - \sum_{i = v+1}^{M} {d_i n_i}}{n_v}$ 
       % This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $v+1$ to $M$, divided by the size of group type $v$, denoted as $n_v$.
     \end{itemize}
 
     \vspace{0.5cm}
-    When the demand is way smaller than the number of seats, the seat planning obtained from problem \eqref{deter_upper} does not utilize all seats. 
+    When $\tilde{i} =0$, the seat planning obtained from problem \eqref{deter_upper} does not utilize all seats.
     \vspace{0.5cm}
 
     We aim to generate a seat planning utilizing all seats while ensuring that the demand requirements are met.
   \end{frame}
 
-  \begin{frame}{Generate The Full or Largest Pattern}
+  \begin{frame}{Generate the Full or Largest Pattern}
     Specifically, we can convert a given specific pattern into a largest or full pattern while ensuring that the original group type requirements are met. Our objective is to generate the pattern with maximal people.
 
     Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_M)$, we seek to find a pattern $\bm{h}^{'} = (h_1^{'}, \ldots, h_M^{'})$ that satisfies the following programming.
@@ -56,7 +56,7 @@
     Constraints: a smaller group can take the larger seats.
   \end{frame}
 
-  \begin{frame}{Algorithm to Generate The Full or Largest Pattern}
+  \begin{frame}{Algorithm to Generate the Full or Largest Pattern}
     For each row $j$, let $\beta_{j} = L_{j} - \sum_{i} n_{i} x_{ij}$. We aim to allocate the remaining unoccupied seats ($\beta_{j}$) in row $j$ to maximize the number of people while satisfying the original group type requirements.
     \vspace{0.5cm}
     

@@ -147,7 +147,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 % \end{frame}
 
 
-\begin{frame}{Running time of Benders Decomposition and IP}
+\begin{frame}{Running Time of Benders Decomposition and IP}
   Parameters: 
 
   (150, 350): the demand of each group type is randomly sampled from (150, 350).
@@ -162,29 +162,33 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     % 1000 & (20, 30) & 10 & 4 & (21, 30) & 1.6 & 0.1 \\
     % 1000 & (20, 30) & 10 & 4 & (21, 40) & 1.6 & 0.1 \\
     \hline
-    1000  & (150, 350) & 30 & 8 & (21, 50) & 4.1  & 0.23 \\
-    5000  &            &    &   &         & 28.73 & 0.47  \\
-    10000 &            &    &   &         & 66.81  & 0.91 \\
-    50000 &            &    &   &         & 925.17 & 4.3 \\
+    1000  & (150, 350) & 30 & 8 & (21, 50) & 4.12  & 0.13 \\
+    5000  &            &    &   &         & 28.73 & 0.29  \\
+    10000 &            &    &   &         & 66.81  & 0.54 \\
+    50000 &            &    &   &         & 925.17 & 2.46 \\
     \hline
-    1000  & (1000, 2000) & 200 & 8 & (21, 50) & 5.88 & 0.29 \\
-    5000  &              &     &   &          & 30.0 & 0.62 \\
-    10000 &              &     &   &          & 64.41 & 1.09 \\
-    50000 &              &     &   &          & 365.57 & 4.56\\
+    1000  & (1000, 2000) & 200 & 8 & (21, 50) & 5.88 & 0.18 \\
+    5000  &              &     &   &          & 30.0 & 0.42 \\
+    10000 &              &     &   &          & 64.41 & 0.62 \\
+    50000 &              &     &   &          & 365.57 & 2.51\\
     \hline
     1000  & (150, 250) & 30 & 16 & (41, 60) & 17.15  & 0.18 \\
-    5000  &            &    &    &          & 105.2  & 0.67 \\
-    10000 &            &    &    &          & 260.88 & 1.28 \\
-    50000 &            &    &    &          & 3873.16 & 6.18 \\
+    5000  &            &    &    &          & 105.2  & 0.37 \\
+    10000 &            &    &    &          & 260.88 & 0.65 \\
+    50000 &            &    &    &          & 3873.16 & 2.95 \\
     \hline
     \end{tabular}
   \end{table}
 \end{frame}
 
 \begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
-  % In most cases, we 
+  In most cases, it is time-consuming to obtain the optimal solution to SSP. 
+  \vspace{0.5cm}
 
-  There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+  Meanwhile, there exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+  \vspace{0.5cm}
+
+  We aim to obtain a seat planning composed of full or largest patterns by the optimal solution to the LP relaxation of SSP.
 
   \begin{itemize}
     \item[-] Obtain the solution to the relaxed SSP, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.

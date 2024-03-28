@@ -1,0 +1,11 @@
+Run Start Time: Mon Mar 25 21:10:52 2024
+The number of periods: 	70
+SSP: 94.97 ;Expected: 94.71 ;
+The number of periods: 	80
+SSP: 96.48 ;Expected: 96.16 ;
+The number of periods: 	90
+SSP: 97.94 ;Expected: 97.36 ;
+The number of periods: 	100
+SSP: 98.91 ;Expected: 96.27 ;
+
+Even

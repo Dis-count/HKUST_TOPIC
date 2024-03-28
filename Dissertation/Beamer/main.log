@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  18 MAR 2024 11:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  25 MAR 2024 21:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1276,15 +1276,20 @@ Package pdftex.def Info: ./images/BD.png  used on input line 132.
 
 ] [38
 
-]) (./chapters/Results.tex [39
+]) (./chapters/Results.tex
+Overfull \hbox (11.36145pt too wide) in paragraph at lines 35--35
+ [] 
+ []
+
+[39
 
 ]
-<./images/p1.pdf, id=1201, 462.52798pt x 346.89601pt>
+<./images/p1.pdf, id=1203, 462.52798pt x 346.89601pt>
 File: ./images/p1.pdf Graphic file (type pdf)
 <use ./images/p1.pdf>
 Package pdftex.def Info: ./images/p1.pdf  used on input line 49.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
-<./images/p2.pdf, id=1202, 462.52798pt x 346.89601pt>
+<./images/p2.pdf, id=1204, 462.52798pt x 346.89601pt>
 File: ./images/p2.pdf Graphic file (type pdf)
 <use ./images/p2.pdf>
 Package pdftex.def Info: ./images/p2.pdf  used on input line 49.
@@ -1295,7 +1300,7 @@ Package pdftex.def Info: ./images/p2.pdf  used on input line 49.
 
 pdfTeX warning: pdflatex.exe (file ./images/p2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<./images/gamma_estimation.pdf, id=1309, 1387.58403pt x 739.3221pt>
+<./images/gamma_estimation.pdf, id=1311, 1387.58403pt x 739.3221pt>
 File: ./images/gamma_estimation.pdf Graphic file (type pdf)
 <use ./images/gamma_estimation.pdf>
 Package pdftex.def Info: ./images/gamma_estimation.pdf  used on input line 61.
@@ -1330,18 +1335,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34972 strings out of 478599
- 662910 string characters out of 5853593
- 1438060 words of memory out of 5000000
- 52027 multiletter control sequences out of 15000+600000
+ 35000 strings out of 478599
+ 663760 string characters out of 5853593
+ 1438119 words of memory out of 5000000
+ 52054 multiletter control sequences out of 15000+600000
  429238 words of font info for 106 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,124p,785b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (46 pages, 4288093 bytes).
+Output written on main.pdf (46 pages, 4289675 bytes).
 PDF statistics:
- 1682 PDF objects out of 1728 (max. 8388607)
- 1420 compressed objects within 15 object streams
- 108 named destinations out of 1000 (max. 500000)
+ 1686 PDF objects out of 1728 (max. 8388607)
+ 1424 compressed objects within 15 object streams
+ 109 named destinations out of 1000 (max. 500000)
  179 words of extra memory for PDF output out of 10000 (max. 10000000)
 

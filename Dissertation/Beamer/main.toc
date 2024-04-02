@@ -11,4 +11,4 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {5}{Seat Assignment with Dynamic Demand}{27}{0}{5}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {6}{Conclusion}{44}{0}{6}
+\beamer@sectionintoc {6}{Conclusion and Future Work}{44}{0}{6}

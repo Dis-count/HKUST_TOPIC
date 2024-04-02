@@ -2,10 +2,10 @@
   \begin{itemize}  
     \item Group type $\mathcal{M} = \{1, \ldots, M\}$.
     \item Row $\mathcal{N} = \{1, \ldots, N\}$.
-    \item The social distancing: $\delta$ seat(s).
-    \item $n_i = i + \delta$: the size of group type $i$ for each $i \in \mathcal{M}$.
     \item The number of seats in row $j$: $L_j^{0}, j \in \mathcal{N}$.
-    \item $L_j = L_j^{0} + \delta$: the length of row $j$ for each $j \in \mathcal{N}$.
+    \item The social distancing: $\delta$ seat(s).
+    \item[-] $n_i = i + \delta$: the size of group type $i$ for each $i \in \mathcal{M}$.
+    \item[-] $L_j = L_j^{0} + \delta$: the length of row $j$ for each $j \in \mathcal{N}$.
     \end{itemize}
     
     \begin{figure}[ht]
@@ -38,9 +38,7 @@
       \item[-] $\bm{h}$ is a feasible pattern if $\sum_{i=1}^{M} n_i h_i \leq L$.
       \item[-] $\bm{h}$ is a largest pattern if $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any feasible $\bm{h}^{\prime}$.
       
-      $|\bm{h}| = qM + \max\{r-\delta, 0\}$, 
-      
-      where $q = \lfloor L/n_M \rfloor$, $r \equiv L \bmod n_M$.
+      $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where $q = \lfloor L/n_M \rfloor$, $r \equiv L \bmod n_M$.
       \item[-] $\bm{h}$ is a full pattern if $\sum_{i=1}^{M} n_i h_i = L$.  
     \end{itemize}
 
@@ -48,11 +46,11 @@
       
       $\delta = 1$, $M =4$, $L = 21$.
       
-      Largest patterns: $(0, 0, 0, 4), (0, 0, 4, 1), (0, 2, 0, 3)$.
+      Largest patterns: $h_1 = (0, 0, 0, 4)$, $h_2 = (0, 0, 4, 1)$, $h_3 = (0, 2, 0, 3)$.
 
-      Largest may not be full: $(0, 0, 0, 4)$. $\sum_{i=1}^{M} n_i h_i \neq L$
+      Largest may not be full: $h_1 = (0, 0, 0, 4)$. {\color{red} $\quad$ $\sum_{i=1}^{M} n_i h_i \neq L$}
 
-      Full may not be largest: $(1, 1, 4, 0)$. $15 < 16$
+      Full may not be largest: $h_4 = (1, 1, 4, 0)$. {\color{red} $|h_4| = 15 < 16 = |h_1|$}
 
       \begin{figure}[ht]
         \centering

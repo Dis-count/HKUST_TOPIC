@@ -4,7 +4,7 @@
     \frame{\sectionpage}
 
     \begin{frame}{Method Flow}
-      We aim to obtain a seat planning with known demand scenarios before the demand realization.
+      We aim to obtain a seat planning with known demand scenarios.
       \begin{itemize}
         \item Build the formulation of scenario-based stochastic programming(SSP).
         \item[-] Consider the nested relation: a smaller group can take the larger seats.
@@ -30,8 +30,8 @@
         y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
         & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
-        & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \\
-        & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+        & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}^{+}_{0}, \quad i \in \mathcal{M}, \omega \in \Omega \\
+        & x_{ij} \in \mathbb{Z}^{+}_{0}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
       \end{scriptsize}
@@ -74,7 +74,7 @@
     \begin{aligned}
   \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
   \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-  & \mathbf{x} \in \mathbb{Z}_{+}^{M \times N},
+  & \mathbf{x} \in \mathbb{Z}_{0}^{M \times N, +},
   \end{aligned}
   \end{equation}
 
@@ -106,7 +106,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
     \end{equation}
 
     \begin{itemize}
-      \item The feasible region of problem \eqref{BD_sub_dual}, $P= \{\alpha|\alpha^{\intercal} V \geq \mathbf{f}^{\intercal}\}$, is bounded. In addition, all the extreme points of $P$ are integral.
+      \item The feasible region of problem \eqref{BD_sub_dual}, $P= \{\alpha|\alpha^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$, is bounded. In addition, all the extreme points of $P$ are integral.
       \item The optimal solution to this problem can be obtained directly according to the complementary slackness property.
     \end{itemize}
 \end{frame}

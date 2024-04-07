@@ -67,6 +67,42 @@
 \setbeamercolor{background canvas}{bg = white}
 \setbeamercolor{normal text}{bg = gray, fg = black}
 
+% \setbeamercolor{title}{bg=red!50!gray,fg=white}
+% \setbeamercolor{author}{bg=gray!50!yellow,fg=white}
+% \setbeamercolor{super}{bg=gray!50!yellow,fg=white}
+% \setbeamercolor{date}{bg=gray,fg=white}
+% \setbeamercolor{institute}{bg=black,fg=green}
+\setbeamertemplate{title page}
+{
+  \vbox{
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      % \ifx\insertsubtitle\@empty%
+      % \else%
+      %   \vskip1em%
+      %   {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      % \fi%     
+    \end{beamercolorbox}%
+    \vskip4.5em%\par
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}
+	\vskip0.5em%\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \vskip0.5em
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \vskip0.5em
+    \begin{beamercolorbox}[sep=8pt,center]{super}
+      \usebeamerfont{}{Supervisors: QI, Xiangtong; LIU, Qian}
+    \end{beamercolorbox}
+	%\par
+    }
+}
+
 \setbeamertemplate{footline}
         {
       \leavevmode%

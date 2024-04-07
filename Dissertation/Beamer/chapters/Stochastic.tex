@@ -6,14 +6,14 @@
     \begin{frame}{Method Flow}
       We aim to obtain a seat planning with known demand scenarios.
       \begin{itemize}
-        \item Build the formulation of scenario-based stochastic programming(SSP).
-        \item[-] Consider the nested relation: a smaller group can take the larger seats.
-        \item Reformulate SSP to the benders master problem(BMP) and subproblem.
+        \item Build the formulation of scenario-based stochastic programming (SSP).
+        \item[-] Consider the nested relation: a smaller group can take the seats planned for the larger group.
+        \item Reformulate SSP to the benders master problem (BMP) and subproblem.
         \item The optimal solution can be obtained by solving BMP iteratively. 
       \end{itemize}
     \end{frame}
 
-    \begin{frame}{Scenario-based Stochastic Programming(SSP)}
+    \begin{frame}{Scenario-based Stochastic Programming (SSP)}
       % \scriptsize
       \begin{scriptsize}
         Objective: maximize the expected number of people
@@ -119,7 +119,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
       \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
       \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
       & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
-       & \mathbf{x} \in \mathbb{Z}_{+}
+       & \mathbf{x} \in \mathbb{Z}_{0}^{M \times N, +}
     \end{aligned}
 \end{equation} 
 
@@ -182,10 +182,10 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 \end{frame}
 
 \begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
-  In most cases, it is time-consuming to obtain the optimal solution to SSP. 
+  In some cases, it is time-consuming to obtain the optimal solution to SSP. 
   \vspace{0.5cm}
 
-  Meanwhile, there exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+  Meanwhile, there exists an optimal solution to SSP such that the patterns associated with this {\color{red} optimal solution} are composed of the {\color{red} full or largest patterns} under any given scenarios.
   \vspace{0.5cm}
 
   We aim to obtain a seat planning composed of full or largest patterns by the optimal solution to the LP relaxation of SSP.

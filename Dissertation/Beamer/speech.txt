@@ -1,19 +1,52 @@
-My prelim title is seat planning and assignment with social distancing.
+It's a great pleasure to have you here to attend the preliminary exam.
+
+The title is seat planning and assignment with social distancing.
 
 
-I divide the content into the following 6 parts. In the introduction, since the outbreak of the pandemic, social distancing as a valid physical measure to restrict the spread of the virus has been used in many places. For instance, in the dining hall and office, the staff paste social distancing tape on the floor to remind people to keep social distance. In the restaurant, plastic boards have been used to separate the adjacent groups. In the park, the square line is drawn to confine the scope of group activity. Social distancing has also been used in seating areas, such as in amusement parks, shopping malls, restaurants and theaters, and we mainly focus on the dynamic seat assignment problem with social distancing.
+The content is divided into the following 6 parts. In the introduction, since the outbreak of the pandemic, social distancing as a valid physical measure to restrict the spread of the virus has been used in many places. For instance, in the dining hall and office, the staff paste social distancing tape on the floor to remind people to keep social distancing. In the restaurant, plastic boards have been used to separate the adjacent groups. In the park, the square line is drawn to confine the scope of group activity. Social distancing has also been used in seating areas, such as in amusement parks, shopping malls, restaurants and theaters or music concert.
 
 
-To implement the social distancing , the government often require the size of group, that is, the maximum number of people in one group, meanwhile, people in one group should sit together. Then, I clarify the two terms seat planning and seat assignment used in the following part.
+The policy regarding social distance usually requires a limit on the size of each group, with people in the same group sitting together and different groups maintaining distance.
 
-Here are two forms of seat planning available. In the fixed seat planning, the seats designated (used) for social distancing will be dismantled beforehand. In the flexible seat planning, seat partitions are arranged for the coming group. If the current planned seats do not match the size of the group, the seat planning can be modified accordingly.
+
+Then, I need to clarify the two terms, seat planning and seat assignment used in the following part.
+
+Here are two forms of seat planning available. In the fixed seat planning, the seats designated (used) for social distancing will be dismantled/disabled beforehand. In the flexible seat planning, seat partitions are arranged for the coming group. If the current planned seats do not match the size of the group, the seat planning can be modified accordingly.
 
 The seat assignment refers to the process of assigning the seats to the coming group. For example, here is a group of 2, we assign 3 seats to it, then three seats will be occupied and will not used in the future.
+
+There are different situations for seat planning and seat assignment. We consider to obtain the seat planning with the deterministic demand and stochastic demand. 
+
+For the seat assignment, we focus on the dynamic demand situation under fixed seat planning and flexible seat planning. Under the flexible seat planning, the assignment can be made immediately or later.
 
 
 For the literature review, there have been many works about seat planning with social distancing, including allocation of seats on airplanes, classrooms, trains, theaters. However, they all focus on the static model and the specific scenario not the real-time seat assignment.
 
-For dynamic seat assignment, we model our problem as dynamic multiple knapsack problem, which is related to multiple knapsack problem and dynamic knapsack problem. Dynamic seat assignment without social distancing has applications in the context of airplanes and trains.
+In terms of dynamic seat assignment, we model our problem as dynamic multiple knapsack problem, which is related to multiple knapsack problem and dynamic knapsack problem. Dynamic seat assignment without social distancing has applications in the context of airplanes and trains.
+
+The most related literature is this paper, we share the same feature: assign-to-seat, that is, after assigning someone in a seat, the seat will not be used in the future.
+
+
+Now, I introduce the seat planning problem with social distancing. There are M types of groups, group type i contains i people. The seat layout contains N rows, row j has Lj seats. Set delta seats as the social distancing. We make the following conversion, i.e., for each i, let n_i equal i plus delta. The value, ni, indicates the number of seats occupied by group type i. For each row, let Lj equal the number of physical seats plus delta. In this way, we can incorporate the social distancing into the seat planning problem. We use the following picture to illustrate the conversion. On the left hand side, the blue squares represent the social distancing, here it is one seat. There are 10 physical seats. On the right hand side, the gray square is the added virtual seat. And we use 3 seats to represent the group of 2 with one seat as the social distancing. Then we don't need to consider the social distancing seperately after the conversion.
+
+To better understand this problem, I introduce the concept of pattern. Pattern represents the seat planning for one row, denoted by h, where hi is the number of group type i. And the number of people can be accommodated is the size of h, the summation of this term.
+
+Still use the above example to explain, here L = 11.
+
+Then we define some patterns. Suppose the length is L. h is feasible if the summation of the sizes of all groups is no larger than the length of the row. 
+
+The size of largest pattern is, that is, we divide the seats into the largest group as many as possible, then put the rest seats as a group if the number of seats permits.
+
+The sum of this expression.
+
+P17. Specifically, we can convert a given pattern into a largest or full pattern while ensuring the original group type requirements are met. 
+
+Mathematically, we can solve the following programming, here the constraints indicate a smaller group can take the seats planned for the larger group. 
+
+We develop an efficient algorithm to generate the full or largest pattern. We aim to allocate the remaining unoccupied seats to maximize the number of people. The core idea is to change the smaller group to the largest group as much as possible with the unoccupied seats. The specific procedure is shown here. 
+
+
+P29 the expected value difference of acceptance and rejection
 
 Our work makes the first attempt to implement dynamic seat assignments
 
@@ -83,7 +116,7 @@ Zikang LI: group types and each group type I contains, I. People
 
 30
 00:02:51.450 --> 00:03:01.679
-Zikang LI: and the seed layout contains N. Rows from one to N. And H. And the number of seeds in zo, J.
+Zikang LI: and the seat layout contains N. Rows from one to N. And H. And the number of seats in zo, J.
 
 31
 00:03:01.700 --> 00:03:03.320

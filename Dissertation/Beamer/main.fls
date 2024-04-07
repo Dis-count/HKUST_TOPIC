@@ -1808,6 +1808,11 @@ INPUT chapters/Dynamic.tex
 INPUT ./chapters/Dynamic.tex
 INPUT chapters/Dynamic.tex
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss9.tfm
+INPUT ./images/d_ij.png
+INPUT ./images/d_ij.png
+INPUT ./images/d_ij.png
+INPUT ./images/d_ij.png
+INPUT ./images/d_ij.png
 INPUT ./chapters/Results.tex
 INPUT chapters/Results.tex
 INPUT ./chapters/Results.tex

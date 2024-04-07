@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  2 APR 2024 21:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  7 APR 2024 17:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -971,24 +971,24 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
  (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1043,7 +1043,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (e:/Software/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 16.
+Package hyperref Info: Link coloring OFF on input line 19.
  (e:/Software/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (e:/Software/texlive/2021/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1053,9 +1053,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count500
 )
-LaTeX Info: Redefining \ref on input line 16.
-LaTeX Info: Redefining \pageref on input line 16.
-LaTeX Info: Redefining \nameref on input line 16.
+LaTeX Info: Redefining \ref on input line 19.
+LaTeX Info: Redefining \pageref on input line 19.
+LaTeX Info: Redefining \nameref on input line 19.
  (./main.out) (./main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
@@ -1094,8 +1094,8 @@ Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 16.
-Package biblatex Info: Reference segment=0 on input line 16.
+Package biblatex Info: Reference section=0 on input line 19.
+Package biblatex Info: Reference segment=0 on input line 19.
  (./main.nav) [1
 Non-PDF special ignored!
 <special> header=pstricks.pro
@@ -1178,12 +1178,12 @@ Package pdftex.def Info: ./images/cinema.jpg  used on input line 75.
 <./images/seat_planning.png, id=207, 391.4625pt x 238.64156pt>
 File: ./images/seat_planning.png Graphic file (type png)
 <use ./images/seat_planning.png>
-Package pdftex.def Info: ./images/seat_planning.png  used on input line 103.
+Package pdftex.def Info: ./images/seat_planning.png  used on input line 104.
 (pdftex.def)             Requested size: 113.81145pt x 69.37906pt.
 <./images/seat_assignment.png, id=208, 407.27156pt x 234.8775pt>
 File: ./images/seat_assignment.png Graphic file (type png)
 <use ./images/seat_assignment.png>
-Package pdftex.def Info: ./images/seat_assignment.png  used on input line 103.
+Package pdftex.def Info: ./images/seat_assignment.png  used on input line 104.
 (pdftex.def)             Requested size: 113.81145pt x 65.63622pt.
  [6
 
@@ -1256,9 +1256,15 @@ Package pdftex.def Info: ./images/BD.png  used on input line 132.
 
 ] [28
 
-] [29
+]
+<./images/d_ij.png, id=893, 877.02657pt x 168.63pt>
+File: ./images/d_ij.png Graphic file (type png)
+<use ./images/d_ij.png>
+Package pdftex.def Info: ./images/d_ij.png  used on input line 63.
+(pdftex.def)             Requested size: 308.06367pt x 59.23236pt.
+ [29
 
-] [30
+ <./images/d_ij.png>] [30
 
 ] [31
 
@@ -1284,12 +1290,12 @@ Overfull \hbox (11.36145pt too wide) in paragraph at lines 35--35
 [39
 
 ]
-<./images/p1.pdf, id=1203, 462.52798pt x 346.89601pt>
+<./images/p1.pdf, id=1205, 462.52798pt x 346.89601pt>
 File: ./images/p1.pdf Graphic file (type pdf)
 <use ./images/p1.pdf>
 Package pdftex.def Info: ./images/p1.pdf  used on input line 49.
 (pdftex.def)             Requested size: 164.30028pt x 123.2257pt.
-<./images/p2.pdf, id=1204, 462.52798pt x 346.89601pt>
+<./images/p2.pdf, id=1206, 462.52798pt x 346.89601pt>
 File: ./images/p2.pdf Graphic file (type pdf)
 <use ./images/p2.pdf>
 Package pdftex.def Info: ./images/p2.pdf  used on input line 49.
@@ -1300,7 +1306,7 @@ Package pdftex.def Info: ./images/p2.pdf  used on input line 49.
 
 pdfTeX warning: pdflatex.exe (file ./images/p2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<./images/gamma_estimation.pdf, id=1311, 1387.58403pt x 739.3221pt>
+<./images/gamma_estimation.pdf, id=1313, 1387.58403pt x 739.3221pt>
 File: ./images/gamma_estimation.pdf Graphic file (type pdf)
 <use ./images/gamma_estimation.pdf>
 Package pdftex.def Info: ./images/gamma_estimation.pdf  used on input line 61.
@@ -1335,18 +1341,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 35000 strings out of 478599
- 663760 string characters out of 5853593
- 1438119 words of memory out of 5000000
- 52054 multiletter control sequences out of 15000+600000
+ 35013 strings out of 478599
+ 663973 string characters out of 5853593
+ 1438308 words of memory out of 5000000
+ 52066 multiletter control sequences out of 15000+600000
  429238 words of font info for 106 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,124p,785b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (46 pages, 4290264 bytes).
+Output written on main.pdf (46 pages, 4349752 bytes).
 PDF statistics:
- 1686 PDF objects out of 1728 (max. 8388607)
+ 1688 PDF objects out of 1728 (max. 8388607)
  1424 compressed objects within 15 object streams
  109 named destinations out of 1000 (max. 500000)
- 179 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 184 words of extra memory for PDF output out of 10000 (max. 10000000)
 

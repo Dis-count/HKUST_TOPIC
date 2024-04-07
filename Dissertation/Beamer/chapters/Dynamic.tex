@@ -5,7 +5,7 @@
 
 \begin{frame}{Dynamic Demand}
   \begin{itemize}
-    \item[-] There is at most one group arrival at each period, $t = 1, \ldots, T+1$. 
+    \item[-] There is at most one group arrival at each period, $t = 1, \ldots, T$. 
     \item[-] The probability of an arrival of group type $i$: $p_i$.  
   \end{itemize}
 
@@ -31,15 +31,29 @@
     \small
     \begin{itemize}
       \item Group-type Control
-      \item[-] Obtain the seat planning from stochastic programming. Suppose the corresponding supply is $[X_1, \ldots, X_M]$.
+      \item[-] Obtain the seat planning from stochastic programming. Suppose the corresponding supply is $[X_1, \ldots, X_M]$. ($X_{i} = \sum_{j} x_{ij}, \forall i$)
       
       For the arrival of group type $i$,
 
-      \item[-] if $X_i > 0$, accept it directly;
+      \item[-] if $X_i > 0$, accept it directly, assign it the seats planned for group type $i$;
       \item[-] if $X_i = 0$, determine which group type to accept it.
     \end{itemize}
 
-    $d^{t}(i, j)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta} \geq x_{j-i-\delta}+1; T-t)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j} \geq x_{j}; T-t)}_{\text{rejection}}.$
+    % \begin{tiny}
+    % Let $D^t_j$ be the random variable indicates the number of group type $j$ in $t$ periods.
+
+    % $P(D_{i}^{T-t} \geq x_i)$ is the probability that the demand of group type $i$ in $(T - t)$ periods is no less than $x_i$.
+    % \end{tiny}
+
+    % $d^{t}(i, j)$ = $\underbrace{i + (j-i-\delta)P(D_{j-i-\delta}^{T-t} \geq x_{j-i-\delta}+1)}_{\text{acceptance}}$ - $\underbrace{j P(D_{j}^{T-t} \geq x_{j})}_{\text{rejection}}.$
+    \vspace{-0.5cm}
+
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width = 0.9\textwidth]{./images/d_ij.png}
+    \end{figure}
+
+    \vspace{-0.1cm}
 
     For all $j > i$, find the maximum value denoted as $d^{t}(i, j^{*})$.
     
@@ -144,13 +158,13 @@
 
       For the arriving group type $i$,
 
-      \item[-] if $X_i > 0$, accept the group; 
+      \item[-] if $X_i > 0$, accept the group, assign it according to the break tie rule;
       
       \item[-] if $X_i = 0$, different methods:
       
       \vspace{0.5cm}
 
-      1. Based on the seat planning from adjusted SSP.
+      1. Based on the adjusted SSP.
 
       2. Based on the seat planning from the relaxation of SSP.
 
@@ -170,8 +184,8 @@
         y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
         & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - n_k a_j, j \in \mathcal{N} \\
-        & \sum_{j} a_j \leq 1 \\
-        & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
+        & \sum_{j=1}^{N} a_j \leq 1 \\
+        & x_{ij} \in \mathbb{Z}_{0}^{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{0}^{+}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
     \end{tiny}
@@ -210,17 +224,20 @@
     \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
       If $X_i = 0$,
       
-      1. Determine the group type by the group-type control.
+      1. Determine the group type $j^{*}$ by the group-type control.
 
       2. Make the decision on assigning the group to a specific row.
       \begin{itemize}
         \item Break tie for determining a specific row
         \item Decision on assigning the group
-        \item[-] Value of Acceptance (VoA): approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j^{*}})$ + $i$. (Find a pattern containing group type $j^{*}$)
+        \item[-] Value of Acceptance (VoA): value of LP relaxation of SSP with $(\mathbf{L}-n_i \mathbf{e}_{j^{*}})$ plus $i$.
         
-        \item[-] Value of Rejection (VoR): approximation of $V_{t} (\mathbf{L})$.
+        % approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j^{*}})$ + $i$. 
+        % approximation of $V_{t} (\mathbf{L})$
 
-        \item[-] If VoA is no less than VoR, accept group type $i$, otherwise, reject it.
+        \item[-] Value of Rejection (VoR): value of LP relaxation of SSP with $\mathbf{L}$.
+
+        \item[-] If VoA is no less than VoR, accept group type $i$; otherwise, reject it.
       \end{itemize}
       Regenerate the seat planning
       \begin{itemize}
@@ -231,7 +248,9 @@
 
     \begin{frame}{Compared with Other Policies}
       We have the following policies compared with DSA when we make the instant allocation.
-    
+      
+      \vspace{0.5cm}
+      
       \begin{itemize}
         \item Bid-price control
         \item Dynamic programming based heuristic
@@ -274,7 +293,7 @@
       \end{frame}
       
       \begin{frame}{Booking limit Control}
-        Basic idea: for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
+        Basic idea: for each type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
         \begin{itemize}
           \item[1] Observe the arrival group type $i$.
           \item[2] Solve problem \eqref{deter_upper} using the expected demand.

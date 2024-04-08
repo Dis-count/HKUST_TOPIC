@@ -1,9 +1,14 @@
-It's a great pleasure to have you here to attend the preliminary exam.
+Good morning, Distinguished professors.
+
+It is a great pleasure and honor to have you attending my preliminary exam. Thank you for your participation.
 
 The title is seat planning and assignment with social distancing.
 
 
-The content is divided into the following 6 parts. In the introduction, since the outbreak of the pandemic, social distancing as a valid physical measure to restrict the spread of the virus has been used in many places. For instance, in the dining hall and office, the staff paste social distancing tape on the floor to remind people to keep social distancing. In the restaurant, plastic boards have been used to separate the adjacent groups. In the park, the square line is drawn to confine the scope of group activity. Social distancing has also been used in seating areas, such as in amusement parks, shopping malls, restaurants and theaters or music concert.
+The content is divided into the following 6 parts. In the introduction, since the outbreak of the pandemic, social distancing as a valid physical measure to restrict the spread of the virus has been used in many places. 
+In the introduction, it is worth noting that social distancing has been widely implemented as an effective physical measure to mitigate the spread of the virus since the outbreak of the pandemic.
+
+For instance, in the dining hall and office, the staff paste social distancing tape on the floor to remind people to keep social distancing. In the restaurant, plastic boards have been used to separate the adjacent groups. In the park, the square line is drawn to confine the scope of group activity. Social distancing has also been used in seating areas, such as in amusement parks, shopping malls, restaurants and theaters or music concert.
 
 
 The policy regarding social distance usually requires a limit on the size of each group, with people in the same group sitting together and different groups maintaining distance.
@@ -13,21 +18,21 @@ Then, I need to clarify the two terms, seat planning and seat assignment used in
 
 Here are two forms of seat planning available. In the fixed seat planning, the seats designated (used) for social distancing will be dismantled/disabled beforehand. In the flexible seat planning, seat partitions are arranged for the coming group. If the current planned seats do not match the size of the group, the seat planning can be modified accordingly.
 
-The seat assignment refers to the process of assigning the seats to the coming group. For example, here is a group of 2, we assign 3 seats to it, then three seats will be occupied and will not used in the future.
+The seat assignment refers to the process of assigning the seats to the coming group. For example, here is a group of 2, we assign 3 seats to it, then three seats will be occupied and will not be used in the future.
 
 There are different situations for seat planning and seat assignment. We consider to obtain the seat planning with the deterministic demand and stochastic demand. 
 
 For the seat assignment, we focus on the dynamic demand situation under fixed seat planning and flexible seat planning. Under the flexible seat planning, the assignment can be made immediately or later.
 
 
-For the literature review, there have been many works about seat planning with social distancing, including allocation of seats on airplanes, classrooms, trains, theaters. However, they all focus on the static model and the specific scenario not the real-time seat assignment.
+Regarding the literature review, there have been many works about seat planning with social distancing, including allocation of seats on airplanes, classrooms, trains, theaters. However, they all focus on the static model and the specific scenario not the real-time seat assignment.
 
 In terms of dynamic seat assignment, we model our problem as dynamic multiple knapsack problem, which is related to multiple knapsack problem and dynamic knapsack problem. Dynamic seat assignment without social distancing has applications in the context of airplanes and trains.
 
-The most related literature is this paper, we share the same feature: assign-to-seat, that is, after assigning someone in a seat, the seat will not be used in the future.
+The most related literature to our work is this paper, we share the same feature: assign-to-seat, that is, after assigning someone in a seat, the seat will not be used in the future.
 
 
-Now, I introduce the seat planning problem with social distancing. There are M types of groups, group type i contains i people. The seat layout contains N rows, row j has Lj seats. Set delta seats as the social distancing. We make the following conversion, i.e., for each i, let n_i equal i plus delta. The value, ni, indicates the number of seats occupied by group type i. For each row, let Lj equal the number of physical seats plus delta. In this way, we can incorporate the social distancing into the seat planning problem. We use the following picture to illustrate the conversion. On the left hand side, the blue squares represent the social distancing, here it is one seat. There are 10 physical seats. On the right hand side, the gray square is the added virtual seat. And we use 3 seats to represent the group of 2 with one seat as the social distancing. Then we don't need to consider the social distancing seperately after the conversion.
+Now, I introduce the seat planning problem with social distancing. There are M types of groups, group type i contains i people. The seat layout contains N rows, row j has Lj seats. Set delta seats as the social distancing. We make the following conversion, i.e., for each i, let n_i equal i plus delta. The value, ni, indicates the number of seats occupied by group type i. For each row, let Lj equal the number of physical seats plus delta. In this way, we can incorporate the social distancing into the seat planning problem. We use the following picture to illustrate the conversion. On the left hand side, the blue squares represent the social distancing, here it is one seat. There are 10 physical seats. On the right hand side, the gray square is the added virtual seat. For the first group, And we use 3 seats to represent the group of 2 with one seat as the social distancing. Then we don't need to consider the social distancing seperately after the conversion.
 
 To better understand this problem, I introduce the concept of pattern. Pattern represents the seat planning for one row, denoted by h, where hi is the number of group type i. And the number of people can be accommodated is the size of h, the summation of this term.
 
@@ -45,8 +50,28 @@ Mathematically, we can solve the following programming, here the constraints ind
 
 We develop an efficient algorithm to generate the full or largest pattern. We aim to allocate the remaining unoccupied seats to maximize the number of people. The core idea is to change the smaller group to the largest group as much as possible with the unoccupied seats. The specific procedure is shown here. 
 
-
 P29 the expected value difference of acceptance and rejection
+
+P40 For the managerial insight of the policy, we examine the impact of implementing social distancing. We know that when the demand is small, we will accept all groups with social distancing constraints. As the demand increases, there will be a difference between the number of people accepted with social distancing and without social distancing. What interests us is when the difference starts to be larger than 0.
+
+Let gamma be the expected number of people at each period. Here we show two figures about the gap point when gamma are 2.5 and 1.9.
+
+The gap point represents the first period when we have the difference. 
+
+
+The gap points of different probabilities with the same gamma has little difference, which can be seen by the estimation of gap point.
+
+
+Here we have a figure including the gap points under DSA with 200 probabilities, the blue points represent the period and red points represent the corresponding occupancy rate.
+
+And these points can be fitted very well.
+
+I will not go into details here.
+
+Here we can get the conclusion that 
+1.  we address dynamic assignment 
+2.  we develop the efficient policy .
+3.  the occupancy rate can be estimated by gamma.
 
 Our work makes the first attempt to implement dynamic seat assignments
 
@@ -69,6 +94,14 @@ For each j larger than i, we find the largest one, denoted as j star. It is a ne
 
 The optimal policy is to make the decision when we have complete knowledge of all future requests in advance.
 
+
+
+
+That concludes my presentation."
+And that wraps up my presentation."
+And that brings me to the end of my presentation."
+And that's all for my presentation."
+
 --------------------------------------------------------------------------------------
 
 Hello, my supervisors! My research topic is dynamic city assignment with social distancing
@@ -88,7 +121,6 @@ And social distancing has also been used in seating areas such as in the amuseme
 In the Literature Review, there are many works about seat planning with social distancing, including the allocation of seeds on airplanes, classrooms and trains. However, these works only considered the static model, not a real-time seat assignment. That is a main difference.
 
 In the literature review, several studies have been conducted on seat planning with social distancing, encompassing various settings such as airplanes, classrooms, and trains. However, it is important to note that these works primarily focused on static seat allocation models, lacking consideration for real-time seat assignments. This distinction forms a significant gap in the existing research.
-
 
 For the dynamic Seat assignment, we model our problem as a dynamic multiple knapsack problem which is related to multiple knapsack problem and dynamic knapsack problem and dynamic seat assignment without social distancing has the applications in the context of airplanes and trains. 
 

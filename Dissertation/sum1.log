@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  5 APR 2024 22:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  8 APR 2024 16:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -546,18 +546,18 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <./Figures/re2.pdf, id=462, 1387.58403pt x 739.3221pt>
 File: ./Figures/re2.pdf Graphic file (type pdf)
 <use ./Figures/re2.pdf>
-Package pdftex.def Info: ./Figures/re2.pdf  used on input line 178.
+Package pdftex.def Info: ./Figures/re2.pdf  used on input line 176.
 (pdftex.def)             Requested size: 362.37569pt x 193.07657pt.
  [26]
 <./Figures/p2.pdf, id=467, 462.52798pt x 346.89601pt>
 File: ./Figures/p2.pdf Graphic file (type pdf)
 <use ./Figures/p2.pdf>
-Package pdftex.def Info: ./Figures/p2.pdf  used on input line 213.
+Package pdftex.def Info: ./Figures/p2.pdf  used on input line 211.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 <./Figures/p1.pdf, id=468, 462.52798pt x 346.89601pt>
 File: ./Figures/p1.pdf Graphic file (type pdf)
 <use ./Figures/p1.pdf>
-Package pdftex.def Info: ./Figures/p1.pdf  used on input line 215.
+Package pdftex.def Info: ./Figures/p1.pdf  used on input line 213.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
  [27 <./Figures/re2.pdf>] [28 <./Figures/p2.pdf> <./Figures/p1.pdf
 
@@ -577,7 +577,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  62i,21n,75p,1426b,720s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (30 pages, 435759 bytes).
+Output written on sum1.pdf (30 pages, 435718 bytes).
 PDF statistics:
  771 PDF objects out of 1000 (max. 8388607)
  581 compressed objects within 6 object streams

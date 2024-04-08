@@ -9,7 +9,7 @@
     \item[-] The probability of an arrival of group type $i$: $p_i$.  
   \end{itemize}
 
-  1. Assign the seats under the fixed seat planning
+  1. Assign the seats under the {\color{red}fixed seat planning}
 
   \begin{footnotesize}
     The seats, which were arranged for social distancing purposes, need to be dismantled before people arrive to prevent them from occupying those seats. When each group arrives, we make decisions regarding whether to accept or reject them based on the predetermined seat planning.
@@ -17,7 +17,7 @@
 
   \vspace{0.3cm}
 
-  2. Assign the seats under the flexible seat planning
+  2. Assign the seats under the {\color{red}flexible seat planning}
 
   \begin{footnotesize}
   Scenario 1: the seller need to assign seats each time a group arrives. 
@@ -57,7 +57,7 @@
 
     For all $j > i$, find the maximum value denoted as $d^{t}(i, j^{*})$.
     
-    If $d^{t}(i, j^{*}) > 0$, we place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
+    If $d^{t}(i, j^{*}) \geq 0$, we place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
 
     % After acceptance, customers have more freedom to choose their seats with the seat planning.
   \end{frame}
@@ -70,7 +70,7 @@
 
   \begin{frame}{Performance}
     \scriptsize
-    The assignment is based on the fixed seat planning and we use the group-type to make the decision. 
+    The assignment is based on the fixed seat planning and we use the group-type control to make the decision. 
     % \begin{table}[ht]
     %     \begin{tabular}{|l|l|l|l|l|}
     %     \hline
@@ -179,12 +179,12 @@
       \begin{tiny}
         \begin{equation}\label{adjusted_SSP}
         \begin{aligned}
-        \max \quad & \sum_{j} k a_j + E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+        \max \quad & {\color{red}\sum_{j} k a_j} + E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
         \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
         y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
-        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - n_k a_j, j \in \mathcal{N} \\
-        & \sum_{j=1}^{N} a_j \leq 1 \\
+        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - {\color{red}n_k a_j}, j \in \mathcal{N} \\
+        & {\color{red}\sum_{j=1}^{N} a_j \leq 1} \\
         & x_{ij} \in \mathbb{Z}_{0}^{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{0}^{+}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
@@ -282,7 +282,7 @@
       \begin{frame}{Dynamic Programming Based Heuristic}
         \begin{itemize}
         \item Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
-        \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}_{+}\}$.
+        \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}^{+}_{0}\}$.
         \item Decision: $u^{t}$. If we accept a request in period $t$, $u^t = 1$; otherwise, $u^t =0$.  
         \item[-] DP with one row can be expressed as:
         $$V^{t}(l) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l)\right\}, l \geq 0 $$

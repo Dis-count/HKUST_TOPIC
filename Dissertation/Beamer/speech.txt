@@ -20,7 +20,7 @@ Here are two forms of seat planning available. In the fixed seat planning, the s
 
 The seat assignment refers to the process of assigning the seats to the coming group. For example, here is a group of 2, we assign 3 seats to it, then three seats will be occupied and will not be used in the future.
 
-There are different situations for seat planning and seat assignment. We consider to obtain the seat planning with the deterministic demand and stochastic demand. 
+There are different situations for seat planning and seat assignment. We consider to obtain the seat planning with the deterministic demand and stochastic demand.
 
 For the seat assignment, we focus on the dynamic demand situation under fixed seat planning and flexible seat planning. Under the flexible seat planning, the assignment can be made immediately or later.
 
@@ -44,15 +44,15 @@ The size of largest pattern is, that is, we divide the seats into the largest gr
 
 The sum of this expression.
 
-P17. Specifically, we can convert a given pattern into a largest or full pattern while ensuring the original group type requirements are met. 
+P17. Specifically, we can convert a given pattern into a largest or full pattern while ensuring the original group type requirements are met.
 
 Mathematically, we can solve the following programming, here the constraints indicate a smaller group can take the seats planned for the larger group. 
 
-We develop an efficient algorithm to generate the full or largest pattern. We aim to allocate the remaining unoccupied seats to maximize the number of people. The core idea is to change the smaller group to the largest group as much as possible with the unoccupied seats. The specific procedure is shown here. 
+We develop an efficient algorithm to generate the full or largest pattern. We aim to allocate the remaining unoccupied seats to maximize the number of people. The core idea is to change the smaller group to the largest group as much as possible with the unoccupied seats. The specific procedure is shown here.
 
 P29 the expected value difference of acceptance and rejection
 
-P40 For the managerial insight of the policy, we examine the impact of implementing social distancing. We know that when the demand is small, we will accept all groups with social distancing constraints. As the demand increases, there will be a difference between the number of people accepted with social distancing and without social distancing. What interests us is when the difference starts to be larger than 0.
+P40 For the managerial insight of the DSA policy, we examine the impact of implementing social distancing. We know that when the demand is small, we will accept all groups with social distancing constraints. As the demand increases, there will be a difference between the number of people accepted with social distancing and without social distancing. What interests us is when the difference starts to be larger than 0.
 
 Let gamma be the expected number of people at each period. Here we show two figures about the gap point when gamma are 2.5 and 1.9.
 
@@ -96,11 +96,12 @@ The optimal policy is to make the decision when we have complete knowledge of al
 
 
 
-
 That concludes my presentation."
 And that wraps up my presentation."
 And that brings me to the end of my presentation."
 And that's all for my presentation."
+
+I would be delighted to address any questions, comments, or suggestions you may have. Please feel free to share your thoughts, and I will do my best to provide thorough responses. I value your insights and look forward to our discussion.
 
 --------------------------------------------------------------------------------------
 

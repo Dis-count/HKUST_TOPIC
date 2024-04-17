@@ -271,3 +271,30 @@ Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solu
       {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from problem \eqref{deter_upper1} with $\tilde{X}$\;}
       {Construct the full or largest patterns by Algorithm \ref{construction} with $\tilde{\mathbf{x}}$ and $\bm{H}$\;}
   \end{algorithm}
+
+
+  \begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+    \hline
+    \# of scenarios & Demands & \# of rows & \# of groups & \# of seats & Running time of IP(s) & Benders (s) \\
+    % 1000 & (20, 30) & 10 & 4 & (21, 30) & 1.6 & 0.1 \\
+    % 1000 & (20, 30) & 10 & 4 & (21, 40) & 1.6 & 0.1 \\
+    \hline
+    1000  & (150, 350) & 30 & 8 & (21, 50) & 4.12  & 0.13 \\
+    5000  &            &    &   &         & 28.73 & 0.29  \\
+    10000 &            &    &   &         & 66.81  & 0.54 \\
+    50000 &            &    &   &         & 925.17 & 2.46 \\
+    \hline
+    1000  & (1000, 2000) & 200 & 8 & (21, 50) & 5.88 & 0.18 \\
+    5000  &              &     &   &          & 30.0 & 0.42 \\
+    10000 &              &     &   &          & 64.41 & 0.62 \\
+    50000 &              &     &   &          & 365.57 & 2.51\\
+    \hline
+    1000  & (150, 250) & 30 & 16 & (41, 60) & 17.15  & 0.18 \\
+    5000  &            &    &    &          & 105.2  & 0.37 \\
+    10000 &            &    &    &          & 260.88 & 0.65 \\
+    50000 &            &    &    &          & 3873.16 & 2.95 \\
+    \hline
+    \end{tabular}
+  \end{table}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  17 APR 2024 13:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  17 APR 2024 15:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -106,6 +106,9 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
+) (e:/Software/texlive/2021/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
+\@enLab=\toks22
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2021/04/12 v1.27 mathematical typesetting tools
  (e:/Software/texlive/2021/texmf-dist/tex/latex/tools/calc.sty
@@ -183,15 +186,15 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (e:/Software/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks22
-\thm@bodyfont=\toks23
-\thm@headfont=\toks24
-\thm@notefont=\toks25
-\thm@headpunct=\toks26
+\thm@style=\toks23
+\thm@bodyfont=\toks24
+\thm@headfont=\toks25
+\thm@notefont=\toks26
+\thm@headpunct=\toks27
 \thm@preskip=\skip62
 \thm@postskip=\skip63
 \thm@headsep=\skip64
-\dth@everypar=\toks27
+\dth@everypar=\toks28
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip65
@@ -230,9 +233,9 @@ File: pppdftex.def 2021/03/06 v0.5t Pdfpages driver for pdfTeX (AM)
 )
 \pdfpages@includegraphics@status=\count279
 \AM@pagebox=\box53
-\AM@global@opts=\toks28
+\AM@global@opts=\toks29
 \AM@pagecnt=\count280
-\AM@toc@title=\toks29
+\AM@toc@title=\toks30
 \c@AM@survey=\count281
 \AM@templatesizebox=\box54
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/cite/cite.sty
@@ -362,7 +365,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutheight=\dimen184
 \Gm@layouthoffset=\dimen185
 \Gm@layoutvoffset=\dimen186
-\Gm@dimlist=\toks30
+\Gm@dimlist=\toks31
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
 \c@AlgoLine=\count295
@@ -425,24 +428,24 @@ File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
 ) (./sum1.aux)
 \openout1 = `sum1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
  (e:/Software/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count308
@@ -450,12 +453,12 @@ LaTeX Font Info:    ... okay on input line 54.
 \scratchbox=\box64
 \nofMPsegments=\count309
 \nofMParguments=\count310
-\everyMPshowfont=\toks31
+\everyMPshowfont=\toks32
 \MPscratchCnt=\count311
 \MPscratchDim=\dimen194
 \MPnumerator=\count312
 \makeMPintoPDFobject=\count313
-\everyMPtoPDFconversion=\toks32
+\everyMPtoPDFconversion=\toks33
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -473,7 +476,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-Package hyperref Info: Link coloring ON on input line 54.
+Package hyperref Info: Link coloring ON on input line 55.
  (e:/Software/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (e:/Software/texlive/2021/texmf-dist/tex/latex/refcount/refcount.sty
@@ -483,9 +486,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count314
 )
-LaTeX Info: Redefining \ref on input line 54.
-LaTeX Info: Redefining \pageref on input line 54.
-LaTeX Info: Redefining \nameref on input line 54.
+LaTeX Info: Redefining \ref on input line 55.
+LaTeX Info: Redefining \pageref on input line 55.
+LaTeX Info: Redefining \nameref on input line 55.
  (./sum1.out) (./sum1.out)
 \@outlinefile=\write3
 \openout3 = `sum1.out'.
@@ -525,11 +528,11 @@ LaTeX Info: Redefining \nameref on input line 54.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 56.
 (e:/Software/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 56.
  (e:/Software/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -539,12 +542,12 @@ LaTeX Warning: No \author given.
 (./Chapters/Abstract.tex) (./Chapters/Introduction.tex [1
 
 {e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<./Figures/seat_planning.png, id=114, 391.4625pt x 238.64156pt>
+<./Figures/seat_planning.png, id=126, 391.4625pt x 238.64156pt>
 File: ./Figures/seat_planning.png Graphic file (type png)
 <use ./Figures/seat_planning.png>
 Package pdftex.def Info: ./Figures/seat_planning.png  used on input line 25.
 (pdftex.def)             Requested size: 142.26378pt x 86.72655pt.
-<./Figures/seat_assignment.png, id=116, 407.27156pt x 234.8775pt>
+<./Figures/seat_assignment.png, id=128, 407.27156pt x 234.8775pt>
 File: ./Figures/seat_assignment.png Graphic file (type png)
 <use ./Figures/seat_assignment.png>
 Package pdftex.def Info: ./Figures/seat_assignment.png  used on input line 30.
@@ -552,55 +555,60 @@ Package pdftex.def Info: ./Figures/seat_assignment.png  used on input line 30.
  [2 <./Figures/seat_planning.png> <./Figures/seat_assignment.png>] [3]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/dummy_seat.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./Figures/dummy_seat.pdf, id=137, 932.82928pt x 132.54417pt>
+<./Figures/dummy_seat.pdf, id=149, 932.82928pt x 132.54417pt>
 File: ./Figures/dummy_seat.pdf Graphic file (type pdf)
 <use ./Figures/dummy_seat.pdf>
 Package pdftex.def Info: ./Figures/dummy_seat.pdf  used on input line 62.
 (pdftex.def)             Requested size: 362.37569pt x 51.48976pt.
-<./Figures/full_largest.png, id=138, 603.75563pt x 115.93312pt>
+<./Figures/full_largest.png, id=150, 603.75563pt x 115.93312pt>
 File: ./Figures/full_largest.png Graphic file (type png)
 <use ./Figures/full_largest.png>
-Package pdftex.def Info: ./Figures/full_largest.png  used on input line 96.
+Package pdftex.def Info: ./Figures/full_largest.png  used on input line 95.
 (pdftex.def)             Requested size: 362.37569pt x 69.58339pt.
-[4 <./Figures/dummy_seat.pdf>] [5 <./Figures/full_largest.png>]) (./Chapters/Deterministic.tex [6]) (./Chapters/Stochastic.tex [7] [8] [9] [10] [11] [12] [13] [14]) (./Chapters/Dynamic.tex [15] [16] [17] [18] [19]) (./Chapters/Results.tex [20] [21] [22] [23] [24] [25] [26]
-<./Figures/re2.pdf, id=483, 1387.58403pt x 739.3221pt>
+[4 <./Figures/dummy_seat.pdf>] [5 <./Figures/full_largest.png>]) (./Chapters/Literature-review.tex [6] [7]) (./Chapters/Deterministic.tex [8]) (./Chapters/Stochastic.tex [9] [10] [11] [12] [13] [14] [15] [16]
+Overfull \hbox (33.17188pt too wide) in paragraph at lines 278--300
+ [][] 
+ []
+
+) (./Chapters/Dynamic.tex [17] [18] [19] [20] [21] [22]) (./Chapters/Results.tex [23] [24] [25] [26] [27] [28] [29]
+<./Figures/re2.pdf, id=574, 1387.58403pt x 739.3221pt>
 File: ./Figures/re2.pdf Graphic file (type pdf)
 <use ./Figures/re2.pdf>
 Package pdftex.def Info: ./Figures/re2.pdf  used on input line 176.
 (pdftex.def)             Requested size: 362.37569pt x 193.07657pt.
- [27]
-<./Figures/p2.pdf, id=488, 462.52798pt x 346.89601pt>
+ [30]
+<./Figures/p2.pdf, id=579, 462.52798pt x 346.89601pt>
 File: ./Figures/p2.pdf Graphic file (type pdf)
 <use ./Figures/p2.pdf>
 Package pdftex.def Info: ./Figures/p2.pdf  used on input line 211.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/p1.pdf, id=489, 462.52798pt x 346.89601pt>
+<./Figures/p1.pdf, id=580, 462.52798pt x 346.89601pt>
 File: ./Figures/p1.pdf Graphic file (type pdf)
 <use ./Figures/p1.pdf>
 Package pdftex.def Info: ./Figures/p1.pdf  used on input line 213.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
- [28 <./Figures/re2.pdf>] [29 <./Figures/p2.pdf> <./Figures/p1.pdf
+ [31 <./Figures/re2.pdf>] [32 <./Figures/p2.pdf> <./Figures/p1.pdf
 
 pdfTeX warning: pdflatex.exe (file ./Figures/p1.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]) (./Chapters/Conclusion.tex) (./sum1.bbl) (./Chapters/Proof.tex [30]) [31
+>] [33]) (./Chapters/Conclusion.tex) (./sum1.bbl [34] [35]) (./Chapters/Proof.tex [36] [37
 
-] (./sum1.aux)
+] [38] [39]) (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: D5D8122A48F20BE86BA97CAAEA171417;5151.
+(rerunfilecheck)             Checksum: 4B0A7047D5FF68A0B94DF535DA46072E;5712.
  ) 
 Here is how much of TeX's memory you used:
- 14327 strings out of 478599
- 218146 string characters out of 5853593
- 551305 words of memory out of 5000000
- 31719 multiletter control sequences out of 15000+600000
+ 14453 strings out of 478599
+ 220324 string characters out of 5853593
+ 555012 words of memory out of 5000000
+ 31782 multiletter control sequences out of 15000+600000
  417751 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,21n,75p,1444b,720s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,21n,75p,1426b,720s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (31 pages, 455365 bytes).
+Output written on sum1.pdf (39 pages, 496573 bytes).
 PDF statistics:
- 794 PDF objects out of 1000 (max. 8388607)
- 596 compressed objects within 6 object streams
- 235 named destinations out of 1000 (max. 500000)
- 228 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 952 PDF objects out of 1000 (max. 8388607)
+ 744 compressed objects within 8 object streams
+ 293 named destinations out of 1000 (max. 500000)
+ 252 words of extra memory for PDF output out of 10000 (max. 10000000)
 

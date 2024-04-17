@@ -54,10 +54,37 @@ Group-type control policy can only tell us which group type's seats are planned 
 
 
 \subsubsection{Performances}
-
-The assignment is based on the fixed seat planning and we use the group-type to make the
+The assignment is based on the fixed seat planning and we use the group-type control to make the
 decision.
 
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+   T & Probabilities & \# of rows & SSP (\%) & Expected demand (\%) \\
+  \hline
+  70  & [0.25, 0.25, 0.25, 0.25]  & 10 & 94.97 & 94.71  \\
+  80  &   &  & 96.48 & 96.16  \\
+  90  &   &  & 97.94 & 97.36  \\
+  100  &   &  & 98.91 & 96.27  \\
+  \hline
+  70  & [0.25, 0.35, 0.05, 0.35]  & 10 & 95.90 & 95.60 \\
+  80  &   &  & 97.06 & 96.69 \\
+  90  &   &  & 98.58 & 98.58 \\
+  100  &   &  & 99.47 & 95.97 \\
+  \hline
+  70  & [0.15, 0.25, 0.55, 0.05]  & 10 & 97.41 & 96.70 \\
+  80  &   &  & 98.85 & 96.06 \\
+  90  &   &  & 98.73 & 97.63 \\
+  100  &   &  & 98.46 & 98.19 \\
+  \hline
+  140  & [0.25, 0.25, 0.25, 0.25]  & 20 & 95.83 & 95.78 \\
+  160  &   &  & 97.46 & 96.89 \\
+  180  &   &  & 99.05 & 96.42 \\
+  200  &   &  & 99.74 & 97.57 \\
+  \hline
+  \end{tabular}
+\end{table}
 
 \subsection{Make the instant allocation}
 In a more realistic scenario, groups arrive sequentially over time, and the seller must promptly make group assignments upon each arrival while maintaining the required spacing between groups. When a group is accepted, the seller must also determine which seats should be assigned to that group. It is essential to note that each group must be either accepted in its entirety or rejected entirely; partial acceptance is not permitted. Once the seats are confirmed and assigned to a group, they cannot be changed or reassigned to other groups.

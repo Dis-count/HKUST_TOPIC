@@ -46,7 +46,7 @@ The sum of this expression.
 
 P17. Specifically, we can convert a given pattern into a largest or full pattern while ensuring the original group type requirements are met.
 
-Mathematically, we can solve the following programming, here the constraints indicate a smaller group can take the seats planned for the larger group. 
+Mathematically, we can solve the following programming, here the constraints indicate a smaller group can take the seats planned for the larger group.
 
 We develop an efficient algorithm to generate the full or largest pattern. We aim to allocate the remaining unoccupied seats to maximize the number of people. The core idea is to change the smaller group to the largest group as much as possible with the unoccupied seats. The specific procedure is shown here.
 

@@ -64,20 +64,20 @@ There exists an optimal solution to the stochastic programming problem such that
 \end{prop}
 
 
-Given a specific pattern, we can convert it into a largest or full pattern while ensuring that the original group type requirements are met. When multiple full patterns are possible, our objective is to generate the pattern with minimal loss. Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_N)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_N{'})$ that maximizes $|\bm{h}{'}|$ while satisfying the following constraints: $h_1{'} \geq h_1$, $h_1{'} + h_2{'} \geq h_1 + h_2$, $\cdots$, $h_1{'} + \ldots + h_N{'} \geq h_1 + \ldots + h_N$. In other words, we want to find a pattern $\bm{h}'$ where each element $h_i'$ is greater than or equal to the corresponding element $h_i$ in $\bm{h}$, and the cumulative sums of the elements in $\bm{h}'$ are greater than or equal to the cumulative sums of the elements in $\bm{h}$.
+Given a specific pattern, we can convert it into a largest or full pattern while ensuring that the original group type requirements are met. When multiple full patterns are possible, our objective is to generate the pattern with minimal loss. Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_M)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_M{'})$ that maximizes $|\bm{h}{'}|$ while satisfying the following constraints: $h_1{'} \geq h_1$, $h_1{'} + h_2{'} \geq h_1 + h_2$, $\cdots$, $h_1{'} + \ldots + h_M{'} \geq h_1 + \ldots + h_M$. In other words, we want to find a pattern $\bm{h}'$ where each element $h_i'$ is greater than or equal to the corresponding element $h_i$ in $\bm{h}$, and the cumulative sums of the elements in $\bm{h}'$ are greater than or equal to the cumulative sums of the elements in $\bm{h}$.
 By finding such a pattern $\bm{h}'$, we can ensure that the converted pattern meets or exceeds the requirements of the original group types. Among the possible full patterns that satisfy these constraints, we prioritize the one with the smallest loss.
 
 Now, we demonstrate the specific allocation scheme.
-Let $\beta= L_{j} - \sum_{i} n_{i} x_{ij}$. If row $j$ is not the largest or full, then $\beta > 0$. 
-We aim to allocate the remaining unoccupied seats in row $j$ in a way that maximizes the number of planned groups that become the largest in size. Find the smallest group type in the pattern denoted as $k$. If $k = M$, it means that this row corresponds to a largest pattern. If $k \neq M$, we reduce the number of group type $k$ by one and increase the number of group type $\min \{(k+\beta), M\}$ by one, the number of unoccupied seats will be reduced correspondingly.
+Let $\beta_{j}= L_{j} - \sum_{i} n_{i} x_{ij}$. If row $j$ is not the largest or full, then $\beta_{j} > 0$. 
+We aim to allocate the remaining unoccupied seats in row $j$ in a way that maximizes the number of planned groups that become the largest in size. Find the smallest group type in the pattern denoted as $k$. If $k = M$, it means that this row corresponds to a largest pattern. If $k \neq M$, we reduce the number of group type $k$ by one and increase the number of group type $\min \{(k+\beta_{j}), M\}$ by one, the number of unoccupied seats will be reduced correspondingly.
 
-We continue this procedure until either all the planned groups become the largest or $\beta = 0$. If $\beta = 0$, it indicates that the pattern is full. In this case, we have assigned all the unoccupied seats to the existing groups without incurring any additional loss. Therefore, this full pattern has the minimal loss while satisfying the groups requirement. However, if all the planned groups become the largest and $\beta \neq 0$, we can repeatly follow the steps outlined below to obtain the largest pattern:
+We continue this procedure until either all the planned groups become the largest or $\beta_{j} = 0$. If $\beta_{j} = 0$, it indicates that the pattern is full. In this case, we have assigned all the unoccupied seats to the existing groups without incurring any additional loss. Therefore, this full pattern has the minimal loss while satisfying the groups requirement. However, if all the planned groups become the largest and $\beta_{j} \neq 0$, we can repeatly follow the steps outlined below to obtain the largest pattern:
 
 \begin{itemize}
-  \item If $\beta \geq n_{M}$, we can assign $n_M$ seats to a new group type $M$.
+  \item If $\beta_{j} \geq n_{M}$, we can assign $n_M$ seats to a new group type $M$.
 
-  \item If $n_{1} \leq \beta < n_{M}$, we can assign $\beta$ seats to a new group type $\beta-n_{1}+1$.
-  \item If $0 < \beta < n_{1}$, it means that the current pattern is already the largest possible pattern because all the planned groups in the pattern are the largest.
+  \item If $n_{1} \leq \beta_{j} < n_{M}$, we can assign $\beta_{j}$ seats to a new group type $\beta_{j}-n_{1}+1$.
+  \item If $0 < \beta_{j} < n_{1}$, it means that the current pattern is already the largest possible pattern because all the planned groups in the pattern are the largest.
 \end{itemize}
 
 By following these steps and always prioritizing the largest group type for seat planning, we can achieve either the largest pattern or a full pattern with minimal loss. This approach guarantees efficient seat allocation, maximizing the utilization of available seats while still accommodating the original groups' requirements.

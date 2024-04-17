@@ -12,10 +12,10 @@ In this section, we develop the scenario-based stochastic programming (SSP) to o
 
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. A particular realization of the demand vector can be represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of people accommodated over all the scenarios, we propose a scenario-based stochastic programming to obtain a seat planning.
 
-The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{Z}_{+}^{M \times N}$. Here, $x_{ij}$ represents the number of group type $i$ assigned to row $j$ in the seat planning. As mentioned earlier, we calculate the supply for group type $i$ as the sum of $x_{ij}$ over all rows $j$, denoted as $\sum_{j=1}^N x_{ij}$. However, considering the variability across different scenarios, it is necessary to model the potential excess or shortage of supply. To capture this characteristic, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$. 
-It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}_{+}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{Z}_{+}^{M \times |\Omega|}$. Each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the excess supply for group type $i$ for each scenario $\omega$. On the other hand, $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ for each scenario $\omega$.
+The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{Z}^{+, M \times N}_{0}$. Here, $x_{ij}$ represents the number of group type $i$ assigned to row $j$ in the seat planning. As mentioned earlier, we calculate the supply for group type $i$ as the sum of $x_{ij}$ over all rows $j$, denoted as $\sum_{j=1}^N x_{ij}$. However, considering the variability across different scenarios, it is necessary to model the potential excess or shortage of supply. To capture this characteristic, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$. 
+It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}^{+, M \times |\Omega|}_{0}$ and $\mathbf{y}^{-} \in \mathbb{Z}^{+, M \times |\Omega|}_{0}$. Each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the excess supply for group type $i$ for each scenario $\omega$. On the other hand, $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ for each scenario $\omega$.
 
-Taking into account the possibility of groups occupying seats planned for larger group types when the corresponding supply is insufficient, we make the assumption that surplus seats for group type $i$ can be occupied by smaller group types $j<i$ in descending order of group size. This means that if there are excess supply available after assigning groups of type $i$ to rows, we can provide the supply to groups of type $j<i$ in a hierarchical manner based on their sizes. That is, for any $\omega$, $i \leq M-1$, 
+Taking into account the possibility of groups occupying seats planned for larger group types when the corresponding supply is insufficient, we make the assumption that surplus seats for group type $i$ can be occupied by smaller group types $j<i$ in descending order of group size. This means that if there are excess supply available after assigning groups of type $i$ to rows, we can provide the supply to groups of type $j<i$ in a hierarchical manner based on their sizes. That is, for any $\omega$, $i \leq M-1$,
 
 $$y_{i \omega}^{+}=\left(\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+}\right)^{+}, ~y_{i \omega}^{-}=\left(d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+} \right)^{+},$$
 where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest group type $M$, we have $y_{M \omega}^{+} = (\sum_{j=1}^N x_{Mj} - d_{M \omega})^{+}$, $y_{M \omega}^{-} = (d_{M \omega}- \sum_{j=1}^N x_{Mj})^{+}$. Based on the above mentioned considerations, the total supply of group type $i$ under scenario $\omega$ can be expressed as $\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}, i = 1, \ldots, M-1$. For the special case of group type $M$, the total supply under scenario $\omega$ is $\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}$.
@@ -28,8 +28,8 @@ Then we have the formulation of SSP:
   y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega \label{DEF_constr1} \\
   & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \label{DEF_constr2}\\
   & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}  \label{DEF_constr3} \\
-  & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \notag \\
-  & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
+  & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}^{+}_{0}, \quad i \in \mathcal{M}, \omega \in \Omega \notag \\
+  & x_{ij} \in \mathbb{Z}^{+}_{0}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
   \end{align}
 
 The objective function consists of two parts. The first part represents the number of people in
@@ -50,20 +50,20 @@ Considering the analysis provided earlier, we find it advantageous to obtain a s
 There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
 \end{prop}
 
-Given a specific pattern, we can convert it into a largest or full pattern while ensuring that the original group type requirements are met. When multiple full patterns are possible, our objective is to generate the pattern with minimal loss. Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_M)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_M{'})$ that maximizes $|\bm{h}{'}|$ while satisfying the following constraints: $h_1{'} \geq h_1$, $h_1{'} + h_2{'} \geq h_1 + h_2$, $\cdots$, $h_1{'} + \ldots + h_M{'} \geq h_1 + \ldots + h_M$. In other words, we want to find a pattern $\bm{h}'$ where each element $h_i'$ is greater than or equal to the corresponding element $h_i$ in $\bm{h}$, and the cumulative sums of the elements in $\bm{h}'$ are greater than or equal to the cumulative sums of the elements in $\bm{h}$.
-By finding such a pattern $\bm{h}'$, we can ensure that the converted pattern meets or exceeds the requirements of the original group types. Among the possible full patterns that satisfy these constraints, we prioritize the one with the smallest loss.
+Given a specific pattern, we can convert it into a largest or full pattern while ensuring that the original group type requirements are met. When multiple full patterns are possible, our objective is to generate the pattern with minimal loss. Mathematically, for any pattern $\bm{h} = (h_1, \ldots, h_M)$, we seek to find a pattern $\bm{h}{'} = (h_1{'}, \ldots, h_M{'})$ that maximizes $|\bm{h}{'}|$ while satisfying the following constraints: $h_M{'} \geq h_M$, $h_{M-1}{'} + h_M{'} \geq h_{M-1} + h_{M}$, $\cdots$, $h_1{'} + \ldots + h_M{'} \geq h_1 + \ldots + h_M$. In other words, we want to find a pattern $\bm{h}'$ where each element $h_i'$ is greater than or equal to the corresponding element $h_i$ in $\bm{h}$, and the cumulative sums of the elements in $\bm{h}'$ are greater than or equal to the cumulative sums of the elements in $\bm{h}$.
+By finding such a pattern $\bm{h}'$, we can ensure that the converted pattern meets or exceeds the requirements of the original group types. Among the possible full patterns that satisfy these constraints, we prioritize the one with the largest size.
 
 Now, we demonstrate the specific allocation scheme.
-Let $\beta= L_{j} - \sum_{i} n_{i} x_{ij}$. If row $j$ is not the largest or full, then $\beta > 0$. 
-We aim to allocate the remaining unoccupied seats in row $j$ in a way that maximizes the number of planned groups that become the largest in size. Find the smallest group type in the pattern denoted as $k$. If $k = M$, it means that this row corresponds to a largest pattern. If $k \neq M$, we reduce the number of group type $k$ by one and increase the number of group type $\min \{(k+\beta), M\}$ by one, the number of unoccupied seats will be reduced correspondingly.
+Let $\beta_{j}= L_{j} - \sum_{i} n_{i} x_{ij}$. If row $j$ is not the largest or full, then $\beta_{j} > 0$. 
+We aim to allocate the remaining unoccupied seats in row $j$ in a way that maximizes the number of planned groups that become the largest in size. Find the smallest group type in the pattern denoted as $k$. If $k = M$, it means that this row corresponds to a largest pattern. If $k \neq M$, we reduce the number of group type $k$ by one and increase the number of group type $\min \{(k+\beta_{j}), M\}$ by one, the number of unoccupied seats will be reduced correspondingly.
 
-We continue this procedure until either all the planned groups become the largest or $\beta = 0$. If $\beta = 0$, it indicates that the pattern is full. In this case, we have assigned all the unoccupied seats to the existing groups without incurring any additional loss. Therefore, this full pattern has the minimal loss while satisfying the groups requirement. However, if all the planned groups become the largest and $\beta \neq 0$, we can repeatly follow the steps outlined below to obtain the largest pattern:
+We continue this procedure until either all the planned groups become the largest or $\beta_{j} = 0$. If $\beta_{j} = 0$, it indicates that the pattern is full. In this case, we have assigned all the unoccupied seats to the existing groups without incurring any additional loss. Therefore, this full pattern has the minimal loss while satisfying the groups requirement. However, if all the planned groups become the largest and $\beta_{j} \neq 0$, we can repeatly follow the steps outlined below to obtain the largest pattern:
 
 \begin{itemize}
-    \item If $\beta \geq n_{M}$, we can assign $n_M$ seats to a new group type $M$.
+    \item If $\beta_{j} \geq n_{M}$, we can assign $n_M$ seats to a new group type $M$.
   
-    \item If $n_{1} \leq \beta < n_{M}$, we can assign $\beta$ seats to a new group type $\beta-n_{1}+1$.
-    \item If $0 < \beta < n_{1}$, it means that the current pattern is already the largest possible pattern because all the planned groups in the pattern are the largest.
+    \item If $n_{1} \leq \beta_{j} < n_{M}$, we can assign $\beta_{j}$ seats to a new group type $\beta_{j}-n_{1}+1$.
+    \item If $0 < \beta_{j} < n_{1}$, it means that the current pattern is already the largest possible pattern because all the planned groups in the pattern are the largest.
   \end{itemize}
   
 By following these steps and always prioritizing the largest group type for seat planning, we can achieve either the largest pattern or a full pattern with minimal loss. This approach guarantees efficient seat allocation, maximizing the utilization of available seats while still accommodating the original groups' requirements.
@@ -123,7 +123,7 @@ As we can find, this deterministic equivalent form is a large-scale problem even
 \begin{aligned}
 \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
 \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-& \mathbf{x} \in \mathbb{Z}_{+}^{M \times N},
+& \mathbf{x} \in \mathbb{Z}^{+, M \times N}_{0},
 \end{aligned}
 \end{equation}
 where $z(\mathbf{x})$ is defined as
@@ -173,7 +173,7 @@ Alternatively, $z_{\omega}(\mathbf{x})$ is the largest number $z_{\omega}$ such 
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
     & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \forall \bm{\alpha}_{\omega} \in \mathcal{O}, \forall \omega \\
-     & \mathbf{x} \in \mathbb{Z}_{+}
+     & \mathbf{x} \in \mathbb{Z}^{+}_{0}
   \end{aligned}
 \end{equation}
 
@@ -215,7 +215,7 @@ We can conclude that the RBMP will have the form:
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
     & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha}_{\omega} \in \mathcal{O}^{t}, \forall \omega \\
-     & \mathbf{x} \in \mathbb{Z}_{+}
+     & \mathbf{x} \in \mathbb{Z}^{+}_{0}
   \end{aligned}
 \end{equation}
 
@@ -257,7 +257,7 @@ We may obtain a fractional optimal solution when we solve the LP relaxation of p
 Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${X}^{*}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Replace the vector $\mathbf{d}$ with ${X}^{*}$ in the deterministic model, we have the following problem, 
 
 \begin{equation}\label{deter_upper1}
-  \left\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq {X}^{*}_{i}, i \in \mathcal{M}; x_{ij} \in Z_{+} \right\}
+  \left\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq {X}^{*}_{i}, i \in \mathcal{M}; x_{ij} \in \mathbb{Z}^{+}_{0} \right\}
 \end{equation}
 
 Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{\tilde{x}}$, which represents a feasible seat planning. We can construct the largest or full patterns by Algorithm \ref{construction}.

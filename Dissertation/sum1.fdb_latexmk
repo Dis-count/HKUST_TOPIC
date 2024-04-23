@@ -1,17 +1,17 @@
 # Fdb version 3
-["bibtex sum1"] 1713339437 "sum1.aux" "sum1.bbl" "sum1" 1713340763
+["bibtex sum1"] 1713339437 "sum1.aux" "sum1.bbl" "sum1" 1713782914
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1630493868 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "refe.bib" 1708323554 13722 d91e9e7ba112788535745a2050ae6adb ""
-  "sum1.aux" 1713340432 12627 6e06a5f52b21a88292cfad8ca755c9cf "pdflatex"
+  "sum1.aux" 1713768573 12627 6e06a5f52b21a88292cfad8ca755c9cf "pdflatex"
   (generated)
-  "sum1.blg"
   "sum1.bbl"
-["pdflatex"] 1713340431 "f:/Files/Github/HKUST_TOPIC/Dissertation/sum1.tex" "sum1.pdf" "sum1" 1713340763
+  "sum1.blg"
+["pdflatex"] 1713768572 "f:/Files/Github/HKUST_TOPIC/Dissertation/sum1.tex" "sum1.pdf" "sum1" 1713782914
   "Chapters/Abstract.tex" 1713169083 940 91e18a03f3ff5e998f6a5fa26c2b49bf ""
   "Chapters/Conclusion.tex" 1712326113 2868 8cac7123fa41e2f261d2f27c37dd783d ""
   "Chapters/Deterministic.tex" 1713329445 4985 beb30fd26650194e6045a01adadb8cf7 ""
-  "Chapters/Dynamic.tex" 1713339352 22714 c78b0b5c16d6f2565e5e08df34c217ad ""
-  "Chapters/Introduction.tex" 1713340430 13493 fec5d1bcd2fa4a5e04cbc938b95ec4f1 ""
+  "Chapters/Dynamic.tex" 1713768571 22683 2c093c8e155af11e9d7de150a13f6754 ""
+  "Chapters/Introduction.tex" 1713685434 13495 49040d4a216a5e4c8e99816a062686eb ""
   "Chapters/Literature-review.tex" 1713178557 10437 94150163444bce84a1313069fd1a8074 ""
   "Chapters/Proof.tex" 1713338491 9597 8db7591cfda5d1476e32309b459456e0 ""
   "Chapters/Results.tex" 1713340270 25701 3643d8fabfc91adc1923033cee69660c ""
@@ -174,9 +174,9 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/Dissertation/sum1.tex" 1713338639 1957 0ad52a4b144f736c3590d3e9c58f0919 ""
-  "sum1.aux" 1713340432 12627 6e06a5f52b21a88292cfad8ca755c9cf "pdflatex"
+  "sum1.aux" 1713768573 12627 6e06a5f52b21a88292cfad8ca755c9cf "pdflatex"
   "sum1.bbl" 1713339438 6850 cb548d382d9d21a6b6635668c7353d5a "bibtex sum1"
-  "sum1.out" 1713340432 5712 4b0a7047d5ff68a0b94df535da46072e "pdflatex"
+  "sum1.out" 1713768573 5712 4b0a7047d5ff68a0b94df535da46072e "pdflatex"
   "sum1.tex" 1713338639 1957 0ad52a4b144f736c3590d3e9c58f0919 ""
   (generated)
   "sum1.pdf"

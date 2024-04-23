@@ -1,6 +1,6 @@
 % !TEX root = sum1.tex
 \section{Results}
-We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing.
+We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of immediate assignment and implementing social distancing.
 
 % assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
@@ -28,10 +28,10 @@ In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a
 
 % According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
 \begin{lem}\label{bid-price}
- The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_v =0$, $z_{i} = \frac{\delta(n_i-n_v)}{n_v}$ for $i = v+1, \ldots, M$ and $\beta_j = \frac{n_v - \delta}{n_v}$ for all $j$.
+ The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
 \end{lem}
 
-The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_v - \delta}{n_v} n_i = \frac{\delta (i - v)}{n_v}$. When $i < v$, $i - \beta_j n_i < 0$. When $i \geq v$, $i - \beta_j n_i \geq 0$. This means that group type $i$ with $i$ greater than or equal to $v$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. In practice, groups are often assigned arbitrarily based on availability when the capacity allows, which can result in a large number of empty seats.
+The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}} n_i = \frac{\delta (i - \tilde{i})}{n_{\tilde{i}}}$. When $i < \tilde{i}$, $i - \beta_j n_i < 0$. When $i \geq \tilde{i}$, $i - \beta_j n_i \geq 0$. This means that group type $i$ with $i$ greater than or equal to $\tilde{i}$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. In practice, groups are often assigned arbitrarily based on availability when the capacity allows, which can result in a large number of empty seats.
 
 The bid-price control policy based on the static model is stated below.
 
@@ -40,8 +40,8 @@ The bid-price control policy based on the static model is stated below.
   \For{$t =1, \ldots, T$}{
     {Observe group type $i$\;}
     {Solve the LP relaxation of problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$\;
-    Obtain $v$ such that the aggregate optimal solution is $x e_{v} + \sum_{i=v+1} ^{M} d_{i} e_{i}$\;}
-    \eIf{$i \geq v$ and $\max_j{L_j} \geq n_i$}
+    Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$\;}
+    \eIf{$i \geq \tilde{i}$ and $\max_j{L_j} \geq n_i$}
     {Accept the group and assign the group to row $k$ such that $L_{k} \geq n_{i}$\;  
     $\mathbf{L}^{t+1} \gets \mathbf{L}^{t} - n_i \mathbf{e}_{k}$\;}
     {Reject the group\; $\mathbf{L}^{t+1} \gets \mathbf{L}^{t}$\;}}
@@ -156,6 +156,75 @@ For the first three policies, their performance tends to initially drop and then
 
 %  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
 %  大于 gamma/gamma+1， 则最大损失是（ ）
+
+\subsection{Impact of Immediate Assignment}
+To demonstrate the impact of immediate seat assignment, we adopt a decision-making process where instant decisions are made but seat assignments are conducted at a later stage. In our numerical experiments, we utilize bid-price control and dynamic programming to evaluate the effectiveness of this approach.
+
+We introduce the following LP,
+
+\begin{equation}\label{test}
+  \{\max: \sum_{i=1}^{M} \sum_{j= 1}^{N} (n_i- \delta) x_{i} \big| \sum_{j= 1}^{N} x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \geq 0, i \in \mathcal{M}\},
+\end{equation}
+
+where $x_{i}$ denotes the number of group type $i$ in one row with the length of $L$.
+
+It is evident that the optimal solution to this LP equals the aggregate optimal solution to LP relaxation of problem \eqref{deter_upper}.
+
+For each arriving group, the option to assign seats at a later time is available. Therefore, when deciding to accept a group, it is crucial to ensure that a feasible seat assignment can be made. In practice, a capacity threshold is often set. If the cumulative size of all accepted groups does not exceed the threshold, which can be calculated as $\sum_{j} [L_j- (n_M - 1)]= L - N(n_M -1)$, a feasible seat assignment for the current accepted groups always exists. However, if the cumulative size surpasses this threshold, we need to utilize the problem \ref{deter_upper} to determine whether a feasible seat assignment is possible.
+
+% \begin{equation}
+%   \begin{aligned}
+%   \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{i} \\
+%   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{i} \leq d_{i}, \quad i \in \mathcal{M}, \\
+%   & \sum_{i=1}^{M} n_{i} x_{i} \leq L,  \\
+%   & x_{ij} \geq 0, \quad i \in \mathcal{M}.
+%   \end{aligned}
+% \end{equation}
+
+The specific algorithms are shown in the following.
+
+\begin{algorithm}[H]
+  \caption{Bid-price Control Algorithm with Late Allocation}\label{algo_bid_late}
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    {Solve the LP relaxation of problem \eqref{test} with $d_i^{t} = (T-t) \cdot p_i$ and $L^{t}$\;
+    Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$\;}
+    \eIf{$i \geq \tilde{i}$ and \text{there is a feasible assignment}}
+    {Accept the group \;
+    $L^{t+1} \gets L^{t} - n_i$\;}
+    {Reject the group\; $L^{t+1} \gets L^{t}$\;}}
+\end{algorithm}
+
+
+The numerical results are presented in the following table. Through a comparison of these values, it becomes evident that late seat assignment leads to an improvement in the occupancy rate, resulting in enhanced performance when compared to optimal seat assignment.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|l|l|l|l|l|l|}
+  \hline
+   T & Probabilities &  DP1-L (\%) & Bid-L (\%) & DP1 (\%) & Bid (\%) \\
+  \hline
+  60  & [0.25, 0.25, 0.25, 0.25]  & 99.52 & 99.44 & 98.42 & 98.38 \\
+  70  &   & 99.32 & 98.97 & 96.87 & 96.24 \\
+  80  &   & 99.34 & 99.30 & 95.69 & 96.02 \\
+  90  &   & 99.55 & 99.49 & 96.05 & 96.41  \\
+  100 &   & 99.78 & 99.66 & 95.09 & 96.88 \\
+  \hline
+  60  & [0.25, 0.35, 0.05, 0.35]  & 99.50 & 99.37 & 98.26 & 98.25  \\
+  70  &   & 99.40 & 98.97 & 96.62 & 96.06 \\
+  80  &   & 99.46 & 99.24 & 96.01 & 95.89 \\
+  90  &   & 99.59 & 99.35 & 96.77 & 96.62 \\
+  100 &   & 99.77 & 99.61 & 97.04 & 97.14  \\
+  \hline
+  60  & [0.15, 0.25, 0.55, 0.05]  & 99.57 & 99.54 & 98.72 & 98.74 \\
+  70  &   & 99.46 & 99.39  & 96.38 & 96.90 \\
+  80  &   & 99.50 & 99.30  & 97.75 & 97.87 \\
+  90  &   & 99.34 & 99.44  & 98.45 & 98.69 \\
+  100 &   & 99.34 & 99.55  & 98.62 & 98.94 \\
+  \hline
+  \end{tabular}
+\end{table}
+
 
 \subsection{Impact of Implementing Social Distancing in DSA}
 In this section, our focus is to analyze the influence of social distancing on the number of accepted individuals. Intuitively, when demand is small, we will accept all arrivals, thus there is no difference whether we implement the social distancing. What is interesting for us is when the difference occurs. Our primary objective is to determine the first time period at which, on average, the number of people accepted without social distancing is not less than the number accepted with social distancing plus one. This critical point, referred to as the gap point, is of interest to us. Additionally, we will examine the corresponding occupancy rate at this gap point. It should be noted that the difference at a specific time period may vary depending on the total number of periods considered. Therefore, when evaluating the difference at a particular time period, we assume that there are a total of such periods under consideration.

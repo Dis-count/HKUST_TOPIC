@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  21 APR 2024 21:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  25 APR 2024 14:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**f:/Files/Github/HKUST_TOPIC/DynamicSeat3/sum1.tex
-(f:/Files/Github/HKUST_TOPIC/DynamicSeat3/sum1.tex
+**f:/Files/Github/HKUST_TOPIC/DynamicSeat_copy/sum1.tex
+(f:/Files/Github/HKUST_TOPIC/DynamicSeat_copy/sum1.tex
 LaTeX2e <2021-06-01> patch level 1
 L3 programming layer <2021-08-27> (e:/Software/texlive/2021/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
@@ -542,12 +542,12 @@ LaTeX Warning: No \author given.
 (./Chapters/Abstract.tex) (./Chapters/Introduction.tex [1
 
 {e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<./Figures/seat_planning.png, id=122, 391.4625pt x 238.64156pt>
+<./Figures/seat_planning.png, id=130, 391.4625pt x 238.64156pt>
 File: ./Figures/seat_planning.png Graphic file (type png)
 <use ./Figures/seat_planning.png>
 Package pdftex.def Info: ./Figures/seat_planning.png  used on input line 21.
 (pdftex.def)             Requested size: 142.26378pt x 86.72655pt.
-<./Figures/seat_assignment.png, id=124, 407.27156pt x 234.8775pt>
+<./Figures/seat_assignment.png, id=132, 407.27156pt x 234.8775pt>
 File: ./Figures/seat_assignment.png Graphic file (type png)
 <use ./Figures/seat_assignment.png>
 Package pdftex.def Info: ./Figures/seat_assignment.png  used on input line 26.
@@ -555,91 +555,53 @@ Package pdftex.def Info: ./Figures/seat_assignment.png  used on input line 26.
  [2 <./Figures/seat_planning.png> <./Figures/seat_assignment.png>] [3]) (./Chapters/Literature-review.tex [4] [5]) (./Chapters/Problem-description.tex
 
 pdfTeX warning: pdflatex.exe (file ./Figures/dummy_seat.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./Figures/dummy_seat.pdf, id=216, 932.82928pt x 132.54417pt>
+<./Figures/dummy_seat.pdf, id=224, 932.82928pt x 132.54417pt>
 File: ./Figures/dummy_seat.pdf Graphic file (type pdf)
 <use ./Figures/dummy_seat.pdf>
 Package pdftex.def Info: ./Figures/dummy_seat.pdf  used on input line 24.
 (pdftex.def)             Requested size: 362.37569pt x 51.48976pt.
 [6]
-<./Figures/full_largest.png, id=232, 603.75563pt x 115.93312pt>
+<./Figures/full_largest.png, id=240, 603.75563pt x 115.93312pt>
 File: ./Figures/full_largest.png Graphic file (type png)
 <use ./Figures/full_largest.png>
 Package pdftex.def Info: ./Figures/full_largest.png  used on input line 57.
 (pdftex.def)             Requested size: 362.37569pt x 69.58339pt.
- [7 <./Figures/dummy_seat.pdf> <./Figures/full_largest.png>]) (./Chapters/Stochastic-form.tex [8] [9] [10] [11] [12] [13] [14]) (./Chapters/Methods.tex [15] [16] [17] [18]) (./Chapters/Results.tex [19] [20]
-
-LaTeX Warning: Reference `deter_upper' on page 21 undefined on input line 15.
-
-
-LaTeX Warning: Reference `deter_upper' on page 21 undefined on input line 48.
-
-[21]
-
-LaTeX Warning: Reference `deter_upper' on page 22 undefined on input line 55.
-
-
-LaTeX Warning: Reference `deter_upper' on page 22 undefined on input line 57.
-
-
-LaTeX Warning: Reference `deter_upper' on page 22 undefined on input line 69.
-
-[22]
-
-LaTeX Warning: Reference `sec_dynamic_seat' on page 23 undefined on input line 79.
-
-[23] [24] [25]
-<./Figures/re2.pdf, id=542, 1387.58403pt x 739.3221pt>
+ [7 <./Figures/dummy_seat.pdf> <./Figures/full_largest.png>] [8] [9] [10]) (./Chapters/Stochastic-form.tex [11] [12] [13] [14] [15] [16] [17]) (./Chapters/Methods.tex [18] [19] [20]) (./Chapters/Results.tex [21] [22] [23] [24]
+<./Figures/re2.pdf, id=494, 1387.58403pt x 739.3221pt>
 File: ./Figures/re2.pdf Graphic file (type pdf)
 <use ./Figures/re2.pdf>
-Package pdftex.def Info: ./Figures/re2.pdf  used on input line 192.
+Package pdftex.def Info: ./Figures/re2.pdf  used on input line 100.
 (pdftex.def)             Requested size: 362.37569pt x 193.07657pt.
- [26]
-<./Figures/p2.pdf, id=547, 462.52798pt x 346.89601pt>
+ [25 <./Figures/re2.pdf>]
+<./Figures/p2.pdf, id=540, 462.52798pt x 346.89601pt>
 File: ./Figures/p2.pdf Graphic file (type pdf)
 <use ./Figures/p2.pdf>
-Package pdftex.def Info: ./Figures/p2.pdf  used on input line 235.
+Package pdftex.def Info: ./Figures/p2.pdf  used on input line 143.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/p1.pdf, id=548, 462.52798pt x 346.89601pt>
+<./Figures/p1.pdf, id=541, 462.52798pt x 346.89601pt>
 File: ./Figures/p1.pdf Graphic file (type pdf)
 <use ./Figures/p1.pdf>
-Package pdftex.def Info: ./Figures/p1.pdf  used on input line 238.
+Package pdftex.def Info: ./Figures/p1.pdf  used on input line 146.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
- [27 <./Figures/re2.pdf>]) (./Chapters/Conclusion.tex [28 <./Figures/p2.pdf> <./Figures/p1.pdf>]) (./sum1.bbl [29] [30]) (./Chapters/Appendix_proof.tex [31]
+ [26 <./Figures/p2.pdf> <./Figures/p1.pdf>]) (./Chapters/Conclusion.tex [27]) (./sum1.bbl [28] [29]) (./Chapters/Appendix_2.tex [30] [31] [32] [33]) (./Chapters/Appendix_proof.tex [34
 
-LaTeX Warning: Reference `sol_relax_deter' on page 32 undefined on input line 42.
-
-
-LaTeX Warning: Reference `deter_upper' on page 32 undefined on input line 45.
-
-[32
-
-] [33]
-
-LaTeX Warning: Reference `sol_relax_deter' on page 34 undefined on input line 119.
-
-
-LaTeX Warning: Reference `deter_upper' on page 34 undefined on input line 119.
-
-[34]) (./Chapters/Extension.tex [35]) [36] (./sum1.aux)
-
-LaTeX Warning: There were undefined references.
-
+] [35] [36]) (./Chapters/Extension.tex [37]) [38] (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: 31F268D48A70A99CB44AF8801408BC96;6199.
+(rerunfilecheck)             Checksum: D9249C779473C862DD5001CC63674A65;6609.
  ) 
 Here is how much of TeX's memory you used:
- 14463 strings out of 478599
- 220598 string characters out of 5853593
- 561052 words of memory out of 5000000
- 31801 multiletter control sequences out of 15000+600000
+ 14479 strings out of 478599
+ 220857 string characters out of 5853593
+ 561290 words of memory out of 5000000
+ 31807 multiletter control sequences out of 15000+600000
  420217 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,21n,75p,1577b,720s stack positions out of 5000i,500n,10000p,200000b,80000s
-{e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (36 pages, 498457 bytes).
+ 62i,21n,75p,1581b,718s stack positions out of 5000i,500n,10000p,200000b,80000s
+{e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on sum1.pdf (38 pages, 518649 bytes).
 PDF statistics:
- 909 PDF objects out of 1000 (max. 8388607)
- 697 compressed objects within 7 object streams
- 274 named destinations out of 1000 (max. 500000)
- 244 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 955 PDF objects out of 1000 (max. 8388607)
+ 738 compressed objects within 8 object streams
+ 281 named destinations out of 1000 (max. 500000)
+ 260 words of extra memory for PDF output out of 10000 (max. 10000000)
 

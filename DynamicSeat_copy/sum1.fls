@@ -1,8 +1,8 @@
-PWD f:/Files/Github/HKUST_TOPIC/DynamicSeat3
+PWD f:/Files/Github/HKUST_TOPIC/DynamicSeat_copy
 INPUT e:/Software/texlive/2021/texmf.cnf
 INPUT e:/Software/texlive/2021/texmf-dist/web2c/texmf.cnf
 INPUT e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT f:/Files/Github/HKUST_TOPIC/DynamicSeat3/sum1.tex
+INPUT f:/Files/Github/HKUST_TOPIC/DynamicSeat_copy/sum1.tex
 OUTPUT sum1.log
 INPUT e:/Software/texlive/2021/texmf-dist/tex/latex/base/article.cls
 INPUT e:/Software/texlive/2021/texmf-dist/tex/latex/base/article.cls
@@ -971,6 +971,13 @@ INPUT ./sum1.bbl
 INPUT sum1.bbl
 INPUT ./sum1.bbl
 INPUT sum1.bbl
+INPUT ./Chapters/Appendix_2.tex
+INPUT ./Chapters/Appendix_2.tex
+INPUT ./Chapters/Appendix_2.tex
+INPUT Chapters/Appendix_2.tex
+INPUT ./Chapters/Appendix_2.tex
+INPUT ./Chapters/Appendix_2.tex
+INPUT Chapters/Appendix_2.tex
 INPUT ./Chapters/Appendix_proof.tex
 INPUT ./Chapters/Appendix_proof.tex
 INPUT ./Chapters/Appendix_proof.tex
@@ -1002,6 +1009,7 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb

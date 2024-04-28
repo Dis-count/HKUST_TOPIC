@@ -130,7 +130,7 @@ The results of the estimation of $c_1$ and $c_2$ are presented in the table belo
 
 
 \subsubsection{Impact of Social Distancing as Demands Increase}
-Now, we consider impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 1.9$ and $\gamma = 2.5$. We set the parameters as follows: $T$ varies from 30 to 120, the step size is 1.  The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
+Now, we consider the impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 1.9$ and $\gamma = 2.5$. We set the parameters as follows: $T$ varies from 30 to 120, the step size is 1.  The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
 
 The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ DSA to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt a different approach. We simply accept all incoming groups as long as the capacity allows, without considering the constraints of groups needing to sit together. This means that we prioritize filling the available seats without enforcing any specific seating arrangements or social distancing requirements. We conduct an analysis using a sample of 100 probability combinations associated with the same $\gamma$. The occupancy rate at different demands is calculated as the mean of these 100 samples. The figures depicting the results are presented below.
 
@@ -198,6 +198,12 @@ The below table presents the percentage differences for different demand levels 
   \hline            
 \end{tabular}
 \end{table}
+
+
+As the value of $\gamma$ increases, the period of gap point will decrease and the corresponding occupancy rate will Increase. This suggests that larger groups are more likely to be accepted, resulting in a smaller number of accepted groups overall. Consequently, the occupancy rate increases due to the allocation of seats to larger groups. The percentage difference is negligible when the demand is small, but it becomes more significant as the demand increases.
+
+
+Let us consider the scenario where the gap point is defined as $[T, OR]$ under the parameters $\delta$, $\gamma$, and $M$, with the total number of seats denoted as $L$. When the actual number of people (demand) is less than $L \cdot OR$, the implementation of social distancing has no impact on the revenue. However, when the actual number of people exceeds $L \cdot OR$, implementing social distancing will result in a revenue loss. The magnitude of this loss can be determined through simulations using the corresponding parameters. To mitigate this potential loss, the seller can increase the value of $\gamma$. This can be achieved by either setting a limit on the number of single-person groups or allowing for larger group sizes. By doing so, the goal is to minimize the negative impact of social distancing measures and maximize revenue within the constraints imposed by the occupancy rate.
 
 
 % [0.27 6.39 13.23 21.85 25.69] 1.9

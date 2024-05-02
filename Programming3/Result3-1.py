@@ -8,9 +8,9 @@ import time
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(60,61,10)
+    period_range = range(60,101,10)
     given_lines = 10
-    probab = [0.25, 0.25, 0.25, 0.25]
+    probab = [0.25, 0.05, 0.65, 0.05]
     s = 1
     begin_time = time.time()
     filename = 'Periods_' + str(time.time()) + '.txt'
@@ -28,7 +28,7 @@ if __name__ == "__main__":
         ratio3 = 0
         ratio4 = 0
         ratio5 = 0
-        accept_people =0
+        accept_people = 0
 
         multi = np.arange(1, I+1)
         count = 100

@@ -1,0 +1,12 @@
+Run Start Time: Mon Apr 29 13:19:11 2024
+The number of periods: 	60
+Sto: 98.64 ;Bid: 98.49 ;DP1: 98.58 ;FCFS: 97.89 
+;Number of accepted people: 146.62 	The number of periods: 	70
+Sto: 98.60 ;Bid: 97.89 ;DP1: 98.18 ;FCFS: 94.33 
+;Number of accepted people: 153.51 	The number of periods: 	80
+Sto: 99.53 ;Bid: 99.01 ;DP1: 98.68 ;FCFS: 94.21 
+;Number of accepted people: 153.69 	The number of periods: 	90
+Sto: 99.41 ;Bid: 98.98 ;DP1: 98.70 ;FCFS: 94.08 
+;Number of accepted people: 154.34 	The number of periods: 	100
+Sto: 99.25 ;Bid: 98.62 ;DP1: 98.48 ;FCFS: 94.19 
+;Number of accepted people: 155.02 	Total Runtime	1585.105860

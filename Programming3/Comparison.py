@@ -423,8 +423,8 @@ class CompareMethods:
         sequence = [i-self.s for i in sequence]
         final_demand = np.array(sequence) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
-        print(change_roll)
-        print(mylist)
+        # print(change_roll)
+        # print(mylist)
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1

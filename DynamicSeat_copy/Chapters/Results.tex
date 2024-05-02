@@ -1,6 +1,7 @@
 % !TEX root = sum1.tex
 \section{Results}
 We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing.
+In the experiment, we set the following parameters. The seat layout consists of 10 rows, each containing 21 seats. To account for social distancing measures, one seat is designated as a dummy seat. The group size can range from 1 to 4 people. In our experiments, we simulate exact one group arrival in each period.
 
 % assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
@@ -11,15 +12,34 @@ In this section, we compare the performance of five dynamic seat assignment poli
 % dynamic programming based heuristic and booking limit control. Finally, we establish the FCFS policy as the benchmark.
 
 \subsubsection*{Numerical Results}
-The seat layout consists of 10 rows, each with 21 seats (including one dummy seat as the social distance), and the group size can range up to 4 people. We conducted experiments over 60 to 100 periods to demonstrate the policies' performance under varying demand levels. We selected three probabilities to ensure that the expected number of people for each period is consistent. The table below displays the average of 200 instances for each number.
+We conducted these experiments over a range of 60 to 100 periods to evaluate the performance of different policies under varying demand levels.
 
-An arrival sequence during $T$ periods can be expressed as ${y_1, y_2, \ldots, y_T}$. Let $N_i = \sum_{t} I(y_t = i)$, i.e., the count number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_M)$, follow a multinomial distribution, 
-$$
-p\left(N_1, \ldots, N_M \mid \mathbf{p}\right)=\frac{T !}{N_{1} !, \ldots, N_{M} !} \prod_{i=1}^M p_i^{N_i}, T=\sum_{i=1}^M N_i.
-$$
+To ensure consistency in the expected number of people for each period, we selected probabilities for group types such that the sum of the expected number of people per period remains constant. Denote this constant as $c$. Initially, we assigned equal probabilities to each group type, resulting in $c = 2.5$. To introduce more variation, we select the probability distribution $[0.45, 0.05, 0.05, 0.45]$ to emphasize a large $p_4$ and a small $p_3$, and the distribution $[0.25, 0.05, 0.65, 0.05]$ to emphasize a large $p_3$ and a small $p_4$. 
 
-It is clear that the number of different sequences is $M^T$. The number of different scenarios is
-$O(T^{M-1})$ which can be obtained by the following DP. The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
+
+The table presents the performance results of five different policies: DSA, DP1, Bid-price, Booking, and FCFS, which stand for dynamic seat assignment, dynamic programming based heuristic, bid-price, booking-limit, and first come first served, respectively. The procedures for the last four policies are detailed in the appendix \ref{policies}. Each entry in the table represents the average performance across 100 instances. Performance is evaluated by comparing the ratio of the number of accepted people under each policy to the number of accepted people under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
+
+
+% seat planning: two rows/ seat assignment: same rows but point out the assignment.
+
+% change 5.1 and 5.2 general
+
+% 详细指出what is the percentage diff
+
+% Explain the performance
+
+% 让最大组和次大组的到来概率的差距达到最大
+% To maximize the difference between $p_3$ and $p_4$, we set $p_4$ as large as possible and $p_3$ as small as possible, while maintaining an interval of 0.05 between probabilities. Based on this approach, we selected the following probability: $p_1 = 0.45$, $p_2 = 0.05$, $p_3 = 0.05$, and $p_4 = 0.45$. Similarly, to maximize the difference between $p_3$ and $p_4$ in the opposite direction, we set $p_4$ as small as possible and $p_3$ as large as possible. This time, we selected the following probabilities: $p_1 = 0.25$, $p_2 = 0.05$, $p_3 = 0.65$, and $p_4 = 0.05$. By selecting these distinct probability distributions, we can analyze and compare the performance of different policies under varying demand levels and group type compositions. Each Entry of policies in the table below displays the average of 200 instances for each probabilities. From the top to bottom of the table, the probabilities are $[0.25, 0.25, 0.25, 0.25]$, $[0.45, 0.05, 0.05, 0.45]$, $[0.25, 0.05, 0.65, 0.05]$, respectively.
+
+% [0.25, 0.35, 0.05, 0.35], [0.15, 0.25, 0.55, 0.05] This distribution ensures a significant contrast between the probability of smaller group sizes and larger group sizes.
+
+% An arrival sequence during $T$ periods can be expressed as ${y_1, y_2, \ldots, y_T}$. Let $N_i = \sum_{t} I(y_t = i)$, i.e., the count number of times group type $i$ arrives during $T$ periods. Then the scenarios, $(N_1, \ldots, N_M)$, follow a multinomial distribution, 
+% $$
+% p\left(N_1, \ldots, N_M \mid \mathbf{p}\right)=\frac{T !}{N_{1} !, \ldots, N_{M} !} \prod_{i=1}^M p_i^{N_i}, T=\sum_{i=1}^M N_i.
+% $$
+
+% It is clear that the number of different sequences is $M^T$. The number of different scenarios is
+% $O(T^{M-1})$ which can be obtained by the following DP. The number of scenarios is too large to enumerate all possible cases. Thus, we choose to sample some sequences from the multinomial distribution.
 
 
 \begin{table}[ht]
@@ -27,25 +47,25 @@ $O(T^{M-1})$ which can be obtained by the following DP. The number of scenarios 
   \caption{Performances of Different Policies}
   \begin{tabular}{|l|l|l|l|l|l|l|}
   \hline
-   T & probabilities & DSA (\%) & DP1 (\%) & Bid-price (\%) & Booking (\%) & FCFS (\%) \\
+  Probabilities &  T &  DSA (\%) & DP1 (\%) & Bid-price (\%) & Booking (\%) & FCFS (\%) \\
   \hline
-   60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 & 96.74 & 98.17 \\
-   70  &                           & 98.34 & 96.87 & 96.24 & 97.18 & 94.75 \\
-   80  &                           & 98.61 & 95.69 & 96.02 & 98.00 & 93.18 \\
-   90  &                           & 99.10 & 96.05 & 96.41 & 98.31 & 92.48 \\
-   100 &                           & 99.58 & 95.09 & 96.88 & 98.70 & 92.54 \\
+  [0.25,0.25,0.25,0.25] & 60  &  99.12 & 98.42 & 98.38 & 96.74 & 98.17 \\
+  & 70                             & 98.34 & 96.87 & 96.24 & 97.18 & 94.75 \\
+  & 80                             & 98.61 & 95.69 & 96.02 & 98.00 & 93.18 \\
+  & 90                             & 99.10 & 96.05 & 96.41 & 98.31 & 92.48 \\
+  & 100                            & 99.58 & 95.09 & 96.88 & 98.70 & 92.54 \\
    \hline
-   60  & [0.25, 0.35, 0.05, 0.35]  & 98.94 & 98.26 & 98.25 & 96.74 & 98.62 \\
-   70  &                           & 98.05 & 96.62 & 96.06 & 96.90 & 93.96 \\
-   80  &                           & 98.37 & 96.01 & 95.89 & 97.75 & 92.88 \\
-   90  &                           & 99.01 & 96.77 & 96.62 & 98.42 & 92.46 \\
-   100 &                           & 99.23 & 97.04 & 97.14 & 98.67 & 92.00 \\
+  [0.45, 0.05, 0.05, 0.45] & 60  &  98.94 & 98.26 & 98.25 & 96.74 & 98.62 \\
+  & 70                             & 98.05 & 96.62 & 96.06 & 96.90 & 93.96 \\
+  & 80                            & 98.37 & 96.01 & 95.89 & 97.75 & 92.88 \\
+  & 90                            & 99.01 & 96.77 & 96.62 & 98.42 & 92.46 \\
+  & 100                            & 99.23 & 97.04 & 97.14 & 98.67 & 92.00 \\
   \hline
-  60  & [0.15, 0.25, 0.55, 0.05]  & 99.14 & 98.72 & 98.74 & 96.61 & 98.07 \\
-  70  &                           & 99.30 & 96.38 & 96.90 & 97.88 & 96.25 \\
-  80  &                           & 99.59 & 97.75 & 97.87 & 98.55 & 95.81 \\
-  90  &                           & 99.53 & 98.45 & 98.69 & 98.81 & 95.50 \\
-  100 &                           & 99.47 & 98.62 & 98.94 & 98.90 & 95.25 \\
+  [0.25, 0.05, 0.65, 0.05] & 60  &  99.14 & 98.72 & 98.74 & 96.61 & 98.07 \\
+  & 70                             & 99.30 & 96.38 & 96.90 & 97.88 & 96.25 \\
+  & 80                             & 99.59 & 97.75 & 97.87 & 98.55 & 95.81 \\
+  & 90                             & 99.53 & 98.45 & 98.69 & 98.81 & 95.50 \\
+  & 100                            & 99.47 & 98.62 & 98.94 & 98.90 & 95.25 \\
   \hline
   \end{tabular}
 \end{table}
@@ -104,16 +124,16 @@ To provide estimations, we utilize the equations $y_1 = \frac{c_1 L}{\gamma + \d
 % For the first function, we found that $c_1 = 200.0208$, with a standard error of 0.203. For the second function, we obtained $c_2 = 90.9284$, with a standard error of 0.099. 
 
 
-The estimation of $c_1$ and $c_2$ can be affected by different seat layouts. To investigate this impact, we conduct several experiments using different seat layouts, specifically with the number of rows $\times$ the number of seats configurations set as 10 $\times$ 16, 10 $\times$ 21, 10 $\times$ 26 and 10 $\times$ 31. Similarly, we perform an analysis using a sample of 100 probability combinations, each with a mean equal to $\gamma$. The values of $\gamma$ range from 1.5 to 3.4. We employed an Ordinary Least Squares (OLS) model to fit the data and derive the parameter values. The goodness of fit is assessed using the R-square values, which are found to be 1.000 for all models, indicating a perfect fit between the data and the models.
+The fitting values of $c_1$ and $c_2$ can be affected by different seat layouts. To investigate this impact, we conduct several experiments using different seat layouts, specifically with the number of rows $\times$ the number of seats configurations set as 10 $\times$ 16, 10 $\times$ 21, 10 $\times$ 26 and 10 $\times$ 31. Similarly, we perform an analysis using a sample of 100 probability combinations, each with a mean equal to $\gamma$. The values of $\gamma$ range from 1.5 to 3.4. We employed an Ordinary Least Squares (OLS) model to fit the data and derive the parameter values. The goodness of fit is assessed using the R-square values, which are found to be 1.000 for all models, indicating a perfect fit between the data and the models.
 
 The results of the estimation of $c_1$ and $c_2$ are presented in the table below:
 
 \begin{table}[ht]
   \centering
-  \caption{Estimation of $c_1$ and $c_2$}
+  \caption{Fitting values of $c_1$ and $c_2$}
   \begin{tabular}{|c|c|c|}
   \hline
-   Seat layout(\# of rows $\times$ \# of seats) & Estimation of $c_1$ & Estimation of $c_2$  \\
+   Seat layout(\# of rows $\times$ \# of seats) & Fitting Values of $c_1$ & Fitting Values of $c_2$  \\
   \hline
    10 $\times$ 11 & 0.909 $\pm$ 0.013  & 89.89 $\pm$ 1.436 \\
    10 $\times$ 16 & 0.948 $\pm$ 0.008  & 94.69 $\pm$ 0.802 \\
@@ -125,12 +145,14 @@ The results of the estimation of $c_1$ and $c_2$ are presented in the table belo
   \end{tabular}
 \end{table}
 
+As the number of seats in each row increases, the fitting values of $c_1$ and $c_2$ will gradually increase.
+
 
 % when the probability combination is $[0.05, 0.05, 0.85, 0.05]$ (which corresponds to $\gamma = 2.9$), and the demands cannot be accommodated by constructing full patterns for every row, which does not satisfy our assumption. This leads to a considerable gap between the blue and red points in this case. For example, the demands could be $[4, 1, 45, 2]$ or $[2, 2, 47, 1]$ according to the probability combination, but the typical pattern that can be generated is $(4,4,4,4)$, which is not full.
 
 
 \subsubsection{Impact of Social Distancing as Demands Increase}
-Now, we consider the impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 1.9$ and $\gamma = 2.5$. We set the parameters as follows: $T$ varies from 30 to 120, the step size is 1.  The seat layout consists 10 rows and the number of seats per row is 21. The social distancing is 1 seat.
+Now, we consider the impact of social distance as demands increase by changing $T$. Specifically, we consider two situations: $\gamma = 1.9$ and $\gamma = 2.5$. Here, $T$ varies from 30 to 120, the step size is 1. Other parameters are set the same as before.
 
 The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ DSA to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt a different approach. We simply accept all incoming groups as long as the capacity allows, without considering the constraints of groups needing to sit together. This means that we prioritize filling the available seats without enforcing any specific seating arrangements or social distancing requirements. We conduct an analysis using a sample of 100 probability combinations associated with the same $\gamma$. The occupancy rate at different demands is calculated as the mean of these 100 samples. The figures depicting the results are presented below.
 
@@ -155,27 +177,8 @@ In the first stage, when the capacity is sufficient, the outcome remains unaffec
 
 The below table presents the percentage differences for different demand levels (130, 150, 170, 190, 210).
 
-% \begin{table}[ht]
-%   \centering
-%   \caption{Percentage differences under different demands}
-% \begin{tabular}{llllll}
-%   \hline
-%   \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}}  &  \multicolumn{5}{l|}{Percentage gaps under different demands}   \\ 
-%   \cline{2-6} 
-%   \multicolumn{1}{|l|}{}   & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
-%   \hline
-%   \multicolumn{1}{|l|}{1.9} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
-%   \hline
-%   \multicolumn{1}{|l|}{2.1} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
-%   \hline
-%   \multicolumn{1}{|l|}{2.3} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
-%   \hline      
-%   \multicolumn{1}{|l|}{2.5}   & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.46}  & \multicolumn{1}{l|}{9.23} & \multicolumn{1}{l|}{17.32} & \multicolumn{1}{l|}{21.59} \\ 
-%   \hline
-%   \multicolumn{1}{|l|}{2.7} &   \multicolumn{1}{l|}{0.27}  & \multicolumn{1}{l|}{6.39}  & \multicolumn{1}{l|}{13.23} & \multicolumn{1}{l|}{21.85} & \multicolumn{1}{l|}{25.69} \\
-%   \hline  
-% \end{tabular}
-% \end{table}
+The percentage diff is 
+
 
 \begin{table}[ht]
   \centering
@@ -200,10 +203,10 @@ The below table presents the percentage differences for different demand levels 
 \end{table}
 
 
-As the value of $\gamma$ increases, the period of gap point will decrease and the corresponding occupancy rate will Increase. This suggests that larger groups are more likely to be accepted, resulting in a smaller number of accepted groups overall. Consequently, the occupancy rate increases due to the allocation of seats to larger groups. The percentage difference is negligible when the demand is small, but it becomes more significant as the demand increases.
+As the value of $\gamma$ increases, the period of gap point will decrease and the corresponding occupancy rate will increase. This suggests that larger groups are more likely to be accepted, resulting in a smaller number of accepted groups overall. Consequently, the occupancy rate increases due to the allocation of seats to larger groups. The percentage difference is negligible when the demand is small, but it becomes more significant as the demand increases.
 
 
-Let us consider the scenario where the gap point is defined as $[T, OR]$ under the parameters $\delta$, $\gamma$, and $M$, with the total number of seats denoted as $L$. When the actual number of people (demand) is less than $L \cdot OR$, the implementation of social distancing has no impact on the revenue. However, when the actual number of people exceeds $L \cdot OR$, implementing social distancing will result in a revenue loss. The magnitude of this loss can be determined through simulations using the corresponding parameters. To mitigate this potential loss, the seller can increase the value of $\gamma$. This can be achieved by either setting a limit on the number of single-person groups or allowing for larger group sizes. By doing so, the goal is to minimize the negative impact of social distancing measures and maximize revenue within the constraints imposed by the occupancy rate.
+We examine the impact of implementing social distancing on the occupancy rate and explore strategies to minimize revenue loss. Consider the situation where the gap point is represented as $T$ and is determined by the parameters $\delta$, $\gamma$, $M$, and $L$. The corresponding occupancy rate is denoted as $O(T)$. When the actual number of people (demand) is less than $L \cdot O(T)$, implementing social distancing does not affect the revenue. However, if the actual number of people exceeds $L \cdot O(T)$, enforcing social distancing measures will lead to a reduction in revenue. The extent of this loss can be assessed through simulations using the specified parameters. To mitigate the potential loss, the seller can increase the value of $\gamma$. This can be achieved by implementing certain measures, such as setting a limit on the number of single-person groups or allowing for larger group sizes. By doing so, the objective is to minimize the negative impact of social distancing while maximizing revenue within the constraints imposed by the occupancy rate.
 
 
 % [0.27 6.39 13.23 21.85 25.69] 1.9

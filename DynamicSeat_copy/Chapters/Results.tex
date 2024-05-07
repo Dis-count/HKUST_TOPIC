@@ -1,12 +1,12 @@
 % !TEX root = sum1.tex
 \section{Results}
 We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing.
-In the experiment, we set the following parameters. The seat layout consists of 10 rows, each containing 21 seats. To account for social distancing measures, one seat is designated as a dummy seat. The group size can range from 1 to 4 people. In our experiments, we simulate exact one group arrival in each period.
+In the experiment, we set the following parameters. The seat layout consists of 10 rows, each containing 20 physical seats. To account for social distancing measures, one seat is designated as a dummy seat. The group sizes considered range from 1 to 4 people. In our experiments, we simulate the arrival of exactly one group in each period.
 
 % assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
 \subsection{Performances of Different Policies}
-In this section, we compare the performance of five dynamic seat assignment policies to the optimal value, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the stochastic planning policy, DP Base-heuristic, bid-price control, booking limit control and FCFS policy. 
+In this section, we compare the performance of five assignment policies to the optimal one, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the dynamic seat assignment policy, DP Base-heuristic, bid-price control, booking limit control and FCFS policy. 
 
 
 % dynamic programming based heuristic and booking limit control. Finally, we establish the FCFS policy as the benchmark.
@@ -14,7 +14,7 @@ In this section, we compare the performance of five dynamic seat assignment poli
 \subsubsection*{Numerical Results}
 We conducted these experiments over a range of 60 to 100 periods to evaluate the performance of different policies under varying demand levels.
 
-To ensure consistency in the expected number of people for each period, we selected probabilities for group types such that the sum of the expected number of people per period remains constant. Denote this constant as $c$. Initially, we assigned equal probabilities to each group type, resulting in $c = 2.5$. To introduce more variation, we select the probability distribution $[0.45, 0.05, 0.05, 0.45]$ to emphasize a large $p_4$ and a small $p_3$, and the distribution $[0.25, 0.05, 0.65, 0.05]$ to emphasize a large $p_3$ and a small $p_4$. 
+To ensure consistency in the expected number of people for each period, we selected probabilities for group types such that the sum of the expected number of people per period remains constant. Denote this constant as $c$. Initially, we assigned equal probabilities to each group type, resulting in $c = 2.5$. To introduce more variation, we select the probability distribution $[0.25, 0.35, 0.05, 0.35]$ to emphasize a large $p_4$ and a small $p_3$, and the distribution $[0.15, 0.25, 0.55, 0.05]$ to emphasize a large $p_3$ and a small $p_4$. 
 
 
 The table presents the performance results of five different policies: DSA, DP1, Bid-price, Booking, and FCFS, which stand for dynamic seat assignment, dynamic programming based heuristic, bid-price, booking-limit, and first come first served, respectively. The procedures for the last four policies are detailed in the appendix \ref{policies}. Each entry in the table represents the average performance across 100 instances. Performance is evaluated by comparing the ratio of the number of accepted people under each policy to the number of accepted people under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
@@ -22,11 +22,8 @@ The table presents the performance results of five different policies: DSA, DP1,
 
 % seat planning: two rows/ seat assignment: same rows but point out the assignment.
 
-% change 5.1 and 5.2 general
-
-% 详细指出what is the percentage diff
-
 % Explain the performance
+
 
 % 让最大组和次大组的到来概率的差距达到最大
 % To maximize the difference between $p_3$ and $p_4$, we set $p_4$ as large as possible and $p_3$ as small as possible, while maintaining an interval of 0.05 between probabilities. Based on this approach, we selected the following probability: $p_1 = 0.45$, $p_2 = 0.05$, $p_3 = 0.05$, and $p_4 = 0.45$. Similarly, to maximize the difference between $p_3$ and $p_4$ in the opposite direction, we set $p_4$ as small as possible and $p_3$ as large as possible. This time, we selected the following probabilities: $p_1 = 0.25$, $p_2 = 0.05$, $p_3 = 0.65$, and $p_4 = 0.05$. By selecting these distinct probability distributions, we can analyze and compare the performance of different policies under varying demand levels and group type compositions. Each Entry of policies in the table below displays the average of 200 instances for each probabilities. From the top to bottom of the table, the probabilities are $[0.25, 0.25, 0.25, 0.25]$, $[0.45, 0.05, 0.05, 0.45]$, $[0.25, 0.05, 0.65, 0.05]$, respectively.
@@ -55,13 +52,13 @@ The table presents the performance results of five different policies: DSA, DP1,
   & 90                             & 99.10 & 96.05 & 96.41 & 98.31 & 92.48 \\
   & 100                            & 99.58 & 95.09 & 96.88 & 98.70 & 92.54 \\
    \hline
-  [0.45, 0.05, 0.05, 0.45] & 60  &  98.94 & 98.26 & 98.25 & 96.74 & 98.62 \\
-  & 70                             & 98.05 & 96.62 & 96.06 & 96.90 & 93.96 \\
-  & 80                            & 98.37 & 96.01 & 95.89 & 97.75 & 92.88 \\
-  & 90                            & 99.01 & 96.77 & 96.62 & 98.42 & 92.46 \\
-  & 100                            & 99.23 & 97.04 & 97.14 & 98.67 & 92.00 \\
+  [0.25, 0.35, 0.05, 0.35] & 60  &  98.94 & 98.26 & 98.25 & 96.74 & 98.62 \\
+  & 70                           & 98.05 & 96.62 & 96.06 & 96.90 & 93.96 \\
+  & 80                           & 98.37 & 96.01 & 95.89 & 97.75 & 92.88 \\
+  & 90                           & 99.01 & 96.77 & 96.62 & 98.42 & 92.46 \\
+  & 100                          & 99.23 & 97.04 & 97.14 & 98.67 & 92.00 \\
   \hline
-  [0.25, 0.05, 0.65, 0.05] & 60  &  99.14 & 98.72 & 98.74 & 96.61 & 98.07 \\
+  [0.15, 0.25, 0.55, 0.05] & 60  &  99.14 & 98.72 & 98.74 & 96.61 & 98.07 \\
   & 70                             & 99.30 & 96.38 & 96.90 & 97.88 & 96.25 \\
   & 80                             & 99.59 & 97.75 & 97.87 & 98.55 & 95.81 \\
   & 90                             & 99.53 & 98.45 & 98.69 & 98.81 & 95.50 \\
@@ -70,10 +67,11 @@ The table presents the performance results of five different policies: DSA, DP1,
   \end{tabular}
 \end{table}
 
-We can find that the stochastic planning policy are better than DP Base-heuristic and bid-price policy consistently, and FCFS policy works worst. As we mentioned previously, DP Base-heuristic and bid-price policy can only make the decision to accept or deny, cannot decide which row to assign the group to. FCFS accepts groups in sequential order until the capacity cannot accommodate more.
-
+We can find that the dynamic seat assignment policy is better than DP Base-heuristic and bid-price policy consistently, and FCFS policy works worst. As we mentioned previously, DP Base-heuristic and bid-price policy can only make the decision to accept or deny, cannot decide which row to assign the group to. FCFS accepts groups in sequential order until the capacity cannot accommodate more.
 
 For the first three policies, their performance tends to initially drop and then increase as the number of periods increases. When the number of periods is small, the demand for capacity is relatively low, and the policies can achieve relatively optimal performance. However, as the number of periods increases, the policies may struggle to always obtain a perfect allocation plan, leading to a decrease in performance. Nevertheless, when the number of periods continue to become larger, these policies tend to accept larger groups, and as a result, narrow the gap with the optimal value, leading to an increase in performance.
+
+The performance of the policies can vary based on different probabilities. DSA is not significantly affected by varying demands under a fixed probability. However, the other policies are more sensitive and their performance can be influenced by changes in demand levels.
 
 %  当之前的上座率 小于 gamma/gamma+1, 制定社交距离没有影响
 %  大于 gamma/gamma+1， 则最大损失是（ ）
@@ -175,29 +173,50 @@ In the first stage, when the capacity is sufficient, the outcome remains unaffec
 
 % The maximum number of people that can be accepted is $200 * \frac{16}{20} = 160$, which is the upper bound on the number of people that can be accepted.
 
-The below table presents the percentage differences for different demand levels (130, 150, 170, 190, 210).
+The below table presents the occupancy rate differences for different demand levels (130, 150, 170, 190, 210).
 
-The percentage diff is 
+
+% \begin{table}[ht]
+%   \centering
+%   \caption{Gap points and percentage differences under different demands of different gammas}
+% \begin{tabular}{lllllll}
+%   \hline
+%   \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{l|}{\multirow{2}{*}{gap point}} & \multicolumn{5}{l|}{percentage differences under different demands}   \\ 
+%   \cline{3-7} 
+%   \multicolumn{1}{|l|}{}                      & \multicolumn{1}{l|}{}                    & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
+%   \hline
+%   \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\ 
+%   \hline                                    
+%   \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\ 
+%   \hline           
+%   \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\ 
+%   \hline           
+%   \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
+%   \hline          
+%   \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
+%   \hline            
+% \end{tabular}
+% \end{table}
 
 
 \begin{table}[ht]
   \centering
-  \caption{Gap points and percentage differences under different demands of different gammas}
-\begin{tabular}{lllllll}
+  \caption{Gap points and occupancy rate differences under different demands of different gammas}
+\begin{tabular}{llllllll}
   \hline
-  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{l|}{\multirow{2}{*}{gap point}} & \multicolumn{5}{l|}{percentage differences under different demands}   \\ 
-  \cline{3-7} 
-  \multicolumn{1}{|l|}{}                      & \multicolumn{1}{l|}{}                    & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
+  \multicolumn{1}{|l|}{\multirow{2}{*}{$\gamma$}} & \multicolumn{1}{l|}{\multirow{2}{*}{Gap point}} & \multicolumn{1}{l|}{\multirow{2}{*}{Occupancy rate}} & \multicolumn{5}{l|}{Occupancy rate differences under different demands}   \\ 
+  \cline{4-8} 
+  \multicolumn{1}{|l|}{}  & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{130} & \multicolumn{1}{l|}{150} & \multicolumn{1}{l|}{170} & \multicolumn{1}{l|}{190} & \multicolumn{1}{l|}{210} \\ 
   \hline
-  \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{[69, 65.52]}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\ 
+  \multicolumn{1}{|l|}{1.9}  & \multicolumn{1}{l|}{69} & \multicolumn{1}{l|}{65.52}  & \multicolumn{1}{l|}{0.25}  & \multicolumn{1}{l|}{5.82}  & \multicolumn{1}{l|}{12.82} & \multicolumn{1}{l|}{20.38} & \multicolumn{1}{l|}{24.56} \\
   \hline                                    
-  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{[64, 67.74]}  & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\ 
+  \multicolumn{1}{|l|}{2.1}  & \multicolumn{1}{l|}{64} & \multicolumn{1}{l|}{67.74} & \multicolumn{1}{l|}{0.05}  & \multicolumn{1}{l|}{4.11}  & \multicolumn{1}{l|}{11.51} & \multicolumn{1}{l|}{18.77} & \multicolumn{1}{l|}{21.87} \\ 
   \hline           
-  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{[61, 69.79]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\ 
+  \multicolumn{1}{|l|}{2.3}  & \multicolumn{1}{l|}{61} & \multicolumn{1}{l|}{69.79}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{2.29}  & \multicolumn{1}{l|}{10.21} & \multicolumn{1}{l|}{17.36} & \multicolumn{1}{l|}{21.16} \\ 
   \hline           
-  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{[57, 70.89]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
+  \multicolumn{1}{|l|}{2.5}  & \multicolumn{1}{l|}{57} & \multicolumn{1}{l|}{70.89} & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.45}  & \multicolumn{1}{l|}{9.30} & \multicolumn{1}{l|}{15.78} & \multicolumn{1}{l|}{19.80} \\ 
   \hline          
-  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{[53, 71.28]}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
+  \multicolumn{1}{|l|}{2.7}  & \multicolumn{1}{l|}{53} & \multicolumn{1}{l|}{71.28}  & \multicolumn{1}{l|}{0}  & \multicolumn{1}{l|}{1.38}  & \multicolumn{1}{l|}{7.39} & \multicolumn{1}{l|}{14.91} & \multicolumn{1}{l|}{19.14} \\ 
   \hline            
 \end{tabular}
 \end{table}
@@ -206,7 +225,7 @@ The percentage diff is
 As the value of $\gamma$ increases, the period of gap point will decrease and the corresponding occupancy rate will increase. This suggests that larger groups are more likely to be accepted, resulting in a smaller number of accepted groups overall. Consequently, the occupancy rate increases due to the allocation of seats to larger groups. The percentage difference is negligible when the demand is small, but it becomes more significant as the demand increases.
 
 
-We examine the impact of implementing social distancing on the occupancy rate and explore strategies to minimize revenue loss. Consider the situation where the gap point is represented as $T$ and is determined by the parameters $\delta$, $\gamma$, $M$, and $L$. The corresponding occupancy rate is denoted as $O(T)$. When the actual number of people (demand) is less than $L \cdot O(T)$, implementing social distancing does not affect the revenue. However, if the actual number of people exceeds $L \cdot O(T)$, enforcing social distancing measures will lead to a reduction in revenue. The extent of this loss can be assessed through simulations using the specified parameters. To mitigate the potential loss, the seller can increase the value of $\gamma$. This can be achieved by implementing certain measures, such as setting a limit on the number of single-person groups or allowing for larger group sizes. By doing so, the objective is to minimize the negative impact of social distancing while maximizing revenue within the constraints imposed by the occupancy rate.
+We examine the impact of implementing social distancing on the occupancy rate and explore strategies to minimize revenue loss. Consider the situation where the gap point is represented as $\tilde{T}$ and is determined by the parameters $\delta$, $\gamma$, $M$, and $L$. The corresponding occupancy rate is denoted as $\beta(\tilde{T})$. When the actual number of people (demand) is less than $L \cdot \beta(\tilde{T})$, implementing social distancing does not affect the revenue. However, if the actual number of people exceeds $L \cdot \beta(\tilde{T})$, enforcing social distancing measures will lead to a reduction in revenue. The extent of this loss can be assessed through simulations using the specified parameters. To mitigate the potential loss, the seller can increase the value of $\gamma$. This can be achieved by implementing certain measures, such as setting a limit on the number of single-person groups or allowing for larger group sizes. By doing so, the objective is to minimize the negative impact of social distancing while maximizing revenue within the constraints imposed by the occupancy rate.
 
 
 % [0.27 6.39 13.23 21.85 25.69] 1.9

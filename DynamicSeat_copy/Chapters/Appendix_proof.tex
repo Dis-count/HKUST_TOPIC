@@ -7,7 +7,7 @@ We can utilize a greedy approach to construct a pattern, denoted as $\bm{h}_{g}$
 
 \begin{itemize}
  \item Begin by selecting the maximum group size, denoted as $n_M$, as many times as possible to fill up the available seats in the row.
- \item Allocate the remaining seats(if possible) in the row to the group with the corresponding size.
+ \item Allocate the remaining seats (if possible) in the row to the group with the corresponding size.
 \end{itemize}
 
 Let $L = n_M \cdot q + r$, where $q$ represents the number of times $n_M$ is selected (the quotient), and $r$ represents the remainder, indicating the number of remaining seats. It holds that $0 \leq r < n_M$. 
@@ -42,7 +42,7 @@ Therefore, $\bm{h}$ cannot exist. All largest patterns can accommodate the same 
 \begin{pf}[Proof of Proposition \ref{sol_relax_deter}]
   Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
   
-  Then this Integer Programming is a special case of the Multiple Knapsack Problem(MKP). Consider the solution to the linear relaxation of \eqref{deter_upper}. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. 
+  Then this Integer Programming is a special case of the Multiple Knapsack Problem (MKP). Consider the solution to the linear relaxation of \eqref{deter_upper}. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. 
   % $\delta$ is no less than 1, different types have
   Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(L-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $v$, then for $i < v$, $x_{ij}^{*} = 0$; for $i > v$, $x_{ij}^{*} = d_{i}$; for $i = v$, $\sum_{j} x_{ij}^{*} = (L - \sum_{i = v+1}^{M} {d_i n_i})/ n_v$. \qed
 \end{pf}
@@ -64,6 +64,11 @@ Therefore, $\bm{h}$ cannot exist. All largest patterns can accommodate the same 
   
 %   To maximize the objective function, we can take $y_i^{+} = 0$. Notice that $y_{i}^{-} \geq 0$, thus the constraints $\sum_{j= 1}^{N} x_{ij} + y_{i}^{-} = d_{i}, i \in \mathcal{M}$ can be rewritten as $\sum_{j= 1}^{N} x_{ij} \leq d_{i}, i \in \mathcal{M}$. That is to say, problem \eqref{one_form} is equivalent to the deterministic model. \qed
 % \end{pf}
+
+\begin{pf}[Proof of Proposition \ref{prop_solution}]
+  In any optimal solution where one of the corresponding patterns is not full or largest, we have the flexibility to allocate the remaining unoccupied seats. These seats can be assigned to either a new seat planning or added to an existing seat planning. Importantly, since a group can utilize the seat planning of a larger group, the allocation scheme based on the original optimal solution will not affect the optimality of the solution. 
+  For each row, there are three situations to allocate the seats. First, when the rest seats can be allocated to the existing groups, then the corresponding pattern becomes a full pattern. Second, when all the existing groups are the largest groups and the rest seats cannot construct a new group, the pattern becomes the largest. Third, when all the existing groups are the largest groups and the rest seats can construct new groups, the rest seats can be used to construct the largest groups until there is no enough capacity, then the pattern becomes the largest. Finally, we can allocate the seats such that each row in the seat planning becomes either full or largest. \qed
+  \end{pf}
 
 
 \begin{pf}[Proof of Lemma \ref{feasible_region}]
@@ -110,10 +115,7 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
     \qed
   \end{pf}
 
-\begin{pf}[Proof of Proposition \ref{prop_solution}]
-In any optimal solution where one of the corresponding patterns is not full or largest, we have the flexibility to allocate the remaining unoccupied seats. These seats can be assigned to either a new seat planning or added to an existing seat planning. Importantly, since a group can utilize the seat planning of a larger group, the allocation scheme based on the original optimal solution will not affect the optimality of the solution. 
-For each row, there are three situations to allocate the seats. First, when the rest seats can be allocated to the existing groups, then the corresponding pattern becomes a full pattern. Second, when all the existing groups are the largest groups and the rest seats cannot construct a new group, the pattern becomes the largest. Third, when all the existing groups are the largest groups and the rest seats can construct new groups, the rest seats can be used to construct the largest groups until there is no enough capacity, then the pattern becomes the largest. Finally, we can allocate the seats such that each row in the seat planning becomes either full or largest. \qed
-\end{pf}
+
 
 \begin{pf}[Proof of Lemma \ref{bid-price}]
   According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.

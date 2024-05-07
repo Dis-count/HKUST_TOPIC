@@ -28,21 +28,21 @@ class CompareMethods:
         dw, prop = sam.get_prob_ini(first_arrival)
         W = len(dw)
         m1 = stochasticModel(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
-        m_sce = stochasticModel1(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
+        # m_sce = stochasticModel1(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
 
         ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
 
-        ini_demand, newx4 = deter.IP_formulation(np.zeros(self.I), ini_demand)
+        ini_demand4, newx4 = deter.IP_formulation(np.zeros(self.I), ini_demand)
         newx4 = self.full_largest(newx4, self.roll_width)
 
-        # ini_demand1 = np.array(self.probab) * self.num_period
-        # ini_demand3, newx3 = deter.IP_formulation(np.zeros(self.I), ini_demand1)
+        ini_demand1 = np.array(self.probab) * self.num_period
+        ini_demand3, newx3 = deter.IP_formulation(np.zeros(self.I), ini_demand1)
         # newx3 = self.full_largest(newx3, self.roll_width)
-        newx3, _ = m_sce.solveBenders(first_arrival-self.s, eps=1e-4, maxit=20)
-        ini_demand3 = np.sum(newx3, axis=1)
-        return sequence, ini_demand, ini_demand3, newx3, newx4
+        # newx3, _ = m_sce.solveBenders(first_arrival-self.s, eps=1e-4, maxit=20)
+        # ini_demand3 = np.sum(newx3, axis=1)
+        return sequence, ini_demand4, ini_demand3, newx3, newx4
 
     def row_by_row(self, sequence):
         # i is the i-th request in the sequence
@@ -431,6 +431,7 @@ class CompareMethods:
         return demand
 
     def method_scenario(self, sequence: List[int], change_roll0):
+        # without initial seat planning
         change_roll = copy.deepcopy(change_roll0)
         mylist = []
         periods = len(sequence)
@@ -465,6 +466,7 @@ class CompareMethods:
         return demand
 
     def method_scenario1(self, sequence: List[int], newx, change_roll0):
+        # with initial seat planning
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         mylist = []

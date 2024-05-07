@@ -10,7 +10,7 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     period_range = range(60,101,10)
     given_lines = 10
-    probab = [0.25, 0.05, 0.65, 0.05]
+    probab = [0.25, 0.35, 0.05, 0.35]
     s = 1
     begin_time = time.time()
     filename = 'Periods_' + str(time.time()) + '.txt'
@@ -39,7 +39,7 @@ if __name__ == "__main__":
             a = a_instance.method_new(sequence, newx4, roll_width)
             b = a_instance.bid_price(sequence)
             c = a_instance.dynamic_program1(sequence)
-            # d = a_instance.method_IP(sequence, newx3, roll_width)
+            d = a_instance.method_IP(sequence, newx3, roll_width)
             e = a_instance.row_by_row(sequence)
 
             f = a_instance.offline(sequence)  # optimal result
@@ -48,14 +48,14 @@ if __name__ == "__main__":
             ratio1 += np.dot(multi, a) / optimal  # sto-planning
             ratio2 += np.dot(multi, b) / optimal  # bid-price
             ratio3 += np.dot(multi, c) / optimal  # DP1
-            # ratio4 += np.dot(multi, d) / optimal  # booking-limit
+            ratio4 += np.dot(multi, d) / optimal  # booking-limit
             ratio5 += np.dot(multi, e) / optimal  # FCFS
             accept_people += optimal
 
         my_file.write('Sto: %.2f ;' % (ratio1/count*100))
         my_file.write('Bid: %.2f ;' % (ratio2/count*100))
         my_file.write('DP1: %.2f ;' % (ratio3/count*100))
-        # my_file.write('Booking: %.2f ;' % (ratio4/count*100))
+        my_file.write('Booking: %.2f ;' % (ratio4/count*100))
         my_file.write('FCFS: %.2f \n;' % (ratio5/count*100))
         my_file.write('Number of accepted people: %.2f \t' % (accept_people/count))
 

@@ -17,7 +17,7 @@ We introduce the term pattern to refer to the seat planning arrangement for a si
 Let $|\bm{h}|$ indicate the number of people that can be assigned according to pattern $\bm{h}$, i.e., $|\bm{h}| = \sum_{i =1}^{M} i h_i$. The size of $\bm{h}$ provides a measure of the largest number of seats which can be taken due to the implementation of social distancing constraints. By examining $|\bm{h}|$ associated with different patterns, we can assess the effectiveness of various seat planning configurations with respect to accommodating the desired number of individuals while adhering to social distancing requirements.
 
 \begin{example}
-Consider the given values: $\delta = 1$, $L^{0} = 10$, and $M = 4$. By adding one seat to each group and the original row, we can realize the conversion, as shown in the follwoing figure.
+Consider the given values: $\delta = 1$, $L^{0} = 10$, and $M = 4$. By adding one seat to each group and the original row, we can realize the conversion, as shown in the following figure.
 
 \begin{figure}[ht]
     \centering
@@ -43,9 +43,15 @@ In other words, a full pattern is one in which the sum of the product of the num
 Given the parameters of a row, including its length $L$, the social distancing requirement $\delta$, and the maximum size of a group allowed $M$, for one possible largest pattern $\bm{h}$, the maximum number of people that can be accommodated is given by $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where $q = \lfloor \frac{L}{M + \delta} \rfloor$, $r \equiv L \bmod (M + \delta)$. 
 \end{prop}
 
+
 % The corresponding loss of the largest pattern equals $q \delta - \delta + \min\{r, \delta\}$, represents the amount of empty seats due to the social distancing requirement. 
 
 The largest pattern $\bm{h}$ is unique and full when $r = 0$, indicating that only one pattern can accommodate the maximal number of people. On the other hand, if $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
+
+
+\begin{corollary}\label{coro_1}
+  Suppose there are two largest patterns, denoted as $h_1$ and $h_2$, with lengths $L_1 = n \cdot n_M$ and $L_2$ respectively (where $n$ is an integer), then $h_1 + h_2$ is largest with the length $L_1 + L_2$.
+\end{corollary}
 
 
 \begin{example}

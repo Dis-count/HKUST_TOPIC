@@ -1,7 +1,8 @@
 % !TEX root = sum1.tex
 \section{Results}
 We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing.
-In the experiment, we set the following parameters. The seat layout consists of 10 rows, each containing 20 physical seats. To account for social distancing measures, one seat is designated as a dummy seat. The group sizes considered range from 1 to 4 people. In our experiments, we simulate the arrival of exactly one group in each period.
+In the experiment, we set the following parameters. The seat layout consists of 10 rows, each containing 20 physical seats. To account for social distancing measures, one seat is designated as one dummy seat. The group sizes considered range from 1 to 4 people. In our experiments, we simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of people per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. We assume that $p_4$ always has a positive value. 
+
 
 % assessing the results for different numbers of people in each period and finally investigating the impact of seat layout on the number of served people.
 
@@ -12,9 +13,10 @@ In this section, we compare the performance of five assignment policies to the o
 % dynamic programming based heuristic and booking limit control. Finally, we establish the FCFS policy as the benchmark.
 
 \subsubsection*{Numerical Results}
-We conducted these experiments over a range of 60 to 100 periods to evaluate the performance of different policies under varying demand levels.
+In order to assess the effectiveness of different policies across different demand levels, we conducted experiments spanning a range of 60 to 100 periods. For our analysis, we considered three probability distributions: [0.25, 0.25, 0.25, 0.25], [0.25, 0.35, 0.05, 0.35], and [0.15, 0.25, 0.55, 0.05]. These distributions were designed to have a common mean $\gamma$, ensuring that the expected number of people for each period remained consistent.
 
-To ensure consistency in the expected number of people for each period, we selected probabilities for group types such that the sum of the expected number of people per period remains constant. Denote this constant as $c$. Initially, we assigned equal probabilities to each group type, resulting in $c = 2.5$. To introduce more variation, we select the probability distribution $[0.25, 0.35, 0.05, 0.35]$ to emphasize a large $p_4$ and a small $p_3$, and the distribution $[0.15, 0.25, 0.55, 0.05]$ to emphasize a large $p_3$ and a small $p_4$. 
+
+% To ensure consistency in the expected number of people for each period, we selected probabilities for group types such that the sum of the expected number of people per period remains constant. Denote this constant as $c$. Initially, we assigned equal probabilities to each group type, resulting in $c = 2.5$. To introduce more variation, we select the probability distribution $[0.25, 0.35, 0.05, 0.35]$ to emphasize a large $p_4$ and a small $p_3$, and the distribution $[0.15, 0.25, 0.55, 0.05]$ to emphasize a large $p_3$ and a small $p_4$. 
 
 
 The table presents the performance results of five different policies: DSA, DP1, Bid-price, Booking, and FCFS, which stand for dynamic seat assignment, dynamic programming based heuristic, bid-price, booking-limit, and first come first served, respectively. The procedures for the last four policies are detailed in the appendix \ref{policies}. Each entry in the table represents the average performance across 100 instances. Performance is evaluated by comparing the ratio of the number of accepted people under each policy to the number of accepted people under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
@@ -107,7 +109,7 @@ Assuming that we accept all incoming groups within $T'$ periods, filling all the
 % It is important to note that this estimation is accurate only when we accepted groups in $T{'}$ periods and all rows represent full patterns, as per our assumption. 
 % $T{'}$ represents the ideal first period where the number of people without social distancing is larger than that with social distancing 
 
-We consider the scenario where the number of group types is limited to 4. In this case, the average number of people per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four people, respectively. We assume that $p_4$ always has a positive value. Additionally, the social distancing requirement is set to one seat.
+
 
 To analyze the relation between the increment of $\gamma$ and the gap point, we define each combination $(p_1, p_2, p_3, p_4)$ satisfying $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. We conducted an analysis using a sample of 200 probability combinations. The figure below illustrates the gap point as a function of the increment of $\gamma$, along with the corresponding estimations. For each probability combination, we considered 100 instances and plotted the gap point as blue points. Additionally, the occupancy rate at the gap point is represented by red points.
 

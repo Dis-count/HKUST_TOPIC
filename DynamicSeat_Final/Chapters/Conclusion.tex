@@ -1,0 +1,16 @@
+% !TEX root = sum1.tex
+\section{Conclusion}
+Since the outbreak of the pandemic, social distancing has been widely recognized as a crucial measure for containing the spread of the virus. It has been implemented in seating areas to ensure safety. While static seating arrangements can be addressed through integer programming by defining specific social distancing constraints, dealing with the dynamic situations is challenging.
+
+
+Our paper focuses on the problem of dynamic seat assignment with social distancing in the context of a pandemic. To tackle this problem, we propose a scenario-based stochastic programming approach to obtain a seat planning that adheres to social distancing constraints. We utilize the benders decomposition method to solve this model efficiently, leveraging its well-structured property. However, solving the integer programming formulation directly can be computationally prohibitive in some cases. Therefore, in practice, we consider the linear programming relaxation of the problem and devise an approach to obtain the seat planning, which consists of full or largest patterns. In our approach, seat planning can be seen as the supply for each group type. We assign groups to seats when the supply is sufficient. However, when the supply is insufficient, we employ the dynamic seat assignment policy to make decisions on whether to accept or reject group requests. 
+
+% comparing the running time of the benders decomposition method and integer programming,
+% The results of our experiments demonstrated that the benders decomposition method efficiently solves our model.
+
+We conducted several experiments to investigate various aspects of our approach. These experiments include analyzing different policies for dynamic seat assignment and evaluating the impact of implementing social distancing. In terms of dynamic seat assignment policies, we consider the classical bid-price control, booking limit control in revenue management, dynamic programming-based heuristics, and the first-come-first-served policy. Comparatively, our proposed policy exhibited superior performance.
+
+Building upon our policies, we further evaluated the impact of implementing social distancing. By defining the gap point as the period at which the difference between applying and not applying social distancing becomes evident, we established a relationship between the gap point and the expected number of people in each period. We observed that as the expected number of people in each period increased, the gap point occurred earlier, resulting in a higher occupancy rate at the gap point.
+
+Overall, our study emphasizes the operational significance of social distancing in the seat allocation and offers a fresh perspective for sellers and governments to implement seat assignment mechanisms that effectively promote social distancing during the pandemic.
+

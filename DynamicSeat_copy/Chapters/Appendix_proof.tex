@@ -44,7 +44,7 @@ Therefore, $\bm{h}$ cannot exist. All largest patterns can accommodate the same 
   
   Then this Integer Programming is a special case of the Multiple Knapsack Problem (MKP). Consider the solution to the linear relaxation of \eqref{deter_upper}. Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. 
   % $\delta$ is no less than 1, different types have
-  Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(L-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $v$, then for $i < v$, $x_{ij}^{*} = 0$; for $i > v$, $x_{ij}^{*} = d_{i}$; for $i = v$, $\sum_{j} x_{ij}^{*} = (L - \sum_{i = v+1}^{M} {d_i n_i})/ n_v$. \qed
+  Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq L\}$, where $L = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. Then the Dantzig upper bound \cite{dantzig1957discrete} becomes $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(L-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(L-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $\tilde{i}$, then for $i < \tilde{i}$, $x_{ij}^{*} = 0$; for $i > \tilde{i}$, $x_{ij}^{*} = d_{i}$; for $i = \tilde{i}$, $\sum_{j} x_{ij}^{*} = (L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i})/ n_{\tilde{i}}$. \qed
 \end{pf}
 
 
@@ -100,7 +100,7 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
         \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
         \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
         & (\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} \geq (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega \\
-         & \mathbf{x} \in \mathbb{Z}_{+}
+         & \mathbf{x} \in \mathbb{Z}^{+}_{0}
       \end{aligned}
     \end{equation}
     Problem \eqref{lemma_eq} reaches its maximum when $(\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} = (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega$. Substitute $z_{\omega}$ with these equations, we have 
@@ -108,12 +108,23 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
       \begin{aligned}
         \max \quad & \mathbf{c}^{\intercal} \mathbf{x} - \sum_{\omega}p_{\omega}(\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + \sum_{\omega} p_{\omega} (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{d}_{\omega} \\
         \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-        & \mathbf{x} \in \mathbb{Z}_{+}
+        & \mathbf{x} \in \mathbb{Z}^{+}_{0}
       \end{aligned}
     \end{equation}
     Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more constraints will not make the optimal value larger. Thus, RBMP is bounded. 
     \qed
   \end{pf}
+
+
+
+
+\begin{pf}[Proof of ]
+To accomodate $n$ groups with the length of $L$, $L$ should satisfy $L \geq \sum_{i} n_i h_i$
+
+the largest size of pattern is $L-N$.   
+
+
+\end{pf}
 
 
 

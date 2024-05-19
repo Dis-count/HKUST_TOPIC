@@ -3,7 +3,7 @@
 \section*{Proof}
 
 \begin{pf}[Proof of Proposition \ref{lem_pattern}]
-We can utilize a greedy approach to construct a pattern, denoted as $\bm{h}_{g}$, by following the steps outlined below. This approach aims to generate a pattern that maximizes the number of people accommodated within the given constraints.
+First, we construct a feasible pattern with the size of $qM + \max\{r-\delta, 0\}$, then we prove this pattern is largest. We can utilize a greedy approach to construct a pattern, denoted as $\bm{h}_{g}$, by following the steps outlined below. This approach aims to generate a pattern that maximizes the number of people accommodated within the given constraints.
 
 \begin{itemize}
  \item Begin by selecting the maximum group size, denoted as $n_M$, as many times as possible to fill up the available seats in the row.
@@ -12,14 +12,14 @@ We can utilize a greedy approach to construct a pattern, denoted as $\bm{h}_{g}$
 
 Let $L = n_M \cdot q + r$, where $q$ represents the number of times $n_M$ is selected (the quotient), and $r$ represents the remainder, indicating the number of remaining seats. It holds that $0 \leq r < n_M$. 
 
-The number of people accommodated in the pattern $\bm{h}_{g}$ is given by $|\bm{h}_{g}| = q M + \max\{r-\delta, 0\}$. To establish the optimality of $|\bm{h}_{g}|$ as the largest possible number of people accommodated given the constraints of $L$, $\delta$, and $M$, we can employ a proof by contradiction.
+The number of people accommodated in the pattern $\bm{h}_{g}$ is given by $|\bm{h}_{g}| = q M + \max\{r-\delta, 0\}$. To establish the optimality of $|\bm{h}_{g}|$ as the largest number of people accommodated given the constraints of $L$, $\delta$, and $M$, we can employ a proof by contradiction.
 
 % This expression takes into account the complete groups of size $M$ (represented by the product $q M$) and any remaining seats beyond the complete groups (represented by $\max{r-\delta, 0}$) that can be utilized to accommodate additional individuals, considering the social distancing requirement $\delta$.
 % That is we need to prove $\max\{\sum_{i} (n_i - \delta)h_i| n_{i} h_{i} \leq L, h_{i} \in \mathbb{Z}\}$.
 
 % With the capacity constraint, we have $L \geq \sum_{i} n_i h_i > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\}$. By substituting $L = n_M \cdot q + r$, we have $q(M + \delta) + r > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\}$.
 
-Assuming the existence of a pattern $\bm{h}$ such that $|\bm{h}| > |\bm{h}_{g}|$, we can derive the following inequalities: 
+Assuming the existence of a pattern $\bm{h}$ such that $|\bm{h}| > |\bm{h}_{g}|$, we can derive the following inequalities:
 
 \begin{align*}
   & \sum_{i} (n_i - \delta) h_i > q M + \max\{r-\delta, 0\} \\
@@ -35,7 +35,7 @@ Breaking down the above inequality into two cases:
   \item When $r \leq \delta$, we have the inequality $q \delta + \delta \geq q \delta + r > \sum_{i} \delta h_i$. Similarly, we obtain $q+1 > \sum_{i} h_i$. Thus, the maximum number of people that can be accommodated is $q M$, which is not greater than $|\bm{h}_{g}|$.  
 \end{enumerate}
 
-Therefore, $\bm{h}$ cannot exist. All largest patterns can accommodate the same maximum number of people and have the same loss. Hence, the maximum number of people that can be accommodated in the largest pattern is $q M + \max\{r-\delta, 0\}$. 
+Therefore, $\bm{h}$ cannot exist. The pattern, $\bm{h}_{g}$, is a largest pattern. The maximum number of people that can be accommodated in the largest pattern is $q M + \max\{r-\delta, 0\}$. 
 
 % Correspondingly, the loss of the largest pattern $|\bm{h}_{g}|$ is $q \delta -\delta + \min\{r, \delta\}$.
 \qed

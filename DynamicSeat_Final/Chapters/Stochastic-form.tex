@@ -7,8 +7,8 @@ In this section, we develop the scenario-based stochastic programming (SSP) to o
 \subsection{Scenario-based Stochastic Programming (SSP) Formulation}
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. A particular realization of the demand vector can be represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of people accommodated over all the scenarios, we propose a scenario-based stochastic programming to obtain a seat planning.
 
-The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{Z}_{0}^{+, M \times N}$. Here, $x_{ij}$ represents the number of group type $i$ assigned to row $j$ in the seat planning. As mentioned earlier, we calculate the supply for group type $i$ as the sum of $x_{ij}$ over all rows $j$, denoted as $\sum_{j=1}^N x_{ij}$. However, considering the variability across different scenarios, it is necessary to model the potential excess or shortage of supply. To capture this characteristic, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$. 
-It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{Z}^{+, M \times |\Omega|}_{0}$ and $\mathbf{y}^{-} \in \mathbb{Z}^{+,M \times |\Omega|}_{0}$. Each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the excess supply for group type $i$ for each scenario $\omega$. On the other hand, $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ for each scenario $\omega$.
+The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{N}^{M \times N}$. Here, $x_{ij}$ represents the number of group type $i$ assigned to row $j$ in the seat planning. As mentioned earlier, we calculate the supply for group type $i$ as the sum of $x_{ij}$ over all rows $j$, denoted as $\sum_{j=1}^N x_{ij}$. However, considering the variability across different scenarios, it is necessary to model the potential excess or shortage of supply. To capture this characteristic, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$. 
+It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{N}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{N}^{M \times |\Omega|}$. Each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the excess supply for group type $i$ for each scenario $\omega$. On the other hand, $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ for each scenario $\omega$.
 
 Taking into account the possibility of groups occupying seats planned for larger group types when the corresponding supply is insufficient, we make the assumption that surplus seats for group type $i$ can be occupied by smaller group types $j<i$ in descending order of group size. This means that if there are excess supply available after assigning groups of type $i$ to rows, we can provide the supply to groups of type $j<i$ in a hierarchical manner based on their sizes. That is, for any $\omega$, $i \leq M-1$, 
 
@@ -32,8 +32,8 @@ Then we have the formulation of SSP:
   y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega \label{DEF_constr1} \\
   & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \label{DEF_constr2}\\
   & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}  \label{DEF_constr3} \\
-  & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}^{+}_{0}, \quad i \in \mathcal{M}, \omega \in \Omega \notag \\
-  & x_{ij} \in \mathbb{Z}^{+}_{0}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
+  & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega \notag \\
+  & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
   \end{align}
 
 The objective function consists of two parts. The first part represents the number of people in
@@ -96,7 +96,7 @@ As we can find, this deterministic equivalent form is a large-scale problem even
 \begin{aligned}
 \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
 \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-& \mathbf{x} \in \mathbb{Z}^{+, M \times N}_{0},
+& \mathbf{x} \in \mathbb{N}^{M \times N},
 \end{aligned}
 \end{equation}
 where $z(\mathbf{x})$ is defined as
@@ -147,7 +147,7 @@ Alternatively, $z_{\omega}(\mathbf{x})$ is the largest number $z_{\omega}$ such 
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
     & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \forall \bm{\alpha}_{\omega} \in \mathcal{O}, \forall \omega \\
-     & \mathbf{x} \in \mathbb{Z}^{+}_{0}
+     & \mathbf{x} \in \mathbb{N}^{M \times N}
   \end{aligned}
 \end{equation}
 
@@ -202,7 +202,7 @@ We can conclude that the RBMP will have the form:
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
     \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
     & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha}_{\omega} \in \mathcal{O}^{t}, \forall \omega \\
-     & \mathbf{x} \in \mathbb{Z}^{+}_{0}
+     & \mathbf{x} \in \mathbb{N}^{M \times N}
   \end{aligned}
 \end{equation}
 
@@ -262,10 +262,10 @@ We may obtain a fractional optimal solution when we solve the LP relaxation of p
 Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${X}^{*}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Replace the vector $\mathbf{d}$ with ${X}^{*}$ in the deterministic model, we have the following problem, 
 
 \begin{equation}\label{deter_upper1}
-  \left\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq {X}^{*}_{i}, i \in \mathcal{M}; x_{ij} \in \mathbb{Z}^{+}_{0} \right\}
+  \left\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq {X}^{*}_{i}, i \in \mathcal{M}; x_{ij} \in \mathbb{N},i \in \mathcal{M}, j \in \mathcal{N} \right\}
 \end{equation}
 
-Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{\tilde{x}}$, which represents a feasible seat planning. We can construct the largest or full patterns by Algorithm \ref{construction}.
+Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{\tilde{x}}$, which represents a feasible seat planning.
 
 % To maximize the utilization of seats, we should assign full or largest patterns to each row. 
 % We will check if every row is full. When row $j$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j}$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. If $\beta$ is no less than $n_M$, then let $\beta = \beta - n_M$, $s_M = s_M +1$ until $\beta$ is less than $n_M$. If row $j$ is still not full, then find the smallest group size in row $j$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
@@ -278,8 +278,6 @@ Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solu
     {Obtain the optimal solution, $\mathbf{x}^{*}$, from the LP relaxation of problem \eqref{BD_master3}\;}
     {Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} = \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$\;}
     {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from problem \eqref{deter_upper1} with $\tilde{X}$\;}
-    {Construct the full or largest patterns by Algorithm \ref{construction} with $\tilde{\mathbf{x}}$ and $\bm{H}$\;}
+    {Construct the full or largest patterns by problem \eqref{improve_seat} with $\tilde{\mathbf{x}}$ and $\bm{H}$\;}
 \end{algorithm}
 
-
-% The sequence of groups within each pattern can be arranged arbitrarily, allowing for a flexible seat planning that can accommodate realistic operational constraints.

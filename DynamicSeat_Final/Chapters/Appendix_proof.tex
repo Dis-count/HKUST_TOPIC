@@ -122,21 +122,21 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
 %   Suppose there are two largest patterns, denoted as $h_1$ and $h_2$, with lengths $L_1 = n \cdot n_M$ and $L_2$ respectively (where $n$ is an integer), then $h_1 + h_2$ is largest with the length $L_1 + L_2$.
 % \end{corollary}
 
-\begin{pf}[Proof of Proposition \ref{prop_construction}]
-To prove this proposition, we first prove the following lemma.
+% \begin{pf}[Proof of Proposition \ref{prop_construction}]
+% To prove this proposition, we first prove the following lemma.
 
-\begin{lem}\label{generation}
-  For a feasible pattern $\bm{h}$ with $n$ groups and the length $L$, where $\sum_{i} n_{i} h_{i} \leq L \leq n \cdot n_{M}$, it is always possible to find a pattern $\bm{h}^{'}$ with $n$ groups which is the optimal solution to problem \eqref{gene_largest}. Additionally, $\bm{h}^{'}$ satisfies $|\bm{h}^{'}| = L - n$.
-\end{lem}
+% \begin{lem}\label{generation}
+%   For a feasible pattern $\bm{h}$ with $n$ groups and the length $L$, where $\sum_{i} n_{i} h_{i} \leq L \leq n \cdot n_{M}$, it is always possible to find a pattern $\bm{h}^{\prime}$ with $n$ groups which is the optimal solution to problem \eqref{gene_largest}. Additionally, $\bm{h}^{\prime}$ satisfies $|\bm{h}^{\prime}| = L - n$.
+% \end{lem}
   
-\begin{pf}[Proof of Lemma \ref{generation}]
-We can demonstrate that the maximum value of $|\bm{h}^{'}|$ is $L - n$. For a feasible pattern $\bm{h}^{'}$ with $n$ groups, we have $\sum_{i}{h_i} = n$ and $\sum_{i}{n_i h_i} \leq L$. Therefore, we can deduce that $\sum_{i} {i h_i} \leq L - n$. To achieve equality, we need to transform the original pattern into a full pattern. Suppose the original pattern is not a full pattern. Let $\beta = L - \sum_{i} n_{i} h_{i}$, and identify the smallest group type in pattern $\bm{h}$ as $k$. We modify the original group of seats planned for $i$ people and allocate the unused seat(s) with the original group to accommodate $j$ people, where $j = \min\{M, \beta + i\}$. Let $\bm{h}^{1}$ represent the pattern after this allocation. As a result, we have $h^{1}_{i} = h_{i} -1$ and $h^{1}_{j} = h_{j} +1$. Thus, $\bm{h}^{1}$ will still satisfy the given constraints. This allocation process continues until $\beta$ reaches $0$. Eventually, we obtain a full pattern $\bm{h}^{'}$ that maximizes $|\bm{h}^{'}|$ while satisfying the constraints.
-\end{pf}
+% \begin{pf}[Proof of Lemma \ref{generation}]
+% We can demonstrate that the maximum value of $|\bm{h}^{\prime}|$ is $L - n$. For a feasible pattern $\bm{h}^{\prime}$ with $n$ groups, we have $\sum_{i}{h_i} = n$ and $\sum_{i}{n_i h_i} \leq L$. Therefore, we can deduce that $\sum_{i} {i h_i} \leq L - n$. To achieve equality, we need to transform the original pattern into a full pattern. Suppose the original pattern is not a full pattern. Let $\beta = L - \sum_{i} n_{i} h_{i}$, and identify the smallest group type in pattern $\bm{h}$ as $k$. We modify the original group of seats planned for $i$ people and allocate the unused seat(s) with the original group to accommodate $j$ people, where $j = \min\{M, \beta + i\}$. Let $\bm{h}^{1}$ represent the pattern after this allocation. As a result, we have $h^{1}_{i} = h_{i} -1$ and $h^{1}_{j} = h_{j} +1$. Thus, $\bm{h}^{1}$ will still satisfy the given constraints. This allocation process continues until $\beta$ reaches $0$. Eventually, we obtain a full pattern $\bm{h}^{\prime}$ that maximizes $|\bm{h}^{\prime}|$ while satisfying the constraints.
+% \end{pf}
 
-Suppose there is a feasible pattern $\bm{h}$ with $n$ groups and the length $L_{j}$ for row $j$. When $L_{j} \leq n \cdot n_M$, Algorithm \ref{construction} can generate the optimal solution to problem \eqref{gene_largest} from Lemma \ref{generation}.
+% Suppose there is a feasible pattern $\bm{h}$ with $n$ groups and the length $L_{j}$ for row $j$. When $L_{j} \leq n \cdot n_M$, Algorithm \ref{construction} can generate the optimal solution to problem \eqref{gene_largest} from Lemma \ref{generation}.
 
-When $L_{j} > n \cdot n_M$, Algorithm \ref{construction} can generate the pattern $\bm{h}^{'}$ which can be divided as $\bm{h}^{'} = \bm{h}^{'}_1 + \bm{h}^{'}_2$. The first part, $\bm{h}^{'}_1$, is associated with $L^1_{j} = n \cdot n_M$, the second part is associated with $L^2_{j} = L - n \cdot n_M$. According to Lemma \ref{generation}, $\bm{h}^{'}_1$ satisfies the constraints of problem \eqref{gene_largest}. Thus, $\bm{h}^{'}$ also satisfies these constraints. And $\bm{h}^{'}_2$ is a largest pattern according to Proposition \ref{lem_pattern}. Therefore, $\bm{h}^{'}$ is also a largest pattern.
-\end{pf}
+% When $L_{j} > n \cdot n_M$, Algorithm \ref{construction} can generate the pattern $\bm{h}^{\prime}$ which can be divided as $\bm{h}^{\prime} = \bm{h}^{\prime}_1 + \bm{h}^{\prime}_2$. The first part, $\bm{h}^{\prime}_1$, is associated with $L^1_{j} = n \cdot n_M$, the second part is associated with $L^2_{j} = L - n \cdot n_M$. According to Lemma \ref{generation}, $\bm{h}^{'}_1$ satisfies the constraints of problem \eqref{gene_largest}. Thus, $\bm{h}^{\prime}$ also satisfies these constraints. And $\bm{h}^{\prime}_2$ is a largest pattern according to Proposition \ref{lem_pattern}. Therefore, $\bm{h}^{\prime}$ is also a largest pattern.
+% \end{pf}
 
 \begin{pf}[Proof of Lemma \ref{bid-price}]
 According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.

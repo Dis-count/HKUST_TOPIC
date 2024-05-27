@@ -49,11 +49,12 @@ For the first method, to determine the appropriate row assignment for the curren
   & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
   & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - n_k a_j, j \in \mathcal{N} \\
   & \sum_{j=1}^{N} a_j \leq 1 \\
-  & x_{ij} \in \mathbb{Z}_{0}^{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{0}^{+}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
+  & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
   \end{aligned}
 \end{equation}
 
 When $X_i = 0$, we can solve the aforementioned problem to make the decision and update the seat planning accordingly. Once the decision is made, we proceed to assign seats to the next incoming group based on the updated seat planning. This iterative process ensures that the seat assignments are continuously adjusted and optimized as new groups arrive.
+
 
 \subsection{Assignment Based on The LP Relaxation of SSP}
 In a similar manner, denote the corresponding supply as $[X_1, \ldots, X_M]$, where $X_i = \sum_{j} x_{ij}$ for all $i$. When a group type $i$ arrives, if $X_i > 0$, we accept the group directly and assign them the seats originally planned for group type $i$. However, if $X_i = 0$, we determine the group type that can accommodate the arriving group first. We choose a specific row based on the group type and the break-tie rule, and then make the final decision by evaluating the values obtained from the relaxed SSP.

@@ -243,7 +243,7 @@ From Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \math
 
 However, solving problem \eqref{BD_master3} even with the simplified constraints directly can be computationally challenging in some cases, so practically we first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. Then, we generate an integral seat planning from this solution.
 
-\subsection{Obtain The Seat Planning Composed of Full or Largest Patterns}\label{seat_assignment}
+\subsection{Obtain The Feasible Seat Planning}\label{seat_assignment}
 We may obtain a fractional optimal solution when we solve the LP relaxation of problem \eqref{BD_master}. This solution represents the optimal allocations of groups to seats but may involve fractional values, indicating partial assignments. Based on the fractional solution obtained, we use the deterministic model to generate a feasible seat planning. The objective of this model is to allocate groups to seats in a way that satisfies the supply requirements for each group without exceeding the corresponding supply values obtained from the fractional solution. To accommodate more groups and optimize seat utilization, we aim to construct a seat planning composed of full or largest patterns based on the feasible seat planning obtained in the last step. 
 
 
@@ -265,7 +265,7 @@ Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $
   \left\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq {X}^{*}_{i}, i \in \mathcal{M}; x_{ij} \in \mathbb{N},i \in \mathcal{M}, j \in \mathcal{N} \right\}
 \end{equation}
 
-Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{\tilde{x}}$, which represents a feasible seat planning.
+Solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{\tilde{x}}$, and the corresponding pattern, $\bm{H}$, then generate the seat planning by problem \eqref{improve_seat} with $\bm{H}$.
 
 % To maximize the utilization of seats, we should assign full or largest patterns to each row. 
 % We will check if every row is full. When row $j$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j}$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. If $\beta$ is no less than $n_M$, then let $\beta = \beta - n_M$, $s_M = s_M +1$ until $\beta$ is less than $n_M$. If row $j$ is still not full, then find the smallest group size in row $j$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
@@ -278,6 +278,6 @@ Then solve the resulting problem \eqref{deter_upper1} to obtain the optimal solu
     {Obtain the optimal solution, $\mathbf{x}^{*}$, from the LP relaxation of problem \eqref{BD_master3}\;}
     {Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} = \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$\;}
     {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from problem \eqref{deter_upper1} with $\tilde{X}$\;}
-    {Construct the full or largest patterns by problem \eqref{improve_seat} with $\tilde{\mathbf{x}}$ and $\bm{H}$\;}
+    {Construct the seat planning by problem \eqref{improve_seat} with $\bm{H}$\;}
 \end{algorithm}
 

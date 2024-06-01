@@ -2,11 +2,6 @@
 \section{Seat Assignment with Dynamic Demand}\label{sec_dynamic}
 % Identify possible rows and assign to specific row.
 
-% 一般来说，我们可以通过比较接受和拒绝当前到来的组的随机规划模型的值来进行决策。随机规划模型可以给出座位排布，当有对应的座位时，我们直接接受并放置在任意一个对应的位置上。当没有对应的座位分布时，我们需要比较将组别放置在每一个可能的排时进行随机值的计算并比较，最终进行决策。
-% 这样做不仅在于整数随机规划较为费时并且在某些instance下无法求得最优解, 而且在当没有对应的座位分布时，我们需要比较将组别放置在每一个有可能放置的排进行计算并比较，计算量是十分巨大的。
-
-% 因此我们采用线性松弛的随机规划来作为近似值进行比较接受和拒绝，但线性松弛导致接受组别在任意可能的一排得到的目标值都是一样的，我们还需要辨别接受组别时将其放在哪一排。
-
 In this section, we address the assignment of arriving groups in the dynamic situation. Our policy involves making seat allocation decisions for each arriving group based on a seat planning strategy outlined in Section \ref{sec_seat_planning}. If the supply for a group arrival is adequate, we accept the group directly. However, when the supply is insufficient, we have two methods to make the decision. The first method is based on an adjusted SSP, while the second method is based on the LP relaxation of SSP. Typically, we prefer the former method if time permits. However, to ensure consistent computation time, we opt for the latter method.
 
 
@@ -160,14 +155,14 @@ The decision-making algorithm is shown below.
     \eIf{$X_{i} > 0$}
     {Find row $k$ such that $H_{ki} >0$ according to tie-breaking rule\; Accept group type $i$ in row $k$, $L_{k} \gets L_{k} -n_{i}$\; $H_{ki} \gets H_{ki} -1$, $X_{i} \gets X_{i} -1$\Comment*[r]{Accept group type $i$ when the supply is sufficient}
     \If{$i = M$ and $X_{M} =0$}
-    {Regenerate $\bm{H}$ from Algorithm 3\; Update the corresponding $\bm{X}$\Comment*[r]{Regenerate the seat planning when the supply of the largest group type is 0}}
+    {Regenerate $\bm{H}$ from Algorithm \ref{seat_construction}\; Update the corresponding $\bm{X}$\Comment*[r]{Regenerate the seat planning when the supply of the largest group type is 0}}
     }
     {Calculate $d^{t}(i, j^{*})$\;
     \eIf{$d^{t}(i, j^{*}) >0 $}
     {Find row $k$ such that $H_{kj^{*}} > 0$ according to tie-breaking rule\; 
     Calculate the VoA under scenario $\Omega^{t}_{A}$ and the VoR under scenario $\Omega^{t}_{R}$\;
     \eIf{VoA $>$ VoR}
-    {Accept group type $i$, $L_{k} \gets L_{k} - n_{i}$\; Regenerate $\bm{H}$ from Algorithm 3\; Update the corresponding $\bm{X}$\;}
+    {Accept group type $i$, $L_{k} \gets L_{k} - n_{i}$\; Regenerate $\bm{H}$ from Algorithm \ref{seat_construction}\; Update the corresponding $\bm{X}$\;}
     {Reject group type $i$\; Regenerate $\bm{H}$ from Algorithm 3\; Update the corresponding $\bm{X}$\;}}
     {Reject group type $i$\;}
     }}

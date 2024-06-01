@@ -138,6 +138,14 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
 % When $L_{j} > n \cdot n_M$, Algorithm \ref{construction} can generate the pattern $\bm{h}^{\prime}$ which can be divided as $\bm{h}^{\prime} = \bm{h}^{\prime}_1 + \bm{h}^{\prime}_2$. The first part, $\bm{h}^{\prime}_1$, is associated with $L^1_{j} = n \cdot n_M$, the second part is associated with $L^2_{j} = L - n \cdot n_M$. According to Lemma \ref{generation}, $\bm{h}^{'}_1$ satisfies the constraints of problem \eqref{gene_largest}. Thus, $\bm{h}^{\prime}$ also satisfies these constraints. And $\bm{h}^{\prime}_2$ is a largest pattern according to Proposition \ref{lem_pattern}. Therefore, $\bm{h}^{\prime}$ is also a largest pattern.
 % \end{pf}
 
+\begin{pf}[Proof of Proposition \ref{prop_construction}]
+First of all, we demonstrate the feasibility of problem \eqref{improve_seat}. Given the feasible seat planning $\bm{H}$ and $\tilde{d}_{i} = \sum_{j=1}^{N} H_{ji}$, let $\hat{x}_{ij} = H_{ji}, i \in \mathcal{M}, j \in \mathcal{N}$, then $\{\hat{x}_{ij}\}$ satisfies the first set of constraints. Because $\bm{H}$ is feasible, $\{\hat{x}_{ij}\}$ satisfies the second set of constraints and integer constraints. Thus, problem \eqref{improve_seat} always has a feasible solution. 
+
+Suppose there exists at least one pattern $\bm{h}$ is neither full nor largest in the optimal seat planning obtained from problem \eqref{improve_seat}. Let $\beta = L - \sum_{i} n_{i} h_{i}$, and denote the smallest group type in pattern $\bm{h}$ by $k$. If $\beta \geq n_1$, we can assign at least $n_1$ seats to a new group to increase the objective value. Thus, we consider the situation when $\beta < n_1$. If $k =M$, then this pattern is largest. When $k< M$, let $h^{1}_{k} = h_{k} -1$ and $h^{1}_{j} = h_{j} +1$, where $j = \min\{M, \beta + i\}$. In this way, the constraints will still be satisfied but the objective value will increase when the pattern $\bm{h}$ changes. Therefore, by contradiction, problem \eqref{improve_seat} always generate a seat planning composed of full or largest patterns.
+
+\end{pf}
+
+
 \begin{pf}[Proof of Lemma \ref{bid-price}]
 According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
   

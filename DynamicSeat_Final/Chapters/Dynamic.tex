@@ -169,6 +169,28 @@ The decision-making algorithm is shown below.
 \end{algorithm}
 
 
+\begin{algorithm}[H]
+  \caption{Dynamic Seat Assignment}
+  \For{$t =1, \ldots, T$}
+  {Observe group type $i$\;
+  \If{$i = M$ and $X_{M} =0$}
+   {Generate $\bm{H}$ from Algorithm \ref{seat_construction}\; Update the corresponding $\bm{X}$\Comment*[r]{Regenerate the seat planning when the supply of the largest group type is 0}}
+    Generate seat planning with scenarios\;
+    \eIf{$X_{i} > 0$}
+    {Find row $k$ such that $H_{ki} >0$ according to tie-breaking rule\; Accept group type $i$ in row $k$, $L_{k} \gets L_{k} -n_{i}$\; $H_{ki} \gets H_{ki} -1$, $X_{i} \gets X_{i} -1$\Comment*[r]{Accept group type $i$ when the supply is sufficient}}
+    {Calculate $d^{t}(i, j^{*})$\;
+    \eIf{$d^{t}(i, j^{*}) >0 $}
+    {Find row $k$ such that $H_{kj^{*}} > 0$ according to tie-breaking rule\; 
+    Calculate the VoA under scenario $\Omega^{t}_{A}$ and the VoR under scenario $\Omega^{t}_{R}$\;
+    \eIf{VoA $>$ VoR}
+    {Accept group type $i$, $L_{k} \gets L_{k} - n_{i}$\; Regenerate $\bm{H}$ from Algorithm \ref{seat_construction}\; Update the corresponding $\bm{X}$\;}
+    {Reject group type $i$\; Regenerate $\bm{H}$ from Algorithm 3\; Update the corresponding $\bm{X}$\;}}
+    {Reject group type $i$\;}
+    }}
+\end{algorithm}
+
+
+
 % \subsection{Break tie for Bid-price and DP base-heuristic}
 % To determine which row to place accepted groups in when there are multiple options, follow these steps:
 

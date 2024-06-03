@@ -62,7 +62,7 @@ The second row can be represented by $(1, 1, 4, 0)$, which is a full pattern as 
 \end{example}
 
 \subsection{Seat Planning Problem}
-Let $x_{ij}$ represent the number of group type $i$ planned in row $j$. The deterministic seat planning problem is formulated below, with the objective of maximizing the number of people accommodated.
+Let $x_{ij}$ represent the number of group type $i$ planned in row $j$. The deterministic seat planning problem (SPP$(\{d_{i}\})$) is formulated below, with the objective of maximizing the number of people accommodated.
 
 \begin{equation}\label{deter_upper}
     \begin{aligned}
@@ -91,9 +91,9 @@ For the LP relaxation of problem \eqref{deter_upper}, there exists an index $\ti
 \end{prop}
 
 
-For $i = 1,\ldots, \tilde{i}-1$, $x_{ij}^{*} = 0$ for all rows, indicating that no group type $i$ are assigned to any rows before index $\tilde{i}$. For $i = \tilde{i}+1,\ldots, M$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = d_{i}$ group type $i$ to meet the demand for group type $i$. For $i = \tilde{i}$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ group type $\tilde{i}$ to the rows. This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $\tilde{i}+1$ to $M$, divided by the size of group type $\tilde{i}$, denoted as $n_{\tilde{i}}$.
+For $i = 1,\ldots, \tilde{i}-1$, $x_{ij}^{*} = 0$ for all rows, indicating that no group type $i$ are assigned to any rows before index $\tilde{i}$. For $i = \tilde{i}+1,\ldots, M$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = d_{i}$ group type $i$ to meet the demand for group type $i$. For $i = \tilde{i}$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = \frac{\sum_{j=1}^{N}L_{j} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ group type $\tilde{i}$ to the rows. This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $\tilde{i}+1$ to $M$, divided by the size of group type $\tilde{i}$, denoted as $n_{\tilde{i}}$.
 
-Hence, the corresponding supply associated with the optimal solutions can be summarized as follows: $X_{\tilde{i}} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$, $X_{i} = d_{i}$ for $i = \tilde{i} +1,\ldots, M$, and $X_{i} = 0$ for $i = 1, \ldots, \tilde{i}-1$.
+Hence, the corresponding supply associated with the optimal solutions can be summarized as follows: $X_{\tilde{i}} = \frac{\sum_{j=1}^{N}L_{j} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$, $X_{i} = d_{i}$ for $i = \tilde{i} +1,\ldots, M$, and $X_{i} = 0$ for $i = 1, \ldots, \tilde{i}-1$.
 
 \subsection{Generate The Seat Planning Composed of Full or Largest Patterns}
 The seat planning obtained from problem \eqref{deter_upper} may not utilize all available seats, as it depends on the given demand. To improve a given seat planning and utilize all seats, we aim to generate a new seat planning that can assign the maximum number of seats to the possible groups while ensuring that the original group type requirements are met.

@@ -60,6 +60,24 @@ To optimize the computational efficiency, we consider certain conditions to dete
 
 % When $X_i =0$, the seat assignment process involves two main steps. First, we determine the appropriate group type used to accommodated the arriving group. The second step is to choose a specific row according to the group type and make the final decision by evaluating stochastic programming. For the whole periods, we regenerate the seat planning under certain conditions to optimize computational efficiency.
 
+\subsubsection*{Decision on Assigning The Group}
+Then, we compare the values of the relaxed stochastic programming when accepting the group at the chosen row versus rejecting it. This evaluation allows us to assess the potential revenues and make the final decision. Simultaneously, after this calculation, we can generate a new seat planning according to Algorithm 3. For the situation where the supply is enough in the first step, we can skip the final step because we already accept the group. Specifically, after we plan to assign the arriving group in a specific row, we determine whether to place the arriving group in the row based on the values of the stochastic programming problem. For the objective values of the relaxed stochastic programming, we consider the potential revenues that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR). 
+
+
+SSP$(\mathbf{L}_{a}^{t}, \Omega^{t})$
+
+Suppose a group type $i$ arrives at period $t$. The set of scenarios at period $t$ is denoted as $\Omega^{t}$. The available supply at period $t$ before making the decision is $\mathbf{L}_{r}^{t} = (L_1^{t}, \ldots, L_N^{t})$. The VoR is the value of relaxed SSP with the scenario set $\Omega^{t}$ and the capacity $\mathbf{L}_{r}^{t}$ when we reject group type $i$ at period $t$, denoted as SSP$(\mathbf{L}_{r}^{t}, \Omega^{t})$. If we plan to accept group type $i$ in row $j$, we need to assign seats from row $j$ to group type $i$. Let $\mathbf{L}_{a}^{t}= (L_1^{t}, \ldots, L_j^{t}-n_{i}, \ldots, L_N^{t})$, then the VoA is calculated by SSP$(\mathbf{L}_{a}^{t}, \Omega^{t})$.
+
+In each period, we can calculate the relaxed stochastic programming values only twice: once for the acceptance option (VoA) and once for the rejection option (VoR). By comparing the values of VoA and VoR, we can determine whether to accept or reject the group arrival. The decision will be based on selecting the option with the higher expected value, i.e., if the VoA is larger than the VoR, we accept the arrival; if the VoA is less than the VoR, we will reject the incoming group.
+
+% This adjustment ensures that the stochastic programming model captures the impact of rejecting group type $i$ on the remaining seats.
+
+% In such cases, we refer to the corresponding planning group row in the group-type control, where we determine which group to break in order to accommodate the incoming group. 
+
+By combining the group-type control strategy with the evaluation of relaxed stochastic programming values, we obtain a comprehensive decision-making process within a single period. This integrated approach enables us to make informed decisions regarding the acceptance or rejection of incoming groups, as well as determine the appropriate row for the assignment when acceptance is made. By considering both computation time savings and potential revenues, we can optimize the overall performance of the seat assignment process.
+
+% In essence, this decision-making approach weighs the potential benefits associated with accepting or rejecting an arrival, allowing us to select the option that maximizes the objective value and aligns with our overall goals.
+
 
 \subsubsection{Determine The Group Type}\label{nested_policy}
 % One intuitive approach is to utilize the relaxed SSP to make decisions by comparing the values obtained when accepting or rejecting the currently arriving group. The SSP aids in generating seat planning, and when there are available seats planned for the group, we readily accept and allocate it to the corresponding position according to the seat planning. 
@@ -101,27 +119,12 @@ When the supply is sufficient for the particular group type, we assign the group
 As an example to illustrate group-type control and the tie-breaking rule, consider a situation where we have four rows with available seats as follows: row 1 has 3 seats, row 2 has 4 seats, row 3 has 5 seats and row 4 has 6 seats. The corresponding patterns for each row are $(0,1,0,0)$, $(0,0,1,0)$, $(0,0,0,1)$ and $(0,0,0,1)$, respectively. There are $M =4$ groups, the social distance is $\delta =1$. Now, a group of one arrives,  and the group-type control indicates the possible rows where the group can be assigned. We assume this group can be assigned to the seats of the largest group according to the group-type control, then we have two choices: row 3 or row 4. To determine which row to select, we can apply the breaking tie rule. The $\beta$ value of the rows will be used as the criterion, we would choose row 4 because its $\beta$ value is larger. Because when we assign it in row 4, there will be two seats reserved for future group of one, but when we assign it in row 3, there will be one seat remaining unused.
 
 In the above example, the group of one can be assigned to any row with the available seats. The group-type control can help us find the larger group type that can be used to place the arriving group while maximizing the expected values. Maybe there are multiple rows containing the larger group type. Then we can choose the row containing the larger group type according to the breaking tie rule. 
-Finally, we use the stochastic programming to calculate the VoA and VoR. Comparing these values allows us to make the decision on whether to accept or reject the group.
+Finally, we compare the values of stochastic programming when accepting or rejecting the group, then make the corresponding decision.
 
-% When the available supply is sufficient to accommodate an arriving group, we can directly assign the group seats and update the remaining supply accordingly.
 
 % Notice that the relaxed stochastic programming will have the same value.
 
-\subsubsection*{Decision on Assigning The Group}
-Then, we compare the values of the relaxed stochastic programming when accepting the group at the chosen row versus rejecting it. This evaluation allows us to assess the potential revenues and make the final decision. Simultaneously, after this calculation, we can generate a new seat planning according to Algorithm 3. For the situation where the supply is enough in the first step, we can skip the final step because we already accept the group. Specifically, after we plan to assign the arriving group in a specific row, we determine whether to place the arriving group in the row based on the values of the stochastic programming problem. For the objective values of the relaxed stochastic programming, we consider the potential revenues that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR). 
 
-Consider the set of scenarios, denoted as $\Omega^{t}$, at period $t$. The VoA is the value of 
-relaxed stochastic programming by considering the scenario set $\Omega^{t}$ when we accept the arriving group at period $t$. On the other hand, the VoR is calculated when we reject the arriving arrival. Suppose the available supply is $\mathbf{L}^{t} = (L_1^{t}, \ldots, L_N^{t})$ before making the decision at period $t$. We calculate the relaxed stochastic programming with $\mathbf{L}^{t}= (L_1^{t}, \ldots, L_N^{t})$ when we reject group type $i$ as the VoR. If we plan to accept group type $i$ in row $j$, we need to assign seats from row $j$ to group type $i$. Let $L_j^{t} = L_j^{t} - n_{i}$, then we calculate the relaxed stochastic programming with $\mathbf{L}^{t}= (L_1^{t}, \ldots, L_N^{t})$ when we accept group type $i$ in row $j$ as the VoA.
-
-In each period, we can calculate the relaxed stochastic programming values only twice: once for the acceptance option (VoA) and once for the rejection option (VoR). By comparing the values of VoA and VoR, we can determine whether to accept or reject the group arrival. The decision will be based on selecting the option with the higher expected value, i.e., if the VoA is larger than the VoR, we accept the arrival; if the VoA is less than the VoR, we will reject the incoming group.
-
-% This adjustment ensures that the stochastic programming model captures the impact of rejecting group type $i$ on the remaining seats.
-
-% In such cases, we refer to the corresponding planning group row in the group-type control, where we determine which group to break in order to accommodate the incoming group. 
-
-By combining the group-type control strategy with the evaluation of relaxed stochastic programming values, we obtain a comprehensive decision-making process within a single period. This integrated approach enables us to make informed decisions regarding the acceptance or rejection of incoming groups, as well as determine the appropriate row for the assignment when acceptance is made. By considering both computation time savings and potential revenues, we can optimize the overall performance of the seat assignment process.
-
-% In essence, this decision-making approach weighs the potential benefits associated with accepting or rejecting an arrival, allowing us to select the option that maximizes the objective value and aligns with our overall goals.
 
 \subsubsection{Regenerate The Seat Planning}
 % For the whole decison-making process, there is no need to generate the seat planning every period when the supply is sufficient. In such cases, we can simply follow the current seat planning and assign the group accordingly. However, when the supply of the largest group drops from 1 to 0 or when we need to make a decision about whether to assign a group to the larger seats, we can generate the seat planning at that specific period. By generating the seat planning only when necessary, we can optimize the computational cost and ensure that our decisions accurately reflect the current state of seat availability. This approach strikes a balance between efficiency and accuracy in the dynamic seat assignment process.
@@ -140,11 +143,6 @@ To optimize computational efficiency, it is not necessary to regenerate the seat
 % The seat planning can be obtained from Algorithm \ref{seat_construction}. In accordance with the group-type control discussed in the previous section, we determine whether to accept or reject group arrivals and which row to assign the group in.
 
 The decision-making algorithm is shown below.
-
-% \begin{figure}[ht]
-%   \centering
-%     \includegraphics[width=1\textwidth]{./Figures/test.pdf}
-% \end{figure}
 
 \begin{algorithm}[H]
   \caption{Dynamic Seat Assignment}\label{algo_dynamic_policy}

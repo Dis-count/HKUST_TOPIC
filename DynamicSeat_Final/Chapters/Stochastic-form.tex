@@ -4,7 +4,7 @@ In this section, we develop the scenario-based stochastic programming (SSP) to o
 
 % Consider the seller who give the seat planning based on the scenarios then assign the groups to seats according to the realized true demand.
 
-\subsection{Scenario-based Stochastic Programming (SSP) Formulation}
+\subsection{Scenario-based Stochastic Programming Formulation}
 Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. A particular realization of the demand vector can be represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of people accommodated over all the scenarios, we propose a scenario-based stochastic programming to obtain a seat planning.
 
 The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{N}^{M \times N}$. Here, $x_{ij}$ represents the number of group type $i$ assigned to row $j$ in the seat planning. As mentioned earlier, we calculate the supply for group type $i$ as the sum of $x_{ij}$ over all rows $j$, denoted as $\sum_{j=1}^N x_{ij}$. However, considering the variability across different scenarios, it is necessary to model the potential excess or shortage of supply. To capture this characteristic, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$. 
@@ -25,7 +25,7 @@ where $(x)^{+}$ equals $x$ if $x>0$, $0$ otherwise. Specially, for the largest g
 
 % The assignment will be determined before the realization of the random demand, here-and-now policy.
 
-Then we have the formulation of SSP:
+Then we have the following formulation:
   \begin{align}
   \quad \max \quad & E_{\omega}\left[(n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}) + \sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+})\right] \\
   \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
@@ -35,6 +35,8 @@ Then we have the formulation of SSP:
   & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega \notag \\
   & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
   \end{align}
+
+We use SSP$(\mathbf{L}, \Omega)$ to represent the above stochastic programming, and similarly, we use RSSP$(\mathbf{L}, \Omega)$ to represent the LP relaxation of SSP. Notice that the value of RSSP$(\mathbf{L}, \Omega)$ is related with the total remaining capacity $L$. 
 
 The objective function consists of two parts. The first part represents the number of people in
 the largest group type that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of people in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
@@ -64,8 +66,8 @@ There exists an optimal solution to the stochastic programming problem such that
 \end{prop}
 
 
-Let $\mathbf{n} = (n_1, \ldots, n_M)$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)$ represent the vector of row lengths, where $L_j$ denotes the length of row $j$ as defined previously.
-The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{n} \mathbf{x} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{n} \mathbf{x}$, does not exceed the available row lengths $\mathbf{L}$. We can use the product $\mathbf{x} \mathbf{1}$ to indicate the supply of group types, where $\mathbf{1}$ is a column vector of size $N$ with all elements equal to 1. 
+Let $\mathbf{n} = (n_1, \ldots, n_M)^{\intercal}$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)^{\intercal}$ represent the vector of row lengths, where $L_j$ denotes the length of row $j$ as defined previously.
+The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{x}^{\intercal} \mathbf{n}$, does not exceed the available row lengths $\mathbf{L}$. We can use the product $\mathbf{x} \mathbf{1}$ to indicate the supply of group types, where $\mathbf{1}$ is a column vector of size $N$ with all elements equal to 1. 
 
 The linear constraints associated with scenarios, denoted by constraints \eqref{DEF_constr1} and \eqref{DEF_constr2}, can be expressed in matrix form as:
 \[\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_\omega = \mathbf{d}_\omega, \omega\in \Omega,\]
@@ -95,7 +97,7 @@ As we can find, this deterministic equivalent form is a large-scale problem even
 \begin{equation}\label{BD_master}
 \begin{aligned}
 \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
-\text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+\text {s.t.} \quad & \mathbf{x}^{\intercal} \mathbf{n}  \leq \mathbf{L} \\
 & \mathbf{x} \in \mathbb{N}^{M \times N},
 \end{aligned}
 \end{equation}
@@ -131,11 +133,13 @@ Notice that the feasible region of the dual of problem \eqref{BD_sub} remains un
   \end{aligned}
 \end{equation}
 
+% Let $\mathbb{P} = \{\bm{\alpha} \in \mathbb{R}^{M}|\bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$.
+
 \begin{lem}\label{feasible_region}
-Let $\mathbb{P} = \{\bm{\alpha} \in \mathbb{R}^{M}|\bm{\alpha}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$. The feasible region of problem \eqref{BD_sub_dual}, $\mathbb{P}$, is nonempty and bounded. Furthermore, all the extreme points of $\mathbb{P}$ are integral.
+ The feasible region of problem \eqref{BD_sub_dual} is nonempty and bounded. Furthermore, all the extreme points of the feasible region are integral.
 \end{lem}
 
-Therefore, the optimal value of the problem \eqref{BD_sub}, $z_{\omega}(\mathbf{x})$, is finite and can be achieved at extreme points of the set $\mathbb{P}$. Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$. That is, we have $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha}_{\omega} \in \mathcal{O}} \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$.
+Let $\mathbb{P}$ indicate the feasible region of problem $\eqref{BD_sub_dual}$. According to Lemma \ref{feasible_region}, the optimal value of the problem \eqref{BD_sub}, $z_{\omega}(\mathbf{x})$, is finite and can be achieved at extreme points of $\mathbb{P}$. Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$. Then, we have $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha}_{\omega} \in \mathcal{O}} \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$.
 
 % We assume that $\mathbb{P}$ is nonempty and has at least one extreme point.  Then, either the dual problem \eqref{BD_sub_dual} has an optimal solution and $z_{\omega}(\mathbf{x})$ is finite, or the primal problem \eqref{BD_sub} is infeasible and $z_{\omega}(\mathbf{x}) = \infty$.  
 
@@ -145,7 +149,7 @@ Alternatively, $z_{\omega}(\mathbf{x})$ is the largest number $z_{\omega}$ such 
 \begin{equation}\label{BD_master2}
   \begin{aligned}
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-    \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+    \text {s.t.} \quad & \mathbf{x}^{\intercal} \mathbf{n}  \leq \mathbf{L} \\
     & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \forall \bm{\alpha}_{\omega} \in \mathcal{O}, \forall \omega \\
      & \mathbf{x} \in \mathbb{N}^{M \times N}
   \end{aligned}
@@ -192,7 +196,7 @@ Instead of solving this linear programming directly, we can compute the values o
 \subsubsection{Constraint Generation}\label{bender_stage}
 % Benders decomposition works with only a subset of those exponentially many constraints and adds more constraints iteratively until the optimal solution of Benders Master Problem(BMP) is attained. This procedure is known as delayed constraint generation.
 
-Due to the computational infeasibility of solving problem \eqref{BD_master2} with an exponentially large number of constraints, it is a common practice to use a subset, denoted as $\mathcal{O}^t$, to replace $\mathcal{O}$ in problem \eqref{BD_master2}. This results in a modified problem known as the Restricted Benders Master Problem(RBMP). To find the optimal solution to problem \eqref{BD_master2}, we employ the technique of constraint generation. It involves iteratively solving the RBMP and incrementally adding more constraints until the optimal solution to problem \eqref{BD_master2} is obtained.
+Due to the computational infeasibility of solving problem \eqref{BD_master2} with an exponentially large number of constraints, it is a common practice to use a subset, denoted as $\mathcal{O}^t$, to replace $\mathcal{O}$ in problem \eqref{BD_master2}. This results in a modified problem known as the Restricted Benders Master Problem (RBMP). To find the optimal solution to problem \eqref{BD_master2}, we employ the technique of constraint generation. It involves iteratively solving the RBMP and incrementally adding more constraints until the optimal solution to problem \eqref{BD_master2} is obtained.
 
 
 We can conclude that the RBMP will have the form:
@@ -200,7 +204,7 @@ We can conclude that the RBMP will have the form:
 \begin{equation}\label{BD_master3}
   \begin{aligned}
     \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-    \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+    \text {s.t.} \quad & \mathbf{x}^{\intercal} \mathbf{n}  \leq \mathbf{L} \\
     & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha}_{\omega} \in \mathcal{O}^{t}, \forall \omega \\
      & \mathbf{x} \in \mathbb{N}^{M \times N}
   \end{aligned}
@@ -209,7 +213,7 @@ We can conclude that the RBMP will have the form:
 To determine the initial $\mathcal{O}^{t}$, we have the following proposition.
 
 \begin{prop}\label{one_ep_feasible}
-RBMP is always bounded with at least any one feasible constraint for each scenario.
+RBMP is always bounded with at least one constraint for each scenario.
 \end{prop}
 
 Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}^{*}$ and $\mathbf{z}^{*} =(z^{*}_1,\ldots, z^{*}_{|\Omega|})$. Then $c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{*}$ is an upper bound of problem \eqref{BD_master3}. When $\mathbf{x}^{*}$ is given, the optimal solution, $\bm{\tilde{\alpha}}_{\omega}$, to problem \eqref{BD_sub_dual} can be obtained according to Proposition \ref{optimal_sol_sub_dual}. Let $\tilde{z}_{\omega} = \bm{\tilde{\alpha}}_{\omega}(d_{\omega} - \mathbf{x}^{*} \mathbf{1})$, then $(\mathbf{x}^{*}, \mathbf{\tilde{z}})$ is a feasible solution to problem \eqref{BD_master3} because it satisfies all the constraints. Thus, $\mathbf{c}^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} \tilde{z}_{\omega}$ is a lower bound of problem \eqref{BD_master2}.
@@ -259,13 +263,10 @@ We may obtain a fractional optimal solution when we solve the LP relaxation of p
 
 % its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 
-Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${X}^{*}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Replace the vector $\mathbf{d}$ with ${X}^{*}$ in the deterministic model, we have the following problem, 
+Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Solve the SPP$(\{\tilde{X}_{i}\})$ to obtain the optimal solution, $\mathbf{\tilde{x}}$, and the corresponding pattern, $\bm{H}$, then generate the seat planning by problem \eqref{improve_seat} with $\bm{H}$.
 
-\begin{equation}\label{deter_upper1}
-  \left\{\max \sum_{j=1}^{N} \sum_{i=1}^{M}(n_i -\delta) x_{ij}: \sum_{i = 1}^{M} n_i x_{ij} \leq L_{j}, j \in \mathcal{N}; \sum_{j =1}^{N} x_{ij} \leq {X}^{*}_{i}, i \in \mathcal{M}; x_{ij} \in \mathbb{N},i \in \mathcal{M}, j \in \mathcal{N} \right\}
-\end{equation}
 
-Solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution, $\mathbf{\tilde{x}}$, and the corresponding pattern, $\bm{H}$, then generate the seat planning by problem \eqref{improve_seat} with $\bm{H}$.
+
 
 % To maximize the utilization of seats, we should assign full or largest patterns to each row. 
 % We will check if every row is full. When row $j$ is not full, i.e., $\sum_{i} n_{i} x_{ij} < L_{j}$, let $\beta = L_{j} - \sum_{i} n_{i} x_{ij}$. If $\beta$ is no less than $n_M$, then let $\beta = \beta - n_M$, $s_M = s_M +1$ until $\beta$ is less than $n_M$. If row $j$ is still not full, then find the smallest group size in row $j$ and mark it as $i^0$. If the smallest group is exactly the largest, then the row represents a largest pattern and check next row. Otherwise, reduce the number of group type $i^0$ by one and increase the number of group type $\min \{(i^0+\beta), M\}$ by one. Continue this procedure until this row is full.
@@ -277,7 +278,6 @@ Solve the resulting problem \eqref{deter_upper1} to obtain the optimal solution,
   % \KwOut{$\mathbf{x}, \bm{H}$}
     {Obtain the optimal solution, $\mathbf{x}^{*}$, from the LP relaxation of problem \eqref{BD_master3}\;}
     {Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} = \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$\;}
-    {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from problem \eqref{deter_upper1} with $\tilde{X}$\;}
+    {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from SPP$(\{\tilde{X}_{i}\})$\;}
     {Construct the seat planning by problem \eqref{improve_seat} with $\bm{H}$\;}
 \end{algorithm}
-

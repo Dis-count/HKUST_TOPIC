@@ -1,6 +1,6 @@
 % !TEX root = ./sum1.tex
 \section{Seat Planning with Stochastic Demand}\label{sec_seat_planning}
-In this section, we develop the scenario-based stochastic programming (SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
+In this section, we develop the Scenario-based Stochastic Programming (SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
 
 % Consider the seller who give the seat planning based on the scenarios then assign the groups to seats according to the realized true demand.
 
@@ -36,7 +36,7 @@ Then we have the following formulation:
   & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
   \end{align}
 
-We use SSP$(\mathbf{L}, \Omega)$ to represent the above stochastic programming, and similarly, we use RSSP$(\mathbf{L}, \Omega)$ to represent the LP relaxation of SSP. Notice that the value of RSSP$(\mathbf{L}, \Omega)$ is related with the total remaining capacity $L$. 
+We use SSP$(\mathbf{L}, \Omega)$ to represent the above stochastic programming, and similarly, we use RSSP$(\mathbf{L}, \Omega)$ to represent the LP relaxation of SSP. Notice that the value of RSSP$(\mathbf{L}, \Omega)$ is related with the total capacity $\sum_{j} L_{j}$ rather than $\mathbf{L}$. 
 
 The objective function consists of two parts. The first part represents the number of people in
 the largest group type that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of people in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.

@@ -4,11 +4,10 @@
 In this section, we address the assignment of arriving groups in the dynamic situation. Our policy involves making seat allocation decisions for each arriving group based on a seat planning strategy outlined in Section \ref{sec_seat_planning}. If the supply for a group arrival is adequate, we accept the group directly. However, when the supply is insufficient, we have two methods to make the decision. The first method is based on an adjusted SSP, while the second method is based on the LP relaxation of SSP. Typically, we prefer the former method if time permits. However, to ensure consistent computation time, we opt for the latter method.
 
 
-
 \subsection{Assignment Based on The Adjusted SSP}
 Initially, we obtain the seat planning, $x_{ij}, \forall i,j$, by SSP. The seat planning can be obtained by either solving the LP relaxation of SSP or the original SSP, depending on the computational time. Let the corresponding supply be denoted as $[X_1, \ldots, X_M]$, where $X_i = \sum_{j} x_{ij}$ for all $i$.
 
-When a group of type $i$ arrives, if $X_i > 0$, we accept the group directly and assign them the seats originally planned for group type $i$, adhering to any break tie rules that may exist. If $X_i = 0$, we make the decision with the help of the adjusted SSP. 
+When a group type $i$ arrives, if $X_i > 0$, we accept the group directly and assign them the seats originally planned for group type $i$, adhering to any break tie rules that may exist. If $X_i = 0$, we make the decision with the help of the adjusted SSP. 
 
 \subsubsection{Adjusted SSP}
 For the first method, to determine the appropriate row assignment for the current group type $k$, we introduce the decision variables $a_j, j \in \mathcal{N}$ indicating whether we accept it in row $j$.
@@ -89,7 +88,6 @@ In each period, we can calculate the relaxed stochastic programming values only 
 By combining the group-type control strategy with the evaluation of relaxed stochastic programming values, we obtain a comprehensive decision-making process within a single period. This integrated approach enables us to make informed decisions regarding the acceptance or rejection of incoming groups, as well as determine the appropriate row for the assignment when acceptance is made. By considering both computation time savings and potential revenues, we can optimize the overall performance of the seat assignment process.
 
 % In essence, this decision-making approach weighs the potential benefits associated with accepting or rejecting an arrival, allowing us to select the option that maximizes the objective value and aligns with our overall goals.
-
 
 
 \subsubsection{Regenerate The Seat Planning}

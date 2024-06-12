@@ -91,14 +91,17 @@ For the LP relaxation of problem \eqref{deter_upper}, there exists an index $\ti
 \end{prop}
 
 
-For $i = 1,\ldots, \tilde{i}-1$, $x_{ij}^{*} = 0$ for all rows, indicating that no group type $i$ are assigned to any rows before index $\tilde{i}$. For $i = \tilde{i}+1,\ldots, M$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = d_{i}$ group type $i$ to meet the demand for group type $i$. For $i = \tilde{i}$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = \frac{\sum_{j=1}^{N}L_{j} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ group type $\tilde{i}$ to the rows. This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $\tilde{i}+1$ to $M$, divided by the size of group type $\tilde{i}$, denoted as $n_{\tilde{i}}$.
+For $i = 1,\ldots, \tilde{i}-1$, the optimal solutions have $x_{ij}^{*} = 0$ for all rows, indicating that no group type $i$ lower than index $\tilde{i}$ are assigned to any rows. For $i = \tilde{i}+1,\ldots, M$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = d_{i}$ group type $i$ to meet the demand for group type $i$. For $i = \tilde{i}$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = \frac{\sum_{j=1}^{N}L_{j} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ group type $\tilde{i}$ to the rows. This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $\tilde{i}+1$ to $M$, divided by the size of group type $\tilde{i}$, denoted as $n_{\tilde{i}}$.
 
 Hence, the corresponding supply associated with the optimal solutions can be summarized as follows: $X_{\tilde{i}} = \frac{\sum_{j=1}^{N}L_{j} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$, $X_{i} = d_{i}$ for $i = \tilde{i} +1,\ldots, M$, and $X_{i} = 0$ for $i = 1, \ldots, \tilde{i}-1$.
 
 \subsection{Generate The Seat Planning Composed of Full or Largest Patterns}
-The seat planning obtained from problem \eqref{deter_upper} may not utilize all available seats, as it depends on the given demand. To improve a given seat planning and utilize all seats, we aim to generate a new seat planning that can assign the maximum number of seats to the possible groups while ensuring that the original group type requirements are met.
+The seat planning obtained from problem \eqref{deter_upper} may not utilize all available seats, as it depends on the given demand. To improve a given seat planning and utilize all seats, we aim to generate a new seat planning composed of full or largest patterns while ensuring that the original group type requirements are met.
 
-We seek to find a seat planning $\bm{H}^{\prime}$ for any feasible seat planning $\bm{H}$.Specifically, we reallocate the seats to obtain a seat planning, $\bm{H}^{\prime}$, which can satisfy the realized demand $\sum_{j=1}^{N} H_{ji}$ for each group type $i$. Mathematically, we can solve the following programming to obtain the improved seat planning:
+We can assign the maximum number of seats to the possible groups to realize our goal. Specifically, we can reallocate the seats to obtain a new seat planning, $\bm{H}^{\prime}$, which can satisfy the realized demand $\sum_{j=1}^{N} H_{ji}$ for each group type $i$. Mathematically, we can solve the following optimization problem to obtain the desired seat planning:
+
+% We seek to find a seat planning $\bm{H}^{\prime}$ for any feasible seat planning $\bm{H}$.
+
 
 \begin{equation}\label{improve_seat}
   \begin{aligned}
@@ -115,7 +118,10 @@ Since smaller groups can be satisfied by larger groups, for each group type $i$,
   Problem \eqref{improve_seat} can always generate a seat planning $\bm{H}^{\prime}$ composed of full or largest patterns, given a feasible seat planning $\bm{H}$.
 \end{prop}
 
-This approach guarantees efficient seat allocation, maximizing the utilization of available seats while still accommodating the original groups' requirements. Furthermore, the improved seat planning can be used for the seat assignment when the demand arrives sequentially.
+% maximizing the utilization of available seats
+
+This approach guarantees efficient seat allocation by constructing full or largest patterns while still accommodating the original groups' requirements. Furthermore, the improved seat planning can be used for the seat assignment when the demand arrives sequentially.
+
 
 % When there is high demand for seats, it is advantageous to prioritize the largest patterns. These patterns allow for the accommodation of the largest number of individuals due to social distancing requirements. On the other hand, in scenarios with moderate demand, adopting the full pattern becomes more feasible. The full pattern maximizes seating capacity by utilizing all available seats, except those empty seats needed for social distancing measures. By considering both the largest and full patterns, we can optimize seat planning configurations to efficiently accommodate a significant number of individuals while maintaining adherence to social distancing guidelines. 
 

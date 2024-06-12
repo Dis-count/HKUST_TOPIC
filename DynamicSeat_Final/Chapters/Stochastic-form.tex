@@ -36,7 +36,9 @@ Then we have the following formulation:
   & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
   \end{align}
 
-We use SSP$(\mathbf{L}, \Omega)$ to represent the above stochastic programming, and similarly, we use RSSP$(\mathbf{L}, \Omega)$ to represent the LP relaxation of SSP. Notice that the value of RSSP$(\mathbf{L}, \Omega)$ is related with the total capacity $\sum_{j} L_{j}$ rather than $\mathbf{L}$. 
+We use SSP$(\mathbf{L}, \Omega)$ to represent the above stochastic programming, and similarly, we use RSSP$(\mathbf{L}, \Omega)$ to represent the LP relaxation of SSP. 
+
+% Notice that the value of RSSP$(\mathbf{L}, \Omega)$ is related with the total capacity $\sum_{j} L_{j}$ rather than $\mathbf{L}$. 
 
 The objective function consists of two parts. The first part represents the number of people in
 the largest group type that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of people in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
@@ -210,12 +212,6 @@ We can conclude that the RBMP will have the form:
   \end{aligned}
 \end{equation}
 
-To determine the initial $\mathcal{O}^{t}$, we have the following proposition.
-
-\begin{prop}\label{one_ep_feasible}
-RBMP is always bounded with at least one constraint for each scenario.
-\end{prop}
-
 Given the initial $\mathcal{O}^{t}$, we can have the solution $\mathbf{x}^{*}$ and $\mathbf{z}^{*} =(z^{*}_1,\ldots, z^{*}_{|\Omega|})$. Then $c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{*}$ is an upper bound of problem \eqref{BD_master3}. When $\mathbf{x}^{*}$ is given, the optimal solution, $\bm{\tilde{\alpha}}_{\omega}$, to problem \eqref{BD_sub_dual} can be obtained according to Proposition \ref{optimal_sol_sub_dual}. Let $\tilde{z}_{\omega} = \bm{\tilde{\alpha}}_{\omega}(d_{\omega} - \mathbf{x}^{*} \mathbf{1})$, then $(\mathbf{x}^{*}, \mathbf{\tilde{z}})$ is a feasible solution to problem \eqref{BD_master3} because it satisfies all the constraints. Thus, $\mathbf{c}^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} \tilde{z}_{\omega}$ is a lower bound of problem \eqref{BD_master2}.
 
 If for every scenario $\omega$, the optimal value of the corresponding problem \eqref{BD_sub_dual} is larger than or equal to $z_{\omega}^{*}$, which means all contraints are satisfied, then we have an optimal solution, $(\mathbf{x}^{*}, \mathbf{z}^{*})$, to problem \eqref{BD_master2}. However, if there exists at least one scenario $\omega$ for which the optimal value of problem \eqref{BD_sub_dual} is less than $z_{\omega}^{*}$, indicating that the constraints are not fully satisfied, we need to add a new constraint $(\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega} - \mathbf{x} \mathbf{1}) \geq z_{\omega}$ to RBMP.
@@ -224,6 +220,13 @@ If for every scenario $\omega$, the optimal value of the corresponding problem \
 
 % The problem \eqref{lemma_eq} associated with $\alpha_{\omega}$ will give an optimal solution $(x_1, z_{\omega}^{1})$. (Upper bound)
 
+To determine the initial $\mathcal{O}^{t}$, we have the following proposition.
+
+\begin{prop}\label{one_ep_feasible}
+RBMP is always bounded with at least one constraint for each scenario.
+\end{prop}
+
+From Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \mathbf{0}$ initially. Notice that only contraints are added in each iteration, thus $UB$ is decreasing monotone over iterations. Then we can use $UB - LB < \epsilon$ to terminate the algorithm.
 
 \begin{algorithm}[h]
   \caption{Benders Decomposition}\label{cut_algo}
@@ -241,7 +244,6 @@ If for every scenario $\omega$, the optimal value of the corresponding problem \
     }
 \end{algorithm}
 
-From Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \mathbf{0}$ initially. Notice that only contraints are added in each iteration, thus $UB$ is decreasing monotone over iterations. Then we can use $UB - LB < \epsilon$ to terminate the algorithm.
 
 % After the algorithm terminates, we obtain the optimal $\mathbf{x}^{*}$. The demand that can be satisfied by the arrangement is $\mathbf{x}^{*} \mathbf{1} = \mathbf{d}_0 = (d_{1,0},\ldots,d_{M,0})^{\intercal}$. 
 
@@ -263,9 +265,7 @@ We may obtain a fractional optimal solution when we solve the LP relaxation of p
 
 % its objective is to obtain the maximal number of people served, not the optimal seat assignment. It will not provide an appropriate solution when the number of arriving people in the scenarios is way less than the number of total seats because it does not utilize all the empty seats.
 
-Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$. Solve the SPP$(\{\tilde{X}_{i}\})$ to obtain the optimal solution, $\mathbf{\tilde{x}}$, and the corresponding pattern, $\bm{H}$, then generate the seat planning by problem \eqref{improve_seat} with $\bm{H}$.
-
-
+Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} =\sum_{j} x^{*}_{ij}, \forall i \in \mathbf{M}$. Solve the SPP$(\{\tilde{X}_{i}\})$ to obtain the optimal solution, $\mathbf{\tilde{x}}$, and the corresponding pattern, $\bm{H}$, then generate the seat planning by problem \eqref{improve_seat} with $\bm{H}$.
 
 
 % To maximize the utilization of seats, we should assign full or largest patterns to each row. 

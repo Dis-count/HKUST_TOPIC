@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -98,11 +101,10 @@
 \@writefile{toc}{\contentsline {section}{\numberline {6}Seat Assignment with Dynamic Demand}{17}{section.6}\protected@file@percent }
 \newlabel{sec_dynamic}{{6}{17}{Seat Assignment with Dynamic Demand}{section.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Assignment Based on The Adjusted SSP}{17}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.1}Adjusted SSP}{17}{subsubsection.6.1.1}\protected@file@percent }
-\newlabel{adjusted_SSP}{{15}{17}{Adjusted SSP}{equation.6.15}{}}
+\newlabel{adjusted_SSP}{{15}{17}{Assignment Based on The Adjusted SSP}{equation.6.15}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Assignment Based on The LP Relaxation of SSP}{18}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Determine The Group Type}{18}{subsubsection.6.2.1}\protected@file@percent }
-\newlabel{nested_policy}{{6.2.1}{18}{Determine The Group Type}{subsubsection.6.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Group-type Control}{18}{subsubsection.6.2.1}\protected@file@percent }
+\newlabel{nested_policy}{{6.2.1}{18}{Group-type Control}{subsubsection.6.2.1}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Decision on Assigning The Group to A Specific Row}{19}{subsubsection.6.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Regenerate The Seat Planning}{21}{subsubsection.6.2.3}\protected@file@percent }
 \@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces Dynamic Seat Assignment\relax }}{22}{algocf.3}\protected@file@percent }

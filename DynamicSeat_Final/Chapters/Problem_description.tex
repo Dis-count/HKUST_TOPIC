@@ -100,8 +100,6 @@ The seat planning obtained from problem \eqref{deter_upper} may not utilize all 
 
 We can assign the maximum number of seats to the possible groups to realize our goal. Specifically, we can reallocate the seats to obtain a new seat planning, $\bm{H}^{\prime}$, which can satisfy the realized demand $\sum_{j=1}^{N} H_{ji}$ for each group type $i$. Mathematically, we can solve the following optimization problem to obtain the desired seat planning:
 
-% We seek to find a seat planning $\bm{H}^{\prime}$ for any feasible seat planning $\bm{H}$.
-
 
 \begin{equation}\label{improve_seat}
   \begin{aligned}
@@ -118,7 +116,6 @@ Since smaller groups can be satisfied by larger groups, for each group type $i$,
   Problem \eqref{improve_seat} can always generate a seat planning $\bm{H}^{\prime}$ composed of full or largest patterns, given a feasible seat planning $\bm{H}$.
 \end{prop}
 
-% maximizing the utilization of available seats
 
 This approach guarantees efficient seat allocation by constructing full or largest patterns while still accommodating the original groups' requirements. Furthermore, the improved seat planning can be used for the seat assignment when the demand arrives sequentially.
 

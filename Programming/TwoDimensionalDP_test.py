@@ -2,7 +2,7 @@ import numpy as np
 from SamplingMethod import samplingmethod
 from Method1 import stochasticModel
 from Method10 import deterministicModel
-from Mist import generate_sequence, decision1, decision2
+from Mist import generate_sequence
 import copy
 from itertools import combinations
 import time
@@ -10,15 +10,17 @@ import time
 # This function use two-dimensional dynamic programming as the upper bound.
 
 class CompareMethods:
-    def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample):
+    def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample, s):
         self.roll_width = roll_width  # array, mutable object
         self.given_lines = given_lines  # number, Immutable object
-        self.demand_width_array = np.arange(2, 2+I)
-        self.value_array = self.demand_width_array - 1
+        self.s = s
+        self.demand_width_array = np.arange(1+self.s, 1+I+self.s)
+        self.value_array = self.demand_width_array - self.s
         self.I = I   # number, Immutable object
         self.probab = probab
         self.num_period = num_period   # number, Immutable object
         self.num_sample = num_sample   # number, Immutable object
+        
 
     def random_generate(self):
         sequence = generate_sequence(self.num_period, self.probab)
@@ -195,42 +197,47 @@ class CompareMethods:
         return value
 
     def com_dy(self, length, T):
-        # Consider all combinations of each status of length.
+        # Consider the upper bound of two dimensional length.
         total = sum(length)
         min_value = 1e6
-        for j in range(int(self.given_lines/2)+1):
-            for i in combinations(length, j):
-                sum1 = int(sum(i))
-                sum2 = int(total - sum1)
-                current_value = min(value[sum1][sum2][T], value[sum2][sum1][T]) 
-                if min_value > current_value:
-                    min_value = current_value
+        for i in range(self.given_lines):
+            sum1 = int(length[i])
+            sum2 = int(total - sum1)
+            current_value = min(value[sum1][sum2][T], value[sum2][sum1][T]) 
+            if min_value > current_value:
+                min_value = current_value
         return min_value
 
     def each_row(self, arrival, roll_width0, T):
-        max_value = self.com_dy(roll_width0, T)
         index = -1
+        max_value = 0
+        # for i in range(self.given_lines):
+        #     if roll_width0[i] <= 1:
+        #         roll_width0[i] = 0
         roll_width = copy.deepcopy(roll_width0)
+        total = sum(roll_width)
         for i in range(self.given_lines):
             roll_width[i] = roll_width0[i] - arrival
             if roll_width[i] >= 0:
-                upper_bound = self.com_dy(roll_width, T)
-                if upper_bound + arrival-1 > max_value:
-                    max_value = upper_bound + arrival-1
+                upper_bound = value[int(total - roll_width0[i])][int(roll_width[i])][T]
+                if upper_bound > max_value:
+                    max_value = upper_bound
                     index = i
-            roll_width[i] = roll_width0[i]
-        
+        # max_value = self.com_dy(roll_width0, T)  # When rejecting the arrival
+        if (index == -1) or value[int(total - roll_width0[index])][int(roll_width0[index])][T] > upper_bound + arrival-1:
+            index = -1
+
         return  max_value, index
 
     def main_dy(self, sequence):
         decision_list = [0] * self.num_period
         cur_roll_width = copy.deepcopy(self.roll_width)
         for num, i in enumerate(sequence):
-            max_value, index = self.each_row(i, cur_roll_width, self.num_period - num)
+            max_value, index = self.each_row(i, cur_roll_width, self.num_period - num-1)
             if index >= 0:
                 decision_list[num] = 1
                 cur_roll_width[index] -= i
-        
+                print(cur_roll_width)
         sequence = [i-1 for i in sequence if i > 0]
         final_demand = np.array(sequence) * np.array(decision_list)
 
@@ -238,7 +245,8 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        
+        print(decision_list)
+        # print(cur_roll_width)
         return demand
 
     def bid_price(self, sequence):
@@ -275,8 +283,6 @@ class CompareMethods:
         demand = np.zeros(I)
         for i in final_demand:
             demand[i-1] += 1
-        print(f'bid: {roll_width}')
-        print(f'bid: {demand}')
 
         return demand
 
@@ -298,7 +304,8 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     num_period = 70
     given_lines = 10
-    # np.random.seed(16)
+    np.random.seed(16)
+    s = 1
 
     probab = [0.25, 0.25, 0.25, 0.25]
 
@@ -306,23 +313,25 @@ if __name__ == "__main__":
     # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
     # total_seat = np.sum(roll_width)
 
-    a_instance = CompareMethods(
-        roll_width, given_lines, I, probab, num_period, num_sample)
+    a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
 
     sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
-
+    
+    print(sequence)
+    
     h = a_instance.bid_price(sequence)
 
-    value = a_instance.dynamic2(220, 220, 71)
+    # value = a_instance.dynamic2(220, 220, 71)
+    value = a_instance.dynamic2(2, 3, 2)
+    print(value)
+    # a = np.array(value)
+    # np.save('a.npy', a)
 
-    a = np.array(value)
-    np.save('a.npy', a)
+    # a = np.load('a.npy')
+    # value = a.tolist()
 
-    a = np.load('a.npy')
-    value = a.tolist()
+    # b = a_instance.main_dy(sequence)
 
-    b = a_instance.main_dy(sequence)
-
-    multi = np.arange(1, I+1)
-    print(f'dynamic: {np.dot(multi, b)}')
-    print(f'bid: {np.dot(multi, h)}')
+    # multi = np.arange(1, I+1)
+    # print(f'dynamic: {np.dot(multi, b)}')
+    # print(f'bid: {np.dot(multi, h)}')

@@ -169,23 +169,21 @@ class CompareMethods:
                  for _ in range(S1 + 1)]
         record = [[[[0] * option for _ in range(T + 1)] for _ in range(S+1)] for _ in range(S1 + 1)]
 
-        for i2 in range(1, S1+1):
-            for i in range(1, S + 1):
+        for i2 in range(S1+1):
+            for i in range(S + 1):
                 for j in range(1, T + 1):
                     value[i2][i][j] = value[i2][i][j-1]
 
                     everyvalue = value[i2][i][j-1]
-                    everyvalue1 = value[i2][i][j-1]
-                    everyvalue2 = value[i2][i][j-1]
+                    everyvalue1 = 0
+                    everyvalue2 = 0
                     totalvalue = 0
                     for k in range(option):
-                        if (i - self.value_array[k]) >= 1:
-                            everyvalue2 = value[i2][i - self.value_array[k] -
-                                                    1][j - 1] + self.value_array[k]
+                        if (i - self.demand_width_array[k]) >= 0:
+                            everyvalue2 = value[i2][i - self.demand_width_array[k]][j - 1] + self.value_array[k]
 
-                        if (i2 - self.value_array[k]) >= 1:
-                            everyvalue1 = value[i2 - self.value_array[k] -
-                                                1][i][j - 1] + self.value_array[k]
+                        if (i2 - self.demand_width_array[k]) >= 0:
+                            everyvalue1 = value[i2 - self.demand_width_array[k]][i][j - 1] + self.value_array[k]
                         value_list = [everyvalue, everyvalue1, everyvalue2]
 
                         max_value = max(value_list)
@@ -210,7 +208,8 @@ class CompareMethods:
 
     def each_row(self, arrival, roll_width0, T):
         index = -1
-        max_value = 0
+        max_value = -1
+        upper_bound = -1e6
         # for i in range(self.given_lines):
         #     if roll_width0[i] <= 1:
         #         roll_width0[i] = 0
@@ -218,13 +217,14 @@ class CompareMethods:
         total = sum(roll_width)
         for i in range(self.given_lines):
             roll_width[i] = roll_width0[i] - arrival
+
             if roll_width[i] >= 0:
                 upper_bound = value[int(total - roll_width0[i])][int(roll_width[i])][T]
                 if upper_bound > max_value:
                     max_value = upper_bound
                     index = i
         # max_value = self.com_dy(roll_width0, T)  # When rejecting the arrival
-        if (index == -1) or value[int(total - roll_width0[index])][int(roll_width0[index])][T] > upper_bound + arrival-1:
+        if  value[int(total - roll_width0[index])][int(roll_width0[index])][T] > upper_bound + arrival-1:
             index = -1
 
         return  max_value, index
@@ -246,7 +246,7 @@ class CompareMethods:
         for i in final_demand:
             demand[i-1] += 1
         print(decision_list)
-        # print(cur_roll_width)
+        print(cur_roll_width)
         return demand
 
     def bid_price(self, sequence):
@@ -309,7 +309,7 @@ if __name__ == "__main__":
 
     probab = [0.25, 0.25, 0.25, 0.25]
 
-    roll_width = np.ones(given_lines) * 21
+    roll_width = np.ones(given_lines) * 20
     # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
     # total_seat = np.sum(roll_width)
 
@@ -317,21 +317,23 @@ if __name__ == "__main__":
 
     sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
     
-    print(sequence)
     
     h = a_instance.bid_price(sequence)
 
     # value = a_instance.dynamic2(220, 220, 71)
-    value = a_instance.dynamic2(2, 3, 2)
-    print(value)
     # a = np.array(value)
     # np.save('a.npy', a)
 
-    # a = np.load('a.npy')
-    # value = a.tolist()
+    a = np.load('a.npy')
+    value = a.tolist()
 
-    # b = a_instance.main_dy(sequence)
+    b = a_instance.main_dy(sequence)
+    c = a_instance.offline(sequence)
 
-    # multi = np.arange(1, I+1)
-    # print(f'dynamic: {np.dot(multi, b)}')
-    # print(f'bid: {np.dot(multi, h)}')
+    multi = np.arange(1, I+1)
+    print(sequence)
+    print(f'dynamic: {np.dot(multi, b)}')
+    print(f'bid: {np.dot(multi, h)}')
+    print(f'optimal: {np.dot(multi, c)}')
+
+

@@ -167,14 +167,14 @@ class CompareMethods:
                  for _ in range(S1 + 1)]
         record = [[[[0] * option for _ in range(T + 1)] for _ in range(S+1)] for _ in range(S1 + 1)]
 
-        for i2 in range(1, S1+1):
-            for i in range(1, S + 1):
+        for i2 in range(S1+1):
+            for i in range(S + 1):
                 for j in range(1, T + 1):
                     value[i2][i][j] = value[i2][i][j-1]
 
                     everyvalue = value[i2][i][j-1]
-                    everyvalue1 = value[i2][i][j-1]
-                    everyvalue2 = value[i2][i][j-1]
+                    everyvalue1 = 0
+                    everyvalue2 = 0
                     totalvalue = 0
                     for k in range(option):
                         if (i - self.value_array[k]) >= 1:
@@ -226,7 +226,7 @@ class CompareMethods:
         decision_list = [0] * self.num_period
         cur_roll_width = copy.deepcopy(self.roll_width)
         for num, i in enumerate(sequence):
-            max_value, index = self.each_row(i, cur_roll_width, self.num_period - num)
+            max_value, index = self.each_row(i, cur_roll_width, self.num_period - num-1)
             if index >= 0:
                 decision_list[num] = 1
                 cur_roll_width[index] -= i
@@ -238,7 +238,7 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        
+        print(cur_roll_width)
         return demand
 
     def bid_price(self, sequence):
@@ -298,11 +298,11 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     num_period = 70
     given_lines = 10
-    # np.random.seed(16)
+    np.random.seed(16)
 
     probab = [0.25, 0.25, 0.25, 0.25]
 
-    roll_width = np.ones(given_lines) * 21
+    roll_width = np.ones(given_lines) * 20
     # roll_width = np.array([0,0,21,21,21,21,21,21,21,21])
     # total_seat = np.sum(roll_width)
 
@@ -313,13 +313,13 @@ if __name__ == "__main__":
 
     h = a_instance.bid_price(sequence)
 
-    value = a_instance.dynamic2(220, 220, 71)
+    # value = a_instance.dynamic2(220, 220, 71)
 
-    a = np.array(value)
-    np.save('a.npy', a)
+    # aaa = np.array(value)
+    # np.save('aaa.npy', aaa)
 
-    a = np.load('a.npy')
-    value = a.tolist()
+    aaa = np.load('aaa.npy')
+    value = aaa.tolist()
 
     b = a_instance.main_dy(sequence)
 

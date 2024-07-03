@@ -325,6 +325,92 @@ class CompareMethod_new:
                     value[i2][i][j] = totalvalue
         return value
 
+    def dynamic3(self, S2, S1, S, T):
+        p = self.probab
+        option = self.I
+        value = [[[[0 for _ in range(T + 1)] for _ in range(S + 1)]
+                 for _ in range(S1 + 1)] for _ in range(S2+1)] 
+        record = [[[[[0] * option for _ in range(T + 1)] for _ in range(S+1)] for _ in range(S1 + 1)] for _ in range(S2+1)]
+
+        for i3 in range(S2+1):
+            for i2 in range(S1+1):
+                for i in range(S + 1):
+                    for j in range(1, T + 1):
+                        value[i3][i2][i][j] = value[i3][i2][i][j-1]
+
+                        everyvalue = value[i3][i2][i][j-1]
+                        everyvalue1 = 0
+                        everyvalue2 = 0
+                        everyvalue3 = 0
+                        totalvalue = 0
+                        for k in range(option):
+                            if (i - self.demand_width_array[k]) >= 0:
+                                everyvalue1 = value[i3][i2][i - self.demand_width_array[k]
+                                                        ][j - 1] + self.value_array[k]
+
+                            if (i2 - self.demand_width_array[k]) >= 0:
+                                everyvalue2 = value[i3][i2 - self.demand_width_array[k]
+                                                    ][i][j - 1] + self.value_array[k]
+
+                            if (i3 - self.demand_width_array[k]) >= 0:
+                                everyvalue3 = value[i3 - self.demand_width_array[k]
+                                                    ][i2][i][j - 1] + self.value_array[k]
+
+                            value_list = [everyvalue, everyvalue1,
+                                          everyvalue2, everyvalue3]
+
+                            max_value = max(value_list)
+                            record[i3][i2][i][j][k] = value_list.index(max_value)
+
+                            totalvalue += p[k] * max_value
+
+                        value[i3][i2][i][j] = totalvalue
+        return value
+
+    def each_row_3(self, arrival, roll_width0, T, value):
+        index = -1
+        max_value = -1
+        upper_bound = -1e6
+
+        roll_width = copy.deepcopy(roll_width0)
+        total = sum(roll_width)
+        for i in range(self.given_lines):
+            roll_width[i] = roll_width0[i] - arrival
+            smallest = min(np.delete(roll_width, [i]))
+            remaining = total - roll_width0[i] - smallest
+
+            if roll_width[i] >= 0:
+                upper_bound = value[int(roll_width[i])][int(remaining)][int(smallest)][T]
+                if upper_bound > max_value:
+                    max_value = upper_bound
+                    index = i
+        
+        smallest = min(np.delete(roll_width0, [index]))
+        remaining = total - roll_width0[index] - smallest
+
+        if value[int(roll_width0[index])][int(remaining)][int(smallest)][T] > upper_bound + arrival-self.s:
+            index = -1
+
+        return max_value, index
+
+    def main_dy3(self, sequence, value):
+        decision_list = [0] * self.num_period
+        cur_roll_width = copy.deepcopy(self.roll_width)
+        for num, i in enumerate(sequence):
+            max_value, index = self.each_row_3(
+                i, cur_roll_width, self.num_period - num-1, value)
+            if index >= 0:
+                decision_list[num] = 1
+                cur_roll_width[index] -= i
+        sequence = [i-1 for i in sequence if i > 0]
+        final_demand = np.array(sequence) * np.array(decision_list)
+
+        final_demand = final_demand[final_demand != 0]
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+
+        return demand
 
     def each_row(self, arrival, roll_width0, T, value):
         index = -1
@@ -549,13 +635,13 @@ if __name__ == "__main__":
     np.save('a.npy', aaa)
 
     aaa = np.load('a.npy')
-    value = aaa.tolist()
+    # value = aaa.tolist()
 
-    b = a.main_dy(sequence)
+    # b = a.main_dy(sequence)
 
-    new = a.method_new(sequence, newx4, roll_width)
+    # new = a.method_new(sequence, newx4, roll_width)
 
-    multi = np.arange(1,1+I)
-    new_value = np.dot(multi, new)
-    print(f'sto: {new_value}')
+    # multi = np.arange(1,1+I)
+    # new_value = np.dot(multi, new)
+    # print(f'sto: {new_value}')
 

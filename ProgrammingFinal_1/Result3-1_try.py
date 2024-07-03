@@ -8,7 +8,7 @@ import time
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(70,71,10)
+    period_range = range(120,121,10)
     given_lines = 10
     probab = [0.25, 0.25, 0.25, 0.25]
     s = 1
@@ -20,8 +20,8 @@ if __name__ == "__main__":
     for num_period in period_range:
         my_file.write('The number of periods: \t' + str(num_period) + '\n')
         
-        # roll_width = np.ones(given_lines) * 21
-        roll_width = np.array([17,18,19,20,21,21,22,23,24,20])
+        roll_width = np.ones(given_lines) * 21
+        # roll_width = np.array([17,18,19,20,21,21,22,23,24,20])
         a_instance = CompareMethod_new(roll_width, given_lines, I, probab, num_period, num_sample, s)
 
         ratio1 = 0
@@ -34,11 +34,11 @@ if __name__ == "__main__":
         multi = np.arange(1, I+1)
         count = 100
 
-        # value = a_instance.dynamic2(220, 220, 101)
-        # aaa = np.array(value)
-        # np.save('a.npy', aaa)
+        value = a_instance.dynamic2(220, 220, 151)
+        aaa = np.array(value)
+        np.save('a_1.npy', aaa)
 
-        aaa = np.load('a.npy')
+        aaa = np.load('a_1.npy')
         value = aaa.tolist()
 
         for j in range(count):

@@ -3,7 +3,7 @@
 \section*{Proof}
 
 \begin{pf}[Proof of Proposition \ref{lem_pattern}]
-We can utilize a greedy approach to construct a pattern, denoted as $\bm{h}_{g}$, by following the steps outlined below. This approach aims to generate a pattern that maximizes the number of people accommodated within the given constraints.
+First, we construct a feasible pattern with the size of $qM + \max\{r-\delta, 0\}$, then we prove this pattern is largest. We can utilize a greedy approach to construct a pattern, denoted as $\bm{h}_{g}$, by following the steps outlined below. This approach aims to generate a pattern that maximizes the number of people accommodated within the given constraints.
 
 \begin{itemize}
  \item Begin by selecting the maximum group size, denoted as $n_M$, as many times as possible to fill up the available seats in the row.
@@ -12,14 +12,14 @@ We can utilize a greedy approach to construct a pattern, denoted as $\bm{h}_{g}$
 
 Let $L = n_M \cdot q + r$, where $q$ represents the number of times $n_M$ is selected (the quotient), and $r$ represents the remainder, indicating the number of remaining seats. It holds that $0 \leq r < n_M$. 
 
-The number of people accommodated in the pattern $\bm{h}_{g}$ is given by $|\bm{h}_{g}| = q M + \max\{r-\delta, 0\}$. To establish the optimality of $|\bm{h}_{g}|$ as the largest possible number of people accommodated given the constraints of $L$, $\delta$, and $M$, we can employ a proof by contradiction.
+The number of people accommodated in the pattern $\bm{h}_{g}$ is given by $|\bm{h}_{g}| = q M + \max\{r-\delta, 0\}$. To establish the optimality of $|\bm{h}_{g}|$ as the largest number of people accommodated given the constraints of $L$, $\delta$, and $M$, we can employ a proof by contradiction.
 
 % This expression takes into account the complete groups of size $M$ (represented by the product $q M$) and any remaining seats beyond the complete groups (represented by $\max{r-\delta, 0}$) that can be utilized to accommodate additional individuals, considering the social distancing requirement $\delta$.
 % That is we need to prove $\max\{\sum_{i} (n_i - \delta)h_i| n_{i} h_{i} \leq L, h_{i} \in \mathbb{Z}\}$.
 
 % With the capacity constraint, we have $L \geq \sum_{i} n_i h_i > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\}$. By substituting $L = n_M \cdot q + r$, we have $q(M + \delta) + r > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\}$.
 
-Assuming the existence of a pattern $\bm{h}$ such that $|\bm{h}| > |\bm{h}_{g}|$, we can derive the following inequalities: 
+Assuming the existence of a pattern $\bm{h}$ such that $|\bm{h}| > |\bm{h}_{g}|$, we can derive the following inequalities:
 
 \begin{align*}
   & \sum_{i} (n_i - \delta) h_i > q M + \max\{r-\delta, 0\} \\
@@ -35,7 +35,9 @@ Breaking down the above inequality into two cases:
   \item When $r \leq \delta$, we have the inequality $q \delta + \delta \geq q \delta + r > \sum_{i} \delta h_i$. Similarly, we obtain $q+1 > \sum_{i} h_i$. Thus, the maximum number of people that can be accommodated is $q M$, which is not greater than $|\bm{h}_{g}|$.  
 \end{enumerate}
 
-Therefore, $\bm{h}$ cannot exist. All largest patterns can accommodate the same maximum number of people and have the same loss. Hence, the maximum number of people that can be accommodated in the largest pattern is $q M + \max\{r-\delta, 0\}$. Correspondingly, the loss of the largest pattern $|\bm{h}_{g}|$ is $q \delta -\delta + \min\{r, \delta\}$.
+Therefore, $\bm{h}$ cannot exist. The pattern, $\bm{h}_{g}$, is a largest pattern. The maximum number of people that can be accommodated in the largest pattern is $q M + \max\{r-\delta, 0\}$. 
+
+% Correspondingly, the loss of the largest pattern $|\bm{h}_{g}|$ is $q \delta -\delta + \min\{r, \delta\}$.
 \qed
 \end{pf}
 
@@ -100,7 +102,7 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
         \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
         \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
         & (\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} \geq (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega \\
-         & \mathbf{x} \in \mathbb{Z}^{+}_{0}
+         & \mathbf{x} \in \mathbb{N}^{M \times N}
       \end{aligned}
     \end{equation}
     Problem \eqref{lemma_eq} reaches its maximum when $(\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} = (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega$. Substitute $z_{\omega}$ with these equations, we have 
@@ -108,7 +110,7 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
       \begin{aligned}
         \max \quad & \mathbf{c}^{\intercal} \mathbf{x} - \sum_{\omega}p_{\omega}(\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + \sum_{\omega} p_{\omega} (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{d}_{\omega} \\
         \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-        & \mathbf{x} \in \mathbb{Z}^{+}_{0}
+        & \mathbf{x} \in \mathbb{N}^{M \times N}
       \end{aligned}
     \end{equation}
     Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more constraints will not make the optimal value larger. Thus, RBMP is bounded. 
@@ -116,22 +118,37 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $V = [W,~I]$.
   \end{pf}
 
 
+% \begin{corollary}\label{coro_1}
+%   Suppose there are two largest patterns, denoted as $h_1$ and $h_2$, with lengths $L_1 = n \cdot n_M$ and $L_2$ respectively (where $n$ is an integer), then $h_1 + h_2$ is largest with the length $L_1 + L_2$.
+% \end{corollary}
 
+% \begin{pf}[Proof of Proposition \ref{prop_construction}]
+% To prove this proposition, we first prove the following lemma.
 
-\begin{pf}[Proof of ]
-To accomodate $n$ groups with the length of $L$, $L$ should satisfy $L \geq \sum_{i} n_i h_i$
+% \begin{lem}\label{generation}
+%   For a feasible pattern $\bm{h}$ with $n$ groups and the length $L$, where $\sum_{i} n_{i} h_{i} \leq L \leq n \cdot n_{M}$, it is always possible to find a pattern $\bm{h}^{\prime}$ with $n$ groups which is the optimal solution to problem \eqref{gene_largest}. Additionally, $\bm{h}^{\prime}$ satisfies $|\bm{h}^{\prime}| = L - n$.
+% \end{lem}
+  
+% \begin{pf}[Proof of Lemma \ref{generation}]
+% We can demonstrate that the maximum value of $|\bm{h}^{\prime}|$ is $L - n$. For a feasible pattern $\bm{h}^{\prime}$ with $n$ groups, we have $\sum_{i}{h_i} = n$ and $\sum_{i}{n_i h_i} \leq L$. Therefore, we can deduce that $\sum_{i} {i h_i} \leq L - n$. To achieve equality, we need to transform the original pattern into a full pattern. Suppose the original pattern is not a full pattern. Let $\beta = L - \sum_{i} n_{i} h_{i}$, and identify the smallest group type in pattern $\bm{h}$ as $k$. We modify the original group of seats planned for $i$ people and allocate the unused seat(s) with the original group to accommodate $j$ people, where $j = \min\{M, \beta + i\}$. Let $\bm{h}^{1}$ represent the pattern after this allocation. As a result, we have $h^{1}_{i} = h_{i} -1$ and $h^{1}_{j} = h_{j} +1$. Thus, $\bm{h}^{1}$ will still satisfy the given constraints. This allocation process continues until $\beta$ reaches $0$. Eventually, we obtain a full pattern $\bm{h}^{\prime}$ that maximizes $|\bm{h}^{\prime}|$ while satisfying the constraints.
+% \end{pf}
 
-the largest size of pattern is $L-N$.   
+% Suppose there is a feasible pattern $\bm{h}$ with $n$ groups and the length $L_{j}$ for row $j$. When $L_{j} \leq n \cdot n_M$, Algorithm \ref{construction} can generate the optimal solution to problem \eqref{gene_largest} from Lemma \ref{generation}.
 
+% When $L_{j} > n \cdot n_M$, Algorithm \ref{construction} can generate the pattern $\bm{h}^{\prime}$ which can be divided as $\bm{h}^{\prime} = \bm{h}^{\prime}_1 + \bm{h}^{\prime}_2$. The first part, $\bm{h}^{\prime}_1$, is associated with $L^1_{j} = n \cdot n_M$, the second part is associated with $L^2_{j} = L - n \cdot n_M$. According to Lemma \ref{generation}, $\bm{h}^{'}_1$ satisfies the constraints of problem \eqref{gene_largest}. Thus, $\bm{h}^{\prime}$ also satisfies these constraints. And $\bm{h}^{\prime}_2$ is a largest pattern according to Proposition \ref{lem_pattern}. Therefore, $\bm{h}^{\prime}$ is also a largest pattern.
+% \end{pf}
 
+\begin{pf}[Proof of Proposition \ref{prop_construction}]
+First of all, we demonstrate the feasibility of problem \eqref{improve_seat}. Given the feasible seat planning $\bm{H}$ and $\tilde{d}_{i} = \sum_{j=1}^{N} H_{ji}$, let $\hat{x}_{ij} = H_{ji}, i \in \mathcal{M}, j \in \mathcal{N}$, then $\{\hat{x}_{ij}\}$ satisfies the first set of constraints. Because $\bm{H}$ is feasible, $\{\hat{x}_{ij}\}$ satisfies the second set of constraints and integer constraints. Thus, problem \eqref{improve_seat} always has a feasible solution. 
+
+Suppose there exists at least one pattern $\bm{h}$ is neither full nor largest in the optimal seat planning obtained from problem \eqref{improve_seat}. Let $\beta = L - \sum_{i} n_{i} h_{i}$, and denote the smallest group type in pattern $\bm{h}$ by $k$. If $\beta \geq n_1$, we can assign at least $n_1$ seats to a new group to increase the objective value. Thus, we consider the situation when $\beta < n_1$. If $k =M$, then this pattern is largest. When $k< M$, let $h^{1}_{k} = h_{k} -1$ and $h^{1}_{j} = h_{j} +1$, where $j = \min\{M, \beta + i\}$. In this way, the constraints will still be satisfied but the objective value will increase when the pattern $\bm{h}$ changes. Therefore, by contradiction, problem \eqref{improve_seat} always generate a seat planning composed of full or largest patterns.
 \end{pf}
 
 
-
 \begin{pf}[Proof of Lemma \ref{bid-price}]
-  According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_h = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, h$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_h - \delta}{n_h}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_h - \delta}{n_h} = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.
+According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_{\tilde{i}} = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, \tilde{i}$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = h+1, \ldots, M$.
   
-  Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_h - \delta}{n_h}$ for all $j$, and $z_i = \frac{\delta(n_i-n_h)}{n_h}$ for $i = h+1, \ldots, M$.  \qed
+Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$, and $z_i = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$.  \qed
 \end{pf}
 
 % Problem \ref{bid-price_dual} can also be obtained by the following approximation:

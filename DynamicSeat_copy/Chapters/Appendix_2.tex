@@ -21,10 +21,10 @@ In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a
 
 % According to Lemma \ref{sol_relax_deter}, there exists $h$ such that the aggregate optimal solution to relaxation of problem \eqref{deter_upper} takes the form $x e_{h} + \sum_{i=h+1} ^{M} d_{i} e_{i}$, $x = (L- \sum_{i = h+1}^{M} {d_i n_i})/ n_h$.
 \begin{lem}\label{bid-price}
- The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_v =0$, $z_{i} = \frac{\delta(n_i-n_v)}{n_v}$ for $i = v+1, \ldots, M$ and $\beta_j = \frac{n_v - \delta}{n_v}$ for all $j$.
+ The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
 \end{lem}
 
-The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_v - \delta}{n_v} n_i = \frac{\delta (i - v)}{n_v}$. When $i < v$, $i - \beta_j n_i < 0$. When $i \geq v$, $i - \beta_j n_i \geq 0$. This means that group type $i$ with $i$ greater than or equal to $v$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. In practice, groups are often assigned arbitrarily based on availability when the capacity allows, which can result in a large number of empty seats.
+The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}} n_i = \frac{\delta (i - \tilde{i})}{n_{\tilde{i}}}$. When $i < \tilde{i}$, $i - \beta_j n_i < 0$. When $i \geq \tilde{i}$, $i - \beta_j n_i \geq 0$. This means that group type $i$ greater than or equal to $\tilde{i}$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. In practice, groups are often assigned arbitrarily based on availability when the capacity allows, which can result in a large number of empty seats.
 
 The bid-price control policy based on the static model is stated below.
 
@@ -33,8 +33,8 @@ The bid-price control policy based on the static model is stated below.
   \For{$t =1, \ldots, T$}{
     {Observe group type $i$\;}
     {Solve the LP relaxation of problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$\;
-    Obtain $v$ such that the aggregate optimal solution is $x e_{v} + \sum_{i=v+1} ^{M} d_{i} e_{i}$\;}
-    \eIf{$i \geq v$ and $\max_j{L_j} \geq n_i$}
+    Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$\;}
+    \eIf{$i \geq \tilde{i}$ and $\max_j{L_j} \geq n_i$}
     {Accept the group and assign the group to row $k$ such that $L_{k} \geq n_{i}$\;  
     $\mathbf{L}^{t+1} \gets \mathbf{L}^{t} - n_i \mathbf{e}_{k}$\;}
     {Reject the group\; $\mathbf{L}^{t+1} \gets \mathbf{L}^{t}$\;}}

@@ -1,4 +1,11 @@
 % !TEX root = ./sum1.tex
+
+% 目的：
+
+% random arrival -> seat planning ->
+
+% suitable to dynamic case
+
 \section{Seat Planning with Stochastic Demand}\label{sec_seat_planning}
 In this section, we develop the Scenario-based Stochastic Programming (SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
 
@@ -41,8 +48,7 @@ We use SSP$(\mathbf{L}, \Omega)$ to represent the above stochastic programming, 
 % Notice that the value of RSSP$(\mathbf{L}, \Omega)$ is related with the total capacity $\sum_{j} L_{j}$ rather than $\mathbf{L}$. 
 
 The objective function consists of two parts. The first part represents the number of people in
-the largest group type that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of people in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
-
+the group type $M$ that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of people in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
 
 By reformulating the objective function, we have
 \begin{align*}
@@ -50,6 +56,8 @@ By reformulating the objective function, we have
   =& \sum_{j =1}^{N} \sum_{i=1}^M (n_i- \delta) x_{ij} - \sum_{\omega =1}^{|\Omega|} p_{\omega} \left(\sum_{i=1}^{M}(n_i- \delta)y_{i \omega}^{+} - \sum_{i=1}^{M-1}(n_i-\delta)y_{i+1, \omega}^{+}\right) \\
   =& \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}
 \end{align*}
+
+Here, $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$ indicates the maximum number of people that can be accommodated in the seat planning $\{x_{ij}\}$. The second part, $\sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}$ indicates the expected excess supply for group type $i$ over scenarios.
 
 % Plug in $s_i = i+1$, the objective function is $\sum_{j =1}^{N} \sum_{i=1}^m i x_{ij} - \sum_{\omega =1}^{S} p_{\omega} \sum_{i=1}^{m} y_{i \omega}^{+}$.
 % The last equality holds because of $n_i- \delta = i, i \in \mathcal{M}$. 
@@ -67,9 +75,11 @@ Considering the analysis provided earlier, we find it advantageous to obtain a s
 There exists an optimal solution to the stochastic programming problem such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
 \end{prop}
 
+Proposition \ref{prop_solution} is different from proposition \ref{prop_construction}. Proposition \ref{prop_construction} can make sure that we can obtain a seat planning composed of full or largest patterns. Here, proposition \ref{prop_solution} states that there always exists an optimal solution where the corresponding patterns are either full or largest. However, we may not be able to directly find such an optimal solution as described in Proposition \ref{prop_solution}. Instead, we try to obtain the seat planning composed of full or largest patterns, as stated in Section \ref{seat_assignment}.
 
-Let $\mathbf{n} = (n_1, \ldots, n_M)^{\intercal}$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)^{\intercal}$ represent the vector of row lengths, where $L_j$ denotes the length of row $j$ as defined previously.
-The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{x}^{\intercal} \mathbf{n}$, does not exceed the available row lengths $\mathbf{L}$. We can use the product $\mathbf{x} \mathbf{1}$ to indicate the supply of group types, where $\mathbf{1}$ is a column vector of size $N$ with all elements equal to 1. 
+Then, we reformulate SSP$(\mathbf{L}, \Omega)$ in a matrix form to apply the Benders decomposition technique.
+Let $\mathbf{n} = (n_1, \ldots, n_M)^{\intercal}$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)^{\intercal}$ represent the vector of row sizes, where $L_j$ denotes the size of row $j$ as defined previously.
+The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{x}^{\intercal} \mathbf{n}$, does not exceed the available row sizes $\mathbf{L}$. We can use the product $\mathbf{x} \mathbf{1}$ to indicate the supply of group types, where $\mathbf{1}$ is a column vector of size $N$ with all elements equal to 1. 
 
 The linear constraints associated with scenarios, denoted by constraints \eqref{DEF_constr1} and \eqref{DEF_constr2}, can be expressed in matrix form as:
 \[\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_\omega = \mathbf{d}_\omega, \omega\in \Omega,\]

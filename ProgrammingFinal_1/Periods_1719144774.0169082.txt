@@ -1,0 +1,5 @@
+Run Start Time: Sun Jun 23 20:12:54 2024
+The number of periods: 	70
+Sto: 98.48 ;DP_relaxed: 98.81 ;Number of accepted people: 153.24 	Total Runtime	628.915791
+
+[17,18,19,20,21,21,22,23,24,20]

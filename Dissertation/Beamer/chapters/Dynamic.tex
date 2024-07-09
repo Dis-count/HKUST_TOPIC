@@ -50,14 +50,14 @@
 
     \begin{figure}[h]
       \centering
-      \includegraphics[width = 0.9\textwidth]{./images/d_ij.png}
+      \includegraphics[width = 0.8\textwidth]{./images/group_type.pdf}
     \end{figure}
 
     \vspace{-0.1cm}
 
-    For all $j > i$, find the maximum value denoted as $d^{t}(i, j^{*})$.
+    For all $\hat{i} > i$, find the maximum value denoted as $d^{t}(i, \hat{i}^{*})$.
     
-    If $d^{t}(i, j^{*}) \geq 0$, we place the group of $i$ in $(j^{*} + \delta)$-size seats. Otherwise, reject the group.
+    If $d^{t}(i, \hat{i}^{*}) \geq 0$, we place the group of $i$ in $(\hat{i}^{*} + \delta)$-size seats. Otherwise, reject the group.
 
     % After acceptance, customers have more freedom to choose their seats with the seat planning.
   \end{frame}
@@ -137,14 +137,14 @@
     \begin{itemize}
     \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
     \item[-] The probability of an arrival of group type $i$: $p_i$.
-    \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
+    \item[-] $\mathbf{L}^{t} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
     \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
-    \item[-] $U^{t}(\mathbf{L}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}, \forall i,j \}$.
+    \item[-] $U^{t}(\mathbf{L}^{t}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}, \forall i,j \}$.
     \item[-] $\mathbf{e}_j$: Unit column vector with $j$-th element being 1.
-    \item[-] $V^{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
+    \item[-] $V^{t}(\mathbf{L}^{t})$: Value function at period $t$, given remaining capacity, $\mathbf{L}^{t}$.
     \end{itemize}
 
-    $$V^{t}(\mathbf{L}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L})\right\}$$
+    $$V^{t}(\mathbf{L}^{t}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L}^{t})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}^{t}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L}^{t})\right\}$$
     \small
 \end{frame}
 
@@ -185,7 +185,7 @@
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
         & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - {\color{red}n_k a_j}, j \in \mathcal{N} \\
         & {\color{red}\sum_{j=1}^{N} a_j \leq 1} \\
-        & x_{ij} \in \mathbb{Z}_{0}^{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{0}^{+}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
+        & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
     \end{tiny}
@@ -224,13 +224,13 @@
     \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
       If $X_i = 0$,
       
-      1. Determine the group type $j^{*}$ by the group-type control.
+      1. Determine the group type $\hat{i}^{*}$ by the group-type control.
 
       2. Make the decision on assigning the group to a specific row.
       \begin{itemize}
         \item Break tie for determining a specific row
         \item Decision on assigning the group
-        \item[-] Value of Acceptance (VoA): value of LP relaxation of SSP with $(\mathbf{L}-n_i \mathbf{e}_{j^{*}})$ plus $i$.
+        \item[-] Value of Acceptance (VoA): value of LP relaxation of SSP with $(\mathbf{L}-n_i \mathbf{e}_{\hat{i}^{*}})$ plus $i$.
         
         % approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j^{*}})$ + $i$. 
         % approximation of $V_{t} (\mathbf{L})$

@@ -1,13 +1,9 @@
 % !TEX root = ./sum1.tex
 
-% 目的：
-
-% random arrival -> seat planning ->
-
-% suitable to dynamic case
+% random arrival -> seat planning -> suitable to dynamic case
 
 \section{Seat Planning with Stochastic Demand}\label{sec_seat_planning}
-In this section, we develop the Scenario-based Stochastic Programming (SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
+In this section, we aim to obtain a seat planning which is suitable to the dynamic seat assignment.Specially, we develop the Scenario-based Stochastic Programming (SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
 
 % Consider the seller who give the seat planning based on the scenarios then assign the groups to seats according to the realized true demand.
 

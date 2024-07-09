@@ -1,8 +1,8 @@
 % !TEX root = sum1.tex
-\section{Basic Concepts}
+\section{The Static Model}
 This section integrates social distancing measures into the seat planning process. We use a `pattern' to represent the seat planning. Next, we present the deterministic seat planning problem. Then, we introduce the idea of the `full' and `largest' pattern. For the seat planning that does not utilize all available seats, we propose to improve the seat planning by incorporating full or largest patterns.
 
-\subsection{Seat Planning with Social Distancing}
+\subsection{Seat Planning Problem with Social Distancing}
 Consider a seat layout comprising $N$ rows, with each row containing $L_j^0$ seats, where $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. The seating arrangement is used to accommodate people in  groups, where each group consists of no more than $M$ people and has to sit together in one specific row. There are $M$ distinct group types, denoted by group type $i$, where each group type consists of $i$ people. The set of all group types is denoted by $\mathcal{M} \coloneqq \{1, 2, \ldots, M\}$. The demand for each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the demand of group type $i$.
 
 We incorporate social distancing in the seat planning problem. To comply with the social distancing requirements, individuals from the same group must sit together, while maintaining a distance from other groups. Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s).
@@ -25,37 +25,7 @@ Consider the given values: $\delta = 1$, $L^{0} = 10$, and $M = 4$. By adding on
 After the conversion, $L = L^{0} + 1 =11$, $n_i = i + 1$ for $i = 1, 2, 3, 4$. For the first group, we use a group of three seats to indicate the original group of two and one seat used as the social distancing. We do the same procedure for the other groups. Then, the row can be represented by $\bm{h} = (2,1,1,0)$. The maximum number of people that can be accommodated is $|\bm{h}| = 7$.
 \end{example}
 
-\begin{definition}
-Consider a pattern $\bm{h} = (h_1, \ldots, h_M)$ for a row with size $L$. We refer to $\bm{h}$ as a full pattern if $\sum_{i=1}^{M} n_i h_i = L$, $\bm{h}$ as a largest pattern if it has a size $|\bm{h}|$ that is greater than or equal to the size $|\bm{h}^{\prime}|$ of any other feasible pattern $\bm{h}^{\prime}$.
-\end{definition}
 
-In other words, a full pattern is one in which the sum of the product of the number of occurrences $h_i$ and the size $n_i$ of each group in the pattern is equal to the size of the row $L$. This ensures that the pattern fully occupies the available row seats. A largest pattern is one that either has the maximum size or is equal in size to other patterns, ensuring that it can accommodate the maximum number of people within the given row size.
-
-
-\begin{prop}\label{lem_pattern}
-If the size of a feasible pattern $\bm{h}$ is $|\bm{h}| = qM + \max{r-\delta, 0}$, where the size of the row is $L$, the social distancing is $\delta$, the number of distinct group types is $M$, $q = \lfloor \frac{L}{M + \delta} \rfloor$, and $r \equiv L \bmod (M + \delta)$, then this pattern is a largest pattern.
-\end{prop}
-
-
-Proposition \ref{lem_pattern} states that if the size of a pattern is $|\bm{h}| = qM + \max\{r-\delta, 0\}$, then this pattern is the largest. Furthermore, according to the definition of the largest pattern, the size of one possible largest pattern is given by $qM + \max\{r-\delta, 0\}$.
-
-When $r = 0$, the largest pattern $\bm{h}$ is unique and full, indicating that only one pattern can accommodate the maximum number of people. On the other hand, if $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
-
-\begin{example}
-Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. In this case, we have $n_i = i + 1$ for $i = 1, 2, 3, 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are the following: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$.
-
-The following figure shows that the largest pattern may not be full and the full pattern may not be largest.
-\begin{figure}[ht]
-    \centering
-        \includegraphics[width=0.8\textwidth]{./Figures/full_largest.png}
-    \caption{Largest and Full Patterns}
-\end{figure}
-
-The first row can be represented by $(0, 0, 0, 4)$. It is a largest pattern as its size is 16. However, it does not satisfy the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$.
-The second row can be represented by $(1, 1, 4, 0)$, which is a full pattern as it utilizes all available seats. However, its size is 15, indicating that it is not a largest pattern.
-\end{example}
-
-\subsection{Seat Planning Problem}
 Let $x_{ij}$ represent the number of group type $i$ planned in row $j$. The deterministic seat planning problem (SPP$(\{d_{i}\})$) is formulated below, with the objective of maximizing the number of people accommodated.
 
 \begin{equation}\label{deter_upper}
@@ -92,8 +62,40 @@ Hence, the corresponding supply associated with the optimal solutions can be sum
 \subsection{Generate The Seat Planning Composed of Full or Largest Patterns}
 The seat planning obtained from problem \eqref{deter_upper} may not utilize all available seats, as it depends on the given demand. To improve a given seat planning and utilize all seats, we aim to generate a new seat planning composed of full or largest patterns while ensuring that the original group type requirements are met.
 
-We can assign the maximum number of seats to the possible groups to realize our goal. Specifically, we can reallocate the seats to obtain a new seat planning, $\bm{H}^{\prime}$, which can satisfy the realized demand $\sum_{j=1}^{N} H_{ji}$ for each group type $i$. Mathematically, we can solve the following optimization problem to obtain the desired seat planning:
+\begin{definition}
+Consider a pattern $\bm{h} = (h_1, \ldots, h_M)$ for a row with size $L$. We refer to $\bm{h}$ as a full pattern if $\sum_{i=1}^{M} n_i h_i = L$, $\bm{h}$ as a largest pattern if it has a size $|\bm{h}|$ that is greater than or equal to the size $|\bm{h}^{\prime}|$ of any other feasible pattern $\bm{h}^{\prime}$.
+\end{definition}
 
+In other words, a full pattern is one in which the sum of the product of the number of occurrences $h_i$ and the size $n_i$ of each group in the pattern is equal to the size of the row $L$. This ensures that the pattern fully occupies the available row seats. A largest pattern is one that either has the maximum size or is equal in size to other patterns, ensuring that it can accommodate the maximum number of people within the given row size.
+
+
+\begin{prop}\label{lem_pattern}
+If the size of a feasible pattern $\bm{h}$ is $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where the size of the row is $L$, the social distancing is $\delta$, the number of distinct group types is $M$, $q = \lfloor \frac{L}{M + \delta} \rfloor$, and $r \equiv L \bmod (M + \delta)$, then this pattern is a largest pattern.
+\end{prop}
+
+
+Proposition \ref{lem_pattern} states that if the size of a pattern is $|\bm{h}| = qM + \max\{r-\delta, 0\}$, then this pattern is the largest. Furthermore, according to the definition of the largest pattern, the size of one possible largest pattern is given by $qM + \max\{r-\delta, 0\}$.
+
+When $r = 0$, the largest pattern $\bm{h}$ is unique and full, indicating that only one pattern can accommodate the maximum number of people. On the other hand, if $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
+    
+\begin{example}
+Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. In this case, we have $n_i = i + 1$ for $i = 1, 2, 3, 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are the following: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$.
+
+The following figure shows that the largest pattern may not be full and the full pattern may not be largest.
+\begin{figure}[ht]
+    \centering
+        \includegraphics[width=0.8\textwidth]{./Figures/full_largest.png}
+    \caption{Largest and Full Patterns}
+\end{figure}
+
+The first row can be represented by $(0, 0, 0, 4)$. It is a largest pattern as its size is 16. However, it does not satisfy the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$.
+The second row can be represented by $(1, 1, 4, 0)$, which is a full pattern as it utilizes all available seats. However, its size is 15, indicating that it is not a largest pattern.
+\end{example}
+
+
+Suppose the original seat planning is $\bm{H}$, the desired seat planning is $\bm{H}^{\prime}$. To meet the original group type requirements, for each group type $i$, the total quantity from group $i$ to group $M$ in $\bm{H}^{\prime}$ should be no less than the total quantity from group type $i$ to group type $M$ in $\bm{H}$. Mathematically, we aim to find a feasible seat planning $\bm{H}^{\prime}$ such that $\sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji} \leq \sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{ji}, \forall i \in \mathcal{M}$. We say $\bm{H} \subseteq \bm{H}^{'}$ if this condition holds.
+
+To utilize all seats in the seat planning, the objective is to maximize the number of people that can be accommodated. Thus, we have the following formulation:
 
 \begin{equation}\label{improve_seat}
   \begin{aligned}
@@ -104,10 +106,8 @@ We can assign the maximum number of seats to the possible groups to realize our 
   \end{aligned}
 \end{equation}
 
-Since smaller groups can be satisfied by larger groups, for each group type $i$, the total quantity from group $i$ to group $M$ should be no less than the total satisfied demand from group type $i$ to group type $M$, as shown in the first set of constraints in problem \eqref{improve_seat}. The optimal solution obtained from problem \eqref{improve_seat} represents the desired seat planning $\bm{H}^{\prime}$ and each pattern in $\bm{H}^{\prime}$ is either largest or full.
-
 \begin{prop}\label{prop_construction}
-Given a feasible seat planning $\bm{H}$, problem \eqref{improve_seat} can always generate a seat planning $\bm{H}^{\prime}$ composed of full or largest patterns.
+Given a feasible seat planning $\bm{H}$, problem \eqref{improve_seat} can always generate a seat planning $\bm{H}^{\prime}$ such that $\bm{H}^{\prime} \supseteq \bm{H}$ and $\bm{H}^{'}$ is composed of full or largest patterns.
 \end{prop}
 
 

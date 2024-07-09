@@ -30,8 +30,8 @@
         y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
         & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
-        & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}^{+}_{0}, \quad i \in \mathcal{M}, \omega \in \Omega \\
-        & x_{ij} \in \mathbb{Z}^{+}_{0}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+        & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega \\
+        & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
       \end{scriptsize}
@@ -74,7 +74,7 @@
     \begin{aligned}
   \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
   \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-  & \mathbf{x} \in \mathbb{Z}_{0}^{M \times N, +},
+  & \mathbf{x} \in \mathbb{N}^{M \times N, +},
   \end{aligned}
   \end{equation}
 
@@ -117,9 +117,9 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \begin{equation}\label{BD_master2}
     \begin{aligned}
       \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-      \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+      \text {s.t.} \quad & \mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L} \\
       & (\alpha^{k})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \alpha^k \in \mathcal{O}, \forall \omega \\
-       & \mathbf{x} \in \mathbb{Z}_{0}^{M \times N, +}
+       & \mathbf{x} \in \mathbb{N}^{M \times N, +}
     \end{aligned}
 \end{equation} 
 

@@ -121,28 +121,12 @@ Rhyd Lewis and Fiona Carroll.
 \newblock {\em Journal of the Operational Research Society}, 67(11):1353--1362,
   2016.
 
-\bibitem{li2013modeling}
-Yihua Li, Bruce Wang, and Luz~A Caudillo-Fuentes.
-\newblock Modeling a hotel room assignment problem.
-\newblock {\em Journal of Revenue and Pricing Management}, 12:120--127, 2013.
-
 \bibitem{moore2021seat}
 Jane~F Moore, Arthur Carvalho, Gerard~A Davis, Yousif Abulhassan, and Fadel~M
   Megahed.
 \newblock Seat assignments with physical distancing in single-destination
   public transit settings.
 \newblock {\em Ieee Access}, 9:42985--42993, 2021.
-
-\bibitem{moosa2020effectiveness}
-Imad~A Moosa.
-\newblock The effectiveness of social distancing in containing covid-19.
-\newblock {\em Applied Economics}, 52(58):6292--6305, 2020.
-
-\bibitem{pisinger1999exact}
-David Pisinger.
-\newblock An exact algorithm for large multiple knapsack problems.
-\newblock {\em European Journal of Operational Research}, 114(3):528--541,
-  1999.
 
 \bibitem{salari2022social}
 Mostafa Salari, R~John Milne, Camelia Delcea, and Liviu-Adrian Cotfas.
@@ -166,11 +150,6 @@ Elizabeth~Louise Williamson.
 \newblock {\em Airline network seat inventory control: Methodologies and
   revenue impacts}.
 \newblock PhD thesis, Massachusetts Institute of Technology, 1992.
-
-\bibitem{yuen2002group}
-Benson~B Yuen.
-\newblock Group revenue management: Redefining the business process—part i.
-\newblock {\em Journal of Revenue and Pricing Management}, 1:267--274, 2002.
 
 \bibitem{zhu2023assign}
 Feng Zhu, Shaoxuan Liu, Rowan Wang, and Zizhuo Wang.

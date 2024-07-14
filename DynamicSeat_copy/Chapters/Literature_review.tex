@@ -50,7 +50,6 @@ In our dynamic form, the decision to accept or reject groups is made at each sta
 
 Our problem is closely related to the network revenue management (RM) problem \cite{williamson1992airline}, which is typically formulated as a dynamic programming (DP) problem. However, for large-scale problems, the exponential growth of the state space and decision set makes the DP approach computationally intractable. One of the characteristics we are studying is that the decision should be made on an all-or-none basis for each group. To address this challenge, we propose using scenario-based programming \cite{feng2013scenario, casey2005scenario, henrion2018problem} to determine the seat planning. In this approach, the aggregated supply can be considered as a protection level for each group type. Notably, in our model, the supply of larger groups can also be utilized by smaller groups. This is because our approach focuses on group arrival rather than individual unit, which sets it apart from traditional partitioned and nested approaches \cite{curry1990optimal, van2008simulation}.
 
-
 % We have two distinct features: group-based and assignment.
 
 Traditional revenue management focuses on decision-making issues, namely accepting or rejecting a request \cite{gallego1997multiproduct}.However, our paper not only addresses decision-making, but also emphasizes the significance of assignment, particularly in the context of seat assignment. This sets it apart from traditional revenue management methods and makes the problem more challenging.

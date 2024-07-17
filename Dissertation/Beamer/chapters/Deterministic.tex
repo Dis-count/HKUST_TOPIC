@@ -42,6 +42,13 @@
   \end{frame}
 
   \begin{frame}{Generate the Full or Largest Patterns}
+    \small
+    Original seat planning: $\bm{H}$.
+
+    Desired feasible seat planning: $\bm{H}^{\prime}$.
+    
+    Meet the original group type requirements: $\sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{ji} \geq \sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji}, \forall i \in \mathcal{M}$.
+
     \begin{equation}\label{improve_seat}
       \begin{aligned}
       \max \quad & \sum_{i=1}^{M} \sum_{j=1}^{N} (n_i-\delta)  x_{ij} \\
@@ -50,4 +57,8 @@
       & x_{ij} \in \mathbb{N}, i \in \mathcal{M}, j \in \mathcal{N}
       \end{aligned}
     \end{equation}
+
+    $\bm{H}^{\prime}$ is composed of full or largest patterns.
   \end{frame}
+
+  

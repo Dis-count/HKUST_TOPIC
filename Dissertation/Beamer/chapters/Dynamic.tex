@@ -160,31 +160,31 @@
 
       \item[-] if $X_i > 0$, accept the group, assign it according to the break tie rule;
       
-      \item[-] if $X_i = 0$, different methods:
+      \item[-] if $X_i = 0$, two approaches:
       
       \vspace{0.5cm}
 
       1. Based on the adjusted SSP.
 
-      2. Based on the seat planning from the relaxation of SSP.
+      2. Based on the seat planning from the LP relaxation of SSP.
 
     \end{itemize}
   \end{frame}
 
   \begin{frame}{Method 1}
     \scriptsize
-    To determine the appropriate row assignment for the current group type $k$, we introduce the decision variables $a_j, j \in \mathcal{N}$ indicating whether we accept it in row $j$.
+    To determine the appropriate row assignment for the current group type $i{'}$, we introduce the decision variables $I_j, j \in \mathcal{N}$ indicating whether we accept it in row $j$.
     
       % \item Obtain the seat planning after the realization of group.
       \begin{tiny}
         \begin{equation}\label{adjusted_SSP}
         \begin{aligned}
-        \max \quad & {\color{red}\sum_{j} k a_j} + E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+        \max \quad & {\color{red}\sum_{j} i{'} I_j} + E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
         \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
         y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
-        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - {\color{red}n_k a_j}, j \in \mathcal{N} \\
-        & {\color{red}\sum_{j=1}^{N} a_j \leq 1} \\
+        & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - {\color{red}n_{i{'}} I_j}, j \in \mathcal{N} \\
+        & {\color{red}\sum_{j=1}^{N} I_j \leq 1} \\
         & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}

@@ -1,0 +1,232 @@
+% !TEX root = sum1.tex
+
+\subsection{The Property}
+In view of the complexity and uncertainty of branch scheme, we should analyze the property of this problem and use it to obtain a solution.
+
+At first, we consider the types of pattern. For each pattern $k$, we use $\alpha_k, \beta_k$ to indicate the number of groups and the left space, respectively. Denote $(\alpha_k + \beta_k)$ as the loss for pattern k, $l(k)$.
+% Notice that the left space is the true loss.
+
+% When $l(k)$ reaches minimum, the corresponding pattern $k$ is the optimal solution for a single row of seats.
+
+Let $I_1$ be the set of patterns with the minimal loss. Then we call the patterns from $I_1$ are largest. And the pattern with zero left space is called full pattern.
+% Notice that a pattern from $I_1$ may not be full.
+Recall that we use the vector $(t_1,t_2,\ldots,t_m)$ to represent a pattern, where $t_i$ is the size of group $i$. For example, take the length of each row be $S = 21$, the size of group types be $s = [2,3,4,5]$. Thus these patterns, $(5,5,5,5,1),(5,4,4,4,4),(5,5,5,3,3)$, belongs to $I_1$. Notice that the pattern, $(0,0,0,4)$, is not full because there is one left space.
+
+Now consider this special case, $[2,3,\ldots,u]$, the group sizes are consecutive integers starting from 2. Then we can use the following greedy way to generate the largest pattern. Select the maximal group size,$u$, as many as possible and the left space is occupied by the group with the corresponding size. The loss is $q+1$, where $q$ is the number of times $u$ selected. Let $S = u\cdot q + r$, when $r>0$, we will have at least $\lfloor \frac{r+u}{2} \rfloor -r +1$ largest patterns with the same loss. When $r =0$, we have only one possible largest pattern.
+
+\begin{lem}
+If all patterns from an integral feasible solution belong to $I_1$, then this solution is optimal.
+\end{lem}
+
+This lemma holds because we cannot find a better solution occupying more space.
+
+When the number of given rows is small, we can construct a solution in the following way. Every time we can select one pattern from $I_1$, then minus the corresponding number of group type from demand and update demand. Repeat this procedure until we cannot generate a largest pattern. Compare the number of generated patterns with the number of rows. If the number of rows is small, this method is useful.
+
+\begin{corollary}
+When the left updated demand can form a largest pattern, the optimal solution is the combination of patterns from $I_1$.
+\end{corollary}
+
+For example, when given the demand $d = (10,11,12,10)$ and three rows.
+By column generation, we will obtain the solution $2.333 \times (0,0,0,4)_d, 0.667 \times (0,0,4,1)_d$. But we can construct an integral solution $2 \times (0,0,0,4)_d, 1 \times (0,1,2,2)_d$ or $3 \times (0,0,4,1)_d$, that depends on which pattern we choose at the beginning.
+
+But how could we know if the number of rows is small enough?
+We can consider the relation between the demand and the number of group types in patterns. Then we develop the following theorem:
+\begin{thm}\label{I_1}
+  When $N \leq \max_{k\in I_1} \min_{i} \{\lfloor \frac{d_i}{b_i^k}\rfloor\}$, select $k^*$-th pattern from $I_1$ and it is the optimal solution.
+  $N$ is the number of rows, $i = 1,2,\ldots, m$, $d_m$ is the demand of the largest size, $b_m^k$ is the number of group $m$ placed in pattern $k$.
+\end{thm}
+
+In the light of the Theorem \ref{I_1}, when the number of given rows is small, we just need to select some patterns from $I_1$.
+Continuing with the above example, we just take $(5,5,5,5), (5,4,4,4,4), (5,5,4,4,3)$ as the alternative patterns. For each $k$, $\min_{i} \{\lfloor \frac{d_i}{b_i^k}\rfloor\}$ will be $2,3,5$ respectively. So when $N \leq 5$, we can always select the pattern $(5,5,4,4,3)$ five times as the optimal solution.
+
+When column generation method gives an integer solution at the first time, we obtain the optimal solution immediately. Now suppose that we have a fractional solution. Divide the solution into a pure integral part and the fractional part. The fractional solution will have a corresponding integral supply occupying the same space size. When the rest groups can be placed in the rest rows(given rows minus the integral rows), then the total groups can be placed in the given rows.
+
+% \begin{lem}
+% If the patterns obtained by column generation are all full, the total groups can be placed in the given rows if and only if the rest groups can be placed in the rest rows.
+% \end{lem}
+%
+% The necessity is clear. For the sufficiency, this is because the space occupied by the integral supply is fixed, and the capacity of the supply corresponding to the integral pattern cannot be improved.(They are all full.)
+
+Based on the above analysis, we can establish an algorithm below.
+
+\begin{algorithm}[H]\label{algoDI}
+\caption{Optimal solution to seat assginment problem with fixed demand}
+\begin{description}
+  \item[Step 1.] Obtain the solution from \eqref{lambda1}. If the solution is integral, terminate this algorithm. Then, for the fractional solution $x{'}$, calculate the supply quantity $q{'}=(q_1,\ldots,q_m) = Tx{'}$ for each group type. If each element is integral, go to step 3. If any element of this supply is not integral, go to step 2 to construct an integer supply vector which can provide the largest integral profit.
+  \vspace{5pt}
+  \item[Step 2.] Construction: calculate the space occupied by fractional supply and the corresponding profit. The size of space must be integral. Increase the corresponding-size supply by 1, then delete the fractional part. If the size of space is 1, delete the corresponding fractional part directly. 
+  % If the space occupied by fractional supply is fractional, find the supply providing the same profit according to the greedy rule.
+
+  \item[Step 3.] Take this integral supply vector $q$ as a new demand and obtain a new LP solution $x^{*}$ with column generation. Divide $x^{*}$ into a pure integral part $x^I$ and fractional part $x^F$. Subtract the corresponding supply of the integral part $x^I$ from the new demand $q$ to obtain the rest groups($r = q - q^I$). $N$ is the number of given rows. The number of rest rows equals to $N - \sum x^I$.
+  \item[Step 4.] Use subset sum problem to check if the rest groups can be placed in rest rows.
+  \item[Step 5.] If the rest groups can be placed, then we find an optimal solution. If the rest cannot be placed, find a new supply providing the maximal people without exceeding the capacity and go to step 2 to construct a new supply.
+\end{description}
+\end{algorithm}
+
+Summary:
+Two main procedures: 1. From the fractional solution(fractional supply) to intergal supply(according to the nature of our problem, i.e., we have the upper bound of elements of supply)  step 1.2.
+2. From integral supply to integral pattern.(Check the feasibility)  step 3.4.
+
+Reason of construction:
+
+\begin{thm}
+  The supply obtained from (2) has at most one fractional element.
+\end{thm}
+
+Notice that from (2), we have an upper bound of demand, and the larger-size group has more people per seat on average.
+
+% Thus, the linear result must place groups from big to small according to their size.
+
+To show it by contradiction. Now we obtain a supply, $[q_1, q_2, \ldots, q_{J}]$, find the first fractional element from $q_{J}$ to $q_{1}$, let it be $q_{m}$. There exists a non-zero number among $q_{j}, j<m$. Then increasing $q_{m}$ by $\alpha$ to $\lceil q_{m} \rceil$ from the seats taken by $q_{j}$ can give a higher objective value, i.e., $\alpha m > \frac{\alpha(m+1)}{j+1} j$. Follow this procedure until at most one fractional value among $q_1, q_2, \ldots, q_{J}$. 
+And when $q_i$ is the fractional number, all $q_k, k<i =0$. With the constraint that the supply should be no larger than the demand, $q_k = d_k, k>i$.
+
+Thus, we will only have the supply with at most one fractional element.
+
+\begin{corollary}
+ The solution associated with the integral supply obtained by the above procedure is an optimal integral solution to (2).
+\end{corollary}
+
+Firstly, the integral supply constructed from step 2 is a potential optimal integral supply. We still need check its feasibility, once we find a seat assignment, that is an optimal solution. If not, find a new supply providing the maximal people without exceeding the capacity, then continue to check its feasibility.
+
+This procedure can be realized by the result of subset sum problem.
+
+
+% Construction:what we need to do is to construct an integer supply, then to test if there exists a plan to accommodate these groups.
+
+% Now we need to judge whether we need to tackle step 4 in some cases.
+
+% For the case $(2,3,\ldots,u)$, if the rest space is 1, we can discard $1$ or exchange $1$ and $3$ with two $2$. Remember what we need to do is to construct a maxmimal integer supply.
+
+% Assume that the demand is large such that the given rows cannot accommodate it and the number of group containing 2 people is large.
+
+% When the demand is large, i.e. supply cannot cover the whole demand. The equation $\sum_{k \in K}^K x_{k} \leq N$ will be always valid. The sum of all elements of the solution vector always equals to the given number of rows.
+
+% Then the rest space for each maximal pattern will be no more than 1 with the extra groups with the size of 2.
+
+% \begin{thm}\label{full}
+% For the case $(2,3,\ldots,u)$, there exist patterns to contain the rest groups.
+% \end{thm}
+
+We have a counterexample, [4,6,9,10] * [1,2,1,1], L= 18 for the original cutting plane problem. Still need to check whether the rest can construct 18.
+
+But if we add more groups, like [2, 3, 4, 5, 6,7 ,8 ,9,10] * [1, 1, 2, 3, 2, 2, 2,1,1], we can find a seat assignment.
+
+% We can use the induction to construct the pattern.
+% When the sum of all elements of the fractional solution is 1, it is clear that the rest group will form a pattern because the summation of space occupied by the rest group will be no more than the length of row.
+% When the sum is 2, suppose the rest groups cannot form a full pattern, the maximal pattern will have a left space. So there will be two rows with one unoccupied space, and we know in this situation there will be a left group with size of 1. When there are two adjacent numbers in the two patterns separately, we can change their position to accommodate these groups. As for the situation
+% without adjacent numbers, it will be removed during the calculation of column generation.
+% % Because we will not obtain the fractional solution for these cases.
+% For example, we have 6 seats for a row. The rest groups are [2,1,1](number)* [2,3,5](size).
+%
+% % Once we construct the supply correctly, it will be ...
+%
+% When the sum is 3, if we can form a full pattern for a row, this situation converts to the situation where the sum is 2.
+% Then we suppose that the left group should have the size of 3 and the three rows all contains one occupied space. But this situation will contradict with the results of column generation method.
+
+% There are several points to consider:
+%
+% 2. And whether the pattern is full or not. When all pattern obtained by column generation, can we say that we definitely have the results.
+
+% 3. For the case [2,3,4,5], we can be sure that there will be the solution to contain the rest group.
+
+
+% 2) Possible extension to group sizes [a,b,c]. It is not true for any a,b,c,L. Howover, can you identify some conditions under which your idea can be applied, e.g., (2,3,7,41), (3,5,7,44)?
+%
+% 3) Possible extension to 4 sizes [a,b,c,d] and specific L
+%
+% 4) For cases that cannot be solved by your idea, can you bound the error of your idea?
+
+% One observation is that as long as we can satisfy the largest $[d_a, d_b, d_c]$ under some policy, we can obtain an optimal solution. Can the greedy method help us to realize that?
+
+% Because we cannot generate the largest pattern, either $D_4-d_4$ or $D_5-d_5$ will be small.
+\newpage
+
+\subsection{Definitions And Policy}
+
+In this section, we discuss about the cases where the group size is no more than 5, we can use the greedy way to generate one largest pattern. Through this pattern, we can obtain all other largest patterns. Then we define the priority of different largest patterns. The priority may depends on the initial demands in some case and does not depend on the demands in other cases. Then we give the policy to obtain one optimal assignment. Notice that only given the specific case, we have the corresponding priority in the policy. But we give the conclusions in the following subsections.
+
+\begin{definition}
+Let $P_N = \{2,\ldots,N\}$ denote the assignment problem with up to N sizes in each group, $3 \leq N \leq 5$.
+% Without loss of generality, suppose that the group sizes are consecutive integers starting from 2.
+% Let $[a_1,a_2,\ldots,a_i], a_1<a_2<\ldots<a_i$ denote the group sizes.
+
+Let $D = (d_{2},d_{3}, \ldots, d_{N})_D$ denote the initial demands of the group sizes.
+\end{definition}
+
+Recall that a feasible assignment for one row is called a pattern, which can be expressed in a compact form or an expanded form.
+
+Compact form: Use $(p_2,p_3,\ldots,p_N)$ denote the number of group sizes in one pattern.
+
+Expanded form : Denote by $(a,b,\ldots,d), a \geq b \geq \ldots \geq d$ the pattern, which means that the groups with the size of $a,b, \ldots, d$ are placed in a row.
+
+
+For the group sizes $[a_1,\ldots,a_i], 2 \leq a_1<\ldots<a_i \leq 5, 2 \leq i \leq 4$, we have the following conclusions.
+
+Suppose the demands are large enough, we consider a greedy way to generate a pattern.
+
+\begin{definition}
+We obtain the pattern without considering the effect of demands. The greedy way to generate a pattern is described as follows.
+For any row, we will place the groups with the largest size as many as possible, then place the group whose size equals the number of the remaining seats. Because we don't consider the effect of demands, the remaining seats will be less than $2$. When the number of remaining seat is $1$ or $0$, we stop placing. In this way, we generate a greedy pattern.
+\end{definition}
+
+\begin{lem}\label{largest}
+The pattern generated in the greedy way is one of the largest patterns.
+\end{lem}
+
+\begin{pf}[Proof of lemma \ref{largest}]
+For each pattern $k \in I$(denote by $I$ all feasible patterns), we have two parts of loss. The first one results from the social distance between adjacent groups, we use $\alpha(k)$ to express its value. The second one is the empty seats which are not taken by any groups, use $\beta(k)$ to express its value.
+
+The largest patterns have the minimal loss. We need to prove the greedy pattern will also have the minimal loss.
+
+Notice that the number of remaining seats will be less than 2. Denote by $g \in I$ the greedy pattern. By placing the group with the largest size as many as possible, the pattern will have the minimal $\alpha(g)$, $\alpha(g) \leq \alpha(k), k \in I$. When the number of remaining seat is $0$, $\beta(g)$ will be 0. In these cases, the total loss will be the smallest.
+
+When the number of remaining seat is $1$, $\beta(g)$ will be 1. Notice that any pattern $g_1$ will have at least $\alpha(g_1) = \alpha(g)+1$ when placing another group, in this way, the loss,$\alpha(g) + \beta(g) \leq \alpha(g_1)+\beta(g_1)$, will still be the smallest.
+Thus, the greedy pattern is one largest pattern.
+\end{pf}
+
+\begin{lem}
+Other largest patterns can be generated by the greedy largest pattern.
+\end{lem}
+
+Denote by $r$ the number of remaining seats after placing the groups with the largest size as many as possible in a row. We can generate a new largest pattern by decreasing the group with the largest size and increasing the group with the size of $r$. We can obtain all the largest patterns until the gap between the size of all placed groups is less than 2.
+
+For example, when $S=21$, group sizes are $[2,3,4,5]$. The greedy pattern is $(5,5,5,5,1)$, which can develop the second largest pattern $(5,5,5,4,2)$, the third one $(5,5,5,3,3)$, the fourth one $(5,5,4,4,3)$, the fifth one $(5,4,4,4,4)$. Because the gap between $4$ and $5$ is 1 less than 2, we cannot decrease the largest group size and increase the smallest group size to generate another different pattern. Until here, we have obtained all the largest patterns.
+
+\begin{remark}
+$r=1$ leads to the maximum number of different largest patterns. Thus, the case, $r=1$, is the most complex part we need to consider.
+\end{remark}
+
+Our policy is to use the largest patterns as many as possible, then place the group with the largest remaining size in a greedy way. The core problem is how to obtain the maximum number of the largest patterns with the given certain demands. But maybe we have several largest patterns, and their priority will affect the maximum number of largest patterns when given the demands. Once we can determine their priority, then use the specific largest patterns according to their priority, we can obtain an optimal assignment for any given $n$ rows.
+
+\begin{definition}
+Given the number of seats in a row, $S$. The group sizes are $[a,b,c,d]$.
+Suppose we have several largest patterns $k_i, i\in \{1,2,\ldots,l\}$. We assume that $k_i \succeq k_{j}, i, j\in \{1,2,\ldots,l\}$ which means we prefer pattern $k_i$ to $k_j$ in our policy when they are both available.
+When the demands are enough to obtain pattern $k_i$, we say pattern $k_i$ is available. If some largest pattern is not available, just skip it in order of precedence.
+
+When $k_1 \succeq k_2 \succeq \ldots \succeq k_l$ holds, we can follow this priority in our policy to obtain an optimal assignment for any demands $d_a, d_b, d_c, d_d$.
+We can say that $k_i$ is preferred at least as much as $k_{i+1}, i = 1,2,\ldots, l-1$.
+
+If the priority between $k_i$ and $k_j$ depends on the demands. Suppose that when $D_4 \leq D_3$, $k_i \succeq k_j$. We will always choose the preferred pattern $k_i$ until it is unavailable.
+
+Here we need to talk about the existence of priority.
+When given $S$ and $D$, the priority will remain unchanged.
+
+\end{definition}
+
+With the conclusions of the following subsections, we have Theorem \ref{OptimalAssignment}.
+
+
+\begin{thm}\label{OptimalAssignment}
+If the first $n$ rows are filled with full patterns by the greedy way, then the first $k$ rows of $n$ rows will be an optimal assignment when given $k$ rows, $1 \leq k \leq n$.
+\end{thm}
+
+If we follow this theorem to revise the assignment when we encounter the non-full pattern, maybe we can construct a new assignment until the patterns are all full.
+
+
+% \begin{corollary}
+% We can obtain an optimal assignment when given $n$ rows in our policy.
+% The first $k$ rows of $n$ rows will be an optimal assignment when given $k$ rows, $1 \leq k<n$.
+% \end{corollary}
+
+
+\newpage

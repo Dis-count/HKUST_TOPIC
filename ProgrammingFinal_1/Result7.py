@@ -72,7 +72,7 @@ if __name__ == "__main__":
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
     t_value = np.arange(45, 80, 1)
-    people_value = np.zeros(len(period_range))
+    # people_value = np.zeros(len(period_range))
     occup_value = np.zeros(len(period_range))
 
     for i in range(200):
@@ -103,7 +103,7 @@ if __name__ == "__main__":
                 accept_people += optimal
 
             occup_value[cnt] = sto/count/total_seat * 100
-            people_value[cnt] = accept_people/count/total_seat * 100
+            # people_value[cnt] = accept_people/count/total_seat * 100
             if gap_if:
                 if accept_people/count - sto/count > 1:
                     point = [num_period-1, occup_value[cnt-1]]

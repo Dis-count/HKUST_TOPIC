@@ -5,7 +5,7 @@
     \item The number of seats in row $j$: $L_j^{0}, j \in \mathcal{N}$.
     \item The social distancing: $\delta$ seat(s).
     \item[-] $n_i = i + \delta$: the size of group type $i$ for each $i \in \mathcal{M}$.
-    \item[-] $L_j = L_j^{0} + \delta$: the length of row $j$ for each $j \in \mathcal{N}$.
+    \item[-] $L_j = L_j^{0} + \delta$: the size of row $j$ for each $j \in \mathcal{N}$.
     \end{itemize}
     
     \begin{figure}[ht]
@@ -24,7 +24,7 @@
     
     \begin{figure}[ht]
       \centering
-      \includegraphics[width = 0.6\textwidth]{./images/illustration.pdf}
+      \includegraphics[width = 0.6\textwidth]{./images/conversion1.pdf}
     \end{figure}
     \centering
     $L = 11$, $\delta =1$, $M =4$, $n_1 = 2, n_2 = 3, n_3 = 4, n_4 = 5$. 
@@ -33,13 +33,14 @@
   \end{frame}
 
   \begin{frame}{Largest and Full Patterns}
-    Suppose the length of the row is $L$.
     \begin{itemize}
-      \item[-] $\bm{h}$ is a feasible pattern if $\sum_{i=1}^{M} n_i h_i \leq L$.
-      \item[-] $\bm{h}$ is a {\color{red}largest} pattern if $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any feasible $\bm{h}^{\prime}$.
+      \item[-] Feasible pattern: $\sum_{i=1}^{M} n_i h_i \leq L$.
       
-      $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where $q = \lfloor L/n_M \rfloor$, $r \equiv L \bmod n_M$.
-      \item[-] $\bm{h}$ is a {\color{red}full} pattern if $\sum_{i=1}^{M} n_i h_i = L$.  
+      \item[-] {\color{red}Largest} pattern: $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any feasible $\bm{h}^{\prime}$.
+      
+      $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where $q = \lfloor L/n_M \rfloor$, $r = L - q \cdot n_M$.
+      
+      \item[-] {\color{red}Full} pattern: $\sum_{i=1}^{M} n_i h_i = L$.  
     \end{itemize}
 
      {\color{green} Example}: 
@@ -66,8 +67,10 @@
   % 4. traits:  focus on our study
 
   % size 
-  % 体现一一对应
+  
   % group 去掉
 
   % feasible  换行缩进
   %  简洁
+
+  % 体现一一对应

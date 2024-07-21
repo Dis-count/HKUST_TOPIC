@@ -18,15 +18,3 @@ At the beginning of period $t$, we have the current remaining capacity vector de
 Solving the dynamic programming problem described in equation \eqref{DP} can be challenging due to the curse of dimensionality, which arises when the problem involves a large number of variables or states. To mitigate this complexity, we aim to develop a heuristic method for assigning arriving groups. In our approach, we begin by generating a seat planning, as outlined in section \ref{sec_seat_planning}. This seat planning acts as a foundation for the seat assignment. In section \ref{sec_dynamic}, building upon the generated seat planning, we further develop a dynamic seat assignment policy which guides the allocation of seats to the incoming groups sequentially. 
 
 
-% \begin{equation}\label{improve_seat}
-%   \begin{aligned}
-%   \max \quad & i \cdot x_{ij} \\
-%   s.t. \quad & \sum_{j=1}^{N} x_{Mj} \geq d_M \\
-%   & \sum_{j=1}^{N} (x_{Mj}+x_{M-1,j}) \geq d_M + d_{M-1} \\
-%   & \cdots \\
-%   & \sum_{j=1}^{N} (x_{Mj}+\ldots + x_{1,j}) \geq d_M + \ldots+ d_{1} \\
-%   & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_{j}, \quad \forall j \in \mathbf{N} \\
-%   & x_{ij} \in \mathbb{N}
-%   \end{aligned}
-% \end{equation}
-

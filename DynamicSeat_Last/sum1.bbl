@@ -38,6 +38,11 @@ Juliano~Cavalcante Bortolete, Luis~Felipe Bueno, Renan Butkeraites,
   between students.
 \newblock {\em Computational and Applied Mathematics}, 41:1--23, 2022.
 
+\bibitem{CDC}
+{CDC}.
+\newblock Keep a safe space.
+\newblock \url{https://stacks.cdc.gov/view/cdc/90522}, 2020.
+
 \bibitem{clausen2010off}
 Tommy Clausen, Allan~Nordlunde Hjorth, Morten Nielsen, and David Pisinger.
 \newblock The off-line group seat reservation problem.
@@ -138,6 +143,13 @@ Mostafa Salari, R~John Milne, Camelia Delcea, Lina Kattan, and Liviu-Adrian
 Kalyan~T Talluri and Garrett~J Van~Ryzin.
 \newblock {\em The theory and practice of revenue management}, volume~68.
 \newblock Springer Science \& Business Media, 2006.
+
+\bibitem{AdviceforPublic}
+{WHO}.
+\newblock Advice for public.
+\newblock
+  \url{https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public},
+  2020.
 
 \bibitem{williamson1992airline}
 Elizabeth~Louise Williamson.

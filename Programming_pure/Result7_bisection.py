@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
     for i in range(1):
         # ran_prop = random.randint(0, all_number-1)
-        p = [0.3, 0.2, 0.1, 0.4]
+        p = [0.25, 0.25, 0.25, 0.25]
         my_file.write(str(p) + '\t')
         a = 40
         b = 90

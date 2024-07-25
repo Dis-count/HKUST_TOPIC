@@ -1,6 +1,5 @@
 % !TeX root = ../main.tex
 
-      
     \begin{frame}{Performances of Different Policies}
         \scriptsize
         $M =4$, $\delta =1$, $N =10$, $L_j =21, j \in \mathcal{N}$, $p_0 = 0$, $|\Omega| = 1000$.
@@ -35,37 +34,127 @@
     \end{frame}
       
     \begin{frame}{Impact of Social Distancing as Demand Increases}
-        \scriptsize
-        $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$: the expected number of people at each period.
-        \begin{figure}[h]
-            \centering
-            \subfigure[When $\gamma =2.5$]{
-              \includegraphics[width=0.48\textwidth]{./images/p1.pdf}}
-            \subfigure[When $\gamma =1.9$]{
-              \includegraphics[width=0.48\textwidth]{./images/p2.pdf}}
-          \end{figure}
-        \scriptsize
-        The gap point represents the first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats.
-    \end{frame}
-      
+      \vspace{-0.4cm}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{./images/p1.pdf}          
+        \caption{When probability is [0.25, 0.25, 0.25, 0.25]}
+        \end{figure}
+        
+      \vspace{-0.2cm}
+      % The gap point represents the first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats.
+      \begin{itemize}
+        \item Gap point: the first period when there is difference 
+        \item Before gap point: no difference
+        \item After gap point: the difference becomes larger
+      \end{itemize}
+  \end{frame}
+
     \begin{frame}{Estimation of Gap Point}
+      \scriptsize
+      $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$: the expected number of people at each period.
+      \begin{columns}
+        \begin{column}{0.8\textwidth}
       \begin{figure}[ht]
         \centering
-        \includegraphics[width = 0.8\textwidth]{./images/gamma_estimation.pdf}
+        \includegraphics[width = 1\textwidth]{./images/gamma.pdf}
+        \captionsetup{font={scriptsize}}
         \caption{Gap points with 200 probabilities}
     \end{figure}
+  \end{column}
+
+  \begin{column}{0.2\textwidth}
+    Assumption: the groups before gap point will occupy all seats.
+    $c_1, c_2$ can be seen as the discount rate compared to the ideal assumption.
+
+    {\color{blue} $y_1 = \frac{c_1 \tilde{L}}{\gamma + \delta}$}
+    {\color{red}  $y_2 = c_2 \frac{\gamma}{\gamma + \delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$}
+  \end{column}
+  \end{columns}
+
     \scriptsize
     {\color{blue} Blue points}: period of the gap point.
     {\color{red} Red points}: occupancy rate of the gap point. 
-    Gap points can be estimated.
+    Gap points can be estimated with $\gamma$.
     \end{frame}
+
+  %   \begin{frame}{Impact of Social Distancing as Demand Increases}
+
+
+  % \end{frame}
 
     % We simulate 200 probabilities. For each probability, we run 100 instances to calculate the gap point and the corresponding occupancy rate on average. 
     
     % The point in the figure is the average of 100 instances.
     % x-axis is gamma, y-axis is periods/ and occupancy rate.
 
-    % 
+    % \begin{frame}{Seat Assignment under Fixed Seat Planning}
+    %   % To evaluate the effectiveness of the initial seat planning, we employ a dynamic situation where decisions are made based on real-time feedback. In this context, we utilize a fixed seat planning as the foundation, and then make informed decisions accordingly.
+    %   \small
+    %   \begin{itemize}
+    %     \item Group-type Control
+    %     \item[-] Suppose the corresponding supply is $[X_1, \ldots, X_M]$. ($X_{i} = \sum_{j} x_{ij}, \forall i$)
+        
+    %     For the arrival of group type $i$,
+  
+    %     \item[-] if $X_i > 0$, accept it directly, assign it the seats planned for group type $i$;
+    %     \item[-] if $X_i = 0$, determine which group type to accept it.
+    %   \end{itemize}
+  
+    %   \vspace{-0.5cm}
+  
+    %   \begin{figure}[h]
+    %     \centering
+    %     \includegraphics[width = 0.8\textwidth]{./images/group_type.pdf}
+    %   \end{figure}
+  
+    %   \vspace{-0.1cm}
+  
+    %   For all $\hat{i} > i$, find the maximum value denoted as $d^{t}(i, \hat{i}^{*})$.
+      
+    %   If $d^{t}(i, \hat{i}^{*}) \geq 0$, we place the group of $i$ in $(\hat{i}^{*} + \delta)$-size seats. Otherwise, reject the group.
+  
+    %   % After acceptance, customers have more freedom to choose their seats with the seat planning.
+    % \end{frame}
+    
+    \begin{frame}{Seat Assignment under Fixed Seat Planning}
+      \scriptsize
+      The assignment is based on the fixed seat planning and we use the group-type control to make the decision. 
+      $M =4$, $\delta =1$, $L_j =21, j \in \mathcal{N}$, $p_0 = 0$, $|\Omega| = 1000$.
+      \begin{table}[ht]
+        \centering
+        \begin{tabular}{|l|l|l|l|}
+        \hline
+         T & Probabilities & \# of rows & Compared to the optimal (\%)  \\
+        \hline
+        70  & [0.25, 0.25, 0.25, 0.25]  & 10 & 94.97  \\
+        80  &   &  & 96.48   \\
+        90  &   &  & 97.94   \\
+        100  &   &  & 98.91   \\
+        \hline
+        70  & [0.25, 0.35, 0.05, 0.35]  & 10 & 95.90 \\
+        80  &   &  & 97.06  \\
+        90  &   &  & 98.58  \\
+        100  &   &  & 99.47 \\
+        \hline
+        70  & [0.15, 0.25, 0.55, 0.05]  & 10 & 97.41  \\
+        80  &   &  & 98.85  \\
+        90  &   &  & 98.73  \\
+        100  &   &  & 98.46  \\
+        \hline
+        140  & [0.25, 0.25, 0.25, 0.25]  & 20 & 95.83  \\
+        160  &   &  & 97.46  \\
+        180  &   &  & 99.05  \\
+        200  &   &  & 99.74  \\
+        \hline
+        \end{tabular}
+      \end{table}
+  
+    % Each entry is the average of 50 instances.
+    % IP will spend more than 2 hours in some instances, as `NA' showed in the table.
+    \end{frame}
+
+
 
     \begin{frame}{Make A Later Allocation}
       This setting is particularly applicable to larger venues, such as stadiums, where an immediate decision is made when a group arrives, but the actual allocation of seats for that group is deferred to a later time.

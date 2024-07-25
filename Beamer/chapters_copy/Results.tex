@@ -1,0 +1,116 @@
+% !TeX root = ../main.tex
+
+      
+    \begin{frame}{Performances of Different Policies}
+        \scriptsize
+        $M =4$, $\delta =1$, $N =10$, $L_j =21, j \in \mathcal{N}$, $p_0 = 0$, $|\Omega| = 1000$.
+        \begin{table}[ht]
+          \centering
+          \begin{tabular}{|l|l|l|l|l|l|l|}
+          \hline
+           T & Probabilities & DSA (\%) & DP1 (\%) & Bid (\%) & Booking (\%) & FCFS (\%) \\
+          \hline
+          60  & [0.25, 0.25, 0.25, 0.25]  & 99.12 & 98.42 & 98.38 & 96.74 & 98.17 \\
+          70  &   & 98.34 & 96.87 & 96.24 & 97.18 & 94.75 \\
+          80  &   & 98.61 & 95.69 & 96.02 & 98.00 & 93.18 \\
+          90  &   & 99.10 & 96.05 & 96.41 & 98.31 & 92.48 \\
+          100 &   & 99.58 & 95.09 & 96.88 & 98.70 & 92.54 \\
+          \hline
+          60  & [0.25, 0.35, 0.05, 0.35]  & 98.94 & 98.26 & 98.25 & 96.74 & 98.62 \\
+          70  &   & 98.05 & 96.62 & 96.06 & 96.90 & 93.96 \\
+          80  &   & 98.37 & 96.01 & 95.89 & 97.75 & 92.88 \\
+          90  &   & 99.01 & 96.77 & 96.62 & 98.42 & 92.46 \\
+          100 &   & 99.23 & 97.04 & 97.14 & 98.67 & 92.00 \\
+          \hline
+          60  & [0.15, 0.25, 0.55, 0.05]  & 99.14 & 98.72 & 98.74 & 96.61 & 98.07 \\
+          70  &   & 99.30 & 96.38 & 96.90 & 97.88 & 96.25 \\
+          80  &   & 99.59 & 97.75 & 97.87 & 98.55 & 95.81 \\
+          90  &   & 99.53 & 98.45 & 98.69 & 98.81 & 95.50 \\
+          100 &   & 99.47 & 98.62 & 98.94 & 98.90 & 95.25 \\
+          \hline
+          \end{tabular}
+        \end{table}
+        DSA has better performance than other policies under different demands.
+
+    \end{frame}
+      
+    \begin{frame}{Impact of Social Distancing as Demand Increases}
+        \scriptsize
+        $\gamma = p_1 * 1 + p_2 * 2 + p_3 * 3 + p_4 * 4$: the expected number of people at each period.
+        \begin{figure}[h]
+            \centering
+            \subfigure[When $\gamma =2.5$]{
+              \includegraphics[width=0.48\textwidth]{./images/p1.pdf}}
+            \subfigure[When $\gamma =1.9$]{
+              \includegraphics[width=0.48\textwidth]{./images/p2.pdf}}
+          \end{figure}
+        \scriptsize
+        The gap point represents the first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats.
+    \end{frame}
+      
+    \begin{frame}{Estimation of Gap Point}
+      \begin{figure}[ht]
+        \centering
+        \includegraphics[width = 0.8\textwidth]{./images/gamma_estimation.pdf}
+        \caption{Gap points with 200 probabilities}
+    \end{figure}
+    \scriptsize
+    {\color{blue} Blue points}: period of the gap point.
+    {\color{red} Red points}: occupancy rate of the gap point. 
+    Gap points can be estimated.
+    \end{frame}
+
+    % We simulate 200 probabilities. For each probability, we run 100 instances to calculate the gap point and the corresponding occupancy rate on average. 
+    
+    % The point in the figure is the average of 100 instances.
+    % x-axis is gamma, y-axis is periods/ and occupancy rate.
+
+    % 
+
+    \begin{frame}{Make A Later Allocation}
+      This setting is particularly applicable to larger venues, such as stadiums, where an immediate decision is made when a group arrives, but the actual allocation of seats for that group is deferred to a later time.
+
+      \vspace{0.5cm}
+
+      The critical part is to make the decision, thus, we choose the following policies associated with relaxation forms.
+
+      \vspace{0.5cm}
+
+      Policies: 
+
+      \begin{itemize}
+        \item Dynamic programming based heuristic
+        \item Bid-price control
+      \end{itemize}
+    \end{frame}
+
+      \begin{frame}{Performances of Different Policies}
+        \scriptsize
+        \begin{table}[ht]
+          \centering
+          \begin{tabular}{|l|l|l|l|l|l|}
+          \hline
+           T & Probabilities &  DP1-L (\%) & Bid-L (\%) & DP1 (\%) & Bid (\%) \\
+          \hline
+          60  & [0.25, 0.25, 0.25, 0.25]  & 99.52 & 99.44 & 98.42 & 98.38 \\
+          70  &   & 99.32 & 98.97 & 96.87 & 96.24 \\
+          80  &   & 99.34 & 99.30 & 95.69 & 96.02 \\
+          90  &   & 99.55 & 99.49 & 96.05 & 96.41  \\
+          100 &   & 99.78 & 99.66 & 95.09 & 96.88 \\
+          \hline
+          60  & [0.25, 0.35, 0.05, 0.35]  & 99.50 & 99.37 & 98.26 & 98.25  \\
+          70  &   & 99.40 & 98.97 & 96.62 & 96.06 \\
+          80  &   & 99.46 & 99.24 & 96.01 & 95.89 \\
+          90  &   & 99.59 & 99.35 & 96.77 & 96.62 \\
+          100 &   & 99.77 & 99.61 & 97.04 & 97.14  \\
+          \hline
+          60  & [0.15, 0.25, 0.55, 0.05]  & 99.57 & 99.54 & 98.72 & 98.74 \\
+          70  &   & 99.46 & 99.39  & 96.38 & 96.90 \\
+          80  &   & 99.50 & 99.30  & 97.75 & 97.87 \\
+          90  &   & 99.34 & 99.44  & 98.45 & 98.69 \\
+          100 &   & 99.34 & 99.55  & 98.62 & 98.94 \\
+          \hline
+          \end{tabular}
+        \end{table}
+
+    \end{frame}

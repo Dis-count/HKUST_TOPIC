@@ -1,3 +1,6 @@
+
+\section{Problem Description}
+    \frame{\sectionpage}
 \begin{frame}{Seat Planning with Social Distancing}
   \begin{itemize}  
     \item Group type $\mathcal{M} = \{1, \ldots, M\}$.
@@ -18,8 +21,8 @@
   \begin{frame}{Pattern}
     \begin{itemize}
       \item Pattern: $\bm{h} = (h_1, \ldots, h_M)$, the seat planning for one row, where $h_i$ is the number of group type $i$.
-
-      - The maximum number of people accommodated: $|\bm{h}| = \sum_{i =1}^{M} i h_i$.
+      \item [-] Feasible pattern: $\sum_{i=1}^{M} n_i h_i \leq L$.
+      \item [-] The maximum number of people accommodated: $|\bm{h}| = \sum_{i =1}^{M} i h_i$.
     \end{itemize}
     
     \begin{figure}[ht]
@@ -33,14 +36,16 @@
   \end{frame}
 
   \begin{frame}{Largest and Full Patterns}
-    \begin{itemize}
-      \item[-] Feasible pattern: $\sum_{i=1}^{M} n_i h_i \leq L$.
+    \begin{itemize} 
+      \item[-] {\color{red}Largest} pattern: 
       
-      \item[-] {\color{red}Largest} pattern: $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any feasible $\bm{h}^{\prime}$.
+      $\bm{h}$ is a largest pattern if $|\bm{h}| \geq |\bm{h}^{\prime}|$ for any feasible $\bm{h}^{\prime}$.
       
       $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where $q = \lfloor L/n_M \rfloor$, $r = L - q \cdot n_M$.
       
-      \item[-] {\color{red}Full} pattern: $\sum_{i=1}^{M} n_i h_i = L$.  
+      \item[-] {\color{red}Full} pattern: 
+      
+      $\bm{h}$ is a full pattern if $\sum_{i=1}^{M} n_i h_i = L$.  
     \end{itemize}
 
      {\color{green} Example}: 
@@ -49,9 +54,9 @@
       
       Largest patterns: $h_1 = (0, 0, 0, 4)$, $h_2 = (0, 0, 4, 1)$, $h_3 = (0, 2, 0, 3)$.
 
-      Largest may not be full: $h_1 = (0, 0, 0, 4)$. {\color{red} $\quad$ $\sum_{i=1}^{M} n_i h_i \neq L$}
+      Largest but not full: $h_1 = (0, 0, 0, 4)$. {\color{red} $\quad$ $\sum_{i=1}^{M} n_i h_i \neq L$}
 
-      Full may not be largest: $h_4 = (1, 1, 4, 0)$. {\color{red} $|h_4| = 15 < 16 = |h_1|$}
+      Full but not largest: $h_4 = (1, 1, 4, 0)$. {\color{red} $|h_4| = 15 < 16 = |h_1|$}
 
       \begin{figure}[ht]
         \centering

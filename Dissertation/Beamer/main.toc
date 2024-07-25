@@ -5,10 +5,10 @@
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {2}{Literature Review}{8}{0}{2}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {3}{Seat Planning with Deterministic Demand}{14}{0}{3}
+\beamer@sectionintoc {3}{Problem Description}{11}{0}{3}
 \defcounter {refsection}{0}\relax 
 \beamer@sectionintoc {4}{Seat Planning with Stochastic Demand}{18}{0}{4}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {5}{Seat Assignment with Dynamic Demand}{26}{0}{5}
+\beamer@sectionintoc {5}{Seat Assignment with Dynamic Demand}{25}{0}{5}
 \defcounter {refsection}{0}\relax 
-\beamer@sectionintoc {6}{Conclusion and Future Work}{43}{0}{6}
+\beamer@sectionintoc {6}{Conclusion and Future Work}{42}{0}{6}

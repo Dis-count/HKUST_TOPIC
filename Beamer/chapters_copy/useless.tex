@@ -1,0 +1,62 @@
+% !TeX root = ./main.tex
+
+\section{*}
+
+\begin{frame}
+  Static Model
+  \begin{equation*}
+      V_{j}(x) = E\left[\max_{0\leq u \leq \min\{D_j,x\}} \{p_ju + V_{j-1}(x-u)\}\right]
+      \end{equation*}
+\end{frame}
+
+\begin{frame}{Heuristic}
+  \begin{itemize}
+    \item For example, if given the case, demand $[10,17,20,15]$ for group types $[1,3,5,6]$.
+    The used patterns are $t^1 = [7,0,0,1]*1, t^2 = [0,2,1,1]*9, t^3 = [1,0,2,1]*6$.
+    \item According to the above definition, $t^3 = t^2 \succ t^1$. So based on the solution, we can obtain a feasible solution immediately.
+    \item When given $n$ lines, any combination of $t^3$ and $t^2$, $[t^3*x,t^2*(n-x)]$, is a feasible solution.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Heuristic}
+  \begin{enumerate}
+    \item Choose the solution according to dominance relation.
+    \item Calculate the gap between the total demand and the satisfied demand.
+    \begin{itemize}
+      \item If gap $<0$ for some group type, choose the total demand.
+    \end{itemize}
+    \item Increase the largest unsatisfied demand $g_i$ to the asked demand. Keep the other  demands unchanged.
+    \item Update the new demand and use column generation to solve.
+    \item Repeat the above procedure until the value does not increase.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Dominance Relation}
+  \begin{itemize}
+    \item According to the following programming define the dominance relations for solutions.
+    \[\begin{split}\mbox{max}\quad & \sum_{i=1}^m (s_i-1) x_{i}\\
+    \mbox{s.t.} \quad & \sum_{i=1}^m s_i x_i \leq S  \\
+    & x_i \leq d_i, \mbox{ integer}\quad \mbox{for}~ i=1,\ldots,m.\\\end{split}\]
+    \item $F(x) = \sum_{i=1}^m (s_i-1) x_{i}$ satisfying the above constraints. If $F(x_1)\geq F(x_2)$, then $x_1 \succeq x_2$.
+    \item $m$ types of groups. $d_i$ is the remaining demand for $x_i$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Explanation}
+  \begin{itemize}
+    \item Replacement principle: Two/or more small pieces together can be replaced by a bigger one with the same capacity. But the idea behind this operation can be reflected in the algorithm.
+    \item This results from the fact that the larger group size can provide high value.
+    \item If we want to increase the value, we should place the larger groups as much as possible. This algorithm can help us to realize this purpose. However, if we only consider the larger groups, which will fall into the trap of greed. That explains why the value will decrease when we continue step 2.
+    \item Problem: how to test the optimality.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Multidimentional Knapsack Problem Formulation}
+  \[\begin{split}\mbox{max}\quad & \sum_{i=1}^n\sum_{j=1}^m (s_j-1) x_{ij}\\
+  \mbox{s.t.} \quad & \sum_{j=1}^m s_j x_{ij} \leq S_i, \quad i=1,\ldots,n \\
+  & \sum_{i=1}^n x_{ij} \leq 1 ,\quad j=1,\ldots,m\\
+  & x_{ij} \in \{0,1\}, \quad i=1,\ldots,n, j=1,\ldots,m\\\end{split}\]
+  \begin{itemize}
+    \item Surrogate relaxation $\to$ Upper bound but unfeasible.
+  \end{itemize}
+\end{frame}

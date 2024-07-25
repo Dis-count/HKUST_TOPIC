@@ -1,0 +1,60 @@
+% !TeX root = ../main.tex
+\begin{frame}{Problem Formulation}  %开始一张幻灯片
+    Seat planning problem with given demand $\bm{d}$:
+
+    \begin{equation}\label{deter_upper}
+      \begin{aligned}
+      \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
+      \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
+      & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \\
+      & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+      \end{aligned}
+    \end{equation}
+    Objective: maximize the number of people accommodated.
+
+    $x_{ij}$: the number of group type $i$ in row $j$.
+  \end{frame}
+
+  \begin{frame}{Property}
+    In the LP relaxation of problem \eqref{deter_upper}, there is a threshold $\tilde{i} \in\{0,1,\ldots, M\}$ such that the optimal solutions satisfy the following conditions:
+
+    \begin{itemize}
+      \item For $i = 1,\ldots, \tilde{i} -1$ and all $j$, $x_{ij}^{*} = 0$. 
+      % indicating that no group type $i$ are assigned to any rows before index $v$.
+      \item For $i = \tilde{i} +1,\ldots, M$, $\sum_{j} x_{ij}^{*} = d_{i}$. 
+
+      \item For $i = \tilde{i}$, $\sum_{j} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ 
+      % This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $v+1$ to $M$, divided by the size of group type $v$, denoted as $n_v$.
+    \end{itemize}
+
+    \vspace{0.5cm}
+    The seat planning obtained from problem \eqref{deter_upper} may not utilize all seats.
+
+    \vspace{0.5cm}
+    
+    We aim to improve the seat planning utilizing all seats.
+
+    % We aim to generate a seat planning utilizing all seats while ensuring that the demand requirements are met.
+  \end{frame}
+
+  \begin{frame}{Generate the Full or Largest Patterns}
+    \small
+    Original seat planning: $\bm{H}$.
+
+    Desired feasible seat planning: $\bm{H}^{\prime}$.
+    
+    Meet the original group type requirements: $\sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{ji} \geq \sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji}, \forall i \in \mathcal{M}$.
+
+    \begin{equation}\label{improve_seat}
+      \begin{aligned}
+      \max \quad & \sum_{i=1}^{M} \sum_{j=1}^{N} (n_i-\delta)  x_{ij} \\
+      s.t. \quad & \sum_{j=1}^{N} \sum_{k=i}^{M} x_{kj} \geq  \sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji}, i \in \mathcal{M} \\
+      & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_{j}, j \in \mathcal{N} \\
+      & x_{ij} \in \mathbb{N}, i \in \mathcal{M}, j \in \mathcal{N}
+      \end{aligned}
+    \end{equation}
+
+    $\bm{H}^{\prime}$ is composed of full or largest patterns.
+  \end{frame}
+
+  

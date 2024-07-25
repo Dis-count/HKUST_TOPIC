@@ -6,9 +6,9 @@
     \begin{frame}{Method Flow}
       We aim to obtain a seat planning with known demand scenarios.
       \begin{itemize}
-        \item Build the formulation of scenario-based stochastic programming (SSP).
+        \item Build the formulation of Scenario-based Stochastic Programming (SSP).
         \item[-] Consider the nested relation: a smaller group can take the seats planned for the larger group.
-        \item Reformulate SSP to the benders master problem (BMP) and subproblem.
+        \item Reformulate SSP to the Benders Master Problem (BMP) and subproblem.
         \item The optimal solution can be obtained by solving BMP iteratively. 
       \end{itemize}
     \end{frame}
@@ -22,7 +22,7 @@
 
         $d_{i \omega}$: demand of group type $i$ for scenario $\omega$
 
-      \begin{equation}\label{sto_form}
+      \begin{equation}
         \begin{aligned}
         \hspace{-10mm}
         \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
@@ -35,65 +35,87 @@
         \end{aligned}
       \end{equation}
       \end{scriptsize}
-    
+
+      \begin{tiny}
+        $E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right]$ = $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}$
+      \end{tiny}
     \end{frame}
 
-% \begin{frame}
-%   \begin{columns}
-%     \begin{column}{0.7\textwidth}
-%       \begin{tiny}
-%         \begin{equation}
-%           \begin{aligned}
-%           \hspace{-10mm}
-%           \max \quad & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
-%           \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
-%           y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots,M-1, \omega \in \Omega \\
-%           & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
-%           & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}\\
-%           & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, \omega \in \Omega \\
-%           & x_{ij} \in \mathbb{Z}_{+}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-%           \end{aligned}
-%         \end{equation}
-%         \end{tiny}
-%     \end{column}
-%     \begin{column}{0.3\textwidth}
-%       \tiny
-%       Objective: maximize the expected number of people
-
-%       $y_{i \omega}^{+}$: excess supply for $i, \omega$.
-
-%       $y_{i \omega}^{-}$: shortage of supply for $i, \omega$.
-%     \end{column}
-% \end{columns}
-% \end{frame}
-
 \begin{frame}{Reformulation}
-  \small
-  Problem \eqref{sto_form} is equivalent to the following master problem
-  \begin{equation}\label{BD_master}
-    \begin{aligned}
-  \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
-  \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-  & \mathbf{x} \in \mathbb{N}^{M \times N, +},
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{scriptsize}
+        \begin{equation*}
+          \begin{aligned}
+          \hspace{-10mm}
+          \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
+          \text {s.t.} \quad & {\color{red}\sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
+          y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}}, \\ & i = 1,\ldots,M-1, \omega \in \Omega \\
+          & {\color{red}\sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}}, \\ & i = M, \omega \in \Omega \\
+          & {\color{green}\sum_{i=1}^{M} n_{i} x_{ij} \leq L_j}, j \in \mathcal{N}\\
+          & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega \\
+          & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+          \end{aligned}
+        \end{equation*}
+        \end{scriptsize}
+        \begin{tiny}
+              $\mathbf{c}^{\intercal} \mathbf{x} =\sum_{j=1}^{N} \sum_{i=1}^{M} i x_{ij}$, $\mathbf{f}^{\intercal} \mathbf{y}_{\omega} = - \sum_{i=1}^{M} y_{i \omega}^{+}$.
+              % $\mathbf{V}$ is the system matrix for $\mathbf{y}$.
+        \end{tiny}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \scriptsize
+      SSP is equivalent to the following master problem
+      \begin{equation}\label{BD_master}
+        \begin{aligned}
+      \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
+      \text {s.t.} \quad & {\color{green}\mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L}} \\
+      & \mathbf{x} \in \mathbb{N}^{M \times N, +},
+      \end{aligned}
+      \end{equation}
+
+      where $z(\mathbf{x})$ is defined as 
+
+    $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, we have the subproblem
+
+\begin{equation}\label{BD_sub}
+  \begin{aligned}
+    z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
+    \text {s.t.} \quad & {\color{red}\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega}} \\
+     & \mathbf{y} \geq 0.
   \end{aligned}
   \end{equation}
-
-  where $z(\mathbf{x})$ is defined as 
-
-$$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, we have the subproblem
-
-  \begin{equation}\label{BD_sub}
-    \begin{aligned}
-      z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y} \\
-      \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y} = \mathbf{d}_{\omega} \\
-       & \mathbf{y} \geq 0.
-    \end{aligned}
-    \end{equation}
-
-    \begin{tiny}
-    $\mathbf{c}^{\intercal} \mathbf{x} =\sum_{j=1}^{N} \sum_{i=1}^{M} i x_{ij}$, $\mathbf{f}^{\intercal} \mathbf{y} = - \sum_{i=1}^{M} y_{i \omega}^{+}$, $\mathbf{V}$ is the system matrix for $\mathbf{y}$.
-    \end{tiny}
+    \end{column}
+\end{columns}
 \end{frame}
+
+% \begin{frame}{Reformulation}
+%   \small
+%   Problem \eqref{sto_form} is equivalent to the following master problem
+%   \begin{equation}\label{BD_master}
+%     \begin{aligned}
+%   \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
+%   \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+%   & \mathbf{x} \in \mathbb{N}^{M \times N, +},
+%   \end{aligned}
+%   \end{equation}
+
+%   where $z(\mathbf{x})$ is defined as 
+
+% $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, we have the subproblem
+
+%   \begin{equation}\label{BD_sub}
+%     \begin{aligned}
+%       z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
+%       \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} \\
+%        & \mathbf{y} \geq 0.
+%     \end{aligned}
+%     \end{equation}
+
+%     \begin{tiny}
+%     $\mathbf{c}^{\intercal} \mathbf{x} =\sum_{j=1}^{N} \sum_{i=1}^{M} i x_{ij}$, $\mathbf{f}^{\intercal} \mathbf{y}_{\omega} = - \sum_{i=1}^{M} y_{i \omega}^{+}$, $\mathbf{V}$ is the system matrix for $\mathbf{y}$.
+%     \end{tiny}
+% \end{frame}
 
 \begin{frame}{Solution to Subproblem}
   Problem \eqref{BD_sub} is easy to solve with a given $\mathbf{x}$ from the perspective of the dual problem:
@@ -107,7 +129,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 
     \begin{itemize}
       \item The feasible region of problem \eqref{BD_sub_dual}, $P= \{\alpha|\alpha^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}\}$, is bounded. In addition, all the extreme points of $P$ are integral.
-      \item The optimal solution to this problem can be obtained directly according to the complementary slackness property.
+      \item The optimal solution can be obtained directly according to the complementary slackness property.
     \end{itemize}
 \end{frame}
 
@@ -145,41 +167,6 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 %   \item 
 %   \end{itemize}
 % \end{frame}
-
-
-\begin{frame}{Running Time of Benders Decomposition and IP}
-  Parameters: 
-
-  (150, 350): the demand of each group type is randomly sampled from (150, 350).
-
-  (21, 50): the number of seats of each row is randomly sampled from (21, 50).
-  \tiny
-  \begin{table}[ht]
-    \centering
-    \begin{tabular}{|l|l|l|l|l|l|l|}
-    \hline
-    \# of scenarios & Demands & \# of rows & \# of groups & \# of seats & Running time of IP(s) & Benders (s) \\
-    % 1000 & (20, 30) & 10 & 4 & (21, 30) & 1.6 & 0.1 \\
-    % 1000 & (20, 30) & 10 & 4 & (21, 40) & 1.6 & 0.1 \\
-    \hline
-    1000  & (150, 350) & 30 & 8 & (21, 50) & 4.12  & 0.13 \\
-    5000  &            &    &   &         & 28.73 & 0.29  \\
-    10000 &            &    &   &         & 66.81  & 0.54 \\
-    50000 &            &    &   &         & 925.17 & 2.46 \\
-    \hline
-    1000  & (1000, 2000) & 200 & 8 & (21, 50) & 5.88 & 0.18 \\
-    5000  &              &     &   &          & 30.0 & 0.42 \\
-    10000 &              &     &   &          & 64.41 & 0.62 \\
-    50000 &              &     &   &          & 365.57 & 2.51\\
-    \hline
-    1000  & (150, 250) & 30 & 16 & (41, 60) & 17.15  & 0.18 \\
-    5000  &            &    &    &          & 105.2  & 0.37 \\
-    10000 &            &    &    &          & 260.88 & 0.65 \\
-    50000 &            &    &    &          & 3873.16 & 2.95 \\
-    \hline
-    \end{tabular}
-  \end{table}
-\end{frame}
 
 \begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
   In some cases, it is time-consuming to obtain the optimal solution to SSP. 

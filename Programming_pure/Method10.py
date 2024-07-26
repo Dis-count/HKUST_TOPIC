@@ -27,7 +27,7 @@ class deterministicModel:
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
             self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
-        m.setParam('TimeLimit', 40)
+        # m.setParam('TimeLimit', 40)
         m.optimize()
         if m.status !=2:
             m.write('test.lp')

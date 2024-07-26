@@ -35,18 +35,31 @@
       
     \begin{frame}{Impact of Social Distancing as Demand Increases}
       \vspace{-0.4cm}
-      \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.5\textwidth]{./images/p1.pdf}          
-        \caption{When probability is [0.25, 0.25, 0.25, 0.25]}
-        \end{figure}
+      % \begin{figure}[h]
+      %   \centering
+      %   \includegraphics[width=0.5\textwidth]{./images/p1.pdf}          
+      %   \caption{When probability is [0.25, 0.25, 0.25, 0.25]}
+      %   \end{figure}
         
-      \vspace{-0.2cm}
+
+      \begin{columns}
+        \column{6cm}  %第一栏（左栏）宽度为5cm
+          \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 1\textwidth]{./images/without2.pdf}
+          \end{figure}
+          \column{6cm}
+          \scriptsize
+          \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 1\textwidth]{./images/without1.pdf}
+          \end{figure}
+      \end{columns}
       % The gap point represents the first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats.
       \begin{itemize}
         \item Gap point: the first period when there is difference 
-        \item Before gap point: no difference
-        \item After gap point: the difference becomes larger
+        \item Demand less than 71.3\% total seats: no difference
+        \item Demand larger than 71.3\% total seats: the difference becomes larger
       \end{itemize}
   \end{frame}
 
@@ -65,7 +78,7 @@
 
   \begin{column}{0.2\textwidth}
     Assumption: the groups before gap point will occupy all seats.
-    $c_1, c_2$ can be seen as the discount rate compared to the ideal assumption.
+    $c_1, c_2$ can be seen as the discount factor compared to the ideal assumption.
 
     {\color{blue} $y_1 = \frac{c_1 \tilde{L}}{\gamma + \delta}$}
     {\color{red}  $y_2 = c_2 \frac{\gamma}{\gamma + \delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$}
@@ -75,7 +88,7 @@
     \scriptsize
     {\color{blue} Blue points}: period of the gap point.
     {\color{red} Red points}: occupancy rate of the gap point. 
-    Gap points can be estimated with $\gamma$.
+    Gap points can be estimated with $\gamma$. Different seat layout affects $c_1, c_2$. The larger $c_1, c_2$, the closer to the ideal assumption.
     \end{frame}
 
   %   \begin{frame}{Impact of Social Distancing as Demand Increases}

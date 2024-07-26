@@ -22,20 +22,20 @@ def withoutSD(sequence, total_seat, sd):
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(30,100,1)
+    period_range = range(30,90,1)
     given_lines = 10
     # np.random.seed(i)
     sd = 1
-    p = [[0.25, 0.25, 0.25, 0.25], [0.4, 0.4, 0.1, 0.1]]
+    p = [[0.25, 0.25, 0.25, 0.25]]
     # probab = [0.4, 0.2, 0.3, 0.1]
-    #  [0.4, 0.4, 0.1, 0.1]
+    #  [0.4, 0.4, 0.1, 0.1]  [0.25, 0.25, 0.25, 0.25],
 
     begin_time = time.time()
-    filename = 'different_c' + str(time.time()) + '.txt'
-    my_file = open(filename, 'w')
-    my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
+    # filename = 'different_c' + str(time.time()) + '.txt'
+    # my_file = open(filename, 'w')
+    # my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
 
-    t_value = np.arange(30, 100, 1)
+    t_value = np.arange(30, 90, 1)
     people_value = np.zeros(len(period_range))
     occup_value = np.zeros(len(period_range))
     occup_without = np.zeros(len(period_range))
@@ -57,7 +57,7 @@ if __name__ == "__main__":
             multi = np.arange(1, I+1)
             count = 50
             for j in range(count):
-                sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+                sequence, ini_demand, newx4 = a_instance.random_generate()
                 sequence1 = copy.deepcopy(sequence)
 
                 g = a_instance.method_new(sequence1, newx4, roll_width)
@@ -72,10 +72,12 @@ if __name__ == "__main__":
                     point = [num_period-1, occup_value[cnt-1]]
                     gap_if = False
             cnt += 1
-
+        np.save("t_value.npy", t_value)
+        np.save("peo_value.npy", people_value)
+        np.save("occup_value.npy", occup_value)
         plt.plot(t_value* gamma, people_value, 'b-', label = 'Without social distancing')
         plt.plot(t_value* gamma, occup_value, 'r--', label = 'With social distancing')
-        plt.xlim((50, 250))
+        plt.xlim((80, 220))
         plt.ylim((0, 100))
         plt.xlabel('Expected number of people')
         plt.ylabel('Percentage of total seats')
@@ -85,17 +87,17 @@ if __name__ == "__main__":
         
         plt.annotate(r'Gap $%s$' % str(point), xy= (point[0]*gamma, point[1]), xytext=(point[0]*gamma + 10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
 
-        my_x_ticks = np.arange(50, 250, 50)
+        my_x_ticks = np.arange(80, 220, 40)
         plt.xticks(my_x_ticks)
         plt.legend()
         graphname = './test' + str(probab[0]) + '.pdf'
         plt.savefig(graphname)
         plt.cla()
 
-        for i in range(60, 100, 10):
-            a = people_value[i- period_range[0]] - occup_value[i - period_range[0]]
-            my_file.write(str(i) + '\t' + str(a) + '\n')
+        # for i in range(60, 100, 10):
+        #     a = people_value[i- period_range[0]] - occup_value[i - period_range[0]]
+        #     my_file.write(str(i) + '\t' + str(a) + '\n')
 
-    run_time = time.time() - begin_time
-    my_file.write('Total Runtime\t %f \n' % run_time)
-    my_file.close()
+    # run_time = time.time() - begin_time
+    # my_file.write('Total Runtime\t %f \n' % run_time)
+    # my_file.close()

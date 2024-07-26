@@ -6,24 +6,21 @@
 \begin{frame}{Dynamic Demand}
   \begin{itemize}
     \item[-] There is at most one group arrival at each period, $t = 1, \ldots, T$. 
-    \item[-] The probability of an arrival of group type $i$: $p_i$.  
+    \item[-] The probability of an arrival of group type $i$: $p_i$
+    \item[-] Seat assignment under the seat planning
+    \item[1.] Assign the seats under the {\color{red}flexible seat planning} 
+    
+    \begin{footnotesize}
+      Situation 1: the seller need to assign seats each time a group arrives. 
+      
+      Situation 2: the seller only needs to accept or reject the group's request and then assign the seats after the selling period.
+      \end{footnotesize}
+    \item[2.] Assign the seats under the {\color{red}fixed seat planning}
+    
+    \begin{footnotesize}
+      The seats, which were arranged for social distancing purposes, need to be dismantled before people arrive to prevent them from occupying those seats. When each group arrives, we make decisions regarding whether to accept or reject them based on the predetermined seat planning.
+    \end{footnotesize}
   \end{itemize}
-
-  1. Assign the seats under the {\color{red}flexible seat planning}
-
-  \begin{footnotesize}
-  Situation 1: the seller need to assign seats each time a group arrives. 
-  
-  Situation 2: the seller only needs to accept or reject the group's request and then assign the seats after the selling period.
-  \end{footnotesize}
-
-  \vspace{0.3cm}
-
-  2. Assign the seats under the {\color{red}fixed seat planning}
-
-  \begin{footnotesize}
-    The seats, which were arranged for social distancing purposes, need to be dismantled before people arrive to prevent them from occupying those seats. When each group arrives, we make decisions regarding whether to accept or reject them based on the predetermined seat planning.
-  \end{footnotesize}
 \end{frame}
 
   % \begin{frame}{Group-type Control}
@@ -210,7 +207,7 @@
         \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}^{+}_{0}\}$.
         \item Decision: $u^{t}$. If we accept a request in period $t$, $u^t = 1$; otherwise, $u^t =0$.  
         \item[-] DP with one row can be expressed as:
-        $$V^{t}(l) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l)\right\}, l \geq 0 $$
+        $$V^{t}(l^{t}) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l^{t}-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l^{t})\right\}$$
 
         $$V^{T+1}(l) =0, \forall l.$$
         \item After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.

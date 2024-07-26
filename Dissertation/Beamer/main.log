@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  24 JUL 2024 20:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  26 JUL 2024 09:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1198,19 +1198,14 @@ Package pdftex.def Info: ./images/cinema.jpg  used on input line 75.
  [5
 
  <./images/park_social_distancing.jpg> <./images/tape_measures.jpg> <./images/seat_sc.png> <./images/cinema.jpg>]
-<./images/seat_planning.png, id=207, 391.4625pt x 238.64156pt>
-File: ./images/seat_planning.png Graphic file (type png)
-<use ./images/seat_planning.png>
-Package pdftex.def Info: ./images/seat_planning.png  used on input line 104.
-(pdftex.def)             Requested size: 113.81145pt x 69.37906pt.
-<./images/seat_assignment.png, id=208, 407.27156pt x 234.8775pt>
-File: ./images/seat_assignment.png Graphic file (type png)
-<use ./images/seat_assignment.png>
-Package pdftex.def Info: ./images/seat_assignment.png  used on input line 104.
-(pdftex.def)             Requested size: 113.81145pt x 65.63622pt.
+<./images/assignment.png, id=207, 840.13875pt x 341.77687pt>
+File: ./images/assignment.png Graphic file (type png)
+<use ./images/assignment.png>
+Package pdftex.def Info: ./images/assignment.png  used on input line 109.
+(pdftex.def)             Requested size: 273.83728pt x 111.39949pt.
  [6
 
- <./images/seat_planning.png> <./images/seat_assignment.png>] [7
+ <./images/assignment.png>] [7
 
 ]) (./chapters/Literature.tex [8
 
@@ -1223,7 +1218,7 @@ Package pdftex.def Info: ./images/seat_assignment.png  used on input line 104.
 ]
 
 pdfTeX warning: pdflatex.exe (file ./images/dummy_seat.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./images/dummy_seat.pdf, id=376, 932.82928pt x 132.54417pt>
+<./images/dummy_seat.pdf, id=374, 932.82928pt x 132.54417pt>
 File: ./images/dummy_seat.pdf Graphic file (type pdf)
 <use ./images/dummy_seat.pdf>
 Package pdftex.def Info: ./images/dummy_seat.pdf  used on input line 19.
@@ -1233,7 +1228,7 @@ Package pdftex.def Info: ./images/dummy_seat.pdf  used on input line 19.
  <./images/dummy_seat.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./images/conversion1.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./images/conversion1.pdf, id=413, 388.83568pt x 140.08134pt>
+<./images/conversion1.pdf, id=411, 388.83568pt x 140.08134pt>
 File: ./images/conversion1.pdf Graphic file (type pdf)
 <use ./images/conversion1.pdf>
 Package pdftex.def Info: ./images/conversion1.pdf  used on input line 36.
@@ -1243,7 +1238,7 @@ Package pdftex.def Info: ./images/conversion1.pdf  used on input line 36.
  <./images/conversion1.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./images/full_largest.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./images/full_largest.pdf, id=456, 588.5932pt x 112.4421pt>
+<./images/full_largest.pdf, id=454, 588.5932pt x 112.4421pt>
 File: ./images/full_largest.pdf Graphic file (type pdf)
 <use ./images/full_largest.pdf>
 Package pdftex.def Info: ./images/full_largest.pdf  used on input line 65.
@@ -1267,10 +1262,10 @@ Package pdftex.def Info: ./images/full_largest.pdf  used on input line 65.
 ] [22
 
 ]
-<./images/BD.png, id=742, 532.99126pt x 102.3825pt>
+<./images/BD.png, id=740, 532.99126pt x 102.3825pt>
 File: ./images/BD.png Graphic file (type png)
 <use ./images/BD.png>
-Package pdftex.def Info: ./images/BD.png  used on input line 154.
+Package pdftex.def Info: ./images/BD.png  used on input line 157.
 (pdftex.def)             Requested size: 205.37926pt x 39.45096pt.
  [23
 
@@ -1281,7 +1276,7 @@ Package pdftex.def Info: ./images/BD.png  used on input line 154.
 ] [26
 
 ]
-Overfull \hbox (6.61995pt too wide) detected at line 50
+Overfull \hbox (6.61995pt too wide) detected at line 47
 \OML/cmm/m/it/10 V[]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 L[]\OT1/cmr/m/n/10 ) = [] []
  []
 
@@ -1294,10 +1289,10 @@ Overfull \hbox (6.61995pt too wide) detected at line 50
 ]
 
 pdfTeX warning: pdflatex.exe (file ./images/group_type.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./images/group_type.pdf, id=943, 589.8055pt x 144.38553pt>
+<./images/group_type.pdf, id=941, 589.8055pt x 144.38553pt>
 File: ./images/group_type.pdf Graphic file (type pdf)
 <use ./images/group_type.pdf>
-Package pdftex.def Info: ./images/group_type.pdf  used on input line 148.
+Package pdftex.def Info: ./images/group_type.pdf  used on input line 145.
 (pdftex.def)             Requested size: 273.83728pt x 67.03722pt.
 [30
 
@@ -1319,18 +1314,23 @@ Overfull \hbox (11.36145pt too wide) in paragraph at lines 34--34
 [36
 
 ]
-<./images/p1.pdf, id=1162, 462.52798pt x 346.89601pt>
-File: ./images/p1.pdf Graphic file (type pdf)
-<use ./images/p1.pdf>
-Package pdftex.def Info: ./images/p1.pdf  used on input line 51.
-(pdftex.def)             Requested size: 171.14764pt x 128.36009pt.
+<./images/without2.pdf, id=1160, 462.52798pt x 346.89601pt>
+File: ./images/without2.pdf Graphic file (type pdf)
+<use ./images/without2.pdf>
+Package pdftex.def Info: ./images/without2.pdf  used on input line 64.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
+<./images/without1.pdf, id=1161, 462.52798pt x 346.89601pt>
+File: ./images/without1.pdf Graphic file (type pdf)
+<use ./images/without1.pdf>
+Package pdftex.def Info: ./images/without1.pdf  used on input line 64.
+(pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
  [37
 
- <./images/p1.pdf>]
-<./images/gamma.pdf, id=1228, 1387.58403pt x 739.3221pt>
+ <./images/without2.pdf> <./images/without1.pdf>]
+<./images/gamma.pdf, id=1265, 1387.58403pt x 739.3221pt>
 File: ./images/gamma.pdf Graphic file (type pdf)
 <use ./images/gamma.pdf>
-Package pdftex.def Info: ./images/gamma.pdf  used on input line 79.
+Package pdftex.def Info: ./images/gamma.pdf  used on input line 92.
 (pdftex.def)             Requested size: 273.83728pt x 145.89888pt.
  [38
 
@@ -1364,18 +1364,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36229 strings out of 478599
- 688335 string characters out of 5853593
- 1460819 words of memory out of 5000000
- 53287 multiletter control sequences out of 15000+600000
+ 36241 strings out of 478599
+ 688555 string characters out of 5853593
+ 1461174 words of memory out of 5000000
+ 53299 multiletter control sequences out of 15000+600000
  425640 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,124p,785b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (44 pages, 4472924 bytes).
+Output written on main.pdf (44 pages, 4497659 bytes).
 PDF statistics:
- 1620 PDF objects out of 1728 (max. 8388607)
- 1387 compressed objects within 14 object streams
+ 1657 PDF objects out of 1728 (max. 8388607)
+ 1391 compressed objects within 14 object streams
  104 named destinations out of 1000 (max. 500000)
  184 words of extra memory for PDF output out of 10000 (max. 10000000)
 

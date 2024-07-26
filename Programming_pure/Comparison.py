@@ -28,7 +28,7 @@ class CompareMethods:
         dw, prop = sam.get_prob_ini(first_arrival)
         W = len(dw)
         m1 = stochasticModel(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
-        m_sce = stochasticModel1(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
+        # m_sce = stochasticModel1(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
 
         ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
 
@@ -40,9 +40,9 @@ class CompareMethods:
         # ini_demand1 = np.array(self.probab) * self.num_period
         # ini_demand3, newx3 = deter.IP_formulation(np.zeros(self.I), ini_demand1)
         # newx3 = self.full_largest(newx3, self.roll_width)
-        newx3, _ = m_sce.solveBenders(first_arrival-self.s, eps=1e-4, maxit=20)
-        ini_demand3 = np.sum(newx3, axis=1)
-        return sequence, ini_demand, ini_demand3, newx3, newx4
+        # newx3, _ = m_sce.solveBenders(first_arrival-self.s, eps=1e-4, maxit=20)
+        # ini_demand3 = np.sum(newx3, axis=1)
+        return sequence, ini_demand, newx4
 
     def row_by_row(self, sequence):
         # i is the i-th request in the sequence
@@ -423,8 +423,8 @@ class CompareMethods:
         sequence = [i-self.s for i in sequence]
         final_demand = np.array(sequence) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
-        print(change_roll)
-        print(mylist)
+        # print(change_roll)
+        # print(mylist)
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1

@@ -12,6 +12,7 @@
 \usepackage{bm}
 \usepackage[backend=biber]{biblatex} %Custom bibliography
 \usepackage{caption}
+\usepackage{multirow}
 \addbibresource{refe.bib} %Load references
 
 
@@ -84,27 +85,21 @@
       %   {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
       % \fi%     
     \end{beamercolorbox}%
-    \vskip1.5em%\par
+    \vskip2.5em%\par
 %\par
     \begin{beamercolorbox}[sep=8pt,center]{author}
-      \usebeamerfont{author}{Examinee: Zikang LI}
+      \usebeamerfont{author}{Zikang LI}
     \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=1pt,center]{super}
-      \usebeamerfont{}{Supervisors: Prof. Xiangtong QI\\{\color{white}cosupe:} Prof. Qian LIU}
-    \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=1pt,center]{chair}
-      \usebeamerfont{}{Chairperson: Prof. Zhenyang LIN}
-    \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=1pt,center]{member}
-      \usebeamerfont{}{Members: Prof. Richard SO \\
-                       {\color{white} Member:}Prof. Yi CHEN \\
-                       {\color{white} member}Prof. Mitch LI \\
-                       {\color{white} Members}Prof. Yimin YU}
-    \end{beamercolorbox}
+    \vskip1.5em
     \begin{beamercolorbox}[sep=8pt,center]{institute}
       \usebeamerfont{institute}\insertinstitute
     \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=1pt,center]{date}
+    \vskip1.5em
+    \begin{beamercolorbox}[sep=8pt,center]{super}
+      \usebeamerfont{}{Supervisors: Prof. Xiangtong QI\\{\color{white}cosupe:} Prof. Qian LIU}
+    \end{beamercolorbox}
+
+    \begin{beamercolorbox}[sep=8pt,center]{date}
       \usebeamerfont{date}\insertdate
     \end{beamercolorbox}
 	%\par

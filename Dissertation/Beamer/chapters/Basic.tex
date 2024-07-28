@@ -5,32 +5,31 @@
   \begin{itemize}  
     \item Group type $\mathcal{M} = \{1, \ldots, M\}$.
     \item Row $\mathcal{N} = \{1, \ldots, N\}$.
-    \item The number of seats in row $j$: $L_j^{0}, j \in \mathcal{N}$.
-    \item The social distancing: $\delta$ seat(s).
-    \item[-] $n_i = i + \delta$: the size of group type $i$ for each $i \in \mathcal{M}$.
+    \item Number of seats in row $j$: $L_j^{0}, j \in \mathcal{N}$.
+    \item Social distancing: $\delta$ seat(s).
+    \item[-] $n_i = i + \delta$: the size of type $i$ group for each $i \in \mathcal{M}$.
     \item[-] $L_j = L_j^{0} + \delta$: the size of row $j$ for each $j \in \mathcal{N}$.
     \end{itemize}
     
     \begin{figure}[ht]
       \centering
-      \includegraphics[width = 0.8\textwidth]{./images/dummy_seat.pdf}
-      \caption{Problem Conversion with One Seat as Social Distancing}
+      \includegraphics[width = 0.6\textwidth]{./images/delta.pdf}
   \end{figure}
   \end{frame}
 
   \begin{frame}{Pattern}
     \begin{itemize}
-      \item Pattern: $\bm{h} = (h_1, \ldots, h_M)$, the seat planning for one row, where $h_i$ is the number of group type $i$.
+      \item Pattern: $\bm{h} = (h_1, \ldots, h_M)$, the seat planning for one row, where $h_i$ is the number of type $i$ groups.
       \item [-] Feasible pattern: $\sum_{i=1}^{M} n_i h_i \leq L$.
-      \item [-] The maximum number of people accommodated: $|\bm{h}| = \sum_{i =1}^{M} i h_i$.
+      \item [-] Maximum number of people accommodated: $|\bm{h}| = \sum_{i =1}^{M} i h_i$.
     \end{itemize}
     
     \begin{figure}[ht]
       \centering
-      \includegraphics[width = 0.6\textwidth]{./images/conversion1.pdf}
+      \includegraphics[width = 0.6\textwidth]{./images/group_delta.pdf}
     \end{figure}
     \centering
-    $L = 11$, $\delta =1$, $M =4$, $n_1 = 2, n_2 = 3, n_3 = 4, n_4 = 5$. 
+    $L = 11$, $\delta =1$, $M =4$.
 
     $\bm{h} = (2, 1, 1, 0)$, $|\bm{h}| = 7$.
   \end{frame}
@@ -52,11 +51,12 @@
       
       $\delta = 1$, $M =4$, $L = 21$.
       
-      Largest patterns: $h_1 = (0, 0, 0, 4)$, $h_2 = (0, 0, 4, 1)$, $h_3 = (0, 2, 0, 3)$.
+      Largest patterns: $h_1 = (0, 0, 0, 4)$, $h_2 = (0, 0, 4, 1)$, $h_3 = (0, 2, 0, 3)$, \\ 
+                    \hspace{2.7cm}   $|h_1| =|h_2| =|h_3| = 16$.
 
       Largest but not full: $h_1 = (0, 0, 0, 4)$. {\color{red} $\quad$ $\sum_{i=1}^{M} n_i h_i \neq L$}
 
-      Full but not largest: $h_4 = (1, 1, 4, 0)$. {\color{red} $|h_4| = 15 < 16 = |h_1|$}
+      Full but not largest: $h_4 = (1, 1, 4, 0)$. {\color{red} $|h_4| = 15 < 16$}
 
       \begin{figure}[ht]
         \centering

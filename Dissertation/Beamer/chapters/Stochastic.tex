@@ -20,7 +20,7 @@
 
         $y_{i \omega}^{+}$: excess supply for $i, \omega$. $y_{i \omega}^{-}$: shortage of supply for $i, \omega$.
 
-        $d_{i \omega}$: demand of group type $i$ for scenario $\omega$
+        $d_{i \omega}$: demand of type $i$ groups for scenario $\omega$
 
       \begin{equation}
         \begin{aligned}
@@ -48,7 +48,8 @@
         \begin{equation*}
           \begin{aligned}
           \hspace{-10mm}
-          \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
+          \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} 
+          {\color{violet} \mathbf{f}^{\intercal} \mathbf{y}_{\omega}} \\
           \text {s.t.} \quad & {\color{red}\sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
           y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}}, \\ & i = 1,\ldots,M-1, \omega \in \Omega \\
           & {\color{red}\sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}}, \\ & i = M, \omega \in \Omega \\
@@ -59,7 +60,8 @@
         \end{equation*}
         \end{scriptsize}
         \begin{tiny}
-              $\mathbf{c}^{\intercal} \mathbf{x} =\sum_{j=1}^{N} \sum_{i=1}^{M} i x_{ij}$, $\mathbf{f}^{\intercal} \mathbf{y}_{\omega} = - \sum_{i=1}^{M} y_{i \omega}^{+}$.
+              $\mathbf{c}^{\intercal} \mathbf{x} =\sum_{j=1}^{N} \sum_{i=1}^{M} i x_{ij}$, 
+              $\mathbf{f}^{\intercal} \mathbf{y}_{\omega} = - \sum_{i=1}^{M} y_{i \omega}^{+}$.
               % $\mathbf{V}$ is the system matrix for $\mathbf{y}$.
         \end{tiny}
     \end{column}
@@ -79,11 +81,11 @@
 
       where $z(\mathbf{x})$ is defined as 
 
-    $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, we have the subproblem
+    $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, the subproblem
 
 \begin{equation}\label{BD_sub}
   \begin{aligned}
-    z_{\omega}(\mathbf{x}) := \max \quad & \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
+    z_{\omega}(\mathbf{x}) := \max \quad & {\color{violet} \mathbf{f}^{\intercal} \mathbf{y}_{\omega}} \\
     \text {s.t.} \quad & {\color{red}\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega}} \\
      & \mathbf{y} \geq 0.
   \end{aligned}
@@ -172,10 +174,10 @@
 % \end{frame}
 
 \begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
-  In some cases, it is time-consuming to obtain the optimal solution to SSP. 
+  Challenge: it is hard to solve SSP in some cases. 
   \vspace{0.5cm}
 
-  Meanwhile, there exists an optimal solution to SSP such that the patterns associated with this {\color{red} optimal solution} are composed of the {\color{red} full or largest patterns} under any given scenarios.
+  Property: there exists an optimal solution to SSP such that the patterns associated with this {\color{red} optimal solution} are composed of the {\color{red} full or largest patterns} under any given scenarios.
   \vspace{0.5cm}
 
   We aim to obtain a seat planning composed of full or largest patterns by the optimal solution to the LP relaxation of SSP.
@@ -186,6 +188,6 @@
     \item[-] Obtain the optimal solution, $\mathbf{x}^{1}$, by solving problem \eqref{deter_upper} with $d_{i} = {s}_{i}$. 
     % Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
      
-    \item[-] Construct the full or largest patterns with $\mathbf{x}^{1}$.
+    \item[-] Obtain full or largest patterns by solving problem \eqref{improve_seat} with $\bm{H} = \mathbf{x}^{1}$.
  \end{itemize}
 \end{frame}

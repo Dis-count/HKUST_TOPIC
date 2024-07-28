@@ -3,24 +3,42 @@
 \section{Seat Assignment with Dynamic Demand}
     \frame{\sectionpage}
 
-\begin{frame}{Dynamic Demand}
-  \begin{itemize}
-    \item[-] There is at most one group arrival at each period, $t = 1, \ldots, T$. 
-    \item[-] The probability of an arrival of group type $i$: $p_i$
-    \item[-] Seat assignment under the seat planning
-    \item[1.] Assign the seats under the {\color{red}flexible seat planning} 
+    \begin{frame}{Real-time Seat Assignment}
+      \centering
+      \small
+      \begin{itemize}
+      \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
+      \item[-] The probability of an arrival of group type $i$: $p_i$.
+      \item[-] $\mathbf{L}^{t} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
+      \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
+      \item[-] $U^{t}(\mathbf{L}^{t}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}^{t}, \forall i,j \}$.
+      \item[-] $\mathbf{e}_j$: Unit column vector with $j$-th element being 1.
+      \item[-] $V^{t}(\mathbf{L}^{t})$: Value function at period $t$, given remaining capacity, $\mathbf{L}^{t}$.
+      \end{itemize}
+  
+      $$V^{t}(\mathbf{L}^{t}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L}^{t})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}^{t}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L}^{t})\right\}$$
+      \small
+  \end{frame}
+
+\begin{frame}{Seat Assignment under The Seat Planning}
+    % \item[-] There is at most one group arrival at each period, $t = 1, \ldots, T$. 
+    % \item[-] The probability of an arrival of group type $i$: $p_i$
+    \vspace{0.2cm}
+    \begin{itemize}
+    \item Assign the seats under the {\color{red}flexible seat planning} 
+    \vspace{0.2cm}
+
+      Situation 1: {\color{red} \textbf{real-time seat assignment}}
+      \vspace{0.2cm}
+
+      Situation 2: accept or reject each arriving group, then assign the seats after all groups arrive.
+    \vspace{0.2cm}
+
+    \item Assign the seats under the {\color{red}fixed seat planning}
+    \vspace{0.2cm}
     
-    \begin{footnotesize}
-      Situation 1: the seller need to assign seats each time a group arrives. 
-      
-      Situation 2: the seller only needs to accept or reject the group's request and then assign the seats after the selling period.
-      \end{footnotesize}
-    \item[2.] Assign the seats under the {\color{red}fixed seat planning}
-    
-    \begin{footnotesize}
-      The seats, which were arranged for social distancing purposes, need to be dismantled before people arrive to prevent them from occupying those seats. When each group arrives, we make decisions regarding whether to accept or reject them based on the predetermined seat planning.
-    \end{footnotesize}
-  \end{itemize}
+    The seats will be dismantled before people arrive to prevent them from occupying those seats. 
+    \end{itemize}
 \end{frame}
 
   % \begin{frame}{Group-type Control}
@@ -29,24 +47,8 @@
   %   $P(D_{i}^{T-t} \geq x_i)$ is the probability that the demand of group type $i$ in $(T - t)$ periods is no less than $x_i$.
   % \end{frame}
 
-  \begin{frame}{Real-time Seat Assignment under Flexible Seat Planning}
-    \centering
-    \small
-    \begin{itemize}
-    \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
-    \item[-] The probability of an arrival of group type $i$: $p_i$.
-    \item[-] $\mathbf{L}^{t} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
-    \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
-    \item[-] $U^{t}(\mathbf{L}^{t}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}, \forall i,j \}$.
-    \item[-] $\mathbf{e}_j$: Unit column vector with $j$-th element being 1.
-    \item[-] $V^{t}(\mathbf{L}^{t})$: Value function at period $t$, given remaining capacity, $\mathbf{L}^{t}$.
-    \end{itemize}
 
-    $$V^{t}(\mathbf{L}^{t}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L}^{t})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}^{t}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L}^{t})\right\}$$
-    \small
-\end{frame}
-
-  \begin{frame}{Proposed Methods}
+  \begin{frame}{Proposed Methods to Real-time Seat Assignment}
     % We make the decision under the flexible seat planning.
 
     \begin{itemize}
@@ -56,13 +58,13 @@
 
       For the arriving group type $i$,
 
-      \item[-] if $X_i > 0$, accept the group, assign it by the tie-breaking rule;
+      \item[-] if $X_i > 0$, accept the group, assign it by the tie-breaking rule (full pattern first);
       
       \item[-] if $X_i = 0$, two methods:
       
       \vspace{0.5cm}
 
-      1. Based on the adjusted SSP.
+      1. Based on the modified SSP.
       \vspace{0.5cm}
 
       2. Based on the seat planning from the LP relaxation of SSP.
@@ -73,7 +75,7 @@
     \end{itemize}
   \end{frame}
 
-  \begin{frame}{Method 1}
+  \begin{frame}{Method 1: Modified SSP}
     \small
     Introduce the decision variables $I_j, j \in \mathcal{N}$ indicating whether we accept the arriving group type $i{'}$ in row $j$.
     
@@ -87,13 +89,11 @@
         & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \\
         & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j - {\color{red}n_{i{'}} I_j}, j \in \mathcal{N} \\
         & {\color{red}\sum_{j=1}^{N} I_j \leq 1} \\
-        & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega,  a_j \in \{0,1\}, j \in \mathcal{N}.
+        & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}, y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega,  I_j \in \{0,1\}, j \in \mathcal{N}.
         \end{aligned}
       \end{equation}
     \end{tiny}
-    \begin{itemize}      
-      \item[-] If $X_i = 0$, solve problem \eqref{adjusted_SSP}, make the decision and update the seat planning.
-    \end{itemize}
+    Intuitive but not efficient.
   \end{frame}
 
   % \begin{frame}{Method 2 Overview}
@@ -118,14 +118,44 @@
   %   \end{itemize}
   % \end{frame}
     
+    \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
+      For the arriving group type $i$, if $X_i =0$:
+
+      \vspace{0.5cm}
+
+      Step 1. Determine the group type $\hat{i}^{*}> i$ by the group-type control.
+
+      \vspace{0.5cm}
+
+      Step 2. Decision on assigning the group type $i$ to a specific row.
+
+      % \begin{itemize}
+      %   \item Determine a specific row including group type $\hat{i}^{*}$ by tie-breaking rule (largest pattern first). 
+      %   \item Decision on assigning the group
+      %   \item[-] Value of Acceptance (VoA): value of LP relaxation of SSP with $(\mathbf{L}-n_{i} \mathbf{e}_{\hat{i}})$ plus $i$.
+        
+      %   % approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j^{*}})$ + $i$. 
+      %   % approximation of $V_{t} (\mathbf{L})$
+
+      %   \item[-] Value of Rejection (VoR): value of LP relaxation of SSP with $\mathbf{L}$.
+
+      %   \item[-] If VoA is no less than VoR, accept group type $i$; otherwise, reject it.
+      % \end{itemize}
+      % Regenerate the seat planning
+      % \begin{itemize}
+      % \item[-] When $X_{M} =0$
+      % \item[-] When comparing VoA and VoR 
+      % \end{itemize}
+    \end{frame}
 
     \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
       
-      {\color{red} Group-type control}: determine the group type $\hat{i}^{*}$ to place arriving group type $i$. 
+
+      1. {\color{red} Group-type control}: determine the group type $\hat{i}^{*}$ to place arriving group type $i$. 
       
       \vspace{0.2cm}
 
-      Suppose the corresponding supply is $[X_1, \ldots, X_M]$. 
+      Recall that the supply is $[X_1, \ldots, X_M]$. 
       % For the arrival of group type $i$.
 
       \vspace{-0.1cm}
@@ -138,20 +168,19 @@
       \vspace{-0.1cm}
   
       For all $\hat{i} > i$, find the maximum value denoted as $d^{t}(i, \hat{i}^{*})$.
-      
-      If $d^{t}(i, \hat{i}^{*}) \geq 0$, we place the group of $i$ in $(\hat{i}^{*} + \delta)$-size seats. Otherwise, reject the group.
-  
+      \vspace{0.1cm}
 
+      If $d^{t}(i, \hat{i}^{*}) \geq 0$, we place the group of $i$ in $(\hat{i}^{*} + \delta)$-size seats. Otherwise, reject the group.
     \end{frame}
 
     \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
-      1. Determine the group type $\hat{i}^{*}$ by the group-type control.
+      2. Decision on assigning the group to a specific row.
+      \vspace{0.2cm}
 
-      2. Make the decision on assigning the group to a specific row.
       \begin{itemize}
-        \item Determine a specific row including group type $\hat{i}^{*}$ by tie-breaking rule. 
-        \item Decision on assigning the group
-        \item[-] Value of Acceptance (VoA): value of LP relaxation of SSP with $(\mathbf{L}-n_{i} \mathbf{e}_{\hat{i}})$ plus $i$.
+        \item Determine the specific row $\hat{j}$ including group type $\hat{i}^{*}$ by tie-breaking rule (Non-full pattern first). 
+        \item Whether to assign the group in row $\hat{j}$
+        \item[-] Value of Acceptance (VoA): value of LP relaxation of SSP with $(\mathbf{L}-n_{i} \mathbf{e}_{\hat{j}})$ plus $i$.
         
         % approximation of $V_{t} (\mathbf{L}-n_i \mathbf{e}_{j^{*}})$ + $i$. 
         % approximation of $V_{t} (\mathbf{L})$
@@ -160,12 +189,8 @@
 
         \item[-] If VoA is no less than VoR, accept group type $i$; otherwise, reject it.
       \end{itemize}
-      Regenerate the seat planning
-      \begin{itemize}
-      \item[-] When $X_{M} =0$
-      \item[-] When comparing VoA and VoR 
-      \end{itemize}
     \end{frame}
+
 
     \begin{frame}{Compared with Other Policies}
       We compared DSA with the following policies 
@@ -178,7 +203,9 @@
         \item Booking limit control
         \item First come first served
         \vspace{0.1cm}
-        \item[-] Offline optimal solution: full knowledge of demands before decision
+        \item[-] Benchmark: 
+        
+        Offline optimal solution with knowing demands before decision
       \end{itemize}
     \end{frame}
 
@@ -218,13 +245,11 @@
         Basic idea: for each type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
         \begin{itemize}
           \item[1] Observe the arrival group type $i$.
-          \item[2] Solve problem \eqref{deter_upper} using the expected demand.
+          \item[2] Solve problem \eqref{deter_upper} with $d_{i} = p_{i} \times T, i \in \mathcal{M}$.
           \item[3] Obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$.
           \item[4] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.
         \end{itemize}
                  
         % When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
       \end{frame}
-
-
       

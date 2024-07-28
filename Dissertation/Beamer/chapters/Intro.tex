@@ -85,27 +85,25 @@
       
       \vspace{0.5cm}
 
-      Seat assignment under flexible seat planning and fixed seat planning:
-      \begin{figure}[ht]
-        \centering
-        \includegraphics[width = 0.8\textwidth]{./images/assignment.png}
-      \end{figure}
-      % \begin{columns}
-      %   \column{5cm}  %第一栏（左栏）宽度为5cm
-      %   Seat planning: 
-      %     \begin{figure}[ht]
-      %       \centering
-      %       \includegraphics[width = 0.8\textwidth]{./images/seat_planning.png}
-      %     \end{figure}
-      %     \column{5cm}
-      %   Seat assignment: 
-      %     \scriptsize
-      %     \begin{figure}[ht]
-      %       \centering
-      %       \includegraphics[width = 0.8\textwidth]{./images/seat_assignment.png}
-      %     \end{figure}
-      % \end{columns}
-    
+      % \begin{figure}[ht]
+      %   \centering
+      %   \includegraphics[width = 0.8\textwidth]{./images/assignment.png}
+      % \end{figure}
+      \begin{columns}
+        \column{5cm}  %第一栏（左栏）宽度为5cm
+        Seat planning: 
+          \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 0.8\textwidth]{./images/seat_planning1.png}
+          \end{figure}
+          \column{5cm}
+        Seat assignment:
+          \scriptsize
+          \begin{figure}[ht]
+            \centering
+            \includegraphics[width = 0.8\textwidth]{./images/seat_assignment1.png}
+          \end{figure}
+      \end{columns}
     \end{frame}
     
 
@@ -114,8 +112,8 @@
         \item Seat planning
         \vspace*{0.2cm}
         \begin{itemize}
-          \item {\color{red}Deterministic demand}: make the seat planning with the known specific demand for each group.
-          \item {\color{red}Stochastic demand}: make the seat planning with the known demand distribution before the realization of demand.
+          \item {\color{red}Deterministic demand}: make the seat planning with the known specific demand for groups.
+          \item {\color{red} \textbf{Stochastic demand}}: make the seat planning with the known demand distribution before the realization of demand.
         \end{itemize}
         
         \item Seat assignment with dynamic demand
@@ -124,10 +122,41 @@
           \vspace*{0.2cm}
           \item Assign seats to each group under {\color{red}flexible} seat planning.
           \vspace*{0.2cm}
-            \item[-] Assign seats to each group after its realization.
+            \item[-] {\color{red} \textbf{Real-time seat assignment}}
+            
+            \vspace*{0.2cm}
+
             \item[-] Accept or reject each group after its realization, but assign them later.
           \vspace*{0.2cm}
           \item Assign seats to each group under {\color{red}fixed} seat planning.
         \end{itemize}
       \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Contributions}
+      \begin{itemize}
+        \item  Seat planning:
+        \vspace{0.2cm}
+
+        \begin{itemize}
+          \item New model and technique for stochastic demand
+          \vspace{0.2cm}
+
+          \item Provide seat planning as a guidance for seat assignment 
+        \end{itemize}
+        
+        \vspace{0.8cm}
+        
+        \item Seat assignment:
+        \vspace{0.2cm}
+
+        \begin{itemize}
+          \item New model for seat assignment problem
+          \vspace{0.2cm}
+
+          \item Provide practical solution and insights
+        \end{itemize}
+      
+      \end{itemize}  
+
     \end{frame}

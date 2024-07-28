@@ -38,6 +38,7 @@ if __name__ == "__main__":
     t_value = np.arange(30, 90, 1)
     people_value = np.zeros(len(period_range))
     occup_value = np.zeros(len(period_range))
+    all_value = np.zeros(len(period_range))
     occup_without = np.zeros(len(period_range))
 
     for probab in p:
@@ -53,46 +54,49 @@ if __name__ == "__main__":
 
             sto = 0
             accept_people = 0
+            all_people = 0
 
             multi = np.arange(1, I+1)
             count = 50
             for j in range(count):
                 sequence, ini_demand, newx4 = a_instance.random_generate()
                 sequence1 = copy.deepcopy(sequence)
-
+                sequence2 = copy.deepcopy(sequence)
                 g = a_instance.method_new(sequence1, newx4, roll_width)
                 sto += np.dot(multi, g)
 
                 accept_people += withoutSD(sequence, total_seat, sd)
-
+                all_people += sum(sequence2)
             occup_value[cnt] = sto/count/total_seat * 100
             people_value[cnt] = accept_people/count/total_seat * 100
+            all_value[cnt] = all_people/count/total_seat * 100
             if gap_if:
                 if accept_people/count - sto/count > 1:
                     point = [num_period-1, occup_value[cnt-1]]
                     gap_if = False
             cnt += 1
-        np.save("t_value.npy", t_value)
-        np.save("peo_value.npy", people_value)
-        np.save("occup_value.npy", occup_value)
-        plt.plot(t_value* gamma, people_value, 'b-', label = 'Without social distancing')
-        plt.plot(t_value* gamma, occup_value, 'r--', label = 'With social distancing')
-        plt.xlim((80, 220))
-        plt.ylim((0, 100))
-        plt.xlabel('Expected number of people')
-        plt.ylabel('Percentage of total seats')
-        point[1] = round(point[1], 2)
-        # plt.annotate(r'Gap $%s$' % str(point), xy=point, xytext=(
-            # point[0]*gamma + 10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
+        np.save("t_value1.npy", t_value)
+        np.save("peo_value1.npy", people_value)
+        np.save("occup_value1.npy", occup_value)
+        np.save("all_value1.npy", all_value)
+        # plt.plot(t_value* gamma, people_value, 'b-', label = 'Without social distancing')
+        # plt.plot(t_value* gamma, occup_value, 'r--', label = 'With social distancing')
+        # plt.xlim((80, 220))
+        # plt.ylim((0, 100))
+        # plt.xlabel('Expected number of people')
+        # plt.ylabel('Percentage of total seats')
+        # point[1] = round(point[1], 2)
+        # # plt.annotate(r'Gap $%s$' % str(point), xy=point, xytext=(
+        #     # point[0]*gamma + 10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
         
-        plt.annotate(r'Gap $%s$' % str(point), xy= (point[0]*gamma, point[1]), xytext=(point[0]*gamma + 10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
+        # plt.annotate(r'Gap $%s$' % str(point), xy= (point[0]*gamma, point[1]), xytext=(point[0]*gamma + 10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
 
-        my_x_ticks = np.arange(80, 220, 40)
-        plt.xticks(my_x_ticks)
-        plt.legend()
-        graphname = './test' + str(probab[0]) + '.pdf'
-        plt.savefig(graphname)
-        plt.cla()
+        # my_x_ticks = np.arange(80, 220, 40)
+        # plt.xticks(my_x_ticks)
+        # plt.legend()
+        # graphname = './test' + str(probab[0]) + '.pdf'
+        # plt.savefig(graphname)
+        # plt.cla()
 
         # for i in range(60, 100, 10):
         #     a = people_value[i- period_range[0]] - occup_value[i - period_range[0]]

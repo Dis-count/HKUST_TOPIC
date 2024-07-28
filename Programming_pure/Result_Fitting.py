@@ -36,11 +36,11 @@ plt.scatter(result[:, 0], result[:, 1], c="blue")
 plt.scatter(result[:, 0], result[:, 2], c="red")
 
 x = np.arange(1.4, 3.6, 0.01)
-y1 = 201.04 /(x+1)
-y2 = 100.59 * x/(x+1)
+# y1 = 201.04 /(x+1)
+# y2 = 100.59 * x/(x+1)
 
-plt.plot(x, y1, label="Blue_estimated")
-plt.plot(x, y2, label="Red_estimated")
+# plt.plot(x, y1, label="Blue_estimated")
+# plt.plot(x, y2, label="Red_estimated")
 
 plt.xlabel('Gamma', fontsize=18)
 plt.ylabel('Percentage of total seats/Periods', fontsize=18)

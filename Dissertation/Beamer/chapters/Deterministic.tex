@@ -1,6 +1,11 @@
 % !TeX root = ../main.tex
 \begin{frame}{Problem Formulation}  %开始一张幻灯片
-    Seat planning problem with given demand $\bm{d}$:
+  Goal: obtain the seat planning composed of {\color{red}full or largest patterns} \\ 
+        \hspace{1cm} while {\color{red}maximizing the number of people} accommodated.
+  \small
+    \vspace{0.2cm}
+
+    Seat planning problem with given demand $\bm{d}= (d_1,\ldots,d_{M})$:
 
     \begin{equation}\label{deter_upper}
       \begin{aligned}
@@ -10,9 +15,9 @@
       & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
       \end{aligned}
     \end{equation}
-    Objective: maximize the number of people accommodated.
+    Objective: {\color{green} maximize the number of people accommodated}.
 
-    $x_{ij}$: the number of group type $i$ in row $j$.
+    $x_{ij}$: the number of type $i$ groups in row $j$.
   \end{frame}
 
   \begin{frame}{Property}
@@ -32,7 +37,7 @@
 
     \vspace{0.5cm}
     
-    We aim to improve the seat planning utilizing all seats.
+    We aim to obtain the {\color{green} seat planning composed of full or largest patterns}.
 
     % We aim to generate a seat planning utilizing all seats while ensuring that the demand requirements are met.
   \end{frame}
@@ -43,7 +48,7 @@
 
     Desired feasible seat planning: $\bm{H}^{\prime}$.
     
-    Meet the original group type requirements: $\sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{ji} \geq \sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji}, \forall i \in \mathcal{M}$.
+    Original group type requirement: $\sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{ji} \geq \sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji}, \forall i \in \mathcal{M}$.
 
     \begin{equation}\label{improve_seat}
       \begin{aligned}
@@ -54,7 +59,7 @@
       \end{aligned}
     \end{equation}
 
-    $\bm{H}^{\prime}$ corresponding to the optimal solution is composed of full or largest patterns.
+    Property: {\color{red}$\bm{H}^{\prime}$} corresponding to the optimal solution to problem \eqref{improve_seat}  is composed \\ \hspace{1.5cm} of {\color{red}full or largest patterns}.
   \end{frame}
 
   

@@ -78,6 +78,9 @@ Mathematically, we can solve the following programming, here the constraints ind
 
 P29 the expected value difference between acceptance and rejection
 
+
+Addressing/solving this dynamic programming encounters the curse of dimensionality
+
 Now we move on to the numerical results, first we describe some common parameters.
 
 Then we investigate the impact of social distancing.

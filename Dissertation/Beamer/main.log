@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  28 JUL 2024 20:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  29 JUL 2024 13:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1286,12 +1286,7 @@ Package pdftex.def Info: ./images/BD.png  used on input line 159.
 
 ]) (./chapters/Dynamic.tex [26
 
-]
-Overfull \hbox (6.61995pt too wide) detected at line 21
-\OML/cmm/m/it/10 V[]\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 L[]\OT1/cmr/m/n/10 ) = [] []
- []
-
-[27
+] [27
 
 ] [28
 
@@ -1390,7 +1385,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  128i,15n,124p,785b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (47 pages, 4517367 bytes).
+Output written on main.pdf (47 pages, 4517381 bytes).
 PDF statistics:
  1779 PDF objects out of 2073 (max. 8388607)
  1477 compressed objects within 15 object streams

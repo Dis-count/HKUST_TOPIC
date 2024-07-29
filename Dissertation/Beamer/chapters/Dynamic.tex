@@ -7,16 +7,16 @@
       \centering
       \small
       \begin{itemize}
-      \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
+      \item[-] There is at most one group arrival at each period, $t = 1, \ldots, T$. 
       \item[-] The probability of an arrival of type $i$: $p_i$.
-      \item[-] $\mathbf{L}^{t} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
+      \item[-] $\mathbf{L} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
       \item[-] $u_{i,j}^{t}$: Decision. Assign type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
-      \item[-] $U^{t}(\mathbf{L}^{t}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}^{t}, \forall i,j \}$.
+      \item[-] $U^{t}(\mathbf{L}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}, \forall i,j \}$.
       \item[-] $\mathbf{e}_j$: Unit column vector with $j$-th element being 1.
-      \item[-] $V^{t}(\mathbf{L}^{t})$: Value function at period $t$, given remaining capacity, $\mathbf{L}^{t}$.
+      \item[-] $V^{t}(\mathbf{L})$: Value function at period $t$, given remaining capacity, $\mathbf{L}$.
       \end{itemize}
   
-      $$V^{t}(\mathbf{L}^{t}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L}^{t})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}^{t}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L}^{t})\right\}$$
+      $$V^{t}(\mathbf{L}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L})}\left\{ \sum_{i=1}^{M} p_i ( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L}- \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)) + p_0 V^{t+1}(\mathbf{L})\right\}$$
       \small
   \end{frame}
 
@@ -56,7 +56,7 @@
       
       \vspace{0.5cm}
 
-      For the arriving group type $i$,
+      For the arriving type $i$ group,
 
       \item[-] if $X_i > 0$, accept the group, assign it by the tie-breaking rule (full pattern first);
       
@@ -170,7 +170,7 @@
       For all $\hat{i} > i$, find the maximum value denoted as $d^{t}(i, \hat{i}^{*})$.
       \vspace{0.1cm}
 
-      If $d^{t}(i, \hat{i}^{*}) \geq 0$, we place the group of $i$ in $(\hat{i}^{*} + \delta)$-size seats. Otherwise, reject the group.
+      If $d^{t}(i, \hat{i}^{*}) \geq 0$, we place the type $i$ in the seats planned for type $\hat{i}^{*}$. Otherwise, reject the group.
     \end{frame}
 
     \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
@@ -193,7 +193,7 @@
 
 
     \begin{frame}{Compared with Other Policies}
-      We compared DSA with the following policies 
+      We compare DSA with the following policies 
       
       \vspace{0.5cm}
       
@@ -224,7 +224,7 @@
         The optimal solution to problem \eqref{bid-price_dual} is given by $z_1, \ldots, z_{\tilde{i}} =0, z_i = \frac{\delta (n_i - n_{\tilde{i}})}{n_{\tilde{i}}}$, for $i = \tilde{i} + 1, \ldots, M$, $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
         \vspace{0.5cm}
 
-        For the type $i$, if $i - \beta_j n_i \geq 0$, accept it. 
+        For type $i$, if ${\color{red}i - \beta_j n_i} \geq 0$, accept it; otherwise, reject it.
         % The bid-price control policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
       \end{frame}
 
@@ -233,8 +233,8 @@
         \item Relax all rows to one row with the same capacity by $\tilde{L} = \sum_{j=1}^{N} L_j$.
         \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq \tilde{L}, x_{i} \in \mathbb{Z}^{+}_{0}\}$.
         \item Decision: $u^{t}$. If we accept a request in period $t$, $u^t = 1$; otherwise, $u^t =0$.  
-        \item[-] DP with one row can be expressed as:
-        $$V^{t}(l^{t}) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l^{t}-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l^{t})\right\}$$
+        \item[-] {\color{red}DP with one row} can be expressed as:
+        $$V^{t}(l) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l)\right\}$$
 
         $$V^{T+1}(l) =0, \forall l.$$
         \item After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
@@ -242,7 +242,7 @@
       \end{frame}
       
       \begin{frame}{Booking limit Control}
-        Basic idea: for each type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
+        Basic idea: for each group type, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
         \begin{itemize}
           \item[1] Observe the arriving type $i$.
           \item[2] Solve problem \eqref{deter_upper} with $d_{i} = p_{i} \times T, i \in \mathcal{M}$.

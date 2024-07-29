@@ -8,9 +8,9 @@
       \small
       \begin{itemize}
       \item[-] There is one and only one group arrival at each period, $t = 1, \ldots, T+1$. 
-      \item[-] The probability of an arrival of group type $i$: $p_i$.
+      \item[-] The probability of an arrival of type $i$: $p_i$.
       \item[-] $\mathbf{L}^{t} = (l_1, l_2, \ldots, l_{N})$, where $l_j =0,\ldots, L_j, j\in \mathcal{N}$: Remaining capacity.
-      \item[-] $u_{i,j}^{t}$: Decision. Assign group type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
+      \item[-] $u_{i,j}^{t}$: Decision. Assign type $i$ to row $j$ at period $t$, $u_{i,j}^t =1$.
       \item[-] $U^{t}(\mathbf{L}^{t}) = \{u_{i,j}^{t} \in\{0,1\}, \forall i,j| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i, n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}^{t}, \forall i,j \}$.
       \item[-] $\mathbf{e}_j$: Unit column vector with $j$-th element being 1.
       \item[-] $V^{t}(\mathbf{L}^{t})$: Value function at period $t$, given remaining capacity, $\mathbf{L}^{t}$.
@@ -69,7 +69,7 @@
 
       2. Based on the seat planning from the LP relaxation of SSP.
       \begin{itemize}
-        \item Determine the possible group type $\hat{i}^{*}>i$ by group-type control
+        \item Determine the possible type $\hat{i}^{*}>i$ by group-type control
         \item Decision on assigning the group to a specific row
       \end{itemize}
     \end{itemize}
@@ -77,7 +77,7 @@
 
   \begin{frame}{Method 1: Modified SSP}
     \small
-    Introduce the decision variables $I_j, j \in \mathcal{N}$ indicating whether we accept the arriving group type $i{'}$ in row $j$.
+    Introduce the decision variables $I_j, j \in \mathcal{N}$ indicating whether we accept the arriving type $i{'}$ in row $j$.
     
       % \item Obtain the seat planning after the realization of group.
       \begin{tiny}
@@ -119,15 +119,15 @@
   % \end{frame}
     
     \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
-      For the arriving group type $i$, if $X_i =0$:
+      For the arriving type $i$, if $X_i =0$:
 
       \vspace{0.5cm}
 
-      Step 1. Determine the group type $\hat{i}^{*}> i$ by the group-type control.
+      Step 1. Determine the type $\hat{i}^{*}> i$ by the group-type control.
 
       \vspace{0.5cm}
 
-      Step 2. Decision on assigning the group type $i$ to a specific row.
+      Step 2. Decision on assigning type $i$ to a row containing type $\hat{i}^{*}$.
 
       % \begin{itemize}
       %   \item Determine a specific row including group type $\hat{i}^{*}$ by tie-breaking rule (largest pattern first). 
@@ -151,7 +151,7 @@
     \begin{frame}{Method 2: Dynamic Seat Assignment (DSA)}
       
 
-      1. {\color{red} Group-type control}: determine the group type $\hat{i}^{*}$ to place arriving group type $i$. 
+      1. {\color{red} Group-type control}: determine the type $\hat{i}^{*}$ to place arriving type $i$. 
       
       \vspace{0.2cm}
 
@@ -178,7 +178,7 @@
       \vspace{0.2cm}
 
       \begin{itemize}
-        \item Determine the specific row $\hat{j}$ including group type $\hat{i}^{*}$ by tie-breaking rule (Non-full pattern first). 
+        \item Determine the specific row $\hat{j}$ including type $\hat{i}^{*}$ by tie-breaking rule (Non-full pattern first). 
         \item Whether to assign the group in row $\hat{j}$
         \item[-] Value of Acceptance (VoA): value of LP relaxation of SSP with $(\mathbf{L}-n_{i} \mathbf{e}_{\hat{j}})$ plus $i$.
         
@@ -187,7 +187,7 @@
 
         \item[-] Value of Rejection (VoR): value of LP relaxation of SSP with $\mathbf{L}$.
 
-        \item[-] If VoA is no less than VoR, accept group type $i$; otherwise, reject it.
+        \item[-] If VoA is no less than VoR, accept type $i$; otherwise, reject it.
       \end{itemize}
     \end{frame}
 
@@ -224,14 +224,14 @@
         The optimal solution to problem \eqref{bid-price_dual} is given by $z_1, \ldots, z_{\tilde{i}} =0, z_i = \frac{\delta (n_i - n_{\tilde{i}})}{n_{\tilde{i}}}$, for $i = \tilde{i} + 1, \ldots, M$, $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
         \vspace{0.5cm}
 
-        For the group type $i$, if $i - \beta_j n_i \geq 0$, accept it. 
+        For the type $i$, if $i - \beta_j n_i \geq 0$, accept it. 
         % The bid-price control policy will make the decision to accept group type $i$, where $i$ is greater than or equal to $h$, if the capacity allows.
       \end{frame}
 
       \begin{frame}{Dynamic Programming Based Heuristic}
         \begin{itemize}
-        \item Relax all rows to one row with the same capacity by $L = \sum_{j=1}^{N} L_j$.
-        \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq L, x_{i} \in \mathbb{Z}^{+}_{0}\}$.
+        \item Relax all rows to one row with the same capacity by $\tilde{L} = \sum_{j=1}^{N} L_j$.
+        \item[-] Deterministic problem: $\{\max \sum_{i=1}^{M} (n_i- \delta) x_{i}: x_{i} \leq d_{i}, i \in \mathcal{M}, \sum_{i=1}^{M} n_{i} x_{i} \leq \tilde{L}, x_{i} \in \mathbb{Z}^{+}_{0}\}$.
         \item Decision: $u^{t}$. If we accept a request in period $t$, $u^t = 1$; otherwise, $u^t =0$.  
         \item[-] DP with one row can be expressed as:
         $$V^{t}(l^{t}) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l^{t}-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l^{t})\right\}$$
@@ -244,7 +244,7 @@
       \begin{frame}{Booking limit Control}
         Basic idea: for each type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
         \begin{itemize}
-          \item[1] Observe the arrival group type $i$.
+          \item[1] Observe the arriving type $i$.
           \item[2] Solve problem \eqref{deter_upper} with $d_{i} = p_{i} \times T, i \in \mathcal{M}$.
           \item[3] Obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$.
           \item[4] If $X_{i} > 0$, accept the arrival and assign the group to row $k$ where $x_{ik} > 0$, update $\mathbf{L}^{t+1} = \mathbf{L}^{t} - n_i \mathbf{e}_{k}$; otherwise, reject it, let $\mathbf{L}^{t+1} = \mathbf{L}^{t}$.

@@ -67,21 +67,21 @@
         \column{6cm}  %第一栏（左栏）宽度为5cm
           \begin{figure}[ht]
             \centering
-            \includegraphics[width = 1\textwidth]{./images/without3.pdf}
+            \includegraphics[width = 1\textwidth]{./images/without7.pdf}
           \end{figure}
           \column{6cm}
           \scriptsize
           \begin{figure}[ht]
             \centering
-            \includegraphics[width = 1\textwidth]{./images/without5.pdf}
+            \includegraphics[width = 1\textwidth]{./images/without6.pdf}
           \end{figure}
       \end{columns}
       % The gap point represents the first period where the number of people without social distancing is larger than that with social distancing and the gap percentage is the corresponding percentage of total seats.
       \begin{itemize}
-        \item Gap point: the first period when there is difference 
+        \item Gap point: the first period when there is a difference 
+        \item The largest occupancy rate is {\color{red}80\%} by the property of the largest pattern.
         \item Demand {\color{green}less than} 71.3\% total seats: no difference
         \item Demand {\color{violet}larger than} 71.3\% total seats: difference becomes larger
-        \item The largest occupancy rate is 80\% by the property of the largest pattern.
       \end{itemize}
   \end{frame}
 
@@ -127,15 +127,16 @@
   \end{column}
 
   \begin{column}{0.4\textwidth}
-    Ideal: the groups before gap point will occupy all seats.
-    $c_1, c_2$ can be seen as the discount factor compared to the ideal situation.
-
+    Ideal: the groups before gap point can occupy all seats.
+    
     Gap points can be estimated with $\gamma$.
 
     {\color{blue} $y_1 = \frac{c_1 \tilde{L}}{\gamma + \delta}$}, 
     {\color{red}  $y_2 = c_2 \frac{\gamma}{\gamma + \delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$}
 
-    The larger $c_1, c_2$, the closer to the ideal situation.
+    $c_1, c_2$ can be seen as the discount factor compared to the ideal situation.
+
+    The larger $c_1, c_2$ are, the closer to the ideal situation.
   \end{column}
   \end{columns}
 

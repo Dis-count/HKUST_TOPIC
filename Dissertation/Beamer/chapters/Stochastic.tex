@@ -174,20 +174,23 @@
 % \end{frame}
 
 \begin{frame}{Obtain Seat Planning Composed of Full or Largest Patterns}
-  Challenge: it is hard to solve SSP in some cases. 
-  \vspace{0.5cm}
+  % Challenge: it is hard to solve SSP in some cases. 
+  % \vspace{0.5cm}
 
   Property: there exists an optimal solution to SSP such that the patterns associated with this {\color{red} optimal solution} are composed of the {\color{red} full or largest patterns} under any given scenarios.
   \vspace{0.5cm}
 
-  We aim to obtain a seat planning composed of full or largest patterns by the optimal solution to the LP relaxation of SSP.
+  % We aim to obtain a seat planning composed of full or largest patterns by the optimal solution to the LP relaxation of SSP.
 
   \begin{itemize}
-    \item[-] Obtain the solution to the relaxed SSP, $\mathbf{x}^{*}$, by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each group type, ${s}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
+    \item[-] Obtain the solution to the LP relaxation of SSP, $\mathbf{x}^{*}$. 
+    % by benders decomposition. Aggregate $\mathbf{x}^{*}$ to the number of each type, ${s}_{i} =\sum_{j} x^{*}_{ij}, i \in \mathbf{M}$.
+    \vspace{0.2cm}
 
-    \item[-] Obtain the optimal solution, $\mathbf{x}^{1}$, by solving problem \eqref{deter_upper} with $d_{i} = {s}_{i}$. 
-    % Aggregate $\mathbf{x}^{1}$ to the number of each group type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+    \item[-] Obtain a fesible seat planning, $\bm{H}$, by solving problem \eqref{deter_upper} with $d_{i} = \sum_{j} x^{*}_{ij}$. 
+    % Aggregate $\mathbf{x}^{1}$ to the number of each type, ${s}_{i}^{1} = \sum_{j} x^{1}_{ij}, i \in \mathbf{M}$.
+    \vspace{0.2cm}
      
-    \item[-] Obtain full or largest patterns by solving problem \eqref{improve_seat} with $\bm{H} = \mathbf{x}^{1}$.
+    \item[-] Obtain full or largest patterns by solving problem \eqref{improve_seat} with $\bm{H}$.
  \end{itemize}
 \end{frame}

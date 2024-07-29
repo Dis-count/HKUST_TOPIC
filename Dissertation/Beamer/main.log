@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  28 JUL 2024 11:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  28 JUL 2024 20:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1326,20 +1326,20 @@ Package pdftex.def Info: ./images/group_type.pdf  used on input line 174.
 ] [39
 
 ]
-<./images/without3.pdf, id=1250, 462.52798pt x 346.89601pt>
-File: ./images/without3.pdf Graphic file (type pdf)
-<use ./images/without3.pdf>
-Package pdftex.def Info: ./images/without3.pdf  used on input line 86.
+<./images/without7.pdf, id=1250, 462.52798pt x 346.89601pt>
+File: ./images/without7.pdf Graphic file (type pdf)
+<use ./images/without7.pdf>
+Package pdftex.def Info: ./images/without7.pdf  used on input line 86.
 (pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
-<./images/without5.pdf, id=1251, 462.52798pt x 346.89601pt>
-File: ./images/without5.pdf Graphic file (type pdf)
-<use ./images/without5.pdf>
-Package pdftex.def Info: ./images/without5.pdf  used on input line 86.
+<./images/without6.pdf, id=1251, 462.52798pt x 346.89601pt>
+File: ./images/without6.pdf Graphic file (type pdf)
+<use ./images/without6.pdf>
+Package pdftex.def Info: ./images/without6.pdf  used on input line 86.
 (pdftex.def)             Requested size: 170.71652pt x 128.0372pt.
  [40
 
- <./images/without3.pdf> <./images/without5.pdf>]
-<./images/gamma1.pdf, id=1353, 1387.58403pt x 739.3221pt>
+ <./images/without7.pdf> <./images/without6.pdf>]
+<./images/gamma1.pdf, id=1354, 1387.58403pt x 739.3221pt>
 File: ./images/gamma1.pdf Graphic file (type pdf)
 <use ./images/gamma1.pdf>
 Package pdftex.def Info: ./images/gamma1.pdf  used on input line 113.
@@ -1347,10 +1347,10 @@ Package pdftex.def Info: ./images/gamma1.pdf  used on input line 113.
  [41
 
  <./images/gamma1.pdf>]
-<./images/gamma.pdf, id=1416, 1387.58403pt x 739.3221pt>
+<./images/gamma.pdf, id=1417, 1387.58403pt x 739.3221pt>
 File: ./images/gamma.pdf Graphic file (type pdf)
 <use ./images/gamma.pdf>
-Package pdftex.def Info: ./images/gamma.pdf  used on input line 163.
+Package pdftex.def Info: ./images/gamma.pdf  used on input line 164.
 (pdftex.def)             Requested size: 205.37926pt x 109.42697pt.
  [42
 
@@ -1384,15 +1384,15 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  36309 strings out of 478599
  689745 string characters out of 5853593
- 1463441 words of memory out of 5000000
+ 1462441 words of memory out of 5000000
  53357 multiletter control sequences out of 15000+600000
  425922 words of font info for 96 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,124p,785b,1985s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (47 pages, 4516853 bytes).
+Output written on main.pdf (47 pages, 4517367 bytes).
 PDF statistics:
- 1778 PDF objects out of 2073 (max. 8388607)
+ 1779 PDF objects out of 2073 (max. 8388607)
  1477 compressed objects within 15 object streams
  110 named destinations out of 1000 (max. 500000)
  194 words of extra memory for PDF output out of 10000 (max. 10000000)

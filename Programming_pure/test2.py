@@ -21,8 +21,8 @@ plt.plot(t_value*gamma/total_seat*100, occup_value,
          'r--', label='With social distancing')
 plt.xlim((40, 100))
 plt.ylim((40, 100))
-plt.xlabel('Expected demand percentage of total seats')
-plt.ylabel('Percentage of total seats')
+plt.xlabel('Percentage of expected demand relative to total seats')
+plt.ylabel('Percentage of accepted individuals relative to total seats')
 point[1] = round(point[1], 2)
 # plt.annotate(r'Gap $%s$' % str(point), xy=point, xytext=(
 # point[0] + 10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)

@@ -22,7 +22,7 @@ plt.plot(t_value, occup_value,
 plt.xlim((30, 90))
 plt.ylim((40, 100))
 plt.xlabel('Period')
-plt.ylabel('Percentage of total seats')
+plt.ylabel('Percentage of accepted individuals relative to total seats')
 point[1] = round(point[1], 2)
 # plt.annotate(r'Gap $%s$' % str(point), xy=point, xytext=(
 # point[0] + 10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
@@ -31,7 +31,7 @@ plt.annotate(r'Gap $%s$' % str(point), xy=(point[0], point[1]), xytext=(
     point[0] + 5, point[1]-10), arrowprops=dict(facecolor='black', shrink=0.1),)
 
 plt.annotate(r'80%' , xy=(90, 80), xytext=(
-    80, 90), arrowprops=dict(facecolor='black', shrink=0.1),)
+    80, 90), color='red', arrowprops=dict(facecolor='black', shrink=0.1),)
 
 my_x_ticks = np.arange(30, 90, 10)
 plt.xticks(my_x_ticks)

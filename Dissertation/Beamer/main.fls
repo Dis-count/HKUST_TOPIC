@@ -1782,6 +1782,11 @@ INPUT ./images/seat_assignment1.png
 INPUT ./images/seat_assignment1.png
 INPUT ./images/seat_assignment1.png
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
+INPUT ./images/contribution.pdf
+INPUT ./images/contribution.pdf
+INPUT ./images/contribution.pdf
+INPUT ./images/contribution.pdf
+INPUT ./images/contribution.pdf
 INPUT ./chapters/Literature.tex
 INPUT chapters/Literature.tex
 INPUT ./chapters/Literature.tex

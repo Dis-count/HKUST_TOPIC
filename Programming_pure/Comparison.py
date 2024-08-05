@@ -285,8 +285,8 @@ class CompareMethods:
     def offline(self, sequence):
         # This function is to obtain the optimal decision.
         demand = np.zeros(self.I)
-        sequence = [i-self.s for i in sequence]
-        for i in sequence:
+        sequence1 = [i-self.s for i in sequence]
+        for i in sequence1:
             demand[i-1] += 1
         test = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
         newd, _ = test.IP_formulation(np.zeros(self.I), demand)
@@ -429,6 +429,89 @@ class CompareMethods:
         for i in final_demand:
             demand[i-1] += 1
         return demand
+
+    def method_new1(self, sequence: List[int], newx, change_roll0):
+        change_roll = copy.deepcopy(change_roll0)
+        newx = newx.T.tolist()
+        mylist = []
+        periods = len(sequence)
+
+        for num, j in enumerate(sequence):
+            newd = np.sum(newx, axis=0)
+            remaining_period = periods - num
+
+            if newd[j-1-self.s] > 1e-4:
+                mylist.append(1)
+                k = self.break_tie(newx, change_roll, j-1-self.s)
+                newx[k][j-1-self.s] -= 1
+                change_roll[k] -= j
+
+                newd = np.sum(newx, axis=0)
+
+                if j == self.s + self.I and newd[-1] == 0:
+                    newx = self.rearrange(change_roll, remaining_period, j)
+                    newd = np.sum(newx, axis=0)
+            else:
+                usedDemand, decision_list = decisionOnce(
+                    sequence[-remaining_period:], newd, self.probab, self.s)
+                Indi_Demand = np.dot(usedDemand, range(self.I))
+
+                change_deny = copy.deepcopy(change_roll)
+                if decision_list:
+                    k = self.break_tie2(newx, change_roll, decision_list)
+                    newx[k][decision_list] -= 1
+                    if decision_list - Indi_Demand - 1 - self.s >= 0:
+                        newx[k][int(decision_list - Indi_Demand -
+                                    1 - self.s)] += 1
+                    change_roll[k] -= (Indi_Demand + 1 + self.s)
+
+                    change_accept = copy.deepcopy(change_roll)
+                    sam_multi = samplingmethod1(
+                        self.I, self.num_sample, remaining_period-1, self.probab, self.s)
+
+                    dw_acc, prop_acc = sam_multi.get_prob()
+                    W_acc = len(dw_acc)
+                    m_acc = stochasticModel(change_accept, self.given_lines,
+                                            self.demand_width_array, W_acc, self.I, prop_acc, dw_acc, self.s)
+                    ini_demand_acc, val_acc = m_acc.solveBenders(
+                        eps=1e-4, maxit=20)
+
+                    dw_deny = dw_acc
+                    prop_deny = prop_acc
+                    W_deny = len(dw_deny)
+                    m_deny = stochasticModel(change_deny, self.given_lines,
+                                             self.demand_width_array, W_deny, self.I, prop_deny, dw_deny, self.s)
+                    ini_demand_deny, val_deny = m_deny.solveBenders(
+                        eps=1e-4, maxit=20)
+
+                    if val_acc + (j-self.s) < val_deny:
+                        mylist.append(0)
+                        deterModel = deterministicModel(
+                            change_deny, self.given_lines, self.demand_width_array, self.I, self.s)
+                        _, newx = deterModel.IP_formulation(
+                            np.zeros(self.I), ini_demand_deny)
+
+                        newx = self.full_largest(newx, change_deny)
+                        newx = newx.T.tolist()
+                        change_roll = change_deny
+                    else:
+                        mylist.append(1)
+                        deterModel = deterministicModel(
+                            change_accept, self.given_lines, self.demand_width_array, self.I, self.s)
+                        _, newx = deterModel.IP_formulation(
+                            np.zeros(self.I), ini_demand_acc)
+
+                        newx = self.full_largest(newx, change_accept)
+                        newx = newx.T.tolist()
+                        change_roll = change_accept
+                else:
+                    mylist.append(0)
+
+        sequence = [i-self.s for i in sequence]
+        final_demand = np.array(sequence) * np.array(mylist)
+        final_demand = final_demand[final_demand != 0]
+
+        return mylist
 
     def method_scenario(self, sequence: List[int], change_roll0):
         change_roll = copy.deepcopy(change_roll0)

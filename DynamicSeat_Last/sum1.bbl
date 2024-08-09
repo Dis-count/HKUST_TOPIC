@@ -4,7 +4,7 @@
 Nursen Aydin and S~Ilker Birbil.
 \newblock Decomposition methods for dynamic room allocation in hotel revenue
   management.
-\newblock {\em European journal of operational research}, 271(1):179--192,
+\newblock {\em European Journal of Operational Research}, 271(1):179--192,
   2018.
 
 \bibitem{barry2021optimal}
@@ -17,13 +17,13 @@ Michael Barry, Claudio Gambella, Fabio Lorenzi, John Sheehan, and Joern
 Matthew~E Berge and Craig~A Hopperstad.
 \newblock Demand driven dispatch: A method for dynamic aircraft capacity
   assignment, models and algorithms.
-\newblock {\em Operations research}, 41(1):153--168, 1993.
+\newblock {\em Operations Research}, 41(1):153--168, 1993.
 
 \bibitem{bitran1995application}
 Gabriel~R Bitran and Susana~V Mondschein.
 \newblock An application of yield management to the hotel industry considering
   multiple day stays.
-\newblock {\em Operations research}, 43(3):427--443, 1995.
+\newblock {\em Operations Research}, 43(3):427--443, 1995.
 
 \bibitem{blom2022filling}
 Danny Blom, Rudi Pendavingh, and Frits Spieksma.
@@ -31,9 +31,7 @@ Danny Blom, Rudi Pendavingh, and Frits Spieksma.
 \newblock {\em INFORMS Journal on Applied Analytics}, 52(6):473--484, 2022.
 
 \bibitem{bortolete2022support}
-Juliano~Cavalcante Bortolete, Luis~Felipe Bueno, Renan Butkeraites,
-  Ant{\^o}nio~Augusto Chaves, Gustavo Colla{\c{c}}o, Marcos Magueta, FJR
-  Pelogia, LL~Salles Neto, TS~Santos, TS~Silva, et~al.
+Juliano~Cavalcante Bortolete, Luis~Felipe Bueno, Renan Butkeraites, et~al.
 \newblock A support tool for planning classrooms considering social distancing
   between students.
 \newblock {\em Computational and Applied Mathematics}, 41:1--23, 2022.
@@ -46,13 +44,13 @@ Juliano~Cavalcante Bortolete, Luis~Felipe Bueno, Renan Butkeraites,
 \bibitem{clausen2010off}
 Tommy Clausen, Allan~Nordlunde Hjorth, Morten Nielsen, and David Pisinger.
 \newblock The off-line group seat reservation problem.
-\newblock {\em European journal of operational research}, 207(3):1244--1253,
+\newblock {\em European Journal of Operational Research}, 207(3):1244--1253,
   2010.
 
 \bibitem{dantzig1957discrete}
 George~B Dantzig.
 \newblock Discrete-variable extremum problems.
-\newblock {\em Operations research}, 5(2):266--288, 1957.
+\newblock {\em Operations Research}, 5(2):266--288, 1957.
 
 \bibitem{deplano2019offline}
 Igor Deplano, Danial Yazdani, and Trung~Thanh Nguyen.
@@ -69,7 +67,7 @@ Martina Fischetti, Matteo Fischetti, and Jakob Stoustrup.
 Guillermo Gallego and Garrett Van~Ryzin.
 \newblock A multiproduct dynamic pricing problem and its applications to
   network yield management.
-\newblock {\em Operations research}, 45(1):24--41, 1997.
+\newblock {\em Operations Research}, 45(1):24--41, 1997.
 
 \bibitem{ghorbani2020model}
 Elaheh Ghorbani, Hamid Molavian, and Fred Barez.
@@ -94,14 +92,14 @@ Md~Tabish Haque and Faiz Hamid.
 
 \bibitem{haque2023social}
 Md~Tabish Haque and Faiz Hamid.
-\newblock Social distancing and revenue management—a post-pandemic adaptation
+\newblock Social distancing and revenue management-{A} post-pandemic adaptation
   for railways.
 \newblock {\em Omega}, 114:102737, 2023.
 
 \bibitem{kleywegt1998dynamic}
 Anton~J Kleywegt and Jason~D Papastavrou.
 \newblock The dynamic and stochastic knapsack problem.
-\newblock {\em Operations research}, 46(1):17--35, 1998.
+\newblock {\em Operations Research}, 46(1):17--35, 1998.
 
 \bibitem{kwag2022optimal}
 Sungil Kwag, Woo~Jin Lee, and Young~Dae Ko.
@@ -114,13 +112,6 @@ Rhyd Lewis and Fiona Carroll.
 \newblock Creating seating plans: a practical application.
 \newblock {\em Journal of the Operational Research Society}, 67(11):1353--1362,
   2016.
-
-\bibitem{moore2021seat}
-Jane~F Moore, Arthur Carvalho, Gerard~A Davis, Yousif Abulhassan, and Fadel~M
-  Megahed.
-\newblock Seat assignments with physical distancing in single-destination
-  public transit settings.
-\newblock {\em Ieee Access}, 9:42985--42993, 2021.
 
 \bibitem{pisinger1999exact}
 David Pisinger.
@@ -141,7 +132,7 @@ Mostafa Salari, R~John Milne, Camelia Delcea, Lina Kattan, and Liviu-Adrian
 
 \bibitem{talluri2006theory}
 Kalyan~T Talluri and Garrett~J Van~Ryzin.
-\newblock {\em The theory and practice of revenue management}, volume~68.
+\newblock {\em The Theory and Practice of Revenue Management}.
 \newblock Springer Science \& Business Media, 2006.
 
 \bibitem{AdviceforPublic}

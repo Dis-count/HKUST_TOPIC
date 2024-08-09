@@ -5,24 +5,27 @@ The present study is closely connected to the following research areas -- seat p
 
 
 \subsection{Seat Planning with Social Distancing}
-Social distancing in seat planning has attracted considerable attention from the research area. The applications include the allocation of seats on airplanes \cite{ghorbani2020model}, classroom layout planning \cite{bortolete2022support}, seat planning in long-distancing trains \cite{haque2022optimization}. There are two basic forms: fixed seat layout and determination of the layout. Fischetti et al.\cite{fischetti2021safe} consider how to plant positions with social distancing in restaurants and beach umbrellas. On an airplane, the distancing between seats and the aisle must be considered \cite{salari2022social}, while in a classroom, maximizing social distancing between students is a priority \cite{bortolete2022support}. 
+Social distancing in seat planning has attracted significant attention from the research community. This topic involves various applications and optimization techniques to address the challenges posed by the need for physical distancing in different settings. 
 
+For example, in the context of layout design, maximizing the social distancing between students in the classroom is a primary concern \cite{bortolete2022support}. Fischetti et al.\cite{fischetti2021safe} considers how to plant positions with social distancing and apply it in restaurants and beach umbrellas. Similarly, in the domain of air travel, seat planning with a given layout needs to consider the distancing between seats, as well as the spacing along the aisles \cite{ghorbani2020model, salari2022social}. Furthermore, the optimization of seating arrangements has also been explored in the context of long-distance train travel \cite{haque2022optimization}.  
 
-The seat allocation of the static form is useful for fixed people, for example, the students in one class. In our specific setting, we not only consider the static problem, but analyze the seat assignment in the dynamic situation.
+% In our specific setting, we not only consider the static problem, but analyze the seat assignment in the dynamic situation.
 
+Prior to the pandemic, the topic of group seat reservation had been an active area of research in the transportation domain \cite{clausen2010off, deplano2019offline}. The primary focus of these studies was on maximizing capacity utilization or reducing the total capacity required for passenger rail services. Similar optimization techniques have also been applied in the context of seat planning for large events, such as wedding or dinner events \cite{lewis2016creating}. 
 
-The recent pandemic has shed light on the benefits of group reservations, as they have been shown to increase revenue without increasing the risk of infection \cite{moore2021seat}. The group seat reservation has various applications in industries such as working spaces\cite{fischetti2021safe}, public transport\cite{deplano2019offline}, sports arenas\cite{kwag2022optimal}, and large-scale events \cite{lewis2016creating}. Traditional works \cite{clausen2010off, deplano2019offline}in transportation focus on maximizing capacity utilization or reducing total capacity needed for passenger rail, typically modeling these problems as knapsack or bin-packing problems.
+% The pandemic has brought increased attention and significance to the topic of group seat reservations, particularly in the context of social distancing requirements. It highlighted the potential benefits of group reservations in mitigating the spread of infection, as they can be designed to increase revenue without increasing the risk of transmission. The group seat reservation problem has become more complex, with the additional constraint of social distancing. This challenge has various applications across different industries, including: 
 
+The pandemic has amplified the focus on and importance of group seat reservations, especially within the framework of social distancing mandates. It has underscored the potential advantages of group reservations in curbing the spread of infections, as they can be structured to boost revenue without heightening transmission risks. The issue of group seat reservations has evolved into a more intricate problem with the constraint of social distancing. This complexity presents diverse applications across various industries, including: airplanes \cite{salari2022social}, trains \cite{salari2022social, haque2023social}, sports arenas\cite{kwag2022optimal}, theaters \cite{blom2022filling}.
 
-% However, the group seat reservation policy poses a significant challenge when it comes to determining the seat assignment policy.
+The major difference in our study is that we consider seat planning with stochastic demand not only the known specific demand. Meanwhile, we consider the dynamic seat assignment assuming the groups arrive in a certain probability.
 
-% This policy has significant impacts on passenger satisfaction and revenue, with the study \cite{yuen2002group} showing that passenger groups increase revenue by filling seats that would otherwise be empty. 
+% The recent pandemic has shed light on the benefits of group reservations, it brings more thought to the group seat reservation, it becomes more important and more complex with the social distancing constraint. As they have been shown to increase revenue without increasing the risk of infection, The group seat reservation with social distancing has various applications in industries such as airplanes \cite{salari2022social}, trains \cite{salari2022social, haque2023social}, sports arenas\cite{kwag2022optimal}, theaters \cite{blom2022filling}.
 
+% \cite{moore2021seat} 
 
-Some related literature mentioned the seat planning under pandemic for groups are represented below.
-Fischetti et al. \cite{fischetti2021safe} propose a seating planning for known groups of customers in amphitheaters. Haque and Hamid \cite{haque2022optimization} consider assigning seats to passengers in long-distance passenger trains. Salari et al. \cite{salari2022social} perform group seat assignment in airplanes during the pandemic and found that increasing passenger groups can yield greater social distancing than single passengers. Haque and Hamid \cite{haque2023social} aim to optimize seating assignments on trains by minimizing the risk of virus spread while maximizing revenue. The specific number of groups in their models is known in advance. Blom et al. \cite{blom2022filling} discuss strategies for filling a theater by considering the social distancing and group arrivals, which is similar to ours. 
+% Some related literature mentioned the seat planning under pandemic for groups are represented below.
+% Fischetti et al. \cite{fischetti2021safe} propose a seating planning for known groups of customers in amphitheaters. Haque and Hamid \cite{haque2022optimization} consider assigning seats to passengers in long-distance passenger trains. Salari et al. \cite{salari2022social} perform group seat assignment in airplanes during the pandemic and found that increasing passenger groups can yield greater social distancing than single passengers. Haque and Hamid \cite{haque2023social} aim to optimize seating assignments on trains by minimizing the risk of virus spread while maximizing revenue. The specific number of groups in their models is known in advance. Blom et al. \cite{blom2022filling} discuss strategies for filling a theater by considering the social distancing and group arrivals, which is similar to ours. 
 
-The major difference in our study is that we require that groups be accepted on an all-or-none basis, meaning that members of the same family or group must be seated together. We give the seat assignment assuming the groups arrive in a certain probability.
 
 % However, unlike our project, it only focuses on a specific location layout and it is still based on a static situation by giving the proportion of different groups.
 
@@ -31,28 +34,24 @@ The major difference in our study is that we require that groups be accepted on 
 % In the absence of an epidemic, all requests for tickets can be considered one by one. However, the COVID-19 pandemic has shed new light on the potential benefits of group reservations, as they can improve revenue without increasing the risk of infection. 
 
 
-% Dundar and Karakose \cite{dundar2021seat} proposed a two-stage algorithm for classroom seat assignment during the pandemic, with the first phase maximizing total allocations and the second phase maximizing the minimum interpersonal distance between students. 
+% Dundar and Karakose \cite{dundar2021seat} proposed a two-stage algorithm for classroom seat assignment during the pandemic, with the first phase maximizing total allocations and the second phase maximizing the minimum interpersonal distance between students.
 
 
-%  where we aim to assign a subset of groups to some distinct rows.
 
 \subsection{Dynamic Seat Assignment}
-In dynamic seat assignment, the decision to accept or reject groups is made at each stage as they arrive. When there is one row, the related problem is dynamic knapsack problem \cite{kleywegt1998dynamic}. Our model in its static form can be viewed as a specific instance of the multiple knapsack problem \cite{pisinger1999exact}. To the best of our knowledge, there are no existing studies that have specifically addressed the dynamic multiple knapsack problem. Dynamic seat assignment is a process of assigning seats to passengers on a transportation vehicle, such as an airplane, train, or bus, in a way that maximizes the efficiency and convenience of the seating arrangements \cite{hamdouch2011schedule, berge1993demand, zhu2023assign}. 
+In dynamic seat assignment, the decision to accept or reject groups is made at each stage as they arrive. We model our problem as the dynamic multiple knapsack problem. When there is one row, the related problem is dynamic knapsack problem \cite{kleywegt1998dynamic}. Our model in its static form can be viewed as a specific instance of the multiple knapsack problem \cite{pisinger1999exact}. To the best of our knowledge, there are no existing studies that have specifically addressed the dynamic multiple knapsack problem.
 
-% and dynamic bin-packing problem \cite{coffman1983dynamic, berndt2020fully} where items arrive and depart online and all knapsacks are the same. 
+Dynamic seat assignment is a process of assigning seats to passengers on a transportation vehicle, such as an airplane, train, or bus, in a way that maximizes the efficiency and convenience of the seating arrangements \cite{hamdouch2011schedule, berge1993demand, zhu2023assign}. 
+
 
 % However, solving this problem is strongly NP-hard, which means that finding an optimal solution for large instances of the problem is computationally challenging \cite{pisinger1999exact}.
 
-Our problem is closely related to the network revenue management (RM) problem \cite{williamson1992airline}, which is typically formulated as a dynamic programming (DP) problem. However, for large-scale problems, the exponential growth of the state space and decision set makes the DP approach computationally intractable. 
-
-
-One of the characteristics we are studying is that the decision should be made on an all-or-none basis for each group, which is the real complication in group arrivals \cite{talluri2006theory}. The group trait reflected in the RM is the hotel revenue management considering multiple day stays \cite{aydin2018decomposition, bitran1995application}. 
-
-
 % We have two distinct features: group-based and assignment.
 
-Another characteristic in our study is the significance of seat assignment. This sets it apart from traditional revenue management focusing on decision-making issues, namely accepting or rejecting a request \cite{gallego1997multiproduct}. Similarly, the assign-to-seat feature introduced by Zhu et al. \cite{zhu2023assign} also highlights the importance of seat assignment in revenue management. This trait addresses the challenge of selling high-speed train tickets in China, where each request must be assigned to a single seat for the entire journey and takes into account seat reuse. This work focuses on the individual seat assignment while our work relies on the group-based setting.
+Our problem is closely related to the group-based network revenue management (RM) problem \cite{williamson1992airline}, which is typically formulated as a dynamic programming (DP) problem. However, for large-scale problems, the exponential growth of the state space and decision set makes the DP approach computationally intractable. One of the characteristics we are studying is that the decision should be made on an all-or-none basis for each group, which is the real complication in group arrivals \cite{talluri2006theory}. The group trait reflected in the RM is the hotel revenue management considering multiple day stays \cite{aydin2018decomposition, bitran1995application}. 
 
+
+Another characteristic in our study is the significance of seat assignment. This sets it apart from traditional revenue management focusing on decision-making issues, namely accepting or rejecting a request \cite{gallego1997multiproduct}. Similarly, the assign-to-seat feature introduced by Zhu et al. \cite{zhu2023assign} also highlights the importance of seat assignment in revenue management. This trait addresses the challenge of selling high-speed train tickets in China, where each request must be assigned to a single seat for the entire journey and takes into account seat reuse. This work studies the individual seat assignment with reusable capacity while our work focuses on the group-based seat assignment with non-reusable seats.
 
 % which makes the problem more challenging.
 

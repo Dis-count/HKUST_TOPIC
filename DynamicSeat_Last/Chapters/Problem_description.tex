@@ -1,11 +1,13 @@
 % !TEX root = sum1.tex
-\section{The Static Model}
-This section integrates social distancing measures into the seat planning process. We use a `pattern' to represent the seat planning. Next, we present the deterministic seat planning problem. Then, we introduce the idea of the `full' and `largest' pattern. For the seat planning that does not utilize all available seats, we propose to improve the seat planning by incorporating full or largest patterns.
+\section{Seat Planning Problem with Social Distancing}
+This section integrates social distancing measures into the seat planning process. By introducing some concepts, we present the deterministic seat planning problem. For the seat planning that does not utilize all available seats, we propose to improve the seat planning.
 
-\subsection{Seat Planning Problem with Social Distancing}
-Consider a seat layout comprising $N$ rows, with each row containing $L_j^0$ seats, where $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. The seating arrangement is used to accommodate people in  groups, where each group consists of no more than $M$ people and has to sit together in one specific row. There are $M$ distinct group types, denoted by group type $i$, where each group type consists of $i$ people. The set of all group types is denoted by $\mathcal{M} \coloneqq \{1, 2, \ldots, M\}$. The demand for each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the demand of group type $i$.
+\subsection{Concepts}
+Consider a seat layout comprising $N$ rows, with each row containing $L_j^0$ seats, where $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. There are $M$ distinct group types, denoted by group type $i$, where each group type consists of $i$ individuals. The set of all group types is denoted by $\mathcal{M} \coloneqq \{1, 2, \ldots, M\}$. The demand for each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the demand of group type $i$.
 
-We incorporate social distancing in the seat planning problem. To comply with the social distancing requirements, individuals from the same group must sit together, while maintaining a distance from other groups. Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s).
+% The seating arrangement is used to accommodate people in  groups, where each group consists of no more than $M$ people and has to sit together in one specific row.
+
+We incorporate social distancing in the seat planning problem. To comply with the social distancing requirements, individuals from the same group must sit together in one specific row, while maintaining a distance from other groups. Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s).
 
 To model the social distancing requirements into the seat planning process, we add the parameter, $\delta$, to the original group types, resulting in the size of group type $i$ being denoted as $n_i = i + \delta$, where $i \in \mathcal{M}$. Accordingly, the size of each row is also adjusted to accommodate the group sizes. Consequently, $L_j = L_j^{0} + \delta$ represents the size of row $j$, where $L_j^{0}$ indicates the number of seats in row $j$. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat planning problem.
 

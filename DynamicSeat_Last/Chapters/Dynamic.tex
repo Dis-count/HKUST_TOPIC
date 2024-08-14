@@ -1,13 +1,13 @@
 % !TEX root = sum1.tex
 \section{Seat Assignment with Dynamic Demand}\label{sec_dynamic}
 
-In this section, we address the assignment of arriving groups in the dynamic situation. Our policy involves making seat allocation decisions for each arriving group based on a seat planning strategy outlined in Section \ref{sec_seat_planning}. If the supply for a group arrival is adequate, we accept the group directly. When the supply is insufficient, we propose two approaches to make the decision. The first method is based on an adjusted SSP, while the second method is based on the LP relaxation of SSP. Typically, we prefer the former method if time permits. However, to ensure consistent computation time, we opt for the latter method.
+In this section, we address the assignment of arriving groups in the dynamic situation. Our policy involves making seat allocation decisions for each arriving group based on a seat planning strategy outlined in Section \ref{sec_seat_planning}. If the supply for a group arrival is sufficient, we accept the group directly. When the supply is insufficient, we propose two approaches to make the decision. The first method is based on an modified SSP, while the second method is based on the LP relaxation of SSP. Typically, we prefer the former method if time permits. However, to ensure consistent computation time, we opt for the latter method.
 
 
-Specifically, we obtain the seat planning, $x_{ij}, \forall i,j$, by SSP. The seat planning can be obtained by either solving the LP relaxation of SSP or the original SSP, depending on the computational time. Recall that the corresponding supply is denoted as $[X_1, \ldots, X_M]$, where $X_i = \sum_{j} x_{ij}$ for all $i$. When a group type $i$ arrives, if $X_i > 0$, we accept the group directly and assign them the seats originally planned for group type $i$, adhering to the break-tie rules. If $X_i = 0$, we make the decision based on the adjusted SSP or the LP relaxation of SSP.
+Specifically, we obtain the seat planning, $x_{ij}, \forall i,j$, by SSP. The seat planning can be obtained by either solving the LP relaxation of SSP or the original SSP, depending on the computational time. Recall that the corresponding supply is denoted as $[X_1, \ldots, X_M]$, where $X_i = \sum_{j} x_{ij}$ for all $i$. When a group type $i$ arrives, if $X_i > 0$, we accept the group directly and assign them the seats originally planned for group type $i$, adhering to the break-tie rules. If $X_i = 0$, we make the decision based on the modified SSP or the LP relaxation of SSP.
 
-\subsection{Assignment Based on The Adjusted SSP}
-For the current group type $i{'}$, we introduce the decision variables $I_j, j \in \mathcal{N}$ to determine the appropriate row assignment. If $I_j =1$, we accept this group and assign it in row $j$; if $I_j =0$, we reject it. We need to add the constraint $\sum_{j=1}^{N} I_j \leq 1$ to the original SSP to ensure there is only one row can be assigned to. The capacity constraint and objective will be changed correspondingly. The following formulation is the adjusted SSP.
+\subsection{Assignment Based on The Modified SSP}
+For the current group type $i{'}$, we introduce the decision variables $I_j, j \in \mathcal{N}$ to determine the appropriate row assignment. If we accept this group and assign it to row $j$, then $I_j$ is equal to 1, and 0 otherwise. We need to add the constraint $\sum_{j=1}^{N} I_j \leq 1$ to the original SSP to ensure that only one row can be assigned to the group. The capacity constraint and objective function will be changed correspondingly to accommodate this new decision variable and constraint. The modified SSP can be expressed as:
 
 \begin{equation}\label{adjusted_SSP}
   \begin{aligned}
@@ -21,11 +21,11 @@ For the current group type $i{'}$, we introduce the decision variables $I_j, j \
   \end{aligned}
 \end{equation}
 
-When $X_i = 0$, we can solve the adjusted SSP to make the decision and update the seat planning accordingly.
+When $X_i = 0$, we can solve the modified SSP to make the decision and update the seat planning accordingly.
 
 
 \subsection{Assignment Based on The LP Relaxation of SSP}
-Since solving the adjusted SSP may be slow, we assign the groups based on the LP relaxation of SSP in this section. When $X_i = 0$, we have three steps to assign the group arrival. First, we develop the group-type control policy to determine the group type that can accommodate the arriving group. Second, we choose a specific row based on the group type and the break-tie rule. In the third step, we make the decision by comparing the values of the relaxed SSPs, considering both accepting and rejecting the arriving group.
+Since solving the modified SSP may be slow, we assign the groups based on the LP relaxation of SSP in this section. When $X_i = 0$, we have three steps to assign the group arrival. First, we develop the group-type control policy to determine the group type that can accommodate the arriving group. Second, we choose a specific row based on the group type and the break-tie rule. In the third step, we make the decision by comparing the values of the relaxed SSPs, considering both accepting and rejecting the arriving group.
 
 To optimize the computational efficiency, we consider certain conditions to determine when to regenerate the seat planning, ensuring that it is not regenerated unnecessarily in every period. This iterative process continues for the next incoming group, enabling real-time seat assignments based on the current seat planning, while minimizing the frequency of seat planning regeneration. In the following part, we will refer to this policy as Dynamic Seat Assignment (DSA).
 
@@ -33,13 +33,12 @@ To optimize the computational efficiency, we consider certain conditions to dete
 \subsubsection{Group-type Control}\label{nested_policy}
 % One intuitive approach is to utilize the relaxed SSP to make decisions by comparing the values obtained when accepting or rejecting the currently arriving group. The SSP aids in generating seat planning, and when there are available seats planned for the group, we readily accept and allocate it to the corresponding position according to the seat planning. 
 
-When $X_i = 0$ for the arriving group type $i$, we need to perform calculations of the SSP by considering the placement of the group in each possible row, then compare these values to make a decision. However, it is important to note that integer stochastic programming can be computationally expensive and will be unsolvable in some instances. Additionally, evaluating the values associated with placing the group in each possible row can require a significant amount of computation. Therefore, in order to mitigate the computational challenges, we utilize the LP relaxation of SSP as an approximation to compare the values when deciding whether to accept or reject a group. However, one challenge arises from the fact that the LP relaxation results in the same objective values for the acceptance group in any possible row. This poses the question of determining which row to place the group in when we accept it. To address this challenge, we developed the group-type control policy.
+% However, it is important to note that integer stochastic programming can be computationally expensive and will be unsolvable in some instances.
+
+In order to mitigate the computational challenges, we utilize the LP relaxation of SSP as an approximation to compare the values when deciding whether to accept or reject a group. However, one challenge arises from the fact that the LP relaxation results in the same objective values for the acceptance group in any possible row. This poses the question of determining which row to place the group in when we accept it. To address this challenge, we developed the group-type control policy.
 % which narrows down the row options based on the seat planning.
 
-The group-type control aims to find the group type to assign the arriving group, that helps us narrow down the option of rows for seat assignment. The policy considers whether to use a larger group's supply to meet the need of the arriving group when given a seat planning. When a group is accepted and assigned to larger-size seats, the remaining empty seat(s) can be reserved for future demand without affecting the rest of the seat planning. To determine whether to use larger seats to accommodate the incoming group, we compare the expected values of accepting the group in the larger seats and rejecting the group based on the current seat planning. Then we identify the possible rows where the incoming group can be assigned based on the group types and seat availability.
-
-
-% Based on our previous considerations, we know that groups can be assigned to the seats which are planned for a larger group type if the supply for their own group type is insufficient. 
+The group-type control aims to find the group type to assign the arriving group, that helps us narrow down the option of rows for seat assignment. The policy considers whether to use a larger group's supply to meet the need of the arriving group when given a seat planning. The group type is selected based on the tradeoff between the social distancing and the future demand. When a group is accepted and assigned to larger-size seats, the remaining empty seat(s) can be reserved for future demand without affecting the rest of the seat planning. To determine whether to use larger seats to accommodate the incoming group, we compare the expected values of accepting the group in the larger seats and rejecting the group based on the current seat planning. Then we identify the possible rows where the incoming group can be assigned based on the group types and seat availability.
 
 Specifically, suppose the supply is $(X_1, \ldots, X_M)$ at period $t$, the number of remaining periods is $(T-t)$. For the arriving group type $i$ when $X_i = 0$, we demonstrate how to decide whether to accept the group to occupy larger-size seats. For any $\hat{i}=i+1, \ldots, M$, we can use one supply of group type $\hat{i}$ to accept a group type $i$. In that case, when $\hat{i} = i+1, \ldots, i+\delta$, the expected number of accepted people is $i$ and the remaining seats beyond the accepted group, which is $\hat{i}-i$, will be wasted. When $\hat{i} = i+\delta+1, \ldots, M$, the rest $(\hat{i}-i-\delta)$ seats can be provided for one group type $(\hat{i}-i-\delta)$ with $\delta$ seats of social distancing. Let $D_{\hat{i}}^{t}$ be the random variable that indicates the number of group type $\hat{i}$ in $t$ periods. The expected number of accepted people is $i + (\hat{i}-i-\delta)P(D_{\hat{i}-i-\delta}^{T-t} \geq X_{\hat{i}-i-\delta}+1)$, where $P(D_i^{T-t} \geq X_i)$ is the probability that the demand of group type $i$ in $(T-t)$ periods is no less than $X_i$, the remaining supply of group type $i$. Thus, the term, $P(D_{\hat{i}-i-\delta}^{T-t} \geq X_{\hat{i}-i-\delta}+1)$, indicates the probability that the demand of group type $(\hat{i}-i-\delta)$ in $(T-t)$ periods is no less than its current remaining supply plus 1. 
 
@@ -62,7 +61,7 @@ Group-type control policy can only tell us which group type's seats are planned 
 To make the final decision, first, we determine a specific row by the tie-breaking rule, then we assign the group based on the values of relaxed stochastic programming. To determine the appropriate row for seat assignment, we can apply a tie-breaking rule among the possible options obtained by the group-type control. This rule helps us decide on a particular row when there are multiple choices available. 
 
 \subsubsection*{Break Tie for Determining A Specific Row}
-A tie occurs when there are serveral rows to accommodate the group. Suppose one group type $i$ arrives, the current seat planning is $\bm{H} = \{\bm{h}_{1}; \ldots, \bm{h}_{N}\}$, the corresponding supply is $\bm{X}$. Let $\beta_{j} = L_j - \sum_{i} (i+\delta) H_{ji}$ represent the remaining number of seats in row $j$ after considering the seat allocation for other groups. When $X_{i} > 0$, we assign the group to row $k \in \arg \min_{j} \{\beta_{j}\}$. That allows us to fill in the row as much as possible. When $X_{i} = 0$ and we plan to assign the group to seats designated for group type $\hat{i}, \hat{i}>i$, we assign the group to a row $k \in \arg \max_{j} \{\beta_{j}| H_{j \hat{i}}>0\}$. That helps to reconstruct the pattern with less unused seats. When there are multiple rows available, we can choose randomly. This rule in both scenarios prioritizes filling rows and leads to better capacity management.
+A tie occurs when there are serveral rows to accommodate the group. Suppose one group type $i$ arrives, the current seat planning is $\bm{H} = \{\bm{h}_{1}; \ldots; \bm{h}_{N}\}$, the corresponding supply is $\bm{X}$. Let $\beta_{j} = L_j - \sum_{i} (i+\delta) H_{ji}$ represent the remaining number of seats in row $j$ after considering the seat allocation for other groups. When $X_{i} > 0$, we assign the group to row $k \in \arg \min_{j} \{\beta_{j}\}$. That allows us to fill in the row as much as possible. When $X_{i} = 0$ and we plan to assign the group to seats designated for group type $\hat{i}, \hat{i}>i$, we assign the group to a row $k \in \arg \max_{j} \{\beta_{j}| H_{j \hat{i}}>0\}$. That helps to reconstruct the pattern with less unused seats. When there are multiple rows available, we can choose randomly. This rule in both scenarios prioritizes filling rows and leads to better capacity management.
 
 As an example to illustrate group-type control and the tie-breaking rule, consider a situation where $L_1 =3, L_2 = 4, L_3 =5, L_4 =6$, $M =4$, $\delta =1$. The corresponding patterns for each row are $(0,1,0,0)$, $(0,0,1,0)$, $(0,0,0,1)$ and $(0,0,0,1)$, respectively. Thus, $\beta_1 = \beta_2 = \beta_3 =0$, $\beta_4 =1$. Now, a group of one arrives, and the group-type control indicates the possible rows where the group can be assigned. We assume this group can be assigned to the seats of the largest group according to the group-type control, then we have two choices: row 3 or row 4. To determine which row to select, we can apply the breaking tie rule. The $\beta$ value of the rows will be used as the criterion, we would choose row 4 because $\beta_4$ is larger. Because when we assign it in row 4, there will be two seats reserved for future group of one, but when we assign it in row 3, there will be one seat remaining unused.
 
@@ -73,9 +72,9 @@ Finally, we compare the values of stochastic programming when accepting or rejec
 % Notice that the relaxed stochastic programming will have the same value.
 
 \subsubsection*{Compare The Values of Relaxed SSP}
-Then, we compare the values of the relaxed stochastic programming when accepting the group at the chosen row versus rejecting it. This evaluation allows us to assess the potential revenues and make the final decision. Simultaneously, after this calculation, we can generate a new seat planning according to Algorithm \ref{seat_construction}. For the situation where the supply is enough in the first step, we can skip the final step because we already accept the group. Specifically, after we plan to assign the arriving group in a specific row, we determine whether to place the arriving group in the row based on the values of the stochastic programming problem. For the objective values of the relaxed stochastic programming, we consider the potential revenues that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR).
+We compare the values of the relaxed stochastic programming when accepting the group at the chosen row versus rejecting it. This evaluation allows us to assess the potential revenues and make the final decision. Simultaneously, after this calculation, we can generate a new seat planning according to Algorithm \ref{seat_construction}. Specifically, after we plan to assign the arriving group in a specific row, we determine whether to place the arriving group in the row based on the values of the stochastic programming problem. For the objective values of the relaxed stochastic programming, we consider the potential revenues that could result from accepting the current arrival, i.e., the Value of Acceptance (VoA), as well as the potential outcomes that could result from rejecting it, i.e., the Value of Rejection (VoR).
 
-Suppose a group type $i$ arrives at period $t$. The set of scenarios at period $t$ is denoted as $\Omega^{t}$. The available supply at period $t$ before making the decision is $\mathbf{L}_{r}^{t} = (L_1^{t}, \ldots, L_N^{t})$. The VoR is the value of RSSP with the scenario set $\Omega^{t}$ and the capacity $\mathbf{L}_{r}^{t}$ when we reject group type $i$ at period $t$, denoted as RSSP$(\mathbf{L}_{r}^{t}, \Omega^{t})$. If we plan to accept group type $i$ in row $j$, we need to assign seats from row $j$ to group type $i$. Let $\mathbf{L}_{a}^{t}= (L_1^{t}, \ldots, L_j^{t}-n_{i}, \ldots, L_N^{t})$, then the VoA is calculated by RSSP$(\mathbf{L}_{a}^{t}, \Omega^{t})$.
+Suppose a group type $i$ arrives at period $t$. The set of scenarios at period $t$ is denoted as $\Omega^{t}$. The available supply at period $t$ before making the decision is $\mathbf{L}_{r} = (L_1, \ldots, L_N)$. The VoR is the value of RSSP with the scenario set $\Omega^{t}$ and the capacity $\mathbf{L}_{r}$ when we reject group type $i$ at period $t$, denoted as RSSP$(\mathbf{L}_{r}, \Omega^{t})$. If we plan to accept group type $i$ in row $j$, we need to assign seats from row $j$ to group type $i$. Let $\mathbf{L}_{a}= (L_1, \ldots, L_j-n_{i}, \ldots, L_N)$, then the VoA is calculated by RSSP$(\mathbf{L}_{a}, \Omega^{t})$.
 
 In each period, we can calculate the relaxed stochastic programming values only twice: once for the acceptance option (VoA) and once for the rejection option (VoR). By comparing the values of VoA and VoR, we can determine whether to accept or reject the group arrival. The decision will be based on selecting the option with the higher expected value, i.e., if the VoA is larger than the VoR, we accept the arrival; if the VoA is less than the VoR, we will reject the incoming group.
 
@@ -84,23 +83,22 @@ In each period, we can calculate the relaxed stochastic programming values only 
 
 By combining the group-type control strategy with the evaluation of relaxed stochastic programming values, we obtain a comprehensive decision-making process within a single period. This integrated approach enables us to make informed decisions regarding the acceptance or rejection of incoming groups, as well as determine the appropriate row for the assignment when acceptance is made. By considering both computation time savings and potential revenues, we can optimize the overall performance of the seat assignment process.
 
-% In essence, this decision-making approach weighs the potential benefits associated with accepting or rejecting an arrival, allowing us to select the option that maximizes the objective value and aligns with our overall goals.
-
 
 % \subsubsection{Regenerate The Seat Planning}
 
 \subsection{The Whole Procedure of Seat Assignment}
-For the first approach, once the decision is made, we proceed to assign seats to the next incoming group based on the updated seat planning. This iterative process ensures that the seat assignments are continuously adjusted and optimized as new groups arrive.
+For the first approach, once the decision is made, we proceed to assign seats to the next incoming group based on the updated seat planning. This iterative process ensures that the seat assignments are continuously modified and optimized as new groups arrive.
 
 \begin{algorithm}[H]
-  \caption{Seat Assignment with Adjusted SSP}
+  \caption{Seat Assignment with Modified SSP}
   \For{$t =1, \ldots, T$}
   {Observe group type $i$\;
-  \If{$t =1$}
-   {Obtain seat planning $\bm{H}$, $\bm{X}$ from Algorithm \ref{seat_construction}}
+  % \If{$t =1$}
+  %  {Obtain seat planning $\bm{H}$, $\bm{X}$ from Algorithm \ref{seat_construction}}
     \eIf{$X_{i} > 0$}
     {Find row $k$ such that $H_{ki} >0$ according to tie-breaking rule\; 
-    Accept group type $i$ in row $k$, $L_{k} \gets L_{k} -n_{i}$, $H_{ki} \gets H_{ki} -1$, $X_{i} \gets X_{i} -1$\Comment*[r]{Accept group type $i$ when the supply is sufficient}}
+    Accept group type $i$ in row $k$\; 
+    $L_{k} \gets L_{k} -n_{i}$, $H_{ki} \gets H_{ki} -1$, $X_{i} \gets X_{i} -1$\;}
     {{Obtain $I_{j}, j \in \mathcal{N}$ from problem \eqref{adjusted_SSP}\;
     \eIf{$I_{j} > 0$}
     {Accept group type $i$ in row $j$, $L_{j} \gets L_{j} - n_{i}$\; 
@@ -136,3 +134,5 @@ The algorithm is shown below.
     {Reject group type $i$\;}
     }}
 \end{algorithm}
+
+ 

@@ -39,7 +39,7 @@ if __name__ == "__main__":
     occup_value = np.zeros(5)
     occup_without = np.zeros(5)
 
-    people_range = np.array([130, 150, 170, 190, 210])
+    people_range = np.array([120, 140, 160, 180, 200])
     for probab in p:
         gamma = np.dot(probab, np.arange(1,5))
         cnt = 0
@@ -60,7 +60,7 @@ if __name__ == "__main__":
             multi = np.arange(1, I+1)
             count = 100
             for j in range(count):
-                sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+                sequence, ini_demand, newx4 = a_instance.random_generate()
                 sequence1 = copy.deepcopy(sequence)
 
                 g = a_instance.method_new(sequence1, newx4, roll_width)

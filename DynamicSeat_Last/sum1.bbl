@@ -7,12 +7,6 @@ Nursen Aydin and S~Ilker Birbil.
 \newblock {\em European Journal of Operational Research}, 271(1):179--192,
   2018.
 
-\bibitem{barry2021optimal}
-Michael Barry, Claudio Gambella, Fabio Lorenzi, John Sheehan, and Joern
-  Ploennigs.
-\newblock Optimal seat allocation under social distancing constraints.
-\newblock {\em arXiv preprint arXiv:2105.05017}, 2021.
-
 \bibitem{berge1993demand}
 Matthew~E Berge and Craig~A Hopperstad.
 \newblock Demand driven dispatch: A method for dynamic aircraft capacity
@@ -58,10 +52,11 @@ Igor Deplano, Danial Yazdani, and Trung~Thanh Nguyen.
   seats.
 \newblock {\em IEEE Access}, 7:152358--152367, 2019.
 
-\bibitem{fischetti2021safe}
+\bibitem{fischetti2023safe}
 Martina Fischetti, Matteo Fischetti, and Jakob Stoustrup.
 \newblock Safe distancing in the time of covid-19.
-\newblock {\em European Journal of Operational Research}, 2021.
+\newblock {\em European Journal of Operational Research}, 304(1):139--149,
+  2023.
 
 \bibitem{gallego1997multiproduct}
 Guillermo Gallego and Garrett Van~Ryzin.
@@ -71,7 +66,7 @@ Guillermo Gallego and Garrett Van~Ryzin.
 
 \bibitem{ghorbani2020model}
 Elaheh Ghorbani, Hamid Molavian, and Fred Barez.
-\newblock A model for optimizing the health and economic impacts of covid-19
+\newblock A model for optimizing the health and economic impacts of {C}ovid-19
   under social distancing measures; a study for the number of passengers and
   their seating arrangements in aircrafts.
 \newblock {\em arXiv preprint arXiv:2010.10993}, 2020.
@@ -86,7 +81,7 @@ Younes Hamdouch, HW~Ho, Agachai Sumalee, and Guodong Wang.
 \bibitem{haque2022optimization}
 Md~Tabish Haque and Faiz Hamid.
 \newblock An optimization model to assign seats in long distance trains to
-  minimize sars-cov-2 diffusion.
+  minimize {SARS}-{C}o{V}-2 diffusion.
 \newblock {\em Transportation Research Part A: Policy and Practice},
   162:104--120, 2022.
 
@@ -124,12 +119,6 @@ Mostafa Salari, R~John Milne, Camelia Delcea, and Liviu-Adrian Cotfas.
 \newblock Social distancing in airplane seat assignments for passenger groups.
 \newblock {\em Transportmetrica B: Transport Dynamics}, 10(1):1070--1098, 2022.
 
-\bibitem{salari2020social}
-Mostafa Salari, R~John Milne, Camelia Delcea, Lina Kattan, and Liviu-Adrian
-  Cotfas.
-\newblock Social distancing in airplane seat assignments.
-\newblock {\em Journal of Air Transport Management}, 89:101915, 2020.
-
 \bibitem{talluri2006theory}
 Kalyan~T Talluri and Garrett~J Van~Ryzin.
 \newblock {\em The Theory and Practice of Revenue Management}.
@@ -152,6 +141,7 @@ Elizabeth~Louise Williamson.
 Feng Zhu, Shaoxuan Liu, Rowan Wang, and Zizhuo Wang.
 \newblock Assign-to-seat: Dynamic capacity control for selling high-speed train
   tickets.
-\newblock {\em Manufacturing \& Service Operations Management}, 2023.
+\newblock {\em Manufacturing \& Service Operations Management}, 25(3):921--938,
+  2023.
 
 \end{thebibliography}

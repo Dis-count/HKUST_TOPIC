@@ -27,6 +27,7 @@ if __name__ == "__main__":
     multi = np.arange(1, I+1)
     count = 100
     lower_plan = 0
+    equ_plan = 0
 
     for j in range(count):
         sequence, ini_demand, newx4 = a_instance.random_generate()
@@ -35,17 +36,11 @@ if __name__ == "__main__":
 
         a = a_instance.method_new(sequence, newx4, roll_width)
 
-        e = a_instance.dynamic_program(sequence)
-
         f = a_instance.offline(sequence)  # optimal result
         optimal = np.dot(multi, f)
-
-        ratio1 += np.dot(multi, a) / optimal   # sto-planning
+        # ratio1 += np.dot(multi, a) / optimal   # sto-planning
 
         accept_people += optimal
-
         lower_plan += (seat_plan < optimal)
-
+        equ_plan += (abs(seat_plan - optimal) < 1e-5)
     print(lower_plan/count)
-
-        

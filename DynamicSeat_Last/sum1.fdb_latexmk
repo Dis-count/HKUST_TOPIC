@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex sum1"] 1724055244 "sum1.aux" "sum1.bbl" "sum1" 1724305211
+["bibtex sum1"] 1724576971 "sum1.aux" "sum1.bbl" "sum1" 1724576975
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1630493868 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "refe.bib" 1723992545 14938 3bfbd5941434854a8497af5f82477142 ""
-  "sum1.aux" 1724305210 13055 5bab3389c239d372e010b4d8ed62644e "pdflatex"
+  "refe.bib" 1724576970 14950 74aa85d0ddf6876cdee34558c8888ae2 ""
+  "sum1.aux" 1724576974 13055 5bab3389c239d372e010b4d8ed62644e "pdflatex"
   (generated)
   "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1724305209 "f:/Files/Github/HKUST_TOPIC/DynamicSeat_Last/sum1.tex" "sum1.pdf" "sum1" 1724305211
+["pdflatex"] 1724576972 "f:/Files/Github/HKUST_TOPIC/DynamicSeat_Last/sum1.tex" "sum1.pdf" "sum1" 1724576975
   "Chapters/Abstract.tex" 1715585969 1130 97509122cbcee6e5fdf6f3d2029b286f ""
   "Chapters/Appendix_1.tex" 1723615253 7844 485d9565ce24ce893befceadd8bcb127 ""
   "Chapters/Appendix_2.tex" 1721193744 16799 129f9c4d7921bfab33cf186300502541 ""
@@ -177,12 +177,12 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/DynamicSeat_Last/sum1.tex" 1723109416 2196 a4cf78a6c1084823b68bec40091ed0d2 ""
-  "sum1.aux" 1724305210 13055 5bab3389c239d372e010b4d8ed62644e "pdflatex"
-  "sum1.bbl" 1724055245 5427 c04ba2a816f1810cc113eb6da5af40bc "bibtex sum1"
-  "sum1.out" 1724305210 6337 b414fa93a6fce29eef597ff82a6f9a0f "pdflatex"
+  "sum1.aux" 1724576974 13055 5bab3389c239d372e010b4d8ed62644e "pdflatex"
+  "sum1.bbl" 1724576972 5435 6b4b9e7acede5c0dda03c300b8d6c51d "bibtex sum1"
+  "sum1.out" 1724576974 6337 b414fa93a6fce29eef597ff82a6f9a0f "pdflatex"
   "sum1.tex" 1723109416 2196 a4cf78a6c1084823b68bec40091ed0d2 ""
   (generated)
-  "sum1.out"
-  "sum1.log"
-  "sum1.aux"
   "sum1.pdf"
+  "sum1.log"
+  "sum1.out"
+  "sum1.aux"

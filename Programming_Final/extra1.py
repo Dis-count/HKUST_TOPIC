@@ -3,7 +3,7 @@ from Comparison import CompareMethods
 import time
 import matplotlib.pyplot as plt
 
-# Results of Different Policies under multiple periods and one probability
+# Plot arrival path of DSA
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
@@ -19,8 +19,7 @@ if __name__ == "__main__":
 
     roll_width = np.ones(given_lines) * 21
     total_seats = np.sum(roll_width)
-    a_instance = CompareMethods(
-        roll_width, given_lines, I, probab, period_range, num_sample, s)
+    a_instance = CompareMethods(roll_width, given_lines, I, probab, period_range, num_sample, s)
 
     multi = np.arange(1, I+1)
 

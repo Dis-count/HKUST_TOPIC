@@ -9,7 +9,7 @@ from typing import List
 from Method_scenario import stochasticModel1
 import time
 
-# we compare the later assignment.
+# we compare the late assignment.
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample, s):

@@ -102,7 +102,6 @@ if  __name__ == "__main__":
 
     # roll_width = np.arange(21, 21 + given_lines)
     roll_width = np.ones(given_lines) * 21
-    
     demand_width_array = np.arange(2, 2+I)
 
     deterModel = deterministicModel(roll_width, given_lines, demand_width_array, I, sd)
@@ -111,6 +110,7 @@ if  __name__ == "__main__":
     probab = [0.3, 0.2, 0.3, 0.2]
 
     demand_upper = np.array(probab) * number_period
+    print(demand_upper)
     total_usedDemand, _ = deterModel.IP_formulation(demand_upper)
     print(total_usedDemand)
     ini_demand, obj = deterModel.IP_advanced(total_usedDemand)
@@ -118,4 +118,3 @@ if  __name__ == "__main__":
     print(ini_demand)
     multi = np.arange(1, 1+I)
     new_value = np.dot(multi, ini_demand)
-

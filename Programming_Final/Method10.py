@@ -39,27 +39,27 @@ class deterministicModel:
         newd = np.rint(newd)
         return newd, newx
 
-    # def IP_formulation2(self, roll_width, num_period, probab, seq):
-    #     # used to test the booking performance when knowing the coming group
-    #     demand = np.ceil(np.array(probab) * num_period)
-    #     demand[seq-2] +=1
-    #     m = grb.Model()
+    def IP_advanced(self, demand_lower):
+        m = grb.Model()
+        x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
+        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+                                  for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
 
-    #     x = m.addVars(self.I, len(roll_width), lb=0, vtype= GRB.INTEGER)
-    #     m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-    #                               for i in range(self.I)) <= roll_width[j] for j in range(len(roll_width)))
-    #     m.addConstrs(grb.quicksum(x[i, j] for j in range(
-    #         len(roll_width))) <= demand[i] for i in range(self.I))
+        for k in range(self.I):
+            m.addConstr(grb.quicksum(x[i, j] for j in range(
+                self.given_lines) for i in range(self.I-k-1, self.I, 1)) >= grb.quicksum(demand_lower[i] for i in range(self.I-k-1, self.I, 1)))
 
-    #     m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
-    #         self.I) for j in range(len(roll_width))), GRB.MAXIMIZE)
-    #     m.setParam('OutputFlag', 0)
-    #     m.optimize()
-    #     x_ij = np.array(m.getAttr('X'))
-        
-    #     newx = np.reshape(x_ij, (self.I, len(roll_width)))
-    #     newd = np.sum(newx, axis=1)
-    #     return newd, newx
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
+            self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
+        m.setParam('OutputFlag', 0)
+        m.optimize()
+        # print('************************************************')
+        # print('Optimal value of IP is: %g' % m.objVal)
+        x_ij = np.array(m.getAttr('X'))
+        newx = np.reshape(x_ij, (self.I, self.given_lines))
+        newd = np.sum(newx, axis=1)
+
+        return newd, newx
 
     def LP_formulation(self, demand, roll_width):
         m = grb.Model()
@@ -93,7 +93,6 @@ class deterministicModel:
         # m.write('bid_price.lp')
         x_i = np.array(m.getAttr('X'))[-1]
         return x_i, m.objVal
-
 
     # def LP_formulation2(self, demand, roll_width):
     #     #  used to test the performance of bid-price

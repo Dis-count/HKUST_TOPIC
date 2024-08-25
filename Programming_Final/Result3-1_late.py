@@ -1,7 +1,7 @@
 # import gurobipy as grb
 # from gurobipy import GRB
 import numpy as np
-from Comparison_later import CompareMethods
+from Comparison_late import CompareMethods
 import time
 
 # performance of the later seat assignment

@@ -22,7 +22,6 @@ class deterministicModel:
         m.addConstrs(grb.quicksum(x[i, j] for j in range(
                 self.given_lines)) <= demand_upper[i] for i in range(self.I))
 
-
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(
             self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)

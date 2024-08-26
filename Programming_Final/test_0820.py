@@ -1,4 +1,4 @@
-#  This file is used to add two more programmings
+#  This file is used to add two more experiments.
 #  1. location of rejecting 1 group
 # 
 #  2. compare occupancy rate in optimal accepted individuals versus seat planning under 200 instances

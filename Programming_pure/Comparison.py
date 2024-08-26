@@ -220,7 +220,8 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        # print(f'bid: {roll_width}')
+        print(decision_list)
+        print(f'bid: {roll_width}')
         return demand
 
     def offline(self, sequence):

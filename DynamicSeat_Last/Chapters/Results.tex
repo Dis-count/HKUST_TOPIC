@@ -126,7 +126,10 @@ The figure below displays the outcomes of groups who were accepted under two dif
 
 Intuitively, when demand is low, we will accept all arrivals, and there will be no difference in the number of accepted individuals whether we implement social distancing or not. The interesting case is when the difference in the number of accepted individuals due to social distancing starts to occur.
 
-Let $T$ denote the total number of periods. We use $E(T; DSA)$ to denote the expected number of people accepted across 100 instances by DSA with one seat as social distancing. Similarly, we use $E(T; OPT)$ to denote the expected number of people accepted across 100 instances by the optimal solution when there is no social distancing. The gap point $\tilde{T}$ is defined as the lowest point that satisfies $E(\tilde{T}; DSA)+1 \leq E(\tilde{T}; OPT)$. This period marks the threshold where the difference in the number of accepted individuals due to social distancing becomes significant. Additionally, the corresponding occupancy rate at the gap point is denoted by $\Gamma(\tilde{T})$.
+Let $T$ denote the total number of periods. We use $E(T; DSA)$ to denote the expected number of people accepted across 100 instances by DSA with one seat as social distancing. Similarly, we use $E(T; OPT)$ to denote the expected number of people accepted across 100 instances by the optimal solution when there is no social distancing. The gap point $\tilde{T}$ is defined as the largest point $T$ such that $E(T; DSA)+1 > E(T; OPT)$ holds. The occupancy rate at the gap point is denoted by $\Gamma(\tilde{T})$. This occupancy rate represents the maximum demand that can be satisfied when there is a requirement for social distancing but the difference in the number of accepted individuals is not affected by social distancing.
+
+% 代表了当有社交距离的要求但不受社交距离影响能达到的最大需求
+% This period marks the threshold where the difference in the number of accepted individuals due to social distancing becomes significant. 
 
 Under the even probability distribution, we obtain the gap point is 58, the corresponding occupancy rate is 71.3\%. To better analyze the situation under different demands, we plot the second figure. When the capacity is sufficient, in this case when the expected demand is less than 71.3\%, the outcome remains unaffected by the implementation of social distancing measures. When the expected demand is larger than 71.3\%, the difference between the outcomes with and without social distancing measures becomes more pronounced. As the expected demand continues to increase, both situations reach their maximum capacity acceptance. At this point, the gap between the outcomes with and without social distancing measures begins to converge. For the social distancing situation, according to Proposition \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. Therefore, the policy requires an occupancy rate larger than 80\% will be invalid.
 
@@ -140,7 +143,6 @@ To analyze the relation between the increment of $\gamma$ and the gap point, we 
 
 % we define each distribution $(p_1, p_2, p_3, p_4)$ satisfying $p_1 + p_2 + p_3 + p_4 = 1$ as a probability combination. 
 
-
 To provide estimations, we utilize the equations $y_1 = \frac{c_1 \tilde{L}}{\gamma + \delta}$ (blue line in the figure) and $y_2 = c_2 \frac{\gamma}{\gamma + \delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$ (orange line in the figure), which are fitted to the data. These equations capture the relation between the gap point and the increment of $\gamma$, allowing us to approximate the values. By examining the relation between the gap point and the increment of $\gamma$, we can find that $\gamma$ can be used to estimate gap point.
 
 \begin{figure}[ht]
@@ -149,7 +151,7 @@ To provide estimations, we utilize the equations $y_1 = \frac{c_1 \tilde{L}}{\ga
   \caption{Gap points and their estimation under 200 probabilities}
 \end{figure}
 
-The fitting values of $c_1$ and $c_2$ can be affected by different seat layouts. To investigate this impact, we conduct several experiments using different seat layouts, specifically with the number of rows $\times$ the number of seats configurations set as 10 $\times$ 16, 10 $\times$ 21, 10 $\times$ 26 and 10 $\times$ 31. Similarly, we perform an analysis using a sample of 100 probability combinations, each with a mean equal to $\gamma$. The values of $\gamma$ range from 1.5 to 3.4. We employed an Ordinary Least Squares (OLS) model to fit the data and derive the parameter values. The goodness of fit is assessed using the R-square values, which are found to be 1.000 for all models, indicating a perfect fit between the data and the models.
+The fitting values of $c_1$ and $c_2$ can be affected by different seat layouts. To investigate this impact, we conduct several experiments using different seat layouts, specifically with the number of rows $\times$ the number of seats configurations set as 10 $\times$ 16, 10 $\times$ 21, 10 $\times$ 26 and 10 $\times$ 31. Similarly, we perform an analysis using a sample of 100 probability combinations, each with a mean equal to $\gamma$. The values of $\gamma$ range from 1.5 to 3.4. We employed an Ordinary Least Squares (OLS) model to fit the data and derive the parameter values. The goodness of fit is assessed using the R-squared values of 1.000 for all models, indicating a perfect fit between the data and the models.
 
 The results of the estimation of $c_1$ and $c_2$ are presented in the table below:
 

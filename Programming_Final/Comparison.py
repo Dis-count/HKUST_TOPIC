@@ -183,6 +183,76 @@ class CompareMethods:
     def bid_price(self, sequence):
         decision_list = [0] * self.num_period
         roll_width = copy.deepcopy(self.roll_width)
+        roll_length = sum(self.roll_width)
+
+        for t in range(self.num_period):
+            i = sequence[t]
+            
+            if max(roll_width) < i:
+                decision_list[t] = 0
+            elif np.isin(i, roll_width).any():
+                decision_list[t] = 1
+                j = np.where(roll_width == i)[0]
+                roll_width[j] -= i
+                roll_length -= i
+            else:
+                demand = (self.num_period - t) * np.array(self.probab)
+
+                demand_capa = demand * np.arange(2, 2+I)
+                demand_capa = np.cumsum(demand_capa[::-1])
+
+                length_index = self.I-1
+                for index, length in enumerate(demand_capa):
+                    if length >= roll_length:
+                        length_index = index
+                        break
+                
+                if max(roll_width) <= self.s + self.I:
+                    tie_list = 0
+                else:
+                    tie_list = 1
+
+                if  i -self.s >= self.I- length_index and tie_list:
+                    decision_list[t] = 1
+                    find = 1  # Whether to find the alternative Element
+                    exact_find = 1
+                    for j in range(self.given_lines):
+                        if roll_width[j] == i:
+                            roll_width[j] = 0
+                            roll_length -= i
+                            exact_find = 0  # stop 
+                            break
+                        if roll_width[j] > self.s + self.I and find:
+                            find_index = j
+                            find = 0 # stop
+                    if exact_find:
+                        roll_width[find_index] -= i
+                        roll_length -= i
+
+                elif i - self.s < self.I- length_index:
+                    decision_list[t] = 0
+                else:
+                    decision_list[t] = 1
+                    for j in range(self.given_lines):
+                        if roll_width[j] >= i:
+                            roll_width[j] -= i
+                            roll_length -= i
+                            break
+
+        sequence = [i-self.s for i in sequence]
+        final_demand = np.array(sequence) * np.array(decision_list)
+        final_demand = final_demand[final_demand != 0]
+
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+        print(decision_list)
+        print(f'bid: {roll_width}')
+        return demand
+
+    def bid_price1(self, sequence):
+        decision_list = [0] * self.num_period
+        roll_width = copy.deepcopy(self.roll_width)
 
         for t in range(self.num_period):
             i = sequence[t]
@@ -191,7 +261,8 @@ class CompareMethods:
             else:
                 demand = (self.num_period - t) * np.array(self.probab)
 
-                deterModel = deterministicModel(roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
+                deterModel = deterministicModel(
+                    roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
                 value, obj = deterModel.LP_formulation(demand, roll_width)
                 decision = (i-self.s) - value * i
                 for j in range(self.given_lines):
@@ -200,7 +271,7 @@ class CompareMethods:
 
                 val = max(decision)
                 decision_ind = np.array(decision).argmax()
-                if val >= 0 and roll_width[decision_ind]- i >= 0:
+                if val >= 0 and roll_width[decision_ind] - i >= 0:
                     decision_list[t] = 1
                     roll_width[decision_ind] -= i
                 else:
@@ -213,7 +284,8 @@ class CompareMethods:
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        # print(f'bid: {roll_width}')
+        # print(decision_list)
+        print(f'bid: {roll_width}')
         return demand
 
     def offline(self, sequence):
@@ -442,7 +514,7 @@ class CompareMethods:
 
 if __name__ == "__main__":
     given_lines = 10
-    np.random.seed(3)
+    # np.random.seed(10)
     roll_width = np.ones(given_lines) * 21
     # roll_width = np.array([210])
     num_period = 70
@@ -456,16 +528,21 @@ if __name__ == "__main__":
     # sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2, 5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
     t1 = time.time()
     new = a.method_new(sequence, newx4, roll_width)
-    
+    bid = a.bid_price(sequence)
+    # bid1 = a.bid_price1(sequence)
     newx = copy.deepcopy(newx4)
     print(sequence)
     optimal = a.offline(sequence)
 
     multi = np.arange(1,1+I)
     new_value = np.dot(multi, new)
+    bid_value = np.dot(multi, bid)
+    # bid_value1 = np.dot(multi, bid1)
     opt_value = np.dot(multi, optimal)
 
     print(f'sto: {new_value}')
+    print(f'bid: {bid_value}')
+    # print(f'bid1: {bid_value1}')
     print(f'optimal: {opt_value}')
 
     # newx = np.array([[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [-0.0, 0.0, 0.0, 1.0], [-0.0, 0.0, 1.0, 1.0], [0.0, 1.0, 0.0, 0.0]])

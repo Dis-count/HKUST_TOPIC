@@ -9,7 +9,7 @@ import time
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(60,61,10)
+    period_range = range(60,101,10)
     given_lines = 10
     probab = [0.25, 0.25, 0.25, 0.25]
     s = 1
@@ -35,7 +35,7 @@ if __name__ == "__main__":
         count = 100
 
         for j in range(count):
-            sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+            sequence, newx4 = a_instance.random_generate()
 
             a = a_instance.method_new(sequence, newx4, roll_width)
             b = a_instance.bid_price(sequence)

@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  31 OCT 2024 10:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  25 OCT 2024 14:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**f:/Files/Github/HKUST_TOPIC/DynamicSeat_Last/sum1.tex
-(f:/Files/Github/HKUST_TOPIC/DynamicSeat_Last/sum1.tex
+**f:/Files/Github/HKUST_TOPIC/DynamicSeat_twoparts/sum1.tex
+(f:/Files/Github/HKUST_TOPIC/DynamicSeat_twoparts/sum1.tex
 LaTeX2e <2021-06-01> patch level 1
 L3 programming layer <2021-08-27> (e:/Software/texlive/2021/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
@@ -557,41 +557,45 @@ File: ./Figures/full.pdf Graphic file (type pdf)
 <use ./Figures/full.pdf>
 Package pdftex.def Info: ./Figures/full.pdf  used on input line 86.
 (pdftex.def)             Requested size: 362.37569pt x 53.99945pt.
-[9 <./Figures/full.pdf>]) (./Chapters/Dynamic_description.tex [10]) (./Chapters/Stochastic-form.tex [11] [12] [13] [14] [15] [16] [17]) (./Chapters/Dynamic.tex [18] [19] [20] [21]) (./Chapters/Results.tex [22] [23] [24] [25]
-<./Figures/add0_55.pdf, id=489, 1387.58403pt x 739.3221pt>
+[9 <./Figures/full.pdf>]) (./Chapters/Stochastic-form.tex [10] [11] [12] [13] [14]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[15]) (./Chapters/Dynamic_description.tex [16] [17]) (./Chapters/Dynamic.tex [18] [19] [20] [21] [22]) (./Chapters/Results.tex [23] [24] [25]
+<./Figures/add0_55.pdf, id=482, 1387.58403pt x 739.3221pt>
 File: ./Figures/add0_55.pdf Graphic file (type pdf)
 <use ./Figures/add0_55.pdf>
 Package pdftex.def Info: ./Figures/add0_55.pdf  used on input line 70.
 (pdftex.def)             Requested size: 430.31812pt x 229.27773pt.
-<./Figures/add5_70.pdf, id=490, 1387.58403pt x 739.3221pt>
+<./Figures/add5_70.pdf, id=483, 1387.58403pt x 739.3221pt>
 File: ./Figures/add5_70.pdf Graphic file (type pdf)
 <use ./Figures/add5_70.pdf>
 Package pdftex.def Info: ./Figures/add5_70.pdf  used on input line 73.
 (pdftex.def)             Requested size: 430.31812pt x 229.27773pt.
  [26 <./Figures/add0_55.pdf> <./Figures/add5_70.pdf>]
-<./Figures/add7_70.pdf, id=577, 1387.58403pt x 739.3221pt>
+<./Figures/add7_70.pdf, id=570, 1387.58403pt x 739.3221pt>
 File: ./Figures/add7_70.pdf Graphic file (type pdf)
 <use ./Figures/add7_70.pdf>
 Package pdftex.def Info: ./Figures/add7_70.pdf  used on input line 86.
 (pdftex.def)             Requested size: 430.31812pt x 229.27773pt.
-<./Figures/add9_70.pdf, id=578, 1387.58403pt x 739.3221pt>
+<./Figures/add9_70.pdf, id=571, 1387.58403pt x 739.3221pt>
 File: ./Figures/add9_70.pdf Graphic file (type pdf)
 <use ./Figures/add9_70.pdf>
 Package pdftex.def Info: ./Figures/add9_70.pdf  used on input line 88.
 (pdftex.def)             Requested size: 430.31812pt x 229.27773pt.
  [27 <./Figures/add7_70.pdf> <./Figures/add9_70.pdf>]
-<./Figures/without.pdf, id=667, 462.52798pt x 346.89601pt>
+<./Figures/without.pdf, id=659, 462.52798pt x 346.89601pt>
 File: ./Figures/without.pdf Graphic file (type pdf)
 <use ./Figures/without.pdf>
 Package pdftex.def Info: ./Figures/without.pdf  used on input line 119.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/without6.pdf, id=668, 462.52798pt x 346.89601pt>
+<./Figures/without6.pdf, id=660, 462.52798pt x 346.89601pt>
 File: ./Figures/without6.pdf Graphic file (type pdf)
 <use ./Figures/without6.pdf>
 Package pdftex.def Info: ./Figures/without6.pdf  used on input line 122.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
  [28 <./Figures/without.pdf> <./Figures/without6.pdf>]
-<./Figures/re2.pdf, id=751, 1387.58403pt x 739.3221pt>
+<./Figures/re2.pdf, id=744, 1387.58403pt x 739.3221pt>
 File: ./Figures/re2.pdf Graphic file (type pdf)
 <use ./Figures/re2.pdf>
 Package pdftex.def Info: ./Figures/re2.pdf  used on input line 150.
@@ -605,21 +609,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--133
 
 ] [38] [39]) (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: B414FA93A6FCE29EEF597FF82A6F9A0F;6337.
+(rerunfilecheck)             Checksum: 7833C4458B1DB755D78C0B51711DAACD;6337.
  ) 
 Here is how much of TeX's memory you used:
- 14445 strings out of 478599
- 220651 string characters out of 5853593
- 553677 words of memory out of 5000000
- 31798 multiletter control sequences out of 15000+600000
+ 14441 strings out of 478599
+ 220610 string characters out of 5853593
+ 554734 words of memory out of 5000000
+ 31799 multiletter control sequences out of 15000+600000
  417751 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,22n,75p,1557b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,21n,75p,1561b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (39 pages, 612347 bytes).
+Output written on sum1.pdf (39 pages, 611552 bytes).
 PDF statistics:
- 1093 PDF objects out of 1200 (max. 8388607)
- 745 compressed objects within 8 object streams
- 262 named destinations out of 1000 (max. 500000)
+ 1085 PDF objects out of 1200 (max. 8388607)
+ 737 compressed objects within 8 object streams
+ 257 named destinations out of 1000 (max. 500000)
  270 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -23,23 +23,25 @@ While the above practice of social distancing measures has been recognized for c
 
 % To avoid confusion, we discuss two related terms `seat planning' and `seat assignment' which will be used in the following parts. In our context, 
 
-We will address the above issues of social distancing in the context of seating arrangement in a venue, such as a cinema or a conference hall. The venue is equipped with seats of multiple rows.  People come in groups where each group of people will sit consecutively in one row. Different groups should keep social distance from each other. The seat planning is to determine the seat partition with the known customer request. 
+We will address the above issues of social distancing in the context of seating arrangement in a venue, such as a cinema or a conference hall. The venue is equipped with seats of multiple rows.  People come in groups where each group of people will sit consecutively in one row. 
+The seat planning is to determine the seat partition with the known customer request. 
 
-How can we model the seat planning problem given the social distancing restrictions? What kind of property does this problem have? How can we give a seat planning to accommodate the maximum people with stochastic demand?
+% The planning can be altered later when the planned seats don't match the size of a coming group or when the seat planning is disrupted after assigning a coming group. 
 
-% The planning can be altered later when the planned seats don't match the size of a coming group or when the seat planning is disrupted after assigning a coming group.
+In the seat assignment, for the coming group, when accepting it, we assign the seats to the group, and the seats will not be used by others in the future.
 
 % In order to adhere to social distancing guidelines, it is important to understand the process of generating seat planning based on known groups and how to assign seats to incoming groups. Additionally, it is of interest to explore how the social distancing constraints impact the sellers and the specific policies formulated by the government to address social distancing concerns.
 
-In the seat assignment, for the coming group, when accepting it, we assign the seats to the group, and the seats will not be used by others in the future. We intend to shed light on the problem described and propose a practical dynamic seat assignment policy. In particular, we investigate the following questions.
+We intend to shed light on the problem described and propose a practical dynamic seat assignment policy. In particular, we investigate the following questions. 
 
-How to use the property of seat planning problem to design the dynamic seat assignment policy? How good is the performance of this policy compared with other policies?
+1. How can we model the seat planning problem given the social distancing restrictions? What kind of property does this problem have? How can we give a seat planning to accommodate the maximum people with stochastic demand?
 
-What kind of insights regarding the social distancing and occupancy rates can we obtain when implementing the dynamic seat assignment policy?
+2. How to use the property of seat planning problem to design the dynamic seat assignment policy? How good is the performance of this policy compared with other policies?
+
+3. What kind of insights regarding the social distancing and occupancy rates can we obtain when implementing the dynamic seat assignment policy?
 
 
 To answer these questions, we construct the seat planning problem with deterministic and stochastic demand under social distancing requirement. For the deterministic situation, we have complete and accurate information about the demand for seating. We aim to provide a seat planning that maximizes the number of people accommodated. This situation is applicable in venues like churches or company meetings, where fixed seat layouts are available, and the goal is to assign seats to accommodate as many people as possible within the given layout. The seat planning obtained shows the utilization of all seats as many as possible. Thus, we introduce the concept of full or largest pattern to indicate the seat partition of each row. For the seat planning that does not utilize all available seats, we propose to improve the seat planning by incorporating full or largest patterns.
-
 
 For the stochastic situation, we know that the demand distribution before the actual demand is realized. We aim to generate a seat planning that maximizes the expected number of people accommodated. This approach is suitable for venues where seats have been pre-allocated to ensure compliance with social distancing rules. With the given demand scenarios, we develop the scenario-based stochastic programming to obtain the seat planning. To solve this problem efficiently, we apply the Benders decomposition technique. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to utilize all seats fully.
 
@@ -56,6 +58,6 @@ Third, we presents the first attempt to consider the arrangement of seat assignm
 % While many studies in the literature highlight the importance of social distancing in controlling the spread of the virus, they often focus too much on the model and do not provide much insight into the operational significance behind social distancing \cite{barry2021optimal, fischetti2023safe}. Recent studies have explored the effects of social distancing on health and economics, mainly in the context of aircraft \cite{salari2020social, ghorbani2020model, salari2022social}. 
 
 
-The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the stochastic model, analyze its properties and obtain the seat planning. Section 5 introduces the dynamic seat assignment problem.
+The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the stochastic model,analyze its properties and obtain the seat planning. Section 5 introduces the dynamic seat assignment problem.
 Section 6 demonstrates the dynamic seat assignment policy to assign the seats for incoming groups. Section 7 gives the numerical results and the insights of implementing social distancing. The conclusions are shown in Section 8.
 \newpage

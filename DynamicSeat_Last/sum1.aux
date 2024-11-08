@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -48,50 +51,50 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Largest and Full Patterns\relax }}{9}{figure.caption.3}\protected@file@percent }
 \newlabel{improve_seat}{{2}{10}{Seat Planning Composed of Full or Largest Patterns}{equation.3.2}{}}
 \newlabel{prop_construction}{{3}{10}{}{prop.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Dynamic Seat Assignment with Social Distancing}{10}{section.4}\protected@file@percent }
-\newlabel{sec_dynamic_seat}{{4}{10}{Dynamic Seat Assignment with Social Distancing}{section.4}{}}
-\newlabel{DP}{{3}{11}{Dynamic Seat Assignment with Social Distancing}{equation.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Seat Planning with Stochastic Demand}{11}{section.5}\protected@file@percent }
-\newlabel{sec_seat_planning}{{5}{11}{Seat Planning with Stochastic Demand}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Scenario-based Stochastic Programming Formulation}{12}{subsection.5.1}\protected@file@percent }
-\newlabel{DEF_constr1}{{5}{13}{Scenario-based Stochastic Programming Formulation}{equation.5.5}{}}
-\newlabel{DEF_constr2}{{6}{13}{Scenario-based Stochastic Programming Formulation}{equation.5.6}{}}
-\newlabel{DEF_constr3}{{7}{13}{Scenario-based Stochastic Programming Formulation}{equation.5.7}{}}
-\newlabel{prop_solution}{{4}{14}{}{prop.4}{}}
-\newlabel{BD_master}{{8}{15}{Scenario-based Stochastic Programming Formulation}{equation.5.8}{}}
-\newlabel{BD_sub}{{9}{15}{Scenario-based Stochastic Programming Formulation}{equation.5.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Solve SSP by Benders Decomposition}{15}{subsection.5.2}\protected@file@percent }
-\newlabel{solve_by_benders}{{5.2}{15}{Solve SSP by Benders Decomposition}{subsection.5.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Solve The Subproblem}{15}{subsubsection.5.2.1}\protected@file@percent }
-\newlabel{second_stage}{{5.2.1}{15}{Solve The Subproblem}{subsubsection.5.2.1}{}}
-\newlabel{BD_sub_dual}{{10}{15}{Solve The Subproblem}{equation.5.10}{}}
-\newlabel{feasible_region}{{1}{15}{}{lem.1}{}}
-\newlabel{BD_master2}{{11}{16}{Solve The Subproblem}{equation.5.11}{}}
-\newlabel{y_recursively}{{12}{16}{Solve The Subproblem}{equation.5.12}{}}
-\newlabel{optimal_sol_sub_dual}{{5}{16}{}{prop.5}{}}
-\newlabel{BD_sub_simplified}{{13}{16}{}{equation.5.13}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Constraint Generation}{16}{subsubsection.5.2.2}\protected@file@percent }
-\newlabel{bender_stage}{{5.2.2}{16}{Constraint Generation}{subsubsection.5.2.2}{}}
-\newlabel{BD_master3}{{14}{17}{Constraint Generation}{equation.5.14}{}}
-\newlabel{one_ep_feasible}{{6}{17}{}{prop.6}{}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Benders Decomposition\relax }}{17}{algocf.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Seat Planning with Stochastic Demand}{10}{section.4}\protected@file@percent }
+\newlabel{sec_seat_planning}{{4}{10}{Seat Planning with Stochastic Demand}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Scenario-based Stochastic Programming Formulation}{10}{subsection.4.1}\protected@file@percent }
+\newlabel{DEF_constr1}{{4}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.4}{}}
+\newlabel{DEF_constr2}{{5}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.5}{}}
+\newlabel{DEF_constr3}{{6}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.6}{}}
+\newlabel{prop_solution}{{4}{12}{}{prop.4}{}}
+\newlabel{BD_master}{{7}{13}{Scenario-based Stochastic Programming Formulation}{equation.4.7}{}}
+\newlabel{BD_sub}{{8}{13}{Scenario-based Stochastic Programming Formulation}{equation.4.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve SSP by Benders Decomposition}{14}{subsection.4.2}\protected@file@percent }
+\newlabel{solve_by_benders}{{4.2}{14}{Solve SSP by Benders Decomposition}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Solve The Subproblem}{14}{subsubsection.4.2.1}\protected@file@percent }
+\newlabel{second_stage}{{4.2.1}{14}{Solve The Subproblem}{subsubsection.4.2.1}{}}
+\newlabel{BD_sub_dual}{{9}{14}{Solve The Subproblem}{equation.4.9}{}}
+\newlabel{feasible_region}{{1}{14}{}{lem.1}{}}
+\newlabel{BD_master2}{{10}{14}{Solve The Subproblem}{equation.4.10}{}}
+\newlabel{y_recursively}{{11}{14}{Solve The Subproblem}{equation.4.11}{}}
+\newlabel{optimal_sol_sub_dual}{{5}{15}{}{prop.5}{}}
+\newlabel{BD_sub_simplified}{{12}{15}{}{equation.4.12}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Constraint Generation}{15}{subsubsection.4.2.2}\protected@file@percent }
+\newlabel{bender_stage}{{4.2.2}{15}{Constraint Generation}{subsubsection.4.2.2}{}}
+\newlabel{BD_master3}{{13}{15}{Constraint Generation}{equation.4.13}{}}
+\newlabel{one_ep_feasible}{{6}{15}{}{prop.6}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Benders Decomposition\relax }}{16}{algocf.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{cut_algo}{{1}{17}{Constraint Generation}{algocf.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Obtain The Feasible Seat Planning}{18}{subsection.5.3}\protected@file@percent }
-\newlabel{seat_assignment}{{5.3}{18}{Obtain The Feasible Seat Planning}{subsection.5.3}{}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Seat Planning Construction\relax }}{18}{algocf.2}\protected@file@percent }
-\newlabel{seat_construction}{{2}{18}{Obtain The Feasible Seat Planning}{algocf.2}{}}
+\newlabel{cut_algo}{{1}{16}{Constraint Generation}{algocf.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Obtain The Feasible Seat Planning}{16}{subsection.4.3}\protected@file@percent }
+\newlabel{seat_assignment}{{4.3}{16}{Obtain The Feasible Seat Planning}{subsection.4.3}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Seat Planning Construction\relax }}{16}{algocf.2}\protected@file@percent }
+\newlabel{seat_construction}{{2}{16}{Obtain The Feasible Seat Planning}{algocf.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Dynamic Seat Assignment with Social Distancing}{16}{section.5}\protected@file@percent }
+\newlabel{sec_dynamic_seat}{{5}{16}{Dynamic Seat Assignment with Social Distancing}{section.5}{}}
+\newlabel{DP}{{14}{17}{Dynamic Seat Assignment with Social Distancing}{equation.5.14}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Seat Assignment with Dynamic Demand}{18}{section.6}\protected@file@percent }
 \newlabel{sec_dynamic}{{6}{18}{Seat Assignment with Dynamic Demand}{section.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Assignment Based on The Modified SSP}{18}{subsection.6.1}\protected@file@percent }
-\newlabel{modified_SSP}{{15}{19}{Assignment Based on The Modified SSP}{equation.6.15}{}}
+\newlabel{modified_SSP}{{15}{18}{Assignment Based on The Modified SSP}{equation.6.15}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces Seat Assignment with Modified SSP\relax }}{19}{algocf.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Assignment Based on The LP Relaxation of SSP}{19}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Group-type Control}{20}{subsubsection.6.2.1}\protected@file@percent }
-\newlabel{nested_policy}{{6.2.1}{20}{Group-type Control}{subsubsection.6.2.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Break Tie for Determining A Specific Row}{21}{subsubsection.6.2.2}\protected@file@percent }
-\newlabel{tie-break}{{6.2.2}{21}{Break Tie for Determining A Specific Row}{subsubsection.6.2.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Compare The Values of Relaxed SSP}{22}{subsubsection.6.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Group-type Control}{19}{subsubsection.6.2.1}\protected@file@percent }
+\newlabel{nested_policy}{{6.2.1}{19}{Group-type Control}{subsubsection.6.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Break Tie for Determining A Specific Row}{20}{subsubsection.6.2.2}\protected@file@percent }
+\newlabel{tie-break}{{6.2.2}{20}{Break Tie for Determining A Specific Row}{subsubsection.6.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Compare The Values of Relaxed SSP}{21}{subsubsection.6.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.4}Regenerate The Seat Planning}{22}{subsubsection.6.2.4}\protected@file@percent }
 \@writefile{loa}{\contentsline {algocf}{\numberline {4}{\ignorespaces Dynamic Seat Assignment\relax }}{23}{algocf.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7}Computational Experiment}{23}{section.7}\protected@file@percent }

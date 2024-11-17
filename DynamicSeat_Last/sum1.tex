@@ -41,7 +41,11 @@
 % \newtheorem{algorithm}{Algorithm}
 \newtheorem{thm}{\hspace{2em}Theorem}
 \newtheorem{lem}{\hspace{2em}Lemma}
-\newtheorem*{pf}{}
+
+
+% \newenvironment*{pf}{\par\medskip \textbf{}}{\hfill $\blacksquare$\par}
+\newenvironment{pf}[1]{\noindent\textbf{#1}\par\medskip}{\hfill $\blacksquare$\par\medskip}
+
 % \newtheorem{pf}{Proof}
 \newtheorem{remark}{\hspace{2em}Remark}
 \newtheorem{corollary}{\hspace{2em}Corollary}
@@ -79,7 +83,7 @@
 
 \input{Chapters/Appendix_1}
 
-\input{Chapters/Appendix_2}
+\input{Chapters/Proof1}
 
 % \input{Chapters/Extension}
 \end{document}

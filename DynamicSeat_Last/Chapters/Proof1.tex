@@ -55,10 +55,8 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $\mathbf{V} =
     & y_{i \omega}^{-} \alpha_{i} = 0, i =1,\ldots, M.
   \end{align*}
   
-  \begin{itemize}
-    \item When $y_{i \omega}^{-} >0$, we have $\alpha_{i} =0$. 
-    \item When $y_{i \omega}^{+} >0$, we have $\alpha_{i} = \alpha_{i-1} +1$.
-    \item When $y_{i \omega}^{+} = y_{i \omega}^{-} = 0$, let $\Delta d = d_{\omega} - d_0$,
+
+    When $y_{i \omega}^{-} >0$, we have $\alpha_{i} =0$. When $y_{i \omega}^{+} >0$, we have $\alpha_{i} = \alpha_{i-1} +1$. When $y_{i \omega}^{+} = y_{i \omega}^{-} = 0$, let $\Delta d = d_{\omega} - d_0$,
     \begin{itemize}
       \item if $i = M$, $\Delta d_{M} =0$, the value of objective function associated with $\alpha_{M}$ is always $0$, thus we have $0 \leq \alpha_{M} \leq \alpha_{M-1}+1$;
       \item if $i < M$, we have $y_{i+1, \omega}^{+} = \Delta d_{i} \geq 0$.
@@ -67,7 +65,6 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $\mathbf{V} =
         \item If $y_{i+1, \omega}^{+} = 0$, we have $0 \leq \alpha_{i} \leq \alpha_{i-1} +1$.
       \end{itemize}
     \end{itemize}
-  \end{itemize}
   \end{pf}
 
   \begin{pf}{Proof of Proposition \ref{one_ep_feasible}}

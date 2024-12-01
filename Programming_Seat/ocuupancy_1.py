@@ -13,12 +13,10 @@ total_seat = np.sum(roll_width) - given_lines * sd
 t_value = np.load("t_value.npy")
 people_value = np.load("peo_value.npy")
 occup_value = np.load("occup_value.npy")
-point=[58, 71.3]
+point = [58, 71.3]
 
-plt.plot(t_value, people_value,
-         'b-', label='Without social distancing')
-plt.plot(t_value, occup_value,
-         'r--', label='With social distancing')
+plt.plot(t_value, people_value, 'b-', label='Without social distancing')
+plt.plot(t_value, occup_value, 'r--', label='With social distancing')
 plt.xlim((30, 90))
 plt.ylim((40, 100))
 plt.xlabel('Period')

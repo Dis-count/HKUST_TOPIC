@@ -109,7 +109,9 @@ if __name__ == "__main__":
     num_sample = 5  # the number of scenarios
     I = 4  # the number of group types
     number_period = 10
+    sd = 2
     probab = [0.4, 0.2, 0.2, 0.2]
-    sam = samplingmethod1(I, num_sample, number_period, probab)
+    sam = samplingmethod1(I, num_sample, number_period, probab, sd)
     sam.accept_sample(2)
     dw, prop = sam.get_prob()
+    print(dw)

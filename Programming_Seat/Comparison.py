@@ -14,7 +14,7 @@ class CompareMethods:
         self.given_lines = given_lines  # number, Immutable object
         self.s = s
         self.value_array = np.arange(1, 1+I)
-        self.demand_width_array = self.value_array + self.s
+        self.demand_width_array = self.value_array + s
         self.I = I   # number, Immutable object
         self.probab = probab
         self.num_period = num_period   # number, Immutable object
@@ -25,10 +25,9 @@ class CompareMethods:
         sam = samplingmethod1(self.I, self.num_sample, self.num_period-1, self.probab, self.s)
         first_arrival = sequence[0]
         dw, prop = sam.get_prob_ini(first_arrival)
-        W = len(dw)
-        m1 = stochasticModel(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
+        m1 = stochasticModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, prop, dw, self.s)
 
-        ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
+        ini_demand, _ = m1.solveBenders(eps = 1e-4, maxit = 20)
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
 
@@ -118,6 +117,7 @@ class CompareMethods:
         return seq
 
     def dynamic_program1(self, sequence):
+        #  
         roll_width_dy1 = copy.deepcopy(self.roll_width)
         S = int(sum(self.roll_width))
         p = self.probab
@@ -282,43 +282,6 @@ class CompareMethods:
         # print(f'bid: {roll_width}')
         return demand
 
-    def bid_price1(self, sequence):
-        decision_list = [0] * self.num_period
-        roll_width = copy.deepcopy(self.roll_width)
-
-        for t in range(self.num_period):
-            i = sequence[t]
-            if max(roll_width) < i:
-                decision_list[t] = 0
-            else:
-                demand = (self.num_period - t) * np.array(self.probab)
-
-                deterModel = deterministicModel(roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
-                value, obj = deterModel.LP_formulation(demand, roll_width)
-                decision = (i-self.s) - value * i
-                for j in range(self.given_lines):
-                    if roll_width[j] < i:
-                        decision[j] = -1
-
-                val = max(decision)
-                decision_ind = np.array(decision).argmax()
-                if val >= 0 and roll_width[decision_ind] - i >= 0:
-                    decision_list[t] = 1
-                    roll_width[decision_ind] -= i
-                else:
-                    decision_list[t] = 0
-
-        sequence = [i-self.s for i in sequence]
-        final_demand = np.array(sequence) * np.array(decision_list)
-        final_demand = final_demand[final_demand != 0]
-
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
-        # print(decision_list)
-        print(f'bid: {roll_width}')
-        return demand
-
     def offline(self, sequence):
         # This function is to obtain the optimal decision.
         demand = np.zeros(self.I)
@@ -418,17 +381,16 @@ class CompareMethods:
                     sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
                     # dw_acc, prop_acc = sam_multi.accept_sample(sequence[-remaining_period:][0])
                     dw_acc, prop_acc = sam_multi.get_prob()
-                    W_acc = len(dw_acc)
                     m_acc = stochasticModel(change_accept, self.given_lines,
-                                            self.demand_width_array, W_acc, self.I, prop_acc, dw_acc, self.s)
-                    ini_demand_acc, val_acc = m_acc.solveBenders(eps=1e-4, maxit=20)
+                                            self.demand_width_array, self.I, prop_acc, dw_acc, self.s)
+                    ini_demand_acc, val_acc = m_acc.solveBenders(eps = 1e-4, maxit = 20)
                     # ini_demand_acc = np.ceil(ini_demand_acc)
                     # dw_deny, prop_deny = sam_multi.get_prob()
                     dw_deny = dw_acc
                     prop_deny = prop_acc
-                    W_deny = len(dw_deny)
+
                     m_deny = stochasticModel(change_deny, self.given_lines,
-                                             self.demand_width_array, W_deny, self.I, prop_deny, dw_deny, self.s)
+                                             self.demand_width_array, self.I, prop_deny, dw_deny, self.s)
                     ini_demand_deny, val_deny = m_deny.solveBenders(eps=1e-4, maxit=20)
                     # ini_demand_deny = np.ceil(ini_demand_deny)
 
@@ -449,204 +411,14 @@ class CompareMethods:
                 else:
                     mylist.append(0)
 
-        sequence = [i-self.s for i in sequence]
-        final_demand = np.array(sequence) * np.array(mylist)
+        sequence1 = [i-self.s for i in sequence]
+        final_demand = np.array(sequence1) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
-        print(change_roll)
-        print(mylist)
+
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
         return demand
-
-    def method_sto_dp(self, sequence: List[int], newx, change_roll0):
-        change_roll = copy.deepcopy(change_roll0)
-        L = int(sum(change_roll0))
-        newx = newx.T.tolist()
-        mylist = []
-        periods = len(sequence)
-        dp = self.dp1()
-
-        for num, j in enumerate(sequence):
-            # print(self.num_period-num-1)
-            # print(L)
-            if max(change_roll) < j:
-                mylist.append(0)
-                continue
-            elif np.isin(j, change_roll).any():
-                mylist.append(1)
-                kk = np.where(change_roll == j)[0]
-                change_roll[kk[0]] = 0
-                L -= j
-                newx[kk[0]] = np.zeros(self.I)
-                continue
-
-            newd = np.sum(newx, axis=0)
-            remaining_period = periods - num
-
-            if num == 6:
-                print(newd)
-                print(newx)
-                print(change_roll)
-
-            if newd[j-1-self.s] > 1e-4:
-                mylist.append(1)
-                k = self.break_tie(newx, change_roll, j-1-self.s)
-                newx[k][j-1-self.s] -= 1
-                change_roll[k] -= j
-                L -= j
-                newd = np.sum(newx, axis=0)
-                # if after accept j, the supply is 0, we should generate another newx.
-                if j == self.s + self.I and newd[-1] == 0:
-                    newx = self.rearrange(change_roll, remaining_period, j)
-                    newd = np.sum(newx, axis=0)
-            else:
-                _, decision_list = decisionOnce(sequence[-remaining_period:], newd, self.probab, self.s)
-
-                change_deny = copy.deepcopy(change_roll)
-                if  decision_list:  
-                    k = self.break_tie3(newx, change_roll, decision_list)
-                    if max(change_roll[k]) > self.s + self.I:
-                        for jj in k:
-                            if  change_roll[jj] > self.s + self.I:
-                                change_roll[jj] -= j
-                                break
-                    else:
-                        for jj in k:
-                            if  change_roll[jj] >= j:
-                                change_roll[jj] -= j
-                                break
-
-                    change_accept = copy.deepcopy(change_roll)
-                    sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
-                    dw_acc, prop_acc = sam_multi.get_prob()
-                    W_acc = len(dw_acc)
-                    m_acc = stochasticModel(change_accept, self.given_lines,
-                                            self.demand_width_array, W_acc, self.I, prop_acc, dw_acc, self.s)
-                    ini_demand_acc, _ = m_acc.solveBenders(eps=1e-4, maxit=20)
-                    dw_deny = dw_acc
-                    prop_deny = prop_acc
-                    W_deny = len(dw_deny)
-                    m_deny = stochasticModel(change_deny, self.given_lines,self.demand_width_array, W_deny, self.I, prop_deny, dw_deny, self.s)
-                    ini_demand_deny, _ = m_deny.solveBenders(eps=1e-4, maxit=20)
-                    
-
-
-                    if dp[L-j][self.num_period-num-1]+j-self.s < dp[L][self.num_period-num-1]:
-                        mylist.append(0)
-                        deterModel = deterministicModel(change_deny, self.given_lines, self.demand_width_array, self.I, self.s)
-                        newd, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand_deny)
-                        _, newx = deterModel.IP_advanced(newd)
-                        newx = newx.T.tolist()
-                        change_roll = change_deny
-                    else:
-                        mylist.append(1)
-                        L -= j
-                        deterModel = deterministicModel(change_accept, self.given_lines, self.demand_width_array, self.I, self.s)
-                        newd, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand_acc)
-                        _, newx = deterModel.IP_advanced(newd)
-                        newx = newx.T.tolist()
-                        change_roll = change_accept
-                else:
-                    mylist.append(0)
-
-        sequence = [i-self.s for i in sequence]
-        final_demand = np.array(sequence) * np.array(mylist)
-        final_demand = final_demand[final_demand != 0]
-        print(change_roll)
-        print(mylist)
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
-        return demand
-
-    def method_new_copy(self, sequence: List[int], newx, change_roll0):
-        # return list
-        change_roll = copy.deepcopy(change_roll0)
-        newx = newx.T.tolist()
-        mylist = []
-        periods = len(sequence)
-
-        for num, j in enumerate(sequence):
-            newd = np.sum(newx, axis=0)
-            remaining_period = periods - num
-
-            if newd[j-1-self.s] > 1e-4:
-                mylist.append(1)
-                k = self.break_tie(newx, change_roll, j-1-self.s)
-                newx[k][j-1-self.s] -= 1
-                change_roll[k] -= j
-
-                newd = np.sum(newx, axis=0)
-                # if after accept j, the supply is 0, we should generate another newx.
-                if j == self.s + self.I and newd[-1] == 0:
-                    newx = self.rearrange(change_roll, remaining_period, j)
-                    newd = np.sum(newx, axis=0)
-            else:
-                usedDemand, decision_list = decisionOnce(
-                    sequence[-remaining_period:], newd, self.probab, self.s)
-                Indi_Demand = np.dot(usedDemand, range(self.I))
-
-                change_deny = copy.deepcopy(change_roll)
-                if decision_list:
-                    k = self.break_tie2(newx, change_roll, decision_list)
-                    newx[k][decision_list] -= 1
-                    if decision_list - Indi_Demand - 1 - self.s >= 0:
-                        newx[k][int(decision_list - Indi_Demand -
-                                    1 - self.s)] += 1
-                    change_roll[k] -= (Indi_Demand + 1 + self.s)
-
-                    change_accept = copy.deepcopy(change_roll)
-                    sam_multi = samplingmethod1(
-                        self.I, self.num_sample, remaining_period-1, self.probab, self.s)
-                    # dw_acc, prop_acc = sam_multi.accept_sample(sequence[-remaining_period:][0])
-                    dw_acc, prop_acc = sam_multi.get_prob()
-                    W_acc = len(dw_acc)
-                    m_acc = stochasticModel(change_accept, self.given_lines,
-                                            self.demand_width_array, W_acc, self.I, prop_acc, dw_acc, self.s)
-                    ini_demand_acc, val_acc = m_acc.solveBenders(
-                        eps=1e-4, maxit=20)
-                    # ini_demand_acc = np.ceil(ini_demand_acc)
-                    # dw_deny, prop_deny = sam_multi.get_prob()
-                    dw_deny = dw_acc
-                    prop_deny = prop_acc
-                    W_deny = len(dw_deny)
-                    m_deny = stochasticModel(change_deny, self.given_lines,
-                                             self.demand_width_array, W_deny, self.I, prop_deny, dw_deny, self.s)
-                    ini_demand_deny, val_deny = m_deny.solveBenders(
-                        eps=1e-4, maxit=20)
-
-
-                    if val_acc + (j-self.s) < val_deny:
-                        mylist.append(0)
-                        deterModel = deterministicModel(
-                            change_deny, self.given_lines, self.demand_width_array, self.I, self.s)
-                        _, newx = deterModel.IP_formulation(
-                            np.zeros(self.I), ini_demand_deny)
-
-                        newx = self.full_largest(newx, change_deny)
-                        newx = newx.T.tolist()
-                        change_roll = change_deny
-                    else:
-                        mylist.append(1)
-                        deterModel = deterministicModel(
-                            change_accept, self.given_lines, self.demand_width_array, self.I, self.s)
-                        _, newx = deterModel.IP_formulation(
-                            np.zeros(self.I), ini_demand_acc)
-
-                        newx = self.full_largest(newx, change_accept)
-                        newx = newx.T.tolist()
-                        change_roll = change_accept
-                else:
-                    mylist.append(0)
-
-        sequence = [i-self.s for i in sequence]
-        final_demand = np.array(sequence) * np.array(mylist)
-        final_demand = final_demand[final_demand != 0]
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
-        return demand, mylist
 
     def method_IP(self, sequence, newx, change_roll0):
         # use the IP result to assign the groups
@@ -711,28 +483,7 @@ if __name__ == "__main__":
     sequence, newx4 = a.random_generate()
 
     # sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2, 5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
-    t1 = time.time()
-    print(sequence)
-    new = a.method_sto_dp(sequence, newx4, roll_width)
-    print(new)
-    # bid = a.bid_price(sequence)
-    dp = a.dynamic_program1(sequence)
-    # print(dp)
-    # bid1 = a.bid_price1(sequence)
-    # newx = copy.deepcopy(newx4)
-    # optimal = a.offline(sequence)
-    # print(optimal)
-    multi = np.arange(1,1+I)
-    new_value = np.dot(multi, new)
-    # bid_value = np.dot(multi, bid)
-    # dp_value = np.dot(multi, dp)
-    # bid_value1 = np.dot(multi, bid1)
-    # opt_value = np.dot(multi, optimal)
 
-    print(f'sto: {new_value}')
-    # print(f'bid: {bid_value}')
-    # print(f'dy: {dp_value}')
-    # print(f'bid1: {bid_value1}')
     # print(f'optimal: {opt_value}')
 
     # newx = np.array([[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [-0.0, 0.0, 0.0, 1.0], [-0.0, 0.0, 1.0, 1.0], [0.0, 1.0, 0.0, 0.0]])

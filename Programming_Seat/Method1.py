@@ -131,10 +131,9 @@ class stochasticModel:
 
         return m.objVal, [m.getVarByName('varx[' + str(i) + ',' + str(j) + ']').x for i in range(self.I) for j in range(self.given_lines)]
 
-    def solveBenders(self, eps=1e-4, maxit=20):
+    def solveBenders(self, eps = 1e-4, maxit = 20):
         m = grb.Model()
-        x = m.addVars(self.I, self.given_lines, lb=0,
-                      vtype = GRB.CONTINUOUS, name='varx')
+        x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.CONTINUOUS, name='varx')
         z = m.addVars(self.W, lb = -float('inf'), ub = 0, vtype = GRB.CONTINUOUS, name='varz')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
@@ -156,20 +155,14 @@ class stochasticModel:
         LB = 0  # Any feasible solution gives a lower bound.
         while eps < tol and it < maxit:
             alpha_set, w_set, LB = self.add_Constrs(x0, zstar)  # give the constraints
-            # m.addConstrs(grb.quicksum(alpha_set[t][i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + z[w_set[t]-1] <= grb.quicksum(alpha_set[t][i] * self.dw[w_set[t]-1][i] for i in range(self.I)) for t in range(len(w_set)))
 
-            # m.addConstrs(grb.quicksum(alpha_set[t][i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + z[k-1] <= grb.quicksum(alpha_set[t][i] * self.dw[k-1][i] for i in range(self.I)) for t,k in enumerate(w_set))
             x_var = m.getVars()[0: self.I * self.given_lines]
             for t in range(len(w_set)):
                 coff = alpha_set[t].repeat(self.given_lines)
                 coff = coff.tolist()
                 myrhs = np.dot(alpha_set[t], self.dw[w_set[t]-1])
-                m.addLConstr(grb.LinExpr(coff, x_var),
-                             GRB.LESS_EQUAL, -z[w_set[t]-1]+myrhs)
+                m.addLConstr(grb.LinExpr(coff, x_var), GRB.LESS_EQUAL, -z[w_set[t]-1]+myrhs)
 
-            # print("LP and AddConstrs took...", round(time.time() - start1, 3), "seconds")
-            # UB = min(UB, obj)
-            # start = time.time()
             # m.setParam('TimeLimit', 40)
             # m.Params.MIPGap = 5e-4
             m.optimize()
@@ -198,14 +191,11 @@ class stochasticModel:
         # print('obj:', m.objVal)
         return newd, LB
 
-    def solveBenders_LP(self, eps=1e-4, maxit=20):
+    def solveBenders_IP(self, eps=1e-4, maxit=20):
         m = grb.Model()
-        x = m.addVars(self.I, self.given_lines, lb=0,
-                      vtype = GRB.CONTINUOUS, name='varx')
-        z = m.addVars(self.W, lb=- float('inf'),
-                      vtype = GRB.CONTINUOUS, name='varz')
-        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-                                  for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
+        x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.INTEGER, name = 'varx')
+        z = m.addVars(self.W, lb = - float('inf'), vtype = GRB.CONTINUOUS, name = 'varz')
+        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j] for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         m.addConstrs(z[i] <= 0 for i in range(self.W))
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
         m.setParam('OutputFlag', 0)
@@ -252,26 +242,6 @@ class stochasticModel:
         # print('optimal IP objective:', obj_IP)
         return newd, LB
 
-
-    # def setupMasterModel(self):
-    #     # Initially, add z<= 0
-    #     m = grb.Model()
-    #     x = m.addVars(self.I, self.given_lines, lb=0, vtype= GRB.CONTINUOUS, name = 'varx')
-    #     z = m.addVars(self.W, lb = -float('inf'), vtype= GRB.CONTINUOUS, name = 'varz')
-    #     m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
-    #                             for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
-    #     for i in range(self.W):
-    #         #     yplus1, yminus1 = obtainY(dw[i])
-    #         #     alpha0 = solveSub(yplus1, yminus1)
-    #         m.addConstr(z[i] <= 0)
-    #     #     print('Initial cut:', alpha0)
-    #     m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)) + grb.quicksum(self.prop[w] * z[w] for w in range(self.W)), GRB.MAXIMIZE)
-    #     # m.update()
-    #     m.setParam('OutputFlag', 0)
-    #     # m.write('Master.lp')
-    #     m.optimize()
-
-    #     return m, [m.getVarByName('varx[' + str(i) + ',' + str(j) + ']').x for i in range(self.I) for j in range(self.given_lines)], [m.getVarByName('varz[' + str(w) + ']').x for w in range(self.W)]
 
 
 

@@ -33,7 +33,6 @@ if __name__ == "__main__":
         b = a_instance.bid_price(sequence)
         c = a_instance.dynamic_program1(sequence)
         d = a_instance.method1(sequence, ini_demand)
-        e = a_instance.dynamic_program(sequence)
 
         f = a_instance.offline(sequence)  # optimal result
         optimal = np.dot(multi, f)
@@ -42,7 +41,6 @@ if __name__ == "__main__":
         ratio2 += np.dot(multi, b) / optimal   # bid-price
         ratio3 += np.dot(multi, c) / optimal   # DP1
         ratio4 += np.dot(multi, d) / optimal   # once
-        ratio5 += np.dot(multi, e) / optimal   # DP-based
         accept_people += optimal
 
     print('%.2f' % (ratio1/count*100))

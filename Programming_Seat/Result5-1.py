@@ -2,7 +2,6 @@
 import numpy as np
 from Comparison import CompareMethods
 import matplotlib.pyplot as plt
-import copy
 
 # The occupancy rate over Periods
 
@@ -14,7 +13,6 @@ if __name__ == "__main__":
     # np.random.seed(i)
     sd = 1
     probab = [0.3, 0.2, 0.2, 0.3]
-    # probab = [0.25, 0.25, 0.25, 0.25]
 
     t_value = np.arange(30, 100, 1)
     people_value = np.zeros(len(period_range))
@@ -24,8 +22,8 @@ if __name__ == "__main__":
     gap_if = True
     for num_period in period_range:
         roll_width = np.ones(given_lines) * 21
-        total_seat = np.sum(roll_width)
-        # total_seat = np.sum(roll_width) - given_lines
+        # total_seat = np.sum(roll_width)
+        total_seat = np.sum(roll_width) - given_lines * sd
 
         a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, sd)
         a_without = CompareMethods(roll_width-sd, given_lines, I, probab, num_period, num_sample, 0)

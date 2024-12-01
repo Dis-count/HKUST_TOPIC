@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex sum1"] 1732177174 "sum1.aux" "sum1.bbl" "sum1" 1732446781
+["bibtex sum1"] 1732177174 "sum1.aux" "sum1.bbl" "sum1" 1733050901
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1630493868 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "refe.bib" 1724576970 14950 74aa85d0ddf6876cdee34558c8888ae2 ""
   "sum1.aux" 1732177240 12998 a2f1e4c0da3a348b503468090c5a79b5 "pdflatex"
   (generated)
   "sum1.blg"
   "sum1.bbl"
-["pdflatex"] 1732177238 "f:/Files/Github/HKUST_TOPIC/DynamicSeat_Last/sum1.tex" "sum1.pdf" "sum1" 1732446781
+["pdflatex"] 1732177238 "f:/Files/Github/HKUST_TOPIC/DynamicSeat_Last/sum1.tex" "sum1.pdf" "sum1" 1733050901
   "Chapters/Abstract.tex" 1732176669 1223 529d5517609307f06dca87f28c250670 ""
   "Chapters/Appendix_1.tex" 1723615253 7844 485d9565ce24ce893befceadd8bcb127 ""
   "Chapters/Conclusion.tex" 1719909606 2500 d9c87e24d860f483c9f115aebeb384e9 ""
@@ -183,7 +183,7 @@
   "sum1.out" 1732177240 6337 7833c4458b1db755d78c0b51711daacd "pdflatex"
   "sum1.tex" 1731482034 2346 de3f9cbdec34c6235f80ca26d76fea36 ""
   (generated)
+  "sum1.pdf"
   "sum1.out"
   "sum1.aux"
-  "sum1.pdf"
   "sum1.log"

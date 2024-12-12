@@ -1,16 +1,16 @@
 % !TEX root = sum1.tex
 \section{Computational Experiment}
-We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing. In the experiment, we set the following parameters. The seat layout consists of 10 rows, each with the same size of 21 seats. To account for social distancing measures, one seat is designated as one dummy seat, i.e., $\delta =1$. The group sizes considered range from 1 to 4 people, i.e., $M =4$. In our experiments, we simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of people per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four individuals, respectively. We assume that $p_4$ always has a positive value.
+We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing, comparing different layouts, group sizes and social distancing. In the experiment, we set the following parameters. 
+
+The basic setting in the experiments is as follows, $\delta =1$ and $M =4$. The seat layout consists of 10 rows, each with the same size of 21. We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of people per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four individuals, respectively. We assume that $p_4$ always has a positive value.
+
+The values of $\delta$, $M$ and the layout will change accordingly as we explore different layouts, group sizes and social distances.
 
 \subsection{Performances of Different Policies}
-In this section, we compare the performance of five assignment policies to the optimal one, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the dynamic seat assignment policy, DP-based heuristic, bid-price control, booking limit control and FCFS policy. 
+In this section, we compare the performance of five assignment policies to the optimal one, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the dynamic seat assignment policy, DP-based heuristic, bid-price control, booking limit control and FCFS policy.
 
 \subsection*{Parameters Description}
-We give the description of the parameters that will be used in the numerical results. 
-M = 4, $\delta = 1$, N = 10, $L_j = 21, j \in \mathcal{N}$. Consider three sets of probability distributions with the same expectation of demand each period:
-D1: [0.25, 0.25, 0.25, 0.25], D2: [0.25, 0.35, 0.05, 0.35], D3: [0.15, 0.25, 0.55, 0.05].
-
-These distributions have a common mean $\gamma = 2.5$, ensuring that the expected number of people for each period remained consistent. Each entry in the result columns is the average of 100 instances. The number of scenarios is $|\Omega| = 1000$. To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. When the total number of periods, $T$, is set to 60, the expected total demand is $T \cdot \gamma = 150$. This expected demand would, on average, require $150 \times \frac{\gamma + \delta}{\gamma} = 210$ seats to accommodate. As the value of $T$ increases, the total expected demand will eventually exceed the available supply. For example, with $T = 70$, the expected demand would be $T \cdot \gamma = 175$, which would require an average of $175 \times \frac{\gamma + \delta}{\gamma} = 245$ seats. By conducting experiments across this range of periods, we can observe how the different policies perform under both moderate and high-demand situations.
+The parameters in this numerical experiment are as follows: $M = 4$, $\delta = 1$, $N = 10$, $L_j = 21, j \in \mathcal{N}$. We consider three sets of probability distributions: D1: [0.25, 0.25, 0.25, 0.25], D2: [0.25, 0.35, 0.05, 0.35], D3: [0.15, 0.25, 0.55, 0.05]. These distributions share the same value of $\gamma = 2.5$, ensuring that the expected number of individuals for each period remains consistent. The number of scenarios is $|\Omega| = 1000$. To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. When the total number of periods, $T$, is set to 60, the expected total demand is $T \cdot \gamma = 150$. This expected demand would, on average, require $150 \times \frac{\gamma + \delta}{\gamma} = 210$ seats to accommodate. As the value of $T$ increases, the total expected demand will eventually exceed the available supply. For example, with $T = 70$, the expected demand would be $T \cdot \gamma = 175$, which would require an average of $175 \times \frac{\gamma + \delta}{\gamma} = 245$ seats. By conducting experiments across this range of periods, we can observe how the different policies perform under both moderate and high-demand situations.
 
 % For the DP Base-heuristic, we consider a simplified dynamic programming by relaxing all rows to a single row with the same total capacity, $\sum_{j=1}^{N} L_j$. With this simplification, we can make decisions for each group arrival based on the relaxed dynamic programming. 
 
@@ -18,9 +18,9 @@ These distributions have a common mean $\gamma = 2.5$, ensuring that the expecte
 
 % Booking limit control policy involves setting a maximum number of reservations for each group type. In this policy, we solve problem \eqref{deter_upper} with the expected demand during the time period. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
 
-The following table presents the performance results of five different policies: DSA, DP, Bid-price, Booking, and FCFS, which stand for dynamic seat assignment, dynamic programming based heuristic, bid-price, booking-limit, and first come first served, respectively. The procedures for the last four policies are detailed in the appendix \ref{policies}. Each entry in the table represents the average performance across 100 instances. Performance is evaluated by comparing the ratio of the number of accepted people under each policy to the number of accepted people under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
+The following table presents the performance results of five different policies: DSA, DP, Bid-price, Booking, and FCFS, which stand for dynamic seat assignment, dynamic programming based heuristic, bid-price, booking-limit, and first come first served, respectively. The procedures for the last four policies are detailed in the appendix \ref{policies}. Each entry in the table represents the average performance across 100 instances. Performance is evaluated by comparing the ratio of the number of accepted individuals under each policy to that under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
 
-\begin{table}[ht]
+\begin{table}[h]
   \centering
   \caption{Performances of Different Policies}
   \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -48,14 +48,16 @@ The following table presents the performance results of five different policies:
   \end{tabular}
 \end{table}
 
-We can find that DSA is better than DP-based heuristic, bid-price policy and booking limit policy consistently, and FCFS policy works worst. DP-based heuristic and bid-price policy can only make the decision to accept or deny, cannot decide which row to assign the group to. Booking limit policy does not consider satisfying the group demand with the larger planning. FCFS accepts groups in sequential order until the capacity cannot accommodate more.
+We can find that DSA is better than DP-based heuristic, bid-price policy and booking limit policy consistently, and FCFS policy works worst. DP-based heuristic and bid-price policy can only make the decision to accept or deny, cannot decide which row to assign the group to. Booking limit policy does not consider using more seats to meet the demand of one group. FCFS accepts groups in sequential order until the capacity cannot accommodate more.
 
-The performance of DSA, DP-based heuristic, and bid-price policies follows a pattern where it initially decreases and then gradually improves as $T$ increases. When $T$ is small, the demand for capacity is generally low, allowing these policies to achieve relatively optimal performance. However, as $T$ increases, it becomes more challenging for these policies to consistently achieve a perfect allocation plan, resulting in a decrease in performance. Nevertheless, as $T$ continues to grow, these policies tend to accept larger groups, thereby narrowing the gap between their performance and the optimal value. Consequently, their performances improve. In contrast, the booking limit policy shows improved performance as $T$ increases because it reduces the number of unoccupied seats reserved for the largest groups. When $T$ increases to infinity, DSA can always generate the largest pattern in each row, thus, the performance will converge to 100\% compared to the optimal solution.
+The performance of DSA, DP-based heuristic, and bid-price policies follows a pattern where it initially decreases and then gradually improves as $T$ increases. When $T$ is small, the demand for capacity is generally low, allowing these policies to achieve relatively optimal performance. However, as $T$ increases, it becomes more challenging for these policies to consistently achieve a perfect allocation plan, resulting in a decrease in performance. Nevertheless, as $T$ continues to grow, these policies tend to accept larger groups, thereby narrowing the gap between their performance and the optimal value. Consequently, their performances improve. In contrast, the booking limit policy shows improved performance as $T$ increases because it reduces the number of unoccupied seats reserved for the largest groups. 
 
-The performance of the policies can vary based on different probabilities. For different probability distributions listed, DSA performs more stably and consistently for the same demand under different probabilities, while for DP and bid price, their performance fluctuates more.
+% When $T$ increases to infinity, DSA can always generate the largest pattern in each row, thus, the performance will converge to 100\% compared to the optimal solution.
 
-According to the results of policies, we can develop an easy-to-implement policy. When $T \leq \frac{\sum_{j}{L_j}}{\sum_{i} i p_i + 1}$, we accept the groups based on the first come first served policy.
-When $T > \frac{\sum_{j}{L_j}}{\sum_{i} i p_i + 1}$, we adopt the booking-limit policy, i.e., assign the seats according to the seat planning obtained from problem \eqref{deter_upper}.
+The performance of the policies can vary based on different probabilities. For the different probability distributions listed, DSA performs more stably and consistently for the same demand. In contrast, the performance of DP and bid-price fluctuates more significantly.
+
+Moreover, according to the results of policies, we can develop an easy-to-implement policy. When $T \leq \frac{\sum_{j}{L_j}}{\gamma + 1}$, we accept the groups based on the first come first served policy.
+When $T > \frac{\sum_{j}{L_j}}{\gamma + 1}$, we adopt the booking-limit policy, i.e., assign the seats according to the seat planning obtained from problem \eqref{deter_upper}.
 
 \subsection*{Analysis of DSA}
 We explore the arrival path of one instance under DSA and the optimal solution. The figures show two arrival paths when $T= 55$ and $T= 70$ at the even probability distribution. In the figures, we plot four lines over periods, number of remaining seats, the expected future demand, optimal remaining seats and optimal remaining demand. The horizontal parts of remaining seats represent the rejection at the period. We can observe that when the demand is larger than supply (T =70), even at the beginning we still reject the group. When the demand is lower than supply (T =55), we will accept all groups.
@@ -67,31 +69,28 @@ We explore the arrival path of one instance under DSA and the optimal solution. 
   \centering
   \subfigure[T = 55]{
     % \label{Fig.sub.1}
-    \includegraphics[width=0.95\textwidth]{./Figures/add0_55.pdf}}
+    \includegraphics[width=0.45\textwidth]{./Figures/path_55.pdf}}
   \subfigure[T = 70]{
     % \label{Fig.sub.2}
-    \includegraphics[width=0.95\textwidth]{./Figures/add5_70.pdf}}
-  \caption{Arrival paths}
+    \includegraphics[width=0.45\textwidth]{./Figures/path_70.pdf}}
+  \caption{Arrival paths of DSA}
   % \label{Fig.lable}
 \end{figure}
 
-
-We also examine the situation where the actual demand fluctuates around the expected demand.
-
-\newpage
+We also examine the situations where the actual demand is higher or lower than the expected demand.
 
 \begin{figure}[h]
   \centering
-  \subfigure[]{
-    \includegraphics[width=0.95\textwidth]{./Figures/add7_70.pdf}}
-  \subfigure[]{
-    \includegraphics[width=0.95\textwidth]{./Figures/add9_70.pdf}}
-  \caption{Tow instances when T= 70}
+  \subfigure[Higher actual demand]{
+    \includegraphics[width=0.48\textwidth]{./Figures/path_70_seed5.pdf}}
+  \subfigure[Lower actual demand]{
+    \includegraphics[width=0.48\textwidth]{./Figures/path_70_seed15.pdf}}
+  \caption{Arrival paths of DSA when T= 70}
 \end{figure}
 
 Based on the figures provided, we can draw several key conclusions:
 
-1. Even at the very beginning of the time period, both DSA approach and the optimal solution reject some groups, as indicated by the horizontal segments in the lines.
+1. When the demand is larger than supply, even at the very beginning of the time period, both DSA approach and the optimal solution reject some groups, as indicated by the horizontal segments in the lines.
 
 2. DSA approach is inclined to accept groups earlier compared to the optimal solution. This is because DSA makes decisions based on the expected future demand, rather than the actual remaining demand.
 
@@ -108,7 +107,7 @@ distributions. Here, $T$ varies from 30 to 90, the step size is 1. Other paramet
 % By analyzing and comparing the data, we can gain insights into the relation between demand, social distancing, the number of accepted individuals, and occupancy rates. This information is valuable for understanding the impact of social distancing policies on overall capacity utilization and making informed decisions regarding resource allocation and operational strategies.
 
 
-The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ DSA to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt the optimal solution assuming that all arrivals are known and that there are no social distancing constraints. The occupancy rate at different demands is calculated as the mean of these 100 instances. The figures depicting the results are presented below. The difference between these two figures is the x-axis, the left one is period, while the right one is the percentage of expected demand relative to total seats. 
+The figure below displays the outcomes of groups who were accepted under two different conditions: with social distancing measures and without social distancing measures. For the former case, we employ DSA to obtain the results. In this case, we consider the constraints of social distancing and optimize the seat allocation accordingly. For the latter case, we adopt the optimal solution assuming that all arrivals are known and that there are no social distancing constraints. The occupancy rate at different demands is calculated as the average of these 100 instances. The figures depicting the results are presented below. The difference between these two figures is the x-axis, the left one is period, while the right one is the percentage of expected demand relative to total seats. 
 
 % We simply accept all incoming groups if the capacity allows, without considering the constraints of social distancing. 
 
@@ -126,12 +125,62 @@ The figure below displays the outcomes of groups who were accepted under two dif
 
 Intuitively, when demand is low, we will accept all arrivals, and there will be no difference in the number of accepted individuals whether we implement social distancing or not. The interesting case is when the difference in the number of accepted individuals due to social distancing starts to occur.
 
-Let $T$ denote the total number of periods. We use $E(T; DSA)$ to denote the expected number of people accepted across 100 instances by DSA with one seat as social distancing. Similarly, we use $E(T; OPT)$ to denote the expected number of people accepted across 100 instances by the optimal solution when there is no social distancing. The gap point $\tilde{T}$ is defined as the largest point $T$ such that $E(T; DSA)+1 > E(T; OPT)$ holds. The occupancy rate at the gap point is denoted by $\Gamma(\tilde{T})$. This occupancy rate represents the maximum demand that can be satisfied when there is a requirement for social distancing but the difference in the number of accepted individuals is not affected by social distancing.
+We use $E(T; DSA)$ to denote the expected number of individuals accepted across 100 instances by DSA with one seat as social distancing. Similarly, we use $E(T; OPT)$ to denote the expected number of people accepted across 100 instances by the optimal solution when there is no social distancing. The gap point $\tilde{T}$ is defined as the largest point $T$ such that $E(T; DSA)+1 \geq E(T; OPT)$ holds. The occupancy rate at the gap point is denoted by $\Gamma(\tilde{T})$. This occupancy rate represents the maximum demand that can be satisfied when the difference in the number of accepted individuals is not affected by social distancing.
 
 % 代表了当有社交距离的要求但不受社交距离影响能达到的最大需求
 % This period marks the threshold where the difference in the number of accepted individuals due to social distancing becomes significant. 
 
 Under the even probability distribution, we obtain the gap point is 58, the corresponding occupancy rate is 71.3\%. To better analyze the situation under different demands, we plot the second figure. When the capacity is sufficient, in this case when the expected demand is less than 71.3\%, the outcome remains unaffected by the implementation of social distancing measures. When the expected demand is larger than 71.3\%, the difference between the outcomes with and without social distancing measures becomes more pronounced. As the expected demand continues to increase, both situations reach their maximum capacity acceptance. At this point, the gap between the outcomes with and without social distancing measures begins to converge. For the social distancing situation, according to Proposition \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. Therefore, the policy requires an occupancy rate larger than 80\% will be invalid.
+
+
+Here we 
+We use three metrics to measure the number of accepted individuals across different layouts, group sizes, and social distancing scenarios: the gap point and the corresponding occupancy rate, largest occupancy rate.
+
+\subsection*{Different Layouts}
+We experiment with several seat layouts. For the large room, we consider two configurations: Layout 1 consists of 20 rows with 10 seats each and Layout 2 features 10 rows with 20 seats each. Layout 3 as the small room consists of 15 rows with 8 seats each. Additionally, we include a fan-shaped Layout 4 with 10 rows, where the first five rows contain between 16 and 21 seats, increasing by 1 seat per row, and the last five rows contain between 21 and 25 seats, also increasing by 1 seat per row. This ensures that the total number of seats and the number of rows match those of the Layout 1.
+
+% [0.25, 0.3, 0.25, 0.2]
+
+% We have several insights, for the big room, the occupancy rate will be slightly larger than small room. Fan-shaped layout will be better than the rectangular shape. 
+
+\begin{figure}[h]
+  \centering
+  \subfigure[Layout 1]{
+    \includegraphics[width=0.48\textwidth]{./Figures/layout20.pdf}}
+  \subfigure[Layout 3]{
+    \includegraphics[width=0.48\textwidth]{./Figures/layout15.pdf}}
+  \caption{The occupancy rate over demand with large and small rooms}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \subfigure[Layout 2]{
+    \includegraphics[width=0.48\textwidth]{./Figures/group4.pdf}}
+  \subfigure[Layout 4]{
+    \includegraphics[width=0.48\textwidth]{./Figures/layout_fan.pdf}}
+  \caption{The occupancy rate over demand with rectangular and fan-shaped layouts}
+\end{figure}
+
+\subsection*{Different Group Sizes}
+The figures display the number of accepted individuals over time for group sizes of 3 and 5, respectively, both sharing the same average group of people.
+
+\begin{figure}[h]
+  \centering
+  \subfigure[Group size of 3]{
+    \includegraphics[width = 0.48\textwidth]{./Figures/group3.pdf}}
+  \subfigure[Group size of 5]{
+    \includegraphics[width = 0.48\textwidth]{./Figures/group5.pdf}}
+  \caption{The occupancy rate over demand for different group sizes}
+\end{figure}
+
+\subsection*{Different Social Distances}
+The following figure illustrates the number of accepted individuals over time with social distancing set at 0, 1, and 2 seats, respectively.
+
+\begin{figure}[ht]
+  \centering
+    \includegraphics[width=0.8\textwidth]{./Figures/distance.pdf}
+  \caption{The occupancy rate over demand for different social distancings}
+\end{figure}
 
 \subsection{Estimation of Gap Points}
 To estimate the gap point, we aim to find the maximum period such that all the groups can be assigned into the seats during these periods, i.e., for each group type $i$, we have $\sum_{j} x_{ij} \geq d_i$, where $x_{ij}$ is the number of group type $i$ in row $j$. Meanwhile, we have the capacity constraint $\sum_{i} n_{i} x_{ij} \leq L_j$, thus, $\sum_{i} n_i d_i \leq \sum_{i} n_i \sum_{j} x_{ij} \leq \sum_{j} L_{j}$. Notice that $E(d_i) = p_i T$, we have $\sum_{i} n_i p_i T \leq \sum_{j} L_{j}$ by taking the expectation. Recall that $\tilde{L} = \sum_{j} L_{j}$ denotes the total number of seats, and let $\gamma = \sum_{i} i p_i$ represent the average number of people arriving in each period. From this, we can derive the inequality $T \leq \frac{\tilde{L}}{\gamma + \delta}$. Therefore, the upper bound for the expected maximum period is given by $T' = \frac{\tilde{L}}{\gamma + \delta}$.
@@ -168,6 +217,22 @@ The results of the estimation of $c_1$ and $c_2$ are presented in the table belo
    10 $\times$ 26 & 0.966 $\pm$ 0.004 & 96.23 $\pm$ 0.386 \\
    10 $\times$ 31 & 0.965 $\pm$ 0.003 & 96.67 $\pm$ 0.434 \\
    10 $\times$ 36 & 0.968 $\pm$ 0.003 & 97.04 $\pm$ 0.289 \\
+   \hline
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+  \centering
+  \caption{Fitting values of $c_1$ and $c_2$}
+  \begin{tabular}{|c|c|c|}
+  \hline
+   Seat Layout & Fitting Values of $c_1$ & Fitting Values of $c_2$  \\
+  \hline
+   Layout 1 & 0.909 $\pm$ 0.013  & 89.89 $\pm$ 1.436 \\
+   Layout 2 & 0.948 $\pm$ 0.008  & 94.69 $\pm$ 0.802 \\
+   Layout 3 & 0.955 $\pm$ 0.004 & 95.44 $\pm$ 0.571 \\
+   Layout 4 & 0.966 $\pm$ 0.004 & 96.23 $\pm$ 0.386 \\
    \hline
   \end{tabular}
 \end{table}

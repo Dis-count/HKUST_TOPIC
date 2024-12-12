@@ -412,10 +412,7 @@ class CompareMethods:
         final_demand = np.array(sequence1) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
 
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
-        return demand
+        return mylist
 
     def method_IP(self, sequence, newx, change_roll0):
         # use the IP result to assign the groups

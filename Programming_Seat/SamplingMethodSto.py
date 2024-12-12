@@ -13,6 +13,7 @@ class samplingmethod1:
         sample_multi = np.random.multinomial(self.number_period, prob, size = self.number_sample)
         self.sample_multi = sample_multi.tolist()
 
+    #  acc_sample + convert_acc == what I am using
     def accept_sample(self, seq):
         sample = np.array(self.sample_multi)
         sample[:, seq-1-self.s] = sample[:, seq-1-self.s] + 1
@@ -112,6 +113,6 @@ if __name__ == "__main__":
     sd = 2
     probab = [0.4, 0.2, 0.2, 0.2]
     sam = samplingmethod1(I, num_sample, number_period, probab, sd)
-    sam.accept_sample(2)
+    # sam.accept_sample(2)
     dw, prop = sam.get_prob()
     print(dw)

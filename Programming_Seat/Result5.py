@@ -34,9 +34,9 @@ if __name__ == "__main__":
         print(num_period)
         count = 1
         for j in range(count):
-            sequence, ini_demand, ini_demand3, newx3, newx4 = a_instance.random_generate()
+            sequence, newx4 = a_instance.random_generate()
             sequence1 = [i-sd for i in sequence]
-            _, _, _, _, newx40 = a_without.random_generate()
+            _, newx40 = a_without.random_generate()
             f = a_without.offline(sequence1)  # optimal result
             optimal = np.dot(multi, f)
 

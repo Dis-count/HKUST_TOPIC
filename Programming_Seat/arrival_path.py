@@ -1,9 +1,11 @@
 import numpy as np
-from Comparison import CompareMethods
+from Comparison1 import CompareMethods
 import time
 import matplotlib.pyplot as plt
 
 # Plot arrival path of DSA
+
+# Parameters
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
@@ -13,6 +15,7 @@ if __name__ == "__main__":
     probab = [0.25, 0.25, 0.25, 0.25]
     multi = np.arange(1, I+1)
     gamma = np.dot(probab, multi)
+    np.random.seed(15)
     s = 1
     begin_time = time.time()
     t_value = np.arange(0, period_range+1, 1)
@@ -23,9 +26,9 @@ if __name__ == "__main__":
 
     multi = np.arange(1, I+1)
 
-    sequence, ini_demand, newx4 = a_instance.random_generate()
+    sequence, newx4 = a_instance.random_generate()
 
-    accept_list = a_instance.method_new1(sequence, newx4, roll_width)
+    accept_list = a_instance.method_new(sequence, newx4, roll_width)
     opt_demand = a_instance.offline(sequence)
     opt_list = []
     for i in sequence:
@@ -56,8 +59,7 @@ if __name__ == "__main__":
     # print(remain_seats)
     remain_demand = (period_range - t_value) * (gamma+s)
 
-    plt.plot(t_value, remain_seats, 'b-',
-                label='Number of remaining seats')
+    plt.plot(t_value, remain_seats, 'b-', label='Number of remaining seats')
     plt.plot(t_value, remain_demand, 'r--', label='Expected future demand')
     plt.plot(t_value, actual_seq, '*', label='Actual remaining demand')
     plt.plot(t_value, opt_remain_seats, '*', label='Optimal remaining seats')

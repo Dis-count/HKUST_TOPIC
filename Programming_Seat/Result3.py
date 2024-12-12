@@ -3,6 +3,7 @@ from Comparison import CompareMethods
 import time
 
 # Results of Different Policies under one period and one probability
+
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types

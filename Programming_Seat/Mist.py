@@ -69,7 +69,7 @@ def decision1(sequence, demand, probab, sd):
 def generate_sequence(period, prob, sd):
     I = len(prob)
     group_type = np.arange(1+ sd, 1+ sd+ I)
-    trials = [np.random.choice(group_type, p=prob) for _ in range(period)]
+    trials = [np.random.choice(group_type, p = prob) for _ in range(period)]
     return trials
 
 def decisionOnce(sequence, demand0, probab, sd):

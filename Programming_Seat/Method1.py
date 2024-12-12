@@ -4,7 +4,6 @@ import numpy as np
 import time
 from SamplingMethodSto import samplingmethod1
 from Mist import generate_sequence, decision1
-from collections import Counter
 
 # This function uses benders' decomposition to solve stochastic Model. Including IP and LP.
 # And give the once decision.
@@ -90,6 +89,7 @@ class stochasticModel:
     # But for the common benders model, the variables will be confirmed at the beginning.
 
     # This function add new set to model m.
+
     def solve_LP(self, m, alphaset, wset):
         start = time.time()
         if len(wset) == 0:
@@ -111,15 +111,6 @@ class stochasticModel:
         m.optimize()
 
         return m, m.objVal, m.getAttr(GRB.Attr.X, m.getVars()[0: self.I * self.given_lines]), m.getAttr(GRB.Attr.X, m.getVars()[-self.W:])
-
-    # def addDemand(self, m, demand):
-    #     # This function is used to add demand constraints to the model.
-    #     x_var = m.getVars()[0: self.I * self.given_lines]
-    #     m.addConstrs(grb.quicksum(x_var[i*self.given_lines+j]
-    #                  for j in range(self.given_lines)) >= demand[i] for i in range(self.I))
-    #     m.setParam('OutputFlag', 0)
-    #     m.optimize()
-    #     return
 
     def solve_IP(self, m):
         xvalue = m.getVars()[0: self.I * self.given_lines]

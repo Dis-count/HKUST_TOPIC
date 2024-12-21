@@ -1,0 +1,32 @@
+Run Start Time: Fri Dec 20 10:19:26 2024
+The number of periods: 	60
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 61.49 ;FCFS: 100.00 
+;Number of accepted people: 108.15 	The number of periods: 	70
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 85.15 ;FCFS: 100.00 
+;Number of accepted people: 126.13 	The number of periods: 	80
+Sto: 99.54 ;Bid: 97.21 ;DP1: 97.89 ;Booking: 98.38 ;FCFS: 96.19 
+;Number of accepted people: 136.69 	The number of periods: 	90
+Sto: 99.90 ;Bid: 99.44 ;DP1: 99.73 ;Booking: 99.58 ;FCFS: 94.53 
+;Number of accepted people: 139.57 	The number of periods: 	100
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.32 
+;Number of accepted people: 140.00 	The number of periods: 	110
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	120
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	130
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	140
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	150
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	160
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	170
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	180
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	190
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	The number of periods: 	200
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 100.00 ;FCFS: 94.34 
+;Number of accepted people: 140.00 	Total Runtime	1010.611935

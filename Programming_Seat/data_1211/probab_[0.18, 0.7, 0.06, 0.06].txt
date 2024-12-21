@@ -1,0 +1,39 @@
+Run Start Time: Wed Dec 18 12:03:32 2024
+The number of periods: 	60
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 67.59 ;FCFS: 100.00 
+;Number of accepted people: 119.72 	The number of periods: 	70
+Sto: 99.51 ;Bid: 99.16 ;DP1: 99.21 ;Booking: 91.46 ;FCFS: 99.07 
+;Number of accepted people: 138.46 	The number of periods: 	80
+Sto: 98.97 ;Bid: 98.71 ;DP1: 98.95 ;Booking: 97.26 ;FCFS: 96.44 
+;Number of accepted people: 143.67 	The number of periods: 	90
+Sto: 99.25 ;Bid: 99.01 ;DP1: 99.11 ;Booking: 98.44 ;FCFS: 95.68 
+;Number of accepted people: 144.89 	The number of periods: 	100
+Sto: 98.99 ;Bid: 98.96 ;DP1: 99.19 ;Booking: 98.38 ;FCFS: 95.31 
+;Number of accepted people: 145.48 	The number of periods: 	110
+Sto: 98.92 ;Bid: 98.94 ;DP1: 99.08 ;Booking: 98.27 ;FCFS: 94.92 
+;Number of accepted people: 146.07 	The number of periods: 	120
+Sto: 98.67 ;Bid: 98.81 ;DP1: 99.12 ;Booking: 98.25 ;FCFS: 94.44 
+;Number of accepted people: 146.82 	The number of periods: 	130
+Sto: 98.50 ;Bid: 98.84 ;DP1: 99.02 ;Booking: 98.25 ;FCFS: 94.11 
+;Number of accepted people: 147.34 	The number of periods: 	140
+Sto: 98.48 ;Bid: 98.78 ;DP1: 99.08 ;Booking: 98.16 ;FCFS: 93.74 
+;Number of accepted people: 147.93 	The number of periods: 	150
+Sto: 98.28 ;Bid: 98.80 ;DP1: 99.08 ;Booking: 97.99 ;FCFS: 93.38 
+;Number of accepted people: 148.50 	The number of periods: 	160
+Sto: 98.18 ;Bid: 98.57 ;DP1: 99.10 ;Booking: 97.84 ;FCFS: 92.94 
+;Number of accepted people: 149.20 	The number of periods: 	170
+Sto: 98.10 ;Bid: 98.49 ;DP1: 99.08 ;Booking: 97.92 ;FCFS: 92.59 
+;Number of accepted people: 149.77 	
+
+The number of periods: 	180
+Sto: 98.18 ;Bid: 98.55 ;DP1: 99.13 ;Booking: 97.94 ;FCFS: 92.34 
+;Number of accepted people: 150.18
+
+
+The number of periods: 	190
+Sto: 98.00 ;Bid: 98.39 ;DP1: 99.03 ;Booking: 97.79 ;FCFS: 91.93 
+;Number of accepted people: 150.85 	
+
+The number of periods: 	200
+Sto: 98.03 ;Bid: 98.39 ;DP1: 99.03 ;Booking: 97.63 ;FCFS: 91.62 
+;Number of accepted people: 151.36 	Total Runtime	10284.124505

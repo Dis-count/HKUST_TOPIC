@@ -2,15 +2,20 @@
 \section{Computational Experiment}
 We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing, comparing different layouts, group sizes and social distancing. In the experiment, we set the following parameters. 
 
-The basic setting in the experiments is as follows, $\delta =1$ and $M =4$. The seat layout consists of 10 rows, each with the same size of 21. We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of people per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four individuals, respectively. We assume that $p_4$ always has a positive value.
-
-The values of $\delta$, $M$ and the layout will change accordingly as we explore different layouts, group sizes and social distances.
+The default setting in the experiments is as follows, $\delta =1$ and $M =4$. The default seat layout consists of 10 rows, each with the same size of 21. The values of $\delta$, $M$ and the layout will change accordingly as we explore different layouts, group sizes and social distances.
+We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of people per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four individuals, respectively. We assume that $p_4$ always has a positive value.
 
 \subsection{Performances of Different Policies}
 In this section, we compare the performance of five assignment policies to the optimal one, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the dynamic seat assignment policy, DP-based heuristic, bid-price control, booking limit control and FCFS policy.
 
+% [0.18, 0.7, 0.06, 0.06], [0, 0.5, 0, 0.5], [0.2, 0.8, 0 , 0]
+
+% These distributions share the same value of $\gamma = 2.5$, ensuring that the expected number of individuals for each period remains consistent.
+
 \subsection*{Parameters Description}
-The parameters in this numerical experiment are as follows: $M = 4$, $\delta = 1$, $N = 10$, $L_j = 21, j \in \mathcal{N}$. We consider three sets of probability distributions: D1: [0.25, 0.25, 0.25, 0.25], D2: [0.25, 0.35, 0.05, 0.35], D3: [0.15, 0.25, 0.55, 0.05]. These distributions share the same value of $\gamma = 2.5$, ensuring that the expected number of individuals for each period remains consistent. The number of scenarios is $|\Omega| = 1000$. To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. When the total number of periods, $T$, is set to 60, the expected total demand is $T \cdot \gamma = 150$. This expected demand would, on average, require $150 \times \frac{\gamma + \delta}{\gamma} = 210$ seats to accommodate. As the value of $T$ increases, the total expected demand will eventually exceed the available supply. For example, with $T = 70$, the expected demand would be $T \cdot \gamma = 175$, which would require an average of $175 \times \frac{\gamma + \delta}{\gamma} = 245$ seats. By conducting experiments across this range of periods, we can observe how the different policies perform under both moderate and high-demand situations.
+We consider three sets of probability distributions: D1: [0.18, 0.7, 0.06, 0.06], D2: [0, 0.5, 0, 0.5], D3: [0.2, 0.8, 0, 0]. The number of scenarios is $|\Omega| = 1000$. To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. 
+
+% When the total number of periods, $T$, is set to 60, the expected total demand is $T \cdot \gamma = 150$. This expected demand would, on average, require $150 \times \frac{\gamma + \delta}{\gamma} = 210$ seats to accommodate. As the value of $T$ increases, the total expected demand will eventually exceed the available supply. For example, with $T = 70$, the expected demand would be $T \cdot \gamma = 175$, which would require an average of $175 \times \frac{\gamma + \delta}{\gamma} = 245$ seats. By conducting experiments across this range of periods, we can observe how the different policies perform under both moderate and high-demand situations.
 
 % For the DP Base-heuristic, we consider a simplified dynamic programming by relaxing all rows to a single row with the same total capacity, $\sum_{j=1}^{N} L_j$. With this simplification, we can make decisions for each group arrival based on the relaxed dynamic programming. 
 
@@ -27,23 +32,23 @@ The following table presents the performance results of five different policies:
   \hline
   Distribution & T & DSA (\%) & DP (\%) & Bid (\%) & Booking (\%) & FCFS (\%) \\
   \hline
-  \multirow{5}{*}{D1} & 60   & 99.12 & 98.42 & 98.38 & 96.74 & 98.17 \\
-  & 70    & 98.34 & 96.87 & 96.24 & 97.18 & 94.75 \\
-  & 80    & 98.61 & 95.69 & 96.02 & 98.00 & 93.18 \\
-  & 90    & 99.10 & 96.05 & 96.41 & 98.31 & 92.48 \\
-  & 100   & 99.58 & 95.09 & 96.88 & 98.70 & 92.54 \\
+  \multirow{5}{*}{D1} & 60   & 100.00 & 100.00 & 100.00 & 67.27 & 100.00 \\
+  & 70    & 99.53 & 99.01 & 98.98 & 91.43 & 98.82 \\
+  & 80    & 99.38 & 98.91 & 98.84 & 97.06 & 96.06 \\
+  & 90    & 99.52 & 99.23 & 99.10 & 98.52 & 95.37 \\
+  & 100   & 99.58 & 99.27 & 98.95 & 98.38 & 94.98 \\
   \hline
-  \multirow{5}{*}{D2} & 60   & 98.94 & 98.26 & 98.25 & 96.74 & 98.62 \\
-     & 70   & 98.05 & 96.62 & 96.06 & 96.90 & 93.96 \\
-     & 80   & 98.37 & 96.01 & 95.89 & 97.75 & 92.88 \\
-     & 90   & 99.01 & 96.77 & 96.62 & 98.42 & 92.46 \\
-     & 100  & 99.23 & 97.04 & 97.14 & 98.67 & 92.00 \\
+  \multirow{5}{*}{D2} & 60  & 99.45 & 97.23 & 96.58 & 99.09 & 96.49 \\
+     & 70   & 99.82 & 98.28 & 97.46 & 99.81 & 95.76 \\
+     & 80   & 99.92 & 98.60 & 98.86 & 100.00 & 95.66 \\
+     & 90   & 99.99 & 99.10 & 99.70 & 100.00 & 95.66 \\
+     & 100  & 100.00 & 98.74 & 99.99 & 100.00 & 95.66 \\
   \hline
-  \multirow{5}{*}{D3} & 60  &  99.14 & 98.72 & 98.74 & 96.61 & 98.07 \\
-     & 70  & 99.30 & 96.38 & 96.90 & 97.88 & 96.25 \\
-     & 80  & 99.59 & 97.75 & 97.87 & 98.55 & 95.81 \\
-     & 90  & 99.53 & 98.45 & 98.69 & 98.81 & 95.50 \\
-     & 100 & 99.47 & 98.62 & 98.94 & 98.90 & 95.25 \\
+  \multirow{5}{*}{D3} & 60  & 100.00 & 100.00 & 100.00 & 61.49 & 100.00 \\
+     & 70  & 100.00 & 100.00 & 100.00 & 85.15 & 100.00 \\
+     & 80  & 99.54 & 97.89 & 97.21 & 98.38 & 96.19 \\
+     & 90  & 99.90 & 99.73 & 99.44 & 99.58 & 94.53 \\
+     & 100 & 100.00 & 100.00 & 100.00 & 100.00 & 94.32 \\
   \hline
   \end{tabular}
 \end{table}
@@ -56,14 +61,12 @@ The performance of DSA, DP-based heuristic, and bid-price policies follows a pat
 
 The performance of the policies can vary based on different probabilities. For the different probability distributions listed, DSA performs more stably and consistently for the same demand. In contrast, the performance of DP and bid-price fluctuates more significantly.
 
-Moreover, according to the results of policies, we can develop an easy-to-implement policy. When $T \leq \frac{\sum_{j}{L_j}}{\gamma + 1}$, we accept the groups based on the first come first served policy.
-When $T > \frac{\sum_{j}{L_j}}{\gamma + 1}$, we adopt the booking-limit policy, i.e., assign the seats according to the seat planning obtained from problem \eqref{deter_upper}.
+% Moreover, according to the results of policies, we can develop an easy-to-implement policy. When $T \leq \frac{\sum_{j}{L_j}}{\gamma + 1}$, we accept the groups based on the first come first served policy. When $T > \frac{\sum_{j}{L_j}}{\gamma + 1}$, we adopt the booking-limit policy, i.e., assign the seats according to the seat planning obtained from problem \eqref{deter_upper}.
 
 \subsection*{Analysis of DSA}
 We explore the arrival path of one instance under DSA and the optimal solution. The figures show two arrival paths when $T= 55$ and $T= 70$ at the even probability distribution. In the figures, we plot four lines over periods, number of remaining seats, the expected future demand, optimal remaining seats and optimal remaining demand. The horizontal parts of remaining seats represent the rejection at the period. We can observe that when the demand is larger than supply (T =70), even at the beginning we still reject the group. When the demand is lower than supply (T =55), we will accept all groups.
 
 \newpage
-
 
 \begin{figure}[h]
   \centering
@@ -73,7 +76,7 @@ We explore the arrival path of one instance under DSA and the optimal solution. 
   \subfigure[T = 70]{
     % \label{Fig.sub.2}
     \includegraphics[width=0.45\textwidth]{./Figures/path_70.pdf}}
-  \caption{Arrival paths of DSA}
+  \caption{Remaining seats over periods under DSA and optimal policies}
   % \label{Fig.lable}
 \end{figure}
 
@@ -85,7 +88,7 @@ We also examine the situations where the actual demand is higher or lower than t
     \includegraphics[width=0.48\textwidth]{./Figures/path_70_seed5.pdf}}
   \subfigure[Lower actual demand]{
     \includegraphics[width=0.48\textwidth]{./Figures/path_70_seed15.pdf}}
-  \caption{Arrival paths of DSA when T= 70}
+  \caption{Remaining seats over periods when T= 70}
 \end{figure}
 
 Based on the figures provided, we can draw several key conclusions:
@@ -115,10 +118,10 @@ The figure below displays the outcomes of groups who were accepted under two dif
   \centering
   \subfigure[]{
     \label{Fig.sub.1}
-    \includegraphics[width=0.48\textwidth]{./Figures/without.pdf}}
+    \includegraphics[width=0.48\textwidth]{./Figures/occu_demand_group4.pdf}}
   \subfigure[]{
     \label{Fig.sub.2}
-    \includegraphics[width=0.48\textwidth]{./Figures/without6.pdf}}
+    \includegraphics[width=0.48\textwidth]{./Figures/occu_gamma_group4.pdf}}
   \caption{The occupancy rate over demand}
   \label{Fig.lable}
 \end{figure}
@@ -137,29 +140,42 @@ Here we
 We use three metrics to measure the number of accepted individuals across different layouts, group sizes, and social distancing scenarios: the gap point and the corresponding occupancy rate, largest occupancy rate.
 
 \subsection*{Different Layouts}
-We experiment with several seat layouts. For the large room, we consider two configurations: Layout 1 consists of 20 rows with 10 seats each and Layout 2 features 10 rows with 20 seats each. Layout 3 as the small room consists of 15 rows with 8 seats each. Additionally, we include a fan-shaped Layout 4 with 10 rows, where the first five rows contain between 16 and 21 seats, increasing by 1 seat per row, and the last five rows contain between 21 and 25 seats, also increasing by 1 seat per row. This ensures that the total number of seats and the number of rows match those of the Layout 1.
+We experiment with four seat layouts. For the large room, we consider three configurations: Layout 1 consists of 20 rows with 10 seats each, Layout 2 features 10 rows with 20 seats each. Additionally, we include a fan-shaped Layout 3 with 10 rows, where the first five rows contain between 16 and 20 seats, increasing by 1 seat per row, and the last five rows contain between 20 and 24 seats, also increasing by 1 seat per row. This ensures that the total number of seats and the number of rows match those of the Layout 2. Layout 4 as the small room consists of 15 rows with 7 seats each.  
 
-% [0.25, 0.3, 0.25, 0.2]
+We consider 100 same instances under the probabily of [0.25, 0.3, 0.25, 0.2].
+
+The following figure gives the typical pattern of the occupancy rate over demand. The gap point,  the corresponding occupancy rate and the largest occupancy rate are also given in the following table.  
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.8\textwidth]{./Figures/layout20.pdf}
+  \caption{The occupancy rate over demand with Layout 1}
+\end{figure}
+
+\begin{table}[ht]
+  \centering
+  \caption{Gap points and occupancy rates of the layouts}
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+   Seat Layout & Gap point & Occupancy rate & Largest occupancy rate \\
+  \hline
+   Layout 1 & 63  & 74.64 \% & 80 \% \\
+   Layout 2 & 62.5 & 74 \% & 80 \%  \\ 
+   Layout 3 & 61 & 72.13 \% & 82 \% \\
+   Layout 4 & 33 & 74.37 \% & 85.71 \%  \\
+   \hline
+  \end{tabular}
+\end{table}
+
+% 1. The occupancy rate of small room will not necessarily be smaller than that of the large room.
+
+% 2. 
+
+The largest occupancy rate can be calculated from Proposition 2.
 
 % We have several insights, for the big room, the occupancy rate will be slightly larger than small room. Fan-shaped layout will be better than the rectangular shape. 
 
-\begin{figure}[h]
-  \centering
-  \subfigure[Layout 1]{
-    \includegraphics[width=0.48\textwidth]{./Figures/layout20.pdf}}
-  \subfigure[Layout 3]{
-    \includegraphics[width=0.48\textwidth]{./Figures/layout15.pdf}}
-  \caption{The occupancy rate over demand with large and small rooms}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \subfigure[Layout 2]{
-    \includegraphics[width=0.48\textwidth]{./Figures/group4.pdf}}
-  \subfigure[Layout 4]{
-    \includegraphics[width=0.48\textwidth]{./Figures/layout_fan.pdf}}
-  \caption{The occupancy rate over demand with rectangular and fan-shaped layouts}
-\end{figure}
 
 \subsection*{Different Group Sizes}
 The figures display the number of accepted individuals over time for group sizes of 3 and 5, respectively, both sharing the same average group of people.

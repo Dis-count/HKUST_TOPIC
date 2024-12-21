@@ -1,0 +1,32 @@
+Run Start Time: Thu Dec 19 20:37:50 2024
+The number of periods: 	60
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 67.27 ;FCFS: 100.00 
+;Number of accepted people: 119.32 	The number of periods: 	70
+Sto: 99.53 ;Bid: 98.98 ;DP1: 99.01 ;Booking: 91.43 ;FCFS: 98.82 
+;Number of accepted people: 138.30 	The number of periods: 	80
+Sto: 99.38 ;Bid: 98.84 ;DP1: 98.91 ;Booking: 97.06 ;FCFS: 96.06 
+;Number of accepted people: 143.54 	The number of periods: 	90
+Sto: 99.52 ;Bid: 99.10 ;DP1: 99.23 ;Booking: 98.52 ;FCFS: 95.37 
+;Number of accepted people: 144.78 	The number of periods: 	100
+Sto: 99.58 ;Bid: 98.95 ;DP1: 99.27 ;Booking: 98.38 ;FCFS: 94.98 
+;Number of accepted people: 145.42 	The number of periods: 	110
+Sto: 99.56 ;Bid: 98.93 ;DP1: 99.34 ;Booking: 98.42 ;FCFS: 94.61 
+;Number of accepted people: 146.01 	The number of periods: 	120
+Sto: 99.54 ;Bid: 98.93 ;DP1: 99.41 ;Booking: 98.36 ;FCFS: 94.27 
+;Number of accepted people: 146.53 	The number of periods: 	130
+Sto: 99.58 ;Bid: 98.95 ;DP1: 99.27 ;Booking: 98.45 ;FCFS: 93.96 
+;Number of accepted people: 147.02 	The number of periods: 	140
+Sto: 99.37 ;Bid: 98.94 ;DP1: 99.24 ;Booking: 98.45 ;FCFS: 93.62 
+;Number of accepted people: 147.55 	The number of periods: 	150
+Sto: 99.48 ;Bid: 98.87 ;DP1: 99.18 ;Booking: 98.35 ;FCFS: 93.26 
+;Number of accepted people: 148.12 	The number of periods: 	160
+Sto: 99.56 ;Bid: 98.75 ;DP1: 99.16 ;Booking: 98.19 ;FCFS: 92.90 
+;Number of accepted people: 148.70 	The number of periods: 	170
+Sto: 99.51 ;Bid: 98.58 ;DP1: 99.10 ;Booking: 97.98 ;FCFS: 92.48 
+;Number of accepted people: 149.38 	The number of periods: 	180
+Sto: 99.59 ;Bid: 98.56 ;DP1: 99.17 ;Booking: 97.78 ;FCFS: 92.10 
+;Number of accepted people: 150.00 	The number of periods: 	190
+Sto: 99.51 ;Bid: 98.52 ;DP1: 99.24 ;Booking: 97.84 ;FCFS: 91.74 
+;Number of accepted people: 150.59 	The number of periods: 	200
+Sto: 99.47 ;Bid: 98.41 ;DP1: 99.20 ;Booking: 97.77 ;FCFS: 91.38 
+;Number of accepted people: 151.18 	Total Runtime	1617.503083

@@ -72,6 +72,12 @@ def generate_sequence(period, prob, sd):
     trials = [np.random.choice(group_type, p = prob) for _ in range(period)]
     return trials
 
+def sequence_pool(count, num_period, probab, s):
+    pools = np.zeros((count, num_period), dtype = int)
+    for i in range(count):
+        pools[i] = generate_sequence(num_period, probab, s)
+    return pools
+
 def decisionOnce(sequence, demand0, probab, sd):
     # the function is used to make a decision once on several classes
     # sequence is one possible sequence of the group arrival.

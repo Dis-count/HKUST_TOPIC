@@ -31,7 +31,7 @@ class CompareMethods:
         W = len(dw)
         m1 = stochasticModel(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
 
-        ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
+        ini_demand, _ = m1.solveBenders(eps = 1e-4, maxit = 20)
 
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
 

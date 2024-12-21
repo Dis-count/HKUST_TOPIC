@@ -104,7 +104,6 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{aligned}
 \end{equation}
 
-
 We can solve problem \eqref{BD_master} quickly if we can efficiently solve problem \eqref{BD_sub}. Next, we will mention how to solve problem \eqref{BD_sub}.
 
 \subsection{Solve SSP by Benders Decomposition}\label{solve_by_benders}
@@ -165,12 +164,10 @@ The optimal solutions to problem \eqref{BD_sub_dual} can be obtained according t
 \end{equation}
 \end{prop}
 
-
 Instead of solving this linear programming directly, we can compute the values of $\alpha_{\omega}$ by performing a forward calculation from $\alpha_{1\omega}$ to $\alpha_{M\omega}$.
 
 \subsubsection{Constraint Generation}\label{bender_stage}
 Due to the computational infeasibility of solving problem \eqref{BD_master2} with an exponentially large number of constraints, it is a common practice to use a subset, denoted as $\mathcal{O}^t$, to replace $\mathcal{O}$ in problem \eqref{BD_master2}. This results in a modified problem known as the Restricted Benders Master Problem (RBMP). To find the optimal solution to problem \eqref{BD_master2}, we employ the technique of constraint generation. It involves iteratively solving the RBMP and incrementally adding more constraints until the optimal solution to problem \eqref{BD_master2} is obtained.
-
 
 We can conclude that the RBMP will have the form:
 

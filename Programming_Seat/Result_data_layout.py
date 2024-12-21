@@ -19,21 +19,24 @@ from Comparison import CompareMethods
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(30, 100, 1)
+    total_period = 100
+    period_range = range(30, total_period, 1)
     # given_lines = 11
-    layout_dic = {10: np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25]),
-                  20: np.ones(20) * 11,
-                  15: np.ones(15) * 8}
+    layout_dic = {'fan': np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25]),
+                  'rec': np.ones(10) * 21}
 
     probab = [0.25, 0.3, 0.25, 0.2]
     sd = 1
-    t_value = np.arange(30, 100, 1)
+    t_value = np.arange(30, total_period, 1)
     people_value = np.zeros(len(period_range))
     occup_value = np.zeros(len(period_range))
-    cnt = 0
-    gap_if = True
+    count = 100
+    sequences_pool = np.load('data_sequence0.25.npy')
 
-    for given_lines, roll_width in layout_dic.items():
+    for shape, roll_width in layout_dic.items():
+        cnt = 0
+        given_lines = len(roll_width)
+
         for num_period in period_range:
             total_seat = np.sum(roll_width) - given_lines * sd
             a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, sd)
@@ -42,27 +45,22 @@ if __name__ == "__main__":
             accept_people = 0
             multi = np.arange(1, I+1)
 
-            count = 100
             for j in range(count):
-                sequence, newx4 = a_instance.random_generate()
+                sequence = sequences_pool[j][0: num_period]
+                newx4 = a_instance.random_generate(sequence)
                 sequence1 = [i-sd for i in sequence]
-                _, newx40 = a_without.random_generate()
+                newx40 = a_without.random_generate(sequence1)
+
                 f = a_without.offline(sequence1)  # optimal result
-                optimal = np.dot(multi, f)
+                accept_people += np.dot(multi, f)
 
                 g = a_instance.method_new(sequence, newx4, roll_width)
                 sto += np.dot(multi, g)
-                accept_people += optimal
 
             occup_value[cnt] = sto/count/total_seat * 100
             people_value[cnt] = accept_people/count/total_seat * 100
-            if gap_if:
-                if accept_people/count - sto/count > 1:
-                    point = [num_period-1, occup_value[cnt-1]]
-                    gap_if = False
+
             cnt += 1
 
         data = np.vstack((t_value, people_value, occup_value))
-
-        np.save('data_layout' + str(given_lines) + '.npy', data)
-
+        np.save('data_layout_fan' + str(shape) + '.npy', data)

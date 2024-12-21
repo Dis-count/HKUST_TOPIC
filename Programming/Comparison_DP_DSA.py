@@ -334,6 +334,71 @@ class CompareMethods:
         periods = len(sequence)
         value = self.dp1()
         for num, j in enumerate(sequence):
+            if max(change_roll) < j:
+                mylist.append(0)
+                continue
+            elif np.isin(j, change_roll).any():
+                mylist.append(1)
+                kk = np.where(change_roll == j)[0]
+                change_roll[kk[0]] = 0
+                newx[kk[0]] = np.zeros(self.I)
+                continue
+
+            newd = np.sum(newx, axis = 0)
+            remaining_period = periods - num
+
+            for i in range(self.given_lines):
+                if change_roll[i] == self.s:
+                    change_roll[i] = 0
+            sum_length = sum(change_roll)
+
+            if newd[j-1-self.s] > 1e-4:
+                mylist.append(1)
+                k = self.break_tie(newx, change_roll, j-1-self.s)
+                newx[k][j-1-self.s] -= 1
+                change_roll[k] -= j
+
+                newd = np.sum(newx, axis=0)
+                # if after accept j, the supply is 0, we should generate another newx.
+                if j == self.s + self.I and newd[-1] == 0:
+                    newx = self.rearrange(change_roll, remaining_period, j)
+                    newd = np.sum(newx, axis=0)
+                
+            elif value[int(sum_length)][remaining_period-1] - value[int(sum_length-j)][remaining_period-1] <= (j-self.s):
+                # usedDemand, decision_list = decisionOnce(sequence[-remaining_period:], newd, self.probab, self.s)
+                # if decision_list:
+                #     Indi_Demand = np.dot(usedDemand, range(self.I))
+                #     k = self.break_tie2(newx, change_roll, decision_list)
+                #     newx[k][decision_list] -= 1
+                #     if decision_list - Indi_Demand - 1 - self.s >= 0:
+                #         newx[k][int(decision_list - Indi_Demand - 1 - self.s)] += 1
+                change_roll[k] -= j
+                mylist.append(1)
+                if remaining_period >= 2:
+                    newx = self.rearrange(change_roll, remaining_period, sequence[num+1])
+                    newd = np.sum(newx, axis = 0)
+                # else:
+                #     mylist.append(0)
+            else:
+                mylist.append(0)
+
+        sequence1 = [i-self.s for i in sequence]
+        final_demand = np.array(sequence1) * np.array(mylist)
+        final_demand = final_demand[final_demand != 0]
+        demand = np.zeros(self.I)
+        for i in final_demand:
+            demand[i-1] += 1
+        print(change_roll)
+
+        return demand
+
+    def method_new1(self, sequence: List[int], newx, change_roll0):
+        change_roll = copy.deepcopy(change_roll0)
+        newx = newx.T.tolist()
+        mylist = []
+        periods = len(sequence)
+        value = self.dp1()
+        for num, j in enumerate(sequence):
             #  Trivial situation
             if max(change_roll) < j:
                 mylist.append(0)
@@ -378,9 +443,6 @@ class CompareMethods:
                         change_roll[k] -= j
                         mylist.append(1)
                     else:
-                        # print(j)
-                        # print(change_roll)
-                        # print(np.sum(newx, axis=0))
                         mylist.append(0)
                     if remaining_period >= 2:
                         newx = self.rearrange(change_roll, remaining_period, sequence[num+1])

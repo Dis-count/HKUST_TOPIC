@@ -4,7 +4,6 @@ import time
 import matplotlib.pyplot as plt
 
 # Plot arrival path of DSA
-
 # Parameters
 
 if __name__ == "__main__":
@@ -46,7 +45,6 @@ if __name__ == "__main__":
     print(num_reject)
 
     accept_seq = np.array(sequence) * np.array(accept_list)
-    
     
     actual_seq = np.cumsum(sequence)
     act = np.insert(actual_seq, 0, 0)

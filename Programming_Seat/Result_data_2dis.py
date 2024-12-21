@@ -1,5 +1,6 @@
 import numpy as np
 from Comparison import CompareMethods
+from Mist import sequence_pool
 
 # This function is used to record all the data from the simulations.
 # The specific parameters are as follows:
@@ -13,19 +14,24 @@ from Comparison import CompareMethods
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(40,100,1)
+    total_period = 100
+    period_range = range(40, total_period, 1)
     given_lines = 10
     sd = 1
     probab = [0.25, 0.3, 0.25, 0.2]
 
-    t_value = np.arange(40, 100, 1)
+    t_value = np.arange(40, total_period, 1)
+
     people_value = np.zeros(len(period_range))
     occup_1 = np.zeros(len(period_range))
     occup_2 = np.zeros(len(period_range))
+    count = 100
+
+    sequences_pool = sequence_pool(count, total_period, probab, sd)
 
     cnt = 0
-
     for num_period in period_range:
+
         roll_width = np.ones(given_lines) * 21
         total_seat = np.sum(roll_width) - given_lines * sd
 
@@ -36,17 +42,16 @@ if __name__ == "__main__":
         sto_1 = 0
         sto_2 = 0
         accept_people = 0
-
         multi = np.arange(1, I+1)
 
-        count = 100
         for j in range(count):
-            sequence1, newx4 = a_1.random_generate()
+            sequence1 = sequences_pool[j][0: num_period]
+            newx4 = a_1.random_generate(sequence1)
+
             sequence2 = [i+1 for i in sequence1]
+            newx40 = a_2.random_generate(sequence2)
 
-            _, newx40 = a_2.random_generate()
             sequence0 = [i-1 for i in sequence1]
-
             f = a_0.offline(sequence0)  # optimal result
             accept_people += np.dot(multi, f)
             
@@ -59,9 +64,7 @@ if __name__ == "__main__":
         occup_1[cnt] = sto_1/count/total_seat * 100
         occup_2[cnt] = sto_2/count/total_seat * 100
         people_value[cnt] = accept_people/count/total_seat * 100
-
         cnt += 1
-    
-    data = np.vstack((t_value, people_value, occup_1, occup_2))
 
-    np.save('data_distances.npy', data)
+    data = np.vstack((t_value, people_value, occup_1, occup_2))
+    np.save('data_distances_new.npy', data)

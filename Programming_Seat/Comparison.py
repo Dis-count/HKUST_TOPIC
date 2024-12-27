@@ -17,7 +17,6 @@ class CompareMethods:
         self.probab = probab
         self.num_period = num_period   # number, Immutable object
         self.num_sample = num_sample   # number, Immutable object        
-
     # Used to generate the sequence with the first one fixed.
     def random_generate(self, sequence):
         sam = samplingmethod1(self.I, self.num_sample, self.num_period-1, self.probab, self.s)
@@ -457,7 +456,7 @@ if __name__ == "__main__":
     num_sample = 1000
     s = 1
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
-    sequence, newx4 = a.random_generate()
+    newx4 = a.random_generate()
 
     # sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2, 5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
 

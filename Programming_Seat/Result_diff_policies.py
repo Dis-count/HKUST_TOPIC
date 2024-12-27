@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
             ini_demand1 = np.array(probab) * num_period
             ini_demand3, _ = deter.IP_formulation(np.zeros(I), ini_demand1)
-            _, newx3 = deter.IP_advanced(ini_demand3)
+            _, newx3 = deter.IP_formulation(ini_demand3, np.zeros(I))
             
             for j in range(count):
                 sequence = sequences_pool[j][0: num_period]

@@ -2,12 +2,8 @@ import numpy as np
 from SamplingMethodSto import samplingmethod1
 from Method1 import stochasticModel
 from Method10 import deterministicModel
-from Mist import generate_sequence, decision1
 import copy
-from Mist import decisionOnce
-from typing import List
-from Method_scenario import stochasticModel1
-import time
+
 
 # we compare the late assignment.
 
@@ -23,22 +19,20 @@ class CompareMethods:
         self.num_period = num_period   # number, Immutable object
         self.num_sample = num_sample   # number, Immutable object        
 
-    def random_generate(self):
-        sequence = generate_sequence(self.num_period, self.probab, self.s)
-        sam = samplingmethod1(self.I, self.num_sample, self.num_period-1, self.probab, self.s)
+    def random_generate(self, sequence):
+        sam = samplingmethod1(self.I, self.num_sample,
+                              self.num_period-1, self.probab, self.s)
         first_arrival = sequence[0]
         dw, prop = sam.get_prob_ini(first_arrival)
-        W = len(dw)
-        m1 = stochasticModel(self.roll_width, self.given_lines, self.demand_width_array, W, self.I, prop, dw, self.s)
+        m1 = stochasticModel(self.roll_width, self.given_lines,
+                             self.demand_width_array, self.I, prop, dw, self.s)
 
-        ini_demand, _ = m1.solveBenders(eps = 1e-4, maxit = 20)
-
+        ini_demand, _ = m1.solveBenders(eps=1e-4, maxit=20)
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
-
         ini_demand, newx4 = deter.IP_formulation(np.zeros(self.I), ini_demand)
-        newx4 = self.full_largest(newx4, self.roll_width)
+        _, newx4 = deter.IP_advanced(ini_demand)
 
-        return sequence, ini_demand, newx4
+        return newx4
 
     def binary_search_first(self, sequence):
         # Return the index not less than the first
@@ -231,117 +225,6 @@ class CompareMethods:
                     delta = 0
         return newx
 
-    def break_tie(self, newx, change_roll, group_type):
-        newx = np.array(newx).T
-        a = np.argwhere(newx[group_type] > 1e-4)
-        length = np.dot(np.arange(self.s+1, self.I+self.s+1), newx)
-        beta = change_roll - length
-        b = beta[a]
-        a_min = a[np.argmin(b)][0]   # find the minimum index in a
-        return a_min
-
-    def break_tie2(self, newx, change_roll, group_type):
-        newx = np.array(newx).T
-        a = np.argwhere(newx[group_type] > 1e-4)
-        length = np.dot(np.arange(self.s+1, self.I+self.s+1), newx)
-        beta = change_roll - length
-        b = beta[a]
-        a_max = a[np.argmax(b)][0]   # find the maximum index in a
-        return a_max
-
-    def method_new(self, sequence: List[int], newx, change_roll0):
-        change_roll = copy.deepcopy(change_roll0)
-        # threshold = sum(self.roll_width) - self.given_lines*(self.I + self.s-1)
-        # current = 0
-        # acc_demand = np.zeros(self.I)
-        newx = newx.T.tolist()
-        mylist = []
-        periods = len(sequence)
-        
-        for num, j in enumerate(sequence):
-            newd = np.sum(newx, axis = 0)
-            remaining_period = periods - num
-
-            if newd[j-1-self.s] > 1e-4:
-                mylist.append(1)
-                k = self.break_tie(newx, change_roll, j-1-self.s)
-                newx[k][j-1-self.s] -= 1
-                change_roll[k] -= j
-
-                newd = np.sum(newx, axis=0)
-                if j == self.s + self.I and newd[-1] == 0:
-                    newx = self.rearrange(change_roll, remaining_period, j)
-                    newd = np.sum(newx, axis=0)
-            else:
-                usedDemand, decision_list = decisionOnce(sequence[-remaining_period:], newd, self.probab, self.s)
-                Indi_Demand = np.dot(usedDemand, range(self.I))
-
-                change_deny = copy.deepcopy(change_roll)
-                if decision_list:
-                    k = self.break_tie2(newx, change_roll, decision_list)
-                    newx[k][decision_list] -= 1
-                    if decision_list - Indi_Demand - 1 - self.s >= 0:
-                        newx[k][int(decision_list - Indi_Demand - 1 - self.s)] += 1
-                    change_roll[k] -= (Indi_Demand + 1 + self.s)
-
-                    change_accept = copy.deepcopy(change_roll)
-                    sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
-                    dw_acc, prop_acc = sam_multi.get_prob()
-                    W_acc = len(dw_acc)
-                    m_acc = stochasticModel(change_accept, self.given_lines,
-                                            self.demand_width_array, W_acc, self.I, prop_acc, dw_acc, self.s)
-                    ini_demand_acc, val_acc = m_acc.solveBenders(eps=1e-4, maxit=20)
-
-                    dw_deny = dw_acc
-                    prop_deny = prop_acc
-                    W_deny = len(dw_deny)
-                    m_deny = stochasticModel(change_deny, self.given_lines,
-                                             self.demand_width_array, W_deny, self.I, prop_deny, dw_deny, self.s)
-                    ini_demand_deny, val_deny = m_deny.solveBenders(eps=1e-4, maxit=20)
-                    # ini_demand_deny = np.ceil(ini_demand_deny)
-
-                    if val_acc + (j-self.s) < val_deny:
-                        mylist.append(0)
-                        deterModel = deterministicModel(change_deny, self.given_lines, self.demand_width_array, self.I, self.s)
-                        _, newx = deterModel.IP_formulation(np.zeros(self.I), ini_demand_deny)
-
-                        newx = self.full_largest(newx, change_deny)
-                        newx = newx.T.tolist()
-                        change_roll = change_deny
-                    else:
-                        mylist.append(1)
-                        deterModel = deterministicModel(change_accept, self.given_lines, self.demand_width_array, self.I, self.s)
-                        _, newx = deterModel.IP_formulation(np.zeros(self.I), ini_demand_acc)
-
-                        newx = self.full_largest(newx, change_accept)
-                        newx = newx.T.tolist()
-                        change_roll = change_accept
-                else:
-                    mylist.append(0)
-
-        sequence = [i-self.s for i in sequence]
-        final_demand = np.array(sequence) * np.array(mylist)
-        final_demand = final_demand[final_demand != 0]
-        print(change_roll)
-        print(mylist)
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
-        return demand
-
-    def method1(self, sequence, ini_demand):
-        decision_list = decision1(sequence, ini_demand, self.probab, self.s)
-        sequence = [i-self.s for i in sequence if i > 0]
-
-        final_demand = np.array(sequence) * np.array(decision_list)
-        # print('The result of Method 1--------------')
-        final_demand = final_demand[final_demand != 0]
-
-        demand = np.zeros(self.I)
-        for i in final_demand:
-            demand[i-1] += 1
-        return demand
-
     def result(self, sequence, ini_demand, ini_demand3, newx3, newx4):
         ini_demand4 = copy.deepcopy(ini_demand)
         ini_demand2 = copy.deepcopy(ini_demand3)
@@ -367,8 +250,10 @@ if __name__ == "__main__":
     num_sample = 1000
     s = 1
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
-    sequence, ini_demand, newx4 = a.random_generate()
+    newx4 = a.random_generate()
 
+    sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2,
+                5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
     new = a.bid_price(sequence)
     
     test = a.dynamic_program(sequence)

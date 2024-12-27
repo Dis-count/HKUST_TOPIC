@@ -4,8 +4,6 @@ import numpy as np
 import time
 from SamplingMethodSto import samplingmethod1
 from Mist import generate_sequence, decision1
-from collections import Counter
-from Method10 import deterministicModel
 
 # xk is binary in the master problem to indicate which row we assign the group in.
 # This function uses benders' decomposition to solve stochastic Model directly.

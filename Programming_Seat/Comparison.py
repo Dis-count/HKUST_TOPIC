@@ -214,7 +214,6 @@ class CompareMethods:
                     else:
                         totalvalue += p[k] * value[i][j-1]
                 value[i][j] = totalvalue
-
         return value
 
     def bid_price(self, sequence):
@@ -398,6 +397,7 @@ class CompareMethods:
 
     def method_IP(self, sequence, newx, change_roll0):
         # use the IP result to assign the groups
+        # booking limit
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         mylist = []
@@ -429,20 +429,6 @@ class CompareMethods:
         for i in final_demand:
             demand[i-1] += 1
         return demand
-
-    def result(self, sequence, ini_demand, ini_demand3, newx3, newx4):
-        ini_demand4 = copy.deepcopy(ini_demand)
-        ini_demand2 = copy.deepcopy(ini_demand3)
-        roll_width = copy.deepcopy(self.roll_width)
-
-        final_demand1 = self.method1(sequence, ini_demand)
-        final_demand2 = self.method1(sequence, ini_demand2)
-
-        final_demand3 = self.method_new(sequence, newx3, roll_width)
-        # final_demand3 = 0
-        final_demand4 = self.method_final(sequence, newx4, roll_width)
-
-        return final_demand1, final_demand2, final_demand3, final_demand4
 
 if __name__ == "__main__":
     given_lines = 10

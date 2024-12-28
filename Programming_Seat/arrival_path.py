@@ -1,5 +1,5 @@
 import numpy as np
-from Comparison1 import CompareMethods
+from Comparison import CompareMethods
 import time
 import matplotlib.pyplot as plt
 
@@ -25,7 +25,10 @@ if __name__ == "__main__":
 
     multi = np.arange(1, I+1)
 
-    sequence, newx4 = a_instance.random_generate()
+    # sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2,
+                # 5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
+
+    newx4 = a_instance.random_generate(sequence)
 
     accept_list = a_instance.method_new(sequence, newx4, roll_width)
     opt_demand = a_instance.offline(sequence)

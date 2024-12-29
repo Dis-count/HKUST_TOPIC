@@ -66,7 +66,7 @@ def plot_data(data, option):
 
 data = np.load('data_group4.npy')
 # period
-option = 1 
+option = 1
 # gamma
 option = 0
 plot_data(data, 1)

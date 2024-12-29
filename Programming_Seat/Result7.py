@@ -28,37 +28,7 @@ def prop_all():
 
     return p
 
-# gamma = 2.5
-def prop_list():
-    x = np.arange(0.05, 1, 0.05)
-    y = np.arange(0.05, 0.8, 0.05)
-    p = np.zeros((len(x)*len(y), 4))
 
-    t = 0
-    for i in x:
-        for j in y:
-            if 3-2*i-4*j > 0 and 3-4*i-2*j > 0:
-                p[t] = [(3 - 4*i - 2*j)/6, i, j, (3 - 2*i - 4*j)/6]
-                t += 1
-    p = p[0:t]
-
-    return p
-
-# gamma = 2
-def prop_list1():
-    x = np.arange(0.05, 0.5, 0.1)  # p3
-    y = np.arange(0.05, 0.35, 0.05)  # p4
-    p = np.zeros((len(x)*len(y), 4))
-
-    t = 0
-    for i in x:
-        for j in y:
-            if 1-2*i-3*j > 0:
-                p[t] = [(i + 2*j), (1 - 2*i - 3*j), i, j]
-                t += 1
-    p = p[0:t]
-
-    return p
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios

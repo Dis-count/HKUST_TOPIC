@@ -22,7 +22,6 @@ def prop_all():
                 if 1 - i - j - k > 0:
                     p[t] = [1 - i - j - k, i, j, k]
                     t += 1
-
     p = p[0:t]
 
     return p

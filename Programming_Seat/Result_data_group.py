@@ -53,7 +53,7 @@ if __name__ == "__main__":
                 sequence = sequences_pool[j][0: num_period]
                 newx4 = a_instance.random_generate(sequence)
                 sequence1 = [i-sd for i in sequence]
-                newx40 = a_without.random_generate(sequence1)
+                # newx40 = a_without.random_generate(sequence1)
 
                 f = a_without.offline(sequence1)  # optimal result
                 accept_people += np.dot(multi, f)

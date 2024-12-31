@@ -380,6 +380,7 @@ class CompareMethods:
                         # print(change_roll)
                         # print(np.sum(newx, axis=0))
                         mylist.append(0)
+                    #### Regenerate the planning
                     if remaining_period >= 2:
                         newx = self.rearrange(change_roll, remaining_period, sequence[num+1])
                         newd = np.sum(newx, axis=0)

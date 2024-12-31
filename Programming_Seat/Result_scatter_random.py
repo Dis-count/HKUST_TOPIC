@@ -3,11 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
-# not useful fitting with variance and prob_1
+data = [[0 for _ in range(2)] for _ in range(200)]
 
-data = [[0 for i in range(2)] for j in range(200)]
-
-with open("Periods_21.txt", 'r') as f:
+with open("Random_200.txt", 'r') as f:
     lines = f.readlines()[1:]
     cnt = 0
     for line in lines:
@@ -16,36 +14,38 @@ with open("Periods_21.txt", 'r') as f:
         cnt += 1
 
 def gamma(data):
-    result = np.zeros((len(data),3))
+    result = np.zeros((len(data), 3))
     cnt = 0
     for i in range(len(data)):
         prob = re.findall(r"\d+\.?\d*", data[i][0])
         p = [float(i) for i in prob]
         # theta = p[-1]  # np.var  np.std
-        p = np.dot(p, np.arange(1,5))
+        gamma = np.dot(p, np.arange(1,5))
         gap_point = re.findall(r"\d+\.?\d*", data[i][1])
         period = int(gap_point[0])
-        occu_rate = round(float(gap_point[1]) * 21/20, 2)
-        result[cnt] = [p, period, occu_rate]
+        occu_rate = round(float(gap_point[1]), 2)
+        result[cnt] = [gamma, period, occu_rate]
         cnt += 1
     return result
 
 result = gamma(data)
 
-plt.scatter(result[:, 0], result[:, 1], c="blue")
-plt.scatter(result[:, 0], result[:, 2], c="red")
+plt.scatter(result[:, 0], result[:, 1], c = "blue")
+plt.scatter(result[:, 0], result[:, 2], c = "red")
 
 x = np.arange(1.4, 3.6, 0.01)
-# y1 = 201.04 /(x+1)
-# y2 = 100.59 * x/(x+1)
+
+# y1 = 201.14 /(x+1)
+# y2 = 100.54 * x/(x+1)
+
+plt.xlabel('Gamma', fontsize=15)
+plt.ylabel('Percentage of total seats/Periods', fontsize=15)
 
 # plt.plot(x, y1, label="Blue_estimated")
 # plt.plot(x, y2, label="Red_estimated")
 
-plt.xlabel('Gamma', fontsize=18)
-plt.ylabel('Percentage of total seats/Periods', fontsize=18)
-
-plt.legend()
+# plt.legend(fontsize = 15)
+# plt.legend()
 plt.show()
 
 
@@ -54,20 +54,25 @@ plt.show()
 
 # data_x = result[:, 0]
 
-# theta = result[:, -1]
-
+# ####### Gap point estimation
+#  c1 * L
 # data_x1 = 1/(data_x+1)
 # data_y1 = result[:, 1]
 
+# ####### Occupancy estimations
+# c2 * L/(L-N) = c2* 21/20
 # data_x2 = data_x/(data_x+1) 
 # data_y2 = result[:, 2]
 
 # mod = sm.OLS(data_y2, sm.add_constant(data_x2))  # 需要用sm.add_constant 手动添加截距项
 
+# ############ When considering multiple independent variables 
+# ############ Not useful fitting with variance and prob_1
+# theta = result[:, -1]
 # datax1 = np.array([data_x2]).T
 # theta = np.array([theta]).T
-
 # data_x1 = np.concatenate((datax1, theta), axis=1)
+
 
 # mod = sm.OLS(data_y1, data_x1)  # 无截距项
 
@@ -75,7 +80,6 @@ plt.show()
 # print(res.summary())
 
 # print(a.reshape(-1, 1))
-
 # print(np.concatenate((a.T, b.T), axis=1))
 
 # const         -1.2799      0.446     -2.867      0.005      -2.160      -0.399

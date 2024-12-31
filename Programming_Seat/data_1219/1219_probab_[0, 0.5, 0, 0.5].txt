@@ -1,0 +1,32 @@
+Run Start Time: Thu Dec 19 21:04:47 2024
+The number of periods: 	60
+Sto: 99.45 ;Bid: 96.58 ;DP1: 97.23 ;Booking: 99.09 ;FCFS: 96.49 
+;Number of accepted people: 158.52 	The number of periods: 	70
+Sto: 99.82 ;Bid: 97.46 ;DP1: 98.28 ;Booking: 99.81 ;FCFS: 95.76 
+;Number of accepted people: 159.84 	The number of periods: 	80
+Sto: 99.92 ;Bid: 98.86 ;DP1: 98.60 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	90
+Sto: 99.99 ;Bid: 99.70 ;DP1: 99.10 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	100
+Sto: 100.00 ;Bid: 99.99 ;DP1: 98.74 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	110
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.64 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	120
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.64 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	130
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.66 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	140
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.81 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	150
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.64 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	160
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.75 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	170
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.65 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	180
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.64 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	190
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.62 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	The number of periods: 	200
+Sto: 100.00 ;Bid: 100.00 ;DP1: 98.61 ;Booking: 100.00 ;FCFS: 95.66 
+;Number of accepted people: 160.00 	Total Runtime	1637.662091

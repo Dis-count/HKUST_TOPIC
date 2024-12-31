@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
-data = [[0 for i in range(2)] for j in range(120)]
+data = [[0 for _ in range(2)] for _ in range(120)]
 
 with open("Periods_layout.txt", 'r') as f:
     lines = f.readlines()[1:]
@@ -20,7 +20,6 @@ with open("Periods_layout.txt", 'r') as f:
             data[cnt][1] = a[0]
             cnt += 1
         num += 1
-
 
 def gamma(data):
     result = np.zeros((len(data),3))
@@ -88,7 +87,7 @@ print(res.summary())
 
 # 151.6723/160   100.9988
 
-# 200.6338   100.2097 
+# 200.6338   100.2097
 
 # 251.1247   100.0757
 

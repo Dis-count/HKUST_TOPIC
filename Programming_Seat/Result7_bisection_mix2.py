@@ -6,7 +6,7 @@ import time
 import random
 
 # Find all the probability combinations
-#  the average of random probability with the same gamma
+# The average of random probability with the same gamma
 
 def prop_list(gamma):
     x = np.arange(0.05, 1, 0.05)

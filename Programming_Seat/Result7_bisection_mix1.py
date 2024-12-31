@@ -43,7 +43,7 @@ for i in range(100):
     ran_prop = random.randint(0, all_number-1)
     p = probab[ran_prop]
     my_file.write(str(p) + '\t')
-    gamma = np.dot(p, np.arange(1, 5))
+    # gamma = np.dot(p, np.arange(1, 5))
     a = 70
     b = 160
     num_period = int((a+b)/2)
@@ -52,7 +52,7 @@ for i in range(100):
         # total_seat = np.sum(roll_width)
         total_seat = np.sum(roll_width) - given_lines
         a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample, sd)
-        a_without = CompareMethods(roll_width-1, given_lines, I, p, num_period, num_sample, 0)
+        a_without = CompareMethods(roll_width-sd, given_lines, I, p, num_period, num_sample, 0)
         sto = 0
         accept_people = 0
 

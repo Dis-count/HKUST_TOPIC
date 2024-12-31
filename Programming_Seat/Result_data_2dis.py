@@ -26,9 +26,9 @@ if __name__ == "__main__":
     occup_1 = np.zeros(len(period_range))
     occup_2 = np.zeros(len(period_range))
     count = 100
-
-    sequences_pool = sequence_pool(count, total_period, probab, sd)
-
+    # sequences_pool = sequence_pool(count, total_period, probab, sd)
+    sequences_pool = np.load('data_sequence0.25.npy')
+    
     cnt = 0
     for num_period in period_range:
 

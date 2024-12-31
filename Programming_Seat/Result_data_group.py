@@ -25,8 +25,7 @@ if __name__ == "__main__":
     # probab = [0.3, 0.3, 0.2, 0.1, 0.1]
     # 4: [0.25, 0.3, 0.25, 0.2]
     sd = 1
-    group_dict = {4: [0.25, 0.3, 0.25, 0.2],
-                  3: [0.2, 0.2, 0.6],
+    group_dict = {3: [0.2, 0.2, 0.6],
                   5: [0.3, 0.3, 0.2, 0.1, 0.1]}
 
     t_value = np.arange(40, total_period, 1)
@@ -70,4 +69,4 @@ if __name__ == "__main__":
             cnt += 1
 
         data = np.vstack((t_value, people_value, occup_value))
-        np.save('data_group_test' + str(I) + '.npy', data)
+        np.save('data_group_' + str(I) + '.npy', data)

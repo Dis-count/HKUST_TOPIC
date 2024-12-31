@@ -23,7 +23,9 @@ if __name__ == "__main__":
     period_range = range(30, total_period, 1)
     # given_lines = 11
     layout_dic = {'fan': np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25]),
-                  'rec': np.ones(10) * 21}
+                  'rec_21rows': np.ones(20) * 11, 
+                  'small': np.ones(15) * 8, 
+                  'rec_10rows': np.ones(10)* 21}
 
     probab = [0.25, 0.3, 0.25, 0.2]
     sd = 1
@@ -63,4 +65,4 @@ if __name__ == "__main__":
             cnt += 1
 
         data = np.vstack((t_value, people_value, occup_value))
-        np.save('data_layout_fan' + str(shape) + '.npy', data)
+        np.save('data_layout_' + str(shape) + '.npy', data)

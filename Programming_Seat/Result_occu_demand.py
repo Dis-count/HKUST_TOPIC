@@ -50,12 +50,12 @@ def plot_data(data, option):
         plt.xlabel('Percentage of expected demand relative to total seats')
         plt.ylabel('Percentage of accepted individuals relative to total seats')
         point[1] = round(point[1], 2)
-        plt.axvline(x=60, ymin=0, ymax=1/6, color='green', linestyle='--')
+        plt.axvline(x=60, ymin = 0, ymax = 1/6, color = 'green', linestyle='--')
 
-        plt.axvline(x=70, ymin=0, ymax=1/3, color='green', linestyle='--')
-        plt.axvline(x=80,  ymin=0, ymax=1/2, color='purple', linestyle='--')
-        plt.axvline(90, ymin=0, ymax=2/3, color='purple', linestyle='--')
-        plt.axvline(100, ymin = 0, ymax = 5/6-0.02, color='purple', linestyle='--')
+        plt.axvline(x=70, ymin = 0, ymax = 1/3, color = 'green', linestyle='--')
+        plt.axvline(x=80,  ymin = 0, ymax = 1/2, color = 'purple', linestyle='--')
+        plt.axvline(90, ymin = 0, ymax = 2/3, color = 'purple', linestyle='--')
+        plt.axvline(100, ymin = 0, ymax = 5/6-0.02, color = 'purple', linestyle='--')
 
         my_x_ticks = np.arange(50, 110, 10)
         plt.xticks(my_x_ticks)

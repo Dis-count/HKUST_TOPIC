@@ -11,12 +11,13 @@ from Method10 import deterministicModel
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    period_range = range(60,201,10)
+    period_range = range(60, 101, 10)
     given_lines = 10
-    probab_list = [[0.2, 0.8, 0, 0], [0, 1, 0, 0]]
-    total_period = 210
+    probab_list = [[0.2, 0.8, 0, 0], [0.18, 0.7, 0.06, 0.06],
+                   [0, 0.5, 0, 0.5], [0.25, 0.3, 0.25, 0.2]]
     sd = 1
     count = 100
+    total_period = 100
 
     for probab in probab_list:
         begin_time = time.time()
@@ -79,5 +80,4 @@ if __name__ == "__main__":
         run_time = time.time() - begin_time
         my_file.write('Total Runtime\t%f\n' % run_time)
             # print('%.2f' % (ratio1/count*100))
-
         my_file.close()

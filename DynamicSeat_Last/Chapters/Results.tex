@@ -32,7 +32,7 @@ The following table presents the performance results of five different policies:
   \hline
   Distribution & T & DSA (\%) & DP (\%) & Bid (\%) & Booking (\%) & FCFS (\%) \\
   \hline
-  \multirow{5}{*}{D1} & 60   & 100.00 & 100.00 & 100.00 & 67.27 & 100.00 \\
+  \multirow{5}{*}{D1} & 60 & 100.00 & 100.00 & 100.00 & 67.27 & 100.00 \\
   & 70    & 99.53 & 99.01 & 98.98 & 91.43 & 98.82 \\
   & 80    & 99.38 & 98.91 & 98.84 & 97.06 & 96.06 \\
   & 90    & 99.52 & 99.23 & 99.10 & 98.52 & 95.37 \\
@@ -55,6 +55,7 @@ The following table presents the performance results of five different policies:
      & 80  & 99.54 & 97.89 & 97.21 & 98.38 & 96.19 \\
      & 90  & 99.90 & 99.73 & 99.44 & 99.58 & 94.53 \\
      & 100 & 100.00 & 100.00 & 100.00 & 100.00 & 94.32 \\
+  \hline
   \end{tabular}
 \end{table}
 
@@ -185,14 +186,14 @@ The largest occupancy rate can be calculated from Proposition 2.
 \subsection*{Different Group Sizes}
 The figures display the number of accepted individuals over time for group sizes of 3 and 5, respectively, both sharing the same average group of people.
 
-\begin{figure}[h]
-  \centering
-  \subfigure[Group size of 3]{
-    \includegraphics[width = 0.48\textwidth]{./Figures/group3.pdf}}
-  \subfigure[Group size of 5]{
-    \includegraphics[width = 0.48\textwidth]{./Figures/group5.pdf}}
-  \caption{The occupancy rate over demand for different group sizes}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \subfigure[Group size of 3]{
+%     \includegraphics[width = 0.48\textwidth]{./Figures/group3.pdf}}
+%   \subfigure[Group size of 5]{
+%     \includegraphics[width = 0.48\textwidth]{./Figures/group5.pdf}}
+%   \caption{The occupancy rate over demand for different group sizes}
+% \end{figure}
 
 \subsection*{Different Social Distances}
 The following figure illustrates the number of accepted individuals over time with social distancing set at 0, 1, and 2 seats, respectively.
@@ -217,7 +218,7 @@ To provide estimations, we utilize the equations $y_1 = \frac{c_1 \tilde{L}}{\ga
 
 \begin{figure}[ht]
   \centering
-    \includegraphics[width=0.8\textwidth]{./Figures/re2.pdf}
+    \includegraphics[width=0.8\textwidth]{./Figures/gamma_estimation.pdf}
   \caption{Gap points and their estimation under 200 probabilities}
 \end{figure}
 

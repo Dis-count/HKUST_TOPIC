@@ -1,32 +1,12 @@
-Run Start Time: Thu Dec 19 21:04:47 2024
+Run Start Time:Mon Dec 30 21:27:46 2024
 The number of periods: 	60
-Sto: 99.45 ;Bid: 96.58 ;DP1: 97.23 ;Booking: 99.09 ;FCFS: 96.49 
-;Number of accepted people: 158.52 	The number of periods: 	70
-Sto: 99.82 ;Bid: 97.46 ;DP1: 98.28 ;Booking: 99.81 ;FCFS: 95.76 
-;Number of accepted people: 159.84 	The number of periods: 	80
-Sto: 99.92 ;Bid: 98.86 ;DP1: 98.60 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	90
-Sto: 99.99 ;Bid: 99.70 ;DP1: 99.10 ;Booking: 100.00 ;FCFS: 95.66 
+Sto: 99.58 ;Bid: 96.87 ;DP1: 97.58 ;Booking: 99.31 ;FCFS: 96.62 
+;Number of accepted people: 158.82 	The number of periods: 	70
+Sto: 99.86 ;Bid: 97.75 ;DP1: 98.34 ;Booking: 99.79 ;FCFS: 96.06 
+;Number of accepted people: 159.78 	The number of periods: 	80
+Sto: 99.94 ;Bid: 99.09 ;DP1: 98.59 ;Booking: 99.94 ;FCFS: 95.94 
+;Number of accepted people: 159.98 	The number of periods: 	90
+Sto: 99.94 ;Bid: 99.85 ;DP1: 98.97 ;Booking: 100.00 ;FCFS: 95.93 
 ;Number of accepted people: 160.00 	The number of periods: 	100
-Sto: 100.00 ;Bid: 99.99 ;DP1: 98.74 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	110
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.64 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	120
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.64 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	130
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.66 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	140
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.81 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	150
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.64 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	160
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.75 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	170
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.65 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	180
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.64 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	190
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.62 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	The number of periods: 	200
-Sto: 100.00 ;Bid: 100.00 ;DP1: 98.61 ;Booking: 100.00 ;FCFS: 95.66 
-;Number of accepted people: 160.00 	Total Runtime	1637.662091
+Sto: 100.00 ;Bid: 99.95 ;DP1: 98.61 ;Booking: 100.00 ;FCFS: 95.93 
+;Number of accepted people: 160.00 	Total Runtime	306.121183

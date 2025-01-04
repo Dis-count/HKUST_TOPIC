@@ -11,7 +11,7 @@ from Mist import sequence_pool
 # [0.25, 0.3, 0.25, 0.2]  4
 # gamma = 2.4
 
-# output: 
+# output:
 # data_group5.npy
 # data_group4.npy
 # data_group3.npy

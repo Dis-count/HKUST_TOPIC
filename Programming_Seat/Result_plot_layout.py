@@ -28,10 +28,14 @@ def plot_data(given_lines, roll_width, data):
     plt.annotate(r'Gap $%s$' % str(point), xy = point, xytext = (point[0]+10, point[1]), arrowprops = dict(facecolor = 'black', shrink = 0.1),)
     
     plt.legend()
-    plt.savefig('layout20.pdf')
+    plt.savefig('Layout_rec20rows.pdf')
 
-given_lines = 15
-roll_width = np.ones(15) * 8
 
-data = np.load('data_layout20.npy')
+# roll_width = np.ones(15) * 8
+# roll_width = np.ones(10) * 21
+roll_width = np.ones(20) * 11
+# roll_width = np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25])
+given_lines = len(roll_width)
+
+data = np.load('data_layout_rec_20rows.npy')
 plot_data(given_lines, roll_width, data)

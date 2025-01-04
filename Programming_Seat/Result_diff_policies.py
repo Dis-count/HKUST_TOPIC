@@ -7,24 +7,26 @@ from Method10 import deterministicModel
 
 # [0.18, 0.7, 0.06, 0.06], [0, 0.5, 0, 0.5],
 # [0.2, 0.8, 0, 0], [0, 1, 0, 0]
+# [0.05, 0.05, 0.85, 0.05], [0.25, 0.3, 0.25, 0.2]
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
     period_range = range(60, 101, 10)
     given_lines = 10
-    probab_list = [[0.2, 0.8, 0, 0], [0.18, 0.7, 0.06, 0.06],
-                   [0, 0.5, 0, 0.5], [0.25, 0.3, 0.25, 0.2]]
+    # probab_list = [[0.2, 0.8, 0, 0], [0.18, 0.7, 0.06, 0.06], [0, 0.5, 0, 0.5], [0.25, 0.3, 0.25, 0.2]]
+    probab_list = [[0.25, 0.3, 0.25, 0.2]]
+
     sd = 1
     count = 100
     total_period = 100
 
     for probab in probab_list:
         begin_time = time.time()
-        filename = '1219_probab_' + str(probab) + '.txt'
+        filename = '1231_probab_' + str(probab) + '.txt'
         my_file = open(filename, 'w')
         my_file.write('Run Start Time:' + str(time.ctime()) + '\n')
-        
+        # sequences_pool = np.load('data_sequence0.25.npy')
         sequences_pool = sequence_pool(count, total_period, probab, sd)
 
         for num_period in period_range:

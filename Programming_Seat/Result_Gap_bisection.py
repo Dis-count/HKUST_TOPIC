@@ -75,29 +75,29 @@ def prop_all():
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    given_lines = 10    
+    given_lines = 20
     probab = prop_all()
-    all_number = len(probab)
+    # 随机100个数字
+    probab_list = np.load('Prob_random.npy')
     total_period = 100
     sd = 1
     begin_time = time.time()
 
-    filename = 'Random_200.txt'
+    filename = 'Random_100_20rows.txt'
     my_file = open(filename, 'w')
     my_file.write('Run Start Time: ' + str(time.ctime()) + '\n')
     count = 100
 
-    for i in range(200):
-        ran_prop = random.randint(0, all_number-1)
-        p = probab[ran_prop]
+    for i in range(100):
+        p = probab[probab_list[i]]
         sequences_pool = sequence_pool(count, total_period, p, sd)
         my_file.write(str(p) + '\t')
 
         a, b = 30, 100
         num_period = int((a+b)/2)
         while num_period > a:
-            roll_width = np.ones(given_lines) * 21
-            # roll_width = np.array([21, 21, 21, 21, 21, 21, 21, 21, 21, 21])
+            roll_width = np.ones(given_lines) * 11
+            # roll_width = np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25])
             total_seat = np.sum(roll_width) - given_lines
             a_instance = CompareMethods(roll_width, given_lines, I, p, num_period, num_sample, sd)
             a_without = CompareMethods(roll_width-sd, given_lines, I, p, num_period, num_sample, 0)

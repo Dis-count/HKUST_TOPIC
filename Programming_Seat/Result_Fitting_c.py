@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
+# different layouts for different c_1
+
 data = [[0 for _ in range(2)] for _ in range(120)]
 
 with open("Periods_layout.txt", 'r') as f:

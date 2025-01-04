@@ -19,21 +19,25 @@ from Comparison import CompareMethods
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    total_period = 100
+    total_period = 90
     period_range = range(30, total_period, 1)
     # given_lines = 11
-    layout_dic = {'fan': np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25]),
-                  'rec_21rows': np.ones(20) * 11, 
-                  'small': np.ones(15) * 8, 
-                  'rec_10rows': np.ones(10)* 21}
 
-    probab = [0.25, 0.3, 0.25, 0.2]
+    # layout_dic = {'fan': np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25]),
+    #               'rec_20rows': np.ones(20) * 11,
+    #               'small': np.ones(15) * 8,
+    #               'rec_10rows': np.ones(10) * 21}
+
+    layout_dic = {'fan': np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25]),
+                  'rec_10rows': np.ones(10) * 21}
+
+    probab = [0.05, 0.05, 0.85, 0.05]
     sd = 1
     t_value = np.arange(30, total_period, 1)
     people_value = np.zeros(len(period_range))
     occup_value = np.zeros(len(period_range))
     count = 100
-    sequences_pool = np.load('data_sequence0.25.npy')
+    sequences_pool = np.load('sequence_0.05.npy')
 
     for shape, roll_width in layout_dic.items():
         cnt = 0
@@ -65,4 +69,4 @@ if __name__ == "__main__":
             cnt += 1
 
         data = np.vstack((t_value, people_value, occup_value))
-        np.save('data_layout_' + str(shape) + '.npy', data)
+        np.save('layout_prop_' + str(shape) + '.npy', data)

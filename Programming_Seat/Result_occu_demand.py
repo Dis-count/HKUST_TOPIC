@@ -27,7 +27,7 @@ def plot_data(data, option):
         plt.ylim((40, 100))
         plt.xlabel('Period')
         plt.ylabel('Percentage of accepted individuals relative to total seats')
-        point[1] = round(point[1], 2)
+        point[1] = round(point[1], 1)
 
         plt.annotate(r'Gap $%s$' % str(point), xy=(point[0], point[1]), xytext=(
             point[0] + 5, point[1]-10), arrowprops=dict(facecolor='black', shrink=0.1),)
@@ -49,7 +49,7 @@ def plot_data(data, option):
         plt.ylim((50, 110))
         plt.xlabel('Percentage of expected demand relative to total seats')
         plt.ylabel('Percentage of accepted individuals relative to total seats')
-        point[1] = round(point[1], 2)
+        point[1] = round(point[1], 1)
         plt.axvline(x=60, ymin = 0, ymax = 1/6, color = 'green', linestyle='--')
 
         plt.axvline(x=70, ymin = 0, ymax = 1/3, color = 'green', linestyle='--')
@@ -60,7 +60,7 @@ def plot_data(data, option):
         my_x_ticks = np.arange(50, 110, 10)
         plt.xticks(my_x_ticks)
         plt.legend()
-        graphname = 'occu_demand_group4.pdf'
+        graphname = 'occu_gamma_group4.pdf'
         plt.savefig(graphname)
 
 
@@ -69,4 +69,4 @@ data = np.load('data_group4.npy')
 option = 1
 # gamma
 option = 0
-plot_data(data, 1)
+plot_data(data, 0)

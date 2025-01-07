@@ -1,0 +1,12 @@
+Run Start Time: Fri Dec 22 17:17:14 2023
+The number of periods: 	60
+Sto: 98.98 ;Bid: 98.43 ;DP1: 98.44 ;FCFS: 98.60 
+;Number of accepted people: 147.78 	The number of periods: 	70
+Sto: 98.17 ;Bid: 96.42 ;DP1: 96.99 ;FCFS: 94.79 
+;Number of accepted people: 155.55 	The number of periods: 	80
+Sto: 98.67 ;Bid: 96.00 ;DP1: 96.07 ;FCFS: 92.93 
+;Number of accepted people: 158.66 	The number of periods: 	90
+Sto: 98.96 ;Bid: 95.88 ;DP1: 96.14 ;FCFS: 92.34 
+;Number of accepted people: 159.66 	The number of periods: 	100
+Sto: 99.51 ;Bid: 96.75 ;DP1: 94.87 ;FCFS: 92.48 
+;Number of accepted people: 159.96 	Total Runtime	5705.015659

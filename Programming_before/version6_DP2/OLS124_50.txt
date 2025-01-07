@@ -1,0 +1,1997 @@
+Run Start Time: Sun Mar 19 19:40:42 2023
+probabilities: 	[0.05 0.05 0.05 0.85]
+Result: 158.06 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.1  0.8 ]
+Result: 158.38 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.15 0.75]
+Result: 158.64 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.2  0.7 ]
+Result: 158.54 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.25 0.65]
+Result: 158.64 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.3  0.6 ]
+Result: 159.04 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.35 0.55]
+Result: 159.06 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.4  0.5 ]
+Result: 158.64 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.45 0.45]
+Result: 159.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.5  0.4 ]
+Result: 158.84 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.55 0.35]
+Result: 158.92 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.6  0.3 ]
+Result: 158.54 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.65 0.25]
+Result: 157.80 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.7  0.2 ]
+Result: 157.40 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.75 0.15]
+Result: 156.04 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.8  0.1 ]
+Result: 153.66 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.05 0.85 0.05]
+Result: 151.38 
+Number of accepted people: 158.78 	probabilities: 	[0.05 0.1  0.05 0.8 ]
+Result: 158.18 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.1  0.75]
+Result: 158.48 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.15 0.7 ]
+Result: 158.76 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.2  0.65]
+Result: 158.88 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.25 0.6 ]
+Result: 158.96 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.3  0.55]
+Result: 158.82 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.35 0.5 ]
+Result: 158.96 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.4  0.45]
+Result: 158.74 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.45 0.4 ]
+Result: 158.98 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.5  0.35]
+Result: 158.86 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.55 0.3 ]
+Result: 158.38 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.6  0.25]
+Result: 157.68 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.65 0.2 ]
+Result: 156.84 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.7  0.15]
+Result: 156.00 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.75 0.1 ]
+Result: 154.14 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.1  0.8  0.05]
+Result: 151.64 
+Number of accepted people: 158.80 	probabilities: 	[0.05 0.15 0.05 0.75]
+Result: 158.16 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.1  0.7 ]
+Result: 158.58 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.15 0.65]
+Result: 158.84 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.2  0.6 ]
+Result: 159.16 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.25 0.55]
+Result: 158.58 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.3  0.5 ]
+Result: 158.82 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.35 0.45]
+Result: 158.80 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.4  0.4 ]
+Result: 158.32 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.45 0.35]
+Result: 158.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.5  0.3 ]
+Result: 157.24 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.55 0.25]
+Result: 157.10 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.6  0.2 ]
+Result: 156.26 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.65 0.15]
+Result: 155.36 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.15 0.7  0.1 ]
+Result: 153.74 
+Number of accepted people: 159.98 	probabilities: 	[0.05 0.15 0.75 0.05]
+Result: 151.74 
+Number of accepted people: 158.54 	probabilities: 	[0.05 0.2  0.05 0.7 ]
+Result: 158.84 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.1  0.65]
+Result: 158.62 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.15 0.6 ]
+Result: 159.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.2  0.55]
+Result: 158.76 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.25 0.5 ]
+Result: 158.60 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.3  0.45]
+Result: 158.62 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.35 0.4 ]
+Result: 158.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.4  0.35]
+Result: 157.78 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.45 0.3 ]
+Result: 156.80 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.5  0.25]
+Result: 156.40 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.55 0.2 ]
+Result: 156.04 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.6  0.15]
+Result: 155.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.65 0.1 ]
+Result: 153.78 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.2  0.7  0.05]
+Result: 152.04 
+Number of accepted people: 158.84 	probabilities: 	[0.05 0.25 0.05 0.65]
+Result: 158.36 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.1  0.6 ]
+Result: 158.80 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.15 0.55]
+Result: 158.74 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.2  0.5 ]
+Result: 158.24 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.25 0.45]
+Result: 158.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.3  0.4 ]
+Result: 157.38 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.35 0.35]
+Result: 156.54 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.4  0.3 ]
+Result: 156.44 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.45 0.25]
+Result: 155.38 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.5  0.2 ]
+Result: 154.56 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.55 0.15]
+Result: 153.66 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.6  0.1 ]
+Result: 153.28 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.25 0.65 0.05]
+Result: 151.86 
+Number of accepted people: 158.72 	probabilities: 	[0.05 0.3  0.05 0.6 ]
+Result: 158.42 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.1  0.55]
+Result: 158.24 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.15 0.5 ]
+Result: 158.24 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.2  0.45]
+Result: 157.88 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.25 0.4 ]
+Result: 157.34 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.3  0.35]
+Result: 156.66 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.35 0.3 ]
+Result: 156.10 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.4  0.25]
+Result: 155.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.45 0.2 ]
+Result: 154.48 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.5  0.15]
+Result: 153.38 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.55 0.1 ]
+Result: 152.60 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.3  0.6  0.05]
+Result: 151.70 
+Number of accepted people: 158.56 	probabilities: 	[0.05 0.35 0.05 0.55]
+Result: 157.58 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.1  0.5 ]
+Result: 157.22 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.15 0.45]
+Result: 157.28 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.2  0.4 ]
+Result: 156.56 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.25 0.35]
+Result: 155.52 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.3  0.3 ]
+Result: 155.14 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.35 0.25]
+Result: 154.22 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.4  0.2 ]
+Result: 153.52 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.45 0.15]
+Result: 153.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.5  0.1 ]
+Result: 152.10 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.35 0.55 0.05]
+Result: 151.34 
+Number of accepted people: 158.88 	probabilities: 	[0.05 0.4  0.05 0.5 ]
+Result: 156.90 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.1  0.45]
+Result: 156.26 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.15 0.4 ]
+Result: 155.36 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.2  0.35]
+Result: 155.06 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.25 0.3 ]
+Result: 154.74 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.3  0.25]
+Result: 153.86 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.35 0.2 ]
+Result: 152.96 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.4  0.15]
+Result: 151.60 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.45 0.1 ]
+Result: 151.58 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.4  0.5  0.05]
+Result: 150.40 
+Number of accepted people: 158.50 	probabilities: 	[0.05 0.45 0.05 0.45]
+Result: 155.48 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.45 0.1  0.4 ]
+Result: 154.52 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.45 0.15 0.35]
+Result: 154.24 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.45 0.2  0.3 ]
+Result: 153.54 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.45 0.25 0.25]
+Result: 153.08 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.45 0.3  0.2 ]
+Result: 151.74 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.45 0.35 0.15]
+Result: 151.60 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.45 0.4  0.1 ]
+Result: 150.38 
+Number of accepted people: 159.98 	probabilities: 	[0.05 0.45 0.45 0.05]
+Result: 149.96 
+Number of accepted people: 158.60 	probabilities: 	[0.05 0.5  0.05 0.4 ]
+Result: 154.18 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.5  0.1  0.35]
+Result: 153.60 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.5  0.15 0.3 ]
+Result: 152.78 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.5  0.2  0.25]
+Result: 152.58 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.5  0.25 0.2 ]
+Result: 151.62 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.5  0.3  0.15]
+Result: 150.58 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.5  0.35 0.1 ]
+Result: 149.32 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.5  0.4  0.05]
+Result: 148.38 
+Number of accepted people: 157.68 	probabilities: 	[0.05 0.55 0.05 0.35]
+Result: 152.20 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.55 0.1  0.3 ]
+Result: 152.06 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.55 0.15 0.25]
+Result: 150.98 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.55 0.2  0.2 ]
+Result: 150.74 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.55 0.25 0.15]
+Result: 149.28 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.55 0.3  0.1 ]
+Result: 148.18 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.55 0.35 0.05]
+Result: 147.76 
+Number of accepted people: 158.72 	probabilities: 	[0.05 0.6  0.05 0.3 ]
+Result: 151.20 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.6  0.1  0.25]
+Result: 150.14 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.6  0.15 0.2 ]
+Result: 149.78 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.6  0.2  0.15]
+Result: 148.70 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.6  0.25 0.1 ]
+Result: 147.44 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.6  0.3  0.05]
+Result: 146.34 
+Number of accepted people: 158.62 	probabilities: 	[0.05 0.65 0.05 0.25]
+Result: 149.50 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.65 0.1  0.2 ]
+Result: 148.52 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.65 0.15 0.15]
+Result: 148.04 
+Number of accepted people: 159.98 	probabilities: 	[0.05 0.65 0.2  0.1 ]
+Result: 147.28 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.65 0.25 0.05]
+Result: 146.06 
+Number of accepted people: 158.90 	probabilities: 	[0.05 0.7  0.05 0.2 ]
+Result: 147.50 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.7  0.1  0.15]
+Result: 146.78 
+Number of accepted people: 160.00 	probabilities: 	[0.05 0.7  0.15 0.1 ]
+Result: 146.06 
+Number of accepted people: 159.76 	probabilities: 	[0.05 0.7  0.2  0.05]
+Result: 144.86 
+Number of accepted people: 158.12 	probabilities: 	[0.05 0.75 0.05 0.15]
+Result: 145.90 
+Number of accepted people: 159.74 	probabilities: 	[0.05 0.75 0.1  0.1 ]
+Result: 145.40 
+Number of accepted people: 158.34 	probabilities: 	[0.05 0.75 0.15 0.05]
+Result: 143.96 
+Number of accepted people: 156.44 	probabilities: 	[0.05 0.8  0.05 0.1 ]
+Result: 144.10 
+Number of accepted people: 156.50 	probabilities: 	[0.05 0.8  0.1  0.05]
+Result: 143.26 
+Number of accepted people: 152.82 	probabilities: 	[0.05 0.85 0.05 0.05]
+Result: 141.68 
+Number of accepted people: 149.60 	probabilities: 	[0.1  0.05 0.05 0.8 ]
+Result: 157.42 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.1  0.75]
+Result: 157.86 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.15 0.7 ]
+Result: 158.42 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.2  0.65]
+Result: 158.86 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.25 0.6 ]
+Result: 158.78 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.3  0.55]
+Result: 158.76 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.35 0.5 ]
+Result: 158.80 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.4  0.45]
+Result: 158.74 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.45 0.4 ]
+Result: 158.08 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.5  0.35]
+Result: 158.02 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.55 0.3 ]
+Result: 157.32 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.6  0.25]
+Result: 156.86 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.65 0.2 ]
+Result: 156.20 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.7  0.15]
+Result: 154.80 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.75 0.1 ]
+Result: 153.26 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.05 0.8  0.05]
+Result: 150.52 
+Number of accepted people: 158.88 	probabilities: 	[0.1  0.1  0.05 0.75]
+Result: 157.90 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.1 0.1 0.7]
+Result: 158.36 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.1  0.15 0.65]
+Result: 158.30 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.1 0.2 0.6]
+Result: 158.58 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.1  0.25 0.55]
+Result: 158.70 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.1 0.3 0.5]
+Result: 158.36 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.1  0.35 0.45]
+Result: 158.38 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.1 0.4 0.4]
+Result: 157.96 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.1  0.45 0.35]
+Result: 157.62 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.1 0.5 0.3]
+Result: 157.04 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.1  0.55 0.25]
+Result: 156.22 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.1 0.6 0.2]
+Result: 155.42 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.1  0.65 0.15]
+Result: 154.46 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.1 0.7 0.1]
+Result: 153.48 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.1  0.75 0.05]
+Result: 150.98 
+Number of accepted people: 159.10 	probabilities: 	[0.1  0.15 0.05 0.7 ]
+Result: 158.24 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.1  0.65]
+Result: 158.24 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.15 0.6 ]
+Result: 158.36 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.2  0.55]
+Result: 158.50 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.25 0.5 ]
+Result: 158.58 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.3  0.45]
+Result: 157.78 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.35 0.4 ]
+Result: 157.48 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.4  0.35]
+Result: 157.20 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.45 0.3 ]
+Result: 156.50 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.5  0.25]
+Result: 155.20 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.55 0.2 ]
+Result: 155.12 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.6  0.15]
+Result: 153.88 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.15 0.65 0.1 ]
+Result: 153.52 
+Number of accepted people: 159.98 	probabilities: 	[0.1  0.15 0.7  0.05]
+Result: 151.56 
+Number of accepted people: 158.56 	probabilities: 	[0.1  0.2  0.05 0.65]
+Result: 157.68 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.2 0.1 0.6]
+Result: 158.60 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.2  0.15 0.55]
+Result: 158.08 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.2 0.2 0.5]
+Result: 158.04 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.2  0.25 0.45]
+Result: 157.38 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.2 0.3 0.4]
+Result: 156.82 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.2  0.35 0.35]
+Result: 156.04 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.2 0.4 0.3]
+Result: 155.90 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.2  0.45 0.25]
+Result: 154.40 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.2 0.5 0.2]
+Result: 154.70 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.2  0.55 0.15]
+Result: 153.52 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.2 0.6 0.1]
+Result: 152.78 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.2  0.65 0.05]
+Result: 151.38 
+Number of accepted people: 158.68 	probabilities: 	[0.1  0.25 0.05 0.6 ]
+Result: 157.64 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.1  0.55]
+Result: 157.96 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.15 0.5 ]
+Result: 157.10 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.2  0.45]
+Result: 156.74 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.25 0.4 ]
+Result: 156.10 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.3  0.35]
+Result: 155.30 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.35 0.3 ]
+Result: 155.26 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.4  0.25]
+Result: 153.78 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.45 0.2 ]
+Result: 153.22 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.5  0.15]
+Result: 153.08 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.55 0.1 ]
+Result: 152.30 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.25 0.6  0.05]
+Result: 150.84 
+Number of accepted people: 159.02 	probabilities: 	[0.1  0.3  0.05 0.55]
+Result: 157.24 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.3 0.1 0.5]
+Result: 156.90 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.3  0.15 0.45]
+Result: 156.10 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.3 0.2 0.4]
+Result: 156.12 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.3  0.25 0.35]
+Result: 155.02 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.3 0.3 0.3]
+Result: 154.58 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.3  0.35 0.25]
+Result: 153.18 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.3 0.4 0.2]
+Result: 152.86 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.3  0.45 0.15]
+Result: 152.30 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.3 0.5 0.1]
+Result: 151.32 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.3  0.55 0.05]
+Result: 150.24 
+Number of accepted people: 158.60 	probabilities: 	[0.1  0.35 0.05 0.5 ]
+Result: 155.90 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.1  0.45]
+Result: 155.24 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.15 0.4 ]
+Result: 155.14 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.2  0.35]
+Result: 154.56 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.25 0.3 ]
+Result: 153.52 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.3  0.25]
+Result: 152.58 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.35 0.2 ]
+Result: 151.66 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.4  0.15]
+Result: 151.28 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.45 0.1 ]
+Result: 150.84 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.35 0.5  0.05]
+Result: 149.86 
+Number of accepted people: 159.08 	probabilities: 	[0.1  0.4  0.05 0.45]
+Result: 155.60 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.4 0.1 0.4]
+Result: 153.70 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.4  0.15 0.35]
+Result: 153.48 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.4 0.2 0.3]
+Result: 153.12 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.4  0.25 0.25]
+Result: 152.26 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.4 0.3 0.2]
+Result: 151.62 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.4  0.35 0.15]
+Result: 150.82 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.4 0.4 0.1]
+Result: 149.70 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.4  0.45 0.05]
+Result: 148.68 
+Number of accepted people: 159.08 	probabilities: 	[0.1  0.45 0.05 0.4 ]
+Result: 154.00 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.45 0.1  0.35]
+Result: 152.30 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.45 0.15 0.3 ]
+Result: 152.62 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.45 0.2  0.25]
+Result: 151.26 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.45 0.25 0.2 ]
+Result: 150.48 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.45 0.3  0.15]
+Result: 149.42 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.45 0.35 0.1 ]
+Result: 148.90 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.45 0.4  0.05]
+Result: 147.26 
+Number of accepted people: 158.66 	probabilities: 	[0.1  0.5  0.05 0.35]
+Result: 151.96 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.5 0.1 0.3]
+Result: 151.08 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.5  0.15 0.25]
+Result: 149.66 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.5 0.2 0.2]
+Result: 149.32 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.5  0.25 0.15]
+Result: 148.74 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.5 0.3 0.1]
+Result: 147.28 
+Number of accepted people: 159.98 	probabilities: 	[0.1  0.5  0.35 0.05]
+Result: 146.62 
+Number of accepted people: 158.82 	probabilities: 	[0.1  0.55 0.05 0.3 ]
+Result: 150.14 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.55 0.1  0.25]
+Result: 149.42 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.55 0.15 0.2 ]
+Result: 148.78 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.55 0.2  0.15]
+Result: 147.64 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.55 0.25 0.1 ]
+Result: 147.22 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.55 0.3  0.05]
+Result: 146.24 
+Number of accepted people: 159.04 	probabilities: 	[0.1  0.6  0.05 0.25]
+Result: 148.54 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.6 0.1 0.2]
+Result: 147.66 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.6  0.15 0.15]
+Result: 146.62 
+Number of accepted people: 160.00 	probabilities: 	[0.1 0.6 0.2 0.1]
+Result: 145.24 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.6  0.25 0.05]
+Result: 144.88 
+Number of accepted people: 158.62 	probabilities: 	[0.1  0.65 0.05 0.2 ]
+Result: 146.82 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.65 0.1  0.15]
+Result: 145.38 
+Number of accepted people: 160.00 	probabilities: 	[0.1  0.65 0.15 0.1 ]
+Result: 145.14 
+Number of accepted people: 159.90 	probabilities: 	[0.1  0.65 0.2  0.05]
+Result: 143.70 
+Number of accepted people: 157.90 	probabilities: 	[0.1  0.7  0.05 0.15]
+Result: 144.90 
+Number of accepted people: 159.56 	probabilities: 	[0.1 0.7 0.1 0.1]
+Result: 143.88 
+Number of accepted people: 158.76 	probabilities: 	[0.1  0.7  0.15 0.05]
+Result: 142.86 
+Number of accepted people: 156.12 	probabilities: 	[0.1  0.75 0.05 0.1 ]
+Result: 142.90 
+Number of accepted people: 155.80 	probabilities: 	[0.1  0.75 0.1  0.05]
+Result: 141.50 
+Number of accepted people: 152.68 	probabilities: 	[0.1  0.8  0.05 0.05]
+Result: 141.06 
+Number of accepted people: 149.94 	probabilities: 	[0.15 0.05 0.05 0.75]
+Result: 157.06 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.1  0.7 ]
+Result: 157.56 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.15 0.65]
+Result: 158.36 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.2  0.6 ]
+Result: 158.62 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.25 0.55]
+Result: 158.52 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.3  0.5 ]
+Result: 158.22 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.35 0.45]
+Result: 157.84 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.4  0.4 ]
+Result: 156.78 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.45 0.35]
+Result: 156.60 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.5  0.3 ]
+Result: 156.44 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.55 0.25]
+Result: 155.42 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.6  0.2 ]
+Result: 154.48 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.65 0.15]
+Result: 154.20 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.7  0.1 ]
+Result: 152.46 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.05 0.75 0.05]
+Result: 148.82 
+Number of accepted people: 158.42 	probabilities: 	[0.15 0.1  0.05 0.7 ]
+Result: 157.10 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.1  0.65]
+Result: 157.68 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.15 0.6 ]
+Result: 158.46 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.2  0.55]
+Result: 157.84 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.25 0.5 ]
+Result: 157.98 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.3  0.45]
+Result: 157.50 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.35 0.4 ]
+Result: 156.86 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.4  0.35]
+Result: 156.32 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.45 0.3 ]
+Result: 155.70 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.5  0.25]
+Result: 154.66 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.55 0.2 ]
+Result: 153.82 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.6  0.15]
+Result: 153.44 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.65 0.1 ]
+Result: 152.62 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.1  0.7  0.05]
+Result: 150.56 
+Number of accepted people: 158.52 	probabilities: 	[0.15 0.15 0.05 0.65]
+Result: 157.02 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.1  0.6 ]
+Result: 157.78 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.15 0.55]
+Result: 157.38 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.2  0.5 ]
+Result: 157.06 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.25 0.45]
+Result: 156.74 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.3  0.4 ]
+Result: 156.16 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.35 0.35]
+Result: 155.64 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.4  0.3 ]
+Result: 154.66 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.45 0.25]
+Result: 154.26 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.5  0.2 ]
+Result: 153.06 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.55 0.15]
+Result: 152.80 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.6  0.1 ]
+Result: 151.92 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.15 0.65 0.05]
+Result: 150.38 
+Number of accepted people: 158.78 	probabilities: 	[0.15 0.2  0.05 0.6 ]
+Result: 156.78 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.1  0.55]
+Result: 157.50 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.15 0.5 ]
+Result: 157.26 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.2  0.45]
+Result: 156.34 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.25 0.4 ]
+Result: 155.46 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.3  0.35]
+Result: 154.54 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.35 0.3 ]
+Result: 154.08 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.4  0.25]
+Result: 153.88 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.45 0.2 ]
+Result: 152.50 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.5  0.15]
+Result: 152.30 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.55 0.1 ]
+Result: 151.48 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.2  0.6  0.05]
+Result: 150.24 
+Number of accepted people: 158.66 	probabilities: 	[0.15 0.25 0.05 0.55]
+Result: 156.46 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.1  0.5 ]
+Result: 156.38 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.15 0.45]
+Result: 155.74 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.2  0.4 ]
+Result: 155.04 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.25 0.35]
+Result: 153.92 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.3  0.3 ]
+Result: 153.68 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.35 0.25]
+Result: 153.06 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.4  0.2 ]
+Result: 152.08 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.45 0.15]
+Result: 151.82 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.5  0.1 ]
+Result: 150.62 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.25 0.55 0.05]
+Result: 149.88 
+Number of accepted people: 158.28 	probabilities: 	[0.15 0.3  0.05 0.5 ]
+Result: 155.18 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.1  0.45]
+Result: 154.76 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.15 0.4 ]
+Result: 154.40 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.2  0.35]
+Result: 152.78 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.25 0.3 ]
+Result: 152.26 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.3  0.25]
+Result: 151.82 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.35 0.2 ]
+Result: 151.46 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.4  0.15]
+Result: 150.58 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.45 0.1 ]
+Result: 149.10 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.3  0.5  0.05]
+Result: 148.12 
+Number of accepted people: 159.02 	probabilities: 	[0.15 0.35 0.05 0.45]
+Result: 153.98 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.35 0.1  0.4 ]
+Result: 153.28 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.35 0.15 0.35]
+Result: 152.82 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.35 0.2  0.3 ]
+Result: 151.56 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.35 0.25 0.25]
+Result: 150.70 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.35 0.3  0.2 ]
+Result: 150.38 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.35 0.35 0.15]
+Result: 149.34 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.35 0.4  0.1 ]
+Result: 148.84 
+Number of accepted people: 159.96 	probabilities: 	[0.15 0.35 0.45 0.05]
+Result: 147.48 
+Number of accepted people: 158.74 	probabilities: 	[0.15 0.4  0.05 0.4 ]
+Result: 152.18 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.4  0.1  0.35]
+Result: 152.14 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.4  0.15 0.3 ]
+Result: 151.26 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.4  0.2  0.25]
+Result: 150.38 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.4  0.25 0.2 ]
+Result: 149.10 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.4  0.3  0.15]
+Result: 148.76 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.4  0.35 0.1 ]
+Result: 147.46 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.4  0.4  0.05]
+Result: 145.98 
+Number of accepted people: 158.72 	probabilities: 	[0.15 0.45 0.05 0.35]
+Result: 151.34 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.45 0.1  0.3 ]
+Result: 150.34 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.45 0.15 0.25]
+Result: 149.84 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.45 0.2  0.2 ]
+Result: 147.70 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.45 0.25 0.15]
+Result: 147.28 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.45 0.3  0.1 ]
+Result: 146.94 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.45 0.35 0.05]
+Result: 146.02 
+Number of accepted people: 158.64 	probabilities: 	[0.15 0.5  0.05 0.3 ]
+Result: 149.54 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.5  0.1  0.25]
+Result: 148.62 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.5  0.15 0.2 ]
+Result: 148.08 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.5  0.2  0.15]
+Result: 146.72 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.5  0.25 0.1 ]
+Result: 146.58 
+Number of accepted people: 159.98 	probabilities: 	[0.15 0.5  0.3  0.05]
+Result: 145.22 
+Number of accepted people: 159.30 	probabilities: 	[0.15 0.55 0.05 0.25]
+Result: 147.82 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.55 0.1  0.2 ]
+Result: 146.82 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.55 0.15 0.15]
+Result: 145.50 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.55 0.2  0.1 ]
+Result: 144.44 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.55 0.25 0.05]
+Result: 143.70 
+Number of accepted people: 158.76 	probabilities: 	[0.15 0.6  0.05 0.2 ]
+Result: 145.78 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.6  0.1  0.15]
+Result: 144.70 
+Number of accepted people: 160.00 	probabilities: 	[0.15 0.6  0.15 0.1 ]
+Result: 143.72 
+Number of accepted people: 159.72 	probabilities: 	[0.15 0.6  0.2  0.05]
+Result: 143.46 
+Number of accepted people: 158.98 	probabilities: 	[0.15 0.65 0.05 0.15]
+Result: 144.04 
+Number of accepted people: 159.66 	probabilities: 	[0.15 0.65 0.1  0.1 ]
+Result: 143.62 
+Number of accepted people: 159.00 	probabilities: 	[0.15 0.65 0.15 0.05]
+Result: 142.14 
+Number of accepted people: 156.12 	probabilities: 	[0.15 0.7  0.05 0.1 ]
+Result: 141.76 
+Number of accepted people: 156.42 	probabilities: 	[0.15 0.7  0.1  0.05]
+Result: 140.66 
+Number of accepted people: 153.22 	probabilities: 	[0.15 0.75 0.05 0.05]
+Result: 139.06 
+Number of accepted people: 148.82 	probabilities: 	[0.2  0.05 0.05 0.7 ]
+Result: 156.18 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.1  0.65]
+Result: 156.36 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.15 0.6 ]
+Result: 157.04 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.2  0.55]
+Result: 157.44 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.25 0.5 ]
+Result: 157.78 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.3  0.45]
+Result: 156.50 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.35 0.4 ]
+Result: 155.58 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.4  0.35]
+Result: 154.76 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.45 0.3 ]
+Result: 154.86 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.5  0.25]
+Result: 154.24 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.55 0.2 ]
+Result: 153.66 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.6  0.15]
+Result: 152.78 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.65 0.1 ]
+Result: 150.60 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.05 0.7  0.05]
+Result: 147.44 
+Number of accepted people: 158.70 	probabilities: 	[0.2  0.1  0.05 0.65]
+Result: 156.06 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.1 0.1 0.6]
+Result: 157.20 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.1  0.15 0.55]
+Result: 157.04 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.1 0.2 0.5]
+Result: 156.28 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.1  0.25 0.45]
+Result: 156.44 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.1 0.3 0.4]
+Result: 155.82 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.1  0.35 0.35]
+Result: 155.26 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.1 0.4 0.3]
+Result: 154.00 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.1  0.45 0.25]
+Result: 153.10 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.1 0.5 0.2]
+Result: 152.76 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.1  0.55 0.15]
+Result: 152.06 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.1 0.6 0.1]
+Result: 150.64 
+Number of accepted people: 159.98 	probabilities: 	[0.2  0.1  0.65 0.05]
+Result: 148.78 
+Number of accepted people: 158.34 	probabilities: 	[0.2  0.15 0.05 0.6 ]
+Result: 156.00 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.1  0.55]
+Result: 155.98 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.15 0.5 ]
+Result: 155.64 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.2  0.45]
+Result: 155.46 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.25 0.4 ]
+Result: 155.00 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.3  0.35]
+Result: 153.46 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.35 0.3 ]
+Result: 153.04 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.4  0.25]
+Result: 152.32 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.45 0.2 ]
+Result: 152.48 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.5  0.15]
+Result: 151.00 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.55 0.1 ]
+Result: 150.12 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.15 0.6  0.05]
+Result: 149.10 
+Number of accepted people: 158.78 	probabilities: 	[0.2  0.2  0.05 0.55]
+Result: 155.60 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.2 0.1 0.5]
+Result: 155.72 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.2  0.15 0.45]
+Result: 155.42 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.2 0.2 0.4]
+Result: 154.14 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.2  0.25 0.35]
+Result: 153.42 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.2 0.3 0.3]
+Result: 152.64 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.2  0.35 0.25]
+Result: 151.72 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.2 0.4 0.2]
+Result: 151.52 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.2  0.45 0.15]
+Result: 150.68 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.2 0.5 0.1]
+Result: 149.78 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.2  0.55 0.05]
+Result: 148.46 
+Number of accepted people: 158.12 	probabilities: 	[0.2  0.25 0.05 0.5 ]
+Result: 154.70 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.1  0.45]
+Result: 154.04 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.15 0.4 ]
+Result: 153.24 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.2  0.35]
+Result: 152.44 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.25 0.3 ]
+Result: 151.82 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.3  0.25]
+Result: 150.78 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.35 0.2 ]
+Result: 150.22 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.4  0.15]
+Result: 149.34 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.45 0.1 ]
+Result: 149.20 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.25 0.5  0.05]
+Result: 147.80 
+Number of accepted people: 158.70 	probabilities: 	[0.2  0.3  0.05 0.45]
+Result: 153.22 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.3 0.1 0.4]
+Result: 152.58 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.3  0.15 0.35]
+Result: 152.04 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.3 0.2 0.3]
+Result: 150.96 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.3  0.25 0.25]
+Result: 150.30 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.3 0.3 0.2]
+Result: 149.40 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.3  0.35 0.15]
+Result: 147.94 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.3 0.4 0.1]
+Result: 148.06 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.3  0.45 0.05]
+Result: 146.86 
+Number of accepted people: 158.58 	probabilities: 	[0.2  0.35 0.05 0.4 ]
+Result: 152.16 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.35 0.1  0.35]
+Result: 151.32 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.35 0.15 0.3 ]
+Result: 150.08 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.35 0.2  0.25]
+Result: 149.68 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.35 0.25 0.2 ]
+Result: 148.70 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.35 0.3  0.15]
+Result: 147.56 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.35 0.35 0.1 ]
+Result: 147.16 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.35 0.4  0.05]
+Result: 146.04 
+Number of accepted people: 158.84 	probabilities: 	[0.2  0.4  0.05 0.35]
+Result: 150.28 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.4 0.1 0.3]
+Result: 149.68 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.4  0.15 0.25]
+Result: 148.16 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.4 0.2 0.2]
+Result: 147.72 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.4  0.25 0.15]
+Result: 146.52 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.4 0.3 0.1]
+Result: 145.54 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.4  0.35 0.05]
+Result: 145.06 
+Number of accepted people: 158.68 	probabilities: 	[0.2  0.45 0.05 0.3 ]
+Result: 148.50 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.45 0.1  0.25]
+Result: 147.64 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.45 0.15 0.2 ]
+Result: 146.74 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.45 0.2  0.15]
+Result: 146.30 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.45 0.25 0.1 ]
+Result: 144.86 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.45 0.3  0.05]
+Result: 144.56 
+Number of accepted people: 158.16 	probabilities: 	[0.2  0.5  0.05 0.25]
+Result: 146.64 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.5 0.1 0.2]
+Result: 145.78 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.5  0.15 0.15]
+Result: 145.20 
+Number of accepted people: 160.00 	probabilities: 	[0.2 0.5 0.2 0.1]
+Result: 144.20 
+Number of accepted people: 159.92 	probabilities: 	[0.2  0.5  0.25 0.05]
+Result: 143.44 
+Number of accepted people: 158.54 	probabilities: 	[2.00000000e-01 5.00000000e-01 3.00000000e-01 5.55111512e-17]
+Result: 142.36 
+Number of accepted people: 150.00 	probabilities: 	[0.2  0.55 0.05 0.2 ]
+Result: 145.16 
+Number of accepted people: 160.00 	probabilities: 	[0.2  0.55 0.1  0.15]
+Result: 143.94 
+Number of accepted people: 159.94 	probabilities: 	[0.2  0.55 0.15 0.1 ]
+Result: 142.30 
+Number of accepted people: 159.62 	probabilities: 	[0.2  0.55 0.2  0.05]
+Result: 142.12 
+Number of accepted people: 158.36 	probabilities: 	[0.2  0.6  0.05 0.15]
+Result: 142.72 
+Number of accepted people: 159.84 	probabilities: 	[0.2 0.6 0.1 0.1]
+Result: 142.18 
+Number of accepted people: 158.66 	probabilities: 	[0.2  0.6  0.15 0.05]
+Result: 140.84 
+Number of accepted people: 155.90 	probabilities: 	[0.2  0.65 0.05 0.1 ]
+Result: 140.54 
+Number of accepted people: 156.04 	probabilities: 	[0.2  0.65 0.1  0.05]
+Result: 139.90 
+Number of accepted people: 152.94 	probabilities: 	[0.2  0.7  0.05 0.05]
+Result: 138.52 
+Number of accepted people: 149.12 	probabilities: 	[0.25 0.05 0.05 0.65]
+Result: 155.56 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.1  0.6 ]
+Result: 156.50 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.15 0.55]
+Result: 156.02 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.2  0.5 ]
+Result: 156.32 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.25 0.45]
+Result: 155.60 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.3  0.4 ]
+Result: 154.82 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.35 0.35]
+Result: 154.24 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.4  0.3 ]
+Result: 152.82 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.45 0.25]
+Result: 152.68 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.5  0.2 ]
+Result: 151.78 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.55 0.15]
+Result: 150.30 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.6  0.1 ]
+Result: 148.44 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.05 0.65 0.05]
+Result: 146.60 
+Number of accepted people: 158.64 	probabilities: 	[0.25 0.1  0.05 0.6 ]
+Result: 155.24 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.1  0.55]
+Result: 155.68 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.15 0.5 ]
+Result: 155.24 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.2  0.45]
+Result: 154.24 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.25 0.4 ]
+Result: 154.26 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.3  0.35]
+Result: 154.04 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.35 0.3 ]
+Result: 152.24 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.4  0.25]
+Result: 151.22 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.45 0.2 ]
+Result: 151.32 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.5  0.15]
+Result: 149.58 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.55 0.1 ]
+Result: 149.42 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.1  0.6  0.05]
+Result: 147.38 
+Number of accepted people: 157.84 	probabilities: 	[0.25 0.15 0.05 0.55]
+Result: 154.94 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.1  0.5 ]
+Result: 154.66 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.15 0.45]
+Result: 154.12 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.2  0.4 ]
+Result: 153.66 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.25 0.35]
+Result: 152.92 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.3  0.3 ]
+Result: 152.12 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.35 0.25]
+Result: 150.88 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.4  0.2 ]
+Result: 149.98 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.45 0.15]
+Result: 148.58 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.15 0.5  0.1 ]
+Result: 148.34 
+Number of accepted people: 159.98 	probabilities: 	[0.25 0.15 0.55 0.05]
+Result: 147.56 
+Number of accepted people: 158.90 	probabilities: 	[0.25 0.2  0.05 0.5 ]
+Result: 153.84 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.1  0.45]
+Result: 153.62 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.15 0.4 ]
+Result: 152.50 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.2  0.35]
+Result: 152.08 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.25 0.3 ]
+Result: 151.34 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.3  0.25]
+Result: 150.38 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.35 0.2 ]
+Result: 149.26 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.4  0.15]
+Result: 148.50 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.45 0.1 ]
+Result: 147.06 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.2  0.5  0.05]
+Result: 146.74 
+Number of accepted people: 158.94 	probabilities: 	[0.25 0.25 0.05 0.45]
+Result: 153.12 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.25 0.1  0.4 ]
+Result: 151.78 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.25 0.15 0.35]
+Result: 151.04 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.25 0.2  0.3 ]
+Result: 149.90 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.25 0.25 0.25]
+Result: 149.16 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.25 0.3  0.2 ]
+Result: 148.66 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.25 0.35 0.15]
+Result: 147.30 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.25 0.4  0.1 ]
+Result: 147.10 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.25 0.45 0.05]
+Result: 145.28 
+Number of accepted people: 158.82 	probabilities: 	[0.25 0.3  0.05 0.4 ]
+Result: 151.10 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.3  0.1  0.35]
+Result: 150.50 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.3  0.15 0.3 ]
+Result: 149.22 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.3  0.2  0.25]
+Result: 148.50 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.3  0.25 0.2 ]
+Result: 147.94 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.3  0.3  0.15]
+Result: 146.42 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.3  0.35 0.1 ]
+Result: 145.80 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.3  0.4  0.05]
+Result: 145.06 
+Number of accepted people: 158.64 	probabilities: 	[0.25 0.35 0.05 0.35]
+Result: 149.26 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.35 0.1  0.3 ]
+Result: 148.72 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.35 0.15 0.25]
+Result: 147.52 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.35 0.2  0.2 ]
+Result: 146.06 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.35 0.25 0.15]
+Result: 145.64 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.35 0.3  0.1 ]
+Result: 144.56 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.35 0.35 0.05]
+Result: 143.94 
+Number of accepted people: 158.24 	probabilities: 	[0.25 0.4  0.05 0.3 ]
+Result: 147.76 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.4  0.1  0.25]
+Result: 146.52 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.4  0.15 0.2 ]
+Result: 145.62 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.4  0.2  0.15]
+Result: 144.42 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.4  0.25 0.1 ]
+Result: 143.52 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.4  0.3  0.05]
+Result: 143.54 
+Number of accepted people: 158.66 	probabilities: 	[0.25 0.45 0.05 0.25]
+Result: 145.96 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.45 0.1  0.2 ]
+Result: 144.96 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.45 0.15 0.15]
+Result: 144.16 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.45 0.2  0.1 ]
+Result: 143.14 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.45 0.25 0.05]
+Result: 141.96 
+Number of accepted people: 158.50 	probabilities: 	[0.25 0.5  0.05 0.2 ]
+Result: 143.50 
+Number of accepted people: 160.00 	probabilities: 	[0.25 0.5  0.1  0.15]
+Result: 142.80 
+Number of accepted people: 159.90 	probabilities: 	[0.25 0.5  0.15 0.1 ]
+Result: 142.38 
+Number of accepted people: 159.88 	probabilities: 	[0.25 0.5  0.2  0.05]
+Result: 141.32 
+Number of accepted people: 158.68 	probabilities: 	[0.25 0.55 0.05 0.15]
+Result: 141.78 
+Number of accepted people: 159.46 	probabilities: 	[0.25 0.55 0.1  0.1 ]
+Result: 140.48 
+Number of accepted people: 158.48 	probabilities: 	[0.25 0.55 0.15 0.05]
+Result: 140.00 
+Number of accepted people: 155.96 	probabilities: 	[0.25 0.6  0.05 0.1 ]
+Result: 138.94 
+Number of accepted people: 156.16 	probabilities: 	[0.25 0.6  0.1  0.05]
+Result: 138.54 
+Number of accepted people: 153.38 	probabilities: 	[0.25 0.65 0.05 0.05]
+Result: 136.78 
+Number of accepted people: 149.50 	probabilities: 	[0.3  0.05 0.05 0.6 ]
+Result: 153.76 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.1  0.55]
+Result: 154.04 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.15 0.5 ]
+Result: 153.84 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.2  0.45]
+Result: 154.32 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.25 0.4 ]
+Result: 153.50 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.3  0.35]
+Result: 152.76 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.35 0.3 ]
+Result: 151.34 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.4  0.25]
+Result: 151.42 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.45 0.2 ]
+Result: 149.54 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.5  0.15]
+Result: 149.68 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.55 0.1 ]
+Result: 147.96 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.05 0.6  0.05]
+Result: 144.38 
+Number of accepted people: 158.76 	probabilities: 	[0.3  0.1  0.05 0.55]
+Result: 153.84 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.1 0.1 0.5]
+Result: 153.64 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.1  0.15 0.45]
+Result: 153.02 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.1 0.2 0.4]
+Result: 152.44 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.1  0.25 0.35]
+Result: 152.18 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.1 0.3 0.3]
+Result: 151.14 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.1  0.35 0.25]
+Result: 150.70 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.1 0.4 0.2]
+Result: 149.08 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.1  0.45 0.15]
+Result: 148.28 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.1 0.5 0.1]
+Result: 147.64 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.1  0.55 0.05]
+Result: 145.56 
+Number of accepted people: 158.60 	probabilities: 	[0.3  0.15 0.05 0.5 ]
+Result: 153.08 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.1  0.45]
+Result: 151.90 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.15 0.4 ]
+Result: 151.46 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.2  0.35]
+Result: 151.50 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.25 0.3 ]
+Result: 150.58 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.3  0.25]
+Result: 150.40 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.35 0.2 ]
+Result: 148.94 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.4  0.15]
+Result: 147.48 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.45 0.1 ]
+Result: 146.62 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.15 0.5  0.05]
+Result: 145.54 
+Number of accepted people: 158.70 	probabilities: 	[0.3  0.2  0.05 0.45]
+Result: 151.14 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.2 0.1 0.4]
+Result: 151.34 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.2  0.15 0.35]
+Result: 150.62 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.2 0.2 0.3]
+Result: 149.56 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.2  0.25 0.25]
+Result: 149.14 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.2 0.3 0.2]
+Result: 147.72 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.2  0.35 0.15]
+Result: 147.22 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.2 0.4 0.1]
+Result: 145.38 
+Number of accepted people: 159.98 	probabilities: 	[0.3  0.2  0.45 0.05]
+Result: 144.88 
+Number of accepted people: 158.86 	probabilities: 	[0.3  0.25 0.05 0.4 ]
+Result: 150.78 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.25 0.1  0.35]
+Result: 149.80 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.25 0.15 0.3 ]
+Result: 148.64 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.25 0.2  0.25]
+Result: 147.64 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.25 0.25 0.2 ]
+Result: 146.30 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.25 0.3  0.15]
+Result: 145.68 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.25 0.35 0.1 ]
+Result: 144.76 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.25 0.4  0.05]
+Result: 143.66 
+Number of accepted people: 158.84 	probabilities: 	[0.3  0.3  0.05 0.35]
+Result: 148.48 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.3 0.1 0.3]
+Result: 147.88 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.3  0.15 0.25]
+Result: 147.44 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.3 0.2 0.2]
+Result: 145.30 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.3  0.25 0.15]
+Result: 144.18 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.3 0.3 0.1]
+Result: 143.32 
+Number of accepted people: 159.98 	probabilities: 	[0.3  0.3  0.35 0.05]
+Result: 142.26 
+Number of accepted people: 158.74 	probabilities: 	[0.3  0.35 0.05 0.3 ]
+Result: 146.98 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.35 0.1  0.25]
+Result: 145.48 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.35 0.15 0.2 ]
+Result: 144.70 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.35 0.2  0.15]
+Result: 143.28 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.35 0.25 0.1 ]
+Result: 143.14 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.35 0.3  0.05]
+Result: 141.98 
+Number of accepted people: 158.72 	probabilities: 	[0.3  0.4  0.05 0.25]
+Result: 144.82 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.4 0.1 0.2]
+Result: 143.78 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.4  0.15 0.15]
+Result: 143.60 
+Number of accepted people: 160.00 	probabilities: 	[0.3 0.4 0.2 0.1]
+Result: 141.34 
+Number of accepted people: 159.98 	probabilities: 	[0.3  0.4  0.25 0.05]
+Result: 141.14 
+Number of accepted people: 158.88 	probabilities: 	[0.3  0.45 0.05 0.2 ]
+Result: 143.02 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.45 0.1  0.15]
+Result: 141.74 
+Number of accepted people: 160.00 	probabilities: 	[0.3  0.45 0.15 0.1 ]
+Result: 140.62 
+Number of accepted people: 159.78 	probabilities: 	[0.3  0.45 0.2  0.05]
+Result: 139.36 
+Number of accepted people: 158.20 	probabilities: 	[0.3  0.5  0.05 0.15]
+Result: 140.24 
+Number of accepted people: 159.24 	probabilities: 	[0.3 0.5 0.1 0.1]
+Result: 139.96 
+Number of accepted people: 158.76 	probabilities: 	[0.3  0.5  0.15 0.05]
+Result: 138.42 
+Number of accepted people: 156.22 	probabilities: 	[0.3  0.55 0.05 0.1 ]
+Result: 138.00 
+Number of accepted people: 156.26 	probabilities: 	[0.3  0.55 0.1  0.05]
+Result: 137.34 
+Number of accepted people: 152.92 	probabilities: 	[0.3  0.6  0.05 0.05]
+Result: 135.44 
+Number of accepted people: 149.62 	probabilities: 	[0.35 0.05 0.05 0.55]
+Result: 152.52 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.1  0.5 ]
+Result: 152.68 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.15 0.45]
+Result: 152.30 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.2  0.4 ]
+Result: 151.54 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.25 0.35]
+Result: 151.66 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.3  0.3 ]
+Result: 149.92 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.35 0.25]
+Result: 149.40 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.4  0.2 ]
+Result: 148.76 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.45 0.15]
+Result: 146.84 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.05 0.5  0.1 ]
+Result: 144.82 
+Number of accepted people: 159.94 	probabilities: 	[0.35 0.05 0.55 0.05]
+Result: 143.00 
+Number of accepted people: 158.58 	probabilities: 	[0.35 0.1  0.05 0.5 ]
+Result: 151.58 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.1  0.45]
+Result: 152.14 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.15 0.4 ]
+Result: 150.20 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.2  0.35]
+Result: 151.02 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.25 0.3 ]
+Result: 149.24 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.3  0.25]
+Result: 148.36 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.35 0.2 ]
+Result: 147.62 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.4  0.15]
+Result: 146.54 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.45 0.1 ]
+Result: 145.82 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.1  0.5  0.05]
+Result: 144.12 
+Number of accepted people: 158.68 	probabilities: 	[0.35 0.15 0.05 0.45]
+Result: 150.46 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.15 0.1  0.4 ]
+Result: 150.34 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.15 0.15 0.35]
+Result: 149.18 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.15 0.2  0.3 ]
+Result: 148.34 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.15 0.25 0.25]
+Result: 148.14 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.15 0.3  0.2 ]
+Result: 147.44 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.15 0.35 0.15]
+Result: 146.76 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.15 0.4  0.1 ]
+Result: 145.00 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.15 0.45 0.05]
+Result: 143.56 
+Number of accepted people: 159.16 	probabilities: 	[0.35 0.2  0.05 0.4 ]
+Result: 149.30 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.2  0.1  0.35]
+Result: 148.24 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.2  0.15 0.3 ]
+Result: 147.56 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.2  0.2  0.25]
+Result: 146.90 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.2  0.25 0.2 ]
+Result: 145.42 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.2  0.3  0.15]
+Result: 145.00 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.2  0.35 0.1 ]
+Result: 143.52 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.2  0.4  0.05]
+Result: 142.92 
+Number of accepted people: 159.04 	probabilities: 	[0.35 0.25 0.05 0.35]
+Result: 147.78 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.25 0.1  0.3 ]
+Result: 146.58 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.25 0.15 0.25]
+Result: 145.94 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.25 0.2  0.2 ]
+Result: 145.36 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.25 0.25 0.15]
+Result: 144.26 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.25 0.3  0.1 ]
+Result: 143.00 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.25 0.35 0.05]
+Result: 141.26 
+Number of accepted people: 158.76 	probabilities: 	[0.35 0.3  0.05 0.3 ]
+Result: 145.80 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.3  0.1  0.25]
+Result: 144.42 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.3  0.15 0.2 ]
+Result: 143.70 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.3  0.2  0.15]
+Result: 142.84 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.3  0.25 0.1 ]
+Result: 141.52 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.3  0.3  0.05]
+Result: 140.60 
+Number of accepted people: 158.76 	probabilities: 	[0.35 0.35 0.05 0.25]
+Result: 144.30 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.35 0.1  0.2 ]
+Result: 143.14 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.35 0.15 0.15]
+Result: 141.96 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.35 0.2  0.1 ]
+Result: 140.72 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.35 0.25 0.05]
+Result: 139.88 
+Number of accepted people: 158.36 	probabilities: 	[0.35 0.4  0.05 0.2 ]
+Result: 141.46 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.4  0.1  0.15]
+Result: 140.32 
+Number of accepted people: 160.00 	probabilities: 	[0.35 0.4  0.15 0.1 ]
+Result: 139.66 
+Number of accepted people: 159.88 	probabilities: 	[0.35 0.4  0.2  0.05]
+Result: 138.86 
+Number of accepted people: 158.10 	probabilities: 	[0.35 0.45 0.05 0.15]
+Result: 139.30 
+Number of accepted people: 159.58 	probabilities: 	[0.35 0.45 0.1  0.1 ]
+Result: 137.94 
+Number of accepted people: 158.66 	probabilities: 	[0.35 0.45 0.15 0.05]
+Result: 137.22 
+Number of accepted people: 155.88 	probabilities: 	[0.35 0.5  0.05 0.1 ]
+Result: 138.18 
+Number of accepted people: 156.48 	probabilities: 	[0.35 0.5  0.1  0.05]
+Result: 136.10 
+Number of accepted people: 152.62 	probabilities: 	[0.35 0.55 0.05 0.05]
+Result: 134.52 
+Number of accepted people: 149.04 	probabilities: 	[0.4  0.05 0.05 0.5 ]
+Result: 151.56 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.1  0.45]
+Result: 150.94 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.15 0.4 ]
+Result: 150.12 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.2  0.35]
+Result: 149.30 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.25 0.3 ]
+Result: 148.54 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.3  0.25]
+Result: 147.30 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.35 0.2 ]
+Result: 146.62 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.4  0.15]
+Result: 145.30 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.45 0.1 ]
+Result: 143.08 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.05 0.5  0.05]
+Result: 140.22 
+Number of accepted people: 158.86 	probabilities: 	[0.4  0.1  0.05 0.45]
+Result: 149.78 
+Number of accepted people: 160.00 	probabilities: 	[0.4 0.1 0.1 0.4]
+Result: 148.92 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.1  0.15 0.35]
+Result: 148.94 
+Number of accepted people: 160.00 	probabilities: 	[0.4 0.1 0.2 0.3]
+Result: 147.68 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.1  0.25 0.25]
+Result: 146.36 
+Number of accepted people: 160.00 	probabilities: 	[0.4 0.1 0.3 0.2]
+Result: 144.92 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.1  0.35 0.15]
+Result: 145.20 
+Number of accepted people: 160.00 	probabilities: 	[0.4 0.1 0.4 0.1]
+Result: 144.24 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.1  0.45 0.05]
+Result: 142.80 
+Number of accepted people: 158.70 	probabilities: 	[0.4  0.15 0.05 0.4 ]
+Result: 149.06 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.15 0.1  0.35]
+Result: 148.52 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.15 0.15 0.3 ]
+Result: 146.84 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.15 0.2  0.25]
+Result: 145.76 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.15 0.25 0.2 ]
+Result: 144.18 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.15 0.3  0.15]
+Result: 143.36 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.15 0.35 0.1 ]
+Result: 143.32 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.15 0.4  0.05]
+Result: 142.16 
+Number of accepted people: 158.68 	probabilities: 	[0.4  0.2  0.05 0.35]
+Result: 146.50 
+Number of accepted people: 160.00 	probabilities: 	[0.4 0.2 0.1 0.3]
+Result: 145.00 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.2  0.15 0.25]
+Result: 144.18 
+Number of accepted people: 160.00 	probabilities: 	[0.4 0.2 0.2 0.2]
+Result: 143.46 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.2  0.25 0.15]
+Result: 142.78 
+Number of accepted people: 160.00 	probabilities: 	[0.4 0.2 0.3 0.1]
+Result: 141.84 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.2  0.35 0.05]
+Result: 140.16 
+Number of accepted people: 158.26 	probabilities: 	[0.4  0.25 0.05 0.3 ]
+Result: 145.34 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.25 0.1  0.25]
+Result: 143.92 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.25 0.15 0.2 ]
+Result: 142.60 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.25 0.2  0.15]
+Result: 141.34 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.25 0.25 0.1 ]
+Result: 141.26 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.25 0.3  0.05]
+Result: 139.80 
+Number of accepted people: 158.64 	probabilities: 	[0.4  0.3  0.05 0.25]
+Result: 143.00 
+Number of accepted people: 160.00 	probabilities: 	[0.4 0.3 0.1 0.2]
+Result: 141.92 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.3  0.15 0.15]
+Result: 140.78 
+Number of accepted people: 159.98 	probabilities: 	[0.4 0.3 0.2 0.1]
+Result: 139.64 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.3  0.25 0.05]
+Result: 138.10 
+Number of accepted people: 158.60 	probabilities: 	[0.4  0.35 0.05 0.2 ]
+Result: 140.76 
+Number of accepted people: 160.00 	probabilities: 	[0.4  0.35 0.1  0.15]
+Result: 139.90 
+Number of accepted people: 159.94 	probabilities: 	[0.4  0.35 0.15 0.1 ]
+Result: 137.74 
+Number of accepted people: 159.66 	probabilities: 	[0.4  0.35 0.2  0.05]
+Result: 136.92 
+Number of accepted people: 158.34 	probabilities: 	[0.4  0.4  0.05 0.15]
+Result: 137.66 
+Number of accepted people: 159.90 	probabilities: 	[0.4 0.4 0.1 0.1]
+Result: 137.94 
+Number of accepted people: 158.84 	probabilities: 	[0.4  0.4  0.15 0.05]
+Result: 135.94 
+Number of accepted people: 156.18 	probabilities: 	[0.4  0.45 0.05 0.1 ]
+Result: 135.82 
+Number of accepted people: 156.06 	probabilities: 	[0.4  0.45 0.1  0.05]
+Result: 134.50 
+Number of accepted people: 153.28 	probabilities: 	[0.4  0.5  0.05 0.05]
+Result: 133.76 
+Number of accepted people: 149.58 	probabilities: 	[0.45 0.05 0.05 0.45]
+Result: 148.86 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.05 0.1  0.4 ]
+Result: 147.46 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.05 0.15 0.35]
+Result: 147.40 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.05 0.2  0.3 ]
+Result: 146.44 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.05 0.25 0.25]
+Result: 145.82 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.05 0.3  0.2 ]
+Result: 144.48 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.05 0.35 0.15]
+Result: 143.54 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.05 0.4  0.1 ]
+Result: 142.00 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.05 0.45 0.05]
+Result: 138.46 
+Number of accepted people: 158.66 	probabilities: 	[0.45 0.1  0.05 0.4 ]
+Result: 147.32 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.1  0.1  0.35]
+Result: 146.72 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.1  0.15 0.3 ]
+Result: 145.90 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.1  0.2  0.25]
+Result: 145.66 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.1  0.25 0.2 ]
+Result: 144.42 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.1  0.3  0.15]
+Result: 142.26 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.1  0.35 0.1 ]
+Result: 141.98 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.1  0.4  0.05]
+Result: 139.06 
+Number of accepted people: 158.52 	probabilities: 	[4.50000000e-01 1.00000000e-01 4.50000000e-01 5.55111512e-17]
+Result: 138.02 
+Number of accepted people: 150.00 	probabilities: 	[0.45 0.15 0.05 0.35]
+Result: 145.70 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.15 0.1  0.3 ]
+Result: 144.70 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.15 0.15 0.25]
+Result: 143.92 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.15 0.2  0.2 ]
+Result: 141.60 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.15 0.25 0.15]
+Result: 141.42 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.15 0.3  0.1 ]
+Result: 141.10 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.15 0.35 0.05]
+Result: 140.54 
+Number of accepted people: 158.92 	probabilities: 	[0.45 0.2  0.05 0.3 ]
+Result: 143.64 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.2  0.1  0.25]
+Result: 143.16 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.2  0.15 0.2 ]
+Result: 141.24 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.2  0.2  0.15]
+Result: 141.08 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.2  0.25 0.1 ]
+Result: 139.38 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.2  0.3  0.05]
+Result: 138.76 
+Number of accepted people: 159.10 	probabilities: 	[0.45 0.25 0.05 0.25]
+Result: 141.96 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.25 0.1  0.2 ]
+Result: 140.24 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.25 0.15 0.15]
+Result: 139.56 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.25 0.2  0.1 ]
+Result: 138.56 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.25 0.25 0.05]
+Result: 137.34 
+Number of accepted people: 159.06 	probabilities: 	[4.50000000e-01 2.50000000e-01 3.00000000e-01 5.55111512e-17]
+Result: 135.46 
+Number of accepted people: 150.00 	probabilities: 	[0.45 0.3  0.05 0.2 ]
+Result: 139.14 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.3  0.1  0.15]
+Result: 138.64 
+Number of accepted people: 160.00 	probabilities: 	[0.45 0.3  0.15 0.1 ]
+Result: 136.54 
+Number of accepted people: 159.76 	probabilities: 	[0.45 0.3  0.2  0.05]
+Result: 135.60 
+Number of accepted people: 158.08 	probabilities: 	[4.50000000e-01 3.00000000e-01 2.50000000e-01 5.55111512e-17]
+Result: 134.40 
+Number of accepted people: 150.00 	probabilities: 	[0.45 0.35 0.05 0.15]
+Result: 137.68 
+Number of accepted people: 159.60 	probabilities: 	[0.45 0.35 0.1  0.1 ]
+Result: 135.86 
+Number of accepted people: 158.30 	probabilities: 	[0.45 0.35 0.15 0.05]
+Result: 134.64 
+Number of accepted people: 156.38 	probabilities: 	[0.45 0.4  0.05 0.1 ]
+Result: 135.24 
+Number of accepted people: 156.66 	probabilities: 	[0.45 0.4  0.1  0.05]
+Result: 132.60 
+Number of accepted people: 153.52 	probabilities: 	[0.45 0.45 0.05 0.05]
+Result: 131.80 
+Number of accepted people: 150.12 	probabilities: 	[4.50000000e-01 4.50000000e-01 1.00000000e-01 2.77555756e-17]
+Result: 130.26 
+Number of accepted people: 146.42 	probabilities: 	[4.50000000e-01 5.00000000e-01 5.00000000e-02 4.16333634e-17]
+Result: 128.78 
+Number of accepted people: 142.96 	probabilities: 	[0.5  0.05 0.05 0.4 ]
+Result: 146.18 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.05 0.1  0.35]
+Result: 145.78 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.05 0.15 0.3 ]
+Result: 144.68 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.05 0.2  0.25]
+Result: 143.84 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.05 0.25 0.2 ]
+Result: 142.58 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.05 0.3  0.15]
+Result: 141.00 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.05 0.35 0.1 ]
+Result: 140.58 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.05 0.4  0.05]
+Result: 136.58 
+Number of accepted people: 158.70 	probabilities: 	[0.5  0.1  0.05 0.35]
+Result: 144.88 
+Number of accepted people: 160.00 	probabilities: 	[0.5 0.1 0.1 0.3]
+Result: 142.82 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.1  0.15 0.25]
+Result: 143.46 
+Number of accepted people: 160.00 	probabilities: 	[0.5 0.1 0.2 0.2]
+Result: 141.24 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.1  0.25 0.15]
+Result: 140.84 
+Number of accepted people: 160.00 	probabilities: 	[0.5 0.1 0.3 0.1]
+Result: 139.74 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.1  0.35 0.05]
+Result: 137.46 
+Number of accepted people: 158.82 	probabilities: 	[0.5  0.15 0.05 0.3 ]
+Result: 143.10 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.15 0.1  0.25]
+Result: 141.82 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.15 0.15 0.2 ]
+Result: 140.84 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.15 0.2  0.15]
+Result: 139.28 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.15 0.25 0.1 ]
+Result: 138.70 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.15 0.3  0.05]
+Result: 137.86 
+Number of accepted people: 159.12 	probabilities: 	[0.5  0.2  0.05 0.25]
+Result: 140.72 
+Number of accepted people: 160.00 	probabilities: 	[0.5 0.2 0.1 0.2]
+Result: 139.68 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.2  0.15 0.15]
+Result: 138.46 
+Number of accepted people: 160.00 	probabilities: 	[0.5 0.2 0.2 0.1]
+Result: 137.00 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.2  0.25 0.05]
+Result: 136.08 
+Number of accepted people: 158.66 	probabilities: 	[0.5  0.25 0.05 0.2 ]
+Result: 138.72 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.25 0.1  0.15]
+Result: 136.84 
+Number of accepted people: 160.00 	probabilities: 	[0.5  0.25 0.15 0.1 ]
+Result: 135.66 
+Number of accepted people: 159.62 	probabilities: 	[0.5  0.25 0.2  0.05]
+Result: 135.04 
+Number of accepted people: 158.32 	probabilities: 	[0.5  0.3  0.05 0.15]
+Result: 136.68 
+Number of accepted people: 159.70 	probabilities: 	[0.5 0.3 0.1 0.1]
+Result: 133.92 
+Number of accepted people: 158.18 	probabilities: 	[0.5  0.3  0.15 0.05]
+Result: 132.96 
+Number of accepted people: 156.26 	probabilities: 	[0.5  0.35 0.05 0.1 ]
+Result: 133.58 
+Number of accepted people: 156.66 	probabilities: 	[0.5  0.35 0.1  0.05]
+Result: 131.88 
+Number of accepted people: 152.78 	probabilities: 	[0.5  0.4  0.05 0.05]
+Result: 130.32 
+Number of accepted people: 149.60 	probabilities: 	[0.55 0.05 0.05 0.35]
+Result: 143.48 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.05 0.1  0.3 ]
+Result: 142.76 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.05 0.15 0.25]
+Result: 140.90 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.05 0.2  0.2 ]
+Result: 140.58 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.05 0.25 0.15]
+Result: 139.24 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.05 0.3  0.1 ]
+Result: 136.70 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.05 0.35 0.05]
+Result: 135.26 
+Number of accepted people: 159.32 	probabilities: 	[0.55 0.1  0.05 0.3 ]
+Result: 142.42 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.1  0.1  0.25]
+Result: 140.64 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.1  0.15 0.2 ]
+Result: 139.02 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.1  0.2  0.15]
+Result: 138.78 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.1  0.25 0.1 ]
+Result: 137.22 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.1  0.3  0.05]
+Result: 135.94 
+Number of accepted people: 158.88 	probabilities: 	[0.55 0.15 0.05 0.25]
+Result: 138.90 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.15 0.1  0.2 ]
+Result: 138.06 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.15 0.15 0.15]
+Result: 136.60 
+Number of accepted people: 159.94 	probabilities: 	[0.55 0.15 0.2  0.1 ]
+Result: 135.68 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.15 0.25 0.05]
+Result: 134.30 
+Number of accepted people: 158.84 	probabilities: 	[0.55 0.2  0.05 0.2 ]
+Result: 137.36 
+Number of accepted people: 160.00 	probabilities: 	[0.55 0.2  0.1  0.15]
+Result: 135.66 
+Number of accepted people: 159.98 	probabilities: 	[0.55 0.2  0.15 0.1 ]
+Result: 135.22 
+Number of accepted people: 159.76 	probabilities: 	[0.55 0.2  0.2  0.05]
+Result: 132.92 
+Number of accepted people: 158.22 	probabilities: 	[0.55 0.25 0.05 0.15]
+Result: 134.14 
+Number of accepted people: 159.36 	probabilities: 	[0.55 0.25 0.1  0.1 ]
+Result: 133.04 
+Number of accepted people: 158.76 	probabilities: 	[0.55 0.25 0.15 0.05]
+Result: 131.58 
+Number of accepted people: 156.04 	probabilities: 	[0.55 0.3  0.05 0.1 ]
+Result: 132.02 
+Number of accepted people: 155.86 	probabilities: 	[0.55 0.3  0.1  0.05]
+Result: 130.50 
+Number of accepted people: 153.40 	probabilities: 	[0.55 0.35 0.05 0.05]
+Result: 128.36 
+Number of accepted people: 149.02 	probabilities: 	[0.6  0.05 0.05 0.3 ]
+Result: 141.18 
+Number of accepted people: 160.00 	probabilities: 	[0.6  0.05 0.1  0.25]
+Result: 139.12 
+Number of accepted people: 160.00 	probabilities: 	[0.6  0.05 0.15 0.2 ]
+Result: 138.76 
+Number of accepted people: 160.00 	probabilities: 	[0.6  0.05 0.2  0.15]
+Result: 136.66 
+Number of accepted people: 160.00 	probabilities: 	[0.6  0.05 0.25 0.1 ]
+Result: 134.70 
+Number of accepted people: 160.00 	probabilities: 	[0.6  0.05 0.3  0.05]
+Result: 132.60 
+Number of accepted people: 158.28 	probabilities: 	[0.6  0.1  0.05 0.25]
+Result: 138.00 
+Number of accepted people: 160.00 	probabilities: 	[0.6 0.1 0.1 0.2]
+Result: 136.68 
+Number of accepted people: 160.00 	probabilities: 	[0.6  0.1  0.15 0.15]
+Result: 136.46 
+Number of accepted people: 160.00 	probabilities: 	[0.6 0.1 0.2 0.1]
+Result: 133.84 
+Number of accepted people: 159.92 	probabilities: 	[0.6  0.1  0.25 0.05]
+Result: 133.42 
+Number of accepted people: 159.08 	probabilities: 	[0.6  0.15 0.05 0.2 ]
+Result: 136.18 
+Number of accepted people: 160.00 	probabilities: 	[0.6  0.15 0.1  0.15]
+Result: 133.80 
+Number of accepted people: 159.96 	probabilities: 	[0.6  0.15 0.15 0.1 ]
+Result: 133.16 
+Number of accepted people: 159.86 	probabilities: 	[0.6  0.15 0.2  0.05]
+Result: 131.48 
+Number of accepted people: 157.82 	probabilities: 	[0.6  0.2  0.05 0.15]
+Result: 132.60 
+Number of accepted people: 159.82 	probabilities: 	[0.6 0.2 0.1 0.1]
+Result: 132.06 
+Number of accepted people: 158.58 	probabilities: 	[0.6  0.2  0.15 0.05]
+Result: 129.86 
+Number of accepted people: 155.48 	probabilities: 	[0.6  0.25 0.05 0.1 ]
+Result: 130.26 
+Number of accepted people: 155.70 	probabilities: 	[0.6  0.25 0.1  0.05]
+Result: 128.74 
+Number of accepted people: 152.62 	probabilities: 	[0.6  0.3  0.05 0.05]
+Result: 126.64 
+Number of accepted people: 149.44 	probabilities: 	[0.65 0.05 0.05 0.25]
+Result: 136.68 
+Number of accepted people: 160.00 	probabilities: 	[0.65 0.05 0.1  0.2 ]
+Result: 135.58 
+Number of accepted people: 160.00 	probabilities: 	[0.65 0.05 0.15 0.15]
+Result: 133.92 
+Number of accepted people: 160.00 	probabilities: 	[0.65 0.05 0.2  0.1 ]
+Result: 132.68 
+Number of accepted people: 160.00 	probabilities: 	[0.65 0.05 0.25 0.05]
+Result: 131.02 
+Number of accepted people: 158.74 	probabilities: 	[0.65 0.1  0.05 0.2 ]
+Result: 133.74 
+Number of accepted people: 160.00 	probabilities: 	[0.65 0.1  0.1  0.15]
+Result: 132.84 
+Number of accepted people: 159.98 	probabilities: 	[0.65 0.1  0.15 0.1 ]
+Result: 132.62 
+Number of accepted people: 159.90 	probabilities: 	[0.65 0.1  0.2  0.05]
+Result: 130.52 
+Number of accepted people: 158.84 	probabilities: 	[0.65 0.15 0.05 0.15]
+Result: 132.32 
+Number of accepted people: 159.52 	probabilities: 	[0.65 0.15 0.1  0.1 ]
+Result: 130.08 
+Number of accepted people: 158.58 	probabilities: 	[0.65 0.15 0.15 0.05]
+Result: 128.74 
+Number of accepted people: 156.74 	probabilities: 	[0.65 0.2  0.05 0.1 ]
+Result: 129.14 
+Number of accepted people: 156.04 	probabilities: 	[0.65 0.2  0.1  0.05]
+Result: 127.00 
+Number of accepted people: 152.90 	probabilities: 	[0.65 0.25 0.05 0.05]
+Result: 126.40 
+Number of accepted people: 149.98 	probabilities: 	[0.7  0.05 0.05 0.2 ]
+Result: 132.66 
+Number of accepted people: 160.00 	probabilities: 	[0.7  0.05 0.1  0.15]
+Result: 131.46 
+Number of accepted people: 159.76 	probabilities: 	[0.7  0.05 0.15 0.1 ]
+Result: 129.12 
+Number of accepted people: 159.36 	probabilities: 	[0.7  0.05 0.2  0.05]
+Result: 128.00 
+Number of accepted people: 158.28 	probabilities: 	[0.7  0.1  0.05 0.15]
+Result: 130.22 
+Number of accepted people: 159.24 	probabilities: 	[0.7 0.1 0.1 0.1]
+Result: 127.88 
+Number of accepted people: 157.32 	probabilities: 	[0.7  0.1  0.15 0.05]
+Result: 127.04 
+Number of accepted people: 155.40 	probabilities: 	[0.7  0.15 0.05 0.1 ]
+Result: 127.76 
+Number of accepted people: 156.62 	probabilities: 	[0.7  0.15 0.1  0.05]
+Result: 125.50 
+Number of accepted people: 152.02 	probabilities: 	[0.7  0.2  0.05 0.05]
+Result: 123.30 
+Number of accepted people: 147.74 	probabilities: 	[0.75 0.05 0.05 0.15]
+Result: 129.02 
+Number of accepted people: 158.88 	probabilities: 	[0.75 0.05 0.1  0.1 ]
+Result: 126.68 
+Number of accepted people: 156.68 	probabilities: 	[0.75 0.05 0.15 0.05]
+Result: 124.46 
+Number of accepted people: 153.84 	probabilities: 	[0.75 0.1  0.05 0.1 ]
+Result: 126.24 
+Number of accepted people: 154.10 	probabilities: 	[0.75 0.1  0.1  0.05]
+Result: 123.28 
+Number of accepted people: 147.92 	probabilities: 	[0.75 0.15 0.05 0.05]
+Result: 122.46 
+Number of accepted people: 144.60 	probabilities: 	[0.8  0.05 0.05 0.1 ]
+Result: 124.28 
+Number of accepted people: 150.84 	probabilities: 	[0.8  0.05 0.1  0.05]
+Result: 121.54 
+Number of accepted people: 145.44 	probabilities: 	[0.8  0.1  0.05 0.05]
+Result: 119.58 
+Number of accepted people: 139.38 	probabilities: 	[0.85 0.05 0.05 0.05]
+Result: 117.64 
+Number of accepted people: 134.46 	Total Runtime	 2081.703657 
+Deviated probability: [0.05 0.05 0.8  0.1 ]	Deviated value: 3.18 
+Deviated probability: [0.05 0.05 0.85 0.05]	Deviated value: 4.77 
+Deviated probability: [0.05 0.1  0.8  0.05]	Deviated value: 3.81 
+Deviated probability: [0.1  0.05 0.8  0.05]	Deviated value: 4.22 
+Deviated probability: [0.1  0.1  0.75 0.05]	Deviated value: 3.02 
+Deviated probability: [0.15 0.05 0.75 0.05]	Deviated value: 4.42 
+Deviated probability: [0.2  0.05 0.05 0.7 ]	Deviated value: 3.82 
+Deviated probability: [0.2  0.05 0.1  0.65]	Deviated value: 3.64 
+Deviated probability: [0.2  0.05 0.7  0.05]	Deviated value: 4.23 
+Deviated probability: [0.2  0.1  0.05 0.65]	Deviated value: 3.34 
+Deviated probability: [0.25 0.05 0.05 0.65]	Deviated value: 3.22 
+Deviated probability: [0.25 0.05 0.65 0.05]	Deviated value: 3.40 
+Deviated probability: [0.3  0.05 0.05 0.6 ]	Deviated value: 3.08 
+Deviated probability: [0.3  0.05 0.6  0.05]	Deviated value: 3.86 
+Deviated probability: [0.35 0.05 0.55 0.05]	Deviated value: 3.36 
+Deviated probability: [0.4  0.05 0.5  0.05]	Deviated value: 4.16 
+Deviated probability: [0.45 0.05 0.45 0.05]	Deviated value: 3.80 
+Deviated probability: [0.5  0.05 0.4  0.05]	Deviated value: 3.42 
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.873
+Model:                            OLS   Adj. R-squared:                  0.873
+Method:                 Least Squares   F-statistic:                 1.122e+05
+Date:                Sun, 19 Mar 2023   Prob (F-statistic):               0.00
+Time:                        20:15:24   Log-Likelihood:            -1.2142e+05
+No. Observations:               48750   AIC:                         2.428e+05
+Df Residuals:                   48746   BIC:                         2.429e+05
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const        158.2768      0.059   2689.164      0.000     158.161     158.392
+p1           -38.0160      0.094   -406.114      0.000     -38.199     -37.832
+p2           -15.9506      0.094   -170.549      0.000     -16.134     -15.767
+p4            13.2551      0.094    141.693      0.000      13.072      13.438
+==============================================================================
+Omnibus:                     1282.209   Durbin-Watson:                   1.374
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2012.705
+Skew:                          -0.262   Prob(JB):                         0.00
+Kurtosis:                       3.847   Cond. No.                         11.9
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

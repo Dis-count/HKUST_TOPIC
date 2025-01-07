@@ -1,5 +1,0 @@
-Run Start Time: Sun Jul  2 20:26:32 2023
-probabilities: 	[0.25, 0.25, 0.25, 0.25]
-Sto: 98.61 ;DP1: 95.69 ;bid-price: 96.02;Number of accepted people: 158.77 	probabilities: 	[0.25, 0.35, 0.05, 0.35]
-Sto: 98.37 ;DP1: 96.01 ;bid-price: 95.89;Number of accepted people: 158.51 	probabilities: 	[0.15, 0.25, 0.55, 0.05]
-Sto: 99.59 ;DP1: 97.75 ;bid-price: 97.87;Number of accepted people: 153.82 	Total Runtime	1572.847183

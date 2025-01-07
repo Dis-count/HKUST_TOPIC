@@ -1,0 +1,99 @@
+% !TEX root = sum1.tex
+
+\section{Policies for Dynamic Situations}\label{policies}
+
+\subsubsection*{Bid-price Control}
+Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
+
+The dual of LP relaxation of problem \eqref{deter_upper} is:
+
+\begin{equation}\label{bid-price_dual}
+  \begin{aligned}
+  \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \beta_{j} \\
+  \text {s.t.} \quad & z_{i} + \beta_j n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+  & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
+  \end{aligned}
+\end{equation}
+
+In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. A request is only accepted if the revenue it generates is above the sum of the bid prices of the seats it uses. Thus, if its revenue is more than its opportunity costs, i.e., $i -\beta_{j} n_i \geq 0$, we will accept the group type $i$. And choose $j^{*} = \arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
+
+
+\begin{lem}\label{bid-price}
+ The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
+\end{lem}
+
+The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}} n_i = \frac{\delta (i - \tilde{i})}{n_{\tilde{i}}}$. When $i < \tilde{i}$, $i - \beta_j n_i < 0$. When $i \geq \tilde{i}$, $i - \beta_j n_i \geq 0$. This means that group type $i$ greater than or equal to $\tilde{i}$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. In practice, groups are often assigned arbitrarily based on availability when the capacity allows, which can result in a large number of empty seats.
+
+The bid-price control policy based on the static model is stated below.
+
+\begin{algorithm}[H]
+  \caption{Bid-price Control Algorithm}\label{algo_bid}
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    {Solve the LP relaxation of problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$\;
+    Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$\;}
+    \eIf{$i \geq \tilde{i}$ and $\max_j{L_j^{t}} \geq n_i$}
+    {Accept the group and assign the group to row $k$ such that $L_{k}^{t} \geq n_{i}$\;}
+    {Reject the group\;}}
+\end{algorithm}
+
+
+\subsubsection*{Booking Limit Control}
+The booking limit control policy involves setting a maximum number of reservations that can be accepted for each group type. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
+
+In this policy, we replace the real demand by the expected one and solve the corresponding static problem using the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests. When we solve the linear relaxation of problem \eqref{deter_upper}, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
+
+When we solve problem \eqref{deter_upper} directly, we can develop the booking limit control policy.
+
+\begin{algorithm}[H]
+  \caption{Booking Limit Control Algorithm}\label{algo_booking}
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    {Solve problem \eqref{deter_upper} with $d_i^{t} = (T-t) \cdot p_i$ and $\mathbf{L}^{t}$\;
+    Obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$\;}
+    \eIf{$X_i > 0$}
+    {Accept the group and assign the group to row $k$ such that $x_{ik} > 0$\;}
+    {Reject the group\;}}
+\end{algorithm}
+
+
+\subsubsection*{DP-based Heuristic}
+To simplify the complexity of the original dynamic programming problem, we can consider a simplified version by relaxing all rows to a single row with the same total capacity, denoted as $\tilde{L} = \sum_{j=1}^{N} L_j$. With this simplification, we can make decisions for each group arrival based on the relaxed dynamic programming. By relaxing the rows to a single row, we aggregate the capacities of all individual rows into a single capacity value. This allows us to treat the seat assignment problem as a one-dimensional problem, reducing the computational complexity. Using the relaxed dynamic programming approach, we can determine the seat assignment decisions for each group arrival based on the simplified problem.
+
+Let $u$ denote the decision, where $u^{t} = 1$ if we accept a request in period $t$, $u^{t} =0$ otherwise. Similar to the DP in section \ref{sec_dynamic_seat}, the DP with one row can be expressed as:
+
+$$V^{t}(l) =  \max_{u^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l-n_i u^{t})+ i u^{t}] + p_0 V^{t+1}(l)\right\} $$
+with the boundary conditions $V^{T+1}(l) =0, \forall l \geq 0$, $V^{t}(0) =0, \forall t$.
+
+After accepting one group, assign it in some row arbitrarily when the capacity of the row allows.
+
+\begin{algorithm}[H]
+  \caption{DP-based Heuristic Algorithm}\label{algo_dp_heuris}
+  Calculate $V^{t}(l)$, $\forall t =2, \ldots, T; \forall l = 1, \ldots, L$\;
+  $l^{1} \gets L$\;
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    \eIf{$V^{t+1}(l^{t}) \leq V^{t+1}(l^{t}-n_i) + i$}
+    {Accept the group and assign the group to an arbitrary row $k$ such that $L_{k}^{t} \geq n_i$\;  
+    }
+    {Reject the group\;}}
+\end{algorithm}
+
+\subsubsection*{First Come First Served (FCFS) Policy}
+For dynamic seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of a partially filled row, we will assign it to that row immediately. Then continue to process requests in this manner until all rows cannot accommodate any groups.
+
+\begin{algorithm}[H]
+  \caption{FCFS Policy Algorithm}\label{algo_fcfs}
+  \For{$t =1, \ldots, T$}{
+    {Observe group type $i$\;}
+    \eIf{$\exists k$ such that $L_{k}^{t} \geq n_i$}
+    {Accept the group and assign the group to row $k$\;}
+    {Reject the group\;}}
+\end{algorithm}
+
+\subsubsection*{Tie-Breaking Rule}
+These policies will encounter ties when the group can be assigned to two or more rows.
+For the booking limit control, we assign the group according to the seat planning. The same tie-breaking rule used in the DSA approach can be applied for the booking limit control policy.
+For the other policies besides the booking limit control, we adopt the following rule for assigning groups to rows. We prioritize assigning the group to rows that have at least $n_M$ seats available. If the number of remaining seats for all rows are less than $n_M$, we assign the group to an arbitrary row that has enough capacity to accommodate the group.
+
+\newpage

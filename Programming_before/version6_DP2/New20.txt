@@ -1,0 +1,1979 @@
+Run Start Time: Mon Mar 20 20:19:34 2023
+probabilities: 	[0.05 0.05 0.05 0.85]
+Result: 158.30 
+probabilities: 	[0.05 0.05 0.1  0.8 ]
+Result: 158.40 
+probabilities: 	[0.05 0.05 0.15 0.75]
+Result: 158.95 
+probabilities: 	[0.05 0.05 0.2  0.7 ]
+Result: 159.05 
+probabilities: 	[0.05 0.05 0.25 0.65]
+Result: 158.85 
+probabilities: 	[0.05 0.05 0.3  0.6 ]
+Result: 158.95 
+probabilities: 	[0.05 0.05 0.35 0.55]
+Result: 159.35 
+probabilities: 	[0.05 0.05 0.4  0.5 ]
+Result: 159.05 
+probabilities: 	[0.05 0.05 0.45 0.45]
+Result: 159.15 
+probabilities: 	[0.05 0.05 0.5  0.4 ]
+Result: 158.95 
+probabilities: 	[0.05 0.05 0.55 0.35]
+Result: 158.75 
+probabilities: 	[0.05 0.05 0.6  0.3 ]
+Result: 158.30 
+probabilities: 	[0.05 0.05 0.65 0.25]
+Result: 158.10 
+probabilities: 	[0.05 0.05 0.7  0.2 ]
+Result: 157.65 
+probabilities: 	[0.05 0.05 0.75 0.15]
+Result: 155.80 
+probabilities: 	[0.05 0.05 0.8  0.1 ]
+Result: 153.20 
+probabilities: 	[0.05 0.05 0.85 0.05]
+Result: 151.55 
+probabilities: 	[0.05 0.1  0.05 0.8 ]
+Result: 158.35 
+probabilities: 	[0.05 0.1  0.1  0.75]
+Result: 158.45 
+probabilities: 	[0.05 0.1  0.15 0.7 ]
+Result: 158.50 
+probabilities: 	[0.05 0.1  0.2  0.65]
+Result: 158.35 
+probabilities: 	[0.05 0.1  0.25 0.6 ]
+Result: 158.90 
+probabilities: 	[0.05 0.1  0.3  0.55]
+Result: 158.80 
+probabilities: 	[0.05 0.1  0.35 0.5 ]
+Result: 159.00 
+probabilities: 	[0.05 0.1  0.4  0.45]
+Result: 158.80 
+probabilities: 	[0.05 0.1  0.45 0.4 ]
+Result: 158.95 
+probabilities: 	[0.05 0.1  0.5  0.35]
+Result: 158.35 
+probabilities: 	[0.05 0.1  0.55 0.3 ]
+Result: 158.15 
+probabilities: 	[0.05 0.1  0.6  0.25]
+Result: 157.35 
+probabilities: 	[0.05 0.1  0.65 0.2 ]
+Result: 157.15 
+probabilities: 	[0.05 0.1  0.7  0.15]
+Result: 156.25 
+probabilities: 	[0.05 0.1  0.75 0.1 ]
+Result: 154.15 
+probabilities: 	[0.05 0.1  0.8  0.05]
+Result: 151.35 
+probabilities: 	[0.05 0.15 0.05 0.75]
+Result: 158.00 
+probabilities: 	[0.05 0.15 0.1  0.7 ]
+Result: 158.65 
+probabilities: 	[0.05 0.15 0.15 0.65]
+Result: 158.50 
+probabilities: 	[0.05 0.15 0.2  0.6 ]
+Result: 158.90 
+probabilities: 	[0.05 0.15 0.25 0.55]
+Result: 159.25 
+probabilities: 	[0.05 0.15 0.3  0.5 ]
+Result: 158.85 
+probabilities: 	[0.05 0.15 0.35 0.45]
+Result: 159.00 
+probabilities: 	[0.05 0.15 0.4  0.4 ]
+Result: 158.20 
+probabilities: 	[0.05 0.15 0.45 0.35]
+Result: 158.00 
+probabilities: 	[0.05 0.15 0.5  0.3 ]
+Result: 157.95 
+probabilities: 	[0.05 0.15 0.55 0.25]
+Result: 157.05 
+probabilities: 	[0.05 0.15 0.6  0.2 ]
+Result: 156.30 
+probabilities: 	[0.05 0.15 0.65 0.15]
+Result: 155.30 
+probabilities: 	[0.05 0.15 0.7  0.1 ]
+Result: 154.35 
+probabilities: 	[0.05 0.15 0.75 0.05]
+Result: 152.45 
+probabilities: 	[0.05 0.2  0.05 0.7 ]
+Result: 158.55 
+probabilities: 	[0.05 0.2  0.1  0.65]
+Result: 158.60 
+probabilities: 	[0.05 0.2  0.15 0.6 ]
+Result: 159.25 
+probabilities: 	[0.05 0.2  0.2  0.55]
+Result: 159.05 
+probabilities: 	[0.05 0.2  0.25 0.5 ]
+Result: 158.70 
+probabilities: 	[0.05 0.2  0.3  0.45]
+Result: 158.90 
+probabilities: 	[0.05 0.2  0.35 0.4 ]
+Result: 158.10 
+probabilities: 	[0.05 0.2  0.4  0.35]
+Result: 157.00 
+probabilities: 	[0.05 0.2  0.45 0.3 ]
+Result: 157.45 
+probabilities: 	[0.05 0.2  0.5  0.25]
+Result: 156.65 
+probabilities: 	[0.05 0.2  0.55 0.2 ]
+Result: 155.95 
+probabilities: 	[0.05 0.2  0.6  0.15]
+Result: 155.30 
+probabilities: 	[0.05 0.2  0.65 0.1 ]
+Result: 153.20 
+probabilities: 	[0.05 0.2  0.7  0.05]
+Result: 151.55 
+probabilities: 	[0.05 0.25 0.05 0.65]
+Result: 158.05 
+probabilities: 	[0.05 0.25 0.1  0.6 ]
+Result: 158.55 
+probabilities: 	[0.05 0.25 0.15 0.55]
+Result: 158.55 
+probabilities: 	[0.05 0.25 0.2  0.5 ]
+Result: 158.70 
+probabilities: 	[0.05 0.25 0.25 0.45]
+Result: 157.30 
+probabilities: 	[0.05 0.25 0.3  0.4 ]
+Result: 158.25 
+probabilities: 	[0.05 0.25 0.35 0.35]
+Result: 156.60 
+probabilities: 	[0.05 0.25 0.4  0.3 ]
+Result: 156.70 
+probabilities: 	[0.05 0.25 0.45 0.25]
+Result: 155.85 
+probabilities: 	[0.05 0.25 0.5  0.2 ]
+Result: 154.80 
+probabilities: 	[0.05 0.25 0.55 0.15]
+Result: 154.20 
+probabilities: 	[0.05 0.25 0.6  0.1 ]
+Result: 153.50 
+probabilities: 	[0.05 0.25 0.65 0.05]
+Result: 152.10 
+probabilities: 	[0.05 0.3  0.05 0.6 ]
+Result: 158.05 
+probabilities: 	[0.05 0.3  0.1  0.55]
+Result: 158.45 
+probabilities: 	[0.05 0.3  0.15 0.5 ]
+Result: 157.70 
+probabilities: 	[0.05 0.3  0.2  0.45]
+Result: 157.95 
+probabilities: 	[0.05 0.3  0.25 0.4 ]
+Result: 157.15 
+probabilities: 	[0.05 0.3  0.3  0.35]
+Result: 157.10 
+probabilities: 	[0.05 0.3  0.35 0.3 ]
+Result: 155.50 
+probabilities: 	[0.05 0.3  0.4  0.25]
+Result: 155.95 
+probabilities: 	[0.05 0.3  0.45 0.2 ]
+Result: 154.95 
+probabilities: 	[0.05 0.3  0.5  0.15]
+Result: 153.50 
+probabilities: 	[0.05 0.3  0.55 0.1 ]
+Result: 152.20 
+probabilities: 	[0.05 0.3  0.6  0.05]
+Result: 152.25 
+probabilities: 	[0.05 0.35 0.05 0.55]
+Result: 157.85 
+probabilities: 	[0.05 0.35 0.1  0.5 ]
+Result: 157.05 
+probabilities: 	[0.05 0.35 0.15 0.45]
+Result: 156.80 
+probabilities: 	[0.05 0.35 0.2  0.4 ]
+Result: 156.80 
+probabilities: 	[0.05 0.35 0.25 0.35]
+Result: 156.65 
+probabilities: 	[0.05 0.35 0.3  0.3 ]
+Result: 154.75 
+probabilities: 	[0.05 0.35 0.35 0.25]
+Result: 154.15 
+probabilities: 	[0.05 0.35 0.4  0.2 ]
+Result: 153.35 
+probabilities: 	[0.05 0.35 0.45 0.15]
+Result: 152.60 
+probabilities: 	[0.05 0.35 0.5  0.1 ]
+Result: 152.60 
+probabilities: 	[0.05 0.35 0.55 0.05]
+Result: 150.50 
+probabilities: 	[0.05 0.4  0.05 0.5 ]
+Result: 157.50 
+probabilities: 	[0.05 0.4  0.1  0.45]
+Result: 156.05 
+probabilities: 	[0.05 0.4  0.15 0.4 ]
+Result: 155.80 
+probabilities: 	[0.05 0.4  0.2  0.35]
+Result: 155.45 
+probabilities: 	[0.05 0.4  0.25 0.3 ]
+Result: 154.80 
+probabilities: 	[0.05 0.4  0.3  0.25]
+Result: 152.75 
+probabilities: 	[0.05 0.4  0.35 0.2 ]
+Result: 153.10 
+probabilities: 	[0.05 0.4  0.4  0.15]
+Result: 151.40 
+probabilities: 	[0.05 0.4  0.45 0.1 ]
+Result: 151.30 
+probabilities: 	[0.05 0.4  0.5  0.05]
+Result: 150.20 
+probabilities: 	[0.05 0.45 0.05 0.45]
+Result: 155.75 
+probabilities: 	[0.05 0.45 0.1  0.4 ]
+Result: 154.80 
+probabilities: 	[0.05 0.45 0.15 0.35]
+Result: 154.35 
+probabilities: 	[0.05 0.45 0.2  0.3 ]
+Result: 152.85 
+probabilities: 	[0.05 0.45 0.25 0.25]
+Result: 153.00 
+probabilities: 	[0.05 0.45 0.3  0.2 ]
+Result: 152.60 
+probabilities: 	[0.05 0.45 0.35 0.15]
+Result: 151.65 
+probabilities: 	[0.05 0.45 0.4  0.1 ]
+Result: 150.40 
+probabilities: 	[0.05 0.45 0.45 0.05]
+Result: 149.75 
+probabilities: 	[0.05 0.5  0.05 0.4 ]
+Result: 154.30 
+probabilities: 	[0.05 0.5  0.1  0.35]
+Result: 152.80 
+probabilities: 	[0.05 0.5  0.15 0.3 ]
+Result: 152.50 
+probabilities: 	[0.05 0.5  0.2  0.25]
+Result: 152.05 
+probabilities: 	[0.05 0.5  0.25 0.2 ]
+Result: 151.15 
+probabilities: 	[0.05 0.5  0.3  0.15]
+Result: 150.60 
+probabilities: 	[0.05 0.5  0.35 0.1 ]
+Result: 149.75 
+probabilities: 	[0.05 0.5  0.4  0.05]
+Result: 148.30 
+probabilities: 	[0.05 0.55 0.05 0.35]
+Result: 151.60 
+probabilities: 	[0.05 0.55 0.1  0.3 ]
+Result: 152.00 
+probabilities: 	[0.05 0.55 0.15 0.25]
+Result: 151.35 
+probabilities: 	[0.05 0.55 0.2  0.2 ]
+Result: 149.75 
+probabilities: 	[0.05 0.55 0.25 0.15]
+Result: 149.10 
+probabilities: 	[0.05 0.55 0.3  0.1 ]
+Result: 149.00 
+probabilities: 	[0.05 0.55 0.35 0.05]
+Result: 147.65 
+probabilities: 	[0.05 0.6  0.05 0.3 ]
+Result: 150.60 
+probabilities: 	[0.05 0.6  0.1  0.25]
+Result: 149.85 
+probabilities: 	[0.05 0.6  0.15 0.2 ]
+Result: 149.55 
+probabilities: 	[0.05 0.6  0.2  0.15]
+Result: 148.65 
+probabilities: 	[0.05 0.6  0.25 0.1 ]
+Result: 147.90 
+probabilities: 	[0.05 0.6  0.3  0.05]
+Result: 147.20 
+probabilities: 	[0.05 0.65 0.05 0.25]
+Result: 149.55 
+probabilities: 	[0.05 0.65 0.1  0.2 ]
+Result: 148.55 
+probabilities: 	[0.05 0.65 0.15 0.15]
+Result: 147.75 
+probabilities: 	[0.05 0.65 0.2  0.1 ]
+Result: 146.70 
+probabilities: 	[0.05 0.65 0.25 0.05]
+Result: 145.70 
+probabilities: 	[0.05 0.7  0.05 0.2 ]
+Result: 148.30 
+probabilities: 	[0.05 0.7  0.1  0.15]
+Result: 146.45 
+probabilities: 	[0.05 0.7  0.15 0.1 ]
+Result: 145.80 
+probabilities: 	[0.05 0.7  0.2  0.05]
+Result: 145.05 
+probabilities: 	[0.05 0.75 0.05 0.15]
+Result: 146.30 
+probabilities: 	[0.05 0.75 0.1  0.1 ]
+Result: 145.05 
+probabilities: 	[0.05 0.75 0.15 0.05]
+Result: 144.15 
+probabilities: 	[0.05 0.8  0.05 0.1 ]
+Result: 143.85 
+probabilities: 	[0.05 0.8  0.1  0.05]
+Result: 143.25 
+probabilities: 	[0.05 0.85 0.05 0.05]
+Result: 142.25 
+probabilities: 	[0.1  0.05 0.05 0.8 ]
+Result: 157.60 
+probabilities: 	[0.1  0.05 0.1  0.75]
+Result: 157.80 
+probabilities: 	[0.1  0.05 0.15 0.7 ]
+Result: 158.45 
+probabilities: 	[0.1  0.05 0.2  0.65]
+Result: 158.80 
+probabilities: 	[0.1  0.05 0.25 0.6 ]
+Result: 158.85 
+probabilities: 	[0.1  0.05 0.3  0.55]
+Result: 158.90 
+probabilities: 	[0.1  0.05 0.35 0.5 ]
+Result: 159.00 
+probabilities: 	[0.1  0.05 0.4  0.45]
+Result: 158.65 
+probabilities: 	[0.1  0.05 0.45 0.4 ]
+Result: 158.50 
+probabilities: 	[0.1  0.05 0.5  0.35]
+Result: 158.40 
+probabilities: 	[0.1  0.05 0.55 0.3 ]
+Result: 157.45 
+probabilities: 	[0.1  0.05 0.6  0.25]
+Result: 157.45 
+probabilities: 	[0.1  0.05 0.65 0.2 ]
+Result: 156.25 
+probabilities: 	[0.1  0.05 0.7  0.15]
+Result: 155.00 
+probabilities: 	[0.1  0.05 0.75 0.1 ]
+Result: 153.35 
+probabilities: 	[0.1  0.05 0.8  0.05]
+Result: 150.40 
+probabilities: 	[0.1  0.1  0.05 0.75]
+Result: 157.10 
+probabilities: 	[0.1 0.1 0.1 0.7]
+Result: 158.50 
+probabilities: 	[0.1  0.1  0.15 0.65]
+Result: 159.05 
+probabilities: 	[0.1 0.1 0.2 0.6]
+Result: 158.75 
+probabilities: 	[0.1  0.1  0.25 0.55]
+Result: 158.80 
+probabilities: 	[0.1 0.1 0.3 0.5]
+Result: 159.05 
+probabilities: 	[0.1  0.1  0.35 0.45]
+Result: 158.25 
+probabilities: 	[0.1 0.1 0.4 0.4]
+Result: 157.95 
+probabilities: 	[0.1  0.1  0.45 0.35]
+Result: 157.35 
+probabilities: 	[0.1 0.1 0.5 0.3]
+Result: 157.25 
+probabilities: 	[0.1  0.1  0.55 0.25]
+Result: 156.20 
+probabilities: 	[0.1 0.1 0.6 0.2]
+Result: 155.00 
+probabilities: 	[0.1  0.1  0.65 0.15]
+Result: 154.60 
+probabilities: 	[0.1 0.1 0.7 0.1]
+Result: 153.45 
+probabilities: 	[0.1  0.1  0.75 0.05]
+Result: 151.85 
+probabilities: 	[0.1  0.15 0.05 0.7 ]
+Result: 158.10 
+probabilities: 	[0.1  0.15 0.1  0.65]
+Result: 157.85 
+probabilities: 	[0.1  0.15 0.15 0.6 ]
+Result: 158.40 
+probabilities: 	[0.1  0.15 0.2  0.55]
+Result: 158.70 
+probabilities: 	[0.1  0.15 0.25 0.5 ]
+Result: 158.90 
+probabilities: 	[0.1  0.15 0.3  0.45]
+Result: 157.40 
+probabilities: 	[0.1  0.15 0.35 0.4 ]
+Result: 157.50 
+probabilities: 	[0.1  0.15 0.4  0.35]
+Result: 156.90 
+probabilities: 	[0.1  0.15 0.45 0.3 ]
+Result: 155.75 
+probabilities: 	[0.1  0.15 0.5  0.25]
+Result: 156.05 
+probabilities: 	[0.1  0.15 0.55 0.2 ]
+Result: 155.15 
+probabilities: 	[0.1  0.15 0.6  0.15]
+Result: 154.50 
+probabilities: 	[0.1  0.15 0.65 0.1 ]
+Result: 153.30 
+probabilities: 	[0.1  0.15 0.7  0.05]
+Result: 151.95 
+probabilities: 	[0.1  0.2  0.05 0.65]
+Result: 157.40 
+probabilities: 	[0.1 0.2 0.1 0.6]
+Result: 158.15 
+probabilities: 	[0.1  0.2  0.15 0.55]
+Result: 158.00 
+probabilities: 	[0.1 0.2 0.2 0.5]
+Result: 158.65 
+probabilities: 	[0.1  0.2  0.25 0.45]
+Result: 157.50 
+probabilities: 	[0.1 0.2 0.3 0.4]
+Result: 156.85 
+probabilities: 	[0.1  0.2  0.35 0.35]
+Result: 155.75 
+probabilities: 	[0.1 0.2 0.4 0.3]
+Result: 156.10 
+probabilities: 	[0.1  0.2  0.45 0.25]
+Result: 154.35 
+probabilities: 	[0.1 0.2 0.5 0.2]
+Result: 153.75 
+probabilities: 	[0.1  0.2  0.55 0.15]
+Result: 153.70 
+probabilities: 	[0.1 0.2 0.6 0.1]
+Result: 151.90 
+probabilities: 	[0.1  0.2  0.65 0.05]
+Result: 151.70 
+probabilities: 	[0.1  0.25 0.05 0.6 ]
+Result: 157.15 
+probabilities: 	[0.1  0.25 0.1  0.55]
+Result: 158.00 
+probabilities: 	[0.1  0.25 0.15 0.5 ]
+Result: 157.45 
+probabilities: 	[0.1  0.25 0.2  0.45]
+Result: 156.80 
+probabilities: 	[0.1  0.25 0.25 0.4 ]
+Result: 156.05 
+probabilities: 	[0.1  0.25 0.3  0.35]
+Result: 156.10 
+probabilities: 	[0.1  0.25 0.35 0.3 ]
+Result: 155.10 
+probabilities: 	[0.1  0.25 0.4  0.25]
+Result: 154.50 
+probabilities: 	[0.1  0.25 0.45 0.2 ]
+Result: 153.50 
+probabilities: 	[0.1  0.25 0.5  0.15]
+Result: 152.40 
+probabilities: 	[0.1  0.25 0.55 0.1 ]
+Result: 152.15 
+probabilities: 	[0.1  0.25 0.6  0.05]
+Result: 150.95 
+probabilities: 	[0.1  0.3  0.05 0.55]
+Result: 157.00 
+probabilities: 	[0.1 0.3 0.1 0.5]
+Result: 156.95 
+probabilities: 	[0.1  0.3  0.15 0.45]
+Result: 156.75 
+probabilities: 	[0.1 0.3 0.2 0.4]
+Result: 156.00 
+probabilities: 	[0.1  0.3  0.25 0.35]
+Result: 154.40 
+probabilities: 	[0.1 0.3 0.3 0.3]
+Result: 154.30 
+probabilities: 	[0.1  0.3  0.35 0.25]
+Result: 154.00 
+probabilities: 	[0.1 0.3 0.4 0.2]
+Result: 152.75 
+probabilities: 	[0.1  0.3  0.45 0.15]
+Result: 151.45 
+probabilities: 	[0.1 0.3 0.5 0.1]
+Result: 150.95 
+probabilities: 	[0.1  0.3  0.55 0.05]
+Result: 150.10 
+probabilities: 	[0.1  0.35 0.05 0.5 ]
+Result: 156.70 
+probabilities: 	[0.1  0.35 0.1  0.45]
+Result: 154.65 
+probabilities: 	[0.1  0.35 0.15 0.4 ]
+Result: 154.80 
+probabilities: 	[0.1  0.35 0.2  0.35]
+Result: 154.35 
+probabilities: 	[0.1  0.35 0.25 0.3 ]
+Result: 153.15 
+probabilities: 	[0.1  0.35 0.3  0.25]
+Result: 152.60 
+probabilities: 	[0.1  0.35 0.35 0.2 ]
+Result: 152.15 
+probabilities: 	[0.1  0.35 0.4  0.15]
+Result: 151.40 
+probabilities: 	[0.1  0.35 0.45 0.1 ]
+Result: 150.80 
+probabilities: 	[0.1  0.35 0.5  0.05]
+Result: 149.25 
+probabilities: 	[0.1  0.4  0.05 0.45]
+Result: 156.05 
+probabilities: 	[0.1 0.4 0.1 0.4]
+Result: 153.95 
+probabilities: 	[0.1  0.4  0.15 0.35]
+Result: 153.60 
+probabilities: 	[0.1 0.4 0.2 0.3]
+Result: 152.30 
+probabilities: 	[0.1  0.4  0.25 0.25]
+Result: 152.55 
+probabilities: 	[0.1 0.4 0.3 0.2]
+Result: 151.40 
+probabilities: 	[0.1  0.4  0.35 0.15]
+Result: 150.45 
+probabilities: 	[0.1 0.4 0.4 0.1]
+Result: 149.85 
+probabilities: 	[0.1  0.4  0.45 0.05]
+Result: 148.50 
+probabilities: 	[0.1  0.45 0.05 0.4 ]
+Result: 153.35 
+probabilities: 	[0.1  0.45 0.1  0.35]
+Result: 152.10 
+probabilities: 	[0.1  0.45 0.15 0.3 ]
+Result: 152.20 
+probabilities: 	[0.1  0.45 0.2  0.25]
+Result: 150.80 
+probabilities: 	[0.1  0.45 0.25 0.2 ]
+Result: 150.75 
+probabilities: 	[0.1  0.45 0.3  0.15]
+Result: 150.10 
+probabilities: 	[0.1  0.45 0.35 0.1 ]
+Result: 148.80 
+probabilities: 	[0.1  0.45 0.4  0.05]
+Result: 147.95 
+probabilities: 	[0.1  0.5  0.05 0.35]
+Result: 151.30 
+probabilities: 	[0.1 0.5 0.1 0.3]
+Result: 151.40 
+probabilities: 	[0.1  0.5  0.15 0.25]
+Result: 150.15 
+probabilities: 	[0.1 0.5 0.2 0.2]
+Result: 149.20 
+probabilities: 	[0.1  0.5  0.25 0.15]
+Result: 148.75 
+probabilities: 	[0.1 0.5 0.3 0.1]
+Result: 148.10 
+probabilities: 	[0.1  0.5  0.35 0.05]
+Result: 147.25 
+probabilities: 	[0.1  0.55 0.05 0.3 ]
+Result: 151.15 
+probabilities: 	[0.1  0.55 0.1  0.25]
+Result: 149.65 
+probabilities: 	[0.1  0.55 0.15 0.2 ]
+Result: 148.20 
+probabilities: 	[0.1  0.55 0.2  0.15]
+Result: 147.90 
+probabilities: 	[0.1  0.55 0.25 0.1 ]
+Result: 146.30 
+probabilities: 	[0.1  0.55 0.3  0.05]
+Result: 145.85 
+probabilities: 	[0.1  0.6  0.05 0.25]
+Result: 148.90 
+probabilities: 	[0.1 0.6 0.1 0.2]
+Result: 148.30 
+probabilities: 	[0.1  0.6  0.15 0.15]
+Result: 147.40 
+probabilities: 	[0.1 0.6 0.2 0.1]
+Result: 145.65 
+probabilities: 	[0.1  0.6  0.25 0.05]
+Result: 145.50 
+probabilities: 	[0.1  0.65 0.05 0.2 ]
+Result: 146.10 
+probabilities: 	[0.1  0.65 0.1  0.15]
+Result: 146.25 
+probabilities: 	[0.1  0.65 0.15 0.1 ]
+Result: 144.65 
+probabilities: 	[0.1  0.65 0.2  0.05]
+Result: 144.40 
+probabilities: 	[0.1  0.7  0.05 0.15]
+Result: 144.40 
+probabilities: 	[0.1 0.7 0.1 0.1]
+Result: 144.00 
+probabilities: 	[0.1  0.7  0.15 0.05]
+Result: 142.95 
+probabilities: 	[0.1  0.75 0.05 0.1 ]
+Result: 142.80 
+probabilities: 	[0.1  0.75 0.1  0.05]
+Result: 141.60 
+probabilities: 	[0.1  0.8  0.05 0.05]
+Result: 140.40 
+probabilities: 	[0.15 0.05 0.05 0.75]
+Result: 156.50 
+probabilities: 	[0.15 0.05 0.1  0.7 ]
+Result: 157.25 
+probabilities: 	[0.15 0.05 0.15 0.65]
+Result: 157.85 
+probabilities: 	[0.15 0.05 0.2  0.6 ]
+Result: 158.60 
+probabilities: 	[0.15 0.05 0.25 0.55]
+Result: 158.25 
+probabilities: 	[0.15 0.05 0.3  0.5 ]
+Result: 157.90 
+probabilities: 	[0.15 0.05 0.35 0.45]
+Result: 158.35 
+probabilities: 	[0.15 0.05 0.4  0.4 ]
+Result: 156.95 
+probabilities: 	[0.15 0.05 0.45 0.35]
+Result: 156.75 
+probabilities: 	[0.15 0.05 0.5  0.3 ]
+Result: 156.10 
+probabilities: 	[0.15 0.05 0.55 0.25]
+Result: 155.15 
+probabilities: 	[0.15 0.05 0.6  0.2 ]
+Result: 155.35 
+probabilities: 	[0.15 0.05 0.65 0.15]
+Result: 153.40 
+probabilities: 	[0.15 0.05 0.7  0.1 ]
+Result: 152.25 
+probabilities: 	[0.15 0.05 0.75 0.05]
+Result: 150.05 
+probabilities: 	[0.15 0.1  0.05 0.7 ]
+Result: 157.20 
+probabilities: 	[0.15 0.1  0.1  0.65]
+Result: 157.35 
+probabilities: 	[0.15 0.1  0.15 0.6 ]
+Result: 158.50 
+probabilities: 	[0.15 0.1  0.2  0.55]
+Result: 157.60 
+probabilities: 	[0.15 0.1  0.25 0.5 ]
+Result: 158.25 
+probabilities: 	[0.15 0.1  0.3  0.45]
+Result: 158.35 
+probabilities: 	[0.15 0.1  0.35 0.4 ]
+Result: 156.80 
+probabilities: 	[0.15 0.1  0.4  0.35]
+Result: 155.85 
+probabilities: 	[0.15 0.1  0.45 0.3 ]
+Result: 155.15 
+probabilities: 	[0.15 0.1  0.5  0.25]
+Result: 154.65 
+probabilities: 	[0.15 0.1  0.55 0.2 ]
+Result: 154.25 
+probabilities: 	[0.15 0.1  0.6  0.15]
+Result: 153.30 
+probabilities: 	[0.15 0.1  0.65 0.1 ]
+Result: 151.80 
+probabilities: 	[0.15 0.1  0.7  0.05]
+Result: 150.40 
+probabilities: 	[0.15 0.15 0.05 0.65]
+Result: 156.85 
+probabilities: 	[0.15 0.15 0.1  0.6 ]
+Result: 157.15 
+probabilities: 	[0.15 0.15 0.15 0.55]
+Result: 157.35 
+probabilities: 	[0.15 0.15 0.2  0.5 ]
+Result: 157.05 
+probabilities: 	[0.15 0.15 0.25 0.45]
+Result: 156.75 
+probabilities: 	[0.15 0.15 0.3  0.4 ]
+Result: 156.10 
+probabilities: 	[0.15 0.15 0.35 0.35]
+Result: 154.85 
+probabilities: 	[0.15 0.15 0.4  0.3 ]
+Result: 155.45 
+probabilities: 	[0.15 0.15 0.45 0.25]
+Result: 154.15 
+probabilities: 	[0.15 0.15 0.5  0.2 ]
+Result: 154.35 
+probabilities: 	[0.15 0.15 0.55 0.15]
+Result: 152.85 
+probabilities: 	[0.15 0.15 0.6  0.1 ]
+Result: 151.00 
+probabilities: 	[0.15 0.15 0.65 0.05]
+Result: 150.10 
+probabilities: 	[0.15 0.2  0.05 0.6 ]
+Result: 156.90 
+probabilities: 	[0.15 0.2  0.1  0.55]
+Result: 157.50 
+probabilities: 	[0.15 0.2  0.15 0.5 ]
+Result: 156.45 
+probabilities: 	[0.15 0.2  0.2  0.45]
+Result: 156.10 
+probabilities: 	[0.15 0.2  0.25 0.4 ]
+Result: 155.75 
+probabilities: 	[0.15 0.2  0.3  0.35]
+Result: 155.45 
+probabilities: 	[0.15 0.2  0.35 0.3 ]
+Result: 153.70 
+probabilities: 	[0.15 0.2  0.4  0.25]
+Result: 153.65 
+probabilities: 	[0.15 0.2  0.45 0.2 ]
+Result: 152.80 
+probabilities: 	[0.15 0.2  0.5  0.15]
+Result: 152.60 
+probabilities: 	[0.15 0.2  0.55 0.1 ]
+Result: 151.45 
+probabilities: 	[0.15 0.2  0.6  0.05]
+Result: 150.25 
+probabilities: 	[0.15 0.25 0.05 0.55]
+Result: 156.80 
+probabilities: 	[0.15 0.25 0.1  0.5 ]
+Result: 156.05 
+probabilities: 	[0.15 0.25 0.15 0.45]
+Result: 156.00 
+probabilities: 	[0.15 0.25 0.2  0.4 ]
+Result: 155.25 
+probabilities: 	[0.15 0.25 0.25 0.35]
+Result: 153.35 
+probabilities: 	[0.15 0.25 0.3  0.3 ]
+Result: 153.20 
+probabilities: 	[0.15 0.25 0.35 0.25]
+Result: 152.25 
+probabilities: 	[0.15 0.25 0.4  0.2 ]
+Result: 152.15 
+probabilities: 	[0.15 0.25 0.45 0.15]
+Result: 150.30 
+probabilities: 	[0.15 0.25 0.5  0.1 ]
+Result: 150.35 
+probabilities: 	[0.15 0.25 0.55 0.05]
+Result: 149.45 
+probabilities: 	[0.15 0.3  0.05 0.5 ]
+Result: 155.75 
+probabilities: 	[0.15 0.3  0.1  0.45]
+Result: 154.10 
+probabilities: 	[0.15 0.3  0.15 0.4 ]
+Result: 153.65 
+probabilities: 	[0.15 0.3  0.2  0.35]
+Result: 154.25 
+probabilities: 	[0.15 0.3  0.25 0.3 ]
+Result: 152.75 
+probabilities: 	[0.15 0.3  0.3  0.25]
+Result: 151.35 
+probabilities: 	[0.15 0.3  0.35 0.2 ]
+Result: 151.90 
+probabilities: 	[0.15 0.3  0.4  0.15]
+Result: 150.15 
+probabilities: 	[0.15 0.3  0.45 0.1 ]
+Result: 149.65 
+probabilities: 	[0.15 0.3  0.5  0.05]
+Result: 148.10 
+probabilities: 	[0.15 0.35 0.05 0.45]
+Result: 153.80 
+probabilities: 	[0.15 0.35 0.1  0.4 ]
+Result: 153.85 
+probabilities: 	[0.15 0.35 0.15 0.35]
+Result: 152.15 
+probabilities: 	[0.15 0.35 0.2  0.3 ]
+Result: 152.30 
+probabilities: 	[0.15 0.35 0.25 0.25]
+Result: 150.95 
+probabilities: 	[0.15 0.35 0.3  0.2 ]
+Result: 150.55 
+probabilities: 	[0.15 0.35 0.35 0.15]
+Result: 150.05 
+probabilities: 	[0.15 0.35 0.4  0.1 ]
+Result: 149.25 
+probabilities: 	[0.15 0.35 0.45 0.05]
+Result: 148.05 
+probabilities: 	[0.15 0.4  0.05 0.4 ]
+Result: 152.55 
+probabilities: 	[0.15 0.4  0.1  0.35]
+Result: 151.95 
+probabilities: 	[0.15 0.4  0.15 0.3 ]
+Result: 150.50 
+probabilities: 	[0.15 0.4  0.2  0.25]
+Result: 149.90 
+probabilities: 	[0.15 0.4  0.25 0.2 ]
+Result: 149.30 
+probabilities: 	[0.15 0.4  0.3  0.15]
+Result: 147.95 
+probabilities: 	[0.15 0.4  0.35 0.1 ]
+Result: 148.75 
+probabilities: 	[0.15 0.4  0.4  0.05]
+Result: 146.45 
+probabilities: 	[0.15 0.45 0.05 0.35]
+Result: 150.60 
+probabilities: 	[0.15 0.45 0.1  0.3 ]
+Result: 150.15 
+probabilities: 	[0.15 0.45 0.15 0.25]
+Result: 149.60 
+probabilities: 	[0.15 0.45 0.2  0.2 ]
+Result: 147.95 
+probabilities: 	[0.15 0.45 0.25 0.15]
+Result: 148.25 
+probabilities: 	[0.15 0.45 0.3  0.1 ]
+Result: 146.65 
+probabilities: 	[0.15 0.45 0.35 0.05]
+Result: 146.10 
+probabilities: 	[0.15 0.5  0.05 0.3 ]
+Result: 149.05 
+probabilities: 	[0.15 0.5  0.1  0.25]
+Result: 147.95 
+probabilities: 	[0.15 0.5  0.15 0.2 ]
+Result: 147.40 
+probabilities: 	[0.15 0.5  0.2  0.15]
+Result: 147.00 
+probabilities: 	[0.15 0.5  0.25 0.1 ]
+Result: 145.70 
+probabilities: 	[0.15 0.5  0.3  0.05]
+Result: 145.15 
+probabilities: 	[0.15 0.55 0.05 0.25]
+Result: 148.10 
+probabilities: 	[0.15 0.55 0.1  0.2 ]
+Result: 147.10 
+probabilities: 	[0.15 0.55 0.15 0.15]
+Result: 145.85 
+probabilities: 	[0.15 0.55 0.2  0.1 ]
+Result: 145.60 
+probabilities: 	[0.15 0.55 0.25 0.05]
+Result: 144.25 
+probabilities: 	[0.15 0.6  0.05 0.2 ]
+Result: 145.45 
+probabilities: 	[0.15 0.6  0.1  0.15]
+Result: 144.60 
+probabilities: 	[0.15 0.6  0.15 0.1 ]
+Result: 143.25 
+probabilities: 	[0.15 0.6  0.2  0.05]
+Result: 143.65 
+probabilities: 	[0.15 0.65 0.05 0.15]
+Result: 143.70 
+probabilities: 	[0.15 0.65 0.1  0.1 ]
+Result: 142.40 
+probabilities: 	[0.15 0.65 0.15 0.05]
+Result: 141.30 
+probabilities: 	[0.15 0.7  0.05 0.1 ]
+Result: 142.30 
+probabilities: 	[0.15 0.7  0.1  0.05]
+Result: 140.95 
+probabilities: 	[0.15 0.75 0.05 0.05]
+Result: 138.55 
+probabilities: 	[0.2  0.05 0.05 0.7 ]
+Result: 155.80 
+probabilities: 	[0.2  0.05 0.1  0.65]
+Result: 157.05 
+probabilities: 	[0.2  0.05 0.15 0.6 ]
+Result: 156.65 
+probabilities: 	[0.2  0.05 0.2  0.55]
+Result: 157.75 
+probabilities: 	[0.2  0.05 0.25 0.5 ]
+Result: 157.55 
+probabilities: 	[0.2  0.05 0.3  0.45]
+Result: 156.40 
+probabilities: 	[0.2  0.05 0.35 0.4 ]
+Result: 155.80 
+probabilities: 	[0.2  0.05 0.4  0.35]
+Result: 155.95 
+probabilities: 	[0.2  0.05 0.45 0.3 ]
+Result: 154.90 
+probabilities: 	[0.2  0.05 0.5  0.25]
+Result: 154.35 
+probabilities: 	[0.2  0.05 0.55 0.2 ]
+Result: 153.35 
+probabilities: 	[0.2  0.05 0.6  0.15]
+Result: 152.35 
+probabilities: 	[0.2  0.05 0.65 0.1 ]
+Result: 151.05 
+probabilities: 	[0.2  0.05 0.7  0.05]
+Result: 148.20 
+probabilities: 	[0.2  0.1  0.05 0.65]
+Result: 156.20 
+probabilities: 	[0.2 0.1 0.1 0.6]
+Result: 157.10 
+probabilities: 	[0.2  0.1  0.15 0.55]
+Result: 156.95 
+probabilities: 	[0.2 0.1 0.2 0.5]
+Result: 156.70 
+probabilities: 	[0.2  0.1  0.25 0.45]
+Result: 155.75 
+probabilities: 	[0.2 0.1 0.3 0.4]
+Result: 155.55 
+probabilities: 	[0.2  0.1  0.35 0.35]
+Result: 154.70 
+probabilities: 	[0.2 0.1 0.4 0.3]
+Result: 153.75 
+probabilities: 	[0.2  0.1  0.45 0.25]
+Result: 153.50 
+probabilities: 	[0.2 0.1 0.5 0.2]
+Result: 152.55 
+probabilities: 	[0.2  0.1  0.55 0.15]
+Result: 151.85 
+probabilities: 	[0.2 0.1 0.6 0.1]
+Result: 150.20 
+probabilities: 	[0.2  0.1  0.65 0.05]
+Result: 148.65 
+probabilities: 	[0.2  0.15 0.05 0.6 ]
+Result: 155.95 
+probabilities: 	[0.2  0.15 0.1  0.55]
+Result: 155.95 
+probabilities: 	[0.2  0.15 0.15 0.5 ]
+Result: 155.85 
+probabilities: 	[0.2  0.15 0.2  0.45]
+Result: 154.90 
+probabilities: 	[0.2  0.15 0.25 0.4 ]
+Result: 155.35 
+probabilities: 	[0.2  0.15 0.3  0.35]
+Result: 154.60 
+probabilities: 	[0.2  0.15 0.35 0.3 ]
+Result: 153.95 
+probabilities: 	[0.2  0.15 0.4  0.25]
+Result: 152.20 
+probabilities: 	[0.2  0.15 0.45 0.2 ]
+Result: 151.50 
+probabilities: 	[0.2  0.15 0.5  0.15]
+Result: 151.25 
+probabilities: 	[0.2  0.15 0.55 0.1 ]
+Result: 150.10 
+probabilities: 	[0.2  0.15 0.6  0.05]
+Result: 149.50 
+probabilities: 	[0.2  0.2  0.05 0.55]
+Result: 156.35 
+probabilities: 	[0.2 0.2 0.1 0.5]
+Result: 155.60 
+probabilities: 	[0.2  0.2  0.15 0.45]
+Result: 154.80 
+probabilities: 	[0.2 0.2 0.2 0.4]
+Result: 153.80 
+probabilities: 	[0.2  0.2  0.25 0.35]
+Result: 153.10 
+probabilities: 	[0.2 0.2 0.3 0.3]
+Result: 153.95 
+probabilities: 	[0.2  0.2  0.35 0.25]
+Result: 152.00 
+probabilities: 	[0.2 0.2 0.4 0.2]
+Result: 151.45 
+probabilities: 	[0.2  0.2  0.45 0.15]
+Result: 150.80 
+probabilities: 	[0.2 0.2 0.5 0.1]
+Result: 149.15 
+probabilities: 	[0.2  0.2  0.55 0.05]
+Result: 148.15 
+probabilities: 	[0.2  0.25 0.05 0.5 ]
+Result: 154.20 
+probabilities: 	[0.2  0.25 0.1  0.45]
+Result: 154.05 
+probabilities: 	[0.2  0.25 0.15 0.4 ]
+Result: 153.80 
+probabilities: 	[0.2  0.25 0.2  0.35]
+Result: 152.75 
+probabilities: 	[0.2  0.25 0.25 0.3 ]
+Result: 152.35 
+probabilities: 	[0.2  0.25 0.3  0.25]
+Result: 151.60 
+probabilities: 	[0.2  0.25 0.35 0.2 ]
+Result: 151.00 
+probabilities: 	[0.2  0.25 0.4  0.15]
+Result: 148.60 
+probabilities: 	[0.2  0.25 0.45 0.1 ]
+Result: 149.10 
+probabilities: 	[0.2  0.25 0.5  0.05]
+Result: 147.65 
+probabilities: 	[0.2  0.3  0.05 0.45]
+Result: 153.15 
+probabilities: 	[0.2 0.3 0.1 0.4]
+Result: 153.15 
+probabilities: 	[0.2  0.3  0.15 0.35]
+Result: 151.30 
+probabilities: 	[0.2 0.3 0.2 0.3]
+Result: 150.95 
+probabilities: 	[0.2  0.3  0.25 0.25]
+Result: 150.10 
+probabilities: 	[0.2 0.3 0.3 0.2]
+Result: 148.80 
+probabilities: 	[0.2  0.3  0.35 0.15]
+Result: 148.10 
+probabilities: 	[0.2 0.3 0.4 0.1]
+Result: 148.15 
+probabilities: 	[0.2  0.3  0.45 0.05]
+Result: 147.50 
+probabilities: 	[0.2  0.35 0.05 0.4 ]
+Result: 151.20 
+probabilities: 	[0.2  0.35 0.1  0.35]
+Result: 151.50 
+probabilities: 	[0.2  0.35 0.15 0.3 ]
+Result: 150.40 
+probabilities: 	[0.2  0.35 0.2  0.25]
+Result: 150.00 
+probabilities: 	[0.2  0.35 0.25 0.2 ]
+Result: 148.85 
+probabilities: 	[0.2  0.35 0.3  0.15]
+Result: 147.05 
+probabilities: 	[0.2  0.35 0.35 0.1 ]
+Result: 146.55 
+probabilities: 	[0.2  0.35 0.4  0.05]
+Result: 145.90 
+probabilities: 	[0.2  0.4  0.05 0.35]
+Result: 150.60 
+probabilities: 	[0.2 0.4 0.1 0.3]
+Result: 148.60 
+probabilities: 	[0.2  0.4  0.15 0.25]
+Result: 148.30 
+probabilities: 	[0.2 0.4 0.2 0.2]
+Result: 147.65 
+probabilities: 	[0.2  0.4  0.25 0.15]
+Result: 147.30 
+probabilities: 	[0.2 0.4 0.3 0.1]
+Result: 144.75 
+probabilities: 	[0.2  0.4  0.35 0.05]
+Result: 145.60 
+probabilities: 	[0.2  0.45 0.05 0.3 ]
+Result: 148.50 
+probabilities: 	[0.2  0.45 0.1  0.25]
+Result: 147.40 
+probabilities: 	[0.2  0.45 0.15 0.2 ]
+Result: 146.75 
+probabilities: 	[0.2  0.45 0.2  0.15]
+Result: 145.55 
+probabilities: 	[0.2  0.45 0.25 0.1 ]
+Result: 145.70 
+probabilities: 	[0.2  0.45 0.3  0.05]
+Result: 144.65 
+probabilities: 	[0.2  0.5  0.05 0.25]
+Result: 145.65 
+probabilities: 	[0.2 0.5 0.1 0.2]
+Result: 147.85 
+probabilities: 	[0.2  0.5  0.15 0.15]
+Result: 145.40 
+probabilities: 	[0.2 0.5 0.2 0.1]
+Result: 144.40 
+probabilities: 	[0.2  0.5  0.25 0.05]
+Result: 143.15 
+probabilities: 	[2.00000000e-01 5.00000000e-01 3.00000000e-01 5.55111512e-17]
+Result: 142.20 
+probabilities: 	[0.2  0.55 0.05 0.2 ]
+Result: 145.10 
+probabilities: 	[0.2  0.55 0.1  0.15]
+Result: 143.05 
+probabilities: 	[0.2  0.55 0.15 0.1 ]
+Result: 142.55 
+probabilities: 	[0.2  0.55 0.2  0.05]
+Result: 140.80 
+probabilities: 	[0.2  0.6  0.05 0.15]
+Result: 143.05 
+probabilities: 	[0.2 0.6 0.1 0.1]
+Result: 141.90 
+probabilities: 	[0.2  0.6  0.15 0.05]
+Result: 141.35 
+probabilities: 	[0.2  0.65 0.05 0.1 ]
+Result: 140.55 
+probabilities: 	[0.2  0.65 0.1  0.05]
+Result: 139.75 
+probabilities: 	[0.2  0.7  0.05 0.05]
+Result: 138.15 
+probabilities: 	[0.25 0.05 0.05 0.65]
+Result: 155.90 
+probabilities: 	[0.25 0.05 0.1  0.6 ]
+Result: 155.55 
+probabilities: 	[0.25 0.05 0.15 0.55]
+Result: 156.50 
+probabilities: 	[0.25 0.05 0.2  0.5 ]
+Result: 156.40 
+probabilities: 	[0.25 0.05 0.25 0.45]
+Result: 154.90 
+probabilities: 	[0.25 0.05 0.3  0.4 ]
+Result: 154.55 
+probabilities: 	[0.25 0.05 0.35 0.35]
+Result: 154.00 
+probabilities: 	[0.25 0.05 0.4  0.3 ]
+Result: 153.25 
+probabilities: 	[0.25 0.05 0.45 0.25]
+Result: 153.20 
+probabilities: 	[0.25 0.05 0.5  0.2 ]
+Result: 151.90 
+probabilities: 	[0.25 0.05 0.55 0.15]
+Result: 150.75 
+probabilities: 	[0.25 0.05 0.6  0.1 ]
+Result: 149.65 
+probabilities: 	[0.25 0.05 0.65 0.05]
+Result: 146.70 
+probabilities: 	[0.25 0.1  0.05 0.6 ]
+Result: 155.90 
+probabilities: 	[0.25 0.1  0.1  0.55]
+Result: 155.55 
+probabilities: 	[0.25 0.1  0.15 0.5 ]
+Result: 154.80 
+probabilities: 	[0.25 0.1  0.2  0.45]
+Result: 154.75 
+probabilities: 	[0.25 0.1  0.25 0.4 ]
+Result: 154.50 
+probabilities: 	[0.25 0.1  0.3  0.35]
+Result: 152.90 
+probabilities: 	[0.25 0.1  0.35 0.3 ]
+Result: 152.40 
+probabilities: 	[0.25 0.1  0.4  0.25]
+Result: 152.05 
+probabilities: 	[0.25 0.1  0.45 0.2 ]
+Result: 150.95 
+probabilities: 	[0.25 0.1  0.5  0.15]
+Result: 149.90 
+probabilities: 	[0.25 0.1  0.55 0.1 ]
+Result: 148.75 
+probabilities: 	[0.25 0.1  0.6  0.05]
+Result: 148.00 
+probabilities: 	[0.25 0.15 0.05 0.55]
+Result: 154.85 
+probabilities: 	[0.25 0.15 0.1  0.5 ]
+Result: 154.75 
+probabilities: 	[0.25 0.15 0.15 0.45]
+Result: 153.90 
+probabilities: 	[0.25 0.15 0.2  0.4 ]
+Result: 153.15 
+probabilities: 	[0.25 0.15 0.25 0.35]
+Result: 152.30 
+probabilities: 	[0.25 0.15 0.3  0.3 ]
+Result: 152.40 
+probabilities: 	[0.25 0.15 0.35 0.25]
+Result: 151.10 
+probabilities: 	[0.25 0.15 0.4  0.2 ]
+Result: 150.20 
+probabilities: 	[0.25 0.15 0.45 0.15]
+Result: 148.90 
+probabilities: 	[0.25 0.15 0.5  0.1 ]
+Result: 148.45 
+probabilities: 	[0.25 0.15 0.55 0.05]
+Result: 147.35 
+probabilities: 	[0.25 0.2  0.05 0.5 ]
+Result: 153.25 
+probabilities: 	[0.25 0.2  0.1  0.45]
+Result: 152.95 
+probabilities: 	[0.25 0.2  0.15 0.4 ]
+Result: 152.65 
+probabilities: 	[0.25 0.2  0.2  0.35]
+Result: 151.70 
+probabilities: 	[0.25 0.2  0.25 0.3 ]
+Result: 150.90 
+probabilities: 	[0.25 0.2  0.3  0.25]
+Result: 149.25 
+probabilities: 	[0.25 0.2  0.35 0.2 ]
+Result: 149.50 
+probabilities: 	[0.25 0.2  0.4  0.15]
+Result: 148.10 
+probabilities: 	[0.25 0.2  0.45 0.1 ]
+Result: 147.75 
+probabilities: 	[0.25 0.2  0.5  0.05]
+Result: 146.65 
+probabilities: 	[0.25 0.25 0.05 0.45]
+Result: 151.45 
+probabilities: 	[0.25 0.25 0.1  0.4 ]
+Result: 152.25 
+probabilities: 	[0.25 0.25 0.15 0.35]
+Result: 151.55 
+probabilities: 	[0.25 0.25 0.2  0.3 ]
+Result: 149.75 
+probabilities: 	[0.25 0.25 0.25 0.25]
+Result: 149.55 
+probabilities: 	[0.25 0.25 0.3  0.2 ]
+Result: 148.75 
+probabilities: 	[0.25 0.25 0.35 0.15]
+Result: 147.60 
+probabilities: 	[0.25 0.25 0.4  0.1 ]
+Result: 147.05 
+probabilities: 	[0.25 0.25 0.45 0.05]
+Result: 144.90 
+probabilities: 	[0.25 0.3  0.05 0.4 ]
+Result: 152.00 
+probabilities: 	[0.25 0.3  0.1  0.35]
+Result: 150.45 
+probabilities: 	[0.25 0.3  0.15 0.3 ]
+Result: 149.30 
+probabilities: 	[0.25 0.3  0.2  0.25]
+Result: 147.95 
+probabilities: 	[0.25 0.3  0.25 0.2 ]
+Result: 147.55 
+probabilities: 	[0.25 0.3  0.3  0.15]
+Result: 147.85 
+probabilities: 	[0.25 0.3  0.35 0.1 ]
+Result: 145.95 
+probabilities: 	[0.25 0.3  0.4  0.05]
+Result: 145.15 
+probabilities: 	[0.25 0.35 0.05 0.35]
+Result: 149.35 
+probabilities: 	[0.25 0.35 0.1  0.3 ]
+Result: 148.55 
+probabilities: 	[0.25 0.35 0.15 0.25]
+Result: 147.05 
+probabilities: 	[0.25 0.35 0.2  0.2 ]
+Result: 146.75 
+probabilities: 	[0.25 0.35 0.25 0.15]
+Result: 146.95 
+probabilities: 	[0.25 0.35 0.3  0.1 ]
+Result: 145.40 
+probabilities: 	[0.25 0.35 0.35 0.05]
+Result: 144.15 
+probabilities: 	[0.25 0.4  0.05 0.3 ]
+Result: 146.90 
+probabilities: 	[0.25 0.4  0.1  0.25]
+Result: 147.20 
+probabilities: 	[0.25 0.4  0.15 0.2 ]
+Result: 145.85 
+probabilities: 	[0.25 0.4  0.2  0.15]
+Result: 145.10 
+probabilities: 	[0.25 0.4  0.25 0.1 ]
+Result: 143.45 
+probabilities: 	[0.25 0.4  0.3  0.05]
+Result: 143.40 
+probabilities: 	[0.25 0.45 0.05 0.25]
+Result: 145.65 
+probabilities: 	[0.25 0.45 0.1  0.2 ]
+Result: 145.45 
+probabilities: 	[0.25 0.45 0.15 0.15]
+Result: 143.60 
+probabilities: 	[0.25 0.45 0.2  0.1 ]
+Result: 143.40 
+probabilities: 	[0.25 0.45 0.25 0.05]
+Result: 141.55 
+probabilities: 	[0.25 0.5  0.05 0.2 ]
+Result: 143.15 
+probabilities: 	[0.25 0.5  0.1  0.15]
+Result: 142.90 
+probabilities: 	[0.25 0.5  0.15 0.1 ]
+Result: 141.90 
+probabilities: 	[0.25 0.5  0.2  0.05]
+Result: 141.25 
+probabilities: 	[0.25 0.55 0.05 0.15]
+Result: 141.80 
+probabilities: 	[0.25 0.55 0.1  0.1 ]
+Result: 140.55 
+probabilities: 	[0.25 0.55 0.15 0.05]
+Result: 139.75 
+probabilities: 	[0.25 0.6  0.05 0.1 ]
+Result: 138.50 
+probabilities: 	[0.25 0.6  0.1  0.05]
+Result: 138.45 
+probabilities: 	[0.25 0.65 0.05 0.05]
+Result: 137.50 
+probabilities: 	[0.3  0.05 0.05 0.6 ]
+Result: 153.75 
+probabilities: 	[0.3  0.05 0.1  0.55]
+Result: 154.85 
+probabilities: 	[0.3  0.05 0.15 0.5 ]
+Result: 153.80 
+probabilities: 	[0.3  0.05 0.2  0.45]
+Result: 153.60 
+probabilities: 	[0.3  0.05 0.25 0.4 ]
+Result: 152.55 
+probabilities: 	[0.3  0.05 0.3  0.35]
+Result: 152.50 
+probabilities: 	[0.3  0.05 0.35 0.3 ]
+Result: 151.30 
+probabilities: 	[0.3  0.05 0.4  0.25]
+Result: 151.50 
+probabilities: 	[0.3  0.05 0.45 0.2 ]
+Result: 149.65 
+probabilities: 	[0.3  0.05 0.5  0.15]
+Result: 148.55 
+probabilities: 	[0.3  0.05 0.55 0.1 ]
+Result: 147.40 
+probabilities: 	[0.3  0.05 0.6  0.05]
+Result: 145.65 
+probabilities: 	[0.3  0.1  0.05 0.55]
+Result: 153.65 
+probabilities: 	[0.3 0.1 0.1 0.5]
+Result: 153.80 
+probabilities: 	[0.3  0.1  0.15 0.45]
+Result: 153.25 
+probabilities: 	[0.3 0.1 0.2 0.4]
+Result: 153.55 
+probabilities: 	[0.3  0.1  0.25 0.35]
+Result: 152.00 
+probabilities: 	[0.3 0.1 0.3 0.3]
+Result: 151.85 
+probabilities: 	[0.3  0.1  0.35 0.25]
+Result: 149.80 
+probabilities: 	[0.3 0.1 0.4 0.2]
+Result: 149.95 
+probabilities: 	[0.3  0.1  0.45 0.15]
+Result: 149.00 
+probabilities: 	[0.3 0.1 0.5 0.1]
+Result: 147.40 
+probabilities: 	[0.3  0.1  0.55 0.05]
+Result: 146.45 
+probabilities: 	[0.3  0.15 0.05 0.5 ]
+Result: 152.55 
+probabilities: 	[0.3  0.15 0.1  0.45]
+Result: 152.15 
+probabilities: 	[0.3  0.15 0.15 0.4 ]
+Result: 151.35 
+probabilities: 	[0.3  0.15 0.2  0.35]
+Result: 152.25 
+probabilities: 	[0.3  0.15 0.25 0.3 ]
+Result: 150.70 
+probabilities: 	[0.3  0.15 0.3  0.25]
+Result: 149.30 
+probabilities: 	[0.3  0.15 0.35 0.2 ]
+Result: 147.95 
+probabilities: 	[0.3  0.15 0.4  0.15]
+Result: 147.70 
+probabilities: 	[0.3  0.15 0.45 0.1 ]
+Result: 148.25 
+probabilities: 	[0.3  0.15 0.5  0.05]
+Result: 146.70 
+probabilities: 	[0.3  0.2  0.05 0.45]
+Result: 152.05 
+probabilities: 	[0.3 0.2 0.1 0.4]
+Result: 151.00 
+probabilities: 	[0.3  0.2  0.15 0.35]
+Result: 150.85 
+probabilities: 	[0.3 0.2 0.2 0.3]
+Result: 149.75 
+probabilities: 	[0.3  0.2  0.25 0.25]
+Result: 148.15 
+probabilities: 	[0.3 0.2 0.3 0.2]
+Result: 148.20 
+probabilities: 	[0.3  0.2  0.35 0.15]
+Result: 146.50 
+probabilities: 	[0.3 0.2 0.4 0.1]
+Result: 146.35 
+probabilities: 	[0.3  0.2  0.45 0.05]
+Result: 145.15 
+probabilities: 	[0.3  0.25 0.05 0.4 ]
+Result: 150.80 
+probabilities: 	[0.3  0.25 0.1  0.35]
+Result: 148.95 
+probabilities: 	[0.3  0.25 0.15 0.3 ]
+Result: 150.10 
+probabilities: 	[0.3  0.25 0.2  0.25]
+Result: 146.70 
+probabilities: 	[0.3  0.25 0.25 0.2 ]
+Result: 146.70 
+probabilities: 	[0.3  0.25 0.3  0.15]
+Result: 146.20 
+probabilities: 	[0.3  0.25 0.35 0.1 ]
+Result: 145.40 
+probabilities: 	[0.3  0.25 0.4  0.05]
+Result: 143.95 
+probabilities: 	[0.3  0.3  0.05 0.35]
+Result: 149.80 
+probabilities: 	[0.3 0.3 0.1 0.3]
+Result: 148.45 
+probabilities: 	[0.3  0.3  0.15 0.25]
+Result: 146.90 
+probabilities: 	[0.3 0.3 0.2 0.2]
+Result: 145.55 
+probabilities: 	[0.3  0.3  0.25 0.15]
+Result: 145.70 
+probabilities: 	[0.3 0.3 0.3 0.1]
+Result: 143.60 
+probabilities: 	[0.3  0.3  0.35 0.05]
+Result: 143.80 
+probabilities: 	[0.3  0.35 0.05 0.3 ]
+Result: 147.35 
+probabilities: 	[0.3  0.35 0.1  0.25]
+Result: 145.45 
+probabilities: 	[0.3  0.35 0.15 0.2 ]
+Result: 145.40 
+probabilities: 	[0.3  0.35 0.2  0.15]
+Result: 144.25 
+probabilities: 	[0.3  0.35 0.25 0.1 ]
+Result: 143.05 
+probabilities: 	[0.3  0.35 0.3  0.05]
+Result: 141.50 
+probabilities: 	[0.3  0.4  0.05 0.25]
+Result: 144.30 
+probabilities: 	[0.3 0.4 0.1 0.2]
+Result: 143.55 
+probabilities: 	[0.3  0.4  0.15 0.15]
+Result: 142.10 
+probabilities: 	[0.3 0.4 0.2 0.1]
+Result: 142.55 
+probabilities: 	[0.3  0.4  0.25 0.05]
+Result: 141.45 
+probabilities: 	[0.3  0.45 0.05 0.2 ]
+Result: 143.80 
+probabilities: 	[0.3  0.45 0.1  0.15]
+Result: 141.30 
+probabilities: 	[0.3  0.45 0.15 0.1 ]
+Result: 141.15 
+probabilities: 	[0.3  0.45 0.2  0.05]
+Result: 139.15 
+probabilities: 	[0.3  0.5  0.05 0.15]
+Result: 140.30 
+probabilities: 	[0.3 0.5 0.1 0.1]
+Result: 140.05 
+probabilities: 	[0.3  0.5  0.15 0.05]
+Result: 137.90 
+probabilities: 	[0.3  0.55 0.05 0.1 ]
+Result: 138.95 
+probabilities: 	[0.3  0.55 0.1  0.05]
+Result: 137.80 
+probabilities: 	[0.3  0.6  0.05 0.05]
+Result: 135.95 
+probabilities: 	[0.35 0.05 0.05 0.55]
+Result: 152.80 
+probabilities: 	[0.35 0.05 0.1  0.5 ]
+Result: 153.30 
+probabilities: 	[0.35 0.05 0.15 0.45]
+Result: 152.85 
+probabilities: 	[0.35 0.05 0.2  0.4 ]
+Result: 152.15 
+probabilities: 	[0.35 0.05 0.25 0.35]
+Result: 150.95 
+probabilities: 	[0.35 0.05 0.3  0.3 ]
+Result: 150.20 
+probabilities: 	[0.35 0.05 0.35 0.25]
+Result: 149.85 
+probabilities: 	[0.35 0.05 0.4  0.2 ]
+Result: 149.25 
+probabilities: 	[0.35 0.05 0.45 0.15]
+Result: 147.45 
+probabilities: 	[0.35 0.05 0.5  0.1 ]
+Result: 144.95 
+probabilities: 	[0.35 0.05 0.55 0.05]
+Result: 145.00 
+probabilities: 	[0.35 0.1  0.05 0.5 ]
+Result: 152.90 
+probabilities: 	[0.35 0.1  0.1  0.45]
+Result: 151.55 
+probabilities: 	[0.35 0.1  0.15 0.4 ]
+Result: 150.60 
+probabilities: 	[0.35 0.1  0.2  0.35]
+Result: 150.15 
+probabilities: 	[0.35 0.1  0.25 0.3 ]
+Result: 149.65 
+probabilities: 	[0.35 0.1  0.3  0.25]
+Result: 149.25 
+probabilities: 	[0.35 0.1  0.35 0.2 ]
+Result: 148.10 
+probabilities: 	[0.35 0.1  0.4  0.15]
+Result: 147.00 
+probabilities: 	[0.35 0.1  0.45 0.1 ]
+Result: 145.85 
+probabilities: 	[0.35 0.1  0.5  0.05]
+Result: 144.45 
+probabilities: 	[0.35 0.15 0.05 0.45]
+Result: 150.50 
+probabilities: 	[0.35 0.15 0.1  0.4 ]
+Result: 150.75 
+probabilities: 	[0.35 0.15 0.15 0.35]
+Result: 149.05 
+probabilities: 	[0.35 0.15 0.2  0.3 ]
+Result: 148.75 
+probabilities: 	[0.35 0.15 0.25 0.25]
+Result: 148.15 
+probabilities: 	[0.35 0.15 0.3  0.2 ]
+Result: 146.45 
+probabilities: 	[0.35 0.15 0.35 0.15]
+Result: 146.45 
+probabilities: 	[0.35 0.15 0.4  0.1 ]
+Result: 144.50 
+probabilities: 	[0.35 0.15 0.45 0.05]
+Result: 143.30 
+probabilities: 	[0.35 0.2  0.05 0.4 ]
+Result: 148.90 
+probabilities: 	[0.35 0.2  0.1  0.35]
+Result: 148.65 
+probabilities: 	[0.35 0.2  0.15 0.3 ]
+Result: 147.90 
+probabilities: 	[0.35 0.2  0.2  0.25]
+Result: 148.05 
+probabilities: 	[0.35 0.2  0.25 0.2 ]
+Result: 145.55 
+probabilities: 	[0.35 0.2  0.3  0.15]
+Result: 144.80 
+probabilities: 	[0.35 0.2  0.35 0.1 ]
+Result: 145.75 
+probabilities: 	[0.35 0.2  0.4  0.05]
+Result: 142.85 
+probabilities: 	[0.35 0.25 0.05 0.35]
+Result: 148.85 
+probabilities: 	[0.35 0.25 0.1  0.3 ]
+Result: 147.75 
+probabilities: 	[0.35 0.25 0.15 0.25]
+Result: 144.45 
+probabilities: 	[0.35 0.25 0.2  0.2 ]
+Result: 145.60 
+probabilities: 	[0.35 0.25 0.25 0.15]
+Result: 144.70 
+probabilities: 	[0.35 0.25 0.3  0.1 ]
+Result: 143.70 
+probabilities: 	[0.35 0.25 0.35 0.05]
+Result: 141.05 
+probabilities: 	[0.35 0.3  0.05 0.3 ]
+Result: 144.40 
+probabilities: 	[0.35 0.3  0.1  0.25]
+Result: 145.50 
+probabilities: 	[0.35 0.3  0.15 0.2 ]
+Result: 144.05 
+probabilities: 	[0.35 0.3  0.2  0.15]
+Result: 143.45 
+probabilities: 	[0.35 0.3  0.25 0.1 ]
+Result: 142.05 
+probabilities: 	[0.35 0.3  0.3  0.05]
+Result: 140.75 
+probabilities: 	[0.35 0.35 0.05 0.25]
+Result: 143.50 
+probabilities: 	[0.35 0.35 0.1  0.2 ]
+Result: 142.70 
+probabilities: 	[0.35 0.35 0.15 0.15]
+Result: 140.80 
+probabilities: 	[0.35 0.35 0.2  0.1 ]
+Result: 139.50 
+probabilities: 	[0.35 0.35 0.25 0.05]
+Result: 139.15 
+probabilities: 	[0.35 0.4  0.05 0.2 ]
+Result: 142.35 
+probabilities: 	[0.35 0.4  0.1  0.15]
+Result: 140.25 
+probabilities: 	[0.35 0.4  0.15 0.1 ]
+Result: 138.85 
+probabilities: 	[0.35 0.4  0.2  0.05]
+Result: 139.40 
+probabilities: 	[0.35 0.45 0.05 0.15]
+Result: 139.45 
+probabilities: 	[0.35 0.45 0.1  0.1 ]
+Result: 138.50 
+probabilities: 	[0.35 0.45 0.15 0.05]
+Result: 137.90 
+probabilities: 	[0.35 0.5  0.05 0.1 ]
+Result: 137.25 
+probabilities: 	[0.35 0.5  0.1  0.05]
+Result: 134.95 
+probabilities: 	[0.35 0.55 0.05 0.05]
+Result: 134.75 
+probabilities: 	[0.4  0.05 0.05 0.5 ]
+Result: 150.40 
+probabilities: 	[0.4  0.05 0.1  0.45]
+Result: 151.60 
+probabilities: 	[0.4  0.05 0.15 0.4 ]
+Result: 150.30 
+probabilities: 	[0.4  0.05 0.2  0.35]
+Result: 149.80 
+probabilities: 	[0.4  0.05 0.25 0.3 ]
+Result: 148.80 
+probabilities: 	[0.4  0.05 0.3  0.25]
+Result: 148.70 
+probabilities: 	[0.4  0.05 0.35 0.2 ]
+Result: 146.90 
+probabilities: 	[0.4  0.05 0.4  0.15]
+Result: 145.75 
+probabilities: 	[0.4  0.05 0.45 0.1 ]
+Result: 144.55 
+probabilities: 	[0.4  0.05 0.5  0.05]
+Result: 140.50 
+probabilities: 	[0.4  0.1  0.05 0.45]
+Result: 149.40 
+probabilities: 	[0.4 0.1 0.1 0.4]
+Result: 147.40 
+probabilities: 	[0.4  0.1  0.15 0.35]
+Result: 149.00 
+probabilities: 	[0.4 0.1 0.2 0.3]
+Result: 147.10 
+probabilities: 	[0.4  0.1  0.25 0.25]
+Result: 146.70 
+probabilities: 	[0.4 0.1 0.3 0.2]
+Result: 145.80 
+probabilities: 	[0.4  0.1  0.35 0.15]
+Result: 143.85 
+probabilities: 	[0.4 0.1 0.4 0.1]
+Result: 144.15 
+probabilities: 	[0.4  0.1  0.45 0.05]
+Result: 142.30 
+probabilities: 	[0.4  0.15 0.05 0.4 ]
+Result: 148.15 
+probabilities: 	[0.4  0.15 0.1  0.35]
+Result: 147.60 
+probabilities: 	[0.4  0.15 0.15 0.3 ]
+Result: 146.85 
+probabilities: 	[0.4  0.15 0.2  0.25]
+Result: 147.45 
+probabilities: 	[0.4  0.15 0.25 0.2 ]
+Result: 144.65 
+probabilities: 	[0.4  0.15 0.3  0.15]
+Result: 144.70 
+probabilities: 	[0.4  0.15 0.35 0.1 ]
+Result: 143.65 
+probabilities: 	[0.4  0.15 0.4  0.05]
+Result: 141.60 
+probabilities: 	[0.4  0.2  0.05 0.35]
+Result: 146.00 
+probabilities: 	[0.4 0.2 0.1 0.3]
+Result: 145.70 
+probabilities: 	[0.4  0.2  0.15 0.25]
+Result: 145.15 
+probabilities: 	[0.4 0.2 0.2 0.2]
+Result: 144.30 
+probabilities: 	[0.4  0.2  0.25 0.15]
+Result: 142.15 
+probabilities: 	[0.4 0.2 0.3 0.1]
+Result: 141.75 
+probabilities: 	[0.4  0.2  0.35 0.05]
+Result: 140.05 
+probabilities: 	[0.4  0.25 0.05 0.3 ]
+Result: 143.95 
+probabilities: 	[0.4  0.25 0.1  0.25]
+Result: 144.40 
+probabilities: 	[0.4  0.25 0.15 0.2 ]
+Result: 142.40 
+probabilities: 	[0.4  0.25 0.2  0.15]
+Result: 143.70 
+probabilities: 	[0.4  0.25 0.25 0.1 ]
+Result: 141.20 
+probabilities: 	[0.4  0.25 0.3  0.05]
+Result: 139.25 
+probabilities: 	[0.4  0.3  0.05 0.25]
+Result: 142.60 
+probabilities: 	[0.4 0.3 0.1 0.2]
+Result: 140.55 
+probabilities: 	[0.4  0.3  0.15 0.15]
+Result: 140.60 
+probabilities: 	[0.4 0.3 0.2 0.1]
+Result: 138.85 
+probabilities: 	[0.4  0.3  0.25 0.05]
+Result: 138.55 
+probabilities: 	[0.4  0.35 0.05 0.2 ]
+Result: 141.30 
+probabilities: 	[0.4  0.35 0.1  0.15]
+Result: 139.50 
+probabilities: 	[0.4  0.35 0.15 0.1 ]
+Result: 138.70 
+probabilities: 	[0.4  0.35 0.2  0.05]
+Result: 136.70 
+probabilities: 	[0.4  0.4  0.05 0.15]
+Result: 136.95 
+probabilities: 	[0.4 0.4 0.1 0.1]
+Result: 137.55 
+probabilities: 	[0.4  0.4  0.15 0.05]
+Result: 135.50 
+probabilities: 	[0.4  0.45 0.05 0.1 ]
+Result: 135.55 
+probabilities: 	[0.4  0.45 0.1  0.05]
+Result: 134.80 
+probabilities: 	[0.4  0.5  0.05 0.05]
+Result: 134.35 
+probabilities: 	[0.45 0.05 0.05 0.45]
+Result: 148.60 
+probabilities: 	[0.45 0.05 0.1  0.4 ]
+Result: 147.80 
+probabilities: 	[0.45 0.05 0.15 0.35]
+Result: 147.95 
+probabilities: 	[0.45 0.05 0.2  0.3 ]
+Result: 145.85 
+probabilities: 	[0.45 0.05 0.25 0.25]
+Result: 145.30 
+probabilities: 	[0.45 0.05 0.3  0.2 ]
+Result: 145.55 
+probabilities: 	[0.45 0.05 0.35 0.15]
+Result: 143.45 
+probabilities: 	[0.45 0.05 0.4  0.1 ]
+Result: 140.85 
+probabilities: 	[0.45 0.05 0.45 0.05]
+Result: 138.75 
+probabilities: 	[0.45 0.1  0.05 0.4 ]
+Result: 146.75 
+probabilities: 	[0.45 0.1  0.1  0.35]
+Result: 146.10 
+probabilities: 	[0.45 0.1  0.15 0.3 ]
+Result: 144.95 
+probabilities: 	[0.45 0.1  0.2  0.25]
+Result: 144.45 
+probabilities: 	[0.45 0.1  0.25 0.2 ]
+Result: 144.70 
+probabilities: 	[0.45 0.1  0.3  0.15]
+Result: 142.25 
+probabilities: 	[0.45 0.1  0.35 0.1 ]
+Result: 141.60 
+probabilities: 	[0.45 0.1  0.4  0.05]
+Result: 138.95 
+probabilities: 	[4.50000000e-01 1.00000000e-01 4.50000000e-01 5.55111512e-17]
+Result: 138.20 
+probabilities: 	[0.45 0.15 0.05 0.35]
+Result: 145.40 
+probabilities: 	[0.45 0.15 0.1  0.3 ]
+Result: 145.75 
+probabilities: 	[0.45 0.15 0.15 0.25]
+Result: 143.15 
+probabilities: 	[0.45 0.15 0.2  0.2 ]
+Result: 141.90 
+probabilities: 	[0.45 0.15 0.25 0.15]
+Result: 141.80 
+probabilities: 	[0.45 0.15 0.3  0.1 ]
+Result: 139.85 
+probabilities: 	[0.45 0.15 0.35 0.05]
+Result: 138.05 
+probabilities: 	[0.45 0.2  0.05 0.3 ]
+Result: 144.70 
+probabilities: 	[0.45 0.2  0.1  0.25]
+Result: 142.60 
+probabilities: 	[0.45 0.2  0.15 0.2 ]
+Result: 140.90 
+probabilities: 	[0.45 0.2  0.2  0.15]
+Result: 141.35 
+probabilities: 	[0.45 0.2  0.25 0.1 ]
+Result: 140.20 
+probabilities: 	[0.45 0.2  0.3  0.05]
+Result: 137.80 
+probabilities: 	[0.45 0.25 0.05 0.25]
+Result: 141.25 
+probabilities: 	[0.45 0.25 0.1  0.2 ]
+Result: 140.75 
+probabilities: 	[0.45 0.25 0.15 0.15]
+Result: 139.00 
+probabilities: 	[0.45 0.25 0.2  0.1 ]
+Result: 138.40 
+probabilities: 	[0.45 0.25 0.25 0.05]
+Result: 137.15 
+probabilities: 	[4.50000000e-01 2.50000000e-01 3.00000000e-01 5.55111512e-17]
+Result: 136.45 
+probabilities: 	[0.45 0.3  0.05 0.2 ]
+Result: 139.55 
+probabilities: 	[0.45 0.3  0.1  0.15]
+Result: 137.80 
+probabilities: 	[0.45 0.3  0.15 0.1 ]
+Result: 137.75 
+probabilities: 	[0.45 0.3  0.2  0.05]
+Result: 135.80 
+probabilities: 	[4.50000000e-01 3.00000000e-01 2.50000000e-01 5.55111512e-17]
+Result: 134.35 
+probabilities: 	[0.45 0.35 0.05 0.15]
+Result: 137.30 
+probabilities: 	[0.45 0.35 0.1  0.1 ]
+Result: 136.10 
+probabilities: 	[0.45 0.35 0.15 0.05]
+Result: 134.50 
+probabilities: 	[0.45 0.4  0.05 0.1 ]
+Result: 134.85 
+probabilities: 	[0.45 0.4  0.1  0.05]
+Result: 132.75 
+probabilities: 	[0.45 0.45 0.05 0.05]
+Result: 131.45 
+probabilities: 	[4.50000000e-01 4.50000000e-01 1.00000000e-01 2.77555756e-17]
+Result: 130.40 
+probabilities: 	[4.50000000e-01 5.00000000e-01 5.00000000e-02 4.16333634e-17]
+Result: 128.90 
+probabilities: 	[0.5  0.05 0.05 0.4 ]
+Result: 146.40 
+probabilities: 	[0.5  0.05 0.1  0.35]
+Result: 146.00 
+probabilities: 	[0.5  0.05 0.15 0.3 ]
+Result: 145.85 
+probabilities: 	[0.5  0.05 0.2  0.25]
+Result: 144.25 
+probabilities: 	[0.5  0.05 0.25 0.2 ]
+Result: 143.10 
+probabilities: 	[0.5  0.05 0.3  0.15]
+Result: 141.00 
+probabilities: 	[0.5  0.05 0.35 0.1 ]
+Result: 141.45 
+probabilities: 	[0.5  0.05 0.4  0.05]
+Result: 136.90 
+probabilities: 	[0.5  0.1  0.05 0.35]
+Result: 145.70 
+probabilities: 	[0.5 0.1 0.1 0.3]
+Result: 144.10 
+probabilities: 	[0.5  0.1  0.15 0.25]
+Result: 141.85 
+probabilities: 	[0.5 0.1 0.2 0.2]
+Result: 142.15 
+probabilities: 	[0.5  0.1  0.25 0.15]
+Result: 139.75 
+probabilities: 	[0.5 0.1 0.3 0.1]
+Result: 139.80 
+probabilities: 	[0.5  0.1  0.35 0.05]
+Result: 138.45 
+probabilities: 	[0.5  0.15 0.05 0.3 ]
+Result: 142.05 
+probabilities: 	[0.5  0.15 0.1  0.25]
+Result: 140.75 
+probabilities: 	[0.5  0.15 0.15 0.2 ]
+Result: 140.05 
+probabilities: 	[0.5  0.15 0.2  0.15]
+Result: 138.25 
+probabilities: 	[0.5  0.15 0.25 0.1 ]
+Result: 138.15 
+probabilities: 	[0.5  0.15 0.3  0.05]
+Result: 137.65 
+probabilities: 	[0.5  0.2  0.05 0.25]
+Result: 140.70 
+probabilities: 	[0.5 0.2 0.1 0.2]
+Result: 139.95 
+probabilities: 	[0.5  0.2  0.15 0.15]
+Result: 138.20 
+probabilities: 	[0.5 0.2 0.2 0.1]
+Result: 136.90 
+probabilities: 	[0.5  0.2  0.25 0.05]
+Result: 136.60 
+probabilities: 	[0.5  0.25 0.05 0.2 ]
+Result: 139.20 
+probabilities: 	[0.5  0.25 0.1  0.15]
+Result: 137.30 
+probabilities: 	[0.5  0.25 0.15 0.1 ]
+Result: 135.80 
+probabilities: 	[0.5  0.25 0.2  0.05]
+Result: 135.25 
+probabilities: 	[0.5  0.3  0.05 0.15]
+Result: 134.90 
+probabilities: 	[0.5 0.3 0.1 0.1]
+Result: 135.80 
+probabilities: 	[0.5  0.3  0.15 0.05]
+Result: 132.90 
+probabilities: 	[0.5  0.35 0.05 0.1 ]
+Result: 133.35 
+probabilities: 	[0.5  0.35 0.1  0.05]
+Result: 130.50 
+probabilities: 	[0.5  0.4  0.05 0.05]
+Result: 130.40 
+probabilities: 	[0.55 0.05 0.05 0.35]
+Result: 143.65 
+probabilities: 	[0.55 0.05 0.1  0.3 ]
+Result: 142.05 
+probabilities: 	[0.55 0.05 0.15 0.25]
+Result: 141.30 
+probabilities: 	[0.55 0.05 0.2  0.2 ]
+Result: 139.95 
+probabilities: 	[0.55 0.05 0.25 0.15]
+Result: 139.50 
+probabilities: 	[0.55 0.05 0.3  0.1 ]
+Result: 136.95 
+probabilities: 	[0.55 0.05 0.35 0.05]
+Result: 134.80 
+probabilities: 	[0.55 0.1  0.05 0.3 ]
+Result: 139.85 
+probabilities: 	[0.55 0.1  0.1  0.25]
+Result: 141.55 
+probabilities: 	[0.55 0.1  0.15 0.2 ]
+Result: 140.55 
+probabilities: 	[0.55 0.1  0.2  0.15]
+Result: 138.70 
+probabilities: 	[0.55 0.1  0.25 0.1 ]
+Result: 136.90 
+probabilities: 	[0.55 0.1  0.3  0.05]
+Result: 135.20 
+probabilities: 	[0.55 0.15 0.05 0.25]
+Result: 139.10 
+probabilities: 	[0.55 0.15 0.1  0.2 ]
+Result: 139.05 
+probabilities: 	[0.55 0.15 0.15 0.15]
+Result: 137.00 
+probabilities: 	[0.55 0.15 0.2  0.1 ]
+Result: 136.30 
+probabilities: 	[0.55 0.15 0.25 0.05]
+Result: 135.35 
+probabilities: 	[0.55 0.2  0.05 0.2 ]
+Result: 137.20 
+probabilities: 	[0.55 0.2  0.1  0.15]
+Result: 135.25 
+probabilities: 	[0.55 0.2  0.15 0.1 ]
+Result: 135.70 
+probabilities: 	[0.55 0.2  0.2  0.05]
+Result: 133.80 
+probabilities: 	[0.55 0.25 0.05 0.15]
+Result: 134.55 
+probabilities: 	[0.55 0.25 0.1  0.1 ]
+Result: 133.20 
+probabilities: 	[0.55 0.25 0.15 0.05]
+Result: 131.70 
+probabilities: 	[0.55 0.3  0.05 0.1 ]
+Result: 131.10 
+probabilities: 	[0.55 0.3  0.1  0.05]
+Result: 130.05 
+probabilities: 	[0.55 0.35 0.05 0.05]
+Result: 128.60 
+probabilities: 	[0.6  0.05 0.05 0.3 ]
+Result: 140.75 
+probabilities: 	[0.6  0.05 0.1  0.25]
+Result: 139.75 
+probabilities: 	[0.6  0.05 0.15 0.2 ]
+Result: 137.80 
+probabilities: 	[0.6  0.05 0.2  0.15]
+Result: 137.50 
+probabilities: 	[0.6  0.05 0.25 0.1 ]
+Result: 135.25 
+probabilities: 	[0.6  0.05 0.3  0.05]
+Result: 133.00 
+probabilities: 	[0.6  0.1  0.05 0.25]
+Result: 138.35 
+probabilities: 	[0.6 0.1 0.1 0.2]
+Result: 136.85 
+probabilities: 	[0.6  0.1  0.15 0.15]
+Result: 135.45 
+probabilities: 	[0.6 0.1 0.2 0.1]
+Result: 134.45 
+probabilities: 	[0.6  0.1  0.25 0.05]
+Result: 133.10 
+probabilities: 	[0.6  0.15 0.05 0.2 ]
+Result: 135.45 
+probabilities: 	[0.6  0.15 0.1  0.15]
+Result: 133.70 
+probabilities: 	[0.6  0.15 0.15 0.1 ]
+Result: 132.45 
+probabilities: 	[0.6  0.15 0.2  0.05]
+Result: 131.25 
+probabilities: 	[0.6  0.2  0.05 0.15]
+Result: 132.70 
+probabilities: 	[0.6 0.2 0.1 0.1]
+Result: 131.95 
+probabilities: 	[0.6  0.2  0.15 0.05]
+Result: 129.80 
+probabilities: 	[0.6  0.25 0.05 0.1 ]
+Result: 129.95 
+probabilities: 	[0.6  0.25 0.1  0.05]
+Result: 128.95 
+probabilities: 	[0.6  0.3  0.05 0.05]
+Result: 127.75 
+probabilities: 	[0.65 0.05 0.05 0.25]
+Result: 137.05 
+probabilities: 	[0.65 0.05 0.1  0.2 ]
+Result: 135.50 
+probabilities: 	[0.65 0.05 0.15 0.15]
+Result: 132.95 
+probabilities: 	[0.65 0.05 0.2  0.1 ]
+Result: 133.65 
+probabilities: 	[0.65 0.05 0.25 0.05]
+Result: 131.30 
+probabilities: 	[0.65 0.1  0.05 0.2 ]
+Result: 135.05 
+probabilities: 	[0.65 0.1  0.1  0.15]
+Result: 132.65 
+probabilities: 	[0.65 0.1  0.15 0.1 ]
+Result: 132.40 
+probabilities: 	[0.65 0.1  0.2  0.05]
+Result: 131.35 
+probabilities: 	[0.65 0.15 0.05 0.15]
+Result: 131.60 
+probabilities: 	[0.65 0.15 0.1  0.1 ]
+Result: 130.70 
+probabilities: 	[0.65 0.15 0.15 0.05]
+Result: 128.65 
+probabilities: 	[0.65 0.2  0.05 0.1 ]
+Result: 127.75 
+probabilities: 	[0.65 0.2  0.1  0.05]
+Result: 127.65 
+probabilities: 	[0.65 0.25 0.05 0.05]
+Result: 124.55 
+probabilities: 	[0.7  0.05 0.05 0.2 ]
+Result: 130.95 
+probabilities: 	[0.7  0.05 0.1  0.15]
+Result: 131.60 
+probabilities: 	[0.7  0.05 0.15 0.1 ]
+Result: 129.05 
+probabilities: 	[0.7  0.05 0.2  0.05]
+Result: 128.10 
+probabilities: 	[0.7  0.1  0.05 0.15]
+Result: 130.25 
+probabilities: 	[0.7 0.1 0.1 0.1]
+Result: 127.25 
+probabilities: 	[0.7  0.1  0.15 0.05]
+Result: 126.85 
+probabilities: 	[0.7  0.15 0.05 0.1 ]
+Result: 125.75 
+probabilities: 	[0.7  0.15 0.1  0.05]
+Result: 125.10 
+probabilities: 	[0.7  0.2  0.05 0.05]
+Result: 122.95 
+probabilities: 	[0.75 0.05 0.05 0.15]
+Result: 127.65 
+probabilities: 	[0.75 0.05 0.1  0.1 ]
+Result: 128.85 
+probabilities: 	[0.75 0.05 0.15 0.05]
+Result: 124.10 
+probabilities: 	[0.75 0.1  0.05 0.1 ]
+Result: 125.90 
+probabilities: 	[0.75 0.1  0.1  0.05]
+Result: 123.45 
+probabilities: 	[0.75 0.15 0.05 0.05]
+Result: 122.80 
+probabilities: 	[0.8  0.05 0.05 0.1 ]
+Result: 123.60 
+probabilities: 	[0.8  0.05 0.1  0.05]
+Result: 121.75 
+probabilities: 	[0.8  0.1  0.05 0.05]
+Result: 121.00 
+probabilities: 	[0.85 0.05 0.05 0.05]
+Result: 116.25 
+Total Runtime	 1013.479195 
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.041
+Model:                            OLS   Adj. R-squared:                  0.041
+Method:                 Least Squares   F-statistic:                     280.8
+Date:                Mon, 20 Mar 2023   Prob (F-statistic):          1.78e-178
+Time:                        20:36:28   Log-Likelihood:                -45594.
+No. Observations:               19500   AIC:                         9.120e+04
+Df Residuals:                   19496   BIC:                         9.123e+04
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -2.9253      0.080    -36.700      0.000      -3.082      -2.769
+p1             2.7481      0.127     21.721      0.000       2.500       2.996
+p2             3.4819      0.127     27.488      0.000       3.234       3.730
+p3             2.0804      0.127     16.382      0.000       1.832       2.329
+==============================================================================
+Omnibus:                      244.516   Durbin-Watson:                   1.829
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              360.553
+Skew:                          -0.144   Prob(JB):                     5.09e-79
+Kurtosis:                       3.601   Cond. No.                         11.9
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

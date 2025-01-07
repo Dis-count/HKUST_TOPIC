@@ -1,7 +1,0 @@
-Run Start Time: Tue Aug 27 15:18:38 2024
-The number of periods: 	60
-Sto: 99.16 ;Bid: 98.66 ;Number of accepted people: 147.53 	The number of periods: 	70
-Sto: 98.47 ;Bid: 97.86 ;Number of accepted people: 156.46 	The number of periods: 	80
-Sto: 99.09 ;Bid: 98.18 ;Number of accepted people: 159.04 	The number of periods: 	90
-Sto: 99.23 ;Bid: 98.43 ;Number of accepted people: 159.75 	The number of periods: 	100
-Sto: 99.67 ;Bid: 99.36 ;Number of accepted people: 159.93 	Total Runtime	2543.832044

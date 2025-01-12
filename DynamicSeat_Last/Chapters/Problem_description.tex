@@ -5,16 +5,28 @@ This section integrates social distancing measures into the seat planning proces
 \subsection{Concepts}
 Consider a seat layout comprising $N$ rows, with each row containing $L_j^0$ seats, where $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. There are $M$ distinct group types, denoted by group type $i$, where each group type consists of $i$ individuals. The set of all group types is denoted by $\mathcal{M} \coloneqq \{1, 2, \ldots, M\}$. The request of each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the number of group types $i$.
 
-We incorporate social distancing in the seat planning problem. To comply with the social distancing requirements, individuals from the same group must sit together in one specific row, while maintaining a distance from other groups. Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s).
+We incorporate social distancing in the seat planning problem. To comply with the social distancing requirements, individuals from the same group must sit together in one specific row, while maintaining a distance from other groups. 
 
-To model the social distancing requirements into the seat planning process, we add the parameter, $\delta$, to the original group types, resulting in the size of group type $i$ being denoted as $n_i = i + \delta$, where $i \in \mathcal{M}$. The size of each row is also adjusted accordingly, i.e., $L_j = L_j^{0} + \delta$. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat planning problem.
+
+Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s).
+
+To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat planning problem.
+
+% This definition will not affect the set of all possible seat plannings.
+
+For any feasible pattern $h$, the number of physical seats that can be taken is 
+
+$\sum_{i} h_i i + (\sum_{i} h_{i} -1) \delta \leq L_{j}^{0}$
+
+$\sum_{i} h_{i}(i + \delta) \leq L_{j}^{0} +\delta$
+
+$\sum_{i} h_{i} n_{i} \leq L_{j}$
 
 
 We introduce the term pattern to represent the seat planning arrangement for a single row. A specific pattern can be represented by a vector $\bm{h} = (h_1, \ldots, h_M)$, where $h_i$ is the number of group type $i$ in the row for $i = 1,\ldots, M$. A feasible pattern, $\bm{h}$, must satisfy the condition $\sum_{i=1}^{M} h_i n_i \leq L$ and belong to the set of non-negative integer values, denoted as $\bm{h} \in \mathbb{N}^{M}$. Then a seat planning with $N$ rows can be expressed by $\bm{H} = \{\bm{h}_1; \ldots; \bm{h}_N\}$.
   
 Let $|\bm{h}|$ indicate the maximum number of people that can be assigned according to pattern $\bm{h}$, i.e., $|\bm{h}| = \sum_{i =1}^{M} i h_i$. The size of $\bm{h}$, $|\bm{h}|$, provides a measure of the maximum number of seats that can be taken due to the implementation of social distancing constraints. By examining $|\bm{h}|$ associated with different patterns, we can assess the effectiveness of various seat planning configurations for accommodating the desired number of individuals while adhering to social distancing requirements.
 
-Let $x_{ij}$ represent the number of group type $i$ planned in row $j$.
 
 \begin{example}
 Consider the given values: $\delta = 1$, $L^{0} = 10$, and $M = 4$. By adding one seat to each group and the original row, we can realize the conversion, as shown in the following figure.
@@ -25,11 +37,10 @@ Consider the given values: $\delta = 1$, $L^{0} = 10$, and $M = 4$. By adding on
     \caption{Illustration of Groups with Social Distancing}
 \end{figure}
 
-After the conversion, $L = L^{0} + 1 =11$, $n_i = i + 1$ for $i = 1, 2, 3, 4$. For group 1, we use a group of three seats to indicate the original group of two and one seat used as the social distancing. We do the same procedure for the other groups. Then, the row can be represented by $\bm{h} = (2,1,1,0)$. The maximum number of people that can be accommodated is $|\bm{h}| = 7$.
+After the conversion, $L = L^{0} + 1 =11$, $n_i = i + 1$ for $i = 1, 2, 3, 4$. Then, the row can be represented by $\bm{h} = (2,1,1,0)$. The maximum number of people that can be accommodated is $|\bm{h}| = 7$.
 \end{example}
 
-
-Let $x_{ij}$ represent the number of group type $i$ planned in row $j$. The deterministic seat planning problem (SPP) is formulated below, with the objective of maximizing the number of people accommodated.
+To formulate the deterministic model, let $x_{ij}$ represent the number of group type $i$ planned in row $j$. The seat planning problem with deterministic request is formulated below.
 
 \begin{equation}\label{deter_upper}
     \begin{aligned}
@@ -39,8 +50,12 @@ Let $x_{ij}$ represent the number of group type $i$ planned in row $j$. The dete
     & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
     \end{aligned}
 \end{equation}
-  
-In this context, we define $\bm{X}_i= \sum_{j=1}^{N} x_{ij}$ as the supply to group type $i$ for $i \in \mathcal{M}$. Then $\bm{X} = (\bm{X}_{1}, \ldots, \bm{X}_{M})^T$ is the aggregate solution. In other words, $\bm{X}$ captures the number of each group type that can be allocated to the seat layout by summing up the supplies across all rows. By considering the monotone ratio between the original group sizes and the adjusted group sizes, we can determine the upper bound of supply corresponding to the optimal solution of the LP relaxation of Problem \eqref{deter_upper}, as demonstrated in Proposition \ref{sol_relax_deter}.
+
+
+The objective is to maximize the number of people accommodated.
+The constraint 
+
+In this context, the supply of a seat planning for group type $i$ can be defined as $\bm{X}_i= \sum_{j=1}^{N} x_{ij}$. Then $\bm{X} = (\bm{X}_{1}, \ldots, \bm{X}_{M})^T$ is the aggregate solution. In other words, $\bm{X}$ captures the number of each group type that can be allocated to the seat layout by summing up the supplies across all rows. By considering the monotone ratio between the original group sizes and the adjusted group sizes, we can determine the upper bound of supply corresponding to the optimal solution of the LP relaxation of Problem \eqref{deter_upper}, as demonstrated in Proposition \ref{sol_relax_deter}.
 
 
 \begin{prop}\label{sol_relax_deter}
@@ -52,26 +67,28 @@ For $i = 1,\ldots, \tilde{i}-1$, the optimal solutions have $x_{ij}^{*} = 0$ for
 Hence, the corresponding supply associated with the optimal solutions can be summarized as follows: $X_{\tilde{i}} = \frac{\sum_{j=1}^{N}L_{j} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$, $X_{i} = d_{i}$ for $i = \tilde{i} +1,\ldots, M$, and $X_{i} = 0$ for $i = 1, \ldots, \tilde{i}-1$.
 
 \subsection{Seat Planning Composed of Full or Largest Patterns}
-The seat planning obtained from problem \eqref{deter_upper} may not utilize all available seats, as it depends on the given demand. To improve a given seat planning and utilize all seats, we aim to generate a new seat planning composed of full or largest patterns while ensuring that the original group type requirements are met.
+The seat planning obtained from problem \eqref{deter_upper} may not utilize all available seats, as it depends on the given requests. To improve a given seat planning and utilize all seats, we aim to generate a new seat planning composed of full or largest patterns while ensuring that the original group type requirements are met.
 
 \begin{definition}
-Consider a pattern $\bm{h} = (h_1, \ldots, h_M)$ for a row with size $L$. We refer to $\bm{h}$ as a full pattern if $\sum_{i=1}^{M} n_i h_i = L$, $\bm{h}$ as a largest pattern if its size $|\bm{h}| \geq |\bm{h}^{\prime}|$, for any other feasible pattern $\bm{h}^{\prime}$.
+Consider a pattern $\bm{h} = (h_1, \ldots, h_M)$ for a row with size $L$. We refer to $\bm{h}$ as a full pattern if $\sum_{i=1}^{M} n_i h_i = L$. Refer to $\bm{h}$ as a largest pattern if its size $|\bm{h}| \geq |\bm{h}^{\prime}|$, for any other feasible pattern $\bm{h}^{\prime}$.
 \end{definition}
 
 In other words, a full pattern is one in which the sum of the product of the number of occurrences $h_i$ and the size $n_i$ of each group in the pattern is equal to the size of the row $L$. This ensures that the pattern fully occupies the available row seats. A largest pattern is one that either has the maximum size or is equal in size to other patterns, ensuring that it can accommodate the maximum number of people within the given row size.
 
 
 \begin{prop}\label{lem_pattern}
-If the size of a feasible pattern $\bm{h}$ is $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where the size of the row is $L$, the social distancing is $\delta$, the number of distinct group types is $M$, $q = \lfloor \frac{L}{M + \delta} \rfloor$, and $r \equiv L \bmod (M + \delta)$, then this pattern is a largest pattern.
+If the size of a feasible pattern $\bm{h}$ is $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where $q = \lfloor \frac{L}{M + \delta} \rfloor$, and $r \equiv L \bmod (M + \delta)$, then this pattern is a largest pattern.
 \end{prop}
 
 
-Proposition \ref{lem_pattern} states that if the size of a pattern is $|\bm{h}| = qM + \max\{r-\delta, 0\}$, then this pattern is the largest. Furthermore, according to the definition of the largest pattern, the size of one possible largest pattern is given by $qM + \max\{r-\delta, 0\}$.
+The largest pattern is not unique, one form of largest pattern, other largest pattern has the same size.
+
+Furthermore, according to the definition of the largest pattern, the size of one possible largest pattern is given by $qM + \max\{r-\delta, 0\}$.
 
 When $r = 0$, the largest pattern $\bm{h}$ is unique and full, indicating that only one pattern can accommodate the maximum number of people. On the other hand, if $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
     
 \begin{example}
-Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. In this case, we have $n_i = i + 1$ for $i = 1, 2, 3, 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are the following: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$.
+Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are the following: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$.
 
 The following figure shows that the largest pattern may not be full and the full pattern may not be largest.
 \begin{figure}[ht]
@@ -84,7 +101,7 @@ The first row can be represented by $(0, 0, 0, 4)$. It is a largest pattern as i
 The second row can be represented by $(1, 1, 4, 0)$, which is a full pattern as it utilizes all available seats. However, its size is 15, indicating that it is not a largest pattern.
 \end{example}
 
-
+Having defined the full and largest pattern, we would like to obtain a seat planning from 
 Suppose the original seat planning is $\bm{H}$, the desired seat planning is $\bm{H}^{\prime}$. To meet the original group type requirements, for each group type $i$, the total quantity from group $i$ to group $M$ in $\bm{H}^{\prime}$ should be no less than the total quantity from group type $i$ to group type $M$ in $\bm{H}$. Mathematically, we aim to find a feasible seat planning $\bm{H}^{\prime}$ such that $\sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji} \leq \sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{ji}, \forall i \in \mathcal{M}$. We say $\bm{H} \subseteq \bm{H}^{'}$ if this condition holds.
 
 To utilize all seats in the seat planning, the objective is to maximize the number of people that can be accommodated. Thus, we have the following formulation:

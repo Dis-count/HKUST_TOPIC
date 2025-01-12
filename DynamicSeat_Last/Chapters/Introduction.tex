@@ -37,13 +37,19 @@ What kind of insights regarding the social distancing and occupancy rates can we
 
 We have the following insights:
 
-1.  With the requirement of social distancing, there is no need for the government to set a separate attendance rate. We set the gap point to represent the size of the demand. The gap point is specifically the number of periods, and the demand is the product of the gap point and the probability distribution of customer arrival. It can be estimated by the average number of customers at each period. And it has little to do with different probability distributions.
+Our policy outperforms traditional approaches in terms of the number of accepted individuals. While different probability distributions represent varying group profiles, our policy demonstrates consistent performance across different scenarios.
+
+1.  With the requirement of social distancing, there is no need for the government to set a separate attendance rate. We set the gap point to represent the size of the demand. The gap point is specifically the number of periods, and the demand is the product of the gap point and the probability distribution of customer arrival. It can be estimated by the average number of customers in each request. And it has little to do with different probability distributions.  
 
 2. When the demand is smaller than the demand corresponding to the gap point, social distancing will not have an impact. The occupancy rate corresponding to the gap point is the maximum occupancy rate when there is no impact.
 
-3.  For the choice of group size that allows sitting together, when the demand is high, we tend to allow more people to sit together, and when the demand is low, we can limit the number of groups that sit together to be smaller. For the choice of social distancing, when the demand is low, two seats can be chosen as the social distance.
+3. The group size 
 
-4.  Regarding the different layouts, we found that under the requirement of a single seat in social distancing, the occupancy rate of small venues is actually higher than that of large venues. When the total number of seats is the same, layouts with more rows have higher occupancy rates.
+For the choice of group size that allows sitting together, when the demand is high, we tend to allow more people to sit together, and when the demand is low, we can limit the number of groups that sit together to be smaller. For the choice of social distancing, when the demand is low, two seats can be chosen as the social distance.
+
+4.  Layout of venues also has the impact on the 
+
+Regarding the different layouts, we found that under the requirement of a single seat in social distancing, the occupancy rate of small venues is actually higher than that of large venues. When the total number of seats is the same, layouts with more rows have higher occupancy rates.
 
 
 % Our main contributions in this paper are summarized as follows. First, we establish a deterministic model to analyze the effects of social distancing when the demand is known. Due to the medium size of the problem, we can solve the IP model directly. 

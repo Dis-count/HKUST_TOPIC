@@ -108,6 +108,14 @@ Rhyd Lewis and Fiona Carroll.
 \newblock {\em Journal of the Operational Research Society}, 67(11):1353--1362,
   2016.
 
+\bibitem{Berlin_theater}
+{Lonlely Planet}.
+\newblock Berlin theatre shows what socially-distanced entertainment might look
+  like.
+\newblock
+  \url{https://www.lonelyplanet.com/news/berlin-theatre-socially-distanced-seating},
+  2020.
+
 \bibitem{pisinger1999exact}
 David Pisinger.
 \newblock An exact algorithm for large multiple knapsack problems.
@@ -123,13 +131,6 @@ Mostafa Salari, R~John Milne, Camelia Delcea, and Liviu-Adrian Cotfas.
 Kalyan~T Talluri and Garrett~J Van~Ryzin.
 \newblock {\em The Theory and Practice of Revenue Management}.
 \newblock Springer Science \& Business Media, 2006.
-
-\bibitem{Berlin_theater}
-{The New York Times}.
-\newblock Looking to past pandemics to determine the future of theater.
-\newblock
-  \url{https://www.nytimes.com/2020/09/16/t-magazine/theater-coronavirus-covid-pandemic.html?auth=login-google1tap&login=google1tap},
-  2020.
 
 \bibitem{AdviceforPublic}
 {WHO}.

@@ -5,12 +5,9 @@ This section integrates social distancing measures into the seat planning proces
 \subsection{Concepts}
 Consider a seat layout comprising $N$ rows, with each row containing $L_j^0$ seats, where $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. There are $M$ distinct group types, denoted by group type $i$, where each group type consists of $i$ individuals. The set of all group types is denoted by $\mathcal{M} \coloneqq \{1, 2, \ldots, M\}$. The request of each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the number of group types $i$.
 
-We incorporate social distancing in the seat planning problem. To comply with the social distancing requirements, individuals from the same group must sit together in one specific row, while maintaining a distance from other groups. 
+We incorporate social distancing in the seat planning problem. To comply with the social distancing requirements, individuals from the same group must sit together in one specific row, while maintaining a distance from other groups. Since each group occupies only one row, we assume that social distancing does not impact different rows. If the social distancing requirement is more significant, an empty row can be implemented, as implemented by the theater in Berlin. \cite{Berlin_theater}
 
-
-Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s).
-
-To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat planning problem.
+Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s). To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat planning problem.
 
 % This definition will not affect the set of all possible seat plannings.
 
@@ -42,18 +39,17 @@ After the conversion, $L = L^{0} + 1 =11$, $n_i = i + 1$ for $i = 1, 2, 3, 4$. T
 
 To formulate the deterministic model, let $x_{ij}$ represent the number of group type $i$ planned in row $j$. The seat planning problem with deterministic request is formulated below.
 
-\begin{equation}\label{deter_upper}
-    \begin{aligned}
-    \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\
-    & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \\
-    & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}.
-    \end{aligned}
-\end{equation}
+
+\begin{align}
+\max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \notag \\
+\text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \label{deter_upper}\\ 
+& \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \label{capa_con} \\
+& x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}. \notag 
+\end{align}
 
 
-The objective is to maximize the number of people accommodated.
-The constraint 
+The objective is to maximize the number of people accommodated. Constraint \eqref{deter_upper} requires 
+Constraint \eqref{capa_con} requires the number of seats planned in each row does not exceed the size of the row.  
 
 In this context, the supply of a seat planning for group type $i$ can be defined as $\bm{X}_i= \sum_{j=1}^{N} x_{ij}$. Then $\bm{X} = (\bm{X}_{1}, \ldots, \bm{X}_{M})^T$ is the aggregate solution. In other words, $\bm{X}$ captures the number of each group type that can be allocated to the seat layout by summing up the supplies across all rows. By considering the monotone ratio between the original group sizes and the adjusted group sizes, we can determine the upper bound of supply corresponding to the optimal solution of the LP relaxation of Problem \eqref{deter_upper}, as demonstrated in Proposition \ref{sol_relax_deter}.
 

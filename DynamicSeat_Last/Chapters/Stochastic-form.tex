@@ -2,12 +2,12 @@
 
 % random arrival -> seat planning -> suitable to dynamic case
 
-\section{Seat Planning with Stochastic Demand}\label{sec_seat_planning}
+\section{Seat Planning with Stochastic Requests}\label{sec_seat_planning}
 In this section, we aim to obtain a seat planning which is suitable to the dynamic seat assignment.Specially, we develop the Scenario-based Stochastic Programming (SSP) to obtain the seat planning with available capacity. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat planning by deterministic model. Based on that, we construct a seat planning composed of full or largest patterns to fully utilize all seats.
 
 
 \subsection{Scenario-based Stochastic Programming Formulation}
-Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. A particular realization of the demand vector can be represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of people accommodated over all the scenarios, we propose a scenario-based stochastic programming to obtain a seat planning.
+Now suppose the demand of groups is stochastic, the stochastic information can be obtained from scenarios through historical data. Use $\omega$ to index the different scenarios, each scenario $\omega \in \Omega$. Regarding the nature of the obtained information, we assume that there are $|\Omega|$ possible scenarios. A particular realization of the demand vector can be represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of individuals accommodated over all the scenarios, we propose a scenario-based stochastic programming to obtain a seat planning.
 
 The seat planning can be represented by decision variables $\mathbf{x} \in \mathbb{N}^{M \times N}$. Here, $x_{ij}$ represents the number of group type $i$ assigned to row $j$ in the seat planning. As mentioned earlier, we calculate the supply for group type $i$ as the sum of $x_{ij}$ over all rows $j$, denoted as $\sum_{j=1}^N x_{ij}$. However, considering the variability across different scenarios, it is necessary to model the potential excess or shortage of supply. To capture this characteristic, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$. 
 It includes two vectors of decisions, $\mathbf{y}^{+} \in \mathbb{N}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{N}^{M \times |\Omega|}$. Each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the excess supply for group type $i$ for each scenario $\omega$. On the other hand, $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ for each scenario $\omega$.
@@ -32,8 +32,8 @@ Then we have the following formulation:
 We use SSP$(\mathbf{L}, \Omega)$ to represent the above stochastic programming, and similarly, we use RSSP$(\mathbf{L}, \Omega)$ to represent the LP relaxation of SSP. 
 
 
-The objective function consists of two parts. The first part represents the number of people in
-the group type $M$ that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of people in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
+The objective function consists of two parts. The first part represents the number of individuals in
+the group type $M$ that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of individuals in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
 
 By reformulating the objective function, we have
 \begin{align*}
@@ -42,7 +42,7 @@ By reformulating the objective function, we have
   =& \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}
 \end{align*}
 
-Here, $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$ indicates the maximum number of people that can be accommodated in the seat planning $\{x_{ij}\}$. The second part, $\sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}$ indicates the expected excess supply for group type $i$ over scenarios.
+Here, $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$ indicates the maximum number of individuals that can be accommodated in the seat planning $\{x_{ij}\}$. The second part, $\sum_{\omega =1}^{|\Omega|} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}$ indicates the expected excess supply for group type $i$ over scenarios.
 
 
 In the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive for any $i, \omega$. Suppose there exist $i_0$ and $\omega_0$ such that $y_{i_0 \omega_0}^{+}$ and $y_{i_0 \omega_0}^{-}$ are positive. Substracting $\min\{y_{i_0, \omega_0}^{+}, y_{i_0, \omega_0}^{-}\}$ from these two values will still satisfy constraints \eqref{DEF_constr1} and \eqref{DEF_constr2} but increase the objective value when $p_{\omega_0}$ is positive. Thus, in the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive.

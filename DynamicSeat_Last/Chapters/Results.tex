@@ -3,7 +3,7 @@
 We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing, comparing different layouts, group sizes and social distancing. In the experiment, we set the following parameters. 
 
 The default setting in the experiments is as follows, $\delta =1$ and $M =4$. The default seat layout consists of 10 rows, each with the same size of 21. The values of $\delta$, $M$ and the layout will change accordingly as we explore different layouts, group sizes and social distances.
-We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of people per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four individuals, respectively. We assume that $p_4$ always has a positive value.
+We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of individuals per period, denoted as $\gamma$, can be expressed as $\gamma = p_1 \cdot 1 + p_2 \cdot 2 + p_3 \cdot 3 + p_4 \cdot 4$, where $p_1$, $p_2$, $p_3$, and $p_4$ represent the probabilities of groups with one, two, three, and four individuals, respectively. We assume that $p_4$ always has a positive value.
 
 \subsection{Performances of Different Policies}
 In this section, we compare the performance of five assignment policies to the optimal one, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are the dynamic seat assignment policy, DP-based heuristic, bid-price control, booking limit control and FCFS policy.
@@ -73,30 +73,9 @@ The performance of the policies can vary based on different probabilities. For t
 \subsection*{Analysis of DSA}
 We explore the arrival path of one instance under DSA and the optimal solution. The figures show two arrival paths when $T= 55$ and $T= 70$ at the even probability distribution. In the figures, we plot four lines over periods, number of remaining seats, the expected future demand, optimal remaining seats and optimal remaining demand. The horizontal parts of remaining seats represent the rejection at the period. We can observe that when the demand is larger than supply (T =70), even at the beginning we still reject the group. When the demand is lower than supply (T =55), we will accept all groups.
 
-\newpage
-
-\begin{figure}[h]
-  \centering
-  \subfigure[T = 55]{
-    % \label{Fig.sub.1}
-    \includegraphics[width=0.45\textwidth]{./Figures/path_55.pdf}}
-  \subfigure[T = 70]{
-    % \label{Fig.sub.2}
-    \includegraphics[width=0.45\textwidth]{./Figures/path_70.pdf}}
-  \caption{Remaining seats over periods under DSA and optimal policies}
-  % \label{Fig.lable}
-\end{figure}
 
 We also examine the situations where the actual demand is higher or lower than the expected demand.
 
-\begin{figure}[h]
-  \centering
-  \subfigure[Higher actual demand]{
-    \includegraphics[width=0.48\textwidth]{./Figures/path_70_seed5.pdf}}
-  \subfigure[Lower actual demand]{
-    \includegraphics[width=0.48\textwidth]{./Figures/path_70_seed15.pdf}}
-  \caption{Remaining seats over periods when T= 70}
-\end{figure}
 
 Based on the figures provided, we can draw several key conclusions:
 
@@ -134,7 +113,7 @@ The figure below displays the outcomes of groups who were accepted under two dif
 
 Intuitively, when demand is low, we will accept all arrivals, and there will be no difference in the number of accepted individuals whether we implement social distancing or not. The interesting case is when the difference in the number of accepted individuals due to social distancing starts to occur.
 
-We use $E(T; DSA)$ to denote the expected number of individuals accepted across 100 instances by DSA with one seat as social distancing. Similarly, we use $E(T; OPT)$ to denote the expected number of people accepted across 100 instances by the optimal solution when there is no social distancing. The gap point $\tilde{T}$ is defined as the largest point $T$ such that $E(T; DSA)+1 \geq E(T; OPT)$ holds. The occupancy rate at the gap point is denoted by $\Gamma(\tilde{T})$. This occupancy rate represents the maximum demand that can be satisfied when the difference in the number of accepted individuals is not affected by social distancing.
+We use $E(T; DSA)$ to denote the expected number of individuals accepted across 100 instances by DSA with one seat as social distancing. Similarly, we use $E(T; OPT)$ to denote the expected number of individuals accepted across 100 instances by the optimal solution when there is no social distancing. The gap point $\tilde{T}$ is defined as the largest point $T$ such that $E(T; DSA)+1 \geq E(T; OPT)$ holds. The occupancy rate at the gap point is denoted by $\Gamma(\tilde{T})$. This occupancy rate represents the maximum demand that can be satisfied when the difference in the number of accepted individuals is not affected by social distancing.
 
 % 代表了当有社交距离的要求但不受社交距离影响能达到的最大需求
 % This period marks the threshold where the difference in the number of accepted individuals due to social distancing becomes significant.
@@ -144,7 +123,7 @@ Under the probability distribution of $D4$, we obtain the gap point is 60, the c
 % 由于 occupancy rate 已经被social distancing 所限定，因此政府额外设置occupancy rate 是不必要的
 
 \subsection{Estimation of Gap Points}
-To estimate the gap point, we aim to find the maximum period such that all the groups can be assigned into the seats during these periods, i.e., for each group type $i$, we have $\sum_{j} x_{ij} \geq d_i$, where $x_{ij}$ is the number of group type $i$ in row $j$. Meanwhile, we have the capacity constraint $\sum_{i} n_{i} x_{ij} \leq L_j$, thus, $\sum_{i} n_i d_i \leq \sum_{i} n_i \sum_{j} x_{ij} \leq \sum_{j} L_{j}$. Notice that $E(d_i) = p_i T$, we have $\sum_{i} n_i p_i T \leq \sum_{j} L_{j}$ by taking the expectation. Recall that $\tilde{L} = \sum_{j} L_{j}$ denotes the total number of seats, and let $\gamma = \sum_{i} i p_i$ represent the average number of people arriving in each period. From this, we can derive the inequality $T \leq \frac{\tilde{L}}{\gamma + \delta}$. Therefore, the upper bound for the expected maximum period is given by $T' = \frac{\tilde{L}}{\gamma + \delta}$.
+To estimate the gap point, we aim to find the maximum period such that all the groups can be assigned into the seats during these periods, i.e., for each group type $i$, we have $\sum_{j} x_{ij} \geq d_i$, where $x_{ij}$ is the number of group type $i$ in row $j$. Meanwhile, we have the capacity constraint $\sum_{i} n_{i} x_{ij} \leq L_j$, thus, $\sum_{i} n_i d_i \leq \sum_{i} n_i \sum_{j} x_{ij} \leq \sum_{j} L_{j}$. Notice that $E(d_i) = p_i T$, we have $\sum_{i} n_i p_i T \leq \sum_{j} L_{j}$ by taking the expectation. Recall that $\tilde{L} = \sum_{j} L_{j}$ denotes the total number of seats, and let $\gamma = \sum_{i} i p_i$ represent the expected number of individuals arriving in each period. From this, we can derive the inequality $T \leq \frac{\tilde{L}}{\gamma + \delta}$. Therefore, the upper bound for the expected maximum period is given by $T' = \frac{\tilde{L}}{\gamma + \delta}$.
 
 
 Assuming that we accept all incoming groups within $T'$ periods, filling all the available seats, the corresponding occupancy rate at this period can be calculated as $\frac{\gamma T'}{(\gamma+ \delta)T' - N \delta} = \frac{\gamma}{\gamma +\delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$. However, it is important to note that the actual maximum period will be smaller than $T{'}$ because it is impossible to accept groups to fill all seats exactly. To estimate the gap point when applying DSA, we can use $y_1 = c_1 \frac{\tilde{L}}{\gamma + \delta}$, where $c_1$ is a discount factor compared to the ideal assumption. Similarly, we can estimate the corresponding occupancy rate as $y_2 = c_2 \frac{\gamma}{\gamma +\delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$, where $c_2$ is a discount factor for the occupancy rate compared to the ideal scenario.
@@ -157,7 +136,7 @@ To provide estimations, we use the equations $y_1 = \frac{c_1 \tilde{L}}{\gamma 
 
 \begin{figure}[ht]
   \centering
-    \includegraphics[width=0.8\textwidth]{./Figures/gamma_estimation.pdf}
+    \includegraphics[width=0.95\textwidth]{./Figures/gamma_estimation.pdf}
   \caption{Gap points and their estimation under 200 probabilities}
 \end{figure}
 

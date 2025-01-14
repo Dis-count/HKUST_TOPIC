@@ -31,18 +31,22 @@ def gamma(data):
 result = gamma(data)
 
 plt.scatter(result[:, 0], result[:, 1], c = "blue")
-plt.scatter(result[:, 0], result[:, 2], c = "red")
 
 x = np.arange(1.4, 3.6, 0.01)
 
-# y1 = 201.14 /(x+1)
-# y2 = 100.54 * x/(x+1)
+y1 = 201.14 /(x+1)
+y2 = 100.54 * x/(x+1)
 
-plt.xlabel('Gamma', fontsize=15)
-plt.ylabel('Percentage of total seats/Periods', fontsize=15)
+plt.xlabel('Gamma', fontsize = 15)
 
-# plt.plot(x, y1, label="Blue_estimated")
-# plt.plot(x, y2, label="Red_estimated")
+plt.plot(x, y1, label= "Blue_estimated")
+plt.ylabel('Periods', fontsize=15)
+
+plt.twinx()
+
+plt.scatter(result[:, 0], result[:, 2], c="red")
+plt.plot(x, y2, 'r-', label= "Red_estimated")
+plt.ylabel('Occupancy Rate', fontsize=15)
 
 # plt.legend(fontsize = 15)
 # plt.legend()

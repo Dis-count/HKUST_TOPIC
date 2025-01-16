@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  14 JAN 2025 21:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  16 JAN 2025 21:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -547,7 +547,7 @@ pdfTeX warning: pdflatex.exe (file ./Figures/illustration.pdf): PDF inclusion: f
 <./Figures/illustration.pdf, id=190, 572.88933pt x 154.52931pt>
 File: ./Figures/illustration.pdf Graphic file (type pdf)
 <use ./Figures/illustration.pdf>
-Package pdftex.def Info: ./Figures/illustration.pdf  used on input line 35.
+Package pdftex.def Info: ./Figures/illustration.pdf  used on input line 27.
 (pdftex.def)             Requested size: 249.13371pt x 67.20084pt.
 [7] [8 <./Figures/illustration.pdf>]
 
@@ -555,9 +555,9 @@ pdfTeX warning: pdflatex.exe (file ./Figures/full.pdf): PDF inclusion: found PDF
 <./Figures/full.pdf, id=239, 670.25517pt x 99.87915pt>
 File: ./Figures/full.pdf Graphic file (type pdf)
 <use ./Figures/full.pdf>
-Package pdftex.def Info: ./Figures/full.pdf  used on input line 89.
+Package pdftex.def Info: ./Figures/full.pdf  used on input line 81.
 (pdftex.def)             Requested size: 362.37569pt x 53.99945pt.
-[9 <./Figures/full.pdf>]) (./Chapters/Stochastic-form.tex [10] [11] [12] [13] [14] [15] [16]) (./Chapters/Dynamic_description.tex [17]) (./Chapters/Dynamic.tex [18] [19] [20]) (./Chapters/Results.tex [21] [22] [23] [24]
+[9 <./Figures/full.pdf>]) (./Chapters/Stochastic-form.tex [10] [11] [12] [13] [14] [15]) (./Chapters/Dynamic_description.tex [16] [17]) (./Chapters/Dynamic.tex [18] [19] [20]) (./Chapters/Results.tex [21] [22] [23] [24]
 <./Figures/occu_demand_group4.pdf, id=472, 462.52798pt x 346.89601pt>
 File: ./Figures/occu_demand_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_demand_group4.pdf>
@@ -602,7 +602,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  62i,22n,75p,1557b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (37 pages, 586674 bytes).
+Output written on sum1.pdf (37 pages, 586378 bytes).
 PDF statistics:
  946 PDF objects out of 1000 (max. 8388607)
  707 compressed objects within 8 object streams

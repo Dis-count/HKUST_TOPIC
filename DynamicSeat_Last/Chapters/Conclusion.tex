@@ -2,14 +2,20 @@
 \section{Conclusion}
 We study the seat planning and seat assignment problem under social distancing requirement. 
 Specially, we first consider the seat planning with deterministic request. The full and largest pattern is introduced to utilize all seats. Subsequently, we investigate the seat planning with stochastic request. To tackle this problem, we propose a scenario-based stochastic programming model. 
-Then we utilize the benders decomposition method to efficiently obtain the seat planning, which serves as a reference for the dynamic seat assignment. Last but not least, we introduce an approach to address the problem of dynamic seat assignment by integrating the relaxed dynamic programming and group-type control policy. 
+Then we utilize the benders decomposition method to efficiently obtain the seat planning, which serves as a reference for the dynamic seat assignment. Last but not least, we introduce an approach to address the problem of dynamic seat assignment by integrating the relaxed dynamic programming and group-type control policy.
 
-% Through numerical experiments, we assess the performance of our approach across different situations. 
+% Through numerical experiments, we assess the performance of our approach across different situations.
 
-We conducted several experiments to investigate various aspects of our approach. These experiments include analyzing different policies for dynamic seat assignment and evaluating the impact of implementing social distancing. In terms of dynamic seat assignment policies, we consider the classical bid-price control, booking limit control in revenue management, dynamic programming-based heuristics, and the first-come-first-served policy. Comparatively, our proposed policy exhibited superior performance.
+We conducted several numerical experiments to investigate various aspects of our approach. These experiments include analyzing different policies for dynamic seat assignment and evaluating the impact of implementing social distancing. In terms of dynamic seat assignment policies, we consider the classical bid-price control, booking limit control in revenue management, dynamic programming-based heuristics, and the first-come-first-served policy. Comparatively, our proposed policy exhibited superior performance.
 
-Building upon our policies, we further evaluated the impact of implementing social distancing. By defining the gap point as the period at which the difference between applying and not applying social distancing becomes evident, we established a relationship between the gap point and the expected number of individuals in each period. We observed that as the expected number of individuals in each period increased, the gap point occurred earlier, resulting in a higher occupancy rate at the gap point.
+Building upon our policies, we further evaluated the impact of implementing social distancing. By defining the gap point as the period at which the difference between applying and not applying social distancing becomes evident, we established a relationship between the gap point and the expected number of individuals in each period. We observed that as the expected number of individuals in each period increased, the gap point occurred earlier, resulting in a higher occupancy rate at the gap point. Furthermore, the gap point and the occupancy rate can be estimated by the expected number of individuals in each period.
 
 % insight
 
+1. Our policy outperforms traditional approaches in terms of the number of accepted individuals. While different probability distributions represent varying group profiles, our policy demonstrates consistent performance across different scenarios.
+
+
 Overall, our study emphasizes the operational significance of social distancing in the seat allocation and offers a fresh perspective for sellers and governments to implement seat assignment mechanisms that effectively promote social distancing requirement.
+
+
+Our work future research  

@@ -5,27 +5,19 @@ This section integrates social distancing measures into the seat planning proces
 \subsection{Concepts}
 Consider a seat layout comprising $N$ rows, with each row containing $L_j^0$ seats, where $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. There are $M$ distinct group types, denoted by group type $i$, where each group type consists of $i$ individuals. The set of all group types is denoted by $\mathcal{M} \coloneqq \{1, 2, \ldots, M\}$. The request of each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the number of group types $i$.
 
-We incorporate social distancing in the seat planning problem. To comply with the social distancing requirements, individuals from the same group must sit together in one specific row, while maintaining a distance from other groups. Since each group occupies only one row, we assume that social distancing does not impact different rows. If the social distancing requirement is more significant, an empty row can be implemented, as implemented by the theater in Berlin \cite{Berlin_theater}.
+To adhere to social distancing requirements, individuals from the same group must sit together in one specific row while maintaining a distance—measured by the number of empty seats—from individuals in different groups. Since each group occupies only one row, we assume that the physical distance between different rows is sufficient. If the social distancing requirement is more stringent, an empty row can be implemented, as practiced by the theater in Berlin \cite{Berlin_theater}.
 
-Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s). To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat planning problem.
+Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s). To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. It is a clear one-to-one mapping between the original physical seat planning and the model of seat planning. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat planning problem.
 
-
-
-This definition will not affect the set of all possible seat plannings.
-
-For any feasible pattern $h$, the number of physical seats that can be taken is 
-
-$\sum_{i} h_i i + (\sum_{i} h_{i} -1) \delta \leq L_{j}^{0}$
-
-$\sum_{i} h_{i}(i + \delta) \leq L_{j}^{0} +\delta$
-
-$\sum_{i} h_{i} n_{i} \leq L_{j}$.
-
+% This definition will not affect the set of all possible seat plannings.
+% For any feasible pattern $h$, the number of physical seats that can be taken is 
+% $\sum_{i} h_i i + (\sum_{i} h_{i} -1) \delta \leq L_{j}^{0}$
+% $\sum_{i} h_{i}(i + \delta) \leq L_{j}^{0} +\delta$
+% $\sum_{i} h_{i} n_{i} \leq L_{j}$.
 
 We introduce the term pattern to represent the seat planning arrangement for a single row. A specific pattern can be represented by a vector $\bm{h} = (h_1, \ldots, h_M)$, where $h_i$ is the number of group type $i$ in the row for $i = 1,\ldots, M$. A feasible pattern, $\bm{h}$, must satisfy the condition $\sum_{i=1}^{M} h_i n_i \leq L$ and belong to the set of non-negative integer values, denoted as $\bm{h} \in \mathbb{N}^{M}$. Then a seat planning with $N$ rows can be expressed by $\bm{H} = \{\bm{h}_1; \ldots; \bm{h}_N\}$.
   
 Let $|\bm{h}|$ indicate the maximum number of individuals that can be assigned according to pattern $\bm{h}$, i.e., $|\bm{h}| = \sum_{i =1}^{M} i h_i$. The size of $\bm{h}$, $|\bm{h}|$, provides a measure of the maximum number of seats that can be taken due to the implementation of social distancing constraints. By examining $|\bm{h}|$ associated with different patterns, we can assess the effectiveness of various seat planning configurations for accommodating the desired number of individuals while adhering to social distancing requirements.
-
 
 \begin{example}
 Consider the given values: $\delta = 1$, $L^{0} = 10$, and $M = 4$. By adding one seat to each group and the original row, we can realize the conversion, as shown in the following figure.
@@ -41,14 +33,12 @@ In the model, $L = L^{0} + 1 =11$, $n_i = i + 1$ for $i = 1, 2, 3, 4$. Then, the
 
 To formulate the deterministic model, let $x_{ij}$ represent the number of group type $i$ planned in row $j$. The seat planning problem with deterministic request is formulated below.
 
-
 \begin{align}
 \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i- \delta) x_{ij} \notag \\
 \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \label{deter_upper}\\ 
 & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \label{capa_con} \\
 & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}. \notag 
 \end{align}
-
 
 The objective is to maximize the number of individuals accommodated. Constraint \eqref{deter_upper} ensures the number of accommodated groups does not exceed the number of requests. Constraint \eqref{capa_con} stipulates that the number of seats allocated in each row does not exceed the size of the row.
 
@@ -76,12 +66,14 @@ In other words, a full pattern is one in which the sum of the product of the num
 If the size of a feasible pattern $\bm{h}$ is $|\bm{h}| = qM + \max\{r-\delta, 0\}$, where $q = \lfloor \frac{L}{M + \delta} \rfloor$, and $r \equiv L \bmod (M + \delta)$, then this pattern is a largest pattern.
 \end{prop}
 
-According to the definition of the largest pattern, the size of one possible largest pattern is given by $qM + \max\{r-\delta, 0\}$. The form of largest pattern is not unique; there are other largest patterns that share the same size.
+The size, $qM + \max\{r-\delta, 0\}$, corresponds directly to a largest pattern that includes $q$ group type $M$ and $r$ seats for one group type $(r-\delta)$ when $r>\delta$. However, the form of the largest pattern is not unique; there are other largest patterns that share the same size.
+
+% According to the definition of the largest pattern, the size of any largest pattern is given by $qM + \max\{r-\delta, 0\}$.
 
 When $r = 0$, the largest pattern $\bm{h}$ is unique and full, indicating that only one pattern can accommodate the maximum number of individuals. On the other hand, if $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
     
 \begin{example}
-Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are as follows: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$. Among these, $(0, 0, 4, 1)$ is the form referenced in Proposition \ref{lem_pattern}.
+Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are as follows: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$. Among these, $(0, 0, 0, 4)$ is the form referenced in Proposition \ref{lem_pattern}.
 
 The following figure shows that the largest pattern may not be full and the full pattern may not be largest.
 \begin{figure}[ht]

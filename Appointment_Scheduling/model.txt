@@ -1,0 +1,9 @@
+1. consider limited space capacity
+
+(Satisfy the demand) -> Maximize number of appointments -> Simulation -> Feasible
+
+Similar to the movies scheduling in cinemas
+
+2. Traditional Appointment Scheduling -> Increase gap between appointments -> Infeasible
+
+From the perspective of time: disinfection time/buffer time

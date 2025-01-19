@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\title{Appointment Scheduling}
+\author{Discount}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Model}
+We assume that the patients will arrive at the appointed time.
+
+The service time for patient $i$, $\xi_{i}$, stochastic with a mean of $\mu_{i}$ and a standard deviation of $\sigma_{i}$.
+
+The service times are mutually independent.
+
+For each patient $i = 1, \ldots, n$, 
+
+$A_{i}$: appointment time.
+
+$S_{i} = \max\{A_{i}, S_{i-1} + \xi_{i-1}\}$: actual starting time of service.
+
+$A_{1} = S_{1} = 0$.
+
+Patient $i$ will arrive at $A_{i}$ but start service at $S_{i}$.
+
+Waiting time: $S_{i} - A_{i}$
+
+Overtime: $(S_{n} +\xi_{n} - T)^{+}$
+
+Total idle time: $\sum_{i=1}^{n-1} = [S_{i+1} - (S_{i} + \xi_{i})] = S_{n} - \sum_{i=1}^{n-1} \xi_{i}$
+
+Problem to minimize the total time:
+
+\begin{equation}
+    \begin{aligned}
+        \min_{\mathbf{A}} \quad & E_{\xi}\left[\left(S_n-\sum_{i=1}^{n-1} \xi_i\right)+\sum_{i=2}^n \alpha_i \left(S_i-A_i\right) + \beta(S_{n} +\xi_{n} - T)^{+} \right] \\
+        \mbox{s.t.} \quad & S_{i} = \max\{A_{i}, S_{i-1} + \xi_{i-1}\} \\
+        & S_{1} = 0
+    \end{aligned}
+\end{equation}
+
+\begin{align}
+    S_i & =\max \left\{A_i, S_{i-1}+\xi_{i-1}\right\}, \\
+    S_i-A_i & =\max \left\{0,\left(A_{i-1}+W_{i-1}\right)+\xi_{i-1}-A_i\right\}, \\
+    W_i & =\left(W_{i-1}+\xi_{i-1}-X_{i-1}\right)^{+}.
+\end{align}
+
+Slot time: $X_i = A_{i+1} - A_{i} \rightarrow A_{j} = \sum_{i=1}^{j-1} X_{i}$
+Waiting time: $W_{i} = S_{i} - A_{i} \rightarrow S_{n} = \sum_{i=1}^{n-1} X_{i} + W_{n}$
+
+\begin{equation}
+    \begin{aligned}
+        \min_{\mathbf{X}} \quad & E_{\xi}\left[\sum_{i=1}^{n-1} (X_{i} - \xi_{i}) + W_{n} + \sum_{i=2}^n \alpha_i W_{i} + \beta(\sum_{i=1}^{n-1} X_i + W_n + \xi_{n} -T)^{+} \right] \\
+        \mbox{s.t.} \quad & W_{i} = \max\{0, W_{i-1} + \xi_{i-1} - X_{i-1}\} \\
+        & W_{1} = 0.
+    \end{aligned}
+\end{equation}
+
+Suppose that $\sigma$ are the same for all patients.
+
+Let
+\begin{align}
+    x_i & = \left(X_i- \mu_i \right) / \sigma, \\
+    \zeta_i & = \left(\xi_i-\mu_i\right) / \sigma, \text { and } \\
+    w_i & = W_i / \sigma;
+\end{align}
+
+Take out $- \sum_{i=1}^{n-1} \mu_{i}$.
+
+\begin{equation}
+    \begin{aligned}
+        \sigma \cdot \min _{\mathbf{x}} \quad & \left\{\sum_{i=1}^{n-1} x_i+ E_{\zeta} w_n + \sum_{i=2}^n \alpha_i E_\zeta\left[w_i\right]\right\} \\
+        \mbox{s.t.} \quad & w_{i} = \max\{0, w_{i-1} + \zeta_{i-1} - x_{i-1}\} \\
+        & w_{1} = 0.
+    \end{aligned}
+\end{equation}
+
+Traditional: idle time + waiting time + (overtime)
+
+Social distance: Ilde time + Overlap + Overtime
+
+Conclusion: dome-shaped
+
+Graph: 
+
+\begin{equation}
+    \begin{aligned}
+        \min_{\mathbf{A}} \quad & E_{\xi}\left[\left(S_n-\sum_{i=1}^{n-1} \xi_i\right)+ \sum_{i=2}^{n-1} \alpha_i \max(S_i-A_{i+1}, 0)  \right] \\
+        \mbox {s.t.} \quad & S_{i} = \max\{A_{i}, S_{i-1} + \xi_{i-1}\} \\
+        & S_{1} = 0
+    \end{aligned}
+\end{equation}
+
+
+Consider: three people
+
+\begin{equation}
+    \begin{aligned}
+        \min_{\mathbf{A}} \quad & E_{\xi}\left[\left(S_n-\sum_{i=1}^{n-1} \xi_i\right)+ \sum_{i=2}^{n-1} \alpha_i \max(S_i - A_{i+1}, 0) + \sum_{i=2}^{n-2} \beta_i \max(S_i - A_{i+2}, 0)  \right] \\
+        \mbox {s.t.} \quad & S_{i} = \max\{A_{i}, S_{i-1} + \xi_{i-1}\} \\
+        & S_{1} = 0
+    \end{aligned}
+\end{equation}
+
+
+j-i: $\max (\min (S_{i} - A_{j}, 0) + A_{j} -A_{j-1}, 0)$
+
+% + different distribution
+
+
+\begin{equation}
+    \begin{aligned}
+        \min_{\mathbf{A}} \quad & E_{\xi}\left[\left(S_n-\sum_{i=1}^{n-1} \xi_i\right)+ 
+        \sum_{i} \sum_{j} w_{ij}^{\prime} \right] \\
+        \mbox {s.t.} \quad & S_{i} = \max\{A_{i}, S_{i-1} + \xi_{i-1}\} \\
+        & A_{1} = S_{1} = 0 \\
+        & w_{ij} = \max\{0, S_{i} - A_{j}\} \\
+        & w_{ij} = \sum_{t \leq i \leq j \leq k} w_{tk}^{\prime} \\
+    \end{aligned}
+\end{equation}
+
+\begin{align*}
+    w_{ij} & \geq S_{i} - A_{j} \\
+    w_{ij} & \geq 0 \\
+    w_{ij} & \leq M \cdot (1-bin) \\
+    w_{ij} & \leq S_{i} -A_{j} + M \cdot bin 
+\end{align*}
+
+
+\end{document}
+

@@ -1,6 +1,8 @@
 % !TEX root = sum1.tex
-\section{Seat Assignment with Dynamic Demand}\label{sec_dynamic}
-In this section, we focus on the assignment of arriving groups in a dynamic context. Our policy involves making seating allocation decisions for each incoming group based on the seat planning strategy outlined in Section \ref{sec_seat_planning}. This approach also integrates relaxed dynamic programming to inform the decision-making process.
+\section{Seat Assignment with Dynamic Requests}\label{sec_dynamic}
+In this section, we propose our policy for assigning arriving requests in a dynamic context. First, we employ relaxed dynamic programming to determine whether to prepare a request for assignment or to reject it. Then, we make seating allocation decisions based on the seat planning strategy outlined in Section \ref{sec_seat_planning}.
+
+% This approach also integrates relaxed dynamic programming to inform the decision-making process.
 
 
 % \subsection{Assignment Based on The Modified SSP}
@@ -39,7 +41,7 @@ In this section, we focus on the assignment of arriving groups in a dynamic cont
 % \end{algorithm}
 
 \subsection{DP-based Heuristic}
-To simplify the complexity of the original DP \ref{DP}, we consider a simplified version by relaxing all rows to a single row with the same total capacity, denoted as $\tilde{L} = \sum_{j=1}^{N} L_j$. With this simplification, we can make decisions for each group arrival based on the relaxed dynamic programming. By relaxing the rows to a single row, we aggregate the capacities of all individual rows into a single capacity value. This allows us to treat the seat assignment problem as a one-dimensional problem, reducing the computational complexity. Using the relaxed dynamic programming approach, we can determine the seat assignment decisions for each group arrival based on the simplified problem.
+To simplify the complexity of the original DP \eqref{DP}, we consider a simplified version by relaxing all rows to a single row with the same total capacity, denoted as $\tilde{L} = \sum_{j=1}^{N} L_j$. With this simplification, we can make decisions for each group arrival based on the relaxed dynamic programming. By relaxing the rows to a single row, we aggregate the capacities of all individual rows into a single capacity value. This allows us to treat the seat assignment problem as a one-dimensional problem, reducing the computational complexity. Using the relaxed dynamic programming approach, we can determine the seat assignment decisions for each group arrival based on the simplified problem.
 
 Let $u$ denote the decision, where $u^{t} = 1$ if we accept a request in period $t$, $u^{t} =0$ otherwise. Similar to the DP in section \ref{sec_dynamic_seat}, the DP with one row can be expressed as:
 

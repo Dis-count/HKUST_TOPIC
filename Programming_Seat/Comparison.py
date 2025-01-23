@@ -433,18 +433,21 @@ class CompareMethods:
 
 if __name__ == "__main__":
     given_lines = 10
-    np.random.seed(10)
+    # np.random.seed(10)
     roll_width = np.ones(given_lines) * 21
     # roll_width = np.ones(given_lines) * 12
     # roll_width = np.array([16,17,18,19,20,21,22, 23, 23,24])
-    num_period = 70
+    num_period = 47
     I = 4
-    probab = np.array([0.25, 0.25, 0.25, 0.25])
+    probab = np.array([0.2, 0.05, 0.1, 0.65])
     num_sample = 1000
     s = 1
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
-    newx4 = a.random_generate()
+    sequence = sequence_pool(count, total_period, probab, sd)
+    newx4 = a.random_generate(sequence)
 
+    b = a.method_new(sequence, newx4, roll_width)
+    
     # sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2, 5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
 
     # print(f'optimal: {opt_value}')
@@ -453,3 +456,4 @@ if __name__ == "__main__":
     # change_roll = np.array([0,0,0,0,0,0,0,5,13,4])
     # new = a.full_largest(newx.T, change_roll)
     # print(new)
+

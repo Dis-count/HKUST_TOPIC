@@ -1,0 +1,71 @@
+% !TEX root = sum1.tex
+\section{Introduction}
+Social distancing is a proven concept for containing the spread of an infectious disease. It has been widely adopted worldwide, for example, during the most recent Covid 19 pandemic. As a general principle, social distancing measures can be specified from different dimensions. The basic requirement of social distancing is the specification of a minimum physical distance between people in public areas. For example, the World Health Organization (WHO) suggests social distancing as to ``keep physical distance of at least 1 meter from others'' \cite{AdviceforPublic}. In the US, the Center for Disease and Control (CDC) refers to social distancing as ``keeping a safe space between yourself and other people who are not from your household'' \cite{CDC}.
+Note that under such a requirement, social distancing is actually applied with respect to groups of people. Similarly in Hong Kong, the government has adopted social distancing measures, in the recent Covid 19 pandemic, by limiting the size of groups in public gatherings to two, four, and six people per group over time. Moreover, the Hong Kong government has also adopted an upper limit on the total number of people in a venue; for example, restaurants can operate at 50\% or 75\% of their normal seating capacity.
+
+
+The implementation of social distancing measures has an extended impact beyond disease control. In particular, social distancing may disrupt the usual operations in certain sectors. For example, a restaurant needs to change or redesign the layout of its tables in order to fulfill the requirement of social distancing. Such change implies smaller capacity, fewer customers and less revenue. In such a context, an affected firm faces a new operational problem of optimizing its operations flow under given social distancing policies.
+
+The impact of enforcing social distancing measures on economic activities is also an important factor for governmental decision making. Facing an outbreak of an infectious disease, a government shall declare a social distancing policy based on a holistic analysis, considering not only the severity of the outbreak, but also the potential impact on all stakeholders. What is particularly important is the level of business loss suffered by the industries that are directly affected.  
+ 
+
+However, the requirement of social distancing is not applicable to all places. Strict physical distance requirements make some cinemas with small row spacing and seat spacing only able to accommodate fewer customers, making the implementation of this policy impractical. Therefore, we hope to develop a policy that is easy to implement and satisfies both the government and businesses to meet requirements, and evaluate the impact of these strategies, in order to provide insights for policy implementation and business operations.
+
+% The social distancing requirement.
+% The measures implemented by the Hong Kong government primarily concentrate on restricting social distancing, group sizes and occupancy rates. However, implementing these policies in practice can pose challenges, particularly for fixed seating layouts with dynamic arrivals of people. In the original commercial case without social distancing requirements, customers did not need to sit together, so the focus was solely on total capacity. Under social distancing constraints, placing groups in row runs the risk of being unable to find matching demand, potentially leaving empty seats.
+
+% The distancing measures discussed can also be applied to other domains, such as the arrangement of animal cages and the placement of GPUs. During customs quarantine, different types of animals from various regions need to maintain a certain distance to meet epidemic prevention requirements. Implementing a reasonable distance-based placement can ensure safety while not occupying an excessive amount of space. Similarly, with the rapid development of big data and artificial intelligence, a large number of GPUs are required as computational tools. GPU clustering can lead to overheating, which is detrimental to heat dissipation and affects operational efficiency. Arranging the placement of GPUs with appropriate distances can help address this issue and improve the overall system performance.
+
+
+We will address the above issues of social distancing in the context of seating management. Consider  a venue, such as a cinema or a conference hall, which is to be used in an event. The venue is equipped with seats of multiple rows. In the event, requests for seats are in groups where each group contains a limited number of people. Any group can be accepted or rejected, and the people in an accepted group  will sit consecutively in one row. Each row can accommodate multiple groups as long as any two adjacent groups in the same row are separated by one or multiple empty seats, as the requirement of the social distancing measures. The objective is to accept the number of individuals as many as possible.
+
+We will consider three models in managing the seats, referred to as seat planning with deterministic requests, seat planning with stochastic requests, and seat assignment, respectively. As we elaborate below, each of these models defines a standalone problem with suitable situations. Together, they are inherently connected to each other, jointly forming a suite of solution schemes for seating management under the social distancing constraints.
+
+In seat planning with deterministic requests, we are given the complete information about seating requests in groups, and the problem is to find a seating plan which specifies a partition of the layout into small segments to match the seating requests. Such a problem is applicable for cases of which participants and their groups are known, such as people from the same family in a church gathering, and staff from the same office in a company meeting.
+ 
+In seat planning with stochastic requests, we need to find a seating plan facing the requests in terms of a probabilistic distribution. This problem may find its applications in situations where a new layout needs to be made for serving multiple events with different seating requests. For example, there are theaters physically removing some seats during the Covid-19 outbreak. \cite{Berlin_theater}
+
+In seat assignment, groups of seating requests arrive dynamically. The problem is to decide, upon the arrival of each group of request, whether to accept or reject the group, and assign seats for each accepted groups. Seat assignment can be used for those  commercial applications where requests arrive as a stochastic process, for example, tickets selling in movie theaters.
+
+The above three problems are closely related to each other with respect to problem solving methods and managerial insights. For example, seat planning with deterministic requests can provide an upper bound for the seat assignment problems. In studying the seat planning problem with deterministic requests, we identify some useful concepts such as the full patterns and largest patterns, which are important in the solution development for seat assignment.
+
+
+% We also address the dynamic seat assignment problem with a given set of seats in the context of social distancing. In the seat assignment, for the coming group, when accepting it, we assign the seats to the group, and the seats will not be used by others in the future. We intend to shed light on the problem described and propose a practical dynamic seat assignment policy. In particular, we investigate the following questions.
+
+How good is the performance of this policy compared with other policies? 
+
+What kind of insights regarding the social distancing and occupancy rates can we obtain when implementing the dynamic seat assignment policy?
+
+We have the following statements to answer these questions.
+
+% 我们研究在什么条件下， social distancing 会造成实质性的损失, 
+
+%  With the requirement of social distancing, there is no need for the government to set a separate attendance rate.
+
+1. Due to the fact that the original demand does not fully occupy the seats, there exists a critical level of demand when implementing social distancing, which is not affected by social distancing. The gap point, the number of requests, can reflect the level of the demand. Specifically, the demand is the product of the gap point and the probability distribution of customer arrival. Under our proposed policy, the gap point can be estimated by the average number of customers in each request and it has little to do with different probability distributions.
+
+% 2. gap point 在其他policy 下对于不同的 probability 不稳定
+
+2. The occupancy rate at the gap point represents the largest occupancy rate achievable without the social distancing restriction. When demand is lower than the demand level corresponding to the gap point, social distancing will not have an impact. When demand is higher, the loss will gradually increase. Therefore, the number of seats set as the social distance can determine the occupancy rate. There is no need to set a separate attendance rate in the polciy.
+
+% from the perspective of firm.
+
+3. Two concerns for the government is the maximum group size permitted to sit together and how much the social distancing should be. Restricting group sizes will reduce the maximum occupancy rate. While allowing larger group sizes may increase the maximum occupancy rate, the effects of social distancing will become apparent sooner. When demand is high, a larger group size limit can be implemented; conversely, when demand is low, we can set a smaller limit on the number of individuals that can sit together. Two seats can be chosen as the social distancing when the demand is low, the related property is similar to the situation where one seat as the social distancing is implemented.
+
+
+4. From the perspective of firm, the layout of venues also influences the implementation of social distancing. Generally, the maximum occupancy rate of smaller venues is actually higher than that of larger ones. When the total number of seats is the same, a layout with more rows and fewer seats tends to achieve a higher occupancy rate. Thus, setting the unified occupation rate for all venues is invalid or valid but may result in errors.
+
+% not stable.
+
+% Our main contributions in this paper are summarized as follows. First, we establish a deterministic model to analyze the effects of social distancing when the demand is known. Due to the medium size of the problem, we can solve the IP model directly. 
+
+% Second, we consider the seat planning problem with the stochastic demand. We develop the scenario-based stochastic programming by considering the stochastic demands of different group types. By using Benders decomposition methods, we can obtain the seat planning quickly, which can guide to develop dynamic seat assignment policy to address the problem in the dynamic situation. 
+
+% The results demonstrate a significant improvement over the traditional control policies and provide insights on the implementation of social distancing.
+
+% Third, we present the first attempt to consider seat assignments with social distancing under dynamic arrivals. Our study offers a new perspective to assist the government in implementing a mechanism for seat assignments that promotes social distancing. When demand is low, simpler policies, such as first-come-first-served or bid-price strategies, can be effectively applied. Our policy, DSA, demonstrates stable and consistent performance across different probability distributions. We also investigate the critical point where the social distancing constraint significantly impacts seat assignments. When demand exceeds the corresponding occupancy rate at this critical point, the differences become pronounced. Furthermore, we estimate both the critical point and the occupancy rate based on the average number of people arriving in each period.
+
+
+The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the stochastic model, analyze its properties and obtain the seat planning. Section 5 introduces the dynamic seat assignment problem.
+Section 6 demonstrates the dynamic seat assignment policy to assign the seats for incoming groups. Section 7 gives the numerical results and the insights of implementing social distancing. The conclusions are shown in Section 8.
+\newpage

@@ -1,5 +1,5 @@
 % !TEX root = sum1.tex
-\section{Computational Experiment}
+\section{Computational Experiment}\label{sec_result}
 We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing, comparing different layouts, group sizes and social distancing. In the experiment, we set the following parameters. 
 
 The default setting in the experiments is as follows, $\delta =1$ and $M =4$. The default seat layout consists of 10 rows, each with the same size of 21. The values of $\delta$, $M$ and the layout will change accordingly as we explore different layouts, group sizes and social distances.
@@ -70,20 +70,19 @@ The performance of the policies can vary based on different probabilities. For t
 
 % Moreover, according to the results of policies, we can develop an easy-to-implement policy. When $T \leq \frac{\sum_{j}{L_j}}{\gamma + 1}$, we accept the groups based on the first come first served policy. When $T > \frac{\sum_{j}{L_j}}{\gamma + 1}$, we adopt the booking-limit policy, i.e., assign the seats according to the seat planning obtained from problem \eqref{deter_upper}.
 
-\subsection*{Analysis of DSA}
-We explore the arrival path of one instance under DSA and the optimal solution. The figures show two arrival paths when $T= 55$ and $T= 70$ at the even probability distribution. In the figures, we plot four lines over periods, number of remaining seats, the expected future demand, optimal remaining seats and optimal remaining demand. The horizontal parts of remaining seats represent the rejection at the period. We can observe that when the demand is larger than supply (T =70), even at the beginning we still reject the group. When the demand is lower than supply (T =55), we will accept all groups.
+% \subsection*{Analysis of DSA}
+% We explore the arrival path of one instance under DSA and the optimal solution. The figures show two arrival paths when $T= 55$ and $T= 70$ at the even probability distribution. In the figures, we plot four lines over periods, number of remaining seats, the expected future demand, optimal remaining seats and optimal remaining demand. The horizontal parts of remaining seats represent the rejection at the period. We can observe that when the demand is larger than supply (T =70), even at the beginning we still reject the group. When the demand is lower than supply (T =55), we will accept all groups.
 
 
-We also examine the situations where the actual demand is higher or lower than the expected demand.
+% We also examine the situations where the actual demand is higher or lower than the expected demand.
 
+% Based on the figures provided, we can draw several key conclusions:
 
-Based on the figures provided, we can draw several key conclusions:
+% 1. When the demand is larger than supply, even at the very beginning of the time period, both DSA approach and the optimal solution reject some groups, as indicated by the horizontal segments in the lines.
 
-1. When the demand is larger than supply, even at the very beginning of the time period, both DSA approach and the optimal solution reject some groups, as indicated by the horizontal segments in the lines.
+% 2. DSA approach is inclined to accept groups earlier compared to the optimal solution. This is because DSA makes decisions based on the expected future demand, rather than the actual remaining demand.
 
-2. DSA approach is inclined to accept groups earlier compared to the optimal solution. This is because DSA makes decisions based on the expected future demand, rather than the actual remaining demand.
-
-3. When the actual remaining demand is lower than the expected demand, the optimal remaining seats will be lower than that of DSA approach. Conversely, when the actual remaining demand is higher than expected, the optimal remaining seats will be higher than DSA.
+% 3. When the actual remaining demand is lower than the expected demand, the optimal remaining seats will be lower than that of DSA approach. Conversely, when the actual remaining demand is higher than expected, the optimal remaining seats will be higher than DSA.
 
 % For the DSA, DP Base-heuristic, bid-price policies, their performance tends to initially drop and then increase as the number of periods increases. When the number of periods is small, the demand for capacity is relatively low, and the policies can achieve relatively optimal performance. However, as the number of periods increases, the policies may struggle to always obtain a perfect allocation plan, leading to a decrease in performance. Nevertheless, when the number of periods continue to become larger, these policies tend to accept larger groups, and as a result, narrow the gap with the optimal value, leading to an increase in performance. As the number of periods increases, the performance for the booking limit policy is getting better because the numebr of seats planned for the largest groups that are not occupied will drop.
 
@@ -118,7 +117,7 @@ We use $E(T; DSA)$ to denote the expected number of individuals accepted across 
 % 代表了当有社交距离的要求但不受社交距离影响能达到的最大需求
 % This period marks the threshold where the difference in the number of accepted individuals due to social distancing becomes significant.
 
-Under the probability distribution of $D4$, we obtain the gap point is 60, the corresponding occupancy rate is 71.8\%. To better analyze the situation under different demands, we plot the second figure. When the capacity is sufficient, in this case when the expected demand is less than 71.8\%, the outcome remains unaffected by the implementation of social distancing measures. When the expected demand is larger than 71.8\%, the difference between the outcomes with and without social distancing measures becomes more pronounced. As the expected demand continues to increase, both situations reach their maximum capacity acceptance. At this point, the gap between the outcomes with and without social distancing measures begins to converge. For the social distancing situation, according to Proposition \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. Therefore, the policy requires an occupancy rate larger than 80\% will be invalid.
+Under the probability distribution of $D4$, we obtain the gap point is 60, the corresponding occupancy rate is 71.8\%. To better analyze the situation under different demands, we plot the second figure. When the expected demand is less than 71.8\%, the social distancing measures will not have an impact. When the expected demand is larger than 71.8\%, the difference between the number of accepted individuals with and without social distancing measures becomes more pronounced. As the expected demand continues to increase, both situations reach their maximum capacity acceptance. At this point, the gap between the outcomes with and without social distancing measures begins to converge. For the social distancing situation, according to Proposition \ref{lem_pattern}, when the largest pattern is assigned to each row, the resulting occupancy rate is $\frac{16}{20} = 80\%$, which is the upper bound of occupancy rate. Therefore, the policy requires an occupancy rate larger than 80\% will be invalid.
 
 % 由于 occupancy rate 已经被social distancing 所限定，因此政府额外设置occupancy rate 是不必要的
 
@@ -189,6 +188,10 @@ The occupancy rate over demand follows the typical pattern of Figure \ref{typica
    Layout 2 & 60.0 & 71.79 \% & 80 \% \\ 
    Layout 3 & 60.0 & 71.84 \% & 82 \% \\
    Layout 4 & 33.0 & 74.41 \% & 85.71 \% \\
+   $[4,6,8,10,10]$ & 12 & 72.18 \% &  \\
+   14seats 11rows & 46 & 71.48 \% &  \\
+   6seats 6 rows & 11 & 69.67 \% &  \\
+   Large not rec & 75 & 72.88 \% &  \\
    \hline
   \end{tabular}
 \end{table}

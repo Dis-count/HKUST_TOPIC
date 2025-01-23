@@ -1,17 +1,15 @@
 % !TEX root = sum1.tex
-
-
 {\bf Terminologies to use}
 
 We use {\em seating management} to refer to the general problem which includes {\em seat planning with deterministic requests}, 
-{\em seat planning with stochastic requests}, and {\em Seat Assignment.}
+{\em seat planning with stochastic requests}, and real-time {\em Seat Assignment.}
 
 Each problem is defined for an {\em event} which has multiple {\em seating  requests}, where each request has a {\em group} of people to be seated.
 
 
 \section{Introduction}
-Social distancing is a proven concept for containing the spread of an infectious disease. It has been widely adopted worldwide, for example, during the most recent Covid 19 pandemic. As a general principle, social distancing measures can be specified from different dimensions. The basic requirement of social distancing is the specification of a minimum physical distance between people in public areas. For example, the World Health Organization (WHO) suggests social distancing as to ``keep physical distance of at least 1 meter from others'' \cite{AdviceforPublic}. In the US, the Center for Disease and Control (CDC) refers to social distancing as ``keeping a safe space between yourself and other people who are not from your household'' \cite{CDC}. 
-Note that under such a requirement, social distancing is actually applied with respect to groups of people. Similarly in Hong Kong, the government has adopted social distancing measures, in the recent Covid 19 pandemic, by limiting the size of groups in public gatherings to two, four, and six people per group over time. Moreover, the Hong Kong government has also adopted an upper limit on the total number of people in a venue; for example, restaurants can operate at 50\% or 75\% of their normal seating capacity. 
+Social distancing is a proven concept for containing the spread of an infectious disease. It has been widely adopted worldwide, for example, during the most recent Covid-19 pandemic. As a general principle, social distancing measures can be specified from different dimensions. The basic requirement of social distancing is the specification of a minimum physical distance between people in public areas. For example, the World Health Organization (WHO) suggests social distancing as to ``keep physical distance of at least 1 meter from others'' \cite{AdviceforPublic}. In the US, the Center for Disease and Control (CDC) refers to social distancing as ``keeping a safe space between yourself and other people who are not from your household'' \cite{CDC}. 
+Note that under such a requirement, social distancing is actually applied with respect to groups of people. Similarly in Hong Kong, the government has adopted social distancing measures, in the recent Covid-19 pandemic, by limiting the size of groups in public gatherings to two, four, and six people per group over time. Moreover, the Hong Kong government has also adopted an upper limit on the total number of people in a venue; for example, restaurants can operate at 50\% or 75\% of their normal seating capacity. 
 
 
 The implementation of social distancing measures has an extended impact beyond disease control. In particular, social distancing may disrupt the usual operations in certain sectors. For example, a restaurant needs to change or redesign the layout of its tables in order to fulfill the requirement of social distancing. Such change implies smaller capacity, fewer customers and less revenue. In such a context, an effected firm faces a new operational problem of optimizing its operations flow under given social distancing policies.
@@ -40,16 +38,21 @@ Besides developing models and solution schemes for operational solutions satisfy
 We address the above issue from the following aspects.
 
 
-1. We introduce the concept of gap point to characterize the situations under which social distancing can cause substantial loss to an event. Roughly speaking, given a distribution of the group size of each request, the gap point can be specified as an upper bound of the number of requests in an event such that if an event has fewer requests than the gap point, then the event will virtually not be affected by social distancing. Our computational experiments show that the gap point depends mainly on the mean of the group size, and relatively insensitive to its exact distribution. This offers an easy way to estimate the gap point and the impact of social distancing.
+1. We introduce the concept of gap point to characterize the situations under which social distancing can cause substantial loss to an event. The gap point can be specified as an upper bound of the number of requests for an event such that if an event has fewer requests than the gap point, then the event will virtually not be affected by social distancing. Our computational experiments show that the gap point depends mainly on the average size of each request, and relatively insensitive to its exact distribution. This offers an easy way to estimate the gap point.
 
-% (different policies have different gap points, and our policy performs more stably.)
 
-Our models and analysis are developed for the social distancing requirement on the physical distance and group size, where we can determine an expected occupancy rate for any given event in a venue, and a maximum achievable occupancy rate for all events. Sometimes the government also imposes a maximum allowed occupancy rate to tighten the social distancing requirement. This maximum allowed rate is effective for an event if it is lower than the expected occupancy rate of the event. Furthermore, the maximum allowed rate will be redundant if it is higher than the maximum achievable rate for all events.
+2. Gap point itself is not related to the occupancy rate but gives an upper bound of the occupancy rate (demand level). The policy published by the government often requires a maximum attendance rate.
+When the maximum attendance rate is larger than the demand level, this requirement is redundant; when the maximum attendance rate is lower than the demand level, this policy needs to be considered, i.e, no requests will be accepted when the occupancy rate reaches the maximum attendance rate.
+
+% When demand is lower than the demand level corresponding to the gap point, social distancing will not have an impact. When demand is higher, the loss will gradually increase. 
+
 
 3. The government is also concerned about how much the social distancing should be. Two seats can be chosen as the social distancing when the demand is low, the related property is similar to the situation where one seat as the social distancing is implemented.
 
+
 4. The implementation of social distancing will also have different impacts in different layout situations. A layout with fewer seats tends to achieve a higher occupancy rate. Thus, the occupancy rate of smaller venues is actually higher than that of larger ones.
 
-The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the stochastic model, analyze its properties and obtain the seat planning. Section 5 introduces the dynamic seat assignment problem.
-Section 6 demonstrates the dynamic seat assignment policy to assign the seats for incoming groups. Section 7 gives the numerical results and the insights of implementing social distancing. The conclusions are shown in Section 8.
+
+The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section \ref{problem_description}. In Section \ref{sec_seat_planning}, we establish the stochastic model, analyze its properties and obtain the seat planning. Section \ref{sec_dynamic_seat} introduces the dynamic seat assignment problem.
+Section \ref{sec_dynamic} demonstrates the dynamic seat assignment policy to assign the seats for incoming groups. Section \ref{sec_result} gives the numerical results and the insights of implementing social distancing. The conclusions are shown in Section \ref{sec_conclusion}.
 \newpage

@@ -15,10 +15,12 @@ with open("Random_200.txt", 'r') as f:
 
 def gamma(data):
     result = np.zeros((len(data), 3))
+    prop_set = np.zeros((len(data), 4))
     cnt = 0
     for i in range(len(data)):
         prob = re.findall(r"\d+\.?\d*", data[i][0])
         p = [float(i) for i in prob]
+        prop_set[cnt] = p
         # theta = p[-1]  # np.var  np.std
         gamma = np.dot(p, np.arange(1,5))
         gap_point = re.findall(r"\d+\.?\d*", data[i][1])
@@ -26,31 +28,44 @@ def gamma(data):
         occu_rate = round(float(gap_point[1]), 2)
         result[cnt] = [gamma, period, occu_rate]
         cnt += 1
-    return result
+    return result, prop_set
 
-result = gamma(data)
+result, prop_set = gamma(data)
 
-plt.scatter(result[:, 0], result[:, 1], c = "blue")
+# plt.scatter(result[:, 0], result[:, 1], c = "blue")
 
 x = np.arange(1.4, 3.6, 0.01)
 
 y1 = 201.14 /(x+1)
 y2 = 100.54 * x/(x+1)
 
-plt.xlabel('Gamma', fontsize = 15)
+for i in range(200):
+    x_2 = result[i][0]
+    if abs(100.54 * x_2/(x_2+1) - result[i][2]) > 3:
+        print(prop_set[i])
+        print(result[i][2])
+        print(result[i][1])
+        print(result[i][0])
 
-plt.plot(x, y1, label= "Blue_estimated")
-plt.ylabel('Periods', fontsize=15)
 
-plt.twinx()
+# [0.2  0.05 0.1  0.65]
+# 73.27
+# 46.0
+# 3.2
 
-plt.scatter(result[:, 0], result[:, 2], c="red")
-plt.plot(x, y2, 'r-', label= "Red_estimated")
-plt.ylabel('Occupancy Rate', fontsize=15)
+# plt.xlabel('Gamma', fontsize = 15)
 
-# plt.legend(fontsize = 15)
-# plt.legend()
-plt.show()
+# plt.plot(x, y1, label= "Blue_estimated")
+# plt.ylabel('Periods', fontsize=15)
+
+# plt.twinx()
+
+# plt.scatter(result[:, 0], result[:, 2], c="red")
+# plt.plot(x, y2, 'r-', label= "Red_estimated")
+# plt.ylabel('Occupancy Rate', fontsize=15)
+
+
+# plt.show()
 
 
 #  根据已有数据拟合 + 画出拟合之后的图

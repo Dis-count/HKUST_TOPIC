@@ -25,17 +25,20 @@ def plot_data(given_lines, roll_width, data):
     plt.ylabel('Percentage of total seats')
     
     point[1] = round(point[1], 2)
-    plt.annotate(r'Gap $%s$' % str(point), xy = point, xytext = (point[0]+10, point[1]), arrowprops = dict(facecolor = 'black', shrink = 0.1),)
+    plt.annotate(r'Gap $%s$' % str(point), xy = point, xytext = (point[0], point[1]), arrowprops = dict(facecolor = 'black', shrink = 0.1),)
     
     plt.legend()
-    plt.savefig('Layout_rec20rows.pdf')
+    plt.savefig('Layout_large_not_rec.pdf')
 
 
 # roll_width = np.ones(15) * 8
 # roll_width = np.ones(10) * 21
-roll_width = np.ones(20) * 11
+# roll_width = np.ones(20) * 11
+# roll_width = np.array([5, 7, 9, 11, 11])
+# roll_width = np.ones(11) * 15
+roll_width = np.array([15, 15, 15, 15, 15, 15, 17, 17, 17, 17, 17, 17, 17, 17, 17, 19])
 # roll_width = np.array([17, 18, 19, 20, 21, 21, 22, 23, 24, 25])
 given_lines = len(roll_width)
 
-data = np.load('data_layout_rec_20rows.npy')
+data = np.load('layout_large_not_rec.npy')
 plot_data(given_lines, roll_width, data)

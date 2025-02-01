@@ -167,7 +167,14 @@ To provide estimations, we use the equations $y_1 = \frac{c_1 \tilde{L}}{\gamma 
 Based on the above analysis, we also explore the results of different layouts, different group sizes and different social distances. Since the figure about the occupancy rate over demand is similar to Figure \ref{typical_figure}, we only use three metrics to show the results: the gap point and the corresponding occupancy rate, largest occupancy rate.
 
 \subsection*{Different Layouts}
-We experiment with four seat layouts. For the large room, we consider three configurations, each with the same total of 200 seats. Layout 1 consists of 20 rows with 10 seats each, Layout 2 features 10 rows with 20 seats each. Additionally, we include a fan-shaped Layout 3 with 10 rows, where the first five rows contain between 16 and 20 seats, increasing by 1 seat per row, and the last five rows contain between 20 and 24 seats, also increasing by 1 seat per row. This ensures that the total number of seats and the number of rows match those of the Layout 2. Layout 4 as the small room consists of 15 rows with 7 seats each. The same 100 instances with the probability of $D4$ are experimented for each layout.
+We experiment with several realistic seat layouts from cinema websites.
+% https://www.cinema.com.hk/
+
+% We do the following procedure on the layout.
+
+% The seats on the side can be regarded as the new rows.
+
+For the large room, we consider three configurations, each with the same total of 200 seats. Layout 1 consists of 20 rows with 10 seats each, Layout 2 features 10 rows with 20 seats each. Additionally, we include a fan-shaped Layout 3 with 10 rows, where the first five rows contain between 16 and 20 seats, increasing by 1 seat per row, and the last five rows contain between 20 and 24 seats, also increasing by 1 seat per row. This ensures that the total number of seats and the number of rows match those of the Layout 2. Layout 4 as the small room consists of 15 rows with 7 seats each. The same 100 instances with the probability of $D4$ are experimented for each layout.
 
 The occupancy rate over demand follows the typical pattern of Figure \ref{typical_figure}. The gap point, the corresponding occupancy rate and the largest occupancy rate are also given in the following table. The largest occupancy rate can be calculated from Proposition \ref{lem_pattern}.
 
@@ -200,7 +207,6 @@ We have three observations. First, the gap point and occupancy rate of Layout 1 
 Second, when the number of rows is the same, the fan-shaped layout exhibits a similar gap point and occupancy rate to the rectangular layout. However, the largest occupancy rates differ between the two layouts. Third, the occupancy rate at the gap point and the largest occupancy rate for the small room will be higher than those for the large room, comparatively.
 
 For each row, a seat is designated for social distancing with every group accepted. Consequently, when each row follows a full pattern and the total number of seats remains constant, having more rows results in a higher gap point and occupancy rate. Similarly, in a small room with fewer seats per row, the occupancy rate at the gap point will correspondingly be higher.
-
 
 \subsection*{Different Group Sizes}
 For group sizes of 3, 4 and 5, we present the gap point, the corresponding occupancy rate and the largest occupancy rate in the table below. The probability distributions for these group sizes all share the same value of $\gamma = 2.4$.

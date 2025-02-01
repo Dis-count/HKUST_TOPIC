@@ -2,31 +2,49 @@
 \section{Literature Review}
 The present study is closely connected to the following research areas -- seat planning with social distancing and dynamic seat assignment. The subsequent sections review literature about each perspective and highlight significant differences between the present study and previous research.
 
+% Seating management is practical problem and has many different application, 例如
+%  火车上，怎么样增加 capacity, 尤其是 group-based, 大的活动上，
+
+% social distancing 增加了另外一个维度上的考虑 使其更加复杂， 
+
+%  不固定 layout design 
+
+%  给定layout  怎么给座位  没有考虑 group 要求   个人的
+
+%  group-based seat planning, 飞机 火车， 
+
+% 特别是，电影院，social distance group 来体现，静态的palnning 问题，是我们研究的一小部分，我们研究了 stochastic planning 和 动态的  给出了更完整的解决方案。
 
 \subsection{Seat Planning with Social Distancing}
-Seating management is a practical problem that exists in many applications with different issues to handle, especially in the context of accommodating group-based seating requests.  For example, in  passenger rail services, work has been done on problems for maximizing capacity utilization or reducing the total capacity required \cite{clausen2010off, deplano2019offline}. In another example, such as weddings or dinner events \cite{lewis2016creating}, the main focus is on satisfying customer preferences and enhancing the overall experience. 
-
-Including social distancing in seating management has added another dimension of consideration, forming a new stream of research. In some cases, it involves layout design, specifically, to determine the seating location within a given venue, for example, with the aim of maximizing the physical distancing between students in a classroom \cite{bortolete2022support}, and positioning tables in restaurants and beach umbrellas \cite{fischetti2023safe}. In other situations with predetermined seating layout, individuals are assigned seats while adhering to social distancing guidelines, for instance, problems in the air travel \cite{ghorbani2020model} and long-distance train travel \cite{haque2022optimization}. Such work highlights the relevance and importance in seating management with the consideration of social distancing.
+Seating management is a practical problem and has many different applications, for instance, increasing capacity in the trains, group-based seating arrangements for the special events. Social distancing introduced has added another dimension of consideration, making it more complicated. It involves various applications to address the challenges posed by the need for physical distancing in different settings.
 
 
-Our work belongs to seating management with social ditancing for group-based requests, which has found its applications across various areas, including airplanes \cite{salari2022social}, trains \cite{haque2023social}, sports arenas \cite{kwag2022optimal}, and theaters \cite{blom2022filling}. Because of the diversity in applications, there are different issues to handle, for example, in \cite{salari2022social}, ... {\bf{what to emphasize?}}
+In the context of layout design, specifically determining the seating location within a given venue, there are various applications. For example, maximizing the social distancing between students in a classroom is discussed in \cite{bortolete2022support}. Fischetti et al.\cite{fischetti2023safe} consider how to plant positions with social distancing and apply these principles in restaurants and beach umbrellas. In other scenarios where the layout is predetermined, individuals are assigned seats while adhering to social distancing guidelines. For instance, seat planning within a fixed layout is addressed in the literature related to air travel \cite{ghorbani2020model, salari2022social}. Additionally, the optimization of seating arrangements has been explored in the context of long-distance train travel \cite{haque2022optimization}.
 
-{\bf{why not mention group seat planning without social distancing}}
-% Generally speaking, group seat reservation had two main applications in terms of revenue optimization and customer preference satisfaction. In the transportation domain, such as for passenger rail services, the primary focus of these studies was on maximizing capacity utilization or reducing the total capacity required \cite{clausen2010off, deplano2019offline}. Similar optimization techniques have also been applied in the context of seat planning for large events, such as weddings or dinner events \cite{lewis2016creating}. In these cases, the focus was on satisfying customer preferences and enhancing the overall experience.
+Generally speaking, group seat reservation had two main applications in terms of revenue optimization and customer preference satisfaction. In the transportation domain, such as for passenger rail services, the primary focus of these studies was on maximizing capacity utilization or reducing the total capacity required \cite{clausen2010off, deplano2019offline}. Similar optimization techniques have also been applied in the context of seat planning for large events, such as weddings or dinner events \cite{lewis2016creating}. In these cases, the focus was on satisfying customer preferences and enhancing the overall experience.
+
+The pandemic has heightened the emphasis on group-based seat planning, particularly in light of social distancing mandates. It has highlighted the potential benefits of group reservations in mitigating the spread of infections, as they can be designed to enhance revenue without increasing transmission risks. The challenge of group seat reservations has become more complex due to social distancing constraints, leading to diverse applications across various industries, including airplanes \cite{salari2022social}, trains \cite{haque2023social}, sports arenas \cite{kwag2022optimal}, and theaters \cite{blom2022filling}.
+
+It is important to note that the scenario presented in \cite{blom2022filling} is similar to the problem we are addressing, which aims to maximize the number of individuals accommodated. However, it primarily focuses on a known fixed proportion of groups for seat planning, which is just one aspect of our work. We also consider group-based seat planning with stochastic requests. Additionally, we incorporate dynamic seat assignment, assuming that groups arrive with a certain probability, to provide a comprehensive solution pattern.
 
 
-Our work in \cite{blom2022filling} is the most related one to our research, both addressing group-based seating problem in theaters. In \cite{blom2022filling}, the primarily focuses on the cases with known groups, which is referred to as seat planning with deterministic requests in this paper, we have a broader scope. We also consider group-based seat planning with stochastic requests. Additionally, we incorporate dynamic seat assignment, assuming that groups arrive with a certain probability, to provide a comprehensive solution pattern.
-
+% The recent pandemic has shed light on the benefits of group reservations, it brings more thought to the group seat reservation, it becomes more important and more complex with the social distancing constraint. As they have been shown to increase revenue without increasing the risk of infection, The group seat reservation with social distancing has various applications in industries such as airplanes \cite{salari2022social}, trains \cite{salari2022social, haque2023social}, sports arenas\cite{kwag2022optimal}, theaters \cite{blom2022filling}.
 
 % \cite{moore2021seat} 
 
 % Some related literature mentioned the seat planning under pandemic for groups are represented below.
 % Fischetti et al. \cite{fischetti2021safe} propose a seating planning for known groups of customers in amphitheaters. Haque and Hamid \cite{haque2022optimization} consider assigning seats to passengers in long-distance passenger trains. Salari et al. \cite{salari2022social} perform group seat assignment in airplanes during the pandemic and found that increasing passenger groups can yield greater social distancing than single passengers. Haque and Hamid \cite{haque2023social} aim to optimize seating assignments on trains by minimizing the risk of virus spread while maximizing revenue. The specific number of groups in their models is known in advance. Blom et al. \cite{blom2022filling} discuss strategies for filling a theater by considering the social distancing and group arrivals, which is similar to ours. 
 
+
 % However, unlike our project, it only focuses on a specific location layout and it is still based on a static situation by giving the proportion of different groups.
+
+% In contrast, there is a lack of research on group seat reservations for booking tickets for cinemas, where available seats are typically displayed for customers to choose from for low-demand movie tickets. For concerts with high demand, it is usually not possible to choose seats independently, and the organizer will inform seat information after confirming the order. 
+% For movies of the same time period, the ticket prices are the same, while for the same concert, although there are different ticket prices, for the same region, the ticket prices are the same. Therefore, we can consider different ticket prices separately. 
+% In the absence of an epidemic, all requests for tickets can be considered one by one. However, the COVID-19 pandemic has shed new light on the potential benefits of group reservations, as they can improve revenue without increasing the risk of infection. 
 
 
 % Dundar and Karakose \cite{dundar2021seat} proposed a two-stage algorithm for classroom seat assignment during the pandemic, with the first phase maximizing total allocations and the second phase maximizing the minimum interpersonal distance between students.
+
 
 \subsection{Dynamic Seat Assignment}
 %  我们的工作可以看成是 dynamic 
@@ -56,7 +74,6 @@ Another key characteristic of our study is the importance of seat assignment, wh
 
 % Our work not only focuses on how to make the group-based seat assignment with non-reusable seats, also contribute the revenue insights with social distancing.
 
-
 % This further emphasizes the significance of seat assignment and sets it apart from traditional revenue management methods.
 
 
@@ -71,6 +88,5 @@ Another key characteristic of our study is the importance of seat assignment, wh
 
 
 % Implementing dynamic seat assignment with social distancing can be done manually by the staff or through automated systems that use algorithms to optimize the seat assignments based on various factors, such as ticket sales, seat availability, and customer preferences. However, the implementation of social distancing measures poses unique challenges that require careful planning and consideration of various factors to balance safety with revenue generation.
-
 
 \newpage

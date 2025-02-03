@@ -1,16 +1,9 @@
 % !TEX root = sum1.tex
 \section{Seat Planning Problem with Social Distancing}\label{problem_description}
-This section integrates social distancing measures into the seat planning process. By introducing some concepts, we present the deterministic seat planning problem. 
-
-% Formulate it by IP to develop seat planning.
-
-% For the seat planning that does not utilize all available seats, we propose to improve the seat planning.
-
-% Event
+This section integrates social distancing measures into the seat planning process. By introducing some concepts, we present the deterministic seat planning problem. For the seat planning that does not utilize all available seats, we propose to improve the seat planning.
 
 \subsection{Concepts}
-Consider a seat layout comprising $N$ rows, with each row $j$ containing $L_j^0$ seats, for $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. The venue will hold an event with multiple seat requests, where each request includes a group of multiple people.
-There are $M$ distinct group types, where each group type $i$, $i \in \mathcal{M} \coloneqq \{1, 2, \ldots, M\}$ consists of $i$ individuals. The request of each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the number of group types $i$.
+Consider a seat layout comprising $N$ rows, with each row $j$ containing $L_j^0$ seats, for $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. The venue will hold an event with multiple seat requests, where each request includes a group of multiple people. There are $M$ distinct group types, where each group type $i$, $i \in \mathcal{M} \coloneqq \{1, 2, \ldots, M\}$ consists of $i$ individuals. The request of each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the number of group types $i$.
 
 To adhere to social distancing requirements, individuals from the same group must sit together in one specific row while maintaining a distance—measured by the number of empty seats—from individuals in different groups. Since each group occupies only one row, we assume that the physical distance between different rows is sufficient. If the social distancing requirement is more stringent, an empty row can be implemented, as practiced by the theater in Berlin \cite{Berlin_theater}.
 
@@ -77,13 +70,11 @@ If the size of a feasible pattern $\bm{h}$ is $|\bm{h}| = qM + \max\{r-\delta, 0
 
 % Similarly, $f(M, L)$ does not decrease in $L$. Since any largest pattern $\bm{h}$ under L is a feasible pattern under $L+1$, thus, $f(M, L) \leq $f(M, L+1)$.
 
-% 
-
 The size, $qM + \max\{r-\delta, 0\}$, corresponds directly to a largest pattern that includes $q$ group type $M$ and $r$ seats for one group type $(r-\delta)$ when $r>\delta$. However, the form of the largest pattern is not unique; there are other largest patterns that share the same size.
 
 % According to the definition of the largest pattern, the size of any largest pattern is given by $qM + \max\{r-\delta, 0\}$.
 
-When $r = 0$, the largest pattern $\bm{h}$ is unique and full, indicating that only one pattern can accommodate the maximum number of individuals. On the other hand, if $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
+When $r = 0$, the largest pattern $\bm{h}$ is unique and full, indicating that only one pattern can accommodate the maximum number of individuals. On the other hand, when $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
 
 \begin{example}
 Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are as follows: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$. Among these, $(0, 0, 0, 4)$ is the form referenced in Proposition \ref{lem_pattern}.
@@ -99,14 +90,14 @@ The first row can be represented by $(0, 0, 0, 4)$. It is a largest pattern as i
 \end{example}
 
 To obtain a seat planning composed of the full or largest patterns, we make the following statements.
-Let the original seat planning be $\bm{H}$ and the desired seat planning be $\bm{H}^{\prime}$. To satisfy requirements for the original group types, the total quantity of groups from type $i$ to type $M$ in $\bm{H}^{\prime}$ must be at least equal to the total quantity from group type $i$ to group type $M$ in $\bm{H}$. Mathematically, we aim to find a feasible seat planning $\bm{H}^{\prime}$ such that $\sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji} \leq \sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{ji}, \forall i \in \mathcal{M}$. We say $\bm{H} \subseteq \bm{H}^{'}$ if this condition is satisfied.
+Let the original seat planning be $\bm{H}$ and the desired seat planning be $\bm{H}^{\prime}$. To satisfy requirements for the original group types, the total quantity of groups from type $i$ to type $M$ in $\bm{H}^{\prime}$ must be at least equal to the total quantity from group type $i$ to group type $M$ in $\bm{H}$. Mathematically, we aim to find a feasible seat planning $\bm{H}^{\prime}$ such that $\sum_{k=i}^{M} \sum_{j=1}^{N} H_{jk} \leq \sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{jk}, \forall i \in \mathcal{M}$. We say $\bm{H} \subseteq \bm{H}^{'}$ if this condition is satisfied.
 
 To utilize all seats in the seat planning, the objective is to maximize the number of individuals that can be accommodated. Thus, we have the following formulation:
 
 \begin{equation}\label{improve_seat}
   \begin{aligned}
   \max \quad & \sum_{i=1}^{M} \sum_{j=1}^{N} (n_i-\delta)  x_{ij} \\
-  s.t. \quad & \sum_{j=1}^{N} \sum_{k=i}^{M} x_{kj} \geq  \sum_{k=i}^{M} \sum_{j=1}^{N} H_{ji}, i \in \mathcal{M} \\
+  s.t. \quad & \sum_{j=1}^{N} \sum_{k=i}^{M} x_{kj} \geq  \sum_{k=i}^{M} \sum_{j=1}^{N} H_{jk}, i \in \mathcal{M} \\
   & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_{j}, j \in \mathcal{N} \\
   & x_{ij} \in \mathbb{N}, i \in \mathcal{M}, j \in \mathcal{N}
   \end{aligned}

@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -35,6 +38,7 @@
 \citation{pisinger1999exact}
 \citation{hamdouch2011schedule,berge1993demand}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{5}{section.2}\protected@file@percent }
+\newlabel{literature}{{2}{5}{Literature Review}{section.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Seat Planning with Social Distancing}{5}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Dynamic Seat Assignment}{5}{subsection.2.2}\protected@file@percent }
 \citation{williamson1992airline}
@@ -58,24 +62,25 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4}Seat Planning with Stochastic Requests}{10}{section.4}\protected@file@percent }
 \newlabel{sec_seat_planning}{{4}{10}{Seat Planning with Stochastic Requests}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Scenario-based Stochastic Programming Formulation}{10}{subsection.4.1}\protected@file@percent }
-\newlabel{DEF_constr1}{{5}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.5}{}}
-\newlabel{DEF_constr2}{{6}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.6}{}}
-\newlabel{DEF_constr3}{{7}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.7}{}}
+\newlabel{y_recursively}{{4}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.4}{}}
+\newlabel{DEF_constr1}{{6}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.6}{}}
+\newlabel{DEF_constr2}{{7}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.7}{}}
+\newlabel{DEF_constr3}{{8}{11}{Scenario-based Stochastic Programming Formulation}{equation.4.8}{}}
 \newlabel{prop_solution}{{4}{12}{}{prop.4}{}}
-\newlabel{BD_master}{{8}{13}{Scenario-based Stochastic Programming Formulation}{equation.4.8}{}}
-\newlabel{BD_sub}{{9}{13}{Scenario-based Stochastic Programming Formulation}{equation.4.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve SSP by Benders Decomposition}{14}{subsection.4.2}\protected@file@percent }
-\newlabel{solve_by_benders}{{4.2}{14}{Solve SSP by Benders Decomposition}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Solve The Subproblem}{14}{subsubsection.4.2.1}\protected@file@percent }
-\newlabel{second_stage}{{4.2.1}{14}{Solve The Subproblem}{subsubsection.4.2.1}{}}
-\newlabel{BD_sub_dual}{{10}{14}{Solve The Subproblem}{equation.4.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Solve SSP by Benders Decomposition}{12}{subsection.4.2}\protected@file@percent }
+\newlabel{solve_by_benders}{{4.2}{12}{Solve SSP by Benders Decomposition}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Reformulation}{13}{subsubsection.4.2.1}\protected@file@percent }
+\newlabel{BD_master}{{9}{13}{Reformulation}{equation.4.9}{}}
+\newlabel{BD_sub}{{10}{14}{Reformulation}{equation.4.10}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Solve The Subproblem}{14}{subsubsection.4.2.2}\protected@file@percent }
+\newlabel{second_stage}{{4.2.2}{14}{Solve The Subproblem}{subsubsection.4.2.2}{}}
+\newlabel{BD_sub_dual}{{11}{14}{Solve The Subproblem}{equation.4.11}{}}
 \newlabel{feasible_region}{{1}{14}{}{lem.1}{}}
-\newlabel{BD_master2}{{11}{14}{Solve The Subproblem}{equation.4.11}{}}
-\newlabel{y_recursively}{{12}{14}{Solve The Subproblem}{equation.4.12}{}}
-\newlabel{optimal_sol_sub_dual}{{5}{15}{}{prop.5}{}}
+\newlabel{BD_master2}{{12}{14}{Solve The Subproblem}{equation.4.12}{}}
+\newlabel{optimal_sol_sub_dual}{{5}{14}{}{prop.5}{}}
 \newlabel{BD_sub_simplified}{{13}{15}{}{equation.4.13}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Constraint Generation}{15}{subsubsection.4.2.2}\protected@file@percent }
-\newlabel{bender_stage}{{4.2.2}{15}{Constraint Generation}{subsubsection.4.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Constraint Generation}{15}{subsubsection.4.2.3}\protected@file@percent }
+\newlabel{bender_stage}{{4.2.3}{15}{Constraint Generation}{subsubsection.4.2.3}{}}
 \newlabel{BD_master3}{{14}{15}{Constraint Generation}{equation.4.14}{}}
 \newlabel{one_ep_feasible}{{6}{15}{}{prop.6}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Benders Decomposition\relax }}{16}{algocf.1}\protected@file@percent }
@@ -85,44 +90,44 @@
 \newlabel{seat_assignment}{{4.3}{16}{Obtain The Feasible Seat Planning}{subsection.4.3}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Seat Planning Construction\relax }}{16}{algocf.2}\protected@file@percent }
 \newlabel{seat_construction}{{2}{16}{Obtain The Feasible Seat Planning}{algocf.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Dynamic Seat Assignment with Social Distancing}{17}{section.5}\protected@file@percent }
-\newlabel{sec_dynamic_seat}{{5}{17}{Dynamic Seat Assignment with Social Distancing}{section.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Dynamic Seat Assignment with Social Distancing}{16}{section.5}\protected@file@percent }
+\newlabel{sec_dynamic_seat}{{5}{16}{Dynamic Seat Assignment with Social Distancing}{section.5}{}}
 \newlabel{DP}{{15}{17}{Dynamic Seat Assignment with Social Distancing}{equation.5.15}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Seat Assignment with Dynamic Demand}{18}{section.6}\protected@file@percent }
 \newlabel{sec_dynamic}{{6}{18}{Seat Assignment with Dynamic Demand}{section.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}DP-based Heuristic}{18}{subsection.6.1}\protected@file@percent }
-\@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces DP-based Heuristic Algorithm\relax }}{19}{algocf.3}\protected@file@percent }
-\newlabel{algo_dp_heuris}{{3}{19}{DP-based Heuristic}{algocf.3}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces DP-based Heuristic Algorithm\relax }}{18}{algocf.3}\protected@file@percent }
+\newlabel{algo_dp_heuris}{{3}{18}{DP-based Heuristic}{algocf.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Assignment Based on Planning}{19}{subsection.6.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Group-type Control}{19}{subsubsection.6.2.1}\protected@file@percent }
 \newlabel{nested_policy}{{6.2.1}{19}{Group-type Control}{subsubsection.6.2.1}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Break Tie for Determining A Specific Row}{20}{subsubsection.6.2.2}\protected@file@percent }
 \newlabel{tie-break}{{6.2.2}{20}{Break Tie for Determining A Specific Row}{subsubsection.6.2.2}{}}
+\citation{blom2022filling}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Regenerate The Seat Planning}{21}{subsubsection.6.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7}Computational Experiment}{21}{section.7}\protected@file@percent }
 \newlabel{sec_result}{{7}{21}{Computational Experiment}{section.7}{}}
-\citation{blom2022filling}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Performances of Different Policies}{22}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Performances of Different Policies}{21}{subsection.7.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performances of Different Policies\relax }}{22}{table.caption.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Impact of Social Distancing}{23}{subsection.7.2}\protected@file@percent }
-\newlabel{typical_figure}{{3(a)}{24}{Subfigure 3(a)}{subfigure.3.1}{}}
-\newlabel{sub@typical_figure}{{(a)}{24}{Subfigure 3(a)\relax }{subfigure.3.1}{}}
-\newlabel{Fig.sub.2}{{3(b)}{24}{Subfigure 3(b)}{subfigure.3.2}{}}
-\newlabel{sub@Fig.sub.2}{{(b)}{24}{Subfigure 3(b)\relax }{subfigure.3.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The occupancy rate over demand\relax }}{24}{figure.caption.8}\protected@file@percent }
-\newlabel{Fig.lable}{{3}{24}{The occupancy rate over demand\relax }{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{24}{figure.caption.8}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{24}{figure.caption.8}\protected@file@percent }
+\newlabel{typical_figure}{{3(a)}{23}{Subfigure 3(a)}{subfigure.3.1}{}}
+\newlabel{sub@typical_figure}{{(a)}{23}{Subfigure 3(a)\relax }{subfigure.3.1}{}}
+\newlabel{Fig.sub.2}{{3(b)}{23}{Subfigure 3(b)}{subfigure.3.2}{}}
+\newlabel{sub@Fig.sub.2}{{(b)}{23}{Subfigure 3(b)\relax }{subfigure.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The occupancy rate over demand\relax }}{23}{figure.caption.8}\protected@file@percent }
+\newlabel{Fig.lable}{{3}{23}{The occupancy rate over demand\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{23}{figure.caption.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{23}{figure.caption.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Estimation of Gap Points}{24}{subsection.7.3}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Gap points and their estimation under 200 probabilities\relax }}{25}{figure.caption.9}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Gap points and occupancy rates of the layouts\relax }}{26}{table.caption.11}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Gap points and occupancy rates of the group sizes\relax }}{26}{table.caption.13}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The occupancy rate over demand for different social distancings\relax }}{27}{figure.caption.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{27}{section.8}\protected@file@percent }
+\newlabel{sec_conclusion}{{8}{27}{Conclusion}{section.8}{}}
 \bibstyle{plain}
 \bibdata{refe}
 \bibcite{aydin2018decomposition}{1}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{28}{section.8}\protected@file@percent }
-\newlabel{sec_conclusion}{{8}{28}{Conclusion}{section.8}{}}
 \bibcite{berge1993demand}{2}
 \bibcite{bitran1995application}{3}
 \bibcite{blom2022filling}{4}
@@ -149,8 +154,8 @@
 \bibcite{zhu2023assign}{25}
 \@writefile{toc}{\contentsline {section}{\numberline {9}Policies for Dynamic Situations}{30}{section.9}\protected@file@percent }
 \newlabel{policies}{{9}{30}{Policies for Dynamic Situations}{section.9}{}}
-\newlabel{bid-price_dual}{{16}{31}{Bid-price Control}{equation.9.16}{}}
-\newlabel{bid-price}{{2}{31}{}{lem.2}{}}
+\newlabel{bid-price_dual}{{16}{30}{Bid-price Control}{equation.9.16}{}}
+\newlabel{bid-price}{{2}{30}{}{lem.2}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {4}{\ignorespaces Bid-price Control Algorithm\relax }}{31}{algocf.4}\protected@file@percent }
 \newlabel{algo_bid}{{4}{31}{Bid-price Control}{algocf.4}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {5}{\ignorespaces Booking Limit Control Algorithm\relax }}{32}{algocf.5}\protected@file@percent }
@@ -158,6 +163,6 @@
 \@writefile{loa}{\contentsline {algocf}{\numberline {6}{\ignorespaces FCFS Policy Algorithm\relax }}{32}{algocf.6}\protected@file@percent }
 \newlabel{algo_fcfs}{{6}{32}{First Come First Served (FCFS) Policy}{algocf.6}{}}
 \citation{dantzig1957discrete}
-\newlabel{lemma_eq}{{17}{36}{Tie-Breaking Rule}{equation.9.17}{}}
-\newlabel{lemma_eq2}{{18}{36}{Tie-Breaking Rule}{equation.9.18}{}}
-\gdef \@abspage@last{36}
+\newlabel{lemma_eq}{{17}{35}{Tie-Breaking Rule}{equation.9.17}{}}
+\newlabel{lemma_eq2}{{18}{35}{Tie-Breaking Rule}{equation.9.18}{}}
+\gdef \@abspage@last{35}

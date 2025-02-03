@@ -26,31 +26,43 @@ We will address the above issues of social distancing in the context of seating 
 We will consider three models for managing the seats, referred to as seat planning with deterministic requests, seat planning with stochastic requests, and seat assignment, respectively. As we elaborate below, each of these models defines a standalone problem with suitable situations. Together, they are inherently connected to each other, jointly forming a suite of solution schemes for seating management under the social distancing constraints.
 
 In seat planning with deterministic requests, we are given the complete information about seating requests in groups, and the problem is to find a seating plan which specifies a partition of the layout into small segments to match the seating requests. Such a problem is applicable for cases of which participants and their groups are known, such as people from the same family in a church gathering, and staff from the same office in a company meeting.
-We formulate the problem by Integer Programming and discuss some characteristics  of the optimal plan.
  
-In seat planning with stochastic requests, we need to find a seating plan facing the requests in terms of a probabilistic distribution. This problem may find its applications in situations where a new layout needs to be made for serving multiple events with different seating requests. For example  \cite{Berlin_theater}, there are theaters physically removing some seats during the Covid-19 outbreak, where the remaining seats essentially form a seating plan with stochastic requests. We formulate the problem by scenario-based optimization and develop an algorithm by Benders decomposition.
+In seat planning with stochastic requests, we need to find a seating plan facing the requests in terms of a probabilistic distribution. This problem may find its applications in situations where a new layout needs to be made for serving multiple events with different seating requests. For example, there are theaters physically removing some seats during the Covid-19 outbreak. \cite{Berlin_theater}
 
 In seat assignment, groups of seating requests arrive dynamically. The problem is to decide, upon the arrival of each group of request, whether to accept or reject the group, and assign seats for each accepted groups. Seat assignment can be used for those commercial applications where requests arrive as a stochastic process, for example, tickets selling in movie theaters.
 
 The above three problems are closely related to each other with respect to problem solving methods and managerial insights. For example, in seat planning with deterministic requests,
-we identify some useful concepts such as the full patterns and largest patterns, which are important in the solution development for the other two problems. In addition, the duality analysis in the seat planning with deterministic requests facilitates the subproblem solving in the Benders decomposition algorithm for set planning with stochastic requests. 
-Also, the solution of seat planning with stochastic requests can be used  as a reference seating plan in seat assignment.
+we identify some useful concepts such as the full patterns and largest patterns, which are important in the solution development for the other two problems. Also, the solution of seat planning with stochastic requests can be used  as a reference seating plan in seat assignment.
 
 
-Besides developing models and solution schemes for operational solutions satisfying  social distancing requirements, we are also interested in understanding the impact of social  distancing realized over  particular events. Note that although the seating capacity  is reduced by social distancing, this does not necessarily mean the same reduction of the number of people to be held for an event, especially when the event  needs a small number of seats. For example, consider a seating plan with 70 seats available in a venue of 100 seats, i.e., a 30\% reduction of the seating capacity. If an event held in the venue needs less than 70 seats, then it is possible that there will be a small number of people to be rejected, which implies that the loss caused by the social distancing is much less than 30\%. It is important for a government to include such an effect in policy making.
+Besides developing models and solution schemes for operational solutions satisfying  social distancing requirements, we are also interested in understanding the impact of social  distancing realized over  particular events. Note that although the seating capacity  is reduced by social distancing, this does not necessarily mean the same reduction of the number of people to be held for an event, especially when the event  needs a small number of seats. For example, consider a seating plan with 70 seats available in a venue of 100 seats, i.e., a 30\% reduction of the seating capacity. If an event held in the venue need less than 70 seats, then it is possible that there will be a small number of people to be rejected, which implies that the loss caused by the social distancing is much less than 30\%. It is important for a government to include such an effect in policy making.
 
 We address the above issue from the following aspects.
 
 
-1. We introduce the concept of gap point to characterize the situations under which social distancing can cause substantial loss to an event. Roughly speaking, given a distribution of the group size of each request, the gap point can be specified as an upper bound of the number of requests in an event such that if an event has fewer requests than the gap point, then the event will virtually not be affected by social distancing. Our computational experiments show that the gap point depends mainly on the mean of the group size, and relatively insensitive to its exact distribution. This offers an easy way to estimate the gap point and  the impact of social distancing.
+1. We introduce the concept of gap point to characterize the situations under which social distancing can cause substantial loss to an event. Roughly speaking, given a distribution of the group size of each request, the gap point can be specified as an upper bound of the number of requests in an event such that if an event has fewer requests than the gap point, then the event will virtually not be affected by social distancing. Our computational experiments show that the gap point depends mainly on the mean of the group size, and relatively insensitive to its exact distribution. This offers an easy way to estimate the gap point and the impact of social distancing.
 
 % (different policies have different gap points, and our policy performs more stably.)
 
 Our models and analysis are developed for the social distancing requirement on the physical distance and group size, where we can determine an expected occupancy rate for any given event in a venue, and a maximum achievable occupancy rate for all events. Sometimes the government also imposes a maximum allowed occupancy rate to tighten the social distancing requirement. This maximum allowed rate is effective for an event if it is lower than the expected occupancy rate of the event. Furthermore, the maximum allowed rate will be redundant if it is higher than the maximum achievable rate for all events.
 
-3. The above qualitative insights are stable with respect to different parameters in the model, such as the minimum physical distances, the maximum group sizes, and the layout of the venue. 
+3. The government is also concerned about how much the social distancing should be. Two seats can be chosen as the social distancing when the demand is low, the related property is similar to the situation where one seat as the social distancing is implemented.
 
-{\bf [To be refined] } The rest of this paper is structured as follows. We review the relevant literature in Section 2. The wen introduce the 
- major issues brought by social distancing and define the seating planning with deterministic requests in Section 3. In Section 4, we establish the stochastic model, analyze its properties and obtain the seat planning. Section 5 introduces the dynamic seat assignment problem.
+4. The implementation of social distancing will also have different impacts in different layout situations. A layout with fewer seats tends to achieve a higher occupancy rate. Thus, the occupancy rate of smaller venues is actually higher than that of larger ones.
+
+The rest of this paper is structured as follows. The following section reviews relevant literature. We describe the motivating problem in Section 3. In Section 4, we establish the stochastic model, analyze its properties and obtain the seat planning. Section 5 introduces the dynamic seat assignment problem.
 Section 6 demonstrates the dynamic seat assignment policy to assign the seats for incoming groups. Section 7 gives the numerical results and the insights of implementing social distancing. The conclusions are shown in Section 8.
 \newpage
+
+
+%  Take the wheelchair space as the common seats. No more than 4 seats is trivial.
+
+%  1. Revise the literature review
+
+%  2. Check 21, 15, 17, 4 是不是只有 planning/ air train dynamic seat assignment 
+
+%  3. 找到 The Ordinary seat layout. 结论： 不同的 seat layout 不影响我们的结果
+
+%  4. Organize the literature review. 
+
+%  https://www.cinema.com.hk/

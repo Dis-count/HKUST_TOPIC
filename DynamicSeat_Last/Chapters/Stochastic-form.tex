@@ -17,7 +17,7 @@ Taking into account the possibility of groups occupying seats planned for larger
   & y_{i \omega}^{+}= (\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+})^{+}, i =1,\ldots, M-1 \\
   & y_{i \omega}^{-}= (d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+})^{+}, i =1,\ldots, M-1 \\
   & y_{M \omega}^{+} = (\sum_{j=1}^N x_{Mj} - d_{M \omega})^{+} \\ 
-  & y_{M \omega}^{-} = (d_{M \omega}- \sum_{j=1}^N x_{Mj})^{+}
+  & y_{M \omega}^{-} = (d_{M \omega}- \sum_{j=1}^N x_{Mj})^{+},
 \end{aligned}
 \end{equation}
 
@@ -46,7 +46,7 @@ By reformulating the objective function, we have
   = & \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega \in \Omega} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}
 \end{align*}
 
-Here, $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$ indicates the maximum number of individuals that can be accommodated in the seat planning $\{x_{ij}\}$. The second part, $\sum_{\omega \in \Omega} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}$ indicates the expected excess supply for group type $i$ over scenarios.
+Here, $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$ indicates the maximum number of individuals that can be accommodated in the seat planning $\{x_{ij}\}$. The second part, $\sum_{\omega \in \Omega} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}$ indicates the expected excess of supply for group type $i$ over scenarios.
 
 In the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive for any $i, \omega$. Suppose there exist $i_0$ and $\omega_0$ such that $y_{i_0 \omega_0}^{+}$ and $y_{i_0 \omega_0}^{-}$ are positive. Substracting $\min\{y_{i_0, \omega_0}^{+}, y_{i_0, \omega_0}^{-}\}$ from these two values will still satisfy constraints \eqref{DEF_constr1} and \eqref{DEF_constr2} but increase the objective value when $p_{\omega_0}$ is positive. Thus, in the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive.
 
@@ -56,7 +56,9 @@ Considering the analysis provided earlier, we find it advantageous to obtain a s
 There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
 \end{prop}
 
-Proposition \ref{prop_solution} is different from proposition \ref{prop_construction}. Proposition \ref{prop_construction} can make sure that we can obtain a seat planning composed of full or largest patterns. Here, proposition \ref{prop_solution} states that there always exists an optimal solution where the corresponding patterns are either full or largest. However, we may not be able to directly find such an optimal solution as described in Proposition \ref{prop_solution}. Instead, we try to obtain the seat planning composed of full or largest patterns, as stated in Section \ref{seat_assignment}.
+When there is only one scenario, the SSP reduces to the deterministic model. This aligns with Section \ref{seat_planning_full_largest}, which outlines the generation of seat planning consisting of full or largest patterns.
+
+Solving SSP directly is computationally prohibitive when there are numerous scenarios, instead, we apply Benders decomposition to simplify the solving process in Section \ref{solve_by_benders}, then obtain the seat planning composed of full or largest patterns, as stated in Section \ref{seat_assignment}.
 
 \subsection{Solve SSP by Benders Decomposition}\label{solve_by_benders}
 We reformulate problem \eqref{BD_master} into a master problem and a subproblem \eqref{BD_sub}. The iterative process of solving the master problem and subproblem is known as Benders decomposition. 
@@ -113,8 +115,7 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
 We can solve problem \eqref{BD_master} quickly if we can efficiently solve problem \eqref{BD_sub}. Next, we will mention how to solve problem \eqref{BD_sub}.
 
 \subsubsection{Solve The Subproblem}\label{second_stage}
-
-Notice that the feasible region of the dual of problem \eqref{BD_sub} remains unaffected by $\mathbf{x}$. This observation provides insight into the properties of this problem. Let $\bm{\alpha}$ denote the vector of dual variables. For each $\omega$, we can form its dual problem, which is 
+Notice that the feasible region of the dual of problem \eqref{BD_sub} remains unaffected by $\mathbf{x}$. This observation provides insight into the properties of this problem. Let $\bm{\alpha}_{\omega} = (\alpha_{1\omega},\alpha_{2\omega}, \ldots, \alpha_{M,\omega})^{\intercal}$ denote the vector of dual variables. For each $\omega$, we can form its dual problem, which is 
 
 \begin{equation}\label{BD_sub_dual}
   \begin{aligned}
@@ -141,22 +142,26 @@ Alternatively, $z_{\omega}(\mathbf{x})$ is the largest number $z_{\omega}$ such 
 \end{equation}
 
 
-Before applying Benders decomposition to solve problem \eqref{BD_master2}, it is important to address the efficient computation of the optimal solution to problem \eqref{BD_sub_dual}. When $\mathbf{x}^{*}$ is given, $y_{i, \omega}$ can be obtained from \ref{y_recursively}.
-
-The optimal solutions to problem \eqref{BD_sub_dual} can be obtained according to the value of $\mathbf{y}_{\omega}$.
+Before applying Benders decomposition to solve problem \eqref{BD_master2}, it is important to address the efficient computation of the optimal solution to problem \eqref{BD_sub_dual}. When $\mathbf{x}^{*}$ is given, $\mathbf{y}_{\omega}$ can be obtained from equation \eqref{y_recursively}. Let $\alpha_{0, \omega} = 0$ for each $\omega$, then we have Proposition \ref{optimal_sol_sub_dual}.
 
 \begin{prop}\label{optimal_sol_sub_dual}
   The optimal solutions to problem \eqref{BD_sub_dual} are given by 
 \begin{equation}\label{BD_sub_simplified}
   \begin{aligned}
-    \alpha_{i} = 0 \quad & \text{if}~  y_{i \omega}^{-} > 0,  i =1,\ldots, M~\text{or}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}> 0, i = 1,\ldots, M-1 \\
-    \alpha_{i} = \alpha_{i-1}+1 \quad & \text{if}~ y_{i \omega}^{+} > 0, i =1,\ldots, M \\
-    0 \leq \alpha_{i} \leq \alpha_{i-1}+1 \quad & \text{if}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, i = M~\text{or}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}= 0, i = 1,\ldots, M-1
+    \alpha_{i \omega} = 0 \quad & \text{if}~  y_{i \omega}^{-} > 0,  i =1,\ldots, M~\text{or}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}> 0, i = 1,\ldots, M-1 \\
+    \alpha_{i \omega} = \alpha_{i-1, \omega}+1 \quad & \text{if}~ y_{i \omega}^{+} > 0, i =1,\ldots, M \\
+    0 \leq \alpha_{i \omega} \leq \alpha_{i-1, \omega}+1 \quad & \text{if}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, i = M~\text{or}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}= 0, i = 1,\ldots, M-1
   \end{aligned}
 \end{equation}
 \end{prop}
 
-Instead of solving this linear programming directly, we can compute the values of $\alpha_{\omega}$ by performing a forward calculation from $\alpha_{1\omega}$ to $\alpha_{M\omega}$.
+% According to the value of 
+
+% There are no consecutive 
+
+% When $\alpha_{i}$ satisfies $0 \leq \alpha_{i} \leq \alpha_{i-1}+1$, $i = M$ or $y_{i+1, \omega}^{+} =0$, then 
+
+Instead of solving this linear programming directly, we can compute the values of $\alpha_{\omega}$ by performing a forward calculation from $\alpha_{1\omega}$ to $\alpha_{M\omega}$. 
 
 \subsubsection{Constraint Generation}\label{bender_stage}
 Due to the computational infeasibility of solving problem \eqref{BD_master2} with an exponentially large number of constraints, it is a common practice to use a subset, denoted as $\mathcal{O}^t$, to replace $\mathcal{O}$ in problem \eqref{BD_master2}. This results in a modified problem known as the Restricted Benders Master Problem (RBMP). To find the optimal solution to problem \eqref{BD_master2}, we employ the technique of constraint generation. It involves iteratively solving the RBMP and incrementally adding more constraints until the optimal solution to problem \eqref{BD_master2} is obtained.

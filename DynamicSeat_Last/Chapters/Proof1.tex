@@ -38,9 +38,21 @@ Therefore, $\bm{h}$ cannot exist. The maximum number of people that can be accom
 
 
 \begin{pf}{Proof of Proposition \ref{prop_solution}}
-  In any optimal solution where one of the corresponding patterns is neither full or largest, we can utilize the conclusion of Proposition \ref{prop_construction} to obtain a seat planning that is composed of full or largest patterns meanwhile the constraints of SSP are still satisfied.
-\end{pf}
+Suppose that $H$ is the seat planning associated with the optimal solution to SSP, but there exists a pattern that is neither full nor the largest. The corresponding excess of supply is $\mathbf{y}^{+}$. According to Proposition \ref{prop_construction}, $H{'}$ can be obtained from $H$. The seat planning, $H{'}$, is composed of full or largest patterns and satisfies all constraints of SSP. The corresponding excess of supply is $\mathbf{y}^{'+}$.
 
+Then we will demonstrate that for each scenario $\omega$, the objective function of SSP, given by $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{i = 1}^{M} y_{i \omega}^{+}$, does not decrease when transitioning from $H$ to $H'$.
+
+Let $\Delta y_{M \omega}^{+} = y_{M \omega}^{'+} - y_{M \omega}^{+}$, $\Delta \sum_{j=1}^{N} x_{Mj} = \sum_{j=1}^{N} x_{Mj}^{'} - \sum_{j=1}^{N} x_{Mj}$. According to \eqref{y_recursively}, when $i$ changes from $M$ to 1, we obtain the following inequalities.
+
+\begin{align*}
+  \Delta y_{M \omega}^{+} \geq & \Delta \sum_{j=1}^{N} x_{Mj} \\
+  \Delta y_{M-1, \omega}^{+} \geq & \Delta y_{M \omega}^{+} + \Delta \sum_{j=1}^{N} x_{M-1,j} \geq \Delta \sum_{j=1}^{N} (x_{Mj} + x_{M-1,j}) \\
+  \vdots ~\cdots \geq & ~\cdots ~\vdots \\
+  \Delta y_{1, \omega}^{+} \geq & \Delta \sum_{j=1}^{N} \sum_{i=1}^{M} x_{i,j}
+\end{align*}
+
+Since the objective function does not decrease, $H^{'}$ represents the optimal solution to SSP and is composed of full or largest patterns.
+\end{pf}
 
 \begin{pf}{Proof of Lemma \ref{feasible_region}}
 Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $\mathbf{V} = [\mathbf{W},~\mathbf{I}]$. Based on this, we can derive the following inequalities: $\bm{\alpha}^{\intercal} \mathbf{W} \geq -\mathbf{1}$ and $\bm{\alpha}^{\intercal} \mathbf{I} \geq \mathbf{0}$. According to the expression of $\mathbf{W}$ and $\mathbf{I}$, we can deduce that $0 \leq \alpha_i \leq \alpha_{i-1} +1$ for $i \in \mathcal{M}$ by letting $\alpha_0 = 0$. These inequalities indicate that the feasible region is nonempty and bounded. For $i \in \mathcal{M}$, $\alpha_{i}$ is only bounded by $\alpha_{i-1}+1$ and $0$, thus, all extreme points within the feasible region are integral.

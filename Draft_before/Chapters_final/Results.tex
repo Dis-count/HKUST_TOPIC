@@ -174,6 +174,41 @@ The results of the estimation of $c_1$ and $c_2$ are presented in the table belo
 
 As the number of seats in each row increases, the fitting values of $c_1$ and $c_2$ will gradually increase.
 
+\subsection*{Different Layouts}
+For the large room, we consider three configurations, each with the same total of 200 seats. Layout 1 consists of 20 rows with 10 seats each, Layout 2 features 10 rows with 20 seats each. Additionally, we include a fan-shaped Layout 3 with 10 rows, where the first five rows contain between 16 and 20 seats, increasing by 1 seat per row, and the last five rows contain between 20 and 24 seats, also increasing by 1 seat per row. This ensures that the total number of seats and the number of rows match those of the Layout 2. Layout 4 as the small room consists of 15 rows with 7 seats each. The same 100 instances with the probability of $D4$ are experimented for each layout.
+
+The occupancy rate over demand follows the typical pattern of Figure \ref{occupancy_rate_demand}. The gap point, the corresponding occupancy rate and the largest occupancy rate are also given in the following table. The largest occupancy rate can be calculated from Proposition \ref{lem_pattern}.
+
+% \begin{figure}[h]
+%   \centering
+%     \includegraphics[width=0.8\textwidth]{./Figures/layout20.pdf}
+%   \caption{The occupancy rate over demand with Layout 1}
+% \end{figure}
+
+\begin{table}[ht]
+  \centering
+  \caption{Gap points and occupancy rates of the layouts}
+  \begin{tabular}{|c|c|c|c|}
+  \hline
+   Seat Layout & Gap point & Occupancy rate & Largest occupancy rate \\
+   \hline
+   Layout 1 & 62.0 & 74.33 \% & 80 \% \\
+   Layout 2 & 60.0 & 71.79 \% & 80 \% \\ 
+   Layout 3 & 60.0 & 71.84 \% & 82 \% \\
+   Layout 4 & 33.0 & 74.41 \% & 85.71 \% \\
+   $[4,6,8,10,10]$ & 12 & 72.18 \% &  \\
+   14seats 11rows & 46 & 71.48 \% &  \\
+   6seats 6 rows & 11 & 69.67 \% &  \\
+   Large not rec & 75 & 72.88 \% &  \\
+   \hline
+  \end{tabular}
+\end{table}
+
+We have three observations. First, the gap point and occupancy rate of Layout 1 are higher than those of Layout 2 and Layout 3. This suggests that, when the total number of seats is the same, the layout with more rows yields a larger gap point and occupancy rate compared to the layout with fewer rows.
+Second, when the number of rows is the same, the fan-shaped layout exhibits a similar gap point and occupancy rate to the rectangular layout. However, the largest occupancy rates differ between the two layouts. Third, the occupancy rate at the gap point and the largest occupancy rate for the small room will be higher than those for the large room, comparatively.
+
+For each row, a seat is designated for social distancing with every group accepted. Consequently, when each row follows a full pattern and the total number of seats remains constant, having more rows results in a higher gap point and occupancy rate. Similarly, in a small room with fewer seats per row, the occupancy rate at the gap point will correspondingly be higher.
+
 \subsection{Impact of Social Distancing under Different Demands}
 We present a table that shows the occupancy rate differences between DSA approach with social distancing and the optimal solution without social distancing for different expected demand levels (120, 140, 160, 180, 200).
 

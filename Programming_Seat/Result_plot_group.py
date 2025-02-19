@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # The specific parameters are as follows:
 
 def plot_data(given_lines, roll_width, data):
-    sd = 1    
+    sd = 1
     t_value = data[0]
     people_value = data[1]
     occup_value = data[2]
@@ -24,9 +24,9 @@ def plot_data(given_lines, roll_width, data):
     point[1] = round(point[1], 2)
     plt.annotate(r'Gap $%s$' % str(point), xy=point, xytext=(point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
     plt.legend()
-    plt.savefig('group_4.pdf')
+    plt.savefig('test_group_4.pdf')
 
 given_lines = 10
 roll_width = np.ones(given_lines) * 21
-data = np.load('data_group4.npy')
+data = np.load('test_group_4.npy')
 plot_data(given_lines, roll_width, data)

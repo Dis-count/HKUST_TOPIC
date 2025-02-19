@@ -1,0 +1,12 @@
+Run Start Time:Tue Feb 18 14:40:49 2025
+The number of periods: 	60
+Sto: 100.00 ;Bid: 100.00 ;DP1: 100.00 ;Booking: 91.07 ;FCFS: 100.00 
+;Number of accepted people: 113.69 	The number of periods: 	70
+Sto: 99.85 ;Bid: 99.73 ;DP1: 99.76 ;Booking: 90.15 ;FCFS: 99.67 
+;Number of accepted people: 132.72 	The number of periods: 	80
+Sto: 99.22 ;Bid: 98.40 ;DP1: 98.92 ;Booking: 96.98 ;FCFS: 97.05 
+;Number of accepted people: 140.68 	The number of periods: 	90
+Sto: 99.39 ;Bid: 98.36 ;DP1: 99.12 ;Booking: 96.93 ;FCFS: 94.54 
+;Number of accepted people: 144.47 	The number of periods: 	100
+Sto: 99.32 ;Bid: 98.88 ;DP1: 99.18 ;Booking: 97.63 ;FCFS: 92.92 
+;Number of accepted people: 146.97 	Total Runtime	421.873402

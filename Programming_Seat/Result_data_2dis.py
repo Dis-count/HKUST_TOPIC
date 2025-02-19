@@ -18,7 +18,7 @@ if __name__ == "__main__":
     period_range = range(40, total_period, 1)
     given_lines = 10
     sd = 1
-    probab = [0.25, 0.3, 0.25, 0.2]
+    probab = [0.12, 0.5, 0.13, 0.25]
 
     t_value = np.arange(40, total_period, 1)
 
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     occup_2 = np.zeros(len(period_range))
     count = 100
     # sequences_pool = sequence_pool(count, total_period, probab, sd)
-    sequences_pool = np.load('data_sequence0.25.npy')
+    sequences_pool = np.load('sequence_0.12.npy')
     
     cnt = 0
     for num_period in period_range:
@@ -67,4 +67,4 @@ if __name__ == "__main__":
         cnt += 1
 
     data = np.vstack((t_value, people_value, occup_1, occup_2))
-    np.save('data_distances_new.npy', data)
+    np.save('data_distances_012.npy', data)

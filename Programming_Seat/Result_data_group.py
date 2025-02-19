@@ -7,14 +7,12 @@ from Mist import sequence_pool
 # The specific parameters are as follows:
 # The occupancy rate with different group sizes 
 # [0.2, 0.2, 0.6]  3
-# [0.3, 0.3, 0.2, 0.1, 0.1]  5
 # [0.25, 0.3, 0.25, 0.2]  4
-# gamma = 2.4
 
 # output:
-# data_group5.npy
 # data_group4.npy
 # data_group3.npy
+# data_group2.npy
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
@@ -22,11 +20,11 @@ if __name__ == "__main__":
     total_period = 100
     period_range = range(40, total_period, 1)
     given_lines = 10
-    # probab = [0.3, 0.3, 0.2, 0.1, 0.1]
-    # 4: [0.25, 0.3, 0.25, 0.2]
     sd = 1
-    group_dict = {3: [0.2, 0.2, 0.6],
-                  5: [0.3, 0.3, 0.2, 0.1, 0.1]}
+    # 2: [0.19, 0.81],
+    # 3: [0.16, 0.67, 0.17],
+    # 4: [0.12, 0.5, 0.13, 0.25]
+    group_dict = {4: [0.12, 0.5, 0.13, 0.25]}
 
     t_value = np.arange(40, total_period, 1)
     people_value = np.zeros(len(period_range))
@@ -34,7 +32,8 @@ if __name__ == "__main__":
     count = 100
 
     for I, probab in group_dict.items():
-        sequences_pool = sequence_pool(count, total_period, probab, sd)
+        # sequences_pool = sequence_pool(count, total_period, probab, sd)
+        sequences_pool = np.load('sequence_0.12.npy')
         cnt = 0
         gap_if = True
         
@@ -52,9 +51,12 @@ if __name__ == "__main__":
                 sequence = sequences_pool[j][0: num_period]
                 newx4 = a_instance.random_generate(sequence)
                 sequence1 = [i-sd for i in sequence]
+                newx40 = a_without.random_generate(sequence1)
                 # newx40 = a_without.random_generate(sequence1)
-
-                f = a_without.offline(sequence1)  # optimal result
+                if num_period <= 70:
+                    f = a_without.offline(sequence1)  # optimal result
+                else:
+                    f = a_without.method_new(sequence1, newx40, roll_width-sd)
                 accept_people += np.dot(multi, f)
 
                 g = a_instance.method_new(sequence, newx4, roll_width)
@@ -69,4 +71,4 @@ if __name__ == "__main__":
             cnt += 1
 
         data = np.vstack((t_value, people_value, occup_value))
-        np.save('data_group_' + str(I) + '.npy', data)
+        np.save('test_group_' + str(I) + '.npy', data)

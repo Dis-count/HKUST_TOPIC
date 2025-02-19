@@ -33,6 +33,8 @@ def plot_data(data, option):
             point[0] + 5, point[1]-10), arrowprops=dict(facecolor='black', shrink=0.1),)
 
         plt.axhline(y = 80, xmin = 0, xmax = 1, color = 'green', linestyle = '--')
+        # plt.axhline(y = 65, xmin = 0, xmax = 1, color = 'purple', linestyle='--')
+        plt.axhline(y = 71.8, xmin = 0, xmax = 1, color = 'purple', linestyle='--')
 
         # plt.annotate(r'80%' , xy=(90, 80), xytext=(80, 90), color='red', arrowprops=dict(facecolor='black', shrink=0.1),)
 
@@ -64,9 +66,11 @@ def plot_data(data, option):
         plt.savefig(graphname)
 
 
-data = np.load('data_group4.npy')
+data = np.load('data_group_4.npy')
 # period
 option = 1
+
 # gamma
 option = 0
-plot_data(data, 0)
+
+plot_data(data, 1)

@@ -5,7 +5,6 @@ from Mist import sequence_pool
 # The specific parameters are as follows:
 
 # The layouts are:
-
 # [0.25, 0.3, 0.25, 0.2]  I = 4  gamma = 2.4
 
 # np.array([17, 18, 18, 18, 18, 18, 18, 8]) given_lines = 8  
@@ -29,7 +28,7 @@ from Mist import sequence_pool
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
     I = 4  # the number of group types
-    total_period = 120
+    total_period = 110
     period_range = range(90, total_period, 1)
     # given_lines = 11
 
@@ -37,19 +36,19 @@ if __name__ == "__main__":
                 #   'KTT_TS': np.array([7, 9, 7, 10, 7, 11, 8, 11, 9, 7, 10, 7, 11, 7, 13, 8])}
     layout_dic = {'NCWCC': np.array([13, 21, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 21, 13])}
 
-    # layout_dic = {'KTT_TS': np.array([7, 9, 7, 10, 7, 11, 8, 11, 9, 7, 10, 7, 11, 7, 13, 8]),
+    # layout_dic = {'HK_FAC': np.array([17, 18, 18, 18, 18, 18, 18, 8]),
+    #               'KTT_TS': np.array([7, 9, 7, 10, 7, 11, 8, 11, 9, 7, 10, 7, 11, 7, 13, 8]),
     #               'SWHCC': np.array([6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]),
-    #               'SWCC': np.array([3, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13])
-    #               }
+    #               'SWCC': np.array([3, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13])}
 
-    probab = [0.25, 0.3, 0.25, 0.2]
+    probab = [0.12, 0.5, 0.13, 0.25]
     sd = 1
     t_value = np.arange(90, total_period, 1)
     people_value = np.zeros(len(period_range))
     occup_value = np.zeros(len(period_range))
     count = 100
-    # sequences_pool = np.load('data_sequence0.25.npy')
-    sequences_pool = sequence_pool(count, 120, probab, sd)
+    # sequences_pool = np.load('sequence_0.12.npy')
+    sequences_pool = sequence_pool(count, total_period, probab, sd)
 
     for shape, roll_width in layout_dic.items():
         cnt = 0

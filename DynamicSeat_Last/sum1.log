@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  16 FEB 2025 14:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  19 FEB 2025 20:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -233,12 +233,152 @@ File: pppdftex.def 2021/03/06 v0.5t Pdfpages driver for pdfTeX (AM)
 \AM@toc@title=\toks30
 \c@AM@survey=\count280
 \AM@templatesizebox=\box54
+) (e:/Software/texlive/2021/texmf-dist/tex/latex/tabu/tabu.sty
+Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
+ (e:/Software/texlive/2021/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+\col@sep=\dimen174
+\ar@mcellbox=\box55
+\extrarowheight=\dimen175
+\NC@list=\toks31
+\extratabsurround=\skip65
+\backup@length=\skip66
+\ar@cellbox=\box56
+) (e:/Software/texlive/2021/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box57
+\sift@deathcycles=\count281
+\@vwid@loff=\dimen176
+\@vwid@roff=\dimen177
+)
+\c@taburow=\count282
+\tabu@nbcols=\count283
+\tabu@cnt=\count284
+\tabu@Xcol=\count285
+\tabu@alloc=\count286
+\tabu@nested=\count287
+\tabu@target=\dimen178
+\tabu@spreadtarget=\dimen179
+\tabu@naturalX=\dimen180
+\tabucolX=\dimen181
+\tabu@Xsum=\dimen182
+\extrarowdepth=\dimen183
+\abovetabulinesep=\dimen184
+\belowtabulinesep=\dimen185
+\tabustrutrule=\dimen186
+\tabu@thebody=\toks32
+\tabu@footnotes=\toks33
+\tabu@box=\box58
+\tabu@arstrutbox=\box59
+\tabu@hleads=\box60
+\tabu@vleads=\box61
+\tabu@cellskip=\skip67
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
-\multirow@colwidth=\skip65
-\multirow@cntb=\count281
-\multirow@dima=\skip66
-\bigstrutjot=\dimen174
+\multirow@colwidth=\skip68
+\multirow@cntb=\count288
+\multirow@dima=\skip69
+\bigstrutjot=\dimen187
+) (e:/Software/texlive/2021/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
+\c@tracingmulticols=\count289
+\mult@box=\box62
+\multicol@leftmargin=\dimen188
+\c@unbalance=\count290
+\c@collectmore=\count291
+\doublecol@number=\count292
+\multicoltolerance=\count293
+\multicolpretolerance=\count294
+\full@width=\dimen189
+\page@free=\dimen190
+\premulticols=\dimen191
+\postmulticols=\dimen192
+\multicolsep=\skip70
+\multicolbaselineskip=\skip71
+\partial@page=\box63
+\last@line=\box64
+\maxbalancingoverflow=\dimen193
+\mult@rightbox=\box65
+\mult@grightbox=\box66
+\mult@gfirstbox=\box67
+\mult@firstbox=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\c@minrows=\count295
+\c@columnbadness=\count296
+\c@finalcolumnbadness=\count297
+\last@try=\dimen194
+\multicolovershoot=\dimen195
+\multicolundershoot=\dimen196
+\mult@nat@firstbox=\box106
+\colbreak@box=\box107
+\mc@col@check@num=\count298
+) (e:/Software/texlive/2021/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count299
+\float@exts=\toks34
+\float@box=\box108
+\@float@everytoks=\toks35
+\@floatcapt=\box109
+) (e:/Software/texlive/2021/texmf-dist/tex/latex/makecell/makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen197
+\c@nlinenum=\count300
+\TeXr@lab=\toks36
+) (e:/Software/texlive/2021/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen198
+\lightrulewidth=\dimen199
+\cmidrulewidth=\dimen256
+\belowrulesep=\dimen257
+\belowbottomsep=\dimen258
+\aboverulesep=\dimen259
+\abovetopsep=\dimen260
+\cmidrulesep=\dimen261
+\cmidrulekern=\dimen262
+\defaultaddspace=\dimen263
+\@cmidla=\count301
+\@cmidlb=\count302
+\@aboverulesep=\dimen264
+\@belowrulesep=\dimen265
+\@thisruleclass=\count303
+\@lastruleclass=\count304
+\@thisrulewidth=\dimen266
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -275,9 +415,9 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
-\@linkdim=\dimen175
-\Hy@linkcounter=\count282
-\Hy@pagecounter=\count283
+\@linkdim=\dimen267
+\Hy@linkcounter=\count305
+\Hy@pagecounter=\count306
  (e:/Software/texlive/2021/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -289,7 +429,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (e:/Software/texlive/2021/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count284
+\Hy@SavedSpaceFactor=\count307
  (e:/Software/texlive/2021/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -304,17 +444,17 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count285
+\c@Hy@tempcnt=\count308
 LaTeX Info: Redefining \url on input line 4804.
-\XeTeXLinkMargin=\dimen176
+\XeTeXLinkMargin=\dimen268
  (e:/Software/texlive/2021/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (e:/Software/texlive/2021/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count286
-\Field@Width=\dimen177
-\Fld@charsize=\dimen178
+\Fld@menulength=\count309
+\Field@Width=\dimen269
+\Fld@charsize=\dimen270
 Package hyperref Info: Hyper figures OFF on input line 6076.
 Package hyperref Info: Link nesting OFF on input line 6081.
 Package hyperref Info: Hyper index ON on input line 6084.
@@ -328,9 +468,9 @@ LaTeX Info: Redefining \pageref on input line 6150.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count287
-\c@Item=\count288
-\c@Hfootnote=\count289
+\Hy@abspage=\count310
+\c@Item=\count311
+\c@Hfootnote=\count312
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (e:/Software/texlive/2021/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -339,8 +479,8 @@ File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery package
 with kernel methods
 )
-\Fld@listcount=\count290
-\c@bookmark@seq@number=\count291
+\Fld@listcount=\count313
+\c@bookmark@seq@number=\count314
  (e:/Software/texlive/2021/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
  (e:/Software/texlive/2021/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -348,117 +488,117 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 286.
 )
-\Hy@SectionHShift=\skip67
+\Hy@SectionHShift=\skip72
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count292
-\algocf@hangindent=\skip68
+\c@AlgoLine=\count315
+\algocf@hangindent=\skip73
  (e:/Software/texlive/2021/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count293
+\c@checkoddpage=\count316
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip69
-\skiplinenumber=\skip70
-\skiprule=\skip71
-\skiphlne=\skip72
-\skiptext=\skip73
-\skiplength=\skip74
-\algomargin=\skip75
-\skipalgocfslide=\skip76
-\algowidth=\dimen179
-\inoutsize=\dimen180
-\inoutindent=\dimen181
-\interspacetitleruled=\dimen182
-\interspacealgoruled=\dimen183
-\interspacetitleboxruled=\dimen184
-\algocf@ruledwidth=\skip77
-\algocf@inoutbox=\box55
-\algocf@inputbox=\box56
-\AlCapSkip=\skip78
-\AlCapHSkip=\skip79
-\algoskipindent=\skip80
-\algocf@nlbox=\box57
-\algocf@hangingbox=\box58
-\algocf@untilbox=\box59
-\algocf@skipuntil=\skip81
-\algocf@capbox=\box60
-\algocf@lcaptionbox=\skip82
-\algoheightruledefault=\skip83
-\algoheightrule=\skip84
-\algotitleheightruledefault=\skip85
-\algotitleheightrule=\skip86
-\c@algocfline=\count294
-\c@algocfproc=\count295
-\c@algocf=\count296
-\algocf@algoframe=\box61
-\algocf@algobox=\box62
+\skiptotal=\skip74
+\skiplinenumber=\skip75
+\skiprule=\skip76
+\skiphlne=\skip77
+\skiptext=\skip78
+\skiplength=\skip79
+\algomargin=\skip80
+\skipalgocfslide=\skip81
+\algowidth=\dimen271
+\inoutsize=\dimen272
+\inoutindent=\dimen273
+\interspacetitleruled=\dimen274
+\interspacealgoruled=\dimen275
+\interspacetitleboxruled=\dimen276
+\algocf@ruledwidth=\skip82
+\algocf@inoutbox=\box110
+\algocf@inputbox=\box111
+\AlCapSkip=\skip83
+\AlCapHSkip=\skip84
+\algoskipindent=\skip85
+\algocf@nlbox=\box112
+\algocf@hangingbox=\box113
+\algocf@untilbox=\box114
+\algocf@skipuntil=\skip86
+\algocf@capbox=\box115
+\algocf@lcaptionbox=\skip87
+\algoheightruledefault=\skip88
+\algoheightrule=\skip89
+\algotitleheightruledefault=\skip90
+\algotitleheightrule=\skip91
+\c@algocfline=\count317
+\c@algocfproc=\count318
+\c@algocf=\count319
+\algocf@algoframe=\box116
+\algocf@algobox=\box117
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (e:/Software/texlive/2021/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count297
-\Gm@cntv=\count298
-\c@Gm@tempcnt=\count299
-\Gm@bindingoffset=\dimen185
-\Gm@wd@mp=\dimen186
-\Gm@odd@mp=\dimen187
-\Gm@even@mp=\dimen188
-\Gm@layoutwidth=\dimen189
-\Gm@layoutheight=\dimen190
-\Gm@layouthoffset=\dimen191
-\Gm@layoutvoffset=\dimen192
-\Gm@dimlist=\toks31
+\Gm@cnth=\count320
+\Gm@cntv=\count321
+\c@Gm@tempcnt=\count322
+\Gm@bindingoffset=\dimen277
+\Gm@wd@mp=\dimen278
+\Gm@odd@mp=\dimen279
+\Gm@even@mp=\dimen280
+\Gm@layoutwidth=\dimen281
+\Gm@layoutheight=\dimen282
+\Gm@layouthoffset=\dimen283
+\Gm@layoutvoffset=\dimen284
+\Gm@dimlist=\toks37
 )
-\c@thm=\count300
-\c@lem=\count301
-\c@remark=\count302
-\c@corollary=\count303
-\c@prop=\count304
-\c@definition=\count305
-\c@example=\count306
+\c@thm=\count323
+\c@lem=\count324
+\c@remark=\count325
+\c@corollary=\count326
+\c@prop=\count327
+\c@definition=\count328
+\c@example=\count329
  (e:/Software/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count307
-\l__pdf_internal_box=\box63
+\l__color_backend_stack_int=\count330
+\l__pdf_internal_box=\box118
 ) (./sum1.aux)
 \openout1 = `sum1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
  (e:/Software/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count308
-\scratchdimen=\dimen193
-\scratchbox=\box64
-\nofMPsegments=\count309
-\nofMParguments=\count310
-\everyMPshowfont=\toks32
-\MPscratchCnt=\count311
-\MPscratchDim=\dimen194
-\MPnumerator=\count312
-\makeMPintoPDFobject=\count313
-\everyMPtoPDFconversion=\toks33
+\scratchcounter=\count331
+\scratchdimen=\dimen285
+\scratchbox=\box119
+\nofMPsegments=\count332
+\nofMParguments=\count333
+\everyMPshowfont=\toks38
+\MPscratchCnt=\count334
+\MPscratchDim=\dimen286
+\MPnumerator=\count335
+\makeMPintoPDFobject=\count336
+\everyMPtoPDFconversion=\toks39
 ) (e:/Software/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -466,6 +606,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: subfigure package is loaded.
 Package caption Info: End \AtBeginDocument code.
@@ -476,7 +617,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-Package hyperref Info: Link coloring ON on input line 60.
+Package hyperref Info: Link coloring ON on input line 65.
  (e:/Software/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (e:/Software/texlive/2021/texmf-dist/tex/latex/refcount/refcount.sty
@@ -484,11 +625,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (e:/Software/texlive/2021/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count314
+\c@section@level=\count337
 )
-LaTeX Info: Redefining \ref on input line 60.
-LaTeX Info: Redefining \pageref on input line 60.
-LaTeX Info: Redefining \nameref on input line 60.
+LaTeX Info: Redefining \ref on input line 65.
+LaTeX Info: Redefining \pageref on input line 65.
+LaTeX Info: Redefining \nameref on input line 65.
  (./sum1.out) (./sum1.out)
 \@outlinefile=\write3
 \openout3 = `sum1.out'.
@@ -528,11 +669,11 @@ LaTeX Info: Redefining \nameref on input line 60.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 66.
 (e:/Software/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 66.
  (e:/Software/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -541,84 +682,97 @@ LaTeX Warning: No \author given.
 
 (./Chapters/Abstract.tex) (./Chapters/Introduction.tex [1
 
-{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]) (./Chapters/Literature_review.tex [5] [6]) (./Chapters/Problem_description.tex
+{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]) (./Chapters/Literature_review.tex [5] [6]) (./Chapters/Problem_description.tex [7]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/illustration.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./Figures/illustration.pdf, id=197, 572.88933pt x 154.52931pt>
+<./Figures/illustration.pdf, id=216, 572.88933pt x 154.52931pt>
 File: ./Figures/illustration.pdf Graphic file (type pdf)
 <use ./Figures/illustration.pdf>
-Package pdftex.def Info: ./Figures/illustration.pdf  used on input line 29.
+Package pdftex.def Info: ./Figures/illustration.pdf  used on input line 26.
 (pdftex.def)             Requested size: 249.13371pt x 67.20084pt.
-[7] [8 <./Figures/illustration.pdf>]
+[8 <./Figures/illustration.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/full.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./Figures/full.pdf, id=244, 670.25517pt x 99.87915pt>
+<./Figures/full.pdf, id=251, 670.25517pt x 99.87915pt>
 File: ./Figures/full.pdf Graphic file (type pdf)
 <use ./Figures/full.pdf>
-Package pdftex.def Info: ./Figures/full.pdf  used on input line 83.
+Package pdftex.def Info: ./Figures/full.pdf  used on input line 86.
 (pdftex.def)             Requested size: 362.37569pt x 53.99945pt.
-[9 <./Figures/full.pdf>]) (./Chapters/Stochastic-form.tex [10] [11] [12] [13] [14]
+[9]) (./Chapters/Stochastic-form.tex [10 <./Figures/full.pdf>] [11] [12]
+
+LaTeX Warning: Reference `seat_planning_full_largest' on page 13 undefined on input line 59.
+
+[13] [14] [15] [16]) (./Chapters/Dynamic_description.tex [17]) (./Chapters/Dynamic.tex [18] [19] [20]) (./Chapters/Results.tex [21] [22]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[15]) (./Chapters/Dynamic_description.tex [16]) (./Chapters/Dynamic.tex [17] [18] [19] [20]) (./Chapters/Results.tex [21] [22] [23]
-<./Figures/occu_demand_group4.pdf, id=470, 462.52798pt x 346.89601pt>
+[23]
+<./Figures/occu_demand_group4.pdf, id=474, 462.52798pt x 346.89601pt>
 File: ./Figures/occu_demand_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_demand_group4.pdf>
-Package pdftex.def Info: ./Figures/occu_demand_group4.pdf  used on input line 115.
+Package pdftex.def Info: ./Figures/occu_demand_group4.pdf  used on input line 87.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/occu_gamma_group4.pdf, id=471, 462.52798pt x 346.89601pt>
+<./Figures/occu_gamma_group4.pdf, id=475, 462.52798pt x 346.89601pt>
 File: ./Figures/occu_gamma_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_gamma_group4.pdf>
-Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 118.
+Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 90.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
- [24 <./Figures/occu_demand_group4.pdf> <./Figures/occu_gamma_group4.pdf>]
-
-pdfTeX warning: pdflatex.exe (file ./Figures/gamma_estimation.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/gamma_estimation.pdf, id=552, 1387.58403pt x 739.3221pt>
-File: ./Figures/gamma_estimation.pdf Graphic file (type pdf)
-<use ./Figures/gamma_estimation.pdf>
-Package pdftex.def Info: ./Figures/gamma_estimation.pdf  used on input line 141.
-(pdftex.def)             Requested size: 430.31812pt x 229.27773pt.
-[25 <./Figures/gamma_estimation.pdf>]
-<./Figures/distance.pdf, id=610, 462.52798pt x 346.89601pt>
-File: ./Figures/distance.pdf Graphic file (type pdf)
-<use ./Figures/distance.pdf>
-Package pdftex.def Info: ./Figures/distance.pdf  used on input line 208.
-(pdftex.def)             Requested size: 362.37569pt x 271.79523pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./Chapters/Conclusion.tex [26] [27 <./Figures/distance.pdf>]) (./sum1.bbl [28]
+[24]
+<./Figures/occu_demand.pdf, id=481, 462.52798pt x 346.89601pt>
+File: ./Figures/occu_demand.pdf Graphic file (type pdf)
+<use ./Figures/occu_demand.pdf>
+Package pdftex.def Info: ./Figures/occu_demand.pdf  used on input line 104.
+(pdftex.def)             Requested size: 430.31812pt x 322.75287pt.
+ [25 <./Figures/occu_demand_group4.pdf> <./Figures/occu_gamma_group4.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/gamma_estimation.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
+<./Figures/gamma_estimation.pdf, id=563, 1387.58403pt x 739.3221pt>
+File: ./Figures/gamma_estimation.pdf Graphic file (type pdf)
+<use ./Figures/gamma_estimation.pdf>
+Package pdftex.def Info: ./Figures/gamma_estimation.pdf  used on input line 128.
+(pdftex.def)             Requested size: 430.31812pt x 229.27773pt.
+[26 <./Figures/occu_demand.pdf>]
+<./Figures/distance.pdf, id=611, 462.52798pt x 346.89601pt>
+File: ./Figures/distance.pdf Graphic file (type pdf)
+<use ./Figures/distance.pdf>
+Package pdftex.def Info: ./Figures/distance.pdf  used on input line 193.
+(pdftex.def)             Requested size: 362.37569pt x 271.79523pt.
+ [27 <./Figures/gamma_estimation.pdf>]) (./Chapters/Conclusion.tex [28 <./Figures/distance.pdf>]) (./sum1.bbl [29] [30]
 Underfull \hbox (badness 10000) in paragraph at lines 136--141
 []\OT1/cmr/m/n/10 WHO.  Ad-vice for the pub-lic.  [][]$\OT1/cmtt/m/n/10 https : / / www . who . int / emergencies / diseases /
  []
 
-) (./Chapters/Appendix_1.tex [29] [30] [31] [32]) (./Chapters/Proof1.tex [33
+) (./Chapters/Appendix_1.tex [31] [32] [33]) (./Chapters/Proof1.tex [34
 
 ]
 Overfull \hbox (9.02077pt too wide) in paragraph at lines 43--44
 []\OT1/cmr/m/n/10 Then we will demon-strate that for each sce-nario $\OML/cmm/m/it/10 !$\OT1/cmr/m/n/10 , the ob-jec-tive func-tion of SSP, given by $[][] [][] \OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 ^^A
  []
 
-[34] [35] [36]) (./sum1.aux)
+[35] [36] [37]) (./sum1.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: 3D36EFD3FDD7C2ED2E7B662B7C5E514A;5555.
+(rerunfilecheck)             Checksum: 4E685ED7A59C80CAB0C168571EBE2026;5838.
  ) 
 Here is how much of TeX's memory you used:
- 14400 strings out of 478599
- 220041 string characters out of 5853593
- 558884 words of memory out of 5000000
- 31784 multiletter control sequences out of 15000+600000
+ 15569 strings out of 478599
+ 236582 string characters out of 5853593
+ 580824 words of memory out of 5000000
+ 32924 multiletter control sequences out of 15000+600000
  417751 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,22n,75p,1499b,664s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,22n,75p,1499b,663s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (36 pages, 582127 bytes).
+Output written on sum1.pdf (37 pages, 592651 bytes).
 PDF statistics:
- 940 PDF objects out of 1000 (max. 8388607)
- 702 compressed objects within 8 object streams
- 234 named destinations out of 1000 (max. 500000)
- 247 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 993 PDF objects out of 1000 (max. 8388607)
+ 720 compressed objects within 8 object streams
+ 237 named destinations out of 1000 (max. 500000)
+ 260 words of extra memory for PDF output out of 10000 (max. 10000000)
 

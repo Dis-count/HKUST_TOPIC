@@ -40,5 +40,5 @@ def plot_data(given_lines, roll_width, data):
 
 given_lines = 10
 roll_width = np.ones(given_lines) * 21
-data = np.load('data_distances.npy')
+data = np.load('data_distances_012.npy')
 plot_data(given_lines, roll_width, data)

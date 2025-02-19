@@ -14,8 +14,8 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     period_range = range(60, 101, 10)
     given_lines = 10
-    # probab_list = [[0.2, 0.8, 0, 0], [0.18, 0.7, 0.06, 0.06], [0, 0.5, 0, 0.5], [0.25, 0.3, 0.25, 0.2]]
-    probab_list = [[0.25, 0.3, 0.25, 0.2]]
+    # probab_list = [[0.2, 0.8, 0, 0], [0.18, 0.7, 0.06, 0.06], [0, 0.5, 0, 0.5], [0.25, 0.3, 0.25, 0.2]]    0.12, 0.5, 0.13, 0.25
+    probab_list = [[0.34, 0.51, 0.07, 0.08]]
 
     sd = 1
     count = 100
@@ -23,11 +23,11 @@ if __name__ == "__main__":
 
     for probab in probab_list:
         begin_time = time.time()
-        filename = '1231_probab_' + str(probab) + '.txt'
+        filename = '218_probab_' + str(probab) + '.txt'
         my_file = open(filename, 'w')
         my_file.write('Run Start Time:' + str(time.ctime()) + '\n')
-        # sequences_pool = np.load('data_sequence0.25.npy')
-        sequences_pool = sequence_pool(count, total_period, probab, sd)
+        sequences_pool = np.load('sequence_0.12.npy')
+        # sequences_pool = sequence_pool(count, total_period, probab, sd)
 
         for num_period in period_range:
             my_file.write('The number of periods: \t' + str(num_period) + '\n')

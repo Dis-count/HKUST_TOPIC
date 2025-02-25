@@ -45,17 +45,17 @@ def plot_data(data, option):
         plt.savefig(graphname)
 
     else:
-        plt.plot(t_value*gamma/total_seat*100, people_value, 'b-', label='Without social distancing')
-        plt.plot(t_value*gamma/total_seat*100, occup_value, 'r--', label='With 1 social distancing')
+        plt.plot(t_value* gamma/total_seat*100, people_value, 'b-', label='Without social distancing')
+        plt.plot(t_value* gamma/total_seat*100, occup_value, 'r--', label='With 1 social distancing')
         plt.xlim((50, 110))
         plt.ylim((50, 110))
         plt.xlabel('Percentage of expected demand relative to total seats')
         plt.ylabel('Percentage of accepted individuals relative to total seats')
         point[1] = round(point[1], 1)
-        plt.axvline(x=60, ymin = 0, ymax = 1/6, color = 'green', linestyle='--')
+        plt.axvline(x = 60, ymin = 0, ymax = 1/6, color = 'green', linestyle='--')
 
-        plt.axvline(x=70, ymin = 0, ymax = 1/3, color = 'green', linestyle='--')
-        plt.axvline(x=80,  ymin = 0, ymax = 1/2, color = 'purple', linestyle='--')
+        plt.axvline(x = 70, ymin = 0, ymax = 1/3, color = 'green', linestyle='--')
+        plt.axvline(x = 80,  ymin = 0, ymax = 1/2, color = 'purple', linestyle='--')
         plt.axvline(90, ymin = 0, ymax = 2/3, color = 'purple', linestyle='--')
         plt.axvline(100, ymin = 0, ymax = 5/6-0.02, color = 'purple', linestyle='--')
 

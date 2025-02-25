@@ -13,9 +13,7 @@ In this section, we compare the performance of five assignment policies to the o
 \subsection*{Parameters Description}
 We consider four probability distributions for our analysis. The first two, D1:[0.18,0.7,0.06,0.06] and D2:[0.2,0.8,0,0], were experimented with in \cite{blom2022filling}. For additional experiments, we introduce two more distributions, D3 and D4, derived from real-world movie data.
 Specifically, we selected Detective Chinatown 1900 and Captain America: Brave New World as target movies to analyze group information and their corresponding probability distributions, denoted as 
-D3 and D4, respectively. The ticket seat plans were obtained from the CML cinema website. We focused on scattered seat plans and excluded cases where the number of consecutive seats exceeded four. By counting the occurrences of different group types, we obtained the following distributions: $D3 = [0.34, 0.51, 0.07, 0.08]$ representing the suspense genre, and $D4: [0.12, 0.5, 0.13, 0.25]$, representing the family fun genre.
-
-To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. 
+D3 and D4, respectively. The ticket seat plans were obtained from the MCL cinema website. We focused on scattered seat plans and excluded cases where the number of consecutive seats exceeded four. By counting the occurrences of different group types, we obtained the following distributions: $D3 = [0.34, 0.51, 0.07, 0.08]$ representing the suspense genre, and $D4: [0.12, 0.5, 0.13, 0.25]$, representing the family fun genre. To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. 
 
 
 The following table presents the performance results of five different policies: DSA, DP, Bid-price, Booking, and FCFS, which stand for dynamic seat assignment, dynamic programming based heuristic, bid-price, booking-limit, and first come first served, respectively. The procedures for the last four policies are detailed in the appendix \ref{policies}. Performance is evaluated by comparing the ratio of the number of accepted individuals under each policy to that under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
@@ -84,7 +82,7 @@ The occupancy rate corresponding to the gap point is referred to as the threshol
   \centering
   \subfigure[]{
     \label{x_period}
-    \includegraphics[width=0.48\textwidth]{./Figures/occu_demand_group4.pdf}}
+    \includegraphics[width=0.48\textwidth]{./Figures/occu_demand.pdf}}
   \subfigure[]{
     \label{x_demand}
     \includegraphics[width=0.48\textwidth]{./Figures/occu_gamma_group4.pdf}}
@@ -92,24 +90,18 @@ The occupancy rate corresponding to the gap point is referred to as the threshol
   \label{occupancy_rate_demand}
 \end{figure}
 
-In the first figure, the gap point is 60, the threshold occupancy rate is 71.8\%. As the expected demand continues to increase, both situations reach their maximum capacity acceptance. For the social distancing situation, when the largest pattern is realized in each row, the maximum achievable occupancy rate is given by $\frac{16}{20} = 80\%$. The second figure is plotted to show that when the expected demand is less than 71.8\%, the social distancing measures will not have an impact; when the expected demand is larger than 71.8\%, the difference between the number of accepted individuals with and without social distancing measures becomes more pronounced. 
+In the figure \ref{x_period}, the gap point is 57, the threshold occupancy rate is 71.8\%. As the expected demand continues to increase, both situations reach their maximum capacity acceptance. For the social distancing situation, when the largest pattern is realized in each row, the maximum achievable occupancy rate is given by $\frac{16}{20} = 80\%$. The figure \ref{x_demand} is plotted to show that when the expected demand is less than 71.8\%, the social distancing measures will not have an impact; when the expected demand is larger than 71.8\%, the difference between the number of accepted individuals with and without social distancing measures becomes more pronounced. 
 
 \subsection{Impact of Maximum Allowable Occupancy Rate}
-Sometimes, the policy also requires a maximum allowable occupancy rate to tighten the social distancing requirement. The maximum allowable rate will be redundant if it is higher than the maximum achievable rate for all events. Only the requirement on occupancy rate is effective and the requirement on social distancing is not effective for an event if it is lower than the threshold occupancy rate of the event. Furthermore, when the maximum allowable rate is between the threshold occupancy rate and the maximum achievable rate, the requirements on seat occupancy and social distancing interact to determine the seat assignment.
+Sometimes, policies impose a maximum allowable occupancy rate to enforce stricter social distancing. This maximum allowable rate becomes redundant if it exceeds the maximum achievable rate for all events. As shown by the green line in the figure, when the maximum allowable rate is above 80\%, it has no effect. Only the occupancy rate requirement is effective, while the social distancing requirement becomes irrelevant for events with an occupancy rate below the threshold. This is illustrated by the purple line in the figure, where a maximum allowable rate below 71.8\% renders only the occupancy rate requirement effective. Additionally, when the maximum allowable rate falls between the threshold occupancy rate and the maximum achievable rate, both the occupancy rate and social distancing requirements jointly influence seat assignments.
 
 % Similarly, $\phi(M, L)$ does not decrease in $L$. Since any largest pattern $\bm{h}$ under $L$ is a feasible pattern under $L+1$, thus, $\phi(M, L) \leq \phi(M, L+1)$.
 
-\begin{figure}[ht]
-  \centering
-    \includegraphics[width=0.95\textwidth]{./Figures/occu_demand.pdf}
-  \caption{The occupancy rate over demand}
-\end{figure}
-
-
-
-
-% Intuitively, when demand is low, we will accept all arrivals, and there will be no difference in the number of accepted individuals whether we implement social distancing or not. The interesting case is when the difference in the number of accepted individuals due to social distancing starts to occur.
-
+% \begin{figure}[ht]
+%   \centering
+%     \includegraphics[width=0.95\textwidth]{./Figures/occu_demand.pdf}
+%   \caption{The occupancy rate over demand}
+% \end{figure}
 
 % The policy requires a maximum allowable occupancy rate larger than 80\% will be redundant.
 
@@ -134,7 +126,7 @@ We applied an Ordinary Least Squares (OLS) model to fit the data and estimate th
 Based on the above analysis, we also explore the results of different layouts, different group sizes and different social distances. Since the figure about the occupancy rate over demand is similar to Figure \ref{occupancy_rate_demand}, we only use three metrics to show the results: the gap point and the threshold occupancy rate, maximal achievable occupancy rate.
 
 \subsection*{Different Layouts}
-We experiment with several realistic seat layouts selected from the theater seat plan website, https://www.lcsd.gov.hk/en/ticket/seat.html. We select five places, Hong Kong Film Archive Cinema, Kwai Tsing Theatre Transverse Stage, Sai Wan Ho Civic Centre, Sheung Wan Civic Centre, Ngau Chi Wan Civic Centre, represented as HKFAC, KTTTS, SWHCC, SWCC, NCWCC respectively. HKFAC, SWCC, NCWCC, are approximately rectangular layouts, SWHCC is a standard rectangular layout. While KTTTS is an irregular layout.
+We experiment with several realistic seat layouts selected from the theater seat plan website, https://www.lcsd.gov.hk/en/ticket/seat.html. We select five places, Hong Kong Film Archive Cinema, Kwai Tsing Theatre Transverse Stage, Sai Wan Ho Civic Centre, Sheung Wan Civic Centre, Ngau Chi Wan Civic Centre, represented as HKFAC, KTTTS, SWHCC, SWCC, NCWCC respectively. HKFAC, SWCC, NCWCC, are approximately rectangular layouts, SWHCC is a standard rectangular layout. While KTTTS is an irregular layout. 
 
 In these layouts, wheelchair seats and management seats are excluded, while seats with sufficient space for an aisle are treated as new rows. 
 
@@ -143,15 +135,15 @@ The occupancy rate over demand follows the typical pattern of Figure \ref{occupa
 \begin{table}[ht]
   \centering
   \caption{Gap points and threshold occupancy rates of the layouts}
-  \begin{tabular}{ccc}
+  \begin{tabular}{cccc}
   \hline
-   Seat Layout & Gap point & Threshold occupancy rate  \\
-   \cmidrule(r){1-1} \cmidrule(lr){2-2} \cmidrule(l){3-3}
-   HKFAC & 36 & 72.3 \%  \\
-   KTTTS & 38 & 75.79 \%   \\
-   SWHCC & 32 & 72.83 \%  \\
-   SWCC & 43 & 74.07 \%   \\
-   NCWCC & 102 & 72.37 \%  \\
+   Seat Layout & Gap point & Threshold occupancy rate & Maximum achievable occupancy rate \\
+   \cmidrule(r){1-1} \cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(l){4-4}
+   HKFAC & 36 & 72.3 \% & 82.4 \% \\
+   KTTTS & 38 & 75.79 \% & 84.1 \% \\
+   SWHCC & 32 & 72.83 \% & 80 \% \\
+   SWCC & 43 & 74.07 \%  & 83.6 \% \\
+   NCWCC & 102 & 72.37 \% & 81.7 \% \\
    \hline
   \end{tabular}
 \end{table}
@@ -172,11 +164,11 @@ We present the gap point, the threshold occupancy rate and the maximum achievabl
   \caption{Gap points and threshold occupancy rates of $M$s}
   \begin{tabular}{cccc}
   \hline
-   $M$ & Probability distribution & Gap point & Threshold occupancy rate \\
+   $M$  & Gap point & Threshold occupancy rate & Maximum achievable occupancy rate \\
    \cmidrule(r){1-1} \cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(l){4-4}
-   2 & [0.19, 0.81] & 74  & 66.88 \%  \\
-   3 & [0.16, 0.67, 0.17] &  69 & 69.03 \%  \\
-   4 & [0.12, 0.5, 0.13, 0.25] & 57 & 71.82 \%   \\ 
+   2 &  74  & 66.88 \% & 70 \% \\
+   3 &  69  & 69.03 \% & 75 \% \\
+   4 &  57  & 71.82 \% & 80 \% \\ 
    \hline
   \end{tabular}
 \end{table}

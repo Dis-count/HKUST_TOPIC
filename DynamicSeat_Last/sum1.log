@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  19 FEB 2025 20:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  25 FEB 2025 12:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -684,69 +684,68 @@ LaTeX Warning: No \author given.
 
 {e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]) (./Chapters/Literature_review.tex [5] [6]) (./Chapters/Problem_description.tex [7]
 
-pdfTeX warning: pdflatex.exe (file ./Figures/illustration.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<./Figures/illustration.pdf, id=216, 572.88933pt x 154.52931pt>
+pdfTeX warning: pdflatex.exe (file ./Figures/illustration.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
+<./Figures/illustration.pdf, id=221, 546.50572pt x 169.60565pt>
 File: ./Figures/illustration.pdf Graphic file (type pdf)
 <use ./Figures/illustration.pdf>
-Package pdftex.def Info: ./Figures/illustration.pdf  used on input line 26.
-(pdftex.def)             Requested size: 249.13371pt x 67.20084pt.
+Package pdftex.def Info: ./Figures/illustration.pdf  used on input line 27.
+(pdftex.def)             Requested size: 249.13371pt x 77.31561pt.
 [8 <./Figures/illustration.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/full.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 <./Figures/full.pdf, id=251, 670.25517pt x 99.87915pt>
 File: ./Figures/full.pdf Graphic file (type pdf)
 <use ./Figures/full.pdf>
-Package pdftex.def Info: ./Figures/full.pdf  used on input line 86.
+Package pdftex.def Info: ./Figures/full.pdf  used on input line 85.
 (pdftex.def)             Requested size: 362.37569pt x 53.99945pt.
-[9]) (./Chapters/Stochastic-form.tex [10 <./Figures/full.pdf>] [11] [12]
+[9]) (./Chapters/Stochastic-form.tex
+Overfull \hbox (13.25511pt too wide) in paragraph at lines 6--7
+[]\OT1/cmr/m/n/10 In this sec-tion, we aim to ob-tain a seat plan which is suit-able to the dy-namic seat as-sign-ment.Specifically,
+ []
 
-LaTeX Warning: Reference `seat_planning_full_largest' on page 13 undefined on input line 59.
-
-[13] [14] [15] [16]) (./Chapters/Dynamic_description.tex [17]) (./Chapters/Dynamic.tex [18] [19] [20]) (./Chapters/Results.tex [21] [22]
+[10 <./Figures/full.pdf>] [11] [12] [13] [14] [15]) (./Chapters/Dynamic_description.tex [16] [17]) (./Chapters/Dynamic.tex [18] [19] [20]) (./Chapters/Results.tex [21] [22]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [23]
-<./Figures/occu_demand_group4.pdf, id=474, 462.52798pt x 346.89601pt>
-File: ./Figures/occu_demand_group4.pdf Graphic file (type pdf)
-<use ./Figures/occu_demand_group4.pdf>
-Package pdftex.def Info: ./Figures/occu_demand_group4.pdf  used on input line 87.
+<./Figures/occu_demand.pdf, id=471, 462.52798pt x 346.89601pt>
+File: ./Figures/occu_demand.pdf Graphic file (type pdf)
+<use ./Figures/occu_demand.pdf>
+Package pdftex.def Info: ./Figures/occu_demand.pdf  used on input line 85.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/occu_gamma_group4.pdf, id=475, 462.52798pt x 346.89601pt>
+<./Figures/occu_gamma_group4.pdf, id=472, 462.52798pt x 346.89601pt>
 File: ./Figures/occu_gamma_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_gamma_group4.pdf>
-Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 90.
+Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 88.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[24]
-<./Figures/occu_demand.pdf, id=481, 462.52798pt x 346.89601pt>
-File: ./Figures/occu_demand.pdf Graphic file (type pdf)
-<use ./Figures/occu_demand.pdf>
-Package pdftex.def Info: ./Figures/occu_demand.pdf  used on input line 104.
-(pdftex.def)             Requested size: 430.31812pt x 322.75287pt.
- [25 <./Figures/occu_demand_group4.pdf> <./Figures/occu_gamma_group4.pdf>]
+[24] [25 <./Figures/occu_demand.pdf> <./Figures/occu_gamma_group4.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/gamma_estimation.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/gamma_estimation.pdf, id=563, 1387.58403pt x 739.3221pt>
+<./Figures/gamma_estimation.pdf, id=561, 1387.58403pt x 739.3221pt>
 File: ./Figures/gamma_estimation.pdf Graphic file (type pdf)
 <use ./Figures/gamma_estimation.pdf>
-Package pdftex.def Info: ./Figures/gamma_estimation.pdf  used on input line 128.
+Package pdftex.def Info: ./Figures/gamma_estimation.pdf  used on input line 120.
 (pdftex.def)             Requested size: 430.31812pt x 229.27773pt.
-[26 <./Figures/occu_demand.pdf>]
-<./Figures/distance.pdf, id=611, 462.52798pt x 346.89601pt>
+[26 <./Figures/gamma_estimation.pdf>]
+<./Figures/distance.pdf, id=618, 462.52798pt x 346.89601pt>
 File: ./Figures/distance.pdf Graphic file (type pdf)
 <use ./Figures/distance.pdf>
-Package pdftex.def Info: ./Figures/distance.pdf  used on input line 193.
+Package pdftex.def Info: ./Figures/distance.pdf  used on input line 185.
 (pdftex.def)             Requested size: 362.37569pt x 271.79523pt.
- [27 <./Figures/gamma_estimation.pdf>]) (./Chapters/Conclusion.tex [28 <./Figures/distance.pdf>]) (./sum1.bbl [29] [30]
-Underfull \hbox (badness 10000) in paragraph at lines 136--141
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (./Chapters/Conclusion.tex [27] [28 <./Figures/distance.pdf>]) (./sum1.bbl [29]
+Underfull \hbox (badness 10000) in paragraph at lines 155--160
 []\OT1/cmr/m/n/10 WHO.  Ad-vice for the pub-lic.  [][]$\OT1/cmtt/m/n/10 https : / / www . who . int / emergencies / diseases /
  []
 
-) (./Chapters/Appendix_1.tex [31] [32] [33]) (./Chapters/Proof1.tex [34
+) (./Chapters/Appendix_1.tex [30] [31] [32] [33]) (./Chapters/Proof1.tex [34
 
 ]
 Overfull \hbox (9.02077pt too wide) in paragraph at lines 43--44
@@ -754,25 +753,22 @@ Overfull \hbox (9.02077pt too wide) in paragraph at lines 43--44
  []
 
 [35] [36] [37]) (./sum1.aux)
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: 4E685ED7A59C80CAB0C168571EBE2026;5838.
+(rerunfilecheck)             Checksum: B476F8A60D04BACD79A8684C8E4B726F;5816.
  ) 
 Here is how much of TeX's memory you used:
- 15569 strings out of 478599
- 236582 string characters out of 5853593
- 580824 words of memory out of 5000000
- 32924 multiletter control sequences out of 15000+600000
+ 15565 strings out of 478599
+ 236370 string characters out of 5853593
+ 580958 words of memory out of 5000000
+ 32920 multiletter control sequences out of 15000+600000
  417751 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,22n,75p,1499b,663s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (37 pages, 592651 bytes).
+Output written on sum1.pdf (37 pages, 564983 bytes).
 PDF statistics:
- 993 PDF objects out of 1000 (max. 8388607)
- 720 compressed objects within 8 object streams
- 237 named destinations out of 1000 (max. 500000)
- 260 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 952 PDF objects out of 1000 (max. 8388607)
+ 711 compressed objects within 8 object streams
+ 238 named destinations out of 1000 (max. 500000)
+ 255 words of extra memory for PDF output out of 10000 (max. 10000000)
 

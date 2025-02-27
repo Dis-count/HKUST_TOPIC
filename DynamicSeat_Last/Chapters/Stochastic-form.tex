@@ -68,7 +68,7 @@ We reformulate SSP problem into a master problem and a subproblem. The iterative
 The solution obtained from the master problem serves as input for the subproblem, while the subproblem's solutions help refine the master problem by adding constraints. This iterative process improves the overall solution until convergence is achieved. To accelerate the solving process, we derive a closed-form solution for the subproblem. Subsequently, we obtain the solution to the LP relaxation of SSP problem through a constraint generation approach.
 
 \subsubsection{Reformulation}
-Then, we reformulate SSP$(\mathbf{L}, \Omega)$ in a matrix form to apply the Benders decomposition technique. Let $\mathbf{n} = (n_1, \ldots, n_M)^{\intercal}$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)^{\intercal}$ represent the vector of row sizes, where $L_j$ denotes the size of row $j$ as defined previously.
+Then, we reformulate SSP in a matrix form to apply the Benders decomposition technique. Let $\mathbf{n} = (n_1, \ldots, n_M)^{\intercal}$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)^{\intercal}$ represent the vector of row sizes, where $L_j$ denotes the size of row $j$ as defined previously.
 The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{x}^{\intercal} \mathbf{n}$, does not exceed the available row sizes $\mathbf{L}$. We can use the product $\mathbf{x} \mathbf{1}$ to indicate the supply of group types, where $\mathbf{1}$ is a column vector of size $N$ with all elements equal to 1. 
 
 The linear constraints associated with scenarios, denoted by constraints \eqref{DEF_constr1} and \eqref{DEF_constr2}, can be expressed in matrix form as:
@@ -209,13 +209,13 @@ From Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \math
     }
 \end{algorithm}
 
-However, solving problem \eqref{BD_master3} directly can be computationally challenging in some cases, so practically we first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. Then, we generate a seat plan from this solution.
+However, solving problem \eqref{BD_master3} directly can be computationally challenging in some cases, so we practically first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. Then, we generate a seat plan from this solution.
 
 \subsection{Obtain The Feasible Seat Plan}\label{seat_assignment}
 We may obtain a fractional optimal solution when we solve the LP relaxation of problem \eqref{BD_master}. This solution represents the optimal allocations of groups to seats but may involve fractional values, indicating partial assignments. Based on the fractional solution obtained, we use the deterministic model to generate a feasible seat plan. The objective of this model is to allocate groups to seats in a way that satisfies the supply requirements for each group without exceeding the corresponding supply values obtained from the fractional solution. To accommodate more groups and optimize seat utilization, we aim to construct a seat plan composed of full or largest patterns based on the feasible seat plan obtained in the last step. 
 
 
-Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} =\sum_{j} x^{*}_{ij}, \forall i \in \mathbf{M}$. Solve the SPP$(\{\tilde{X}_{i}\})$ to obtain the optimal solution, $\mathbf{\tilde{x}}$, and the corresponding pattern, $\bm{H}$, then generate the seat plan by problem \eqref{improve_seat} with $\bm{H}$.
+Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} =\sum_{j} x^{*}_{ij}, \forall i \in \mathbf{M}$. Solve the SPDRP with $\bm{d} = \bm{\tilde{X}}$ to obtain the optimal solution, $\mathbf{\tilde{x}}$, and the corresponding pattern, $\bm{H}$, then generate the seat plan by problem \eqref{improve_seat} with $\bm{H}$.
 
 
 \begin{algorithm}
@@ -224,6 +224,6 @@ Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $
   % \KwOut{$\mathbf{x}, \bm{H}$}
     {Obtain the optimal solution, $\mathbf{x}^{*}$, from the LP relaxation of problem \eqref{BD_master3}\;}
     {Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} = \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$\;}
-    {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from SPP$(\{\tilde{X}_{i}\})$\;}
+    {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from SPP\;}
     {Construct the seat plan by problem \eqref{improve_seat} with $\bm{H}$\;}
 \end{algorithm}

@@ -83,12 +83,12 @@ The algorithm is shown below.
     {Find row $k$ such that $H_{k{i}} >0$ according to the tie-breaking rule\; 
     Accept group type $i$ in row $k$, update $L_{k}$, $H_{ki}$, $X_{i}$\;
     \If{${i} = M$ and $X_{M} =0$}
-    {Generate seat planning $\bm{H}$ from Algorithm \ref{seat_construction}, update the corresponding $\bm{X}$\;}}
+    {Generate seat plan $\bm{H}$ from Algorithm \ref{seat_construction}, update the corresponding $\bm{X}$\;}}
     {Calculate $d^{t}({i}, \hat{i}^{*})$\;
     \eIf{$d^{t}({i}, \hat{i}^{*}) \geq 0 $}
     {Find row $k$ such that $H_{k \hat{i}^{*}} > 0$ according to the tie-breaking rule\;
      Accept group type $i$ in row $k$\;
-    Generate seat planning $\bm{H}$ from Algorithm \ref{seat_construction}, update the corresponding $\bm{X}$\;}
+    Generate seat plan $\bm{H}$ from Algorithm \ref{seat_construction}, update the corresponding $\bm{X}$\;}
     {Reject group type ${i}$\;}}}
     {Reject group type ${i}$\;}}
 \end{algorithm}

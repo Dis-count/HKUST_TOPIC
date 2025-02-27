@@ -51,8 +51,8 @@ For the LP relaxation of \textup{SPDRP}, there exists an index $\tilde{i}$ such 
 
 In other words, the supply corresponding to the optimal solutions for group types $i$ (where $i > \tilde{i}$) exactly matches the demand of group type $i$. For group types $i$ (where $i < \tilde{i}$), the supply is zero. The supply for group type $\tilde{i}$ is determined by the remaining available seats.
 
-\subsection{Seat Planning Composed of Full or Largest Patterns}\label{seat_planning_full_largest}
-The seat plan obtained from \textup{SPDRP} may not utilize all available seats, as it depends on the given requests. To improve a given seat plan and utilize all seats, we aim to generate a new seat plan composed of full or largest patterns while ensuring that the original group type requirements are met.
+\subsection{Seat Planning with Full or Largest Patterns}\label{seat_planning_full_largest}
+The seat plan obtained from \textup{SPDRP} may not utilize all available seats, as it depends on the given requests. To improve a given seat plan and utilize all seats, we aim to generate a new seat plan with full or largest patterns while ensuring that the original group type requirements are met.
 
 \begin{definition}
 Consider a pattern $\bm{h} = (h_1, \ldots, h_M)$ for a row of size $L$. We define $\bm{h}$ as a full pattern if $\sum_{i=1}^{M} n_i h_i = L$. Addtionally, we refer to $\bm{h}$ as a largest pattern if its size $|\bm{h}| \geq |\bm{h}^{\prime}|$, for any other feasible pattern $\bm{h}^{\prime}$.
@@ -86,11 +86,10 @@ The following figure shows that the largest pattern may not be full and the full
     \caption{Largest and Full Patterns}
 \end{figure}
 
-The first row can be represented by $(0, 0, 0, 4)$. It is a largest pattern as its size is 16. However, it does not satisfy the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$.
-The second row can be represented by $(1, 1, 4, 0)$, which is a full pattern as it utilizes all available seats. However, its size is 15, indicating that it is not a largest pattern.
+The first row can be represented by $(0, 0, 0, 4)$. It is a largest pattern as its size is 16. However, it does not satisfy the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$. The second row can be represented by $(1, 1, 4, 0)$, which is a full pattern as it utilizes all available seats. However, its size is 15, indicating that it is not a largest pattern.
 \end{example}
 
-To obtain a seat plan composed of the full or largest patterns, we make the following statements.
+To obtain a seat plan with the full or largest patterns, we make the following statements.
 Let the original seat plan be $\bm{H}$ and the desired seat plan be $\bm{H}^{\prime}$. To satisfy requirements for the original group types, the total quantity of groups from type $i$ to type $M$ in $\bm{H}^{\prime}$ must be at least equal to the total quantity from group type $i$ to group type $M$ in $\bm{H}$. Mathematically, we aim to find a feasible seat plan $\bm{H}^{\prime}$ such that $\sum_{k=i}^{M} \sum_{j=1}^{N} H_{jk} \leq \sum_{k=i}^{M} \sum_{j=1}^{N} H^{'}_{jk}, \forall i \in \mathcal{M}$. We say $\bm{H} \subseteq \bm{H}^{'}$ if this condition is satisfied.
 
 To utilize all seats in the seat plan, the objective is to maximize the number of individuals that can be accommodated. Thus, we have the following formulation:

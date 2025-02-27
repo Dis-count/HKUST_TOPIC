@@ -3,20 +3,21 @@
 We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing, comparing different layouts, $M$s and social distancings. In the experiment, we set the following parameters. 
 
 % The layout and the values of $M$, $\delta$ will change accordingly as
-The default setting in the experiments is as follows, $\delta =1$ and $M =4$. The number of scenarios in SSP is $|\Omega| = 1000$. The default seat layout consists of 10 rows, each with the same size of 21. Different realistic layouts, group sizes and social distances are also explored. We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of individuals per period, denoted as $\gamma$, can be expressed as $\gamma = \sum_{i=1}^{M} i p_i$. Each experimented result is the average of 100 instances.
+The default setting in the experiments is as follows, $\delta =1$ and $M =4$. The number of scenarios in SSP is $|\Omega| = 1000$. The default seat layout consists of 10 rows, each with the same size of 21. Different realistic layouts, group sizes and social distances are also explored. We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of individuals per period, denoted as $\gamma$, can be expressed as $\gamma = \sum_{i=1}^{M} i p_i$. Each experiment result is the average of 100 instances.
 % The occupancy rate at different demands is calculated as the average of these 100 instances. 
 % Each entry in the table represents the average performance across 100 instances.
 
 \subsection{Performances of Different Policies}
-In this section, we compare the performance of five assignment policies to the optimal one, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are DSA, DP-based heuristic, bid-price control, booking limit control and FCFS policy.
+In this section, we compare the performance of five assignment policies with the optimal one, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are DSA, DP-based heuristic, bid-price control, booking-limit control and FCFS policy.
 
 \subsection*{Parameters Description}
-We consider four probability distributions for our analysis. The first two, D1:[0.18,0.7,0.06,0.06] and D2:[0.2,0.8,0,0], were experimented with in \cite{blom2022filling}. For additional experiments, we introduce two more distributions, D3 and D4, derived from real-world movie data.
-Specifically, we selected Detective Chinatown 1900 and Captain America: Brave New World as target movies to analyze group information and their corresponding probability distributions, denoted as 
-D3 and D4, respectively. The ticket seat plans were obtained from the MCL cinema website. We focused on scattered seat plans and excluded cases where the number of consecutive seats exceeded four. By counting the occurrences of different group types, we obtained the following distributions: $D3 = [0.34, 0.51, 0.07, 0.08]$ representing the suspense genre, and $D4: [0.12, 0.5, 0.13, 0.25]$, representing the family fun genre. To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. 
+We consider four probability distributions for our analysis. The first two, $D1:[0.18,0.7,0.06,0.06]$ and $D2:[0.2,0.8,0,0]$, were experimented with in \cite{blom2022filling}. 
+Here, $D1$ represents the statistical distribution of group sizes, while $D2$ can be interpreted as a restricted situation where groups of more than 2 people are not allowed in our context. For additional experiments, we introduce two more distributions, $D3$ and $D4$, derived from real-world movie data.
+
+Specifically, we selected Detective Chinatown 1900 and Captain America: Brave New World as target movies to analyze group information and their corresponding probability distributions, denoted as D3 and D4, respectively. The seat plans for the tickets were obtained from the MCL cinema website. We focused on scattered seat plans and excluded cases where the number of consecutive seats exceeded four. By counting the occurrences of different group types, we obtained the following distributions: $D3 = [0.34, 0.51, 0.07, 0.08]$ representing the suspense genre, and $D4: [0.12, 0.5, 0.13, 0.25]$, representing the family fun genre. To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. 
 
 
-The following table presents the performance results of five different policies: DSA, DP, Bid-price, Booking, and FCFS, which stand for dynamic seat assignment, dynamic programming based heuristic, bid-price, booking-limit, and first come first served, respectively. The procedures for the last four policies are detailed in the appendix \ref{policies}. Performance is evaluated by comparing the ratio of the number of accepted individuals under each policy to that under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
+The following table presents the performance results of five different policies: DSA, DP, Bid-price, Booking, and FCFS, which stand for dynamic seat assignment, dynamic programming-based heuristic, bid-price, booking-limit, and first-come-first-served, respectively. The procedures of the other three policies are detailed in Appendix \ref{policies}. Performance is evaluated by comparing the ratio of the number of accepted individuals under each policy to that under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
 
 \begin{table}[h]
   \centering
@@ -53,18 +54,17 @@ The following table presents the performance results of five different policies:
   \end{tabular}
 \end{table}
 
-We can find that DSA is better than DP-based heuristic, bid-price policy and booking limit policy consistently, and FCFS policy works worst. DP-based heuristic and bid-price policy can only make the decision to accept or deny, cannot decide which row to assign the group to. Booking limit policy does not consider using more seats to meet the demand of one group. FCFS accepts groups in sequential order until the capacity cannot accommodate more.
+We can find that DSA is better than DP-based heuristic, bid-price policy and booking-limit policy consistently, and FCFS policy works worst. DP-based heuristic and bid-price policy can only decide to accept or deny, cannot decide which row to assign the group to. Booking-limit policy does not consider using more seats to meet the demand of one group. FCFS accepts groups in sequential order until the capacity cannot accommodate more.
 
-The performance of DSA, DP-based heuristic, and bid-price policies follows a pattern where it initially decreases and then gradually improves as $T$ increases. When $T$ is small, the demand for capacity is generally low, allowing these policies to achieve relatively optimal performance. However, as $T$ increases, it becomes more challenging for these policies to consistently achieve a perfect allocation plan, resulting in a decrease in performance. Nevertheless, as $T$ continues to grow, these policies tend to accept larger groups, thereby narrowing the gap between their performance and the optimal value. Consequently, their performances improve. In contrast, the booking limit policy shows improved performance as $T$ increases because it reduces the number of unoccupied seats reserved for the largest groups. 
+The performance of DSA, DP-based heuristic, and bid-price policies follows a pattern where it initially decreases and then gradually improves as $T$ increases. When $T$ is small, the demand for capacity is generally low, allowing these policies to achieve relatively optimal performance. However, as $T$ increases, it becomes more challenging for these policies to consistently achieve a perfect allocation plan, resulting in a decrease in performance. Nevertheless, as $T$ continues to grow, these policies tend to accept larger groups, thereby narrowing the gap between their performance and the optimal value. Consequently, their performances improve. In contrast, the booking-limit policy shows improved performance as $T$ increases because it reduces the number of unoccupied seats reserved for the largest groups. 
 
 The performance of the policies can vary based on different probabilities. For the different probability distributions listed, DSA performs more stably and consistently for the same demand. In contrast, the performance of DP and bid-price fluctuates more significantly.
 
 % Moreover, according to the results of policies, we can develop an easy-to-implement policy. When $T \leq \frac{\sum_{j}{L_j}}{\gamma + 1}$, we accept the groups based on the first come first served policy. When $T > \frac{\sum_{j}{L_j}}{\gamma + 1}$, we adopt the booking-limit policy, i.e., assign the seats according to the seat planning obtained from problem \eqref{deter_upper}.
 
-
 \subsection{Impact of Social Distancing}\label{impact_sd}
 We investigate the impact of social distancing when implementing DSA under varying levels of demand. 
-As an illustrative example, we adopt $D4$ as the probability distribution. The demand levels are varied by adjusting the parameter $T$ from 30 to 90 in increments of 1.
+As an illustrative example, we adopt $D4$ as the probability distribution. The demand levels are varied by adjusting the parameter $T$ from 40 to 100 in increments of 1.
 
 % It is evident that as the demand increases, the effect of social distancing becomes more pronounced. We aim to determine the specific time period where the absence of social distancing results in a higher number of accepted individuals compared to when social distancing measures are in place. Additionally, we will calculate the corresponding occupancy rate during this period.
 
@@ -112,12 +112,12 @@ To estimate the gap point, we aim to find the maximal period such that all reque
 Assuming that all arrivals within $T'$ periods are accepted and fill all the available seats, the threshold occupancy rate can be calculated as $\frac{\gamma T'}{(\gamma+ \delta)T' - N \delta} = \frac{\gamma}{\gamma +\delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$. However, it is important to note that the actual maximal period will be smaller than $T{'}$ because it is nearly impossible to accept groups to fill all seats exactly. To estimate the gap point when applying DSA, we can use $y_1 = c_1 \frac{\tilde{L}}{\gamma + \delta}$, where $c_1$ is a discount factor compared to the ideal assumption. Similarly, we can estimate the threshold occupancy rate as $y_2 = c_2 \frac{\gamma}{\gamma +\delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$, where $c_2$ is a discount factor for the occupancy rate compared to the ideal scenario.
 
 To analyze the relation between $\gamma$ and the gap point, we conducted an analysis using a sample of 200 probability distributions. The figure below illustrates the gap point as a function of $\gamma$, along with the corresponding estimations.  Additionally, the threshold occupancy rate is represented by red points. 
-% For each probability distribution, we considered 100 instances and plotted the gap point as blue points.
+
 We applied an Ordinary Least Squares (OLS) model to fit the data and estimate the parameter values. The resulting fitted equations, $y_1 = \frac{c_1 \tilde{L}}{\gamma + \delta}$ (represented by the blue line in the figure) and $y_2 = c_2 \frac{\gamma}{\gamma + \delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$ (represented by the orange line in the figure), are displayed in the figure. The goodness of fit is evaluated using R-squared values, which are 1.000 for both models, indicating a perfect fit between the data and the fitted equations. The estimated discount factor values are $c_1 = 0.9578$ and $c_2 = 0.9576$.
 
 \begin{figure}[ht]
   \centering
-    \includegraphics[width=0.95\textwidth]{./Figures/gamma_estimation.pdf}
+    \includegraphics[width=0.95\textwidth]{./Figures/esti_scatter.pdf}
   \caption{Gap points and their estimation under 200 probabilities}
 \end{figure}
 
@@ -186,16 +186,11 @@ The following figure illustrates the number of accepted individuals over time wi
   \caption{The occupancy rate over demand for different social distancings}
 \end{figure}
 
-
 % We examine the impact of implementing social distancing on the occupancy rate and explore strategies to minimize revenue loss. Consider the situation where the gap point is $\tilde{T}$ and is determined by the parameters $\delta$, $\gamma$, $M$, and $\tilde{L}$. The corresponding occupancy rate is $\Gamma(\tilde{T})$. When the actual number of people (demand) is less than $\tilde{L} \cdot \Gamma(\tilde{T})$, implementing social distancing does not affect the revenue. However, if the actual number of people exceeds $\tilde{L} \cdot \Gamma(\tilde{T})$, enforcing social distancing measures will lead to a reduction in revenue. The extent of this loss can be assessed through simulations by using the specified parameters. To mitigate the potential loss, the seller can increase the value of $\gamma$. This can be achieved by implementing certain measures, such as setting a limit on the number of single-person groups or allowing for larger group sizes. 
 
-
-At times, the government may establish a maximum allowable occupancy rate. This rate is effective for an event only if it is lower than the expected occupancy rate. Additionally, the maximum allowed rate becomes redundant if it exceeds the maximum achievable rate for all events.
-
+% At times, the government may establish a maximum allowable occupancy rate. This rate is effective for an event only if it is lower than the expected occupancy rate. Additionally, the maximum allowed rate becomes redundant if it exceeds the maximum achievable rate for all events.
 
 % for example, for family movies in cinemas, $\gamma$ will be relatively large, so a higher occupancy rate limit can be set.
-
-
 
 
 % HONG KONG FILM ARCHIVE CINEMA [17, 18, 18, 18, 18, 18, 18, 8]

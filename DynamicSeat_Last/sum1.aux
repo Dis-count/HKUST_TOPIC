@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -55,11 +58,11 @@
 \newlabel{deter_upper}{{1}{8}{Concepts}{equation.3.1}{}}
 \newlabel{capa_con}{{2}{8}{Concepts}{equation.3.2}{}}
 \newlabel{sol_relax_deter}{{1}{8}{}{prop.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Seat Planning Composed of Full or Largest Patterns}{9}{subsection.3.2}\protected@file@percent }
-\newlabel{seat_planning_full_largest}{{3.2}{9}{Seat Planning Composed of Full or Largest Patterns}{subsection.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Seat Planning with Full or Largest Patterns}{9}{subsection.3.2}\protected@file@percent }
+\newlabel{seat_planning_full_largest}{{3.2}{9}{Seat Planning with Full or Largest Patterns}{subsection.3.2}{}}
 \newlabel{lem_pattern}{{2}{9}{}{prop.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Largest and Full Patterns\relax }}{10}{figure.caption.3}\protected@file@percent }
-\newlabel{improve_seat}{{3}{10}{Seat Planning Composed of Full or Largest Patterns}{equation.3.3}{}}
+\newlabel{improve_seat}{{3}{10}{Seat Planning with Full or Largest Patterns}{equation.3.3}{}}
 \newlabel{prop_construction}{{3}{10}{}{prop.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Seat Planning with Stochastic Requests}{10}{section.4}\protected@file@percent }
 \newlabel{sec_seat_planning}{{4}{10}{Seat Planning with Stochastic Requests}{section.4}{}}
@@ -127,9 +130,9 @@
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Gap points and threshold occupancy rates of $M$s\relax }}{27}{table.caption.14}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{27}{section.8}\protected@file@percent }
 \newlabel{sec_conclusion}{{8}{27}{Conclusion}{section.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The occupancy rate over demand for different social distancings\relax }}{28}{figure.caption.16}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{refe}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The occupancy rate over demand for different social distancings\relax }}{28}{figure.caption.16}\protected@file@percent }
 \bibcite{aydin2018decomposition}{1}
 \bibcite{bitran1995application}{2}
 \bibcite{blom2022filling}{3}

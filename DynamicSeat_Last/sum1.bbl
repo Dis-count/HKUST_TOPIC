@@ -7,6 +7,11 @@ Nursen Aydin and S~Ilker Birbil.
 \newblock {\em European Journal of Operational Research}, 271(1):179--192,
   2018.
 
+\bibitem{bertsimas2003revenue}
+Dimitris Bertsimas and Ioana Popescu.
+\newblock Revenue management in a dynamic network environment.
+\newblock {\em Transportation Science}, 37(3):257--277, 2003.
+
 \bibitem{bitran1995application}
 Gabriel~R Bitran and Susana~V Mondschein.
 \newblock An application of yield management to the hotel industry considering
@@ -24,6 +29,12 @@ Juliano~Cavalcante Bortolete, Luis~Felipe Bueno, Renan Butkeraites, et~al.
   between students.
 \newblock {\em Computational and Applied Mathematics}, 41:1--23, 2022.
 
+\bibitem{casey2005scenario}
+Michael~S Casey and Suvrajeet Sen.
+\newblock The scenario generation algorithm for multistage stochastic linear
+  programming.
+\newblock {\em Mathematics of Operations Research}, 30(3):615--631, 2005.
+
 \bibitem{CDC}
 {CDC}.
 \newblock Keep a safe space.
@@ -34,6 +45,12 @@ Tommy Clausen, Allan~Nordlunde Hjorth, Morten Nielsen, and David Pisinger.
 \newblock The off-line group seat reservation problem.
 \newblock {\em European Journal of Operational Research}, 207(3):1244--1253,
   2010.
+
+\bibitem{curry1990optimal}
+Renwick~E Curry.
+\newblock Optimal airline seat allocation with fare classes nested by origins
+  and destinations.
+\newblock {\em Transportation Science}, 24(3):193--204, 1990.
 
 \bibitem{dantzig1957discrete}
 George~B Dantzig.
@@ -46,11 +63,16 @@ Igor Deplano, Danial Yazdani, and Trung~Thanh Nguyen.
   seats.
 \newblock {\em IEEE Access}, 7:152358--152367, 2019.
 
-\bibitem{dundar2021seat}
-Bayram Dundar and Gokhan Karakose.
-\newblock Seat assignment models for classrooms in response to {C}ovid-19
-  pandemic.
-\newblock {\em Journal of the Operational Research Society}, pages 1--13, 2021.
+\bibitem{feng2013scenario}
+Yonghan Feng and Sarah~M Ryan.
+\newblock Scenario construction and reduction applied to stochastic power
+  generation expansion planning.
+\newblock {\em Computers \& Operations Research}, 40(1):9--23, 2013.
+
+\bibitem{ferreira1996solving}
+Carlos~E Ferreira, Alexander Martin, and Robert Weismantel.
+\newblock Solving multiple knapsack problems by cutting planes.
+\newblock {\em SIAM Journal on Optimization}, 6(3):858--877, 1996.
 
 \bibitem{fischetti2023safe}
 Martina Fischetti, Matteo Fischetti, and Jakob Stoustrup.
@@ -84,6 +106,17 @@ Md~Tabish Haque and Faiz Hamid.
   for railways.
 \newblock {\em Omega}, 114:102737, 2023.
 
+\bibitem{henrion2018problem}
+R{\'e}ne Henrion and Werner R{\"o}misch.
+\newblock Problem-based optimal scenario generation and reduction in stochastic
+  programming.
+\newblock {\em Mathematical Programming}, pages 1--23, 2018.
+
+\bibitem{johnson1974fast}
+David~S Johnson.
+\newblock Fast algorithms for bin packing.
+\newblock {\em Journal of Computer and System Sciences}, 8(3):272--314, 1974.
+
 \bibitem{kleywegt1998dynamic}
 Anton~J Kleywegt and Jason~D Papastavrou.
 \newblock The dynamic and stochastic knapsack problem.
@@ -109,13 +142,6 @@ Rhyd Lewis and Fiona Carroll.
   \url{https://www.lonelyplanet.com/news/berlin-theatre-socially-distanced-seating},
   2020.
 
-\bibitem{moore2021seat}
-Jane~F Moore, Arthur Carvalho, Gerard~A Davis, Yousif Abulhassan, and Fadel~M
-  Megahed.
-\newblock Seat assignments with physical distancing in single-destination
-  public transit settings.
-\newblock {\em IEEE Access}, 9:42985--42993, 2021.
-
 \bibitem{perry2009approximate}
 Thomas~C Perry and Joseph~C Hartman.
 \newblock An approximate dynamic programming approach to solving a dynamic,
@@ -134,16 +160,21 @@ Mostafa Salari, R~John Milne, Camelia Delcea, and Liviu-Adrian Cotfas.
 \newblock Social distancing in airplane seat assignments for passenger groups.
 \newblock {\em Transportmetrica B: Transport Dynamics}, 10(1):1070--1098, 2022.
 
-\bibitem{salari2020social}
-Mostafa Salari, R~John Milne, Camelia Delcea, Lina Kattan, and Liviu-Adrian
-  Cotfas.
-\newblock Social distancing in airplane seat assignments.
-\newblock {\em Journal of Air Transport Management}, 89:101915, 2020.
+\bibitem{talluri1998analysis}
+Kalyan Talluri and Garrett Van~Ryzin.
+\newblock An analysis of bid-price controls for network revenue management.
+\newblock {\em Management Science}, 44(11-part-1):1577--1593, 1998.
 
 \bibitem{talluri2006theory}
 Kalyan~T Talluri and Garrett~J Van~Ryzin.
 \newblock {\em The Theory and Practice of Revenue Management}.
 \newblock Springer Science \& Business Media, 2006.
+
+\bibitem{van2008simulation}
+Garrett Van~Ryzin and Gustavo Vulcano.
+\newblock Simulation-based optimization of virtual nesting controls for network
+  revenue management.
+\newblock {\em Operations Research}, 56(4):865--880, 2008.
 
 \bibitem{vangerven2022parliament}
 Bart Vangerven, Dirk Briskorn, Dries~R Goossens, and Frits~CR Spieksma.

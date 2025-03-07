@@ -1,0 +1,60 @@
+% !TEX root = sum1.tex
+\section{Literature Review}\label{literature}
+The present study is closely connected to the following research areas -- seat management with social distancing and dynamic seat assignment. The subsequent sections review literature about each perspective and highlight significant differences between the present study and previous research.
+
+
+\subsection{Seat Management with Social Distancing}
+Seating management is a practical problem that presents unique challenges across various applications, each with its own complexities, particularly when accommodating group-based seating requests. For instance, in passenger rail services, groups differ not only in size but also in their departure and arrival destinations, requiring them to be assigned consecutive seats \cite{clausen2010off, deplano2019offline}. In social gatherings such as weddings or dinner galas, individuals often prefer to sit together at the same table while maintaining distance from other groups they may dislike \cite{lewis2016creating}. In parliamentary seating assignments, members of the same party are typically grouped in clusters to facilitate intra-party communication as much as possible \cite{vangerven2022parliament}. In e-sports gaming centers, seating allocation for group customers is designed to maximize the revenue \cite{kwag2022optimal}.
+
+
+Including social distancing in seating management has added another dimension of consideration, resulting in a new stream of research. In some cases, respecting social distancing involves layout design. The problem is to determine the seating positions in a given venue, with the aim of maximizing the physical distance between people, such as students in a classroom \cite{bortolete2022support, dundar2021seat}, and customers in restaurants and beach umbrellas \cite{fischetti2023safe}. In other cases, seating layout is predetermined seating layout, individuals are assigned seats while adhering to social distancing guidelines, for instance, problems in the air travel \cite{ghorbani2020model, salari2020social} and long-distance train travel \cite{haque2022optimization}. Such research highlights the relevance and importance in seating management with the consideration of social distancing.
+
+
+Our work belongs to seating management with social distancing for group-based requests, which has found its applications across various areas, including airplanes \cite{salari2022social}, trains \cite{haque2023social}, public transit \cite{moore2021seat} and theaters \cite{blom2022filling}. Due to the diversity of applications, there are different issues to handle. For example, in \cite{salari2022social}, the distance between different groups is taken into account, leading to the development of a seating assignment strategy that outperforms the simplistic airline policy of blocking all middle seats. In \cite{haque2023social}, when designing seat allocation for groups with social distancing, not only is the transmission risk inside the train considered, but also the transmission risk between different cities where the stops are located. 
+
+Our work in this paper is most closely related to \cite{blom2022filling}, in that both addressing group-based seating problem in theaters. In \cite{blom2022filling}, they primarily focus on the cases with known groups, which is referred to as seat planning with deterministic requests in this paper, we have a broader scope. We also consider group-based seat planning with stochastic requests. Additionally, we incorporate dynamic seat assignment, assuming that groups arrive with a certain probability, to provide a comprehensive solution pattern.
+
+
+% Seat assignment has applications in the transportation industry, including trains, and buses \cite{hamdouch2011schedule}. This process involves assigning seats to passengers in a manner that maximizes the efficiency and convenience of seating arrangements.
+
+
+\subsection{Dynamic Seat Assignment}
+
+%  Dynamic 与我们的哪里不一样？这些文献是怎么来的？ 这里没有接受拒绝的问题。
+
+%  我们的工作与group RM 有关  difffence from RM in two parts: 典型的RM decision on acceptance and rejection, 我们的 accept need to assign, 
+
+
+%  Assignment: 方面 有火车 怎么不一样？
+
+In dynamic seat assignment, the decision to either reject or accept-and-assign groups is made at each stage upon their arrival. This problem can be regarded as a special case of the dynamic multiple knapsack problem. When there is one row, the related problem is dynamic knapsack problem \cite{kleywegt1998dynamic}. Our model in its static form, deterministic request, can be viewed as a specific instance of the multiple knapsack problem \cite{pisinger1999exact}. There is little study, only one mildly related to the stochastic and dynamic multiple knapsack problem \cite{perry2009approximate}. It models a multiperiod, single resource capacity reservation problem by using multiple knapsacks to capture multiple time periods, not the traditional realistic multiple knapsacks.
+
+
+% \cite{williamson1992airline}
+
+Our work is closely related to the group-based network revenue management (RM) problem, which focuses on accepting or rejecting a request \cite{gallego1997multiproduct}. One of the characteristics we are studying is that the decision should be made on an all-or-none basis for each group, which brings more complication in group arrivals \cite{talluri2006theory}. 
+
+In hotel revenue management, group characteristics can also be observed in multi-day stays \cite{aydin2018decomposition, bitran1995application}, which differs from the concept of the group in our problem.
+
+Another key characteristic of our study is the importance of seat assignment, which distinguishes it from traditional revenue management. The assign-to-seat feature introduced by Zhu et al. \cite{zhu2023assign} further emphasizes the significance of seat assignment. This approach tackles the challenge of selling high-speed train tickets, where each request must be assigned to a specific seat for the entire journey. However, this paper focuses on individual passengers rather than groups, which sets it apart from our research.
+
+% Our work not only focuses on how to make the group-based seat assignment with non-reusable seats, also contribute the revenue insights with social distancing.
+
+
+% This further emphasizes the significance of seat assignment and sets it apart from traditional revenue management methods.
+
+
+% To address this challenge, we propose using scenario-based programming \cite{feng2013scenario, casey2005scenario, henrion2018problem} to determine the seat planning. In this approach, the aggregated supply can be considered as a protection level for each group type. Notably, in our model, the supply of larger groups can also be utilized by smaller groups. This is because our approach focuses on group arrival rather than individual unit, which sets it apart from traditional partitioned and nested approaches \cite{curry1990optimal, van2008simulation}.
+
+
+% The authors propose a modified network revenue management model and introduce a bid-price control policy based on a novel maximal sequence principle. They also propose a "re-solving a dynamic primal" policy that achieves uniformly bounded revenue loss. The study reveals connections between this problem and traditional network revenue management problems and shows that the impact of the assign-to-seat restriction can be limited with the proposed methods.
+
+
+% Jiang et al. \cite{jiang2015dynamic} proposes a revenue management approach for high-speed rail (HSR) passenger ticket assignment with dynamic adjustments. The approach integrates short-term demand forecasting, ticket assignment, and dynamic ticket adjustment mechanisms to allocate passenger tickets during presale periods and avoid situations where tickets are insufficient at some stations while seats remain empty.
+
+
+
+% Implementing dynamic seat assignment with social distancing can be done manually by the staff or through automated systems that use algorithms to optimize the seat assignments based on various factors, such as ticket sales, seat availability, and customer preferences. However, the implementation of social distancing measures poses unique challenges that require careful planning and consideration of various factors to balance safety with revenue generation.
+
+
+\newpage

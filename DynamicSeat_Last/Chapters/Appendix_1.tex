@@ -1,8 +1,8 @@
 % !TEX root = sum1.tex
-
+\newpage
 \section{Policies for Dynamic Situations}\label{policies}
 
-\subsubsection*{Bid-price Control}
+\subsubsection*{Bid-Price Control Policy}
 Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
 
 The dual of LP relaxation of SPDRP is:
@@ -27,20 +27,21 @@ The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_{\tild
 The bid-price control policy based on the static model is stated below.
 
 \begin{algorithm}[H]
-  \caption{Bid-price Control Algorithm}\label{algo_bid}
+  \caption{Bid-Price Control}\label{algo_bid}
   \For{$t =1, \ldots, T$}{
-    {Observe group type $i$\;}
+    {Observe a request of group type $i$\;}
     {Solve the LP relaxation of SPDRP with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ and $\mathbf{L}^{t}$\;
     Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$\;}
-    \eIf{$i \geq \tilde{i}$ and $\max_j{L_j^{t}} \geq n_i$}
-    {Accept the group and assign the group to row $k$ such that $L_{k}^{t} \geq n_{i}$\;
-    Break ties\;}
+    \eIf{$i \geq \tilde{i}$ and $\max_{j \in \mathcal{N}}{L_j^{t}} \geq n_i$}
+    {Set $k = \arg \min_{j \in \mathcal{N}}\{L_j^{t}|L_j^{t} \geq n_i\} $\;
+    Break ties arbitrarily\;
+    Assign the group to row $k$, let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$\;}
     {Reject the group\;}}
 \end{algorithm}
 
 
-\subsubsection*{Booking Limit Control}
-The booking limit control policy involves setting a maximum number of reservations that can be accepted for each request. By controlling the booking limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
+\subsubsection*{Booking-Limit Control Policy}
+The booking-limit control policy involves setting a maximum number of reservations that can be accepted for each request. By controlling the booking-limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
 
 In this policy, we solve SPDRP with the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests. 
 
@@ -49,34 +50,31 @@ In this policy, we solve SPDRP with the expected demand. Then for every type of 
 % we can develop the booking limit control policy.
 
 \begin{algorithm}[H]
-  \caption{Booking Limit Control Algorithm}\label{algo_booking}
+  \caption{Booking-Limit Control}\label{algo_booking}
   \For{$t =1, \ldots, T$}{
-    {Observe group type $i$\;}
+    {Observe a request of group type $i$\;}
     {Solve SPDRP with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ and $\mathbf{L}^{t}$\;
-    Obtain the optimal solution, $x_{ij}^{*}$ and the aggregate optimal solution, $\mathbf{X}$\;}
+    Obtain the seat plan, $\bm{H}$, and the aggregate optimal solution, $\mathbf{X}$\;}
     \eIf{$X_i > 0$}
-    {Accept the group and assign the group to row $k$ such that $x_{ik}^{*} > 0$\;
-    Break ties\;}
+    {Set $k = \arg \min_{j} \{L_j^{t} - \sum_{i}n_i H_{ji}|H_{ji} >0\}$\;
+    Break ties arbitrarily\;
+    Assign the group to row $k$, let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$\;}
     {Reject the group\;}}
 \end{algorithm}
 
 
-\subsubsection*{First Come First Served (FCFS) Policy}
-In the seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of some row, we will assign it to that row immediately. Then continue to process requests in this manner until all rows cannot accommodate any groups.
+% \subsubsection*{First-Come-First-Served (FCFS) Policy}
+% In the seat assignment for each group arrival, the intuitive but trivial method will be on a first-come-first-served basis. Each accepted request will be assigned seats row by row. If the capacity of a row is insufficient to accommodate a request, we will allocate it to the next available row. If a subsequent request can fit exactly into the remaining capacity of some row, we will assign it to that row immediately. Then continue to process requests in this manner until all rows cannot accommodate any groups.
 
-\begin{algorithm}[H]
-  \caption{FCFS Policy Algorithm}\label{algo_fcfs}
-  \For{$t =1, \ldots, T$}{
-    {Observe group type $i$\;}
-    \eIf{$\exists k$ such that $L_{k}^{t} \geq n_i$}
-    {Accept the group and assign the group to row $k$\;
-    Break ties\;}
-    {Reject the group\;}}
-\end{algorithm}
-
-\subsubsection*{Tie-Breaking Rule}
-These policies will encounter ties when the group can be assigned to more than one row.
-For the booking limit control, we assign the group according to the seat plan. The same tie-breaking rule used in the DSA approach can be applied for the booking limit control policy.
-For the other policies besides the booking limit control, we adopt the following rule for assigning groups to rows. We prioritize assigning the group to rows that have at least $n_M$ seats available. If the number of remaining seats for all rows are less than $n_M$, we assign the group to an arbitrary row that has enough seats to accommodate the group.
+% \begin{algorithm}[H]
+%   \caption{FCFS Policy Algorithm}\label{algo_fcfs}
+%   \For{$t =1, \ldots, T$}{
+%     {Observe a request of group type $i$\;}
+%     \eIf{$\max_{j \in \mathcal{N}}{L_j^{t}} \geq n_i$}
+%     {Set $k = \arg \min_{j \in \mathcal{N}}\{L_j^{t}|L_j^{t} \geq n_i\}$\;
+%     Break ties arbitrarily\;
+%     Assign the group to row $k$, let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$\;}
+%     {Reject the group and let $L_{k}^{t+1} \gets L_{k}^{t}$\;}}
+% \end{algorithm}
 
 \newpage

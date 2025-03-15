@@ -7,6 +7,12 @@ Nursen Aydin and S~Ilker Birbil.
 \newblock {\em European Journal of Operational Research}, 271(1):179--192,
   2018.
 
+\bibitem{bnnobrs1962partitioning}
+J~Benders.
+\newblock Partitioning procedures for solving mixed-variables programming
+  problems.
+\newblock {\em Numer. Math}, 4(1):238--252, 1962.
+
 \bibitem{bertsimas2003revenue}
 Dimitris Bertsimas and Ioana Popescu.
 \newblock Revenue management in a dynamic network environment.
@@ -112,6 +118,12 @@ R{\'e}ne Henrion and Werner R{\"o}misch.
   programming.
 \newblock {\em Mathematical Programming}, pages 1--23, 2018.
 
+\bibitem{jasin2012re}
+Stefanus Jasin and Sunil Kumar.
+\newblock A re-solving heuristic with bounded revenue loss for network revenue
+  management with customer choice.
+\newblock {\em Mathematics of Operations Research}, 37(2):313--345, 2012.
+
 \bibitem{johnson1974fast}
 David~S Johnson.
 \newblock Fast algorithms for bin packing.
@@ -159,6 +171,13 @@ David Pisinger.
 Mostafa Salari, R~John Milne, Camelia Delcea, and Liviu-Adrian Cotfas.
 \newblock Social distancing in airplane seat assignments for passenger groups.
 \newblock {\em Transportmetrica B: Transport Dynamics}, 10(1):1070--1098, 2022.
+
+\bibitem{secomandi2008analysis}
+Nicola Secomandi.
+\newblock An analysis of the control-algorithm re-solving issue in inventory
+  and revenue management.
+\newblock {\em Manufacturing \& Service Operations Management}, 10(3):468--483,
+  2008.
 
 \bibitem{talluri1998analysis}
 Kalyan Talluri and Garrett Van~Ryzin.

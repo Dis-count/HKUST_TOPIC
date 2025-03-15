@@ -1,11 +1,9 @@
 % !TEX root = ./sum1.tex
 
-% random arrival -> seat planning -> suitable to dynamic case
-
 \section{Seat Planning with Stochastic Requests}\label{sec_seat_planning}
-In this section, we aim to obtain a seat plan which is suitable to the dynamic seat assignment.Specifically, we develop the scenario-based stochastic programming (SSP) to obtain the seat plan with available seats. Due to the well-structured nature of SSP, we implement Benders decomposition to solve it efficiently. However, in some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then obtain a feasible seat plan by deterministic model. Based on that, we construct a seat plan composed of full or largest patterns to fully utilize all seats.
+We aim to obtain a seat plan that is suitable to the stochastic requests. Specifically, we develop the scenario-based stochastic programming (SBSP) to obtain the seat plan with available seats. To take advantage of the well-structured nature of SBSP, we implement Benders decomposition to solve it efficiently. In some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then construct a seat plan with full or largest patterns to fully utilize all seats.
 
-\subsection{Scenario-based Stochastic Programming Formulation}
+\subsection{Scenario-Based Stochastic Programming Formulation}
 Now suppose the demand of groups is stochastic, and the stochastic information can be derived from scenarios based on historical data. Let $\omega$ index the different scenarios, where each scenario $\omega \in \Omega$. We assume there are $|\Omega|$ possible scenarios, each associated with a specific realization of group requests, represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$. Let $p_{\omega}$ denote the probability of any scenario $\omega$, which we assume to be positive. To maximize the expected number of individuals accommodated across all scenarios, we propose a scenario-based stochastic programming approach to determine a seat plan.
 
 Recall that $x_{ij}$ represents the number of groups of type i planned in row j. To account for the variability across different scenarios, it is essential to model potential excess or shortage of supply. To capture this, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$, which consists of two vectors: $\mathbf{y}^{+} \in \mathbb{N}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{N}^{M \times |\Omega|}$. Here, each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the excess of supply for group type $i$ under scenario $\omega$, while $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ under scenario $\omega$.
@@ -21,7 +19,6 @@ allocated to smaller group types $j<i$ in descending order of group size. This i
   & y_{M \omega}^{-} = (d_{M \omega}- \sum_{j=1}^N x_{Mj})^{+},
 \end{aligned}
 \end{equation}
-
 where $(\cdot)^{+}$ denotes the non-negative part of the expression. 
 
 Based on the considerations outlined above, the total supply of group type $i$ under scenario $\omega$ can be expressed as: $\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}, i = 1, \ldots, M-1$. For the special case of group type $M$, the total supply under scenario $\omega$ is $\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}$.
@@ -37,7 +34,7 @@ Then we have the following formulation:
   & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
   \end{align}
 
-% We use SSP$(\mathbf{L}, \Omega)$ to represent the above stochastic programming, and similarly, we use RSSP$(\mathbf{L}, \Omega)$ to represent the LP relaxation of SSP. 
+
 
 The objective function consists of two parts. The first part represents the number of individuals in
 group type $M$ that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of individuals in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios.
@@ -56,19 +53,21 @@ In the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}
 % Considering the analysis provided earlier, we find it advantageous to obtain a seat plan that only consists of full or largest patterns. However, the seat plan associated with the optimal solution obtained by solver to SSP may not consist of the largest or full patterns. We can convert the optimal solution to another optimal solution which is composed of the largest or full patterns.
 
 \begin{prop}\label{prop_solution}
-There exists an optimal solution to SSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+There exists an optimal solution to SBSP such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
 \end{prop}
 
-When there is only one scenario, the SSP reduces to the deterministic model. This aligns with Section \ref{seat_planning_full_largest}, which outlines the generation of seat plan consisting of full or largest patterns.
+When there is only one scenario, the SBSP reduces to the deterministic model. This aligns with Section \ref{seat_planning_full_largest}, which outlines the generation of seat plan consisting of full or largest patterns.
 
-Solving SSP directly is computationally prohibitive when there are numerous scenarios, instead, we apply Benders decomposition to simplify the solving process in Section \ref{solve_by_benders}, then obtain the seat plan composed of full or largest patterns, as stated in Section \ref{seat_assignment}.
+Solving SBSP directly is computationally prohibitive when there are numerous scenarios, instead, we apply Benders decomposition to simplify the solving process in Section \ref{solve_by_benders}, then obtain the seat plan composed of full or largest patterns, as stated in Section \ref{seat_assignment}.
 
-\subsection{Solve SSP by Benders Decomposition}\label{solve_by_benders}
-We reformulate SSP problem into a master problem and a subproblem. The iterative process of solving the master problem and the subproblem is known as Benders decomposition. 
-The solution obtained from the master problem serves as input for the subproblem, while the subproblem's solutions help refine the master problem by adding constraints. This iterative process improves the overall solution until convergence is achieved. To accelerate the solving process, we derive a closed-form solution for the subproblem. Subsequently, we obtain the solution to the LP relaxation of SSP problem through a constraint generation approach.
+\subsection{Solve SBSP by Benders Decomposition}\label{solve_by_benders}
+We reformulate SBSP problem into a master problem and a subproblem. The iterative process of solving the master problem and the subproblem is known as Benders decomposition \cite{bnnobrs1962partitioning}. 
+The solution obtained from the master problem serves as input for the subproblem, while the subproblem's solutions help refine the master problem by adding constraints. This iterative process improves the overall solution until convergence is achieved. To accelerate the solving process, we derive a closed-form solution for the subproblem. Subsequently, we obtain the solution to the LP relaxation of SBSP problem through a constraint generation approach.
+
+% 解释 benders??
 
 \subsubsection{Reformulation}
-Then, we reformulate SSP in a matrix form to apply the Benders decomposition technique. Let $\mathbf{n} = (n_1, \ldots, n_M)^{\intercal}$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)^{\intercal}$ represent the vector of row sizes, where $L_j$ denotes the size of row $j$ as defined previously.
+We write SBSP in a matrix form to apply the Benders decomposition technique. Let $\mathbf{n} = (n_1, \ldots, n_M)^{\intercal}$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)^{\intercal}$ represent the vector of row sizes, where $L_j$ denotes the size of row $j$ as defined previously.
 The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{x}^{\intercal} \mathbf{n}$, does not exceed the available row sizes $\mathbf{L}$. We can use the product $\mathbf{x} \mathbf{1}$ to indicate the supply of group types, where $\mathbf{1}$ is a column vector of size $N$ with all elements equal to 1. 
 
 The linear constraints associated with scenarios, denoted by constraints \eqref{DEF_constr1} and \eqref{DEF_constr2}, can be expressed in matrix form as:
@@ -94,7 +93,7 @@ $$
 \end{array}\right], \mathbf{y}_{\omega}^{+}=\left[\begin{array}{lllll}y_{1 \omega}^{+} & y_{2 \omega}^{+} & \cdots & y_{M \omega}^{+}\end{array}\right]^{\intercal}, \mathbf{y}_{\omega}^{-}=\left[\begin{array}{llll}y_{1 \omega}^{-} & y_{2 \omega}^{-} & \cdots & y_{M \omega}^{-}\end{array}\right]^{\intercal}.
 $$
 
-As we can find, this deterministic equivalent form is a large-scale problem even if the number of possible scenarios $\Omega$ is moderate. However, the structured constraints allow us to simplify the problem by applying Benders decomposition approach. Before using this approach, we could reformulate this problem as the following form. Let $\mathbf{c}^{\intercal}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$, $\mathbf{f}^{\intercal}\mathbf{y}_{\omega} = -\sum_{i=1}^{M} y_{i \omega}^{+}$. Then the SSP problem can be expressed as below,
+The size of the deterministic equivalent formulation increases with the size of the scenario set, rendering directly solving it computationally infeasible. To overcome the difficulty, we reformulate the problem to apply Benders decomposition approach. Let $\mathbf{c}^{\intercal}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$, $\mathbf{f}^{\intercal}\mathbf{y}_{\omega} = -\sum_{i=1}^{M} y_{i \omega}^{+}$. Then the SBSP problem can be expressed as below,
 
 \begin{equation}\label{BD_master}
 \begin{aligned}
@@ -115,7 +114,11 @@ $$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omeg
   \end{aligned}
 \end{equation}
 
-We can solve problem \eqref{BD_master} quickly if we can efficiently solve problem \eqref{BD_sub}. Next, we will demonstrate how to solve problem \eqref{BD_sub}.
+
+The efficiency of solving problem \eqref{BD_master} hinges on the method used to solve problem \eqref{BD_sub}. Next, we will demonstrate how to solve problem \eqref{BD_sub} efficiently.
+
+% The efficiency of solving problem \eqref{BD_master} depends on the efficient method for solving problem \eqref{BD_sub}.
+
 
 \subsubsection{Solve The Subproblem}\label{second_stage}
 Notice that the feasible region of the dual of problem \eqref{BD_sub} remains unaffected by $\mathbf{x}$. This observation provides insight into the properties of this problem. Let $\bm{\alpha}_{\omega} = (\alpha_{1\omega},\alpha_{2\omega}, \ldots, \alpha_{M,\omega})^{\intercal}$ denote the vector of dual variables. For each $\omega$, we can form its dual problem, which is 
@@ -158,13 +161,10 @@ Before applying Benders decomposition to solve problem \eqref{BD_master2}, it is
 \end{equation}
 \end{prop}
 
-% According to the value of 
 
-% There are no consecutive 
+We can obtain $\alpha_{i \omega}$ through a forward calculation, iterating from $\alpha_{1 \omega}$ to $\alpha_{M\omega}$. In practice, we choose $\alpha_{i \omega} = \alpha_{i-1, \omega}+1$ when $y_{i \omega}^{-}, y_{i \omega}^{+}$ satisfy the third condition in Proposition \ref{optimal_sol_sub_dual}.
 
-% When $\alpha_{i}$ satisfies $0 \leq \alpha_{i} \leq \alpha_{i-1}+1$, $i = M$ or $y_{i+1, \omega}^{+} =0$, then 
-
-Instead of solving this linear programming directly, we can compute the values of $\alpha_{\omega}$ by performing a forward calculation from $\alpha_{1\omega}$ to $\alpha_{M\omega}$. 
+Instead of solving problem \eqref{BD_sub_dual} directly, we can obtain the values of $\alpha_{i \omega}$ by performing a forward calculation from $\alpha_{1\omega}$ to $\alpha_{M\omega}$ and choose $\alpha_{i \omega} = \alpha_{i-1, \omega}+1$ when calculate $\alpha_{i \omega}$. 
 
 \subsubsection{Constraint Generation}\label{bender_stage}
 Due to the computational infeasibility of solving problem \eqref{BD_master2} with an exponentially large number of constraints, it is a common practice to use a subset, denoted as $\mathcal{O}^t$, to replace $\mathcal{O}$ in problem \eqref{BD_master2}. This results in a modified problem known as the Restricted Benders Master Problem (RBMP). To find the optimal solution to problem \eqref{BD_master2}, we employ the technique of constraint generation. It involves iteratively solving the RBMP and incrementally adding more constraints until the optimal solution to problem \eqref{BD_master2} is obtained.
@@ -195,13 +195,14 @@ From Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \math
 
 \begin{algorithm}[h]
   \caption{Benders Decomposition}\label{cut_algo}
-  \KwIn{Initial problem \eqref{BD_master3} with $\bm{\alpha}_{\omega} = 0, \forall \omega$, $LB = 0$, $UB = \infty$, $\epsilon$.}
-  \KwOut{$\mathbf{x}^{*}$}
+  % \KwIn{Initial problem \eqref{BD_master3} with $\bm{\alpha}_{\omega} = 0, \forall \omega$, $LB = 0$, $UB = \infty$, $\epsilon$.}
+  % \KwOut{$\mathbf{x}^{*}$}
+  Initialize $\bm{\alpha}_{\omega} = \mathbf{0}, \forall \omega$, and let $LB \gets 0$, $UB \gets \infty$\;
   \While{$UB - LB > \epsilon$}
-    {Obtain $(\mathbf{x}^{*}, \mathbf{z}^{*})$ from problem \eqref{BD_master3}\;
+    {Solve problem \eqref{BD_master3} and obtain an optimal solution $(\mathbf{x}^{*}, \mathbf{z}^{*})$\;
     $UB \gets c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{*}$\;
     \For{$\omega= 1, \ldots, |\Omega|$}
-    {Obtain $\bm{\tilde{\alpha}}_{\omega}$ from Proposition \ref{optimal_sol_sub_dual}\; $\tilde{z}_{\omega}= (\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}^{*} \mathbf{1})$\;
+    {Obtain $\bm{\tilde{\alpha}}_{\omega}$ according to Proposition \ref{optimal_sol_sub_dual}\; $\tilde{z}_{\omega}= (\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}^{*} \mathbf{1})$\;
     \If{$\tilde{z}_{\omega} < z_{\omega}^{*}$}
     {Add one new constraint, $(\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to problem \eqref{BD_master3}\;}
     }
@@ -220,10 +221,9 @@ Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $
 
 \begin{algorithm}
   \caption{Seat Plan Construction}\label{seat_construction}
-  % \KwIn{Scenarios set $\Omega$, Seat layout}
-  % \KwOut{$\mathbf{x}, \bm{H}$}
-    {Obtain the optimal solution, $\mathbf{x}^{*}$, from the LP relaxation of problem \eqref{BD_master3}\;}
-    {Aggregate $\mathbf{x}^{*}$ to the number of each group type, $\tilde{X}_{i} = \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$\;}
-    {Obtain the optimal solution, $\tilde{\mathbf{x}}$, and the corresponding pattern, $\bm{H}$, from SPP\;}
-    {Construct the seat plan by problem \eqref{improve_seat} with $\bm{H}$\;}
+  % \KwIn{Scenarios set $\Omega$, Seat layout $\bm{L}$}
+  % \KwOut{$\bm{H}^{\prime}$}
+    {Solve the LP relaxation of SBSP, and obtain an optimal solution $\mathbf{x}^{*}$\;}
+    {Solve SPDRP with $d_{i} = \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$, and obtain an optimal solution $\tilde{\mathbf{x}}$ and the corresponding pattern, $\tilde{\bm{H}}$\;}
+    {Solve problem \eqref{improve_seat} with $\bm{H} = \tilde{\bm{H}}$, and obtain the seat plan $\bm{H}^{\prime}$\;}
 \end{algorithm}

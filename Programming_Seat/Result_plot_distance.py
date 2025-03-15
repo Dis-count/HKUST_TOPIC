@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 # This function is used to load the data and plot the corrsponding graphs.
 # The specific parameters are as follows:
+# delta = 0, 1, 2
 
 def plot_data(given_lines, roll_width, data):
     sd = 1    

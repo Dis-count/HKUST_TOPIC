@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# This function is used to give the occupancy over demand
-
+# This function is used to give the occupancy over demand, two axes
 # [0.25, 0.3, 0.25, 0.2]
+#  0.12, 0.5, 0.13, 0.25
 
 def plot_data(data, option):
     probab = [0.12, 0.5, 0.13, 0.25]
@@ -23,12 +23,12 @@ def plot_data(data, option):
             break
 
     if option:
-        plt.plot(t_value, people_value, 'b-', label='Without social distancing')
-        plt.plot(t_value, occup_value, 'r--', label='With 1 social distancing')
+        plt.plot(t_value, people_value, 'b-', label='No social distancing')
+        plt.plot(t_value, occup_value, 'r--', label='With social distancing')
         plt.xlim((40, 100))
         plt.ylim((40, 100))
         plt.xlabel('Period')
-        plt.ylabel('Percentage of accepted individuals relative to total seats')
+        plt.ylabel('Occupancy rate')
         point[1] = round(point[1], 1)
 
         plt.annotate(r'Gap $%s$' % str(point), xy=(point[0], point[1]), xytext=(
@@ -47,12 +47,12 @@ def plot_data(data, option):
         plt.savefig(graphname)
 
     else:
-        plt.plot(t_value* gamma/total_seat*100, people_value, 'b-', label='Without social distancing')
-        plt.plot(t_value* gamma/total_seat*100, occup_value, 'r--', label='With 1 social distancing')
+        plt.plot(t_value* gamma/total_seat*100, people_value, 'b-', label='No social distancing')
+        plt.plot(t_value* gamma/total_seat*100, occup_value, 'r--', label='With social distancing')
         plt.xlim((50, 110))
         plt.ylim((50, 110))
         plt.xlabel('Percentage of expected demand relative to total seats')
-        plt.ylabel('Percentage of accepted individuals relative to total seats')
+        plt.ylabel('Occupancy rate')
         point[1] = round(point[1], 1)
         # plt.axvline(x = 60, ymin = 0, ymax = 1/6, color = 'green', linestyle='--')
 
@@ -75,4 +75,4 @@ option = 1
 # gamma
 option = 0
 
-plot_data(data, 0)
+plot_data(data, 1)

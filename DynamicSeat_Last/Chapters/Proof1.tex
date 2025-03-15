@@ -38,9 +38,9 @@ Therefore, $\bm{h}$ cannot exist. The maximum number of people that can be accom
 
 
 \begin{pf}{Proof of Proposition \ref{prop_solution}}
-Suppose that $H$ is the seat plan associated with the optimal solution to SSP, but there exists a pattern that is neither full nor the largest. The corresponding excess of supply is $\mathbf{y}^{+}$. According to Proposition \ref{prop_construction}, $H{'}$ can be obtained from $H$. The seat plan, $H{'}$, is composed of full or largest patterns and satisfies all constraints of SSP. The corresponding excess of supply is $\mathbf{y}^{'+}$.
+Suppose that $H$ is the seat plan associated with the optimal solution to SBSP, but there exists a pattern that is neither full nor the largest. The corresponding excess of supply is $\mathbf{y}^{+}$. According to Proposition \ref{prop_construction}, $H{'}$ can be obtained from $H$. The seat plan, $H{'}$, is composed of full or largest patterns and satisfies all constraints of SBSP. The corresponding excess of supply is $\mathbf{y}^{'+}$.
 
-Then we will demonstrate that for each scenario $\omega$, the objective function of SSP, given by $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{i = 1}^{M} y_{i \omega}^{+}$, does not decrease when transitioning from $H$ to $H'$.
+Then we will demonstrate that for each scenario $\omega$, the objective function of SBSP, given by $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{i = 1}^{M} y_{i \omega}^{+}$, does not decrease when transitioning from $H$ to $H'$.
 
 Let $\Delta y_{M \omega}^{+} = y_{M \omega}^{'+} - y_{M \omega}^{+}$, $\Delta \sum_{j=1}^{N} x_{Mj} = \sum_{j=1}^{N} x_{Mj}^{'} - \sum_{j=1}^{N} x_{Mj}$. According to \eqref{y_recursively}, when $i$ changes from $M$ to 1, we obtain the following inequalities.
 
@@ -51,7 +51,7 @@ Let $\Delta y_{M \omega}^{+} = y_{M \omega}^{'+} - y_{M \omega}^{+}$, $\Delta \s
   \Delta y_{1, \omega}^{+} \geq & \Delta \sum_{j=1}^{N} \sum_{i=1}^{M} x_{i,j}
 \end{align*}
 
-Since the objective function does not decrease, $H^{'}$ represents the optimal solution to SSP and is composed of full or largest patterns.
+Since the objective function does not decrease, $H^{'}$ represents the optimal solution to SBSP and is composed of full or largest patterns.
 \end{pf}
 
 \begin{pf}{Proof of Lemma \ref{feasible_region}}
@@ -106,6 +106,10 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $\mathbf{V} =
 According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to LP relaxation of problem \eqref{deter_upper} takes the form $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_{\tilde{i}} = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, \tilde{i}$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = h+1, \ldots, M$.
   
 Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$, and $z_i = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$.  
+\end{pf}
+
+\begin{pf}{Proof of Corollary \ref{maximum_or}}
+  According to Proposition \ref{lem_pattern}, $\phi(M, L; \delta)$ does not decrease in $M$. This is because any largest pattern $\bm{h}$ under $M$ remains a feasible pattern under $(M+1)$, implying that $\phi(M, L;\delta) \leq \phi(M+1, L; \delta)$. Consequently, when $M$ increases while $\bm{L}$ remains unchanged, the maximum achievable occupancy rate does not decrease. 
 \end{pf}
 
 \newpage

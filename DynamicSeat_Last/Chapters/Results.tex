@@ -1,20 +1,18 @@
 % !TEX root = sum1.tex
 \section{Computational Experiments}\label{sec_result}
-We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing, comparing different layouts, $M$s and social distancings. In the experiment, we set the following parameters. 
+We carried out several experiments, including analyzing the performances of different policies, evaluating the impact of implementing social distancing, comparing different layouts, $M$s and social distancings. In the experiments, we set the following parameters. 
 
-The default setting in the experiments is as follows, $\delta =1$ and $M =4$. The number of scenarios in SSP is $|\Omega| = 1000$. The default seat layout consists of 10 rows, each with the same size of 21. Different realistic layouts, group sizes and social distances are also explored. We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of individuals per period, denoted as $\gamma$, can be expressed as $\gamma = \sum_{i=1}^{M} i p_i$. Each experiment result is the average of 100 instances.
-% The occupancy rate at different demands is calculated as the average of these 100 instances. 
-% Each entry in the table represents the average performance across 100 instances.
+The default setting in the experiments is as follows, $\delta =1$ and $M =4$. The number of scenarios in SBSP is $|\Omega| = 1000$. The default seat layout consists of 10 rows, each with the same size of 21. Different realistic layouts, group sizes and social distances are also explored. We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of individuals per period, denoted as $\gamma$, can be expressed as $\gamma = \sum_{i=1}^{M} i p_i$. Each experiment result is the average of 100 instances.
+
+To assess the performances of different policies across varying demand levels, we conduct experiments spanning a range of 60 to 100 periods and we consider four probability distributions for our analysis: $D1:[0.18,0.7,0.06,0.06]$ and $D2:[0.2,0.8,0,0]$, $D3 = [0.34, 0.51, 0.07, 0.08]$ and $D4: [0.12, 0.5, 0.13, 0.25]$. The first two distributions, $D1$ and $D2$, are experimented with in \cite{blom2022filling}. Here, $D1$ represents the statistical distribution of group sizes, while $D2$ reflects a restricted situation where groups of more than 2 people are not allowed. The other two distributions, $D3$ and $D4$, are derived from real-world movie data. Specifically, we select Movie A (representing the suspense genre) and Movie B (representing the family fun genre) as target movies to analyze group information and their corresponding probability distributions, denoted as $D3$ and $D4$, respectively. The seat plans for the tickets were obtained from a Hong Kong cinema website. We focused on scattered seat plans and excluded cases where the number of consecutive seats exceeded four. By counting the occurrences of different group types, we obtained the distributions. 
+
+We use $D4$ as the default probability distribution in other experiments.
+
 
 \subsection{Performances of Different Policies}
-In this section, we compare the performance of four assignment policies with the optimal one, which can be obtained by solving the deterministic model after observing all arrivals. The policies under examination are DSA, DP-based heuristic (DPBH), bid-price control (BPC), booking-limit control (BLC) policies.
+We compare the performance of four assignment policies against the optimal one, which is derived by solving the deterministic model after observing all arrivals. The policies under evaluation are DSA, DP-based heuristic (DPBH), bid-price control (BPC), booking-limit control (BLC) policies.
 
 \subsection*{Parameters Description}
-We consider four probability distributions for our analysis. The first two, $D1:[0.18,0.7,0.06,0.06]$ and $D2:[0.2,0.8,0,0]$, were experimented with in \cite{blom2022filling}. Here, $D1$ represents the statistical distribution of group sizes, while $D2$ can be interpreted as a restricted situation where groups of more than 2 people are not allowed in our context. For additional experiments, we introduce two more distributions, $D3$ and $D4$, derived from real-world movie data.
-
-Specifically, we selected Detective Chinatown 1900 and Captain America: Brave New World as target movies to analyze group information and their corresponding probability distributions, denoted as D3 and D4, respectively. The seat plans for the tickets were obtained from the MCL cinema website. We focused on scattered seat plans and excluded cases where the number of consecutive seats exceeded four. By counting the occurrences of different group types, we obtained the following distributions: $D3 = [0.34, 0.51, 0.07, 0.08]$ representing the suspense genre, and $D4: [0.12, 0.5, 0.13, 0.25]$, representing the family fun genre. To assess the effectiveness of different policies across varying demand levels, we conducted experiments spanning a range of 60 to 100 periods. 
-
-
 The following table presents the performance results of four different policies: DSA, DPBH, BPC, BLC, which stand for dynamic seat assignment, dynamic programming-based heuristic, bid-price control and booking-limit control policies, respectively. The procedures of the BPC and BLC policies are detailed in Appendix \ref{policies}. Performance is evaluated by comparing the ratio of the number of accepted individuals under each policy to that under the optimal policy, which assumes complete knowledge of all incoming groups before making seat assignments.
 
 \begin{table}[h]
@@ -57,31 +55,44 @@ We can find that DSA is better than DPBH, BPC and BLC policies consistently. DPB
 
 The performance of DSA, DP-based heuristic, and bid-price policies follows a pattern where it initially decreases and then gradually improves as $T$ increases. When $T$ is small, the demand for capacity is generally low, allowing these policies to achieve relatively optimal performance. However, as $T$ increases, it becomes more challenging for these policies to consistently achieve a perfect allocation plan, resulting in a decrease in performance. Nevertheless, as $T$ continues to grow, these policies tend to accept larger groups, thereby narrowing the gap between their performance and the optimal value. Consequently, their performances improve. In contrast, the booking-limit policy shows improved performance as $T$ increases because it reduces the number of unoccupied seats reserved for the largest groups. 
 
-The performance of the policies can vary based on different probabilities. For the different probability distributions listed, DSA performs more stably and consistently for the same demand. In contrast, the performance of DPBH and BPC fluctuates more significantly.
+The performance of the policies can vary with different probabilities. For the different probability distributions listed, DSA performs more stably and consistently for the same demand. In contrast, the performance of DPBH and BPC fluctuates more significantly.
 
-% Moreover, according to the results of policies, we can develop an easy-to-implement policy. When $T \leq \frac{\sum_{j}{L_j}}{\gamma + 1}$, we accept the groups based on the first come first served policy. When $T > \frac{\sum_{j}{L_j}}{\gamma + 1}$, we adopt the booking-limit policy, i.e., assign the seats according to the seat planning obtained from problem \eqref{deter_upper}.
 
 \subsection{Impact of Social Distancing}\label{impact_sd}
-We investigate the impact of social distancing when implementing DSA under varying levels of demand. 
-As an illustrative example, we adopt $D4$ as the probability distribution. The demand levels are varied by adjusting the parameter $T$ from 40 to 100 in increments of 1.
+We introduce three key terms, gap point, threshold occupancy rate, and maximum achievable occupancy rate, to describe the impact of implementing social distancing.
 
-% It is evident that as the demand increases, the effect of social distancing becomes more pronounced. We aim to determine the specific time period where the absence of social distancing results in a higher number of accepted individuals compared to when social distancing measures are in place. Additionally, we will calculate the corresponding occupancy rate during this period.
+The \textit{gap point} $\tilde{T}$ is defined as the largest value of $T$ for which the inequality $E(T; \delta =1)+1 \geq E(T; \delta = 0)$ holds, where $E(T; \delta =1)$ denotes the average number of accepted individuals by DSA with one seat as social distancing, $E(T; \delta = 0)$ denotes the average number of accepted individuals by DSA when there is no social distancing.
+
+The occupancy rate corresponding to the gap point is referred to as the \textit{threshold occupancy rate}. This rate represents the maximum demand that can be satisfied when the difference in the number of accepted individuals remains unaffected by social distancing constraints.
+
+The \textit{maximum achievable occupancy rate} is attained when all rows of a given layout consist of the largest pattern. This rate is defined as:
+$$\frac{\sum_{j}\phi(M, L_{j}; \delta)}{\sum_{j} L_{j}- N \delta},$$
+
+where $\phi(M, L; \delta)$ represents the size of the largest pattern under $M$ and $L$. 
+
+Then, we examine the impact of social distancing when implementing DSA under varying levels of demand. Two situations: $\delta =0$ (no social distancing) and $\delta = 1$ (with social distancing) are tested. The demand levels are varied by adjusting the parameter $T$ from 40 to 100 in increments of 1. The results are visualized in Figure \ref{occupancy_rate_demand}, which shows the occupancy rate under different demand levels.
+
+
+% 两张图一个采用period 作为横坐标，
+% 另一个用 expected demand 的横坐标，便于显示occupancy rate 随 demand 占比的变化
+% 为了展示不同 demand 的横坐标是periods, 
+% 左边的图看出来
+
+
+Figure \ref{x_period} displays occupancy rate over period. Figure \ref{x_demand} displays occupancy rate over expected demand. 
+
+
 
 % By analyzing and comparing the data, we can gain insights into the relation between demand, social distancing, the number of accepted individuals, and occupancy rates. This information is valuable for understanding the impact of social distancing policies on overall capacity utilization and making informed decisions regarding resource allocation and operational strategies.
 
 % The figure below displays the number of assigned individuals over demand under two different conditions: with social distancing measure ($\delta =1$) and without social distancing measure ($\delta =0$). The figures depicting the results are presented below. The difference between these two figures is the x-axis, the left one is period, while the right one is the percentage of expected demand relative to total seats.
 
-% There are three key points in the figure, the gap point, the threshold occupancy rate and the maximum achievable occupancy rate.
-
-The gap point $\tilde{T}$ is defined as the largest value of $T$ for which the inequality $E(T; \delta =1)+1 \geq E(T; \delta = 0)$ holds, where $E(T; \delta =1)$ denotes the average number of accepted individuals by DSA with one seat as social distancing, $E(T; \delta = 0)$ denotes the average number of accepted individuals by DSA when there is no social distancing.
-
-The occupancy rate corresponding to the gap point is referred to as the threshold occupancy rate. This rate represents the maximum demand that can be satisfied when the difference in the number of accepted individuals remains unaffected by social distancing constraints.
 
 \begin{figure}[h]
   \centering
   \subfigure[]{
     \label{x_period}
-    \includegraphics[width=0.48\textwidth]{./Figures/occu_demand.pdf}}
+    \includegraphics[width=0.48\textwidth]{./Figures/occu_demand_group4.pdf}}
   \subfigure[]{
     \label{x_demand}
     \includegraphics[width=0.48\textwidth]{./Figures/occu_gamma_group4.pdf}}
@@ -125,7 +136,7 @@ We applied an Ordinary Least Squares (OLS) model to fit the data and estimate th
 Based on the above analysis, we also explore the results of different layouts, different group sizes and different social distances. Since the figure about the occupancy rate over demand is similar to Figure \ref{occupancy_rate_demand}, we only use three metrics to show the results: the gap point and the threshold occupancy rate, maximal achievable occupancy rate.
 
 \subsection*{Different Layouts}
-We experiment with several realistic seat layouts selected from the theater seat plan website, https://www.lcsd.gov.hk/en/ticket/seat.html. We select five places, Hong Kong Film Archive Cinema, Kwai Tsing Theatre Transverse Stage, Sai Wan Ho Civic Centre, Sheung Wan Civic Centre, Ngau Chi Wan Civic Centre, represented as HKFAC, KTTTS, SWHCC, SWCC, NCWCC respectively. HKFAC, SWCC, NCWCC, are approximately rectangular layouts, SWHCC is a standard rectangular layout. While KTTTS is an irregular layout. In these layouts, wheelchair seats and management seats are excluded, while seats with sufficient space for an aisle are treated as new rows. 
+We experiment with several realistic seat layouts selected from the theater seat plan website, https://www.lcsd.gov.hk/en/ticket/seat.html. We select five places, Hong Kong Film Archive Cinema, Kwai Tsing Theatre Transverse Stage, Sai Wan Ho Civic Centre, Sheung Wan Civic Centre, Ngau Chi Wan Civic Centre, represented as HKFAC, KTTTS, SWHCC, SWCC, NCWCC respectively. HKFAC, SWCC, NCWCC, are approximately rectangular layouts, SWHCC is a standard rectangular layout. While KTTTS is an irregular layout. In these layouts, wheelchair seats and management seats are excluded, while seats with sufficient space for an aisle are treated as new rows.
 
 The occupancy rate over demand follows the typical pattern of Figure \ref{occupancy_rate_demand}. The gap point, the threshold occupancy rate and the maximum achievable occupancy rate are also given in the following table. The maximum achievable occupancy rate can be calculated from Proposition \ref{lem_pattern}.
 
@@ -146,7 +157,12 @@ The occupancy rate over demand follows the typical pattern of Figure \ref{occupa
   \end{tabular}
 \end{table}
 
-Generally speaking, the length of each row impacts the occupancy rate, as a full pattern can maximize seat utilization, leading to a higher occupancy rate. However, in rectangular layouts, achieving a full pattern in each row can be challenging, resulting in a relatively low occupancy rate, as seen in SWHCC. Although these layouts are all approximately rectangular, the varying lengths of each row lead to different occupancy rates, as demonstrated by HKFAC, SWCC, and NCWCC.
+% Generally speaking, the length of each row impacts the occupancy rate, as a full pattern can maximize seat utilization, leading to a higher occupancy rate. However, in rectangular layouts, achieving a full pattern in each row can be challenging, resulting in a relatively low occupancy rate, as seen in SWHCC. 
+% Although these layouts are all approximately rectangular, the varying lengths of each row lead to different occupancy rates.
+
+% Although the layouts may be rectangular or not, each row of layout may be long or short, the threshold occupancy rate and maximum achievable occupancy rate do not show obvious difference.
+
+Although the layouts may vary in shapes (rectangular or otherwise) and row lengths (long or short), the threshold occupancy rate and maximum achievable occupancy rate do not exhibit significant differences.
 
 % This suggests that, when the total number of seats is the same, the layout with more rows yields a larger gap point and occupancy rate compared to the layout with fewer rows.
 
@@ -156,6 +172,11 @@ Generally speaking, the length of each row impacts the occupancy rate, as a full
 When $M$ is restricted at 3, given the probability distribution [0.12, 0.5, 0.13, 0.25], we discard the fourth component and normalize the remaining three components to generate a new probability distribution [0.16, 0.67, 0.17]. Similarly, when $M =2$, the probability distribution is [0.19, 0.81].
 We present the gap point, the threshold occupancy rate and the maximum achievable occupancy rate in the table below.
 
+\begin{corollary}\label{maximum_or}
+  The maximum achievable occupancy rate does not decrease in $M$ for a fixed layout.
+\end{corollary}
+
+% According to Corollary 
 
 \begin{table}[ht]
   \centering
@@ -177,7 +198,7 @@ We present the gap point, the threshold occupancy rate and the maximum achievabl
 % The insight is although allowing larger groups will increase the largest occupancy rate, the impact of social distancing will become evident at an earlier period. Specifically, if demand is low or if the managers wish to avoid rejecting a significant number of customers, they can set a smaller group size limit. Conversely, when demand is high, a larger group size limit can be set to accommodate more customers.
 
 \subsection*{Different Social Distances}
-The following figure illustrates the number of accepted individuals over time with social distancing set at 0, 1, and 2 seats, respectively.
+The following figure illustrates the occupancy rate over periods with social distancing set at 0, 1, and 2 seats, respectively.
 
 \begin{figure}[h]
   \centering

@@ -64,8 +64,15 @@ The \textit{gap point} $\tilde{T}$ is defined as the largest value of $T$ for wh
 We examine the impact of social distancing when implementing DSA under varying levels of demand.  Specifically, we test a one-seat social distancing requirement ($\delta = 1$) against a benchmark scenario with no social distancing ($\delta =0$). The demand levels are varied by adjusting the parameter $T$ from 40 to 100 in increments of 1. The results are visualized in Figure \ref{occupancy_rate_demand}, which shows the occupancy rate under different demand levels.
 
 
+% 两张图一个采用period 作为横坐标，
+% 另一个用 expected demand 的横坐标，便于显示occupancy rate 随 demand 占比的变化
+% 为了展示不同 demand 的横坐标是periods, 
+% 左边的图看出来
+
 
 % By analyzing and comparing the data, we can gain insights into the relation between demand, social distancing, the number of accepted individuals, and occupancy rates. This information is valuable for understanding the impact of social distancing policies on overall capacity utilization and making informed decisions regarding resource allocation and operational strategies.
+
+% The figure below displays the number of assigned individuals over demand under two different conditions: with social distancing measure ($\delta =1$) and without social distancing measure ($\delta =0$). The figures depicting the results are presented below. The difference between these two figures is the x-axis, the left one is period, while the right one is the percentage of expected demand relative to total seats.
 
 
 \begin{figure}[h]
@@ -80,18 +87,22 @@ We examine the impact of social distancing when implementing DSA under varying l
   \label{occupancy_rate_demand}
 \end{figure}
 
-Figure \ref{x_period} displays occupancy rate over period. The gap point is 57, the threshold occupancy rate is 71.8\%. For the social distancing situation, when the largest pattern is realized in each row, the maximum achievable occupancy rate is given by $80\%$.
+Figure \ref{x_period} displays occupancy rate over period. The gap point is 57, the threshold occupancy rate is 71.8\%. For the social distancing situation, when the largest pattern is realized in each row, the maximum achievable occupancy rate is given by $\frac{16}{20} = 80\%$.
 
 Figure \ref{x_demand} displays occupancy rate over expected demand. When the expected demand is less than 71.8\%, the social distancing requirement will not cause the loss; when the expected demand is larger than 71.8\%, the difference between the number of accepted individuals with and without social distancing requirements becomes more pronounced.
 
-\subsection*{Requirement of Maximum Allowable Occupancy Rate}
+\subsection*{Impact of Maximum Allowable Occupancy Rate}
 Sometimes, policies impose a maximum allowable occupancy rate to enforce stricter measures. This rate becomes redundant if it exceeds the maximum achievable rate. When the maximum allowable rate is below the threshold occupancy rate, only the occupancy rate requirement is effective, rendering the social distancing requirement irrelevant. However, when the maximum allowable rate falls between the threshold occupancy rate and the maximum achievable rate, both the occupancy rate and social distancing requirements jointly influence seat assignments.
 
 In the above example, the maximum achievable rate is 80\%, implying that when the maximum allowable rate exceeds 80\%, it has no effect. The threshold occupancy rate is 71.8\%, so when the maximum allowable rate is below 71.8\%, only the occupancy rate requirement is effective. When the maximum allowable rate is between 71.8\% and 80\%, both the occupancy rate and social distancing requirements jointly determine seat assignments.
 
 
+% Similarly, $\phi(M, L)$ does not decrease in $L$. Since any largest pattern $\bm{h}$ under $L$ is a feasible pattern under $L+1$, thus, $\phi(M, L) \leq \phi(M, L+1)$.
+
+
 \subsection{Estimation of Gap Points and Occupancy Rates}
 To estimate the gap point, we aim to find the maximal period such that all requests can be assigned into the seats during these periods, i.e., for each group type $i$, we have $\bm{X}_{i} = \sum_{j} x_{ij} \geq d_i$. Meanwhile, we have the capacity constraint $\sum_{i} n_{i} x_{ij} \leq L_j$, thus, $\sum_{i} n_i d_i \leq \sum_{i} n_i \sum_{j} x_{ij} \leq \sum_{j} L_{j}$. Notice that $E(d_i) = p_i T$, we have $\sum_{i} n_i p_i T \leq \sum_{j} L_{j}$ by taking the expectation. Recall that $\tilde{L} = \sum_{j} L_{j}$ denotes the total number of seats, and $\gamma$ represents the average number of individuals in each period. Then, we can derive the inequality $T \leq \frac{\tilde{L}}{\gamma + \delta}$. Therefore, the upper bound for the expected maximal period is given by $T' = \frac{\tilde{L}}{\gamma + \delta}$.
+
 
 Assuming that all arrivals within $T'$ periods are accepted and fill all the available seats, the threshold occupancy rate can be calculated as $\frac{\gamma T'}{(\gamma+ \delta)T' - N \delta} = \frac{\gamma}{\gamma +\delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$. However, it is important to note that the actual maximal period will be smaller than $T{'}$ because it is nearly impossible to accept groups to fill all seats exactly. To estimate the gap point when applying DSA, we can use $y_1 = c_1 \frac{\tilde{L}}{\gamma + \delta}$, where $c_1$ is a discount factor compared to the ideal assumption. Similarly, we can estimate the threshold occupancy rate as $y_2 = c_2 \frac{\gamma}{\gamma +\delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$, where $c_2$ is a discount factor for the occupancy rate compared to the ideal scenario.
 
@@ -105,6 +116,7 @@ We applied an Ordinary Least Squares (OLS) model to fit the data and estimate th
   \caption{The estimations of gap points and occupancy rates}
 \end{figure}
 
+% As the value of $\gamma$ increases, the gap point will decrease and the corresponding occupancy rate will increase. Consequently, the occupancy rate increases due to the allocation of seats to larger groups. The percentage difference is negligible when the demand is small, but it becomes more significant as the demand increases.
 
 Based on the above analysis, we also explore the results of different layouts, different group sizes and different social distances. Since the figure about the occupancy rate over demand is similar to Figure \ref{occupancy_rate_demand}, we only use three metrics to show the results: the gap point and the threshold occupancy rate, the maximum achievable occupancy rate.
 
@@ -130,9 +142,16 @@ The occupancy rate over demand follows the typical pattern of Figure \ref{occupa
   \end{tabular}
 \end{table}
 
+% Generally speaking, the length of each row impacts the occupancy rate, as a full pattern can maximize seat utilization, leading to a higher occupancy rate. However, in rectangular layouts, achieving a full pattern in each row can be challenging, resulting in a relatively low occupancy rate, as seen in SWHCC. 
+% Although these layouts are all approximately rectangular, the varying lengths of each row lead to different occupancy rates.
+
+% Although the layouts may be rectangular or not, each row of layout may be long or short, the threshold occupancy rate and maximum achievable occupancy rate do not show obvious difference.
 
 Although the layouts may vary in shapes (rectangular or otherwise) and row lengths (long or short), the threshold occupancy rate and maximum achievable occupancy rate do not exhibit significant differences.
 
+% This suggests that, when the total number of seats is the same, the layout with more rows yields a larger gap point and occupancy rate compared to the layout with fewer rows.
+
+% For each row, a seat is designated for social distancing with every group accepted. Consequently, when each row follows a full pattern and the total number of seats remains constant, having more rows results in a higher gap point and occupancy rate. Similarly, in a small room with fewer seats per row, the occupancy rate at the gap point will correspondingly be higher.
 
 \subsection*{Different Allowable Largest Group Sizes}
 When $M$ is restricted at 3, given the probability distribution [0.12, 0.5, 0.13, 0.25], we discard the fourth component and normalize the remaining three components to generate a new probability distribution: [0.16, 0.67, 0.17]. Similarly, when $M =2$, the probability distribution is [0.19, 0.81].
@@ -189,3 +208,20 @@ table below.
 When the social distance changes from 1 seat to 2 seats, the gap point, the threshold occupancy rate and the maximum allowable rate will decrease correspondingly.
 
 % We examine the impact of implementing social distancing on the occupancy rate and explore strategies to minimize revenue loss. Consider the situation where the gap point is $\tilde{T}$ and is determined by the parameters $\delta$, $\gamma$, $M$, and $\tilde{L}$. The corresponding occupancy rate is $\Gamma(\tilde{T})$. When the actual number of people (demand) is less than $\tilde{L} \cdot \Gamma(\tilde{T})$, implementing social distancing does not affect the revenue. However, if the actual number of people exceeds $\tilde{L} \cdot \Gamma(\tilde{T})$, enforcing social distancing measures will lead to a reduction in revenue. The extent of this loss can be assessed through simulations by using the specified parameters. To mitigate the potential loss, the seller can increase the value of $\gamma$. This can be achieved by implementing certain measures, such as setting a limit on the number of single-person groups or allowing for larger group sizes. 
+
+% At times, the government may establish a maximum allowable occupancy rate. This rate is effective for an event only if it is lower than the expected occupancy rate. Additionally, the maximum allowed rate becomes redundant if it exceeds the maximum achievable rate for all events.
+
+% for example, for family movies in cinemas, $\gamma$ will be relatively large, so a higher occupancy rate limit can be set.
+
+
+% HONG KONG FILM ARCHIVE CINEMA [17, 18, 18, 18, 18, 18, 18, 8]
+
+% Kwai Tsing Theatre Transverse Stage [7, 9, 7, 10, 7, 11, 8, 11, 9, 7, 10, 7, 11, 7, 13, 8]
+
+%%  Kwai Tsing Theatre Arena Stage  [6, 6, 5, 7, 7, 7, 8, 8, 7, 7, 7, 7, 8, 8, 6, 4, 5, 5, 6, 6, 6, 6, 4, 6, 5, 5, 6, 6, 6, 6]
+
+% Sai Wan Ho Civic Centre [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6] 6* 22
+
+% Sheung Wan Civic Centre [3, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13]
+
+% Ngau Chi Wan Civic Centre Theatre  [13, 21, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 21, 13]

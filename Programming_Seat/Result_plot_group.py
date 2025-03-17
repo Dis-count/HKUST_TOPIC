@@ -24,9 +24,9 @@ def plot_data(given_lines, roll_width, data):
     point[1] = round(point[1], 2)
     plt.annotate(r'Gap $%s$' % str(point), xy=point, xytext=(point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
     plt.legend()
-    plt.savefig('test_group_4.pdf')
+    plt.savefig('d3_group_4.pdf')
 
 given_lines = 10
 roll_width = np.ones(given_lines) * 21
-data = np.load('test_group_4.npy')
+data = np.load('d3_group_4.npy')
 plot_data(given_lines, roll_width, data)

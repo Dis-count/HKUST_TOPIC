@@ -24,11 +24,11 @@ def plot_data(given_lines, roll_width, data):
             break
 
     plt.plot(t_value, people_value, 'b-', label= 'Without social distancing')
-    plt.plot(t_value, occup_1, 'r--', label='With 1 social distancing')
-    plt.plot(t_value, occup_2, 'y*', label='With 2 social distancing')
+    plt.plot(t_value, occup_1, 'r--', label='With 1 seat')
+    plt.plot(t_value, occup_2, 'g-.', label='With 2 seats')
 
-    plt.xlabel('Periods')
-    plt.ylabel('Percentage of total seats')
+    plt.xlabel('Period')
+    plt.ylabel('Occupancy rate')
 
     point_1[1] = round(point_1[1], 2)
     plt.annotate(r'Gap $%s$' % str(point_1), xy = point_1, xytext = (point_1[0]+10, point_1[1]), arrowprops = dict(facecolor = 'black', shrink = 0.1),)

@@ -7,7 +7,7 @@ Consider a seat layout comprising $N$ rows, with each row $j$ containing $L_j^0$
 There are $M$ distinct group types, where each group type $i$, $i \in \mathcal{M} \coloneqq \{1, 2, \ldots, M\}$, consists of $i$ individuals requiring $i$ consecutive seats in one row. The request of each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the number of groups of type $i$.
 
 To adhere to social distancing requirements, individuals from the same group must sit together in one specific row while maintaining a distance, measured by the number of empty seats, from adjacent groups in the same row.
-Let $\delta$ denote the social distancing, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s). To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. It is a clear one-to-one mapping between the original physical seat plan and the model of seat plan. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat plan problem.
+Let $\delta$ denote the social distance, which could entail leaving one or more empty seats. Specifically, each group must ensure the empty seat(s) with the adjacent group(s). To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. It is a clear one-to-one mapping between the original physical seat plan and the model of seat plan. By incorporating the additional seat(s) and designating certain seat(s) for social distancing, we can integrate social distancing measures into the seat plan problem.
 
 Since each group occupies only one row, we assume that the physical distance between different rows is sufficient. If the social distancing requirement is more stringent, an empty row can be implemented, as practiced by some theaters \cite{Berlin_theater}.
 
@@ -65,11 +65,15 @@ If the size of a feasible pattern $\bm{h}$ is $|\bm{h}| = qM + \max\{r-\delta, 0
 
 The size, $qM + \max\{r-\delta, 0\}$, corresponds directly to a largest pattern that includes $q$ group type $M$ and $r$ seats for one group type $(r-\delta)$ when $r>\delta$. However, the form of the largest pattern is not unique; there are other largest patterns that share the same size. Specifically, when $r = 0$, the largest pattern $\bm{h}$ is unique and full, indicating that only one pattern can accommodate the maximum number of individuals; when $r > \delta$, the largest pattern $\bm{h}$ is full, as it utilizes the available space up to the social distancing requirement.
 
-A concept closely related to the largest pattern is the \textit{maximum achievable occupancy rate}, which will be discussed in Section \ref{impact_sd} regarding the impact of social distancing. When all rows of a given layout consist of the largest pattern, the layout achieves its maximum achievable occupancy rate. This rate is defined as:
+A concept closely related to the largest pattern is the \textit{maximum achievable occupancy rate}, which will be discussed in Section \ref{impact_sd} regarding the impact of social distancing. The maximum achievable occupancy rate is attained when each row of a given layout is the largest pattern. This rate is defined as follows:
 
 $$\frac{\sum_{j}\phi(M, L_{j}; \delta)}{\sum_{j} L_{j}- N \delta},$$
+where $\phi(M, L; \delta)$ represents the size of the largest pattern under $M$ and $L$. 
 
-where $\phi(M, L; \delta)$ represents the size of the largest pattern under $M$ and $L$. According to Proposition \ref{lem_pattern}, $\phi(M, L; \delta)$ does not decrease in $M$. This is because any largest pattern $\bm{h}$ under $M$ remains a feasible pattern under $(M+1)$, implying that $\phi(M, L;\delta) \leq \phi(M+1, L; \delta)$. Consequently, when $M$ increases while $L$ remains constant, the maximum achievable occupancy rate also increases.
+\begin{corollary}\label{maximum_or}
+    The maximum achievable occupancy rate for a fixed layout does not decrease in $M$.
+\end{corollary}
+
 
 \begin{example}
 Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are as follows: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$. Among these, $(0, 0, 0, 4)$ is the form referenced in Proposition \ref{lem_pattern}.

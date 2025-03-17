@@ -55,13 +55,13 @@ plt.xlabel('Gamma', fontsize = 20)
 
 plt.scatter(result[:, 0], result[:, 1], c = "blue")
 plt.plot(x, y1, label= "Blue_estimated")
-plt.ylabel('Periods', fontsize= 20)
+plt.ylabel('Period', fontsize= 20)
 
 plt.twinx()
 
 plt.scatter(result[:, 0], result[:, 2], c="red")
-plt.plot(x, y2, 'r-', label= "Red_estimated")
-plt.ylabel('Occupancy Rate (%)', fontsize = 20)
+plt.plot(x, y2, 'r--', label= "Red_estimated")
+plt.ylabel('Occupancy rate (%)', fontsize = 20)
 
 
 plt.show()

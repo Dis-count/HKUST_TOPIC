@@ -28,15 +28,15 @@ def plot_data(data, option):
         plt.xlim((40, 100))
         plt.ylim((40, 100))
         plt.xlabel('Period')
-        plt.ylabel('Occupancy rate')
+        plt.ylabel('Occupancy rate (%)')
         point[1] = round(point[1], 1)
 
         plt.annotate(r'Gap $%s$' % str(point), xy=(point[0], point[1]), xytext=(
-            point[0] + 5, point[1]-10), arrowprops=dict(facecolor='black', shrink=0.1),)
+            point[0] + 5, point[1]-10), arrowprops = dict(facecolor='black', shrink=0.1),)
 
-        plt.axhline(y = 80, xmin = 0, xmax = 1, color = 'green', linestyle = '--')
+        plt.axhline(y = 80, xmin = 0, xmax = 1, color = 'green', linestyle = ':')
         # plt.axhline(y = 65, xmin = 0, xmax = 1, color = 'purple', linestyle='--')
-        plt.axhline(y = 71.8, xmin = 0, xmax = 1, color = 'purple', linestyle='--')
+        plt.axhline(y = 71.8, xmin = 0, xmax = 1, color = 'purple', linestyle=':')
 
         # plt.annotate(r'80%' , xy=(90, 80), xytext=(80, 90), color='red', arrowprops=dict(facecolor='black', shrink=0.1),)
 
@@ -51,14 +51,14 @@ def plot_data(data, option):
         plt.plot(t_value* gamma/total_seat*100, occup_value, 'r--', label='With social distancing')
         plt.xlim((50, 110))
         plt.ylim((50, 110))
-        plt.xlabel('Percentage of expected demand relative to total seats')
-        plt.ylabel('Occupancy rate')
+        plt.xlabel('Expected demand relative to total seats (%)')
+        plt.ylabel('Occupancy rate (%)')
         point[1] = round(point[1], 1)
         # plt.axvline(x = 60, ymin = 0, ymax = 1/6, color = 'green', linestyle='--')
 
-        plt.axvline(x = 71.8, ymin = 0, ymax = 0.36, color = 'purple', linestyle='--')
-        plt.axvline(x = 80,  ymin = 0, ymax = 1/2, color = 'green', linestyle='--')
-        # plt.axvline(90, ymin = 0, ymax = 2/3, color = 'purple', linestyle='--')
+        plt.axvline(x = 71.8, ymin = 0, ymax = 0.36, color = 'purple', linestyle=':')
+        plt.axvline(x = 80,  ymin = 0, ymax = 1/2, color = 'green', linestyle=':')
+        plt.axvline(90, ymin = 0, ymax = 2/3, color = 'green', linestyle=':')
         # plt.axvline(100, ymin = 0, ymax = 5/6-0.02, color = 'purple', linestyle='--')
 
         my_x_ticks = np.arange(50, 110, 10)
@@ -75,4 +75,4 @@ option = 1
 # gamma
 option = 0
 
-plot_data(data, 1)
+plot_data(data, 0)

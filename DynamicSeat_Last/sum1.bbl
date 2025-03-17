@@ -35,12 +35,6 @@ Juliano~Cavalcante Bortolete, Luis~Felipe Bueno, Renan Butkeraites, et~al.
   between students.
 \newblock {\em Computational and Applied Mathematics}, 41:1--23, 2022.
 
-\bibitem{casey2005scenario}
-Michael~S Casey and Suvrajeet Sen.
-\newblock The scenario generation algorithm for multistage stochastic linear
-  programming.
-\newblock {\em Mathematics of Operations Research}, 30(3):615--631, 2005.
-
 \bibitem{CDC}
 {CDC}.
 \newblock Keep a safe space.
@@ -68,12 +62,6 @@ Igor Deplano, Danial Yazdani, and Trung~Thanh Nguyen.
 \newblock The offline group seat reservation knapsack problem with profit on
   seats.
 \newblock {\em IEEE Access}, 7:152358--152367, 2019.
-
-\bibitem{feng2013scenario}
-Yonghan Feng and Sarah~M Ryan.
-\newblock Scenario construction and reduction applied to stochastic power
-  generation expansion planning.
-\newblock {\em Computers \& Operations Research}, 40(1):9--23, 2013.
 
 \bibitem{ferreira1996solving}
 Carlos~E Ferreira, Alexander Martin, and Robert Weismantel.
@@ -111,12 +99,6 @@ Md~Tabish Haque and Faiz Hamid.
 \newblock Social distancing and revenue management-{A} post-pandemic adaptation
   for railways.
 \newblock {\em Omega}, 114:102737, 2023.
-
-\bibitem{henrion2018problem}
-R{\'e}ne Henrion and Werner R{\"o}misch.
-\newblock Problem-based optimal scenario generation and reduction in stochastic
-  programming.
-\newblock {\em Mathematical Programming}, pages 1--23, 2018.
 
 \bibitem{jasin2012re}
 Stefanus Jasin and Sunil Kumar.

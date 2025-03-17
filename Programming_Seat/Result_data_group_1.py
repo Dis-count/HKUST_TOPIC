@@ -54,11 +54,8 @@ if __name__ == "__main__":
                 newx4 = a_instance.random_generate(sequence)
                 sequence1 = [i-sd for i in sequence]
                 newx40 = a_without.random_generate(sequence1)
-                # newx40 = a_without.random_generate(sequence1)
-                if num_period <= 70:
-                    f = a_without.offline(sequence1)  # optimal result
-                else:
-                    f = a_without.method_new(sequence1, newx40, roll_width-sd)
+
+                f = a_without.offline(sequence1)  # optimal result
                 accept_people += np.dot(multi, f)
 
                 g = a_instance.method_new(sequence, newx4, roll_width)
@@ -66,10 +63,7 @@ if __name__ == "__main__":
                 
             occup_value[cnt] = sto/count/total_seat * 100
             people_value[cnt] = accept_people/count/total_seat * 100
-            if gap_if:
-                if accept_people/count - sto/count > 1:
-                    point = [num_period-1, occup_value[cnt-1]]
-                    gap_if = False
+
             cnt += 1
 
         data = np.vstack((t_value, people_value, occup_value))

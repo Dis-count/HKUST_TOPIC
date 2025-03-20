@@ -1,46 +1,47 @@
 This is BibTeX, Version 0.99d (TeX Live 2021/W32TeX)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: sum1.aux
-The style file: plain.bst
+The style file: elsarticle-harv.bst
 Database file #1: refe.bib
-You've used 33 entries,
-            2118 wiz_defined-function locations,
-            701 strings with 9292 characters,
-and the built_in function-call counts, 10787 in all, are:
-= -- 1101
-> -- 455
-< -- 0
-+ -- 193
-- -- 146
-* -- 815
-:= -- 1810
-add.period$ -- 99
-call.type$ -- 33
-change.case$ -- 170
-chr.to.int$ -- 0
-cite$ -- 33
-duplicate$ -- 351
-empty$ -- 864
-format.name$ -- 146
-if$ -- 2188
-int.to.chr$ -- 0
-int.to.str$ -- 33
-missing$ -- 31
-newline$ -- 168
-num.names$ -- 66
-pop$ -- 131
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+You've used 32 entries,
+            2990 wiz_defined-function locations,
+            824 strings with 10239 characters,
+and the built_in function-call counts, 19926 in all, are:
+= -- 1583
+> -- 624
+< -- 22
++ -- 270
+- -- 210
+* -- 2075
+:= -- 2883
+add.period$ -- 96
+call.type$ -- 32
+change.case$ -- 228
+chr.to.int$ -- 32
+cite$ -- 32
+duplicate$ -- 1524
+empty$ -- 1553
+format.name$ -- 314
+if$ -- 3706
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 282
+newline$ -- 175
+num.names$ -- 128
+pop$ -- 537
 preamble$ -- 1
-purify$ -- 138
+purify$ -- 197
 quote$ -- 0
-skip$ -- 243
+skip$ -- 427
 stack$ -- 0
-substring$ -- 893
-swap$ -- 33
+substring$ -- 1069
+swap$ -- 1033
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 130
+type$ -- 285
 warning$ -- 0
-while$ -- 121
-width$ -- 35
-write$ -- 360
+while$ -- 149
+width$ -- 0
+write$ -- 457

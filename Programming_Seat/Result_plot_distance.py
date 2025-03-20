@@ -28,7 +28,7 @@ def plot_data(given_lines, roll_width, data):
     plt.plot(t_value, occup_2, 'g-.', label='With 2 seats')
 
     plt.xlabel('Period')
-    plt.ylabel('Occupancy rate')
+    plt.ylabel('Occupancy rate (%)')
 
     point_1[1] = round(point_1[1], 2)
     plt.annotate(r'Gap $%s$' % str(point_1), xy = point_1, xytext = (point_1[0]+10, point_1[1]), arrowprops = dict(facecolor = 'black', shrink = 0.1),)

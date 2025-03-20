@@ -99,7 +99,6 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $\mathbf{V} =
     \end{equation}
     Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more constraints will not make the optimal value larger. Thus, RBMP is bounded. 
   \end{pf}
-  
 
 
 \begin{pf}{Proof of Lemma \ref{bid-price}}
@@ -108,8 +107,14 @@ According to the Proposition \ref{sol_relax_deter}, the aggregate optimal soluti
 Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$, and $z_i = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$.  
 \end{pf}
 
-\begin{pf}{Proof of Corollary \ref{maximum_or}}
-  According to Proposition \ref{lem_pattern}, $\phi(M, L; \delta)$ does not decrease in $M$. This is because any largest pattern $\bm{h}$ under $M$ remains a feasible pattern under $(M+1)$, implying that $\phi(M, L;\delta) \leq \phi(M+1, L; \delta)$. Consequently, when $M$ increases while $\bm{L}$ remains unchanged, the maximum achievable occupancy rate does not decrease. 
+\begin{pf}{Proof of Corollary \ref{maximum_phi}}
+  According to Proposition \ref{lem_pattern}, any largest pattern $\bm{h}$ under $M$ remains a feasible pattern under $(M+1)$, implying that $\phi(M, L;\delta) \leq \phi(M+1, L; \delta)$. Similarly, since any largest pattern $\bm{h}$ under $L$ is a feasible pattern under $L+1$, thus, $\phi(M, L) \leq \phi(M, L+1)$.
 \end{pf}
+ 
+% Similarly, $\phi(M, L; \delta)$ does not decrease in $L$. Since any largest pattern $\bm{h}$ under $L$ is a feasible pattern under $L+1$, thus, $\phi(M, L) \leq \phi(M, L+1)$.
+
+% $\phi(M, L; \delta)$ does not decrease in $M$.
+
+% Consequently, when $M$ increases while $\bm{L}$ remains unchanged, the maximum achievable occupancy rate does not decrease.
 
 \newpage

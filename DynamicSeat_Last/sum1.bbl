@@ -1,200 +1,256 @@
-\begin{thebibliography}{10}
-
-\bibitem{aydin2018decomposition}
-Nursen Aydin and S~Ilker Birbil.
-\newblock Decomposition methods for dynamic room allocation in hotel revenue
-  management.
-\newblock {\em European Journal of Operational Research}, 271(1):179--192,
-  2018.
-
-\bibitem{bnnobrs1962partitioning}
-J~Benders.
-\newblock Partitioning procedures for solving mixed-variables programming
-  problems.
-\newblock {\em Numer. Math}, 4(1):238--252, 1962.
-
-\bibitem{bertsimas2003revenue}
-Dimitris Bertsimas and Ioana Popescu.
-\newblock Revenue management in a dynamic network environment.
-\newblock {\em Transportation Science}, 37(3):257--277, 2003.
-
-\bibitem{bitran1995application}
-Gabriel~R Bitran and Susana~V Mondschein.
-\newblock An application of yield management to the hotel industry considering
-  multiple day stays.
-\newblock {\em Operations Research}, 43(3):427--443, 1995.
-
-\bibitem{blom2022filling}
-Danny Blom, Rudi Pendavingh, and Frits Spieksma.
-\newblock Filling a theater during the {C}ovid-19 pandemic.
-\newblock {\em INFORMS Journal on Applied Analytics}, 52(6):473--484, 2022.
-
-\bibitem{bortolete2022support}
-Juliano~Cavalcante Bortolete, Luis~Felipe Bueno, Renan Butkeraites, et~al.
-\newblock A support tool for planning classrooms considering social distancing
-  between students.
-\newblock {\em Computational and Applied Mathematics}, 41:1--23, 2022.
-
-\bibitem{CDC}
-{CDC}.
-\newblock Keep a safe space.
-\newblock \url{https://stacks.cdc.gov/view/cdc/90522}, 2020.
-
-\bibitem{clausen2010off}
-Tommy Clausen, Allan~Nordlunde Hjorth, Morten Nielsen, and David Pisinger.
-\newblock The off-line group seat reservation problem.
-\newblock {\em European Journal of Operational Research}, 207(3):1244--1253,
-  2010.
-
-\bibitem{curry1990optimal}
-Renwick~E Curry.
-\newblock Optimal airline seat allocation with fare classes nested by origins
-  and destinations.
-\newblock {\em Transportation Science}, 24(3):193--204, 1990.
-
-\bibitem{dantzig1957discrete}
-George~B Dantzig.
-\newblock Discrete-variable extremum problems.
-\newblock {\em Operations Research}, 5(2):266--288, 1957.
-
-\bibitem{deplano2019offline}
-Igor Deplano, Danial Yazdani, and Trung~Thanh Nguyen.
-\newblock The offline group seat reservation knapsack problem with profit on
-  seats.
-\newblock {\em IEEE Access}, 7:152358--152367, 2019.
-
-\bibitem{ferreira1996solving}
-Carlos~E Ferreira, Alexander Martin, and Robert Weismantel.
-\newblock Solving multiple knapsack problems by cutting planes.
-\newblock {\em SIAM Journal on Optimization}, 6(3):858--877, 1996.
-
-\bibitem{fischetti2023safe}
-Martina Fischetti, Matteo Fischetti, and Jakob Stoustrup.
-\newblock Safe distancing in the time of {COVID}-19.
-\newblock {\em European Journal of Operational Research}, 304(1):139--149,
-  2023.
-
-\bibitem{gallego1997multiproduct}
-Guillermo Gallego and Garrett Van~Ryzin.
-\newblock A multiproduct dynamic pricing problem and its applications to
-  network yield management.
-\newblock {\em Operations Research}, 45(1):24--41, 1997.
-
-\bibitem{ghorbani2020model}
-Elaheh Ghorbani, Hamid Molavian, and Fred Barez.
-\newblock A model for optimizing the health and economic impacts of {C}ovid-19
-  under social distancing measures; a study for the number of passengers and
-  their seating arrangements in aircrafts.
-\newblock {\em arXiv preprint arXiv:2010.10993}, 2020.
-
-\bibitem{haque2022optimization}
-Md~Tabish Haque and Faiz Hamid.
-\newblock An optimization model to assign seats in long distance trains to
-  minimize {SARS}-{C}o{V}-2 diffusion.
-\newblock {\em Transportation Research Part A: Policy and Practice},
-  162:104--120, 2022.
-
-\bibitem{haque2023social}
-Md~Tabish Haque and Faiz Hamid.
-\newblock Social distancing and revenue management-{A} post-pandemic adaptation
-  for railways.
-\newblock {\em Omega}, 114:102737, 2023.
-
-\bibitem{jasin2012re}
-Stefanus Jasin and Sunil Kumar.
-\newblock A re-solving heuristic with bounded revenue loss for network revenue
-  management with customer choice.
-\newblock {\em Mathematics of Operations Research}, 37(2):313--345, 2012.
-
-\bibitem{johnson1974fast}
-David~S Johnson.
-\newblock Fast algorithms for bin packing.
-\newblock {\em Journal of Computer and System Sciences}, 8(3):272--314, 1974.
-
-\bibitem{kleywegt1998dynamic}
-Anton~J Kleywegt and Jason~D Papastavrou.
-\newblock The dynamic and stochastic knapsack problem.
-\newblock {\em Operations Research}, 46(1):17--35, 1998.
-
-\bibitem{kwag2022optimal}
-Sungil Kwag, Woo~Jin Lee, and Young~Dae Ko.
-\newblock Optimal seat allocation strategy for e-sports gaming center.
-\newblock {\em International Transactions in Operational Research},
-  29(2):783--804, 2022.
-
-\bibitem{lewis2016creating}
-Rhyd Lewis and Fiona Carroll.
-\newblock Creating seating plans: a practical application.
-\newblock {\em Journal of the Operational Research Society}, 67(11):1353--1362,
-  2016.
-
-\bibitem{Berlin_theater}
-{Lonlely Planet}.
-\newblock Berlin theatre shows what socially-distanced entertainment might look
-  like.
+\begin{thebibliography}{32}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Aydin and Birbil(2018)}]{aydin2018decomposition}
+\bibinfo{author}{Aydin, N.}, \bibinfo{author}{Birbil, S.I.},
+  \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Decomposition methods for dynamic room allocation in
+  hotel revenue management}.
+\newblock \bibinfo{journal}{European Journal of Operational Research}
+  \bibinfo{volume}{271}, \bibinfo{pages}{179--192}.
+%Type = Article
+\bibitem[{Benders(1962)}]{bnnobrs1962partitioning}
+\bibinfo{author}{Benders, J.}, \bibinfo{year}{1962}.
+\newblock \bibinfo{title}{Partitioning procedures for solving mixed-variables
+  programming problems}.
+\newblock \bibinfo{journal}{Numer. Math} \bibinfo{volume}{4},
+  \bibinfo{pages}{238--252}.
+%Type = Article
+\bibitem[{Bertsimas and Popescu(2003)}]{bertsimas2003revenue}
+\bibinfo{author}{Bertsimas, D.}, \bibinfo{author}{Popescu, I.},
+  \bibinfo{year}{2003}.
+\newblock \bibinfo{title}{Revenue management in a dynamic network environment}.
+\newblock \bibinfo{journal}{Transportation Science} \bibinfo{volume}{37},
+  \bibinfo{pages}{257--277}.
+%Type = Article
+\bibitem[{Bitran and Mondschein(1995)}]{bitran1995application}
+\bibinfo{author}{Bitran, G.R.}, \bibinfo{author}{Mondschein, S.V.},
+  \bibinfo{year}{1995}.
+\newblock \bibinfo{title}{An application of yield management to the hotel
+  industry considering multiple day stays}.
+\newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{43},
+  \bibinfo{pages}{427--443}.
+%Type = Article
+\bibitem[{Blom et~al.(2022)Blom, Pendavingh and Spieksma}]{blom2022filling}
+\bibinfo{author}{Blom, D.}, \bibinfo{author}{Pendavingh, R.},
+  \bibinfo{author}{Spieksma, F.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Filling a theater during the {C}ovid-19 pandemic}.
+\newblock \bibinfo{journal}{INFORMS Journal on Applied Analytics}
+  \bibinfo{volume}{52}, \bibinfo{pages}{473--484}.
+%Type = Article
+\bibitem[{Bortolete et~al.(2022)Bortolete, Bueno, Butkeraites
+  et~al.}]{bortolete2022support}
+\bibinfo{author}{Bortolete, J.C.}, \bibinfo{author}{Bueno, L.F.},
+  \bibinfo{author}{Butkeraites, R.}, et~al., \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{A support tool for planning classrooms considering
+  social distancing between students}.
+\newblock \bibinfo{journal}{Computational and Applied Mathematics}
+  \bibinfo{volume}{41}, \bibinfo{pages}{1--23}.
+%Type = Misc
+\bibitem[{{CDC}(2020)}]{CDC}
+\bibinfo{author}{{CDC}}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Keep a safe space}.
+\newblock \bibinfo{howpublished}{\url{https://stacks.cdc.gov/view/cdc/90522}}.
+%Type = Article
+\bibitem[{Clausen et~al.(2010)Clausen, Hjorth, Nielsen and
+  Pisinger}]{clausen2010off}
+\bibinfo{author}{Clausen, T.}, \bibinfo{author}{Hjorth, A.N.},
+  \bibinfo{author}{Nielsen, M.}, \bibinfo{author}{Pisinger, D.},
+  \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{The off-line group seat reservation problem}.
+\newblock \bibinfo{journal}{European Journal of Operational Research}
+  \bibinfo{volume}{207}, \bibinfo{pages}{1244--1253}.
+%Type = Article
+\bibitem[{Curry(1990)}]{curry1990optimal}
+\bibinfo{author}{Curry, R.E.}, \bibinfo{year}{1990}.
+\newblock \bibinfo{title}{Optimal airline seat allocation with fare classes
+  nested by origins and destinations}.
+\newblock \bibinfo{journal}{Transportation Science} \bibinfo{volume}{24},
+  \bibinfo{pages}{193--204}.
+%Type = Article
+\bibitem[{Dantzig(1957)}]{dantzig1957discrete}
+\bibinfo{author}{Dantzig, G.B.}, \bibinfo{year}{1957}.
+\newblock \bibinfo{title}{Discrete-variable extremum problems}.
+\newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{5},
+  \bibinfo{pages}{266--288}.
+%Type = Article
+\bibitem[{Deplano et~al.(2019)Deplano, Yazdani and Nguyen}]{deplano2019offline}
+\bibinfo{author}{Deplano, I.}, \bibinfo{author}{Yazdani, D.},
+  \bibinfo{author}{Nguyen, T.T.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{The offline group seat reservation knapsack problem
+  with profit on seats}.
+\newblock \bibinfo{journal}{IEEE Access} \bibinfo{volume}{7},
+  \bibinfo{pages}{152358--152367}.
+%Type = Article
+\bibitem[{Fischetti et~al.(2023)Fischetti, Fischetti and
+  Stoustrup}]{fischetti2023safe}
+\bibinfo{author}{Fischetti, M.}, \bibinfo{author}{Fischetti, M.},
+  \bibinfo{author}{Stoustrup, J.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Safe distancing in the time of {COVID}-19}.
+\newblock \bibinfo{journal}{European Journal of Operational Research}
+  \bibinfo{volume}{304}, \bibinfo{pages}{139--149}.
+%Type = Article
+\bibitem[{Gallego and Van~Ryzin(1997)}]{gallego1997multiproduct}
+\bibinfo{author}{Gallego, G.}, \bibinfo{author}{Van~Ryzin, G.},
+  \bibinfo{year}{1997}.
+\newblock \bibinfo{title}{A multiproduct dynamic pricing problem and its
+  applications to network yield management}.
+\newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{45},
+  \bibinfo{pages}{24--41}.
+%Type = Article
+\bibitem[{Ghorbani et~al.(2020)Ghorbani, Molavian and
+  Barez}]{ghorbani2020model}
+\bibinfo{author}{Ghorbani, E.}, \bibinfo{author}{Molavian, H.},
+  \bibinfo{author}{Barez, F.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{A model for optimizing the health and economic
+  impacts of {C}ovid-19 under social distancing measures; a study for the
+  number of passengers and their seating arrangements in aircrafts}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2010.10993} .
+%Type = Article
+\bibitem[{Haque and Hamid(2022)}]{haque2022optimization}
+\bibinfo{author}{Haque, M.T.}, \bibinfo{author}{Hamid, F.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{An optimization model to assign seats in long
+  distance trains to minimize {SARS}-{C}o{V}-2 diffusion}.
+\newblock \bibinfo{journal}{Transportation Research Part A: Policy and
+  Practice} \bibinfo{volume}{162}, \bibinfo{pages}{104--120}.
+%Type = Article
+\bibitem[{Haque and Hamid(2023)}]{haque2023social}
+\bibinfo{author}{Haque, M.T.}, \bibinfo{author}{Hamid, F.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Social distancing and revenue management-{A}
+  post-pandemic adaptation for railways}.
+\newblock \bibinfo{journal}{Omega} \bibinfo{volume}{114},
+  \bibinfo{pages}{102737}.
+%Type = Article
+\bibitem[{Jasin and Kumar(2012)}]{jasin2012re}
+\bibinfo{author}{Jasin, S.}, \bibinfo{author}{Kumar, S.}, \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{A re-solving heuristic with bounded revenue loss for
+  network revenue management with customer choice}.
+\newblock \bibinfo{journal}{Mathematics of Operations Research}
+  \bibinfo{volume}{37}, \bibinfo{pages}{313--345}.
+%Type = Article
+\bibitem[{Johnson(1974)}]{johnson1974fast}
+\bibinfo{author}{Johnson, D.S.}, \bibinfo{year}{1974}.
+\newblock \bibinfo{title}{Fast algorithms for bin packing}.
+\newblock \bibinfo{journal}{Journal of Computer and System Sciences}
+  \bibinfo{volume}{8}, \bibinfo{pages}{272--314}.
+%Type = Article
+\bibitem[{Kleywegt and Papastavrou(1998)}]{kleywegt1998dynamic}
+\bibinfo{author}{Kleywegt, A.J.}, \bibinfo{author}{Papastavrou, J.D.},
+  \bibinfo{year}{1998}.
+\newblock \bibinfo{title}{The dynamic and stochastic knapsack problem}.
+\newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{46},
+  \bibinfo{pages}{17--35}.
+%Type = Article
+\bibitem[{Kwag et~al.(2022)Kwag, Lee and Ko}]{kwag2022optimal}
+\bibinfo{author}{Kwag, S.}, \bibinfo{author}{Lee, W.J.}, \bibinfo{author}{Ko,
+  Y.D.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Optimal seat allocation strategy for e-sports gaming
+  center}.
+\newblock \bibinfo{journal}{International Transactions in Operational Research}
+  \bibinfo{volume}{29}, \bibinfo{pages}{783--804}.
+%Type = Article
+\bibitem[{Lewis and Carroll(2016)}]{lewis2016creating}
+\bibinfo{author}{Lewis, R.}, \bibinfo{author}{Carroll, F.},
+  \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Creating seating plans: a practical application}.
+\newblock \bibinfo{journal}{Journal of the Operational Research Society}
+  \bibinfo{volume}{67}, \bibinfo{pages}{1353--1362}.
+%Type = Misc
+\bibitem[{{Lonely Planet}(2020)}]{Berlin_theater}
+\bibinfo{author}{{Lonely Planet}}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Berlin theatre shows what socially-distanced
+  entertainment might look like}.
 \newblock
-  \url{https://www.lonelyplanet.com/news/berlin-theatre-socially-distanced-seating},
-  2020.
-
-\bibitem{perry2009approximate}
-Thomas~C Perry and Joseph~C Hartman.
-\newblock An approximate dynamic programming approach to solving a dynamic,
-  stochastic multiple knapsack problem.
-\newblock {\em International Transactions in Operational Research},
-  16(3):347--359, 2009.
-
-\bibitem{pisinger1999exact}
-David Pisinger.
-\newblock An exact algorithm for large multiple knapsack problems.
-\newblock {\em European Journal of Operational Research}, 114(3):528--541,
-  1999.
-
-\bibitem{salari2022social}
-Mostafa Salari, R~John Milne, Camelia Delcea, and Liviu-Adrian Cotfas.
-\newblock Social distancing in airplane seat assignments for passenger groups.
-\newblock {\em Transportmetrica B: Transport Dynamics}, 10(1):1070--1098, 2022.
-
-\bibitem{secomandi2008analysis}
-Nicola Secomandi.
-\newblock An analysis of the control-algorithm re-solving issue in inventory
-  and revenue management.
-\newblock {\em Manufacturing \& Service Operations Management}, 10(3):468--483,
-  2008.
-
-\bibitem{talluri1998analysis}
-Kalyan Talluri and Garrett Van~Ryzin.
-\newblock An analysis of bid-price controls for network revenue management.
-\newblock {\em Management Science}, 44(11-part-1):1577--1593, 1998.
-
-\bibitem{talluri2006theory}
-Kalyan~T Talluri and Garrett~J Van~Ryzin.
-\newblock {\em The Theory and Practice of Revenue Management}.
-\newblock Springer Science \& Business Media, 2006.
-
-\bibitem{van2008simulation}
-Garrett Van~Ryzin and Gustavo Vulcano.
-\newblock Simulation-based optimization of virtual nesting controls for network
-  revenue management.
-\newblock {\em Operations Research}, 56(4):865--880, 2008.
-
-\bibitem{vangerven2022parliament}
-Bart Vangerven, Dirk Briskorn, Dries~R Goossens, and Frits~CR Spieksma.
-\newblock Parliament seating assignment problems.
-\newblock {\em European Journal of Operational Research}, 296(3):914--926,
-  2022.
-
-\bibitem{AdviceforPublic}
-{WHO}.
-\newblock Advice for the public.
+  \bibinfo{howpublished}{\url{https://www.lonelyplanet.com/news/berlin-theatre-socially-distanced-seating}}.
+%Type = Article
+\bibitem[{Perry and Hartman(2009)}]{perry2009approximate}
+\bibinfo{author}{Perry, T.C.}, \bibinfo{author}{Hartman, J.C.},
+  \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{An approximate dynamic programming approach to
+  solving a dynamic, stochastic multiple knapsack problem}.
+\newblock \bibinfo{journal}{International Transactions in Operational Research}
+  \bibinfo{volume}{16}, \bibinfo{pages}{347--359}.
+%Type = Article
+\bibitem[{Pisinger(1999)}]{pisinger1999exact}
+\bibinfo{author}{Pisinger, D.}, \bibinfo{year}{1999}.
+\newblock \bibinfo{title}{An exact algorithm for large multiple knapsack
+  problems}.
+\newblock \bibinfo{journal}{European Journal of Operational Research}
+  \bibinfo{volume}{114}, \bibinfo{pages}{528--541}.
+%Type = Article
+\bibitem[{Salari et~al.(2022)Salari, Milne, Delcea and
+  Cotfas}]{salari2022social}
+\bibinfo{author}{Salari, M.}, \bibinfo{author}{Milne, R.J.},
+  \bibinfo{author}{Delcea, C.}, \bibinfo{author}{Cotfas, L.A.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Social distancing in airplane seat assignments for
+  passenger groups}.
+\newblock \bibinfo{journal}{Transportmetrica B: Transport Dynamics}
+  \bibinfo{volume}{10}, \bibinfo{pages}{1070--1098}.
+%Type = Article
+\bibitem[{Secomandi(2008)}]{secomandi2008analysis}
+\bibinfo{author}{Secomandi, N.}, \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{An analysis of the control-algorithm re-solving issue
+  in inventory and revenue management}.
+\newblock \bibinfo{journal}{Manufacturing \& Service Operations Management}
+  \bibinfo{volume}{10}, \bibinfo{pages}{468--483}.
+%Type = Article
+\bibitem[{Talluri and Van~Ryzin(1998)}]{talluri1998analysis}
+\bibinfo{author}{Talluri, K.}, \bibinfo{author}{Van~Ryzin, G.},
+  \bibinfo{year}{1998}.
+\newblock \bibinfo{title}{An analysis of bid-price controls for network revenue
+  management}.
+\newblock \bibinfo{journal}{Management Science} \bibinfo{volume}{44},
+  \bibinfo{pages}{1577--1593}.
+%Type = Book
+\bibitem[{Talluri and Van~Ryzin(2006)}]{talluri2006theory}
+\bibinfo{author}{Talluri, K.T.}, \bibinfo{author}{Van~Ryzin, G.J.},
+  \bibinfo{year}{2006}.
+\newblock \bibinfo{title}{The Theory and Practice of Revenue Management}.
+\newblock \bibinfo{publisher}{Springer Science \& Business Media}.
+%Type = Article
+\bibitem[{Van~Ryzin and Vulcano(2008)}]{van2008simulation}
+\bibinfo{author}{Van~Ryzin, G.}, \bibinfo{author}{Vulcano, G.},
+  \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{Simulation-based optimization of virtual nesting
+  controls for network revenue management}.
+\newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{56},
+  \bibinfo{pages}{865--880}.
+%Type = Article
+\bibitem[{Vangerven et~al.(2022)Vangerven, Briskorn, Goossens and
+  Spieksma}]{vangerven2022parliament}
+\bibinfo{author}{Vangerven, B.}, \bibinfo{author}{Briskorn, D.},
+  \bibinfo{author}{Goossens, D.R.}, \bibinfo{author}{Spieksma, F.C.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Parliament seating assignment problems}.
+\newblock \bibinfo{journal}{European Journal of Operational Research}
+  \bibinfo{volume}{296}, \bibinfo{pages}{914--926}.
+%Type = Misc
+\bibitem[{{WHO}(2020)}]{AdviceforPublic}
+\bibinfo{author}{{WHO}}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Advice for the public}.
 \newblock
-  \url{https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public},
-  2020.
-
-\bibitem{zhu2023assign}
-Feng Zhu, Shaoxuan Liu, Rowan Wang, and Zizhuo Wang.
-\newblock Assign-to-seat: Dynamic capacity control for selling high-speed train
-  tickets.
-\newblock {\em Manufacturing \& Service Operations Management}, 25(3):921--938,
-  2023.
+  \bibinfo{howpublished}{\url{https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public}}.
+%Type = Article
+\bibitem[{Zhu et~al.(2023)Zhu, Liu, Wang and Wang}]{zhu2023assign}
+\bibinfo{author}{Zhu, F.}, \bibinfo{author}{Liu, S.}, \bibinfo{author}{Wang,
+  R.}, \bibinfo{author}{Wang, Z.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Assign-to-seat: Dynamic capacity control for selling
+  high-speed train tickets}.
+\newblock \bibinfo{journal}{Manufacturing \& Service Operations Management}
+  \bibinfo{volume}{25}, \bibinfo{pages}{921--938}.
 
 \end{thebibliography}

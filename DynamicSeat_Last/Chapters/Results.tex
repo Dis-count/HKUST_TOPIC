@@ -4,7 +4,7 @@ We carried out several experiments, including analyzing the performances of diff
 
 The default setting in the experiments is as follows, $\delta =1$ and $M =4$. The default seat layout consists of 10 rows, each with the same size of 21. Different realistic layouts, group sizes and social distances are also explored. We simulate the arrival of exactly one group in each period, i.e., $p_0 = 0$. The average number of individuals per period, denoted as $\gamma$, can be expressed as $\gamma = \sum_{i=1}^{M} i p_i$. Each experiment result is the average of 100 instances. In each instance, the number of scenarios in SBSP is $|\Omega| = 1000$.
 
-To assess the performances of different policies across varying demand levels, we conduct experiments spanning a range of 60 to 100 periods and we consider four probability distributions for our analysis: $D1:[0.18,0.7,0.06,0.06]$ and $D2:[0.2,0.8,0,0]$, $D3 = [0.34, 0.51, 0.07, 0.08]$ and $D4: [0.12, 0.5, 0.13, 0.25]$. The first two distributions, $D1$ and $D2$, are experimented with in \cite{blom2022filling}. Here, $D1$ represents the statistical distribution of group sizes, while $D2$ reflects a restricted situation where groups of more than 2 people are not allowed. The other two distributions, $D3$ and $D4$, are derived from real-world movie data. The specific procedure is detailed in Appendix. We use $D4$ as the default probability distribution in the other experiments.
+To assess the performances of different policies across varying demand levels, we conduct experiments spanning a range of 60 to 100 periods and we consider four probability distributions for our analysis: $D1:[0.18,0.7,0.06,0.06]$ and $D2:[0.2,0.8,0,0]$, $D3 = [0.34, 0.51, 0.07, 0.08]$ and $D4: [0.12, 0.5, 0.13, 0.25]$. The first two distributions, $D1$ and $D2$, are experimented in \cite{blom2022filling}. Here, $D1$ represents the statistical distribution of group sizes, while $D2$ reflects a restricted situation where groups of more than 2 people are not allowed. The other two distributions, $D3$ and $D4$, are derived from real-world movie data. The specific procedure is detailed in Appendix \ref{appen_3}. We use $D4$ as the default probability distribution in the other experiments.
 
 % Specifically, we select Movie A (representing the suspense genre) and Movie B (representing the family fun genre) as target movies to analyze group information and their corresponding probability distributions, denoted as $D3$ and $D4$, respectively. The seat plans for the tickets were obtained from a Hong Kong cinema website. We focused on scattered seat plans and excluded cases where the number of consecutive seats exceeded four. By counting the occurrences of different group types, we obtained these distributions. 
 
@@ -58,16 +58,23 @@ The performance of the policies can vary with different probabilities. For the d
 
 
 \subsection{Impact of Social Distancing}\label{impact_sd}
-We introduce three key terms, gap point, threshold occupancy rate, and maximum achievable occupancy rate, to describe the impact of implementing social distancing.
+We introduce three key terms, gap request threshold, threshold occupancy rate, and maximum achievable occupancy rate, to describe the impact of implementing social distancing.
 
-% the largest value of $T$ for which the inequality $E(T; \delta =1)+1 \geq E(T; \delta = 0)$ holds, 
+%  for which the inequality $E(T; \delta =1)+1 \geq E(T; \delta = 0)$ holds, 
 
-The \textit{gap point} $\tilde{T}$ is defined as $\max\{T|\bar{E}(T; \delta)+1 > \bar{E}(T; \delta = 0)\}, \delta \in \{1,2\}$, where $\bar{E}(T; \delta)$ denotes the average number of accepted individuals by DSA with social distancing, $\bar{E}(T; \delta = 0)$ denotes the average number of accepted individuals by DSA when there is no social distancing. In other words, the gap point is 
+The \textit{gap request threshold} $\tilde{Q}$ is defined as 
+\[
+\tilde{Q} = \sum_{i \in \mathcal{M}} p_i \cdot \max\left\{T \,\bigg|\, \bar{E}(T; \delta) + 1 > \bar{E}(T; \delta = 0)\right\}, \quad \delta \in \{1, 2\},
+\]
+where $\bar{E}(T; \delta)$ and $\bar{E}(T; \delta = 0)$ denotes the average number of accepted individuals by DSA with social distancing level $\delta$ and without social distancing, respectively. Here, the maximization is performed over $T$ while keeping all other parameters constant.
+Intuitively, the gap request threshold is the expected maximum number of requests where, on average, the loss in accepted individuals due to social distancing does not exceed one. In the specific case where $p_0 = 0$ (i.e., only one request arrives in every period), it represents the maximum number of requests that can be accommodated while keeping the average loss below one.
 
-The occupancy rate corresponding to the gap point is referred to as the \textit{threshold occupancy rate}. This rate represents the maximum demand that can be satisfied when the difference in the number of accepted individuals remains unaffected by social distancing constraints. Recall that the maximum achievable occupancy rate is attained when each row of a given layout is the largest pattern.
+
+The occupancy rate corresponding to the gap request threshold is referred to as the \textit{threshold occupancy rate}. This rate represents the maximum occupancy rate when the difference in the number of accepted individuals remains unaffected by the social distancing requirement.
+
+The maximum achievable occupancy rate is attained when each row of a given layout is the largest pattern, denoted by $\frac{\sum_{j \in \mathcal{N}}\phi(M, L_{j}^{0}; \delta)}{\sum_{j \in \mathcal{N}} L_{j}^{0}}$, as introduced in Section \ref{seat_planning_full_largest}.
 
 We examine the impact of social distancing when implementing DSA under varying levels of demand.  Specifically, we test a one-seat social distancing requirement ($\delta = 1$) against a benchmark scenario with no social distancing ($\delta =0$). The demand levels are varied by adjusting the parameter $T$ from 40 to 100 in increments of 1. The results are visualized in Figure \ref{occupancy_rate_demand}, which shows the occupancy rate under different demand levels.
-
 
 
 % By analyzing and comparing the data, we can gain insights into the relation between demand, social distancing, the number of accepted individuals, and occupancy rates. This information is valuable for understanding the impact of social distancing policies on overall capacity utilization and making informed decisions regarding resource allocation and operational strategies.

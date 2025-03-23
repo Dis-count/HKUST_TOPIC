@@ -1,95 +1,39 @@
 % !TEX root = sum1.tex
-\section{Literature Review}
+\section{Literature Review}\label{literature}
 
-The present study is closely connected to the following research areas -- seat planning with social distancing and dynamic seat assignment. The subsequent sections review literature about each perspective and highlight significant differences between the present study and previous research.
+%The present study is closely connected to the following research areas: seat management with social distancing, multiple knapsack problem and network revenue management. The subsequent sections review the literature on each perspective and highlight significant differences between the present study and previous research.
 
+%\subsection{Seating Management with Social Distancing}
+Seating management is a practical problem that presents unique challenges in various applications, each with its own complexities, particularly when accommodating group-based seating requests. For instance, in passenger rail services, groups differ not only in size but also in their departure and arrival destinations, requiring them to be assigned consecutive seats \citep{clausen2010off, deplano2019offline}. In social gatherings such as weddings or dinner galas, individuals often prefer to sit together at the same table while maintaining distance from other groups they may dislike \citep{lewis2016creating}. In parliamentary seating assignments, members of the same party are typically grouped in clusters to facilitate intra-party communication as much as possible \citep{vangerven2022parliament}. In e-sports gaming centers, customers arrive to play games in groups and require seating arrangements that allow them to sit together \citep{kwag2022optimal}.
 
-\subsection{Seat Planning with Social Distancing}
-Social distancing in seat planning has attracted significant attention from the research community. This topic involves various applications and optimization techniques to address the challenges posed by the need for physical distancing in different settings. 
-
-
-In the context of layout design, i.e., determine the seats location in the given venue. For example, maximizing the social distancing between students in the classroom \cite{bortolete2022support}. Fischetti et al.\cite{fischetti2023safe} consider how to plant positions with social distancing and apply it in restaurants and beach umbrellas. In some other applications, where the layout is predetermined, individuals are assigned seats while adhering to social distancing guidelines. For instance, in the field of air travel, seat planning with a given layout is addressed in the literature \cite{ghorbani2020model, salari2022social}. Additionally, the optimization of seating arrangements has also been investigated in the context of long-distance train travel \cite{haque2022optimization}. 
-
-Group seat reservation had two main applications in terms of revenue optimization and customer preference satisfaction. In the transportation domain, such as for passenger rail services, the primary focus of these studies was on maximizing capacity utilization or reducing the total capacity required \cite{clausen2010off, deplano2019offline}. Similar optimization techniques have also been applied in the context of seat planning for large events, such as weddings or dinner events \cite{lewis2016creating}. In these cases, the focus was on satisfying customer preferences and enhancing the overall experience.
-
-% Prior to the pandemic, the group seat reservation has two kinds of applications, one is about the revenue, another one is about the customer preferences. In the transportation domain \cite{clausen2010off, deplano2019offline}, the primary focus of these studies was on maximizing capacity utilization or reducing the total capacity required for passenger rail services. Similar optimization techniques have also been applied in the context of seat planning for large events, such as wedding or dinner events \cite{lewis2016creating}. 
-
-% The pandemic has brought increased attention and significance to the topic of group seat reservations, particularly in the context of social distancing requirements. It highlighted the potential benefits of group reservations in mitigating the spread of infection, as they can be designed to increase revenue without increasing the risk of transmission. The group seat reservation problem has become more complex, with the additional constraint of social distancing. This challenge has various applications across different industries, including: 
-
-The pandemic has amplified the focus on and importance of group-based seat planning, especially within the framework of social distancing mandates. It has underscored the potential advantages of group reservations in curbing the spread of infections, as they can be structured to boost revenue without heightening transmission risks. The issue of group seat reservations has evolved into a more intricate problem with the constraint of social distancing. This complexity presents diverse applications across various industries, including: airplanes \cite{salari2022social}, trains \cite{haque2023social}, sports arenas\cite{kwag2022optimal}, theaters \cite{blom2022filling}.
-
-The major difference in our study is that we consider group-based seat planning with stochastic demand not only the known specific demand. Meanwhile, we consider the dynamic seat assignment assuming the groups arrive in a certain probability.
-
-% The recent pandemic has shed light on the benefits of group reservations, it brings more thought to the group seat reservation, it becomes more important and more complex with the social distancing constraint. As they have been shown to increase revenue without increasing the risk of infection, The group seat reservation with social distancing has various applications in industries such as airplanes \cite{salari2022social}, trains \cite{salari2022social, haque2023social}, sports arenas\cite{kwag2022optimal}, theaters \cite{blom2022filling}.
-
-% \cite{moore2021seat} 
-
-% Some related literature mentioned the seat planning under pandemic for groups are represented below.
-% Fischetti et al. \cite{fischetti2021safe} propose a seating planning for known groups of customers in amphitheaters. Haque and Hamid \cite{haque2022optimization} consider assigning seats to passengers in long-distance passenger trains. Salari et al. \cite{salari2022social} perform group seat assignment in airplanes during the pandemic and found that increasing passenger groups can yield greater social distancing than single passengers. Haque and Hamid \cite{haque2023social} aim to optimize seating assignments on trains by minimizing the risk of virus spread while maximizing revenue. The specific number of groups in their models is known in advance. Blom et al. \cite{blom2022filling} discuss strategies for filling a theater by considering the social distancing and group arrivals, which is similar to ours. 
+Incorporating social distancing into seating management has introduced an additional layer of complexity, sparking a new stream of research. Some works focus on the layout design and determine seating positions to maximize physical distance between individuals, such as students in classrooms \citep{bortolete2022support} or customers in restaurants and beach umbrella arrangements \citep{fischetti2023safe}. Other works assume the seating layout is fixed, and assign seats to individuals while adhering to social distancing guidelines. Examples include problems in air travel \citep{ghorbani2020model} and long-distance train travel \citep{haque2022optimization}. These studies underscore the growing relevance and importance of seating management in the context of social distancing.
 
 
-% However, unlike our project, it only focuses on a specific location layout and it is still based on a static situation by giving the proportion of different groups.
-
-% In contrast, there is a lack of research on group seat reservations for booking tickets for cinemas, where available seats are typically displayed for customers to choose from for low-demand movie tickets. For concerts with high demand, it is usually not possible to choose seats independently, and the organizer will inform seat information after confirming the order. 
-% For movies of the same time period, the ticket prices are the same, while for the same concert, although there are different ticket prices, for the same region, the ticket prices are the same. Therefore, we can consider different ticket prices separately. 
-% In the absence of an epidemic, all requests for tickets can be considered one by one. However, the COVID-19 pandemic has shed new light on the potential benefits of group reservations, as they can improve revenue without increasing the risk of infection. 
+Our work relates to seating management with social distancing for group-based requests, which has found its applications in various areas, including airplanes \citep{salari2022social}, trains \citep{haque2023social}, and theaters \citep{blom2022filling}. Due to the diversity of applications, there are different issues to handle. For example, in \cite{salari2022social}, the distance between different groups is taken into account, leading to the development of a seating assignment strategy that outperforms the simplistic airline policy of blocking all middle seats. In \citet{haque2023social}, when designing seat allocation for groups with social distancing, not only was the transmission risk inside the train considered, but also the transmission risk between different cities where the stops were located.
 
 
-% Dundar and Karakose \cite{dundar2021seat} proposed a two-stage algorithm for classroom seat assignment during the pandemic, with the first phase maximizing total allocations and the second phase maximizing the minimum interpersonal distance between students.
+Our work is most closely related to \citet{blom2022filling}, as both address group-based seating problem in theaters. While in \citet{blom2022filling}, they primarily focus on scenarios with known groups - referred to as seat planning with deterministic requests in our work - we consider a broader range of demand patterns. Specifically, we also examine group-based seat planning with stochastic requests. We also consider dynamic seat assignment, assuming that groups arrive sequentially according to a stochastic process. 
 
 
-\subsection{Dynamic Seat Assignment}
-In dynamic seat assignment, the decision to either reject or accept-and-assign groups is made at each stage upon their arrival. This problem can be regarded as a special case of the dynamic multiple knapsack problem. When there is one row, the related problem is dynamic knapsack problem \cite{kleywegt1998dynamic}. Our model in its static form can be viewed as a specific instance of the multiple knapsack problem \cite{pisinger1999exact}. To the best of our knowledge, there are no existing studies that have specifically addressed the dynamic multiple knapsack problem.
+%\subsection{Multiple Knapsack Problem}
+When all requests are known, our problem is a special case of the multiple knapsack problem (MKP) \citep{pisinger1999exact}. It follows that some theoretical properties of MKP can be applied. However, in our problem, the knapsacks can have different capacities and there are many identical groups of the same size, thus, the aggregation form would be useful to obtain the seat plan. Furthermore, seat planning to utilize all seats is a crucial aspect of our analysis, which shows that our proposed approach will be different from those in the literature. 
 
-Dynamic seat assignment has applications in the transportation industry, such as for airplanes, trains, and buses \cite{hamdouch2011schedule, berge1993demand, zhu2023assign}. It is a process of assigning seats to passengers in a way that maximizes the efficiency and convenience of the seating arrangements.
+% To address stochastic demand, we propose a scenario-based programming approach \cite{feng2013scenario, casey2005scenario, henrion2018problem} to determine the seat plan. Unlike existing literature, which typically considers the total supply for different demands or treats each type of supply as a protection level for corresponding demand types, we introduce a hierarchical consumption mechanism for the aggregated supply. Specifically, we adapt the constraints to reflect the hierarchical utilization of seats, where seats planned for larger groups can be repurposed for smaller groups. Additionally, the seat plan derived under demand uncertainty can serve as a reference for dynamic seat assignment, enhancing flexibility and effectiveness in real-time decision-making.
 
-% However, solving this problem is strongly NP-hard, which means that finding an optimal solution for large instances of the problem is computationally challenging \cite{pisinger1999exact}.
+% {\bf not sure how to revise, remaining}
 
-% We have two distinct features: group-based and assignment.
+SADDP falls under the category of the dynamic multiple knapsack problem. When there is only one row, the problem reduces to the dynamic knapsack problem \citep{kleywegt1998dynamic}. However, there is limited research on the dynamic multiple knapsack problem, with only one mildly related study \citep{perry2009approximate}. This study models a multiperiod, single-resource capacity reservation problem by using multiple knapsacks to represent multiple time periods, which differs from our focus on the realistic multiple knapsack problem in seat assignment.
 
-Our problem is closely related to the group-based network revenue management (RM) problem \cite{williamson1992airline}, which is typically formulated as a dynamic programming (DP) problem. However, for large-scale problems, the exponential growth of the state space and decision set makes the DP approach computationally intractable. One of the characteristics we are studying is that the decision should be made on an all-or-none basis for each group, which is the real complication in group arrivals \cite{talluri2006theory}. The group trait reflected in the RM is the hotel revenue management considering multiple day stays \cite{aydin2018decomposition, bitran1995application}. 
+%\subsection{Network Revenue Management}
+Our work is also related to the group-based \textit{network revenue management} (NRM) problem, which focuses on deciding whether to accept or reject a request \citep{gallego1997multiproduct}. The NRM problem can be fully characterized by a dynamic programming (DP) formulation. However, a significant challenge arises because the number of states grows exponentially with the problem size, rendering direct solutions computationally infeasible. To address this, various approaches have been proposed, such as deriving bid-price or booking-limit controls from static formulations or approximating the value function using simplified structures.
 
-Another characteristic in our study is the significance of seat assignment. This sets it apart from traditional revenue management focusing on accepting or rejecting a request \cite{gallego1997multiproduct}. The assign-to-seat feature introduced by Zhu et al. \cite{zhu2023assign} also highlights the importance of seat assignment in revenue management. This trait addresses the challenge of selling high-speed train tickets in China, where each request must be assigned to a single seat for the entire journey and takes into account seat reuse.
-
-
-Our work not only focuses on how to make the group-based seat assignment with non-reusable seats, also contribute the revenue insights with social distancing.
-
-% which makes the problem more challenging.
-
-% This further emphasizes the significance of seat assignment and sets it apart from traditional revenue management methods.
+\citet{talluri1998analysis} was the first to propose bid-price control policies. Since then, a significant body of literature has focused on deriving refined bid prices and tighter bounds on value functions. In our work, we also consider a bid-price control policy, similar to the certainty equivalence control policy proposed by \citet{bertsimas2003revenue}, which directly uses the optimal value from a static model to approximate the initial value function. The seminal contribution to booking-limit control is from \citet{gallego1997multiproduct}, which studied a static model and introduced make-to-stock and make-to-order policies. However, these policies lack flexibility in handling stochastic demand and do not perform well for the group-based problem.
 
 
-% To address this challenge, we propose using scenario-based programming \cite{feng2013scenario, casey2005scenario, henrion2018problem} to determine the seat planning. In this approach, the aggregated supply can be considered as a protection level for each group type. Notably, in our model, the supply of larger groups can also be utilized by smaller groups. This is because our approach focuses on group arrival rather than individual unit, which sets it apart from traditional partitioned and nested approaches \cite{curry1990optimal, van2008simulation}.
+One of the key characteristics of our problem is that decisions must be made on an all-or-none basis for each group, which introduces additional complexity in handling group arrivals \citep{talluri2006theory}. Similar group-based characteristics are also observed in multi-day stays in hotel revenue management \citep{aydin2018decomposition, bitran1995application}, though the concept of a ``group'' in those contexts differs from our problem.
 
+The introduction of group-based characteristics complicates seat management when using traditional bid-price and booking-limit control policies. Notably, in our model, the supply planned for larger groups can also be utilized by smaller groups. This flexibility stems from our approach, which focuses on group arrivals rather than individual units, distinguishing it from traditional partitioned and nested approaches \citep{curry1990optimal, van2008simulation}.
 
-% The authors propose a modified network revenue management model and introduce a bid-price control policy based on a novel maximal sequence principle. They also propose a "re-solving a dynamic primal" policy that achieves uniformly bounded revenue loss. The study reveals connections between this problem and traditional network revenue management problems and shows that the impact of the assign-to-seat restriction can be limited with the proposed methods.
-
-
-% Jiang et al. \cite{jiang2015dynamic} proposes a revenue management approach for high-speed rail (HSR) passenger ticket assignment with dynamic adjustments. The approach integrates short-term demand forecasting, ticket assignment, and dynamic ticket adjustment mechanisms to allocate passenger tickets during presale periods and avoid situations where tickets are insufficient at some stations while seats remain empty.
-
-
-
-% Implementing dynamic seat assignment with social distancing can be done manually by the staff or through automated systems that use algorithms to optimize the seat assignments based on various factors, such as ticket sales, seat availability, and customer preferences. However, the implementation of social distancing measures poses unique challenges that require careful planning and consideration of various factors to balance safety with revenue generation.
-
-
-% \subsection{Scenario generation}
-
-% It is challenging to consider all the possible realizations; thus, it is practicable to use discrete distributions with a finite number of scenarios to approximate the random demands. This procedure is often called scenario generation.
-
-% Some papers consider obtaining a set of scenarios that realistically represents the distributions of the random parameters but is not too large. \cite{feng2013scenario} \cite{casey2005scenario}
-% \cite{henrion2018problem}
-
-% Another process to reduce the calculation is called scenario reduction. It tries to approximate the original scenario set with a smaller subset that retains essential features.
-
-
-
-% Every time we can regenerate the scenario based on the realized demands. (Use the conditional distribution or the truncated distribution)
-
-
-% Suppose that the groups arrive from small to large according to their size. Once a larger group comes, the smaller one will never appear again.
-
-% When a new group arrives (suppose we have accepted $n$ groups with the same size), we accept or reject it according to the supply (when $n+1 < \text{supply}$, we accept it). 
-% then update the scenario set according to the truncated distribution. We can obtain a new supply with the new probability and scenario set.
-
+Another key characteristic of our study is the importance of seat assignment, which distinguishes it from traditional revenue management. The assign-to-seat feature introduced by \citet{zhu2023assign} further emphasizes the significance of seat assignment. This approach tackles the challenge of selling high-speed train tickets, where each request must be assigned to a specific seat for the entire journey. However, this paper focuses on individual passengers rather than groups, which sets it apart from our research.
 
 \newpage

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  19 MAR 2025 21:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  23 MAR 2025 20:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -683,82 +683,82 @@ LaTeX Warning: No \author given.
 
 (./Chapters/Abstract.tex) (./Chapters/Introduction.tex [1
 
-{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]) (./Chapters/Literature_review.tex [4] [5]) (./Chapters/Problem_description.tex [6]
+{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]) (./Chapters/Literature_review.tex [4] [5] [6]) (./Chapters/Problem_description.tex [7]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/model_plan.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/model_plan.pdf, id=256, 542.73769pt x 155.15767pt>
+<./Figures/model_plan.pdf, id=281, 542.73769pt x 155.15767pt>
 File: ./Figures/model_plan.pdf Graphic file (type pdf)
 <use ./Figures/model_plan.pdf>
 Package pdftex.def Info: ./Figures/model_plan.pdf  used on input line 26.
 (pdftex.def)             Requested size: 249.13371pt x 71.22186pt.
-[7 <./Figures/model_plan.pdf>] [8]
+[8 <./Figures/model_plan.pdf>] [9]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/largest_full.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/largest_full.pdf, id=300, 665.85843pt x 155.78601pt>
+<./Figures/largest_full.pdf, id=327, 665.85843pt x 155.78601pt>
 File: ./Figures/largest_full.pdf Graphic file (type pdf)
 <use ./Figures/largest_full.pdf>
-Package pdftex.def Info: ./Figures/largest_full.pdf  used on input line 90.
+Package pdftex.def Info: ./Figures/largest_full.pdf  used on input line 92.
 (pdftex.def)             Requested size: 362.37569pt x 84.78401pt.
-) (./Chapters/Stochastic-form.tex [9 <./Figures/largest_full.pdf>] [10] [11]
+[10 <./Figures/largest_full.pdf>]) (./Chapters/Stochastic-form.tex [11] [12]
 Overfull \hbox (7.55606pt too wide) in paragraph at lines 70--72
 []\OT1/cmr/m/n/10 We write SBSP in a ma-trix form to ap-ply the Ben-ders de-com-po-si-tion tech-nique. Let $\OT1/cmr/bx/n/10 n \OT1/cmr/m/n/10 = (\OML/cmm/m/it/10 n[]; [] ; n[]\OT1/cmr/m/n/10 )[]$
  []
 
-[12] [13] [14]) (./Chapters/Dynamic_description.tex [15] [16]) (./Chapters/Dynamic.tex [17] [18] [19]) (./Chapters/Results.tex [20]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[21]
-<./Figures/occu_demand_group4.pdf, id=525, 462.52798pt x 346.89601pt>
+[13] [14] [15] [16]) (./Chapters/Dynamic.tex [17] [18] [19] [20]) (./Chapters/Results.tex [21] [22] [23]
+<./Figures/occu_demand_group4.pdf, id=557, 462.52798pt x 346.89601pt>
 File: ./Figures/occu_demand_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_demand_group4.pdf>
-Package pdftex.def Info: ./Figures/occu_demand_group4.pdf  used on input line 80.
+Package pdftex.def Info: ./Figures/occu_demand_group4.pdf  used on input line 87.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
-<./Figures/occu_gamma_group4.pdf, id=526, 462.52798pt x 346.89601pt>
+<./Figures/occu_gamma_group4.pdf, id=558, 462.52798pt x 346.89601pt>
 File: ./Figures/occu_gamma_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_gamma_group4.pdf>
-Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 83.
+Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 90.
 (pdftex.def)             Requested size: 217.42265pt x 163.06761pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[22] [23 <./Figures/occu_demand_group4.pdf> <./Figures/occu_gamma_group4.pdf>]
-<./Figures/200_random.pdf, id=625, 1387.58403pt x 739.3221pt>
+[24] [25 <./Figures/occu_demand_group4.pdf> <./Figures/occu_gamma_group4.pdf>]
+<./Figures/200_random.pdf, id=656, 1387.58403pt x 739.3221pt>
 File: ./Figures/200_random.pdf Graphic file (type pdf)
 <use ./Figures/200_random.pdf>
-Package pdftex.def Info: ./Figures/200_random.pdf  used on input line 109.
+Package pdftex.def Info: ./Figures/200_random.pdf  used on input line 116.
 (pdftex.def)             Requested size: 430.31812pt x 229.27773pt.
- [24 <./Figures/200_random.pdf>]
-<./Figures/distance.pdf, id=698, 462.52798pt x 346.89601pt>
+ [26 <./Figures/200_random.pdf>]
+<./Figures/distance.pdf, id=730, 462.52798pt x 346.89601pt>
 File: ./Figures/distance.pdf Graphic file (type pdf)
 <use ./Figures/distance.pdf>
-Package pdftex.def Info: ./Figures/distance.pdf  used on input line 174.
+Package pdftex.def Info: ./Figures/distance.pdf  used on input line 181.
 (pdftex.def)             Requested size: 362.37569pt x 271.79523pt.
- [25]) (./Chapters/Conclusion.tex [26 <./Figures/distance.pdf>]) (./sum1.bbl [27] [28]
-Underfull \hbox (badness 10000) in paragraph at lines 243--248
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [27] (./Chapters/Conclusion.tex [28 <./Figures/distance.pdf>]) (./sum1.bbl [29] [30]
+Underfull \hbox (badness 10000) in paragraph at lines 319--324
 []\OT1/cmr/m/n/10 WHO, 2020.  Ad-vice for the pub-lic.  [][]$\OT1/cmtt/m/n/10 https : / / www . who . int / emergencies / diseases /
  []
 
-) (./Chapters/Appendix_1.tex [29] [30] [31]) (./Chapters/Proof1.tex [32
+) (./Chapters/Appendix_1.tex [31] [32] [33]) (./Chapters/Proof1.tex [34
 
-] [33] [34] [35]) (./Chapters/Movie.tex) [36] (./sum1.aux)
+] [35] [36] [37]) (./Chapters/Movie.tex) [38] (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: 4E83664D27B1416913E30D4DCE5548F3;5366.
+(rerunfilecheck)             Checksum: 89FCBC35BBDE312077B76A565FCB807E;5239.
  ) 
 Here is how much of TeX's memory you used:
- 15890 strings out of 478599
- 241392 string characters out of 5853593
- 583190 words of memory out of 5000000
- 33241 multiletter control sequences out of 15000+600000
+ 15924 strings out of 478599
+ 242127 string characters out of 5853593
+ 583775 words of memory out of 5000000
+ 33268 multiletter control sequences out of 15000+600000
  417751 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,22n,75p,1472b,663s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,22n,75p,1485b,663s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (36 pages, 578665 bytes).
+Output written on sum1.pdf (38 pages, 584992 bytes).
 PDF statistics:
- 1028 PDF objects out of 1200 (max. 8388607)
- 768 compressed objects within 8 object streams
- 238 named destinations out of 1000 (max. 500000)
- 247 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1064 PDF objects out of 1200 (max. 8388607)
+ 801 compressed objects within 9 object streams
+ 248 named destinations out of 1000 (max. 500000)
+ 239 words of extra memory for PDF output out of 10000 (max. 10000000)
 

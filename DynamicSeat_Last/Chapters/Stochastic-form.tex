@@ -212,7 +212,7 @@ From Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \math
 
 However, solving problem \eqref{BD_master3} directly can be computationally challenging in some cases, so we practically first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. Then, we generate a seat plan from this solution.
 
-\subsection{Obtain The Feasible Seat Plan}\label{seat_assignment}
+\subsection{Obtain Seat Plan with Full or Largest Patterns}\label{seat_assignment}
 We may obtain a fractional optimal solution when we solve the LP relaxation of problem \eqref{BD_master}. This solution represents the optimal allocations of groups to seats but may involve fractional values, indicating partial assignments. Based on the fractional solution obtained, we use the deterministic model to generate a feasible seat plan. The objective of this model is to allocate groups to seats in a way that satisfies the supply requirements for each group without exceeding the corresponding supply values obtained from the fractional solution. To accommodate more groups and optimize seat utilization, we aim to construct a seat plan composed of full or largest patterns based on the feasible seat plan obtained in the last step. 
 
 

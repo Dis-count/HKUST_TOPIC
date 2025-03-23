@@ -61,17 +61,19 @@ The above concepts characterize two types of tightness of a pattern. In a full p
 
 
 \begin{prop}\label{lem_pattern}
-The size of a largest pattern, denoted by $\phi(M, L^{0}, \delta)$ as a function of $M$, $L^{0}$ and $\delta$, is given by $$\phi(M, L^{0}, \delta) = q M + \max\{r-\delta, 0\},$$ where $q$ is the quotient of $(L^{0} + \delta)$ divided by $(M+\delta)$ and $r$ is the remainder. In addition, $\phi(M,L)$ is non-decreasing with $M$ and  $L$, and non-increasing with $\delta$, respectively. 
+The size of a largest pattern, denoted by $\phi(M, L^{0}, \delta)$ as a function of $M$, $L^{0}$ and $\delta$, is given by $$\phi(M, L^{0}, \delta) = q M + \max\{r-\delta, 0\},$$ where $q$ is the quotient of $(L^{0} + \delta)$ divided by $(M+\delta)$ and $r$ is the remainder. In addition, $\phi(M,L)$ is non-decreasing with $M$ and $L$, and non-increasing with $\delta$, respectively. 
 \end{prop}
 
-The size, $qM + \max\{r-\delta, 0\}$, corresponds directly to a largest pattern that includes $q$ group type $M$ and $r$ seats for one group type $(r-\delta)$ when $r>\delta$. However, the form of the largest pattern is not unique; there are other largest patterns that share the same size. 
-Specifically, when $r = 0$, the largest pattern is unique and full, indicating that only one pattern can accommodate the maximum number of individuals; when $r > \delta$, the largest pattern is full, as it uses all available seats.
+The size, $qM + \max\{r-\delta, 0\}$, corresponds directly to a largest pattern which includes $q$ group type $M$ and $r$ seats allocated to a group type $(r-\delta)$ when $r>\delta$. However, the form of the largest pattern is not unique; there are other largest patterns with the same size. 
+Specifically, when $r = 0$, the largest pattern is unique and full, indicating that only one pattern can accommodate the maximum number of individuals; when $r > \delta$, the largest pattern is full, as it uses all available seats. A concrete example illustrating largest and full patterns is provided in Example \ref{ex_2}. 
 
-Sometimes we also measure the effectiveness of a seat plan by the relative utilization of the seats. To this end, we define the occupancy rate of a pattern $h$ as $|h|/L^0$. By this definition, a largest pattern leads to the maximum achievable occupancy rate of a row. Similarly, we have the maximum achievable occupancy rate of the venue as
+We can also measure the effectiveness of a seat plan by measuring the relative utilization of the seats. To this end, we define the occupancy rate of a pattern $h$ as $|h|/L^0$. By this definition, a largest pattern achieves the maximum achievable occupancy rate of a row. Similarly, we can define the maximum achievable occupancy rate of the venue as follows. 
 $$\frac{\sum_{j \in \mathcal{N}}\phi(M, L_{j}^{0}; \delta)}{\sum_{j \in \mathcal{N}} L_{j}^{0}},$$
-where $\phi(M, L^{0}, \delta)$ represents the size of the largest pattern under $M$, $L$ and $\delta$.
+where $\phi(M, L^{0}, \delta)$ represents the size of the largest pattern under $M$, $L^{0}$ and $\delta$.
 
-The monotonicity of $\phi(M, L^{0}, \delta)$ stated in Proposition \ref{lem_pattern} still exists in the maximum achievable occupancy rate  with respect to  $M$ and $\delta$, but not in $L$. 
+The monotonicity of $\phi(M, L^{0}, \delta)$ stated in Proposition \ref{lem_pattern} also applies to the maximum achievable occupancy rate with respect to $M$ and $\delta$, but not with respect to $L^{0}$. This result is established in the following corollary. 
+Further discussion on the maximum achievable occupancy rate will be provided in Section \ref{impact_sd}.
+
 
 \begin{corollary}\label{maximum_phi}
 The maximum achievable occupancy rate is non-decreasing in $M$ and non-increasing $\delta$, but not monotone in $L_{j}^{0}, \forall j \in \mathcal{N}$.
@@ -81,7 +83,7 @@ The maximum achievable occupancy rate is non-decreasing in $M$ and non-increasin
  Further discussion on the maximum achievable occupancy rate will be provided in Section \ref{impact_sd}.
 
 
-\begin{example}
+\begin{example}\label{ex_2}
 Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are as follows: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$. Among these, $(0, 0, 0, 4)$ is the form referenced in Proposition \ref{lem_pattern}.
 
 The following figure shows that the largest pattern may not be full and the full pattern may not be largest.

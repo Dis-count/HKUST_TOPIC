@@ -1,4 +1,4 @@
-\begin{thebibliography}{32}
+\begin{thebibliography}{41}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -63,6 +63,14 @@
 \newblock \bibinfo{title}{Keep a safe space}.
 \newblock \bibinfo{howpublished}{\url{https://stacks.cdc.gov/view/cdc/90522}}.
 %Type = Article
+\bibitem[{Chekuri and Khanna(2005)}]{chekuri2005polynomial}
+\bibinfo{author}{Chekuri, C.}, \bibinfo{author}{Khanna, S.},
+  \bibinfo{year}{2005}.
+\newblock \bibinfo{title}{A polynomial time approximation scheme for the
+  multiple knapsack problem}.
+\newblock \bibinfo{journal}{SIAM Journal on Computing} \bibinfo{volume}{35},
+  \bibinfo{pages}{713--728}.
+%Type = Article
 \bibitem[{Clausen et~al.(2010)Clausen, Hjorth, Nielsen and
   Pisinger}]{clausen2010off}
 \bibinfo{author}{Clausen, T.}, \bibinfo{author}{Hjorth, A.N.},
@@ -92,6 +100,15 @@
   with profit on seats}.
 \newblock \bibinfo{journal}{IEEE Access} \bibinfo{volume}{7},
   \bibinfo{pages}{152358--152367}.
+%Type = Article
+\bibitem[{Ferreira et~al.(1996)Ferreira, Martin and
+  Weismantel}]{ferreira1996solving}
+\bibinfo{author}{Ferreira, C.E.}, \bibinfo{author}{Martin, A.},
+  \bibinfo{author}{Weismantel, R.}, \bibinfo{year}{1996}.
+\newblock \bibinfo{title}{Solving multiple knapsack problems by cutting
+  planes}.
+\newblock \bibinfo{journal}{SIAM Journal on Optimization} \bibinfo{volume}{6},
+  \bibinfo{pages}{858--877}.
 %Type = Article
 \bibitem[{Fischetti et~al.(2023)Fischetti, Fischetti and
   Stoustrup}]{fischetti2023safe}
@@ -146,6 +163,13 @@
 \newblock \bibinfo{title}{Fast algorithms for bin packing}.
 \newblock \bibinfo{journal}{Journal of Computer and System Sciences}
   \bibinfo{volume}{8}, \bibinfo{pages}{272--314}.
+%Type = Inproceedings
+\bibitem[{Khuri et~al.(1994)Khuri, B{\"a}ck and Heitk{\"o}tter}]{khuri1994zero}
+\bibinfo{author}{Khuri, S.}, \bibinfo{author}{B{\"a}ck, T.},
+  \bibinfo{author}{Heitk{\"o}tter, J.}, \bibinfo{year}{1994}.
+\newblock \bibinfo{title}{The zero/one multiple knapsack problem and genetic
+  algorithms}, in: \bibinfo{booktitle}{Proceedings of the 1994 ACM symposium on
+  Applied computing}, pp. \bibinfo{pages}{188--193}.
 %Type = Article
 \bibitem[{Kleywegt and Papastavrou(1998)}]{kleywegt1998dynamic}
 \bibinfo{author}{Kleywegt, A.J.}, \bibinfo{author}{Papastavrou, J.D.},
@@ -153,6 +177,14 @@
 \newblock \bibinfo{title}{The dynamic and stochastic knapsack problem}.
 \newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{46},
   \bibinfo{pages}{17--35}.
+%Type = Article
+\bibitem[{Kleywegt and Papastavrou(2001)}]{kleywegt2001dynamic}
+\bibinfo{author}{Kleywegt, A.J.}, \bibinfo{author}{Papastavrou, J.D.},
+  \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{The dynamic and stochastic knapsack problem with
+  random sized items}.
+\newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{49},
+  \bibinfo{pages}{26--41}.
 %Type = Article
 \bibitem[{Kwag et~al.(2022)Kwag, Lee and Ko}]{kwag2022optimal}
 \bibinfo{author}{Kwag, S.}, \bibinfo{author}{Lee, W.J.}, \bibinfo{author}{Ko,
@@ -175,6 +207,32 @@
   entertainment might look like}.
 \newblock
   \bibinfo{howpublished}{\url{https://www.lonelyplanet.com/news/berlin-theatre-socially-distanced-seating}}.
+%Type = Book
+\bibitem[{Martello and Toth(1990)}]{martello1990knapsack}
+\bibinfo{author}{Martello, S.}, \bibinfo{author}{Toth, P.},
+  \bibinfo{year}{1990}.
+\newblock \bibinfo{title}{Knapsack problems: algorithms and computer
+  implementations}.
+\newblock \bibinfo{publisher}{John Wiley \& Sons, Inc.}
+%Type = Article
+\bibitem[{Moore et~al.(2021)Moore, Carvalho, Davis, Abulhassan and
+  Megahed}]{moore2021seat}
+\bibinfo{author}{Moore, J.F.}, \bibinfo{author}{Carvalho, A.},
+  \bibinfo{author}{Davis, G.A.}, \bibinfo{author}{Abulhassan, Y.},
+  \bibinfo{author}{Megahed, F.M.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Seat assignments with physical distancing in
+  single-destination public transit settings}.
+\newblock \bibinfo{journal}{IEEE Access} \bibinfo{volume}{9},
+  \bibinfo{pages}{42985--42993}.
+%Type = Article
+\bibitem[{Papastavrou et~al.(1996)Papastavrou, Rajagopalan and
+  Kleywegt}]{papastavrou1996dynamic}
+\bibinfo{author}{Papastavrou, J.D.}, \bibinfo{author}{Rajagopalan, S.},
+  \bibinfo{author}{Kleywegt, A.J.}, \bibinfo{year}{1996}.
+\newblock \bibinfo{title}{The dynamic and stochastic knapsack problem with
+  deadlines}.
+\newblock \bibinfo{journal}{Management Science} \bibinfo{volume}{42},
+  \bibinfo{pages}{1706--1718}.
 %Type = Article
 \bibitem[{Perry and Hartman(2009)}]{perry2009approximate}
 \bibinfo{author}{Perry, T.C.}, \bibinfo{author}{Hartman, J.C.},
@@ -201,6 +259,15 @@
 \newblock \bibinfo{journal}{Transportmetrica B: Transport Dynamics}
   \bibinfo{volume}{10}, \bibinfo{pages}{1070--1098}.
 %Type = Article
+\bibitem[{Salari et~al.(2020)Salari, Milne, Delcea, Kattan and
+  Cotfas}]{salari2020social}
+\bibinfo{author}{Salari, M.}, \bibinfo{author}{Milne, R.J.},
+  \bibinfo{author}{Delcea, C.}, \bibinfo{author}{Kattan, L.},
+  \bibinfo{author}{Cotfas, L.A.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Social distancing in airplane seat assignments}.
+\newblock \bibinfo{journal}{Journal of Air Transport Management}
+  \bibinfo{volume}{89}, \bibinfo{pages}{101915}.
+%Type = Article
 \bibitem[{Secomandi(2008)}]{secomandi2008analysis}
 \bibinfo{author}{Secomandi, N.}, \bibinfo{year}{2008}.
 \newblock \bibinfo{title}{An analysis of the control-algorithm re-solving issue
@@ -221,6 +288,15 @@
   \bibinfo{year}{2006}.
 \newblock \bibinfo{title}{The Theory and Practice of Revenue Management}.
 \newblock \bibinfo{publisher}{Springer Science \& Business Media}.
+%Type = Article
+\bibitem[{T{\"o}nissen et~al.(2017)T{\"o}nissen, Van~den Akker and
+  Hoogeveen}]{tonissen2017column}
+\bibinfo{author}{T{\"o}nissen, D.D.}, \bibinfo{author}{Van~den Akker, J.},
+  \bibinfo{author}{Hoogeveen, J.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Column generation strategies and decomposition
+  approaches for the two-stage stochastic multiple knapsack problem}.
+\newblock \bibinfo{journal}{Computers \& Operations Research}
+  \bibinfo{volume}{83}, \bibinfo{pages}{125--139}.
 %Type = Article
 \bibitem[{Van~Ryzin and Vulcano(2008)}]{van2008simulation}
 \bibinfo{author}{Van~Ryzin, G.}, \bibinfo{author}{Vulcano, G.},

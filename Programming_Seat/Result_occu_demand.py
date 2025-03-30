@@ -31,7 +31,7 @@ def plot_data(data, option):
         plt.ylabel('Occupancy rate (%)')
         point[1] = round(point[1], 1)
 
-        plt.annotate(r'Gap $%s$' % str(point), xy=(point[0], point[1]), xytext=(
+        plt.annotate(r'Threshold $%s$' % str(point), xy=(point[0], point[1]), xytext=(
             point[0] + 5, point[1]-10), arrowprops = dict(facecolor='black', shrink=0.1),)
 
         plt.axhline(y = 80, xmin = 0, xmax = 1, color = 'green', linestyle = ':')
@@ -58,7 +58,7 @@ def plot_data(data, option):
 
         plt.axvline(x = 71.8, ymin = 0, ymax = 0.36, color = 'purple', linestyle=':')
         plt.axvline(x = 80,  ymin = 0, ymax = 1/2, color = 'green', linestyle=':')
-        plt.axvline(90, ymin = 0, ymax = 2/3, color = 'green', linestyle=':')
+        # plt.axvline(90, ymin = 0, ymax = 2/3, color = 'green', linestyle=':')
         # plt.axvline(100, ymin = 0, ymax = 5/6-0.02, color = 'purple', linestyle='--')
 
         my_x_ticks = np.arange(50, 110, 10)

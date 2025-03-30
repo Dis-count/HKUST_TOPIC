@@ -1,112 +1,114 @@
 \section{Seat Assignment with Dynamic Requests}\label{sec_dynamic_seat}
-In many commercial situations, requests arrive sequentially over time, and the seller must immediately decide whether to accept or reject each request upon arrival while ensuring compliance with the required spacing constraints. If a request is accepted, the seller must also determine the specific seats to assign. Importantly, each request must be either fully accepted or entirely rejected, and once seats are assigned to a group, they cannot be altered or reassigned to other requests.
 
-To model this problem, we adopt a discrete-time framework. Time is divided into $T$ periods, indexed forward from $1$ to $T$. We assume that in each period, at most one request arrives and the probability of an arrival for a group type $i$ is denoted as $p_i$, where $i \in \mathcal{M}$. The probabilities satisfy the constraint $\sum_{i=1}^M p_i \leq 1$, indicating that the total probability of any group arriving in a single period does not exceed one. We introduce the probability $p_0 = 1 - \sum_{i=1}^{M} p_i$ to represent the probability of no arrival each period. To simplify the analysis, we assume that the arrivals of different group types are independent and the arrival probabilities remain constant over time. This assumption can be extended to consider dependent arrival probabilities over time if necessary.
+In many commercial situations, requests arrive sequentially over time, and the seller must immediately decide whether to accept or reject each request upon arrival while ensuring compliance with the required spacing constraints. If a request is accepted, the seller must also determine the specific seats to assign. Importantly, each request must be either fully accepted or entirely rejected; once seats are assigned to a group, they cannot be altered or reassigned to other requests.
+
+To model this problem, we formulate it using dynamic programming approach in a discrete-time framework. Time is divided into $T$ periods, indexed forward from $1$ to $T$. We assume that in each period, at most one request arrives and the probability of an arrival for a group type $i$ is denoted as $p_i$, where $i \in \mathcal{M}$. The probabilities satisfy the constraint $\sum_{i=1}^M p_i \leq 1$, indicating that the total probability of any group arriving in a single period does not exceed one. We introduce the probability $p_0 = 1 - \sum_{i=1}^{M} p_i$ to represent the probability of no arrival in each period. To simplify the analysis, we assume that the arrivals of different group types are independent and the arrival probabilities remain constant over time. This assumption can be extended to consider dependent arrival probabilities over time if necessary.
 
 The remaining capacity in each row is represented by a vector $\mathbf{L} = (l_1, l_2, \ldots, l_N)$, where $l_j$ denotes the number of remaining seats in row $j$. Upon the arrival of a group type $i$ at time $t$, the seller needs to make a decision denoted by $u_{i,j}^{t}$, where $u_{i,j}^{t} = 1$ indicates acceptance of group type $i$ in row $j$ during period $t$, while $u_{i,j}^{t} = 0$ signifies rejection of that group type in row $j$. The feasible decision set is defined as $$U^{t}(\mathbf{L}) = \left\{u_{i,j}^{t} \in \{0,1\}, \forall i \in \mathcal{M}, \forall j \in \mathcal{N} \big| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i \in \mathcal{M}; n_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{L}, \forall i \in \mathcal{M}, \forall j \in \mathcal{N}\right\}.$$
 Here, $\mathbf{e}_j$ represents an N-dimensional unit column vector with the $j$-th element being 1, i.e., $\mathbf{e}_j = (\underbrace{0, \cdots, 0}_{j-1}, 1, \underbrace{0, \cdots, 0}_{N-j})$. The decision set $U^{t}(\mathbf{L})$ consists of all possible combinations of acceptance and rejection decisions for each group type in each row, subject to the constraints that at most one group of each type can be accepted in any row, and the number of seats occupied by each accepted group must not exceed the remaining capacity of the row.
 
-Let $V^{t}(\mathbf{L})$ denote the maximal expected revenue earned by the best decisions regarding group seat assignments at the beginning of period $t$, given remaining capacity $\mathbf{L}$. Then, the dynamic programming formula for this problem can be expressed as:
+Let $V^{t}(\mathbf{L})$ denote the maximum expected revenue earned by the optimal decision regarding group seat assignments at the beginning of period $t$, given the remaining capacity $\mathbf{L}$. Then, the dynamic programming formulation for this problem can be expressed as:
 
 \begin{equation}\label{DP}
 V^{t}(\mathbf{L}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L})}\left\{\sum_{i=1}^{M} p_i \bigl( \sum_{j=1}^{N} i u_{i,j}^{t} + V^{t+1}(\mathbf{L} - \sum_{j=1}^{N} n_i u_{i,j}^{t}\mathbf{e}_j)\bigr) + p_0 V^{t+1}(\mathbf{L})\right\}
 \end{equation}
-with the boundary conditions $V^{T+1}(\mathbf{L}) = 0, \forall \mathbf{L}$, which implies that the revenue at the last period is 0 under any capacity.
+with the boundary conditions $V^{T+1}(\mathbf{L}) = 0, \forall \mathbf{L}$, which implies that the revenue at the last period is 0 under any capacity. The initial capacity is denoted as $\mathbf{L}^{0} = (L_1, L_2, \ldots, L_N)$. Our objective is to determine group assignments that maximize the total expected revenue during the horizon from period 1 to $T$, represented by $V^{1}(\mathbf{L}^{0})$.
 
-Initially, we have the current remaining capacity vector denoted as $\mathbf{L}^{0} = (L_1, L_2, \ldots, L_N)$. Our objective is to make group assignments that maximize the total expected revenue during the horizon from period 1 to $T$ which is represented by $V^{1}(\mathbf{L}^{0})$.
 
-Solving the dynamic programming problem described in equation \eqref{DP} can be challenging due to the curse of dimensionality, which arises when the problem involves a large number of variables or states. To mitigate this complexity, we aim to develop a heuristic method for assigning arriving groups. In our approach, we begin by generating a seat plan, as outlined in Section \ref{sec_seat_planning}. This seat plan acts as a foundation for the seat assignment. 
-
-% In Section \ref{sec_dynamic_seat}, building upon the generated seat plan, we further develop a dynamic seat assignment policy which guides the allocation of seats to the incoming requests sequentially. 
+Solving the dynamic programming problem in equation \eqref{DP} presents computational challenges due to the curse of dimensionality that arises from the large state space. To address this, we develop a relaxed dynamic programming formulation and propose the Seat-Plan-Based Assignment (SPBA) policy. This policy combines the relaxed DP for preliminary acceptance decisions with the seat plan that serves as the basis for the final assignment decision.
 
 % We propose our policy for assigning arriving requests in a dynamic context. First, we employ relaxed dynamic programming to determine whether to prepare a request for assignment or to reject it. Then, we develop the seat assignment approach based on the seat plan generated from Section \ref{sec_seat_planning}.
 
-\subsection{DP-Based Heuristic}
-To simplify the complexity of DP \eqref{DP}, we consider a simplified version by relaxing all rows to a single row with the same total capacity, denoted as $\tilde{L} = \sum_{j=1}^{N} L_j$.  Using the relaxed dynamic programming approach, we can determine the seat assignment decisions for each group arrival. Let $u$ denote the decision, where $u_{i}^{t} = 1$ if we accept a request of type $i$ in period $t$, $u_{i}^{t} =0$ otherwise. Similarly, the DP with one row can be expressed as:
+
+\subsection{Seat-Plan-Based Assignment}
+The Seat-Plan-Based Assignment (SPBA) policy dynamically allocates groups through a two-stage process. In the first stage, requests are evaluated using relaxed dynamic programming (RDP). The second stage, known as group-type control, initially accepted requests are verified and assigned based on expected future revenue, considering the current seat plan and remaining time periods. As part of this stage, accepted requests are further assigned to specific rows according to tie-breaking rules. To enhance computational efficiency and avoid regenerating the seat plan in every period, we establish specific criteria for determining when to update the seat plan.
+
+% In addition, we present alternative policies to facilitate comparative performance analysis.
+
+\subsubsection{Relaxed Dynamic Programming (RDP)}
+To simplify the complexity of the DP formulation in \eqref{DP}, we employ a RDP approach by aggregating all rows into a single row with the total capacity $\tilde{L} = \sum_{j=1}^{N} L_j$. This relaxation yields preliminary seat assignment decisions for each group arrival, where the rejection by the RDP is final (no further evaluation is needed), the acceptance by the RDP is tentative and must be validated according to the current seat plan in the subsequent group-type control.
+
+Let $u_{i}^{t} \in $ denote the RDP's decision variable for accepting ($u_{i}^{t} = 1$) or rejecting ($u_{i}^{t} = 0$) a type $i$ request in period $t$. The value function of the relaxed DP with the total capacity $l$ in period $t$, denoted by $V^{t}(l)$, is the following:
 
 \begin{equation}\label{DP_relaxed}
-V^{t}(l) =  \max_{u_{i}^{t} \in \{0,1\}} \left\{ \sum_{i} p_i [V^{t+1}(l-n_i u_{i}^{t})+ i u_{i}^{t}] + p_0 V^{t+1}(l)\right\}
+V^{t}(l) =  \max_{u_{i}^{t} \in \{0,1\}} \left\{ \sum_{i} p_i \left[V^{t+1}(l-n_i u_{i}^{t})+ i u_{i}^{t}\right] + p_0 V^{t+1}(l)\right\}
 \end{equation}
-with the boundary conditions $V^{T+1}(l) =0, \forall l \geq 0$, $V^{t}(0) =0, \forall t$.
+with the boundary conditions $V^{T+1}(l) =0, \forall l \geq 0$ and $V^{t}(0) =0, \forall t$.
 
 
-Note that we must first verify whether the group can be accommodated with the available seats. Specifically, if the size of the arriving group exceeds the maximum remaining capacity across all rows, the group must be rejected. Once a group is accepted, the next step is to determine where to assign the seats. However, in the absence of a specific seat plan, there are no predefined rules to guide this assignment process. To address this, we adopt a rule similar to the Best Fit rule \citep{johnson1974fast}. Specifically, the group is assigned to the row with the smallest remaining seats that can still accommodate the group.
+To make the initial decision, we compute the value function $V^{t}(l)$ and compare the values of accepting versus rejecting the request. Preliminarily accepted requests are then verified and assigned in the subsequent group-type control stage.
 
-This policy is stated in the following algorithm.
+% However, the RDP policy alone cannot guide an effective assignment approach. We proceed with the assignment by the following group-type control.
 
-\begin{algorithm}[H]
-  \caption{DP-based Heuristic Algorithm}\label{algo_dp_heuris}
-  Calculate $V^{t}(l)$ by \eqref{DP_relaxed}, $\forall t =2, \ldots, T; \forall l = 1, 2, \ldots, l^{1}=\tilde{L}$\;
-  \For{$t =1, \ldots, T$}{
-    {Observe a request of group type $i$\;}
-    \eIf{$\max_{j \in \mathcal{N}} L_{j}^{t} \geq n_i$ and $V^{t+1}(l^{t}) \leq V^{t+1}(l^{t}-n_i) + i$}
-    {Set $k = \arg \min_{j \in \mathcal{N}}\{L_j^{t}|L_j^{t} \geq n_i\} $ and break ties arbitrarily\;
-    Assign the group to row $k$, let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$, $l^{t+1} \gets l^{t}- n_{i}$\;}
-    {Reject the group and let $L_{k}^{t+1} \gets L_{k}^{t}$, $l^{t+1} \gets l^{t}$\;}}
-\end{algorithm}
 
-Since this policy does not guide a more effective assignment approach, we proceed with the assignment based on the seat plan strategy.
+% {\color{red}{The last sentence is not clear. You should explain how this relaxed DP will be used later in the seat assignment.}}
 
-\subsection{Assignment Based on Seat Plan}
-In this section, we assign groups based on a seat plan that incorporates full or largest patterns. When a request of group type $i$ is ready to be assigned using the DP-based heuristic, we allocate seats if the supply for type $i$ satisfies $X_{i} > 0$. If $X_{i} = 0$, we apply the group-type control to determine whether the group can be assigned to a specific row. Addtionally, we discuss the tie-breaking rules in section \ref{tie-break} for selecting a specific row when multiple options are available. Finally, we outline the conditions under which the seat plan should be regenerated.
+% Two-stage: initial acceptance, then assignment?
 
-In the following part, we will refer to the whole policy as Dynamic Seat Assignment (DSA).
+% Note that we must first verify whether the group can be accommodated with the available seats. Specifically, if the size of the arriving group exceeds the maximum remaining capacity across all rows, the group must be rejected. Once a group is accepted, the next step is to determine where to assign the seats. However, in the absence of a specific seat plan, there are no predefined rules to guide this assignment process. To address this, we adopt a rule similar to the Best Fit rule \citep{johnson1974fast}. Specifically, the group is assigned to the row with the smallest remaining seats that can still accommodate the group.
 
 % To determine whether to assign the arriving group and which row to place it in when the DP approach accepts the group, we developed a group-type control policy.
 
 \subsubsection{Group-Type Control}\label{nested_policy}
-The group-type control policy is designed to determine the appropriate group type when the supply for the arriving group is insufficient, thereby aiding in the decision of whether to assign the group and selecting the suitable row during seat assignment. This policy evaluates whether the supply allocated for larger groups can be utilized to accommodate the arriving group, based on the current seat plan.
-
-We balance the trade-off between preserving the current seat plan for potential future requests and accepting the current request. To make this decision, we calculate the expected number of acceptable individuals for both options and compare these values to determine the optimal strategy.
+The group-type control allocation verifies and assigns requests initially accepted in the first stage. It assesses whether the current seat plan can accommodate the arriving group while balancing the trade-off between preserving seat availability for potential future requests and accepting the current request. To make this decision, we compare the expected number of acceptable individuals for both options. Accepted requests are then assigned to specific rows based on tie-breaking rules.
 
 % When a group is accepted and assigned to larger-size seats, the remaining empty seat(s) can be reserved for future demand without affecting the rest of the seat plan. To determine whether to use larger seats to accommodate the incoming group, we compare the expected number of acceptable individuals of accepting the group in the larger seats and rejecting the group based on the current seat plan. Then we identify the possible rows where the incoming group can be assigned based on the group types and seat availability.
 
-Specifically, suppose the supply is $[X_1, \ldots, X_M]$ at period $t$, the number of remaining periods is $(T-t)$. When $X_{i} = 0$ for the request of group type $i$, we can use one supply of group type $\hat{i}$ to accept a group type ${i}$ for any $\hat{i}={i}+1, \ldots, M$. In this case, when $\hat{i} = {i}+1, \ldots, i+\delta$, the expected number of accepted individuals is ${i}$ and the remaining seats beyond the accepted group, which is $\hat{i}-{i}$, will be wasted. When $\hat{i} = {i}+\delta+1, \ldots, M$, the rest $(\hat{i}-{i}-\delta)$ seats can be provided for one group type $(\hat{i}-{i}-\delta)$ with $\delta$ seats of social distancing. Let $D_{\hat{i}}^{t}$ be the random variable that indicates the number of group type $\hat{i}$ in the future $t$ periods. The expected number of accepted people is ${i} + (\hat{i}-{i}-\delta)P(D_{\hat{i}-{i}-\delta}^{T-t} \geq X_{\hat{i}-{i}-\delta}+1)$, where $P(D_{i}^{T-t} \geq X_{i})$ is the probability that the demand of group type ${i}$ in $(T-t)$ periods is no less than $X_{i}$, the remaining supply of group type ${i}$. Thus, the term, $P(D_{\hat{i}-{i}-\delta}^{T-t} \geq X_{\hat{i}-{i}-\delta}+1)$, indicates the probability that the demand of group type $(\hat{i}-{i}-\delta)$ in $(T-t)$ periods is no less than its current remaining supply plus 1.
+Specifically, suppose the supply at period $t$ is $[X_1^{t}, \ldots, X_M^{t}]$, with $(T-t)$ remaining periods. A request of type $i$ arrives and is initially accepted in the first stage. If $X_{i}^{t} > 0$, the request is accepted directly. If $X_{i}^{t} = 0$, the request can still be accepted by utilizing one unit of supply from group type $\hat{i}$ for any $\hat{i}={i}+1, \ldots, M$. 
+\begin{itemize}
+  \item When $\hat{i} = {i}+\delta+1, \ldots, M$, the remaining $(\hat{i}-{i}-\delta)$ seats can be allocated to one additional group type $(\hat{i}-{i}-\delta)$, ensuring the social distancing of $\delta$ seats.
+  \item When $\hat{i} = {i}+1, \ldots, i+\delta$, the expected number of accepted individuals is ${i}$, while the remaining $\hat{i}-{i}$ seats beyond the accepted group are wasted.
+\end{itemize}
 
-Similarly, when we retain the supply of group type $\hat{i}$ by rejecting the group type ${i}$, the expected number of accepted individuals is $\hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}})$. The term, $P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}})$, indicates the probability that the demand of group type $\hat{i}$ in $(T-t)$ periods is no less than its current remaining supply.
+Let $D_{\hat{i}}^{t}$ be the random variable representing the number of future arrivals of group type $\hat{i}$ in the remaining $t$ periods. The expected number of accepted individuals is given by: $${i} + (\hat{i}-{i}-\delta)P(D_{\hat{i}-{i}-\delta}^{T-t} \geq X_{\hat{i}-{i}-\delta}^{t}+1),$$ where $P(D_{i}^{T-t} \geq X_{i}^{t})$ represents the probability that  demand for group type ${i}$ in the remaining $(T-t)$ periods meets or exceeds the current remaining supply $X_{i}^{t}$. Thus, the term, $P(D_{\hat{i}-{i}-\delta}^{T-t} \geq X_{\hat{i}-{i}-\delta}^{t}+1)$, specifically captures the probability that demand for group type $(\hat{i}-{i}-\delta)$ in future periods exceeds its current remaining supply by at least one unit.
 
-Let $d^{t}({i},\hat{i})$ be the difference of the expected number of accepted individuals between acceptance and rejection in the group type ${i}$ that occupies seats of $(\hat{i}+\delta)$ size in period $t$. Then we have
+Similarly, if we reject the current group type $i$ to preserve capacity for potential future groups of type $\hat{i}$, the expected number of accepted individuals becomes: $$\hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}^{t}),$$ where $P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}^{t})$ represents the probability that the demand for group type $\hat{i}$ during the remaining $(T-t)$ periods meets or exceeds its current remaining supply $X_{\hat{i}}^{t}$.
+
+Let $d^{t}({i},\hat{i})$ denote the difference of the expected number of accepted individuals between accepting a group type ${i}$ (occupying $(\hat{i}+\delta)$-size seats) and rejecting it in period $t$. This difference is given by:
 \begin{equation*}
 	d^{t}({i},\hat{i}) = \begin{cases}
-    {i} + (\hat{i}-{i}-\delta)P(D_{\hat{i}-{i}-\delta}^{T-t} \geq X_{\hat{i}-{i}-\delta}+1) - \hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}), &\text{if}~ \hat{i} = {i}+\delta+1, \ldots, M \\
-    {i} - \hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}), &\text{if}~ \hat{i} = {i}+1, \ldots, {i}+\delta.
+    {i} + (\hat{i}-{i}-\delta)P(D_{\hat{i}-{i}-\delta}^{T-t} \geq X_{\hat{i}^{t}-{i}-\delta}^{t}+1) - \hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}^{t}), &\text{if}~ \hat{i} = {i}+\delta+1, \ldots, M \\
+    {i} - \hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}^{t}), &\text{if}~ \hat{i} = {i}+1, \ldots, {i}+\delta.
 		\end{cases}
 \end{equation*}
 
-The decision is to choose $\hat{i}$ with the largest difference. For all $\hat{i} = {i}+1, \ldots, M$, we obtain the largest $d^{t}({i},\hat{i})$, denoted as $d^{t}({i},\hat{i}^{*})$. If $d^{t}({i},\hat{i}^{*}) \geq 0$, we will assign the group type ${i}$ in $(\hat{i}^{*}+\delta)$-size seats. Otherwise, reject the group.
+The optimal decision selects $\hat{i}^{*} = \arg \max_{\hat{i} = {i}+1, \ldots, M} d^{t}({i},\hat{i})$. The group is accepted and assigned to $(\hat{i}^{*} + \delta)$-size seats if $d^{t}({i},\hat{i}^{*}) \geq 0$, otherwise rejected. After determining the optimal group type $\hat{i}^{*}$, we apply the tie-breaking rule to assign the request to a specific row that includes group type $\hat{i}^{*}$.
 
-Although the group-type control policy can help us determine whether to assign and narrow down the row selection options in the assignment, we still need to discuss the tie-breaking rules to determine a specific row.
+% {\color{red}{how is this related to group type control?}}
 
-\subsubsection{Tie-Breaking Rules for Determining A Specific Row}\label{tie-break}
-A tie occurs when there are serveral rows to accommodate the group. To determine the appropriate row for seat assignment, we can apply the following tie-breaking rules among the possible options. Suppose one group type ${i}$ arrives, the current seat plan is $\bm{H} = \{\bm{h}_{1}; \ldots; \bm{h}_{N}\}$, the corresponding supply is $\bm{X}$. Let $\beta_{j} = L_j - \sum_{i} n_{i} H_{ji}$ represent the remaining number of seats in row $j$ after considering the seat allocation for the groups. When $X_{i} > 0$, we assign the group to row $k \in \arg \min_{j} \{\beta_{j}\}$ such that the row can be filled as much as possible. When $X_{i} = 0$ and the group is ready to take the seats designated for group type $\hat{i}, \hat{i}>i$, we assign the group to a row $k \in \arg \max_{j} \{\beta_{j}| H_{j \hat{i}}>0\}$. That can help reduce the number of rows that are not full. When there are multiple $k$s available, we can choose one arbitrarily. This rule in both scenarios prioritizes filling rows and leads to better seat management.
+\subsubsection*{Tie-Breaking for Row Selection}\label{tie-break}
+A tie occurs when there are several rows to assign the request. To determine the appropriate row for seat assignment, we can apply the following tie-breaking rules among the possible options. Suppose one request of type ${i}$ arrives, the current seat plan is $\bm{H} = \{\bm{h}_{1}; \ldots; \bm{h}_{N}\}$, the corresponding supply is $\bm{X}$. Let $\beta_{j} = L_j - \sum_{i} n_{i} H_{ji}$ represent the remaining number of seats in row $j$ after considering the seat allocation for the assigned requests. When $X_{i} > 0$, we assign the request to row $k \in \arg \min_{j} \{\beta_{j}\}$ such that the row can be filled as much as possible. When $X_{i} = 0$ and the request is accepted to take the seats planned for type $\hat{i}, \hat{i}>i$, we assign the request to a row $k \in \arg \max_{j} \{\beta_{j}| H_{j \hat{i}}>0\}$. That can help reduce the number of rows that are not full. When there are multiple $k$s available, we can choose one arbitrarily. This rule in both scenarios prioritizes filling rows and leads to better seat management.
+
 
 % As an example to illustrate group-type control and the tie-breaking rule, consider a situation where $L_1 =3, L_2 = 4, L_3 =5, L_4 =6$, $M =4$, $\delta =1$. The corresponding patterns for each row are $(0,1,0,0)$, $(0,0,1,0)$, $(0,0,0,1)$ and $(0,0,0,1)$, respectively. Thus, $\beta_1 = \beta_2 = \beta_3 =0$, $\beta_4 =1$. Now, a group type 1 arrives, and the group-type control indicates the possible rows where the group can be assigned. We assume this group can be assigned to the seats of the largest group according to the group-type control, then we have two options: row 3 or row 4. To determine which row to select, we can apply the tie-breaking rule. The $\beta$ value of the rows will be used as the criterion, we would choose row 4 because $\beta_4$ is larger. Because when we assign it in row 4, there will be two seats reserved for future group type 1, but when we assign it in row 3, there will be one seat remaining unused.
 
 % In the above example, the group type 1 can be assigned to any row with the available seats. The group-type control can help us find the larger group type that can be used to place the arriving group while maximizing the expected values. When there are multiple rows containing the larger group type, we choose the row containing the larger group type according to the tie-breaking rule.
 
-Combining the group-type control strategy with the evaluation of relaxed DP values, we obtain a comprehensive decision-making process within a single period. This integrated approach enables us to make informed decisions regarding the acceptance or rejection of incoming requests, as well as determine the appropriate row for the assignment when acceptance is made. 
+% Combining the group-type control strategy with the evaluation of relaxed DP values, we obtain a comprehensive decision-making process within a single period. This integrated approach enables us to make informed decisions regarding the acceptance or rejection of incoming requests, as well as determine the appropriate row for the assignment when acceptance is made. 
 
-\subsubsection{Regenerate the Seat Plan}
-A useful technique often applied in network revenue management to enhance performance is re-solving \citep{secomandi2008analysis, jasin2012re}, which, in our context, corresponds to regenerating the seat plan. However, to optimize computational efficiency, it is unnecessary to regenerate the seat plan for every request. Instead, we adopt a more streamlined approach. Since seats allocated for the largest group type can accommodate all smaller group types, the seat plan must be regenerated when the supply for the largest group type decreases from one to zero. This ensures that the largest groups are not rejected due to infrequent updates. Additionally, regeneration is required after determining whether to assign the arriving group to seats originally planned for larger groups. By regenerating the seat plan in these specific situations, we achieve real-time seat assignment while reducing the frequency of planning updates, thereby balancing efficiency and effectiveness.
+\subsubsection{Regenerating the Seat Plan}
+A useful technique often applied in network revenue management to enhance performance is re-solving \citep{secomandi2008analysis, jasin2012re}, which, in our context, corresponds to regenerating the seat plan. However, to optimize computational efficiency, it is unnecessary to regenerate the seat plan for every request. Instead, we adopt a more streamlined approach. Since seats allocated for the largest group type can accommodate all smaller group types, the seat plan must be regenerated when the supply for the largest group type reaches zero. This ensures that the largest group is not rejected due to infrequent updates. Additionally, regeneration is required after determining whether to assign the arriving group to seats originally planned for larger groups. By regenerating the seat plan in these specific situations, we integrate real-time information into seat assignment while reducing the frequency of planning updates, thereby balancing efficiency and effectiveness.
 
-The algorithm is shown below.
+The algorithm for regenerating the seat plan is outlined below.
 
 \begin{algorithm}[H]
-  \caption{Dynamic Seat Assignment}
-  Obtain $\bm{X}$ and $\bm{H}$, calculate $V^{t}(l)$ by \eqref{DP_relaxed}, $\forall t =2, \ldots, T; \forall l = 1,2, \ldots, l^{1}=\tilde{L}$\;
+  \caption{Seat-Plan-Based Assignment}
+  Obtain $\bm{X}^{1}$ and $\bm{H}^{1}$ from Algorithm \ref{seat_construction}, calculate $V^{t}(l)$ by \eqref{DP_relaxed}, $\forall t =2, \ldots, T; \forall l = 1,2, \ldots, \tilde{L}$\;
   \For{$t =1, \ldots, T$}
   {Observe a request of group type ${i}$\;
     \eIf{$V^{t+1}(l^{t}) \leq V^{t+1}(l^{t}-n_i) + i$}
     {\eIf{$X_{i} > 0$}
     {Set $k = \arg \min_{j} \{L_j^{t} - \sum_{i}n_i H^{t}_{ji}|H^{t}_{ji} >0\}$, break ties arbitrarily\; 
-     Assign group type $i$ in row $k$, let $L_{k}^{t+1} \gets L_{k}^{t}- n_{i}$, $H_{ki} \gets H_{ki}-1$, $X_{i}\gets X_{i}-1$\;
-    \If{${i} = M$ and $X_{M} =0$}
-    {Generate seat plan $\bm{H}$ from Algorithm \ref{seat_construction}, update the corresponding $\bm{X}$\;}}
+     Assign group type $i$ in row $k$, let $L_{k}^{t+1} \gets L_{k}^{t}- n_{i}$, $H_{ki}^{t+1} \gets H_{ki}^{t}-1$, $X_{i}^{t+1}\gets X_{i}^{t}-1$\;
+    \If{${i} = M$ and $X_{M}^{t} =0$}
+    {Generate seat plan $\bm{H}^{t+1}$ from Algorithm \ref{seat_construction}, update the corresponding $\bm{X}^{t+1}$\;}}
     {Calculate $d^{t}({i}, \hat{i}^{*})$\;
     \eIf{$d^{t}({i}, \hat{i}^{*}) \geq 0 $}
     {Set $k = \arg \max_{j} \{L_j^{t} - \sum_{i}n_i H_{ji}^{t}|H_{j\hat{i}^{*}}^{t} >0\}$, break ties arbitrarily\;
      Assign group type $i$ in row $k$, let $L_{k}^{t+1} \gets L_{k}^{t}- n_{i}$, $l^{t+1} \gets l^{t}$\;
-    Generate seat plan $\bm{H}$ from Algorithm \ref{seat_construction}, update the corresponding $\bm{X}$\;}
+    Generate seat plan $\bm{H}^{t+1}$ from Algorithm \ref{seat_construction}, update the corresponding $\bm{X}^{t+1}$\;}
     {Reject group type ${i}$ and let $L_{k}^{t+1} \gets L_{k}^{t}$, $l^{t+1} \gets l^{t}$\;}}}
     {Reject group type ${i}$ and let $L_{k}^{t+1} \gets L_{k}^{t}$, $l^{t+1} \gets l^{t}$\;}}
 \end{algorithm}
+
+% {\color{red}{we may move these alternative policies into appendix}}

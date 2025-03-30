@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 # This function is used to load the data and plot the group graphs.
 # The specific parameters are as follows:
+# use data_group4.npy
 
 def plot_data(given_lines, roll_width, data):
     sd = 1
@@ -19,14 +20,14 @@ def plot_data(given_lines, roll_width, data):
 
     plt.plot(t_value, people_value, 'b-', label = 'Without social distancing')
     plt.plot(t_value, occup_value, 'r--', label = 'With 1 social distancing')
-    plt.xlabel('Periods')
-    plt.ylabel('Percentage of total seats')
+    plt.xlabel('Period')
+    plt.ylabel('Occupancy rate (%)')
     point[1] = round(point[1], 2)
-    plt.annotate(r'Gap $%s$' % str(point), xy=point, xytext=(point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
+    plt.annotate(r'Threshold $%s$' % str(point), xy=point, xytext=(point[0]+10, point[1]-20), arrowprops=dict(facecolor='black', shrink=0.1),)
     plt.legend()
-    plt.savefig('d3_group_4.pdf')
+    plt.savefig('d4_group4.pdf')
 
 given_lines = 10
 roll_width = np.ones(given_lines) * 21
-data = np.load('d3_group_4.npy')
+data = np.load('data_group4.npy')
 plot_data(given_lines, roll_width, data)

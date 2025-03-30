@@ -6,7 +6,7 @@
   First, we regard this problem as a special case of the Multiple Knapsack Problem (MKP), then we consider the LP relaxation of this problem.
   Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
   Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq \tilde{L}\}$, where $\tilde{L} = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. 
-  For the LP relaxation of \eqref{deter_upper}, the Dantzig upper bound \cite{dantzig1957discrete} is given by $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(\tilde{L}-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(\tilde{L}-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $\tilde{i}$, then for $i < \tilde{i}$, $x_{ij}^{*} = 0$; for $i > \tilde{i}$, $x_{ij}^{*} = d_{i}$; for $i = \tilde{i}$, $\sum_{j} x_{ij}^{*} = (\tilde{L} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i})/ n_{\tilde{i}}$.
+  For the LP relaxation of \eqref{deter_upper}, the Dantzig upper bound \citep{dantzig1957discrete} is given by $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(\tilde{L}-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(\tilde{L}-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $\tilde{i}$, then for $i < \tilde{i}$, $x_{ij}^{*} = 0$; for $i > \tilde{i}$, $x_{ij}^{*} = d_{i}$; for $i = \tilde{i}$, $\sum_{j} x_{ij}^{*} = (\tilde{L} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i})/ n_{\tilde{i}}$.
 \end{pf}
 
 
@@ -28,6 +28,10 @@ Assuming the existence of a pattern $\bm{h}$ such that $|\bm{h}| > |\bm{h}_{g}|$
 \end{enumerate}
 
 Therefore, $\bm{h}$ cannot exist. The maximum number of people that can be accommodated in the largest pattern is $q M + \max\{r-\delta, 0\}$.
+
+Additionally, any largest pattern $\bm{h}$ under $M$ remains feasible for $(M+1)$, implying that $\phi(M, L^{0}, \delta) \leq \phi(M+1, L^{0}, \delta)$. Similarly, any largest pattern $\bm{h}$ under $L$ is a feasible pattern under $L+1$, thus, $\phi(M, L^{0}, \delta) \leq \phi(M, L^{0}+1, \delta)$. Any largest pattern $\bm{h}$ under $\delta+1$ is a feasible pattern under $\delta$, thus, $\phi(M, L^{0}, \delta+1) \leq \phi(M, L^{0}, \delta)$.
+So, $\phi(M, L^{0}, \delta)$ is non-decreasing with $M$ and $L^{0}$, and non-increasing with $\delta$, respectively.
+
 \end{pf}
 
 \begin{pf}{Proof of Proposition \ref{prop_construction}}
@@ -79,26 +83,26 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $\mathbf{V} =
     \end{itemize}
   \end{pf}
 
-  \begin{pf}{Proof of Proposition \ref{one_ep_feasible}}
-    Suppose we have one extreme point $\bm{\alpha}_{\omega}^{0}$ for each scenario. Then we have the following problem.
-    \begin{equation}\label{lemma_eq}
-      \begin{aligned}
-        \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
-        \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-        & (\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} \geq (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega \\
-         & \mathbf{x} \in \mathbb{N}^{M \times N}
-      \end{aligned}
-    \end{equation}
-    Problem \eqref{lemma_eq} reaches its maximum when $(\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} = (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega$. Substitute $z_{\omega}$ with these equations, we have 
-    \begin{equation}\label{lemma_eq2}
-      \begin{aligned}
-        \max \quad & \mathbf{c}^{\intercal} \mathbf{x} - \sum_{\omega}p_{\omega}(\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + \sum_{\omega} p_{\omega} (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{d}_{\omega} \\
-        \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
-        & \mathbf{x} \in \mathbb{N}^{M \times N}
-      \end{aligned}
-    \end{equation}
-    Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more constraints will not make the optimal value larger. Thus, RBMP is bounded. 
-  \end{pf}
+  % \begin{pf}{Proof of Proposition \ref{one_ep_feasible}}
+  %   Suppose we have one extreme point $\bm{\alpha}_{\omega}^{0}$ for each scenario. Then we have the following problem.
+  %   \begin{equation}\label{lemma_eq}
+  %     \begin{aligned}
+  %       \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+  %       \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+  %       & (\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} \geq (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega \\
+  %        & \mathbf{x} \in \mathbb{N}^{M \times N}
+  %     \end{aligned}
+  %   \end{equation}
+  %   Problem \eqref{lemma_eq} reaches its maximum when $(\bm{\alpha}_{\omega}^{0})^{\intercal}\mathbf{d}_{\omega} = (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + z_{\omega}, \forall \omega$. Substitute $z_{\omega}$ with these equations, we have 
+  %   \begin{equation}\label{lemma_eq2}
+  %     \begin{aligned}
+  %       \max \quad & \mathbf{c}^{\intercal} \mathbf{x} - \sum_{\omega}p_{\omega}(\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{x} \mathbf{1} + \sum_{\omega} p_{\omega} (\bm{\alpha}_{\omega}^{0})^{\intercal} \mathbf{d}_{\omega} \\
+  %       \text {s.t.} \quad & \mathbf{n} \mathbf{x} \leq \mathbf{L} \\
+  %       & \mathbf{x} \in \mathbb{N}^{M \times N}
+  %     \end{aligned}
+  %   \end{equation}
+  %   Notice that $\mathbf{x}$ is bounded by $\mathbf{L}$, then the problem \eqref{lemma_eq} is bounded. Adding more constraints will not make the optimal value larger. Thus, RBMP is bounded. 
+  % \end{pf}
 
 
 \begin{pf}{Proof of Lemma \ref{bid-price}}
@@ -108,13 +112,8 @@ Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum
 \end{pf}
 
 \begin{pf}{Proof of Corollary \ref{maximum_phi}}
-  According to Proposition \ref{lem_pattern}, any largest pattern $\bm{h}$ under $M$ remains a feasible pattern under $(M+1)$, implying that $\phi(M, L;\delta) \leq \phi(M+1, L; \delta)$. Similarly, since any largest pattern $\bm{h}$ under $L$ is a feasible pattern under $L+1$, thus, $\phi(M, L) \leq \phi(M, L+1)$.
+According to Proposition \ref{lem_pattern}, $\phi(M, L^{0}, \delta)$ is non-decreasing with $M$ and  $L^{0}$, and non-increasing with $\delta$, respectively. Consequently, when $M$ increases while $\bm{L}$ remains unchanged, the maximum achievable occupancy rate does not decrease; when $\delta$ increases while $M$ and $\bm{L}^{0}$ remain unchanged, the maximum achievable occupancy rate does not increase; when $\bm{L}^{0}$ increases while $M$ and $\delta$ remain unchanged, the maximum achievable occupancy rate may either increase or decrease.
+
 \end{pf}
- 
-% Similarly, $\phi(M, L; \delta)$ does not decrease in $L$. Since any largest pattern $\bm{h}$ under $L$ is a feasible pattern under $L+1$, thus, $\phi(M, L) \leq \phi(M, L+1)$.
-
-% $\phi(M, L; \delta)$ does not decrease in $M$.
-
-% Consequently, when $M$ increases while $\bm{L}$ remains unchanged, the maximum achievable occupancy rate does not decrease.
 
 \newpage

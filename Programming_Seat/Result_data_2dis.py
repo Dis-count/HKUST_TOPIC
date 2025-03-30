@@ -13,12 +13,15 @@ from Mist import sequence_pool
 
 if __name__ == "__main__":
     num_sample = 1000  # the number of scenarios
-    I = 4  # the number of group types
     total_period = 100
     period_range = range(40, total_period, 1)
     given_lines = 10
     sd = 1
-    probab = [0.12, 0.5, 0.13, 0.25]
+    # probab = [0.12, 0.5, 0.13, 0.25]
+    # probab = [0.16, 0.67, 0.17]
+    probab = [0.19, 0.81]
+
+    I = len(probab)
 
     t_value = np.arange(40, total_period, 1)
 
@@ -27,7 +30,7 @@ if __name__ == "__main__":
     occup_2 = np.zeros(len(period_range))
     count = 100
     # sequences_pool = sequence_pool(count, total_period, probab, sd)
-    sequences_pool = np.load('sequence_0.12.npy')
+    sequences_pool = np.load('sequence_M2_0.19.npy')
     
     cnt = 0
     for num_period in period_range:
@@ -67,4 +70,4 @@ if __name__ == "__main__":
         cnt += 1
 
     data = np.vstack((t_value, people_value, occup_1, occup_2))
-    np.save('data_distances_012.npy', data)
+    np.save('data_distances_012_M3.npy', data)

@@ -1,4 +1,4 @@
-\begin{thebibliography}{41}
+\begin{thebibliography}{44}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -12,13 +12,11 @@
 \providecommand{\bibinfo}[2]{#2}
 \ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
 %Type = Article
-\bibitem[{Aydin and Birbil(2018)}]{aydin2018decomposition}
-\bibinfo{author}{Aydin, N.}, \bibinfo{author}{Birbil, S.I.},
-  \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{Decomposition methods for dynamic room allocation in
-  hotel revenue management}.
-\newblock \bibinfo{journal}{European Journal of Operational Research}
-  \bibinfo{volume}{271}, \bibinfo{pages}{179--192}.
+\bibitem[{Adelman(2007)}]{adelman2007dynamic}
+\bibinfo{author}{Adelman, D.}, \bibinfo{year}{2007}.
+\newblock \bibinfo{title}{Dynamic bid prices in revenue management}.
+\newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{55},
+  \bibinfo{pages}{647--661}.
 %Type = Article
 \bibitem[{Benders(1962)}]{bnnobrs1962partitioning}
 \bibinfo{author}{Benders, J.}, \bibinfo{year}{1962}.
@@ -80,13 +78,6 @@
 \newblock \bibinfo{journal}{European Journal of Operational Research}
   \bibinfo{volume}{207}, \bibinfo{pages}{1244--1253}.
 %Type = Article
-\bibitem[{Curry(1990)}]{curry1990optimal}
-\bibinfo{author}{Curry, R.E.}, \bibinfo{year}{1990}.
-\newblock \bibinfo{title}{Optimal airline seat allocation with fare classes
-  nested by origins and destinations}.
-\newblock \bibinfo{journal}{Transportation Science} \bibinfo{volume}{24},
-  \bibinfo{pages}{193--204}.
-%Type = Article
 \bibitem[{Dantzig(1957)}]{dantzig1957discrete}
 \bibinfo{author}{Dantzig, G.B.}, \bibinfo{year}{1957}.
 \newblock \bibinfo{title}{Discrete-variable extremum problems}.
@@ -134,6 +125,16 @@
   impacts of {C}ovid-19 under social distancing measures; a study for the
   number of passengers and their seating arrangements in aircrafts}.
 \newblock \bibinfo{journal}{arXiv preprint arXiv:2010.10993} .
+%Type = Article
+\bibitem[{Goldman et~al.(2002)Goldman, Freling, Pak and
+  Piersma}]{goldman2002models}
+\bibinfo{author}{Goldman, P.}, \bibinfo{author}{Freling, R.},
+  \bibinfo{author}{Pak, K.}, \bibinfo{author}{Piersma, N.},
+  \bibinfo{year}{2002}.
+\newblock \bibinfo{title}{Models and techniques for hotel revenue management
+  using a rolling horizon}.
+\newblock \bibinfo{journal}{Journal of Revenue and Pricing Management}
+  \bibinfo{volume}{1}, \bibinfo{pages}{207--219}.
 %Type = Article
 \bibitem[{Haque and Hamid(2022)}]{haque2022optimization}
 \bibinfo{author}{Haque, M.T.}, \bibinfo{author}{Hamid, F.},
@@ -200,6 +201,14 @@
 \newblock \bibinfo{title}{Creating seating plans: a practical application}.
 \newblock \bibinfo{journal}{Journal of the Operational Research Society}
   \bibinfo{volume}{67}, \bibinfo{pages}{1353--1362}.
+%Type = Article
+\bibitem[{Liu and Van~Ryzin(2008)}]{liu2008choice}
+\bibinfo{author}{Liu, Q.}, \bibinfo{author}{Van~Ryzin, G.},
+  \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{On the choice-based linear programming model for
+  network revenue management}.
+\newblock \bibinfo{journal}{Manufacturing \& Service Operations Management}
+  \bibinfo{volume}{10}, \bibinfo{pages}{288--310}.
 %Type = Misc
 \bibitem[{{Lonely Planet}(2020)}]{Berlin_theater}
 \bibinfo{author}{{Lonely Planet}}, \bibinfo{year}{2020}.
@@ -233,6 +242,15 @@
   deadlines}.
 \newblock \bibinfo{journal}{Management Science} \bibinfo{volume}{42},
   \bibinfo{pages}{1706--1718}.
+%Type = Article
+\bibitem[{Pavlik et~al.(2021)Pavlik, Ludden, Jacobson and
+  Sewell}]{pavlik2021airplane}
+\bibinfo{author}{Pavlik, J.A.}, \bibinfo{author}{Ludden, I.G.},
+  \bibinfo{author}{Jacobson, S.H.}, \bibinfo{author}{Sewell, E.C.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Airplane seating assignment problem}.
+\newblock \bibinfo{journal}{Service Science} \bibinfo{volume}{13},
+  \bibinfo{pages}{1--18}.
 %Type = Article
 \bibitem[{Perry and Hartman(2009)}]{perry2009approximate}
 \bibinfo{author}{Perry, T.C.}, \bibinfo{author}{Hartman, J.C.},
@@ -297,14 +315,13 @@
   approaches for the two-stage stochastic multiple knapsack problem}.
 \newblock \bibinfo{journal}{Computers \& Operations Research}
   \bibinfo{volume}{83}, \bibinfo{pages}{125--139}.
-%Type = Article
-\bibitem[{Van~Ryzin and Vulcano(2008)}]{van2008simulation}
-\bibinfo{author}{Van~Ryzin, G.}, \bibinfo{author}{Vulcano, G.},
-  \bibinfo{year}{2008}.
-\newblock \bibinfo{title}{Simulation-based optimization of virtual nesting
-  controls for network revenue management}.
-\newblock \bibinfo{journal}{Operations Research} \bibinfo{volume}{56},
-  \bibinfo{pages}{865--880}.
+%Type = Incollection
+\bibitem[{Van~Ryzin and Talluri(2005)}]{van2005introduction}
+\bibinfo{author}{Van~Ryzin, G.J.}, \bibinfo{author}{Talluri, K.T.},
+  \bibinfo{year}{2005}.
+\newblock \bibinfo{title}{An introduction to revenue management}, in:
+  \bibinfo{booktitle}{Emerging theory, methods, and applications}.
+  \bibinfo{publisher}{Informs}, pp. \bibinfo{pages}{142--194}.
 %Type = Article
 \bibitem[{Vangerven et~al.(2022)Vangerven, Briskorn, Goossens and
   Spieksma}]{vangerven2022parliament}
@@ -320,6 +337,12 @@
 \newblock \bibinfo{title}{Advice for the public}.
 \newblock
   \bibinfo{howpublished}{\url{https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public}}.
+%Type = Phdthesis
+\bibitem[{Williamson(1992)}]{williamson1992airline}
+\bibinfo{author}{Williamson, E.L.}, \bibinfo{year}{1992}.
+\newblock \bibinfo{title}{Airline network seat inventory control: Methodologies
+  and revenue impacts}.
+\newblock Ph.D. thesis. Massachusetts Institute of Technology.
 %Type = Article
 \bibitem[{Zhu et~al.(2023)Zhu, Liu, Wang and Wang}]{zhu2023assign}
 \bibinfo{author}{Zhu, F.}, \bibinfo{author}{Liu, S.}, \bibinfo{author}{Wang,

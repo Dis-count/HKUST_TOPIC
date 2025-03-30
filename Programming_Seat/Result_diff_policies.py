@@ -14,8 +14,8 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     period_range = range(60, 101, 10)
     given_lines = 10
-    # probab_list = [[0.2, 0.8, 0, 0], [0.18, 0.7, 0.06, 0.06], [0, 0.5, 0, 0.5], [0.25, 0.3, 0.25, 0.2]]    0.12, 0.5, 0.13, 0.25
-    probab_list = [[0.34, 0.51, 0.07, 0.08]]
+    # probab_list = [[0.2, 0.8, 0, 0], [0.18, 0.7, 0.06, 0.06], [0.12, 0.5, 0.13, 0.25], [0.34, 0.51, 0.07, 0.08]]
+    probab_list = [[0.18, 0.7, 0.06, 0.06]]
 
     sd = 1
     count = 100
@@ -23,13 +23,17 @@ if __name__ == "__main__":
 
     for probab in probab_list:
         begin_time = time.time()
-        filename = '218_probab_' + str(probab) + '.txt'
+        filename = '330_probab_' + str(probab) + '.txt'
         my_file = open(filename, 'w')
         my_file.write('Run Start Time:' + str(time.ctime()) + '\n')
-        sequences_pool = np.load('sequence_0.12.npy')
+        sequences_pool = np.load('sequence_0.18.npy')
         # sequences_pool = sequence_pool(count, total_period, probab, sd)
 
         for num_period in period_range:
+            worst_a = 1
+            worst_b = 1
+            worst_c = 1
+            worst_d = 1
             my_file.write('The number of periods: \t' + str(num_period) + '\n')
             
             roll_width = np.ones(given_lines) * 21
@@ -39,7 +43,6 @@ if __name__ == "__main__":
             ratio2 = 0
             ratio3 = 0
             ratio4 = 0
-            ratio5 = 0
             accept_people = 0
 
             multi = np.arange(1, I+1)
@@ -60,24 +63,43 @@ if __name__ == "__main__":
                 b = a_instance.bid_price(sequence)
                 c = a_instance.dynamic_program1(sequence)
                 d = a_instance.method_IP(sequence, newx3, roll_width)
-                e = a_instance.row_by_row(sequence)
+                # e = a_instance.row_by_row(sequence)
+                value_a = np.dot(multi, a)
+                value_b = np.dot(multi, b)
+                value_c = np.dot(multi, c)
+                value_d = np.dot(multi, d)
 
                 f = a_instance.offline(sequence)  # optimal result
                 optimal = np.dot(multi, f)
 
-                ratio1 += np.dot(multi, a) / optimal  # sto-planning
-                ratio2 += np.dot(multi, b) / optimal  # bid-price
-                ratio3 += np.dot(multi, c) / optimal  # DP1
-                ratio4 += np.dot(multi, d) / optimal  # booking-limit
-                ratio5 += np.dot(multi, e) / optimal  # FCFS
+                if value_a/optimal < worst_a:
+                    worst_a = value_a/optimal
+
+                if value_b/optimal < worst_b:
+                    worst_b = value_b/optimal
+
+                if value_c/optimal < worst_c:
+                    worst_c = value_c/optimal
+
+                if value_d/optimal < worst_d:
+                    worst_d = value_d/optimal
+
+                ratio1 += value_a / optimal  # sto-planning
+                ratio2 += value_b / optimal  # bid-price
+                ratio3 += value_c / optimal  # DP1
+                ratio4 += value_d / optimal  # booking-limit
+                # ratio5 += np.dot(multi, e) / optimal  # FCFS
                 accept_people += optimal
 
-            my_file.write('Sto: %.2f ;' % (ratio1/count*100))
-            my_file.write('Bid: %.2f ;' % (ratio2/count*100))
-            my_file.write('DP1: %.2f ;' % (ratio3/count*100))
-            my_file.write('Booking: %.2f ;' % (ratio4/count*100))
-            my_file.write('FCFS: %.2f \n;' % (ratio5/count*100))
+            my_file.write('SPBA: %.2f ;' % (ratio1/count*100))
+            my_file.write('RDPH: %.2f ;' % (ratio3/count*100))
+            my_file.write('BPC: %.2f ;' % (ratio2/count*100))
+            my_file.write('BLC: %.2f ;' % (ratio4/count*100))
             my_file.write('Number of accepted people: %.2f \t' % (accept_people/count))
+            my_file.write('worst_SPBA: %.4f \n;' % (worst_a))
+            my_file.write('worst_BPC: %.4f \n;' % (worst_b))
+            my_file.write('worst_RDPH: %.4f \n;' % (worst_c))
+            my_file.write('worst_BLC: %.4f \n;' % (worst_d))
 
         run_time = time.time() - begin_time
         my_file.write('Total Runtime\t%f\n' % run_time)

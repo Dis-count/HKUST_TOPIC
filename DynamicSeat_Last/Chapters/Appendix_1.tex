@@ -4,10 +4,27 @@
 \appendix
 \section{Policies for Dynamic Situations}\label{policies}
 
+\subsubsection*{Relaxed Dynamic Programming Heuristic (RDPH)}
+
+According to the RDP formulation in \eqref{DP_relaxed}, we can determine whether to accept or reject each request. For accepted requests, we must then decide on specific seat assignments. However, without a predefined seat plan, this assignment process lacks clear guidelines. To resolve this, we implement a modified Best Fit rule \citep{johnson1974fast}, assigning each group to the row with the smallest remaining capacity that can still accommodate it. An important prerequisite for this assignment is verifying seat availability. Specifically, if the group size exceeds the maximum remaining capacity across all rows, the request must be rejected.
+
+This policy is stated in the following algorithm.
+
+\begin{algorithm}[H]
+  \caption{RDP Heuristic Algorithm}\label{algo_dp_heuris}
+  Calculate $V^{t}(l)$ by \eqref{DP_relaxed}, $\forall t =2, \ldots, T; \forall l = 1, 2, \ldots, l^{1}=\tilde{L}$\;
+  \For{$t =1, \ldots, T$}{
+    {Observe a request of group type $i$\;}
+    \eIf{$\max_{j \in \mathcal{N}} L_{j}^{t} \geq n_i$ and $V^{t+1}(l^{t}) \leq V^{t+1}(l^{t}-n_i) + i$}
+    {Set $k = \arg \min_{j \in \mathcal{N}}\{L_j^{t}|L_j^{t} \geq n_i\} $ and break ties arbitrarily\;
+    Assign the group to row $k$, let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$, $l^{t+1} \gets l^{t}- n_{i}$\;}
+    {Reject the group and let $L_{k}^{t+1} \gets L_{k}^{t}$, $l^{t+1} \gets l^{t}$\;}}
+\end{algorithm}
+
 \subsubsection*{Bid-Price Control Policy}
 Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
 
-The dual of LP relaxation of SPDRP is:
+The dual of LP relaxation of the SPDR problem is:
 
 \begin{equation}\label{bid-price_dual}
   \begin{aligned}
@@ -32,7 +49,7 @@ The bid-price control policy based on the static model is stated below.
   \caption{Bid-Price Control}\label{algo_bid}
   \For{$t =1, \ldots, T$}{
     {Observe a request of group type $i$\;}
-    {Solve the LP relaxation of SPDRP with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ and $\mathbf{L}^{t}$\;
+    {Solve the LP relaxation of the SPDR problem with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ and $\mathbf{L}^{t}$\;
     Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$\;}
     \eIf{$i \geq \tilde{i}$ and $\max_{j \in \mathcal{N}}{L_j^{t}} \geq n_i$}
     {Set $k = \arg \min_{j \in \mathcal{N}}\{L_j^{t}|L_j^{t} \geq n_i\} $\;
@@ -45,7 +62,7 @@ The bid-price control policy based on the static model is stated below.
 \subsubsection*{Booking-Limit Control Policy}
 The booking-limit control policy involves setting a maximum number of reservations that can be accepted for each request. By controlling the booking-limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue.
 
-In this policy, we solve SPDRP with the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests. 
+In this policy, we solve the SPDR problem with the expected demand. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests. 
 
 % When we solve the LP relaxation of SPDRP, the aggregate optimal solution is the limits for each group type. Interestingly, the bid-price control policy is found to be equivalent to the booking limit control policy.
 
@@ -55,7 +72,7 @@ In this policy, we solve SPDRP with the expected demand. Then for every type of 
   \caption{Booking-Limit Control}\label{algo_booking}
   \For{$t =1, \ldots, T$}{
     {Observe a request of group type $i$\;}
-    {Solve SPDRP with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ and $\mathbf{L}^{t}$\;
+    {Solve the SPDR problem with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ and $\mathbf{L}^{t}$\;
     Obtain the seat plan, $\bm{H}$, and the aggregate optimal solution, $\mathbf{X}$\;}
     \eIf{$X_i > 0$}
     {Set $k = \arg \min_{j} \{L_j^{t} - \sum_{i}n_i H_{ji}|H_{ji} >0\}$\;

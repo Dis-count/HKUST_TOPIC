@@ -241,7 +241,7 @@ if __name__ == "__main__":
     I = 4  # the number of group types
     number_period = 60
     given_lines = 8
-    np.random.seed(0)
+    # np.random.seed(0)
     sd = 1
     probab = [0.4, 0.4, 0.1, 0.1]
     sam = samplingmethod1(I, num_sample, number_period, probab, sd)

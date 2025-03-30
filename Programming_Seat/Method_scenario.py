@@ -180,7 +180,7 @@ class stochasticModel1:
                       vtype=GRB.CONTINUOUS, name='varx')
         z = m.addVars(self.W, lb=-float('inf'),
                       vtype= GRB.CONTINUOUS, name='varz')
-        xk = m.addVars(self.given_lines, vtype=GRB.BINARY, name='varxk')
+        xk = m.addVars(self.given_lines, vtype = GRB.BINARY, name='varxk')
         m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
                                   for i in range(self.I)) <= (self.roll_width[j]-self.demand_width_array[k-1]*xk[j]) for j in range(self.given_lines))
         m.addConstr(grb.quicksum(xk[j] for j in range(self.given_lines)) <= 1)

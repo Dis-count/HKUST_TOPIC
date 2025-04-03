@@ -1,29 +1,16 @@
-\section{Probabilities Estimation and Seat Layout}\label{appen_3}
-\subsection{Probabilities Estimation}
+\section{Empirical Probabilities and Realistic Seat Layouts}\label{appen_3}
+\subsection{Empirical Probabilities}
 We select Movie A (representing the suspense genre) and Movie B (representing the family fun genre) as target movies to analyze group information and their corresponding probability distributions, denoted as $D3$ and $D4$, respectively.
-
 
 % The seat plans for the tickets were obtained from a Hong Kong cinema website. We focused on scattered seat plans and excluded cases where the number of consecutive seats exceeded four. By counting the occurrences of different group types, we obtained these distributions. 
 
-
-% 我们分不同时间段截取 ticket seat plans obtained from a Hong Kong cinema website. 
-% 在电影开场前较长一段时间时，售出的座位通常较为分散，因而我们可以将连座的座位作为属于同一个组别，同时 exclude cases where the number of consecutive seats exceeded four.
-
-
-% 统计不同组别在seat plans 出现的频次，来作为它们的概率分布， movie A 四个组的的频数分别为 112, 460, 121, 226, 总数为 919. Movie B 四个组的的频数分别为 116, 178, 23, 28, 总数为 345.
-
-% 我们使用正态近似法（95\% 置信区间）
-
 % $\hat{p}_i \pm z_{\alpha / 2} \sqrt{\frac{\hat{p}_i\left(1-\hat{p}_i\right)}{N}} = $
-% 得到对于Movie A 的各个组别频率估计的置信区间 分别为
 % 0.122 $\pm$ 0.011
 % 0.501 $\pm$ 0.016
 % 0.132 $\pm$ 0.011
 % 0.246 $\pm$ 0.014
 
-
-
-% Similarly, 对于Movie B 的各个组别频率估计的置信区间分别为
+% Similarly, 
 
 % 0.336 $\pm$ 0.025
 % 0.516 $\pm$ 0.027
@@ -51,34 +38,34 @@ $CI_1^{B} =  0.336 \pm 0.025$, $CI_2^{B} =  0.516 \pm 0.027$, $CI_3^{B} = 0.067 
 
 % https://www.lcsd.gov.hk/en/ticket/seat.html
 
-\subsection{Seat Layouts}
+\subsection{Realistic Seat Layouts}
 
-\begin{figure}[h]
+\begin{figure}[ht]
+  \caption{Layout A}
     \centering
       \includegraphics[width=0.6\textwidth]{./Figures/Layouts/Layout_A.png}
-    \caption{Layout A}
 \end{figure}
   
-\begin{figure}[h]
+\begin{figure}[ht]
+  \caption{Layout B}
     \centering
       \includegraphics[width=0.6\textwidth]{./Figures/Layouts/Layout_B.png}
-    \caption{Layout B}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
+  \caption{Layout C}
     \centering
       \includegraphics[width=0.6\textwidth]{./Figures/Layouts/Layout_C1.png}
-    \caption{Layout C}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
+  \caption{Layout D}
     \centering
       \includegraphics[width=0.6\textwidth]{./Figures/Layouts/Layout_D.png}
-    \caption{Layout D}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
+  \caption{Layout E}
     \centering
       \includegraphics[width=0.6\textwidth]{./Figures/Layouts/Layout_E.png}
-    \caption{Layout E}
 \end{figure}

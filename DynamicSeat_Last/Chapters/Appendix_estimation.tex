@@ -1,0 +1,10 @@
+To estimate the threshold of request-volume $q^{\textup{th}}$, we aim to find the maximum period such that all requests can be assigned into the seats during these periods, i.e., for each group type $i$, we have $\bm{X}_{i} = \sum_{j =1}^{N} x_{ij} \geq d_i$. Meanwhile, we have the capacity constraint $\sum_{i =1}^{M} n_{i} x_{ij} \leq L_j$, thus, $\sum_{i =1}^{M} n_i d_i \leq \sum_{i =1}^{M} \sum_{j =1}^{N} n_i x_{ij} \leq \sum_{j =1}^{N} L_{j}$. Notice that $E(d_i) = p_i T$, we have $\sum_{i =1}^{M} n_i p_i T \leq \sum_{j =1}^{N} L_{j}$ by taking the expectation. Recall that $\tilde{L} = \sum_{j =1}^{N} L_{j} = \sum_{j =1}^{N} L_{j}^{0} + N \delta$ denotes the total size of the layout. From this, we derive the inequality $T \leq \frac{\tilde{L}}{\gamma + \delta}$. 
+
+
+Under the ideal assumption that all requests fully occupy the available capacity, the ideal threshold of request-volume can be estimated as $\hat{q}^{\textup{th}} = (1-p_0) \frac{\tilde{L}}{\gamma + \delta}$. Correspondingly, the threshold of occupancy rate under this ideal scenario is: 
+$\hat{\rho}^{\textup{th}}= \frac{\gamma \hat{q}^{\textup{th}}}{(\gamma+ \delta)\hat{q}^{\textup{th}} - N \delta} = \frac{\gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{(1-p_0) \tilde{L}-N \delta}$. 
+
+However, in practice, the actual expected maximum request-volume will be smaller than $\hat{q}^{\textup{th}}$ since perfectly filling all available capacity is nearly impossible. To account for this, we introduce discount factors $c_1$ and $c_2$ for both thresholds, respectively. For the threshold of request-volume:
+$\tilde{q}^{\textup{th}} =  \frac{c_1 (1-p_0) \tilde{L}}{\gamma + \delta}$, where $c_1$ adjusts for deviations from the ideal assumption.
+For the threshold of occupancy rate:
+$\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{(1-p_0) \tilde{L}-N \delta}$, where $c_2$ similarly reflects practical constraints.

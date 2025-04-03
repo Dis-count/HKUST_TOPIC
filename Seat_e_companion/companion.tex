@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{hyperref} % 可选：添加超链接支持
+\usepackage{graphicx}
+
+\usepackage{xr}
+\externaldocument{sum1}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}  % 用于首行缩进
+
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{amsthm} % 使用定理环境
+\usepackage{amssymb}
+
+\usepackage{bm}
+\usepackage{pdfpages}
+\usepackage{tabu}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{url}
+
+\usepackage[style=ieee]{biblatex} % 或 \usepackage{natbib}
+\addbibresource{ec.bib} % 指定参考文献数据库
+
+
+% 自定义 e-companion 的编号格式（例如 EC Section 1）
+\renewcommand{\thesection}{EC.\arabic{section}} % 节编号格式：EC.1, EC.2
+\renewcommand{\thefigure}{EC.\arabic{figure}}   % 图编号格式：EC.1, EC.2
+\renewcommand{\thetable}{EC.\arabic{table}}    % 表编号格式：EC.1, EC.2
+
+\newenvironment{pf}[1]{\noindent\textbf{#1}\par\medskip}{\hfill $\blacksquare$\par\medskip}
+\newtheorem{corollary}{\hspace{2em}Corollary}
+\newtheorem{prop}{\hspace{2em}Proposition}
+
+% 自定义定理样式：编号格式为 EC.X，并保留缩进
+\newtheoremstyle{ecompanion} % 样式名
+  {2em}                     % 上方间距
+  {2em}                     % 下方间距
+  {\normalfont}             % 正文字体
+  {}                        % 缩进（由\hspace控制）
+  {\bfseries}               % 标题字体
+  {.}                       % 标题后标点
+  {5pt plus 1pt minus 1pt}  % 标题后间距
+  {\thmname{#1}\thmnumber{ EC.#2}\thmnote{ (#3)}} % 编号格式
+
+% 应用样式并定义 lemma 环境
+\theoremstyle{ecompanion}
+\newtheorem{lem}{Lemma} % 自动添加 EC. 前缀
+
+\usepackage[linesnumbered,tworuled]{algorithm2e}
+\SetKwComment{Comment}{/* }{ */}
+% ===== 关键修改：重定义算法编号格式 =====
+\makeatletter
+\renewcommand{\fnum@algocf}{Algorithm EC.\thealgocf} % 添加 EC. 前缀
+\makeatother
+\RestyleAlgo{ruled}
+
+\begin{document}
+
+% 标题注明这是 e-companion
+\title{Electronic Companion to \\ \textit{Seating Management under Social Distancing}}
+\author{}
+\date{}
+\maketitle
+
+% 补充内容
+
+\input{Appendix_1}
+
+\input{Proof1}
+
+\input{Misce}
+
+
+% \section{Proof of Theorem 1} \label{sec:ec-proof}
+% Here we provide the full proof omitted in the main text...
+
+% \section{Additional Experiments} \label{sec:ec-experiments}
+% \subsection{Dataset Details} \label{sec:ec-data}
+% The extended dataset is described in Table~\ref{tab:ec-data}.
+
+% % 示例表格
+% \begin{table}[ht]
+% \centering
+% \caption{Extended Dataset Summary} \label{tab:ec-data}
+% \begin{tabular}{lc}
+% \textbf{Feature} & \textbf{Value} \\
+% Size & 10,000 samples \\
+% Dimensions & 20 \\
+% \end{tabular}
+% \end{table}
+
+\printbibliography[title={References in E-Companion}]
+
+\end{document}

@@ -1,0 +1,32 @@
+Run Start Time:Mon Mar 31 12:50:37 2025
+The number of periods: 	60
+SPBA: 100.00 ;RDPH: 100.00 ;BPC: 100.00 ;BLC: 85.06 ;Number of accepted people: 119.30 
+worst_SPBA: 1.0000 
+;worst_BPC: 1.0000 
+;worst_RDPH: 1.0000 
+;worst_BLC: 0.5702 
+;The number of periods: 	70
+SPBA: 99.56 ;RDPH: 99.23 ;BPC: 99.18 ;BLC: 91.52 ;Number of accepted people: 138.15 
+worst_SPBA: 0.9712 
+;worst_BPC: 0.9583 
+;worst_RDPH: 0.9645 
+;worst_BLC: 0.8030 
+;The number of periods: 	80
+SPBA: 99.37 ;RDPH: 98.87 ;BPC: 98.65 ;BLC: 97.36 ;Number of accepted people: 143.71 
+worst_SPBA: 0.9720 
+;worst_BPC: 0.9589 
+;worst_RDPH: 0.9583 
+;worst_BLC: 0.8993 
+;The number of periods: 	90
+SPBA: 99.46 ;RDPH: 99.11 ;BPC: 98.90 ;BLC: 98.46 ;Number of accepted people: 145.11 
+worst_SPBA: 0.9790 
+;worst_BPC: 0.9586 
+;worst_RDPH: 0.9655 
+;worst_BLC: 0.9645 
+;The number of periods: 	100
+SPBA: 99.48 ;RDPH: 99.16 ;BPC: 98.88 ;BLC: 98.35 ;Number of accepted people: 145.77 
+worst_SPBA: 0.9726 
+;worst_BPC: 0.9655 
+;worst_RDPH: 0.9724 
+;worst_BLC: 0.9514 
+;Total Runtime	367.350026

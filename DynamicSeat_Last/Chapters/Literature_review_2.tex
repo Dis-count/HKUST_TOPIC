@@ -1,0 +1,72 @@
+% !TEX root = sum1.tex
+\section{Literature Review}\label{literature}
+
+%\subsection{Seating Management with Social Distancing}
+Seating management is a practical problem that presents unique challenges in various applications, each with its own complexities, particularly when accommodating group-based seating requests. For instance, in passenger rail services, groups differ not only in size but also in their departure and arrival destinations, requiring them to be assigned consecutive seats \citep{clausen2010off, deplano2019offline}. In social gatherings such as weddings or dinner galas, individuals often prefer to sit together at the same table while maintaining distance from other groups they may dislike \citep{lewis2016creating}. In parliamentary seating assignments, members of the same party are typically grouped in clusters to facilitate intra-party communication as much as possible \citep{vangerven2022parliament}. In e-sports gaming centers, customers arrive to play games in groups and require seating arrangements that allow them to sit together \citep{kwag2022optimal}.
+
+Incorporating social distancing into seating management has introduced an additional layer of complexity, sparking a new stream of research. Some works focus on the layout design and determine seating positions to maximize physical distance between individuals, such as students in classrooms \citep{bortolete2022support} or customers in restaurants and beach umbrella arrangements \citep{fischetti2023safe}. Other works assume the seating layout is fixed, and assign seats to individuals while adhering to social distancing guidelines. For example, \citet{bortolete2022support} also consider the fixed seat setting for students in the classroom, \citet{salari2020social, pavlik2021airplane} consider the seat assignment in the airplanes. These studies consider the seating management with social distancing for the individual requests.
+
+
+Our work relates to seating management with social distancing for group-based requests, which has found its applications in various areas, including single-destination public transits \citep{moore2021seat}, airplanes \citep{ghorbani2020model, salari2022social}, trains \citep{haque2022optimization, haque2023social}, and theaters \citep{blom2022filling}. Due to the diversity of applications, there are different issues to handle. For example, \citet{salari2022social} take the distance between different groups into account, leading to the development of a seating assignment strategy that outperforms the simplistic airline policy of blocking all middle seats. In \citet{haque2023social}, when designing seat allocation for groups with social distancing, was not only the transmission risk inside the train considered, but also the transmission risk between different cities where the stops were located. \citet{blom2022filling} address group-based seating problem in theaters. While they primarily focus on scenarios with known groups - referred to as seat planning with deterministic requests in our work - we consider a broader range of demand patterns. Specifically, we also examine group-based seat planning with stochastic requests. We also consider dynamic seat assignment, assuming that groups arrive sequentially according to a stochastic process.
+
+
+Technically speaking, when all requests are known, SPDRP belongs to the category of the multiple knapsack problem (MKP) \citep{martello1990knapsack}. Most existing work focus on deriving bounds or competitive ratios for algorithms designed to solve the general multiple knapsack problem \citep{khuri1994zero, ferreira1996solving, pisinger1999exact, chekuri2005polynomial}. However, in our problem, the sizes of item weights, profits and knapsack capacities are all integers. Additionally, there are many identical groups of the same size, making the aggregation form particularly useful for determining the seat plan. Our work emphasizes the structure and properties of the solution to this specific problem, offering valuable insights for subsequent research in the dynamic situation.
+
+
+% To address stochastic demand, we propose a scenario-based programming approach \cite{feng2013scenario, casey2005scenario, henrion2018problem} to determine the seat plan. Unlike existing literature, which typically considers the total supply for different demands or treats each type of supply as a protection level for corresponding demand types, we introduce a hierarchical consumption mechanism for the aggregated supply. Specifically, we adapt the constraints to reflect the hierarchical utilization of seats, where seats planned for larger groups can be repurposed for smaller groups. Additionally, the seat plan derived under demand uncertainty can serve as a reference for dynamic seat assignment, enhancing flexibility and effectiveness in real-time decision-making.
+
+
+The SADR problem falls under the category of the dynamic multiple knapsack problem. A related problem is the dynamic stochastic knapsack problem, which has been extensively studied in the literature \citep{kleywegt1998dynamic, kleywegt2001dynamic, papastavrou1996dynamic}. In the dynamic stochastic knapsack problem, requests arrive sequentially, and their resource requirements and rewards are unknown prior to arrival but revealed upon arrival. In SADR problem, requests also arrive sequentially; however, the sizes of resource requirements and rewards depend on the type of request and are revealed upon arrival. Additionally, the SADR problem involves multiple knapsacks, adding another layer of complexity.
+
+
+There is limited research on the dynamic or stochastic multiple knapsack problem. \citep{perry2009approximate} employs multiple knapsacks to model multiple time periods for solving a multiperiod, single-resource capacity reservation problem. Essentially, it remains a dynamic knapsack problem but with time-varying capacity. \citep{tonissen2017column} considers a two-stage stochastic multiple knapsack problem with a set of scenarios where the capacity of the knapsacks can be subject to disturbances. This problem is similar to SPSR problem in our work, where the number of items is stochastic.
+
+
+Generally speaking, the SADR problem relates to the \textit{revenue management} (RM) problem, which has been extensively studied in industries such as airlines, hotels, and car rentals, where perishable inventory must be allocated dynamically to maximize revenue \citep{van2005introduction}. Network Revenue Management (NRM) extends traditional RM by considering multiple resources (e.g., flight legs, hotel nights) and interdependent demand \citep{williamson1992airline}. The standard NRM problem is typically formulated as a dynamic programming (DP) model, where decisions involve accepting or rejecting requests based on their revenue contribution and remaining capacity \citep{talluri1998analysis}. However, a significant challenge arises because the number of states grows exponentially with the problem size, rendering direct solutions computationally infeasible. To address this, various control policies have been proposed, such as bid-price \citep{adelman2007dynamic, bertsimas2003revenue}, booking limits \citep{gallego1997multiproduct}, and dynamic programming decomposition \citep{talluri2006theory, liu2008choice}. These methods basically assume that demand arrives individually (e.g., one seat per booking). However, in our problem, customers often request multiple units simultaneously. The decisions in our problem must be made on an all-or-none basis for each request, which introduces additional complexity in handling group arrivals \citep{talluri2006theory}. The introduction of group-based characteristics complicates seat management.
+
+
+
+% Prior work has examined group arrivals in the contexts such as: in hotel revenue management \citep{bitran1995application, goldman2002models}, where customers request multi-day stays but room assignments can be deferred until check-in; in high-speed train ticket sales \citet{zhu2023assign}, where each booking must be assigned to a specific seat for the entire multi-leg journey in real time. Both scenarios involve assignment challenges, but with key differences: hotels allow flexible room allocation, while train seating requires immediate assignment. Our SADR problem aligns more closely with the latter - requiring real-time group assignment - but differs in that requests specify only group size, without fixed start dates (for hotels) or boarding stops (for trains).
+ 
+
+A notable study addressing group-like arrivals in revenue management examines hotel multi-day stays \citep{bitran1995application, goldman2002models, aydin2018decomposition}. While these works focus on customer segmentation and room-type allocation, they do not prioritize real-time assignment.
+
+
+The most closely related work to our SADR problem is high-speed train ticket allocation \citep{zhu2023assign}, as both involve real-time seat assignment and treat multi-leg journeys as the group-like constraint. However, there are two critical differences. First, the train ticket allocation processes individual seat requests, whereas SADR handles group requests (multiple seats in one booking). The second key difference concerns resource reusability. In train systems, seats are reusable because they can be allocated to different passengers across multiple journey legs. In contrast, SADR's seats are non-reusable since once assigned, they remain occupied for the entire duration. These distinctions necessitate novel optimization approaches for SADR, particularly in handling bulk assignments and irreversible resource allocation.
+
+
+%  we only have the assignment constraints (e.g., ensuring group members are seated together). but only with the request of group size, don't specify which day to start to stay in the hotel or which stop to start the journey for the train.
+
+
+% While traditional RM focuses on single-unit demand, group-based RM introduces challenges in capacity allocation. 
+
+% Most of the work focuses on individual requests and booking decisions. 
+
+% Prior work has examined group arrivals in the context of hotel revenue management such as: multi-days stays \citep{bitran1995application, goldman2002models}. However, most existing models simplify group requests by treating them as single aggregated demands or assume independent allocations, neglecting assignment constraints (e.g., ensuring group members are seated together).
+
+
+% Airlines: Families or tour groups requiring multiple adjacent seats, they usually make the pre-allocation for the groups based on the historical data and demand forcast or provide the block booking 
+
+% they focus on the different types, no-show, overbooking, cancellations
+
+% Notably, in our model, the supply planned for larger groups can also be utilized by smaller groups. This flexibility stems from our approach, which focuses on group arrivals rather than individual units, distinguishing it from traditional partitioned and nested approaches \citep{curry1990optimal, van2008simulation}.
+
+
+% And the problem becomes more complex due to assignment constraints (e.g., ensuring group members are seated together or assigned to the same hotel room type).
+
+
+% Another key characteristic of our study is the importance of seat assignment, which distinguishes it from traditional revenue management. 
+
+% group price / discount/ allocation /decision 
+
+% individual /multiple states 
+
+% The assign-to-seat feature introduced by \citet{zhu2023assign} further emphasizes the significance of seat assignment. 
+
+% This approach tackles the challenge of selling high-speed train tickets, where each request must be assigned to a specific seat for the entire journey. However, this paper focuses on individual passengers rather than groups, which sets it apart from our research.
+
+
+% group-booking? still based on the quantity, don't consider the specific assignment
+
+
+% \newpage

@@ -326,12 +326,16 @@ class CompareMethods:
         return beta[a]
 
     def method_new(self, sequence: List[int], newx, change_roll0):
+        # filename = 'test_spbs_' + str(probab) + '.txt'
+        # my_file = open(filename, 'w')
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         mylist = []
         periods = len(sequence)
         value = self.dp1()
         for num, j in enumerate(sequence):
+            # my_file.write(str(j) + '\t')
+
             #  Trivial situation
             if max(change_roll) < j:
                 mylist.append(0)
@@ -387,6 +391,10 @@ class CompareMethods:
             else:
                 mylist.append(0)
 
+            # my_file.write(str(mylist[-1]) + '\t')
+            # my_file.write(f'capacity: {change_roll} \n')
+
+        # my_file.close()
         sequence1 = [i-self.s for i in sequence]
         final_demand = np.array(sequence1) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
@@ -433,24 +441,34 @@ class CompareMethods:
 
 if __name__ == "__main__":
     given_lines = 10
-    # np.random.seed(10)
+
     roll_width = np.ones(given_lines) * 21
     # roll_width = np.ones(given_lines) * 12
     # roll_width = np.array([16,17,18,19,20,21,22, 23, 23,24])
-    num_period = 47
+    num_period = 90
     I = 4
-    probab = np.array([0.2, 0.05, 0.1, 0.65])
+    multi = np.arange(1, I+1)
+    probab = np.array([0.34, 0.51, 0.07, 0.08])
     num_sample = 1000
     s = 1
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
-    sequence = sequence_pool(count, total_period, probab, sd)
+    sequence = [3, 3, 2, 3, 5, 2, 5, 3, 2, 2, 3, 2, 3, 2, 2, 5, 3, 3, 2, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 2, 5, 2, 2, 2, 2, 2, 2, 5, 2, 3, 3, 3, 5, 3, 3, 2, 3, 3, 3, 3, 2, 3, 2, 3, 3, 3, 2, 2, 3, 3, 3, 2, 4, 4, 2, 5, 3, 3, 3, 2, 5, 5, 5, 3, 3, 3, 2, 3, 3, 2, 2, 3, 3, 2, 3, 2, 3, 2, 5, 5]
+    
+    # [3, 3, 5, 2, 3, 3, 5, 3, 2, 3, 2, 2, 3, 3, 4, 2, 5, 5, 2, 3, 3, 4, 2, 3, 2, 2, 2, 5, 3, 5, 3, 2, 3, 3, 3, 3, 2, 2, 2, 3, 3, 4, 5, 4, 2, 3, 3, 2, 3, 3, 2, 2, 2, 3, 3, 3, 4, 3, 3, 3, 3, 2, 2, 4, 2, 2, 2, 2, 3, 3, 5, 2, 3, 3, 3, 2, 3, 2, 2, 3, 2, 2, 3, 3, 2, 2, 4, 5, 3, 5]
+    print(len(sequence))
+    # [3, 3, 2, 3, 5, 2, 5, 3, 2, 2, 3, 2, 3, 2, 2, 5, 3, 3, 2, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 2, 5, 2, 2, 2, 2, 2, 2, 5, 2, 3, 3, 3, 5, 3, 3, 2, 3, 3, 3, 3, 2, 3, 2, 3, 3, 3, 2, 2, 3, 3, 3, 2, 4, 4, 2, 5, 3, 3, 3, 2, 5, 5, 5, 3, 3, 3, 2, 3, 3, 2, 2, 3, 3, 2, 3, 2, 3, 2, 5, 5]
     newx4 = a.random_generate(sequence)
 
     b = a.method_new(sequence, newx4, roll_width)
-    
+    print(np.dot(multi, b))
+
+    f = a.offline(sequence)  # optimal result
+    optimal = np.dot(multi, f)
+    print(f'optimal: {optimal}')
+
     # sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2, 5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
 
-    # print(f'optimal: {opt_value}')
+    # 
 
     # newx = np.array([[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [-0.0, 0.0, 0.0, 1.0], [-0.0, 0.0, 1.0, 1.0], [0.0, 1.0, 0.0, 0.0]])
     # change_roll = np.array([0,0,0,0,0,0,0,5,13,4])

@@ -1,0 +1,83 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{johnson1974fast}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8f805225d8e433c29a18a566d1f6acc6}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={David\bibnamedelima S},
+           giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{8f805225d8e433c29a18a566d1f6acc6}
+      \strng{fullhash}{8f805225d8e433c29a18a566d1f6acc6}
+      \strng{bibnamehash}{8f805225d8e433c29a18a566d1f6acc6}
+      \strng{authorbibnamehash}{8f805225d8e433c29a18a566d1f6acc6}
+      \strng{authornamehash}{8f805225d8e433c29a18a566d1f6acc6}
+      \strng{authorfullhash}{8f805225d8e433c29a18a566d1f6acc6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computer and System Sciences}
+      \field{number}{3}
+      \field{title}{Fast algorithms for bin packing}
+      \field{volume}{8}
+      \field{year}{1974}
+      \field{pages}{272\bibrangedash 314}
+      \range{pages}{43}
+    \endentry
+    \entry{dantzig1957discrete}{article}{}
+      \name{author}{1}{}{%
+        {{hash=212fe65a17e797b6dbce0c3731498b2c}{%
+           family={Dantzig},
+           familyi={D\bibinitperiod},
+           given={George\bibnamedelima B},
+           giveni={G\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {INFORMS}%
+      }
+      \strng{namehash}{212fe65a17e797b6dbce0c3731498b2c}
+      \strng{fullhash}{212fe65a17e797b6dbce0c3731498b2c}
+      \strng{bibnamehash}{212fe65a17e797b6dbce0c3731498b2c}
+      \strng{authorbibnamehash}{212fe65a17e797b6dbce0c3731498b2c}
+      \strng{authornamehash}{212fe65a17e797b6dbce0c3731498b2c}
+      \strng{authorfullhash}{212fe65a17e797b6dbce0c3731498b2c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Operations Research}
+      \field{number}{2}
+      \field{title}{Discrete-variable extremum problems}
+      \field{volume}{5}
+      \field{year}{1957}
+      \field{pages}{266\bibrangedash 288}
+      \range{pages}{23}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

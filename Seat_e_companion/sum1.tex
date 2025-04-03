@@ -1,0 +1,97 @@
+% !TEX program = pdflatex
+\let\nofiles\relax
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{setspace}
+% \usepackage{ctex}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}  % 用于首行缩进
+
+\usepackage{xr}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{amssymb}
+\usepackage{amsthm} % 使用定理环境
+% \usepackage{ntheorem}
+\usepackage{bm}
+\usepackage{pdfpages}
+\usepackage{tabu}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{url}
+
+\usepackage[round]{natbib}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue]{hyperref}  
+\externaldocument{companion}
+
+% \usepackage{hyperref}
+% \usepackage{geometry}
+% \geometry{a4paper,scale=0.8}
+% \usepackage{algorithm}
+\usepackage[linesnumbered,tworuled]{algorithm2e}
+\SetKwComment{Comment}{/* }{ */}
+\RestyleAlgo{ruled}
+% \usepackage{algorithmic}
+\usepackage{geometry}
+\geometry{a4paper,left=1in,right=1in,top =1in, bottom = 1in}
+\setstretch{1.5}   %  改变行间距
+% \newgeometry{left = 2 cm, top= 3 cm}
+
+\title{Seating Management under Social Distancing}
+% \author{Zikang, Li; Xiangtong Qi; Qian Liu}
+% \date{}
+% \newtheorem{algorithm}{Algorithm}
+\newtheorem{thm}{\hspace{2em}Theorem}
+\newtheorem{lem}{\hspace{2em}Lemma}
+
+
+% \newenvironment*{pf}{\par\medskip \textbf{}}{\hfill $\blacksquare$\par}
+\newenvironment{pf}[1]{\noindent\textbf{#1}\par\medskip}{\hfill $\blacksquare$\par\medskip}
+
+% \newtheorem{pf}{Proof}
+\newtheorem{remark}{\hspace{2em}Remark}
+\newtheorem{corollary}{\hspace{2em}Corollary}
+\newtheorem{prop}{\hspace{2em}Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\DeclareMathOperator{\sign}{sign}
+% \newcommand{\sign}{\text{sign}}
+\newcommand{\X}{\mathbf{X}}
+
+\setlength{\abovecaptionskip}{0.cm}
+\begin{document}
+\maketitle{}
+
+\input{Chapters/Abstract}
+
+\input{Chapters/Introduction}
+
+\input{Chapters/Literature_review}
+
+\input{Chapters/Problem_description}
+
+\input{Chapters/Stochastic-form}
+
+\input{Chapters/Dynamic}
+
+\input{Chapters/Results}
+
+\input{Chapters/Conclusion}
+
+% \bibliographystyle{plain}
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{refe}
+
+% \input{Chapters/Appendix_1}
+
+% \input{Chapters/Proof1}
+
+% \input{Chapters/Misce}
+\end{document}

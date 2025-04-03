@@ -15,7 +15,7 @@ if __name__ == "__main__":
     period_range = range(60, 101, 10)
     given_lines = 10
     # probab_list = [[0.2, 0.8, 0, 0], [0.18, 0.7, 0.06, 0.06], [0.12, 0.5, 0.13, 0.25], [0.34, 0.51, 0.07, 0.08]]
-    probab_list = [[0.18, 0.7, 0.06, 0.06]]
+    probab_list = [[0.2, 0.8, 0, 0]]
 
     sd = 1
     count = 100
@@ -23,10 +23,10 @@ if __name__ == "__main__":
 
     for probab in probab_list:
         begin_time = time.time()
-        filename = '330_probab_' + str(probab) + '.txt'
+        filename = '331_probab_' + str(probab) + '.txt'
         my_file = open(filename, 'w')
         my_file.write('Run Start Time:' + str(time.ctime()) + '\n')
-        sequences_pool = np.load('sequence_0.18.npy')
+        sequences_pool = np.load('sequence_0.2.npy')
         # sequences_pool = sequence_pool(count, total_period, probab, sd)
 
         for num_period in period_range:
@@ -95,7 +95,7 @@ if __name__ == "__main__":
             my_file.write('RDPH: %.2f ;' % (ratio3/count*100))
             my_file.write('BPC: %.2f ;' % (ratio2/count*100))
             my_file.write('BLC: %.2f ;' % (ratio4/count*100))
-            my_file.write('Number of accepted people: %.2f \t' % (accept_people/count))
+            my_file.write('Number of accepted people: %.2f \n' % (accept_people/count))
             my_file.write('worst_SPBA: %.4f \n;' % (worst_a))
             my_file.write('worst_BPC: %.4f \n;' % (worst_b))
             my_file.write('worst_RDPH: %.4f \n;' % (worst_c))

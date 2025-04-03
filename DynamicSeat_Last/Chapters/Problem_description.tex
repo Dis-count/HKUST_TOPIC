@@ -7,10 +7,10 @@ Consider a seat layout comprising $N$ rows, with each row $j$ containing $L_j^0$
 There are $M$ distinct group types, where each group type $i$, $i \in \mathcal{M} \coloneqq \{1, 2, \ldots, M\}$, consists of $i$ individuals requiring $i$ consecutive seats in one row. The request of each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the number of groups of type $i$.
 
 To adhere to social distancing requirements, individuals from the same group must sit together in one specific row while maintaining a distance, measured by the number of empty seats, from adjacent groups in the same row.
-Let $\delta$ denote the social distance, which could require leaving one or more empty seats between groups. Specifically, each group must ensure that there are empty seats adjacent to other groups. To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. This is a clear one-to-one mapping between the original physical seat plan and the model of our seat plan. By incorporating additional seats and designating certain seats for social distancing, we can integrate social distancing measures into the seat planning problem.
+Let $\delta$ denote the social distance, which could require leaving one or more empty seats between groups. Specifically, each group must ensure that there are empty seats adjacent to other groups. To model the social distancing requirements into the seat planning process, we define the size of group type $i$ as $n_i = i + \delta$, where $i \in \mathcal{M}$. Correspondingly, the size of each row is defined as $L_j = L_j^{0} + \delta$. To avoid ambiguity, we use $L^{0}$ and $L$ to denote the original and modified sizes for one row. This is a clear one-to-one mapping between the original physical seat plan and the model of our seat plan. By incorporating additional seats and designating certain seats for social distancing, we can integrate social distancing measures into the seat planning problem.
 Since each group occupies only one row, we assume that the physical distance between different rows is sufficient. If the social distancing requirement is more stringent, an empty row can be implemented, as practiced by some theaters \citep{Berlin_theater}.
 
-We introduce the term \textit{pattern} to describe the seat planning arrangement for a single row. A specific pattern can be represented by a vector $\bm{h} = (h_1, \ldots, h_M)$, where $h_i$ denotes the number of groups of type $i$ in the row for $i = 1,\ldots, M$. A feasible pattern, $\bm{h}$, must satisfy the condition $\sum_{i=1}^{M} h_i n_i \leq L$ and belong to the set of non-negative integer values, denoted as $\bm{h} \in \mathbb{N}^{M}$. A seat plan with $N$ rows can be represented as $\bm{H} = [\bm{h}_{1}^{\intercal}, \ldots, \bm{h}_{N}^{\intercal}]$, where each element, $H_{ij}$, denotes the number of groups of type $i$ contained in row $j$. The supply of the seat plan is represented by $\bm{X} = (X_{1}, \ldots, X_{M})^{\intercal}$, where $X_i= \sum_{j=1}^{N} H_{ij}$ indicates the supply for group type $i$. In other words, $\bm{X}$ captures the number of groups of each type that can be accommodated in the seat layout by aggregating the supplies across all rows.
+We introduce the term \textit{pattern} to describe the seat planning arrangement for a single row. A specific pattern can be represented by a vector $\bm{h} = (h_1, \ldots, h_M)$, where $h_i$ denotes the number of groups of type $i$ in the row for $i = 1,\ldots, M$. A feasible pattern, $\bm{h} \in \mathbb{N}^{M}$, must satisfy the condition $\sum_{i=1}^{M} h_i n_i \leq L$. A seat plan with $N$ rows can be represented as $\bm{H} = [\bm{h}_{1}^{\intercal}, \ldots, \bm{h}_{N}^{\intercal}]$, where each element, $H_{ij}$, denotes the number of groups of type $i$ contained in row $j$. The supply of the seat plan is represented by $\bm{X} = (X_{1}, \ldots, X_{M})^{\intercal}$, where $X_i= \sum_{j=1}^{N} H_{ij}$ indicates the supply for group type $i$. In other words, $\bm{X}$ captures the number of groups of each type that can be accommodated in the seat layout by aggregating the supplies across all rows.
 
 Let $|\bm{h}|$ denote the maximum number of individuals that can be assigned according to pattern $\bm{h}$, i.e., $|\bm{h}| = \sum_{i =1}^{M} i h_i$. The size of $\bm{h}$, $|\bm{h}|$, serves as a measure of the maximum seat occupancy achievable under social distancing constraints. By analyzing $|\bm{h}|$ across different patterns, we can evaluate the effectiveness of various seat plan configurations in accommodating the desired number of individuals while complying with social distancing requirements.
 
@@ -21,9 +21,9 @@ Consider a single row of $L^0=10$ seats and the social distancing requirement of
 \end{example}
 
 \begin{figure}[ht]
+    \caption{Illustration of groups with social distancing}\label{fex1}
     \centering
         \includegraphics[width=0.55\textwidth]{./Figures/model_plan.pdf}
-    \caption{Illustration of Groups with Social Distancing}\label{fex1}
 \end{figure}
 
 We now formulate the seat planning with deterministic requests (SPDR) problem as an integer programming, where $x_{ij}$ represents the number of groups of type $i$ planned in row $j$. 
@@ -73,7 +73,7 @@ The size, $qM + \max\{r-\delta, 0\}$, corresponds directly to a largest pattern 
 Specifically, when $r = 0$, the largest pattern is unique and full, indicating that only one pattern can accommodate the maximum number of individuals; when $r > \delta$, the largest pattern is full, as it uses all available seats. A concrete example illustrating largest and full patterns is provided in Example \ref{ex_2}. 
 
 We can also measure the effectiveness of a seat plan by measuring the relative utilization of the seats. To this end, we define the occupancy rate of a pattern $h$ as $|h|/L^0$. By this definition, a largest pattern achieves the maximum achievable occupancy rate of a row. Similarly, we can define the maximum achievable occupancy rate of the venue as follows. 
-$$\rho_{ac} =  \frac{\sum_{j \in \mathcal{N}}\phi(M, L_{j}^{0}; \delta)}{\sum_{j \in \mathcal{N}} L_{j}^{0}},$$
+$$\rho^{\textup{ac}} =  \frac{\sum_{j =1}^{N}\phi(M, L_{j}^{0}, \delta)}{\sum_{j =1}^{N} L_{j}^{0}},$$
 where $\phi(M, L^{0}, \delta)$ represents the size of the largest pattern under $M$, $L^{0}$ and $\delta$.
 
 The monotonicity of $\phi(M, L^{0}, \delta)$ stated in Proposition \ref{lem_pattern} also applies to the maximum achievable occupancy rate with respect to $M$ and $\delta$, but not with respect to $L^{0}$. This result is established in the following corollary. 
@@ -92,9 +92,9 @@ Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. The size of the 
 
 The following figure shows that the largest pattern may not be full and the full pattern may not be largest.
 \begin{figure}[ht]
+    \caption{Largest and full patterns}
     \centering
         \includegraphics[width=0.8\textwidth]{./Figures/largest_full.pdf}
-    \caption{Largest and Full Patterns}
 \end{figure}
 
 Pattern $(0, 0, 0, 4)$ is a largest pattern as its size is 16. However, it does not satisfy the requirement of fully utilizing all available seats since $4 \times 5 \neq 21$. Pattern $(1, 1, 4, 0)$ is a full pattern as it utilizes all available seats. However, its size is 15, indicating that it is not a largest pattern.

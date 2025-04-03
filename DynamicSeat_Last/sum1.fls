@@ -953,7 +953,6 @@ INPUT Chapters/Literature_review.tex
 INPUT ./Chapters/Literature_review.tex
 INPUT ./Chapters/Literature_review.tex
 INPUT Chapters/Literature_review.tex
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT ./Chapters/Problem_description.tex
 INPUT ./Chapters/Problem_description.tex
 INPUT ./Chapters/Problem_description.tex
@@ -978,6 +977,7 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmi
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm
+INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT ./Figures/model_plan.pdf
 INPUT ./Figures/model_plan.pdf
 INPUT ./Figures/model_plan.pdf
@@ -1095,10 +1095,8 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.p
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb

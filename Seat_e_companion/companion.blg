@@ -1,0 +1,15 @@
+[0] Config.pm:311> INFO - This is Biber 2.16
+[0] Config.pm:314> INFO - Logfile is 'companion.blg'
+[114] biber-MSWIN32:340> INFO - === 
+[150] Biber.pm:415> INFO - Reading 'companion.bcf'
+[276] Biber.pm:952> INFO - Found 2 citekeys in bib section 0
+[292] Biber.pm:4340> INFO - Processing section 0
+[305] Biber.pm:4531> INFO - Looking for bibtex format file 'ec.bib' for section 0
+[375] bibtex.pm:1689> INFO - LaTeX decoding ...
+[423] bibtex.pm:1494> INFO - Found BibTeX data source 'ec.bib'
+[468] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[468] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[469] Biber.pm:4168> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[469] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
+[471] bbl.pm:654> INFO - Writing 'companion.bbl' with encoding 'UTF-8'
+[472] bbl.pm:757> INFO - Output to companion.bbl

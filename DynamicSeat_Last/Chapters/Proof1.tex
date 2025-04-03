@@ -4,30 +4,30 @@
 
 \begin{pf}{Proof of Proposition \ref{sol_relax_deter}}
   First, we regard this problem as a special case of the Multiple Knapsack Problem (MKP), then we consider the LP relaxation of this problem.
-  Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
+  Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i=1}^{M} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
   Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq \tilde{L}\}$, where $\tilde{L} = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. 
-  For the LP relaxation of \eqref{deter_upper}, the Dantzig upper bound \citep{dantzig1957discrete} is given by $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(\tilde{L}-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(\tilde{L}-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $\tilde{i}$, then for $i < \tilde{i}$, $x_{ij}^{*} = 0$; for $i > \tilde{i}$, $x_{ij}^{*} = d_{i}$; for $i = \tilde{i}$, $\sum_{j} x_{ij}^{*} = (\tilde{L} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i})/ n_{\tilde{i}}$.
+  For the LP relaxation of \eqref{deter_upper}, the Dantzig upper bound \citep{dantzig1957discrete} is given by $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(\tilde{L}-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(\tilde{L}-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $\tilde{i}$, then for $i < \tilde{i}$, $x_{ij}^{*} = 0$; for $i > \tilde{i}$, $x_{ij}^{*} = d_{i}$; for $i = \tilde{i}$, $\sum_{j=1}^{N} x_{ij}^{*} = (\tilde{L} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i})/ n_{\tilde{i}}$.
 \end{pf}
 
 
 \begin{pf}{Proof of Proposition \ref{lem_pattern}}
-First, we construct a feasible pattern with the size of $qM + \max\{r-\delta, 0\}$, then we prove this pattern is largest. Let $L = n_M \cdot q + r$, where $q$ represents the number of times $n_M$ is selected (the quotient), and $r$ represents the remainder, indicating the number of remaining seats. It holds that $0 \leq r < n_M$. The number of people accommodated in the pattern $\bm{h}_{g}$ is given by $|\bm{h}_{g}| = q M + \max\{r-\delta, 0\}$. To establish the optimality of $|\bm{h}_{g}|$ as the largest number of people accommodated given the constraints of $L$, $\delta$, and $M$, we can employ a proof by contradiction.
+First, we construct a feasible pattern with the size of $qM + \max\{r-\delta, 0\}$, then we prove this pattern is largest. Let $L = n_M \cdot q + r$, where $q$ represents the number of times $n_M$ is selected (the quotient), and $r$ represents the remainder, indicating the number of remaining seats. It holds that $0 \leq r < n_M$. The number of individuals accommodated in the pattern $\bm{h}_{g}$ is given by $|\bm{h}_{g}| = q M + \max\{r-\delta, 0\}$. To establish the optimality of $|\bm{h}_{g}|$ as the largest number of individuals accommodated given the constraints of $L$, $\delta$, and $M$, we can employ a proof by contradiction.
 
 Assuming the existence of a pattern $\bm{h}$ such that $|\bm{h}| > |\bm{h}_{g}|$, we can derive the following inequalities:
 
 \begin{align*}
-  & \sum_{i} (n_i - \delta) h_i > q M + \max\{r-\delta, 0\} \\
-  \Rightarrow ~& L \geq \sum_{i} n_i h_i > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\} \\
-  \Rightarrow ~& q(M + \delta) + r > \sum_{i} \delta h_i + q M + \max\{r-\delta, 0\} \\
-  \Rightarrow ~& q \delta + r > \sum_{i} \delta h_i + \max\{r-\delta, 0\}
+  & \sum_{i=1}^{M} (n_i - \delta) h_i > q M + \max\{r-\delta, 0\} \\
+  \Rightarrow ~& L \geq \sum_{i=1}^{M} n_i h_i > \sum_{i=1}^{M} \delta h_i + q M + \max\{r-\delta, 0\} \\
+  \Rightarrow ~& q(M + \delta) + r > \sum_{i=1}^{M} \delta h_i + q M + \max\{r-\delta, 0\} \\
+  \Rightarrow ~& q \delta + r > \sum_{i=1}^{M} \delta h_i + \max\{r-\delta, 0\}
 \end{align*}
 
 \begin{enumerate}[(i)]
-  \item When $r > \delta$, the inequality becomes $q+1 > \sum_{i} h_i$. It should be noted that $h_i$ represents the number of group type $i$ in the pattern. Since $\sum_{i} h_i \leq q$, the maximum number of people that can be accommodated is $q M < q M + r-\delta$.  
-  \item When $r \leq \delta$, we have the inequality $q \delta + \delta \geq q \delta + r > \sum_{i} \delta h_i$. Similarly, we obtain $q+1 > \sum_{i} h_i$. Thus, the maximum number of people that can be accommodated is $q M$, which is not greater than $|\bm{h}_{g}|$.  
+  \item When $r > \delta$, the inequality becomes $q+1 > \sum_{i=1}^{M} h_i$. It should be noted that $h_i$ represents the number of group type $i$ in the pattern. Since $\sum_{i=1}^{M} h_i \leq q$, the maximum number of individuals that can be accommodated is $q M < q M + r-\delta$.  
+  \item When $r \leq \delta$, we have the inequality $q \delta + \delta \geq q \delta + r > \sum_{i=1}^{M} \delta h_i$. Similarly, we obtain $q+1 > \sum_{i=1}^{M} h_i$. Thus, the maximum number of individuals that can be accommodated is $q M$, which is not greater than $|\bm{h}_{g}|$.  
 \end{enumerate}
 
-Therefore, $\bm{h}$ cannot exist. The maximum number of people that can be accommodated in the largest pattern is $q M + \max\{r-\delta, 0\}$.
+Therefore, $\bm{h}$ cannot exist. The maximum number of individuals that can be accommodated in the largest pattern is $q M + \max\{r-\delta, 0\}$.
 
 Additionally, any largest pattern $\bm{h}$ under $M$ remains feasible for $(M+1)$, implying that $\phi(M, L^{0}, \delta) \leq \phi(M+1, L^{0}, \delta)$. Similarly, any largest pattern $\bm{h}$ under $L$ is a feasible pattern under $L+1$, thus, $\phi(M, L^{0}, \delta) \leq \phi(M, L^{0}+1, \delta)$. Any largest pattern $\bm{h}$ under $\delta+1$ is a feasible pattern under $\delta$, thus, $\phi(M, L^{0}, \delta+1) \leq \phi(M, L^{0}, \delta)$.
 So, $\phi(M, L^{0}, \delta)$ is non-decreasing with $M$ and $L^{0}$, and non-increasing with $\delta$, respectively.
@@ -35,9 +35,9 @@ So, $\phi(M, L^{0}, \delta)$ is non-decreasing with $M$ and $L^{0}$, and non-inc
 \end{pf}
 
 \begin{pf}{Proof of Proposition \ref{prop_construction}}
-  First of all, we demonstrate the feasibility of problem \eqref{improve_seat}. Given the feasible seat plan $\bm{H}$ and $\tilde{d}_{i} = \sum_{j=1}^{N} H_{ji}$, let $\hat{x}_{ij} = H_{ji}, i \in \mathcal{M}, j \in \mathcal{N}$, then $\{\hat{x}_{ij}\}$ satisfies the first set of constraints. Because $\bm{H}$ is feasible, $\{\hat{x}_{ij}\}$ satisfies the second set of constraints and integer constraints. Thus, problem \eqref{improve_seat} always has a feasible solution. 
+  First of all, we demonstrate the feasibility of problem \eqref{improve_seat}. Given the feasible seat plan $\bm{H}$ and $\tilde{d}_{i} = \sum_{j=1}^{N} H_{ij}$, let $\hat{x}_{ij} = H_{ij}, i \in \mathcal{M}, j \in \mathcal{N}$, then $\{\hat{x}_{ij}\}$ satisfies the first set of constraints. Because $\bm{H}$ is feasible, $\{\hat{x}_{ij}\}$ satisfies the second set of constraints and integer constraints. Thus, problem \eqref{improve_seat} always has a feasible solution. 
   
-  Suppose there exists at least one pattern $\bm{h}$ is neither full nor largest in the optimal seat plan obtained from problem \eqref{improve_seat}. Let $\beta = L - \sum_{i} n_{i} h_{i}$, and denote the smallest group type in pattern $\bm{h}$ by $k$. If $\beta \geq n_1$, we can assign at least $n_1$ seats to a new group to increase the objective value. Thus, we consider the situation when $\beta < n_1$. If $k =M$, then this pattern is largest. When $k< M$, let $h^{1}_{k} = h_{k} -1$ and $h^{1}_{j} = h_{j} +1$, where $j = \min\{M, \beta + k\}$. In this way, the constraints will still be satisfied but the objective value will increase when the pattern $\bm{h}$ changes. Therefore, by contradiction, problem \eqref{improve_seat} always generate a seat plan composed of full or largest patterns.
+  Suppose there exists at least one pattern $\bm{h}$ is neither full nor largest in the optimal seat plan obtained from problem \eqref{improve_seat}. Let $\beta = L - \sum_{i=1}^{M} n_{i} h_{i}$, and denote the smallest group type in pattern $\bm{h}$ by $k$. If $\beta \geq n_1$, we can assign at least $n_1$ seats to a new group to increase the objective value. Thus, we consider the situation when $\beta < n_1$. If $k =M$, then this pattern is largest. When $k< M$, let $h^{1}_{k} = h_{k} -1$ and $h^{1}_{j} = h_{j} +1$, where $j = \min\{M, \beta + k\}$. In this way, the constraints will still be satisfied but the objective value will increase when the pattern $\bm{h}$ changes. Therefore, by contradiction, problem \eqref{improve_seat} always generate a seat plan composed of full or largest patterns.
 \end{pf}
 
 
@@ -49,10 +49,10 @@ Then we will demonstrate that for each scenario $\omega$, the objective function
 Let $\Delta y_{M \omega}^{+} = y_{M \omega}^{'+} - y_{M \omega}^{+}$, $\Delta \sum_{j=1}^{N} x_{Mj} = \sum_{j=1}^{N} x_{Mj}^{'} - \sum_{j=1}^{N} x_{Mj}$. According to \eqref{y_recursively}, when $i$ changes from $M$ to 1, we obtain the following inequalities.
 
 \begin{align*}
-  \Delta y_{M \omega}^{+} \geq & \Delta \sum_{j=1}^{N} x_{Mj} \\
-  \Delta y_{M-1, \omega}^{+} \geq & \Delta y_{M \omega}^{+} + \Delta \sum_{j=1}^{N} x_{M-1,j} \geq \Delta \sum_{j=1}^{N} (x_{Mj} + x_{M-1,j}) \\
+  \Delta y_{M \omega}^{+} \geq &~ \Delta \sum_{j=1}^{N} x_{Mj} \\
+  \Delta y_{M-1, \omega}^{+} \geq &~ \Delta y_{M \omega}^{+} + \Delta \sum_{j=1}^{N} x_{M-1,j} \geq \Delta \sum_{j=1}^{N} (x_{Mj} + x_{M-1,j}) \\
   \vdots ~\cdots \geq & ~\cdots ~\vdots \\
-  \Delta y_{1, \omega}^{+} \geq & \Delta \sum_{j=1}^{N} \sum_{i=1}^{M} x_{i,j}
+  \Delta y_{1, \omega}^{+} \geq &~ \Delta \sum_{j=1}^{N} \sum_{i=1}^{M} x_{i,j}
 \end{align*}
 
 Since the objective function does not decrease, $H^{'}$ represents the optimal solution to SBSP and is composed of full or largest patterns.

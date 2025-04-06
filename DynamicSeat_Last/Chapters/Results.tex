@@ -140,16 +140,13 @@ Robustness is quantified by analyzing how these thresholds vary with the mean gr
 
 % As previously noted, SPBA exhibits stable and consistent performance across four different probability distributions. Here, we further investigate its behavior under a large range of probability distributions. To standardize our analysis, we use the two previously defined metrics, the threshold of request-volume $q^{\textup{th}}$ and the threshold of occupancy rate $\rho^{\textup{th}}$ (note that the maximum achievable occupancy rate $\rho^{\textup{ac}}$ is distribution-independent), and evaluate robustness by observing their variations across different distributions through the mean group size. Finally, we provide an estimation of these metrics using the mean group size.
 
-The mean group size, denoted by $\gamma$, is given by $\gamma = \sum_{i=1}^{M} i p_i$.
-To examine the relationship between $q^{\textup{th}}$, $\rho^{\textup{th}}$ and $\gamma$, we analyzed a sample of 200 random probability distributions with $M=4$ and $p_0=0$. Figure \ref{esti_q} presents a scatter plot of $q^{\textup{th}}$ and $\rho^{\textup{th}}$ as functions of $\gamma$, along with their corresponding estimates.
-
-The estimated thresholds for request-volume and occupancy rate are given by:
+The mean group size is $\gamma = \sum_{i=1}^{M} i p_i$. We analyze the relationship between $q^{\textup{th}}$, $\rho^{\textup{th}}$ and $\gamma$ using 200 random probability distributions ($M=4$, $p_0=0$).
+Figure \ref{esti_q} shows $q^{\textup{th}}$ and $\rho^{\textup{th}}$ versus $\gamma$, along with their estimates: 
 $\tilde{q}^{\textup{th}} =  \frac{c_1 (1-p_0) \tilde{L}}{\gamma + \delta}$ and $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{(1-p_0) \tilde{L}-N \delta}$, where 
- $c_1$ and $c_2$ are the discount factors for both thresholds, respectively; $\gamma$ is the mean group size; $p_0 =0$ and $\tilde{L}, \delta, N$ are defined in the problem setup. Derivations and further details are provided in the Appendix.
+$c_1$ and $c_2$ are discount factors, $\tilde{L}, \delta, N$ are defined in the problem setup, and $p_0 =0$. Using the Ordinary Least Squares regression, we obtain perfect fits ($R^{2} = 1.000$) with $c_1 = 0.9578$ and $c_2 = 0.9576$. The derivation and further details are provided in the Appendix.
 
-We apply an Ordinary Least Squares model to fit the data and estimate the parameters. The resulting fitted equations, $\tilde{q}^{\textup{th}} = \frac{c_1 \tilde{L}}{\gamma + \delta}$ (represented by the solid line in the figure) and $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma + \delta} \frac{\tilde{L}}{\tilde{L}-N \delta}$ (represented by the dashed line in the figure), are displayed in Figure \ref{esti_q}. The goodness of fit is evaluated using R-squared values, which are 1.000 for both models, indicating a perfect fit between the data and the fitted equations. The estimated discount factor values are $c_1 = 0.9578$ and $c_2 = 0.9576$.
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \caption{The estimates of $q^{\textup{th}}$ and $\rho^{\textup{th}}$}\label{esti_q}
   \centering
     \includegraphics[width=0.95\textwidth]{./Figures/200_random.pdf}
@@ -160,11 +157,13 @@ For fixed values of all other parameters, the estimated threshold of request-vol
 
 % Under the condition of fixed other parameters, the estimate of the threshold of request-volume $\tilde{q}^{\textup{th}}$ decreases with higher mean group size $\gamma$ while the estimate of threshold of occupancy rate $\tilde{\rho}^{\textup{th}}$ increases with higher mean group size $\gamma$, which follows the pattern as the figure shows.
 
-{\color{blue} remaining}
+
 % estimation 放在appendix  直接给结论
 
 % We analyze how the estimates of the threshold of request-volume $\tilde{q}^{\textup{th}}$ and the threshold of occupancy rate $\tilde{q}^{\textup{th}}$ vary with respect to these parameters: mean group size $\gamma$, maximum group size $M$, physical distance $\delta$, and total size of the layout $\tilde{L}$.
-% Under the condition of fixed other parameters, the estimate of the threshold of request-volume $\tilde{q}^{\textup{th}}$ decreases with higher mean group size $\gamma$ and increases linearly with the total size of the layout $\tilde{L}$. Generally, $\gamma$ increases with the maximum group size $M$ (since $\gamma = \sum_{i=1}^{M} i p_i$), leading to an indirect reduction in $\tilde{q}^{\textup{th}}$. When other parameters are held constant, the estimate of threshold of occupancy rate $\tilde{\rho}^{\textup{th}}$ increases with higher mean group size $\gamma$ (and thus with larger maximum group size $M$, if $\gamma$ raises) and decreases with larger $\tilde{L}$. The estimated $\tilde{q}^{\textup{th}}$ and $\tilde{\rho}^{\textup{th}}$ exhibit non-trivial dependencies on the physical distance parameter $\delta$ since $\tilde{L} = \sum_{j =1}^{N} L_{j}^{0} + N \delta$ couples their dynamics. Assuming the discount factors $c_1$ and $c_2$ remain constant as $\delta$ increases, both $\tilde{q}^{\textup{th}}$ and $\tilde{\rho}^{\textup{th}}$ decrease monotonically, provided the total capacity satisfies $\sum_{j=1}^{N} L_{j}^{0} > N \delta$. This condition is typically met in common practical layouts.
+% Under the condition of fixed other parameters, the estimate of the threshold of request-volume $\tilde{q}^{\textup{th}}$ decreases with higher mean group size $\gamma$ and increases linearly with the total size of the layout $\tilde{L}$. Generally, $\gamma$ increases with the maximum group size $M$ (since $\gamma = \sum_{i=1}^{M} i p_i$), leading to an indirect reduction in $\tilde{q}^{\textup{th}}$. When other parameters are held constant, the estimate of threshold of occupancy rate $\tilde{\rho}^{\textup{th}}$ increases with higher mean group size $\gamma$ (and thus with larger maximum group size $M$, if $\gamma$ raises) and decreases with larger $\tilde{L}$. The estimated $\tilde{q}^{\textup{th}}$ and $\tilde{\rho}^{\textup{th}}$ exhibit non-trivial dependencies on the physical distance parameter $\delta$ since $\tilde{L} = \sum_{j =1}^{N} L_{j}^{0} + N \delta$ couples their dynamics. 
+
+% Assuming the discount factors $c_1$ and $c_2$ remain constant as $\delta$ increases, both $\tilde{q}^{\textup{th}}$ and $\tilde{\rho}^{\textup{th}}$ decrease monotonically, provided the total capacity satisfies $\sum_{j=1}^{N} L_{j}^{0} > N \delta$. This condition is typically met in common practical layouts.
 
 \subsection{Performance Evaluation under Varied Constraints}\label{perf_constraints}
 To comprehensively evaluate the effectiveness of government policy strictness and venue-specific characteristics, we assess the performances of four critical factors: government-mandated maximum allowable occupancy rates, variations in maximum group sizes, different physical distances ($\delta \in \{1,2\}$) and alternative seat layouts.
@@ -185,7 +184,7 @@ The conclusion can be summarized in Table \ref{tab_requirement}.
   \begin{tabular}{ccc}
   \hline
   \hline
-   & Social distancing requirement & requirement of $\rho^{\textup{al}}$ \\
+   & Social distancing requirement & Requirement of $\rho^{\textup{al}}$ \\
   %  \cmidrule(r){1-1} \cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(l){4-4}
   \hline
   $\rho^{\textup{al}} < \rho^{\textup{th}}$            & Ineffective & Effective \\
@@ -222,9 +221,14 @@ We also consider the impact of different distances. We present the corresponding
 \end{table}
 
 
-For the fixed physical distance $\delta$, as the maximum group size $M$ increases, the threshold of occupancy rate $\rho^{\textup{th}}$ increases, while the threshold of request-volume $q^{\textup{th}}$ decreases according to their estimates. The maximum achievable occupancy rate $\rho^{\textup{ac}}$ increases because the size of the largest pattern $\Phi(M, L_j^{0}, \delta)$ defined in Proposition \ref{lem_pattern}, is monotonically increasing in $M$.
+For the fixed physical distance $\delta$, an increase in the maximum group size $M$ generally leads to a larger mean group size $\gamma$ (since $\gamma = \sum_{i=1}^{M} i p_i$). This in turn causes the threshold of occupancy rate $\rho^{\textup{th}}$ to increase while reducing the threshold of request-volume $\tilde{q}^{\textup{th}}$, as evidenced by their respective estimates. The maximum achievable occupancy rate $\rho^{\textup{ac}}$ increases because the size of the largest pattern $\Phi(M, L_j^{0}, \delta)$ defined in Proposition \ref{lem_pattern}, is monotonically increasing in $M$.
 
-For the fixed maximum group size $M$, as the physical distance $\delta$ increases from 1 to 2 seats, both the threshold of occupancy rate $q^{\textup{th}}$ and threshold of request-volume $\rho^{\textup{th}}$ decrease (consistent with the analysis in the estimation). The maximum achievable occupancy rate, $\rho^{\textup{ac}}$, decreases since $\Phi(M, L_j^{0}, \delta)$ is monotonically decreasing in $\delta$.
+For the fixed maximum group size $M$, the experimental results show that when the physical distance $\delta$ increases from 1 to 2 seats, both the threshold of occupancy rate $q^{\textup{th}}$ and threshold of request-volume $\rho^{\textup{th}}$ decrease, which is consistent with our estimates.
+Assuming constant discount factors $c_1$ and $c_2$, both estimated thresholds $q^{\textup{th}}$ and  $\rho^{\textup{th}}$ would decrease monotonically with increasing $\delta$, provided the total capacity satisfies $\sum_{j=1}^{N} L_{j}^{0} > N \delta$ (See Appendix). This condition is generally satisfied in most practical seating layouts, further validating our experimental observations. The maximum achievable occupancy rate, $\rho^{\textup{ac}}$, decreases since $\Phi(M, L_j^{0}, \delta)$ is monotonically decreasing in $\delta$.
+ 
+% as the physical distance $\delta$ increases from 1 to 2 seats, both the threshold of occupancy rate $q^{\textup{th}}$ and threshold of request-volume $\rho^{\textup{th}}$ decrease (consistent with the analysis in the estimation). 
+
+% Assuming the discount factors $c_1$ and $c_2$ remain constant as $\delta$ increases, both $\tilde{q}^{\textup{th}}$ and $\tilde{\rho}^{\textup{th}}$ decrease monotonically, provided the total capacity satisfies $\sum_{j=1}^{N} L_{j}^{0} > N \delta$. This condition is typically met in common practical layouts.
 
 
 
@@ -257,8 +261,6 @@ For the fixed maximum group size $M$, as the physical distance $\delta$ increase
 %   \end{tabular}
 % \end{table}
 
-
-
 \subsubsection{Alternative Seat Layouts}
 We experiment with several realistic seat layouts selected from a theater seat plan website, choosing five layouts labeled A, B, C, D, and E. Layouts A, D, and E are approximately rectangular, Layout C is a standard rectangular layout, and Layout B is irregular. In these layouts, wheelchair seats and management seats are excluded, while seats with sufficient space for an aisle are treated as new rows. The specific layouts are detailed in Appendix \ref{appen_3}.
 
@@ -283,9 +285,15 @@ The occupancy rate over demand follows the typical pattern of Figure \ref{occupa
   \end{tabular}
 \end{table}
 
-While the venue layouts may differ in shapes (rectangular or otherwise) and row configurations (varying lengths), the maximum achievable occupancy rate $\rho^{\textup{ac}}$ do not exhibit significant differences. According to the analysis in the estimation, the threshold of request-volume $q^{\textup{th}}$ increases with the total size of the layout $\tilde{L}$. The threshold of occupancy rate $\rho^{\textup{th}}$ decreases with increasing $\tilde{L}$, though this variation becomes negligible when the ratio $\frac{\tilde{L}}{\tilde{L}-N\delta}$ approaches one. 
+While the venue layouts may differ in shapes (rectangular or otherwise) and row configurations (varying lengths), the maximum achievable occupancy rate $\rho^{\textup{ac}}$ do not shows the deterministic variation pattern.
 
-Consequently, for practical layouts with differing total seats and row arrangements, the threshold of occupancy rate $\rho^{\textup{th}}$ shows no deterministic variation pattern.
+Consistent with our estimates, the threshold of request-volume $q^{\textup{th}}$ follows $\tilde{q}^{\textup{th}} =  \frac{c_1 (1-p_0) \tilde{L}}{\gamma + \delta}$, exhibiting a positive correlation with total size of the layout $\tilde{L}$. 
+
+While the estimate shows that $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{(1-p_0) \tilde{L}-N \delta}$ should decrease with increasing $\tilde{L}$, in practice this variation becomes negligible as the ratio $\frac{\tilde{L}}{\tilde{L}-N\delta}$ remains nearly constant for typical venue sizes. This explains the observed lack of deterministic variation in 
+$\rho^{\textup{th}}$ across layouts with different seating configurations.
+
+
+% $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{(1-p_0) \tilde{L}-N \delta}$, the threshold of occupancy rate $\rho^{\textup{th}}$ decreases with increasing $\tilde{L}$, though this variation becomes negligible when the ratio $\frac{\tilde{L}}{\tilde{L}-N\delta}$ changes little. Consequently, for practical layouts with differing total seats and row arrangements, the threshold of occupancy rate $\rho^{\textup{th}}$ shows no deterministic variation pattern.
 
 % the threshold of occupancy rate $\rho^{\textup{th}}$ 
 

@@ -107,6 +107,15 @@ Each scenario $\omega \in \Omega$ defines an independent subproblem with its own
   \right\}.
 \end{equation}
 
+Then problem \eqref{BD_master1} can be expressed as:
+\begin{equation}\label{BD_master3}
+  \max_{\mathbf{x} \in \mathbb{N}^{M \times N}} \left\{ \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} ~ p_{\omega} z_{\omega}(\mathbf{x}) \bigg| \mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L} \right\}.
+\end{equation}
+
+
+However, the obtain of optimal value $z_{\omega}(\mathbf{x})$ relies on a given $\mathbf{\bar{x}}$. Notice that the optimal value can also be obtained by the dual of the subproblem and the feasible region of problem is independent with $\mathbf{x}$, thus, we analyse the dual of the subproblem, which can help to solve problem \eqref{BD_master3}.
+
+
 The dual of the subproblem \eqref{BD_sub} can be expressed as:
 
 \begin{equation}\label{BD_sub_dual}

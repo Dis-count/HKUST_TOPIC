@@ -8,3 +8,11 @@ However, in practice, the actual expected maximum request-volume will be smaller
 $\tilde{q}^{\textup{th}} =  \frac{c_1 (1-p_0) \tilde{L}}{\gamma + \delta}$, where $c_1$ adjusts for deviations from the ideal assumption.
 For the threshold of occupancy rate:
 $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{(1-p_0) \tilde{L}-N \delta}$, where $c_2$ similarly reflects practical constraints.
+
+
+% Under the condition of fixed other parameters, the estimate of the threshold of request-volume $\tilde{q}^{\textup{th}}$ decreases with higher mean group size $\gamma$ while the estimate of threshold of occupancy rate $\tilde{\rho}^{\textup{th}}$ increases with higher mean group size $\gamma$, which follows the pattern as the figure shows.
+
+% We analyze how the estimates of the threshold of request-volume $\tilde{q}^{\textup{th}}$ and the threshold of occupancy rate $\tilde{q}^{\textup{th}}$ vary with respect to these parameters: mean group size $\gamma$, maximum group size $M$, physical distance $\delta$, and total size of the layout $\tilde{L}$.
+% Under the condition of fixed other parameters, the estimate of the threshold of request-volume $\tilde{q}^{\textup{th}}$ decreases with higher mean group size $\gamma$ and increases linearly with the total size of the layout $\tilde{L}$. Generally, $\gamma$ increases with the maximum group size $M$ (since $\gamma = \sum_{i=1}^{M} i p_i$), leading to an indirect reduction in $\tilde{q}^{\textup{th}}$. When other parameters are held constant, the estimate of threshold of occupancy rate $\tilde{\rho}^{\textup{th}}$ increases with higher mean group size $\gamma$ (and thus with larger maximum group size $M$, if $\gamma$ raises) and decreases with larger $\tilde{L}$. The estimated $\tilde{q}^{\textup{th}}$ and $\tilde{\rho}^{\textup{th}}$ exhibit non-trivial dependencies on the physical distance parameter $\delta$ since $\tilde{L} = \sum_{j =1}^{N} L_{j}^{0} + N \delta$ couples their dynamics. 
+
+% Assuming the discount factors $c_1$ and $c_2$ remain constant as $\delta$ increases, both $\tilde{q}^{\textup{th}}$ and $\tilde{\rho}^{\textup{th}}$ decrease monotonically, provided the total capacity satisfies $\sum_{j=1}^{N} L_{j}^{0} > N \delta$. This condition is typically met in common practical layouts.

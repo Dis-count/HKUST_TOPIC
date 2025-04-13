@@ -67,7 +67,7 @@ Similarly, if we reject the current group type $i$ to preserve capacity for pote
 Let $d^{t}({i},\hat{i})$ denote the difference of the expected number of accepted individuals between accepting a group type ${i}$ (occupying $(\hat{i}+\delta)$-size seats) and rejecting it in period $t$. This difference is given by:
 \begin{equation*}
 	d^{t}({i},\hat{i}) = \begin{cases}
-    {i} + (\hat{i}-{i}-\delta)P(D_{\hat{i}-{i}-\delta}^{T-t} \geq X_{\hat{i}^{t}-{i}-\delta}^{t}+1) - \hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}^{t}), &\text{if}~ \hat{i} = {i}+\delta+1, \ldots, M \\
+    {i} + (\hat{i}-{i}-\delta)P(D_{\hat{i}-{i}-\delta}^{T-t} \geq X_{\hat{i}^{t}-{i}-\delta}^{t}+1) - \hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}^{t}), &\text{if}~ \hat{i} = {i}+\delta+1, \ldots, M, \\
     {i} - \hat{i} P(D_{\hat{i}}^{T-t} \geq X_{\hat{i}}^{t}), &\text{if}~ \hat{i} = {i}+1, \ldots, {i}+\delta.
 		\end{cases}
 \end{equation*}
@@ -77,7 +77,7 @@ The optimal decision selects $\hat{i}^{*} = \arg \max_{\hat{i} = {i}+1, \ldots, 
 % {\color{red}{how is this related to group type control?}}
 
 \subsubsection*{Tie-Breaking for Row Selection}\label{tie-break}
-A tie occurs when there are several rows to assign the request. To determine the appropriate row for seat assignment, we can apply the following tie-breaking rules among the possible options. Suppose one request of type ${i}$ arrives, the current seat plan is $\bm{H} = [\bm{h}_{1}^{\intercal}, \ldots, \bm{h}_{N}^{\intercal}]$, the corresponding supply is $\bm{X}$. Let $\beta_{j} = L_j - \sum_{i =1}^{M} n_{i} H_{ij}$ represent the remaining number of seats in row $j$ after considering the seat allocation for the assigned requests. When $X_{i} > 0$, we assign the request to row $k \in \arg \min_{j \in \mathcal{N}} \{\beta_{j}|H_{ij} > 0\}$ such that the row can be filled as much as possible. When $X_{i} = 0$ and the request is accepted to take the seats planned for type $\hat{i}, \hat{i}>i$, we assign the request to a row $k \in \arg \max_{j \in \mathcal{N}} \{\beta_{j}| H_{\hat{i} j}>0\}$. That can help reduce the number of rows that are not full. When there are multiple $k$s available, we can choose one arbitrarily. 
+A tie occurs when there are several rows to assign the request. To determine the appropriate row for seat assignment, we can apply the following tie-breaking rules among the possible options. Suppose one request of type ${i}$ arrives, the current seat plan is $\bm{H} = [\bm{h}_{1}^{\intercal}, \ldots, \bm{h}_{N}^{\intercal}]$, the corresponding supply is $\bm{X}$. Let $s_{j} = L_j - \sum_{i =1}^{M} n_{i} H_{ij}$ represent the remaining number of seats in row $j$ after considering the seat allocation for the assigned requests. When $X_{i} > 0$, we assign the request to row $k \in \arg \min_{j \in \mathcal{N}} \{s_{j}|H_{ij} > 0\}$ such that the row can be filled as much as possible. When $X_{i} = 0$ and the request is accepted to take the seats planned for type $\hat{i}, \hat{i}>i$, we assign the request to a row $k \in \arg \max_{j \in \mathcal{N}} \{s_{j}| H_{\hat{i} j}>0\}$. That can help reduce the number of rows that are not full. When there are multiple $k$s available, we can choose one arbitrarily. 
 
 % This rule in both scenarios prioritizes filling rows and leads to better seat management.
 

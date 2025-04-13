@@ -3,10 +3,14 @@
 \section{Proofs}
 
 \begin{pf}{Proof of Proposition \ref{sol_relax_deter}}
-  First, we regard this problem as a special case of the Multiple Knapsack Problem (MKP), then we consider the LP relaxation of this problem.
-  Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i=1}^{M} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
-  Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq \tilde{L}\}$, where $\tilde{L} = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. 
-  For the LP relaxation of \eqref{deter_upper}, the Dantzig upper bound \citep{dantzig1957discrete} is given by $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(\tilde{L}-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole items from $1$ to $b-1$ and fractional $(\tilde{L}-\sum_{j=1}^{b-1} w_j)$ item $b$. Suppose the item $b$ belong to type $\tilde{i}$, then for $i < \tilde{i}$, $x_{ij}^{*} = 0$; for $i > \tilde{i}$, $x_{ij}^{*} = d_{i}$; for $i = \tilde{i}$, $\sum_{j=1}^{N} x_{ij}^{*} = (\tilde{L} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i})/ n_{\tilde{i}}$.
+  We model the problem as a special case of the multiple knapsack problem, then we consider the LP relaxation of this problem. In the model, groups are categorized into $M$ distinct types. Each type $i$ is characterized by a fixed group size $n_i$, which serves as the weight, and an associated profit equal to $i$. For every type $i$, there are $d_i$ groups. Altogether, the total number of groups is given by $K = \sum_{i=1}^{M} d_i$. Each individual group $k$ inherits its profit and weight from its type; specifically, if group $k$ belongs to type $i$, then its profit $p_k$ is $i$, and its weight $w_k$ is $n_i$. To apply the greedy approach for the LP relaxation of \eqref{deter_upper}, sort these groups in non-increasing order of their profit-to-weight ratios: $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. The break group $b$ is the smallest index such that the cumulative weight of group 1 to group $b$ meets or exceeds the total capacity $\tilde{L}$: $b=\min \{j: \sum_{k=1}^j w_k \geq \tilde{L}\}$, where $\tilde{L} = \sum_{j=1}^{N} L_j$ is the total size of all rows. For the LP relaxation of \eqref{deter_upper}, the Dantzig upper bound \citep{dantzig1957discrete} is given by $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(\tilde{L}-\sum_{j=1}^{b-1} w_j\right) \frac{p_b}{w_b}$. The corresponding optimal solution is to accept the whole groups from $1$ to $b-1$ and fractional $(\tilde{L}-\sum_{j=1}^{b-1} w_j)$ group $b$. Suppose the group $b$ belong to type $\tilde{i}$, then for $i < \tilde{i}$, $x_{ij}^{*} = 0$; for $i > \tilde{i}$, $x_{ij}^{*} = d_{i}$; for $i = \tilde{i}$, $\sum_{j=1}^{N} x_{ij}^{*} = (\tilde{L} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i})/ n_{\tilde{i}}$.
+
+  % There are $M$ group types. Each type $i$ has a fixed size $n_i$ (weight of the group), a profit $i$. Each type $i$ has $d_i$ groups. The total number of groups is $K = \sum_{i=1}^{M} d_i$, each group $k$ has a profit $p_k$ and weight $w_k$. If group $k$ belongs to type $i$, then $p_k = i$, $w_k = n_i$.
+
+  % Treat the groups as the items, the rows as the knapsacks. There are $M$ types of items, the total number of which is $K = \sum_{i=1}^{M} d_i$, each item $k$ has a profit $p_k$ and weight $w_k$. 
+  % Sort these items according to profit-to-weight ratios $\frac{p_1}{w_1} \geq \frac{p_2}{w_2} \geq \ldots \geq \frac{p_K}{w_K}$. Let the break item $b$ be given by $b=\min \{j: \sum_{k=1}^j w_k \geq \tilde{L}\}$, where $\tilde{L} = \sum_{j=1}^{N} L_j$ is the total size of all knapsacks. 
+
+
 \end{pf}
 
 
@@ -37,14 +41,14 @@ So, $\phi(M, L^{0}, \delta)$ is non-decreasing with $M$ and $L^{0}$, and non-inc
 \begin{pf}{Proof of Proposition \ref{prop_construction}}
   First of all, we demonstrate the feasibility of problem \eqref{improve_seat}. Given the feasible seat plan $\bm{H}$ and $\tilde{d}_{i} = \sum_{j=1}^{N} H_{ij}$, let $\hat{x}_{ij} = H_{ij}, i \in \mathcal{M}, j \in \mathcal{N}$, then $\{\hat{x}_{ij}\}$ satisfies the first set of constraints. Because $\bm{H}$ is feasible, $\{\hat{x}_{ij}\}$ satisfies the second set of constraints and integer constraints. Thus, problem \eqref{improve_seat} always has a feasible solution. 
   
-  Suppose there exists at least one pattern $\bm{h}$ is neither full nor largest in the optimal seat plan obtained from problem \eqref{improve_seat}. Let $\beta = L - \sum_{i=1}^{M} n_{i} h_{i}$, and denote the smallest group type in pattern $\bm{h}$ by $k$. If $\beta \geq n_1$, we can assign at least $n_1$ seats to a new group to increase the objective value. Thus, we consider the situation when $\beta < n_1$. If $k =M$, then this pattern is largest. When $k< M$, let $h^{1}_{k} = h_{k} -1$ and $h^{1}_{j} = h_{j} +1$, where $j = \min\{M, \beta + k\}$. In this way, the constraints will still be satisfied but the objective value will increase when the pattern $\bm{h}$ changes. Therefore, by contradiction, problem \eqref{improve_seat} always generate a seat plan composed of full or largest patterns.
+  Suppose there exists at least one pattern $\bm{h}$ is neither full nor largest in the optimal seat plan obtained from problem \eqref{improve_seat}. Let $s = L - \sum_{i=1}^{M} n_{i} h_{i}$, and denote the smallest group type in pattern $\bm{h}$ by $k$. If $s \geq n_1$, we can assign at least $n_1$ seats to a new group to increase the objective value. Thus, we consider the situation when $s < n_1$. If $k =M$, then this pattern is largest. When $k< M$, let $h^{1}_{k} = h_{k} -1$ and $h^{1}_{j} = h_{j} +1$, where $j = \min\{M, s + k\}$. In this way, the constraints will still be satisfied but the objective value will increase when the pattern $\bm{h}$ changes. Therefore, by contradiction, problem \eqref{improve_seat} always generate a seat plan composed of full or largest patterns.
 \end{pf}
 
 
 \begin{pf}{Proof of Proposition \ref{prop_solution}}
-Suppose that $H$ is the seat plan associated with the optimal solution to SBSP, but there exists a pattern that is neither full nor the largest. The corresponding excess of supply is $\mathbf{y}^{+}$. According to Proposition \ref{prop_construction}, $H{'}$ can be obtained from $H$. The seat plan, $H{'}$, is composed of full or largest patterns and satisfies all constraints of SBSP. The corresponding excess of supply is $\mathbf{y}^{'+}$.
+Suppose that $\bm{H}$ is the seat plan associated with the optimal solution to SBSP, but there exists a pattern that is neither full nor the largest. The corresponding excess of supply is $\mathbf{y}^{+}$. According to Proposition \ref{prop_construction}, $\bm{H}{'}$ can be obtained from $\bm{H}$. The seat plan, $\bm{H}{'}$, is composed of full or largest patterns and satisfies all constraints of SBSP. The corresponding excess of supply is $\mathbf{y}^{'+}$.
 
-Then we will demonstrate that for each scenario $\omega$, the objective function of SBSP, given by $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{i = 1}^{M} y_{i \omega}^{+}$, does not decrease when transitioning from $H$ to $H'$.
+Then we will demonstrate that for each scenario $\omega$, the objective function of SBSP, given by $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{i = 1}^{M} y_{i \omega}^{+}$, does not decrease when transitioning from $\bm{H}$ to $\bm{H}{'}$.
 
 Let $\Delta y_{M \omega}^{+} = y_{M \omega}^{'+} - y_{M \omega}^{+}$, $\Delta \sum_{j=1}^{N} x_{Mj} = \sum_{j=1}^{N} x_{Mj}^{'} - \sum_{j=1}^{N} x_{Mj}$. According to \eqref{y_recursively}, when $i$ changes from $M$ to 1, we obtain the following inequalities.
 
@@ -55,7 +59,7 @@ Let $\Delta y_{M \omega}^{+} = y_{M \omega}^{'+} - y_{M \omega}^{+}$, $\Delta \s
   \Delta y_{1, \omega}^{+} \geq &~ \Delta \sum_{j=1}^{N} \sum_{i=1}^{M} x_{i,j}
 \end{align*}
 
-Since the objective function does not decrease, $H^{'}$ represents the optimal solution to SBSP and is composed of full or largest patterns.
+Since the objective function does not decrease, $\bm{H}{'}$ represents the optimal solution to SBSP and is composed of full or largest patterns.
 \end{pf}
 
 \begin{pf}{Proof of Lemma \ref{feasible_region}}
@@ -106,8 +110,8 @@ Note that $\mathbf{f}^{\intercal} = [-\mathbf{1},~\mathbf{0}]$ and $\mathbf{V} =
 
 
 \begin{pf}{Proof of Lemma \ref{bid-price}}
-According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to LP relaxation of problem \eqref{deter_upper} takes the form $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1, \ldots, z_{\tilde{i}} = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, \tilde{i}$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = h+1, \ldots, M$.
-  
+According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to LP relaxation of problem \eqref{deter_upper} takes the form $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1= \ldots= z_{\tilde{i}} = 0$. This implies that $\beta_j \geq \frac{n_i - \delta}{n_i}$ for $i = 1,\ldots, \tilde{i}$. Since $\frac{n_i - \delta}{n_i}$ increases with $i$, we have $\beta_j \geq \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$. Consequently, we obtain $z_{i} \geq n_i - \delta - n_i \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = h+1, \ldots, M$.
+
 Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$, and $z_i = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$.  
 \end{pf}
 

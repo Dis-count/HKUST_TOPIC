@@ -85,7 +85,7 @@ The complete formulation can be expressed as:
 
 \begin{equation}\label{BD_master}
   \begin{aligned}
-  \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ \sum_{\omega \in \Omega} \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
+  \max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ \sum_{\omega \in \Omega} p_{\omega} \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
   \text {s.t.} \quad & \mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega}, \forall \omega \in \Omega  \\
   & \mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L} \\
   & \mathbf{x} \in \mathbb{N}^{M \times N}, \mathbf{y}_{\omega} \in \mathbb{N}^{2M}, \forall \omega \in \Omega, 
@@ -95,10 +95,7 @@ which can also be formulated as:
 \begin{equation}\label{BD_master1}
   \max_{\mathbf{x} \in \mathbb{N}^{M \times N}} \left\{ \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} ~ p_{\omega} \max_{\mathbf{y}_{\omega} \in \mathbb{N}^{\scriptscriptstyle 2M}} \left\{\mathbf{f}^{\intercal} \mathbf{y}_{\omega} \big| \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} -\mathbf{x} \mathbf{1}\right\} \bigg| \mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L} \right\}.
 \end{equation}
-
-
 Given integer $\mathbf{x} = \mathbf{\bar{x}}$ and $\mathbf{d}_{\omega}$, the constraint $\mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} -\mathbf{x}$ implies $\mathbf{y}_{\omega} \in \mathbb{N}^{2M}$. Thus, the original integrality requirement $\mathbf{y}_{\omega} \in \mathbb{N}^{2M}$ can be relaxed to $\mathbf{y}_{\omega} \in \mathbb{R}^{2M}_{\scriptscriptstyle \geq 0}$.
-
 Each scenario $\omega \in \Omega$ defines an independent subproblem with its own $\mathbf{y}_{\omega}$:
 
 \begin{equation}\label{BD_sub}
@@ -106,17 +103,21 @@ Each scenario $\omega \in \Omega$ defines an independent subproblem with its own
   \mathbf{f}^{\intercal} \mathbf{y}_{\omega}\Big| \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} - \mathbf{\bar{x}} \mathbf{1}
   \right\}.
 \end{equation}
-
-Then problem \eqref{BD_master1} can be expressed as:
+Then problem \eqref{BD_master1} is equivalent to:
 \begin{equation}\label{BD_master3}
   \max_{\mathbf{x} \in \mathbb{N}^{M \times N}} \left\{ \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} ~ p_{\omega} z_{\omega}(\mathbf{x}) \bigg| \mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L} \right\}.
 \end{equation}
 
 
-However, the optimal value $z_{\omega}(\mathbf{\bar{x}})$ depends on a given $\mathbf{\bar{x}}$. Since the dual of the subproblem yields the same optimal value and its feasible region is independent of $\mathbf{\bar{x}}$, we analyze the dual to derive Benders cuts for solving problem \eqref{BD_master3}.
+Given problem \eqref{BD_master3}, the evaluation of $z_{\omega}(\mathbf{\bar{x}})$ for a fixed $\mathbf{\bar{x}}$ requires solving the subproblem. By examining the dual of this subproblem, we can exploit the fact that its feasible region is independent of $\mathbf{x}$, which allows us to derive Benders cuts without repeatedly solving the primal subproblem. 
 
 
-Notice that the optimal value can also be obtained by the dual of the subproblem and the feasible region of problem is independent with $\mathbf{x}$, thus, we analyse the dual of the subproblem, which can help to solve problem \eqref{BD_master3}.
+% Since the dual of the subproblem yields the same optimal value and its feasible region is independent of $\mathbf{x}$, we analyze the dual to derive Benders cuts for solving problem \eqref{BD_master3}.
+
+% This duality-based approach efficiently links the master problem with the subproblem's structure, enabling iterative cut generation for optimization.
+
+
+% Notice that the optimal value can also be obtained by the dual of the subproblem and the feasible region of problem is independent with $\mathbf{x}$, thus, we analyse the dual of the subproblem, which can help to solve problem \eqref{BD_master3}.
 
 
 The dual of the subproblem \eqref{BD_sub} can be expressed as:
@@ -126,7 +127,7 @@ The dual of the subproblem \eqref{BD_sub} can be expressed as:
     \bm{\alpha}_{\omega}^{\intercal} (\mathbf{d}_{\omega}- \mathbf{\bar{x}} \mathbf{1})\Big| \bm{\alpha}_{\omega}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}
   \right\},
 \end{equation}
-where $\bm{\alpha}_{\omega} = (\alpha_{1\omega},\alpha_{2\omega}, \ldots, \alpha_{M,\omega})^{\intercal}$ denote the vector of dual variables. 
+where $\bm{\alpha}_{\omega} = (\alpha_{1\omega},\alpha_{2\omega}, \ldots, \alpha_{M,\omega})^{\intercal}$ denotes the vector of dual variables. 
 
 \begin{lem}\label{feasible_region}
   The feasible region of problem \eqref{BD_sub_dual} is nonempty and bounded. Furthermore, all the extreme points of the feasible region are integral.
@@ -155,11 +156,7 @@ When $y_{i \omega}^{-}$ and $y_{i \omega}^{+}$ jointly satisfy the third conditi
 % The Benders decomposition algorithm iteratively adds two types of cutting planes to the master problem. The \textit{optimality cuts} provide the approximation of the subproblem's optimal solution $z_{\omega}(\mathbf{x})$, constructed using dual solutions from feasible subproblem instances. They progressively improve the lower bound approximation of $z_{\omega}(\mathbf{x})$. The \textit{feasibility cuts} enforce primal feasibility conditions for the subproblem, eliminating master problem solutions that would lead to infeasible subproblem instances \citep{rahmaniani2017benders}.
 
 \subsubsection{Master Problem and Iterative Procedure}
-We now construct the master problem through dual analysis of the subproblems. 
-
-% feasible region is independent with x and scenario.
-
-Let $\mathbb{P}$ denote the feasible region of the dual subproblem $\eqref{BD_sub_dual}$, with $\mathcal{O}$ representing its set of extreme points. The subproblem's optimal value admits the dual representation: $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha}_{\omega} \in \mathcal{O}} \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. This yields optimality cuts for the master problem of the form: $\bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_w, \forall \bm{\alpha}_{\omega} \in \mathcal{O}$, where $z_w$ is an auxiliary variable in problem \eqref{BD_master2} providing a lower bound approximation of $z_{\omega}(\mathbf{x})$. Let $\mathcal{O}^{s}$ denote the subset of $\mathcal{O}$. The master problem is then formulated as:
+We now construct the master problem through dual analysis of the subproblems. Let $\mathbb{P}$ denote the feasible region of the dual subproblem $\eqref{BD_sub_dual}$, with $\mathcal{O}$ representing its set of extreme points. The subproblem's optimal value admits the dual representation: $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha}_{\omega} \in \mathcal{O}} \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$. This yields optimality cuts for the master problem of the form: $\bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_w, \forall \bm{\alpha}_{\omega} \in \mathcal{O}$, where $z_w$ is an auxiliary variable in problem \eqref{BD_master2} providing a lower bound approximation of $z_{\omega}(\mathbf{x})$. Let $\mathcal{O}^{s}$ denote the subset of $\mathcal{O}$. The master problem is then formulated as:
 
 \begin{equation}\label{BD_master2}
   \begin{aligned}
@@ -209,7 +206,7 @@ Solving problem \eqref{BD_master2} iteratively with integrality constraints can 
 After solving the LP relaxation of SBSP with the Benders decomposition technique described above, we can obtain a fractional optimal solution. This solution represents the optimal partial allocation of groups to seats in the relaxed problem. Based on the fractional solution obtained, we use the deterministic model to generate a feasible seat plan. The objective of this model is to allocate groups to seats in a way that satisfies the supply requirements for each group without exceeding the corresponding supply values obtained from the fractional solution. To accommodate more groups and optimize seat utilization, we aim to construct a seat plan composed of full or largest patterns based on the feasible seat plan obtained in the previous step.
 
 
-Let $\mathbf{x}^{*}$ denote the optimal solution to the LP relaxation of SBSP. Aggregate $\mathbf{x}^{*}$ to the number of each group type, defined as $\tilde{X}_{i} =\sum_{j=1}^{N} x^{*}_{ij}, \forall i \in \mathbf{M}$. Next, solve the SPDR problem with $\bm{d} = \bm{\tilde{X}}$ to obtain the optimal solution $\mathbf{\tilde{x}}$, and the corresponding pattern $\tilde{\bm{H}}$. Then generate the seat plan by problem \eqref{improve_seat} with $\bm{H}=  \tilde{\bm{H}}$.
+Let $\mathbf{x}^{*}$ denote the optimal solution to the LP relaxation of SBSP. Aggregate $\mathbf{x}^{*}$ to the number of each group type, defined as $\tilde{X}_{i} =\sum_{j=1}^{N} x^{*}_{ij}, \forall i \in \mathbf{M}$. Next, solve the SPDR problem with $\bm{d} = \bm{\tilde{X}}$ to obtain the optimal solution $\mathbf{\tilde{x}}$, and the corresponding pattern $\tilde{\bm{H}}$. Then generate the seat plan, $\bm{H}^{\prime}$, by problem \eqref{improve_seat} with $\bm{H}=  \tilde{\bm{H}}$. The seat plan $\bm{H}^{\prime}$ is composed of either full or largest patterns according to Proposition \ref{prop_construction}. Algorithm \ref{seat_construction} describes the seat plan construction procedure.
 
 
 \begin{algorithm}

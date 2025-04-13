@@ -142,7 +142,7 @@ Robustness is quantified by analyzing how these thresholds vary with the mean gr
 
 The mean group size is $\gamma = \sum_{i=1}^{M} i p_i$. We analyze the relationship between $q^{\textup{th}}$, $\rho^{\textup{th}}$ and $\gamma$ using 200 random probability distributions ($M=4$, $p_0=0$).
 Figure \ref{esti_q} shows $q^{\textup{th}}$ and $\rho^{\textup{th}}$ versus $\gamma$, along with their estimates: 
-$\tilde{q}^{\textup{th}} =  \frac{c_1 (1-p_0) \tilde{L}}{\gamma + \delta}$ and $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{(1-p_0) \tilde{L}-N \delta}$, where 
+$\tilde{q}^{\textup{th}} =  \frac{c_1 (1-p_0) \tilde{L}}{\gamma + \delta}$ and $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{\tilde{L}-N \delta}$, where 
 $c_1$ and $c_2$ are discount factors, $\tilde{L}, \delta, N$ are defined in the problem setup, and $p_0 =0$. Using the Ordinary Least Squares regression, we obtain perfect fits ($R^{2} = 1.000$) with $c_1 = 0.9578$ and $c_2 = 0.9576$. The derivation and further details are provided in the Appendix.
 
 
@@ -172,7 +172,7 @@ To comprehensively evaluate the effectiveness of government policy strictness an
 \subsubsection{Government-Mandated Maximum Allowable Occupancy Rates}
 % add specific government perspective
 
-Government policies may impose a maximum allowable occupancy rate ($\rho^{\textup{al}}$) to enforce stricter public health measures. The effectiveness of this policy depends on its relationship to two key metrics, threshold of occupancy rate ($\rho^{\textup{th}}$) and maximum achievable occupancy rate ($\rho^{\textup{ac}}$).
+Government policies may impose a maximum allowable occupancy rate ($\rho^{\textup{al}}$) to enforce stricter public health measures. The effectiveness of this policy depends on its relationship to two key metrics, threshold of occupancy rate $\rho^{\textup{th}}$ and maximum achievable occupancy rate $\rho^{\textup{ac}}$.
 
 When $\rho^{\textup{al}} < \rho^{\textup{th}}$, only the occupancy rate requirement is binding. Once the occupancy rate reaches $\rho^{\textup{al}}$, all subsequent requests are rejected. When $\rho^{\textup{th}} \leq \rho^{\textup{al}} < \rho^{\textup{ac}}$, both maximum allowable occupancy rate and social distancing requirements jointly govern seat assignments. Again, once $\rho^{\textup{al}}$ is reached, further requests are rejected. When $\rho^{\textup{al}} \geq \rho^{\textup{ac}}$, the maximum allowable occupancy rate constraint becomes redundant because the occupancy rate will never exceed $\rho^{\textup{al}}$ under social distancing.
 
@@ -181,7 +181,7 @@ The conclusion can be summarized in Table \ref{tab_requirement}.
 \begin{table}[ht]
   \centering
   \caption{Effectiveness of requirements}\label{tab_requirement}
-  \begin{tabular}{ccc}
+  \begin{tabular}{lcc}
   \hline
   \hline
    & Social distancing requirement & Requirement of $\rho^{\textup{al}}$ \\
@@ -224,7 +224,7 @@ We also consider the impact of different distances. We present the corresponding
 For the fixed physical distance $\delta$, an increase in the maximum group size $M$ generally leads to a larger mean group size $\gamma$ (since $\gamma = \sum_{i=1}^{M} i p_i$). This in turn causes the threshold of occupancy rate $\rho^{\textup{th}}$ to increase while reducing the threshold of request-volume $\tilde{q}^{\textup{th}}$, as evidenced by their respective estimates. The maximum achievable occupancy rate $\rho^{\textup{ac}}$ increases because the size of the largest pattern $\Phi(M, L_j^{0}, \delta)$ defined in Proposition \ref{lem_pattern}, is monotonically increasing in $M$.
 
 For the fixed maximum group size $M$, the experimental results show that when the physical distance $\delta$ increases from 1 to 2 seats, both the threshold of occupancy rate $q^{\textup{th}}$ and threshold of request-volume $\rho^{\textup{th}}$ decrease, which is consistent with our estimates.
-Assuming constant discount factors $c_1$ and $c_2$, both estimated thresholds $q^{\textup{th}}$ and  $\rho^{\textup{th}}$ would decrease monotonically with increasing $\delta$, provided the total capacity satisfies $\sum_{j=1}^{N} L_{j}^{0} > N \delta$ (See Appendix). This condition is generally satisfied in most practical seating layouts, further validating our experimental observations. The maximum achievable occupancy rate, $\rho^{\textup{ac}}$, decreases since $\Phi(M, L_j^{0}, \delta)$ is monotonically decreasing in $\delta$.
+Assuming constant discount factors $c_1$ and $c_2$, both estimated thresholds $q^{\textup{th}}$ and  $\rho^{\textup{th}}$ would decrease monotonically with increasing $\delta$, provided the total capacity satisfies $\sum_{j=1}^{N} L_{j}^{0} \geq N \gamma$ (See Appendix). This condition is generally satisfied in most practical seating layouts, further validating our experimental observations. The maximum achievable occupancy rate, $\rho^{\textup{ac}}$, decreases since $\Phi(M, L_j^{0}, \delta)$ is monotonically decreasing in $\delta$.
  
 % as the physical distance $\delta$ increases from 1 to 2 seats, both the threshold of occupancy rate $q^{\textup{th}}$ and threshold of request-volume $\rho^{\textup{th}}$ decrease (consistent with the analysis in the estimation). 
 
@@ -289,7 +289,7 @@ While the venue layouts may differ in shapes (rectangular or otherwise) and row 
 
 Consistent with our estimates, the threshold of request-volume $q^{\textup{th}}$ follows $\tilde{q}^{\textup{th}} =  \frac{c_1 (1-p_0) \tilde{L}}{\gamma + \delta}$, exhibiting a positive correlation with total size of the layout $\tilde{L}$. 
 
-While the estimate shows that $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{(1-p_0) \tilde{L}-N \delta}$ should decrease with increasing $\tilde{L}$, in practice this variation becomes negligible as the ratio $\frac{\tilde{L}}{\tilde{L}-N\delta}$ remains nearly constant for typical venue sizes. This explains the observed lack of deterministic variation in 
+While the estimate shows that $\tilde{\rho}^{\textup{th}} = \frac{c_2 \gamma}{\gamma +\delta} \frac{(1-p_0) \tilde{L}}{\tilde{L}-N \delta}$ should decrease with increasing $\tilde{L}$, in practice this variation becomes negligible as the ratio $\frac{\tilde{L}}{\tilde{L}-N\delta}$ remains nearly constant for typical venue sizes. This explains the observed lack of deterministic variation in 
 $\rho^{\textup{th}}$ across layouts with different seating configurations.
 
 

@@ -4,7 +4,7 @@
 \appendix
 \section{Policies for Dynamic Seat Assignment}\label{policies}
 
-\subsubsection*{Relaxed Dynamic Programming Heuristic (RDPH)}
+\subsection{Relaxed Dynamic Programming Heuristic (RDPH)}
 
 According to the RDP formulation in \eqref{DP_relaxed}, we can determine whether to accept or reject each request. For accepted requests, we must then decide on specific seat assignments. However, without a predefined seat plan, this assignment process lacks clear guidelines. To resolve this, we implement a modified Best Fit rule \citep{johnson1974fast}, assigning each group to the row with the minimum remaining capacity that can still accommodate it. An important prerequisite for this assignment is verifying seat availability. Specifically, if the group size exceeds the maximum remaining capacity across all rows, the request must be rejected.
 
@@ -21,7 +21,7 @@ This policy is stated in the following algorithm.
     {Reject the group and let $L_{k}^{t+1} \gets L_{k}^{t}$, $l^{t+1} \gets l^{t}$\;}}
 \end{algorithm}
 
-\subsubsection*{Bid-Price Control (BPC) Policy}
+\subsection{Bid-Price Control (BPC) Policy}
 Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
 
 The dual of LP relaxation of the SPDR problem is:
@@ -38,7 +38,7 @@ In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a
 
 
 \begin{lem}\label{bid-price}
- The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 ,\ldots, z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
+ The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
 \end{lem}
 
 The bid-price decision can be expressed as $i - \beta_j n_i = i - \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}} n_i = \frac{\delta (i - \tilde{i})}{n_{\tilde{i}}}$. When $i < \tilde{i}$, $i - \beta_j n_i < 0$. When $i \geq \tilde{i}$, $i - \beta_j n_i \geq 0$. This implies that group type $i$ greater than or equal to $\tilde{i}$ will be accepted if the capacity allows. However, it should be noted that $\beta_j$ does not vary with $j$, which means the bid-price control cannot determine the specific row to assign the group to. We maintain the same tie-breaking rule as in RDPH, assigning each group to the row with the minimum residual capacity while still satisfying the accommodation requirement.
@@ -60,7 +60,7 @@ The bid-price control policy based on the static model is stated below.
 \end{algorithm}
 
 
-\subsubsection*{Booking-Limit Control (BLC) Policy}
+\subsection{Booking-Limit Control (BLC) Policy}
 The booking-limit control policy involves setting a maximum number of reservations that can be accepted for each request. By controlling the booking-limits, revenue managers can effectively manage demand and allocate inventory to maximize revenue. 
 Under this booking limit policy, we first solve the SPDR problem using the expected demand. We establish a fixed allocation quota for each group type based on this static solution. For the incoming request, we accept it if the corresponding supply is sufficient, otherwise reject it. Then the request will be assigned to an arbitrary row containing the planned seats for the corresponding group type.
 

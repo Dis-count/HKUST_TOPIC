@@ -35,7 +35,6 @@ We now formulate the seat planning with deterministic requests (SPDR) problem as
 & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}. \notag 
 \end{align}
 
-% {\color{red}{please provide name SPDRP in the above max problem}}
 
 The objective function (\ref{e0}) is to maximize the number of individuals accommodated. Constraint \eqref{deter_upper} ensures the total number of accommodated groups does not exceed the number of requests for each group type. Constraint \eqref{capa_con} stipulates that the number of seats allocated in each row does not exceed the size of the row.
 
@@ -43,12 +42,11 @@ The increasing nature of the ratio $\frac{i}{n_i}$ with respect to group size $i
 
 % By examining the monotonic ratio of $\frac{i}{n_i}$, we can establish the upper bound of supply corresponding to the optimal solution of the LP relaxation of SPDR problem.
 
-% {\color{red} do not understand... should explain why we study LP relaxation}
 
 % and will be utilized in the bid-price control policy discussed in Section \ref{bid_price}.
 
 \begin{prop}\label{sol_relax_deter}
-For the LP relaxation of the \textup{SPDR} problem, there exists an index $\tilde{i}$ such that the optimal solutions satisfy the following conditions: $x_{ij}^{*} = 0$ for all $j$, $i = 1,\ldots, \tilde{i}-1$; $\sum_{j} x_{ij}^{*} = d_{i}$ for $i = \tilde{i}+1,\ldots, M$; $\sum_{j} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ for $i = \tilde{i}$.
+For the LP relaxation of the \textup{SPDR} problem, there exists an index $\tilde{i}$ such that the optimal solutions satisfy the following conditions: $x_{ij}^{*} = 0$ for all $j$, $i = 1,\ldots, \tilde{i}-1$; $\sum_{j=1}^{N} x_{ij}^{*} = d_{i}$ for $i = \tilde{i}+1,\ldots, M$; $\sum_{j=1}^{N} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ for $i = \tilde{i}$.
 \end{prop}
 
 Proposition \ref{sol_relax_deter} implies that, in the optimal fractional seat plan, the requests from larger groups ($i > \tilde{i}$) are fully accommodated by the available supply. The requests from smaller groups ($i < \tilde{i}$) are rejected. Any remaining supply, if available, will be used to partially satisfy the request from group type $\tilde{i}$. 
@@ -90,9 +88,9 @@ The maximum achievable occupancy rate is non-decreasing in $M$ and non-increasin
 \begin{example}\label{ex_2}
 Consider the given values: $\delta = 1$, $L = 21$, and $M = 4$. The size of the largest pattern can be calculated as $qM + \max\{r-\delta, 0\} = 4 \times 4 + 0 = 16$. The largest patterns are as follows: $(1, 0, 1, 3)$, $(0, 1, 2, 2)$, $(0, 0, 0, 4)$, $(0, 0, 4, 1)$, and $(0, 2, 0, 3)$. Among these, $(0, 0, 0, 4)$ is the form referenced in Proposition \ref{lem_pattern}.
 
-The following figure shows that the largest pattern may not be full and the full pattern may not be largest.
+Figure \ref{full_largest} shows that the largest pattern may not be full and the full pattern may not be largest.
 \begin{figure}[ht]
-    \caption{Largest and full patterns}
+    \caption{Largest and full patterns}\label{full_largest}
     \centering
         \includegraphics[width=0.8\textwidth]{./Figures/largest_full.pdf}
 \end{figure}

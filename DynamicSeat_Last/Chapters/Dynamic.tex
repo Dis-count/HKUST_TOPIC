@@ -25,8 +25,8 @@ The Seat-Plan-Based Assignment (SPBA) policy dynamically allocates groups throug
 
 % In addition, we present alternative policies to facilitate comparative performance analysis.
 
-\subsubsection{Relaxed Dynamic Programming (RDP)}
-To simplify the complexity of the DP formulation in \eqref{DP}, we employ an RDP approach by aggregating all rows into a single row with the total capacity $\tilde{L} = \sum_{j=1}^{N} L_j$. This relaxation yields preliminary seat assignment decisions for each group arrival, where the rejection by the RDP is final (no further evaluation is needed), the acceptance by the RDP is tentative and must be validated according to the current seat plan in the subsequent group-type control.
+\subsubsection{Relaxed Dynamic Programming}
+To simplify the complexity of the dynamic programming formulation in \eqref{DP}, we employ a relaxed dynamic programming (RDP) approach by aggregating all rows into a single row with the total capacity $\tilde{L} = \sum_{j=1}^{N} L_j$. This relaxation yields preliminary seat assignment decisions for each group arrival, where the rejection by the RDP is final (no further evaluation is needed), the acceptance by the RDP is tentative and must be validated according to the current seat plan in the subsequent group-type control.
 
 Let $u_{i}^{t} \in $ denote the RDP's decision variable for accepting ($u_{i}^{t} = 1$) or rejecting ($u_{i}^{t} = 0$) a type $i$ request in period $t$. The value function of the relaxed DP with the total capacity $l$ in period $t$, denoted by $V^{t}(l)$, is the following:
 

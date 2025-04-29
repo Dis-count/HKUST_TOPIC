@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  13 APR 2025 13:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  16 APR 2025 10:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -686,7 +686,7 @@ LaTeX Warning: No \author given.
 {e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]) [3] (./Chapters/Literature_review.tex [4] [5]) (./Chapters/Problem_description.tex [6]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/model_plan.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/model_plan.pdf, id=321, 542.73769pt x 155.15767pt>
+<./Figures/model_plan.pdf, id=320, 542.73769pt x 155.15767pt>
 File: ./Figures/model_plan.pdf Graphic file (type pdf)
 <use ./Figures/model_plan.pdf>
 Package pdftex.def Info: ./Figures/model_plan.pdf  used on input line 26.
@@ -694,18 +694,18 @@ Package pdftex.def Info: ./Figures/model_plan.pdf  used on input line 26.
 [7 <./Figures/model_plan.pdf>] [8]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/largest_full.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<./Figures/largest_full.pdf, id=372, 665.85843pt x 155.78601pt>
+<./Figures/largest_full.pdf, id=369, 665.85843pt x 155.78601pt>
 File: ./Figures/largest_full.pdf Graphic file (type pdf)
 <use ./Figures/largest_full.pdf>
 Package pdftex.def Info: ./Figures/largest_full.pdf  used on input line 95.
 (pdftex.def)             Requested size: 362.37569pt x 84.78401pt.
 [9 <./Figures/largest_full.pdf>]) (./Chapters/Stochastic-form.tex [10] [11] [12] [13] [14] [15]) (./Chapters/Dynamic.tex [16] [17] [18]) (./Chapters/Results.tex [19] [20] [21]
-<./Figures/occu_demand_group4.pdf, id=575, 410.8412pt x 307.46169pt>
+<./Figures/occu_demand_group4.pdf, id=572, 410.8412pt x 307.46169pt>
 File: ./Figures/occu_demand_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_demand_group4.pdf>
 Package pdftex.def Info: ./Figures/occu_demand_group4.pdf  used on input line 116.
 (pdftex.def)             Requested size: 203.83417pt x 152.5435pt.
-<./Figures/occu_gamma_group4.pdf, id=576, 410.07535pt x 307.46169pt>
+<./Figures/occu_gamma_group4.pdf, id=573, 410.07535pt x 307.46169pt>
 File: ./Figures/occu_gamma_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_gamma_group4.pdf>
 Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 119.
@@ -715,7 +715,7 @@ Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 119
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [22]
-<./Figures/200_random.pdf, id=590, 1191.63297pt x 623.94035pt>
+<./Figures/200_random.pdf, id=587, 1191.63297pt x 623.94035pt>
 File: ./Figures/200_random.pdf Graphic file (type pdf)
 <use ./Figures/200_random.pdf>
 Package pdftex.def Info: ./Figures/200_random.pdf  used on input line 152.
@@ -723,48 +723,48 @@ Package pdftex.def Info: ./Figures/200_random.pdf  used on input line 152.
  [23 <./Figures/occu_demand_group4.pdf> <./Figures/occu_gamma_group4.pdf>] [24 <./Figures/200_random.pdf>] [25]) (./Chapters/Conclusion.tex [26]) (./sum1.bbl [27] [28] [29]) (./Chapters/Appendix_1.tex [30] [31] [32] [33]) (./Chapters/Appendix_estimation.tex) (./Chapters/Proof1.tex [34] [35
 
 ] [36] [37] [38]) (./Chapters/Misce.tex
-<./Figures/Layouts/Layout_A.png, id=931, 457.71pt x 371.13657pt>
+<./Figures/Layouts/Layout_A.png, id=928, 457.71pt x 371.13657pt>
 File: ./Figures/Layouts/Layout_A.png Graphic file (type png)
 <use ./Figures/Layouts/Layout_A.png>
 Package pdftex.def Info: ./Figures/Layouts/Layout_A.png  used on input line 46.
 (pdftex.def)             Requested size: 271.7835pt x 220.38443pt.
-<./Figures/Layouts/Layout_B.png, id=933, 454.69875pt x 431.36156pt>
+<./Figures/Layouts/Layout_B.png, id=930, 454.69875pt x 431.36156pt>
 File: ./Figures/Layouts/Layout_B.png Graphic file (type png)
 <use ./Figures/Layouts/Layout_B.png>
 Package pdftex.def Info: ./Figures/Layouts/Layout_B.png  used on input line 52.
 (pdftex.def)             Requested size: 271.7835pt x 257.83821pt.
-<./Figures/Layouts/Layout_C1.png, id=934, 376.40625pt x 310.15875pt>
+<./Figures/Layouts/Layout_C1.png, id=931, 376.40625pt x 310.15875pt>
 File: ./Figures/Layouts/Layout_C1.png Graphic file (type png)
 <use ./Figures/Layouts/Layout_C1.png>
 Package pdftex.def Info: ./Figures/Layouts/Layout_C1.png  used on input line 58.
 (pdftex.def)             Requested size: 271.7835pt x 223.96722pt.
-<./Figures/Layouts/Layout_D.png, id=935, 304.13625pt x 441.90094pt>
+<./Figures/Layouts/Layout_D.png, id=932, 304.13625pt x 441.90094pt>
 File: ./Figures/Layouts/Layout_D.png Graphic file (type png)
 <use ./Figures/Layouts/Layout_D.png>
 Package pdftex.def Info: ./Figures/Layouts/Layout_D.png  used on input line 64.
 (pdftex.def)             Requested size: 271.7835pt x 394.90213pt.
-<./Figures/Layouts/Layout_E.png, id=936, 489.32813pt x 381.67593pt>
+<./Figures/Layouts/Layout_E.png, id=933, 489.32813pt x 381.67593pt>
 File: ./Figures/Layouts/Layout_E.png Graphic file (type png)
 <use ./Figures/Layouts/Layout_E.png>
 Package pdftex.def Info: ./Figures/Layouts/Layout_E.png  used on input line 70.
 (pdftex.def)             Requested size: 271.7835pt x 211.99571pt.
 ) [39 <./Figures/Layouts/Layout_A.png>] [40 <./Figures/Layouts/Layout_B.png> <./Figures/Layouts/Layout_C1.png>] [41 <./Figures/Layouts/Layout_D.png> <./Figures/Layouts/Layout_E.png>] (./sum1.aux)
 Package rerunfilecheck Info: File `sum1.out' has not changed.
-(rerunfilecheck)             Checksum: 96E481CE6295CDE4BE59F8E5955D049F;7662.
+(rerunfilecheck)             Checksum: F97BA54F31330563B4BFA45E816FDEF9;7623.
  ) 
 Here is how much of TeX's memory you used:
  15995 strings out of 478599
  243999 string characters out of 5853593
- 583494 words of memory out of 5000000
+ 583487 words of memory out of 5000000
  33320 multiletter control sequences out of 15000+600000
  417751 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,22n,75p,1819b,667s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (41 pages, 901786 bytes).
+Output written on sum1.pdf (41 pages, 901256 bytes).
 PDF statistics:
- 1127 PDF objects out of 1200 (max. 8388607)
- 875 compressed objects within 9 object streams
+ 1124 PDF objects out of 1200 (max. 8388607)
+ 872 compressed objects within 9 object streams
  258 named destinations out of 1000 (max. 500000)
  315 words of extra memory for PDF output out of 10000 (max. 10000000)
 

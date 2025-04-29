@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{color}
+\title{Appointment Scheduling with Restricted People}
+
+% \author{Discount}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Model}
+We assume that the patients will arrive at the appointed time.
+
+The service time for patient $i$, $\xi_{i}$, stochastic with a mean of $\mu_{i}$ and a standard deviation of $\sigma_{i}$.
+
+The service times are mutually independent.
+
+For each patient $i = 1, \ldots, n$, 
+
+$A_{i}$: appointment time.
+
+$S_{i} = \max\{A_{i}, S_{i-1} + \xi_{i-1}\}$: actual starting time of service.
+
+\textcolor{red}{In the scenario with at most 2 patients overlapping in the waiting room, we can calculate the overlapping time.
+Let $t_{ij}$ denote the overlapping time between two consecutive patients $i$ and $i+1$. Thus, $t_{i,i+1} = (S_{i} - A_{i+1})^{+}$}
+
+$A_{1} = S_{1} = 0$.
+
+Patient $i$ will arrive at $A_{i}$ but start service at $S_{i}$.
+
+Waiting time: $S_{i} - A_{i}$
+
+Overtime: $(S_{n} +\xi_{n} - T)^{+}$
+
+Total idle time: $\sum_{i=1}^{n-1}[S_{i+1} - (S_{i} + \xi_{i})] = S_{n} - \sum_{i=1}^{n-1} \xi_{i}$
+
+\textcolor{red}{Total overlapping time: $\sum_{i=1}^{n-1}[S_{i} - A_{i+1}]^{+}$}
+
+Problem to minimize the total time:
+
+\begin{equation}
+    \begin{aligned}
+        \min_{\mathbf{A}} \quad & E_{\xi}\left[\left(S_n-\sum_{i=1}^{n-1} \xi_i\right)+\sum_{i=2}^n \alpha_i \left(S_i-A_i\right) + \beta(S_{n} +\xi_{n} - T)^{+} \right] \\
+        \mbox{s.t.} \quad & S_{i} = \max{A_{i}, S_{i-1} + \xi_{i-1}} \\
+        & S_{1} = 0
+    \end{aligned}
+\end{equation}
+
+\begin{align}
+    S_i & =\max \left\{A_i, S_{i-1}+\xi_{i-1}\right\}, \\
+    S_i-A_i & =\max \left\{0,\left(A_{i-1}+W_{i-1}\right)+\xi_{i-1}-A_i\right\}, \\
+    W_i & =\left(W_{i-1}+\xi_{i-1}-X_{i-1}\right)^{+}.
+\end{align}
+
+Slot time: $X_i = A_{i+1} - A_{i} \rightarrow A_{j} = \sum_{i=1}^{j-1} X_{i}$
+Waiting time: $W_{i} = S_{i} - A_{i} \rightarrow S_{n} = \sum_{i=1}^{n-1} X_{i} + W_{n}$
+
+\begin{equation}
+    \begin{aligned}
+        \min_{\mathbf{X}} \quad & E_{\xi}\left[\sum_{i=1}^{n-1} (X_{i} - \xi_{i}) + W_{n} + \sum_{i=2}^n \alpha_i W_{i} + \beta(\sum_{i=1}^{n-1} X_i + W_n + \xi_{n} -T)^{+} \right] \\
+        \mbox{s.t.} \quad & W_{i} = \max\{0, W_{i-1} + \xi_{i-1} - X_{i-1}\} \\
+        & W_{1} = 0.
+    \end{aligned}
+\end{equation}
+
+Suppose that $\sigma$ are the same for all patients.
+
+Let
+\begin{align}
+    x_i & = \left(X_i- \mu_i \right) / \sigma, \\
+    \zeta_i & = \left(\xi_i-\mu_i\right) / \sigma, \text { and } \\
+    w_i & = W_i / \sigma;
+\end{align}
+
+Take out $- \sum_{i=1}^{n-1} \mu_{i}$.
+
+\begin{equation}
+    \begin{aligned}
+        \sigma \cdot \min _{\mathbf{x}} \quad & \left\{\sum_{i=1}^{n-1} x_i+ E_{\zeta} w_n + \sum_{i=2}^n \alpha_i E_\zeta\left[w_i\right]\right\} \\
+        \mbox{s.t.} \quad & w_{i} = \max\{0, w_{i-1} + \zeta_{i-1} - x_{i-1}\} \\
+        & w_{1} = 0.
+    \end{aligned}
+\end{equation}
+
+
+1. 
+
+
+Possible traits: heterogeneous patients, no-show, lateness, 
+
+Different models:  objective: minimize the total cost, minimize the makespan (the departure time of the last customer).
+
+
+Two possible options: the time of several people waiting, what if it is not 
+
+Traditional Appointment Scheduling Model.
+
+1. with overbooking and no-shows (partial punctuality)
+
+- discrete n time slots.
+
+- minimize the waiting cost, idle time and overtime costs.
+
+
+2. under a service-level constraint (waiting time threshold)
+
+- 
+
+
+\end{document}

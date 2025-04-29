@@ -38,7 +38,7 @@ We now formulate the seat planning with deterministic requests (SPDR) problem as
 
 The objective function (\ref{e0}) is to maximize the number of individuals accommodated. Constraint \eqref{deter_upper} ensures the total number of accommodated groups does not exceed the number of requests for each group type. Constraint \eqref{capa_con} stipulates that the number of seats allocated in each row does not exceed the size of the row.
 
-The increasing nature of the ratio $\frac{i}{n_i}$ with respect to group size $i$ leads to preferential inclusion of larger groups in the optimal fractional seat plan. This intuitive property is illustrated in Proposition \ref{sol_relax_deter}.
+The increasing nature of the ratio $\frac{i}{n_i}$ with respect to group size $i$ leads to preferential inclusion of larger groups in the optimal fractional seat plan. This intuitive property is illustrated in Proposition \ref{sol_relax_deter}. 
 
 % By examining the monotonic ratio of $\frac{i}{n_i}$, we can establish the upper bound of supply corresponding to the optimal solution of the LP relaxation of SPDR problem.
 
@@ -49,7 +49,7 @@ The increasing nature of the ratio $\frac{i}{n_i}$ with respect to group size $i
 For the LP relaxation of the \textup{SPDR} problem, there exists an index $\tilde{i}$ such that the optimal solutions satisfy the following conditions: $x_{ij}^{*} = 0$ for all $j$, $i = 1,\ldots, \tilde{i}-1$; $\sum_{j=1}^{N} x_{ij}^{*} = d_{i}$ for $i = \tilde{i}+1,\ldots, M$; $\sum_{j=1}^{N} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ for $i = \tilde{i}$.
 \end{prop}
 
-Proposition \ref{sol_relax_deter} implies that, in the optimal fractional seat plan, the requests from larger groups ($i > \tilde{i}$) are fully accommodated by the available supply. The requests from smaller groups ($i < \tilde{i}$) are rejected. Any remaining supply, if available, will be used to partially satisfy the request from group type $\tilde{i}$. 
+Proposition \ref{sol_relax_deter} implies that, in the optimal fractional seat plan, the requests from larger groups ($i > \tilde{i}$) are fully accommodated by the available supply. The requests from smaller groups ($i < \tilde{i}$) are rejected. Any remaining supply, if available, will be used to partially satisfy the request from group type $\tilde{i}$. The dual analysis of LP relaxation of the \textup{SPDR} problem and Proposition \ref{sol_relax_deter} will be utilized in the bid-price control policy discussed in Appendix \ref{policies}.
 
 \subsection{Seat Planning with Full or Largest Patterns}\label{seat_planning_full_largest}
 %%The seat plan obtained from \textup{SPDRP} may not utilize all available seats, as it depends on the given requests. To improve a given seat plan and utilize all seats, we aim to generate a new seat plan with full or largest patterns while ensuring that the original group type requirements are met.

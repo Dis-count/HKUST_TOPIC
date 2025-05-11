@@ -6,8 +6,20 @@
 \usepackage{amsmath}
 \usepackage{color}
 
+\usepackage{amsthm}
+\usepackage{bm}
+
 \usepackage{indentfirst}
 \setlength{\parindent}{2em}  % 用于首行缩进
+
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\D}{\bm{\Delta}}
+\newcommand{\A}{\mathbf{A}}
+
+
+\newtheorem{lemma}{\hspace{2em}Lemma}
+\newtheorem{proposition}{\hspace{2em}Proposition}
+\newtheorem{example}{Example}
 
 \usepackage{geometry}
 \geometry{a4paper,left=1in,right=1in,top =1in, bottom = 1in}
@@ -22,25 +34,23 @@
 
 \maketitle
 
-\section{Model}
+\section{Preliminary Study}
 
-The service time for patient $i$, $\xi_{i}$, stochastic with a mean of $\mu_{i}$ and a standard deviation of $\sigma_{i}$. The service times are mutually independent.
-For each patient $i = 1, \ldots, n$, we use $A_{i}$ to denote the appointment time, $S_{i} = \max\{A_{i}, S_{i-1} + \xi_{i-1}\}$ denote the actual starting time of service. We assume that the patients will arrive at the appointed time. Especially, $A_{1} = S_{1} = 0$.
+The service time for customer $i$, $\xi_{i}$, stochastic with a mean of $\mu_{i}$ and a standard deviation of $\sigma_{i}$. The service times are mutually independent.
+For each customer $i = 1, \ldots, n$, we use $A_{i}$ to denote the appointment time, $S_{i} = \max\{A_{i}, S_{i-1} + \xi_{i-1}\}$ denote the actual starting time of service. We assume that the customers will arrive at the appointed time. Especially, $A_{1} = S_{1} = 0$.
 
-The waiting time for patient $i$ is $S_{i} - A_{i}$, the total waiting time is $\sum_{i=2}^n \alpha_i \left(S_i-A_i\right)$, where $\alpha_i$ is the weight for patient $i$. The overtime is $(S_{n} +\xi_{n} - T)^{+}$ and the total idle time is $\sum_{i=1}^{n-1}[S_{i+1} - (S_{i} + \xi_{i})] = S_{n} - \sum_{i=1}^{n-1} \xi_{i}$.
-
-
-\textcolor{red}{In the scenario with at least 2 patients overlapping in the waiting room, we can calculate the overlapping time. Let $t_{ij}$ denote the overlapping time between two patients $i$ and $j$. Then, $t_{i,j} = (S_{i} - A_{j})^{+}$.}
-
-The duration when there are only $(j-i+1)$ people for patients $i$ and $j$ are waiting is $t_{i,j} - t_{i,j+1}$, $i =2, \ldots, n-1, j \geq i$.
+The waiting time for customer $i$ is $S_{i} - A_{i}$, the total waiting time is $\sum_{i=2}^n \alpha_i \left(S_i-A_i\right)$, where $\alpha_i$ is the weight for customer $i$. The overtime is $(S_{n} +\xi_{n} - T)^{+}$ and the total idle time is $\sum_{i=1}^{n-1}[S_{i+1} - (S_{i} + \xi_{i})] = S_{n} - \sum_{i=1}^{n-1} \xi_{i}$.
 
 
+\textcolor{red}{In the scenario with at least 2 customers overlapping in the waiting room, we can calculate the overlapping time. Let $t_{ij}$ denote the overlapping time between two customers $i$ and $j$. Then, $t_{i,j} = (S_{i} - A_{j})^{+}$}, indicating there are at least $(j-i+1)$ customers waiting.
 
-%  Patient $i$ will arrive at $A_{i}$ but start service at $S_{i}$.
+The duration when there are only $(j-i+1)$ people from customer $i$ to customer $j$ are waiting is $t_{i,j} - t_{i,j+1}$, $i =2, \ldots, n-1, j \geq i$.
+
+%  customer $i$ will arrive at $A_{i}$ but start service at $S_{i}$.
 
 \textcolor{red}{Total overlapping time: $\sum_{i=2}^{n-1} \sum_{j=i}^{n-1} \gamma_{i,j} (t_{i,j} - t_{i,j+1})$}
 
-Problem to minimize the total time:
+Problem to minimize the total time cost:
 
 \begin{equation}
     \begin{aligned}
@@ -50,18 +60,110 @@ Problem to minimize the total time:
     \end{aligned}
 \end{equation}
 
-% Surgical Scheduling with Constrained Patient Waiting Times
+To minimize the makespan:
+
+\begin{equation}
+    \begin{aligned}
+        \min_{\mathbf{A}} \quad & E_{\xi}\left(S_n + \xi_{n}\right) \\
+        \mbox{s.t.} \quad & E_{\xi}\left( t_{i,j} - t_{i,j+1} \right) \leq L_{ij}, i =2, \ldots, n-1, j \geq i
+    \end{aligned}
+\end{equation}
+
+$L_{ij}$ indicates constraint on the duration of $(j-i+1)$ people waiting.
+
+
+\section{Model}
+We redefine the scheduling problem using the following notation. Let $\D = (\Delta_1, \ldots, \Delta_n)$ denote the \textbf{appointment intervals}, where $\Delta_{i}$ is the time allocated between the start of customer $i$ and customer $i+1$. Let $\A = (A_1, \ldots, A_n)$ represent the \textbf{scheduled appointment times}, with $A_{i} = \sum_{k=1}^{i-1} \Delta_{k}$ (assuming $A_{1}=0$). Let $\Z = (Z_1, \ldots, Z_n)$ be the \textbf{random service durations}, where $Z_{i}$ is the stochastic service time for customer $i$.
+
+The waiting time for customer $i$ is recursively defined as:
+\begin{align*}
+  W_{i}(\Z_{i-1}, \D_{i-1}) &= [A_{i-1} + W_{i-1}(\Z_{i-2}, \D_{i-2}) + Z_{i-1} -A_{i}]^{+} \\
+    & = [W_{i-1}(\Z_{i-2}, \D_{i-2}) + Z_{i-1} - \Delta_{i-1}]^{+},
+\end{align*}
+where $[*]^{+} = \max(*, 0)$. $W_{1}(\Z_{0}, \D_{0}) = 0$.
+
+Let $W_{ij}$ denote the \textbf{simultaneous waiting duration} for customers $i$ through $j$, meaning the length of time during which all customers from $i$ to $j$ are simultaneously waiting. This can be expressed recursively as: $W_{i, j}(\Z_{i-1}, \D_{j-1}) = [W_{i-1}(\Z_{i-2}, \D_{i-2}) + Z_{i-1} - \sum_{k =i-1}^{j-1} \Delta_{k}]^{+}$, where $W_{i} \equiv W_{i,i}$ is the individual waiting time for customer $i$. $W_{ij}$ captures the time window where customers $i$ to $j$ all experience waiting simultaneously due to delays from earlier customers (1 to $i-1$) and insufficient buffer times.
+
+
+The finish time for customer $i$ is $T_{i}(\Z_{i}, \D_{i-1}) = A_{i} + W_{i}(\Z_{i-1}, \D_{i-1}) + Z_{i}$. We aim to minimize the total schedule span, i.e., $T_{n}$, subject to constraints on individual and group waiting times.
+
+The formulation of the problem can be expressed as follows
+
+\begin{equation}\label{joint_waiting}
+    \begin{aligned}
+        \min \quad & E \left[T_n(\Z_{n}, \D_{n-1}) \right] \\
+        \mbox{s.t.} \quad & E\left[W_{i,j}(\Z_{i-1}, \D_{j-1}) \right] \leq w_{ij}, i =2, \ldots, n-1, j \geq i
+    \end{aligned}
+\end{equation}
+
+
+In this setting, $w_{ij}$ is related with the number of customers from $i$ to $j$, i.e., $j-i +1$. We can use $w_{k}$ to indicate the upper limit on the time when there are $k$ customers waiting.
+
+$T_{n}(\Z_{n}, \D_{n-1}) = A_{n} + W_{n}(\Z_{n-1}, \D_{n-1}) + Z_{n}$.
+
+\begin{lemma}
+For any given realization of $\Z_{n}$, $T_n(\Z_{n}, \D_{n-1})$ becomes shorter when some customer is scheduled to arrive earlier while the schedule for others remain unchanged.
+\end{lemma}
+
+The optimal schedule can be obtained by minimizing $\Delta_{i}$.
+
+When $i =1$, the first customer doesn't need to wait.
+
+When $i =2$, only one constraint $E\left[W_{1}(\Z_{0}, \D_{0}) + Z_{1}- \Delta_{1} \right]^{+} \leq w_{1}$ is applied, then $\D_{1}^{*}$ can be obtained.
+
+When $i =3$, there are two constraints on the waiting time of the third customer.
+
+$E\left[W_{2}(\Z_{1}, \D_{1}^{*}) + Z_{2} - \Delta_{2}\right]^{+} \leq w_{1}$.
+
+$E\left[W_{1}(\Z_{0}, \D_{0}) + Z_{1} - \Delta_{1}^{*} - \Delta_{2}\right]^{+} \leq w_{2}$.
+
+When $i =n$, there are $(n-1)$ constraints.
+
+\begin{proposition}
+    By solving the above problems sequentially, the optimal schedule can be obtained.
+\end{proposition}
+
+Then we analyze these problems. The function on the left-hand side is decreasing in the variable $\Delta_{i}$.
+
+When $\Delta_{1} = 0$, $E\left[W_{1}(\Z_{0}, \D_{0}) + Z_{1}- \Delta_{1} \right]^{+} = E\left[Z_{1}\right]^{+}$. If $E\left[Z_{1}\right]^{+} \leq w_{1}$, $\Delta_{1}^{*} = 0$; if $E\left[Z_{1}\right]^{+} > w_{1}$, $E\left[Z_{1}- \Delta_{1}^{*} \right]^{+} = w_1$.
+
+If $Z_{i}$ follows from the exponential distribution with rate $\lambda$, $E\left[Z_{1}- \Delta_{1} \right]^{+} = \frac{1}{\lambda} e^{-\lambda \Delta_{1}}$, then
+
+\begin{equation*}
+	\Delta_{1}^{*} = \begin{cases}
+	-\frac{\ln (\lambda w_{1})}{\lambda}, & \text{if}~ \lambda w_{1} < 1 \\
+	0, & \text{if}~ \lambda w_{1} \geq 1	
+	\end{cases}
+\end{equation*}
+
+\vspace{10cm}
+
+The optimal schedule for \eqref{joint_waiting} is feasible for \eqref{only_waiting}.
+
+\begin{equation}\label{only_waiting}
+    \begin{aligned}
+        \min \quad & E \left[T_n(\Z_{n}, \D_{n-1}) \right] \\
+        \mbox{s.t.} \quad & E\left[W_{i,j}(\Z_{i-1}, \D_{j-1})-W_{i,j+1}(\Z_{i-1}, \D_{j}) \right] \leq w_{ij}, i =2, \ldots, n-1, j \geq i
+    \end{aligned}
+\end{equation}
+
+
+% Surgical Scheduling with Constrained customer Waiting Times
 % Appointment Scheduling Under a Service-Level Constraint
 
 
 % direction: put the overlapping time in objective function or put it in the constraint.
-% analyze three components seperately.
 
-1. Possible traits: heterogeneous patients, no-show, lateness, walk-in
+\newpage
+
+
+\section{Literature}
+
+1. Possible traits: heterogeneous customers, no-show, lateness, walk-in
 
 Different models: objective: minimize the total cost, minimize the makespan (the departure time of the last customer).
 
-Two possible options: the time of several people waiting, what if it is not 
+% Two possible options: the time of several people waiting, what if it is not makespan
 
 Traditional Appointment Scheduling Model.
 
@@ -71,15 +173,61 @@ Traditional Appointment Scheduling Model.
 
 - minimize the waiting cost, idle time and overtime costs.
 
-
-2. 
-
-- minimize 
+- analyze three components seperately
 
 
-3. Under a service-level constraint (waiting time threshold)
+2. Under a service-level constraint (waiting time threshold)
 
 - makespan
+
+- the optimal schedule can be obtained sequentially.
+
+
+\section{Deterministic Situation}
+% For the $k$th customer, arriving at $(k-1)t$, 
+
+% 我们考虑现有的 appointment scheduling 中 waiting time
+Suppose there are $n$ scheduling slots.
+If the condition that certain number of people cannot be in the waiting room at the same time cannot be satisfied, the number of slots should be reduced until scheduling becomes feasible. (hard constraints)
+
+Customer $i$ has a service time $Z_{i} \in [\underline{Z}_{i}, \overline{Z}_{i}]$, when each customer reaches the largest service time, we aim to maximize the number of scheduling slots. The appointment time of the last customer should not exceed a certain time $\overline{T}$. Let $S(\Z, \D)$ indicate the number of simultaneous waiting people during the whole schedule. $N$ is the restricted number.
+
+To give an optimal scheduling, we have 
+
+\begin{equation}\label{deterministic_model}
+    \begin{aligned}
+        \max \quad & n \\
+        \mbox{s.t.} \quad & S(\Z, \D) \leq N \\
+        & A_{n} \leq \overline{T}
+    \end{aligned}
+\end{equation}
+
+For each $i$, we can find a largest $j$ such that $(\overline{Z}_{i-1}- \sum_{i-1}^{j-1} \Delta_{k})> 0$, when we know the schedule $\D$, the maximum $j^{*}$ can be obtained.
+
+
+When $Z_{i} = \overline{Z}_{i}$, we can obtain the optimal schedule.
+
+The maximum $n^{*} = \max\{n|\sum_{i=1}^{n} \overline{Z}_{i} \leq \overline{T}\} + N +1$.
+
+\begin{example}
+    $Z_{i} \in [20, 40]$ for each $i$. $T \leq 120$. $N =2$. $n^{*} = 3 + 2 +1$. The optimal schedule is $A_{1} = 0$, $A_2 = 40$, $A_3 = 80$, $A_4 =A_5 = A_6 = 120$.
+\end{example}
+
+
+\section{Stochastic Situation}
+There are $n$ scheduling slots, ($n$ is a random variable)
+
+The soft constraint can be set as the expected number of simultaneous waiting people does not exceed certain number. 
+
+Or the probability of the largest number of simultaneous waiting people is less than a threshold.
+
+\begin{equation}\label{stochastic_model}
+    \begin{aligned}
+        \max \quad & E(n) \\
+        \mbox{s.t.} \quad & E(S(\Z, \D)) \leq N \\
+        & A_{n} \leq \overline{T}
+    \end{aligned}
+\end{equation}
 
 
 \end{document}

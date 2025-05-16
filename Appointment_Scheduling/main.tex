@@ -138,7 +138,7 @@ If $Z_{i}$ follows from the exponential distribution with rate $\lambda$, $E\lef
 
 \vspace{10cm}
 
-The optimal schedule for \eqref{joint_waiting} is feasible for \eqref{only_waiting}.
+The optimal schedule for \eqref{joint_waiting} is feasible for \eqref{only_waiting} because the feasible region of \eqref{joint_waiting} is smaller than that of \eqref{only_waiting}.
 
 \begin{equation}\label{only_waiting}
     \begin{aligned}
@@ -158,6 +158,7 @@ The optimal schedule for \eqref{joint_waiting} is feasible for \eqref{only_waiti
 
 
 \section{Literature}
+% https://www.qmatic.com/blog/minimize-clinic-waiting-times-to-avoid-virus-spread
 
 1. Possible traits: heterogeneous customers, no-show, lateness, walk-in
 
@@ -187,47 +188,94 @@ Traditional Appointment Scheduling Model.
 % For the $k$th customer, arriving at $(k-1)t$, 
 
 % 我们考虑现有的 appointment scheduling 中 waiting time
-Suppose there are $n$ scheduling slots.
-If the condition that certain number of people cannot be in the waiting room at the same time cannot be satisfied, the number of slots should be reduced until scheduling becomes feasible. (hard constraints)
 
-Customer $i$ has a service time $Z_{i} \in [\underline{Z}_{i}, \overline{Z}_{i}]$, when each customer reaches the largest service time, we aim to maximize the number of scheduling slots. The appointment time of the last customer should not exceed a certain time $\overline{T}$. Let $S(\Z, \D)$ indicate the number of simultaneous waiting people during the whole schedule. $N$ is the restricted number.
+Suppose there are $n$ customers to be scheduled. If the hard constraint-that certain individuals cannot be in the waiting room simultaneously-cannot be satisfied, the number of customers to be scheduled must be reduced until a feasible schedule is achieved.
 
-To give an optimal scheduling, we have 
+Each customer $i$ has a service time $Z_{i} \in [\underline{Z}_{i}, \overline{Z}_{i}]$. The goal is to maximize the number of scheduled customers $n$. The appointment time of the last customer does not exceed a given deadline $\overline{T}$. The number of simultaneous waiting customers, $S(t)$, never exceeds the capacity $N$ at any time $t$.
+
+This yields the following deterministic optimization problem:
 
 \begin{equation}\label{deterministic_model}
     \begin{aligned}
         \max \quad & n \\
-        \mbox{s.t.} \quad & S(\Z, \D) \leq N \\
+        \mbox{s.t.} \quad & W_{i}(\Z_{i-1}, \D_{i-1}) = [W_{i-1}(\Z_{i-2}, \D_{i-2}) + Z_{i-1} - \Delta_{i-1}]^{+}  \\
+        & S(t) \leq N, \forall t  \in [0, \overline{T}] \\
         & A_{n} \leq \overline{T}
     \end{aligned}
 \end{equation}
 
-For each $i$, we can find a largest $j$ such that $(\overline{Z}_{i-1}- \sum_{i-1}^{j-1} \Delta_{k})> 0$, when we know the schedule $\D$, the maximum $j^{*}$ can be obtained.
+
+To obtain the number of simultaneous waiting customers, we define $j^{*}(i)$ as the largest index $j$ satisfying: 
+$$(\overline{Z}_{i-1}- \sum_{i-1}^{j-1} \Delta_{k})> 0, i =2, \ldots, n$$ 
+where $\Delta_{k}$ represents the appointment interval for customer $k$. The number of simultaneous waiting customers can be obtained by $j^{*}(i) -i +1$. Given a fixed schedule $\D$, the maximum $j^{*}$ can be computed explicitly.
 
 
-When $Z_{i} = \overline{Z}_{i}$, we can obtain the optimal schedule.
+When all customers are assigned their maximum service time ($Z_{i} = \overline{Z}_{i}$), the schedule that maximizes the number of customers $n$ is obtained by solving:
 
-The maximum $n^{*} = \max\{n|\sum_{i=1}^{n} \overline{Z}_{i} \leq \overline{T}\} + N +1$.
+$$n^{*} = \max\left\{n\bigg|\sum_{i=1}^{n} \overline{Z}_{i} \leq \overline{T}\right\} + N +1,$$ where $\overline{T}$ is the deadline and $N$ is the waiting room capacity.
 
 \begin{example}
-    $Z_{i} \in [20, 40]$ for each $i$. $T \leq 120$. $N =2$. $n^{*} = 3 + 2 +1$. The optimal schedule is $A_{1} = 0$, $A_2 = 40$, $A_3 = 80$, $A_4 =A_5 = A_6 = 120$.
+    $Z_{i} \in [20, 40]$ for each $i$. $\overline{T} =120$. $N =2$. $n^{*} = 3 + 2 +1$. The optimal schedule is $A_{1} = 0$, $A_2 = 40$, $A_3 = 80$, $A_4 =A_5 = A_6 = 120$.
 \end{example}
+
+The counterpart (dual) problem aims to minimize the schedule time $A_n$ of the last customer, given a fixed number of customers $n$, while respecting the waiting area capacity constraint. The optimization problem is formulated as:
+
+\begin{equation}
+    \begin{aligned}
+        \min \quad & A_{n} \\
+        \mbox{s.t.} \quad & W_{i}(\Z_{i-1}, \D_{i-1}) = [W_{i-1}(\Z_{i-2}, \D_{i-2}) + Z_{i-1} - \Delta_{i-1}]^{+} \\
+        & S(t) \leq N, \forall t \in [0, A_n]
+    \end{aligned}
+\end{equation}
+
+
+\begin{example}
+    $n = 6$. $Z_{i} \in [20, 40]$ for each $i$. $N =2$. The optimal schedule is $A_{1} = 0$, $A_2 = 40$, $A_3 = 80$, $A_4 =A_5 = A_6 = 120$.
+\end{example}
+
+For any given realization of $\Z_n$, an optimal schedule is $A_1 = 0$, $A_i = \sum_{k=1}^{i-1} Z_k, 2 \leq i \leq n-N$, $A_{n-N+1} = \ldots = A_{n} = \overline{T}$.
 
 
 \section{Stochastic Situation}
-There are $n$ scheduling slots, ($n$ is a random variable)
-
 The soft constraint can be set as the expected number of simultaneous waiting people does not exceed certain number. 
 
 Or the probability of the largest number of simultaneous waiting people is less than a threshold.
 
 \begin{equation}\label{stochastic_model}
     \begin{aligned}
-        \max \quad & E(n) \\
-        \mbox{s.t.} \quad & E(S(\Z, \D)) \leq N \\
+        \max \quad & n \\
+        \mbox{s.t.} \quad & E[S(t)] \leq N, \forall t \\
         & A_{n} \leq \overline{T}
     \end{aligned}
 \end{equation}
 
+\begin{equation}\label{stochastic}
+    \begin{aligned}
+        \min \quad & E \left[T_n(\Z_{n}, \D_{n-1}) \right] \\
+        \mbox{s.t.} \quad & E\left[S(t) \right] \leq N, \forall t
+    \end{aligned}
+\end{equation}
+
+The constraint $E\left[S(t) \right] \leq N, \forall t$ is equivalent to $E\left[S(A(i)) \right] \leq N, i=2,\ldots, n$.
+
+$S(A(i)) = \max\{j|W_{i-1} + Z_{i-1}-\sum_{i-1}^{j-1} \Delta_{k} >0\} - i + 1$.
+
+
+$T_{i}(\Z_{i}, \D_{i-1}) = \sum_{k=1}^{i-1} \Delta_{k} + W_{i}(\Z_{i-1}, \D_{i-1}) + Z_{i}$
+
+
+$W_{i}(\Z_{i-1}, \D_{i-1}) = [W_{i-1}(\Z_{i-2}, \D_{i-2}) + Z_{i-1} - \Delta_{i-1}]^{+}$
+
+
+If the constraint is hard, for each $i$, we have $\max\{j|W_{i-1} + Z_{i-1}-\sum_{i-1}^{j-1} \Delta_{k} >0\} - i + 1 \leq N$. The constraints can be converted to $Z_{i-1} + W_{i-1} \leq \sum_{i-1}^{N-2+i} \Delta_{k}, i =2 \ldots, n$.
+
+
+% 1. 如果设定等待时间的均值小于零，也就是不存在大于一定的人数，这样的条件有些苛刻，因为对于无最大服务时间的情况，schedule time 会相对只有waiting time 的情况大大推迟，同时对于极端情况的出现，schedule time 则会进一步 被推迟
+
+% 解决方法： 设定超过一定人数出现的概率为一定的限度。
+
+% 2. 存在n人时，但是可以 rescheduling
+
+% 上网查找一些医院的处理方式。walk-in? + scheduling?
 
 \end{document}

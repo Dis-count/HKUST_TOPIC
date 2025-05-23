@@ -263,7 +263,49 @@ Traditional Appointment Scheduling Model.
 % If the constraint is hard, for each $i$, we have $\max\{j|W_{i-1} + Z_{i-1}-\sum_{i-1}^{j-1} \Delta_{k} >0\} - i + 1 \leq N$. The constraints can be converted to $Z_{i-1} + W_{i-1} \leq \sum_{i-1}^{N-2+i} \Delta_{k}, i =2 \ldots, n$.
 
 
-\section{Some Instances}
+\section{Some Measures}
+Priority-Based Waiting Time Control: The waiting time for emergency patients is less than 15 minutes. No longer to serve conventional patients when the number of waiting patients is no less than 3. 
+% 按病情优先级分级限制等待时间，
+
+% 紧急患者：等待时间≤15分钟；
+
+% 常规患者：若当前等待人数≥3人，自动分配至下一时段。
+
+% 根据实时等待人数调整优先级阈值（如3人等待时，仅接收急诊患者）
+
+% 新患者自动转入“快速通道”（等待时间承诺≤10分钟）
+
+Time Slot-Based Waiting Time Control: fixed interval, adjust schedule interval according to the congestion, dynamically extend the schedule interval or shut down according to real-time data.
+
+% 固定间隔, 动态调整时段长度(根据拥挤程度，调整固定间隔), new research: 当系统检测到未来某时段预约超额时，自动关闭该时段或延长间隔。
+
+% 2. 存在 n 人时，但是可以 rescheduling, 用短信等方式通知预约人延后的信息
+
+% 上网查找一些医院的处理方式。 walk-in? + scheduling?
+
+With technological advancements, electronic communication methods can be employed by service providers to notify customers in real time, thereby reducing wait times, improving service satisfaction, and avoiding overcrowding. Initially, a set of scheduling slots is allocated to customers. The goal is to ensure that either the number of waiting customers or their total wait time does not exceed predefined thresholds.
+
+However, due to uncertainties in service durations, the initial schedule may lead to congestion during certain periods. In such cases, rescheduling can be applied to adjust subsequent appointments and mitigate delays. The key challenges are to minimize both the frequency of rescheduling and the total delay imposed on customers.
+
+
+
+
+\begin{example}
+In this example, when scheduling four customers, the traditional approach is to assign equal time intervals between appointments (e.g., two time slots per customer). However, this may lead to congestion due to uncertainties in service times. To mitigate this, we can adopt unequal scheduling intervals. For example: The second customer could be scheduled earlier to create a buffer before the third customer. The fourth customer could be scheduled later to reduce overlap.
+
+Alternatively, dynamic rescheduling can be employed when the system detects potential congestion (e.g., multiple customers waiting simultaneously). This adjusts appointments in real time to minimize waiting time and delays. In this example,  since there are two people waiting by the time the third customer arrives, we can reschedule the fourth customer to a later time.
+
+
+\begin{figure}[ht]
+    % \caption{Example}\label{example}
+    \centering
+    \includegraphics[width=0.7\textwidth]{./Figures/ex2.png}
+\end{figure}
+\end{example}
+
+Innovation: Priority-based dynamic rescheduling with waiting capacity constraints
+
+\section{Some instances}
 We evaluate and compare three constraint scenarios: 
 
 \begin{itemize}
@@ -281,6 +323,28 @@ Setting the mean of simultaneous waiting time to be no larger than zero (requiri
 An alternative approach is to set a threshold on the probability of the number of waiting customers not exceeding a certain limit.
 
 
+%   1. 学术研究中的考虑
+%   群体等待时间的优化目标：部分研究会将总等待时间（total waiting time）或平均等待时间作为优化目标，这间接涉及多人共同等待的累积效应。例如：
+  
+%   在门诊调度中，最小化所有患者的等待时间总和。
+%   在制造业中，减少批次任务的总延迟时间。
+  
+%   公平性约束：某些场景（如公共服务）会引入公平性指标，避免某些群体等待时间过长。例如：
+  
+%   限制不同优先级群体的最大等待时间差异。
+%   使用加权调度算法平衡不同用户的等待体验。
+
+
+% 2. 行业实践中的要求
+% 显性限制较少：行业标准（如医疗、银行、客服中心）通常更关注个体等待时间的上限（如“95%的患者等待时间不超过30分钟”），而非多人共同等待的总和。
+
+% 隐性管理需求：以下场景可能涉及群体等待的间接控制：
+
+% 服务容量规划：通过计算峰值时段的平均等待时间，反推需增加的资源（如窗口、人员）。
+% 动态调度：在机场安检、餐厅排队等场景中，系统会实时监测队列长度（即群体等待的直观体现），并动态调整资源。
+% 批次处理（Batch Processing）：如实验室检测、物流分拣，需权衡单个样本的等待时间与整体吞吐量。
+
+
 % punctuality. congestion effect. pre-empt policy. walk-in. fairness. priority. patient preference.
 
 The original model considers the single segment of the overlapping,
@@ -293,9 +357,7 @@ The original model considers the single segment of the overlapping,
     \end{aligned}
 \end{equation}
 
-
-\section{Overlapping Model}
-For the above model, only the seperate overlapping period is considered. From the perspective of customer $i+1$, the total overlapping time can be calculated by $E[W_{i,i+1}(\Z_{i-1}, \D_{i})] + E[W_{i+1,i+2}(\Z_{i-1}, \D_{i})]$.
+For this model, only the seperate overlapping period is considered. From the perspective of customer $i+1$, the total overlapping time can be calculated by $E[W_{i,i+1}(\Z_{i-1}, \D_{i})] + E[W_{i+1,i+2}(\Z_{i-1}, \D_{i})]$.
 
 
 \begin{equation}\label{total_overlap}
@@ -306,35 +368,38 @@ For the above model, only the seperate overlapping period is considered. From th
 \end{equation}
 
 
+
+% 而对于 overlapping time model, 会对于某几个customer增加等待时间，但是控制了整体的传染风险。
+
 % 对于N-2 个
 
 
 \begin{table}[ht]
     \centering
-    \caption{Schedule Intervals and Times}
+    \caption{Schedule Intervals}
     \begin{tabular}{ccccccc}
     \hline
     \hline
-    Waiting Model  & $\Delta_1= 0.72$ & $\Delta_2= 31.1$ & $\Delta_3=31.3$ & $\Delta_4 = 32.3$ & $\Delta_5=32.5$ & $T_{n} = 188.76$ \\
+    Waiting Model & $T_{n} = 188.76$ & $\Delta_1= 0.72$ & $\Delta_2= 31.1$ & $\Delta_3=31.3$ & $\Delta_4 = 32.3$ & $\Delta_5=32.5$ \\
     Waiting  &  0 & 30  & 30  & 30 & 30 & 30 \\
     Overlapping & 0 &  5.2 & 12.4 & 15.4 & 17.1 & 8.9 \\ 
     \hline
-    Overlapping Model  & $\Delta_1= 0.02$ & $\Delta_2= 30.0$ & $\Delta_3 = 29.6$ & $\Delta_4= 41.2$ & $\Delta_5 =27.2$ & $T_{n} = 189.13$ \\
+    Overlapping Model & $T_{n} = 189.13$ & $\Delta_1= 0.02$ & $\Delta_2= 30.0$ & $\Delta_3 = 29.6$ & $\Delta_4= 41.2$ & $\Delta_5 =27.2$ \\
     Waiting   & 0  & 30.7 & 31.7  & 33.2 & 26.6 & 30.3 \\
     Overlapping & 0 & 6.1 & 15  & 15 & 15 & 8.9 \\
     \hline
-    Waiting Model  & $\Delta_1= 0.72$ & $\Delta_2= 31.1$ & $\Delta_3=31.3$ & $\Delta_4 = 32.3$ & $T_{n} = 156.36$ \\
+    Waiting Model & $T_{n} = 156.36$ & $\Delta_1= 0.72$ & $\Delta_2= 31.1$ & $\Delta_3=31.3$ & $\Delta_4 = 32.3$ \\
     Waiting  & 0 & 30  & 30  & 30 & 30 \\
     Overlapping & 0 &  5.2 & 12.4 & 15.4 & 8.2 \\ 
     \hline
-    Overlapping Model  & $\Delta_1= 0$ & $\Delta_2= 24.4$ & $\Delta_3 = 42.3$ & $\Delta_4= 26.2$ & $T_{n} = 156.21$ \\
+    Overlapping Model & $T_{n} = 156.21$ & $\Delta_1= 0$ & $\Delta_2= 24.4$ & $\Delta_3 = 42.3$ & $\Delta_4= 26.2$ \\
     Waiting  &  0  & 30.8 & 37.1  & 27.7 & 32.4 \\
     Overlapping & 0 & 9.3 & 15  & 15  & 9.3 \\
     \hline
     \end{tabular}
   \end{table}
 
-Several conclusions:
+Several conclusion:
 
 For the waiting time constraint model: the average individual waiting time remains stable, but the overlapping duration among individuals grows, leading to elevated transmission risk.
 

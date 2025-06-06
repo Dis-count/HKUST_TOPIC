@@ -107,9 +107,9 @@ For any given realization of $\Z_{n}$, $T_n(\Z_{n}, \D_{n-1})$ becomes shorter w
 
 The optimal schedule can be obtained by minimizing $\Delta_{i}$.
 
-When $i =1$, the first customer doesn't need to wait.
+When $i =1$, the first customer doesn't need to wait, i.e., $W_{1}(\Z_{0}, \D_{0}) = 0$.
 
-When $i =2$, only one constraint $E\left[W_{1}(\Z_{0}, \D_{0}) + Z_{1}- \Delta_{1} \right]^{+} \leq w_{1}$ is applied, then $\D_{1}^{*}$ can be obtained.
+When $i =2$, only one constraint $E\left[W_{1}(\Z_{0}, \D_{0}) + Z_{1}- \Delta_{1} \right]^{+} \leq w_{1}$ is applied, then $\Delta_{1}^{*}$ can be obtained. 
 
 When $i =3$, there are two constraints on the waiting time of the third customer.
 
@@ -117,7 +117,15 @@ $E\left[W_{2}(\Z_{1}, \D_{1}^{*}) + Z_{2} - \Delta_{2}\right]^{+} \leq w_{1}$.
 
 $E\left[W_{1}(\Z_{0}, \D_{0}) + Z_{1} - \Delta_{1}^{*} - \Delta_{2}\right]^{+} \leq w_{2}$.
 
-When $i =n$, there are $(n-1)$ constraints.
+Then $\Delta_{2}^{*}$ can be obtained.
+
+When $i =4$, there are two constraints on the waiting time.
+
+$E\left[W_{3}(\Z_{2}, \D_{2}^{*}) + Z_{3} - \Delta_{3}\right]^{+} \leq w_{1}$.
+
+$E\left[W_{2}(\Z_{1}, \D_{1}) + Z_{2} - \Delta_{2}^{*} - \Delta_{3}\right]^{+} \leq w_{2}$.
+
+% When $i =n$, there are $(n-1)$ constraints.
 
 \begin{proposition}
     By solving the above problems sequentially, the optimal schedule can be obtained.
@@ -268,7 +276,7 @@ We evaluate and compare three constraint scenarios:
 
 \begin{itemize}
     \item  Waiting Time Constraint: Limits the maximum waiting time for each customer.
-    \item  Overlapping Time Constraint: Restricts simultaneous waiting overlaps.
+    \item  Overlapping Time Constraint: Restricts two simultaneous waiting overlaps.
     \item  Combined Constraints: Enforces both waiting time and overlapping time limits.
 \end{itemize}
 
@@ -276,38 +284,31 @@ In all cases, the schedule times of later customers do not affect the appointmen
 
 Setting the mean of simultaneous waiting time to be no larger than zero (requiring that the number of people never exceeds a certain threshold) is an overly stringent condition. In systems without a maximum service time constraint, this requirement would significantly delay the scheduled time compared to systems that only consider the single waiting time. Moreover, when extreme situations occur (the service times of the earlier customers are extremely large), the scheduled time would be postponed even further.
 
-
 % direction: put the overlapping time in objective function or put it in the constraint.
 An alternative approach is to set a threshold on the probability of the number of waiting customers not exceeding a certain limit.
 
-
 % punctuality. congestion effect. pre-empt policy. walk-in. fairness. priority. patient preference.
 
-The original model considers the single segment of the overlapping,
-
+The original model considers the overlapping time,
 
 \begin{equation}\label{single_overlap}
     \begin{aligned}
         \min \quad & E[T_{n}(\Z_{n}, \D_{n-1})] \\
-        \mbox{s.t.} \quad & E[W_{i,i+1}(\Z_{i-1}, \D_{i})] \leq w, i=2,\ldots, N-1
+        \mbox{s.t.} \quad & E[W_{i,i+1}(\Z_{i-1}, \D_{i})] \leq w, i=2,\ldots, n-1
     \end{aligned}
 \end{equation}
 
+Wells-Riley model: The probability $P$ of infection in a shared space is given by:
 
-\section{Overlapping Model}
-For the above model, only the seperate overlapping period is considered. From the perspective of customer $i+1$, the total overlapping time can be calculated by $E[W_{i,i+1}(\Z_{i-1}, \D_{i})] + E[W_{i+1,i+2}(\Z_{i-1}, \D_{i})]$.
+$P=1-e^{-I \cdot q \cdot p \cdot t / Q}$
 
+I: Number of infectious individuals
+q: Quanta emission rate
+p: Mask penetration factor
+t: Exposure time
+Q: Room ventilation rate
 
-\begin{equation}\label{total_overlap}
-    \begin{aligned}
-        \min \quad & E[T_{n}(\Z_{n}, \D_{n-1})] \\
-        \mbox{s.t.} \quad & E[W_{i-1,i}(\Z_{i-1}, \D_{i}) + W_{i,i+1}(\Z_{i}, \D_{i+1})] \leq w, i=2,\ldots, N-1
-    \end{aligned}
-\end{equation}
-
-
-% 对于N-2 个
-
+The overlapping constraint is not stringent/sufficient. Although setting $\Delta_1 = 0$ minimizes $T_n$, increasing $\Delta_1$ can significantly reduce Customer 2's waiting time while only slightly increasing $T_n$.
 
 \begin{table}[ht]
     \centering
@@ -317,29 +318,138 @@ For the above model, only the seperate overlapping period is considered. From th
     \hline
     Waiting Model  & $\Delta_1= 0.72$ & $\Delta_2= 31.1$ & $\Delta_3=31.3$ & $\Delta_4 = 32.3$ & $\Delta_5=32.5$ & $T_{n} = 188.76$ \\
     Waiting  &  0 & 30  & 30  & 30 & 30 & 30 \\
-    Overlapping & 0 &  5.2 & 12.4 & 15.4 & 17.1 & 8.9 \\ 
+    Overlapping & 0 &  5.2 & 7.2 & 8.2 &  8.9 & \\ 
     \hline
-    Overlapping Model  & $\Delta_1= 0.02$ & $\Delta_2= 30.0$ & $\Delta_3 = 29.6$ & $\Delta_4= 41.2$ & $\Delta_5 =27.2$ & $T_{n} = 189.13$ \\
-    Waiting   & 0  & 30.7 & 31.7  & 33.2 & 26.6 & 30.3 \\
-    Overlapping & 0 & 6.1 & 15  & 15 & 15 & 8.9 \\
+    Overlapping Model  & $\Delta_1= 0.1$ & $\Delta_2= 27.4$ & $\Delta_3 = 35.1$ & $\Delta_4= 34.7$ & $\Delta_5 = 34.6$ & $T_{n} = 189.53$ \\
+    Waiting   & 0  & 30.6 & 34.0 & 30.3 & 30.5 & 26.8 \\
+    Overlapping & 0 & 7.4 & 7.4 & 7.4 & 7.4 & \\
     \hline
     Waiting Model  & $\Delta_1= 0.72$ & $\Delta_2= 31.1$ & $\Delta_3=31.3$ & $\Delta_4 = 32.3$ & $T_{n} = 156.36$ \\
-    Waiting  & 0 & 30  & 30  & 30 & 30 \\
-    Overlapping & 0 &  5.2 & 12.4 & 15.4 & 8.2 \\ 
+    Waiting  & 0 & 30  & 30  & 30 & 30  & total(120)\\
+    Overlapping & 0 &  5.2 & 7.2 & 8.2  &  & total(20.6)\\ 
     \hline
-    Overlapping Model  & $\Delta_1= 0$ & $\Delta_2= 24.4$ & $\Delta_3 = 42.3$ & $\Delta_4= 26.2$ & $T_{n} = 156.21$ \\
-    Waiting  &  0  & 30.8 & 37.1  & 27.7 & 32.4 \\
-    Overlapping & 0 & 9.3 & 15  & 15  & 9.3 \\
+    Overlapping Model  & $\Delta_1= 0.42$ & $\Delta_2= 27.11$ & $\Delta_3 = 35.1$ & $\Delta_4= 34.7$ & $T_{n} = 156.56$ \\
+    Waiting  &  0  & 30.5 & 34.0  & 32.1 & 28.3 & total(125.0)\\
+    Overlapping & 0 & 7.4 & 7.4 & 7.4  &  & total(22.2)\\
+    \hline
+    Overlapping (fixed $\Delta_1$)  & $\Delta_1= 5$ & $\Delta_2= 22.53$ & $\Delta_3 = 35.12$ & $\Delta_4= 34.67$ & $T_{n} = 156.58$ \\
+    Waiting  &  0  & 25.8 & 34.1  & 32.2 & 28.3 & total(120.34)\\
+    Overlapping & 0 & 7.4 & 7.4 & 7.4  &  & total(22.2)\\
+    \hline
+    Overlapping (fixed $\Delta_1$)  & $\Delta_1= 8$ & $\Delta_2= 19.53$ & $\Delta_3 = 35.13$ & $\Delta_4= 34.69$ & $T_{n} = 156.63$ \\
+    Waiting  &  0  & 22.9 & 34.2  & 32.2 & 28.4 & total(117.6) \\
+    Overlapping & 0 & 7.4 & 7.4 & 7.4  &  & total(22.2) \\
     \hline
     \end{tabular}
   \end{table}
 
-Several conclusions:
+% Number of customers is large.
 
-For the waiting time constraint model: the average individual waiting time remains stable, but the overlapping duration among individuals grows, leading to elevated transmission risk.
+Now we consider the waiting cost, idle cost and overtime cost.
 
-For the overlapping time model: while this model may marginally extend waiting times for a subset of customers, it effectively mitigates overall transmission risk by controlling concurrent waiting.
+\begin{equation}
+    \label{three_term_model}
+    \begin{aligned}
+        \min_{\D} \quad & \left[c_{w} E_{w} + c_{i} E_{i} + c_{o} E_{o} \right] \\
+        \mbox{s.t.} \quad & W_{i} = (W_{i-1} + Z_{i-1} - \Delta_{i-1})^{+} \\
+        & W_{i, i+1} = (W_{i-1} + Z_{i-1} - \Delta_{i-1}- \Delta_{i})^{+} \\
+        & E(W_{i,i+1}) \leq w, i = 2, \ldots, n-1
+    \end{aligned}
+\end{equation}
+
+$E_{w} = \sum_{i=2}^{n} E(W_{i})$
+
+$E_{i} = E(\sum_{i=1}^{n-1} (\Delta_{i} -Z_{i}) + W_{n})$
+
+$E_{o} = E(\sum_{i=1}^{n-1}\Delta_{i} + W_{n}+ Z_{n} - T)^{+}$
 
 
+We investigate several key questions:
+
+When does the overlapping time constraint become active? (i.e., under what conditions does the overlapping condition take effect?) How does this constraint affect appointment scheduling? Is there an optimal approach under this constraint?
+
+
+For a fixed sum $c_{i} + c_{w}$, the optimal schedule does not vary with changes in $c_{i}$ or $c_{w}$.
+
+When $c_{w} = 0$, problem \eqref{three_term_model} is equivalent to problem \eqref{single_overlap}.
+
+\begin{table}[ht]
+    \centering
+    \caption{Schedule Intervals and Times}
+    \begin{tabular}{cccccccc}
+    \hline
+    \hline
+    $c_{w}$ & $c_{i}$ & $\Delta_1$ & $\Delta_2$ & $\Delta_3$ & $\Delta_4$ & $\Delta_5$ & Largest overlap time/Threshold  \\
+    \hline
+    5  &  1  & 22 & 31 & 30 & 28 & 14 & 6.3462 \\
+    \hline
+    1  &  1  & 19 & 29 & 28 & 28 & 21 & 5.5232 \\
+    \hline
+    1  &  5  &  6 & 15 & 17 & 17 & 13 & 21.5018  \\
+    1  &  5  &  6 & 15 & 18 & 18.61 & 17 & 18 \\
+    1  &  5  & 6 & 15  & 18 & 21 & 20.23 & 15 \\
+    1  &  5  & 6 & 17  & 19 & 23 & 24.10 & 12 \\
+    1  &  5  & 6 & 18  & 20.83 & 26.03 & 27.97 & 9 \\
+    1  &  5  & 7 & 20.25  & 27 & 28.64 & 30.15 & 6 \\
+    1  &  5  & T = 125 &  &    &       &       &  Infeasible  $< 4$ \\
+    \hline
+    \end{tabular}
+  \end{table}
+
+
+For each $i$, $\Delta_{i}^{*}$ increases when the threshold of waiting/overlapping time decreases.
+
+For the optimal schedule, the expected waiting/overlapping time ($E(W_{i})$, $E(W_{i,i+1})$) is increasing in $i$.
+
+% If the service time is integral, then the optimal schedule interval is also integral.
+
+For the first question, we need to find the largest overlapping time.
+
+% \section{Overlapping Model}
+% For the above model, only the seperate overlapping period is considered. From the perspective of customer $i+1$, the total overlapping time can be calculated by $E[W_{i,i+1}(\Z_{i-1}, \D_{i})] + E[W_{i+1,i+2}(\Z_{i-1}, \D_{i})]$.
+
+% \begin{equation}\label{total_overlap}
+%     \begin{aligned}
+%         \min \quad & E[T_{n}(\Z_{n}, \D_{n-1})] \\
+%         \mbox{s.t.} \quad & E[W_{i-1,i}(\Z_{i-1}, \D_{i}) + W_{i,i+1}(\Z_{i}, \D_{i+1})] \leq w, i=2,\ldots, N-1
+%     \end{aligned}
+% \end{equation}
+
+
+% Several conclusions:
+% For the waiting time constraint model: the average individual waiting time remains stable, but the overlapping duration grows, leading to elevated transmission risk.
+
+% For the overlapping time model: while this model may marginally extend waiting times for a subset of customers, it effectively mitigates overall transmission risk by controlling simultaneous waiting.
+
+% Since $E[W_{23}] \leq w$ and $E[W_{N-1, N}] \leq w$ are redundant, there are $(N-3)$ effective constraints, which gives more options for the $(N-1)$ decision variables.
+
+% Since $T_{n}$ is increasing in $\D$. $\Delta_{1} = 0$ always makes the problem feasible, thus $\Delta_{1}^{*} =0$ is one of the optimal partial solution.
+
+% Let the optimal second schedule interval be $\Delta_{2}^{*}$, when $\Delta_{2} > \Delta_{2}^{*}$, $T_{n} > T_{n}^{*}$; when $\Delta_{2} < \Delta_{2}^{*}$, $T_{n} > T_{n}^{*}$.
+
+% % $T_{n}^{*}$ is convex in $\Delta_{2}$.
+
+% Lagrangian function:
+% $$L(\D; \bm{\lambda}) = T_{n} + \lambda_{1} (E[W_{23} - w]) + \lambda_{2} (E[W_{23} + W_{34} - w]) + \lambda_{3}(E[W_{34} + W_{45} - w])$$
+
+% From the literature, we know that
+% $$\frac{\partial T_n}{\partial \Delta_{i}} = 1- \prod_{k=i+1}^n 1_{\left\{W_k\left(\mathbf{Z}_{k-1}, \boldsymbol{\Delta}_{k-1}\right)>0\right\}}.$$
+
+% Take the partial derivative with respect to $\Delta_{2}$,
+% $$\frac{\partial L(\D; \bm{\lambda})}{\partial \Delta_2} = 1- \prod_{k = 3}^n 1_{\left\{W_k\left(\mathbf{Z}_{k-1}, \boldsymbol{\Delta}_{k-1}\right)>0\right\}} - (\lambda_{1}+ \lambda_{2}) 1_{\{W_{23}>0\}} - (\lambda_{2}+ \lambda_{3}) 1_{\{W_{34}>0\}}- \lambda_{3} 1_{\{W_{45}>0\}} 1_{\{W_{3}>0\}}$$ 
+
+% When $W_{ij}=0$ or $W_{k}=0$, the second derivative does not exist. When $W_{ij} \neq 0$ and $W_{k} \neq 0$, the second derivative is 0. This indicates that the Lagrangian function (or $T_{n}$) is piecewise linear in $\Delta_2$.
+
+% The sum of finite piecewise linear functions remains a piecewise linear function.
+
+% The sum of finite piecewise linear functions must attain a minimum on the closed interval. 
+
+% The minimum value will be obtained at the break points.
+
+% $\Delta_{2}^{*}$ can be obtained by bi-section and bound?
+
+% Then, $E[W_{23}]^{*} = E[(Z_{1}- \Delta_{2}^{*})^{+}]$ can be obtained. $E[W_{34}]^{*} = w - E[W_{23}]^{*}$, then $\Delta_{3}^{*}$ can be calculated.
+
+The Wells-Riley model quantifies infection risk based on quanta emission, exposure time, masking, and ventilation. After an infected person leaves, aerosol risk drops significantly within minutes if ventilation is adequate.
 
 \end{document}

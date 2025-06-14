@@ -1,0 +1,30 @@
+% !TEX root = sum1.tex
+\section{Seat Planning Problem with Social Distancing}\label{problem_description}
+
+\subsection{Concepts}
+Consider a seat layout comprising $N$ rows, with each row $j$ containing $L_j^0$ seats, for  $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. The venue will hold an event with multiple seat requests, where each request includes a group of multiple people.
+There are $M$ distinct group types, where each group type $i$, $i \in \mathcal{M} \coloneqq \{1, 2, \ldots, M\}$, consists of $i$ individuals requiring $i$ consecutive seats in one row. The request of each group type is represented by a demand vector $\mathbf{d} = (d_1, d_2, \ldots, d_M)^{\intercal}$, where $d_i$ is the number of groups of type $i$.
+
+
+We now formulate the seat planning with deterministic requests (SPDR) problem as an integer programming, where $x_{ij}$ represents the number of groups of type $i$ planned in row $j$. 
+
+\begin{align}
+(\text{SPDR}) \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i - \delta) x_{ij} \label{e0} \\
+\text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \label{deter_upper}\\ 
+& \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \label{capa_con} \\
+& x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N}. \notag 
+\end{align}
+
+
+The objective function (\ref{e0}) is to maximize the number of individuals accommodated. Constraint \eqref{deter_upper} ensures the total number of accommodated groups does not exceed the number of requests for each group type. Constraint \eqref{capa_con} stipulates that the number of seats allocated in each row does not exceed the size of the row.
+
+The increasing nature of the ratio $\frac{i}{n_i}$ with respect to group size $i$ leads to preferential inclusion of larger groups in the optimal fractional seat plan. This intuitive property is illustrated in Proposition \ref{sol_relax_deter}. 
+
+% By examining the monotonic ratio of $\frac{i}{n_i}$, we can establish the upper bound of supply corresponding to the optimal solution of the LP relaxation of SPDR problem.
+
+% and will be utilized in the bid-price control policy discussed in Section \ref{bid_price}.
+
+\begin{prop}\label{sol_relax_deter}
+For the LP relaxation of the \textup{SPDR} problem, there exists an index $\tilde{i}$ such that the optimal solutions satisfy the following conditions: $x_{ij}^{*} = 0$ for all $j$, $i = 1,\ldots, \tilde{i}-1$; $\sum_{j=1}^{N} x_{ij}^{*} = d_{i}$ for $i = \tilde{i}+1,\ldots, M$; $\sum_{j=1}^{N} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ for $i = \tilde{i}$.
+\end{prop}
+

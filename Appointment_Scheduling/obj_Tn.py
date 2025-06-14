@@ -103,6 +103,7 @@ class originalModel:
         term2 = grb.quicksum(delta[i] for i in range(self.people_num-1))
 
         m2.setObjective(term1/self.num_sample + term2, GRB.MINIMIZE)
+        # m2.setObjective(term2, GRB.MINIMIZE)
         m2.setParam('OutputFlag', 0)
         # m2.write('1.lp')
         m2.optimize()
@@ -253,7 +254,7 @@ if __name__ == "__main__":
     people_num = 6
     overlapping_thres = np.zeros(people_num)
     overlapping_thres[0] = 30  # one person waiting
-    overlapping_thres[1] = 4  # two person waiting
+    overlapping_thres[1] = 5  # two person waiting
     # overlapping_thres[2] = 5
 
     np.random.seed(0)
@@ -264,7 +265,7 @@ if __name__ == "__main__":
 
     # zeta = truncnorm.rvs(a, b, loc = mu, scale = sigma, size = (people_num, num_sample))
      
-    zeta = np.random.exponential(20, [people_num, num_sample])
+    zeta = np.random.exponential(25, [people_num, num_sample])
     zeta = np.floor(zeta).astype(int)
     # zeta = np.clip(zeta, None, 60)
 

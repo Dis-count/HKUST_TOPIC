@@ -1,0 +1,229 @@
+% !TEX root = ./sum1.tex
+
+\section{Seat Planning with Stochastic Requests}\label{sec_seat_planning}
+We now investigate the problem of seat planning with stochastic requests. Specifically, we need to determine a seating plan that accommodates uncertain requests. To model this problem, we develop a scenario-based stochastic programming (SBSP) and follow the framework of Benders decomposition to solve it. %it efficiently. In some cases, solving the integer programming with Benders decomposition remains still computationally prohibitive. Thus, we can consider the LP relaxation first, then construct a seat plan with full or largest patterns to fully utilize all seats.
+
+
+\subsection{Scenario-Based Stochastic Programming Formulation}
+Assume the requests can be defined as a set of scenarios, denoted by  $\omega \in \Omega$. Each scenario $\omega$  is associated with a specific realization of group requests, represented as $\mathbf{d}_\omega = (d_{1\omega},d_{2\omega},\ldots,d_{M,\omega})^{\intercal}$, and  $p_{\omega}$, the realization probability of the scenario $\omega$. To maximize the expected number of individuals accommodated across all scenarios, we propose a scenario-based stochastic programming approach to determine a seat plan.
+
+Recall that $x_{ij}$ in \eqref{e0} ({\color{red} provide the index}) represents the number of groups of type i planned in row j. To account for the variability across different scenarios, it is essential to model potential excess or shortage of supply. To capture this, we introduce a scenario-dependent decision variable, denoted as $\mathbf{y}$, which consists of two vectors: $\mathbf{y}^{+} \in \mathbb{N}^{M \times |\Omega|}$ and $\mathbf{y}^{-} \in \mathbb{N}^{M \times |\Omega|}$. Here, each component of $\mathbf{y}^{+}$, denoted as $y_{i\omega}^{+}$, represents the excess of supply for group type $i$ under scenario $\omega$, while $y_{i\omega}^{-}$ represents the shortage of supply for group type $i$ under scenario $\omega$.
+
+To address the possibility of larger group types being unable to fully occupy their designated seats due to insufficient supply, we assume that surplus seats for group type $i$ can be 
+allocated to smaller group types $j<i$ in descending order of group size. This implies that if there is excess supply after assigning groups of type $i$ to rows, the remaining seats can be hierarchically allocated to groups of type $j<i$ based on their sizes. Recall that the supply for group type $i$ is denoted as $\sum_{j=1}^N x_{ij}$. Thus, for any scenario $\omega$, the excess and shortage of supply can be recursively defined as follows:
+
+\begin{equation}\label{y_recursively}
+\begin{aligned}
+  & y_{i \omega}^{+}= (\sum_{j=1}^N x_{ij}- d_{i \omega} + y_{i+1, \omega}^{+})^{+}, i =1,\ldots, M-1 \\
+  & y_{i \omega}^{-}= (d_{i \omega}- \sum_{j=1}^N x_{ij} - y_{i+1, \omega}^{+})^{+}, i =1,\ldots, M-1 \\
+  & y_{M \omega}^{+} = (\sum_{j=1}^N x_{Mj} - d_{M \omega})^{+} \\ 
+  & y_{M \omega}^{-} = (d_{M \omega}- \sum_{j=1}^N x_{Mj})^{+},
+\end{aligned}
+\end{equation}
+where $(\cdot)^{+}$ denotes the non-negative part of the expression. 
+
+Based on the considerations outlined above, the total supply of group type $i$ under scenario $\omega$ can be expressed as: $\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}, i = 1, \ldots, M-1$. For the special case of group type $M$, the total supply under scenario $\omega$ is $\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}$.
+Then we have the following formulation:
+  \begin{align}
+  (\text{SBSP}) \quad \max \quad & E_{\omega}\left[(n_{M}-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+}) + \sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+})\right] \\
+  \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij}-y_{i \omega}^{+}+
+  y_{i+1, \omega}^{+} + y_{i \omega}^{-}=d_{i \omega}, \quad i = 1,\ldots, M-1, \omega \in \Omega \label{DEF_constr1} \\
+  & \sum_{j= 1}^{N} x_{ij} -y_{i \omega}^{+}+y_{i \omega}^{-}=d_{i \omega}, \quad i = M, \omega \in \Omega \label{DEF_constr2}\\
+  & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}  \label{DEF_constr3} \\
+  & y_{i \omega}^{+}, y_{i \omega}^{-} \in \mathbb{N}, \quad i \in \mathcal{M}, \omega \in \Omega \notag \\
+  & x_{ij} \in \mathbb{N}, \quad i \in \mathcal{M}, j \in \mathcal{N} \notag.
+  \end{align}
+
+
+The objective function consists of two parts. The first part represents the number of individuals in
+group type $M$ that can be accommodated, given by $(n_{M}-\delta) (\sum_{j=1}^{N} x_{Mj} - y_{M\omega}^{+})$. The second part represents the number of individuals in group type $i$, excluding $M$, that can be accommodated, given by $(n_i-\delta) (\sum_{j=1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i\omega}^{+}), i = 1, \ldots, M-1$. The overall objective function is subject to an expectation operator denoted by $E_{\omega}$, which represents the expectation with respect to the scenario set. This implies that the objective function is evaluated by considering the average values of the decision variables and constraints over the different scenarios. The objective function can be then reformulated as follows.
+\begin{align*}
+  & E_{\omega}\left[\sum_{i=1}^{M-1} (n_i-\delta) (\sum_{j= 1}^{N} x_{ij} + y_{i+1,\omega}^{+} - y_{i \omega}^{+}) + (n_M-\delta) (\sum_{j= 1}^{N} x_{Mj} - y_{M \omega}^{+})\right] \\
+  = & \sum_{j =1}^{N} \sum_{i=1}^M (n_i- \delta) x_{ij} - \sum_{\omega \in \Omega} p_{\omega} \left(\sum_{i=1}^{M}(n_i- \delta)y_{i \omega}^{+} - \sum_{i=1}^{M-1}(n_i-\delta)y_{i+1, \omega}^{+}\right) \\
+  = & \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij} - \sum_{\omega \in \Omega} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}
+\end{align*}
+
+Here, $\sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$ indicates the maximum number of individuals that can be accommodated in the seat plan $\{x_{ij}\}$. The second part, $\sum_{\omega \in \Omega} p_{\omega} \sum_{i = 1}^{M} y_{i \omega}^{+}$ indicates the expected excess of supply for group type $i$ over scenarios.
+
+In the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive for any $i, \omega$. Suppose there exist $i_0$ and $\omega_0$ such that $y_{i_0, \omega_0}^{+}$ and $y_{i_0, \omega_0}^{-}$ are positive. Substracting $\min\{y_{i_0, \omega_0}^{+}, y_{i_0, \omega_0}^{-}\}$ from these two values will still satisfy constraints \eqref{DEF_constr1} and \eqref{DEF_constr2} but increase the objective value when $p_{\omega_0}$ is positive. Thus, in the optimal solution, at most one of $y_{i \omega}^{+}$ and $y_{i \omega}^{-}$ can be positive.
+
+% Considering the analysis provided earlier, we find it advantageous to obtain a seat plan that only consists of full or largest patterns. However, the seat plan associated with the optimal solution obtained by solver to SSP may not consist of the largest or full patterns. We can convert the optimal solution to another optimal solution which is composed of the largest or full patterns.
+
+\begin{prop}\label{prop_solution}
+There exists an optimal solution to SBSP ({\color{red} {should introduce this name in equation (6)}})  such that the patterns associated with this optimal solution are composed of the full or largest patterns under any given scenarios.
+\end{prop}
+
+When there is only one scenario, the SBSP reduces to the deterministic model. This aligns with Section \ref{seat_planning_full_largest}, which outlines the generation of seat plan consisting of full or largest patterns.
+
+Solving SBSP directly is computationally prohibitive when there are numerous scenarios, instead, we apply Benders decomposition to simplify the solving process in Section \ref{solve_by_benders}, then obtain the seat plan composed of full or largest patterns, as stated in Section \ref{seat_assignment}.
+
+\subsection{Solving SBSP by Benders Decomposition}\label{solve_by_benders}
+We reformulate SBSP into a master problem and a subproblem. The iterative process of solving the master problem and the subproblem is known as Benders decomposition \cite{bnnobrs1962partitioning}. 
+The solution obtained from the master problem serves as input for the subproblem, while the solutions derived from the subproblem help refine the master problem by adding constraints. This iterative process improves the overall solution until convergence is achieved. To expedite the solving process, we derive a closed-form solution for the subproblem. Subsequently, we obtain the solution to the LP relaxation of SBSP through a constraint generation approach.
+
+
+\subsubsection{Reformulation}
+We express SBSP in matrix form to facilitate the application of the Benders decomposition technique. Let $\mathbf{n} = (n_1, \ldots, n_M)^{\intercal}$ represent the vector of seat sizes for each group type, where $n_i$ denotes the size of seats taken by group type $i$. Let $\mathbf{L} = (L_1, \ldots, L_N)^{\intercal}$ represent the vector of row sizes, where $L_j$ denotes the size of row $j$ as defined previously.
+The constraint \eqref{DEF_constr3} can be expressed as $\mathbf{x}^{\intercal} \mathbf{n} \leq \mathbf{L}$. This constraint ensures that the total size of seats occupied by each group type, represented by $\mathbf{x}^{\intercal} \mathbf{n}$, does not exceed the available row sizes $\mathbf{L}$. We can use the product $\mathbf{x} \mathbf{1}$ to indicate the supply of group types, where $\mathbf{1}$ is a column vector of size $N$ with all elements equal to 1. 
+
+The linear constraints associated with scenarios, denoted by constraints \eqref{DEF_constr1} and \eqref{DEF_constr2}, can be expressed in matrix form as:
+\[\mathbf{x} \mathbf{1} + \mathbf{V} \mathbf{y}_\omega = \mathbf{d}_\omega, \omega\in \Omega,\]
+where $\mathbf{V} = [\mathbf{W}, ~\mathbf{I}]$.
+
+$$
+\mathbf{W}=\left[\begin{array}{cccccc}
+-1 & 1 & 0 & \ldots & \ldots & 0 \\
+0 & -1 & 1 &    0   & \ldots & 0 \\
+\vdots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+0  & \ldots   &  0  & -1 & 1 & 0 \\
+0  & \ldots   &  \ldots  &  0 &  -1 & 1 \\
+0 & \ldots & \ldots & \ldots & 0 & -1
+\end{array}\right]_{M \times M}
+$$
+
+and $\mathbf{I}$ is the identity matrix with the dimension of $M$. For each scenario $\omega \in \Omega$,
+$$
+\mathbf{y}_{\omega}=\left[\begin{array}{l}
+\mathbf{y}_{\omega}^{+} \\
+\mathbf{y}_{\omega}^{-}
+\end{array}\right], \mathbf{y}_{\omega}^{+}=\left[\begin{array}{lllll}y_{1 \omega}^{+} & y_{2 \omega}^{+} & \cdots & y_{M \omega}^{+}\end{array}\right]^{\intercal}, \mathbf{y}_{\omega}^{-}=\left[\begin{array}{llll}y_{1 \omega}^{-} & y_{2 \omega}^{-} & \cdots & y_{M \omega}^{-}\end{array}\right]^{\intercal}.
+$$
+
+The size of the deterministic equivalent formulation increases with the size of the scenario set, rendering directly solving it computationally infeasible. To overcome the difficulty, we reformulate the problem to apply Benders decomposition approach. Let $\mathbf{c}^{\intercal}\mathbf{x} = \sum_{j =1}^{N} \sum_{i=1}^M i \cdot x_{ij}$, $\mathbf{f}^{\intercal}\mathbf{y}_{\omega} = -\sum_{i=1}^{M} y_{i \omega}^{+}$. Then SBSP can be expressed as below,
+
+\begin{equation}\label{BD_master}
+\begin{aligned}
+\max \quad & \mathbf{c}^{\intercal} \mathbf{x}+ z(\mathbf{x}) \\
+\text {s.t.} \quad & \mathbf{x}^{\intercal} \mathbf{n}  \leq \mathbf{L} \\
+& \mathbf{x} \in \mathbb{N}^{M \times N},
+\end{aligned}
+\end{equation}
+where $z(\mathbf{x})$ is defined as
+
+$$z(\mathbf{x}) := E(z_{\omega}(\mathbf{x})) = \sum_{\omega \in \Omega} p_{\omega} z_{\omega}(\mathbf{x}),$$ and for each scenario $\omega \in \Omega$, 
+
+\begin{equation}\label{BD_sub}
+  \begin{aligned}
+    z_{\omega}(\mathbf{x}) = \max \quad & \mathbf{f}^{\intercal} \mathbf{y}_{\omega} \\
+    \text {s.t.} \quad & \mathbf{V} \mathbf{y}_{\omega} = \mathbf{d}_{\omega} - \mathbf{x} \mathbf{1} \\
+     & \mathbf{y}_{\omega} \geq 0.
+  \end{aligned}
+\end{equation}
+
+
+The efficiency of solving problem \eqref{BD_master} hinges on the method used to solve problem \eqref{BD_sub}. Next, we demonstrate how to solve problem \eqref{BD_sub} efficiently.
+
+% The efficiency of solving problem \eqref{BD_master} depends on the efficient method for solving problem \eqref{BD_sub}.
+
+
+\subsubsection{Solving the Subproblem}\label{second_stage}
+Notice that the feasible region of the dual of problem \eqref{BD_sub} remains unaffected by $\mathbf{x}$. This observation provides insight into the properties of this problem. Let $\bm{\alpha}_{\omega} = (\alpha_{1\omega},\alpha_{2\omega}, \ldots, \alpha_{M,\omega})^{\intercal}$ denote the vector of dual variables. For each $\omega$, we can form its dual problem, which is 
+
+\begin{equation}\label{BD_sub_dual}
+  \begin{aligned}
+    \min \quad & \bm{\alpha}_{\omega}^{\intercal} (\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \\
+    \text {s.t.} \quad & \bm{\alpha}_{\omega}^{\intercal} \mathbf{V} \geq \mathbf{f}^{\intercal}
+  \end{aligned}
+\end{equation}
+
+\begin{lem}\label{feasible_region}
+ The feasible region of problem \eqref{BD_sub_dual} is nonempty and bounded. Furthermore, all the extreme points of the feasible region are integral.
+\end{lem}
+
+Let $\mathbb{P}$ indicate the feasible region of problem $\eqref{BD_sub_dual}$. According to Lemma \ref{feasible_region}, the optimal value of the problem \eqref{BD_sub}, $z_{\omega}(\mathbf{x})$, is finite and can be achieved at extreme points of $\mathbb{P}$. Let $\mathcal{O}$ be the set of all extreme points of $\mathbb{P}$. Then, we have $z_{\omega}(\mathbf{x}) = \min_{\bm{\alpha}_{\omega} \in \mathcal{O}} \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1})$.
+
+Alternatively, $z_{\omega}(\mathbf{x})$ is the largest number $z_{\omega}$ such that $\bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_w, \forall \bm{\alpha}_{\omega} \in \mathcal{O}$. We use this characterization of $z_w(\mathbf{x})$ in problem \eqref{BD_master} and conclude that problem \eqref{BD_master} can thus be put in the form by setting $z_w$ as the variable:
+
+\begin{equation}\label{BD_master2}
+  \begin{aligned}
+    \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+    \text {s.t.} \quad & \mathbf{x}^{\intercal} \mathbf{n}  \leq \mathbf{L} \\
+    & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \forall \bm{\alpha}_{\omega} \in \mathcal{O}, \forall \omega \\
+     & \mathbf{x} \in \mathbb{N}^{M \times N}
+  \end{aligned}
+\end{equation}
+
+
+Before applying Benders decomposition to solve problem \eqref{BD_master2}, it is important to ensure the efficient computation of the optimal solution to problem \eqref{BD_sub_dual}. When $\mathbf{x}^{*}$ is given, $\mathbf{y}_{\omega}$ can be obtained from equation \eqref{y_recursively}. Let $\alpha_{0, \omega} = 0$ for each $\omega$, then we have Proposition \ref{optimal_sol_sub_dual}.
+
+\begin{prop}\label{optimal_sol_sub_dual}
+  The optimal solutions to problem \eqref{BD_sub_dual} are given by 
+\begin{equation}\label{BD_sub_simplified}
+  \begin{aligned}
+    \alpha_{i \omega} = 0 \quad & \text{if}~  y_{i \omega}^{-} > 0,  i =1,\ldots, M~\text{or}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}> 0, i = 1,\ldots, M-1 \\
+    \alpha_{i \omega} = \alpha_{i-1, \omega}+1 \quad & \text{if}~ y_{i \omega}^{+} > 0, i =1,\ldots, M \\
+    0 \leq \alpha_{i \omega} \leq \alpha_{i-1, \omega}+1 \quad & \text{if}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, i = M~\text{or}~ y_{i \omega}^{-} = y_{i \omega}^{+} = 0, y_{i+1, \omega}^{+}= 0, i = 1,\ldots, M-1
+  \end{aligned}
+\end{equation}
+\end{prop}
+
+
+We can obtain $\alpha_{i \omega}$ through a forward calculation, iterating from $\alpha_{1 \omega}$ to $\alpha_{M\omega}$. In practice, we choose $\alpha_{i \omega} = \alpha_{i-1, \omega}+1$ when $y_{i \omega}^{-}, y_{i \omega}^{+}$ satisfy the third condition in Proposition \ref{optimal_sol_sub_dual}.
+
+
+\subsubsection{Constraint Generation}\label{bender_stage}
+
+Due to the computational infeasibility of solving problem \eqref{BD_master2} with an exponentially large number of constraints, it is a common practice to use a subset, denoted as $\mathcal{O}^t$, to replace $\mathcal{O}$ in problem \eqref{BD_master2}. This results in a modified problem known as the Restricted Benders Master Problem (RBMP). To find the optimal solution to problem \eqref{BD_master2}, we employ the technique of constraint generation. It involves iteratively solving the RBMP and incrementally adding more constraints until the optimal solution to problem \eqref{BD_master2} is obtained.
+We can conclude that the RBMP will have the form:
+
+\begin{equation}\label{BD_master3}
+  \begin{aligned}
+    \max \quad & \mathbf{c}^{\intercal} \mathbf{x} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega} \\
+    \text {s.t.} \quad & \mathbf{x}^{\intercal} \mathbf{n}  \leq \mathbf{L} \\
+    & \bm{\alpha}_{\omega}^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}, \bm{\alpha}_{\omega} \in \mathcal{O}^{t}, \forall \omega \\
+     & \mathbf{x} \in \mathbb{N}^{M \times N}
+  \end{aligned}
+\end{equation}
+
+Given the initial $\mathcal{O}^{t}$, we can obtain the solution $\mathbf{x}^{*}$ and $\mathbf{z}^{*} =(z^{*}_1,\ldots, z^{*}_{|\Omega|})$. Then $c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{*}$ is an upper bound of problem \eqref{BD_master3}. When $\mathbf{x}^{*}$ is given, the optimal solution, $\bm{\tilde{\alpha}}_{\omega}$, to problem \eqref{BD_sub_dual} can be obtained according to Proposition \ref{optimal_sol_sub_dual}. Let $\tilde{z}_{\omega} = \bm{\tilde{\alpha}}_{\omega}(d_{\omega} - \mathbf{x}^{*} \mathbf{1})$, then $(\mathbf{x}^{*}, \mathbf{\tilde{z}})$ is a feasible solution to problem \eqref{BD_master3} because it satisfies all the constraints. Thus, $\mathbf{c}^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} \tilde{z}_{\omega}$ is a lower bound of problem \eqref{BD_master2}. ({\color{red} lower bound of problem 15?})
+
+If, for every scenario $\omega$, the optimal value of the corresponding problem \eqref{BD_sub_dual} is larger than or equal to $z_{\omega}^{*}$, which means that all contraints are satisfied, then we have an optimal solution $(\mathbf{x}^{*}, \mathbf{z}^{*})$ to problem \eqref{BD_master2}. However, if there exists at least one scenario $\omega$ for which the optimal value of problem \eqref{BD_sub_dual} is less than $z_{\omega}^{*}$, indicating that the constraints are not fully satisfied, we need to add a new constraint $(\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega} - \mathbf{x} \mathbf{1}) \geq z_{\omega}$ to the RBMP problem. ({\color{red}{give index to RBMP problem}})
+
+
+Proposition \ref{one_ep_feasible} below helps to determine the initial $\mathcal{O}^{t}$.
+
+\begin{prop}\label{one_ep_feasible}
+RBMP is bounded when there is at least one constraint for each scenario.
+\end{prop}
+
+{\color{red}{can we move Proposition 6 right after problem (15)?}}
+
+According to Proposition \ref{one_ep_feasible}, we can set $\bm{\alpha}_{\omega} = \mathbf{0}$ initially. Notice that only constraints are added in each iteration, thus the upper bound of (?) $UB$ ({\color{red} should define UB and LB}) is decreasing monotonically over the iterations. Then we can use $UB - LB < \epsilon$ to terminate the algorithm.
+
+\begin{algorithm}[h]
+  \caption{Benders Decomposition}\label{cut_algo}
+  % \KwIn{Initial problem \eqref{BD_master3} with $\bm{\alpha}_{\omega} = 0, \forall \omega$, $LB = 0$, $UB = \infty$, $\epsilon$.}
+  % \KwOut{$\mathbf{x}^{*}$}
+  Initialize $\bm{\alpha}_{\omega} = \mathbf{0}, \forall \omega$, and let $LB \gets 0$, $UB \gets \infty$\;
+  \While{$UB - LB > \epsilon$}
+    {Solve problem \eqref{BD_master3} and obtain an optimal solution $(\mathbf{x}^{*}, \mathbf{z}^{*})$\;
+    $UB \gets c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} z_{\omega}^{*}$\;
+    \For{$\omega= 1, \ldots, |\Omega|$}
+    {Obtain $\bm{\tilde{\alpha}}_{\omega}$ according to Proposition \ref{optimal_sol_sub_dual}\; $\tilde{z}_{\omega}= (\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x}^{*} \mathbf{1})$\;
+    \If{$\tilde{z}_{\omega} < z_{\omega}^{*}$}
+    {Add one new constraint, $(\bm{\tilde{\alpha}}_{\omega})^{\intercal}(\mathbf{d}_{\omega}- \mathbf{x} \mathbf{1}) \geq z_{\omega}$, to problem \eqref{BD_master3}\;}
+    }
+    {$LB \gets c^{\intercal} \mathbf{x}^{*} + \sum_{\omega \in \Omega} p_{\omega} \tilde{z}_{\omega} $\;}
+    }
+\end{algorithm}
+
+However, directly solving problem \eqref{BD_master3} can be computationally challenging in some cases. Therefore, in practice, we first obtain the optimal solution to the LP relaxation of problem \eqref{BD_master}. From this solution, we then generate a seat plan .
+
+\subsection{Obtaining Seat Plan with Full or Largest Patterns}\label{seat_assignment}
+
+We may obtain a fractional optimal solution when we solve the LP relaxation of problem \eqref{BD_master}. This solution represents the optimal allocations of groups to seats but may involve fractional values, indicating partial assignments. Based on the fractional solution obtained, we use the deterministic model to generate a feasible seat plan. The objective of this model is to allocate groups to seats in a way that satisfies the supply requirements for each group without exceeding the corresponding supply values obtained from the fractional solution. To accommodate more groups and optimize seat utilization, we aim to construct a seat plan composed of full or largest patterns based on the feasible seat plan obtained in the previous step. 
+
+
+Let the optimal solution to the LP relaxation of problem \eqref{BD_master3} be $\mathbf{x}^{*}$. Aggregate $\mathbf{x}^{*}$ to the number of each group type, defined as $\tilde{X}_{i} =\sum_{j} x^{*}_{ij}, \forall i \in \mathbf{M}$. Next, solve the SPDRP with $\bm{d} = \bm{\tilde{X}}$ to obtain the optimal solution $\mathbf{\tilde{x}}$, and the corresponding pattern $\bm{H}$. Then generate the seat plan by problem \eqref{improve_seat} using $\bm{H}$.
+
+
+\begin{algorithm}
+  \caption{Seat Plan Construction}\label{seat_construction}
+  % \KwIn{Scenarios set $\Omega$, Seat layout $\bm{L}$}
+  % \KwOut{$\bm{H}^{\prime}$}
+    {Solve the LP relaxation of SBSP, and obtain an optimal solution $\mathbf{x}^{*}$\;}
+    {Solve SPDRP with $d_{i} = \sum_{j} x^{*}_{ij}, i \in \mathbf{M}$, and obtain an optimal solution $\tilde{\mathbf{x}}$ and the corresponding pattern, $\tilde{\bm{H}}$\;}
+    {Solve problem \eqref{improve_seat} with $\bm{H} = \tilde{\bm{H}}$, and obtain the seat plan $\bm{H}^{\prime}$\;}
+\end{algorithm}
+
+{\color{red}{do we need algorithm 2? The description above seems clear enough.}}

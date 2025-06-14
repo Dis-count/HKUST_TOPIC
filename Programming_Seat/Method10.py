@@ -40,6 +40,31 @@ class deterministicModel:
         newd = np.rint(newd)
         return newd, newx
 
+    def LP(self, demand_upper):
+        #  Seat planning with upper and lower bound
+        m = grb.Model()
+        x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.CONTINUOUS)
+        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+                                  for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
+
+        m.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) <= demand_upper[i] for i in range(self.I))
+
+
+        m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
+        m.setParam('OutputFlag', 0)
+        # m.setParam('TimeLimit', 40)
+        m.optimize()
+        if m.status != 2:
+            m.write('test.lp')
+        # print('Optimal value of IP is: %g' % m.objVal)
+        x_ij = np.array(m.getAttr('X'))
+        newx = np.reshape(x_ij, (self.I, self.given_lines))
+        # newx = np.rint(newx)
+        newd = np.sum(newx, axis=1)
+        # newd = np.rint(newd)
+        return newd, newx
+
+
     def IP_advanced(self, demand_lower):
         #  seat planning given the lower demand
         m = grb.Model()
@@ -116,3 +141,21 @@ class deterministicModel:
         else:
             return False
 
+
+if __name__ == "__main__":
+    given_lines = 6
+    roll_width = np.ones(given_lines) * 21
+    I = 4  # the number of group types
+    s = 1
+    demand_width_array = np.arange(2, 2+I)
+
+    demand = np.array([18, 19, 20, 15])
+
+    test = deterministicModel(roll_width, given_lines,demand_width_array, I, s)
+
+    d0, newx = test.IP_formulation(np.zeros(I), demand)
+
+    d1, x = test.LP(demand)
+
+    print(f'IP solution: {newx} supply: {d0}')
+    print(f'LP solution: {x} supply: {d1}')

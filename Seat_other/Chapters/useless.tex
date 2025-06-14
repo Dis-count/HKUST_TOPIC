@@ -1,0 +1,83 @@
+\begin{table}[h]
+    \centering
+    \caption{Performances of Different Policies}
+    \begin{tabular}{ccccccc}
+    \hline
+    Distribution & T & DSA (\%) & DP (\%) & Bid (\%) & Booking (\%) & FCFS (\%) \\
+    % \Xcline{1-1}{0.4pt}\Xcline{3-3}{0.4pt}\Xcline{4-4}{0.4pt}
+    \cmidrule(r){0-1} \cmidrule(lr){3-3} \cmidrule(lr){4-4} \cmidrule(lr){5-5} \cmidrule(lr){6-6} \cmidrule(l){7-7}
+    \multirow{5}{*}{D1} & 60 & 100.00 & 100.00 & 100.00 & 88.56 & 100.00 \\
+    & 70    & 99.53 & 99.01 & 98.98 & 92.69 & 98.82 \\
+    & 80    & 99.38 & 98.91 & 98.84 & 97.06 & 96.06 \\
+    & 90    & 99.52 & 99.23 & 99.10 & 98.24 & 95.37 \\
+    & 100   & 99.58 & 99.27 & 98.95 & 98.46 & 94.98 \\
+    \hline
+    \multirow{5}{*}{D2} & 60  & 99.45 & 97.23 & 96.58 & 99.09 & 96.49 \\
+       & 70   & 99.82 & 98.28 & 97.46 & 99.81 & 95.76 \\
+       & 80   & 99.92 & 98.60 & 98.86 & 100.00 & 95.66 \\
+       & 90   & 99.99 & 99.10 & 99.70 & 100.00 & 95.66 \\
+       & 100  & 100.00 & 98.74 & 99.99 & 100.00 & 95.66 \\
+    \hline
+    \multirow{5}{*}{D3} & 60  & 100.00 & 100.00 & 100.00 & 93.68 & 100.00 \\
+       & 70  & 100.00 & 100.00 & 100.00 & 92.88 & 100.00 \\
+       & 80  & 99.54 & 97.89 & 97.21 & 98.98 & 96.19 \\
+       & 90  & 99.90 & 99.73 & 99.44 & 99.61 & 94.53 \\
+       & 100 & 100.00 & 100.00 & 100.00 & 99.89 & 94.32 \\
+    \hline
+      \multirow{5}{*}{D4} & 60  & 99.25 & 99.18 & 99.13 & 93.45 & 98.95 \\
+       & 70  & 99.20 & 98.65 & 98.54 & 97.79 & 96.41 \\
+       & 80  & 99.25 & 98.69 & 98.40 & 98.22 & 95.33 \\
+       & 90  & 99.29 & 98.65 & 98.02 & 98.42 & 94.28 \\
+       & 100 & 99.60 & 99.14 & 98.32 & 98.68 & 93.64 \\
+    \hline
+    \end{tabular}
+  \end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Gap points and target occupancy rates of the group sizes}
+\begin{tabular}{|c|c|c|c|}
+\hline
+   Group Size & Probability distribution & Gap point & Target occupancy rate \\
+\hline
+   3 & [0.2, 0.2, 0.6] & 60.0  & 71.83 \%  \\
+   4 & [0.25, 0.3, 0.25, 0.2] & 60.0 & 71.79 \%   \\ 
+   5 & [0.3, 0.3, 0.2, 0.1, 0.1] & 58.0 & 70.00 \% \\
+   \hline
+\end{tabular}
+\end{table}
+
+% \subsection{probelm_description}
+% For $i = 1,\ldots, \tilde{i}-1$, the optimal solutions have $x_{ij}^{*} = 0$ for all rows, indicating that no group type $i$ lower than index $\tilde{i}$ are assigned to any rows. For $i = \tilde{i}+1,\ldots, M$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = d_{i}$ group type $i$ to meet the demand for group type $i$. For $i = \tilde{i}$, the optimal solution assigns $\sum_{j} x_{ij}^{*} = \frac{\sum_{j=1}^{N}L_{j} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$ group type $\tilde{i}$ to the rows. This quantity is determined by the available supply, which is calculated as the remaining seats after accommodating the demands for group types $\tilde{i}+1$ to $M$, divided by the size of group type $\tilde{i}$, denoted as $n_{\tilde{i}}$.
+% Hence, the corresponding supply associated with the optimal solutions can be summarized as follows: $X_{\tilde{i}} = \frac{\sum_{j=1}^{N}L_{j} - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}$, $X_{i} = d_{i}$ for $i = \tilde{i} +1,\ldots, M$, and $X_{i} = 0$ for $i = 1, \ldots, \tilde{i}-1$.
+
+% This definition will not affect the set of all possible seat plannings.
+% For any feasible pattern $h$, the number of physical seats that can be taken is 
+% $\sum_{i} h_i i + (\sum_{i} h_{i} -1) \delta \leq L_{j}^{0}$
+% $\sum_{i} h_{i}(i + \delta) \leq L_{j}^{0} +\delta$
+% $\sum_{i} h_{i} n_{i} \leq L_{j}$.
+
+% \subsection{policies discription}
+% By conducting experiments across this range of periods, we can observe how the different policies perform under both moderate and high-demand situations.
+
+% For the DP Base-heuristic, we consider a simplified dynamic programming by relaxing all rows to a single row with the same total capacity, $\sum_{j=1}^{N} L_j$. With this simplification, we can make decisions for each group arrival based on the relaxed dynamic programming. 
+
+% Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Specifically, we estimate the bid price of a seat by the shadow price of the capacity constraint in the LP relaxation of problem \eqref{deter_upper}. Then we assign the seats by comparing the revenues of accepting or denying the groups. 
+
+% Booking limit control policy involves setting a maximum number of reservations for each group type. In this policy, we solve problem \eqref{deter_upper} with the expected demand during the time period. Then for every type of requests, we only allocate a fixed amount according to the static solution and reject all other exceeding requests.
+
+% \subsection*{Analysis of DSA}
+% We explore the arrival path of one instance under DSA and the optimal solution. The figures show two arrival paths when $T= 55$ and $T= 70$ at the even probability distribution. In the figures, we plot four lines over periods, number of remaining seats, the expected future demand, optimal remaining seats and optimal remaining demand. The horizontal parts of remaining seats represent the rejection at the period. We can observe that when the demand is larger than supply (T =70), even at the beginning we still reject the group. When the demand is lower than supply (T =55), we will accept all groups.
+
+% We also examine the situations where the actual demand is higher or lower than the expected demand.
+
+% Based on the figures provided, we can draw several key conclusions:
+
+% 1. When the demand is larger than supply, even at the very beginning of the time period, both DSA approach and the optimal solution reject some groups, as indicated by the horizontal segments in the lines.
+
+% 2. DSA approach is inclined to accept groups earlier compared to the optimal solution. This is because DSA makes decisions based on the expected future demand, rather than the actual remaining demand.
+
+% 3. When the actual remaining demand is lower than the expected demand, the optimal remaining seats will be lower than that of DSA approach. Conversely, when the actual remaining demand is higher than expected, the optimal remaining seats will be higher than DSA.
+
+% For the DSA, DP Base-heuristic, bid-price policies, their performance tends to initially drop and then increase as the number of periods increases. When the number of periods is small, the demand for capacity is relatively low, and the policies can achieve relatively optimal performance. However, as the number of periods increases, the policies may struggle to always obtain a perfect allocation plan, leading to a decrease in performance. Nevertheless, when the number of periods continue to become larger, these policies tend to accept larger groups, and as a result, narrow the gap with the optimal value, leading to an increase in performance. As the number of periods increases, the performance for the booking limit policy is getting better because the numebr of seats planned for the largest groups that are not occupied will drop.

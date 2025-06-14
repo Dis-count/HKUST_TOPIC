@@ -353,7 +353,8 @@ Now we consider the waiting cost, idle cost and overtime cost.
         \min_{\D} \quad & \left[c_{w} E_{w} + c_{i} E_{i} + c_{o} E_{o} \right] \\
         \mbox{s.t.} \quad & W_{i} = (W_{i-1} + Z_{i-1} - \Delta_{i-1})^{+} \\
         & W_{i, i+1} = (W_{i-1} + Z_{i-1} - \Delta_{i-1}- \Delta_{i})^{+} \\
-        & E(W_{i,i+1}) \leq w, i = 2, \ldots, n-1
+        & E(W_{i,i+1}) \leq w, i = 2, \ldots, n-1  \\
+        & \sum_{i=1}^{n-1} \Delta_{i} \leq T
     \end{aligned}
 \end{equation}
 
@@ -396,14 +397,19 @@ When $c_{w} = 0$, problem \eqref{three_term_model} is equivalent to problem \eqr
     \end{tabular}
   \end{table}
 
-
-For each $i$, $\Delta_{i}^{*}$ increases when the threshold of waiting/overlapping time decreases.
-
+  
 For the optimal schedule, the expected waiting/overlapping time ($E(W_{i})$, $E(W_{i,i+1})$) is increasing in $i$.
+  
+For each $i$, $\Delta_{i}^{*}$ increases when the threshold of waiting/overlapping time decreases.
 
 % If the service time is integral, then the optimal schedule interval is also integral.
 
-For the first question, we need to find the largest overlapping time.
+% For the first question, we need to find the largest overlapping time.
+
+Minimize $T_{n}$ is equivalent to minimizing $A_{n}$.
+
+Suppose that the overlapping threshold is $w$ and the optimal last schedule appointment time is $A_{n}$. If $T < A_{n}$, then problem \eqref{three_term_model} is infeasible when the overlapping threshold is $w$.
+
 
 % \section{Overlapping Model}
 % For the above model, only the seperate overlapping period is considered. From the perspective of customer $i+1$, the total overlapping time can be calculated by $E[W_{i,i+1}(\Z_{i-1}, \D_{i})] + E[W_{i+1,i+2}(\Z_{i-1}, \D_{i})]$.

@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex sum1"] 1749877669 "sum1.aux" "sum1.bbl" "sum1" 1749877672
+["bibtex sum1"] 1751544945 "sum1.aux" "sum1.bbl" "sum1" 1751606060
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1630494346 30002 8c0c5833f37bea3ec214cf315a72975d ""
   "refe.bib" 1743924734 22533 1d0cf2aaee92625efbc32698208cb768 ""
-  "sum1.aux" 1749877671 1833 9d1a6491416b267d5fce2c9c8a13de83 "pdflatex"
+  "sum1.aux" 1751606060 1981 fd3df40dbb1d790252d154f9ab004203 "pdflatex"
   (generated)
   "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1749877669 "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" "sum1.pdf" "sum1" 1749877672
-  "Chapters/Dynamic.tex" 1749877665 5845 4f56b81efc1b83bf03a5136c7d99a27f ""
+["pdflatex"] 1751606058 "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" "sum1.pdf" "sum1" 1751606060
+  "Chapters/Dynamic.tex" 1751606057 18063 49dabaae0274dd349257c5618868d125 ""
   "Chapters/Problem_description.tex" 1749877300 2654 66e5f3515c6631b7c924f2ec0aef04a5 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1630494514 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1630493467 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -53,6 +53,7 @@
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1630493467 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb" 1630493467 37912 07513ec114ac737ab54cea0152f4424b ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1630493467 36281 c355509802a035cadc5f15869451dcee ""
+  "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb" 1630493467 36912 b448ef9ad9d7228ec3c6e71005136d55 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1630493467 35752 024fb6c41858982481f6968b5fc26508 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1630493467 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1630493467 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
@@ -62,6 +63,8 @@
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1630493467 32716 08e384dc442464e7285e891af9f45947 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1630493467 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb" 1630493467 30457 bc0868ebece724ed7c3d37e3d9bff7bd ""
+  "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb" 1630493467 39386 0d30f65251ad09eae5335149fa8e6f76 ""
+  "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1630493467 31764 459c573c03a4949a528c2cc7f557e217 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb" 1630493467 33366 60462f3d16c3d0f024f1f856e64b09cd ""
   "e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1630493467 34694 870c211f62cb72718a00e353f14f254d ""
   "e:/Software/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1630495757 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -155,13 +158,13 @@
   "e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1630497016 5227370 214224b42125130ccee72e74a5bb57f5 ""
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
-  "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" 1749877330 2315 40bd66f8d69ed4a70517bba0f19f8ca5 ""
-  "sum1.aux" 1749877671 1833 9d1a6491416b267d5fce2c9c8a13de83 "pdflatex"
-  "sum1.bbl" 1749877669 568 42560143a314657d2116f76ef857ae07 "bibtex sum1"
-  "sum1.out" 1749877671 813 3b13024a15b2e9be974078aa9dc6550c "pdflatex"
-  "sum1.tex" 1749877330 2315 40bd66f8d69ed4a70517bba0f19f8ca5 ""
+  "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" 1750039985 2348 3d182c7101b230fb313e7032099edd7d ""
+  "sum1.aux" 1751606060 1981 fd3df40dbb1d790252d154f9ab004203 "pdflatex"
+  "sum1.bbl" 1751544945 568 42560143a314657d2116f76ef857ae07 "bibtex sum1"
+  "sum1.out" 1751606060 813 3b13024a15b2e9be974078aa9dc6550c "pdflatex"
+  "sum1.tex" 1750039985 2348 3d182c7101b230fb313e7032099edd7d ""
   (generated)
-  "sum1.pdf"
   "sum1.aux"
   "sum1.out"
+  "sum1.pdf"
   "sum1.log"

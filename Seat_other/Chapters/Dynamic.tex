@@ -250,13 +250,21 @@ Dual problem:
     \end{array}
 \end{equation}
 
+we have $\beta_{ij} \leq n_{i} \beta_{j}$
+
+Use $i - \beta_{ij}$ to make the decision.
+
 $\alpha_{i}$ represents marginal revenue for group i. Revenue gained from group $i$.
 
 $\beta_{ij}$ represents row $j$ for group $i$ assign cost.
 
 $\gamma_{j}$ represents capacity cost for row $j$.
 
-Let $S(\bm{L})$ denote the set of d
+Let $S(\bm{L})$ denote the set of dominating patterns for the seat layout.
+
+Dominating pattern $\bm{h}$: $h_{i} \geq h_{i}{'}$ for any pattern $\bm{h{'}}$.
+
+It is obvious that the dominating patterns include the full and largest patterns.
 
 \begin{equation}
     \begin{array}{lr}
@@ -265,3 +273,6 @@ Let $S(\bm{L})$ denote the set of d
     v^{T+1}(S(\bm{L}))=0, & \forall A \geqslant 0.
     \end{array}
 \end{equation}
+
+Multi-Subproblem:
+

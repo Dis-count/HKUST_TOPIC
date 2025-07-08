@@ -234,9 +234,13 @@ For N rows,
     \end{array}
 \end{equation}
 
-Suppose that $S(L_{j})$ is the set of all full patterns for row $j$. $\sum_{i=1}^{M} n_{i} s_{i} = L_{j}$.
+Dominating pattern $\bm{h}$: there does not exist another pattern $\bm{h{'}}$ such that $h_{i} \leq h_{i}{'}, \forall i$.
 
-Let $y_{i \bm{h}}$ denote whether to use pattern $\bm{h}$.
+It is obvious that the dominating patterns include the full and largest patterns.
+
+Suppose that $S(L_{j})$ is the set of all dominating patterns for row $j$.
+
+Let $y_{j \bm{h}}$ denote whether to use pattern $\bm{h}$.
 
 Dual problem:
 
@@ -250,7 +254,7 @@ Dual problem:
     \end{array}
 \end{equation}
 
-we have $\beta_{ij} \leq n_{i} \beta_{j}$
+% we have the relation: $\beta_{ij} \leq n_{i} \beta_{j}$.
 
 Use $i - \beta_{ij}$ to make the decision.
 
@@ -262,17 +266,21 @@ $\gamma_{j}$ represents capacity cost for row $j$.
 
 Let $S(\bm{L})$ denote the set of dominating patterns for the seat layout.
 
-Dominating pattern $\bm{h}$: $h_{i} \geq h_{i}{'}$ for any pattern $\bm{h{'}}$.
-
-It is obvious that the dominating patterns include the full and largest patterns.
 
 \begin{equation}
     \begin{array}{lr}
-    v^t(S(\bm{L}))=\mathbb{E}_{i \sim p^t}\left[\max_{\substack{\bm{h} \in S(L_{j}) \\
-    e_{i}^{T} \leqslant \bm{h}}}\left\{v^{t+1}(S(\bm{L}- e_{j}^{T} \cdot n_{i}))+ {i}, v^{t+1}(S(\bm{L}))\right\}\right], & \forall t \in[T], A \geqslant 0, \\
+    v^t(\bm{L})=\mathbb{E}_{i \sim p^t}\Bigg[\max\Big\{\max_{j :\bm{h} \in S(L_{j}), 
+    h_{i} \geqslant 1}\left\{v^{t+1}(\bm{L}- e_{j}^{T} \cdot n_{i})+ {i}\right\}, v^{t+1}(\bm{L})\Big\}\Bigg], & \forall t \in[T], A \geqslant 0, \\
     v^{T+1}(S(\bm{L}))=0, & \forall A \geqslant 0.
     \end{array}
 \end{equation}
 
 Multi-Subproblem:
 
+\begin{align*}
+    \max \quad & \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \lambda_{j} \\
+    \text {s.t.} \quad & \sum_{i= 1}^{M} n_{i} h_{i} \leq L_j, \\
+    & h_{i} \in \mathbb{N}, \quad i \in \mathcal{M}.
+\end{align*} 
+
+If the value is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.

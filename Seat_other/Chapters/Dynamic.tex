@@ -15,25 +15,54 @@ V^{t}(\mathbf{L}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{L})}\left\{\sum_{i=1}^{M
 with the boundary conditions $V^{T+1}(\mathbf{L}) = 0, \forall \mathbf{L}$, which implies that the revenue at the last period is 0 under any capacity. The initial capacity is denoted as $\mathbf{L}_{0} = (L_1, L_2, \ldots, L_N)$. Our objective is to determine group assignments that maximize the total expected revenue during the horizon from period 1 to $T$, represented by $V^{1}(\mathbf{L}_{0})$.
 
 
-Solving the dynamic programming problem in equation \eqref{DP} presents computational challenges due to the curse of dimensionality that arises from the large state space. To address this, we develop a relaxed dynamic programming formulation and propose the Seat-Plan-Based Assignment (SPBA) policy. This policy combines the relaxed DP for preliminary acceptance decisions with the seat plan that serves as the basis for the final assignment decision.
+Solving the dynamic programming problem in equation \eqref{DP} presents computational challenges due to the curse of dimensionality that arises from the large state space.
 
-% We propose our policy for assigning arriving requests in a dynamic context. First, we employ relaxed dynamic programming to determine whether to prepare a request for assignment or to reject it. Then, we develop the seat assignment approach based on the seat plan generated from Section \ref{sec_seat_planning}.
-
-
-\subsection{Relaxed Dynamic Programming}
-To simplify the complexity of the dynamic programming formulation in \eqref{DP}, we employ a relaxed dynamic programming (RDP) approach by aggregating all rows into a single row with the total capacity $\tilde{L} = \sum_{j=1}^{N} L_j$. This relaxation yields preliminary seat assignment decisions for each group arrival, where the rejection by the RDP is final (no further evaluation is needed), the acceptance by the RDP is tentative and must be validated according to the current seat plan in the subsequent group-type control.
-
-Let $u_{i}^{t} \in $ denote the RDP's decision variable for accepting ($u_{i}^{t} = 1$) or rejecting ($u_{i}^{t} = 0$) a type $i$ request in period $t$. The value function of the relaxed DP with the total capacity $l$ in period $t$, denoted by $V^{t}(l)$, is the following:
-
-\begin{equation}\label{DP_relaxed}
-V^{t}(l) =  \max_{u_{i}^{t} \in \{0,1\}} \left\{ \sum_{i=1}^{M} p_i \left[V^{t+1}(l-n_i u_{i}^{t})+ i u_{i}^{t}\right] + p_0 V^{t+1}(l)\right\}
-\end{equation}
-with the boundary conditions $V^{T+1}(l) =0, \forall l \geq 0$ and $V^{t}(0) =0, \forall t$.
+We propose our policy for assigning arriving requests in a dynamic context. First, we employ the traditional bid-price control policy. Then, we improve the bid-price control policy based on the seat plan (patterns).
 
 
-To make the initial decision, we compute the value function $V^{t}(l)$ and compare the values of accepting versus rejecting the request. Preliminarily accepted requests are then verified and assigned in the subsequent group-type control stage.
+% \subsection{Relaxed Dynamic Programming}
+% To simplify the complexity of the dynamic programming formulation in \eqref{DP}, we employ a relaxed dynamic programming (RDP) approach by aggregating all rows into a single row with the total capacity $\tilde{L} = \sum_{j=1}^{N} L_j$. This relaxation yields preliminary seat assignment decisions for each group arrival, where the rejection by the RDP is final (no further evaluation is needed), the acceptance by the RDP is tentative and must be validated according to the current seat plan in the subsequent group-type control.
 
-\newpage
+% Let $u_{i}^{t} \in $ denote the RDP's decision variable for accepting ($u_{i}^{t} = 1$) or rejecting ($u_{i}^{t} = 0$) a type $i$ request in period $t$. The value function of the relaxed DP with the total capacity $l$ in period $t$, denoted by $V^{t}(l)$, is the following:
+
+% \begin{equation}\label{DP_relaxed}
+% V^{t}(l) =  \max_{u_{i}^{t} \in \{0,1\}} \left\{ \sum_{i=1}^{M} p_i \left[V^{t+1}(l-n_i u_{i}^{t})+ i u_{i}^{t}\right] + p_0 V^{t+1}(l)\right\}
+% \end{equation}
+% with the boundary conditions $V^{T+1}(l) =0, \forall l \geq 0$ and $V^{t}(0) =0, \forall t$.
+
+
+% To make the initial decision, we compute the value function $V^{t}(l)$ and compare the values of accepting versus rejecting the request. Preliminarily accepted requests are then verified and assigned in the subsequent group-type control stage.
+
+\subsection{Traditional BPC Policy}
+Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different group types, which determine the eligibility of groups to take the seats. Bid-prices refer to the opportunity costs of taking one seat. As usual, we estimate the bid price of a seat by the shadow price of the capacity constraint corresponding to some row. In this section, we will demonstrate the implementation of the bid-price control policy. 
+
+The dual of LP relaxation of the SPDR problem is:
+
+\begin{equation}\label{bid-price_dual}
+    \begin{aligned}
+    \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} L_j \beta_{j} \\
+    \text {s.t.} \quad & z_{i} + \beta_j n_i \geq (n_i-\delta), \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+    & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
+    \end{aligned}
+  \end{equation}
+
+In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. A request is only accepted if the revenue it generates is no less than the sum of the bid prices of the seats it uses. Thus, if $i -\beta_{j} n_i \geq 0$, we will accept the group type $i$. And choose $j^{*} = \arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
+  
+\begin{lem}\label{bid-price}
+The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
+\end{lem}
+
+\begin{algorithm}[H]
+    \caption{Bid-Price Control}\label{algo_bid}
+    \For{$t =1, \ldots, T$}{
+      {Observe a request of group type $i$\;}
+      {Solve problem \eqref{bid-price_dual} with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ and $\mathbf{L}^{t}$\;
+      Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i}^{t} e_{i}$\;}
+      \eIf{$i \geq \tilde{i}$ and $\max_{j \in \mathcal{N}}{L_j^{t}} \geq n_i$}
+      {Set $k = \arg \min_{j \in \mathcal{N}}\{L_j^{t}|L_j^{t} \geq n_i\} $ and break ties\;
+      Assign the group to row $k$, let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$ \;}
+      {Reject the group\;}}
+\end{algorithm}
 
 % Let $val_{\theta}(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter}.
 
@@ -48,13 +77,107 @@ To make the initial decision, we compute the value function $V^{t}(l)$ and compa
 % $V_{\theta}^{OPT}(I) = E_{\{d_{i}\}} [val_{\theta}(I; \{d_{i}\})] \leq val_{\theta} (I; \{E[d_{i}]\}) = val_{\theta}(I; \{\theta T p_{i}\})$
 
 
+\subsection{Improved BPC Policy}
+Dominating pattern $\bm{h}$: there does not exist another pattern $\bm{h{'}}$ such that $h_{i} \leq h_{i}{'}, \forall i$.
+
+It is obvious that the dominating patterns include the full and largest patterns.
+
+Suppose that $S(L_{j})$ is the set of all dominating patterns for row $j$.
+
+The dynamic programming can be expressed as follow:
+\begin{equation}
+    \begin{array}{lr}
+    v^t(\bm{L})=\mathbb{E}_{i \sim p^t}\Bigg[\max\Big\{\max_{j :\bm{h} \in S(L_{j}), 
+    h_{i} \geqslant 1}\left\{v^{t+1}(\bm{L}- e_{j}^{T} \cdot n_{i})+ {i}\right\}, v^{t+1}(\bm{L})\Big\}\Bigg], & \forall t \in[T], A \geqslant 0, \\
+    v^{T+1}(S(\bm{L}))=0, & \forall A \geqslant 0.
+    \end{array}
+\end{equation}
+
+The corresponding bid-price problem:
+
+\begin{equation}\label{improve_bid}
+    \begin{aligned}
+    \min \quad & \sum_{i=1}^M \alpha_i d_i+ \sum_{j=1}^N \gamma_j \\
+    \mathrm{s.t.} \quad & \alpha_i+\beta_{i j} \geq n_i-\delta, \quad \forall i, j, \\
+    & \sum_{i=1}^M \beta_{i j} h_i \leq \gamma_j, \quad \forall j, \bm{h} \in S(L_j), \\
+    & \alpha_i \geq 0, \quad \forall i, \\
+    & \gamma_j \geq 0, \quad \forall j .
+    \end{aligned}
+\end{equation}
+
+$\alpha_{i}$ represents marginal revenue for group $i$. Revenue gained from group $i$.
+
+$\beta_{ij}$ represents row $j$ for group $i$ assign cost.
+
+$\gamma_{j}$ represents capacity cost for row $j$.
+
+
+\begin{lem}
+For any bid-prices in \eqref{bid-price_dual}, there exists a group of bid-prices in \eqref{improve_bid} such that we have the relation:
+$\beta_{ij} \leq n_{i} \beta_{j}, \forall i$.
+\end{lem}
+
+
+The improved BPC policy approximate the optimal value better than the traditonal BPC policy.
+
+$val(\text{T-BPC}) \geq val(\text{I-BPC}) \geq val(\text{HO}) \geq val(\text{OPT})$.
+
+\begin{algorithm}[H]
+    \caption{Improved Bid-Price Control}\label{algo_improve_bid}
+    \For{$t =1, \ldots, T$}{
+      {Observe a request of group type $i$\;}
+      {Solve problem \eqref{bid-price_dual} with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ and $\mathbf{L}^{t}$\;}
+      \eIf{$i - \beta_{ij} \geq 0$}
+      {Set $k = \arg \max_{j \in \mathcal{N}}\{i - \beta_{ij}\} $ and break ties\;
+      Assign the group to row $k$, let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$\;}
+      {Reject the group type\;}}
+\end{algorithm}
+
+Let $y_{j \bm{h}}$ denote whether to use pattern $\bm{h}$.
+
+\begin{equation}\label{improve_primal}
+    \begin{aligned}
+    \max \quad & \sum_{i=1}^M \sum_{j=1}^N\left(n_i-\delta\right) x_{i j} \\
+    \text {s.t.} \quad & \sum_{j=1}^N x_{i j} + x_{i0} = d_i, \quad i \in \mathcal{M}, \\
+    & x_{i j}=\sum_{\bm{h} \in S(L_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
+    & \sum_{\bm{h} \in S(L_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N}, \\
+    & y_{j \bm{h}} \in \{0,1\}, \quad j \in \mathcal{N}, \bm{h} \in S(L_{j}).
+    \end{aligned}
+\end{equation}
+
+
+\begin{algorithm}[H]
+    \caption{Dynamic Primal}\label{algo_improve_primal}
+    \For{$t =1, \ldots, T$}{
+      {Observe a request of group type $i$\;}
+      {Solve problem \eqref{improve_primal} with $\bm{d}^{t} = (T-t) \cdot \bm{p}$ \;
+      Obtain an optimal solution $x_{ij}$ \;}
+      {Set $k = \arg \max_{j}\{x_{ij}\}$ and break ties\;
+      Assign the group to row $k$ ($k = 0$ means that the request is rejected), let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$\;}}
+\end{algorithm}
+
+
+\subsection{Solve the dynamic primal}
+To add new dominating pattern in, we need to solve multiple subproblems.
+
+Subproblem for row $j$:
+
+\begin{align*}
+    \max \quad & \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \lambda_{j} \\
+    \text {s.t.} \quad & \sum_{i= 1}^{M} n_{i} h_{i} \leq L_j, \\
+    & h_{i} \in \mathbb{N}, \quad i \in \mathcal{M}.
+\end{align*} 
+
+If the value is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.
+
+\subsection{Static BLC Policy}
+Booking limit control policy:
+
 \begin{align}
     \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i - \delta) x_{ij} \label{theta_deter} \\
     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \notag \\ 
     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \notag 
 \end{align}
-
-Booking limit control policy:
 
 Let $d_{i}^{*} = \sum_{j} x_{ij}^{*}$, $x_{ij}^{*}$ is an integral optimal solution to \eqref{theta_deter} with $d_{i} = \sum_{t} p_{i}^{t}$ (Expected demand).
 
@@ -103,7 +226,7 @@ Surrogate relaxation (0-1 single):
 \begin{align}\label{one_row}
     \quad \max \quad & \sum_{i = 1}^{M} (n_i - \delta) x_{i} \\
     \text {s.t.} \quad & x_{i} \leq d_{i}, \quad i \in \mathcal{M},  \\ 
-    & \sum_{i=1}^{M} n_{i} x_{i} \leq L.  
+    & \sum_{i=1}^{M} n_{i} x_{i} \leq L.
 \end{align}
 
 LP optimal solution: $[0, \ldots, 0, X_{\tilde{i}}, d_{\tilde{i}+1}, \ldots, d_{M}]$, $X_{\tilde{i}} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i n_i}}{n_{\tilde{i}}}.$
@@ -128,7 +251,6 @@ $LP - IP \leq \tilde{i} (X_{\tilde{i}} - \lfloor X_{\tilde{i}} \rfloor)$
 \end{equation}
 
 Always accept the largest group unless the capacity is insufficient.
-
 
 % \begin{lem}\label{bid-price}
 %  The optimal solution to problem is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
@@ -194,9 +316,9 @@ The expected revenue loss can be upper bounded:
 \end{align*}
 
 
-Lemma:
-
+\begin{lem}
 $OPT(L^{1}, \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} (n_{i} - \delta) \gamma_{i}^{[1, t_1)} + OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$
+\end{lem}
 
 For any optimal solution $x^{*}$ of $OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$, $x^{*} + \gamma^{[1, t_1)}$ is a feasible solution of $OPT(L^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$. For any optimal solution $x^{*}$ of $OPT(L^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$, $x^{*}- \gamma^{[1, t_1)}$ is a feasible solution of $OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$ because $x^{*}- \gamma^{[1, t_1)} \geq \gamma^{[1, t_{2})}- \gamma^{[1, t_1)} = \gamma^{[t_1, t_2)}$.
 
@@ -224,63 +346,3 @@ For N rows,
 \end{align*}
 
 
-\begin{equation}
-    \begin{array}{ll}
-    \max & \sum_{i=1}^M \sum_{j=1}^N\left(n_i-\delta\right) x_{i j} \\
-    \text { s.t. } & \sum_{j=1}^N x_{i j} + x_{i0} = d_i, \quad i \in \mathcal{M}, \\
-    & x_{i j}=\sum_{\bm{h} \in S(L_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
-    & \sum_{\bm{h} \in S(L_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N}, \\
-    & y_{j \bm{h}} \in\{0,1\}, \quad j \in \mathcal{N}, \bm{h} \in S(L_{j}).
-    \end{array}
-\end{equation}
-
-Dominating pattern $\bm{h}$: there does not exist another pattern $\bm{h{'}}$ such that $h_{i} \leq h_{i}{'}, \forall i$.
-
-It is obvious that the dominating patterns include the full and largest patterns.
-
-Suppose that $S(L_{j})$ is the set of all dominating patterns for row $j$.
-
-Let $y_{j \bm{h}}$ denote whether to use pattern $\bm{h}$.
-
-Dual problem:
-
-\begin{equation}
-    \begin{array}{ll}
-    \min & \sum_{i=1}^M \alpha_i d_i+ \sum_{j=1}^N \gamma_j \\
-    \mathrm{s.t.} & \alpha_i+\beta_{i j} \geq n_i-\delta, \quad \forall i, j, \\
-    & \sum_{i=1}^M \beta_{i j} h_i \leq \gamma_j, \quad \forall j, \bm{h} \in S_j, \\
-    & \alpha_i \geq 0, \quad \forall i, \\
-    & \gamma_j \geq 0, \quad \forall j .
-    \end{array}
-\end{equation}
-
-% we have the relation: $\beta_{ij} \leq n_{i} \beta_{j}$.
-
-Use $i - \beta_{ij}$ to make the decision.
-
-$\alpha_{i}$ represents marginal revenue for group i. Revenue gained from group $i$.
-
-$\beta_{ij}$ represents row $j$ for group $i$ assign cost.
-
-$\gamma_{j}$ represents capacity cost for row $j$.
-
-Let $S(\bm{L})$ denote the set of dominating patterns for the seat layout.
-
-
-\begin{equation}
-    \begin{array}{lr}
-    v^t(\bm{L})=\mathbb{E}_{i \sim p^t}\Bigg[\max\Big\{\max_{j :\bm{h} \in S(L_{j}), 
-    h_{i} \geqslant 1}\left\{v^{t+1}(\bm{L}- e_{j}^{T} \cdot n_{i})+ {i}\right\}, v^{t+1}(\bm{L})\Big\}\Bigg], & \forall t \in[T], A \geqslant 0, \\
-    v^{T+1}(S(\bm{L}))=0, & \forall A \geqslant 0.
-    \end{array}
-\end{equation}
-
-Multi-Subproblem:
-
-\begin{align*}
-    \max \quad & \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \lambda_{j} \\
-    \text {s.t.} \quad & \sum_{i= 1}^{M} n_{i} h_{i} \leq L_j, \\
-    & h_{i} \in \mathbb{N}, \quad i \in \mathcal{M}.
-\end{align*} 
-
-If the value is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.

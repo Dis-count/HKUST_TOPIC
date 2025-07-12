@@ -117,6 +117,10 @@ For any bid-prices in \eqref{bid-price_dual}, there exists a group of bid-prices
 $\beta_{ij} \leq n_{i} \beta_{j}, \forall i$.
 \end{lem}
 
+Let $val(\text{T-BPC})$ denote the expected optimal value of \eqref{bid-price_dual} with expected demand.
+
+Let $val(\text{I-BPC})$ denote the expected optimal value of \eqref{improve_bid} with expected demand.
+
 
 The improved BPC policy approximate the optimal value better than the traditonal BPC policy.
 
@@ -169,6 +173,20 @@ Subproblem for row $j$:
 \end{align*} 
 
 If the value is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.
+
+The dominating pattern can be regarded as the feasible patterns when the corresponding length is in $[L-\delta, L]$.
+
+
+Let $DP(L, M)$ denote the number of dominating patterns. Let $DP_{t} (L, M)$ denote the number of all feasible patterns with length $L$.
+
+$DP(L, M) = DP_{t} (L, M) - DP_{t} (L-\delta-1, M)$.
+
+\begin{equation}
+DP_{\text {t}}(L, M)=\sum_{k=0}^{\lfloor L /(M+\delta)\rfloor} D P_{\text {t}}(L-k(M+\delta), M-1)
+\end{equation}
+
+
+\newpage
 
 \subsection{Static BLC Policy}
 Booking limit control policy:
@@ -344,5 +362,4 @@ For N rows,
     & x_{i0} \geq \gamma_{i}^{0}, \quad i \in \mathcal{M}, \\
     & \sum_{i=1}^{M} n_{i} x_{ij} \leq L_{j}, \quad j \in \mathcal{N}.
 \end{align*}
-
 

@@ -3,7 +3,7 @@ from gurobipy import GRB
 import numpy as np
 import copy
 
-# This function uses deterministicModel.
+# This function uses column generation
 
 class deterministicModel:
     def __init__(self, roll_width, given_lines, demand_width_array, I, s):
@@ -139,34 +139,3 @@ if __name__ == "__main__":
     demand = np.array([4, 1, 2, 0.8])
 
     test = deterministicModel(roll_width, given_lines, demand_width_array, I, s)
-
-    # dom_set = [[0,0,0,4],
-    #            [0,0,4,1],
-    #            [0,1,2,2],
-    #            [0,3,3,0],
-    #            [1,0,1,3],
-    #            [0,2,0,3],
-    #            [2,1,1,2],
-    #            [1,2,2,1]]
-    dom_set = [[[0, 0, 0, 1],
-               [0, 0, 1, 0],
-               [1, 1, 0, 0],
-               [2, 0, 0, 0]],
-               [[0, 0, 0, 1],
-               [1, 0, 1, 0],
-               [0, 2, 0, 0],
-               [3, 0, 0, 0],
-               [1, 1, 0, 0]]]
-    # print(dom_set[0][0][0])
-
-    # opt_alpha, opt_beta, opt_gamma = test.improved_bid(dom_set, demand)
-
-    opt_x = test.dynamic_primal(dom_set, demand)
-
-    # print(f'alpha: {opt_alpha}')
-    # print(f'beta: {opt_beta}')
-    # print(f'gamma: {opt_gamma}')
-
-    print(f'x: {opt_x}')
-
-    test.LP_formulation(demand, roll_width)

@@ -107,7 +107,7 @@ class deterministicModel:
 
 
     def LP_formulation(self, demand, roll_width):
-        #  Dual of the bid-price
+        #  The traditional bid-price control
         m = grb.Model()
         z = m.addVars(self.I, lb=0, vtype=GRB.CONTINUOUS)
         beta = m.addVars(self.given_lines, lb=0, vtype=GRB.CONTINUOUS)

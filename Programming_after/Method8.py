@@ -17,15 +17,17 @@ class deterministicModel:
     def dynamic_primal(self, dom_set, demand):
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.CONTINUOUS, name = 'x')
-        y1 = m.addVars(self.given_lines, len(
-            dom_set[0]), vtype=GRB.CONTINUOUS, name='y1')
-        y2 = m.addVars(self.given_lines, len(dom_set[1]),  vtype=GRB.CONTINUOUS)
+
+        # k = len(dom_set)
+        # y = [0] * k
+        # for i in range(k):
+        #     y[i] = m.addVars(self.given_lines, len(dom_set[i]), vtype= GRB.CONTINUOUS, name='y1')
 
         m.addConstr(grb.quicksum(y1[0, h] for h in range(len(dom_set[0]))) <= 1)
 
         m.addConstr(grb.quicksum(y2[1, h] for h in range(len(dom_set[1]))) <= 1)
 
-        # m.addConstr(grb.quicksum(y[j, h] for h in range(len(dom_set))) <= 1 for j in range(self.given_lines))
+        m.addConstr(grb.quicksum(y[j, h] for h in range(len(dom_set))) <= 1 for j in range(self.given_lines))
 
         m.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) <= demand[i] for i in range(self.I))
 
@@ -62,8 +64,7 @@ class deterministicModel:
 
         m.addConstr(grb.quicksum(h[i] for i in range(self.I)) <= row_j)
 
-        m.setObjective(grb.quicksum((self.value_array[i] - alpha[i]) * h[i] for i in range(
-            self.I)) - gamma, GRB.MAXIMIZE)
+        m.setObjective(grb.quicksum((self.value_array[i] - alpha[i]) * h[i] for i in range(self.I)) - gamma, GRB.MAXIMIZE)
 
         m.setParam('OutputFlag', 0)
         m.optimize()
@@ -107,7 +108,7 @@ class deterministicModel:
 
 
     def LP_formulation(self, demand, roll_width):
-        #  Dual of the bid-price
+        #  The traditional bid-price control
         m = grb.Model()
         z = m.addVars(self.I, lb=0, vtype=GRB.CONTINUOUS)
         beta = m.addVars(self.given_lines, lb=0, vtype=GRB.CONTINUOUS)
@@ -126,7 +127,22 @@ class deterministicModel:
         print(x_ij)
         return x_ij, m.objVal
 
-    # def 
+    def columnGeneration(self):
+        flag_new_cut_pattern = True
+        new_cut_pattern = None
+        cut_pattern = self.column
+        count = 0
+        while flag_new_cut_pattern:
+            count += 1
+            if count > 20:
+                break
+            if new_cut_pattern:
+                cut_pattern = np.column_stack((cut_pattern, new_cut_pattern))
+            self.column = cut_pattern
+            kk = self.restricted_lp_master_problem()
+            flag_new_cut_pattern, new_cut_pattern = self.knapsack_subproblem(kk)
+        # maximum_value, optimal_number = restricted_ip_master_problem(cut_pattern)
+        lp_result, lp_solution = self.lp_relaxation()
 
 if __name__ == "__main__":
     given_lines = 2

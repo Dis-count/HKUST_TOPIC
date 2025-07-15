@@ -80,6 +80,8 @@ The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots
 \subsection{Improved BPC Policy}
 Dominating pattern $\bm{h}$: there does not exist another pattern $\bm{h{'}}$ such that $h_{i} \leq h_{i}{'}, \forall i$.
 
+The dominating pattern can be regarded as the feasible patterns when the corresponding length is in $[L-\delta, L]$.
+
 It is obvious that the dominating patterns include the full and largest patterns.
 
 Suppose that $S(L_{j})$ is the set of all dominating patterns for row $j$.
@@ -113,9 +115,15 @@ $\gamma_{j}$ represents capacity cost for row $j$.
 
 
 \begin{lem}
-For any bid-prices in \eqref{bid-price_dual}, there exists a group of bid-prices in \eqref{improve_bid} such that we have the relation:
+For any optimal bid-prices, $\beta_{j}$, in \eqref{bid-price_dual}, there exist optimal bid-prices, $\beta_{ij}$, in \eqref{improve_bid} such that we have the relation:
 $\beta_{ij} \leq n_{i} \beta_{j}, \forall i$.
 \end{lem}
+
+% $\beta_{ij} = n_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
+
+% 
+
+This lemma indicates that the improved bid-price control will not reject all small groups roughly, it can accept the small groups according to the form of patterns. Thus, it can make the decision flexibly.
 
 Let $val(\text{T-BPC})$ denote the expected optimal value of \eqref{bid-price_dual} with expected demand.
 
@@ -166,15 +174,13 @@ To add new dominating pattern in, we need to solve multiple subproblems.
 
 Subproblem for row $j$:
 
-\begin{align*}
-    \max \quad & \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \lambda_{j} \\
-    \text {s.t.} \quad & \sum_{i= 1}^{M} n_{i} h_{i} \leq L_j, \\
-    & h_{i} \in \mathbb{N}, \quad i \in \mathcal{M}.
-\end{align*} 
+\begin{align}\label{subproblem}
+    \max \quad & \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \gamma_{j} \\
+    \text {s.t.} \quad & \sum_{i= 1}^{M} n_{i} h_{i} \leq L_j, \notag \\
+    & h_{i} \in \mathbb{N}, \quad i \in \mathcal{M}. \notag
+\end{align} 
 
-If the value is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.
-
-The dominating pattern can be regarded as the feasible patterns when the corresponding length is in $[L-\delta, L]$.
+If the optimal value of \eqref{subproblem} is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.
 
 
 Let $DP(L, M)$ denote the number of dominating patterns. Let $DP_{t} (L, M)$ denote the number of all feasible patterns with length $L$.

@@ -159,9 +159,11 @@ if __name__ == "__main__":
                [1, 1, 0, 0]]]
     # print(dom_set[0][0][0])
 
-    # opt_alpha, opt_beta, opt_gamma = test.improved_bid(dom_set, demand)
+    opt_alpha, opt_beta, opt_gamma = test.improved_bid(dom_set, demand)
+    
+    row_j = 5
 
-    opt_x = test.dynamic_primal(dom_set, demand)
+    opt_x = test.subproblem(opt_alpha, opt_gamma[0], row_j)
 
     # print(f'alpha: {opt_alpha}')
     # print(f'beta: {opt_beta}')

@@ -147,13 +147,15 @@ $val(\text{T-BPC}) \geq val(\text{I-BPC}) \geq val(\text{HO}) \geq val(\text{OPT
 
 Let $y_{j \bm{h}}$ denote whether to use pattern $\bm{h}$.
 
+Relax $y_{j \bm{h}}$, we have the primal problem:
+
 \begin{equation}\label{improve_primal}
     \begin{aligned}
     \max \quad & \sum_{i=1}^M \sum_{j=1}^N\left(n_i-\delta\right) x_{i j} \\
     \text {s.t.} \quad & \sum_{j=1}^N x_{i j} + x_{i0} = d_i, \quad i \in \mathcal{M}, \\
     & x_{i j}=\sum_{\bm{h} \in S(L_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
-    & \sum_{\bm{h} \in S(L_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N}, \\
-    & y_{j \bm{h}} \in \{0,1\}, \quad j \in \mathcal{N}, \bm{h} \in S(L_{j}).
+    & \sum_{\bm{h} \in S(L_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N}.
+    % & y_{j \bm{h}} \in \{0,1\}, \quad j \in \mathcal{N}, \bm{h} \in S(L_{j}).
     \end{aligned}
 \end{equation}
 

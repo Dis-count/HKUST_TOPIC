@@ -46,13 +46,12 @@ The dual of LP relaxation of the SPDR problem is:
     \end{aligned}
   \end{equation}
 
-In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. A request is only accepted if the revenue it generates is no less than the sum of the bid prices of the seats it uses. Thus, if $i -\beta_{j} n_i \geq 0$, we will accept the group type $i$. And choose $j^{*} = \arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
+In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a seat in row $j$. A request is only accepted if the revenue it generates is no less than the sum of the bid prices of the seats it uses. Thus, if $i -\beta_{j} n_i \geq 0$, meanwhile, the capacity allows, we will accept the group type $i$. And choose $j^{*} = \arg \max_{j} \{i -\beta_{j} n_i\}$ as the row to allocate that group.
   
 \begin{lem}\label{bid-price}
 The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
 \end{lem}
 
-There are some drawbacks on the traditional bid-price control. 
 
 \begin{algorithm}[H]
     \caption{Bid-Price Control}\label{algo_bid}
@@ -66,6 +65,8 @@ There are some drawbacks on the traditional bid-price control.
       {Reject the group\;}}
 \end{algorithm}
 
+Let $val(\text{T-BPC})$, $val(\text{DLP})$ denote the optimal value of \eqref{bid-price_dual} and the LP relaxation of the \textup{SPDR} problem with expected demand, respectively. Then we have $val(\text{T-BPC}) = val(\text{DLP})$.
+
 % Let $val_{\theta}(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter}.
 
 % \begin{align}
@@ -78,9 +79,13 @@ There are some drawbacks on the traditional bid-price control.
 
 % $V_{\theta}^{OPT}(I) = E_{\{d_{i}\}} [val_{\theta}(I; \{d_{i}\})] \leq val_{\theta} (I; \{E[d_{i}]\}) = val_{\theta}(I; \{\theta T p_{i}\})$
 
+There are some drawbacks on the traditional bid-price control. First, it cannot distinguish difference between rows, when the capacity allows, placing any row is the same for this pocily; second, it may not be feasible to accpet the request by the decision when the capacity of some row doesnot allow.
+
+To address this problem, we consider an improved BPC policy. The basic idea is to represent the structure of rows by patterns, then use the patterns to make the decision.
+
 
 \subsection{Improved BPC Policy}
-Suppose that $S(L_{j})$ is the set of all patterns for row $j$.
+Suppose that $S(L_{j})$ is the set of all patterns for row $j$. Let $v^t(\bm{L})$ indicate the maximal expected value to go at time $t$, given the capacity $\bm{L}$.
 
 The dynamic programming can be expressed as follow:
 \begin{equation}
@@ -103,32 +108,23 @@ The corresponding bid-price problem:
     \end{aligned}
 \end{equation}
 
-$\alpha_{i}$ represents marginal revenue for group $i$. Revenue gained from group $i$.
-
-$\beta_{ij}$ represents row $j$ for group $i$ assign cost.
-
-$\gamma_{j}$ represents capacity cost for row $j$.
-
-
+$\alpha_{i}$ represents marginal revenue for group $i$. $\beta_{ij}$ represents the cost for group $i$ assigned in row $j$. $\gamma_{j}$ represents the capacity cost for row $j$.
 
 \begin{lem}
 For any optimal bid-prices, $\beta_{j}$, in \eqref{bid-price_dual}, there exist optimal bid-prices, $\beta_{ij}$, in \eqref{improve_bid} such that we have the relation:
 $\beta_{ij} \leq n_{i} \beta_{j}, \forall i$.
 \end{lem}
 
+
 % $\beta_{ij} = n_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
  
 
 This lemma indicates that the improved bid-price control will not reject all small groups roughly, it can accept the small groups according to the form of patterns. Thus, it can make the decision flexibly.
 
-Let $val(\text{T-BPC})$ denote the expected optimal value of \eqref{bid-price_dual} with expected demand.
-
-Let $val(\text{I-BPC})$ denote the expected optimal value of \eqref{improve_bid} with expected demand.
-
+Let $val(\text{I-BPC})$ denote the expected optimal value of \eqref{improve_bid} with expected demand. Then we have $val(\text{T-BPC}) \geq val(\text{I-BPC}) = val(\text{DLP}) \geq val(\text{HO}) \geq val(\text{OPT})$.
 
 The improved BPC policy approximate the optimal value better than the traditonal BPC policy.
 
-$val(\text{T-BPC}) \geq val(\text{I-BPC}) \geq val(\text{HO}) \geq val(\text{OPT})$.
 
 \begin{algorithm}[H]
     \caption{Improved Bid-Price Control}\label{algo_improve_bid}
@@ -140,6 +136,8 @@ $val(\text{T-BPC}) \geq val(\text{I-BPC}) \geq val(\text{HO}) \geq val(\text{OPT
       Assign the group to row $k$, let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$\;}
       {Reject the group type\;}}
 \end{algorithm}
+
+The 
 
 Let $y_{j \bm{h}}$ denote whether to use pattern $\bm{h}$.
 

@@ -125,6 +125,7 @@ Let $val(\text{I-BPC})$ denote the expected optimal value of \eqref{improve_bid}
 
 The improved BPC policy approximate the optimal value better than the traditonal BPC policy.
 
+As a comparison with the traditional BPC policy, the improved BPC policy can distinguish the different rows and does need to judge whether the acceptance decision is feasible, once the request is accepted, it can be placed in some row.
 
 \begin{algorithm}[H]
     \caption{Improved Bid-Price Control}\label{algo_improve_bid}
@@ -137,8 +138,7 @@ The improved BPC policy approximate the optimal value better than the traditonal
       {Reject the group type\;}}
 \end{algorithm}
 
-The 
-
+The dual may loss the information of the remaining demand, we then consider the primal problem.
 Let $y_{j \bm{h}}$ denote whether to use pattern $\bm{h}$.
 
 Relax $y_{j \bm{h}}$, we have the primal problem:
@@ -166,7 +166,11 @@ Relax $y_{j \bm{h}}$, we have the primal problem:
 
 
 \subsection{Solve the dynamic primal}
-To add new dominating pattern in, we need to solve multiple subproblems.
+% A pattern $\bm{h}$ is said to be inefficient if a mixture of other patterns can be used to generate more revenue for the same (or lower) consumption rate.
+
+Efficient patterns: the optimal solution to $\max_{\bm{h}} \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \gamma_{j}$.
+
+To generate all efficient patterns, we need to solve multiple subproblems.
 
 Subproblem for row $j$:
 
@@ -178,12 +182,16 @@ Subproblem for row $j$:
 
 If the optimal value of \eqref{subproblem} is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.
 
-Dominating pattern $\bm{h}$: there does not exist another pattern $\bm{h{'}}$ such that $h_{i} \leq h_{i}{'}, \forall i$.
+\begin{lem}
+    If $y_{j \bm{h}}^{*} > 0$ is the optimal solution to the \eqref{improve_bid}, then $\bm{h}$ is an efficient pattern.
+\end{lem}
 
-The dominating pattern can be regarded as the feasible patterns when the corresponding length is in $[L-\delta, L]$.
+
+The efficient pattern must be a dominating pattern. A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where every component of $\bm{h}{'}$ is greater than or equal to the corresponding component of $\bm{h}$.
 
 It is obvious that the dominating patterns include the full and largest patterns.
 
+The dominating pattern can be regarded as the feasible patterns when the corresponding length is in $[L-\delta, L]$.
 
 Let $DP(L, M)$ denote the number of dominating patterns. Let $DP_{t} (L, M)$ denote the number of all feasible patterns with length $L$.
 

@@ -52,6 +52,8 @@ In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for a
 The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{\delta(n_i-n_{\tilde{i}})}{n_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{n_{\tilde{i}} - \delta}{n_{\tilde{i}}}$ for all $j$.
 \end{lem}
 
+There are some drawbacks on the traditional bid-price control. 
+
 \begin{algorithm}[H]
     \caption{Bid-Price Control}\label{algo_bid}
     \For{$t =1, \ldots, T$}{
@@ -78,13 +80,7 @@ The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots
 
 
 \subsection{Improved BPC Policy}
-Dominating pattern $\bm{h}$: there does not exist another pattern $\bm{h{'}}$ such that $h_{i} \leq h_{i}{'}, \forall i$.
-
-The dominating pattern can be regarded as the feasible patterns when the corresponding length is in $[L-\delta, L]$.
-
-It is obvious that the dominating patterns include the full and largest patterns.
-
-Suppose that $S(L_{j})$ is the set of all dominating patterns for row $j$.
+Suppose that $S(L_{j})$ is the set of all patterns for row $j$.
 
 The dynamic programming can be expressed as follow:
 \begin{equation}
@@ -114,14 +110,14 @@ $\beta_{ij}$ represents row $j$ for group $i$ assign cost.
 $\gamma_{j}$ represents capacity cost for row $j$.
 
 
+
 \begin{lem}
 For any optimal bid-prices, $\beta_{j}$, in \eqref{bid-price_dual}, there exist optimal bid-prices, $\beta_{ij}$, in \eqref{improve_bid} such that we have the relation:
 $\beta_{ij} \leq n_{i} \beta_{j}, \forall i$.
 \end{lem}
 
 % $\beta_{ij} = n_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
-
-% 
+ 
 
 This lemma indicates that the improved bid-price control will not reject all small groups roughly, it can accept the small groups according to the form of patterns. Thus, it can make the decision flexibly.
 
@@ -183,6 +179,12 @@ Subproblem for row $j$:
 \end{align} 
 
 If the optimal value of \eqref{subproblem} is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.
+
+Dominating pattern $\bm{h}$: there does not exist another pattern $\bm{h{'}}$ such that $h_{i} \leq h_{i}{'}, \forall i$.
+
+The dominating pattern can be regarded as the feasible patterns when the corresponding length is in $[L-\delta, L]$.
+
+It is obvious that the dominating patterns include the full and largest patterns.
 
 
 Let $DP(L, M)$ denote the number of dominating patterns. Let $DP_{t} (L, M)$ denote the number of all feasible patterns with length $L$.

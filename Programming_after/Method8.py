@@ -41,11 +41,12 @@ class deterministicModel:
         m.setParam('OutputFlag', 0)
         m.optimize()
         
-        opt_x = np.array(m.getAttr('X'))
-        opt_x = opt_x[:self.I * self.given_lines]
+        opt = np.array(m.getAttr('X'))
+        opt_x = opt[:self.I * self.given_lines]
+        opt_y = opt[self.I * self.given_lines:len(opt)]
         opt_x = np.reshape(opt_x, (self.I, self.given_lines))
         
-        return opt_x
+        return opt_x, opt_y
 
     def dual_primal(self, dom_set, demand):
         m = grb.Model()
@@ -174,20 +175,21 @@ class deterministicModel:
                     add_count += 1
             if  add_count == 0:
                 flag_new_pattern = False
-        opt_x = self.dynamic_primal(dom_set, demand)
-        print(dom_set)
-        return opt_x
+        opt_x, opt_y = self.dynamic_primal(dom_set, demand)
+        for j in range(self.given_lines):
+            print(f'set{j} have: {len(dom_set[j])}')
+        return opt_x, opt_y
 
 
 if __name__ == "__main__":
     given_lines = 8
-    roll_width = np.ones(given_lines) * 21
-    # roll_width = [25, 26]
+    # roll_width = np.ones(given_lines) * 21
+    roll_width = [25, 26, 21, 22, 23, 24, 27, 28]
     I = 4  # the number of group types
     s = 1
     demand_width_array = np.arange(2, 2+I)
 
-    demand = np.array([14, 7, 14, 10])
+    demand = np.array([24, 22, 8, 12])
 
     test = deterministicModel(roll_width, given_lines, demand_width_array, I, s)
 
@@ -206,13 +208,13 @@ if __name__ == "__main__":
     for j in range(given_lines):
         dom_set[j][0][-1] = roll_width[j] // demand_width_array[-1]  # 直接修改
 
-
     # dual1, dual2 = test.dual_primal(dom_set, demand)
 
     # print(np.array(list(dual1.values())))
 
     # dual = test.subproblem(dual1, dual2[0], 5)
 
-    opt_x = test.columnGeneration(dom_set, demand, roll_width)
+    opt_x, opt_y = test.columnGeneration(dom_set, demand, roll_width)
 
     print(f'x: {opt_x}')
+    print(f'y: {opt_y}')

@@ -65,7 +65,7 @@ The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots
       {Reject the group\;}}
 \end{algorithm}
 
-Let $val(\text{T-BPC})$, $val(\text{DLP})$ denote the optimal value of \eqref{bid-price_dual} and the LP relaxation of the \textup{SPDR} problem with expected demand, respectively. Then we have $val(\text{T-BPC}) = val(\text{DLP})$.
+
 
 % Let $val_{\theta}(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter}.
 
@@ -79,9 +79,13 @@ Let $val(\text{T-BPC})$, $val(\text{DLP})$ denote the optimal value of \eqref{bi
 
 % $V_{\theta}^{OPT}(I) = E_{\{d_{i}\}} [val_{\theta}(I; \{d_{i}\})] \leq val_{\theta} (I; \{E[d_{i}]\}) = val_{\theta}(I; \{\theta T p_{i}\})$
 
-There are some drawbacks on the traditional bid-price control. First, it cannot distinguish difference between rows, when the capacity allows, placing any row is the same for this pocily; second, it may not be feasible to accpet the request by the decision when the capacity of some row doesnot allow.
+Let $V(\text{T-BPC})$, $V(\text{DLP})$ denote the optimal value of \eqref{bid-price_dual} and the LP relaxation of the \textup{SPDR} problem with expected demand, respectively. Then we have $V(\text{T-BPC}) = V(\text{DLP})$.
 
-To address this problem, we consider an improved BPC policy. The basic idea is to represent the structure of rows by patterns, then use the patterns to make the decision.
+However, traditional bid-price control (BPC) has two drawbacks. First, when capacity permits, the policy treats all rows as equally preferable, making no distinction between them. Second, the decision to accept a request may not be feasible if certain rows lack sufficient capacity.
+
+% Only consider single seat, not the whole group type.
+
+To address these limitations, we propose an improved BPC policy. The key idea is to represent row structures using patterns and then leverage these patterns for decision-making.
 
 
 \subsection{Improved BPC Policy}
@@ -108,24 +112,31 @@ The corresponding bid-price problem:
     \end{aligned}
 \end{equation}
 
-$\alpha_{i}$ represents marginal revenue for group $i$. $\beta_{ij}$ represents the cost for group $i$ assigned in row $j$. $\gamma_{j}$ represents the capacity cost for row $j$.
+$\alpha_{i}$ represents marginal revenue for group $i$. $\beta_{ij}$ represents the cost for group $i$ assigned in row $j$. $\gamma_{j}$ represents the capacity cost associated with row $j$.
+
+Let $V(\text{I-BPC})$ denote the expected optimal value of \eqref{improve_bid} under expected demand.
 
 \begin{lem}
 For any optimal bid-prices, $\beta_{j}$, in \eqref{bid-price_dual}, there exist optimal bid-prices, $\beta_{ij}$, in \eqref{improve_bid} such that we have the relation:
-$\beta_{ij} \leq n_{i} \beta_{j}, \forall i$.
+$\beta_{ij} \leq n_{i} \beta_{j}, \forall i$. Furthermore, $V(\text{T-BPC}) \geq V(\text{I-BPC})$.
 \end{lem}
 
-
 % $\beta_{ij} = n_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
- 
 
-This lemma indicates that the improved bid-price control will not reject all small groups roughly, it can accept the small groups according to the form of patterns. Thus, it can make the decision flexibly.
+This lemma shows that the improved bid-price control (I-BPC) does not uniformly reject all small groups. Instead, it selectively accepts them based on pattern-based allocation, enabling more flexible decision-making. Meanwhile, the lemma confirms that the I-BPC policy provides a tighter approximation to the optimal value than the T-BPC policy.
 
-Let $val(\text{I-BPC})$ denote the expected optimal value of \eqref{improve_bid} with expected demand. Then we have $val(\text{T-BPC}) \geq val(\text{I-BPC}) = val(\text{DLP}) \geq val(\text{HO}) \geq val(\text{OPT})$.
+\begin{lem}
+$V(\text{DLP}) \geq V(\text{HO})$ results from the concave property. 
+\end{lem}
 
-The improved BPC policy approximate the optimal value better than the traditonal BPC policy.
+$V(\text{HO}) = E_{\{d_{i}\}} [val(I; \{d_{i}\})] \leq val(I; \{E[d_{i}]\}) = V(\text{DLP})$
 
-As a comparison with the traditional BPC policy, the improved BPC policy can distinguish the different rows and does need to judge whether the acceptance decision is feasible, once the request is accepted, it can be placed in some row.
+Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{T-BPC}) \geq V(\text{I-BPC}) \geq V(\text{HO}) \geq V(\text{OPT})$. 
+
+According to the definition, we have $V(\text{HO}) \geq V(\text{OPT})$.
+
+Unlike traditional BPC, the improved policy accounts for row-specific characteristics in allocation decisions. Meanwhile, it guarantees feasible placement. Once a request is accepted, the policy ensures it can be assigned to a suitable row without additional feasibility checks.
+
 
 \begin{algorithm}[H]
     \caption{Improved Bid-Price Control}\label{algo_improve_bid}
@@ -138,10 +149,12 @@ As a comparison with the traditional BPC policy, the improved BPC policy can dis
       {Reject the group type\;}}
 \end{algorithm}
 
-The dual may loss the information of the remaining demand, we then consider the primal problem.
-Let $y_{j \bm{h}}$ denote whether to use pattern $\bm{h}$.
+The I-BPC policy better captures the structure of the capacity and features greater
+flexibility than the T-BPC policy does. However, the bid-price policies are
+established via a ``dual'' formulation, which might lose some information contained in the primal
+problem.
 
-Relax $y_{j \bm{h}}$, we have the primal problem:
+Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in row $j$. The primal problem can be formulated as:
 
 \begin{equation}\label{improve_primal}
     \begin{aligned}
@@ -153,6 +166,7 @@ Relax $y_{j \bm{h}}$, we have the primal problem:
     \end{aligned}
 \end{equation}
 
+Here, $x_{i0}$ is the number of unassigned groups of type $i$. The first set of constraints demonstrate that for each group type $i$, the sum of assigned groups and unassigned groups equals the total demand. The second set of constraints shows that the number of groups of type $i$ assigned to row j equals the sum of $h_{i}$ (the count of type $i$ groups in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in each row $j$ cannot exceed 1.
 
 \begin{algorithm}[H]
     \caption{Dynamic Primal}\label{algo_improve_primal}
@@ -168,11 +182,9 @@ Relax $y_{j \bm{h}}$, we have the primal problem:
 \subsection{Solve the dynamic primal}
 % A pattern $\bm{h}$ is said to be inefficient if a mixture of other patterns can be used to generate more revenue for the same (or lower) consumption rate.
 
-Efficient patterns: the optimal solution to $\max_{\bm{h}} \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \gamma_{j}$.
+The pattern $\bm{h}$ is efficient for row $j$ if and only if, for some $(\alpha_{1}, \ldots, \alpha_{M}, \gamma_{j})$, $\bm{h}$ is the optimal solution to $$\max_{\bm{h}} \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \gamma_{j}$$
 
-To generate all efficient patterns, we need to solve multiple subproblems.
-
-Subproblem for row $j$:
+To generate all efficient patterns, we need to solve the subproblem for each row $j$:
 
 \begin{align}\label{subproblem}
     \max \quad & \sum_{i=1}^{M} [n_i - \delta - \alpha_{i}] h_{i} - \gamma_{j} \\
@@ -183,15 +195,15 @@ Subproblem for row $j$:
 If the optimal value of \eqref{subproblem} is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.
 
 \begin{lem}
-    If $y_{j \bm{h}}^{*} > 0$ is the optimal solution to the \eqref{improve_bid}, then $\bm{h}$ is an efficient pattern.
+    If $y_{j \bm{h}}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $\bm{h}$ is an efficient pattern.
 \end{lem}
 
 
-The efficient pattern must be a dominating pattern. A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where every component of $\bm{h}{'}$ is greater than or equal to the corresponding component of $\bm{h}$.
+A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where every component of $\bm{h}{'}$ is greater than or equal to the corresponding component of $\bm{h}$. The efficient pattern must be a dominating pattern. 
 
 It is obvious that the dominating patterns include the full and largest patterns.
 
-The dominating pattern can be regarded as the feasible patterns when the corresponding length is in $[L-\delta, L]$.
+The dominating pattern can be regarded as the feasible patterns when the number of occupied seats is in $[L-\delta, L]$.
 
 Let $DP(L, M)$ denote the number of dominating patterns. Let $DP_{t} (L, M)$ denote the number of all feasible patterns with length $L$.
 

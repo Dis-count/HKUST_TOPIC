@@ -2,7 +2,10 @@ import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
 from Method10 import deterministicModel
+from Method8 import column_generation
+from SamplingMethodSto import samplingmethod1
 import copy
+
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample, s):
@@ -20,10 +23,6 @@ class CompareMethods:
     def random_generate(self, sequence):
         sam = samplingmethod1(self.I, self.num_sample, self.num_period-1, self.probab, self.s)
         first_arrival = sequence[0]
-        dw, prop = sam.get_prob_ini(first_arrival)
-        m1 = stochasticModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, prop, dw, self.s)
-
-        ini_demand, _ = m1.solveBenders(eps = 1e-4, maxit = 20)
         deter = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
         ini_demand, newx4 = deter.IP_formulation(np.zeros(self.I), ini_demand)
         _, newx4 = deter.IP_advanced(ini_demand)
@@ -66,49 +65,6 @@ class CompareMethods:
             demand[i-1] += 1
 
         return demand
-
-    def binary_search_first(self, sequence):
-        # Return the index not less than the first
-        target = sum(self.roll_width)
-        arr = np.cumsum(sequence)
-        low = 0
-        high = len(arr)-1
-        res = -1
-        while low <= high:
-            mid = (low + high)//2
-            if target <= arr[mid]:
-                res = mid
-                high = mid-1
-            else:
-                low = mid+1
-        if res == -1:
-            total = sum(sequence)
-            seq = sequence
-        else:
-            seq = sequence[0:res]
-            total = sum(seq)
-
-        remaining = target - total
-        if remaining > 0 and res > 0:
-            for i in sequence[res:]:
-                if i <= remaining:
-                    seq = sequence[0:res] + [i]
-                    remaining -= i
-
-        seq = [i-1 for i in seq]
-        demand = np.zeros(self.I)
-        for i in seq:
-            demand[i-1] += 1
-
-        deter1 = deterministicModel(self.roll_width, self.given_lines,self.demand_width_array, self.I)
-        indi = deter1.IP_formulation1(demand, np.zeros(self.I))
-        while not indi:  # If indi doesnot exist, then delete the arrival from the seq.
-            demand[seq[-1]-1] -= 1
-            seq.pop()
-            indi = deter1.IP_formulation1(demand, np.zeros(self.I))
-        seq = [i+1 for i in seq]
-
-        return seq
 
     def dynamic_program1(self, sequence):
         roll_width_dy1 = copy.deepcopy(self.roll_width)
@@ -216,6 +172,7 @@ class CompareMethods:
         return value
 
     def bid_price(self, sequence):
+        # Original bid-price control policy.
         # Don;t solve LP.
         decision_list = [0] * self.num_period
         roll_width = copy.deepcopy(self.roll_width)
@@ -285,6 +242,24 @@ class CompareMethods:
         test = deterministicModel(self.roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
         newd, _ = test.IP_formulation(np.zeros(self.I), demand)
         return newd
+
+    def improved(self, sequence):
+        decision_list = [0] * self.num_period
+        roll_width = copy.deepcopy(self.roll_width)
+        
+        for t in range(self.num_period):
+            i = sequence[t]
+
+            demand = (self.num_period - t) * np.array(self.probab)
+
+            improved = column_generation(roll_width, self.given_lines, self.demand_width_array, self.I, self.s)
+
+            dom_set = [np.zeros((1, I)) for _ in range(given_lines)]
+
+            opt_x, opt_y = improved.setGeneration(dom_set, demand, roll_width)
+
+            j  = max(opt_x)
+
 
 
 if  __name__ == "__main__":

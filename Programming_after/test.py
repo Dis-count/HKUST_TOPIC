@@ -22,17 +22,22 @@ def DP(L, M, delta, memo=None):
     # Base cases (to be filled in by the user)
     # Example base cases (modify as needed):
     if M == 0:
-        return 1 if L == 0 else 0  # Example: DP(L, 0) = 1 if L=0 else 0
+        return 1  # Example: DP(L, 0) = 1 if L=0 else 0
     if L == 0:
         return 1  # Example: DP(0, M) = 1 for all M
 
     # Compute the sum
     total = 0
     max_k = L // (M + delta)  # floor(L / (M + delta))
-    for k in range(0, max_k + 1):
+    for k in range(max_k + 1):
         new_L = L - k * (M + delta)
         total += DP(new_L, M - 1, delta, memo)
 
     # Memoize the result
     memo[(L, M)] = total
+    # print(memo)
     return total
+
+
+total = DP(100, 4, 1, memo=None)
+print(total)

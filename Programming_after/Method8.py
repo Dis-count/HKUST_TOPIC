@@ -5,7 +5,7 @@ import copy
 
 # This function uses column generation
 
-class deterministicModel:
+class column_generation:
     def __init__(self, roll_width, given_lines, demand_width_array, I, s):
         self.roll_width = roll_width
         self.given_lines = given_lines
@@ -153,7 +153,7 @@ class deterministicModel:
         print(x_ij)
         return x_ij, m.objVal
 
-    def columnGeneration(self, dom_set, demand, roll_width):
+    def setGeneration(self, dom_set, demand, roll_width):
         # New_pattern: List[]
         # dom_set: Initial Set
         flag_new_pattern = True
@@ -191,7 +191,7 @@ if __name__ == "__main__":
 
     demand = np.array([24, 22, 8, 12])
 
-    test = deterministicModel(roll_width, given_lines, demand_width_array, I, s)
+    test = column_generation(roll_width, given_lines, demand_width_array, I, s)
 
     # dom_set = [[[0, 0, 0, 1],
     #            [0, 0, 1, 0],
@@ -214,7 +214,9 @@ if __name__ == "__main__":
 
     # dual = test.subproblem(dual1, dual2[0], 5)
 
-    opt_x, opt_y = test.columnGeneration(dom_set, demand, roll_width)
+    opt_x, opt_y = test.setGeneration(dom_set, demand, roll_width)
 
     print(f'x: {opt_x}')
     print(f'y: {opt_y}')
+
+    

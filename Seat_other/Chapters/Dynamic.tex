@@ -129,9 +129,11 @@ This lemma shows that the improved bid-price control (I-BPC) does not uniformly 
 $V(\text{DLP}) \geq V(\text{HO})$ results from the concave property. 
 \end{lem}
 
-$V(\text{HO}) = E_{\{d_{i}\}} [val(I; \{d_{i}\})] \leq val(I; \{E[d_{i}]\}) = V(\text{DLP})$
+Let $val(\{d_{i}\})$ indicate the value of the relaxation of the SPDR problem.
 
-Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{T-BPC}) \geq V(\text{I-BPC}) \geq V(\text{HO}) \geq V(\text{OPT})$. 
+$V(\text{HO}) = E_{\{d_{i}\}} [val(\{d_{i}\})] \leq val(\{E[d_{i}]\}) = V(\text{DLP})$.
+
+Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{T-BPC}) \geq V(\text{I-BPC}) \geq V(\text{HO}) \geq V(\text{OPT})$.
 
 According to the definition, we have $V(\text{HO}) \geq V(\text{OPT})$.
 
@@ -166,7 +168,7 @@ Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in row $j$. Th
     \end{aligned}
 \end{equation}
 
-Here, $x_{i0}$ is the number of unassigned groups of type $i$. The first set of constraints demonstrate that for each group type $i$, the sum of assigned groups and unassigned groups equals the total demand. The second set of constraints shows that the number of groups of type $i$ assigned to row j equals the sum of $h_{i}$ (the count of type $i$ groups in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in each row $j$ cannot exceed 1.
+Here, $x_{i0}$ is the number of unassigned groups of type $i$. The first set of constraints demonstrate that for each group type $i$, the sum of assigned groups and unassigned groups equals the total demand. The second set of constraints shows that the number of groups of type $i$ assigned to row $j$ equals the sum of $h_{i}$ (the count of type $i$ groups in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in each row $j$ cannot exceed 1.
 
 \begin{algorithm}[H]
     \caption{Dynamic Primal}\label{algo_improve_primal}
@@ -192,7 +194,7 @@ To generate all efficient patterns, we need to solve the subproblem for each row
     & h_{i} \in \mathbb{N}, \quad i \in \mathcal{M}. \notag
 \end{align} 
 
-If the optimal value of \eqref{subproblem} is larger than $0$, the original reaches the optimal. Otherwise, a new pattern can be generated.
+If the optimal value of \eqref{subproblem} is larger than $0$, the primal $\ref{improve_primal}$ reaches the optimal. Otherwise, a new pattern can be generated.
 
 \begin{lem}
     If $y_{j \bm{h}}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $\bm{h}$ is an efficient pattern.
@@ -213,6 +215,7 @@ $DP(L, M) = DP_{t} (L, M) - DP_{t} (L-\delta-1, M)$.
 DP_{\text {t}}(L, M)=\sum_{k=0}^{\lfloor L /(M+\delta)\rfloor} D P_{\text {t}}(L-k(M+\delta), M-1)
 \end{equation}
 
+polynomial
 
 \newpage
 

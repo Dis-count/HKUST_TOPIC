@@ -165,19 +165,21 @@ class column_generation:
 
             #  return the dual of the master problem
             dual_alpha, dual_gamma = self.dual_primal(dom_set, demand)
+            print(f'alpha: {dual_alpha}')
+            print(f'gamma: {dual_gamma}')
 
             add_count = 0
             for j in range(self.given_lines):
                 new_pattern = self.subproblem(dual_alpha, dual_gamma[j], roll_width[j])
-                # print(new_pattern)
+                print(new_pattern)
                 if new_pattern is not None:
                     dom_set[j] = np.vstack((dom_set[j], new_pattern))
                     add_count += 1
             if  add_count == 0:
                 flag_new_pattern = False
         opt_x, opt_y = self.dynamic_primal(dom_set, demand)
-        for j in range(self.given_lines):
-            print(f'set{j} have: {len(dom_set[j])}')
+        # for j in range(self.given_lines):
+        #     print(f'set{j} have: {len(dom_set[j])}')
         return opt_x, opt_y
 
 
@@ -189,7 +191,7 @@ if __name__ == "__main__":
     s = 1
     demand_width_array = np.arange(2, 2+I)
 
-    demand = np.array([24, 22, 8, 12])
+    demand = np.array([4, 12, 12, 21])
 
     test = column_generation(roll_width, given_lines, demand_width_array, I, s)
 
@@ -205,18 +207,16 @@ if __name__ == "__main__":
 
     dom_set = [np.zeros((1, I)) for _ in range(given_lines)]  # 初始化为 (1, I) 的全零数组
 
-    for j in range(given_lines):
-        dom_set[j][0][-1] = roll_width[j] // demand_width_array[-1]  # 直接修改
+    # for j in range(given_lines):
+    #     dom_set[j][0][-1] = roll_width[j] // demand_width_array[-1]  # 直接修改
 
     # dual1, dual2 = test.dual_primal(dom_set, demand)
-
+    # print(dual1)
     # print(np.array(list(dual1.values())))
 
-    # dual = test.subproblem(dual1, dual2[0], 5)
+    # pattern = test.subproblem(dual1, dual2[0], 5)
 
     opt_x, opt_y = test.setGeneration(dom_set, demand, roll_width)
 
     print(f'x: {opt_x}')
     print(f'y: {opt_y}')
-
-    

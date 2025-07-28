@@ -256,11 +256,15 @@ class CompareMethods:
 
             dom_set = [np.zeros((1, I)) for _ in range(given_lines)]
 
-            opt_x, opt_y = improved.setGeneration(dom_set, demand, roll_width)
+            opt_x, _ = improved.setGeneration(dom_set, demand, roll_width)
+            remain_x = demand[i] - sum(opt_x[i])
+            j = max(opt_x[i])
 
-            j  = max(opt_x)
-
-
+            if j > remain_x:
+                decision_list.append(1)
+                roll_width[j_index] -= self.demand_width_array[i]
+            else:
+                decision_list.append(0)
 
 if  __name__ == "__main__":
     given_lines = 10
@@ -275,11 +279,8 @@ if  __name__ == "__main__":
     num_sample = 1000
     s = 1
     a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
-    sequence = [3, 3, 2, 3, 5, 2, 5, 3, 2, 2, 3, 2, 3, 2, 2, 5, 3, 3, 2, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 2, 5, 2, 2, 2, 2, 2, 2, 5, 2, 3, 3, 3, 5, 3, 3, 2, 3, 3, 3, 3, 2, 3, 2, 3, 3, 3, 2, 2, 3, 3, 3, 2, 4, 4, 2, 5, 3, 3, 3, 2, 5, 5, 5, 3, 3, 3, 2, 3, 3, 2, 2, 3, 3, 2, 3, 2, 3, 2, 5, 5]
-    
-    # [3, 3, 5, 2, 3, 3, 5, 3, 2, 3, 2, 2, 3, 3, 4, 2, 5, 5, 2, 3, 3, 4, 2, 3, 2, 2, 2, 5, 3, 5, 3, 2, 3, 3, 3, 3, 2, 2, 2, 3, 3, 4, 5, 4, 2, 3, 3, 2, 3, 3, 2, 2, 2, 3, 3, 3, 4, 3, 3, 3, 3, 2, 2, 4, 2, 2, 2, 2, 3, 3, 5, 2, 3, 3, 3, 2, 3, 2, 2, 3, 2, 2, 3, 3, 2, 2, 4, 5, 3, 5]
-    print(len(sequence))
-    # [3, 3, 2, 3, 5, 2, 5, 3, 2, 2, 3, 2, 3, 2, 2, 5, 3, 3, 2, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 2, 5, 2, 2, 2, 2, 2, 2, 5, 2, 3, 3, 3, 5, 3, 3, 2, 3, 3, 3, 3, 2, 3, 2, 3, 3, 3, 2, 2, 3, 3, 3, 2, 4, 4, 2, 5, 3, 3, 3, 2, 5, 5, 5, 3, 3, 3, 2, 3, 3, 2, 2, 3, 3, 2, 3, 2, 3, 2, 5, 5]
+
+
     newx4 = a.random_generate(sequence)
 
     b = a.method_new(sequence, newx4, roll_width)
@@ -289,9 +290,6 @@ if  __name__ == "__main__":
     optimal = np.dot(multi, f)
     print(f'optimal: {optimal}')
 
-    # sequence = [3, 3, 5, 2, 5, 5, 4, 5, 3, 5, 3, 3, 4, 5, 2, 5, 3, 5, 4, 2, 5, 2, 5, 5, 2, 2, 5, 5, 5, 5, 3, 3, 5, 3, 2, 5, 5, 5, 5, 2, 5, 3, 2, 3, 3, 5, 4, 5, 2, 3, 2, 4, 2, 5, 5]
-
-    # 
 
     # newx = np.array([[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [-0.0, 0.0, 0.0, 1.0], [-0.0, 0.0, 1.0, 1.0], [0.0, 1.0, 0.0, 0.0]])
     # change_roll = np.array([0,0,0,0,0,0,0,5,13,4])

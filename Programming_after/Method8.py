@@ -122,7 +122,7 @@ class column_generation:
         m.setObjective(grb.quicksum(demand[i] * alpha[i] for i in range(self.I)) + grb.quicksum(gamma[j] for j in range(self.given_lines)), GRB.MINIMIZE)
 
         m.setParam('OutputFlag', 0)
-        m.write('1.lp')
+        # m.write('1.lp')
         m.optimize()
 
         dual = np.array(m.getAttr('X'))
@@ -149,8 +149,8 @@ class column_generation:
         # m.write('bid_price.lp')
         alpha = np.array(m.getAttr('X'))[:self.I]
         x_ij = np.array(m.getAttr('X'))[-self.given_lines:]
-        print(f'alpha: {alpha}')
-        print(x_ij)
+        # print(f'alpha: {alpha}')
+        # print(x_ij)
         return x_ij, m.objVal
 
     def setGeneration(self, dom_set, demand, roll_width):
@@ -165,13 +165,13 @@ class column_generation:
 
             #  return the dual of the master problem
             dual_alpha, dual_gamma = self.dual_primal(dom_set, demand)
-            print(f'alpha: {dual_alpha}')
-            print(f'gamma: {dual_gamma}')
+            # print(f'alpha: {dual_alpha}')
+            # print(f'gamma: {dual_gamma}')
 
             add_count = 0
             for j in range(self.given_lines):
                 new_pattern = self.subproblem(dual_alpha, dual_gamma[j], roll_width[j])
-                print(new_pattern)
+                # print(new_pattern)
                 if new_pattern is not None:
                     dom_set[j] = np.vstack((dom_set[j], new_pattern))
                     add_count += 1

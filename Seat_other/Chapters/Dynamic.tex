@@ -19,6 +19,15 @@ Solving the dynamic programming problem in equation \eqref{DP} presents computat
 
 We propose our policy for assigning arriving requests in a dynamic context. First, we employ the traditional bid-price control policy. Then, we improve the bid-price control policy based on the seat plan (patterns).
 
+For any policy $\pi$, let $V^{\pi}$ denote the expected revenue collected under $\pi$. Among all policies, a special one is the dynamic programming (DP) policy as it achieves the maximal expected revenue. Apart from DP, another special policy is the hindsight optimum (HO), where the decision
+maker has full information on the demand realization for the entire time horizon and optimizes
+over the allocation schemes. Here, it is impossible for the HO to be attained because we can never know the full demand realization ahead. For ease of analysis, the hindsight optimum for the sample path is computed by solving a relaxed static problem and $V^{HO}$ is the expected value over all sample paths. Then for any online policy $\pi$, we have 
+
+$$V^{\pi} \leq V^{DP} \leq V^{HO}.$$
+
+It is well known that DP, despite its optimality, is computationally complex owing to the ``curse
+of dimensionality.'' Thus we use HO as our benchmark to evaluate the performance of any policy $\pi$.
+
 
 % \subsection{Relaxed Dynamic Programming}
 % To simplify the complexity of the dynamic programming formulation in \eqref{DP}, we employ a relaxed dynamic programming (RDP) approach by aggregating all rows into a single row with the total capacity $\tilde{L} = \sum_{j=1}^{N} L_j$. This relaxation yields preliminary seat assignment decisions for each group arrival, where the rejection by the RDP is final (no further evaluation is needed), the acceptance by the RDP is tentative and must be validated according to the current seat plan in the subsequent group-type control.
@@ -65,8 +74,6 @@ The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots
       {Reject the group\;}}
 \end{algorithm}
 
-
-
 % Let $val_{\theta}(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter}.
 
 % \begin{align}
@@ -83,12 +90,9 @@ Let $V(\text{T-BPC})$, $V(\text{DLP})$ denote the optimal value of \eqref{bid-pr
 
 However, traditional bid-price control (BPC) has two drawbacks. First, when capacity permits, the policy treats all rows as equally preferable, making no distinction between them. Second, the decision to accept a request may not be feasible if certain rows lack sufficient capacity.
 
-% Only consider single seat, not the whole group type.
+\subsection{BPC Policy Based on Patterns}
+To address these limitations, we consider an improved DP formulation. The key idea, as we explain next, is to represent row structures using patterns, not just track the capacity $\bm{L}$.
 
-To address these limitations, we propose an improved BPC policy. The key idea is to represent row structures using patterns and then leverage these patterns for decision-making.
-
-
-\subsection{Improved BPC Policy}
 Suppose that $S(L_{j})$ is the set of all patterns for row $j$. Let $v^t(\bm{L})$ indicate the maximal expected value to go at time $t$, given the capacity $\bm{L}$.
 
 The dynamic programming can be expressed as follow:
@@ -114,23 +118,30 @@ We can solve the following program to compute $v^1(\bm{L})$ for any given capaci
 Solving \eqref{dp_bid} remains computationally prohibitive. Following from the ADP approach, we approximate $v^{t}(\bm{L})$ as 
 
 \begin{equation}\label{appro_dp}
-    v^{t}(\bm{L}) = \theta^{t} + \sum_{j=1}^{N} \max_{\bm{h} \in S(L_{j})} \{\sum_{i=1}^{M} \beta_{ij} h_{i}\}.
+    \hat{v}^{t}(\bm{L}) = \theta^{t} + \sum_{j=1}^{N} \max_{\bm{h} \in S(L_{j})} \{\sum_{i=1}^{M} \beta_{ij} h_{i}\}.
 \end{equation}
 
+Unlike traditional linear approximations, our approach retains the linear term $\theta^{t}$ but introduces a nonlinear component for each row $j$. Specifically, we maximize the linear combination $\sum_{i=1}^{M} \beta_{ij} h_{i}$ over the feasible set $S(L_{j})$.
+
+Our approximation extends classical linear ADP by incorporating resource-specific nonlinear terms through constrained maximization over feasible allocations. While similar separable corrections appear in resource allocation ADP (e.g., Powell, 2007), our explicit use of $\max_{\bm{h} \in S(L_j)}$ captures local constraints more directly, akin to dual decomposition methods (Shapiro \& Nemirovski, 2005).
+
+Our approximation adopts a separable nonlinear structure, but unlike classical concave/quadratic approximations, the nonlinearity is implicitly defined by constrained maximization over feasible allocations. This captures problem-specific constraints without requiring explicit parametric forms for .
 
 The term $\beta_{ij}$ can be regarded as the approximated value for each group in row $j$. 
 
 Substituting \eqref{appro_dp} into \eqref{dp_bid}, we have:
 
 \begin{align}
-    \theta^{t} - \theta^{t+1} = v^{t}(\bm{L}) - v^{t+1}(\bm{L}) \geq  \sum_{i} p_{i} \max\left\{\max_{j:\bm{h} \in S(L_{j}), h_{i} \geqslant 1}\{v^{t+1}(\bm{L} - e_{j}^{T} n_{i}) - v^{t+1}(\bm{L}) + i\}, 0\right\}
+    \theta^{t} - \theta^{t+1} = \hat{v}^{t}(\bm{L}) - \hat{v}^{t+1}(\bm{L}) \geq  \sum_{i} p_{i} \max\left\{\max_{j:\bm{h} \in S(L_{j}), h_{i} \geqslant 1}\{v^{t+1}(\bm{L} - e_{j}^{T} n_{i}) - v^{t+1}(\bm{L}) + i\}, 0\right\}
 \end{align}
 
 For each $j$, $v^{t+1}(\bm{L} - e_{j}^{T} n_{i}) - v^{t+1}(\bm{L}) = \max_{\bm{h} \in S(L_{j}- n_{i})} \{\sum_{i} \beta_{ij} h_{i}\} - \max_{\bm{h} \in S(L_{j})} \{\sum_{i} \beta_{ij} h_{i}\} = -\beta_{ij}$.
 
 Let $\alpha_{i} = \max\left\{\max_{j}\left\{i - \beta_{ij} \right\}, 0\right\}$ and $\gamma_{j} = \max_{\bm{h} \in S(L_{j})} \{\sum_{i} \beta_{ij} h_{i}\}$.
  
-Then, $\theta^{1} = \sum_{t=1}^{T} (\theta^{t} - \theta^{t+1}) \geq \sum_{t} \sum_{i} \alpha_{i} p_{i} = \sum_{i} d_{i} \alpha_{i}$. $v^{1}(\bm{L}) = \sum_{i} d_{i} \alpha_{i} + \sum_{j} \gamma_{j}$.
+Then, we obtian $\theta^{1} = \sum_{t=1}^{T} (\theta^{t} - \theta^{t+1}) \geq \sum_{t} \sum_{i} \alpha_{i} p_{i} = \sum_{i} d_{i} \alpha_{i}$ and $\hat{v}^{1}(\bm{L}) = \sum_{i} d_{i} \alpha_{i} + \sum_{j} \gamma_{j}$.
+
+Since $\hat{v}^{1}(\bm{L})$ is a feasible solution to \eqref{dp_bid}, then $V(\text{I-BPC}) \geq V^{DP}$.
 
 The corresponding bid-price problem can be expressed as:
 
@@ -146,32 +157,20 @@ The corresponding bid-price problem can be expressed as:
 
 $\alpha_{i}$ represents marginal revenue for group $i$. $\beta_{ij}$ represents the cost for group $i$ assigned in row $j$. $\gamma_{j}$ represents the capacity cost associated with row $j$.
 
-Let $\phi(\bm{d})$ indicate the optimal value of the linear relaxation of the SPDR problem.
+Let $V(\text{T-BPC})$ and $V(\text{I-BPC})$ denote the expected optimal value of \eqref{bid-price_dual} and \eqref{improve_bid}, respectively.
 
-$V(\text{HO}) = E[\phi(\bm{d})] \leq \phi(E[\bm{d}]) = V(\text{DLP})$.
 
-$V(\text{T-BPC})$ denotes the expected optimal value of \eqref{bid-price_dual}.
- 
-$V(\text{I-BPC})$ denotes the expected optimal value of \eqref{improve_bid}.
 
-$V(\text{OPT})$ denotes the expected value of the optimal offline policy.
-
-Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{T-BPC}) \geq V(\text{I-BPC}) \geq V(\text{HO}) \geq V(\text{OPT})$.
-
-According to the definition, we have $V(\text{HO}) \geq V(\text{OPT})$.
-
-Let $V(\text{I-BPC})$ denote the expected optimal value of \eqref{improve_bid} under expected demand.
-
-\begin{lem}
+\begin{lem}\label{BPC_relation}
 For any optimal bid-prices, $\beta_{j}$, in \eqref{bid-price_dual}, there exist optimal bid-prices, $\beta_{ij}$, in \eqref{improve_bid} such that we have the relation:
 $\beta_{ij} \leq n_{i} \beta_{j}, \forall i$. Furthermore, $V(\text{T-BPC}) \geq V(\text{I-BPC})$.
 \end{lem}
 
+
 % $\beta_{ij} = n_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
 
-This lemma shows that the improved bid-price control (I-BPC) does not uniformly reject all small groups. Instead, it selectively accepts them based on pattern-based allocation, enabling more flexible decision-making. Meanwhile, the lemma confirms that the I-BPC policy provides a tighter approximation to the optimal value than the T-BPC policy.
+Both bid-price approaches give upper bounds on the value function at any state, meanwhile it follows that I-BPC provides a tighter approximation to the value function more accurately than T-BPC does.
 
-Unlike traditional BPC, the improved policy accounts for row-specific characteristics in allocation decisions. Meanwhile, it guarantees feasible placement. Once a request is accepted, the policy ensures it can be assigned to a suitable row without additional feasibility checks.
 
 \begin{algorithm}[H]
     \caption{Improved Bid-Price Control}\label{algo_improve_bid}
@@ -184,10 +183,14 @@ Unlike traditional BPC, the improved policy accounts for row-specific characteri
       {Reject the group type\;}}
 \end{algorithm}
 
-The I-BPC policy better captures the structure of the capacity and features greater
-flexibility than the T-BPC policy does. However, the bid-price policies are
-established via a ``dual'' formulation, which lose the information contained in the primal
-problem.
+Lemma \ref{BPC_relation} shows that the I-BPC policy does not uniformly reject all small groups. Instead, it selectively accepts them based on pattern-based allocation, enabling more flexible decision-making.
+
+Unlike the traditional BPC, the I-BPC policy accounts for row-specific characteristics in allocation decisions. Meanwhile, it guarantees feasible placement. Once a request is accepted, the policy ensures it can be assigned to a suitable row without additional feasibility checks. Therefore, the I-BPC policy better captures the structure of the capacity and features greater flexibility than the T-BPC policy does.
+
+However, the bid-price policies are established via a ``dual'' formulation, which lose the information contained in the primal problem. Hence, we consider the dynamic primal formulation.
+
+
+\subsection{Dynmaic Primal Based on Patterns}
 
 Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in row $j$. The primal problem can be formulated as:
 
@@ -202,11 +205,22 @@ Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in row $j$. Th
 
 Here, $x_{i0}$ is the number of unassigned groups of type $i$. The first set of constraints demonstrate that for each group type $i$, the sum of assigned groups and unassigned groups equals the total demand. The second set of constraints shows that the number of groups of type $i$ assigned to row $j$ equals the sum of $h_{i}$ (the count of type $i$ groups in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in each row $j$ cannot exceed 1.
 
+Let $\phi(\bm{d})$ indicate the optimal value of the linear relaxation of the SPDR problem.
+
+$V^{\text{HO}} = E[\phi(\bm{d})] \leq \phi(E[\bm{d}]) = V(\text{DLP})$.
+
+Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{T-BPC}) \geq V(\text{I-BPC}) \geq V^{\text{DP}}$.
+
+Any feasible solution to \ref{improve_primal} yields a feasible solution to linear relaxation of SPDR having the same objective value.
+
+$V(\text{T-BPC}) \geq V^{\text{HO}} \geq V^{\text{DP}}$
+
 \begin{lem}
 $V(\text{DLP}) \geq V(\text{HO})$ results from the concave property. 
 \end{lem}
 
 Consider the standard linear program: $\{\max c^{T} \bm{x}: A \bm{x} \leq \bm{d}, \bm{x} \geq \bm{0}\}$.  Suppose that $\bm{d}_1$ and $\bm{d}_2$ are two demand vectors, the optimal solution is $\bm{x}_1$ and $\bm{x}_2$. For any $\lambda \in [0, 1]$, $\bm{d}_{\lambda} = \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2}$. Let $\bm{x}_{\lambda} = \lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}$, then $A \bm{x}_{\lambda} = A(\lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}) \leq \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2} = \bm{d}_{\lambda}$. Thus, $\bm{x}_{\lambda}$ is a feasible solution for $\bm{d}_{\lambda}$. Then, $\phi(\bm{d}_{\lambda}) \geq \bm{c}^{T} \bm{x}_{\lambda} = \lambda \bm{c}^{T} \bm{x}_{1} + (1-\lambda) \bm{c}^{T} \bm{x}_{2} = \lambda \phi(\bm{d}_{1}) + (1= \lambda) \phi(\bm{d}_{2})$, which indicates $\phi(\bm{d})$ is concave. Substitute $\bm{x}$ with $y_{j \bm{h}}$ and view $y_{j \bm{h}}$ as the decision variables, then the concave property still holds for $\eqref{improve_primal}$.
+
 
 \begin{algorithm}[H]
     \caption{Dynamic Primal}\label{algo_improve_primal}
@@ -218,8 +232,7 @@ Consider the standard linear program: $\{\max c^{T} \bm{x}: A \bm{x} \leq \bm{d}
       Assign the group to row $k$ ($k = 0$ means that the request is rejected), let $L_{k}^{t+1} \gets L_{k}^{t} - n_{i}$\;}}
 \end{algorithm}
 
-
-\subsection{Solve the dynamic primal}
+\subsubsection{Solve the dynamic primal}
 % A pattern $\bm{h}$ is said to be inefficient if a mixture of other patterns can be used to generate more revenue for the same (or lower) consumption rate.
 
 The pattern $\bm{h}$ is efficient for row $j$ if and only if, for some $(\alpha_{1}, \ldots, \alpha_{M}, \gamma_{j})$ (except that $\alpha_{i} = i, \forall i$), $\bm{h}$ is the optimal solution to $$\max_{\bm{h}} \sum_{i=1}^{M} (i - \alpha_{i}) h_{i} - \gamma_{j}$$
@@ -233,6 +246,8 @@ To generate all efficient patterns, we need to solve the subproblem for each row
 \end{align} 
 
 If the optimal value of \eqref{subproblem} is larger than $0$, the primal $\eqref{improve_primal}$ reaches the optimal. Otherwise, a new pattern can be generated.
+
+One important fact is that only efficient sets are used in the solution to \eqref{subproblem}. Specifically, 
 
 \begin{lem}
     If $y_{j \bm{h}}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $\bm{h}$ is an efficient pattern.

@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex sum1"] 1753707574 "sum1.aux" "sum1.bbl" "sum1" 1753708833
+["bibtex sum1"] 1753938146 "sum1.aux" "sum1.bbl" "sum1" 1753939525
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1630494346 30002 8c0c5833f37bea3ec214cf315a72975d ""
   "refe.bib" 1743924734 22533 1d0cf2aaee92625efbc32698208cb768 ""
-  "sum1.aux" 1753708832 8113 b203d42d6681de773a187ed8f8314b28 "pdflatex"
+  "sum1.aux" 1753938209 8379 e7171ea35de3f4814236f0d29d29a7e7 "pdflatex"
   (generated)
   "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1753708829 "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" "sum1.pdf" "sum1" 1753708833
+["pdflatex"] 1753938208 "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" "sum1.pdf" "sum1" 1753939525
   "Chapters/Abstract.tex" 1744770453 3510 91fc798d3854030fabf04e891703899d ""
   "Chapters/Conclusion.tex" 1744528234 3339 63a7cea4b3d5ecd1c825fea887c72fd5 ""
-  "Chapters/Dynamic.tex" 1753708828 30188 a7edec6580ae624afb0763648541dc07 ""
+  "Chapters/Dynamic.tex" 1753938207 32481 9fb2ff7e7295d4ffd4072fb65c935fc2 ""
   "Chapters/Introduction.tex" 1744526775 14083 35d3336d63f073505d900ad9d1ee8cea ""
   "Chapters/Literature_review.tex" 1744527147 10269 ad683085332b388375385099937127aa ""
   "Chapters/Problem_description.tex" 1749877300 2654 66e5f3515c6631b7c924f2ec0aef04a5 ""
@@ -165,12 +165,12 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" 1752229729 2314 057359b32385c9f128b3d75025b5744e ""
-  "sum1.aux" 1753708832 8113 b203d42d6681de773a187ed8f8314b28 "pdflatex"
-  "sum1.bbl" 1753707575 16339 997d3058e949fb88fb2ce95972f139f4 "bibtex sum1"
-  "sum1.out" 1753708832 1608 ca62efd50b4330e6c17ea0ca36f7f0b9 "pdflatex"
+  "sum1.aux" 1753938209 8379 e7171ea35de3f4814236f0d29d29a7e7 "pdflatex"
+  "sum1.bbl" 1753938146 16339 997d3058e949fb88fb2ce95972f139f4 "bibtex sum1"
+  "sum1.out" 1753938209 1899 b1c6addedb64f5c98cb65a7362a79c64 "pdflatex"
   "sum1.tex" 1752229729 2314 057359b32385c9f128b3d75025b5744e ""
   (generated)
-  "sum1.log"
-  "sum1.aux"
-  "sum1.out"
   "sum1.pdf"
+  "sum1.out"
+  "sum1.aux"
+  "sum1.log"

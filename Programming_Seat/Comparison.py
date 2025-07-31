@@ -462,6 +462,9 @@ if __name__ == "__main__":
     b = a.method_new(sequence, newx4, roll_width)
     print(np.dot(multi, b))
 
+    c = a.bid_price(sequence)
+    print(np.dot(multi, c))
+
     f = a.offline(sequence)  # optimal result
     optimal = np.dot(multi, f)
     print(f'optimal: {optimal}')

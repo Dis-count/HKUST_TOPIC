@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  4 AUG 2025 22:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  5 AUG 2025 13:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -691,18 +691,18 @@ LaTeX Warning: Reference `sec_seat_planning' on page 3 undefined on input line 5
 
 LaTeX Warning: Reference `seat_planning_full_largest' on page 19 undefined on input line 73.
 
-<./Figures/occu_demand_group4.pdf, id=429, 410.8412pt x 307.46169pt>
+<./Figures/occu_demand_group4.pdf, id=428, 410.8412pt x 307.46169pt>
 File: ./Figures/occu_demand_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_demand_group4.pdf>
 Package pdftex.def Info: ./Figures/occu_demand_group4.pdf  used on input line 116.
 (pdftex.def)             Requested size: 203.83417pt x 152.5435pt.
-<./Figures/occu_gamma_group4.pdf, id=430, 410.07535pt x 307.46169pt>
+<./Figures/occu_gamma_group4.pdf, id=429, 410.07535pt x 307.46169pt>
 File: ./Figures/occu_gamma_group4.pdf Graphic file (type pdf)
 <use ./Figures/occu_gamma_group4.pdf>
 Package pdftex.def Info: ./Figures/occu_gamma_group4.pdf  used on input line 119.
 (pdftex.def)             Requested size: 203.83417pt x 152.8297pt.
 [19 <./Figures/occu_demand_group4.pdf> <./Figures/occu_gamma_group4.pdf>]
-<./Figures/200_random.pdf, id=527, 1191.63297pt x 623.94035pt>
+<./Figures/200_random.pdf, id=526, 1191.63297pt x 623.94035pt>
 File: ./Figures/200_random.pdf Graphic file (type pdf)
 <use ./Figures/200_random.pdf>
 Package pdftex.def Info: ./Figures/200_random.pdf  used on input line 152.
@@ -722,18 +722,18 @@ Package rerunfilecheck Info: File `sum1.out' has not changed.
 (rerunfilecheck)             Checksum: F8610E04E96C291F4F0775F4A450A894;4045.
  ) 
 Here is how much of TeX's memory you used:
- 15767 strings out of 478599
- 239449 string characters out of 5853593
+ 15766 strings out of 478599
+ 239444 string characters out of 5853593
  584752 words of memory out of 5000000
  33210 multiletter control sequences out of 15000+600000
  417416 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,15n,75p,1648b,529s stack positions out of 5000i,500n,10000p,200000b,80000s
 <e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on sum1.pdf (26 pages, 427251 bytes).
+Output written on sum1.pdf (26 pages, 426777 bytes).
 PDF statistics:
- 801 PDF objects out of 1000 (max. 8388607)
- 588 compressed objects within 6 object streams
- 165 named destinations out of 1000 (max. 500000)
+ 800 PDF objects out of 1000 (max. 8388607)
+ 587 compressed objects within 6 object streams
+ 164 named destinations out of 1000 (max. 500000)
  168 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -7,7 +7,7 @@ from SamplingMethodSto import samplingmethod1
 import copy
 
 class CompareMethods:
-    def __init__(self, roll_width, given_lines, I, probab, num_period, num_sample, s):
+    def __init__(self, roll_width, given_lines, I, probab, num_period, s):
         self.roll_width = roll_width  # array, mutable object
         self.given_lines = given_lines  # number, Immutable object
         self.s = s
@@ -15,8 +15,7 @@ class CompareMethods:
         self.demand_width_array = self.value_array + s
         self.I = I   # number, Immutable object
         self.probab = probab
-        self.num_period = num_period   # number, Immutable object
-        self.num_sample = num_sample   # number, Immutable object        
+        self.num_period = num_period   # number, Immutable object   
     # Used to generate the sequence with the first one fixed.
 
     def row_by_row(self, sequence):
@@ -226,7 +225,7 @@ class CompareMethods:
 
     def bid_price_1(self, sequence):
         # Original bid-price control policy.
-        # Don;t solve LP.
+        # Don;t solve LP. With simple break tie.
         decision_list = [0] * self.num_period
         roll_width = copy.deepcopy(self.roll_width)
         roll_length = sum(self.roll_width)
@@ -405,15 +404,15 @@ class CompareMethods:
                 j_index = indices[np.argmax(b_values)]
 
                 print(f'arrival:{i}')
-                print(f'beta: {b_values}')
+                print(f'value: {delta}')
                 print(f'index: {j_index}')
-                print(roll_width)
-
-                if j >= 0:
+                
+                if j > 0:
                     decision_list[t] = 1
                     roll_width[j_index] -= i+ self.s
                 else:
                     decision_list[t] = 0
+                print(roll_width)
         final_demand = np.array(sequence) * np.array(decision_list)
         final_demand = final_demand[final_demand != 0]
 
@@ -440,9 +439,8 @@ if  __name__ == "__main__":
     I = 4
     multi = np.arange(1, I+1)
     probab = np.array([0.12, 0.5, 0.13, 0.25])
-    num_sample = 1000
     s = 1
-    a = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, s)
+    a = CompareMethods(roll_width, given_lines, I, probab, num_period, s)
 
     # sequence = generate_sequence(num_period, probab, s)
 

@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex sum1"] 1754313425 "sum1.aux" "sum1.bbl" "sum1" 1754317024
+["bibtex sum1"] 1754313425 "sum1.aux" "sum1.bbl" "sum1" 1754373324
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1630494346 30002 8c0c5833f37bea3ec214cf315a72975d ""
   "refe.bib" 1743924734 22533 1d0cf2aaee92625efbc32698208cb768 ""
-  "sum1.aux" 1754317023 11765 73ded93f3f9c6536f47d3fc1b3e7252c "pdflatex"
+  "sum1.aux" 1754373323 11765 73ded93f3f9c6536f47d3fc1b3e7252c "pdflatex"
   (generated)
-  "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1754317021 "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" "sum1.pdf" "sum1" 1754317024
+  "sum1.bbl"
+["pdflatex"] 1754373321 "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" "sum1.pdf" "sum1" 1754373324
   "Chapters/Abstract.tex" 1744770453 3510 91fc798d3854030fabf04e891703899d ""
   "Chapters/Conclusion.tex" 1744528234 3339 63a7cea4b3d5ecd1c825fea887c72fd5 ""
-  "Chapters/Dynamic.tex" 1754317020 32986 e956561894fe8627fdf89b6c8eb596f5 ""
+  "Chapters/Dynamic.tex" 1754373321 32935 089bd5d9f3ad0286de07032e31559fec ""
   "Chapters/Introduction.tex" 1744526775 14083 35d3336d63f073505d900ad9d1ee8cea ""
   "Chapters/Literature_review.tex" 1744527147 10269 ad683085332b388375385099937127aa ""
   "Chapters/Problem_description.tex" 1749877300 2654 66e5f3515c6631b7c924f2ec0aef04a5 ""
@@ -171,12 +171,12 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/Seat_other/sum1.tex" 1754298091 2339 20c9aba3eb73d527a9d28a008b1b3867 ""
-  "sum1.aux" 1754317023 11765 73ded93f3f9c6536f47d3fc1b3e7252c "pdflatex"
+  "sum1.aux" 1754373323 11765 73ded93f3f9c6536f47d3fc1b3e7252c "pdflatex"
   "sum1.bbl" 1754313425 16339 997d3058e949fb88fb2ce95972f139f4 "bibtex sum1"
-  "sum1.out" 1754317023 4045 f8610e04e96c291f4f0775f4a450a894 "pdflatex"
+  "sum1.out" 1754373323 4045 f8610e04e96c291f4f0775f4a450a894 "pdflatex"
   "sum1.tex" 1754298091 2339 20c9aba3eb73d527a9d28a008b1b3867 ""
   (generated)
   "sum1.out"
   "sum1.pdf"
-  "sum1.log"
   "sum1.aux"
+  "sum1.log"

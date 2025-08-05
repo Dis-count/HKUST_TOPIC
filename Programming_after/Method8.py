@@ -15,6 +15,7 @@ class column_generation:
         self.I = I
 
     def dynamic_primal(self, dom_set, demand):
+        # return optimal primal
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.CONTINUOUS, name = 'x')
 
@@ -34,7 +35,7 @@ class column_generation:
 
         for i in range(self.I):
             for j in range(self.given_lines):
-                m.addConstr(x[i, j] == grb.quicksum(dom_set[j][h][i] * y[j][h] for h in range(len(dom_set[j]))))
+                m.addConstr(x[i, j] <= grb.quicksum(dom_set[j][h][i] * y[j][h] for h in range(len(dom_set[j]))))
 
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
 
@@ -49,6 +50,7 @@ class column_generation:
         return opt_x, opt_y
 
     def dual_primal(self, dom_set, demand):
+        # return optimal dual
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.CONTINUOUS, name='x')
 
@@ -68,7 +70,7 @@ class column_generation:
 
         for i in range(self.I):
             for j in range(self.given_lines):
-                m.addConstr(x[i, j] == grb.quicksum(dom_set[j][h][i] * y[j][h] for h in range(len(dom_set[j]))))
+                m.addConstr(x[i, j] <= grb.quicksum(dom_set[j][h][i] * y[j][h] for h in range(len(dom_set[j]))))
 
         m.setObjective(grb.quicksum(self.value_array[i] * x[i, j] for i in range(self.I) for j in range(self.given_lines)), GRB.MAXIMIZE)
 
@@ -105,9 +107,10 @@ class column_generation:
         return new_column
 
     def improved_bid(self, dom_set, demand):
+        # return three dual items
         m = grb.Model()
         alpha = m.addVars(self.I, lb=0, vtype = GRB.CONTINUOUS, name = 'alpha')
-        beta = m.addVars(self.I, self.given_lines, lb = float('-inf'), vtype = GRB.CONTINUOUS, name = 'beta')
+        beta = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.CONTINUOUS, name = 'beta')
         gamma = m.addVars(self.given_lines, lb=0, vtype = GRB.CONTINUOUS, name = 'gamma')
 
         m.addConstrs(alpha[i] + beta[i, j] >= self.value_array[i] for i in range(self.I) for j in range(self.given_lines))
@@ -160,7 +163,7 @@ class column_generation:
         count = 0
         while flag_new_pattern:
             count += 1
-            if count > 20:
+            if count > 50:
                 break
 
             #  return the dual of the master problem
@@ -189,7 +192,7 @@ class column_generation:
         count = 0
         while flag_new_pattern:
             count += 1
-            if count > 20:
+            if count > 50:
                 break
 
             #  return the dual of the master problem
@@ -206,21 +209,21 @@ class column_generation:
                     add_count += 1
             if add_count == 0:
                 flag_new_pattern = False
-        _, beta, _ = self.improved_bid(dom_set, demand)
+        alpha, beta, gamma = self.improved_bid(dom_set, demand)
         # for j in range(self.given_lines):
         #     print(f'set{j} have: {len(dom_set[j])}')
-        return beta
+        return alpha, beta, gamma
 
 
 if __name__ == "__main__":
     given_lines = 8
     # roll_width = np.ones(given_lines) * 21
-    roll_width = [25, 26, 21, 22, 23, 24, 27, 28]
+    roll_width = [21, 22, 23, 24, 25, 26, 27, 28]
     I = 4  # the number of group types
     s = 1
     demand_width_array = np.arange(2, 2+I)
 
-    demand = np.array([4, 12, 12, 21])
+    demand = np.array([4, 12, 16, 21])
 
     test = column_generation(roll_width, given_lines, demand_width_array, I, s)
 
@@ -246,6 +249,11 @@ if __name__ == "__main__":
     # pattern = test.subproblem(dual1, dual2[0], 5)
 
     opt_x, opt_y = test.setGeneration(dom_set, demand, roll_width)
+
+    # alpha, beta, gamma = test.setGeneration_bid(dom_set, demand, roll_width)
+    # print(f'alpha: {alpha}')
+    # print(f'beta: {beta}')
+    # print(f'gamma: {gamma}')
 
     print(f'x: {opt_x}')
     print(f'y: {opt_y}')

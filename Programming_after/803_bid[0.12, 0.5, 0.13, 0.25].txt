@@ -1,0 +1,22 @@
+Run Start Time:Mon Aug  4 20:45:36 2025
+The number of periods: 	60
+BPC: 98.04 ;RDPH: 98.94 ;Number of accepted people: 149.51 
+worst_BPC: 0.9481 
+;worst_RDPH: 0.9613 
+;The number of periods: 	70
+BPC: 97.15 ;RDPH: 98.81 ;Number of accepted people: 154.60 
+worst_BPC: 0.9481 
+;worst_RDPH: 0.9539 
+;The number of periods: 	80
+BPC: 96.91 ;RDPH: 98.62 ;Number of accepted people: 156.72 
+worst_BPC: 0.9487 
+;worst_RDPH: 0.9669 
+;The number of periods: 	90
+BPC: 96.93 ;RDPH: 98.59 ;Number of accepted people: 158.43 
+worst_BPC: 0.9497 
+;worst_RDPH: 0.9623 
+;The number of periods: 	100
+BPC: 97.43 ;RDPH: 98.91 ;Number of accepted people: 159.31 
+worst_BPC: 0.9563 
+;worst_RDPH: 0.9618 
+;Total Runtime	58.279099

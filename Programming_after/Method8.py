@@ -92,7 +92,7 @@ class column_generation:
         m.addConstr(grb.quicksum(self.demand_width_array[i] * h[i] for i in range(self.I)) <= row_j)
         m.setObjective(grb.quicksum((self.value_array[i] - alpha[i]) * h[i] for i in range(self.I)) - gamma, GRB.MAXIMIZE)
 
-        # m.write('11.lp')
+        # m.write('1.lp')
         m.setParam('OutputFlag', 0)
         m.optimize()
 
@@ -181,6 +181,35 @@ class column_generation:
         # for j in range(self.given_lines):
         #     print(f'set{j} have: {len(dom_set[j])}')
         return opt_x, opt_y
+
+    def setGeneration_bid(self, dom_set, demand, roll_width):
+        # New_pattern: List[]
+        # dom_set: Initial Set
+        flag_new_pattern = True
+        count = 0
+        while flag_new_pattern:
+            count += 1
+            if count > 20:
+                break
+
+            #  return the dual of the master problem
+            dual_alpha, dual_gamma = self.dual_primal(dom_set, demand)
+            # print(f'alpha: {dual_alpha}')
+            # print(f'gamma: {dual_gamma}')
+
+            add_count = 0
+            for j in range(self.given_lines):
+                new_pattern = self.subproblem(dual_alpha, dual_gamma[j], roll_width[j])
+                # print(new_pattern)
+                if new_pattern is not None:
+                    dom_set[j] = np.vstack((dom_set[j], new_pattern))
+                    add_count += 1
+            if add_count == 0:
+                flag_new_pattern = False
+        _, beta, _ = self.improved_bid(dom_set, demand)
+        # for j in range(self.given_lines):
+        #     print(f'set{j} have: {len(dom_set[j])}')
+        return beta
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 import numpy as np
 from I_BPC import CompareMethods
 import time
+from Mist import sequence_pool
 from Method10 import deterministicModel
 # Results of Different Policies under multiple probabilities
 
@@ -22,7 +23,7 @@ if __name__ == "__main__":
 
     for probab in probab_list:
         begin_time = time.time()
-        filename = '731_probab_' + str(probab) + '.txt'
+        filename = '803_bid' + str(probab) + '.txt'
         my_file = open(filename, 'w')
         my_file.write('Run Start Time:' + str(time.ctime()) + '\n')
         sequences_pool = np.load('sequence_0.12.npy')
@@ -51,20 +52,22 @@ if __name__ == "__main__":
             deter = deterministicModel(roll_width, given_lines, demand_width_array, I, sd)
 
             for j in range(count):
+            # j = 60
                 sequence = sequences_pool[j][0: num_period]
-                a = a_instance.improved(sequence)
-                b = a_instance.bid_price(sequence)
+                # a = a_instance.improved_bid(sequence)
+                b = a_instance.bid_price_1(sequence)
                 c = a_instance.dynamic_program1(sequence)
                 # e = a_instance.row_by_row(sequence)
-                value_a = np.dot(multi, a)
+                # value_a = np.dot(multi, a)
                 value_b = np.dot(multi, b)
                 value_c = np.dot(multi, c)
 
                 f = a_instance.offline(sequence)  # optimal result
                 optimal = np.dot(multi, f)
 
-                if value_a/optimal < worst_a:
-                    worst_a = value_a/optimal
+                # if value_a/optimal < worst_a:
+                #     k = j
+                #     worst_a = value_a/optimal
 
                 if value_b/optimal < worst_b:
                     worst_b = value_b/optimal
@@ -73,19 +76,21 @@ if __name__ == "__main__":
                     worst_c = value_c/optimal
 
 
-                ratio1 += value_a / optimal  # improved
+                # ratio1 += value_a / optimal  # improved
                 ratio2 += value_b / optimal  # bid-price
                 ratio3 += value_c / optimal  # DP1
                 # ratio5 += np.dot(multi, e) / optimal  # FCFS
                 accept_people += optimal
 
-            my_file.write('BPP: %.2f ;' % (ratio1/count*100))
+            # my_file.write('BPP: %.2f ;' % (ratio1/count*100))
             my_file.write('BPC: %.2f ;' % (ratio2/count*100))
             my_file.write('RDPH: %.2f ;' % (ratio3/count*100))
             my_file.write('Number of accepted people: %.2f \n' % (accept_people/count))
-            my_file.write('worst_BPP: %.4f \n;' % (worst_a))
+            # my_file.write('worst_BPP: %.4f \n;' % (worst_a))
             my_file.write('worst_BPC: %.4f \n;' % (worst_b))
             my_file.write('worst_RDPH: %.4f \n;' % (worst_c))
+        
+        # print(f'index:{k}')
 
         run_time = time.time() - begin_time
         my_file.write('Total Runtime\t%f\n' % run_time)

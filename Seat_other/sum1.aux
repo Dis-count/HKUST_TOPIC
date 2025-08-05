@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -61,18 +64,19 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4}Seat Assignment with Dynamic Requests}{7}{section.4}\protected@file@percent }
 \newlabel{sec_dynamic_seat}{{4}{7}{Seat Assignment with Dynamic Requests}{section.4}{}}
 \newlabel{DP}{{4}{7}{Seat Assignment with Dynamic Requests}{equation.4.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Traditional BPC Policy}{8}{subsection.4.1}\protected@file@percent }
-\newlabel{bid-price_dual}{{5}{8}{Traditional BPC Policy}{equation.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}BPC Policy}{8}{subsection.4.1}\protected@file@percent }
+\newlabel{bid-price_dual}{{5}{8}{BPC Policy}{equation.4.5}{}}
 \newlabel{bid-price}{{1}{8}{}{lem.1}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Bid-Price Control\relax }}{9}{algocf.1}\protected@file@percent }
-\newlabel{algo_bid}{{1}{9}{Traditional BPC Policy}{algocf.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}BPC Policy Based on Patterns}{9}{subsection.4.2}\protected@file@percent }
-\newlabel{dp_bid}{{7}{9}{BPC Policy Based on Patterns}{equation.4.7}{}}
-\newlabel{appro_dp}{{8}{10}{BPC Policy Based on Patterns}{equation.4.8}{}}
-\newlabel{improve_bid}{{10}{10}{BPC Policy Based on Patterns}{equation.4.10}{}}
+\newlabel{algo_bid}{{1}{9}{BPC Policy}{algocf.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}BPC Policy Based on Patterns (BPP)}{9}{subsection.4.2}\protected@file@percent }
+\newlabel{dp_bid}{{7}{9}{BPC Policy Based on Patterns (BPP)}{equation.4.7}{}}
+\newlabel{appro_dp}{{8}{10}{BPC Policy Based on Patterns (BPP)}{equation.4.8}{}}
+\newlabel{improve_bid}{{10}{10}{BPC Policy Based on Patterns (BPP)}{equation.4.10}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Improved Bid-Price Control\relax }}{11}{algocf.2}\protected@file@percent }
-\newlabel{algo_improve_bid}{{2}{11}{BPC Policy Based on Patterns}{algocf.2}{}}
+\newlabel{algo_improve_bid}{{2}{11}{BPC Policy Based on Patterns (BPP)}{algocf.2}{}}
 \newlabel{BPC_relation}{{2}{11}{}{lem.2}{}}
+\newlabel{BPP_decision}{{3}{11}{}{lem.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Dynamic Primal Based on Patterns}{11}{subsection.4.3}\protected@file@percent }
 \newlabel{improve_primal}{{11}{11}{Dynamic Primal Based on Patterns}{equation.4.11}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}Solve the dynamic primal}{12}{subsubsection.4.3.1}\protected@file@percent }

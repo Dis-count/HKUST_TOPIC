@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex sum1"] 1754917193 "sum1.aux" "sum1.bbl" "sum1" 1754917691
+["bibtex sum1"] 1754917193 "sum1.aux" "sum1.bbl" "sum1" 1754918062
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1630494346 30002 8c0c5833f37bea3ec214cf315a72975d ""
   "refe.bib" 1743924734 22533 1d0cf2aaee92625efbc32698208cb768 ""
-  "sum1.aux" 1754917690 11376 80aeafb0979ea5e32237307d746a2e8b "pdflatex"
+  "sum1.aux" 1754918061 11376 80aeafb0979ea5e32237307d746a2e8b "pdflatex"
   (generated)
   "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1754917688 "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" "sum1.pdf" "sum1" 1754917691
+["pdflatex"] 1754918059 "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" "sum1.pdf" "sum1" 1754918062
   "Chapters/Abstract.tex" 1744770453 3510 91fc798d3854030fabf04e891703899d ""
   "Chapters/Conclusion.tex" 1744528234 3339 63a7cea4b3d5ecd1c825fea887c72fd5 ""
-  "Chapters/Dynamic.tex" 1754917687 35176 8086acabcf79b6c5ef5e2b996b81f89b ""
+  "Chapters/Dynamic.tex" 1754918059 35316 b2d26ad803e91bf698911b304b66040c ""
   "Chapters/Introduction.tex" 1744526775 14083 35d3336d63f073505d900ad9d1ee8cea ""
   "Chapters/Literature_review.tex" 1744527147 10269 ad683085332b388375385099937127aa ""
   "Chapters/Results.tex" 1754312401 25492 214ac28211ae21cb064a99cdef85df03 ""
@@ -173,12 +173,12 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" 1754880865 2361 f9ebff02bd6f6ed576111a653a19868c ""
-  "sum1.aux" 1754917690 11376 80aeafb0979ea5e32237307d746a2e8b "pdflatex"
+  "sum1.aux" 1754918061 11376 80aeafb0979ea5e32237307d746a2e8b "pdflatex"
   "sum1.bbl" 1754917194 16339 997d3058e949fb88fb2ce95972f139f4 "bibtex sum1"
-  "sum1.out" 1754917690 3505 9c5ec158d43758cc04a28ddd17f9d796 "pdflatex"
+  "sum1.out" 1754918061 3505 9c5ec158d43758cc04a28ddd17f9d796 "pdflatex"
   "sum1.tex" 1754880865 2361 f9ebff02bd6f6ed576111a653a19868c ""
   (generated)
-  "sum1.pdf"
-  "sum1.aux"
   "sum1.log"
+  "sum1.aux"
+  "sum1.pdf"
   "sum1.out"

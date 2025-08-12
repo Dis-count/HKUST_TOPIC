@@ -28,12 +28,12 @@ We propose our policy for assigning arriving requests. First, we employ the trad
 Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different types, which determine the eligibility of items to take the sizes. Bid-prices refer to the opportunity costs of taking one size of capacity. As usual, we estimate the bid price of one size by the shadow price of the capacity constraint corresponding to some knapsack. In this section, we will demonstrate the implementation of the bid-price control policy. 
 
 
-First, we give the formulation of the LP relaxation of the multi-class multiple knapsack problem (MMKP). Let $x_{ij}$ represent the number of items of type $i$ placed in knapsack $j$. The whole request of each item type during T periods is represented by the expected demand $d_i = \sum_{t=1}^{T} \lambda^{t}_{i}$. Then, the problem can be expressed as:
+First, we give the formulation of the LP relaxation of the multi-type multiple knapsack problem (MMKP). Let $x_{ij}$ represent the number of items of type $i$ placed in knapsack $j$. The whole request of each item type during T periods is represented by the expected demand $d_i = \sum_{t=1}^{T} \lambda^{t}_{i}$. Then, the problem can be expressed as:
 
 \begin{align}
 \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} r_{i} x_{ij} \label{e0} \\
 \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \label{deter_upper}\\ 
-& \sum_{i=1}^{M} w_{i} x_{ij} \leq C_j, j \in \mathcal{N}, \label{capa_con} \\
+& \sum_{i=1}^{M} w_{i} x_{ij} \leq c_j, j \in \mathcal{N}, \label{capa_con} \\
 & x_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}. \notag
 \end{align}
 
@@ -51,7 +51,7 @@ The dual of LP relaxation of the MMKP problem is:
 
 \begin{equation}\label{bid-price_dual}
     \begin{aligned}
-    \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} C_j \beta_{j} \\
+    \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} c_j \beta_{j} \\
     \text {s.t.} \quad & z_{i} + \beta_j w_i \geq r_i, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
     & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
     \end{aligned}

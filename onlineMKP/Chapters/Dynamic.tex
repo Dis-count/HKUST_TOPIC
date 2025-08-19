@@ -5,6 +5,7 @@ Consider $N$ knapsacks, with each knapsack $j$ containing $c_j \in \mathbb{Z}^{+
 
 To model this problem, we formulate it using dynamic programming approach in a discrete-time framework. Time is divided into $T$ periods, indexed forward from $1$ to $T$. We assume that in each period, at most one request arrives and the probability of an arrival for an item type $i$ is denoted as $\lambda_i^{t}$, where $i \in \mathcal{M}$. The probabilities satisfy the constraint $\sum_{i=1}^M \lambda_i^{t} \leq 1$, indicating that the total probability of any item arriving in a single period does not exceed one. We introduce the probability $\lambda_0^{t} = 1 - \sum_{i=1}^{M} \lambda_i^{t}$ to represent the probability of no arrival in each period. To simplify the analysis, we assume that the arrivals of different item types are independent and the arrival probabilities remain constant over time. This assumption can be extended to consider dependent arrival probabilities over time if necessary.
 
+
 The remaining capacity in each knapsack is represented by a vector $\mathbf{C} = (c_1, c_2, \ldots, c_N)$, where $c_j$ denotes the capacity of knapsack $j$. Upon the arrival of an item type $i$ at time $t$, the seller needs to make a decision denoted by $u_{i,j}^{t}$, where $u_{i,j}^{t} = 1$ indicates acceptance of type $i$ in knapsack $j$ during period $t$, while $u_{i,j}^{t} = 0$ signifies rejection of that type in knapsack $j$. The feasible decision set is defined as $$U^{t}(\mathbf{L}) = \left\{u_{i,j}^{t} \in \{0,1\}, \forall i \in \mathcal{M}, \forall j \in \mathcal{N} \bigg| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i \in \mathcal{M}; w_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{C}, \forall i \in \mathcal{M}, \forall j \in \mathcal{N}\right\}.$$
 Here, $\mathbf{e}_j$ represents an N-dimensional unit column vector with the $j$-th element being 1, i.e., $\mathbf{e}_j = (\underbrace{0, \cdots, 0}_{j-1}, 1, \underbrace{0, \cdots, 0}_{N-j})$. The decision set $U^{t}(\mathbf{C})$ consists of all possible combinations of acceptance and rejection decisions for each type in each knapsack, subject to the constraints that at most one item of each type can be accepted in any knapsack, and the size of each accepted item must not exceed the remaining capacity of the row.
 
@@ -26,7 +27,6 @@ We propose our policy for assigning arriving requests. First, we employ the trad
 
 \subsection{BPC Policy}
 Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different types, which determine the eligibility of items to take the sizes. Bid-prices refer to the opportunity costs of taking one size of capacity. As usual, we estimate the bid price of one size by the shadow price of the capacity constraint corresponding to some knapsack. In this section, we will demonstrate the implementation of the bid-price control policy. 
-
 
 First, we give the formulation of the LP relaxation of the multi-type multiple knapsack problem (MMKP). Let $x_{ij}$ represent the number of items of type $i$ placed in knapsack $j$. The whole request of each item type during T periods is represented by the expected demand $d_i = \sum_{t=1}^{T} \lambda^{t}_{i}$. Then, the problem can be expressed as:
 
@@ -58,7 +58,7 @@ The dual of LP relaxation of the MMKP problem is:
   \end{equation}
 
 In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for one size in knapsack $j$. A request is only accepted if the revenue it generates is no less than the sum of the bid prices of the sizes it uses. Thus, if $r_i -\beta_{j} w_i \geq 0$, meanwhile, the capacity allows, we will accept the item type $i$. And choose capacity $j^{*} = \arg \max_{j} \{r_i -\beta_{j} w_i\}$ to allocate that item.
-  
+
 \begin{lem}\label{bid-price}
 The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{r_{i} w_{\tilde{i}} - r_{\tilde{i}} w_{\tilde{i}}}{w_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{r_{\tilde{i}}}{w_{\tilde{i}}}$ for all $j$.
 \end{lem}
@@ -97,121 +97,159 @@ However, the BPC policy has two drawbacks. First, the capacity feasibility need 
 \subsection{BPC Policy Based on Patterns (BPP)}
 To account for the differences in placing items across knapsacks, we propose an enhanced dynamic programming (DP) formulation. The key idea, as detailed next, is to represent knapsack configurations using patterns rather than merely tracking the residual capacities.
 
-A feasible pattern $\bm{h} = (h_{1}, \ldots, h_{M})$ for knapsack $j$ satisfies $\sum_{i=1}^{M} w_{i} h_{i} \leq c_{j}$. Suppose that $S(c_{j})$ is the set of all feasible patterns for knapsack $j$. 
+A feasible pattern $\bm{h} = [h_{1}, \ldots, h_{M}]$ for knapsack $j$ satisfies $\sum_{i=1}^{M} w_{i} h_{i} \leq c_{j}$. Suppose that $S(c_{j})$ is the set of all feasible patterns for knapsack $j$. 
 
 Let $v^t(\bm{C})$ denote the maximal expected value-to-go at time $t$, given the remaining capacity $\bm{C}$. The enhanced dynamic programming formulation is as follows:
+
 \begin{equation}
-    \begin{array}{lr}
-    v^t(\bm{C}) = \mathbb{E}_{i \sim \lambda^t}\Bigg[\max\Big\{\max_{j :\bm{h} \in S(c_{j}), 
-    h_{i} \geqslant 1}\left\{v^{t+1}(\bm{C}- e_{j}^{T} \cdot w_{i})+ r_{i}\right\}, v^{t+1}(\bm{C})\Big\}\Bigg], & \forall t, \bm{C}, \\
-    v^{T+1}(\bm{C})=0, & \forall \bm{C}.
-    \end{array}
+v^t(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\left[\left\{
+\begin{array}{ll}
+\max \left\{\max _{j: \bm{h} \in S(c_j), h_i \geq 1}\left\{v^{t+1}\left(\bm{C}-e_j^T \cdot w_i\right)+r_i\right\}, v^{t+1}(\bm{C})\right\}, & \exists j, \bm{h} \in S(c_j), h_i \geq 1, \\
+v^{t+1}(\bm{C}) & \text{otherwise}.
+\end{array}\right]\right.
 \end{equation}
 
-There are two layers of maximization. The inner maximization evaluates the optimal placement of item 
-$i$ across all knapsacks $j$ where the pattern $h$ is feasible for knapsack $j$ (i.e., $\bm{h} \in S(c_{j})$) and the item type $i$ can be accommodated (i.e., $h_{i} \geq 1$). The outer maximization compares the value of accepting $i$ (via the inner maximization) and rejecting $i$ (retaining $v^{t+1}(\bm{C})$).
+
+The DP formulation involves two layers of maximization when there exists at least one knapsack $j$ satisfying $\bm{h} \in S(c_j), h_{i} \geq 1$. The inner maximization evaluates the optimal placement of item type $i$ across all feasible knapsacks $j$ where the pattern $h$ is feasible for knapsack $j$ (i.e., $\bm{h} \in S(c_{j})$) and the item type $i$ can be accommodated (i.e., $h_{i} \geq 1$). The outer maximization compares the value of accepting $i$ (via the inner maximization) and rejecting $i$ (retaining $v^{t+1}(\bm{C})$). If no such $j$ exists, the request $i$ is rejected.
+
+
+For notational convenience, we define $q_i$ as follows:
+\begin{equation*}
+    q_i= \begin{cases}\max _{j: h \in S\left(c_j\right), h_i \geq 1}\left\{v^{t+1}\left(C-e_j^T w_i\right)+r_i\right\} & \text { if } \exists j \text{ satisfying } h \in S\left(c_j\right), h_i \geq 1 \\ 0 & \text { otherwise }\end{cases}
+\end{equation*}
 
 We can solve the following program to compute $v^1(\bm{C})$ for any given capacity $\bm{C}$:
 
 \begin{equation}\label{dp_bid}
     \begin{aligned}
     \min \quad & v^{1}(\bm{C}) \\
-    \mathrm{s.t.} \quad & v^{t}(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\Bigg[\max\Big\{\max_{j :\bm{h} \in S(c_{j}), 
-    h_{i} \geqslant 1}\left\{v^{t+1}(\bm{C}- e_{j}^{T} \cdot w_{i})+ r_i\right\}, v^{t+1}(\bm{C})\Big\}\Bigg], \\
+    \mathrm{s.t.} \quad & v^{t}(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\Bigg[\max\Big\{ q_{i}, v^{t+1}(\bm{C})\Big\}\Bigg], \\
     & v^{T+1}(\bm{C}) \geq 0.
     \end{aligned}
 \end{equation}
 
+
 Solving \eqref{dp_bid} remains computationally prohibitive. Following from the ADP approach, we approximate $v^{t}(\bm{C})$ as 
 
 \begin{equation}\label{appro_dp}
-    \hat{v}^{t}(\bm{C}) = \theta^{t} + \sum_{j=1}^{N} \max_{\bm{h} \in S(c_{j})} \{\sum_{i=1}^{M} \beta_{ij} h_{i}\}.
+    \hat{v}^{t}(\bm{C}) = \theta^{t} + \sum_{j=1}^{N} \max_{\bm{h} \in S(c_{j})} \{\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}\}.
 \end{equation}
 
-Unlike traditional linear approximations, our approach retains the linear term $\theta^{t}$ but introduces a nonlinear component for each knapsack $j$. Specifically, we maximize the linear combination $\sum_{i=1}^{M} \beta_{ij} h_{i}$ over the feasible set $S(c_{j})$.
+The term $\beta_{ij}^{\dag}$ can be regarded as the approximated value for each type $i$ in knapsack $j$. Unlike traditional linear approximations, our approach retains the linear term $\theta^{t}$ but introduces a nonlinear component for each knapsack $j$. Specifically, we maximize the linear combination $\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}$ over the feasible set $S(c_{j})$.
 
 Our approximation extends classical linear ADP by incorporating resource-specific nonlinear terms through constrained maximization over feasible allocations. While similar separable corrections appear in resource allocation ADP (e.g., Powell, 2007), our explicit use of $\max_{\bm{h} \in S(c_j)}$ captures local constraints more directly.
 
-% akin to dual decomposition methods (Shapiro \& Nemirovski, 2005).
 
 % Our approximation adopts a separable nonlinear structure, but unlike classical approximations, the nonlinearity is implicitly defined by constrained maximization over feasible allocations. This captures problem-specific constraints.
-
-The term $\beta_{ij}$ can be regarded as the approximated value for each item in knapsack $j$. 
 
 Substituting \eqref{appro_dp} into \eqref{dp_bid}, we have:
 
 \begin{align}
-    \theta^{t} - \theta^{t+1} = \hat{v}^{t}(\bm{C}) - \hat{v}^{t+1}(\bm{C}) \geq \sum_{i} \lambda_{i}^{t} \max\left\{\max_{j:\bm{h} \in S(c_{j}), h_{i} \geqslant 1}\{v^{t+1}(\bm{C} - e_{j}^{T} w_{i}) - v^{t+1}(\bm{C}) + r_i\}, 0\right\}
+    \theta^{t} - \theta^{t+1} = \hat{v}^{t}(\bm{C}) - \hat{v}^{t+1}(\bm{C}) \geq \sum_{i} \lambda_{i}^{t} \max\left\{q_{i} - v^{t+1}(\bm{C}), 0\right\}
 \end{align}
 
-For each $j$, $v^{t+1}(\bm{C} - e_{j}^{T} w_{i}) - v^{t+1}(\bm{L}) = \max_{\bm{h} \in S(c_{j}- w_{i})} \{\sum_{i} \beta_{ij} h_{i}\} - \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij} h_{i}\} = -\beta_{ij}$.
+For the case where there exists a knapsack $j$ satisfying both conditions: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ and $h_{i}^{*} \geq 1$, we establish the value difference: 
 
-Let $\alpha_{i} = \max\left\{\max_{j}\left\{r_i - \beta_{ij} \right\}, 0\right\}$ and $\gamma_{j} = \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij} h_{i}\}$.
- 
-Then, we obtian $\theta^{1} = \sum_{t=1}^{T} (\theta^{t} - \theta^{t+1}) \geq \sum_{t} \sum_{i} \alpha_{i} p_{i} = \sum_{i} d_{i} \alpha_{i}$ and $\hat{v}^{1}(\bm{C}) = \sum_{i} d_{i} \alpha_{i} + \sum_{j} \gamma_{j}$.
+\begin{align*}
+    & v^{t+1}(\bm{C} - e_{j}^{T} w_{i}) - v^{t+1}(\bm{C}) \\ 
+  = & \max_{\bm{h} \in S(c_{j}- w_{i})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\} - \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\} \\
+  = & -\beta_{ij}^{\dag} \leq 0
+\end{align*}
 
-Since $\hat{v}^{1}(\bm{C})$ is a feasible solution to \eqref{dp_bid}, then $\hat{v}^{1}(\bm{C}) \geq v^{1}(\bm{C}) =  V^{DP}$.
+The acceptance threshold is then defined as:
+$$\alpha_{i} = \max\left\{\max_{j}\left\{r_i - \beta_{ij}^{\dag} \right\}, 0\right\},$$ 
+with $\alpha_{i} = 0$ when no qualifying knapsack $j$ exists.
 
-The corresponding bid-price problem can be expressed as:
+Let $\gamma_{j} = \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\}$. This yields:
+
+\begin{align*}
+    \theta^{1} & = \sum_{t=1}^{T} (\theta^{t} - \theta^{t+1}) \geq \sum_{t} \sum_{i} \alpha_{i} \lambda_{i}^{t} = \sum_{i} d_{i} \alpha_{i} \\
+    \hat{v}^{1}(\bm{C}) & = \sum_{i} d_{i} \alpha_{i} + \sum_{j} \gamma_{j}
+\end{align*}
+
+Since $\hat{v}^{1}(\bm{C})$ constitutes a feasible solution to \eqref{dp_bid}, we have $\hat{v}^{1}(\bm{C}) \geq v^{1}(\bm{C}) =  V^{DP}$.
+
+If all $j$ exist for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$, the corresponding bid-price problem can be expressed as:
 
 \begin{equation}\label{improve_bid}
     \begin{aligned}
     \min \quad & \sum_{i=1}^M \alpha_i d_i+ \sum_{j=1}^N \gamma_j \\
-    \mathrm{s.t.} \quad & \alpha_i+\beta_{i j} \geq r_i, \quad \forall i, j, \\
-    & \sum_{i=1}^M \beta_{i j} h_i \leq \gamma_j, \quad \forall j, \bm{h} \in S(c_j), \\
-    & \alpha_i \geq 0, \forall i, \quad \beta_{ij} \geq 0, \forall i, j \\
+    \mathrm{s.t.} \quad & \alpha_i+ \beta_{ij}^{\dag} \geq r_i, \quad \forall i, j, \\
+    & \sum_{i=1}^M \beta_{ij}^{\dag} h_i \leq \gamma_j, \quad \forall j, \bm{h} \in S(c_j), \\
+    & \alpha_i \geq 0, \forall i, \quad \beta_{ij}^{\dag} \geq 0, \forall i, j \\
     & \gamma_j \geq 0, \quad \forall j.
     \end{aligned}
 \end{equation}
 
-$\alpha_{i}$ represents marginal revenue for type $i$. $\beta_{ij}$ represents the cost for type $i$ assigned in knapsack $j$. $\gamma_{j}$ represents the capacity cost associated with knapsack $j$.
+$\alpha_{i}$ represents marginal revenue for type $i$. $\beta_{ij}^{\dag}$ represents the cost for type $i$ assigned in knapsack $j$. $\gamma_{j}$ represents the capacity cost associated with knapsack $j$.
+
+When no knapsack $j$ exists satisfying both $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ and $h_{i}^{*} \geq 1$, the first set of constraints for $(i,j)$ should be removed from the formulation \eqref{improve_bid}. Although these constraints appear difficult to enforce in advance, the following lemma reveals that in practice we can avoid imposing additional restrictions. Simply solving problem \eqref{improve_bid} will inherently satisfy all required conditions.
+
+% \begin{lem}
+% For the optimal solution, $r_{i} \geq \beta_{ij}^{\dag}$.
+% \end{lem}
+
+\begin{lem}\label{BPP}
+Define $\mathcal{J} = \{j \in \mathcal{N} \mid r_i - \beta_{ij}^{\dag *} > 0\}$. Then there exists some $j_0 \in \mathcal{J}$ such that:
+
+$$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
+\end{lem}
+
+This lemma guarantees that when such a $j_0$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}^{1}(\bm{C})$.
+
+Then, the control policy becomes as follow. If $\alpha_{i} > 0$, accept the type $i$. Find knapsack $k = \arg \max_{j \in \mathcal{N}}\{r_i - \beta_{ij}^{\dag}\}$, if multiple maximizers exist, assign the type $i$ to a knapsack $j$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$ If $\alpha_{i} = 0$, check whether there exists a knapsack $j$ such that: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1$. If no such $j$ exists, reject the type $i$; otherwise, accept the type $i$ and assign it to knapsack $j$.
 
 Let $z(\text{BPC})$ and $z(\text{BPP})$ denote the expected optimal value of \eqref{bid-price_dual} and \eqref{improve_bid}, respectively.
 
 \begin{lem}\label{BPC_relation}
-    For any optimal bid-prices, $\beta_{j}$, in \eqref{bid-price_dual}, there exist optimal bid-prices, $\beta_{ij}$, in \eqref{improve_bid} such that we have the relation:
-    $\beta_{ij} \leq w_{i} \beta_{j}, \forall i$. Furthermore, $z(\text{BPC}) \geq z(\text{BPP})$.
+    For the optimal $\beta_{j}^{*}$ in \eqref{bid-price_dual}, there exist optimal $\beta_{ij}^{\dag *}$ in \eqref{improve_bid} satisfying $\beta_{ij}^{\dag *} \leq w_{i} \beta_{j}^{*}$ for all $i$. Furthermore, $z(\text{BPC}) \geq z(\text{BPP})$.
 \end{lem}
     
-    % $\beta_{ij} = n_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
+% $\beta_{ij}^{\dag} = n_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
     
 Both bid-price approaches give upper bounds on the value function at any state, meanwhile it follows that BPP provides a tighter approximation to the value function more accurately than BPC does.
 
-Under the approximation \eqref{appro_dp}, the BPP policy operates as follows: accept type $i$ if $r_i - \beta_{ij} > 0$ and at least one knapsack has sufficient capacity, reject item type $i$ otherwise. 
+Under the approximation \eqref{appro_dp}, the BPP policy operates as follows: accept type $i$ if $r_i - \beta_{ij}^{\dag} > 0$ and at least one knapsack has sufficient capacity, reject item type $i$ otherwise. 
+
+% $\max_{j \in \mathcal{N}}{c_j^{t}} \geq w_i$
 
 \begin{algorithm}[H]
-    \caption{Improved Bid-Price Control}\label{algo_improve_bid}
+    \caption{Bid-Price Control Based on Patterns}\label{algo_improve_bid}
     \For{$t =1, \ldots, T$}{
       {Observe a request of item type $i$\;}
       {Solve problem \eqref{improve_bid} with $\bm{d}^{[t, T]}$ and $\mathbf{L}^{t}$\;}
-      \eIf{$r_i - \beta_{ij} > 0$ and $\max_{j \in \mathcal{N}}{c_j^{t}} \geq w_i$}
-      {Set $k = \arg \max_{j \in \mathcal{N}}\{r_i - \beta_{ij}\} $ and break ties\;
-      Assign the item to knapsack $k$, let $c_{k}^{t+1} \gets c_{k}^{t} - w_{i}$\;}
-      {Reject the request\;}}
+      \eIf{$r_i - \beta_{ij}^{\dag} > 0$}
+      {Set $k = \arg \max_{j \in \mathcal{N}}\{r_i - \beta_{ij}^{\dag}\}$\;
+      If multiple $k$s exist, assign the type $i$ to a knapsack $j$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
+      Let $c_{j}^{t+1} \gets c_{j}^{t} - w_{i}$\;}
+      {\eIf{There exists $j$ such that $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$}{Assign the item in knapsack $j$, let $c_{j}^{t+1} \gets c_{j}^{t} - w_{i}$\;}
+      {Reject the request\;}}}
 \end{algorithm}
 
-Furthermore, the BPP policy exhibits a threshold structure similar to the BPC policy. There exists a threshold type $\tilde{i}$ (or $\tilde{i}-1$, depending on the remaining capacity and expected future demand) such that all item types $i \leq \tilde{i}$ (or $i \leq \tilde{i}-1$) are rejected and larger types $i > \tilde{i}$ (or $i > \tilde{i}-1$) are accepted.
+% Furthermore, the BPP policy exhibits a threshold structure similar to the BPC policy. There exists a threshold type $\tilde{i}$ (or $\tilde{i}-1$, depending on the remaining capacity and expected future demand) such that all item types $i \leq \tilde{i}$ (or $i \leq \tilde{i}-1$) are rejected and larger types $i > \tilde{i}$ (or $i > \tilde{i}-1$) are accepted.
 
+% Specifically, we have 
+% \begin{lem}\label{BPP_decision}    
+%     For the threshold index $\tilde{i}$ in Proposition \ref{sol_relax_deter},
+%     \begin{itemize}
+%         \item If $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} > \sum_{j=1}^{N} c_{j}$, then $r_i - \beta_{ij}^{\dag} \leq 0$, for $i \leq \tilde{i}$,
+%         \item If $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} = \sum_{j=1}^{N} c_{j}$, then $r_i - \beta_{ij}^{\dag} \leq 0$, for $i \leq \tilde{i}-1$.
+%     \end{itemize}
+% \end{lem}
 
-Specifically, we have 
-\begin{lem}\label{BPP_decision}    
-    For the threshold index $\tilde{i}$ in Proposition \ref{sol_relax_deter},
-    \begin{itemize}
-        \item If $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} > \sum_{j=1}^{N} c_{j}$, then $r_i - \beta_{ij} \leq 0$, for $i \leq \tilde{i}$,
-        \item If $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} = \sum_{j=1}^{N} c_{j}$, then $r_i - \beta_{ij} \leq 0$, for $i \leq \tilde{i}-1$.
-    \end{itemize}
-\end{lem}
-
-Lemma \ref{BPP_decision} indicates how the relation between the remaining capacity and the expected demand affects the decision.
+% Lemma \ref{BPP_decision} indicates how the relation between the remaining capacity and the expected demand affects the decision.
 
 % when $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} > \sum_{j=1}^{N} c_{j}$, item type $i, i \leq \tilde{i}$ is rejected and item type $i, i > \tilde{i}$ is accepted; when $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} = \sum_{j=1}^{N} c_{j}$, item type $i, i \leq \tilde{i}-1$ is rejected and item type $i, i \geq \tilde{i}$ is accepted.
 
 % Proof:
-% $\sum_{j} x_{ij}^{*} < d_{i}$, then $\alpha_{i}^{*} = 0$. $i - \beta_{ij} \leq 0$.
+% $\sum_{j} x_{ij}^{*} < d_{i}$, then $\alpha_{i}^{*} = 0$. $i - \beta_{ij}^{\dag} \leq 0$.
 
 % Lemma \ref{BPC_relation} shows that the I-BPC policy does not uniformly reject all small groups. Instead, it selectively accepts them based on pattern-based allocation, enabling more flexible decision-making. Unlike the traditional BPC, the I-BPC policy accounts for row-specific characteristics in allocation decisions. Therefore, the I-BPC policy better captures the structure of the capacity than the BPC policy does.
 
-This slight difference may not bring the better performance for the BPP policy. Meanwhile, the bid-price policies are established via a ``dual'' formulation, which lose the information contained in the primal problem. For example, they cannot guarantee feasible placement. Hence, we consider the dynamic primal formulation.
+
+Unlike the traditional BPC, the BPP does not require explicit feasibility checks on capacity. However, it still needs to verify whether the optimal pattern contains the given request. This introduces a new challenge, as bid-price policies are inherently derived from a dual formulation, which may inherently omit key information preserved in the primal problem.
+
+While this verification is cumbersome under pure bid-price frameworks, the primal problem offers a more direct way to guarantee the existence of such a request-pattern match. To address this gap, we propose a dynamic primal formulation.
 
 \subsection{Dynamic Primal Based on Patterns}
 
@@ -229,10 +267,36 @@ Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in knapsack $j
 The first set of constraints demonstrate that for each item type $i$, the sum of assigned items and unassigned items equals the total demand. The second set of constraints shows that the number of items of type $i$ assigned in knapsack $j$ is not larger than the sum of $h_{i}$ (the count of type $i$ items in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in knapsack $j$ cannot exceed 1.
 
 \begin{lem}
-If $x_{ij}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $c_{j} \geq w_{i}$.
+The optimal solution $x_{ij}^{*}$ to \eqref{improve_primal} satisfies $x_{ij}^{*} > 0$ if and only if there exists a knapsack $j$ such that $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1.$$
 \end{lem}
 
-This guarantees the feasibility of assigning type $i$ in knapsack $j$.
+In contrast to Lemma \ref{BPP}, this lemma demonstrates the equivalence between the condition $x_{ij}^{*} > 0$ and the existance of a knapsack $j$ satisfying $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$. This equivalence eliminate the need for explicit existance verification.
+
+% This lemma 与 lemma \ref{BPP} 相比，when $x_{ij}^{*} > 0$, 则一定存在j for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$ 而不需要单独check是否存在。
+This lemma guarantees the existance of type $i$ in knapsack $j$ when $x_{ij}^{*} > 0$. We don't need to check whether knapsack $j$ exists for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$.
+
+\begin{example}
+Consider $M =3$, $N =4$, $w_{1} = 3, w_{2} = 4, w_{3} = 5$, $r_{1} = 4, r_{2} = 6, r_{3} = 8$, $\bm{C} = [7, 8, 8, 4]$, $T = 8$, stationary probability arrival, $p_{1} = p_{3} = \frac{1}{4}$, $p_{2} = \frac{1}{2}$. Then the expected demand for each type is $\bm{d} = (2, 4, 2)$.
+
+For the traditional bid-price control, for each $j$, $\beta_{j}^{*} = \frac{4}{3}$. $z(BPC) = \frac{124}{3}$. Two drawbacks: there is no difference among knapsacks. Even $r_{3} - \beta_{4}^{*} * w_{3} > 0$, it is infeasible for type 3 assigned in knapsack 4.
+
+For the BPP, $\bm{\beta}_{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}_{2}^{*} = [6, 6, 6, 6]$, $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. $z(BPP) = 40$. $\alpha = [0, 0, 0]$, $\gamma = [10, 12, 12, 6]$.
+
+$r_{1} - \bm{\beta}_{1}^{*} = [0, 0, 0, -2]$, $r_{2} - \bm{\beta}_{2}^{*} = [0, 0, 0, 0]$, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$.
+
+Drawback: need to check whether $j$ exists for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}, h_{i}^{*} \geq 1$.
+
+For example, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ indicates type 3 cannot be assigned in knapsack 1. While the generated patterns for knapsack 4 are $[0, 1, 0], [1, 0, 0]$, which do not contain $h_{3}$, type 3 can only be assigned to knapsack 2 or 3.
+
+% $[1, 1, 0], [2, 0, 0], [0, 0, 1]$, $[0, 2, 0], [1, 0, 1]$, $[0, 2, 0], [1, 0, 1]$, $[0, 1, 0], [1, 0, 0]$
+
+For the primal, $\bm{x}_{1}^{*} = [1, 1, 0, 0]$, $\bm{x}_{2}^{*} = [1, 0, 2, 1]$, $\bm{x}_{3}^{*} = [0, 1, 0, 0]$. It indicates that type 1 can be assigned in knapsacks 1 or 2, type 2 cannot be assigned in knapsack 2, type 3 can only be assigned in knapsack 2. 
+
+It may contain multiple efficient patterns for one knapsack. In this example, there is exactly one efficient pattern for each knapsack: $[1, 1, 0]$, $[1, 0, 1]$, $[0, 2, 0]$, $[0, 1, 0]$. It shows that knapsack 1 can assign type 1 and 2, so on and so forth.
+
+Using $x_{ij}$ to make the decision is straightforward and easy to implement.
+
+\end{example}
 
 % Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{BPC}) \geq V(\text{I-BPC}) \geq V^{\text{DP}}$.
 
@@ -271,13 +335,11 @@ A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where
 The relation between the capacity and the demand shows the different structure of the optimal solution.
 
 \begin{lem}
-When $\sum_{i=1}^{M} d_{i} w_{i} < \sum_{j=1}^{N} c_{j}$, we have $\gamma_{j}^{*} =0, \forall j$, $\beta_{ij}^{*} =0, \forall i,j$ and $\alpha^{*}_{i} = r_i, \forall i$. There exists at least one knapsack $j$ such that $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} < 1$.
+When $\sum_{i=1}^{M} d_{i} w_{i} < \sum_{j=1}^{N} c_{j}$, we have $\gamma_{j}^{*} =0, \forall j$, $\beta_{ij}^{\dag *} =0, \forall i,j$ and $\alpha^{*}_{i} = r_i, \forall i$. There exists at least one knapsack $j$ such that $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} < 1$.
 
 When $\sum_{i=1}^{M} d_{i} w_{i} \geq \sum_{j=1}^{N} c_{j}$, we have $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} = 1, \forall j$.
 \end{lem}
 
-
-% It is obvious that the dominating patterns include the full and largest patterns.
 
 \begin{algorithm}[H]
     \caption{Dynamic Primal}\label{algo_improve_primal}

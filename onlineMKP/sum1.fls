@@ -945,14 +945,14 @@ INPUT Chapters/Introduction.tex
 INPUT ./Chapters/Introduction.tex
 INPUT ./Chapters/Introduction.tex
 INPUT Chapters/Introduction.tex
+INPUT ./Chapters/Literature_review.tex
+INPUT ./Chapters/Literature_review.tex
+INPUT ./Chapters/Literature_review.tex
+INPUT Chapters/Literature_review.tex
+INPUT ./Chapters/Literature_review.tex
+INPUT ./Chapters/Literature_review.tex
+INPUT Chapters/Literature_review.tex
 INPUT e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
-INPUT ./Chapters/Literature_review.tex
-INPUT ./Chapters/Literature_review.tex
-INPUT ./Chapters/Literature_review.tex
-INPUT Chapters/Literature_review.tex
-INPUT ./Chapters/Literature_review.tex
-INPUT ./Chapters/Literature_review.tex
-INPUT Chapters/Literature_review.tex
 INPUT ./Chapters/Dynamic.tex
 INPUT ./Chapters/Dynamic.tex
 INPUT ./Chapters/Dynamic.tex
@@ -1013,7 +1013,6 @@ INPUT ./sum1.bbl
 INPUT sum1.bbl
 INPUT ./sum1.bbl
 INPUT sum1.bbl
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT sum1.aux
 INPUT ./sum1.out
 INPUT ./sum1.out
@@ -1037,5 +1036,4 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb
-INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

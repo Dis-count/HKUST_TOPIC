@@ -219,8 +219,10 @@ if __name__ == "__main__":
     roll_width = [7, 8, 8, 4]
 
     I = 3  # the number of group types
-    value = np.array([4, 6, 8])
+    # value = np.array([4, 6, 8])
+    value = np.array([2, 4, 7])
     demand_width_array = np.array([3, 4, 5])
+    # value = demand_width_array
 
     demand = np.array([2, 4, 2])
 
@@ -244,7 +246,6 @@ if __name__ == "__main__":
     # dual1, dual2 = test.dual_primal(dom_set, demand)
     # print(dual1)
     # print(np.array(list(dual1.values())))
-
     # pattern = test.subproblem(dual1, dual2[0], 5)
 
     ############# Primal ###################
@@ -258,10 +259,10 @@ if __name__ == "__main__":
     # print(obj)
     ############ END #################
 
-
+    ############ BPP #################
     # alpha, beta, gamma = test.setGeneration_bid(dom_set, demand, roll_width)
     # print(f'alpha: {alpha}')
     # print(f'beta: {beta}')
     # print(f'gamma: {gamma}')
-
+    ############ END #################
 

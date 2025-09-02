@@ -1,0 +1,17 @@
+Run Start Time:Mon Sep  1 14:05:40 2025
+The number of periods: 	60
+SP: 100.00 ;Number of accepted people: 113.29 
+worst_SP: 1.0000 
+;The number of periods: 	70
+SP: 99.87 ;Number of accepted people: 132.15 
+worst_SP: 0.9786 
+;The number of periods: 	80
+SP: 97.62 ;Number of accepted people: 140.52 
+worst_SP: 0.9396 
+;The number of periods: 	90
+SP: 94.76 ;Number of accepted people: 144.71 
+worst_SP: 0.8993 
+;The number of periods: 	100
+SP: 93.40 ;Number of accepted people: 147.13 
+worst_SP: 0.9000 
+;Total Runtime	892.344892

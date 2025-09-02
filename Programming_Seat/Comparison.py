@@ -300,7 +300,21 @@ class CompareMethods:
         newx = newx.T.tolist()
         return newx
 
+    def rearrange_1(self, change_roll, remaining_period, seq):
+        # This one is used to generate the seat plan without the full or largest 
+        sam_multi = samplingmethod1(self.I, self.num_sample, remaining_period-1, self.probab, self.s)
+        dw_without, prop_without = sam_multi.accept_sample(seq)
+        m_without = stochasticModel(change_roll, self.given_lines,
+                                    self.demand_width_array, self.I, prop_without, dw_without, self.s)
+        ini_demand_without, _ = m_without.solveBenders(eps=1e-4, maxit=20)
+        deterModel = deterministicModel(change_roll, self.given_lines, self.demand_width_array, self.I, self.s)
+        _, newx = deterModel.IP_formulation(np.zeros(self.I), ini_demand_without)
+
+        newx = newx.T.tolist()
+        return newx
+
     def break_tie(self, newx, change_roll, group_type):
+        # (full or largest) match break tie
         newx = np.array(newx).T
         a = np.argwhere(newx[group_type] > 1e-4)
         length = np.dot(np.arange(self.s+1, self.I+self.s+1), newx)
@@ -310,6 +324,7 @@ class CompareMethods:
         return a_min
 
     def break_tie2(self, newx, change_roll, group_type):
+        # (full or largest) does not match, break tie
         newx = np.array(newx).T
         a = np.argwhere(newx[group_type] > 1e-4)
         length = np.dot(np.arange(self.s+1, self.I+self.s+1), newx)
@@ -318,12 +333,12 @@ class CompareMethods:
         a_max = a[np.argmax(b)][0]   # find the maximum index in a
         return a_max
 
-    def break_tie3(self, newx, change_roll, group_type):
+    def break_tie3(self, newx, group_type):
         # return list including group_type
         newx = np.array(newx).T
         a = np.argwhere(newx[group_type] > 1e-4)
-        beta = np.arange(self.given_lines)
-        return beta[a]
+
+        return min(a)[0]
 
     def method_new(self, sequence: List[int], newx, change_roll0):
         # filename = 'test_spbs_' + str(probab) + '.txt'
@@ -404,39 +419,75 @@ class CompareMethods:
 
         return demand
 
-    def method_IP(self, sequence, newx, change_roll0):
-        # use the IP result to assign the groups
-        # booking limit
+    def seatplan_without(self, sequence: List[int], newx, change_roll0):
+        # filename = 'test_sp_' + str(probab) + '.txt'
+        # my_file = open(filename, 'w')
         change_roll = copy.deepcopy(change_roll0)
         newx = newx.T.tolist()
         mylist = []
         periods = len(sequence)
+
         for num, j in enumerate(sequence):
+            # my_file.write(str(j) + '\t')
+            #  Trivial situation
+            if max(change_roll) < j:
+                mylist.append(0)
+                continue
+            #  Exactly the size of j
+            elif np.isin(j, change_roll).any():
+                mylist.append(1)
+                kk = np.where(change_roll == j)[0]
+                change_roll[kk[0]] = 0
+                newx[kk[0]] = np.zeros(self.I)
+                continue
+
             newd = np.sum(newx, axis=0)
             remaining_period = periods - num
-            if newd[j-1-self.s] > 0:
+
+            for i in range(self.given_lines):
+                if change_roll[i] == self.s:
+                    change_roll[i] = 0
+
+            # if after accept j, the supply is 0, we should generate another newx.
+            if j == self.s + self.I and newd[-1] == 0:
+                newx = self.rearrange_1(change_roll, remaining_period, j)
+                newd = np.sum(newx, axis=0)
+
+            #  Match the demand
+            if newd[j-1-self.s] > 1e-4:
                 mylist.append(1)
-                k = self.break_tie(newx, change_roll, j-1-self.s)
+                k = self.break_tie3(newx, j-1-self.s)
                 newx[k][j-1-self.s] -= 1
                 change_roll[k] -= j
-
+            #  Not match the demand
             else:
-                mylist.append(0)
-                deterModel = deterministicModel(change_roll, self.given_lines, self.demand_width_array, self.I, self.s)
-                ini_demand1 = np.array(self.probab) * remaining_period
-                # ini_demand1 = np.ceil(ini_demand1)
-                newd, _ = deterModel.IP_formulation(np.zeros(self.I), ini_demand1)
-                _, newx = deterModel.IP_advanced(newd)
-                newx = newx.T.tolist()
+                usedDemand, decision_list = decisionOnce(sequence[-remaining_period:], newd, self.probab, self.s)
+                if decision_list:
+                    Indi_Demand = np.dot(usedDemand, range(self.I))
+                    k = self.break_tie3(newx, decision_list)
+                    newx[k][decision_list] -= 1
+                    if decision_list - Indi_Demand - 1 - self.s >= 0:
+                        newx[k][int(decision_list - Indi_Demand - 1 - self.s)] += 1
+                    change_roll[k] -= j
+                    mylist.append(1)
+                else:
+                    mylist.append(0)
 
-        sequence = [i-self.s for i in sequence]
+                #### Regenerate the planning
+                if remaining_period >= 2:
+                    newx = self.rearrange_1(change_roll, remaining_period, sequence[num+1])
+                    newd = np.sum(newx, axis=0)
 
-        final_demand = np.array(sequence) * np.array(mylist)
+        # my_file.close()
+        sequence1 = [i-self.s for i in sequence]
+        final_demand = np.array(sequence1) * np.array(mylist)
         final_demand = final_demand[final_demand != 0]
-
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
+        # print(change_roll)
+        # print(newd)
+
         return demand
 
 if __name__ == "__main__":

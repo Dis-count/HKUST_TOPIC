@@ -1,0 +1,12 @@
+Run Start Time:Tue Sep  2 01:21:44 2025
+The number of periods: 	60
+SPBA: 99.92 ;RDPH: 99.95 ;BPC: 99.95 ;SP: 99.90 ;Number of accepted people: 131.77 
+The number of periods: 	70
+SPBA: 98.83 ;RDPH: 98.95 ;BPC: 98.53 ;SP: 97.86 ;Number of accepted people: 146.76 
+The number of periods: 	80
+SPBA: 98.85 ;RDPH: 98.84 ;BPC: 97.94 ;SP: 95.22 ;Number of accepted people: 152.61 
+The number of periods: 	90
+SPBA: 99.12 ;RDPH: 99.00 ;BPC: 98.54 ;SP: 93.82 ;Number of accepted people: 156.81 
+The number of periods: 	100
+SPBA: 99.37 ;RDPH: 99.19 ;BPC: 98.92 ;SP: 93.58 ;Number of accepted people: 158.71 
+Total Runtime	1468.394181

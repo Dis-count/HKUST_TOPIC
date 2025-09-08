@@ -9,7 +9,6 @@ import random
 # [0.2, 0.8, 0, 0], [0, 1, 0, 0]
 # [0.05, 0.05, 0.85, 0.05], [0.25, 0.3, 0.25, 0.2]
 
-
 def prop_all():
     x2 = np.arange(0.05, 1, 0.05)
     x3 = np.arange(0.05, 1, 0.05)
@@ -38,9 +37,10 @@ if __name__ == "__main__":
     count = 100
     total_period = 100
 
-    probab1 = prop_all()
-    random_indices = np.random.choice(975, 10, replace= False)
-    probab_list = probab1[random_indices, :]
+    # probab1 = prop_all()
+    # random_indices = np.random.choice(975, 10, replace= False)
+    # probab_list = probab1[random_indices, :]
+    probab_list = [[0.34, 0.51, 0.07, 0.08]]
 
     for probab in probab_list:
         begin_time = time.time()
@@ -60,9 +60,9 @@ if __name__ == "__main__":
             roll_width = np.ones(given_lines) * 21
             a_instance = CompareMethods(roll_width, given_lines, I, probab, num_period, num_sample, sd)
 
-            ratio1 = 0
-            ratio2 = 0
-            ratio3 = 0
+            # ratio1 = 0
+            # ratio2 = 0
+            # ratio3 = 0
             ratio4 = 0
             accept_people = 0
 
@@ -72,13 +72,13 @@ if __name__ == "__main__":
                 sequence = sequences_pool[j][0: num_period]
                 newx4 = a_instance.random_generate(sequence)
 
-                a = a_instance.method_new(sequence, newx4, roll_width)
-                b = a_instance.bid_price(sequence)
-                c = a_instance.dynamic_program1(sequence)
+                # a = a_instance.method_new(sequence, newx4, roll_width)
+                # b = a_instance.bid_price(sequence)
+                # c = a_instance.dynamic_program1(sequence)
                 d = a_instance.seatplan_without(sequence, newx4, roll_width)
-                value_a = np.dot(multi, a)
-                value_b = np.dot(multi, b)
-                value_c = np.dot(multi, c)
+                # value_a = np.dot(multi, a)
+                # value_b = np.dot(multi, b)
+                # value_c = np.dot(multi, c)
                 value_d = np.dot(multi, d)
 
                 f = a_instance.offline(sequence)  # optimal result
@@ -96,16 +96,16 @@ if __name__ == "__main__":
                 # if value_d/optimal < worst_d:
                 #     worst_d = value_d/optimal
 
-                ratio1 += value_a / optimal  # sto-planning
-                ratio2 += value_b / optimal  # bid-price
-                ratio3 += value_c / optimal  # DP1
+                # ratio1 += value_a / optimal  # sto-planning
+                # ratio2 += value_b / optimal  # bid-price
+                # ratio3 += value_c / optimal  # DP1
                 ratio4 += value_d / optimal  # sto-seat-plan-limit
                 # ratio5 += np.dot(multi, e) / optimal  # FCFS
                 accept_people += optimal
 
-            my_file.write('SPBA: %.2f ;' % (ratio1/count*100))
-            my_file.write('RDPH: %.2f ;' % (ratio3/count*100))
-            my_file.write('BPC: %.2f ;' % (ratio2/count*100))
+            # my_file.write('SPBA: %.2f ;' % (ratio1/count*100))
+            # my_file.write('RDPH: %.2f ;' % (ratio3/count*100))
+            # my_file.write('BPC: %.2f ;' % (ratio2/count*100))
             my_file.write('SP: %.2f ;' % (ratio4/count*100))
             my_file.write('Number of accepted people: %.2f \n' % (accept_people/count))
             # my_file.write('worst_SPBA: %.4f \n;' % (worst_a))

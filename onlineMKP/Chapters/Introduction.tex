@@ -1,6 +1,4 @@
 % !TEX root = sum1.tex
-
-
 %{\bf Terminologies to use}
 
 %We use {\em seating management} to refer to the general problem which includes {\em seat planning with deterministic requests}, 
@@ -10,22 +8,31 @@
 
 \section{Introduction}
 We will address the online multi-type multiple knapsack problem. 
+The Online Multi-type Multiple Knapsack Problem (OMMKP) extends the classical knapsack problem to a dynamic and multi-dimensional setting, where items of distinct types arrive sequentially, and decisions to accept or reject them must be made immediately without knowledge of future arrivals. Each item is characterized by a type-dependent size and value, and must be placed into one of multiple knapsacks with non-identical capacities. This framework captures critical resource allocation challenges across various domains, including cloud computing, advertising systems, production planning, energy management, and network bandwidth allocation.
 
-% Consider a venue, such as a cinema or a conference hall, which is used to host an event. The venue is equipped with seats of multiple rows. During the event, requests for seats arrive in groups, each containing a limited number of individuals. Each group can be either accepted or rejected, and those that are accepted will be seated consecutively in one row. Each row can accommodate multiple groups as long as any two adjacent groups in the same row are separated by one or multiple empty seats to comply with social distancing requirements. The objective is to maximize the number of individuals accepted for seating. 
+
+In cloud computing environments, service providers manage numerous heterogeneous servers (knapsacks) with varying computational resources (e.g., CPU, memory, or storage capacities). User tasks (items) arrive dynamically, each belonging to a specific type (e.g., compute-intensive, memory-intensive, or I/O-bound) with deterministic resource requirements (size) and a value (e.g., revenue or priority). The OMMKP models the online scheduling problem of allocating incoming tasks to suitable servers to maximize total profit or resource utilization while respecting capacity constraints. This is particularly relevant in server clusters with specialized hardware or reserved instances, where task heterogeneity and server diversity must be efficiently handled in real time.
+
+
+In online advertising platforms, advertisers bid for impression slots (knapsacks) that exhibit diverse audience reach and engagement capacities (e.g., banner ads, video ads, or native ads). Ad requests (items) arrive in streams and are categorized by types (e.g., industry verticals or creative formats), each with a size (e.g., required impressions or click-through rate) and a value (e.g., bid price or expected revenue). The OMMKP formalism helps optimize the real-time assignment of ads to available slots to maximize platform revenue while satisfying contractual delivery constraints. The problem is compounded by the need to handle multiple ad types and slot categories under uncertain demand.
+
+
+Modern manufacturing systems often involve multiple production lines (knapsacks) with different capabilities and capacities (e.g., throughput rates or machine hours). Customer orders (items) arrive dynamically and can be classified into types (e.g., urgent, standard, or custom orders), each with a processing time (size) and a profit margin (value). The OMMKP captures the challenge of accepting and scheduling orders across production lines to maximize total profit while adhering to capacity limits. This is especially critical in make-to-order environments where order heterogeneity and line specialization necessitate intelligent online decision-making.
+
+
+In smart grids or distributed energy systems, multiple storage units (knapsacks) such as batteries or renewable energy buffers have distinct storage capacities. Energy requests (items)—e.g., from electric vehicles or industrial consumers—arrive online and are typed by priority or flexibility (e.g., urgent, deferrable, or intermittent), each with an energy demand (size) and a willingness-to-pay (value). The OMMKP models the problem of allocating energy requests to storage units to maximize revenue or minimize grid instability. The heterogeneity of requests and storage units requires an online strategy that balances immediate rewards with future uncertainty.
+
+In telecommunications networks, multiple communication channels (knapsacks)—such as fiber-optic links or wireless spectra—have different bandwidth capacities. Data flows (items) arrive dynamically and are categorized by service type (e.g., video streaming, VoIP, or bulk transfer), each requiring a certain bandwidth (size) and offering a quality-of-service value (e.g., priority or revenue). The OMMKP formulation aids in designing online algorithms that assign flows to channels to maximize total utility or adherence to service-level agreements. The problem is exacerbated by the diversity of flow types and channel characteristics in multi-protocol label switching (MPLS) or software-defined networking (SDN) contexts.
+
+
+These applications underscore the broad applicability of the OMMKP in real-world systems where heterogeneous resources must be allocated dynamically under uncertainty. Developing efficient online algorithms for this problem—with guarantees on competitive ratio, scalability, and robustness—is therefore of significant theoretical and practical interest. This paper aims to address this gap by proposing novel strategies for the OMMKP and validating them in one or more of the above domains.
+
+
+% Resource allocation
+% Applications: Cloud computing, Ad placement, Production scheduling, Energy management, Network 
+% bandwidth allocation
 
 
 We develop several policies for online MMKP. 
 
-% Specifically, we formulate the SPDR problem using Integer Programming and discuss the key characteristics of the optimal seating plan. For the SPSR problem, we utilize scenario-based optimization and develop solution approaches based on Benders decomposition. In addressing the SADR problem, we implement a two-stage seat-plan-based assignment approach. In the first decision phase, a relaxed dynamic programming evaluates each incoming request to determine its acceptance. The accepted requests then proceed to the second assignment phase, where the group-type control allocation is performed. This seat-plan-based assignment policy outperforms traditional bid-price and booking-limit policies. Although each of these models represents a standalone problem tailored to specific situations, they are closely interconnected in terms of problem-solving methods and managerial insights. In the seat planning with deterministic requests (SPDR) problem, we identify important concepts such as the full pattern and the largest pattern, which play a crucial role in developing solutions for the other two problems. Additionally, the SPDR problem serves as a useful offline benchmark for evaluating the performance of policies in the SADR problem. Furthermore, the solution to the SPSR problem can serve as a reference seat plan for dynamic seat assignment in the SADR problem.
-
-
-% We investigate the impact of social distancing from the perspective of revenue loss. To facilitate this analysis, we introduce the concept of the threshold of request-volume, which represents the upper limit on the number of requests an event can accommodate without being affected by social distancing measures. Specifically, if an event receives fewer requests than the threshold of request-volume, it will experience virtually no revenue loss due to social distancing. Our computational experiments demonstrate that the threshold of request-volume primarily depends on the mean group size and is relatively insensitive to the specific distribution of group sizes. This finding provides a straightforward method for estimating the threshold of request-volume and evaluating the impact of social distancing.
-
-% In some instances, the government imposes a maximum allowable occupancy rate to enforce stricter social distancing requirements. To assess this effect, we introduce the concept of the threshold of occupancy rate, defined as the occupancy rate at the threshold of request-volume. The maximum allowable occupancy rate is effective for an event only if it is lower than the event's threshold of occupancy rate. Moreover, it becomes redundant if it exceeds the maximum achievable occupancy rate for all events.
-
-
-% These qualitative insights are stable with respect to the government policy's strictness and the specific characteristics of various venues, such as minimum physical distance, allowable maximum group size, and venue layout. When the minimum physical distance increases, the threshold of request-volume, threshold of occupation rate and maximum achievable occupation rate decrease accordingly. Conversely, when the allowable maximum group size decreases, the number of accepted requests will increase; however, both the threshold of occupation rate and maximum achievable occupation rate decline. Although venue layouts may vary in shapes (rectangular or otherwise) and row lengths (long or short), the threshold of occupancy rate and maximum achievable occupancy rate do not exhibit significant variation.
-
-
 The rest of this paper is structured as follows. We review the relevant literature in Section \ref{literature}. Then we introduce the key concepts of seat planning with social distancing and formulate the . Section \ref{sec_dynamic_seat} presents the bid-price and resolving dynamic primal policies to assign seats for incoming requests. Section \ref{sec_result} presents the experimental results and provide insights gained from implementing social distancing. Conclusions are shown in Section \ref{sec_conclusion}.
-

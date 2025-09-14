@@ -1,18 +1,18 @@
 # Fdb version 3
-["bibtex sum1"] 1757579184 "sum1.aux" "sum1.bbl" "sum1" 1757579212
+["bibtex sum1"] 1757654637 "sum1.aux" "sum1.bbl" "sum1" 1757832454
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1630494346 30002 8c0c5833f37bea3ec214cf315a72975d ""
   "refe.bib" 1743924734 22533 1d0cf2aaee92625efbc32698208cb768 ""
-  "sum1.aux" 1757579210 6133 ad794f2c5f0336d07a7b4cca8aad86cc "pdflatex"
+  "sum1.aux" 1757654640 6243 c6af79b07fcf18804e09dbffdb12ed72 "pdflatex"
   (generated)
   "sum1.blg"
   "sum1.bbl"
-["pdflatex"] 1757579209 "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" "sum1.pdf" "sum1" 1757579212
-  "Chapters/Abstract.tex" 1755662568 3469 a9d47c90d214d1b4f9f91181d639341a ""
+["pdflatex"] 1757654638 "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" "sum1.pdf" "sum1" 1757832454
+  "Chapters/Abstract.tex" 1757652268 3339 8e5d5a6fb019785efd703ba284b7dc12 ""
   "Chapters/Conclusion.tex" 1744528234 3339 63a7cea4b3d5ecd1c825fea887c72fd5 ""
-  "Chapters/Dynamic.tex" 1755865609 43066 87e52b3df790a1a0e36ff352b1267ba8 ""
-  "Chapters/Introduction.tex" 1755659956 5227 45e6122ddce4e60278334fca7497e854 ""
+  "Chapters/Dynamic.tex" 1757652467 42930 2ca97c5ca0f9502b1d7a7e8c60061744 ""
+  "Chapters/Introduction.tex" 1757654129 5921 e8fbd259be5a48510bb100b9e1674d88 ""
   "Chapters/Literature_review.tex" 1755659809 4662 a1f1939334bbcad3de3f01c48990edf1 ""
-  "Chapters/Results.tex" 1757579175 83 69d8e188ca7042537ab77fe9093c773e ""
+  "Chapters/Results.tex" 1757654634 235 fd2888b32fc05dc962775b0d57a7f32a ""
   "e:/Software/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1630494514 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1630493467 1120 1e8878807317373affa7f7bba4cf2f6a ""
   "e:/Software/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1630493467 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -162,13 +162,13 @@
   "e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1630497016 5227370 214224b42125130ccee72e74a5bb57f5 ""
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
-  "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" 1757579208 2169 4dada7b6c6fc3c71d5936cf2478a3014 ""
-  "sum1.aux" 1757579210 6133 ad794f2c5f0336d07a7b4cca8aad86cc "pdflatex"
-  "sum1.bbl" 1757579185 8941 dd09724e39bf1beadfe0964a46a7b3e2 "bibtex sum1"
-  "sum1.out" 1757579210 1531 4b61f26a354fcfce0e8f84a3068de8da "pdflatex"
-  "sum1.tex" 1757579208 2169 4dada7b6c6fc3c71d5936cf2478a3014 ""
+  "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" 1757651181 2210 756ce05e7d3d8635b4b4cd73ebeca1e3 ""
+  "sum1.aux" 1757654640 6243 c6af79b07fcf18804e09dbffdb12ed72 "pdflatex"
+  "sum1.bbl" 1757654638 8941 dd09724e39bf1beadfe0964a46a7b3e2 "bibtex sum1"
+  "sum1.out" 1757654640 1581 9c228fc6e772d9aebf7e17982102b894 "pdflatex"
+  "sum1.tex" 1757651181 2210 756ce05e7d3d8635b4b4cd73ebeca1e3 ""
   (generated)
-  "sum1.aux"
-  "sum1.pdf"
   "sum1.log"
   "sum1.out"
+  "sum1.aux"
+  "sum1.pdf"

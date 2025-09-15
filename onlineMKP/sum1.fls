@@ -998,6 +998,13 @@ INPUT ./sum1.bbl
 INPUT sum1.bbl
 INPUT ./sum1.bbl
 INPUT sum1.bbl
+INPUT ./Chapters/Proof1.tex
+INPUT ./Chapters/Proof1.tex
+INPUT ./Chapters/Proof1.tex
+INPUT Chapters/Proof1.tex
+INPUT ./Chapters/Proof1.tex
+INPUT ./Chapters/Proof1.tex
+INPUT Chapters/Proof1.tex
 INPUT sum1.aux
 INPUT ./sum1.out
 INPUT ./sum1.out
@@ -1017,7 +1024,9 @@ INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.p
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb
+INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

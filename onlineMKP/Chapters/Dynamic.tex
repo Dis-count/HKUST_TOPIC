@@ -60,7 +60,7 @@ The dual of LP relaxation of the MMKP problem is:
 In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for one size in knapsack $j$. A request is only accepted if the revenue it generates is no less than the sum of the bid prices of the sizes it uses. Thus, if $r_i -\beta_{j} w_i \geq 0$, meanwhile, the capacity allows, we will accept the item type $i$. And choose knapsack $j^{*} = \arg \max_{j} \{r_i -\beta_{j} w_i\}$ to allocate that item.
 
 \begin{lem}\label{bid-price}
-The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{r_{i} w_{\tilde{i}} - r_{\tilde{i}} w_{\tilde{i}}}{w_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{r_{\tilde{i}}}{w_{\tilde{i}}}$ for all $j$.
+The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{r_{i} w_{\tilde{i}} - r_{\tilde{i}} w_{i}}{w_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{r_{\tilde{i}}}{w_{\tilde{i}}}$ for all $j$.
 \end{lem}
 
 According to Lemma \ref{bid-price}, the decision inequality becomes $r_i -\beta_{j} w_i = r_{i} - \frac{r_{\tilde{i}}}{w_{\tilde{i}}} w_{i} \geq 0$. This establishes the threshold policy: reject item type $i, i < \tilde{i}$ and accept item type $i, i \geq \tilde{i}$.
@@ -110,18 +110,18 @@ Let $v^t(\bm{C})$ denote the maximal expected value-to-go at time $t$, given the
 \begin{equation}
 v^t(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\left[\left\{
 \begin{array}{ll}
-\max \left\{\max _{j: \bm{h} \in S(c_j), h_i \geq 1}\left\{v^{t+1}\left(\bm{C}-e_j^T \cdot w_i\right)+r_i\right\}, v^{t+1}(\bm{C})\right\}, & \exists j, \bm{h} \in S(c_j), h_i \geq 1, \\
+\max \left\{\max\limits_{j:\bm{h} \in S(c_j), h_i \geq 1}\left\{v^{t+1}\left(\bm{C}-e_j^T \cdot w_i\right)+r_i\right\}, v^{t+1}(\bm{C})\right\},&\exists (j,\bm{h}), \bm{h} \in S(c_j), h_i \geq 1, \\
 v^{t+1}(\bm{C}) & \text{otherwise}.
 \end{array}\right]\right.
 \end{equation}
 
 
-The DP formulation involves two layers of maximization when there exists at least one knapsack $j$ satisfying $\bm{h} \in S(c_j), h_{i} \geq 1$. The inner maximization evaluates the optimal placement of item type $i$ across all feasible knapsacks $j$ where the pattern $h$ is feasible for knapsack $j$ (i.e., $\bm{h} \in S(c_{j})$) and the item type $i$ can be accommodated (i.e., $h_{i} \geq 1$). The outer maximization compares the value of accepting $i$ (via the inner maximization) and rejecting $i$ (retaining $v^{t+1}(\bm{C})$). If no such $j$ exists, the request $i$ is rejected.
+The DP formulation involves two layers of maximization when there exists at least one knapsack $j$ satisfying $\bm{h} \in S(c_j), h_{i} \geq 1$. The inner maximization evaluates the optimal placement of item type $i$ across all feasible knapsacks $j$ where the pattern $\bm{h}$ is feasible for knapsack $j$ (i.e., $\bm{h} \in S(c_{j})$) and the item type $i$ can be accommodated (i.e., $h_{i} \geq 1$). The outer maximization compares the value of accepting $i$ (via the inner maximization) and rejecting $i$ (retaining $v^{t+1}(\bm{C})$). If no such $j$ exists, the request $i$ is rejected.
 
 
 For notational convenience, we define $q_i$ as follows:
 \begin{equation*}
-    q_i= \begin{cases}\max _{j: h \in S\left(c_j\right), h_i \geq 1}\left\{v^{t+1}\left(C-e_j^T w_i\right)+r_i\right\} & \text { if } \exists j \text{ satisfying } h \in S\left(c_j\right), h_i \geq 1 \\ 0 & \text { otherwise }\end{cases}
+    q_i= \begin{cases}\max _{j: \bm{h} \in S\left(c_j\right), h_i \geq 1}\left\{v^{t+1}\left(C-e_j^T w_i\right)+r_i\right\} & \text { if } \exists j \text{ satisfying } \bm{h} \in S\left(c_j\right), h_i \geq 1 \\ 0 & \text { otherwise }\end{cases}
 \end{equation*}
 
 We can solve the following program to compute $v^1(\bm{C})$ for any given capacity $\bm{C}$:
@@ -196,12 +196,14 @@ When no knapsack $j$ exists satisfying both $\bm{h}^{*} \in \arg\max_{\bm{h} \in
 % \end{lem}
 
 \begin{lem}\label{BPP}
-Define $\mathcal{J} = \{j \in \mathcal{N} \mid r_i - \beta_{ij}^{\dag *} > 0\}$. Then there exists a $j_0 \in \mathcal{J}$ such that:
+Define $\mathcal{J}_{i} = \{j \in \mathcal{N} \mid r_i - \beta_{ij}^{\dag *} > 0\}$.
+If $\mathcal{J}_{i} = \varnothing$, the first set of constraints for $i$ is redundant.
+If $\mathcal{J}_{i} \neq \varnothing$, then there exists a $j{'} \in \mathcal{J}_{i}$ such that:
 
-$$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
+$$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j{'}})} \sum_{i} \beta_{ij{'}}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
 \end{lem}
 
-This lemma guarantees that when such a $j_0$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}^{1}(\bm{C})$.
+This lemma guarantees that when such a $j{'}$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}^{1}(\bm{C})$.
 
 Then, the control policy becomes as follow. If $\alpha_{i} > 0$, accept the type $i$. Find knapsack $k = \arg \max_{j \in \mathcal{N}}\{r_i - \beta_{ij}^{\dag}\}$, if multiple maximizers exist, assign the type $i$ to a knapsack $j$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$ If $\alpha_{i} = 0$, check whether there exists a knapsack $j$ such that: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1$. If no such $j$ exists, reject the type $i$; otherwise, accept the type $i$ and assign it to knapsack $j$.
 
@@ -269,7 +271,7 @@ Drawback: need to check whether $j$ exists for $\bm{h}^{*} \in \arg\max_{\bm{h} 
 For example, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ indicates type 3 cannot be assigned in knapsack 1. While the generated patterns for knapsack 4 are $[0, 1, 0], [1, 0, 0]$, which do not contain $h_{3}$, type 3 can only be assigned to knapsack 2 or 3.
 \end{example}
 
-While this verification is cumbersome under pure bid-price frameworks, the primal problem offers a more direct way to guarantee the existence of such a request-pattern match. To address this gap, we propose a dynamic primal formulation.
+While this verification is cumbersome under pure bid-price frameworks, the primal problem offers a more direct way to guarantee the existence of such a request-pattern match. To address this gap, we propose the dynamic primal formulation.
 
 \subsection{Dynamic Primal Based on Patterns}
 

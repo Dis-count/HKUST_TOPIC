@@ -5,9 +5,6 @@ Multiple Knapsack problem \citep{martello1990knapsack} is a practical problem th
 
 % This approach offers valuable insights for our investigation into situations involving dynamic demand.
 
-% For instance, in passenger rail services, groups differ not only in size but also in their departure and arrival destinations, requiring them to be assigned consecutive seats \citep{clausen2010off, deplano2019offline}. In social gatherings such as weddings or dinner galas, individuals often prefer to sit together at the same table while maintaining distance from other groups they may dislike \citep{lewis2016creating}. In parliamentary seating assignments, members of the same party are typically grouped in clusters to facilitate intra-party communication as much as possible \citep{vangerven2022parliament}. In e-sports gaming centers, customers arrive to play games in groups and require seating arrangements that allow them to sit together \citep{kwag2022optimal}.
-
-
 
 While the dynamic stochastic knapsack problem (e.g., \citet{kleywegt1998dynamic, kleywegt2001dynamic}, \citet{papastavrou1996dynamic}) has been extensively studied in the literature, these works primarily consider a single knapsack scenario where requests arrive sequentially and their resource requirements and rewards are unknown until they arrive. In contrast, the online MMKP problem extends this framework by incorporating multiple knapsacks, adding another layer of complexity to the decision-making process.
 Research on the dynamic or stochastic multiple knapsack problem is limited. \citet{perry2009approximate} employs multiple knapsacks to model multiple time periods for solving a multiperiod, single-resource capacity reservation problem. This essentially remains a dynamic knapsack problem but involves time-varying capacity. \citet{tonissen2017column} considers a two-stage stochastic multiple knapsack problem with a set of scenarios, wherein the capacity of the knapsacks may be subject to disturbances. This problem is similar to the SPSR problem in our work, where the number of items is stochastic.
@@ -17,5 +14,3 @@ Generally speaking, the online MMKP problem relates to the revenue management (R
 
 
 A notable study addressing group-like arrivals in revenue management examines hotel multi-day stays \citep{bitran1995application, goldman2002models, aydin2018decomposition}. While these works focus on customer classification and room-type allocation, they do not prioritize real-time assignment. The work of \cite{zhu2023assign}, which addresses the high-speed train ticket allocation and processes individual seat requests and implicitly accommodates group-like traits through multi-leg journeys (e.g., passengers retaining the same seat across connected segments).
-
-% is related to our problem in terms of real-time seat assignment. 

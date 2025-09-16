@@ -13,4 +13,47 @@ According to the Proposition \ref{sol_relax_deter}, the aggregate optimal soluti
 Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{r_{\tilde{i}}}{w_{\tilde{i}}}$ for all $j$, and $z_i = \frac{r_{i} w_{\tilde{i}} - r_{\tilde{i}} w_{i}}{w_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$.  
 \end{pf}
 
+\begin{pf}{Proof of Lemma \ref{BPP}}
+We consider two cases based on whether the set $\mathcal{J}_{i}$ is empty or not.
+
+Case 1: $\mathcal{J}_{i} = \varnothing$
+If $\mathcal{J}_{i} = \varnothing$, then for all $j \in \mathcal{N}$, we have $r_i - \beta_{ij}^{\dag *} \leq 0$. This implies that the constraint: $\alpha_{i} \geq r_i - \beta_{ij}^{\dag *}$ is automatically satisfied for all $j \in \mathcal{N}$ when $\alpha_i \geq 0$. Therefore, these constraints are redundant and can be removed without affecting the solution.
+
+Case 2: $\mathcal{J}_{i} \neq \varnothing$
+We prove by contradiction that there exists $h_{i}^{*} \geq 1$ for some $j' \in \mathcal{J}_{i}$.
+
+Assumption for contradiction: Suppose that in the optimal solution, for all $j' \in \mathcal{J}_{i}$, we have $h_{i}^{*} = 0$.
+
+Since $\mathcal{J}_{i} \neq \varnothing$, there exists at least one $j' \in \mathcal{J}_{i}$ such that $r_{i} > \beta_{ij{'}}^{\dag *}$. From the constraint $\alpha_{i} \geq r_{i} - \beta_{ij{'}}^{\dag *}$ and the optimality conditions, we must have $\alpha_{i} = r_{i} - \beta_{ij{'}}^{\dag *} >0$. Now consider the value:
+$$\gamma_{{j}{'}} = \max_{\bm{h} \in S(c_{j{'}})} \sum_{i} \beta_{ij{'}}^{\dag *} h_{i}$$
+
+Under the contradiction assumption ($h_{i}^{*} = 0$ for all $j' \in \mathcal{J}_{i}$), we have:
+$\gamma_{{j}{'}} = \sum_{i} \beta_{ij{'}}^{\dag *} h_{i}^{*}$.
+
+Now examine the objective function: $$\sum_{i} \alpha_{i} d_{i} + \sum_{j} \gamma_{j}.$$
+
+Consider perturbing $\beta_{ij'}^{\dag *}$ by increasing it slightly to $\beta_{ij'}^{\dag *} + \delta$ (for some small $\delta > 0$ such that $r_{i} > \beta_{ij'}^{\dag *} + \delta$ still holds). Then:
+
+\begin{itemize}
+  \item Since $\alpha_{i}$ is exactly at the boundary ($\alpha_{i} = r_{i} - \beta_{ij'}^{\dag *}$), we can now set $\alpha_{i}^{\text{new}} = r_{i} - (\beta_{ij'}^{\dag *} + \delta) < \alpha_{i}$.
+  \item The term $\gamma_{j{'}}$ remains unchanged because $h_{i}^{*} = 0$ for $j' \in \mathcal{J}_{i}$ (by our contradiction assumption), and the perturbation does not affect other terms.
+  \item Since $d_{i} > 0$ (positive arrival rate for type $i$), the objective decreases by $\delta \cdot d_{i} > 0$.
+\end{itemize}
+
+This contradicts the optimality of the current solution. Therefore, our initial assumption must be false, and there must exist some $j' \in \mathcal{J}{i}$ such that $h{i}^{*} \geq 1$.
+\end{pf}
+
+
+\begin{pf}{Proof of Lemma \ref{BPC_relation}}
+We first testify that the relation satisfy the constraints in BPP. Then the objective value of BPP is no larger than that of BPC.
+
+
+\end{pf}
+
+\begin{pf}{Proof of Lemma \ref{primal}}
+  If $x_{ij}^{*}>0$, then $\sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}} >0$, then there exists $\bm{h}$ such that $y_{j \bm{h}} >0$ and $h_{i} \geq 1$.
+
+  If there exists a knapsack $j$ such that
+\end{pf}
+
 \newpage

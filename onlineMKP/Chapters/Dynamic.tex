@@ -196,7 +196,7 @@ When no knapsack $j$ exists satisfying both $\bm{h}^{*} \in \arg\max_{\bm{h} \in
 % \end{lem}
 
 \begin{lem}\label{BPP}
-Define $\mathcal{J}_{i} = \{j \in \mathcal{N} \mid r_i - \beta_{ij}^{\dag *} > 0\}$.
+Define $\mathcal{J}_{i} = \{j \in \mathcal{N} \mid r_i - \beta_{ij}^{\dag *} \geq r_i - \beta_{ik}^{\dag *},\forall k \in \mathcal{N}, r_i - \beta_{ij}^{\dag *} >0 \}$.
 If $\mathcal{J}_{i} = \varnothing$, the first set of constraints for $i$ is redundant.
 If $\mathcal{J}_{i} \neq \varnothing$, then there exists a $j{'} \in \mathcal{J}_{i}$ such that:
 
@@ -288,7 +288,7 @@ Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in knapsack $j
 
 The first set of constraints demonstrate that for each item type $i$, the sum of assigned items and unassigned items equals the total demand. The second set of constraints shows that the number of items of type $i$ assigned in knapsack $j$ is not larger than the sum of $h_{i}$ (the count of type $i$ items in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in knapsack $j$ cannot exceed 1.
 
-\begin{lem}
+\begin{lem}\label{primal}
 The optimal solution $x_{ij}^{*}$ to \eqref{improve_primal} satisfies $x_{ij}^{*} > 0$ if and only if there exists a knapsack $j$ such that $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1.$$
 \end{lem}
 

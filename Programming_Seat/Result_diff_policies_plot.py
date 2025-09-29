@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Plot Results of Different Policies under multiple probabilities
-
-
 df = pd.read_excel('plot.xlsx')
 
 x = range(1, len(df) + 1)
@@ -27,9 +25,9 @@ for i, col in enumerate(y_columns.columns):
              label=labels[i])
 
 
-plt.xlabel('Probability Distribution Index', fontsize=12)
-plt.ylabel('Ratio (%)', fontsize=12)
-plt.title('T = 80', fontsize=12)
+plt.xlabel('Probability Distribution Index', fontsize = 14)
+plt.ylabel('Ratio (%)', fontsize = 14)
+plt.title('T = 80', fontsize = 14)
 plt.legend(loc='lower right')
 
 plt.show()

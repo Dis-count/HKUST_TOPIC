@@ -27,12 +27,12 @@ def plot_data(data, option):
         plt.plot(t_value, occup_value, 'r--', label='With social distancing')
         plt.xlim((40, 100))
         plt.ylim((40, 100))
-        plt.xlabel('Period')
-        plt.ylabel('Occupancy rate (%)')
+        plt.xlabel('Period', fontsize = 14)
+        plt.ylabel('Occupancy rate (%)', fontsize = 14)
         point[1] = round(point[1], 1)
 
         plt.annotate(r'Threshold $%s$' % str(point), xy=(point[0], point[1]), xytext=(
-            point[0] + 5, point[1]-10), arrowprops = dict(facecolor='black', shrink=0.1),)
+            point[0] + 5, point[1]-10), arrowprops=dict(facecolor='black', shrink=0.1), fontsize=14)
 
         plt.axhline(y = 80, xmin = 0, xmax = 1, color = 'green', linestyle = ':')
         # plt.axhline(y = 65, xmin = 0, xmax = 1, color = 'purple', linestyle='--')
@@ -41,18 +41,21 @@ def plot_data(data, option):
         # plt.annotate(r'80%' , xy=(90, 80), xytext=(80, 90), color='red', arrowprops=dict(facecolor='black', shrink=0.1),)
 
         my_x_ticks = np.arange(40, 100, 10)
-        plt.xticks(my_x_ticks)
-        plt.legend()
+        plt.xticks(my_x_ticks, fontsize = 13)
+        plt.yticks(fontsize = 13)
+        plt.legend(loc='upper left', fontsize=14)
         graphname = 'occu_demand_group4.pdf'
-        plt.savefig(graphname)
+        plt.show()
+        # plt.savefig(graphname)
+
 
     else:
         plt.plot(t_value* gamma/total_seat*100, people_value, 'b-', label='No social distancing')
         plt.plot(t_value* gamma/total_seat*100, occup_value, 'r--', label='With social distancing')
         plt.xlim((50, 110))
         plt.ylim((50, 100))
-        plt.xlabel('Expected demand relative to total seats (%)')
-        plt.ylabel('Occupancy rate (%)')
+        plt.xlabel('Expected demand relative to total seats (%)', fontsize = 14)
+        plt.ylabel('Occupancy rate (%)', fontsize = 14)
         point[1] = round(point[1], 1)
         # plt.axvline(x = 60, ymin = 0, ymax = 1/6, color = 'green', linestyle='--')
 
@@ -62,10 +65,12 @@ def plot_data(data, option):
         # plt.axvline(100, ymin = 0, ymax = 5/6-0.02, color = 'purple', linestyle='--')
 
         my_x_ticks = np.arange(50, 110, 10)
-        plt.xticks(my_x_ticks)
-        plt.legend()
+        plt.xticks(my_x_ticks, fontsize = 13)
+        plt.yticks(fontsize = 13)
+        plt.legend(fontsize = 14)
         graphname = 'occu_gamma_group4.pdf'
-        plt.savefig(graphname)
+        plt.show()
+        # plt.savefig(graphname)
 
 
 data = np.load('data_group_4.npy')
@@ -75,4 +80,4 @@ option = 1
 # gamma
 option = 0
 
-plot_data(data, 0)
+plot_data(data, 1)

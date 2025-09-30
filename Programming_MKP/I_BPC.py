@@ -6,6 +6,8 @@ from Method8 import column_generation
 from SamplingMethodSto import samplingmethod1
 import copy
 
+# improved bid-price
+
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, probab, num_period, s):
         self.roll_width = roll_width  # array, mutable object

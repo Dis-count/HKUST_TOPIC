@@ -298,11 +298,11 @@ In contrast to Lemma \ref{BPP}, this lemma demonstrates the equivalence between 
 
 % Any feasible solution to \eqref{improve_primal} yields a feasible solution to linear relaxation of SPDR having the same objective value, then we have  $V(\text{BPC}) \geq V^{\text{HO}} \geq V^{\text{DP}}$.
 
-\begin{lem}
+\begin{lem}\label{concave}
 $z(\text{DLP}) \geq V^{\text{HO}}$ results from the concave property. 
 \end{lem}
 
-Consider the standard linear program: $\phi(\bm{d})= \{\max c^{T} \bm{x}: A \bm{x} \leq \bm{d}, \bm{x} \geq \bm{0}\}$.  Suppose that $\bm{d}_1$ and $\bm{d}_2$ are two demand vectors, the optimal solution is $\bm{x}_1$ and $\bm{x}_2$. For any $\lambda \in [0, 1]$, $\bm{d}_{\lambda} = \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2}$. Let $\bm{x}_{\lambda} = \lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}$, then $A \bm{x}_{\lambda} = A(\lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}) \leq \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2} = \bm{d}_{\lambda}$. Thus, $\bm{x}_{\lambda}$ is a feasible solution for $\bm{d}_{\lambda}$. Then, $\phi(\bm{d}_{\lambda}) \geq \bm{c}^{T} \bm{x}_{\lambda} = \lambda \bm{c}^{T} \bm{x}_{1} + (1-\lambda) \bm{c}^{T} \bm{x}_{2} = \lambda \phi(\bm{d}_{1}) + (1- \lambda) \phi(\bm{d}_{2})$, which indicates $\phi(\bm{d})$ is concave. Let $\phi(\bm{d})$ indicate the optimal value of the linear relaxation of the SPDR problem. Substitute $\bm{x}$ with $y_{j \bm{h}}$ and view $y_{j \bm{h}}$ as the decision variables, then the concave property still holds for $\eqref{improve_primal}$. $V^{\text{HO}} = E[\phi(\bm{d})] \leq \phi(E[\bm{d}]) = z(\text{DLP})$.
+
 
 \subsubsection{Solve the dynamic primal}
 % A pattern $\bm{h}$ is said to be inefficient if a mixture of other patterns can be used to generate more revenue for the same (or lower) consumption rate.

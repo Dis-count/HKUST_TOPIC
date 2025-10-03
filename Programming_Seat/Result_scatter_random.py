@@ -51,19 +51,26 @@ y2 = 100.54 * x/(x+1)
 # 46.0
 # 3.2
 
-plt.xlabel('Gamma', fontsize = 20)
+plt.xlabel('Gamma ($\gamma$)', fontsize = 24)
 
 plt.scatter(result[:, 0], result[:, 1], c = "blue")
 plt.plot(x, y1, label= "Blue_estimated")
-plt.ylabel('Period', fontsize= 20)
+plt.ylabel('Period ($T$)', fontsize= 24)
 
+plt.xticks(fontsize=24)
+plt.yticks(fontsize=24)
 plt.twinx()
 
 plt.scatter(result[:, 0], result[:, 2], c="red")
 plt.plot(x, y2, 'r--', label= "Red_estimated")
-plt.ylabel('Occupancy rate (%)', fontsize = 20)
+plt.ylabel('Occupancy rate (%)', fontsize = 24)
 
 
+plt.text(1.8, 76, "Estimate of $q^{th}$", size = 24, alpha = 1)
+
+plt.text(3.2, 71, r'Estimate of $\rho^{th}$', size = 24, alpha = 1)
+
+plt.yticks(np.arange(60, 80, 5), fontsize=24)
 plt.show()
 
 

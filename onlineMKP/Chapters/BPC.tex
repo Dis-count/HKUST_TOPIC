@@ -1,5 +1,5 @@
 \section{Online MMKP}\label{sec_dynamic_seat}
-Consider a set $\mathcal{N} = {1, 2, \ldots, N}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. There is also a set $\mathcal{M} = {1, 2, \ldots, M}$ of distinct item types. Each item of type $i$ has a size $w_i \in \mathbb{Z}^{+}$ and yields a profit $r_i \in \mathbb{Z}^{+}$ when placed entirely into a knapsack. The item types are ordered such that their profit-to-weight ratios, $r_i / w_i$, are monotonically increasing in $i$.
+Consider a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. There is also a set $\mathcal{M} = \{1, 2, \ldots, M\}$ of distinct item types. Each item of type $i$ has a size $w_i \in \mathbb{Z}^{+}$ and yields a profit $r_i \in \mathbb{Z}^{+}$ when placed entirely into a knapsack. The item types are ordered such that their profit-to-weight ratios, $r_i / w_i$, are monotonically increasing in $i$.
 
 Requests for these items arrive sequentially. Upon the arrival of a request (which specifies its type), the seller must immediately decide whether to accept or reject it. If accepted, the seller must also assign it to a specific knapsack with sufficient remaining capacity. Each item must be placed whole into a single knapsack; partial assignments or reassignments are not permitted.
 
@@ -7,7 +7,7 @@ Requests for these items arrive sequentially. Upon the arrival of a request (whi
 To model this problem, we adopt a dynamic programming framework based on discrete time periods $t = 1, 2, \ldots, T$. In each period, at most one request arrives. Let $\lambda_i^t$ denote the probability that a request for an item of type $i \in \mathcal{M}$ arrives at time $t$. These probabilities satisfy $\sum_{i=1}^M \lambda_i^t \leq 1$ for all $t$, and we define $\lambda_0^t = 1 - \sum_{i=1}^M \lambda_i^t$ as the probability of no arrival in period $t$. Arrival events are assumed to be independent across time periods.
 
 
-The system state is the vector of remaining capacities $\mathbf{C} = (c_1, \ldots, c_N)$. When an item of type $i$ arrives, the seller chooses a decision variable $u_{i,j}^t \in {0,1}$ for each knapsack $j$. The feasible set $U^t(\mathbf{C})$ is defined by:
+The system state is the vector of remaining capacities $\mathbf{C} = (c_1, \ldots, c_N)$. When an item of type $i$ arrives, the seller chooses a decision variable $u_{i,j}^t \in \{0,1\}$ for each knapsack $j$. The feasible set $U^t(\mathbf{C})$ is defined by:
 
 $$
 U^t(\mathbf{C})=\left\{u_{i, j}^t \in\{0,1\} \left\lvert\, \begin{array}{ll}
@@ -59,9 +59,9 @@ The objective \eqref{e0} is to maximize total expected revenue. Constraint \eqre
 
 The monotonic increase of the profit-to-weight ratio $r_i/w_i$ with type index $i$ implies that items with a higher index are more profitable per unit of capacity. Consequently, the optimal solution to the LP relaxation exhibits a greedy structure, preferentially utilizing higher-indexed item types. This structural property is formalized in Proposition \ref{sol_relax_deter}.
 
-\begin{prop}\label{sol_relax_deter}
+\begin{lem}\label{sol_relax_deter}
 For the LP relaxation of the \textup{MMKP} problem, there exists an index $\tilde{i}$ such that the optimal solutions satisfy the following conditions: $x_{ij}^{*} = 0$ for all $j$, $i = 1,\ldots, \tilde{i}-1$; $\sum_{j=1}^{N} x_{ij}^{*} = d_{i}$ for $i = \tilde{i}+1,\ldots, M$; $\sum_{j=1}^{N} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i w_i}}{w_{\tilde{i}}}$ for $i = \tilde{i}$.
-\end{prop}
+\end{lem}
 
 The dual of LP relaxation of the MMKP problem is:
 
@@ -75,11 +75,11 @@ The dual of LP relaxation of the MMKP problem is:
 
 In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for one size in knapsack $j$. A request is only accepted if the revenue it generates is no less than the sum of the bid prices of the sizes it uses. Thus, if $r_i -\beta_{j} w_i \geq 0$, meanwhile, the capacity allows, we will accept the item type $i$. And choose knapsack $j^{*} = \arg \max_{j} \{r_i -\beta_{j} w_i\}$ to allocate that item.
 
-\begin{lem}\label{bid-price}
+\begin{prop}\label{bid-price}
 The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{r_{i} w_{\tilde{i}} - r_{\tilde{i}} w_{i}}{w_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{r_{\tilde{i}}}{w_{\tilde{i}}}$ for all $j$.
-\end{lem}
+\end{prop}
 
-According to Lemma \ref{bid-price}, the decision inequality becomes $r_i -\beta_{j} w_i = r_{i} - \frac{r_{\tilde{i}}}{w_{\tilde{i}}} w_{i} \geq 0$. This establishes the threshold policy: reject item type $i, i < \tilde{i}$ and accept item type $i, i \geq \tilde{i}$.
+According to Proposition \ref{bid-price}, the decision inequality becomes $r_i -\beta_{j} w_i = r_{i} - \frac{r_{\tilde{i}}}{w_{\tilde{i}}} w_{i} \geq 0$. This establishes the threshold policy: reject item type $i, i < \tilde{i}$ and accept item type $i, i \geq \tilde{i}$.
 
 \begin{algorithm}[H]
     \caption{Bid-Price Control}\label{algo_bid}
@@ -287,125 +287,3 @@ For example, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ indicates type 3 canno
 \end{example}
 
 While this verification is cumbersome under pure bid-price frameworks, the primal problem offers a more direct way to guarantee the existence of such a request-pattern match. To address this gap, we propose the dynamic primal formulation.
-
-\subsection{Dynamic Primal Based on Patterns}
-
-Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in knapsack $j$. The primal problem can be formulated as:
-
-\begin{equation}\label{improve_primal}
-    \begin{aligned}
-    \max \quad & \sum_{i=1}^M \sum_{j=1}^N r_i x_{i j} \\
-    \text {s.t.} \quad & \sum_{j=1}^N x_{i j} \leq d_i, \quad i \in \mathcal{M}, \\
-    & x_{i j} \leq \sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
-    & \sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N}.
-    \end{aligned}
-\end{equation}
-
-The first set of constraints demonstrate that for each item type $i$, the sum of assigned items and unassigned items equals the total demand. The second set of constraints shows that the number of items of type $i$ assigned in knapsack $j$ is not larger than the sum of $h_{i}$ (the count of type $i$ items in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in knapsack $j$ cannot exceed 1.
-
-\begin{lem}\label{primal}
-The optimal solution $x_{ij}^{*}$ to \eqref{improve_primal} satisfies $x_{ij}^{*} > 0$ if and only if there exists a knapsack $j$ such that $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1.$$
-\end{lem}
-
-In contrast to Lemma \ref{BPP}, this lemma demonstrates the equivalence between the condition $x_{ij}^{*} > 0$ and the existance of a knapsack $j$ satisfying $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$. This equivalence eliminate the need for explicit existance verification.
-
-% Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{BPC}) \geq V(\text{I-BPC}) \geq V^{\text{DP}}$.
-
-% Any feasible solution to \eqref{improve_primal} yields a feasible solution to linear relaxation of SPDR having the same objective value, then we have  $V(\text{BPC}) \geq V^{\text{HO}} \geq V^{\text{DP}}$.
-
-\begin{lem}
-$z(\text{DLP}) \geq V^{\text{HO}}$ results from the concave property. 
-\end{lem}
-
-Consider the standard linear program: $\phi(\bm{d})= \{\max c^{T} \bm{x}: A \bm{x} \leq \bm{d}, \bm{x} \geq \bm{0}\}$.  Suppose that $\bm{d}_1$ and $\bm{d}_2$ are two demand vectors, the optimal solution is $\bm{x}_1$ and $\bm{x}_2$. For any $\lambda \in [0, 1]$, $\bm{d}_{\lambda} = \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2}$. Let $\bm{x}_{\lambda} = \lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}$, then $A \bm{x}_{\lambda} = A(\lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}) \leq \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2} = \bm{d}_{\lambda}$. Thus, $\bm{x}_{\lambda}$ is a feasible solution for $\bm{d}_{\lambda}$. Then, $\phi(\bm{d}_{\lambda}) \geq \bm{c}^{T} \bm{x}_{\lambda} = \lambda \bm{c}^{T} \bm{x}_{1} + (1-\lambda) \bm{c}^{T} \bm{x}_{2} = \lambda \phi(\bm{d}_{1}) + (1- \lambda) \phi(\bm{d}_{2})$, which indicates $\phi(\bm{d})$ is concave. Let $\phi(\bm{d})$ indicate the optimal value of the linear relaxation of the SPDR problem. Substitute $\bm{x}$ with $y_{j \bm{h}}$ and view $y_{j \bm{h}}$ as the decision variables, then the concave property still holds for $\eqref{improve_primal}$. $V^{\text{HO}} = E[\phi(\bm{d})] \leq \phi(E[\bm{d}]) = z(\text{DLP})$.
-
-\subsubsection{Solve the dynamic primal}
-% A pattern $\bm{h}$ is said to be inefficient if a mixture of other patterns can be used to generate more revenue for the same (or lower) consumption rate.
-
-The pattern $\bm{h}$ is efficient for knapsack $j$ if and only if, for some $(\alpha_{1}, \ldots, \alpha_{M}, \gamma_{j})$ (except that $\alpha_{i} = r_i, \forall i$), $\bm{h}$ is the optimal solution to $$\max_{\bm{h}} \sum_{i=1}^{M} (r_i - \alpha_{i}) h_{i} - \gamma_{j}$$
-
-To generate all efficient patterns, we need to solve the subproblem for each knapsack $j$:
-
-\begin{align}\label{subproblem}
-    \max \quad & \sum_{i=1}^{M} (r_i - \alpha_{i}) h_{i} - \gamma_{j} \\
-    \text {s.t.} \quad & \sum_{i= 1}^{M} w_{i} h_{i} \leq c_j, \notag \\
-    & h_{i} \in \mathbb{N}, \quad i \in \mathcal{M}. \notag
-\end{align} 
-
-If the optimal value of \eqref{subproblem} is larger than $0$, the primal $\eqref{improve_primal}$ reaches the optimal. Otherwise, a new pattern can be generated.
-
-One important fact is that only efficient sets are used in the solution to \eqref{improve_primal}. Specifically, 
-
-\begin{lem}\label{efficient}
-    If $y_{j \bm{h}}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $\bm{h}$ is an efficient pattern.
-\end{lem}
-
-
-A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where every component of $\bm{h}{'}$ is greater than or equal to the corresponding component of $\bm{h}$. The efficient pattern is a dominating pattern. (If $\alpha_{i} = r_i$, \eqref{improve_primal} reaches the optimal and no pattern will be generated.)
-
-The relation between the capacity and the demand shows the different structure of the optimal solution.
-
-\begin{lem}
-When $\sum_{i=1}^{M} d_{i} w_{i} < \sum_{j=1}^{N} c_{j}$, we have $\gamma_{j}^{*} =0, \forall j$, $\beta_{ij}^{\dag *} =0, \forall i,j$ and $\alpha^{*}_{i} = r_i, \forall i$. There exists at least one knapsack $j$ such that $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} < 1$.
-
-When $\sum_{i=1}^{M} d_{i} w_{i} \geq \sum_{j=1}^{N} c_{j}$, we have $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} = 1, \forall j$.
-\end{lem}
-
-
-\begin{algorithm}[H]
-    \caption{Dynamic Primal}\label{algo_improve_primal}
-    \For{$t = 1, \ldots, T$}{
-      {Observe a request of type $i$\;}
-      \If{$c_{j}^{t} = w_i, \exists j$}
-      {Assign the item to knapsack $j$\; 
-      \Continue}
-      {Solve problem \eqref{improve_primal} with $\bm{d}^{[t, T]}$ \;
-      Obtain an optimal solution $x_{ij}$ \;}
-      \eIf{$\max_{j}\{x_{ij}\} > 0$}
-      {Set $k = \arg \max_{j}\{x_{ij}\}$ and break ties\;
-      Assign the item to knapsack $k$, let $c_{k}^{t+1} \gets c_{k}^{t} - w_{i}$\;}
-      {Reject the request\;}}
-\end{algorithm}
-
-Meanwhile, it guarantees feasible placement. Once a request is accepted, the policy ensures it can be assigned to a suitable knapsack without additional feasibility checks.
-
-\begin{example}
-For the primal, $\bm{x}_{1}^{*} = [1, 1, 0, 0]$, $\bm{x}_{2}^{*} = [1, 0, 2, 1]$, $\bm{x}_{3}^{*} = [0, 1, 0, 0]$. It indicates that type 1 can be assigned in knapsacks 1 or 2, type 2 cannot be assigned in knapsack 2, type 3 can only be assigned in knapsack 2. 
-
-It may contain multiple efficient patterns for one knapsack. In this example, there is exactly one efficient pattern for each knapsack: $[1, 1, 0]$, $[1, 0, 1]$, $[0, 2, 0]$, $[0, 1, 0]$. It shows that knapsack 1 can assign type 1 and 2, so on and so forth.
-
-Using $x_{ij}$ to make the decision is straightforward and easy to implement.
-\end{example}
-
-
-\begin{example}
-Consider $M =3$, $N =4$, $w_{1} = 3, w_{2} = 4, w_{3} = 5$, $r_{1} = 4, r_{2} = 6, r_{3} = 8$, $\bm{C} = [7, 8, 8, 4]$, $T = 8$, stationary arrival probability, $\lambda_{1} = \lambda_{3} = \frac{1}{4}$, $\lambda_{2} = \frac{1}{2}$. Then the expected demand for each type is $\bm{d} = (2, 4, 2)$.
-
-For the traditional bid-price control, for each $j$, $\beta_{j}^{*} = \frac{4}{3}$. $z(BPC) = \frac{124}{3}$. Two drawbacks: there is no difference among knapsacks. Even $r_{3} - \beta_{4}^{*} * w_{3} > 0$, it is infeasible for type 3 assigned in knapsack 4.
-
-For the BPP, $\bm{\beta}_{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}_{2}^{*} = [6, 6, 6, 6]$, $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. $z(BPP) = 40$. $\alpha = [0, 0, 0]$, $\gamma = [10, 12, 12, 6]$.
-
-$r_{1} - \bm{\beta}_{1}^{*} = [0, 0, 0, -2]$, $r_{2} - \bm{\beta}_{2}^{*} = [0, 0, 0, 0]$, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$.
-
-Drawback: need to check whether $j$ exists for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}, h_{i}^{*} \geq 1$.
-
-For example, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ indicates type 3 cannot be assigned in knapsack 1. While the generated patterns for knapsack 4 are $[0, 1, 0], [1, 0, 0]$, which do not contain $h_{3}$, type 3 can only be assigned to knapsack 2 or 3.
-
-% $[1, 1, 0], [2, 0, 0], [0, 0, 1]$, $[0, 2, 0], [1, 0, 1]$, $[0, 2, 0], [1, 0, 1]$, $[0, 1, 0], [1, 0, 0]$
-
-For the primal, $\bm{x}_{1}^{*} = [1, 1, 0, 0]$, $\bm{x}_{2}^{*} = [1, 0, 2, 1]$, $\bm{x}_{3}^{*} = [0, 1, 0, 0]$. It indicates that type 1 can be assigned in knapsacks 1 or 2, type 2 cannot be assigned in knapsack 2, type 3 can only be assigned in knapsack 2. 
-
-It may contain multiple efficient patterns for one knapsack. In this example, there is exactly one efficient pattern for each knapsack: $[1, 1, 0]$, $[1, 0, 1]$, $[0, 2, 0]$, $[0, 1, 0]$. It shows that knapsack 1 can assign type 1 and 2, so on and so forth.
-
-Using $x_{ij}$ to make the decision is straightforward and easy to implement.
-\end{example}
-
-% Multiple subset sum
-
-\subsection{Type Analyses}
-
-When there is only one type, the optimal policy is straightforward, i.e., accept the request until the capacity is insufficient. 
-
-When there are two types, 
-
-When will the threshold policy be the optimal?

@@ -214,17 +214,21 @@ class column_generation:
 
 
 if __name__ == "__main__":
-    given_lines = 4
+    given_lines = 2
     # roll_width = [21, 22, 23, 24, 25, 26, 27, 28]
-    roll_width = [7, 8, 8, 4]
+    roll_width = [7, 8]
 
-    I = 3  # the number of group types
+    I = 1  # the number of group types
     # value = np.array([4, 6, 8])
-    value = np.array([2, 4, 7])
-    demand_width_array = np.array([3, 4, 5])
+    value = np.array([2])
+
+    # value = np.array([2, 4, 7])
+    # demand_width_array = np.array([3, 4, 5])
+
+    demand_width_array = np.array([2])
     # value = demand_width_array
 
-    demand = np.array([2, 4, 2])
+    demand = np.array([2])
 
     test = column_generation(roll_width, given_lines, demand_width_array, I, value)
 

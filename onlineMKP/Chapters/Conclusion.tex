@@ -1,22 +1,12 @@
 % !TEX root = sum1.tex
 \section{Conclusion}\label{sec_conclusion}
-We study the seating management problem under social distancing requirements. Specifically, we first consider the seat planning with deterministic requests problem. To utilize all seats, we introduce the full and largest patterns. Subsequently, we investigate the seat planning with stochastic requests problem. To tackle this problem, we propose a scenario-based stochastic programming model. Then, we utilize the Benders decomposition method to efficiently obtain a seat plan, which serves as a reference for dynamic seat assignment. Last but not least, to address the seat assignment with dynamic requests, we introduce the SPBA policy by integrating the relaxed dynamic programming and the group-type control allocation.
+We study the online multi-type multiple knapsack problem. We consider the bid-price control policy. Last but not least, to address the seat assignment with dynamic requests, we introduce the dynamic primal policy by integrating the relaxed dynamic programming and the group-type control allocation.
 
-We conduct several numerical experiments to investigate various aspects of our approach. First, we compare SPBA with three benchmark policies: BPC, BLC, and RDPH. Our proposed policy demonstrates superior and more consistent performance relative to these benchmarks. All policies are assessed against the optimal policy derived from a deterministic model with perfect foresight of request arrivals.
+We conduct several numerical experiments to investigate various aspects of our approach. First, we compare different policies. Our proposed policy demonstrates superior and more consistent performance relative to these benchmarks. 
 
-
-Building upon our policies, we further evaluate the impact of implementing social distancing. By introducing the concept of the threshold of request-volume to characterize situations under which social distancing begins to cause loss to an event, our experiments show that the threshold of request-volume depends mainly on the mean of the group size. This leads us to estimate the threshold of request-volume by the mean of the group size.
-
-
-Our models and analyses are developed for the social distancing requirement on the physical distance and group size, where we can determine a threshold of occupancy rate for any given event in a venue, and a maximum achievable occupancy rate for all events. Sometimes the government may impose a maximum allowable occupancy rate to tighten the social distancing requirement. This maximum allowable rate is effective for an event if it is lower than the threshold of occupancy rate of the event. Furthermore, the maximum allowable rate becomes redundant if it is higher than the maximum achievable rate for all events. These qualitative insights are stable concerning the tightness of the policy as well as the specific characteristics of various venues.
 
 
 % While different probability distributions represent varying group profiles, our policy demonstrates consistent performance across different scenarios.
 
 
 % Overall, our study emphasizes the operational significance of social distancing in the seat allocation and offers a fresh perspective for sellers and governments to implement seat assignment mechanisms that effectively promote social distancing requirement.
-
-
-Future research can be pursued in several directions. First, when seating requests are predetermined, a scattered seat assignment approach can be explored to maximize the distance between adjacent groups when sufficient seating is available. Second, more flexible scenarios could be considered, such as allowing individuals to select seats based on their preferences. Third, research could also investigate scenarios where individuals arrive and leave at different times, adding an additional layer of complexity to the problem.
-
-

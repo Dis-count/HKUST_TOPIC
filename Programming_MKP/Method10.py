@@ -3,22 +3,21 @@ from gurobipy import GRB
 import numpy as np
 import copy
 
-# This function uses deterministicModel.
+# This function uses deterministicModel MMKP.
 
 class deterministicModel:
-    def __init__(self, roll_width, given_lines, demand_width_array, I, s):
+    def __init__(self, roll_width, given_lines, weight, I, value):
         self.roll_width = roll_width
         self.given_lines = given_lines
-        self.demand_width_array = demand_width_array
-        self.s = s
-        self.value_array = demand_width_array - self.s
+        self.weight = weight
+        self.value_array = value
         self.I = I
 
     def IP_formulation(self, demand_lower, demand_upper):
         #  Seat planning with upper and lower bound
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.INTEGER)
-        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+        m.addConstrs(grb.quicksum(self.weight[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         if abs(sum(demand_upper)- 0)> 1e-4:
             m.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) <= demand_upper[i] for i in range(self.I))
@@ -44,7 +43,7 @@ class deterministicModel:
         #  Seat planning with upper and lower bound
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.CONTINUOUS)
-        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+        m.addConstrs(grb.quicksum(self.weight[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
 
         m.addConstrs(grb.quicksum(x[i, j] for j in range(self.given_lines)) <= demand_upper[i] for i in range(self.I))
@@ -68,7 +67,7 @@ class deterministicModel:
         #  seat planning given the lower demand
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
-        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+        m.addConstrs(grb.quicksum(self.weight[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
 
         for k in range(self.I):
@@ -122,7 +121,7 @@ class deterministicModel:
         # This function is used to check whether the model have the optimal solution.
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
-        m.addConstrs(grb.quicksum(self.demand_width_array[i] * x[i, j]
+        m.addConstrs(grb.quicksum(self.weight[i] * x[i, j]
                                   for i in range(self.I)) <= self.roll_width[j] for j in range(self.given_lines))
         if sum(demand_upper) != 0:
             m.addConstrs(grb.quicksum(x[i, j] for j in range(
@@ -145,12 +144,12 @@ if __name__ == "__main__":
     given_lines = 6
     roll_width = np.ones(given_lines) * 21
     I = 4  # the number of group types
-    s = 1
-    demand_width_array = np.arange(2, 2+I)
+    value = np.array([4, 6, 8])
+    weight = np.arange(2, 2+I)
 
     demand = np.array([18, 19, 20, 15])
 
-    test = deterministicModel(roll_width, given_lines,demand_width_array, I, s)
+    test = deterministicModel(roll_width, given_lines, weight, I, value)
 
     d0, newx = test.IP_formulation(np.zeros(I), demand)
 

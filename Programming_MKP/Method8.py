@@ -6,10 +6,10 @@ import copy
 # This function uses column generation
 
 class column_generation:
-    def __init__(self, roll_width, given_lines, demand_width_array, I, value):
+    def __init__(self, roll_width, given_lines, weight, I, value):
         self.roll_width = roll_width
         self.given_lines = given_lines
-        self.demand_width_array = demand_width_array
+        self.weight = weight
         self.value_array = value
         self.I = I
 
@@ -90,7 +90,7 @@ class column_generation:
         m = grb.Model()
         h = m.addVars(self.I, lb = 0, vtype = GRB.INTEGER, name='h')
 
-        m.addConstr(grb.quicksum(self.demand_width_array[i] * h[i] for i in range(self.I)) <= row_j)
+        m.addConstr(grb.quicksum(self.weight[i] * h[i] for i in range(self.I)) <= row_j)
         m.setObjective(grb.quicksum((self.value_array[i] - alpha[i]) * h[i] for i in range(self.I)) - gamma, GRB.MAXIMIZE)
 
         # m.write('1.lp')
@@ -141,7 +141,7 @@ class column_generation:
         z = m.addVars(self.I, lb=0, vtype = GRB.CONTINUOUS)
         beta = m.addVars(self.given_lines, lb=0, vtype = GRB.CONTINUOUS)
 
-        m.addConstrs(z[i] + beta[j] * self.demand_width_array[i] >= self.value_array[i] for j in range(self.given_lines) for i in range(self.I))
+        m.addConstrs(z[i] + beta[j] * self.weight[i] >= self.value_array[i] for j in range(self.given_lines) for i in range(self.I))
 
         m.setObjective(grb.quicksum(demand[i] * z[i] for i in range(self.I)) + grb.quicksum(
             roll_width[j] * beta[j] for j in range(self.given_lines)), GRB.MINIMIZE)
@@ -151,8 +151,8 @@ class column_generation:
         alpha = np.array(m.getAttr('X'))[:self.I]
         beta_j = np.array(m.getAttr('X'))[-self.given_lines:]
         # print(f'alpha: {alpha}')
-        print(beta_j)
-        return m.objVal
+        # print(beta_j)
+        return m.objVal, beta_j
 
     def setGeneration(self, dom_set, demand, roll_width):
         # New_pattern: List[]
@@ -179,8 +179,8 @@ class column_generation:
             if  add_count == 0:
                 flag_new_pattern = False
         opt_x, opt_y = self.dynamic_primal(dom_set, demand)
-        for j in range(self.given_lines):
-            print(f'set{j} have: {dom_set[j]}')
+        # for j in range(self.given_lines):
+        #     print(f'set{j} have: {dom_set[j]}')
         return opt_x, opt_y
 
     def setGeneration_bid(self, dom_set, demand, roll_width):
@@ -208,29 +208,29 @@ class column_generation:
             if add_count == 0:
                 flag_new_pattern = False
         alpha, beta, gamma = self.improved_bid(dom_set, demand)
-        for j in range(self.given_lines):
-            print(f'set{j} have: {dom_set[j]}')
+        # for j in range(self.given_lines):
+        #     print(f'set{j} have: {dom_set[j]}')
         return alpha, beta, gamma
 
 
 if __name__ == "__main__":
-    given_lines = 2
+    given_lines = 4
     # roll_width = [21, 22, 23, 24, 25, 26, 27, 28]
-    roll_width = [7, 8]
+    roll_width = [7, 8, 8, 4]
 
-    I = 1  # the number of group types
-    # value = np.array([4, 6, 8])
-    value = np.array([2])
+    I = 3  # the number of group types
+    value = np.array([4, 6, 8])
+    # value = np.array([2])
 
     # value = np.array([2, 4, 7])
-    # demand_width_array = np.array([3, 4, 5])
+    weight = np.array([3, 4, 5])
 
-    demand_width_array = np.array([2])
-    # value = demand_width_array
+    # weight = np.array([2])
+    # value = weight
 
-    demand = np.array([2])
+    demand_array = np.array([2, 4, 10])
 
-    test = column_generation(roll_width, given_lines, demand_width_array, I, value)
+    test = column_generation(roll_width, given_lines, weight, I, value)
 
     # dom_set = [[[0, 0, 0, 1],
     #            [0, 0, 1, 0],
@@ -245,7 +245,7 @@ if __name__ == "__main__":
     dom_set = [np.zeros((1, I)) for _ in range(given_lines)]  # 初始化为 (1, I) 的全零数组
 
     # for j in range(given_lines):
-    #     dom_set[j][0][-1] = roll_width[j] // demand_width_array[-1]  # 直接修改
+    #     dom_set[j][0][-1] = roll_width[j] // weight[-1]  # 直接修改
 
     # dual1, dual2 = test.dual_primal(dom_set, demand)
     # print(dual1)
@@ -254,19 +254,21 @@ if __name__ == "__main__":
 
     ############# Primal ###################
     opt_x, opt_y = test.setGeneration(dom_set, demand, roll_width)
-    print(f'x: {opt_x}')
-    print(f'y: {opt_y}')
+    # print(f'x: {opt_x}')
+    # print(f'y: {opt_y}')
     ############# END ###################
 
     ############ BPC #################
-    # obj = test.LP_formulation(demand, roll_width)
+    obj, beta_j = test.LP_formulation(demand, roll_width)
     # print(obj)
     ############ END #################
 
     ############ BPP #################
-    # alpha, beta, gamma = test.setGeneration_bid(dom_set, demand, roll_width)
+    alpha, beta, gamma = test.setGeneration_bid(dom_set, demand, roll_width)
     # print(f'alpha: {alpha}')
     # print(f'beta: {beta}')
     # print(f'gamma: {gamma}')
     ############ END #################
 
+    for i in range(I):
+        print(beta[i] - weight[i] * beta_j[i])

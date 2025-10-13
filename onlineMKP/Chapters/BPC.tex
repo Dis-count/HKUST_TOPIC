@@ -107,18 +107,20 @@ According to Proposition \ref{bid-price}, the decision inequality becomes $r_i -
 
 Let $z(\text{BPC})$, $z(\text{DLP})$ denote the optimal value of \eqref{bid-price_dual} and the LP relaxation of the \textup{MMKP} problem with expected demand, respectively. Then we have $z(\text{BPC}) = z(\text{DLP})$.
 
-However, the BPC policy has two drawbacks. First, the capacity feasibility need to be checked when to accept a request. Second, when capacity permits, the policy treats all knapsacks as equally preferable, making no distinction among them.
+However, the BPC policy has two drawbacks. First, the capacity feasibility need to be checked when to accept a request. Second, when capacities permit, the policy treats all knapsacks as equally preferable, making no distinction among them.
 
 \begin{example}
-Consider $M =3$, $N =4$, $w_{1} = 3, w_{2} = 4, w_{3} = 5$, $r_{1} = 4, r_{2} = 6, r_{3} = 8$, $\bm{C} = [7, 8, 8, 4]$, $T = 8$, stationary arrival probability: $\lambda_{1} = \lambda_{3} = \frac{1}{4}$, $\lambda_{2} = \frac{1}{2}$. Then the expected demand for each type is $\bm{d} = (2, 4, 2)$.
+Consider an instance with $M =3$, $N =4$, $w_{1} = 3, w_{2} = 4, w_{3} = 5$, $r_{1} = 4, r_{2} = 6, r_{3} = 8$, $\bm{C} = [7, 8, 8, 4]$ and $T = 8$. The stationary arrival probability is $\lambda_{1} = \lambda_{3} = \frac{1}{4}$, $\lambda_{2} = \frac{1}{2}$, giving an expected demand vector $\bm{d} = (2, 4, 2)$.
 
-For the traditional bid-price control, for each $j$, $\beta_{j}^{*} = \frac{4}{3}$. $z(BPC) = \frac{124}{3}$. Two drawbacks: there is no difference among knapsacks. Even $r_{3} - \beta_{4}^{*} * w_{3} > 0$, it is infeasible for type 3 assigned in knapsack 4.
+Under traditional bid-price control, the bid-price for each knapsack $j$ is $\beta_{j}^{*} = \frac{4}{3}$, yielding a total expected reward $z(\text{BPC}) = \frac{124}{3}$. This solution exhibits two major drawbacks: 
+
+It fails to differentiate between knapsacks, assigning them a uniform bid-price. It permits potentially infeasible assignments. For instance, even though $r_{3} - \beta_{4}^{*} * w_{3} > 0$, assigning a type 3 item (with weight 5) to knapsack 4 (with capacity 4) is infeasible.
 \end{example}
 
 \subsection{BPC Policy Based on Patterns (BPP)}
-To account for the differences in placing items across knapsacks, we propose an enhanced dynamic programming (DP) formulation. The key idea, as detailed next, is to represent knapsack configurations using patterns rather than merely tracking the residual capacities.
+To better account for the differences between knapsacks when placing items, we propose an enhanced dynamic programming (DP) formulation. The key idea is to represent the state of each knapsack using feasible assignment patterns, which encode the combinations of items it can hold, rather than merely tracking its residual capacity. This approach more fully captures the knapsack's combinatorial structure.
 
-A feasible pattern $\bm{h} = [h_{1}, \ldots, h_{M}]$ for knapsack $j$ satisfies $\sum_{i=1}^{M} w_{i} h_{i} \leq c_{j}$. Suppose that $S(c_{j})$ is the set of all feasible patterns for knapsack $j$. 
+Formally, a pattern for a knapsack is a vector $\bm{h} = [h_{1}, \ldots, h_{M}]$ where each $h_i$ denotes the number of type-$i$ items assigned. A pattern $\bm{h}$ is feasible for a knapsack with capacity $c_{j}$ if it satisfies $\sum_{i=1}^{M} w_{i} h_{i} \leq c_{j}$. We denote the set of all feasible patterns for knapsack $j$ by $S(c_{j})$. 
 
 Let $v^t(\bm{C})$ denote the maximal expected value-to-go at time $t$, given the remaining capacity $\bm{C}$. The enhanced dynamic programming formulation is as follows:
 
@@ -220,14 +222,16 @@ $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j{'}})} \sum_{i} \beta_{ij{'}}^{\dag 
 
 This lemma guarantees that when such a $j{'}$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}^{1}(\bm{C})$.
 
-Then, the control policy becomes as follow. If $\alpha_{i} > 0$, accept the type $i$. Find knapsack $k = \arg \max_{j \in \mathcal{N}}\{r_i - \beta_{ij}^{\dag}\}$, if multiple maximizers exist, assign the type $i$ to a knapsack $j$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$ If $\alpha_{i} = 0$, check whether there exists a knapsack $j$ such that: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1$. If no such $j$ exists, reject the type $i$; otherwise, accept the type $i$ and assign it to knapsack $j$.
+The control policy is then defined as follows. For the arriving type-$i$ item, if $\alpha_{i} > 0$, accept the type $i$. Assign the type $i$ to a knapsack $j \in \mathcal{J}_{i}$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$ If $\alpha_{i} = 0$ and there exists a knapsack $j$ such that: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1$, accept the type $i$ and assign it to knapsack $j$; otherwise, reject the type $i$.
 
 Let $z(\text{BPC})$ and $z(\text{BPP})$ denote the expected optimal value of \eqref{bid-price_dual} and \eqref{improve_bid}, respectively.
 
-\begin{lem}\label{BPC_relation}
-    For the optimal $\beta_{j}^{*}$ in \eqref{bid-price_dual}, there exist optimal $\beta_{ij}^{\dag *}$ in \eqref{improve_bid} satisfying $\beta_{ij}^{\dag *} \leq w_{i} \beta_{j}^{*}$ for all $i$. Furthermore, $z(\text{BPC}) \geq z(\text{BPP})$.
-\end{lem}
+\begin{prop}\label{BPC_relation}
+    We have $z(\text{BPC}) \geq z(\text{BPP})$.
+\end{prop}
     
+% For the optimal $\beta_{j}^{*}$ in \eqref{bid-price_dual}, there exist optimal $\beta_{ij}^{\dag *}$ in \eqref{improve_bid} satisfying $\beta_{ij}^{\dag *} \geq w_{i} \beta_{j}^{*}$ for all $i$. 
+
 % $\beta_{ij}^{\dag} = w_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
     
 Both bid-price approaches give upper bounds on the value function at any state, meanwhile it follows that BPP provides a tighter approximation to the value function more accurately than BPC does.
@@ -243,9 +247,8 @@ Under the approximation \eqref{appro_dp}, the BPP policy operates as follows:
     \For{$t =1, \ldots, T$}{
       {Observe a request of item type $i$\;}
       {Solve problem \eqref{improve_bid} with $\bm{d}^{[t, T]}$ and $\mathbf{L}^{t}$\;}
-      \eIf{$r_i - \beta_{ij}^{\dag} > 0$}
-      {Set $k = \arg \max_{j \in \mathcal{N}}\{r_i - \beta_{ij}^{\dag}\}$\;
-      If multiple $k$s exist, assign the type $i$ to a knapsack $j$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
+      \eIf{$\alpha_i > 0$}
+      {Assign the type $i$ to a knapsack $j \in \mathcal{J}_{i}$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
       Let $c_{j}^{t+1} \gets c_{j}^{t} - w_{i}$\;}
       {\eIf{There exists $j$ such that $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$}{Assign the item in knapsack $j$, let $c_{j}^{t+1} \gets c_{j}^{t} - w_{i}$\;}
       {Reject the request\;}}}
@@ -277,13 +280,13 @@ Unlike the traditional BPC, the BPP does not require explicit feasibility checks
 \begin{example}
 Continue with the above example:
 
-For the BPP, $\bm{\beta}_{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}_{2}^{*} = [6, 6, 6, 6]$, $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. $z(BPP) = 40$. $\alpha = [0, 0, 0]$, $\gamma = [10, 12, 12, 6]$.
+For the BPP, the optimal bid price is $\bm{\beta}_{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}_{2}^{*} = [6, 6, 6, 6]$, $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. We can verify that  $z(BPP) = 40 < z(BPC) = \frac{124}{3}$. The reduced reward for each item type 3 is: $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$, which indicates type 3 is excluded from knapsack 1. Also, the optimal patterns for knapsack 4, $[0, 1, 0]$ and $[1, 0, 0]$. Thus, type 3 can only be assigned to knapsack 2 or 3.
 
-$r_{1} - \bm{\beta}_{1}^{*} = [0, 0, 0, -2]$, $r_{2} - \bm{\beta}_{2}^{*} = [0, 0, 0, 0]$, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$.
+% The corresponding primal variables are $\bm{\alpha} = [0, 0, 0]$ and $\bm{\gamma} = [10, 12, 12, 6]$.
 
-Drawback: need to check whether $j$ exists for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}, h_{i}^{*} \geq 1$.
+% A drawback is that one must check if an item type can be assigned to a knapsack $j_0$ by verifying the condition $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}$ with $h_{i}^{*} \geq 1$.
 
-For example, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ indicates type 3 cannot be assigned in knapsack 1. While the generated patterns for knapsack 4 are $[0, 1, 0], [1, 0, 0]$, which do not contain $h_{3}$, type 3 can only be assigned to knapsack 2 or 3.
+
 \end{example}
 
 While this verification is cumbersome under pure bid-price frameworks, the primal problem offers a more direct way to guarantee the existence of such a request-pattern match. To address this gap, we propose the dynamic primal formulation.

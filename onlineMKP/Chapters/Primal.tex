@@ -13,23 +13,22 @@ Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in knapsack $j
 
 The first set of constraints demonstrate that for each item type $i$, the sum of assigned items and unassigned items equals the total demand. The second set of constraints shows that the number of items of type $i$ assigned in knapsack $j$ is not larger than the sum of $h_{i}$ (the count of type $i$ items in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in knapsack $j$ cannot exceed 1.
 
-\begin{lem}\label{primal}
-The optimal solution $x_{ij}^{*}$ to \eqref{improve_primal} satisfies $x_{ij}^{*} > 0$, then there exists a knapsack $j$ such that $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1.$$
-\end{lem}
+\begin{prop}\label{primal}
+If the optimal solution $x_{ij}^{*}$ to \eqref{improve_primal} satisfies $x_{ij}^{*} > 0$ for a pair $(i,j)$, then for that knapsack $j$, we have $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1.$$
+\end{prop}
 
-In contrast to Lemma \ref{BPP}, this lemma demonstrates the equivalence between the condition $x_{ij}^{*} > 0$ and the existance of a knapsack $j$ satisfying $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$. This equivalence eliminate the need for explicit existance verification.
+In contrast to Lemma \ref{BPP}, this lemma ensures the existance of a knapsack $j$ to accommodate item type $i$ when $x_{ij}^{*} > 0$. This eliminates the need for explicit existance verification.
 
 % Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{BPC}) \geq V(\text{I-BPC}) \geq V^{\text{DP}}$.
 
 % Any feasible solution to \eqref{improve_primal} yields a feasible solution to linear relaxation of SPDR having the same objective value, then we have  $V(\text{BPC}) \geq V^{\text{HO}} \geq V^{\text{DP}}$.
 
-\begin{lem}
+\begin{lem}\label{concave}
 $z(\text{DLP}) \geq V^{\text{HO}}$ results from the concave property. 
 \end{lem}
 
-Consider the standard linear program: $\phi(\bm{d})= \{\max c^{T} \bm{x}: A \bm{x} \leq \bm{d}, \bm{x} \geq \bm{0}\}$.  Suppose that $\bm{d}_1$ and $\bm{d}_2$ are two demand vectors, the optimal solution is $\bm{x}_1$ and $\bm{x}_2$. For any $\lambda \in [0, 1]$, $\bm{d}_{\lambda} = \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2}$. Let $\bm{x}_{\lambda} = \lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}$, then $A \bm{x}_{\lambda} = A(\lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}) \leq \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2} = \bm{d}_{\lambda}$. Thus, $\bm{x}_{\lambda}$ is a feasible solution for $\bm{d}_{\lambda}$. Then, $\phi(\bm{d}_{\lambda}) \geq \bm{c}^{T} \bm{x}_{\lambda} = \lambda \bm{c}^{T} \bm{x}_{1} + (1-\lambda) \bm{c}^{T} \bm{x}_{2} = \lambda \phi(\bm{d}_{1}) + (1- \lambda) \phi(\bm{d}_{2})$, which indicates $\phi(\bm{d})$ is concave. Let $\phi(\bm{d})$ indicate the optimal value of the linear relaxation of the SPDR problem. Substitute $\bm{x}$ with $y_{j \bm{h}}$ and view $y_{j \bm{h}}$ as the decision variables, then the concave property still holds for $\eqref{improve_primal}$. $V^{\text{HO}} = E[\phi(\bm{d})] \leq \phi(E[\bm{d}]) = z(\text{DLP})$.
 
-\subsubsection{Solve the dynamic primal}
+\subsection{Solve the Dynamic Primal}
 % A pattern $\bm{h}$ is said to be inefficient if a mixture of other patterns can be used to generate more revenue for the same (or lower) consumption rate.
 
 The pattern $\bm{h}$ is efficient for knapsack $j$ if and only if, for some $(\alpha_{1}, \ldots, \alpha_{M}, \gamma_{j})$ (except that $\alpha_{i} = r_i, \forall i$), $\bm{h}$ is the optimal solution to $$\max_{\bm{h}} \sum_{i=1}^{M} (r_i - \alpha_{i}) h_{i} - \gamma_{j}$$
@@ -44,11 +43,7 @@ To generate all efficient patterns, we need to solve the subproblem for each kna
 
 If the optimal value of \eqref{subproblem} is larger than $0$, the primal $\eqref{improve_primal}$ reaches the optimal. Otherwise, a new pattern can be generated.
 
-One important fact is that only efficient sets are used in the solution to \eqref{improve_primal}. Specifically, 
-
-\begin{lem}\label{efficient}
-    If $y_{j \bm{h}}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $\bm{h}$ is an efficient pattern.
-\end{lem}
+One important fact is that only efficient sets are used in the solution to \eqref{improve_primal}. Therefore, if $y_{j \bm{h}}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $\bm{h}$ is an efficient pattern.
 
 
 A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where every component of $\bm{h}{'}$ is greater than or equal to the corresponding component of $\bm{h}$. The efficient pattern is a dominating pattern. (If $\alpha_{i} = r_i$, \eqref{improve_primal} reaches the optimal and no pattern will be generated.)
@@ -80,11 +75,11 @@ When $\sum_{i=1}^{M} d_{i} w_{i} \geq \sum_{j=1}^{N} c_{j}$, we have $\sum_{\bm{
 Meanwhile, it guarantees feasible placement. Once a request is accepted, the policy ensures it can be assigned to a suitable knapsack without additional feasibility checks.
 
 \begin{example}
-For the primal, $\bm{x}_{1}^{*} = [1, 1, 0, 0]$, $\bm{x}_{2}^{*} = [1, 0, 2, 1]$, $\bm{x}_{3}^{*} = [0, 1, 0, 0]$. It indicates that type 1 can be assigned in knapsacks 1 or 2, type 2 cannot be assigned in knapsack 2, type 3 can only be assigned in knapsack 2. 
+For the dynamic primal, the optiaml solution is given by $\bm{x}_{1}^{*} = [1, 1, 0, 0]$, $\bm{x}_{2}^{*} = [1, 0, 2, 1]$, $\bm{x}_{3}^{*} = [0, 1, 0, 0]$. This indicates that type 1 can be assigned to knapsacks 1 or 2, type 2 cannot be assigned to knapsack 2, type 3 can only be assigned to knapsack 2. 
 
-It may contain multiple efficient patterns for one knapsack. In this example, there is exactly one efficient pattern for each knapsack: $[1, 1, 0]$, $[1, 0, 1]$, $[0, 2, 0]$, $[0, 1, 0]$. It shows that knapsack 1 can assign type 1 and 2, so on and so forth.
+In the optimal solution, the efficient patterns for each knapsack are $[1, 1, 0]$, $[1, 0, 1]$, $[0, 2, 0]$, $[0, 1, 0]$. For instance, $[1, 1, 0]$ shows that knapsack 1 can hold one item of type 1 and one of type 2.
 
-Using $x_{ij}$ to make the decision is straightforward and easy to implement.
+Using the decision variable $x_{ij}$ to represent these assignments is a straightforward and easily implementable approach.
 \end{example}
 
 

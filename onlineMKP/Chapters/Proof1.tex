@@ -44,22 +44,18 @@ This contradicts the optimality of the current solution. Therefore, our initial 
 \end{pf}
 
 
-\begin{pf}{Proof of Lemma \ref{BPC_relation}}
+\begin{pf}{Proof of Proposition \ref{BPC_relation}}
 We first testify that the relation satisfy the constraints in BPP. Then the objective value of BPP is no larger than that of BPC.
 
 \end{pf}
 
-\begin{pf}{Proof of Lemma \ref{primal}}
+\begin{pf}{Proof of Proposition \ref{primal}}
   If $x_{ij}^{*}>0$, then $\sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}} >0$, then there exists $\bm{h}$ such that $y_{j \bm{h}} >0$ and $h_{i} \geq 1$. Then $\bm{h} \in \arg \max(\sum_{i} (r_{i} - \alpha_{i}) h_{i} - \gamma_{j})$.
 
   According to the complementary slackness property, $\alpha_{i} + \beta_{ij} = r_{i}$, then $\max \sum_{i} (r_{i} - \alpha_{i}) h_{i} - \gamma_{j}$ equals $\max \sum_{i} \beta_{ij} h_{i}$. Thus, there exists $j$ such that $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$.
-
-  If there exists a knapsack $j$ such that $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$, 
+ 
 \end{pf}
 
-\begin{pf}{Proof of Lemma \ref{efficient}}
-    
-\end{pf}
 
 \begin{pf}{Proof of Lemma \ref{concave}}
   Consider the standard linear program: $\phi(\bm{d})= \{\max c^{T} \bm{x}: A \bm{x} \leq \bm{d}, \bm{x} \geq \bm{0}\}$.  Suppose that $\bm{d}_1$ and $\bm{d}_2$ are two demand vectors, the optimal solution is $\bm{x}_1$ and $\bm{x}_2$. For any $\lambda \in [0, 1]$, $\bm{d}_{\lambda} = \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2}$. Let $\bm{x}_{\lambda} = \lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}$, then $A \bm{x}_{\lambda} = A(\lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}) \leq \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2} = \bm{d}_{\lambda}$. Thus, $\bm{x}_{\lambda}$ is a feasible solution for $\bm{d}_{\lambda}$. Then, $\phi(\bm{d}_{\lambda}) \geq \bm{c}^{T} \bm{x}_{\lambda} = \lambda \bm{c}^{T} \bm{x}_{1} + (1-\lambda) \bm{c}^{T} \bm{x}_{2} = \lambda \phi(\bm{d}_{1}) + (1- \lambda) \phi(\bm{d}_{2})$, which indicates $\phi(\bm{d})$ is concave. Let $\phi(\bm{d})$ indicate the optimal value of the linear relaxation of the SPDR problem. Substitute $\bm{x}$ with $y_{j \bm{h}}$ and view $y_{j \bm{h}}$ as the decision variables, then the concave property still holds for $\eqref{improve_primal}$. $V^{\text{HO}} = E[\phi(\bm{d})] \leq \phi(E[\bm{d}]) = z(\text{DLP})$.

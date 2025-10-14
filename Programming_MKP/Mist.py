@@ -66,16 +66,16 @@ def decision1(sequence, demand, probab, sd):
         t += 1
     return decision_list
 
-def generate_sequence(period, prob, sd):
+def generate_sequence(period, prob):
     I = len(prob)
-    group_type = np.arange(1+ sd, 1+ sd+ I)
-    trials = [np.random.choice(group_type, p = prob) for _ in range(period)]
+    item_type = np.arange(1, 1+ I)
+    trials = [np.random.choice(item_type, p = prob) for _ in range(period)]
     return trials
 
-def sequence_pool(count, num_period, probab, s):
+def sequence_pool(count, num_period, probab):
     pools = np.zeros((count, num_period), dtype = int)
     for i in range(count):
-        pools[i] = generate_sequence(num_period, probab, s)
+        pools[i] = generate_sequence(num_period, probab)
     return pools
 
 def decisionOnce(sequence, demand0, probab, sd):

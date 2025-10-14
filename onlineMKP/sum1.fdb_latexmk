@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex sum1"] 1760331930 "sum1.aux" "sum1.bbl" "sum1" 1760335880
+["bibtex sum1"] 1760444372 "sum1.aux" "sum1.bbl" "sum1" 1760445984
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1630494346 30002 8c0c5833f37bea3ec214cf315a72975d ""
   "refe.bib" 1743924734 22533 1d0cf2aaee92625efbc32698208cb768 ""
-  "sum1.aux" 1760331983 6356 3c0e882a2ff5dc66f8536e39952f736c "pdflatex"
+  "sum1.aux" 1760445983 6540 684cccf2c61a0179ece6e6e3f84be506 "pdflatex"
   (generated)
-  "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1760331981 "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" "sum1.pdf" "sum1" 1760335880
+  "sum1.bbl"
+["pdflatex"] 1760445982 "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" "sum1.pdf" "sum1" 1760445984
   "Chapters/Abstract.tex" 1760331980 1840 877d1de79dfda423a2fd8cf963ba2953 ""
   "Chapters/BPC.tex" 1760324129 24737 0efc149f0ec5dd3902fb3f90ed87e30c ""
   "Chapters/Conclusion.tex" 1760331926 1016 b5169494bed460a93017eeb3e22b4055 ""
@@ -14,7 +14,7 @@
   "Chapters/Literature_review.tex" 1757919841 3816 8734a05ea5dbbb662b726740c89942ba ""
   "Chapters/Primal.tex" 1760327509 7891 5ef90191cf2a869bb3513e091c18c1de ""
   "Chapters/Proof1.tex" 1759986495 7307 90c5782cb7a07ced25eccfea7bf439de ""
-  "Chapters/Results.tex" 1760331985 233 a5ca00d2f49d7c8ad2844445300fd1b7 ""
+  "Chapters/Results.tex" 1760445981 1567 0525be43720ce477c66d86eae012b48a ""
   "e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1630494038 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1630494514 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1630494319 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -170,12 +170,12 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" 1759755198 2169 44f3f2aa8aec6811bdca9b6d3c97ad84 ""
-  "sum1.aux" 1760331983 6356 3c0e882a2ff5dc66f8536e39952f736c "pdflatex"
-  "sum1.bbl" 1760331930 9222 497ca844d6526d056d19318f6cc5a6fd "bibtex sum1"
-  "sum1.out" 1760331983 1608 fed7363444cbd6445c8b8ceaa59e12cf "pdflatex"
+  "sum1.aux" 1760445983 6540 684cccf2c61a0179ece6e6e3f84be506 "pdflatex"
+  "sum1.bbl" 1760444373 9222 497ca844d6526d056d19318f6cc5a6fd "bibtex sum1"
+  "sum1.out" 1760445983 1558 f784b7c1146d53e57d2efbc15e3273e5 "pdflatex"
   "sum1.tex" 1759755198 2169 44f3f2aa8aec6811bdca9b6d3c97ad84 ""
   (generated)
-  "sum1.aux"
   "sum1.pdf"
-  "sum1.out"
   "sum1.log"
+  "sum1.out"
+  "sum1.aux"

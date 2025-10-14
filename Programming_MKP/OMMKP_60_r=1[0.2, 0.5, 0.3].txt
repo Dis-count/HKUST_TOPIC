@@ -1,0 +1,4 @@
+Run Start Time:Tue Oct 14 15:56:50 2025
+The number of periods: 	60
+Primal: 99.68 ;BPC: 95.66 ;BPP: 98.88 ;Number of accepted people: 200.00 
+Total Runtime	274.277809

@@ -3,20 +3,19 @@ from gurobipy import GRB
 import numpy as np
 from Method10 import deterministicModel
 from Method8 import column_generation
-from SamplingMethodSto import samplingmethod1
 import copy
 
 # improved bid-price
 
 class CompareMethods:
-    def __init__(self, roll_width, given_lines, I, num_period, value, weight, demand_array):
+    def __init__(self, roll_width, given_lines, I, num_period, value, weight, probab):
         self.roll_width = roll_width  # array, mutable object
         self.given_lines = given_lines  # number, Immutable object
         self.value_array = value
-        self.demand_array = demand_array
         self.weight = weight
         self.I = I   # number, Immutable object
         self.num_period = num_period   # number, Immutable object   
+        self.probab = probab
     # Used to generate the sequence with the first one fixed.
 
     def bid_price(self, sequence):
@@ -27,8 +26,8 @@ class CompareMethods:
 
         for t in range(self.num_period):
             i = sequence[t]
-            
-            if max(roll_width) < i:
+            demand = (self.num_period - t) * np.array(self.probab)
+            if max(roll_width) < self.weight[i]:
                 decision_list[t] = 0
             elif np.isin(self.weight[i], roll_width).any():
                 decision_list[t] = 1
@@ -36,8 +35,7 @@ class CompareMethods:
                 roll_width[j[0]] -= self.weight[i]
 
             else:
-                demand = (self.num_period - t) * np.array(self.probab)
-                # demand[i-1-self.s] += 1
+
                 demand_capa = demand * self.weight
                 demand_capa = np.cumsum(demand_capa[::-1])
 
@@ -82,25 +80,26 @@ class CompareMethods:
         return demand
 
     def bid_price_1(self, sequence):
-        # Original bid-price control policy.
+        # BPC
         # Don;t solve LP. With simple break tie.
         decision_list = [0] * self.num_period
         roll_width = copy.deepcopy(self.roll_width)
         roll_length = sum(self.roll_width)
 
         for t in range(self.num_period):
-            i = sequence[t]
+            i = sequence[t]-1
+            demand = (self.num_period - t-1) * np.array(self.probab)
+            demand[i] += 1
 
-            if max(roll_width) < i:
+            if max(roll_width) < self.weight[i]:
                 decision_list[t] = 0
-            elif np.isin(i, roll_width).any():
+            elif np.isin(self.weight[i], roll_width).any():
                 decision_list[t] = 1
-                j = np.where(roll_width == i)[0]
-                roll_width[j[0]] -= i
-                roll_length -= i
+                j = np.where(roll_width == self.weight[i])[0]
+                roll_width[j[0]] -= self.weight[i]
+                roll_length -= self.weight[i]
             else:
-                demand = (self.num_period - t) * np.array(self.probab)
-                # demand[i-1-self.s] += 1
+
                 demand_capa = demand * self.weight
                 demand_capa = np.cumsum(demand_capa[::-1])
 
@@ -110,34 +109,34 @@ class CompareMethods:
                         length_index = index
                         break
 
-                if i - self.s >= self.I - length_index and max(roll_width) >= i:
+                if i + 1 >= self.I - length_index and max(roll_width) >= self.weight[i]:
                     decision_list[t] = 1
 
                     for j in range(self.given_lines):
-                        if roll_width[j] >= i:
-                            roll_width[j] -= i
-                            roll_length -= i
+                        if roll_width[j] >= self.weight[i]:
+                            roll_width[j] -= self.weight[i]
+                            roll_length -= self.weight[i]
                             break
 
                 else:
                     decision_list[t] = 0
 
-        sequence = [i-self.s for i in sequence]
+
         final_demand = np.array(sequence) * np.array(decision_list)
         final_demand = final_demand[final_demand != 0]
 
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
-        # print(f'bid: {roll_width}')
+
         return demand
 
     def offline(self, sequence):
         # This function is to obtain the optimal decision.
         demand = np.zeros(self.I)
         for i in sequence:
-            demand[i] += 1
-        test = deterministicModel(self.roll_width, self.given_lines, self.weight, self.I, self.value)
+            demand[i-1] += 1
+        test = deterministicModel(self.roll_width, self.given_lines, self.weight, self.I, self.value_array)
         newd, _ = test.IP_formulation(np.zeros(self.I), demand)
 
         return newd
@@ -158,9 +157,9 @@ class CompareMethods:
                 continue
             # stationary demand rate
             demand = (self.num_period - t) * np.array(self.probab)
-            # demand[i-1] += 1
 
-            improved = column_generation(roll_width, self.given_lines, self.weight, self.I, self.value)
+
+            improved = column_generation(roll_width, self.given_lines, self.weight, self.I, self.value_array)
 
             dom_set = [np.zeros((1, self.I)) for _ in range(self.given_lines)]
 
@@ -193,17 +192,15 @@ class CompareMethods:
         roll_width = copy.deepcopy(self.roll_width)
 
         for t in range(self.num_period):
-            i = sequence[t]
-
+            i = sequence[t]-1
             if np.isin(self.weight[i], roll_width).any():
                 decision_list[t] = 1
                 j = np.where(roll_width == self.weight[i])[0]
                 roll_width[j[0]] -= self.weight[i]
                 continue
-            demand = (self.num_period - t) * np.array(self.probab)
-            # demand[i-1] += 1
-
-            improved = column_generation(roll_width, self.given_lines, self.weight, self.I, self.value)
+            demand = (self.num_period - t- 1) * np.array(self.probab)
+            demand[i] += 1
+            improved = column_generation(roll_width, self.given_lines, self.weight, self.I, self.value_array)
 
             dom_set = [np.zeros((1, self.I)) for _ in range(self.given_lines)]
 
@@ -219,23 +216,26 @@ class CompareMethods:
                 roll_width[j_index] -= self.weight[i]
             else:
                 decision_list[t] = 0
-
+            
         final_demand = np.array(sequence) * np.array(decision_list)
         final_demand = final_demand[final_demand != 0]
 
         demand = np.zeros(self.I)
         for i in final_demand:
             demand[i-1] += 1
+
         return demand
 
     def improved_bid(self, sequence):
         #  max{i - beta_ij}
+        # BPP
         decision_list = [0] * self.num_period
         roll_width = copy.deepcopy(self.roll_width)
-        sequence = [i-self.s for i in sequence]
 
         for t in range(self.num_period):
-            i = sequence[t]
+            i = sequence[t]-1
+            demand = (self.num_period -t-1) * np.array(self.probab)
+            demand[i] += 1
 
             if max(roll_width) < self.weight[i]:
                 decision_list[t] = 0
@@ -244,31 +244,29 @@ class CompareMethods:
                 j = np.where(roll_width == self.weight[i])[0]
                 roll_width[j[0]] -= self.weight[i]
             else:
-                demand = (self.num_period - t) * np.array(self.probab)
-                # demand[i-1] += 1
-
-                improved = column_generation(roll_width, self.given_lines, self.weight, self.I, self.value)
+                
+                improved = column_generation(roll_width, self.given_lines, self.weight, self.I, self.value_array)
 
                 dom_set = [np.zeros((1, self.I)) for _ in range(self.given_lines)]
-                beta = improved.setGeneration_bid(dom_set, demand, roll_width)
+                alpha, beta, gamma, dom_set = improved.setGeneration_bid(dom_set, demand, roll_width)
 
-                delta = i - beta[i-1]
-                indices = [ind for ind, val in enumerate(roll_width) if val >= i + self.s]
-                b_values = [delta[i] for i in indices]
+                # find sum_{\beta h} = \gamma
+                find_j = -1
 
-                j = max(b_values)
-                j_index = indices[np.argmax(b_values)]
+                for line_idx in range(self.given_lines):
+                    if find_j > -1:
+                        break
+                    for pattern in dom_set[line_idx]:
+                        if pattern[i] >=1 and np.dot(beta[:, line_idx], pattern) == gamma[line_idx]:
+                            find_j = line_idx
+                            break
 
-                print(f'arrival:{i}')
-                print(f'value: {delta}')
-                print(f'index: {j_index}')
-                
-                if j > 0:
+                if find_j >= 0:
                     decision_list[t] = 1
-                    roll_width[j_index] -= i+ self.s
+                    roll_width[find_j] -= self.weight[i]
                 else:
                     decision_list[t] = 0
-                print(roll_width)
+
         final_demand = np.array(sequence) * np.array(decision_list)
         final_demand = final_demand[final_demand != 0]
 
@@ -278,48 +276,50 @@ class CompareMethods:
         return demand
 
 def generate_sequence(period, prob):
+    #  generate item type from 1 
     I = len(prob)
-    item_type = np.arange(I)
+    item_type = np.arange(1,I+1)
     trials = [np.random.choice(item_type, p = prob) for _ in range(period)]
     return trials
 
 if  __name__ == "__main__":
-    given_lines = 10
+    given_lines = 4
 
-    roll_width = np.ones(given_lines) * 21
+    # roll_width = np.ones(given_lines) * 21
     # roll_width = np.ones(given_lines) * 12
-    # roll_width = np.array([16,17,18,19,20,21,22, 23, 23,24])
-    # 0.12, 0.5, 0.13, 0.25
-    # 0.34, 0.51, 0.07, 0.08
-    num_period = 60
+    roll_width = np.array([6,7,8,9])
+
+    num_period = 10
     value = np.array([4, 6, 8])
     weight = np.array([3, 4, 5])
-    demand_array = np.array([2, 4, 10])
-    I = 4
-    multi = np.arange(1, I+1)
-    probab = np.array([0.12, 0.5, 0.13, 0.25])
-    
-    a = CompareMethods(roll_width, given_lines, I, num_period, value, weight, demand_array)
+    # demand_array = np.array([2, 4, 10])
+    I = 3
 
-    # sequence = generate_sequence(num_period, probab, s)
+    probab = np.array([0.2, 0.5, 0.3])
+    # demand_array = num_period * probab
 
-    # sequence = [3, 3, 2, 3, 5, 2, 5, 3, 2, 2, 3, 2, 3, 2, 2, 5, 3, 3, 2, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 2, 5, 2, 2, 2, 2, 2, 2, 5, 2, 3, 3, 3, 5, 3, 3, 2, 3, 3, 3, 3, 2, 3, 2, 3, 3, 3, 2, 2, 3, 3, 3, 2, 4, 4, 2, 5, 3, 3, 3, 2, 5, 5, 5, 3, 3, 3, 2, 3, 3, 2, 2, 3, 3, 2, 3, 2, 3, 2, 5, 5] total 90
+    a = CompareMethods(roll_width, given_lines, I,
+                       num_period, value, weight, probab)
 
-    sequence =  [3, 3, 5, 2, 3, 5, 5, 3, 4, 3, 5, 2, 3, 3, 5, 2, 3, 2, 5, 3, 5, 4, 5, 5, 3, 5, 2, 2, 4, 3, 4, 5, 4, 3, 4, 4, 3, 3, 3, 3, 3, 5, 4, 2, 4, 3, 3, 3, 3, 3, 3, 3, 2, 5, 4, 5, 5, 5, 5, 5]
-
-    sequence = sequence[:60]
+    # sequence = generate_sequence(num_period, probab)
+    sequence = [2, 1, 2, 2, 2, 2, 2, 3, 1, 2]
+    # print(sequence)
+    c = a.bid_price_1(sequence)
+    print(f'BPC: {np.dot(value, c)}')
 
     b = a.improved_bid(sequence)
-    print(f'improved_bid: {np.dot(multi, b)}')
-
-    # c = a.bid_price(sequence)
-    # print(f'bid-price: {np.dot(multi, c)}')
+    print(f'BPP: {np.dot(value, b)}')
+    print(f'BPP_demand: {b}')
+    
+    d = a.dynamic_primal(sequence)
+    print(f'primal_demand: {d}')
+    print(f'primal: {np.dot(value, d)}')
 
     f = a.offline(sequence)  # optimal result
-    print(f)
-    optimal = np.dot(multi, f)
-    print(f'optimal: {optimal}')
+    print(f'optimal_demand:{f}')
 
+    optimal = np.dot(value, f)
+    print(f'optimal: {optimal}')
 
     # newx = np.array([[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0], [-0.0, 0.0, 0.0, 1.0], [-0.0, 0.0, 1.0, 1.0], [0.0, 1.0, 0.0, 0.0]])
     # change_roll = np.array([0,0,0,0,0,0,0,5,13,4])

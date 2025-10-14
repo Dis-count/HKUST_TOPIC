@@ -40,7 +40,7 @@ class column_generation:
 
         m.setParam('OutputFlag', 0)
         m.optimize()
-        print(f'BPP :{m.objVal}')
+        # print(f'BPP :{m.objVal}')
         opt = np.array(m.getAttr('X'))
         opt_x = opt[:self.I * self.given_lines]
         opt_y = opt[self.I * self.given_lines:len(opt)]
@@ -210,7 +210,7 @@ class column_generation:
         alpha, beta, gamma = self.improved_bid(dom_set, demand)
         # for j in range(self.given_lines):
         #     print(f'set{j} have: {dom_set[j]}')
-        return alpha, beta, gamma
+        return alpha, beta, gamma, dom_set
 
 
 if __name__ == "__main__":
@@ -228,7 +228,7 @@ if __name__ == "__main__":
     # weight = np.array([2])
     # value = weight
 
-    demand_array = np.array([2, 4, 10])
+    demand_array = np.array([2, 4, 2])
 
     test = column_generation(roll_width, given_lines, weight, I, value)
 
@@ -253,22 +253,22 @@ if __name__ == "__main__":
     # pattern = test.subproblem(dual1, dual2[0], 5)
 
     ############# Primal ###################
-    opt_x, opt_y = test.setGeneration(dom_set, demand, roll_width)
+    opt_x, opt_y = test.setGeneration(dom_set, demand_array, roll_width)
     # print(f'x: {opt_x}')
     # print(f'y: {opt_y}')
     ############# END ###################
 
     ############ BPC #################
-    obj, beta_j = test.LP_formulation(demand, roll_width)
+    obj, beta_j = test.LP_formulation(demand_array, roll_width)
     # print(obj)
     ############ END #################
 
     ############ BPP #################
-    alpha, beta, gamma = test.setGeneration_bid(dom_set, demand, roll_width)
-    # print(f'alpha: {alpha}')
-    # print(f'beta: {beta}')
-    # print(f'gamma: {gamma}')
+    alpha, beta, domset = test.setGeneration_bid(dom_set, demand_array, roll_width)
+    print(f'alpha: {alpha}')
+    print(f'beta: {beta}')
+    print(f'set: {domset}')
     ############ END #################
 
-    for i in range(I):
-        print(beta[i] - weight[i] * beta_j[i])
+    # for i in range(I):
+    #     print(beta[i] - weight[i] * beta_j[i])

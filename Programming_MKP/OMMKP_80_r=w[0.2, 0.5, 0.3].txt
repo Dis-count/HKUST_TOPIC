@@ -1,0 +1,7 @@
+Run Start Time:Tue Oct 14 17:10:19 2025
+
+weight = np.array([4, 6, 8])
+
+The number of periods: 	80
+Primal: 100.00 ;BPC: 99.25 ;BPP: 99.85 ;Average Optimal Revenue: 200.00 
+Total Runtime	216.163671

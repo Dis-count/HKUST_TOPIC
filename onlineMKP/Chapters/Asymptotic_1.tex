@@ -5,18 +5,17 @@
 %     Loss: $\lim_{\theta \to \infty} V_{\theta}^{\text{DP}} - z_{\theta}({\text{BPC}}) = 0$. 
 % \end{lem}
 
-% \begin{lem}
-%     Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{BPC}} = O(\sqrt{\theta})$. 
-% \end{lem}
+\begin{prop}
+    Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{BL}} = O(\sqrt{\theta})$. 
+\end{prop}
 
-\begin{lem}
-    Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{DPP}} = O(1)$. 
-\end{lem}
+\begin{prop}
+    Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{P}} = O(1)$. 
+\end{prop}
 
-Let $T_{i} = sup \{t \leq T: \lambda_{i}^{t} > 0\}$. 
+% Let $T_{i} = sup \{t \leq T: \lambda_{i}^{t} > 0\}$. 
 
-
-\newpage
+% \newpage
 
 \subsection{Loss for Static BLC Policy}
 Booking limit control policy:
@@ -109,17 +108,30 @@ For one sample path of the requests, the revenue loss can be decomposed into $T$
 
 % Let $c_{j}^{t} = c_{j} -\sum_{i=1}^{M} w_{i} \gamma_{ij}^{[1,t)}$. 
 
-Let $T_{i} = \sup\{t \leq T: \lambda_{i}^{t}> 0\}$
+Let $T_{i} = \sup\{t \leq T: \lambda_{i}^{t}> 0\}$. 
+
+Then 
+$$
+\inf_{\substack{t, i: \\ t \in\left[\theta T_{i}\right]}} \frac{\lambda_{i}^{\left(t, \theta T_{i}\right]}(\theta)}{\theta T_{i}-t}
+$$
+
+is lower bounded by some positive constant 
+$$
+\lambda_{\min } \triangleq \inf_{i} \frac{\lambda_{i}^{T_{i}}}{T_{i}}
+$$
+
 
 The expected revenue loss can be upper bounded:
 
 \begin{align*}
     & E[OPT(\bm{C}, d^{[1, T]}, 0) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
  \leq & l \sum_{t=1}^{T} P(OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) > 0) \\
- = & r_{M} \sum_{t=1}^{T} P(OPT(\bm{C}^{t}, d^{[t, T]}, 0) - OPT(\bm{C}^{t}, d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
- \leq & r_{M}  \sum_{t=1}^{T} P(x_{i^{t}j^{t}}^{*,t} <1)
+ = & l \sum_{t=1}^{T} P(OPT(\bm{C}^{t}, d^{[t, T]}, 0) - OPT(\bm{C}^{t}, d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
+ \leq & l \sum_{t=1}^{T} P(x_{i^{t}j^{t}}^{*,t} <1)
 \end{align*}
 
+$OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) \leq l$.
+$l$ is related to $r_{M}$.
 
 \begin{lem}\label{additive}
 $OPT(\bm{C}^{1}, \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} r_{i} \sum_{j} \gamma_{ij}^{[1, t_1)} + OPT(\bm{C}^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$
@@ -128,7 +140,7 @@ $OPT(\bm{C}^{1}, \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} r_{i} \s
 For any optimal solution $x^{*}$ of $OPT(\bm{C}^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$, $x^{*} + \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$. For any optimal solution $x^{*}$ of $OPT(\bm{C}^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$, $x^{*}- \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$ because $x^{*}- \gamma^{[1, t_1)} \geq \gamma^{[1, t_{2})}- \gamma^{[1, t_1)} = \gamma^{[t_1, t_2)}$.
 
 
-The first inequality results from $E[A] \leq r_{M} E[\bm{1}_{A>0}] = r_{M} P(A>0)$ and $A \leq r_{M}$.
+The first inequality results from $E[A] \leq l E[\bm{1}_{A>0}] = l P(A>0)$.
 
 The first equation follows from Lemma \ref{additive}. (Let $t_1 = t_2 = t$, $\hat{d} = d^{[t, T]}$; let $t_1 = t, t_2 = t+1$, $\hat{d} = d^{[t+1, T]}$).
 

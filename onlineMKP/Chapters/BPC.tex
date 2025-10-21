@@ -152,15 +152,16 @@ We can solve the following program to compute $v^1(\bm{C})$ for any given capaci
 \end{equation}
 
 
-Solving \eqref{dp_bid} remains computationally prohibitive. Following from the ADP approach, we approximate $v^{t}(\bm{C})$ as 
+Solving \eqref{dp_bid} remains computationally intractable. We therefore adopt an Approximate Dynamic Programming (ADP) approach \citep{adelman2007dynamic} to approximate the value function $v^{t}(\bm{C})$. Our proposed approximation is:
 
 \begin{equation}\label{appro_dp}
     \hat{v}^{t}(\bm{C}) = \theta^{t} + \sum_{j=1}^{N} \max_{\bm{h} \in S(c_{j})} \{\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}\}.
 \end{equation}
 
+
 The term $\beta_{ij}^{\dag}$ can be regarded as the approximated value for each type $i$ in knapsack $j$. Unlike traditional linear approximations, our approach retains the linear term $\theta^{t}$ but introduces a nonlinear component for each knapsack $j$. Specifically, we maximize the linear combination $\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}$ over the feasible set $S(c_{j})$.
 
-Our approximation extends classical linear ADP by incorporating resource-specific nonlinear terms through constrained maximization over feasible allocations. While similar separable corrections appear in resource allocation ADP (e.g., Powell, 2007), our explicit use of $\max_{\bm{h} \in S(c_j)}$ captures local constraints more directly.
+% Our approximation extends classical linear ADP by incorporating resource-specific nonlinear terms through constrained maximization over feasible allocations. While similar separable corrections appear in resource allocation ADP, our explicit use of $\max_{\bm{h} \in S(c_j)}$ captures local constraints more directly.
 
 
 % Our approximation adopts a separable nonlinear structure, but unlike classical approximations, the nonlinearity is implicitly defined by constrained maximization over feasible allocations. This captures problem-specific constraints.
@@ -206,7 +207,7 @@ If all $j$ exist for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta
 
 $\alpha_{i}$ represents marginal revenue for type $i$. $\beta_{ij}^{\dag}$ represents the cost for type $i$ assigned in knapsack $j$. $\gamma_{j}$ represents the capacity cost associated with knapsack $j$.
 
-When no knapsack $j$ exists satisfying both $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ and $h_{i}^{*} \geq 1$, the first set of constraints for $(i,j)$ should be removed from the formulation \eqref{improve_bid}. Although these constraints appear difficult to enforce in advance, the following lemma reveals that in practice we can avoid imposing additional restrictions. Simply solving problem \eqref{improve_bid} will inherently satisfy all required conditions.
+If for a given item type $i$, no knapsack $j$ contains an optimal allocation $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ with $h_{i}^{*} \geq 1$, then the variable $\alpha_{i}$ must be zero. This indicates that the constraint associated with item type $i$ and knapsack $j$ is redundant. Although these constraints appear difficult to enforce in advance, the following lemma reveals that in practice we can avoid imposing additional restrictions. Simply solving problem \eqref{improve_bid} will inherently satisfy all required conditions.
 
 % \begin{lem}
 % For the optimal solution, $r_{i} \geq \beta_{ij}^{\dag}$.

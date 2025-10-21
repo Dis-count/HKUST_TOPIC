@@ -5,9 +5,9 @@
 %     Loss: $\lim_{\theta \to \infty} V_{\theta}^{\text{DP}} - z_{\theta}({\text{BPC}}) = 0$. 
 % \end{lem}
 
-\begin{lem}
-    Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{BPC}} = O(\sqrt{\theta})$. 
-\end{lem}
+% \begin{lem}
+%     Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{BPC}} = O(\sqrt{\theta})$. 
+% \end{lem}
 
 \begin{lem}
     Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{DPP}} = O(1)$. 
@@ -16,10 +16,9 @@
 Let $T_{i} = sup \{t \leq T: \lambda_{i}^{t} > 0\}$. 
 
 
-
 \newpage
 
-\subsection{Static BLC Policy}
+\subsection{Loss for Static BLC Policy}
 Booking limit control policy:
 
 \begin{align}
@@ -28,34 +27,34 @@ Booking limit control policy:
     & \sum_{i=1}^{M} w_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \notag 
 \end{align}
 
-Let $d_{i}^{*} = \sum_{j} x_{ij}^{*}$, $x_{ij}^{*}$ is an integral optimal solution to \eqref{theta_deter} with $d_{i} = \sum_{t} p_{i}^{t}$ (Expected demand).
 
-Let $d_{i}$ indicate the number of type $i$ during time $T$. $d_{i} = \sum_{t} \bm{1}_{i_{t} = i}$.
-Let $val(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter}.
+Let $d_{i} =\sum_{t} \bm{1}_{i_{t} = i}$ be the realized number of type $i$ over the horizon $T$. 
+Consider the deterministic linear programming \eqref{theta_deter}, where the right-hand side demands are set to $\sum_{t} \lambda_{i}^{t}$. Let $x_{ij}^{*}$ be an integral optimal solution to this LP, and define $d_{i}^{*} = \sum_{j} x_{ij}^{*}$ as the total number of type $i$ assigned in this optimal solution. Finally, let $val(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter} for a given instance $I$ and demand vector $\{d_{i}\}$.
 
-$V^{BL}(I) = E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) \min\{d_{i}^{*}, d_{i}\}]$, $V^{OPT}(I) = E_{\{d_{i}\}} [val(I; \{d_{i}\})] \leq val(I; \{E[d_{i}]\})$.
+$V^{BL}(I) = E_{\{d_{i}\}}[\sum_{i} r_{i} \min\{d_{i}^{*}, d_{i}\}]$, $V^{OPT}(I) = E_{\{d_{i}\}} [val(I; \{d_{i}\})] \leq val(I; \{E[d_{i}]\})$.
 
 $val(I; \{d_{i}\})$ is concave in $d_{i}$.
 
 \begin{align*}
    & V^{OPT}(I) - V^{BL}(I) \\
 \leq & val(I; \{E[d_{i}]\}) - V^{BL}(I) \\
-= & val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) + val(I; \{\lfloor E[d_{i}]\rfloor\}) - E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) \min\{d_{i}^{*}, d_{i}\}] \\
-\leq & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) (d_{i}^{*} - \min\{d_{i}^{*}, d_{i}\})] \\
-= & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + E_{\{d_{i}\}}[\sum_{i} \frac{1}{2}(n_{i}-\delta) (d_{i}^{*} - d_{i} + |d_{i}^{*} - d_{i}|)] \\
-\overset{\text{(a)}}{\leq} & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + \frac{1}{2} \sum_{i} (n_{i}-\delta)(d_{i}^{*} - E[d_{i}] + |d_{i}^{*} - E[d_{i}]| + \sqrt{\Var[d_{i}]}) \\
-\leq & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + \frac{1}{2} \sum_{i} (n_{i}-\delta) \sqrt{\Var[d_{i}]} \\
-\leq & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + \frac{1}{2} \sum_{i} (n_{i}-\delta) \sqrt{T p_{i} (1- p_{i})} = O(\sqrt{T})
+= & val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) + val(I; \{\lfloor E[d_{i}]\rfloor\}) - E_{\{d_{i}\}}[\sum_{i} r_{i} \min\{d_{i}^{*}, d_{i}\}] \\
+\leq & \sum_{i} r_{i} + N \sum_{i} r_i + E_{\{d_{i}\}}[\sum_{i} r_{i} (d_{i}^{*} - \min\{d_{i}^{*}, d_{i}\})] \\
+= & (1+N) \sum_{i} r_{i} + E_{\{d_{i}\}}[\sum_{i} \frac{1}{2} r_{i} (d_{i}^{*} - d_{i} + |d_{i}^{*} - d_{i}|)] \\
+\overset{\text{(a)}}{\leq} & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} (d_{i}^{*} - E[d_{i}] + |d_{i}^{*} - E[d_{i}]| + \sqrt{\Var[d_{i}]}) \\
+\leq & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} \sqrt{\Var[d_{i}]} \\
+\leq & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} \sqrt{T p_{i} (1- p_{i})} = O(\sqrt{T})
 \end{align*}
 
+The revenue loss between the static deterministic heuristic and the optimal is bounded by $C \sqrt{T}$.
 Thus, $\lim_{T \to \infty} (V^{OPT}(I) - V^{BL}(I))/T \to 0$.
 
-$val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq val(I; \{\lceil E[d_{i}]\rceil\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) = \sum_{i} (n_{i} - \delta)$
+$val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq val(I; \{\lceil E[d_{i}]\rceil\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq \sum_{i} r_{i}$
 
 
-$LP -IP \leq \sum_{i} \sum_{j} (n_{i} - \delta) (x_{ij}^{*} - \lfloor x_{ij}^{*} \rfloor) \leq N \sum_{i} i$ $\Rightarrow$ $val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq IP + N \sum_{i} i$.
+$LP -IP \leq \sum_{i} \sum_{j} r_{i} (x_{ij}^{*} - \lfloor x_{ij}^{*} \rfloor) < N \sum_{i} r_i$ $\Rightarrow$ $val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq IP + N \sum_{i} r_i$.
 
-$IP = \sum_{i} \sum_{j} (n_{i} - \delta) x_{ij}^{*} = \sum_{i} (n_{i} - \delta) d_{i}^{*}$
+$IP = \sum_{i} \sum_{j} r_{i} x_{ij}^{*} = \sum_{i} r_{i} d_{i}^{*}$
 
 $(a)$ results from the following inequalities: $|d_{i}^{*} -d_{i}| = |(d_{i}^{*}-E[d_{i}]) + (E[d_{i}] -d_{i})| \leq |d_{i}^{*}-E[d_{i}]| + |d_{i} - E[d_{i}]|$. Take the expectation, we have $E[|d_{i}^{*} -d_{i}|]\leq |d_{i}^{*}-E[d_{i}]| + E[|d_{i} - E[d_{i}]|]$. $E[|d_{i} - E[d_{i}]|] \leq \sqrt{\Var[d_{i}]}$(Since $E[|X|] \leq \sqrt{E[X^{2}]}$). $d_{i}^{*} \leq E[d_{i}]$.
 
@@ -70,111 +69,96 @@ $(a)$ results from the following inequalities: $|d_{i}^{*} -d_{i}| = |(d_{i}^{*}
 
 % Here, $M = \sum_{i=1}^{m} d_{i}$ represents the number of groups. $p_{k} = (n_{i} - \delta), w_{k} = n_{i}$ if group $k$ belongs to type $i$.
 
-Surrogate relaxation (0-1 single):
-
-\begin{align}\label{one_row}
-    \quad \max \quad & \sum_{i = 1}^{M} r_i x_{i} \\
-    \text {s.t.} \quad & x_{i} \leq d_{i}, \quad i \in \mathcal{M},  \\ 
-    & \sum_{i=1}^{M} n_{i} x_{i} \leq L.
-\end{align}
-
-LP optimal solution: $[0, \ldots, 0, X_{\tilde{i}}, d_{\tilde{i}+1}, \ldots, d_{M}]$, $X_{\tilde{i}} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i w_i}}{n_{\tilde{i}}}.$
-
-One feasible IP optimal solution: $[0, \ldots, 0, \lfloor X_{\tilde{i}} \rfloor, d_{\tilde{i}+1}, \ldots, d_{M}]$.
-
-$LP - IP \leq \tilde{i} (X_{\tilde{i}} - \lfloor X_{\tilde{i}} \rfloor)$
 
 % single-leg RM: bid-price and booking limit expected revenue loss of $O(\sqrt{k})$ even with re-solving.
 
-\begin{align*}
-    & V^{OPT}(I) - V^{BL}(I) \\
- \leq & val(I; \{E[d_{i}]\}) - V^{BL}(I) \\
- = & val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) + val(I; \{\lfloor E[d_{i}]\rfloor\}) - E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) \min\{d_{i}^{*}, d_{i}\}] \\
- \leq & \sum_{i} (n_{i} - \delta) + \tilde{i} (X_{\tilde{i}} - \lfloor X_{\tilde{i}} \rfloor) + E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) (d_{i}^{*} - \min\{d_{i}^{*}, d_{i}\})] \\
- \leq & \sum_{i} (n_{i} - \delta) + \tilde{i} (X_{\tilde{i}} - \lfloor X_{\tilde{i}} \rfloor) + \frac{1}{2} \sum_{i} (n_{i}-\delta) \sqrt{T p_{i} (1- p_{i})}
- \end{align*}
- 
 
+\subsection{Loss for Dynamic Primal Policy}
 
 $E[\text{loss}] = V^{\text{off}} - V_{\pi}^{on} \geq V^{\text{opt}} - V_{\pi}^{on}$
 
-One sample path. $d^{r}$ realization of $M$ types. 
-
-$V_{t}(l) = \sum_{i = \hat{i}+1}^{M} r_{i} d_{i}^{r} + r_{\hat{i}}(l- \sum_{i= \hat{i}+1}^{M} d_{i}^{r})$
-
-
 Let $V^{\text{OPT}}(I)$ denote the expected value under offline optimal policy (relaxed) during $T$ periods for instance $I$ (capacity, probability distribution).
 
-The revenue loss between the static deterministic heuristic and the optimal is bounded by $C \sqrt{T}$.
 
-Let $\gamma_{i}$, $\gamma_{i}^{0}$ denote the number of type $i$ accepted and rejected by some heuristic policy, respectively.
+Let $\gamma_{ij}$, $\gamma_{i}^{0}$ denote the number of type $i$ accepted in capacity $j$ and rejected by this policy, respectively.
 
 
 % Re-solving (each stage) bid-price (DLP) is equivalent to the optimal policy.
-
 \begin{align*}
-    \text{OPT}(L, \hat{d}, \gamma): \quad \max \quad & \sum_{i = 1}^{M} r_{i} x_{i} \\
-    \text {s.t.} \quad & x_{i}^{0} + x_{i} = \hat{d}_{i}, \quad i \in \mathcal{M},  \\ 
-    & x_{i} \geq \gamma_{i}, \quad i \in \mathcal{M}, \\
-    & x_{i}^{0} \geq \gamma_{i}^{0}, \quad i \in \mathcal{M}, \\
-    & \sum_{i=1}^{M} w_{i} x_{i} \leq L.
-\end{align*}
-
-Heuristic policy: At time t, solve problem \eqref{one_row} with $d_{i} = d_{i}^{t} = (T-t) * p_{i}$, $L = L^{t}$. When $x_{i}\geq 1$ for the request of type $i$, accept the request.
-
-
-
-$d^{[1, T]}$ is the demand realization during $[1, T]$. $\gamma^{[1, t)}$ represents the number of requests rejected and accpeted by some heuristic policy during $[1, t)$. 
-
-$OPT(L, d^{[1, T]}, \gamma^{[1,t+1)})$ can be interpreted as the total reward obtained under a virtual policy where we first follow the heuristic policy during $[1, t+1)$ and then from time $t+1$ we follow the optimal solution assuming that we know the future demands.
-
-For one sample path of the requests, the revenue loss can be decomposed into $T$ increments.
-
-\begin{align*}
-    & OPT(C, d^{[1, T]}, 0) - OPT(C, d^{[1, T]}, \gamma^{[1, T]}) \\
- = & \sum_{t=1}^{T} [OPT(C, d^{[1,T]}, \gamma^{[1,t)}) - OPT(C, d^{[1,T]}, \gamma^{[1,t+1)})] 
-\end{align*}
-
-Let $c_{j}^{t} = c_{j} -\sum_{i=1}^{M} w_{i} \gamma_{ij}^{[1,t)}$. 
-
-The expected revenue loss can be upper bounded:
-
-\begin{align*}
-    & E[OPT(C, d^{[1, T]}, 0) - OPT(C, d^{[1, T]}, \gamma^{[1, T]})] \\
- \leq & l \sum_{t=1}^{T} P(OPT(C, d^{[1, T]}, \gamma^{[1,t)}) - OPT(C, d^{[1, T]}, \gamma^{[1,t+1)}) > 0) \\
- = & (n_{M} - \delta) \sum_{t=1}^{T} P(OPT(L^{t}, d^{[t, T]}, 0) - OPT(L^{t}, d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
- \leq & (n_{M} - \delta) \sum_{t=1}^{T} P(x_{i^{t}}^{*,t} <1) \\
- = & (n_{M} - \delta) \sum_{t=T_{0}}^{T} P(x_{i^{t}}^{*,t} <1) \\
- \leq & (n_{M} - \delta) \max_{i}\{\frac{1}{p_{i}}\} 
-\end{align*}
-
-
-\begin{lem}
-$OPT(L^{1}, \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} (n_{i} - \delta) \gamma_{i}^{[1, t_1)} + OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$
-\end{lem}
-
-For any optimal solution $x^{*}$ of $OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$, $x^{*} + \gamma^{[1, t_1)}$ is a feasible solution of $OPT(L^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$. For any optimal solution $x^{*}$ of $OPT(L^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$, $x^{*}- \gamma^{[1, t_1)}$ is a feasible solution of $OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$ because $x^{*}- \gamma^{[1, t_1)} \geq \gamma^{[1, t_{2})}- \gamma^{[1, t_1)} = \gamma^{[t_1, t_2)}$.
-
-
-The first inequality results from $E[A] \leq r_{M} E[\bm{1}_{A>0}] = r_{M} P(A>0)$.
-
-The first equation follows from Lemma. (Let $t_1 = t_2 = t$, $\hat{d} = d^{[t, T]}$; let $t_1 = t, t_2 = t+1$, $\hat{d} = d^{[t+1, T]}$).
-
-The second equation is as follows. If $x_{i^{t}}^{*,t} \geq 1$, then $x^{*,t}$ is still feasible for $OPT(L^{t}, d^{[t, T]}, \gamma^{[t,t+1)})$. (Because the optimal policy)
-
-$x_{i^{t}}^{*,t}$ is the optimal solution for $\text{OPT}(L^{t}, d^{[t, T]}, 0)$ at time $t$.
-
-Let $T- T_{0} = \max_{i}\{\frac{1}{p_{i}}\}$
-
-% The loss can be divided with capacity loss and decision loss.
-
-For N rows,
-
-\begin{align*}
-    OPT(\bm{L}, \hat{d}, \gamma): \quad \max \quad & \sum_{i = 1}^{M} \sum_{j = 1}^{N} r_{i} x_{ij} \\
-    \text {s.t.} \quad & \sum_{j=1}^{N} x_{ij} + x_{i0} = \hat{d}_{i}, \quad i \in \mathcal{M},  \\ 
-    & \sum_{j=1}^{N} x_{ij} \geq \gamma_{i}, \quad i \in \mathcal{M}, \\
+    OPT(\bm{C}, d, \gamma): \quad \max \quad & \sum_{i = 1}^{M} \sum_{j = 1}^{N} r_{i} x_{ij} \\
+    \text {s.t.} \quad & \sum_{j=1}^{N} x_{ij} + x_{i0} = d_{i}, \quad i \in \mathcal{M},  \\ 
+    & x_{ij} \geq \gamma_{ij}, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
     & x_{i0} \geq \gamma_{i}^{0}, \quad i \in \mathcal{M}, \\
     & \sum_{i=1}^{M} w_{i} x_{ij} \leq c_{j}, \quad j \in \mathcal{N}.
 \end{align*}
 
+
+% At time $t$, solve the primal problem \eqref{improve_primal} with demands $d_{i} = \sum_{\tau = t}^{T} * \lambda_{i}^{\tau}$. If the resulting solution has $x_{i} > 0$ for the current request's type $i$, then accept the request.
+
+
+$d^{[1, T]}$ is the demand realization during $[1, T]$. $\gamma_{ij}^{[1, t)}$ represents the number of requests $i$ assigned in knapsack $j$ by the policy during $[1, t)$.
+
+$OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)})$ can be interpreted as the total reward obtained under a virtual policy where we first follow the heuristic policy during $[1, t+1)$ and then from time $t+1$ we follow the optimal solution assuming that we know the future demands.
+
+For one sample path of the requests, the revenue loss can be decomposed into $T$ increments.
+
+\begin{align*}
+    & OPT(\bm{C}, d^{[1, T]}, 0) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]}) \\
+ = & \sum_{t=1}^{T} [OPT(\bm{C}, d^{[1,T]}, \gamma^{[1,t)}) - OPT(\bm{C}, d^{[1,T]}, \gamma^{[1,t+1)})]
+\end{align*}
+
+% Let $c_{j}^{t} = c_{j} -\sum_{i=1}^{M} w_{i} \gamma_{ij}^{[1,t)}$. 
+
+Let $T_{i} = \sup\{t \leq T: \lambda_{i}^{t}> 0\}$
+
+The expected revenue loss can be upper bounded:
+
+\begin{align*}
+    & E[OPT(\bm{C}, d^{[1, T]}, 0) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
+ \leq & l \sum_{t=1}^{T} P(OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) > 0) \\
+ = & r_{M} \sum_{t=1}^{T} P(OPT(\bm{C}^{t}, d^{[t, T]}, 0) - OPT(\bm{C}^{t}, d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
+ \leq & r_{M}  \sum_{t=1}^{T} P(x_{i^{t}j^{t}}^{*,t} <1)
+\end{align*}
+
+
+\begin{lem}\label{additive}
+$OPT(\bm{C}^{1}, \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} r_{i} \sum_{j} \gamma_{ij}^{[1, t_1)} + OPT(\bm{C}^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$
+\end{lem}
+
+For any optimal solution $x^{*}$ of $OPT(\bm{C}^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$, $x^{*} + \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$. For any optimal solution $x^{*}$ of $OPT(\bm{C}^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$, $x^{*}- \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$ because $x^{*}- \gamma^{[1, t_1)} \geq \gamma^{[1, t_{2})}- \gamma^{[1, t_1)} = \gamma^{[t_1, t_2)}$.
+
+
+The first inequality results from $E[A] \leq r_{M} E[\bm{1}_{A>0}] = r_{M} P(A>0)$ and $A \leq r_{M}$.
+
+The first equation follows from Lemma \ref{additive}. (Let $t_1 = t_2 = t$, $\hat{d} = d^{[t, T]}$; let $t_1 = t, t_2 = t+1$, $\hat{d} = d^{[t+1, T]}$).
+
+The second equation is as follows. If $x_{i^{t}j^{t}}^{*,t} \geq 1$, then $x^{*,t}$ is still feasible for $OPT(\bm{C}^{t}, d^{[t, T]}, \gamma^{[t,t+1)})$. (Because the optimal policy)
+
+$x_{i^{t}j^{t}}^{*,t}$ is the optimal solution for $\text{OPT}(\bm{C}^{t}, d^{[t, T]}, 0)$ at time $t$.
+
+Now we consider $P(x_{i^{t}j^{t}}^{*,t} <1)$. In time period $t$, after realization of $i^{t}$, based on the maximum choice of $j^{t}$ in dynamic primal policy, we have
+
+$$
+\gamma_{i^t j^t}^{\mathrm{P}, t}=\max_{j} \gamma_{i^t j}^{\mathrm{P}, t} \geqslant \frac{\sum_{j} \gamma_{i^t j}^{\mathrm{P}, t}}{\sum_{j} 1} = \frac{\lambda_{i^t}^{[t, \theta T]}}{N}
+$$
+
+
+$$
+\begin{aligned}
+& \mathbb{P}\left(x_{i^{t}j^{t}}^{*,t} <1\right) \\
+\leqslant & \mathbb{P}\left(x_{i^{t}j^{t}}^{*,t} < x_{i^{t}j^{t}}^{\mathrm{P}, t}+1-\frac{\lambda_{i^t}^{[t, \theta T]}}{N}\right) \\
+= & \mathbb{P}\left(x_{i^{t}j^{t}}^{\mathrm{P}, t} - x_{i^{t}j^{t}}^{*,t} > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N}{N}\right) \\
+\stackrel{(\mathrm{a})}{\leqslant} & \mathbb{P}\left(\max_{i^{\prime}}\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N}{\delta N} \right) \\
+= & \mathbb{P}\left(\bigcup_{i^{\prime}}\left\{\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right] - d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N}{\delta N} \right\}\right) \\
+\leqslant & \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N}{\delta N}\right) \\
+\stackrel{(\mathrm{b})}{=} & \sum_{i^{\prime}} \sum_{i} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N}{\delta N} \right\rvert\,\left(i^t = i\right) \right) \mathbb{P}\left(i^t = i \right)  \\
+\leqslant & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N}{\delta N} \right\rvert\,\left(i^t = i\right) \right) \bm{1}\left\{t \leqslant \theta T_{i}\right\} \\
+\stackrel{(\mathrm{c})}{\leqslant} & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N}{\delta N} \right\rvert\,\left(i^t = i\right) \right) \bm{1}\left\{t \leqslant \theta T_{i}\right\} \\
+\stackrel{(\mathrm{d})}{=} & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N}{\delta N} \right) \bm{1}\left\{t \leqslant \theta T_{i}\right\}.
+\end{aligned}
+$$
+
+
+
+
+% The loss can be divided with capacity loss and decision loss.

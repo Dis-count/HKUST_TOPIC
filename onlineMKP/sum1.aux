@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -45,6 +48,7 @@
 \@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Bid-Price Control\relax }}{6}{algocf.1}\protected@file@percent }
 \newlabel{algo_bid}{{1}{6}{BPC Policy}{algocf.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}BPC Policy Based on Patterns (BPP)}{6}{subsection.3.2}\protected@file@percent }
+\citation{adelman2007dynamic}
 \newlabel{dp_bid}{{7}{7}{BPC Policy Based on Patterns (BPP)}{equation.3.7}{}}
 \newlabel{appro_dp}{{8}{7}{BPC Policy Based on Patterns (BPP)}{equation.3.8}{}}
 \newlabel{improve_bid}{{10}{8}{BPC Policy Based on Patterns (BPP)}{equation.3.10}{}}
@@ -60,11 +64,17 @@
 \newlabel{subproblem}{{12}{11}{Solve the Dynamic Primal}{equation.4.12}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces Dynamic Primal\relax }}{12}{algocf.3}\protected@file@percent }
 \newlabel{algo_improve_primal}{{3}{12}{Solve the Dynamic Primal}{algocf.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Type Analyses}{12}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Computational Experiments}{12}{section.5}\protected@file@percent }
-\newlabel{sec_result}{{5}{12}{Computational Experiments}{section.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Asymptotic Loss}{12}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Loss for Static BLC Policy}{13}{subsection.5.1}\protected@file@percent }
+\newlabel{theta_deter}{{13}{13}{Loss for Static BLC Policy}{equation.5.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Loss for Dynamic Primal Policy}{14}{subsection.5.2}\protected@file@percent }
+\newlabel{additive}{{6}{15}{}{lem.6}{}}
 \bibstyle{elsarticle-harv}
 \bibdata{refe}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Computational Experiments}{16}{section.6}\protected@file@percent }
+\newlabel{sec_result}{{6}{16}{Computational Experiments}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{16}{section.7}\protected@file@percent }
+\newlabel{sec_conclusion}{{7}{16}{Conclusion}{section.7}{}}
 \bibcite{adelman2007dynamic}{{1}{2007}{{Adelman}}{{}}}
 \bibcite{aydin2018decomposition}{{2}{2018}{{Aydin and Birbil}}{{}}}
 \bibcite{bertsimas2003revenue}{{3}{2003}{{Bertsimas and Popescu}}{{}}}
@@ -73,16 +83,14 @@
 \bibcite{dantzig1957discrete}{{6}{1957}{{Dantzig}}{{}}}
 \bibcite{ferreira1996solving}{{7}{1996}{{Ferreira et~al.}}{{Ferreira, Martin and Weismantel}}}
 \bibcite{gallego1997multiproduct}{{8}{1997}{{Gallego and van Ryzin}}{{}}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of Policies\relax }}{13}{table.caption.2}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab_perf}{{1}{13}{Performance of Policies\relax }{table.caption.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{13}{section.6}\protected@file@percent }
-\newlabel{sec_conclusion}{{6}{13}{Conclusion}{section.6}{}}
 \bibcite{goldman2002models}{{9}{2002}{{Goldman et~al.}}{{Goldman, Freling, Pak and Piersma}}}
 \bibcite{khuri1994zero}{{10}{1994}{{Khuri et~al.}}{{Khuri, B{\"a}ck and Heitk{\"o}tter}}}
 \bibcite{kleywegt1998dynamic}{{11}{1998}{{Kleywegt and Papastavrou}}{{}}}
 \bibcite{kleywegt2001dynamic}{{12}{2001}{{Kleywegt and Papastavrou}}{{}}}
 \bibcite{liu2008choice}{{13}{2008}{{Liu and van Ryzin}}{{}}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of Policies\relax }}{17}{table.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab_perf}{{1}{17}{Performance of Policies\relax }{table.caption.2}{}}
 \bibcite{martello1990knapsack}{{14}{1990}{{Martello and Toth}}{{}}}
 \bibcite{papastavrou1996dynamic}{{15}{1996}{{Papastavrou et~al.}}{{Papastavrou, Rajagopalan and Kleywegt}}}
 \bibcite{perry2009approximate}{{16}{2009}{{Perry and Hartman}}{{}}}
@@ -94,5 +102,5 @@
 \bibcite{williamson1992airline}{{22}{1992}{{Williamson}}{{}}}
 \bibcite{zhu2023assign}{{23}{2023}{{Zhu et~al.}}{{Zhu, Liu, Wang and Wang}}}
 \citation{dantzig1957discrete}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Proofs}{15}{section.7}\protected@file@percent }
-\gdef \@abspage@last{16}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Proofs}{19}{section.8}\protected@file@percent }
+\gdef \@abspage@last{20}

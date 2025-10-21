@@ -1,0 +1,4 @@
+Run Start Time:Sun Oct 19 19:13:27 2025
+The number of periods: 	60
+Primal: 99.27 ;BPC: 94.91 ;BPP: 99.70 ;Average Optimal Revenue: 160.00 
+Total Runtime	282.596245

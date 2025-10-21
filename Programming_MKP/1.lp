@@ -1,8 +1,8 @@
 \ LP format - for model browsing. Use MPS format to capture full model detail.
 Minimize
-  3 alpha[0] + 2 alpha[1] + 2 alpha[2] + 2 alpha[3] + gamma[0] + gamma[1]
-   + gamma[2] + gamma[3] + gamma[4] + gamma[5] + gamma[6] + gamma[7]
-   + gamma[8] + gamma[9]
+  1.75 alpha[0] + 0.75 alpha[1] + 0.75 alpha[2] + 0.75 alpha[3] + gamma[0]
+   + gamma[1] + gamma[2] + gamma[3] + gamma[4] + gamma[5] + gamma[6]
+   + gamma[7] + gamma[8] + gamma[9]
 Subject To
  R0: alpha[0] + beta[0,0] >= 2
  R1: alpha[0] + beta[0,1] >= 2
@@ -54,6 +54,6 @@ Subject To
  R47: - gamma[7] <= 0
  R48: - gamma[8] <= 0
  R49: - gamma[9] <= 0
- R50: 2 beta[0,9] - gamma[9] <= 0
+ R50: beta[0,9] - gamma[9] <= 0
 Bounds
 End

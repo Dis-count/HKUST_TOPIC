@@ -211,7 +211,7 @@ class CompareMethods:
             j = max(opt_x[i])
             j_index = np.argmax(opt_x[i])
 
-            if j > 0:
+            if j >= 1:
                 decision_list[t] = 1
                 roll_width[j_index] -= self.weight[i]
             else:

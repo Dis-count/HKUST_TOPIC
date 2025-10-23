@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -68,16 +71,19 @@
 \newlabel{additive}{{5}{15}{}{lem.5}{}}
 \bibstyle{elsarticle-harv}
 \bibdata{refe}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Computational Experiments}{16}{section.6}\protected@file@percent }
-\newlabel{sec_result}{{6}{16}{Computational Experiments}{section.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{16}{section.7}\protected@file@percent }
-\newlabel{sec_conclusion}{{7}{16}{Conclusion}{section.7}{}}
 \bibcite{adelman2007dynamic}{{1}{2007}{{Adelman}}{{}}}
 \bibcite{aydin2018decomposition}{{2}{2018}{{Aydin and Birbil}}{{}}}
 \bibcite{bertsimas2003revenue}{{3}{2003}{{Bertsimas and Popescu}}{{}}}
 \bibcite{bitran1995application}{{4}{1995}{{Bitran and Mondschein}}{{}}}
 \bibcite{chekuri2005polynomial}{{5}{2005}{{Chekuri and Khanna}}{{}}}
 \bibcite{dantzig1957discrete}{{6}{1957}{{Dantzig}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Computational Experiments}{18}{section.6}\protected@file@percent }
+\newlabel{sec_result}{{6}{18}{Computational Experiments}{section.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of Policies\relax }}{18}{table.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab_perf}{{1}{18}{Performance of Policies\relax }{table.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{18}{section.7}\protected@file@percent }
+\newlabel{sec_conclusion}{{7}{18}{Conclusion}{section.7}{}}
 \bibcite{ferreira1996solving}{{7}{1996}{{Ferreira et~al.}}{{Ferreira, Martin and Weismantel}}}
 \bibcite{gallego1997multiproduct}{{8}{1997}{{Gallego and van Ryzin}}{{}}}
 \bibcite{goldman2002models}{{9}{2002}{{Goldman et~al.}}{{Goldman, Freling, Pak and Piersma}}}
@@ -85,9 +91,6 @@
 \bibcite{kleywegt1998dynamic}{{11}{1998}{{Kleywegt and Papastavrou}}{{}}}
 \bibcite{kleywegt2001dynamic}{{12}{2001}{{Kleywegt and Papastavrou}}{{}}}
 \bibcite{liu2008choice}{{13}{2008}{{Liu and van Ryzin}}{{}}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of Policies\relax }}{17}{table.caption.2}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab_perf}{{1}{17}{Performance of Policies\relax }{table.caption.2}{}}
 \bibcite{martello1990knapsack}{{14}{1990}{{Martello and Toth}}{{}}}
 \bibcite{papastavrou1996dynamic}{{15}{1996}{{Papastavrou et~al.}}{{Papastavrou, Rajagopalan and Kleywegt}}}
 \bibcite{perry2009approximate}{{16}{2009}{{Perry and Hartman}}{{}}}
@@ -99,5 +102,5 @@
 \bibcite{williamson1992airline}{{22}{1992}{{Williamson}}{{}}}
 \bibcite{zhu2023assign}{{23}{2023}{{Zhu et~al.}}{{Zhu, Liu, Wang and Wang}}}
 \citation{dantzig1957discrete}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Proofs}{19}{section.8}\protected@file@percent }
-\gdef \@abspage@last{20}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Proofs}{21}{section.8}\protected@file@percent }
+\gdef \@abspage@last{22}

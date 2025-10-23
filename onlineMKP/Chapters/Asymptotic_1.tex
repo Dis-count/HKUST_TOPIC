@@ -172,7 +172,49 @@ $$
 \end{aligned}
 $$
 
+Let $T_0=\left\lceil\frac{N}{\lambda_{\min}}\right\rceil<\frac{\theta}{2}$. We have 
 
 
+$\mathbb{E}\left[d_{i}^{(t, \theta T]}\right]=\lambda_{i}^{\left(t, \theta T_{i}\right]} \geqslant \lambda_{\min}\left(\theta T_{i}- t\right)$.
 
+
+For $t \leq \theta T_{i} - T_{0}$,
+
+$\frac{\mathbb{E} [d_{i}^{(t, \theta T]}]- N}{\delta N} \geqslant \frac{\lambda_{\min}\left(\theta T_{i}-t\right)- \lambda_{\min} T_0 / 2}{\delta N} \geqslant \frac{\lambda_{\min}\left(\theta T_{i}-t\right)}{\delta N}$.
+
+
+Thus, 
+
+
+$$
+\begin{aligned}
+& \leqslant 2 l \sum_{t=1}^{\theta T} \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]- d_{i^{\prime}}^{(t, \theta T]}\right|>\frac{\mathbb{E}\left[d_{i}(t, \theta T]\right]- N}{\delta N}\right) \bm{1}\left\{t \leqslant \theta T_{i}\right\} \\
+& \leqslant 2 l \sum_{i} \sum_{t=1}^{\theta T_{i}} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]-d_{i^{\prime}}^{(t, \theta T]}\right|> \frac{\lambda_{\min}\left(\theta T_{i}-t\right)}{\delta N}\right) \\
+& \stackrel{(\mathrm{a})}{\leqslant} 2 l \sum_{i} \sum_{t=1}^{\theta T_{i}-T_0} \sum_{i^{\prime}} 2 \exp \left(- 2 \frac{\left(\lambda_{\min}\left(\theta T_{i}-t\right)\right)^2}{\left(\delta N\right)^2(\theta T-t)}\right)+ 2 l \sum_{i} \sum_{t=\theta T_{i}-T_0+1}^{\theta T_{i}} \sum_{i^{\prime}} 1 \\
+& =2 l \sum_{i} \sum_{t=1}^{\theta T_{i}-T_0} \sum_{i^{\prime}} 2 \exp \left(-2 \frac{\lambda_{\min }^2}{\delta^2 N^2} \cdot \frac{\left(\theta T_{i}-t\right)^2}{\theta T-t}\right)+O(1) \\
+& \leqslant 2 l N \sum_{i} \sum_{t=1}^{\theta T_{i}-T_0} 2 \exp \left(-2 \frac{\lambda_{\min}^2}{\delta^2 N^2} \cdot \frac{\left(\theta T_{i}-t \right)^2}{\theta T-t}\right)+O(1) .
+\end{aligned}
+$$
+
+We can further upper bound by 
+
+$$
+\begin{aligned}
+& 2 l N \sum_{i} \sum_{t=T_0}^{+\infty} 2 \exp \left(-2 \frac{\lambda_{\min}^2 t^2}{\delta^2 N^2 \theta T}\right) + O(1) \\
+\leqslant & 2 l N^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(2 \frac{\lambda_{\min}^2}{\delta^2 N^2 T}\right) \cdot \frac{t^2}{\theta}\right)+O(1) \\
+= & O(\sqrt{\theta})
+\end{aligned}
+$$
+
+When the NEE property is satisfied, can be alternatively bounded by
+
+$$
+\begin{aligned}
+& 2 l N \sum_{i} \sum_{t=T_0}^{+\infty} 2 \exp \left(-2 \frac{\lambda_{\min}^2 t^2}{\delta^2 N^2 t}\right) + O(1) \\
+\leqslant & 2 l N^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(2 \frac{\lambda_{\min}^2}{\delta^2 N^2}\right) \cdot t\right)+O(1) \\
+= & O(1)
+\end{aligned}
+$$
+
+\newpage
 % The loss can be divided with capacity loss and decision loss.

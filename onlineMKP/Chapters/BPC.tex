@@ -1,4 +1,4 @@
-\section{Online MMKP}\label{sec_dynamic_seat}
+\section{DSMMKP}\label{sec_dynamic_seat}
 Consider a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. There is also a set $\mathcal{M} = \{1, 2, \ldots, M\}$ of distinct item types. Each item of type $i$ has a size $w_i \in \mathbb{Z}^{+}$ and yields a profit $r_i \in \mathbb{Z}^{+}$ when placed entirely into a knapsack. The item types are ordered such that their profit-to-weight ratios, $r_i / w_i$, are monotonically increasing in $i$.
 
 Requests for these items arrive sequentially. Upon the arrival of a request (which specifies its type), the seller must immediately decide whether to accept or reject it. If accepted, the seller must also assign it to a specific knapsack with sufficient remaining capacity. Each item must be placed whole into a single knapsack; partial assignments or reassignments are not permitted.
@@ -127,46 +127,41 @@ Let $\bm{h} = [h_{1}, \ldots, h_{M}]$ denote a pattern for a knapsack, where eac
 construct a set $S(c_{j})$ which contains all feasible patterns.
 
 
-For any request of type $i$, if we accept it, then we can assign it to a knapsack that has at least $w_{i}$ size. If we assign the request to knapsack $j$, then the capacity $c_{j}$ should be larger than $w_{i}$, that indicates, the pattern $\bm{h}$ should satisfy $\bm{h} \in S(c_{j})$ and $h_{i} \geq 1$. 
-In other words, for any $j$, if there exists $j$ satisfying there exists a $\bm{h}$ satisfying $\bm{h} \in S(c_{j})$ and $h_{i} \geq 1$, then the request can be assigned to knapsack $j$. 
+A request of type $i$ can be accepted only if there exists at least one knapsack $j$ with sufficient remaining capacity $c_{j} \geq w_{i}$. This is equivalent to the existence of a feasible pattern $\bm{h} \in S(c_{j})$ for that knapsack that includes at least one item of type $i$ (i.e., $h_{i} \geq 1$). 
 
+To formalize this, we define the maximum value obtainable from accepting a type $i$ request. For a given knapsack $j$ and pattern $\bm{h}$ that can accommodate the item ($\bm{h} \in S(c_{j})$, $h_{i} \geq 1$), the value of placing it in $j$ is the sum of the immediate reward $r_{i}$ and the future value $v^{t+1}(\bm{C}- -e_j^T w_i)$ starting from the updated capacity.
+
+We therefore define $q_{i}$ as the maximum of this value over all feasible placement options:
+\begin{equation*}
+    q_i= \begin{cases}\max _{j: \exists \bm{h} \in S\left(c_j\right), h_i \geq 1}\left\{v^{t+1}\left(\bm{C}-e_j^T w_i\right) + r_i\right\} & \text {if such a knapsack} ~j~ \text {exists}, \\ 0 & \text {otherwise}\end{cases}
+\end{equation*}
+
+In this definition, the maximization evaluates the optimal placement of a type-$i$ item by considering all knapsacks $j$ for which there exists at least one feasible pattern $\bm{h} \in S(c_{j})$ capable of holding it ($h_{i} \geq 1$).
 
 % The key idea is to make the decision using feasible assignment patterns, which encode the combinations of items it can hold, rather than merely tracking its residual capacity. 
 
 
-Now we present the DP formulation from the pattern perspective. Recall that $v^t(\bm{C})$ denotes the maximal expected value-to-go at time $t$, given the remaining capacity $\bm{C}$. 
-
-For notational convenience, we define $q_i$ as follows:
-\begin{equation*}
-    q_i= \begin{cases}\max _{j: \bm{h} \in S\left(c_j\right), h_i \geq 1}\left\{v^{t+1}\left(C-e_j^T w_i\right)+r_i\right\} & \text { if } \exists j, h \text{ satisfying } \bm{h} \in S\left(c_j\right), h_i \geq 1 \\ 0 & \text { otherwise }\end{cases}
-\end{equation*}
-
-The maximization evaluates the optimal placement of item type $i$ across all feasible knapsacks $j$ where the pattern $\bm{h}$ is feasible for knapsack $j$ (i.e., $\bm{h} \in S(c_{j})$) and the item type $i$ can be accommodated (i.e., $h_{i} \geq 1$). 
-
-
-The dynamic programming can be reformulated as follows:
+Now we present the DP formulation from the pattern perspective. Recall that $v^t(\bm{C})$ denotes the maximal expected value-to-go at time $t$, given the remaining capacity $\bm{C}$. The dynamic programming can be reformulated as follows:
 \begin{equation}
-v^t(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\left[
+\begin{aligned}
+& v^t(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\bigg[
 \max \left\{q_{i}, v^{t+1}(\bm{C})\right\}
-\right]
+\bigg], \forall t,  \\
+& v^{T+1}(\bm{C}) = 0
+\end{aligned}
 \end{equation}
-
-
-% The DP formulation involves two layers of maximization when there exists at least one knapsack $j$ satisfying $\bm{h} \in S(c_j), h_{i} \geq 1$. 
 
 The maximization compares the value of accepting $i$ (via the maximization of $q_{i}$) and rejecting $i$ (retaining $v^{t+1}(\bm{C})$). If no such $j$ exists, the request $i$ is rejected.
 
 
 We can solve the following program to compute $v^1(\bm{C})$ for any given capacity $\bm{C}$:
-
 \begin{equation}\label{dp_bid}
     \begin{aligned}
     \min \quad & v^{1}(\bm{C}) \\
-    \mathrm{s.t.} \quad & v^{t}(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\Bigg[\max\Big\{ q_{i}, v^{t+1}(\bm{C})\Big\}\Bigg], \\
+    \mathrm{s.t.} \quad & v^{t}(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\bigg[\max\Big\{ q_{i}, v^{t+1}(\bm{C})\Big\}\bigg], \\
     & v^{T+1}(\bm{C}) \geq 0.
     \end{aligned}
 \end{equation}
-
 
 Solving \eqref{dp_bid} remains computationally intractable. We therefore adopt an Approximate Dynamic Programming (ADP) approach \citep{adelman2007dynamic} to approximate the value function $v^{t}(\bm{C})$. Our proposed approximation is:
 
@@ -207,7 +202,7 @@ Let $\gamma_{j} = \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\
     \hat{v}^{1}(\bm{C}) & = \sum_{i} d_{i} \alpha_{i} + \sum_{j} \gamma_{j}
 \end{align*}
 
-Since $\hat{v}^{1}(\bm{C})$ constitutes a feasible solution to \eqref{dp_bid}, we have $\hat{v}^{1}(\bm{C}) \geq v^{1}(\bm{C}) =  V^{DP}$.
+Since $\hat{v}^{1}(\bm{C})$ constitutes a feasible solution to \eqref{dp_bid}, we have $\hat{v}^{1}(\bm{C}) \geq v^{1}(\bm{C})$.
 
 If all $j$ exist for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$, the corresponding bid-price problem can be expressed as:
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{23}
+\begin{thebibliography}{24}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -32,6 +32,13 @@
 \newblock \bibinfo{title}{Revenue management in a dynamic network environment}.
 \newblock \bibinfo{journal}{Transportation Science} \bibinfo{volume}{37},
   \bibinfo{pages}{257--277}.
+%Type = Article
+\bibitem[{Bienkowski et~al.(2020)Bienkowski, Pacut and
+  Piecuch}]{bienkowski2020optimal}
+\bibinfo{author}{Bienkowski, M.}, \bibinfo{author}{Pacut, M.},
+  \bibinfo{author}{Piecuch, K.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{An optimal algorithm for online multiple knapsack}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2002.04543} .
 %Type = Article
 \bibitem[{Bitran and Mondschein(1995)}]{bitran1995application}
 \bibinfo{author}{Bitran, G.R.}, \bibinfo{author}{Mondschein, S.V.},
@@ -128,14 +135,6 @@
 \newblock \bibinfo{journal}{Management Science} \bibinfo{volume}{42},
   \bibinfo{pages}{1706--1718}.
 %Type = Article
-\bibitem[{Perry and Hartman(2009)}]{perry2009approximate}
-\bibinfo{author}{Perry, T.C.}, \bibinfo{author}{Hartman, J.C.},
-  \bibinfo{year}{2009}.
-\newblock \bibinfo{title}{An approximate dynamic programming approach to
-  solving a dynamic, stochastic multiple knapsack problem}.
-\newblock \bibinfo{journal}{International Transactions in Operational Research}
-  \bibinfo{volume}{16}, \bibinfo{pages}{347--359}.
-%Type = Article
 \bibitem[{Pisinger(1999)}]{pisinger1999exact}
 \bibinfo{author}{Pisinger, D.}, \bibinfo{year}{1999}.
 \newblock \bibinfo{title}{An exact algorithm for large multiple knapsack
@@ -149,6 +148,16 @@
 \newblock \bibinfo{title}{An introduction to revenue management}, in:
   \bibinfo{booktitle}{Emerging Theory, Methods, and Applications}.
   \bibinfo{publisher}{INFORMS}, pp. \bibinfo{pages}{142--194}.
+%Type = Article
+\bibitem[{Sun et~al.(2020)Sun, Zeynali, Li, Hajiesmaili, Wierman and
+  Tsang}]{sun2020competitive}
+\bibinfo{author}{Sun, B.}, \bibinfo{author}{Zeynali, A.}, \bibinfo{author}{Li,
+  T.}, \bibinfo{author}{Hajiesmaili, M.}, \bibinfo{author}{Wierman, A.},
+  \bibinfo{author}{Tsang, D.H.}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Competitive algorithms for the online multiple
+  knapsack problem with application to electric vehicle charging}.
+\newblock \bibinfo{journal}{Proceedings of the ACM on Measurement and Analysis
+  of Computing Systems} \bibinfo{volume}{4}, \bibinfo{pages}{1--32}.
 %Type = Article
 \bibitem[{Talluri and van Ryzin(1998)}]{talluri1998analysis}
 \bibinfo{author}{Talluri, K.}, \bibinfo{author}{van Ryzin, G.},

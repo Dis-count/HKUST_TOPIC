@@ -5,7 +5,10 @@
 %     Loss: $\lim_{\theta \to \infty} V_{\theta}^{\text{DP}} - z_{\theta}({\text{BPC}}) = 0$. 
 % \end{lem}
 
+Given any instance, we define a sequence of problems indexed by $\theta \in \mathbb{N}$ with $C(\theta) = \theta \bm{C}$ and $\lambda_{i}^{t}(\theta) = \lambda_{i}^{\lceil t/\theta \rceil}$. We scale the number of capacities and the length of the time horizon proportionally.
+
 $\theta$ is the scale parameter.
+
 
 \begin{prop}
     Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{BL}} = O(\sqrt{\theta})$. 
@@ -205,6 +208,8 @@ $$
 = & O(\sqrt{\theta})
 \end{aligned}
 $$
+
+NEE (No Early Ending): If $\inf _{\substack{i \gtrless j: \\ \lambda_{i j}^{[1, T]}>0}} \lambda_{i j}^T>0$, then the set of arrival rates satisfies the NEE property.
 
 When the NEE property is satisfied, can be alternatively bounded by
 

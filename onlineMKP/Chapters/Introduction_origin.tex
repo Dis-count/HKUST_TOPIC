@@ -1,0 +1,75 @@
+% !TEX root = sum1.tex
+%{\bf Terminologies to use}
+
+%We use {\em seating management} to refer to the general problem which includes {\em seat planning with deterministic requests}, 
+%{\em seat planning with stochastic requests}, and {\em seat assignment}.
+
+%Each problem is defined for an {\em event} which has multiple {\em seating requests}, where each request has a {\em group} of people to be seated.
+
+\section{Introduction}
+% We will address the dynamic stochastic multi-type multiple knapsack problem. 
+The Dynamic Stochastic Multi-type Multiple Knapsack Problem (DSMMKP) extends the classical knapsack problem to a dynamic and multi-dimensional setting, where items of distinct types arrive sequentially, and decisions to accept or reject them must be made immediately without knowledge of future arrivals. Each item is characterized by a type-dependent size and value, and must be placed into one of multiple knapsacks with non-identical capacities. This framework captures critical resource allocation challenges across various domains, including cloud computing, advertising systems, production planning, and energy management.
+
+
+In cloud computing environments, service providers manage numerous heterogeneous servers (knapsacks) with varying computational resources (e.g., CPU, memory, or storage capacities). User tasks (items) arrive dynamically, each belonging to a specific type with deterministic resource requirements (size) and a value (e.g., revenue or priority). The DSMMKP models the dynamic scheduling problem of allocating incoming tasks to suitable servers to maximize total profit or resource utilization while respecting capacity constraints. This is particularly relevant in server clusters with specialized hardware or reserved instances, where task heterogeneity and server diversity must be efficiently handled in real time.
+
+
+In online advertising platforms, advertisers bid for impression slots (knapsacks) that exhibit diverse audience reach and engagement capacities (e.g., banner ads, video ads, or native ads). Ad requests (items) arrive in streams and are categorized by types (e.g., industry verticals or creative formats), each with a size (e.g., required impressions or click-through rate) and a value (e.g., bid price or expected revenue). The DSMMKP formalism helps optimize the real-time assignment of ads to available slots to maximize platform revenue while satisfying contractual delivery constraints. The problem is compounded by the need to handle multiple ad types and slot categories under uncertain demand.
+
+
+Modern manufacturing systems often involve multiple production lines (knapsacks) with different capabilities and capacities (e.g., throughput rates or machine hours). Customer orders (items) arrive dynamically and can be classified into types (e.g., urgent, standard, or custom orders), each with a processing time (size) and a profit margin (value). The DSMMKP captures the challenge of accepting and scheduling orders across production lines to maximize total profit while adhering to capacity limits. This is especially critical in make-to-order environments where order heterogeneity and line specialization necessitate intelligent online decision-making.
+
+
+In smart grids or distributed energy systems, multiple storage units (knapsacks) such as batteries or renewable energy buffers have distinct storage capacities. Energy requests (items)—e.g., from electric vehicles or industrial consumers—arrive online and are typed by priority or flexibility (e.g., urgent, deferrable, or intermittent), each with an energy demand (size) and a willingness-to-pay (value). The DSMMKP models the problem of allocating energy requests to storage units to maximize revenue. The heterogeneity of requests and storage units requires an online strategy that balances immediate rewards with future uncertainty.
+
+% In telecommunications networks, multiple communication channels (knapsacks)—such as fiber-optic links or wireless spectra—have different bandwidth capacities. Data flows (items) arrive dynamically and are categorized by service type (e.g., video streaming, VoIP, or bulk transfer), each requiring a certain bandwidth (size) and offering a quality-of-service value (e.g., priority or revenue). The OMMKP formulation aids in designing online algorithms that assign flows to channels to maximize total utility or adherence to service-level agreements. The problem is exacerbated by the diversity of flow types and channel characteristics in multi-protocol label switching (MPLS) or software-defined networking (SDN) contexts.
+
+
+These applications underscore the broad applicability of the DSMMKP in real-world systems where heterogeneous resources must be allocated dynamically under uncertainty. Developing efficient algorithms for this problem--with guarantees on scalability and robustness--is therefore of significant theoretical and practical interest. This paper aims to address this gap by proposing novel strategies for the DSMMKP and validating them in one or more of the above domains.
+
+
+% Resource allocation
+% Applications: Cloud computing, Ad placement, Production scheduling, Energy management, Network 
+% bandwidth allocation
+
+We develop several policies for DSMMKP. 
+
+The rest of this paper is structured as follows. We review the relevant literature in Section \ref{literature}. Section \ref{sec_dynamic_seat} presents the bid-price and resolving dynamic primal policies to assign the incoming requests. Section \ref{sec_result} presents the experimental results and provides insights gained from implementing dynamic primal. Conclusions are shown in Section \ref{sec_conclusion}.
+
+
+% Knapsacks (Servers - Varying Single-Dimensional Capacity):
+% A cloud provider manages multiple servers. These servers are functionally identical, and the only difference between them is their total available capacity, abstracted as "compute units."
+
+% Their capacities are, for example: Server 1: 100 units, Server 2: 150 units, Server 3: 200 units.
+
+% Key Point: Any task can be assigned to any server with sufficient remaining capacity.
+
+% Items (Tasks - Multi-type with Fixed Properties):
+% Incoming user tasks belong to a finite set of types. Each task type has a deterministic resource requirement (size) and an associated reward (value).
+
+% Type-1 (High-Priority Task): Size = 20 units, Value = \$50.
+% Type-2 (Medium-Priority Task): Size = 30 units, Value = \$60.
+% Type-3 (Low-Priority Batch Task): Size = 40 units, Value = \$60.
+
+
+
+% Core Problem: To assign randomly arriving ad requests from multiple advertisers to different advertising slot inventories, maximizing total platform revenue. Requests are categorized into a finite set of types based on their industry vertical and performance goals.
+
+% Knapsacks (Ad Inventories - Varying Single-Dimensional Capacity):
+
+% The platform manages distinct advertising slot inventories, differentiated by their single-dimensional capacity, abstracted as "total available impressions."
+
+% Their capacities are, for example: Inventory X (Premium Slot): 500,000 impressions, Inventory Y (Standard Slot): 1,000,000 impressions.
+
+% Items (Ad Requests - Multi-type with Fixed Properties):
+% Ad requests are from various advertisers but are grouped into a finite set of types. All requests of the same type have identical contractual requirements and value per campaign. 
+
+% Type-A (Luxury Auto Advertisers): Each campaign from this category requires Size = 100,000 impressions and pays Value = \$30,000.
+% Type-B (Fast-Moving Consumer Goods Advertisers): Each campaign requires Size = 200,000 impressions and pays Value = \$45,000.
+% Type-C (Local Service Advertisers): Each campaign requires Size = 150,000 impressions and pays Value = \$30,000.
+
+% Ad requests are standardized packages sold to advertisers. Multiple packages of the same type are available for purchase.
+
+
+
+In online advertising, the DSMMKP provides a foundational framework for modeling a specific, yet relevant, aspect of real-time ad allocation. This problem can be abstracted as one where a platform must assign dynamically arriving ad campaigns from a finite set of types to heterogeneous slot inventories with varying capacities. In this formalization, campaigns of the same type—such as those from the luxury auto vertical—share identical sizes and values, representing a standardized product. The DSMMKP thus captures the core challenge of sequentially allocating these stochastic, typed requests to maximize revenue under capacity constraints. It is crucial to note that this model represents a significant simplification of real-world online advertising systems, which involve multifaceted objectives, complex user-targeting rules, and intricate auction dynamics. However, this abstraction serves as a critical first step, isolating and rigorously studying the fundamental trade-offs between commitment to current requests and reservation for future opportunities within a stochastic and typed environment.

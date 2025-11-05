@@ -1,5 +1,8 @@
-\section{DSMMKP}\label{sec_dynamic_seat}
-Consider a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. There is also a set $\mathcal{M} = \{1, 2, \ldots, M\}$ of distinct item types. Each item of type $i$ has a size $w_i \in \mathbb{Z}^{+}$ and yields a profit $r_i \in \mathbb{Z}^{+}$ when placed entirely into a knapsack. The item types are ordered such that their profit-to-weight ratios, $r_i / w_i$, are monotonically increasing in $i$.
+\section{The Model}\label{sec_dynamic_seat}
+We consider a system with a set $\mathcal{N} = {1, 2, \ldots, N}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. A finite set of item types $\mathcal{M} = {1, 2, \ldots, M}$ is given, where any item of type $i$ is characterized by a size $w_i \in \mathbb{Z}^{+}$ and a profit $r_i \in \mathbb{Z}^{+}$. In the context of online advertising, for instance, size and profit correspond to the impressions required by an ad campaign and the revenue it generates, respectively. The item types are ordered such that their profit-to-weight ratios, $r_i / w_i$, are monotonically increasing in $i$.
+
+% Consider a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. There is also a set $\mathcal{M} = \{1, 2, \ldots, M\}$ of distinct item types. Each item of type $i$ has a size $w_i \in \mathbb{Z}^{+}$, and yields a profit $r_i \in \mathbb{Z}^{+}$ when placed entirely into a knapsack. The size and profit can be reflected as the impressions needed and value created in the online advertising example.
+
 
 Requests for these items arrive sequentially. Upon the arrival of a request (which specifies its type), the seller must immediately decide whether to accept or reject it. If accepted, the seller must also assign it to a specific knapsack with sufficient remaining capacity. Each item must be placed whole into a single knapsack; partial assignments or reassignments are not permitted.
 
@@ -60,10 +63,10 @@ The objective \eqref{e0} is to maximize total expected revenue. Constraint \eqre
 The monotonic increase of the profit-to-weight ratio $r_i/w_i$ with type index $i$ implies that items with a higher index are more profitable per unit of capacity. Consequently, the optimal solution to the LP relaxation exhibits a greedy structure, preferentially utilizing higher-indexed item types. This structural property is formalized in Proposition \ref{sol_relax_deter}.
 
 \begin{lem}\label{sol_relax_deter}
-For the LP relaxation of the \textup{MMKP} problem, there exists an index $\tilde{i}$ such that the optimal solutions satisfy the following conditions: $x_{ij}^{*} = 0$ for all $j$, $i = 1,\ldots, \tilde{i}-1$; $\sum_{j=1}^{N} x_{ij}^{*} = d_{i}$ for $i = \tilde{i}+1,\ldots, M$; $\sum_{j=1}^{N} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i w_i}}{w_{\tilde{i}}}$ for $i = \tilde{i}$.
+For the LP relaxation of the \textup{MKP} problem, there exists an index $\tilde{i}$ such that the optimal solutions satisfy the following conditions: $x_{ij}^{*} = 0$ for all $j$, $i = 1,\ldots, \tilde{i}-1$; $\sum_{j=1}^{N} x_{ij}^{*} = d_{i}$ for $i = \tilde{i}+1,\ldots, M$; $\sum_{j=1}^{N} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i w_i}}{w_{\tilde{i}}}$ for $i = \tilde{i}$.
 \end{lem}
 
-The dual of LP relaxation of the MMKP problem is:
+The dual of LP relaxation of the MKP problem is:
 
 \begin{equation}\label{bid-price_dual}
     \begin{aligned}
@@ -105,7 +108,7 @@ According to Proposition \ref{bid-price}, the decision inequality becomes $r_i -
 
 % $V_{\theta}^{OPT}(I) = E_{\{d_{i}\}} [val_{\theta}(I; \{d_{i}\})] \leq val_{\theta} (I; \{E[d_{i}]\}) = val_{\theta}(I; \{\theta T p_{i}\})$
 
-Let $z(\text{BPC})$, $z(\text{DLP})$ denote the optimal value of \eqref{bid-price_dual} and the LP relaxation of the \textup{MMKP} problem with expected demand, respectively. Then we have $z(\text{BPC}) = z(\text{DLP})$.
+Let $z(\text{BPC})$, $z(\text{DLP})$ denote the optimal value of \eqref{bid-price_dual} and the LP relaxation of the \textup{MKP} problem with expected demand, respectively. Then we have $z(\text{BPC}) = z(\text{DLP})$.
 
 However, the BPC policy has two drawbacks. First, the capacity feasibility need to be checked when to accept a request. Second, when capacities permit, the policy treats all knapsacks as equally preferable, making no distinction among them.
 
@@ -124,12 +127,12 @@ dynamic system with patterns.
 
 
 Let $\bm{h} = [h_{1}, \ldots, h_{M}]$ denote a pattern for a knapsack, where each $h_i$ denotes the number of type-$i$ items assigned. A pattern $\bm{h}$ is feasible for a knapsack with capacity $c_{j}$ if it satisfies $\sum_{i=1}^{M} w_{i} h_{i} \leq c_{j}$. For any knapsack $j$, we
-construct a set $S(c_{j})$ which contains all feasible patterns.
+construct a set $S(c_{j})$ which contains all feasible patterns. For a more general case where $\bm{h}$ is subject to additional constraints, the set $S(c_{j})$ can be extended to include only those solutions that satisfy them. The following algorithm can also be adjusted accordingly.
 
 
 A request of type $i$ can be accepted only if there exists at least one knapsack $j$ with sufficient remaining capacity $c_{j} \geq w_{i}$. This is equivalent to the existence of a feasible pattern $\bm{h} \in S(c_{j})$ for that knapsack that includes at least one item of type $i$ (i.e., $h_{i} \geq 1$). 
 
-To formalize this, we define the maximum value obtainable from accepting a type $i$ request. For a given knapsack $j$ and pattern $\bm{h}$ that can accommodate the item ($\bm{h} \in S(c_{j})$, $h_{i} \geq 1$), the value of placing it in $j$ is the sum of the immediate reward $r_{i}$ and the future value $v^{t+1}(\bm{C}- -e_j^T w_i)$ starting from the updated capacity.
+To formalize this, we define the maximum value obtainable from accepting a type $i$ request. For a given knapsack $j$ and pattern $\bm{h}$ that can accommodate the item ($\bm{h} \in S(c_{j})$, $h_{i} \geq 1$), the value of placing it in $j$ is the sum of the immediate reward $r_{i}$ and the future value $v^{t+1}(\bm{C} -e_j^T w_i)$ starting from the updated capacity.
 
 We therefore define $q_{i}$ as the maximum of this value over all feasible placement options:
 \begin{equation*}
@@ -292,13 +295,11 @@ Unlike the traditional BPC, the BPP does not require explicit feasibility checks
 \begin{example}
 Continue with the above example:
 
-For the BPP, the optimal bid price is $\bm{\beta}_{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}_{2}^{*} = [6, 6, 6, 6]$, $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. We can verify that  $z(BPP) = 40 < z(BPC) = \frac{124}{3}$. The reduced reward for each item type 3 is: $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$, which indicates type 3 is excluded from knapsack 1. Also, the optimal patterns for knapsack 4, $[0, 1, 0]$ and $[1, 0, 0]$. Thus, type 3 can only be assigned to knapsack 2 or 3.
+For the BPP, the optimal bid prices are $\bm{\beta}{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}{2}^{*} = [6, 6, 6, 6]$, and $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. The resulting objective value is $z(BPP) = 40$, which is less than $z(BPC) = \frac{124}{3}$. Using type 3 as an example, we see it can only be assigned to knapsack 2 or 3. From the item's perspective, its reduced reward vector $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ reveals it is unprofitable for knapsack 1, while from the knapsack's perspective, the optimal solution requires two patterns, $[0, 1, 0]$ and $[1, 0, 0]$ for knapsack 4, indicating that type 3 is also excluded from this knapsack.
 
 % The corresponding primal variables are $\bm{\alpha} = [0, 0, 0]$ and $\bm{\gamma} = [10, 12, 12, 6]$.
 
 % A drawback is that one must check if an item type can be assigned to a knapsack $j_0$ by verifying the condition $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}$ with $h_{i}^{*} \geq 1$.
-
-
 \end{example}
 
 While this verification is cumbersome under pure bid-price frameworks, the primal problem offers a more direct way to guarantee the existence of such a request-pattern match. To address this gap, we propose the dynamic primal formulation.

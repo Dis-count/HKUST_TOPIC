@@ -10,71 +10,57 @@ Given any instance, we define a sequence of problems indexed by $\theta \in \mat
 $\theta$ is the scale parameter.
 
 
-\begin{prop}
-    Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{BL}} = O(\sqrt{\theta})$. 
-\end{prop}
+% \begin{prop}
+%     Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{BL}} = O(\sqrt{\theta})$. 
+% \end{prop}
 
 \begin{prop}
     Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{P}} = O(1)$. 
 \end{prop}
 
 % Let $T_{i} = sup \{t \leq T: \lambda_{i}^{t} > 0\}$. 
-
 % \newpage
 
-\subsection{Loss for Static BLC Policy}
-Booking limit control policy:
-
-\begin{align}
-    \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} r_{i} x_{ij} \label{theta_deter} \\
-    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \notag \\ 
-    & \sum_{i=1}^{M} w_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \notag 
-\end{align}
-
-
-Let $d_{i} =\sum_{t} \bm{1}_{i_{t} = i}$ be the realized number of type $i$ over the horizon $T$. 
-Consider the deterministic linear programming \eqref{theta_deter}, where the right-hand side demands are set to $\sum_{t} \lambda_{i}^{t}$. Let $x_{ij}^{*}$ be an integral optimal solution to this LP, and define $d_{i}^{*} = \sum_{j} x_{ij}^{*}$ as the total number of type $i$ assigned in this optimal solution. Finally, let $val(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter} for a given instance $I$ and demand vector $\{d_{i}\}$.
-
-$V^{BL}(I) = E_{\{d_{i}\}}[\sum_{i} r_{i} \min\{d_{i}^{*}, d_{i}\}]$, $V^{OPT}(I) = E_{\{d_{i}\}} [val(I; \{d_{i}\})] \leq val(I; \{E[d_{i}]\})$.
-
-$val(I; \{d_{i}\})$ is concave in $d_{i}$.
-
-\begin{align*}
-   & V^{OPT}(I) - V^{BL}(I) \\
-\leq & val(I; \{E[d_{i}]\}) - V^{BL}(I) \\
-= & val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) + val(I; \{\lfloor E[d_{i}]\rfloor\}) - E_{\{d_{i}\}}[\sum_{i} r_{i} \min\{d_{i}^{*}, d_{i}\}] \\
-\leq & \sum_{i} r_{i} + N \sum_{i} r_i + E_{\{d_{i}\}}[\sum_{i} r_{i} (d_{i}^{*} - \min\{d_{i}^{*}, d_{i}\})] \\
-= & (1+N) \sum_{i} r_{i} + E_{\{d_{i}\}}[\sum_{i} \frac{1}{2} r_{i} (d_{i}^{*} - d_{i} + |d_{i}^{*} - d_{i}|)] \\
-\overset{\text{(a)}}{\leq} & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} (d_{i}^{*} - E[d_{i}] + |d_{i}^{*} - E[d_{i}]| + \sqrt{\Var[d_{i}]}) \\
-\leq & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} \sqrt{\Var[d_{i}]} \\
-\leq & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} \sqrt{T p_{i} (1- p_{i})} = O(\sqrt{T})
-\end{align*}
-
-The revenue loss between the static deterministic heuristic and the optimal is bounded by $C \sqrt{T}$.
-Thus, $\lim_{T \to \infty} (V^{OPT}(I) - V^{BL}(I))/T \to 0$.
-
-$val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq val(I; \{\lceil E[d_{i}]\rceil\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq \sum_{i} r_{i}$
-
-
-$LP -IP \leq \sum_{i} \sum_{j} r_{i} (x_{ij}^{*} - \lfloor x_{ij}^{*} \rfloor) < N \sum_{i} r_i$ $\Rightarrow$ $val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq IP + N \sum_{i} r_i$.
-
-$IP = \sum_{i} \sum_{j} r_{i} x_{ij}^{*} = \sum_{i} r_{i} d_{i}^{*}$
-
-$(a)$ results from the following inequalities: $|d_{i}^{*} -d_{i}| = |(d_{i}^{*}-E[d_{i}]) + (E[d_{i}] -d_{i})| \leq |d_{i}^{*}-E[d_{i}]| + |d_{i} - E[d_{i}]|$. Take the expectation, we have $E[|d_{i}^{*} -d_{i}|]\leq |d_{i}^{*}-E[d_{i}]| + E[|d_{i} - E[d_{i}]|]$. $E[|d_{i} - E[d_{i}]|] \leq \sqrt{\Var[d_{i}]}$(Since $E[|X|] \leq \sqrt{E[X^{2}]}$). $d_{i}^{*} \leq E[d_{i}]$.
-
-% 0-1 multiple
+% \subsection{Loss for Static BLC Policy}
+% Booking limit control policy:
 
 % \begin{align}
-%     \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} p_i x_{ij} \\
-%     \text {s.t.} \quad & \sum_{i= 1}^{M} w_{i} x_{ij} \leq L_{j}, \quad j \in \mathcal{N} \\ 
-%     & \sum_{j=1}^{N} x_{ij} \leq 1, i \in \mathcal{M}  \\
-%     & x_{ij} \in \{0,1\}, \quad i \in \mathcal{M}, j \in \mathcal{N}. 
+%     \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} r_{i} x_{ij} \label{theta_deter} \\
+%     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \notag \\ 
+%     & \sum_{i=1}^{M} w_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \notag 
 % \end{align}
 
-% Here, $M = \sum_{i=1}^{m} d_{i}$ represents the number of groups. $p_{k} = (n_{i} - \delta), w_{k} = n_{i}$ if group $k$ belongs to type $i$.
+
+% Let $d_{i} =\sum_{t} \bm{1}_{i_{t} = i}$ be the realized number of type $i$ over the horizon $T$. 
+% Consider the deterministic linear programming \eqref{theta_deter}, where the right-hand side demands are set to $\sum_{t} \lambda_{i}^{t}$. Let $x_{ij}^{*}$ be an integral optimal solution to this LP, and define $d_{i}^{*} = \sum_{j} x_{ij}^{*}$ as the total number of type $i$ assigned in this optimal solution. Finally, let $val(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter} for a given instance $I$ and demand vector $\{d_{i}\}$.
+
+% $V^{BL}(I) = E_{\{d_{i}\}}[\sum_{i} r_{i} \min\{d_{i}^{*}, d_{i}\}]$, $V^{OPT}(I) = E_{\{d_{i}\}} [val(I; \{d_{i}\})] \leq val(I; \{E[d_{i}]\})$.
+
+% $val(I; \{d_{i}\})$ is concave in $d_{i}$.
+
+% \begin{align*}
+%    & V^{OPT}(I) - V^{BL}(I) \\
+% \leq & val(I; \{E[d_{i}]\}) - V^{BL}(I) \\
+% = & val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) + val(I; \{\lfloor E[d_{i}]\rfloor\}) - E_{\{d_{i}\}}[\sum_{i} r_{i} \min\{d_{i}^{*}, d_{i}\}] \\
+% \leq & \sum_{i} r_{i} + N \sum_{i} r_i + E_{\{d_{i}\}}[\sum_{i} r_{i} (d_{i}^{*} - \min\{d_{i}^{*}, d_{i}\})] \\
+% = & (1+N) \sum_{i} r_{i} + E_{\{d_{i}\}}[\sum_{i} \frac{1}{2} r_{i} (d_{i}^{*} - d_{i} + |d_{i}^{*} - d_{i}|)] \\
+% \overset{\text{(a)}}{\leq} & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} (d_{i}^{*} - E[d_{i}] + |d_{i}^{*} - E[d_{i}]| + \sqrt{\Var[d_{i}]}) \\
+% \leq & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} \sqrt{\Var[d_{i}]} \\
+% \leq & (1+N) \sum_{i} r_{i} + \frac{1}{2} \sum_{i} r_{i} \sqrt{T p_{i} (1- p_{i})} = O(\sqrt{T})
+% \end{align*}
+
+% The revenue loss between the static deterministic heuristic and the optimal is bounded by $C \sqrt{T}$.
+% Thus, $\lim_{T \to \infty} (V^{OPT}(I) - V^{BL}(I))/T \to 0$.
+
+% $val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq val(I; \{\lceil E[d_{i}]\rceil\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq \sum_{i} r_{i}$
 
 
-% single-leg RM: bid-price and booking limit expected revenue loss of $O(\sqrt{k})$ even with re-solving.
+% $LP -IP \leq \sum_{i} \sum_{j} r_{i} (x_{ij}^{*} - \lfloor x_{ij}^{*} \rfloor) < N \sum_{i} r_i$ $\Rightarrow$ $val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq IP + N \sum_{i} r_i$.
+
+% $IP = \sum_{i} \sum_{j} r_{i} x_{ij}^{*} = \sum_{i} r_{i} d_{i}^{*}$
+
+% $(a)$ results from the following inequalities: $|d_{i}^{*} -d_{i}| = |(d_{i}^{*}-E[d_{i}]) + (E[d_{i}] -d_{i})| \leq |d_{i}^{*}-E[d_{i}]| + |d_{i} - E[d_{i}]|$. Take the expectation, we have $E[|d_{i}^{*} -d_{i}|]\leq |d_{i}^{*}-E[d_{i}]| + E[|d_{i} - E[d_{i}]|]$. $E[|d_{i} - E[d_{i}]|] \leq \sqrt{\Var[d_{i}]}$(Since $E[|X|] \leq \sqrt{E[X^{2}]}$). $d_{i}^{*} \leq E[d_{i}]$.
+
 
 
 \subsection{Loss for Dynamic Primal Policy}

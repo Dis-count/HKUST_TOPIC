@@ -111,4 +111,22 @@ Using the decision variable $x_{ij}$ to represent these assignments is a straigh
 
 % When will the threshold policy be the optimal?
 
-% Applications.
+\subsection{Extension of Subproblem}\label{Extension}
+Sometimes, we do not need to generate all feasible patterns. The generated patterns may need to satisfy certain restrictions, such as certain items not being allowed in certain knapsacks, or relationships between items. 
+
+For example, we can add constraints like:
+$h_{i} = 0$ (Item $i$ is excluded), $h_i + h_k \leq 1$ (Items $i$ and $k$ are mutually exclusive). $h_i \leq \text{max count}_{i}$ (An upper bound on the number of item $i$).
+
+To represent these scenarios in a general form, we consider the following extended subproblem for knapsack $j$:
+
+$$
+\begin{aligned}
+\max & \sum_{i=1}^M\left(r_i-\alpha_i\right) h_i-\gamma_j \\
+\text {s.t.} & \sum_{i=1}^M w_i h_i \leq c_j \\
+& \mathbf{A}_j \mathbf{h} \leq \mathbf{b}_j \\
+& \mathbf{h} \in \mathbb{N}^M \\
+& h_i=0, \quad \forall i \notin \mathcal{F}_j
+\end{aligned}
+$$
+
+Here, the second constraint $\mathbf{A}_j \mathbf{h} \leq \mathbf{b}_j$ encompasses various linear restrictions on the pattern, such as mutual exclusion, dependency, and quantity limits. The set $\mathcal{F}_j$ contains the items permitted for knapsack $j$.

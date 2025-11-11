@@ -1,5 +1,5 @@
 \section{The Model}\label{sec_dynamic_seat}
-We consider a system with a set $\mathcal{N} = {1, 2, \ldots, N}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. A finite set of item types $\mathcal{M} = {1, 2, \ldots, M}$ is given, where any item of type $i$ is characterized by a size $w_i \in \mathbb{Z}^{+}$ and a profit $r_i \in \mathbb{Z}^{+}$. In the context of online advertising, for instance, size and profit correspond to the impressions required by an ad campaign and the revenue it generates, respectively. The item types are ordered such that their profit-to-weight ratios, $r_i / w_i$, are monotonically increasing in $i$.
+We consider a system with a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. A finite set of item types $\mathcal{M} = \{1, 2, \ldots, M\}$ is given, where any item of type $i$ is characterized by a size $w_i \in \mathbb{Z}^{+}$ and a profit $r_i \in \mathbb{Z}^{+}$. In the context of online advertising, for instance, size and profit correspond to the impressions required by an ad campaign and the revenue it generates, respectively. The item types are ordered such that their profit-to-weight ratios, $r_i / w_i$, are monotonically increasing in $i$.
 
 % Consider a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. There is also a set $\mathcal{M} = \{1, 2, \ldots, M\}$ of distinct item types. Each item of type $i$ has a size $w_i \in \mathbb{Z}^{+}$, and yields a profit $r_i \in \mathbb{Z}^{+}$ when placed entirely into a knapsack. The size and profit can be reflected as the impressions needed and value created in the online advertising example.
 
@@ -127,7 +127,9 @@ dynamic system with patterns.
 
 
 Let $\bm{h} = [h_{1}, \ldots, h_{M}]$ denote a pattern for a knapsack, where each $h_i$ denotes the number of type-$i$ items assigned. A pattern $\bm{h}$ is feasible for a knapsack with capacity $c_{j}$ if it satisfies $\sum_{i=1}^{M} w_{i} h_{i} \leq c_{j}$. For any knapsack $j$, we
-construct a set $S(c_{j})$ which contains all feasible patterns. For a more general case where $\bm{h}$ is subject to additional constraints, the set $S(c_{j})$ can be extended to include only those solutions that satisfy them. The following algorithm can also be adjusted accordingly.
+construct a set $S(c_{j})$ which contains all feasible patterns. For a more general case where $\bm{h}$ is subject to additional constraints, we consider the extension in Section \ref{Extension}.
+
+% the set $S(c_{j})$ can be extended to include only those solutions that satisfy them. The following algorithm can also be adjusted accordingly.
 
 
 A request of type $i$ can be accepted only if there exists at least one knapsack $j$ with sufficient remaining capacity $c_{j} \geq w_{i}$. This is equivalent to the existence of a feasible pattern $\bm{h} \in S(c_{j})$ for that knapsack that includes at least one item of type $i$ (i.e., $h_{i} \geq 1$). 
@@ -223,9 +225,6 @@ $\alpha_{i}$ represents marginal revenue for type $i$. $\beta_{ij}^{\dag}$ repre
 
 If for a given item type $i$, no knapsack $j$ contains an optimal allocation $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ with $h_{i}^{*} \geq 1$, then the variable $\alpha_{i}$ must be zero. This indicates that the constraint associated with item type $i$ and knapsack $j$ is redundant. Although these constraints appear difficult to enforce in advance, the following lemma reveals that in practice we can avoid imposing additional restrictions. Simply solving problem \eqref{improve_bid} will inherently satisfy all required conditions.
 
-% \begin{lem}
-% For the optimal solution, $r_{i} \geq \beta_{ij}^{\dag}$.
-% \end{lem}
 
 \begin{lem}\label{BPP}
 Define $\mathcal{J}_{i} = \{j \in \mathcal{N} \mid r_i - \beta_{ij}^{\dag *} \geq r_i - \beta_{ik}^{\dag *},\forall k \in \mathcal{N}, r_i - \beta_{ij}^{\dag *} >0 \}$.
@@ -295,7 +294,7 @@ Unlike the traditional BPC, the BPP does not require explicit feasibility checks
 \begin{example}
 Continue with the above example:
 
-For the BPP, the optimal bid prices are $\bm{\beta}{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}{2}^{*} = [6, 6, 6, 6]$, and $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. The resulting objective value is $z(BPP) = 40$, which is less than $z(BPC) = \frac{124}{3}$. Using type 3 as an example, we see it can only be assigned to knapsack 2 or 3. From the item's perspective, its reduced reward vector $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ reveals it is unprofitable for knapsack 1, while from the knapsack's perspective, the optimal solution requires two patterns, $[0, 1, 0]$ and $[1, 0, 0]$ for knapsack 4, indicating that type 3 is also excluded from this knapsack.
+For the BPP, the optimal bid prices are $\bm{\beta}{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}{2}^{*} = [6, 6, 6, 6]$, and $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. The resulting objective value is $z(BPP) = 40$, which is less than $z(BPC) = \frac{124}{3}$. We use item type 3 to demonstrate the assignment analysis. The reduced reward vector for this type, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$, has a negative first element, indicating that assignment to knapsack 1 is unprofitable. Furthermore, from the knapsack's perspective, the patterns generated for knapsack 4 in the optimal solution are $[0, 1, 0]$ and $[1, 0, 0]$, confirming that type 3 is also excluded from this knapsack. Conversely, this item type can be assigned to knapsacks 2 and 3, as evidenced by the non-zero third elements in the respective generated patterns.
 
 % The corresponding primal variables are $\bm{\alpha} = [0, 0, 0]$ and $\bm{\gamma} = [10, 12, 12, 6]$.
 

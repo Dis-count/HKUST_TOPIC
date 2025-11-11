@@ -264,7 +264,7 @@ if __name__ == "__main__":
     ############ END #################
 
     ############ BPP #################
-    alpha, beta, domset = test.setGeneration_bid(dom_set, demand_array, roll_width)
+    alpha, beta, gamma, domset = test.setGeneration_bid(dom_set, demand_array, roll_width)
     print(f'alpha: {alpha}')
     print(f'beta: {beta}')
     print(f'set: {domset}')

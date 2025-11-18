@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -17,8 +20,6 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
 \citation{martello1990knapsack}
 \citation{khuri1994zero,ferreira1996solving,pisinger1999exact,chekuri2005polynomial}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{2}{section.2}\protected@file@percent }
-\newlabel{literature}{{2}{2}{Literature Review}{section.2}{}}
 \citation{kleywegt1998dynamic,kleywegt2001dynamic}
 \citation{papastavrou1996dynamic}
 \citation{bienkowski2020optimal,sun2020competitive}
@@ -29,6 +30,8 @@
 \citation{adelman2007dynamic,bertsimas2003revenue}
 \citation{gallego1997multiproduct}
 \citation{talluri2006theory,liu2008choice}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Literature Review}{3}{section.2}\protected@file@percent }
+\newlabel{literature}{{2}{3}{Literature Review}{section.2}{}}
 \citation{adelman2007dynamic,bertsimas2003revenue}
 \citation{gallego1997multiproduct}
 \citation{talluri2006theory,liu2008choice}
@@ -39,35 +42,46 @@
 \newlabel{sec_dynamic_seat}{{3}{4}{The Model}{section.3}{}}
 \newlabel{DP}{{1}{5}{The Model}{equation.3.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}BPC Policy}{5}{subsection.3.1}\protected@file@percent }
-\newlabel{e0}{{2}{5}{BPC Policy}{equation.3.2}{}}
-\newlabel{deter_upper}{{3}{5}{BPC Policy}{equation.3.3}{}}
-\newlabel{capa_con}{{4}{5}{BPC Policy}{equation.3.4}{}}
+\newlabel{e0}{{2}{6}{BPC Policy}{equation.3.2}{}}
+\newlabel{deter_upper}{{3}{6}{BPC Policy}{equation.3.3}{}}
+\newlabel{capa_con}{{4}{6}{BPC Policy}{equation.3.4}{}}
 \newlabel{sol_relax_deter}{{1}{6}{}{lem.1}{}}
 \newlabel{bid-price_dual}{{5}{6}{BPC Policy}{equation.3.5}{}}
 \newlabel{bid-price}{{1}{6}{}{prop.1}{}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Bid-Price Control\relax }}{6}{algocf.1}\protected@file@percent }
-\newlabel{algo_bid}{{1}{6}{BPC Policy}{algocf.1}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Bid-Price Control\relax }}{7}{algocf.1}\protected@file@percent }
+\newlabel{algo_bid}{{1}{7}{BPC Policy}{algocf.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}BPC Policy Based on Patterns (BPP)}{7}{subsection.3.2}\protected@file@percent }
 \citation{adelman2007dynamic}
 \newlabel{dp_bid}{{7}{8}{BPC Policy Based on Patterns (BPP)}{equation.3.7}{}}
 \newlabel{appro_dp}{{8}{8}{BPC Policy Based on Patterns (BPP)}{equation.3.8}{}}
 \newlabel{improve_bid}{{10}{9}{BPC Policy Based on Patterns (BPP)}{equation.3.10}{}}
-\newlabel{BPP}{{2}{9}{}{lem.2}{}}
+\newlabel{BPP}{{2}{10}{}{lem.2}{}}
 \newlabel{BPC_relation}{{2}{10}{}{prop.2}{}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Bid-Price Control Based on Patterns\relax }}{10}{algocf.2}\protected@file@percent }
-\newlabel{algo_improve_bid}{{2}{10}{BPC Policy Based on Patterns (BPP)}{algocf.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Dynamic Primal Based on Patterns}{11}{section.4}\protected@file@percent }
-\newlabel{improve_primal}{{11}{11}{Dynamic Primal Based on Patterns}{equation.4.11}{}}
-\newlabel{primal}{{3}{11}{}{prop.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Solve the Dynamic Primal}{11}{subsection.4.1}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Bid-Price Control Based on Patterns\relax }}{11}{algocf.2}\protected@file@percent }
+\newlabel{algo_improve_bid}{{2}{11}{BPC Policy Based on Patterns (BPP)}{algocf.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Dynamic Primal Based on Patterns}{12}{section.4}\protected@file@percent }
+\newlabel{improve_primal}{{11}{12}{Dynamic Primal Based on Patterns}{equation.4.11}{}}
+\newlabel{primal}{{3}{12}{}{prop.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Solve the Dynamic Primal}{12}{subsection.4.1}\protected@file@percent }
 \newlabel{subproblem}{{12}{12}{Solve the Dynamic Primal}{equation.4.12}{}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces Dynamic Primal\relax }}{12}{algocf.3}\protected@file@percent }
-\newlabel{algo_improve_primal}{{3}{12}{Solve the Dynamic Primal}{algocf.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Extension of Subproblem}{13}{subsection.4.2}\protected@file@percent }
-\newlabel{Extension}{{4.2}{13}{Extension of Subproblem}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Asymptotic Loss}{13}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Loss for Dynamic Primal Policy}{13}{subsection.5.1}\protected@file@percent }
-\newlabel{additive}{{4}{15}{}{lem.4}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces Dynamic Primal\relax }}{13}{algocf.3}\protected@file@percent }
+\newlabel{algo_improve_primal}{{3}{13}{Solve the Dynamic Primal}{algocf.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Extension}{14}{subsection.4.2}\protected@file@percent }
+\newlabel{Extension}{{4.2}{14}{Extension}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Asymptotic Loss}{14}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Loss for Dynamic Primal Policy}{14}{subsection.5.1}\protected@file@percent }
+\newlabel{additive}{{4}{16}{}{lem.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Loss for different $\theta $\relax }}{19}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:loss}{{1}{19}{Loss for different $\theta $\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Computational Experiments}{19}{section.6}\protected@file@percent }
+\newlabel{sec_result}{{6}{19}{Computational Experiments}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Performances}{19}{subsection.6.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of Policies\relax }}{19}{table.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab_perf}{{1}{19}{Performance of Policies\relax }{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Loss}{19}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{19}{section.7}\protected@file@percent }
+\newlabel{sec_conclusion}{{7}{19}{Conclusion}{section.7}{}}
 \bibstyle{elsarticle-harv}
 \bibdata{refe}
 \bibcite{adelman2007dynamic}{{1}{2007}{{Adelman}}{{}}}
@@ -76,13 +90,6 @@
 \bibcite{bienkowski2020optimal}{{4}{2020}{{Bienkowski et~al.}}{{Bienkowski, Pacut and Piecuch}}}
 \bibcite{bitran1995application}{{5}{1995}{{Bitran and Mondschein}}{{}}}
 \bibcite{chekuri2005polynomial}{{6}{2005}{{Chekuri and Khanna}}{{}}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Computational Experiments}{18}{section.6}\protected@file@percent }
-\newlabel{sec_result}{{6}{18}{Computational Experiments}{section.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of Policies\relax }}{18}{table.caption.2}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab_perf}{{1}{18}{Performance of Policies\relax }{table.caption.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{18}{section.7}\protected@file@percent }
-\newlabel{sec_conclusion}{{7}{18}{Conclusion}{section.7}{}}
 \bibcite{dantzig1957discrete}{{7}{1957}{{Dantzig}}{{}}}
 \bibcite{ferreira1996solving}{{8}{1996}{{Ferreira et~al.}}{{Ferreira, Martin and Weismantel}}}
 \bibcite{gallego1997multiproduct}{{9}{1997}{{Gallego and van Ryzin}}{{}}}
@@ -102,6 +109,6 @@
 \bibcite{williamson1992airline}{{23}{1992}{{Williamson}}{{}}}
 \bibcite{zhu2023assign}{{24}{2023}{{Zhu et~al.}}{{Zhu, Liu, Wang and Wang}}}
 \citation{dantzig1957discrete}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Proofs}{21}{section.8}\protected@file@percent }
-\newlabel{concave}{{5}{22}{}{lem.5}{}}
-\gdef \@abspage@last{22}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Proofs}{22}{section.8}\protected@file@percent }
+\newlabel{concave}{{5}{23}{}{lem.5}{}}
+\gdef \@abspage@last{23}

@@ -5,7 +5,7 @@
 %     Loss: $\lim_{\theta \to \infty} V_{\theta}^{\text{DP}} - z_{\theta}({\text{BPC}}) = 0$. 
 % \end{lem}
 
-Let $\theta \in \mathbb{N}$ be a scale parameter. Given a base instance, we define a sequence of problems where both the capacities $\bm{C}$ and the time horizon $T$ are scaled by $\theta$. The resulting problem has capacities $\bm{C}(\theta) = \theta \bm{C}$, a horizon of $\theta T$ time steps, and arrival rates given by $\lambda_i^t(\theta) = \lambda_i^{\lceil t/\theta \rceil}$ for $t \in [\theta T]$.
+Let $\theta \in \mathbb{N}$ be a scale parameter. Given a base instance, we define a sequence of problems where both the capacities $\bm{C}$ and the time horizon $T$ are scaled by $\theta$. The resulting problem has capacities $\bm{C}(\theta) = \theta \bm{C} = (\theta c_1, \ldots, \theta c_N)$, a horizon of $\theta T$ time steps, and arrival rates given by $\lambda_i^t(\theta) = \lambda_i^{\lceil t/\theta \rceil}$ for $t \in [\theta T]$.
 
 For any policy $\pi$, let $V_{\theta}^{\pi}$ denote the expected revenue collected under $\pi$ in the $\theta$th problem.
 
@@ -15,6 +15,19 @@ For any policy $\pi$, let $V_{\theta}^{\pi}$ denote the expected revenue collect
 \begin{prop}
     Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{P}} = O(1)$. 
 \end{prop}
+
+
+The core idea is to decompose the total loss over time and analyze the loss in each period.
+
+Step 1: Loss Decomposition
+
+% The proof defines a dynamic primal LP, whose optimal value equals the HO revenue
+
+Step 2: Bounding the Single-Period Loss
+
+Step 3: Bounding the Probability of Loss
+
+Step 4: Summing Over Time
 
 
 \subsection{Loss for Dynamic Primal Policy}
@@ -28,6 +41,8 @@ Let $\gamma_{ij}$, $\gamma_{i}^{0}$ denote the number of type $i$ accepted in ca
     OPT(\bm{C}, d, \gamma): \quad \max \quad & \sum_{i = 1}^{M} \sum_{j = 1}^{N} r_{i} x_{ij} \\
     \text {s.t.} \quad & \sum_{j=1}^{N} x_{ij} + x_{i0} = d_{i}, \quad i \in \mathcal{M},  \\ 
     & x_{ij} \geq \gamma_{ij}, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+    & x_{i j} \leq \sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
+    & \sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N} \\
     & x_{i0} \geq \gamma_{i}^{0}, \quad i \in \mathcal{M}, \\
     & \sum_{i=1}^{M} w_{i} x_{ij} \leq c_{j}, \quad j \in \mathcal{N}.
 \end{align*}

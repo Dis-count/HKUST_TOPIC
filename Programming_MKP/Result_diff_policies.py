@@ -14,18 +14,19 @@ if __name__ == "__main__":
     period_range = range(60, 61, 10)
     given_lines = 10
     # probab_list = [[0.2, 0.5, 0.3]]
-    probab_list = [[0.25, 0.25, 0.25, 0.25]]
-    # value = np.array([5, 4, 3])
-    value = np.array([2, 4, 6, 8])
-    weight = np.array([3, 5, 7, 9])
+    probab_list = [[0.1, 0.1, 0.25, 0.25, 0.15, 0.15]]
+    # probab_list = [[0.25, 0.25, 0.25, 0.25]]
+    value = np.array([5, 5, 4, 4, 3, 3])
+    # value = np.array([2, 4, 6, 8])
+    # weight = np.array([3, 5, 7, 9])
     # value = weight
-    # weight = np.array([8, 6, 4])
+    weight = np.array([8, 8, 6, 6, 4, 4])
     count = 100
     total_period = 100
 
     for probab in probab_list:
         begin_time = time.time()
-        filename = 'test_m=4_60' + str(probab) + '.txt'
+        filename = 'devide_m=4_60' + str(probab) + '.txt'
         my_file = open(filename, 'w')
         my_file.write('Run Start Time:' + str(time.ctime()) + '\n')
         # sequences_pool = np.load('sequence_0.12.npy')

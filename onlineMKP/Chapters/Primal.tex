@@ -1,12 +1,14 @@
 \section{Dynamic Primal Based on Patterns}
+In Section \ref{Policy_BPP}, we proposed a bid-price control policy based on the patterns.
+However, the bid-price policies are established via a dual formulation, which might lose some information contained in the primal problem. In this section, we propose a policy called dynamic primal based on patterns (DPP).
 
 Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in knapsack $j$. The primal problem can be formulated as:
 
 \begin{equation}\label{improve_primal}
     \begin{aligned}
-    \max \quad & \sum_{i=1}^M \sum_{j=1}^N r_i x_{i j} \\
+    \max \quad & \sum_{i=1}^M \sum_{j=1}^N r_i x_{ij} \\
     \text {s.t.} \quad & \sum_{j=1}^N x_{i j} \leq d_i, \quad i \in \mathcal{M}, \\
-    & x_{i j} \leq \sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
+    & x_{ij} \leq \sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
     & \sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N}.
     \end{aligned}
 \end{equation}

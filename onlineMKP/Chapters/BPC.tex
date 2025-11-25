@@ -120,7 +120,7 @@ Under traditional bid-price control, the bid-price for each knapsack $j$ is $\be
 It fails to differentiate between knapsacks, assigning them a uniform bid-price. It permits potentially infeasible assignments. For instance, even though $r_{3} - \beta_{4}^{*} * w_{3} > 0$, assigning a type 3 item (with weight 5) to knapsack 4 (with capacity 4) is infeasible.
 \end{example}
 
-\subsection{BPC Policy Based on Patterns (BPP)}
+\subsection{BPC Policy Based on Patterns (BPP)}\label{Policy_BPP}
 In the BPC policy, we treat each size in each knapsack separately. However, a request always occupies
 a series of consecutive sizes within a knapsack. In order to capture the value of an item, it would be helpful to consider the sizes of an item jointly. In the following, we consider an alternative bid-price formulation based on the idea of pattern and we derive a different set of bid-prices and hence a better-performing control policy. The core idea, as we explain next, is to reformulate the
 dynamic system with patterns.

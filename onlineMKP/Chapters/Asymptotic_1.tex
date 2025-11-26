@@ -5,11 +5,9 @@
 %     Loss: $\lim_{\theta \to \infty} V_{\theta}^{\text{DP}} - z_{\theta}({\text{BPC}}) = 0$. 
 % \end{lem}
 
-We begin by outlining the framework for our analysis. To evaluate policy performance, we adopt an asymptotic scaling regime, a standard approach in revenue management (see \citep{gallego1997multiproduct}). Let $\theta \in \mathbb{N}$ be a scale parameter. For a given base instance, we generate a sequence of problems where the capacities $\bm{C}$ and the time horizon $T$ are scaled by $\theta$. The resulting $\theta$-th problem has capacities $\bm{C}(\theta) = \theta \bm{C}$, a horizon of $\theta T$ periods, and arrival rates defined by $\lambda_i^t(\theta) = \lambda_i^{\lceil t/\theta \rceil}$ for $t \in [\theta T]$.
+We begin by outlining the framework for our analysis. To evaluate policy performance, we adopt an asymptotic scaling regime, a standard approach in revenue management (see \citet{gallego1997multiproduct}). Let $\theta \in \mathbb{N}$ be a scale parameter. For a given base instance, we generate a sequence of problems where the capacities $\bm{C}$ and the time horizon $T$ are scaled by $\theta$. The resulting $\theta$-th problem has capacities $\bm{C}(\theta) = \theta \bm{C}$, a horizon of $\theta T$ periods, and arrival rates defined by $\lambda_i^t(\theta) = \lambda_i^{\lceil t/\theta \rceil}$ for $t \in [\theta T]$.
 
-Let $V_{\theta}^{\pi}$ be the expected revenue of policy $\pi$ in the scaled problem. We define two benchmarks for the base instance: $V^{\text{off}}$, the offline optimal value, and $V^{\text{HO}}$, the offline relaxed optimal value, where $V^{\text{HO}} \geq V^{\text{off}}$. The loss of policy $\pi$ is thus bounded by:
-
-$E[\text{loss}]^{\pi} = V^{\text{off}} - V^{\pi} \leq V^{\text{HO}} - V^{\pi}$.
+Let $V_{\theta}^{\pi}$ be the expected revenue of policy $\pi$ in the scaled problem. We define two benchmarks for the base instance: $V^{\text{off}}$, the offline optimal value, and $V^{\text{HO}}$, the offline relaxed optimal value, where $V^{\text{HO}} \geq V^{\text{off}}$. The loss of policy $\pi$ is thus bounded by: $E[\text{loss}]^{\pi} = V^{\text{off}} - V^{\pi} \leq V^{\text{HO}} - V^{\pi}$.
 
 
 % HO makes an allocation decision only after all requests are known, and thus achieves the optimal value for the relaxed static model.

@@ -1,0 +1,57 @@
+% !TEX root = sum1.tex
+\section{Computational Experiments}\label{sec_result}
+\subsection{Performances}
+$N =10$, $L_{j} =20 \forall j$,
+
+$D_1 = [0.2, 0.5, 0.3]$
+
+$w = [3, 4, 5]$, $r = [4, 6, 8]$, $r_i/w_i > 1 \forall i$
+
+$w = [3, 4, 5] = r$, $r_i/w_i = 1 \forall i$
+
+$w = [8, 6, 4]$  $r = [5, 4, 3]$, $r_i/w_i < 1 \forall i$
+
+$D_2 = [0.25, 0.25, 0.25, 0.25]$
+
+$w = [3, 5, 7, 9]$, $r = [2, 4, 6, 8]$.
+
+\begin{table}[h]
+  \centering
+  \caption{Performance of Policies}\label{tab_perf}
+  \begin{tabular}{cccccc}
+  \hline
+  \hline
+  Distribution & T & $r_i/w_i$ & Primal (\%) & BPC (\%) & BPP (\%)  \\
+  % \Xcline{1-1}{0.4pt}\Xcline{3-3}{0.4pt}\Xcline{4-4}{0.4pt}
+  % \cmidrule(r){0-1} \cmidrule(lr){3-3} \cmidrule(lr){4-4} \cmidrule(lr){5-5} \cmidrule(lr){6-6} \cmidrule(l){7-7}
+  \hline
+  \multirow{5}{*}{$D_1$} & 60  & $>$1 & 99.15 & 95.30 & 97.98  \\
+                         & 80  & $>$1 & 99.37 & 95.70 & 98.18  \\
+                         & 60  & =1   & 99.68 & 95.66 & 98.88  \\  % same w r
+                         & 80  & =1   & 99.80 & 96.26 & 99.44  \\
+                         & 60  & $<$1 & 98.56 & 95.86 & 97.66 \\
+                         & 80  & $<$1 & 97.00 & 95.67 & 97.31  \\
+    \hline
+    \multirow{5}{*}{$D_2$} & 60  & $<$1 & 99.65 &  94.63 & 99.84  \\
+     & 80  & $<$1 & 99.81      & 96.89       &  99.91     \\
+     & 100 & $<$1 & 99.94 & 99.41  & 99.97 \\
+  \hline
+  \end{tabular}
+\end{table}
+
+
+\subsection{Loss}
+For each policy $\pi$, the loss of $\pi$, denoted as $L_{\pi}$, is defined as the average of $r^{\text{HO}}(\omega) - r^{\pi}(\omega)$ over all sample paths $\omega$. 
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width = 10cm]{./Figures/loss}
+  \caption{Loss over $T$}  \label{fig:loss}
+\end{figure}
+
+
+% $\frac{r_{i}}{c_{i}} = C$, then the optimal policy exists?
+
+% when there are two knapsacks 
+% Compare one knapsack performance

@@ -1,0 +1,68 @@
+% !TEX root = sum1.tex
+%{\bf Terminologies to use}
+
+%We use {\em seating management} to refer to the general problem which includes {\em seat planning with deterministic requests}, 
+%{\em seat planning with stochastic requests}, and {\em seat assignment}.
+
+%Each problem is defined for an {\em event} which has multiple {\em seating requests}, where each request has a {\em group} of people to be seated.
+
+\section{Introduction}
+The dynamic stochastic multiple knapsack problem with multi-type items extends the classical knapsack problem to a dynamic and multi-knapsack setting, where items of distinct types arrive sequentially, and decisions to accept or reject them must be made immediately without knowledge of future arrivals. Each item is characterized by a type-dependent size and value, and must be placed into one of multiple knapsacks with non-identical capacities. This framework captures critical resource allocation challenges across various domains, including online advertising, cloud resource and energy management.
+
+The business strategy of cloud providers offering fixed-term, pre-paid virtual machine instances presents a classic and impactful resource allocation challenge. This operational challenge can be effectively modeled using the DSMKP, providing a foundational framework for optimizing revenue and resource utilization. Consider the case of \href{https://www.tencentcloud.com/pricing/cvm}{Tencent Cloud}, a representative provider that sells 1-month reserved instance contracts. These contracts, such as small (Type-S), medium (Type-M), and large (Type-L) instances, are characterized by their specific resource requirements (size) and a fixed, pre-paid price (value).
+
+In this formalization, the provider's infrastructure is abstracted as a set of multiple knapsacks. Each knapsack represents a distinct, homogeneous resource pool--for instance, a cluster of servers with identical hardware--with a capacity defined by its total available standardized ``compute units'' (e.g., a combination of CPU cores and memory). Customer orders for reserved instances arrive sequentially and stochastically in an online fashion. Upon each arrival, the platform must make an immediate and irrevocable decision: to either reject the request or accept it and assign it to a specific resource pool, thereby consuming a portion of that pool's capacity.
+
+
+In online advertising, our work employs a foundational framework for ad display allocation. In this model, a platform faces dynamically arriving ad campaigns from a finite set of types. Upon each arrival, it must make an immediate and irrevocable decision: to either reject the campaign or accept it by assigning it to an advertising slot inventory, thereby consuming a portion of that inventory's capacity.
+This application is aligned with the traditional method of fulfilling guaranteed contracts, as seen in yield optimization literature \citep{balseiro2011yield}.
+
+In this formalization, an ad slot inventory is analogous to a ``knapsack''. It represents a homogeneous pool of future advertising impressions (e.g., the banner on a specific website section). The knapsack's capacity corresponds to the total number of available impressions for that inventory over a planned future period (e.g., the next day or week). For example, the platform manages two distinct inventories with different impression capacities. An item to be allocated is a dynamically arriving ad campaign request. Requests are grouped into a finite set of types, where all campaigns of the same type have identical contractual requirements and value. For example, Type-A (Luxury Auto Advertisers), Type-B (Fast-Moving Consumer Goods Advertisers), and Type-C (Local Service Advertisers). Each campaign requires a certain size (in impressions) and pays a fixed value.
+
+
+The DSMKP provides a unified formalism to study this essential trade-off between utilizing current capacity and reserving it for future, potentially more valuable opportunities, making it a critical tool for optimizing online decision-making under uncertainty.
+
+
+These applications underscore the broad applicability of the DSMKP in real-world systems where heterogeneous resources must be allocated dynamically under uncertainty. Developing efficient algorithms for this problem--with guarantees on scalability and robustness--is therefore of significant theoretical and practical interest. This paper aims to address this gap by proposing novel strategies for the DSMKP and validating them in one or more of the above domains.
+
+
+% Resource allocation
+% Applications: Cloud computing, Ad placement, Production scheduling, Energy management, Network 
+% bandwidth allocation
+
+We develop several policies for DSMKP. The rest of this paper is structured as follows. We review the relevant literature in Section \ref{literature}. Section \ref{sec_dynamic_seat} presents the bid-price and resolving dynamic primal policies to assign the incoming requests. Section \ref{sec_result} presents the experimental results and provides insights gained from implementing dynamic primal. Conclusions are shown in Section \ref{sec_conclusion}.
+
+
+% Knapsacks (Servers - Varying Single-Dimensional Capacity):
+% A cloud provider manages multiple servers. These servers are functionally identical, and the only difference between them is their total available capacity, abstracted as "compute units."
+
+% Their capacities are, for example: Server 1: 100 units, Server 2: 150 units, Server 3: 200 units.
+
+% Key Point: Any task can be assigned to any server with sufficient remaining capacity.
+
+% Items (Tasks - Multi-type with Fixed Properties):
+% Incoming user tasks belong to a finite set of types. Each task type has a deterministic resource requirement (size) and an associated reward (value).
+
+% Type-1 (High-Priority Task): Size = 20 units, Value = \$50.
+% Type-2 (Medium-Priority Task): Size = 30 units, Value = \$60.
+% Type-3 (Low-Priority Batch Task): Size = 40 units, Value = \$60.
+
+% Core Problem: To assign randomly arriving ad requests from multiple advertisers to different advertising slot inventories, maximizing total platform revenue. Requests are categorized into a finite set of types based on their industry vertical and performance goals.
+
+% Knapsacks (Ad Inventories - Varying Single-Dimensional Capacity):
+
+% The platform manages distinct advertising slot inventories, differentiated by their single-dimensional capacity, abstracted as "total available impressions."
+
+% Their capacities are, for example: Inventory : 500,000 impressions, Inventory : 1,000,000 impressions.
+
+% Items (Ad Requests - Multi-type with Fixed Properties):
+% Ad requests are from various advertisers but are grouped into a finite set of types. All requests of the same type have identical contractual requirements and value per campaign. 
+
+% Type-A (Luxury Auto Advertisers): Each campaign from this category requires Size = 100,000 impressions and pays Value = \$30,000.
+% Type-B (Fast-Moving Consumer Goods Advertisers): Each campaign requires Size = 200,000 impressions and pays Value = \$45,000.
+% Type-C (Local Service Advertisers): Each campaign requires Size = 150,000 impressions and pays Value = \$30,000.
+
+% Ad requests are standardized packages sold to advertisers. Multiple packages of the same type are available for purchase.
+
+
+

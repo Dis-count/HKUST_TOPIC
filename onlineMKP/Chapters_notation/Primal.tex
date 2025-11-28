@@ -60,14 +60,14 @@ When $\sum_{i=1}^{M} d_{i} w_{i} \geq \sum_{j=1}^{N} c_{j}$, we have $\sum_{\bm{
     \caption{Dynamic Primal}\label{algo_improve_primal}
     \For{$t = 1, \ldots, T$}{
       {Observe a request of type $i$\;}
-      \If{$c_{j}({t}) = w_i, \exists j$}
+      \If{$c_{j}^{t} = w_i, \exists j$}
       {Assign the item to knapsack $j$\; 
       \Continue}
       {Solve problem \eqref{improve_primal} with $\bm{d}^{[t, T]}$ \;
       Obtain an optimal solution $x_{ij}$ \;}
       \eIf{$\max_{j}\{x_{ij}\} > 0$}
       {Set $k = \arg \max_{j}\{x_{ij}\}$ and break ties\;
-      Assign the item to knapsack $k$, let $c_{k}({t+1}) \gets c_{k}({t}) - w_{i}$\;}
+      Assign the item to knapsack $k$, let $c_{k}^{t+1} \gets c_{k}^{t} - w_{i}$\;}
       {Reject the request\;}}
 \end{algorithm}
 

@@ -7,30 +7,31 @@ We consider a system with a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks
 Requests for these items arrive sequentially. Upon the arrival of a request (which specifies its type), the seller must immediately decide whether to accept or reject it. If accepted, the seller must also assign it to a specific knapsack with sufficient remaining capacity. Each item must be placed whole into a single knapsack; partial assignments or reassignments are not permitted.
 
 
-To model this problem, we adopt a dynamic programming framework based on discrete time periods $t = 1, 2, \ldots, T$. In each period, at most one request arrives. Let $\lambda_i(t)$ denote the probability that a request for an item of type $i \in \mathcal{M}$ arrives at time $t$. These probabilities satisfy $\sum_{i=1}^M \lambda_i(t) \leq 1$ for all $t$, and we define $\lambda_0(t) = 1 - \sum_{i=1}^M \lambda_i(t)$ as the probability of no arrival in period $t$. Arrival events are assumed to be independent across time periods.
+To model this problem, we adopt a dynamic programming framework based on discrete time periods $t = 1, 2, \ldots, T$. In each period, at most one request arrives. Let $\lambda_i^t$ denote the probability that a request for an item of type $i \in \mathcal{M}$ arrives at time $t$. These probabilities satisfy $\sum_{i=1}^M \lambda_i^t \leq 1$ for all $t$, and we define $\lambda_0^t = 1 - \sum_{i=1}^M \lambda_i^t$ as the probability of no arrival in period $t$. Arrival events are assumed to be independent across time periods.
 
 
-The system state is the vector of remaining capacities $\mathbf{C} = (c_1, \ldots, c_N)$. When an item of type $i$ arrives, the seller chooses a decision variable $u_{i,j}(t) \in \{0,1\}$ for each knapsack $j$. The feasible set $U(\mathbf{C}(t))$ is defined by:
+The system state is the vector of remaining capacities $\mathbf{C} = (c_1, \ldots, c_N)$. When an item of type $i$ arrives, the seller chooses a decision variable $u_{i,j}^t \in \{0,1\}$ for each knapsack $j$. The feasible set $U^t(\mathbf{C})$ is defined by:
 
 $$
-U(\mathbf{C}(t))=\left\{u_{i, j}(t) \in\{0,1\} \left\lvert\, \begin{array}{ll}
-\text { (a) } & \sum_{j=1}^N u_{i, j}(t) \leq 1 \quad \forall i \in \mathcal{M} \\
-\text { (b) } & w_i u_{i, j}(t) \leq c_j \quad \forall i \in \mathcal{M}, \forall j \in \mathcal{N}
+U^t(\mathbf{C})=\left\{u_{i, j}^t \in\{0,1\} \left\lvert\, \begin{array}{ll}
+\text { (a) } & \sum_{j=1}^N u_{i, j}^t \leq 1 \quad \forall i \in \mathcal{M} \\
+\text { (b) } & w_i u_{i, j}^t \leq c_j \quad \forall i \in \mathcal{M}, \forall j \in \mathcal{N}
 \end{array}\right.\right\} .
 $$
 
-Constraint (a) ensures the item is assigned to at most one knapsack. Constraint (b) ensures that if the item is assigned to knapsack $j$ ($u_{i,j}(t)=1$), its weight $w_i$ does not exceed $c_j$. The original vector form of this constraint, $w_{i}u_{i,j}({t})\mathbf{e}_j \leq \mathbf{C}$ (where $\mathbf{e}_j$ is the $j$-th standard basis vector), is mathematically equivalent to (b).
+Constraint (a) ensures the item is assigned to at most one knapsack. Constraint (b) ensures that if the item is assigned to knapsack $j$ ($u_{i,j}^t=1$), its weight $w_i$ does not exceed $c_j$. The original vector form of this constraint, $w_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{C}$ (where $\mathbf{e}_j$ is the $j$-th standard basis vector), is mathematically equivalent to (b).
 
 
-Let $v_{t}(\mathbf{C})$ denote the value function, representing the maximum expected revenue obtainable from period $t$ onward, given the current remaining capacity vector $\mathbf{C}$. The Bellman equation is given by:
+
+Let $v^{t}(\mathbf{C})$ denote the value function, representing the maximum expected revenue obtainable from period $t$ onward, given the current remaining capacity vector $\mathbf{C}$. The Bellman equation is given by:
 
 \begin{equation}\label{DP}
-v_{t}(\mathbf{C}(t)) = \max_{u_{i,j}({t}) \in U(\mathbf{C}(t))}\left\{\sum_{i=1}^{M} \lambda_i({t}) \bigl( \sum_{j=1}^{N} r_i u_{i,j}({t}) + v_{t+1}(\mathbf{C}(t) - w_i u_{i,j}({t})\mathbf{e}_j)\bigr) + \lambda_0({t}) v_{t+1}(\mathbf{C}(t))\right\}
+v^{t}(\mathbf{C}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{C})}\left\{\sum_{i=1}^{M} \lambda_i^{t} \bigl( \sum_{j=1}^{N} r_i u_{i,j}^{t} + v^{t+1}(\mathbf{C} - w_i u_{i,j}^{t}\mathbf{e}_j)\bigr) + \lambda_0^{t} v^{t+1}(\mathbf{C})\right\}
 \end{equation}
 
-The boundary condition is $v_{T+1}(\mathbf{C}) = 0$ for all $\mathbf{C} \geq \mathbf{0}$, indicating that no more revenue can be earned after the final period $T$.
+The boundary condition is $v^{T+1}(\mathbf{C}) = 0$ for all $\mathbf{C} \geq \mathbf{0}$, indicating that no more revenue can be earned after the final period $T$.
 
-Let $\mathbf{C}(0) = (C_1, C_2, \ldots, C_N)$ be the initial capacity vector. The objective is to compute $v_{1}(\mathbf{C}(0))$, the maximum total expected revenue over the entire horizon from $t=1$ to $t=T$, and to find the policy of item assignments that achieves this value.
+Let $\mathbf{C}_0 = (C_1, C_2, \ldots, C_N)$ be the initial capacity vector. The objective is to compute $v^{1}(\mathbf{C}_0)$, the maximum total expected revenue over the entire horizon from $t=1$ to $t=T$, and to find the policy of item assignments that achieves this value.
 
 
 Solving the dynamic programming problem presented in Equation \eqref{DP} is computationally intractable for realistic problem sizes due to the curse of dimensionality inherent in the large state space.
@@ -47,7 +48,7 @@ Bid-price control is a classical and widely studied methodology in network reven
 
 Typically, these bid prices are derived from the shadow prices of the capacity constraints in a deterministic approximation of the underlying stochastic problem. In this section, we detail the implementation of a bid-price control policy for our model.
 
-We begin by formulating a deterministic linear programming (LP) approximation, specifically the LP relaxation of a multi-type multiple knapsack problem. This model uses expected demand over the horizon. Let $x_{ij}$ denote the number of type $i$ items assigned to knapsack $j$, and let $d_i = \sum_{t=1}^{T} \lambda_{i}(t)$ represent the expected number of requests for type $i$. The formulation is as follows:
+We begin by formulating a deterministic linear programming (LP) approximation, specifically the LP relaxation of a multi-type multiple knapsack problem. This model uses expected demand over the horizon. Let $x_{ij}$ denote the number of type $i$ items assigned to knapsack $j$, and let $d_i = \sum_{t=1}^{T} \lambda^{t}_{i}$ represent the expected number of requests for type $i$. The formulation is as follows:
 
 
 \begin{align}
@@ -87,11 +88,11 @@ According to Proposition \ref{bid-price}, the decision inequality becomes $r_i -
     \caption{Bid-Price Control}\label{algo_bid}
     \For{$t = 1, \ldots, T$}{
       {Observe a request of item type $i$\;}
-      {Solve problem \eqref{bid-price_dual} with $\bm{d}^{[t,T]}$ and $\mathbf{C}({t})$\;
-      Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i}({t}) e_{i}$\;}
-      \eIf{$i \geq \tilde{i}$ and $\max_{j \in \mathcal{N}}{c_j({t})} \geq w_i$}
-      {Set $k = \arg \min_{j \in \mathcal{N}}\{c_j({t})|c_j({t}) \geq w_i\} $ and break ties\;
-      Assign the item to knapsack $k$, let $c_{k}({t+1}) \gets c_{k}({t}) - w_{i}$ \;}
+      {Solve problem \eqref{bid-price_dual} with $\bm{d}^{[t,T]}$ and $\mathbf{C}^{t}$\;
+      Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i}^{t} e_{i}$\;}
+      \eIf{$i \geq \tilde{i}$ and $\max_{j \in \mathcal{N}}{c_j^{t}} \geq w_i$}
+      {Set $k = \arg \min_{j \in \mathcal{N}}\{c_j^{t}|c_j^{t} \geq w_i\} $ and break ties\;
+      Assign the item to knapsack $k$, let $c_{k}^{t+1} \gets c_{k}^{t} - w_{i}$ \;}
       {Reject the request\;}}
 \end{algorithm}
 
@@ -133,11 +134,11 @@ construct a set $S(c_{j})$ which contains all feasible patterns. For a more gene
 
 A request of type $i$ can be accepted only if there exists at least one knapsack $j$ with sufficient remaining capacity $c_{j} \geq w_{i}$. This is equivalent to the existence of a feasible pattern $\bm{h} \in S(c_{j})$ for that knapsack that includes at least one item of type $i$ (i.e., $h_{i} \geq 1$). 
 
-To formalize this, we define the maximum value obtainable from accepting a type $i$ request. For a given knapsack $j$ and pattern $\bm{h}$ that can accommodate the item ($\bm{h} \in S(c_{j})$, $h_{i} \geq 1$), the value of placing it in $j$ is the sum of the immediate reward $r_{i}$ and the future value $v_{t+1}(\bm{C} -e_j^T w_i)$ starting from the updated capacity.
+To formalize this, we define the maximum value obtainable from accepting a type $i$ request. For a given knapsack $j$ and pattern $\bm{h}$ that can accommodate the item ($\bm{h} \in S(c_{j})$, $h_{i} \geq 1$), the value of placing it in $j$ is the sum of the immediate reward $r_{i}$ and the future value $v^{t+1}(\bm{C} -e_j^T w_i)$ starting from the updated capacity.
 
 We therefore define $q_{i}$ as the maximum of this value over all feasible placement options:
 \begin{equation*}
-    q_i= \begin{cases}\max _{j: \exists \bm{h} \in S\left(c_j\right), h_i \geq 1}\left\{v_{t+1}\left(\bm{C}-e_j^T w_i\right) + r_i\right\} & \text {if such a knapsack} ~j~ \text {exists}, \\ 0 & \text {otherwise}\end{cases}
+    q_i= \begin{cases}\max _{j: \exists \bm{h} \in S\left(c_j\right), h_i \geq 1}\left\{v^{t+1}\left(\bm{C}-e_j^T w_i\right) + r_i\right\} & \text {if such a knapsack} ~j~ \text {exists}, \\ 0 & \text {otherwise}\end{cases}
 \end{equation*}
 
 In this definition, the maximization evaluates the optimal placement of a type-$i$ item by considering all knapsacks $j$ for which there exists at least one feasible pattern $\bm{h} \in S(c_{j})$ capable of holding it ($h_{i} \geq 1$).
@@ -145,36 +146,36 @@ In this definition, the maximization evaluates the optimal placement of a type-$
 % The key idea is to make the decision using feasible assignment patterns, which encode the combinations of items it can hold, rather than merely tracking its residual capacity. 
 
 
-Now we present the DP formulation from the pattern perspective. Recall that $v_t(\bm{C})$ denotes the maximal expected value-to-go at time $t$, given the remaining capacity $\bm{C}$. The dynamic programming can be reformulated as follows:
+Now we present the DP formulation from the pattern perspective. Recall that $v^t(\bm{C})$ denotes the maximal expected value-to-go at time $t$, given the remaining capacity $\bm{C}$. The dynamic programming can be reformulated as follows:
 \begin{equation}
 \begin{aligned}
-& v_t(\bm{C}) \geq \mathbb{E}_{i \sim \lambda(t)}\bigg[
-\max \left\{q_{i}, v_{t+1}(\bm{C})\right\}
+& v^t(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\bigg[
+\max \left\{q_{i}, v^{t+1}(\bm{C})\right\}
 \bigg], \forall t,  \\
-& v_{T+1}(\bm{C}) = 0
+& v^{T+1}(\bm{C}) = 0
 \end{aligned}
 \end{equation}
 
-The maximization compares the value of accepting $i$ (via the maximization of $q_{i}$) and rejecting $i$ (retaining $v_{t+1}(\bm{C})$). If no such $j$ exists, the request $i$ is rejected.
+The maximization compares the value of accepting $i$ (via the maximization of $q_{i}$) and rejecting $i$ (retaining $v^{t+1}(\bm{C})$). If no such $j$ exists, the request $i$ is rejected.
 
 
-We can solve the following program to compute $v_1(\bm{C})$ for any given capacity $\bm{C}$:
+We can solve the following program to compute $v^1(\bm{C})$ for any given capacity $\bm{C}$:
 \begin{equation}\label{dp_bid}
     \begin{aligned}
-    \min \quad & v_{1}(\bm{C}) \\
-    \mathrm{s.t.} \quad & v_{t}(\bm{C}) \geq \mathbb{E}_{i \sim \lambda(t)}\bigg[\max\Big\{ q_{i}, v_{t+1}(\bm{C})\Big\}\bigg], \\
-    & v_{T+1}(\bm{C}) \geq 0.
+    \min \quad & v^{1}(\bm{C}) \\
+    \mathrm{s.t.} \quad & v^{t}(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\bigg[\max\Big\{ q_{i}, v^{t+1}(\bm{C})\Big\}\bigg], \\
+    & v^{T+1}(\bm{C}) \geq 0.
     \end{aligned}
 \end{equation}
 
-Solving \eqref{dp_bid} remains computationally intractable. We therefore adopt an Approximate Dynamic Programming (ADP) approach \citep{adelman2007dynamic} to approximate the value function $v_{t}(\bm{C})$. Our proposed approximation is:
+Solving \eqref{dp_bid} remains computationally intractable. We therefore adopt an Approximate Dynamic Programming (ADP) approach \citep{adelman2007dynamic} to approximate the value function $v^{t}(\bm{C})$. Our proposed approximation is:
 
 \begin{equation}\label{appro_dp}
-    \hat{v}_{t}(\bm{C}) = \theta_{t} + \sum_{j=1}^{N} \max_{\bm{h} \in S(c_{j})} \{\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}\}.
+    \hat{v}^{t}(\bm{C}) = \theta^{t} + \sum_{j=1}^{N} \max_{\bm{h} \in S(c_{j})} \{\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}\}.
 \end{equation}
 
 
-The term $\beta_{ij}^{\dag}$ can be regarded as the approximated value for each type $i$ in knapsack $j$. Unlike traditional linear approximations, our approach retains the linear term $\theta_{t}$ but introduces a nonlinear component for each knapsack $j$. Specifically, we maximize the linear combination $\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}$ over the feasible set $S(c_{j})$.
+The term $\beta_{ij}^{\dag}$ can be regarded as the approximated value for each type $i$ in knapsack $j$. Unlike traditional linear approximations, our approach retains the linear term $\theta^{t}$ but introduces a nonlinear component for each knapsack $j$. Specifically, we maximize the linear combination $\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}$ over the feasible set $S(c_{j})$.
 
 % Our approximation extends classical linear ADP by incorporating resource-specific nonlinear terms through constrained maximization over feasible allocations. While similar separable corrections appear in resource allocation ADP, our explicit use of $\max_{\bm{h} \in S(c_j)}$ captures local constraints more directly.
 
@@ -184,13 +185,13 @@ The term $\beta_{ij}^{\dag}$ can be regarded as the approximated value for each 
 Substituting \eqref{appro_dp} into \eqref{dp_bid}, we have:
 
 \begin{align}
-    \theta_{t} - \theta_{t+1} = \hat{v}_{t}(\bm{C}) - \hat{v}_{t+1}(\bm{C}) \geq \sum_{i} \lambda_{i}({t}) \max\left\{q_{i} - v_{t+1}(\bm{C}), 0\right\}
+    \theta^{t} - \theta^{t+1} = \hat{v}^{t}(\bm{C}) - \hat{v}^{t+1}(\bm{C}) \geq \sum_{i} \lambda_{i}^{t} \max\left\{q_{i} - v^{t+1}(\bm{C}), 0\right\}
 \end{align}
 
 For the case where there exists a knapsack $j$ satisfying both conditions: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ and $h_{i}^{*} \geq 1$, we establish the value difference: 
 
 \begin{align*}
-    & v_{t+1}(\bm{C} - e_{j}^{T} w_{i}) - v_{t+1}(\bm{C}) \\ 
+    & v^{t+1}(\bm{C} - e_{j}^{T} w_{i}) - v^{t+1}(\bm{C}) \\ 
   = & \max_{\bm{h} \in S(c_{j}- w_{i})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\} - \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\} \\
   = & -\beta_{ij}^{\dag} \leq 0
 \end{align*}
@@ -202,11 +203,11 @@ with $\alpha_{i} = 0$ when no qualifying knapsack $j$ exists.
 Let $\gamma_{j} = \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\}$. This yields:
 
 \begin{align*}
-    \theta_{1} & = \sum_{t=1}^{T} (\theta_{t} - \theta_{t+1}) \geq \sum_{t} \sum_{i} \alpha_{i} \lambda_{i}({t}) = \sum_{i} d_{i} \alpha_{i} \\
-    \hat{v}_{1}(\bm{C}) & = \sum_{i} d_{i} \alpha_{i} + \sum_{j} \gamma_{j}
+    \theta^{1} & = \sum_{t=1}^{T} (\theta^{t} - \theta^{t+1}) \geq \sum_{t} \sum_{i} \alpha_{i} \lambda_{i}^{t} = \sum_{i} d_{i} \alpha_{i} \\
+    \hat{v}^{1}(\bm{C}) & = \sum_{i} d_{i} \alpha_{i} + \sum_{j} \gamma_{j}
 \end{align*}
 
-Since $\hat{v}_{1}(\bm{C})$ constitutes a feasible solution to \eqref{dp_bid}, we have $\hat{v}_{1}(\bm{C}) \geq v_{1}(\bm{C})$.
+Since $\hat{v}^{1}(\bm{C})$ constitutes a feasible solution to \eqref{dp_bid}, we have $\hat{v}^{1}(\bm{C}) \geq v^{1}(\bm{C})$.
 
 If all $j$ exist for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$, the corresponding bid-price problem can be expressed as:
 
@@ -233,7 +234,7 @@ If $\mathcal{J}_{i} \neq \varnothing$, then there exists a $j{'} \in \mathcal{J}
 $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j{'}})} \sum_{i} \beta_{ij{'}}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
 \end{lem}
 
-This lemma guarantees that when such a $j{'}$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}_{1}(\bm{C})$.
+This lemma guarantees that when such a $j{'}$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}^{1}(\bm{C})$.
 
 The control policy is then defined as follows. For the arriving type-$i$ item, if $\alpha_{i} > 0$, accept the type $i$. Assign the type $i$ to a knapsack $j \in \mathcal{J}_{i}$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$ If $\alpha_{i} = 0$ and there exists a knapsack $j$ such that: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1$, accept the type $i$ and assign it to knapsack $j$; otherwise, reject the type $i$.
 
@@ -259,11 +260,11 @@ Under the approximation \eqref{appro_dp}, the BPP policy operates as follows:
     \caption{Bid-Price Control Based on Patterns}\label{algo_improve_bid}
     \For{$t =1, \ldots, T$}{
       {Observe a request of item type $i$\;}
-      {Solve problem \eqref{improve_bid} with $\bm{d}^{[t, T]}$\;}
+      {Solve problem \eqref{improve_bid} with $\bm{d}^{[t, T]}$ and $\mathbf{L}^{t}$\;}
       \eIf{$\alpha_i > 0$}
       {Assign the type $i$ to a knapsack $j \in \mathcal{J}_{i}$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
-      Let $c_{j}({t+1}) \gets c_{j}({t}) - w_{i}$\;}
-      {\eIf{There exists $j$ such that $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$}{Assign the item in knapsack $j$, let $c_{j}({t+1}) \gets c_{j}({t}) - w_{i}$\;}
+      Let $c_{j}^{t+1} \gets c_{j}^{t} - w_{i}$\;}
+      {\eIf{There exists $j$ such that $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$}{Assign the item in knapsack $j$, let $c_{j}^{t+1} \gets c_{j}^{t} - w_{i}$\;}
       {Reject the request\;}}}
 \end{algorithm}
 

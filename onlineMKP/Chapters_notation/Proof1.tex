@@ -1,0 +1,69 @@
+% !TEX root = sum1.tex
+\clearpage
+\section{Proofs}
+
+\begin{pf}{Proof of Proposition \ref{sol_relax_deter}}
+  We model the problem as a special case of the multiple knapsack problem, then we consider the LP relaxation of this problem. In the model, groups are categorized into $M$ distinct types. Each type $i$ is characterized by a fixed size $w_i$, which serves as the weight, and an associated profit equal to $r_i$. For every type $i$, there are $d_i$ items. Altogether, the total number of groups is given by $K = \sum_{i=1}^{M} d_i$. Each individual item $k$ inherits its profit and weight from its type; specifically, if item $k$ belongs to type $i$, then its profit $p_k$ is $r_i$, and its weight $W_k$ is $w_i$. To apply the greedy approach for the LP relaxation of \eqref{deter_upper}, sort these items in non-increasing order of their profit-to-weight ratios: $\frac{p_1}{W_1} \geq \frac{p_2}{W_2} \geq \ldots \geq \frac{p_K}{W_K}$. The break item $b$ is the smallest index such that the cumulative weight of item 1 to item $b$ meets or exceeds the total capacity $\tilde{c}$: $b=\min\{j: \sum_{k=1}^j W_k \geq \tilde{c}\}$, where $\tilde{c} = \sum_{j=1}^{N} c_j$ is the total size of all knapsacks. For the LP relaxation of \eqref{deter_upper}, the Dantzig upper bound \citep{dantzig1957discrete} is given by $u_{\mathrm{MKP}}=\sum_{j=1}^{b-1} p_j+\left(\tilde{c}-\sum_{j=1}^{b-1} W_j\right) \frac{p_b}{W_b}$. The corresponding optimal solution is to accept the whole groups from $1$ to $b-1$ and fractional $(\tilde{c}-\sum_{j=1}^{b-1} W_j)$ item $b$. Suppose the item $b$ belong to type $\tilde{i}$, then for $i < \tilde{i}$, $x_{ij}^{*} = 0$; for $i > \tilde{i}$, $x_{ij}^{*} = d_{i}$; for $i = \tilde{i}$, $\sum_{j=1}^{N} x_{ij}^{*} = (\tilde{c} - \sum_{i = \tilde{i}+1}^{M} {d_i w_i})/ w_{\tilde{i}}$.
+\end{pf}
+
+
+\begin{pf}{Proof of Lemma \ref{bid-price}}
+According to the Proposition \ref{sol_relax_deter}, the aggregate optimal solution to LP relaxation of problem \eqref{deter_upper} takes the form $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i} e_{i}$, then according to the complementary slackness property, we know that $z_1= \ldots= z_{\tilde{i}} = 0$. This implies that $\beta_j \geq \frac{r_i}{w_i}$ for $i = 1,\ldots, \tilde{i}$. Since $\frac{r_i}{w_i}$ increases with $i$, we have $\beta_j \geq \frac{r_{\tilde{i}}}{w_{\tilde{i}}}$. Consequently, we obtain $z_{i} \geq r_i - w_i \frac{r_{\tilde{i}}}{w_{\tilde{i}}} = \frac{r_{i} w_{\tilde{i}} - r_{\tilde{i}} w_{i}}{w_{\tilde{i}}}$.
+
+Given that $\mathbf{d}$ and $\mathbf{L}$ are both no less than zero, the minimum value will be attained when $\beta_j = \frac{r_{\tilde{i}}}{w_{\tilde{i}}}$ for all $j$, and $z_i = \frac{r_{i} w_{\tilde{i}} - r_{\tilde{i}} w_{i}}{w_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$.  
+\end{pf}
+
+\begin{pf}{Proof of Lemma \ref{BPP}}
+We consider two cases based on whether the set $\mathcal{J}_{i}$ is empty or not.
+
+Case 1: $\mathcal{J}_{i} = \varnothing$
+If $\mathcal{J}_{i} = \varnothing$, then for all $j \in \mathcal{N}$, we have $r_i - \beta_{ij}^{\dag *} \leq 0$. This implies that the constraint: $\alpha_{i} \geq r_i - \beta_{ij}^{\dag *}$ is automatically satisfied for all $j \in \mathcal{N}$ when $\alpha_i \geq 0$. Therefore, these constraints are redundant and can be removed without affecting the solution.
+
+Case 2: $\mathcal{J}_{i} \neq \varnothing$
+We prove by contradiction that there exists $h_{i}^{*} \geq 1$ for some $j' \in \mathcal{J}_{i}$.
+
+Assumption for contradiction: Suppose that in the optimal solution, for all $j' \in \mathcal{J}_{i}$, we have $h_{i}^{*} = 0$.
+
+Since $\mathcal{J}_{i} \neq \varnothing$, there exists at least one $j' \in \mathcal{J}_{i}$ such that $r_{i} > \beta_{ij{'}}^{\dag *}$. From the constraint $\alpha_{i} \geq r_{i} - \beta_{ij{'}}^{\dag *}$ and the optimality conditions, we must have $\alpha_{i} = r_{i} - \beta_{ij{'}}^{\dag *} >0$. Now consider the value:
+$$\gamma_{{j}{'}} = \max_{\bm{h} \in S(c_{j{'}})} \sum_{i} \beta_{ij{'}}^{\dag *} h_{i}$$
+
+Under the contradiction assumption ($h_{i}^{*} = 0$ for all $j' \in \mathcal{J}_{i}$), we have:
+$\gamma_{{j}{'}} = \sum_{i} \beta_{ij{'}}^{\dag *} h_{i}^{*}$.
+
+Now examine the objective function: $$\sum_{i} \alpha_{i} d_{i} + \sum_{j} \gamma_{j}.$$
+
+Consider perturbing $\beta_{ij'}^{\dag *}$ by increasing it slightly to $\beta_{ij'}^{\dag *} + \delta$ (for some small $\delta > 0$ such that $r_{i} > \beta_{ij'}^{\dag *} + \delta$ still holds). Then:
+
+\begin{itemize}
+  \item Since $\alpha_{i}$ is exactly at the boundary ($\alpha_{i} = r_{i} - \beta_{ij'}^{\dag *}$), we can now set $\alpha_{i}^{\text{new}} = r_{i} - (\beta_{ij'}^{\dag *} + \delta) < \alpha_{i}$.
+  \item The term $\gamma_{j{'}}$ remains unchanged because $h_{i}^{*} = 0$ for $j' \in \mathcal{J}_{i}$ (by our contradiction assumption), and the perturbation does not affect other terms.
+  \item Since $d_{i} > 0$ (positive arrival rate for type $i$), the objective decreases by $\delta \cdot d_{i} > 0$.
+\end{itemize}
+
+This contradicts the optimality of the current solution. Therefore, our initial assumption must be false, and there must exist some $j' \in \mathcal{J}{i}$ such that $h{i}^{*} \geq 1$.
+\end{pf}
+
+
+\begin{pf}{Proof of Proposition \ref{BPC_relation}}
+
+
+
+% Then the objective value of BPP is no larger than that of BPC.
+\end{pf}
+
+\begin{pf}{Proof of Proposition \ref{primal}}
+  If $x_{ij}^{*}>0$, then $\sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}} >0$, then there exists $\bm{h}$ such that $y_{j \bm{h}} >0$ and $h_{i} \geq 1$. Then $\bm{h} \in \arg \max(\sum_{i} (r_{i} - \alpha_{i}) h_{i} - \gamma_{j})$.
+
+  According to the complementary slackness property, $\alpha_{i} + \beta_{ij} = r_{i}$, then $\max \sum_{i} (r_{i} - \alpha_{i}) h_{i} - \gamma_{j}$ equals $\max \sum_{i} \beta_{ij} h_{i}$. Thus, there exists $j$ such that $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$.
+ 
+\end{pf}
+
+\begin{lem}\label{concave}
+  $z(\text{DLP}) \geq V^{\text{HO}}$ results from the concave property. 
+\end{lem}  
+
+\begin{pf}{Proof of Lemma \ref{concave}}
+  Consider the standard linear program: $\phi(\bm{d})= \{\max c^{T} \bm{x}: A \bm{x} \leq \bm{d}, \bm{x} \geq \bm{0}\}$.  Suppose that $\bm{d}_1$ and $\bm{d}_2$ are two demand vectors, the optimal solution is $\bm{x}_1$ and $\bm{x}_2$. For any $\lambda \in [0, 1]$, $\bm{d}_{\lambda} = \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2}$. Let $\bm{x}_{\lambda} = \lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}$, then $A \bm{x}_{\lambda} = A(\lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}) \leq \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2} = \bm{d}_{\lambda}$. Thus, $\bm{x}_{\lambda}$ is a feasible solution for $\bm{d}_{\lambda}$. Then, $\phi(\bm{d}_{\lambda}) \geq \bm{c}^{T} \bm{x}_{\lambda} = \lambda \bm{c}^{T} \bm{x}_{1} + (1-\lambda) \bm{c}^{T} \bm{x}_{2} = \lambda \phi(\bm{d}_{1}) + (1- \lambda) \phi(\bm{d}_{2})$, which indicates $\phi(\bm{d})$ is concave. Let $\phi(\bm{d})$ indicate the optimal value of the linear relaxation of the SPDR problem. Substitute $\bm{x}$ with $y_{j \bm{h}}$ and view $y_{j \bm{h}}$ as the decision variables, then the concave property still holds for $\eqref{improve_primal}$. $V^{\text{HO}} = E[\phi(\bm{d})] \leq \phi(E[\bm{d}]) = z(\text{DLP})$.
+\end{pf}
+
+\newpage

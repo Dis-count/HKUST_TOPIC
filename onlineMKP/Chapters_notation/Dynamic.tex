@@ -1,0 +1,566 @@
+\section{Online MMKP}\label{sec_dynamic_seat}
+Consider $N$ knapsacks, with each knapsack $j$ containing $c_j \in \mathbb{Z}^{+}$ capacities, for $j \in \mathcal{N} \coloneqq \{1,2, \ldots, N\}$. There are $M$ distinct item types, where each item type $i$, $i \in \mathcal{M} \coloneqq \{1, 2, \ldots, M\}$, requiring $w_i \in \mathbb{Z}^{+}$ consecutive size in one capacity. The profit of each item type $i$ is $r_{i} \in \mathbb{Z}^{+}$. Suppose that the profit-weight ratio is increasing monotone from 1 to $M$ for type $i$. Requests arrive sequentially over time, and the seller must immediately decide whether to accept or reject each request upon arrival. If a request is accepted, the seller must also determine the specific knapsack to assign. Importantly, each item must be either fully accepted or entirely rejected; once the item is assigned to a knapsack, it cannot be altered.
+
+% non-removable: remains in the knapsack forever.
+
+To model this problem, we formulate it using dynamic programming approach in a discrete-time framework. Time is divided into $T$ periods, indexed forward from $1$ to $T$. We assume that in each period, at most one request arrives and the probability of an arrival for an item type $i$ is denoted as $\lambda_i^{t}$, where $i \in \mathcal{M}$. The probabilities satisfy the constraint $\sum_{i=1}^M \lambda_i^{t} \leq 1$, indicating that the total probability of any item arriving in a single period does not exceed one. We introduce the probability $\lambda_0^{t} = 1 - \sum_{i=1}^{M} \lambda_i^{t}$ to represent the probability of no arrival in each period. To simplify the analysis, we assume that the arrivals of different item types are independent and the arrival probabilities remain constant over time. This assumption can be extended to consider dependent arrival probabilities over time if necessary.
+
+
+The remaining capacity in each knapsack is represented by a vector $\mathbf{C} = (c_1, c_2, \ldots, c_N)$, where $c_j$ denotes the capacity of knapsack $j$. Upon the arrival of an item type $i$ at time $t$, the seller needs to make a decision denoted by $u_{i,j}^{t}$, where $u_{i,j}^{t} = 1$ indicates acceptance of type $i$ in knapsack $j$ during period $t$, while $u_{i,j}^{t} = 0$ signifies rejection of that type in knapsack $j$. The feasible decision set is defined as $$U^{t}(\mathbf{L}) = \left\{u_{i,j}^{t} \in \{0,1\}, \forall i \in \mathcal{M}, \forall j \in \mathcal{N} \bigg| \sum_{j=1}^{N} u_{i,j}^{t} \leq 1, \forall i \in \mathcal{M}; w_{i}u_{i,j}^{t}\mathbf{e}_j \leq \mathbf{C}, \forall i \in \mathcal{M}, \forall j \in \mathcal{N}\right\}.$$
+Here, $\mathbf{e}_j$ represents an N-dimensional unit column vector with the $j$-th element being 1, i.e., $\mathbf{e}_j = (\underbrace{0, \cdots, 0}_{j-1}, 1, \underbrace{0, \cdots, 0}_{N-j})$. The decision set $U^{t}(\mathbf{C})$ consists of all possible combinations of acceptance and rejection decisions for each type in each knapsack, subject to the constraints that at most one item of each type can be accepted in any knapsack, and the size of each accepted item must not exceed the remaining capacity of the knapsack.
+
+Let $V^{t}(\mathbf{C})$ denote the maximum expected revenue earned by the optimal decision regarding item assignments at the beginning of period $t$, given the remaining capacity $\mathbf{C}$. Then, the dynamic programming formulation for this problem can be expressed as:
+
+\begin{equation}\label{DP}
+V^{t}(\mathbf{C}) = \max_{u_{i,j}^{t} \in U^{t}(\mathbf{C})}\left\{\sum_{i=1}^{M} \lambda_i^{t} \bigl( \sum_{j=1}^{N} r_i u_{i,j}^{t} + V^{t+1}(\mathbf{C} - w_i u_{i,j}^{t}\mathbf{e}_j)\bigr) + \lambda_0^{t} V^{t+1}(\mathbf{C})\right\}
+\end{equation}
+with the boundary conditions $V^{T+1}(\mathbf{C}) = 0, \forall \mathbf{C}$, which implies that the revenue at the last period is 0 under any capacity. The initial capacity is denoted as $\mathbf{C}_{0} = (C_1, C_2, \ldots, C_N)$. Our objective is to determine item assignments that maximize the total expected revenue during the horizon from period 1 to $T$, represented by $V^{1}(\mathbf{C}_{0})$.
+
+
+Solving the dynamic programming problem in equation \eqref{DP} presents computational challenges due to the curse of dimensionality that arises from the large state space.
+
+We propose our policy for assigning arriving requests. First, we employ the traditional bid-price control policy. Then, we present the bid-price control policy based on the patterns.
+
+
+% For any policy $\pi$, let $V^{\pi}$ denote the expected revenue collected under $\pi$. Among all policies, a special one is the dynamic programming (DP) policy as it achieves the maximal expected revenue. Apart from DP, another special policy is the hindsight optimum (HO), where the decision maker has full information on the demand realization for the entire time horizon and optimizes over the allocation schemes. Here, it is impossible for the HO to be attained because we can never know the full demand realization ahead. For ease of analysis, the hindsight optimum for the sample path is computed by solving a relaxed static problem and $V^{\text{HO}}$ is the expected value over all sample paths. Then for any online policy $\pi$, we have $$V^{\text{HO}} \geq V^{\text{DP}} \geq V^{\pi}.$$ It is well known that DP, despite its optimality, is computationally complex owing to the ``curse of dimensionality.'' Thus we use HO as our benchmark to evaluate the performance of any policy $\pi$.
+
+
+\subsection{BPC Policy}
+Bid-price control is a classical approach discussed extensively in the literature on network revenue management. It involves setting bid prices for different types, which determine the eligibility of items to take the sizes. Bid-prices refer to the opportunity costs of taking one size of capacity. As usual, we estimate the bid price of one size by the shadow price of the capacity constraint corresponding to some knapsack. In this section, we will demonstrate the implementation of the bid-price control policy. 
+
+First, we give the formulation of the LP relaxation of the multi-type multiple knapsack problem (MMKP). Let $x_{ij}$ represent the number of items of type $i$ placed in knapsack $j$ over $T$ periods. The whole request of each item type during T periods is represented by the expected demand $d_i = \sum_{t=1}^{T} \lambda^{t}_{i}$. Then, the problem can be expressed as:
+
+\begin{align}
+\quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} r_{i} x_{ij} \label{e0} \\
+\text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \label{deter_upper}\\ 
+& \sum_{i=1}^{M} w_{i} x_{ij} \leq c_j, j \in \mathcal{N}, \label{capa_con} \\
+& x_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}. \notag
+\end{align}
+
+The objective function (\ref{e0}) is to maximize the revenue. Constraint \eqref{deter_upper} ensures the total number of accommodated items does not exceed the number of requests for each type. Constraint \eqref{capa_con} stipulates that the total size in each knapsack does not exceed its capacity.
+
+
+The increasing nature of the ratio $\frac{r_i}{w_i}$ with respect to type $i$ leads to preferential inclusion of larger items in the optimal fractional assignment. This intuitive property is illustrated in Proposition \ref{sol_relax_deter}. 
+
+
+\begin{prop}\label{sol_relax_deter}
+For the LP relaxation of the \textup{MMKP} problem, there exists an index $\tilde{i}$ such that the optimal solutions satisfy the following conditions: $x_{ij}^{*} = 0$ for all $j$, $i = 1,\ldots, \tilde{i}-1$; $\sum_{j=1}^{N} x_{ij}^{*} = d_{i}$ for $i = \tilde{i}+1,\ldots, M$; $\sum_{j=1}^{N} x_{ij}^{*} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i w_i}}{w_{\tilde{i}}}$ for $i = \tilde{i}$.
+\end{prop}
+
+The dual of LP relaxation of the MMKP problem is:
+
+\begin{equation}\label{bid-price_dual}
+    \begin{aligned}
+    \min \quad & \sum_{i=1}^{M} d_i z_i + \sum_{j= 1}^{N} c_j \beta_{j} \\
+    \text {s.t.} \quad & z_{i} + \beta_j w_i \geq r_i, \quad i \in \mathcal{M}, j \in \mathcal{N} \\
+    & z_{i} \geq 0, i \in \mathcal{M}, \beta_{j} \geq 0, j \in \mathcal{N}.
+    \end{aligned}
+  \end{equation}
+
+In \eqref{bid-price_dual}, $\beta_{j}$ can be interpreted as the bid-price for one size in knapsack $j$. A request is only accepted if the revenue it generates is no less than the sum of the bid prices of the sizes it uses. Thus, if $r_i -\beta_{j} w_i \geq 0$, meanwhile, the capacity allows, we will accept the item type $i$. And choose knapsack $j^{*} = \arg \max_{j} \{r_i -\beta_{j} w_i\}$ to allocate that item.
+
+\begin{lem}\label{bid-price}
+The optimal solution to problem \eqref{bid-price_dual} is given by $z_1 = \ldots = z_{\tilde{i}} =0$, $z_{i} = \frac{r_{i} w_{\tilde{i}} - r_{\tilde{i}} w_{i}}{w_{\tilde{i}}}$ for $i = \tilde{i}+1, \ldots, M$ and $\beta_j = \frac{r_{\tilde{i}}}{w_{\tilde{i}}}$ for all $j$.
+\end{lem}
+
+According to Lemma \ref{bid-price}, the decision inequality becomes $r_i -\beta_{j} w_i = r_{i} - \frac{r_{\tilde{i}}}{w_{\tilde{i}}} w_{i} \geq 0$. This establishes the threshold policy: reject item type $i, i < \tilde{i}$ and accept item type $i, i \geq \tilde{i}$.
+
+
+\begin{algorithm}[H]
+    \caption{Bid-Price Control}\label{algo_bid}
+    \For{$t = 1, \ldots, T$}{
+      {Observe a request of item type $i$\;}
+      {Solve problem \eqref{bid-price_dual} with $\bm{d}^{[t,T]}$ and $\mathbf{C}^{t}$\;
+      Obtain $\tilde{i}$ such that the aggregate optimal solution is $x e_{\tilde{i}} + \sum_{i=\tilde{i}+1} ^{M} d_{i}^{t} e_{i}$\;}
+      \eIf{$i \geq \tilde{i}$ and $\max_{j \in \mathcal{N}}{c_j^{t}} \geq w_i$}
+      {Set $k = \arg \min_{j \in \mathcal{N}}\{c_j^{t}|c_j^{t} \geq w_i\} $ and break ties\;
+      Assign the item to knapsack $k$, let $c_{k}^{t+1} \gets c_{k}^{t} - w_{i}$ \;}
+      {Reject the request\;}}
+\end{algorithm}
+
+% Let $val_{\theta}(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter}.
+
+% \begin{align}
+%     \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} (n_i - \delta) x_{ij} \label{theta_deter} \\
+%     \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \notag \\ 
+%     & \sum_{i=1}^{M} n_{i} x_{ij} \leq \theta L_j, j \in \mathcal{N}, \notag 
+% \end{align}
+
+% Let $V_{\theta}^{OPT}(I)$ denote the expected value under optimal policy (relaxed) during $\theta T$ periods for instance $I$ (probability distribution).
+
+% $V_{\theta}^{OPT}(I) = E_{\{d_{i}\}} [val_{\theta}(I; \{d_{i}\})] \leq val_{\theta} (I; \{E[d_{i}]\}) = val_{\theta}(I; \{\theta T p_{i}\})$
+
+Let $z(\text{BPC})$, $z(\text{DLP})$ denote the optimal value of \eqref{bid-price_dual} and the LP relaxation of the \textup{MMKP} problem with expected demand, respectively. Then we have $z(\text{BPC}) = z(\text{DLP})$.
+
+However, the BPC policy has two drawbacks. First, the capacity feasibility need to be checked when to accept a request. Second, when capacity permits, the policy treats all knapsacks as equally preferable, making no distinction among them.
+
+\begin{example}
+Consider $M =3$, $N =4$, $w_{1} = 3, w_{2} = 4, w_{3} = 5$, $r_{1} = 4, r_{2} = 6, r_{3} = 8$, $\bm{C} = [7, 8, 8, 4]$, $T = 8$, stationary arrival probability: $\lambda_{1} = \lambda_{3} = \frac{1}{4}$, $\lambda_{2} = \frac{1}{2}$. Then the expected demand for each type is $\bm{d} = (2, 4, 2)$.
+
+For the traditional bid-price control, for each $j$, $\beta_{j}^{*} = \frac{4}{3}$. $z(BPC) = \frac{124}{3}$. Two drawbacks: there is no difference among knapsacks. Even $r_{3} - \beta_{4}^{*} * w_{3} > 0$, it is infeasible for type 3 assigned in knapsack 4.
+\end{example}
+
+\subsection{BPC Policy Based on Patterns (BPP)}
+To account for the differences in placing items across knapsacks, we propose an enhanced dynamic programming (DP) formulation. The key idea, as detailed next, is to represent knapsack configurations using patterns rather than merely tracking the residual capacities.
+
+A feasible pattern $\bm{h} = [h_{1}, \ldots, h_{M}]$ for knapsack $j$ satisfies $\sum_{i=1}^{M} w_{i} h_{i} \leq c_{j}$. Suppose that $S(c_{j})$ is the set of all feasible patterns for knapsack $j$. 
+
+Let $v^t(\bm{C})$ denote the maximal expected value-to-go at time $t$, given the remaining capacity $\bm{C}$. The enhanced dynamic programming formulation is as follows:
+
+\begin{equation}
+v^t(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\left[\left\{
+\begin{array}{ll}
+\max \left\{\max\limits_{j:\bm{h} \in S(c_j), h_i \geq 1}\left\{v^{t+1}\left(\bm{C}-e_j^T \cdot w_i\right)+r_i\right\}, v^{t+1}(\bm{C})\right\},&\exists (j,\bm{h}), \bm{h} \in S(c_j), h_i \geq 1, \\
+v^{t+1}(\bm{C}) & \text{otherwise}.
+\end{array}\right]\right.
+\end{equation}
+
+
+The DP formulation involves two layers of maximization when there exists at least one knapsack $j$ satisfying $\bm{h} \in S(c_j), h_{i} \geq 1$. The inner maximization evaluates the optimal placement of item type $i$ across all feasible knapsacks $j$ where the pattern $\bm{h}$ is feasible for knapsack $j$ (i.e., $\bm{h} \in S(c_{j})$) and the item type $i$ can be accommodated (i.e., $h_{i} \geq 1$). The outer maximization compares the value of accepting $i$ (via the inner maximization) and rejecting $i$ (retaining $v^{t+1}(\bm{C})$). If no such $j$ exists, the request $i$ is rejected.
+
+
+For notational convenience, we define $q_i$ as follows:
+\begin{equation*}
+    q_i= \begin{cases}\max _{j: \bm{h} \in S\left(c_j\right), h_i \geq 1}\left\{v^{t+1}\left(C-e_j^T w_i\right)+r_i\right\} & \text { if } \exists j \text{ satisfying } \bm{h} \in S\left(c_j\right), h_i \geq 1 \\ 0 & \text { otherwise }\end{cases}
+\end{equation*}
+
+We can solve the following program to compute $v^1(\bm{C})$ for any given capacity $\bm{C}$:
+
+\begin{equation}\label{dp_bid}
+    \begin{aligned}
+    \min \quad & v^{1}(\bm{C}) \\
+    \mathrm{s.t.} \quad & v^{t}(\bm{C}) \geq \mathbb{E}_{i \sim \lambda^t}\Bigg[\max\Big\{ q_{i}, v^{t+1}(\bm{C})\Big\}\Bigg], \\
+    & v^{T+1}(\bm{C}) \geq 0.
+    \end{aligned}
+\end{equation}
+
+
+Solving \eqref{dp_bid} remains computationally prohibitive. Following from the ADP approach, we approximate $v^{t}(\bm{C})$ as 
+
+\begin{equation}\label{appro_dp}
+    \hat{v}^{t}(\bm{C}) = \theta^{t} + \sum_{j=1}^{N} \max_{\bm{h} \in S(c_{j})} \{\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}\}.
+\end{equation}
+
+The term $\beta_{ij}^{\dag}$ can be regarded as the approximated value for each type $i$ in knapsack $j$. Unlike traditional linear approximations, our approach retains the linear term $\theta^{t}$ but introduces a nonlinear component for each knapsack $j$. Specifically, we maximize the linear combination $\sum_{i=1}^{M} \beta_{ij}^{\dag} h_{i}$ over the feasible set $S(c_{j})$.
+
+Our approximation extends classical linear ADP by incorporating resource-specific nonlinear terms through constrained maximization over feasible allocations. While similar separable corrections appear in resource allocation ADP (e.g., Powell, 2007), our explicit use of $\max_{\bm{h} \in S(c_j)}$ captures local constraints more directly.
+
+
+% Our approximation adopts a separable nonlinear structure, but unlike classical approximations, the nonlinearity is implicitly defined by constrained maximization over feasible allocations. This captures problem-specific constraints.
+
+Substituting \eqref{appro_dp} into \eqref{dp_bid}, we have:
+
+\begin{align}
+    \theta^{t} - \theta^{t+1} = \hat{v}^{t}(\bm{C}) - \hat{v}^{t+1}(\bm{C}) \geq \sum_{i} \lambda_{i}^{t} \max\left\{q_{i} - v^{t+1}(\bm{C}), 0\right\}
+\end{align}
+
+For the case where there exists a knapsack $j$ satisfying both conditions: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ and $h_{i}^{*} \geq 1$, we establish the value difference: 
+
+\begin{align*}
+    & v^{t+1}(\bm{C} - e_{j}^{T} w_{i}) - v^{t+1}(\bm{C}) \\ 
+  = & \max_{\bm{h} \in S(c_{j}- w_{i})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\} - \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\} \\
+  = & -\beta_{ij}^{\dag} \leq 0
+\end{align*}
+
+The acceptance threshold is then defined as:
+$$\alpha_{i} = \max\left\{\max_{j}\left\{r_i - \beta_{ij}^{\dag} \right\}, 0\right\},$$ 
+with $\alpha_{i} = 0$ when no qualifying knapsack $j$ exists.
+
+Let $\gamma_{j} = \max_{\bm{h} \in S(c_{j})} \{\sum_{i} \beta_{ij}^{\dag} h_{i}\}$. This yields:
+
+\begin{align*}
+    \theta^{1} & = \sum_{t=1}^{T} (\theta^{t} - \theta^{t+1}) \geq \sum_{t} \sum_{i} \alpha_{i} \lambda_{i}^{t} = \sum_{i} d_{i} \alpha_{i} \\
+    \hat{v}^{1}(\bm{C}) & = \sum_{i} d_{i} \alpha_{i} + \sum_{j} \gamma_{j}
+\end{align*}
+
+Since $\hat{v}^{1}(\bm{C})$ constitutes a feasible solution to \eqref{dp_bid}, we have $\hat{v}^{1}(\bm{C}) \geq v^{1}(\bm{C}) =  V^{DP}$.
+
+If all $j$ exist for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$, the corresponding bid-price problem can be expressed as:
+
+\begin{equation}\label{improve_bid}
+    \begin{aligned}
+    \min \quad & \sum_{i=1}^M \alpha_i d_i+ \sum_{j=1}^N \gamma_j \\
+    \mathrm{s.t.} \quad & \alpha_i+ \beta_{ij}^{\dag} \geq r_i, \quad \forall i, j, \\
+    & \sum_{i=1}^M \beta_{ij}^{\dag} h_i \leq \gamma_j, \quad \forall j, \bm{h} \in S(c_j), \\
+    & \alpha_i \geq 0, \forall i, \quad \beta_{ij}^{\dag} \geq 0, \forall i, j \\
+    & \gamma_j \geq 0, \quad \forall j.
+    \end{aligned}
+\end{equation}
+
+$\alpha_{i}$ represents marginal revenue for type $i$. $\beta_{ij}^{\dag}$ represents the cost for type $i$ assigned in knapsack $j$. $\gamma_{j}$ represents the capacity cost associated with knapsack $j$.
+
+When no knapsack $j$ exists satisfying both $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ and $h_{i}^{*} \geq 1$, the first set of constraints for $(i,j)$ should be removed from the formulation \eqref{improve_bid}. Although these constraints appear difficult to enforce in advance, the following lemma reveals that in practice we can avoid imposing additional restrictions. Simply solving problem \eqref{improve_bid} will inherently satisfy all required conditions.
+
+% \begin{lem}
+% For the optimal solution, $r_{i} \geq \beta_{ij}^{\dag}$.
+% \end{lem}
+
+\begin{lem}\label{BPP}
+Define $\mathcal{J}_{i} = \{j \in \mathcal{N} \mid r_i - \beta_{ij}^{\dag *} \geq r_i - \beta_{ik}^{\dag *},\forall k \in \mathcal{N}, r_i - \beta_{ij}^{\dag *} >0 \}$.
+If $\mathcal{J}_{i} = \varnothing$, the first set of constraints for $i$ is redundant.
+If $\mathcal{J}_{i} \neq \varnothing$, then there exists a $j{'} \in \mathcal{J}_{i}$ such that:
+
+$$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j{'}})} \sum_{i} \beta_{ij{'}}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
+\end{lem}
+
+This lemma guarantees that when such a $j{'}$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}^{1}(\bm{C})$.
+
+Then, the control policy becomes as follow. If $\alpha_{i} > 0$, accept the type $i$. Find knapsack $k = \arg \max_{j \in \mathcal{N}}\{r_i - \beta_{ij}^{\dag}\}$, if multiple maximizers exist, assign the type $i$ to a knapsack $j$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$ If $\alpha_{i} = 0$, check whether there exists a knapsack $j$ such that: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1$. If no such $j$ exists, reject the type $i$; otherwise, accept the type $i$ and assign it to knapsack $j$.
+
+Let $z(\text{BPC})$ and $z(\text{BPP})$ denote the expected optimal value of \eqref{bid-price_dual} and \eqref{improve_bid}, respectively.
+
+\begin{lem}\label{BPC_relation}
+    For the optimal $\beta_{j}^{*}$ in \eqref{bid-price_dual}, there exist optimal $\beta_{ij}^{\dag *}$ in \eqref{improve_bid} satisfying $\beta_{ij}^{\dag *} \leq w_{i} \beta_{j}^{*}$ for all $i$. Furthermore, $z(\text{BPC}) \geq z(\text{BPP})$.
+\end{lem}
+    
+% $\beta_{ij}^{\dag} = w_{i} \beta_{j}$ is feasible for \eqref{improve_bid}, then the optimal bid-price 
+    
+Both bid-price approaches give upper bounds on the value function at any state, meanwhile it follows that BPP provides a tighter approximation to the value function more accurately than BPC does.
+
+Under the approximation \eqref{appro_dp}, the BPP policy operates as follows:
+
+% accept type $i$ if $r_i - \beta_{ij}^{\dag} > 0$ and at least one knapsack can assign type $i$, check  item type $i$ otherwise. 
+
+% $\max_{j \in \mathcal{N}}{c_j^{t}} \geq w_i$
+
+\begin{algorithm}[H]
+    \caption{Bid-Price Control Based on Patterns}\label{algo_improve_bid}
+    \For{$t =1, \ldots, T$}{
+      {Observe a request of item type $i$\;}
+      {Solve problem \eqref{improve_bid} with $\bm{d}^{[t, T]}$ and $\mathbf{L}^{t}$\;}
+      \eIf{$r_i - \beta_{ij}^{\dag} > 0$}
+      {Set $k = \arg \max_{j \in \mathcal{N}}\{r_i - \beta_{ij}^{\dag}\}$\;
+      If multiple $k$s exist, assign the type $i$ to a knapsack $j$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
+      Let $c_{j}^{t+1} \gets c_{j}^{t} - w_{i}$\;}
+      {\eIf{There exists $j$ such that $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$}{Assign the item in knapsack $j$, let $c_{j}^{t+1} \gets c_{j}^{t} - w_{i}$\;}
+      {Reject the request\;}}}
+\end{algorithm}
+
+% Furthermore, the BPP policy exhibits a threshold structure similar to the BPC policy. There exists a threshold type $\tilde{i}$ (or $\tilde{i}-1$, depending on the remaining capacity and expected future demand) such that all item types $i \leq \tilde{i}$ (or $i \leq \tilde{i}-1$) are rejected and larger types $i > \tilde{i}$ (or $i > \tilde{i}-1$) are accepted.
+
+% Specifically, we have 
+% \begin{lem}\label{BPP_decision}    
+%     For the threshold index $\tilde{i}$ in Proposition \ref{sol_relax_deter},
+%     \begin{itemize}
+%         \item If $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} > \sum_{j=1}^{N} c_{j}$, then $r_i - \beta_{ij}^{\dag} \leq 0$, for $i \leq \tilde{i}$,
+%         \item If $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} = \sum_{j=1}^{N} c_{j}$, then $r_i - \beta_{ij}^{\dag} \leq 0$, for $i \leq \tilde{i}-1$.
+%     \end{itemize}
+% \end{lem}
+
+% Lemma \ref{BPP_decision} indicates how the relation between the remaining capacity and the expected demand affects the decision.
+
+% when $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} > \sum_{j=1}^{N} c_{j}$, item type $i, i \leq \tilde{i}$ is rejected and item type $i, i > \tilde{i}$ is accepted; when $\sum_{i=\tilde{i}}^{M} d_{i} w_{i} = \sum_{j=1}^{N} c_{j}$, item type $i, i \leq \tilde{i}-1$ is rejected and item type $i, i \geq \tilde{i}$ is accepted.
+
+% Proof:
+% $\sum_{j} x_{ij}^{*} < d_{i}$, then $\alpha_{i}^{*} = 0$. $i - \beta_{ij}^{\dag} \leq 0$.
+
+% Lemma \ref{BPC_relation} shows that the I-BPC policy does not uniformly reject all small groups. Instead, it selectively accepts them based on pattern-based allocation, enabling more flexible decision-making. Unlike the traditional BPC, the I-BPC policy accounts for row-specific characteristics in allocation decisions. Therefore, the I-BPC policy better captures the structure of the capacity than the BPC policy does.
+
+
+Unlike the traditional BPC, the BPP does not require explicit feasibility checks on capacity. However, it still needs to verify whether the optimal pattern contains the given request. This introduces a new challenge, as bid-price policies are inherently derived from a dual formulation, which may inherently omit key information preserved in the primal problem.
+
+\begin{example}
+Continue with the above example:
+
+For the BPP, $\bm{\beta}_{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}_{2}^{*} = [6, 6, 6, 6]$, $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. $z(BPP) = 40$. $\alpha = [0, 0, 0]$, $\gamma = [10, 12, 12, 6]$.
+
+$r_{1} - \bm{\beta}_{1}^{*} = [0, 0, 0, -2]$, $r_{2} - \bm{\beta}_{2}^{*} = [0, 0, 0, 0]$, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$.
+
+Drawback: need to check whether $j$ exists for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}, h_{i}^{*} \geq 1$.
+
+For example, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ indicates type 3 cannot be assigned in knapsack 1. While the generated patterns for knapsack 4 are $[0, 1, 0], [1, 0, 0]$, which do not contain $h_{3}$, type 3 can only be assigned to knapsack 2 or 3.
+\end{example}
+
+While this verification is cumbersome under pure bid-price frameworks, the primal problem offers a more direct way to guarantee the existence of such a request-pattern match. To address this gap, we propose the dynamic primal formulation.
+
+\section{Dynamic Primal Based on Patterns}
+
+Let $y_{j \bm{h}}$ denote the proportion of pattern $\bm{h}$ used in knapsack $j$. The primal problem can be formulated as:
+
+\begin{equation}\label{improve_primal}
+    \begin{aligned}
+    \max \quad & \sum_{i=1}^M \sum_{j=1}^N r_i x_{i j} \\
+    \text {s.t.} \quad & \sum_{j=1}^N x_{i j} \leq d_i, \quad i \in \mathcal{M}, \\
+    & x_{i j} \leq \sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
+    & \sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N}.
+    \end{aligned}
+\end{equation}
+
+The first set of constraints demonstrate that for each item type $i$, the sum of assigned items and unassigned items equals the total demand. The second set of constraints shows that the number of items of type $i$ assigned in knapsack $j$ is not larger than the sum of $h_{i}$ (the count of type $i$ items in pattern $\bm{h}$) weighted by the pattern proportions $y_{i \bm{h}}$. The total proportion of patterns uesd in knapsack $j$ cannot exceed 1.
+
+\begin{lem}\label{primal}
+The optimal solution $x_{ij}^{*}$ to \eqref{improve_primal} satisfies $x_{ij}^{*} > 0$ if and only if there exists a knapsack $j$ such that $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1.$$
+\end{lem}
+
+In contrast to Lemma \ref{BPP}, this lemma demonstrates the equivalence between the condition $x_{ij}^{*} > 0$ and the existance of a knapsack $j$ satisfying $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1$. This equivalence eliminate the need for explicit existance verification.
+
+% Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{BPC}) \geq V(\text{I-BPC}) \geq V^{\text{DP}}$.
+
+% Any feasible solution to \eqref{improve_primal} yields a feasible solution to linear relaxation of SPDR having the same objective value, then we have  $V(\text{BPC}) \geq V^{\text{HO}} \geq V^{\text{DP}}$.
+
+\begin{lem}\label{concave}
+$z(\text{DLP}) \geq V^{\text{HO}}$ results from the concave property. 
+\end{lem}
+
+
+\subsubsection{Solve the dynamic primal}
+% A pattern $\bm{h}$ is said to be inefficient if a mixture of other patterns can be used to generate more revenue for the same (or lower) consumption rate.
+
+The pattern $\bm{h}$ is efficient for knapsack $j$ if and only if, for some $(\alpha_{1}, \ldots, \alpha_{M}, \gamma_{j})$ (except that $\alpha_{i} = r_i, \forall i$), $\bm{h}$ is the optimal solution to $$\max_{\bm{h}} \sum_{i=1}^{M} (r_i - \alpha_{i}) h_{i} - \gamma_{j}$$
+
+To generate all efficient patterns, we need to solve the subproblem for each knapsack $j$:
+
+\begin{align}\label{subproblem}
+    \max \quad & \sum_{i=1}^{M} (r_i - \alpha_{i}) h_{i} - \gamma_{j} \\
+    \text {s.t.} \quad & \sum_{i= 1}^{M} w_{i} h_{i} \leq c_j, \notag \\
+    & h_{i} \in \mathbb{N}, \quad i \in \mathcal{M}. \notag
+\end{align} 
+
+If the optimal value of \eqref{subproblem} is larger than $0$, the primal $\eqref{improve_primal}$ reaches the optimal. Otherwise, a new pattern can be generated.
+
+One important fact is that only efficient sets are used in the solution to \eqref{improve_primal}. Specifically, 
+
+\begin{lem}\label{efficient}
+    If $y_{j \bm{h}}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $\bm{h}$ is an efficient pattern.
+\end{lem}
+
+
+A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where every component of $\bm{h}{'}$ is greater than or equal to the corresponding component of $\bm{h}$. The efficient pattern is a dominating pattern. (If $\alpha_{i} = r_i$, \eqref{improve_primal} reaches the optimal and no pattern will be generated.)
+
+The relation between the capacity and the demand shows the different structure of the optimal solution.
+
+\begin{lem}
+When $\sum_{i=1}^{M} d_{i} w_{i} < \sum_{j=1}^{N} c_{j}$, we have $\gamma_{j}^{*} =0, \forall j$, $\beta_{ij}^{\dag *} =0, \forall i,j$ and $\alpha^{*}_{i} = r_i, \forall i$. There exists at least one knapsack $j$ such that $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} < 1$.
+
+When $\sum_{i=1}^{M} d_{i} w_{i} \geq \sum_{j=1}^{N} c_{j}$, we have $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} = 1, \forall j$.
+\end{lem}
+
+
+\begin{algorithm}[H]
+    \caption{Dynamic Primal}\label{algo_improve_primal}
+    \For{$t = 1, \ldots, T$}{
+      {Observe a request of type $i$\;}
+      \If{$c_{j}^{t} = w_i, \exists j$}
+      {Assign the item to knapsack $j$\; 
+      \Continue}
+      {Solve problem \eqref{improve_primal} with $\bm{d}^{[t, T]}$ \;
+      Obtain an optimal solution $x_{ij}$ \;}
+      \eIf{$\max_{j}\{x_{ij}\} > 0$}
+      {Set $k = \arg \max_{j}\{x_{ij}\}$ and break ties\;
+      Assign the item to knapsack $k$, let $c_{k}^{t+1} \gets c_{k}^{t} - w_{i}$\;}
+      {Reject the request\;}}
+\end{algorithm}
+
+Meanwhile, it guarantees feasible placement. Once a request is accepted, the policy ensures it can be assigned to a suitable knapsack without additional feasibility checks.
+
+\begin{example}
+For the primal, $\bm{x}_{1}^{*} = [1, 1, 0, 0]$, $\bm{x}_{2}^{*} = [1, 0, 2, 1]$, $\bm{x}_{3}^{*} = [0, 1, 0, 0]$. It indicates that type 1 can be assigned in knapsacks 1 or 2, type 2 cannot be assigned in knapsack 2, type 3 can only be assigned in knapsack 2. 
+
+It may contain multiple efficient patterns for one knapsack. In this example, there is exactly one efficient pattern for each knapsack: $[1, 1, 0]$, $[1, 0, 1]$, $[0, 2, 0]$, $[0, 1, 0]$. It shows that knapsack 1 can assign type 1 and 2, so on and so forth.
+
+Using $x_{ij}$ to make the decision is straightforward and easy to implement.
+\end{example}
+
+
+\begin{example}
+Consider $M =3$, $N =4$, $w_{1} = 3, w_{2} = 4, w_{3} = 5$, $r_{1} = 4, r_{2} = 6, r_{3} = 8$, $\bm{C} = [7, 8, 8, 4]$, $T = 8$, stationary arrival probability, $\lambda_{1} = \lambda_{3} = \frac{1}{4}$, $\lambda_{2} = \frac{1}{2}$. Then the expected demand for each type is $\bm{d} = (2, 4, 2)$.
+
+For the traditional bid-price control, for each $j$, $\beta_{j}^{*} = \frac{4}{3}$. $z(BPC) = \frac{124}{3}$. Two drawbacks: there is no difference among knapsacks. Even $r_{3} - \beta_{4}^{*} * w_{3} > 0$, it is infeasible for type 3 assigned in knapsack 4.
+
+For the BPP, $\bm{\beta}_{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}_{2}^{*} = [6, 6, 6, 6]$, $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. $z(BPP) = 40$. $\alpha = [0, 0, 0]$, $\gamma = [10, 12, 12, 6]$.
+
+$r_{1} - \bm{\beta}_{1}^{*} = [0, 0, 0, -2]$, $r_{2} - \bm{\beta}_{2}^{*} = [0, 0, 0, 0]$, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$.
+
+Drawback: need to check whether $j$ exists for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}, h_{i}^{*} \geq 1$.
+
+For example, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ indicates type 3 cannot be assigned in knapsack 1. While the generated patterns for knapsack 4 are $[0, 1, 0], [1, 0, 0]$, which do not contain $h_{3}$, type 3 can only be assigned to knapsack 2 or 3.
+
+% $[1, 1, 0], [2, 0, 0], [0, 0, 1]$, $[0, 2, 0], [1, 0, 1]$, $[0, 2, 0], [1, 0, 1]$, $[0, 1, 0], [1, 0, 0]$
+
+For the primal, $\bm{x}_{1}^{*} = [1, 1, 0, 0]$, $\bm{x}_{2}^{*} = [1, 0, 2, 1]$, $\bm{x}_{3}^{*} = [0, 1, 0, 0]$. It indicates that type 1 can be assigned in knapsacks 1 or 2, type 2 cannot be assigned in knapsack 2, type 3 can only be assigned in knapsack 2. 
+
+It may contain multiple efficient patterns for one knapsack. In this example, there is exactly one efficient pattern for each knapsack: $[1, 1, 0]$, $[1, 0, 1]$, $[0, 2, 0]$, $[0, 1, 0]$. It shows that knapsack 1 can assign type 1 and 2, so on and so forth.
+
+Using $x_{ij}$ to make the decision is straightforward and easy to implement.
+\end{example}
+
+% Multiple subset sum
+
+Asymptotic loss:
+% \begin{lem}
+%     Loss: $\lim_{\theta \to \infty} V_{\theta}^{\text{DP}} - z_{\theta}({\text{BPC}}) = 0$. 
+% \end{lem}
+
+\begin{lem}
+    Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{BPC}} = O(\sqrt{\theta})$. 
+\end{lem}
+
+\begin{lem}
+    Loss: $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{DPP}} = O(1)$. 
+\end{lem}
+
+Let $T_{i} = sup \{t \leq T: \lambda_{i}^{t} > 0\}$. 
+
+
+
+\newpage
+
+\subsection{Static BLC Policy}
+Booking limit control policy:
+
+\begin{align}
+    \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} r_{i} x_{ij} \label{theta_deter} \\
+    \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \notag \\ 
+    & \sum_{i=1}^{M} w_{i} x_{ij} \leq L_j, j \in \mathcal{N}, \notag 
+\end{align}
+
+Let $d_{i}^{*} = \sum_{j} x_{ij}^{*}$, $x_{ij}^{*}$ is an integral optimal solution to \eqref{theta_deter} with $d_{i} = \sum_{t} p_{i}^{t}$ (Expected demand).
+
+Let $d_{i}$ indicate the number of type $i$ during time $T$. $d_{i} = \sum_{t} \bm{1}_{i_{t} = i}$.
+Let $val(I; \{d_{i}\})$ denote the optimal objective value of \eqref{theta_deter}.
+
+$V^{BL}(I) = E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) \min\{d_{i}^{*}, d_{i}\}]$, $V^{OPT}(I) = E_{\{d_{i}\}} [val(I; \{d_{i}\})] \leq val(I; \{E[d_{i}]\})$.
+
+$val(I; \{d_{i}\})$ is concave in $d_{i}$.
+
+\begin{align*}
+   & V^{OPT}(I) - V^{BL}(I) \\
+\leq & val(I; \{E[d_{i}]\}) - V^{BL}(I) \\
+= & val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) + val(I; \{\lfloor E[d_{i}]\rfloor\}) - E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) \min\{d_{i}^{*}, d_{i}\}] \\
+\leq & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) (d_{i}^{*} - \min\{d_{i}^{*}, d_{i}\})] \\
+= & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + E_{\{d_{i}\}}[\sum_{i} \frac{1}{2}(n_{i}-\delta) (d_{i}^{*} - d_{i} + |d_{i}^{*} - d_{i}|)] \\
+\overset{\text{(a)}}{\leq} & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + \frac{1}{2} \sum_{i} (n_{i}-\delta)(d_{i}^{*} - E[d_{i}] + |d_{i}^{*} - E[d_{i}]| + \sqrt{\Var[d_{i}]}) \\
+\leq & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + \frac{1}{2} \sum_{i} (n_{i}-\delta) \sqrt{\Var[d_{i}]} \\
+\leq & \sum_{i} (n_{i} - \delta) + N \sum_{i} i + \frac{1}{2} \sum_{i} (n_{i}-\delta) \sqrt{T p_{i} (1- p_{i})} = O(\sqrt{T})
+\end{align*}
+
+Thus, $\lim_{T \to \infty} (V^{OPT}(I) - V^{BL}(I))/T \to 0$.
+
+$val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq val(I; \{\lceil E[d_{i}]\rceil\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) = \sum_{i} (n_{i} - \delta)$
+
+
+$LP -IP \leq \sum_{i} \sum_{j} (n_{i} - \delta) (x_{ij}^{*} - \lfloor x_{ij}^{*} \rfloor) \leq N \sum_{i} i$ $\Rightarrow$ $val(I; \{\lfloor E[d_{i}]\rfloor\}) \leq IP + N \sum_{i} i$.
+
+$IP = \sum_{i} \sum_{j} (n_{i} - \delta) x_{ij}^{*} = \sum_{i} (n_{i} - \delta) d_{i}^{*}$
+
+$(a)$ results from the following inequalities: $|d_{i}^{*} -d_{i}| = |(d_{i}^{*}-E[d_{i}]) + (E[d_{i}] -d_{i})| \leq |d_{i}^{*}-E[d_{i}]| + |d_{i} - E[d_{i}]|$. Take the expectation, we have $E[|d_{i}^{*} -d_{i}|]\leq |d_{i}^{*}-E[d_{i}]| + E[|d_{i} - E[d_{i}]|]$. $E[|d_{i} - E[d_{i}]|] \leq \sqrt{\Var[d_{i}]}$(Since $E[|X|] \leq \sqrt{E[X^{2}]}$). $d_{i}^{*} \leq E[d_{i}]$.
+
+% 0-1 multiple
+
+% \begin{align}
+%     \quad \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} p_i x_{ij} \\
+%     \text {s.t.} \quad & \sum_{i= 1}^{M} w_{i} x_{ij} \leq L_{j}, \quad j \in \mathcal{N} \\ 
+%     & \sum_{j=1}^{N} x_{ij} \leq 1, i \in \mathcal{M}  \\
+%     & x_{ij} \in \{0,1\}, \quad i \in \mathcal{M}, j \in \mathcal{N}. 
+% \end{align}
+
+% Here, $M = \sum_{i=1}^{m} d_{i}$ represents the number of groups. $p_{k} = (n_{i} - \delta), w_{k} = n_{i}$ if group $k$ belongs to type $i$.
+
+Surrogate relaxation (0-1 single):
+
+\begin{align}\label{one_row}
+    \quad \max \quad & \sum_{i = 1}^{M} r_i x_{i} \\
+    \text {s.t.} \quad & x_{i} \leq d_{i}, \quad i \in \mathcal{M},  \\ 
+    & \sum_{i=1}^{M} n_{i} x_{i} \leq L.
+\end{align}
+
+LP optimal solution: $[0, \ldots, 0, X_{\tilde{i}}, d_{\tilde{i}+1}, \ldots, d_{M}]$, $X_{\tilde{i}} = \frac{L - \sum_{i = \tilde{i}+1}^{M} {d_i w_i}}{n_{\tilde{i}}}.$
+
+One feasible IP optimal solution: $[0, \ldots, 0, \lfloor X_{\tilde{i}} \rfloor, d_{\tilde{i}+1}, \ldots, d_{M}]$.
+
+$LP - IP \leq \tilde{i} (X_{\tilde{i}} - \lfloor X_{\tilde{i}} \rfloor)$
+
+% single-leg RM: bid-price and booking limit expected revenue loss of $O(\sqrt{k})$ even with re-solving.
+
+\begin{align*}
+    & V^{OPT}(I) - V^{BL}(I) \\
+ \leq & val(I; \{E[d_{i}]\}) - V^{BL}(I) \\
+ = & val(I; \{E[d_{i}]\}) - val(I; \{\lfloor E[d_{i}]\rfloor\}) + val(I; \{\lfloor E[d_{i}]\rfloor\}) - E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) \min\{d_{i}^{*}, d_{i}\}] \\
+ \leq & \sum_{i} (n_{i} - \delta) + \tilde{i} (X_{\tilde{i}} - \lfloor X_{\tilde{i}} \rfloor) + E_{\{d_{i}\}}[\sum_{i} (n_{i}-\delta) (d_{i}^{*} - \min\{d_{i}^{*}, d_{i}\})] \\
+ \leq & \sum_{i} (n_{i} - \delta) + \tilde{i} (X_{\tilde{i}} - \lfloor X_{\tilde{i}} \rfloor) + \frac{1}{2} \sum_{i} (n_{i}-\delta) \sqrt{T p_{i} (1- p_{i})}
+ \end{align*}
+ 
+
+
+$E[\text{loss}] = V^{\text{off}} - V_{\pi}^{on} \geq V^{\text{opt}} - V_{\pi}^{on}$
+
+One sample path. $d^{r}$ realization of $M$ types. 
+
+$V_{t}(l) = \sum_{i = \hat{i}+1}^{M} r_{i} d_{i}^{r} + r_{\hat{i}}(l- \sum_{i= \hat{i}+1}^{M} d_{i}^{r})$
+
+
+Let $V^{\text{OPT}}(I)$ denote the expected value under offline optimal policy (relaxed) during $T$ periods for instance $I$ (capacity, probability distribution).
+
+The revenue loss between the static deterministic heuristic and the optimal is bounded by $C \sqrt{T}$.
+
+Let $\gamma_{i}$, $\gamma_{i}^{0}$ denote the number of type $i$ accepted and rejected by some heuristic policy, respectively.
+
+
+% Re-solving (each stage) bid-price (DLP) is equivalent to the optimal policy.
+
+\begin{align*}
+    \text{OPT}(L, \hat{d}, \gamma): \quad \max \quad & \sum_{i = 1}^{M} r_{i} x_{i} \\
+    \text {s.t.} \quad & x_{i}^{0} + x_{i} = \hat{d}_{i}, \quad i \in \mathcal{M},  \\ 
+    & x_{i} \geq \gamma_{i}, \quad i \in \mathcal{M}, \\
+    & x_{i}^{0} \geq \gamma_{i}^{0}, \quad i \in \mathcal{M}, \\
+    & \sum_{i=1}^{M} w_{i} x_{i} \leq L.
+\end{align*}
+
+Heuristic policy: At time t, solve problem \eqref{one_row} with $d_{i} = d_{i}^{t} = (T-t) * p_{i}$, $L = L^{t}$. When $x_{i}\geq 1$ for the request of type $i$, accept the request.
+
+
+
+$d^{[1, T]}$ is the demand realization during $[1, T]$. $\gamma^{[1, t)}$ represents the number of requests rejected and accpeted by some heuristic policy during $[1, t)$. 
+
+$OPT(L, d^{[1, T]}, \gamma^{[1,t+1)})$ can be interpreted as the total reward obtained under a virtual policy where we first follow the heuristic policy during $[1, t+1)$ and then from time $t+1$ we follow the optimal solution assuming that we know the future demands.
+
+For one sample path of the requests, the revenue loss can be decomposed into $T$ increments.
+
+\begin{align*}
+    & OPT(C, d^{[1, T]}, 0) - OPT(C, d^{[1, T]}, \gamma^{[1, T]}) \\
+ = & \sum_{t=1}^{T} [OPT(C, d^{[1,T]}, \gamma^{[1,t)}) - OPT(C, d^{[1,T]}, \gamma^{[1,t+1)})] 
+\end{align*}
+
+Let $c_{j}^{t} = c_{j} -\sum_{i=1}^{M} w_{i} \gamma_{ij}^{[1,t)}$. 
+
+The expected revenue loss can be upper bounded:
+
+\begin{align*}
+    & E[OPT(C, d^{[1, T]}, 0) - OPT(C, d^{[1, T]}, \gamma^{[1, T]})] \\
+ \leq & l \sum_{t=1}^{T} P(OPT(C, d^{[1, T]}, \gamma^{[1,t)}) - OPT(C, d^{[1, T]}, \gamma^{[1,t+1)}) > 0) \\
+ = & (n_{M} - \delta) \sum_{t=1}^{T} P(OPT(L^{t}, d^{[t, T]}, 0) - OPT(L^{t}, d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
+ \leq & (n_{M} - \delta) \sum_{t=1}^{T} P(x_{i^{t}}^{*,t} <1) \\
+ = & (n_{M} - \delta) \sum_{t=T_{0}}^{T} P(x_{i^{t}}^{*,t} <1) \\
+ \leq & (n_{M} - \delta) \max_{i}\{\frac{1}{p_{i}}\} 
+\end{align*}
+
+
+\begin{lem}
+$OPT(L^{1}, \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} (n_{i} - \delta) \gamma_{i}^{[1, t_1)} + OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$
+\end{lem}
+
+For any optimal solution $x^{*}$ of $OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$, $x^{*} + \gamma^{[1, t_1)}$ is a feasible solution of $OPT(L^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$. For any optimal solution $x^{*}$ of $OPT(L^{1}, \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$, $x^{*}- \gamma^{[1, t_1)}$ is a feasible solution of $OPT(L^{t}, \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$ because $x^{*}- \gamma^{[1, t_1)} \geq \gamma^{[1, t_{2})}- \gamma^{[1, t_1)} = \gamma^{[t_1, t_2)}$.
+
+
+The first inequality results from $E[A] \leq r_{M} E[\bm{1}_{A>0}] = r_{M} P(A>0)$.
+
+The first equation follows from Lemma. (Let $t_1 = t_2 = t$, $\hat{d} = d^{[t, T]}$; let $t_1 = t, t_2 = t+1$, $\hat{d} = d^{[t+1, T]}$).
+
+The second equation is as follows. If $x_{i^{t}}^{*,t} \geq 1$, then $x^{*,t}$ is still feasible for $OPT(L^{t}, d^{[t, T]}, \gamma^{[t,t+1)})$. (Because the optimal policy)
+
+$x_{i^{t}}^{*,t}$ is the optimal solution for $\text{OPT}(L^{t}, d^{[t, T]}, 0)$ at time $t$.
+
+Let $T- T_{0} = \max_{i}\{\frac{1}{p_{i}}\}$
+
+% The loss can be divided with capacity loss and decision loss.
+
+For N rows,
+
+\begin{align*}
+    OPT(\bm{L}, \hat{d}, \gamma): \quad \max \quad & \sum_{i = 1}^{M} \sum_{j = 1}^{N} r_{i} x_{ij} \\
+    \text {s.t.} \quad & \sum_{j=1}^{N} x_{ij} + x_{i0} = \hat{d}_{i}, \quad i \in \mathcal{M},  \\ 
+    & \sum_{j=1}^{N} x_{ij} \geq \gamma_{i}, \quad i \in \mathcal{M}, \\
+    & x_{i0} \geq \gamma_{i}^{0}, \quad i \in \mathcal{M}, \\
+    & \sum_{i=1}^{M} w_{i} x_{ij} \leq c_{j}, \quad j \in \mathcal{N}.
+\end{align*}
+

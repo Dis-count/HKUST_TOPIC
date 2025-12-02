@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  28 NOV 2025 13:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.1)  2 DEC 2025 22:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -683,8 +683,13 @@ LaTeX Warning: No \author given.
 
 (./Chapters/Abstract.tex) (./Chapters/Introduction.tex [1
 
-{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./Chapters/Literature_review.tex [2] [3]) (./Chapters/BPC.tex [4] [5] [6] [7] [8] [9]) [10] (./Chapters/Primal.tex [11] [12]) (./Chapters/Asymptotic.tex [13] [14] [15] [16] [17]) (./Chapters/Results.tex
-<./Figures/loss.pdf, id=357, 722.7pt x 433.62pt>
+{e:/Software/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./Chapters/Literature_review.tex [2] [3]) (./Chapters/BPC.tex [4] [5] [6] [7] [8] [9]) [10] (./Chapters/Primal.tex [11] [12]) (./Chapters/Asymptotic.tex [13] [14]
+Overfull \hbox (12.63664pt too wide) in paragraph at lines 97--98
+[]\OT1/cmr/m/n/10 The sec-ond equa-tion is as fol-lows. If $\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^U \OT1/cmr/m/n/10 1$, then $\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 )$ is still fea-si-ble for $\OML/cmm/m/it/10 OPT\OT1/cmr/m/n/10 (\OML/cmm/b/it/10 C\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; d[]; ^^M[]\OT1/cmr/m/n/10 )$.
+ []
+
+[15] [16] [17]) (./Chapters/Results.tex
+<./Figures/loss.pdf, id=362, 722.7pt x 433.62pt>
 File: ./Figures/loss.pdf Graphic file (type pdf)
 <use ./Figures/loss.pdf>
 Package pdftex.def Info: ./Figures/loss.pdf  used on input line 49.
@@ -696,18 +701,18 @@ Package rerunfilecheck Info: File `sum1.out' has not changed.
 (rerunfilecheck)             Checksum: 052E926197EADDF1A48F1A8A984E75A5;1942.
  ) 
 Here is how much of TeX's memory you used:
- 15677 strings out of 478599
- 237216 string characters out of 5853593
- 590541 words of memory out of 5000000
- 33146 multiletter control sequences out of 15000+600000
+ 15683 strings out of 478599
+ 237359 string characters out of 5853593
+ 586644 words of memory out of 5000000
+ 33150 multiletter control sequences out of 15000+600000
  417583 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,18n,75p,1805b,594s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb><e:/Software/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sum1.pdf (22 pages, 366509 bytes).
+Output written on sum1.pdf (22 pages, 370526 bytes).
 PDF statistics:
- 561 PDF objects out of 1000 (max. 8388607)
- 454 compressed objects within 5 object streams
- 135 named destinations out of 1000 (max. 500000)
+ 566 PDF objects out of 1000 (max. 8388607)
+ 459 compressed objects within 5 object streams
+ 137 named destinations out of 1000 (max. 500000)
  118 words of extra memory for PDF output out of 10000 (max. 10000000)
 

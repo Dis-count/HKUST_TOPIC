@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{26}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -127,6 +127,14 @@
   network revenue management}.
 \newblock \bibinfo{journal}{Manufacturing \& Service Operations Management}
   \bibinfo{volume}{10}, \bibinfo{pages}{288--310}.
+%Type = Article
+\bibitem[{Mangasarian and Shiau(1987)}]{mangasarian1987lipschitz}
+\bibinfo{author}{Mangasarian, O.L.}, \bibinfo{author}{Shiau, T.H.},
+  \bibinfo{year}{1987}.
+\newblock \bibinfo{title}{Lipschitz continuity of solutions of linear
+  inequalities, programs and complementarity problems}.
+\newblock \bibinfo{journal}{SIAM Journal on Control and Optimization}
+  \bibinfo{volume}{25}, \bibinfo{pages}{583--595}.
 %Type = Book
 \bibitem[{Martello and Toth(1990)}]{martello1990knapsack}
 \bibinfo{author}{Martello, S.}, \bibinfo{author}{Toth, P.},

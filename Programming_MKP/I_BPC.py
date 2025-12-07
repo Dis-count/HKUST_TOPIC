@@ -287,7 +287,7 @@ if  __name__ == "__main__":
 
     # roll_width = np.ones(given_lines) * 21
     # roll_width = np.ones(given_lines) * 12
-    roll_width = np.array([6,7,8,9])
+    roll_width = np.array([6, 7, 8, 9])
 
     num_period = 10
     value = np.array([4, 6, 8])

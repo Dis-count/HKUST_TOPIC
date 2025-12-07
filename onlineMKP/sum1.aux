@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -65,25 +68,26 @@
 \newlabel{subproblem}{{12}{12}{Solve the Dynamic Primal}{equation.4.12}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces Dynamic Primal\relax }}{12}{algocf.3}\protected@file@percent }
 \newlabel{algo_improve_primal}{{3}{12}{Solve the Dynamic Primal}{algocf.3}{}}
-\citation{gallego1997multiproduct}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Extension}{13}{subsection.4.2}\protected@file@percent }
 \newlabel{Extension}{{4.2}{13}{Extension}{subsection.4.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Evaluation on the Asymptotic Loss}{13}{section.5}\protected@file@percent }
+\citation{gallego1997multiproduct}
+\newlabel{offline_IP}{{13}{14}{Evaluation on the Asymptotic Loss}{equation.5.13}{}}
 \newlabel{loss_dpp}{{4}{14}{}{prop.4}{}}
-\newlabel{OPT}{{13}{14}{Evaluation on the Asymptotic Loss}{equation.5.13}{}}
+\newlabel{OPT}{{14}{15}{Evaluation on the Asymptotic Loss}{equation.5.14}{}}
 \newlabel{additive}{{4}{15}{}{lem.4}{}}
 \citation{mangasarian1987lipschitz}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Computational Experiments}{18}{section.6}\protected@file@percent }
-\newlabel{sec_result}{{6}{18}{Computational Experiments}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Performances}{18}{subsection.6.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of Policies\relax }}{18}{table.caption.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Computational Experiments}{19}{section.6}\protected@file@percent }
+\newlabel{sec_result}{{6}{19}{Computational Experiments}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Performances}{19}{subsection.6.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance of Policies\relax }}{19}{table.caption.2}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab_perf}{{1}{18}{Performance of Policies\relax }{table.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Loss}{18}{subsection.6.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Loss over $T$\relax }}{18}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:loss}{{1}{18}{Loss over $T$\relax }{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{18}{section.7}\protected@file@percent }
-\newlabel{sec_conclusion}{{7}{18}{Conclusion}{section.7}{}}
+\newlabel{tab_perf}{{1}{19}{Performance of Policies\relax }{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Loss}{19}{subsection.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Loss over $T$\relax }}{19}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:loss}{{1}{19}{Loss over $T$\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{19}{section.7}\protected@file@percent }
+\newlabel{sec_conclusion}{{7}{19}{Conclusion}{section.7}{}}
 \bibstyle{elsarticle-harv}
 \bibdata{refe}
 \bibcite{adelman2007dynamic}{{1}{2007}{{Adelman}}{{}}}
@@ -113,6 +117,6 @@
 \bibcite{williamson1992airline}{{25}{1992}{{Williamson}}{{}}}
 \bibcite{zhu2023assign}{{26}{2023}{{Zhu et~al.}}{{Zhu, Liu, Wang and Wang}}}
 \citation{dantzig1957discrete}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Proofs}{21}{section.8}\protected@file@percent }
-\newlabel{concave}{{5}{22}{}{lem.5}{}}
-\gdef \@abspage@last{22}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Proofs}{22}{section.8}\protected@file@percent }
+\newlabel{concave}{{5}{23}{}{lem.5}{}}
+\gdef \@abspage@last{23}

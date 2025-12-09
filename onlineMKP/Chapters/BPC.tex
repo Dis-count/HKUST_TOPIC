@@ -3,11 +3,10 @@ We consider a system with a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks
 
 % Consider a set $\mathcal{N} = \{1, 2, \ldots, N\}$ of knapsacks, where each knapsack $j$ has a capacity $c_j \in \mathbb{Z}^{+}$. There is also a set $\mathcal{M} = \{1, 2, \ldots, M\}$ of distinct item types. Each item of type $i$ has a size $w_i \in \mathbb{Z}^{+}$, and yields a profit $r_i \in \mathbb{Z}^{+}$ when placed entirely into a knapsack. The size and profit can be reflected as the impressions needed and value created in the online advertising example.
 
-
 Requests for these items arrive sequentially. Upon the arrival of a request (which specifies its type), the seller must immediately decide whether to accept or reject it. If accepted, the seller must also assign it to a specific knapsack with sufficient remaining capacity. Each item must be placed whole into a single knapsack; partial assignments or reassignments are not permitted.
 
 
-To model this problem, we adopt a dynamic programming framework based on discrete time periods $t = 1, 2, \ldots, T$. In each period, at most one request arrives. Let $\lambda_i(t)$ denote the probability that a request for an item of type $i \in \mathcal{M}$ arrives at time $t$. These probabilities satisfy $\sum_{i=1}^M \lambda_i(t) \leq 1$ for all $t$, and we define $\lambda_0(t) = 1 - \sum_{i=1}^M \lambda_i(t)$ as the probability of no arrival in period $t$. Arrival events are assumed to be independent across time periods.
+To model this problem, we adopt a dynamic programming framework based on discrete time periods $t = 1, 2, \ldots, T$. In each period, at most one request arrives. Let $\lambda_i(t)$ denote the probability that a request for an item of type $i \in \mathcal{M}$ arrives at time $t$. These probabilities satisfy $\sum_{i=1}^M \lambda_i(t) \leq 1$ for all $t$, and we define $\lambda_0(t) = 1 - \sum_{i=1}^M \lambda_i(t)$ as the probability of no arrival in period $t$. Suppose that there always is a positive probability for each type at the last period, i.e., $\lambda_i(T)>0, \forall i$. Arrival events are assumed to be independent across time periods. 
 
 
 The system state is the vector of remaining capacities $\mathbf{C} = (c_1, \ldots, c_N)$. When an item of type $i$ arrives, the seller chooses a decision variable $u_{i,j}(t) \in \{0,1\}$ for each knapsack $j$. The feasible set $U(\mathbf{C}(t))$ is defined by:
@@ -37,10 +36,7 @@ Solving the dynamic programming problem presented in Equation \eqref{DP} is comp
 
 To overcome this challenge, we propose a heuristic assignment policy. We first outline a traditional bid-price control policy. We then enhance this approach by introducing a novel bid-price control policy that leverages patterns.
 
-
-
 % For any policy $\pi$, let $V^{\pi}$ denote the expected revenue collected under $\pi$. Among all policies, a special one is the dynamic programming (DP) policy as it achieves the maximal expected revenue. Apart from DP, another special policy is the hindsight optimum (HO), where the decision maker has full information on the demand realization for the entire time horizon and optimizes over the allocation schemes. Here, it is impossible for the HO to be attained because we can never know the full demand realization ahead. For ease of analysis, the hindsight optimum for the sample path is computed by solving a relaxed static problem and $V^{\text{HO}}$ is the expected value over all sample paths. Then for any online policy $\pi$, we have $$V^{\text{HO}} \geq V^{\text{DP}} \geq V^{\pi}.$$ It is well known that DP, despite its optimality, is computationally complex owing to the ``curse of dimensionality.'' Thus we use HO as our benchmark to evaluate the performance of any policy $\pi$.
-
 
 \subsection{BPC Policy}
 Bid-price control is a classical and widely studied methodology in network revenue management. The core idea is to set thresholds, known as bid prices, that represent the opportunity cost of consuming one unit of capacity. An item is accepted only if its revenue exceeds the estimated opportunity cost of the capacity it requires.
@@ -286,7 +282,6 @@ Under the approximation \eqref{appro_dp}, the BPP policy operates as follows:
 % $\sum_{j} x_{ij}^{*} < d_{i}$, then $\alpha_{i}^{*} = 0$. $i - \beta_{ij}^{\dag} \leq 0$.
 
 % Lemma \ref{BPC_relation} shows that the I-BPC policy does not uniformly reject all small groups. Instead, it selectively accepts them based on pattern-based allocation, enabling more flexible decision-making. Unlike the traditional BPC, the I-BPC policy accounts for row-specific characteristics in allocation decisions. Therefore, the I-BPC policy better captures the structure of the capacity than the BPC policy does.
-
 
 Unlike the traditional BPC, the BPP does not require explicit feasibility checks on capacity. However, it still needs to verify whether the optimal pattern contains the given request. This introduces a new challenge, as bid-price policies are inherently derived from a dual formulation, which may inherently omit key information preserved in the primal problem.
 

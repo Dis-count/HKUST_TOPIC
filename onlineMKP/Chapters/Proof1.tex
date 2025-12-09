@@ -45,10 +45,32 @@ This contradicts the optimality of the current solution. Therefore, our initial 
 
 
 \begin{pf}{Proof of Proposition \ref{BPC_relation}}
+Consider the duals of problem \eqref{bid-price_dual} and problem \eqref{improve_bid}:
 
+\begin{equation}\label{primal_BPC}
+  \begin{aligned}
+      \max \quad & \sum_{i=1}^{M}  \sum_{j= 1}^{N} r_{i} x_{ij} \\
+      \text {s.t.} \quad & \sum_{j= 1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M}, \\ 
+      & \sum_{i=1}^{M} w_{i} x_{ij} \leq c_j, j \in \mathcal{N},  \\
+      & x_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}. 
+  \end{aligned}
+\end{equation}
 
+and
 
-% Then the objective value of BPP is no larger than that of BPC.
+\begin{equation}\label{primal_BPP}
+  \begin{aligned}
+  \max \quad & \sum_{i = 1}^{M} \sum_{j = 1}^{N} r_{i} x_{ij} \\
+  \text {s.t.} \quad & \sum_{j=1}^{N} x_{ij} \leq d_{i}, \quad i \in \mathcal{M},  \\ 
+  & x_{i j} \leq \sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}}, \quad i \in \mathcal{M}, j \in \mathcal{N}, \\
+  & \sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}} \leq 1, \quad j \in \mathcal{N} \\
+  & x_{ij} \geq 0, \quad i \in \mathcal{M}, j \in \mathcal{N}.
+\end{aligned}
+\end{equation}
+
+Since the constraint $\{x_{ij}: x_{i j} \leq \sum_{\bm{h} \in S(c_{j})} h_i y_{j \bm{h}}, \sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}} \leq 1\}$ is a relaxation of constraint $\{x_{ij}:\sum_{i=1}^{M} w_{i} x_{ij} \leq c_j\}$, the optimal value of \eqref{primal_BPP} is no larger than \eqref{primal_BPC}.
+
+Therefore we have $z(BPP) \leq z(BPC)$ according to the strong duality.
 \end{pf}
 
 \begin{pf}{Proof of Proposition \ref{primal}}

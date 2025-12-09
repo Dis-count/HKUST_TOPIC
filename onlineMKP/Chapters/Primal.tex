@@ -26,7 +26,6 @@ In contrast to Lemma \ref{BPP}, this lemma ensures the existance of a knapsack $
 % Any feasible solution to \eqref{improve_primal} yields a feasible solution to linear relaxation of SPDR having the same objective value, then we have  $V(\text{BPC}) \geq V^{\text{HO}} \geq V^{\text{DP}}$.
 
 
-
 \subsection{Solve the Dynamic Primal}
 % A pattern $\bm{h}$ is said to be inefficient if a mixture of other patterns can be used to generate more revenue for the same (or lower) consumption rate.
 
@@ -43,7 +42,6 @@ To generate all efficient patterns, we need to solve the subproblem for each kna
 If the optimal value of \eqref{subproblem} is larger than $0$, the primal $\eqref{improve_primal}$ reaches the optimal. Otherwise, a new pattern can be generated.
 
 One important fact is that only efficient sets are used in the solution to \eqref{improve_primal}. Therefore, if $y_{j \bm{h}}^{*} > 0$ is the optimal solution to \eqref{improve_primal}, then $\bm{h}$ is an efficient pattern.
-
 
 A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where every component of $\bm{h}{'}$ is greater than or equal to the corresponding component of $\bm{h}$. The efficient pattern is a dominating pattern. (If $\alpha_{i} = r_i$, \eqref{improve_primal} reaches the optimal and no pattern will be generated.)
 

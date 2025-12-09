@@ -1,10 +1,5 @@
 % !TEX root = sum1.tex
 \section{Evaluation on the Asymptotic Loss}
-
-% \begin{lem}
-%     Loss: $\lim_{\theta \to \infty} V_{\theta}^{\text{DP}} - z_{\theta}({\text{BPC}}) = 0$. 
-% \end{lem}
-
 In this section, we examine the notion of loss in revenue management. To establish benchmarks, we define two reference values for the base problem instance. The first is the offline optimal value $V^{\text{OFF}}$, which is defined as the expected value of the following integer program (IP):
 
 \begin{equation}\label{offline_IP}
@@ -18,12 +13,7 @@ In this section, we examine the notion of loss in revenue management. To establi
 
 Here $V^{\text{OFF}} = E(z(\bm{d}))$, representing the maximum expected revenue attainable with perfect knowledge of all future demand realizations.
 
-The second benchmark is the offline relaxed optimal value $V^{\text{HO}}$, which is defined as the optimal value of the same offline problem but with the integrality constraints $x_{ij} \in \mathbb{N}$ relaxed to $x_{ij} \geq 0$. By definition, we have $V^{\text{HO}} \geq V^{\text{OFF}}$. 
-
-Let $V^{\pi}$ denote 
-
-
-The expected loss of a policy $\pi$ is therefore bounded by
+The second benchmark is the offline relaxed optimal value $V^{\text{HO}}$, which is defined as the optimal value of the same offline problem but with the integrality constraints $x_{ij} \in \mathbb{N}$ relaxed to $x_{ij} \geq 0$. By definition, we have $V^{\text{HO}} \geq V^{\text{OFF}}$. For any policy $\pi$, let $V^{\pi}$ denote the expected revenue collected under $\pi$. The expected loss of a policy $\pi$ is therefore bounded by
 $E[\text{loss}^{\pi}] = V^{\text{OFF}} - V^{\pi} \leq V^{\text{HO}} - V^{\pi}$. To obtain a tractable upper bound, we will measure the loss of policy $\pi$ through the difference $V^{\text{HO}} - V^{\pi}$.
 
 
@@ -60,9 +50,9 @@ Let $\gamma_{ij}$, $\gamma_{i0}$ denote the number of type $i$ accepted in capac
 
 Note that comparing to the primal, we add a set of constraints $x_{ij} \geq \gamma_{ij}$ for all $i \in \mathcal{M}, j \in \mathcal{N} \cup \{0\}$. It is clear that \eqref{improve_primal} equals $OPT(\bm{C}, d, 0)$.
 
-We use superscripts to denote realized values from a sample path. Specifically, for $t_1 \leq t_2$, let $d_{i}^{[t_1, t_2]}$ be the realized demand for type $i$ during $[t_1, t_2]$, and let $\gamma_{ij}^{[1, t)}$ be the number of type $i$ requests allocated to knapsack $j$ by the policy during $[1, t)$. The total realized demand over the horizon is therefore $d^{[1, T]}$.
+We use superscripts to denote realized values from a sample path. Specifically, for $t_1 \leq t_2$, let $d_{i}^{[t_1, t_2]}$ be the realized demand for type $i$ during $[t_1, t_2]$, and let $\gamma_{ij}^{[1, t)}$ be the number of type $i$ requests allocated to knapsack $j$ by the policy during $[1, t)$. The total realized demand over the horizon is therefore $d^{[1, T]}$. The total expected demand over the horizon is expressed by $\lambda^{[1, T]}$.
 
-$OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)})$ can be interpreted as the total reward obtained under a virtual policy where we first follow the DPP during $[1, t+1)$ and then from time $t+1$ we follow the optimal solution assuming that we know the future demands. Let $x_{i^{t}j^{t}}^{*}(t)$ denote the optimal solution for $\text{OPT}(\bm{C}({t}), d^{[t, T]}, 0)$ at time $t$, where $i^{t}$ indicates the arriving type at time $t$, $j^{t}$ indicates the assigned knapsack at time $t$.
+$OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)})$ can be interpreted as the total reward obtained under a virtual policy where we first follow the DPP during $[1, t+1)$ and then from time $t+1$ we follow the optimal solution assuming that we know the future demands. Let $x_{i^{t}j^{t}}^{*}(t)$ denote the optimal solution for $\text{OPT}(\bm{C}({t}), d^{[t, T]}, 0)$ at time $t$, where $i^{t}$ indicates the arriving type at time $t$, $j^{t}$ indicates the assigned knapsack at time $t$. 
 
 The following lemma shows an important property of \eqref{OPT}.
 
@@ -82,11 +72,9 @@ For one sample path $\omega$, the HO under $\omega$ is $OPT(\bm{C}, d^{[1, T]}, 
  = & \sum_{t=1}^{T} [OPT^{\omega}(\bm{C}, d^{[1,T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1,T]}, \gamma^{[1,t+1)})]
 \end{align*}
 
-The revenue loss between HO and DPP can be decomposed into $T$ increments. Each increment represents the gap between two ``adjacent'' OPTs. The gap can be uniformly bounded by a constant $l$ related to $r_{M}$. For any $\omega$, $OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) \leq l$.
+The revenue loss between HO and DPP can be decomposed into $T$ increments. Each increment represents the gap between two ``adjacent'' OPTs. The gap can be uniformly bounded by a constant $l$ related to $\{r_{M}\}$. For any $\omega$, $OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) \leq l$.
 
 % At time $t$, solve the primal problem \eqref{improve_primal} with demands $d_{i} = \sum_{\tau = t}^{T} * \lambda_{i}^{\tau}$. If the resulting solution has $x_{i} > 0$ for the current request's type $i$, then accept the request.
-
-
 
 % Let $T_{i} = \sup\{t \leq T: \lambda_{i}^{t}> 0\}$. 
 
@@ -140,21 +128,21 @@ $$
 
 (a) is obtained from the well-known Lipschitz property of optimal solutions to linear programs with respect to perturbations in the right-hand side, as established by \citet{mangasarian1987lipschitz}.
 
+\begin{lem}
 For each $t$, consider $OPT(C({t}), d, 0)$. In the DPP, $d = \lambda^{[t, \theta T]}$, while in the sample path HO, $d = d^{[t, \theta T]}$. We choose $x^{*}(t)$ be an optimal solution of $OPT(C({t}), d^{[t, \theta T]}, 0)$ such that  
 
 $$
 \left\|x^{*}(t)-x^{\mathrm{DPP}}(t)\right\|_{\infty} \leqslant \delta\left\|d^{[t, \theta T]}-\lambda^{[t, \theta T]}\right\|_{\infty}=\delta\left\|d^{[t, \theta T]}-\mathbb{E}\left[d^{[t, \theta T]}\right]\right\|_{\infty}.
-$$
+$$    
+\end{lem}
 
 (b) follows from Bayes formula. (c) follows because of the arrival independence between different time periods.
 
 We consider
 $\inf_{t, i: t \in\left[\theta T\right]} \frac{\lambda_{i}^{\left(t, \theta T\right]}(\theta)}{\theta T-t}$ is lower bounded by some positive constant $\lambda_{\min } \triangleq \inf_{i} \frac{\lambda_{i}^{T}}{T}.$
 
-We have 
-$\mathbb{E}\left[d_{i}^{(t, \theta T]}\right]=\lambda_{i}^{\left(t, \theta T\right]} \geqslant \lambda_{\min}\left(\theta T- t\right)$.
-
-Let $T_0=\left\lceil\frac{N+1}{\lambda_{\min}}\right\rceil<\frac{\theta}{2}$.
+Then, we have 
+$\mathbb{E}\left[d_{i}^{(t, \theta T]}\right]=\lambda_{i}^{\left(t, \theta T\right]} \geqslant \lambda_{\min}\left(\theta T- t\right)$. Let $T_0=\left\lceil\frac{2(N+1)}{\lambda_{\min}}\right\rceil$.
 For $t \leq \theta T - T_{0}$, $\frac{\mathbb{E} [d_{i}^{(t, \theta T]}]- N-1}{\delta (N+1)} \geqslant \frac{\lambda_{\min}\left(\theta T-t\right)- \lambda_{\min} T_0 / 2}{\delta (N+1)} \geqslant \frac{\lambda_{\min}\left(\theta T-t\right)}{2 \delta (N+1)}$.
 
 Thus,
@@ -166,7 +154,7 @@ $$
 \leqslant & 2 l \sum_{i} \sum_{t=1}^{\theta T} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]-d_{i^{\prime}}^{(t, \theta T]}\right|> \frac{\lambda_{\min}\left(\theta T-t\right)}{2 \delta (N+1)}\right) \\
  \stackrel{(\mathrm{a})}{\leqslant} & 2 l \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- 2 \frac{\left(\lambda_{\min}\left(\theta T-t\right)\right)^2}{\left(2 \delta (N+1)\right)^2(\theta T-t)}\right)+ 2 l \sum_{i} \sum_{t=\theta T-T_0+1}^{\theta T} \sum_{i^{\prime}} 1 \\
 = & 2 l \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- \frac{\lambda_{\min }^2}{2 \delta^2 (N+1)^2} \cdot (\theta T-t)\right)+ O(1) \\
-\leqslant & 2 l M \sum_{i} \sum_{t=1}^{\theta T - T_0} 2 \exp \left(- \frac{\lambda_{\min}^2}{2 \delta^2 (N+1)^2} \cdot (\theta T-t)\right)+O(1).
+= & 2 l M^2 \sum_{t=1}^{\theta T - T_0} 2 \exp \left(- \frac{\lambda_{\min}^2}{2 \delta^2 (N+1)^2} \cdot (\theta T-t)\right)+O(1).
 \end{aligned}
 $$
 
@@ -187,20 +175,15 @@ Let $\theta \to \infty$, we can further upper bound by
 % \end{aligned}
 % $$
 
-% NEE (No Early Ending): If $\inf _{\substack{i \gtrless j: \\ \lambda_{i j}^{[1, T]}>0}} \lambda_{i j}^T>0$, then the set of arrival rates satisfies the NEE property.
-
-% When the NEE property is satisfied, can be alternatively bounded by
-
 $$
 \begin{aligned}
-& 2 l M \sum_{i} \sum_{t=T_0}^{+\infty} 2 \exp \left(- \frac{\lambda_{\min}^2 t^2}{2 \delta^2 (N+1)^2 t}\right) + O(1) \\
+& 2 l M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(- \frac{\lambda_{\min}^2 t^2}{2 \delta^2 (N+1)^2 t}\right) + O(1) \\
 = & 2 l M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(\frac{\lambda_{\min}^2}{2 \delta^2 (N+1)^2}\right) \cdot t\right)+O(1) \\
 = & O(1)
 \end{aligned}
 $$
 
-The last equality is because for given $C>0$, $\sum_{t=1}^{+\infty} \exp(-Ct) = O(1)$.
-
+The last equality is because for given $C>0$, $\sum_{t=1}^{+\infty} \exp(-Ct) = \frac{e^{-C}}{C}$.
 \end{pf}
 
 \newpage

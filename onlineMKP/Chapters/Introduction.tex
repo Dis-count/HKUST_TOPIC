@@ -1,18 +1,10 @@
 % !TEX root = sum1.tex
-%{\bf Terminologies to use}
-
-%We use {\em seating management} to refer to the general problem which includes {\em seat planning with deterministic requests}, 
-%{\em seat planning with stochastic requests}, and {\em seat assignment}.
-
-%Each problem is defined for an {\em event} which has multiple {\em seating requests}, where each request has a {\em group} of people to be seated.
-
 \section{Introduction}
 The dynamic stochastic multiple knapsack problem with multi-type items extends the classical knapsack problem to a dynamic and multi-knapsack setting, where items of distinct types arrive sequentially, and decisions to accept or reject them must be made immediately without knowledge of future arrivals. Each item is characterized by a type-dependent size and value, and must be placed into one of multiple knapsacks with non-identical capacities. This framework captures critical resource allocation challenges across various domains, including online advertising, cloud resource and energy management.
 
 The business strategy of cloud providers offering fixed-term, pre-paid virtual machine instances presents a classic and impactful resource allocation challenge. This operational challenge can be effectively modeled using the DSMKP, providing a foundational framework for optimizing revenue and resource utilization. Consider the case of \href{https://www.tencentcloud.com/pricing/cvm}{Tencent Cloud}, a representative provider that sells 1-month reserved instance contracts. These contracts, such as small (Type-S), medium (Type-M), and large (Type-L) instances, are characterized by their specific resource requirements (size) and a fixed, pre-paid price (value).
 
 In this formalization, the provider's infrastructure is abstracted as a set of multiple knapsacks. Each knapsack represents a distinct, homogeneous resource pool--for instance, a cluster of servers with identical hardware--with a capacity defined by its total available standardized ``compute units'' (e.g., a combination of CPU cores and memory). Customer orders for reserved instances arrive sequentially and stochastically in an online fashion. Upon each arrival, the platform must make an immediate and irrevocable decision: to either reject the request or accept it and assign it to a specific resource pool, thereby consuming a portion of that pool's capacity.
-
 
 In online advertising, our work employs a foundational framework for ad display allocation. In this model, a platform faces dynamically arriving ad campaigns from a finite set of types. Upon each arrival, it must make an immediate and irrevocable decision: to either reject the campaign or accept it by assigning it to an advertising slot inventory, thereby consuming a portion of that inventory's capacity.
 This application is aligned with the traditional method of fulfilling guaranteed contracts, as seen in yield optimization literature \citep{balseiro2011yield}.
@@ -25,15 +17,17 @@ In this formalization, an ad slot inventory is analogous to a ``knapsack''. It r
 
 The DSMKP provides a unified formalism to study this essential trade-off between utilizing current capacity and reserving it for future, potentially more valuable opportunities, making it a critical tool for optimizing online decision-making under uncertainty.
 
-
 These applications underscore the broad applicability of the DSMKP in real-world systems where heterogeneous resources must be allocated dynamically under uncertainty. Developing efficient algorithms for this problem--with guarantees on scalability and robustness--is therefore of significant theoretical and practical interest. This paper aims to address this gap by proposing novel strategies for the DSMKP and validating them in one or more of the above domains.
-
 
 % Resource allocation
 % Applications: Cloud computing, Ad placement, Production scheduling, Energy management, Network 
 % bandwidth allocation
 
-We develop several policies for DSMKP. The rest of this paper is structured as follows. We review the relevant literature in Section \ref{literature}. Section \ref{sec_dynamic_seat} presents the bid-price and resolving dynamic primal policies to assign the incoming requests. Section \ref{sec_result} presents the experimental results and provides insights gained from implementing dynamic primal. Conclusions are shown in Section \ref{sec_conclusion}.
+
+We develop several policies for the DSMKP. Because the canonical bid-price control policy does not distinguish between knapsacks when assigning items, we first develop a pattern-based bid-price control policy. To address its cumbersome feasibility-checking procedure, we then propose a primal dynamic policy, which is straightforward and easily implementable. This policy has an asymptotic loss of 
+$O(1)$. We evaluate our approach through a series of numerical experiments.
+
+The rest of this paper is structured as follows. We review the relevant literature in Section \ref{literature}. Section \ref{sec_dynamic_seat} presents the bid-price and resolving dynamic primal policies to assign the incoming requests. Section \ref{sec_result} presents the experimental results and provides insights gained from implementing dynamic primal. Conclusions are shown in Section \ref{sec_conclusion}.
 
 
 % Knapsacks (Servers - Varying Single-Dimensional Capacity):

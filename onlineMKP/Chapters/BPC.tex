@@ -218,18 +218,18 @@ If all $j$ exist for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta
 
 $\alpha_{i}$ represents marginal revenue for type $i$. $\beta_{ij}^{\dag}$ represents the cost for type $i$ assigned in knapsack $j$. $\gamma_{j}$ represents the capacity cost associated with knapsack $j$.
 
-If for a given item type $i$, no knapsack $j$ contains an optimal allocation $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ with $h_{i}^{*} \geq 1$, then the variable $\alpha_{i}$ must be zero. This indicates that the constraint associated with item type $i$ and knapsack $j$ is redundant. Although these constraints appear difficult to enforce in advance, the following lemma reveals that in practice we can avoid imposing additional restrictions. Simply solving problem \eqref{improve_bid} will inherently satisfy all required conditions.
+If for a given item type $i$, no knapsack $j$ contains an optimal allocation $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}$ with $h_{i}^{*} \geq 1$, then the variable $\alpha_{i}$ must be zero. This indicates that the constraint associated with item type $i$ and knapsack $j$ is redundant. Although these constraints appear difficult to enforce in advance, the following proposition reveals that in practice we can avoid imposing additional restrictions. Simply solving problem \eqref{improve_bid} will inherently satisfy all required conditions.
 
 
-\begin{lem}\label{BPP}
+\begin{prop}\label{BPP}
 Define $\mathcal{J}_{i} = \{j \in \mathcal{N} \mid r_i - \beta_{ij}^{\dag *} \geq r_i - \beta_{ik}^{\dag *},\forall k \in \mathcal{N}, r_i - \beta_{ij}^{\dag *} >0 \}$.
 If $\mathcal{J}_{i} = \varnothing$, the first set of constraints for $i$ is redundant.
 If $\mathcal{J}_{i} \neq \varnothing$, then there exists a $j{'} \in \mathcal{J}_{i}$ such that:
 
 $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j{'}})} \sum_{i} \beta_{ij{'}}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$
-\end{lem}
+\end{prop}
 
-This lemma guarantees that when such a $j{'}$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}_{1}(\bm{C})$.
+This proposition guarantees that when such a $j{'}$ exists, the first set of constraints for $i$ becomes active; otherwise, it remains inactive. Consequently, we have $z(\text{BPP}) = \hat{v}_{1}(\bm{C})$.
 
 The control policy is then defined as follows. For the arriving type-$i$ item, if $\alpha_{i} > 0$, accept the type $i$. Assign the type $i$ to a knapsack $j \in \mathcal{J}_{i}$ satisfying: $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1.$$ If $\alpha_{i} = 0$ and there exists a knapsack $j$ such that: $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag *} h_{i}, h_{i}^{*} \geq 1$, accept the type $i$ and assign it to knapsack $j$; otherwise, reject the type $i$.
 

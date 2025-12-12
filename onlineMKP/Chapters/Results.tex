@@ -1,19 +1,12 @@
 % !TEX root = sum1.tex
 \section{Computational Experiments}\label{sec_result}
 \subsection{Performances}
-$N =10$, $L_{j} =20 \forall j$,
 
-$D_1 = [0.2, 0.5, 0.3]$
+The fundamental system configuration consists of $N = 10$ knapsacks, each with an identical capacity of $L_j = 20$ for all $j$.
 
-$w = [3, 4, 5]$, $r = [4, 6, 8]$, $r_i/w_i > 1 \forall i$
+We define several experimental scenarios by varying the combination of item parameters--namely size $w$ and profit $r$ vectors--and the demand probability distribution $D$ over the item types. In the first set of experiments, the demand distribution is $D_1 = [0.2, 0.5, 0.3]$ for three item types. This distribution is examined under three distinct profit-to-size profiles. The first profile uses sizes $w = [3, 4, 5]$ and profits $r = [4, 6, 8]$, where the profit-to-weight ratio exceeds one for every item type. The second profile shares the same sizes, $w = [3, 4, 5]$, but with profits set equal to the sizes, $r = [3, 4, 5]$, resulting in a uniform profit-to-weight ratio of one. The third profile inverts the size order with $w = [8, 6, 4]$ and assigns profits $r = [5, 4, 3]$, leading to profit-to-weight ratios that are all less than one. For this experiment set, the total time horizon $T$ is tested at values of 60 and 80 periods.
 
-$w = [3, 4, 5] = r$, $r_i/w_i = 1 \forall i$
-
-$w = [8, 6, 4]$  $r = [5, 4, 3]$, $r_i/w_i < 1 \forall i$
-
-$D_2 = [0.25, 0.25, 0.25, 0.25]$
-
-$w = [3, 5, 7, 9]$, $r = [2, 4, 6, 8]$.
+A second set of experiments employs a uniform demand distribution $D_2 = [0.25, 0.25, 0.25, 0.25]$ across four item types. The corresponding item parameters are sizes $w = [3, 5, 7, 9]$ and profits $r = [2, 4, 6, 8]$. For this configuration, the total number of periods $T$ takes on the values 60, 80, and 100 to evaluate system performance under varying time horizons.
 
 \begin{table}[h]
   \centering

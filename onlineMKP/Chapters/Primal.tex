@@ -19,7 +19,7 @@ The first set of constraints demonstrate that for each item type $i$, the sum of
 If the optimal solution $x_{ij}^{*}$ to \eqref{improve_primal} satisfies $x_{ij}^{*} > 0$ for a pair $(i,j)$, then for that knapsack $j$, we have $$\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_j)} \sum_{i} \beta_{ij}^{\dag} h_{i}, h_{i}^{*} \geq 1.$$
 \end{prop}
 
-In contrast to Lemma \ref{BPP}, this lemma ensures the existance of a knapsack $j$ to accommodate item type $i$ when $x_{ij}^{*} > 0$. This eliminates the need for explicit existance verification.
+In contrast to Proposition \ref{BPP}, this proposition ensures the existance of a knapsack $j$ to accommodate item type $i$ when $x_{ij}^{*} > 0$. This eliminates the need for explicit existance verification.
 
 % Then, the following hierarchy holds: $V(\text{DLP}) = V(\text{BPC}) \geq V(\text{I-BPC}) \geq V^{\text{DP}}$.
 
@@ -48,9 +48,7 @@ A pattern $\bm{h}$ is dominant if there is no distinct pattern $\bm{h}{'}$ where
 The relation between the capacity and the demand shows the different structure of the optimal solution.
 
 \begin{lem}
-When $\sum_{i=1}^{M} d_{i} w_{i} < \sum_{j=1}^{N} c_{j}$, we have $\gamma_{j}^{*} =0, \forall j$, $\beta_{ij}^{\dag *} =0, \forall i,j$ and $\alpha^{*}_{i} = r_i, \forall i$. There exists at least one knapsack $j$ such that $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} < 1$.
-
-When $\sum_{i=1}^{M} d_{i} w_{i} \geq \sum_{j=1}^{N} c_{j}$, we have $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} = 1, \forall j$.
+When $\sum_{i=1}^{M} d_{i} w_{i} < \sum_{j=1}^{N} c_{j}$, we have $\gamma_{j}^{*} =0, \forall j$, $\beta_{ij}^{\dag *} =0, \forall i,j$ and $\alpha^{*}_{i} = r_i, \forall i$. There exists at least one knapsack $j$ such that $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} < 1$. When $\sum_{i=1}^{M} d_{i} w_{i} \geq \sum_{j=1}^{N} c_{j}$, we have $\sum_{\bm{h} \in S(c_{j})} y_{j \bm{h}}^{*} = 1, \forall j$.
 \end{lem}
 
 
@@ -80,29 +78,6 @@ Using the decision variable $x_{ij}$ to represent these assignments is a straigh
 \end{example}
 
 
-% \begin{example}
-% Consider $M =3$, $N =4$, $w_{1} = 3, w_{2} = 4, w_{3} = 5$, $r_{1} = 4, r_{2} = 6, r_{3} = 8$, $\bm{C} = [7, 8, 8, 4]$, $T = 8$, stationary arrival probability, $\lambda_{1} = \lambda_{3} = \frac{1}{4}$, $\lambda_{2} = \frac{1}{2}$. Then the expected demand for each type is $\bm{d} = (2, 4, 2)$.
-
-% For the traditional bid-price control, for each $j$, $\beta_{j}^{*} = \frac{4}{3}$. $z(BPC) = \frac{124}{3}$. Two drawbacks: there is no difference among knapsacks. Even $r_{3} - \beta_{4}^{*} * w_{3} > 0$, it is infeasible for type 3 assigned in knapsack 4.
-
-% For the BPP, $\bm{\beta}_{1}^{*} = [4, 4, 4, 6]$, $\bm{\beta}_{2}^{*} = [6, 6, 6, 6]$, $\bm{\beta}_{3}^{*} = [10, 8, 8, 8]$. $z(BPP) = 40$. $\alpha = [0, 0, 0]$, $\gamma = [10, 12, 12, 6]$.
-
-% $r_{1} - \bm{\beta}_{1}^{*} = [0, 0, 0, -2]$, $r_{2} - \bm{\beta}_{2}^{*} = [0, 0, 0, 0]$, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$.
-
-% Drawback: need to check whether $j$ exists for $\bm{h}^{*} \in \arg\max_{\bm{h} \in S(c_{j_0})} \sum_{i} \beta_{ij_0}^{\dag *} h_{i}, h_{i}^{*} \geq 1$.
-
-% For example, $r_{3} - \bm{\beta}_{3}^{*} = [-2, 0, 0, 0]$ indicates type 3 cannot be assigned in knapsack 1. While the generated patterns for knapsack 4 are $[0, 1, 0], [1, 0, 0]$, which do not contain $h_{3}$, type 3 can only be assigned to knapsack 2 or 3.
-
-% % $[1, 1, 0], [2, 0, 0], [0, 0, 1]$, $[0, 2, 0], [1, 0, 1]$, $[0, 2, 0], [1, 0, 1]$, $[0, 1, 0], [1, 0, 0]$
-
-% For the primal, $\bm{x}_{1}^{*} = [1, 1, 0, 0]$, $\bm{x}_{2}^{*} = [1, 0, 2, 1]$, $\bm{x}_{3}^{*} = [0, 1, 0, 0]$. It indicates that type 1 can be assigned in knapsacks 1 or 2, type 2 cannot be assigned in knapsack 2, type 3 can only be assigned in knapsack 2. 
-
-% It may contain multiple efficient patterns for one knapsack. In this example, there is exactly one efficient pattern for each knapsack: $[1, 1, 0]$, $[1, 0, 1]$, $[0, 2, 0]$, $[0, 1, 0]$. It shows that knapsack 1 can assign type 1 and 2, so on and so forth.
-
-% Using $x_{ij}$ to make the decision is straightforward and easy to implement.
-% \end{example}
-
-
 % \subsection{Type Analyses}
 
 % When there is only one type, the optimal policy is straightforward, i.e., accept the request until the capacity is insufficient. 
@@ -112,10 +87,8 @@ Using the decision variable $x_{ij}$ to represent these assignments is a straigh
 % When will the threshold policy be the optimal?
 
 \subsection{Extension}\label{Extension}
-Sometimes, we do not need to generate all feasible patterns. The generated patterns may need to satisfy certain restrictions, such as certain items not being allowed in certain knapsacks, or relationships between items. 
-
-For example, we can add constraints like:
-$h_{i} = 0$ (Item $i$ is excluded), $h_i + h_k \leq 1$ (Items $i$ and $k$ are mutually exclusive). $h_i \leq \text{max count}_{i}$ (An upper bound on the number of item $i$).
+Sometimes, we do not need to generate all feasible patterns. The generated patterns may need to satisfy certain restrictions, such as certain types not being allowed in certain knapsacks, or relationships between items. For example, we can add constraints like:
+$h_{i} = 0$ (Type $i$ is excluded), $h_i + h_k \leq 1$ (Types $i$ and $k$ are mutually exclusive). $h_i \leq \text{max count}_{i}$ (An upper bound on the number of type $i$).
 
 To represent these scenarios in a general form, we consider the following extended subproblem for knapsack $j$:
 

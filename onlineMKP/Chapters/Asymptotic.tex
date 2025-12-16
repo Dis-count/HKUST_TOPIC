@@ -27,16 +27,16 @@ Let $V_{\theta}^{\pi}$ be the expected revenue of policy $\pi$ in the scaled pro
 When $\theta \to \infty$, we have $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{DPP}} = O(1)$. 
 \end{prop}
 
-Here we present a brief roadmap for the proof of Proposition \ref{loss_dpp}. First, we consider a variant of \eqref{improve_primal} by imposing lower bounds for $\bm{x}$. For each sample path, we decompose the total loss between $DPP$ and $HO$ into $\theta T$ increments, where each increment is characterized by the gap between two objective values of the variants with different lower bounds for $\bm{x}$.  Then we upper bound each increment. We show that each increment is uniformly upper bounded by a constant that depends only on $\{r_{i}\}$. As a result, the sum of the increments converges to a constant.
+We now outline the proof of Proposition \ref{loss_dpp}. First, we perform a loss decomposition. Starting from a modified version of \eqref{improve_primal} that imposes lower bounds on $\bm{x}$, we decompose--for each sample path--the total loss between the DPP and the hindsight optimum into $\theta T$ increments. Each increment corresponds to the gap between two objective values of the modified problem under different lower bounds for $\bm{x}$. Second, we establish a uniform bound on the single-period loss. Each increment is shown to be bounded above by a constant that depends only on ${r_i}$. The third step is we bound the probability of loss. Finally, we sum the increments over the horizon $T$. This sum converges to a constant, completing the proof.
 
+% Then we upper bound each increment. We show that
 
 % Step 1: Loss Decomposition
 % Step 2: Bounding the Single-Period Loss
 % Step 3: Bounding the Probability of Loss
 % Step 4: Summing Over Time
 
-\begin{pf}{Proof of Proposition \ref{loss_dpp}}
-Let $\gamma_{ij}$, $\gamma_{i0}$ denote the number of type $i$ accepted in capacity $j$ and rejected by DPP, respectively. We consider the following variant of \eqref{improve_primal}.
+In the first step, let $\gamma_{ij}$, $\gamma_{i0}$ denote the number of type $i$ accepted in capacity $j$ and rejected by DPP, respectively. We consider the following variant of \eqref{improve_primal}.
 
 \begin{equation}\label{OPT}
     \begin{aligned}
@@ -50,7 +50,7 @@ Let $\gamma_{ij}$, $\gamma_{i0}$ denote the number of type $i$ accepted in capac
 
 Note that comparing to the primal, we add a set of constraints $x_{ij} \geq \gamma_{ij}$ for all $i \in \mathcal{M}, j \in \mathcal{N} \cup \{0\}$. It is clear that \eqref{improve_primal} equals $OPT(\bm{C}, d, 0)$.
 
-We use superscripts to denote realized values from a sample path. Specifically, for $t_1 \leq t_2$, let $d_{i}^{[t_1, t_2]}$ be the realized demand for type $i$ during $[t_1, t_2]$, and let $\gamma_{ij}^{[1, t)}$ be the number of type $i$ requests allocated to knapsack $j$ by the policy during $[1, t)$. The total realized demand over the horizon is therefore $d^{[1, T]}$. The total expected demand over the horizon is expressed by $\lambda^{[1, T]}$.
+We use superscripts to denote realized values from a sample path. Specifically, for $t_1 \leq t_2$, let $d_{i}^{[t_1, t_2]}$ denote the realized demand for type $i$ during $[t_1, t_2]$, and let $\gamma_{ij}^{[t_1, t_2)}$ denote the number of type $i$ requests allocated to knapsack $j$ by the DPP during $[t_1, t_2)$. The total realized demand over the horizon is therefore $d^{[1, T]}$. The total expected demand over the horizon is expressed by $\lambda^{[1, T]}$.
 
 $OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)})$ can be interpreted as the total reward obtained under a virtual policy where we first follow the DPP during $[1, t+1)$ and then from time $t+1$ we follow the optimal solution assuming that we know the future demands. Let $x_{i^{t}j^{t}}^{*}(t)$ denote the optimal solution for $\text{OPT}(\bm{C}({t}), d^{[t, T]}, 0)$ at time $t$, where $i^{t}$ indicates the arriving type at time $t$, $j^{t}$ indicates the assigned knapsack at time $t$. 
 
@@ -58,12 +58,8 @@ The following lemma shows an important property of \eqref{OPT}.
 
 \begin{lem}\label{additive}
     Given $\hat{d}$, for any $1 \leq t_1 \leq t_2 \leq T+1$, we have
-    $$OPT(\bm{C}({1}), \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} r_{i} \sum_{j} \gamma_{ij}^{[1, t_1)} + OPT(\bm{C}({t}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$$
+    $$OPT(\bm{C}({1}), \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} r_{i} \sum_{j} \gamma_{ij}^{[1, t_1)} + OPT(\bm{C}({t_1}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$$
 \end{lem}
-
-\begin{pf}{Proof of Lemma \ref{additive}}
-    For any optimal solution $x^{*}$ of $OPT(\bm{C}({t}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$, $x^{*} + \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}({1}), \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$. For any optimal solution $x^{*}$ of $OPT(\bm{C}({1}), \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$, $x^{*}- \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}({t}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$ because $x^{*}- \gamma^{[1, t_1)} \geq \gamma^{[1, t_{2})}- \gamma^{[1, t_1)} = \gamma^{[t_1, t_2)}$.    
-\end{pf}
 
 For one sample path $\omega$, the HO under $\omega$ is $OPT(\bm{C}, d^{[1, T]}, 0)$. From Lemma \ref{additive}, by setting $\hat{d} = 0$ and $t_1 = t_2 = T+1$, we can see that the total revenue collected under $\omega$ is $OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})$. Therefore, the loss incured by DPP for $\omega$ can be written as
 
@@ -72,7 +68,29 @@ For one sample path $\omega$, the HO under $\omega$ is $OPT(\bm{C}, d^{[1, T]}, 
  = & \sum_{t=1}^{T} [OPT^{\omega}(\bm{C}, d^{[1,T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1,T]}, \gamma^{[1,t+1)})]
 \end{align*}
 
-The revenue loss between HO and DPP can be decomposed into $T$ increments. Each increment represents the gap between two ``adjacent'' OPTs. The gap can be uniformly bounded by a constant $l$ related to $\{r_{M}\}$. For any $\omega$, $OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) \leq l$.
+The revenue loss between HO and DPP can be decomposed into $T$ increments. Each increment represents the gap between two ``adjacent'' OPTs.
+
+In the second step, we show that the gap can be uniformly bounded by a constant $\delta$ related to $\{r_{M}\}$. ({\color{blue} unrelated to problem scale, need to be proved.}) For any $\omega$, $OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) \leq \delta$.
+
+The expected revenue loss can be upper bounded:
+
+\begin{align*}
+    & E_{\omega}[OPT^{\omega}(\bm{C}, d^{[1, T]}, 0) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
+ \leq & \delta \sum_{t=1}^{T} P(OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) > 0) \\
+ = & \delta \sum_{t=1}^{T} P(OPT^{\omega}(\bm{C}({t}), d^{[t, T]}, 0) - OPT^{\omega}(\bm{C}({t}), d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
+ \leq & \delta \sum_{t=1}^{T} P(x_{i^{t}j^{t}}^{*}(t) <1)
+\end{align*}
+
+The first inequality results from $E[A] \leq \delta E[\bm{1}_{A>0}] = \delta P(A>0)$. The second equation is as follows. If $x_{i^{t}j^{t}}^{*}(t) \geq 1$, then $x^{*}(t)$ is still feasible for $OPT(\bm{C}({t}), d^{[t, T]}, \gamma^{[t,t+1)})$. (Because the optimal policy)
+
+In the third step, we consider $P(x_{i^{t}j^{t}}^{*}(t) <1)$. Let $x_{i^t j^{t}}^{\mathrm{DPP}}(t)$ denote the number of type $i^{t}$ assigned to knapsack $j^{t}$ for DPP. At time period $t$, after realization of $i^{t}$, based on the maximum choice of $j^{t}$ in DPP, we have
+
+$$
+x_{i^t j^t}^{\mathrm{DPP}}(t)=\max_{j} x_{i^t j}^{\mathrm{DPP}}(t) \geqslant \frac{\sum_{j} x_{i^t j}^{\mathrm{DPP}}(t)}{\sum_{j} 1} = \frac{\lambda_{i^t}^{[t, \theta T]}}{N+1}
+$$
+
+The inequality holds because the maximum value over $j$ is always greater than or equal to the average value.
+ 
 
 % At time $t$, solve the primal problem \eqref{improve_primal} with demands $d_{i} = \sum_{\tau = t}^{T} * \lambda_{i}^{\tau}$. If the resulting solution has $x_{i} > 0$ for the current request's type $i$, then accept the request.
 
@@ -88,102 +106,7 @@ The revenue loss between HO and DPP can be decomposed into $T$ increments. Each 
 % $$
 
 
-The expected revenue loss can be upper bounded:
-
-\begin{align*}
-    & E_{\omega}[OPT^{\omega}(\bm{C}, d^{[1, T]}, 0) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
- \leq & l \sum_{t=1}^{T} P(OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) > 0) \\
- = & l \sum_{t=1}^{T} P(OPT^{\omega}(\bm{C}({t}), d^{[t, T]}, 0) - OPT^{\omega}(\bm{C}({t}), d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
- \leq & l \sum_{t=1}^{T} P(x_{i^{t}j^{t}}^{*}(t) <1)
-\end{align*}
-
-
-The first inequality results from $E[A] \leq l E[\bm{1}_{A>0}] = l P(A>0)$.
-
 % The first equation follows from Lemma \ref{additive}. (Let $t_1 = t_2 = t$, $\hat{d} = d^{[t, T]}$; let $t_1 = t, t_2 = t+1$, $\hat{d} = d^{[t+1, T]}$).
 
-The second equation is as follows. If $x_{i^{t}j^{t}}^{*}(t) \geq 1$, then $x^{*}(t)$ is still feasible for $OPT(\bm{C}({t}), d^{[t, T]}, \gamma^{[t,t+1)})$. (Because the optimal policy)
-
-Now we consider $P(x_{i^{t}j^{t}}^{*}(t) <1)$. Let $x_{i^t j^{t}}^{\mathrm{DPP}}(t)$ denote the number of type $i^{t}$ assigned to knapsack $j^{t}$ for DPP. At time period $t$, after realization of $i^{t}$, based on the maximum choice of $j^{t}$ in DPP, we have
-
-$$
-x_{i^t j^t}^{\mathrm{DPP}}(t)=\max_{j} x_{i^t j}^{\mathrm{DPP}}(t) \geqslant \frac{\sum_{j} x_{i^t j}^{\mathrm{DPP}}(t)}{\sum_{j} 1} = \frac{\lambda_{i^t}^{[t, \theta T]}}{N+1}
-$$
-
-The inequality holds because the maximum value over $j$ is always greater than or equal to the average value.
-
-$$
-\begin{aligned}
-& \mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right) \\
-\leqslant & \mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) < x_{i^{t}j^{t}}^{\mathrm{DPP}}(t)+1-\frac{\lambda_{i^t}^{[t, \theta T]}}{N+1}\right) \\
-= & \mathbb{P}\left(x_{i^{t}j^{t}}^{\mathrm{DPP}}(t) - x_{i^{t}j^{t}}^{*}(t) > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{N+1}\right) \\
-\stackrel{(\mathrm{a})}{\leqslant} & \mathbb{P}\left(\max_{i^{\prime}}\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{\delta (N+1)} \right) \\
-= & \mathbb{P}\left(\bigcup_{i^{\prime}}\left\{\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right] - d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{\delta (N+1)} \right\}\right) \\
-\leqslant & \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{\delta (N+1)}\right) \\
-\stackrel{(\mathrm{b})}{=} & \sum_{i^{\prime}} \sum_{i} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{\delta (N+1)} \right\rvert\,\left(i^t = i\right) \right) \mathbb{P}\left(i^t = i \right)  \\
-\leqslant & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{\delta (N+1)} \right\rvert\,\left(i^t = i\right) \right) \bm{1}\left\{t \leqslant \theta T\right\} \\
-\stackrel{(\mathrm{c})}{=} & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{\delta (N+1)} \right) \bm{1}\left\{t \leqslant \theta T\right\}.
-\end{aligned}
-$$
-
-(a) is obtained from the well-known Lipschitz property of optimal solutions to linear programs with respect to perturbations in the right-hand side, as established by \citet{mangasarian1987lipschitz}.
-
-\begin{lem}
-For each $t$, consider $OPT(C({t}), d, 0)$. In the DPP, $d = \lambda^{[t, \theta T]}$, while in the sample path HO, $d = d^{[t, \theta T]}$. We choose $x^{*}(t)$ be an optimal solution of $OPT(C({t}), d^{[t, \theta T]}, 0)$ such that  
-
-$$
-\left\|x^{*}(t)-x^{\mathrm{DPP}}(t)\right\|_{\infty} \leqslant \delta\left\|d^{[t, \theta T]}-\lambda^{[t, \theta T]}\right\|_{\infty}=\delta\left\|d^{[t, \theta T]}-\mathbb{E}\left[d^{[t, \theta T]}\right]\right\|_{\infty}.
-$$    
-\end{lem}
-
-(b) follows from Bayes formula. (c) follows because of the arrival independence between different time periods.
-
-We consider
-$\inf_{t, i: t \in\left[\theta T\right]} \frac{\lambda_{i}^{\left(t, \theta T\right]}(\theta)}{\theta T-t}$ is lower bounded by some positive constant $\lambda_{\min } \triangleq \inf_{i} \frac{\lambda_{i}^{T}}{T}.$
-
-Then, we have 
-$\mathbb{E}\left[d_{i}^{(t, \theta T]}\right]=\lambda_{i}^{\left(t, \theta T\right]} \geqslant \lambda_{\min}\left(\theta T- t\right)$. Let $T_0=\left\lceil\frac{2(N+1)}{\lambda_{\min}}\right\rceil$.
-For $t \leq \theta T - T_{0}$, $\frac{\mathbb{E} [d_{i}^{(t, \theta T]}]- N-1}{\delta (N+1)} \geqslant \frac{\lambda_{\min}\left(\theta T-t\right)- \lambda_{\min} T_0 / 2}{\delta (N+1)} \geqslant \frac{\lambda_{\min}\left(\theta T-t\right)}{2 \delta (N+1)}$.
-
-Thus,
-
-$$
-\begin{aligned}
-&  E[OPT(\bm{C}, d^{[1, T]}, 0) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
-\leqslant & 2 l \sum_{t=1}^{\theta T} \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]- d_{i^{\prime}}^{(t, \theta T]}\right|>\frac{\mathbb{E}\left[d_{i^{t}}^{[t, \theta T]}\right]- N-1}{\delta (N+1)}\right) \bm{1}\left\{t \leqslant \theta T\right\} \\
-\leqslant & 2 l \sum_{i} \sum_{t=1}^{\theta T} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]-d_{i^{\prime}}^{(t, \theta T]}\right|> \frac{\lambda_{\min}\left(\theta T-t\right)}{2 \delta (N+1)}\right) \\
- \stackrel{(\mathrm{a})}{\leqslant} & 2 l \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- 2 \frac{\left(\lambda_{\min}\left(\theta T-t\right)\right)^2}{\left(2 \delta (N+1)\right)^2(\theta T-t)}\right)+ 2 l \sum_{i} \sum_{t=\theta T-T_0+1}^{\theta T} \sum_{i^{\prime}} 1 \\
-= & 2 l \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- \frac{\lambda_{\min }^2}{2 \delta^2 (N+1)^2} \cdot (\theta T-t)\right)+ O(1) \\
-= & 2 l M^2 \sum_{t=1}^{\theta T - T_0} 2 \exp \left(- \frac{\lambda_{\min}^2}{2 \delta^2 (N+1)^2} \cdot (\theta T-t)\right)+O(1).
-\end{aligned}
-$$
-
-(a) holds from Hoeffding's inequality
-
-$$
-\mathrm{P}\left(\left|S_n-\mathrm{E}\left[S_n\right]\right| \geq t\right) \leq 2 \exp \left(-\frac{2 t^2}{\sum_{i=1}^n\left(b_i-a_i\right)^2}\right)
-$$
-In this case, $S_n = d_{i^{\prime}}^{(t, \theta T]}$, $a_i =0, b_i =1$.
-
-Let $\theta \to \infty$, we can further upper bound by 
-
-% $$
-% \begin{aligned}
-% & 2 l N \sum_{i} \sum_{t=T_0}^{+\infty} 2 \exp \left(-2 \frac{\lambda_{\min}^2 t^2}{\delta^2 N^2 \theta T}\right) + O(1) \\
-% \leqslant & 2 l N^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(2 \frac{\lambda_{\min}^2}{\delta^2 N^2 T}\right) \cdot \frac{t^2}{\theta}\right)+O(1) \\
-% = & O(\sqrt{\theta})
-% \end{aligned}
-% $$
-
-$$
-\begin{aligned}
-& 2 l M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(- \frac{\lambda_{\min}^2 t^2}{2 \delta^2 (N+1)^2 t}\right) + O(1) \\
-= & 2 l M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(\frac{\lambda_{\min}^2}{2 \delta^2 (N+1)^2}\right) \cdot t\right)+O(1) \\
-= & O(1)
-\end{aligned}
-$$
-
-The last equality is because for given $C>0$, $\sum_{t=1}^{+\infty} \exp(-Ct) = \frac{e^{-C}}{C}$.
-\end{pf}
-
+The bound on $\mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right)$ converges to the constant is presented in the Appendix.
 \newpage

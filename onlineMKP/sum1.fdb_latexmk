@@ -1,21 +1,21 @@
 # Fdb version 3
-["bibtex sum1"] 1765461007 "sum1.aux" "sum1.bbl" "sum1" 1765461273
+["bibtex sum1"] 1765803005 "sum1.aux" "sum1.bbl" "sum1" 1765884352
   "e:/Software/texlive/2021/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1630494346 30002 8c0c5833f37bea3ec214cf315a72975d ""
   "refe.bib" 1764677817 24003 4e35485e30636577968df457623609b2 ""
-  "sum1.aux" 1765461010 8212 9be4785222134c68a286ee1f60616e8b "pdflatex"
+  "sum1.aux" 1765803046 8212 03bf2068cae1438a2152c263568977aa "pdflatex"
   (generated)
   "sum1.bbl"
   "sum1.blg"
-["pdflatex"] 1765461008 "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" "sum1.pdf" "sum1" 1765461273
+["pdflatex"] 1765803045 "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" "sum1.pdf" "sum1" 1765884352
   "Chapters/Abstract.tex" 1765253315 1178 d5d4392328ede0b8f93fe88012b7c2ad ""
-  "Chapters/Asymptotic.tex" 1765275328 15595 859b1e5a87e48744e36baf7af2278f68 ""
+  "Chapters/Asymptotic.tex" 1765797085 9489 d3af89c2431790a5836acabe9b14cfe8 ""
   "Chapters/BPC.tex" 1765333695 26958 e56fb522925d0f8578ebd066b429cb83 ""
   "Chapters/Conclusion.tex" 1765334524 807 5370a86c82002884abf0033c73e37494 ""
   "Chapters/Introduction.tex" 1765366876 7613 969d16cf1721afcadcdcc7d9fa466d35 ""
   "Chapters/Literature_review.tex" 1762697702 5245 fc36d4a11547c5fb22302d95c01aa5cf ""
   "Chapters/Primal.tex" 1765367029 7161 dcabfce1a28db9909cdf902cdf28c64d ""
-  "Chapters/Proof1.tex" 1765333939 8653 8bd12306e126bb85f58a91aafd46700a ""
-  "Chapters/Results.tex" 1765461001 3068 c28e7182ff3bd506f3bb992960daeb0e ""
+  "Chapters/Proof1.tex" 1765707474 15333 dd941cf132908ffb3eaa2490f6faf269 ""
+  "Chapters/Results.tex" 1765803044 3184 961f2034c4d03bb010de04e19b665b1c ""
   "Figures/loss.pdf" 1763471781 11044 9dd83c785606072b85294bebb1bc9119 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1630494038 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "e:/Software/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1630494514 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -173,12 +173,12 @@
   "e:/Software/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1630497148 2797933 9c11c6080360d7f1c8c22d521b83daf1 ""
   "e:/Software/texlive/2021/texmf.cnf" 1630496991 713 e69b156964470283e0530f5060668171 ""
   "f:/Files/Github/HKUST_TOPIC/onlineMKP/sum1.tex" 1764144840 2220 e5ffc3ae01fd9d74d155d8d3cf5b8f10 ""
-  "sum1.aux" 1765461010 8212 9be4785222134c68a286ee1f60616e8b "pdflatex"
-  "sum1.bbl" 1765461008 10680 9a15f7cef9890bb517908ffb96b4165e "bibtex sum1"
-  "sum1.out" 1765461010 1942 052e926197eaddf1a48f1a8a984e75a5 "pdflatex"
+  "sum1.aux" 1765803046 8212 03bf2068cae1438a2152c263568977aa "pdflatex"
+  "sum1.bbl" 1765803006 10680 9a15f7cef9890bb517908ffb96b4165e "bibtex sum1"
+  "sum1.out" 1765803047 1942 052e926197eaddf1a48f1a8a984e75a5 "pdflatex"
   "sum1.tex" 1764144840 2220 e5ffc3ae01fd9d74d155d8d3cf5b8f10 ""
   (generated)
-  "sum1.aux"
   "sum1.log"
   "sum1.out"
+  "sum1.aux"
   "sum1.pdf"

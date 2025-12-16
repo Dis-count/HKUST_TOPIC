@@ -89,4 +89,84 @@ Therefore we have $z(BPP) \leq z(BPC)$ according to the strong duality.
   Consider the standard linear program: $\phi(\bm{d})= \{\max c^{T} \bm{x}: A \bm{x} \leq \bm{d}, \bm{x} \geq \bm{0}\}$.  Suppose that $\bm{d}_1$ and $\bm{d}_2$ are two demand vectors, the optimal solution is $\bm{x}_1$ and $\bm{x}_2$. For any $\lambda \in [0, 1]$, $\bm{d}_{\lambda} = \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2}$. Let $\bm{x}_{\lambda} = \lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}$, then $A \bm{x}_{\lambda} = A(\lambda \bm{x}_{1} + (1-\lambda) \bm{x}_{2}) \leq \lambda \bm{d}_{1} + (1- \lambda) \bm{d}_{2} = \bm{d}_{\lambda}$. Thus, $\bm{x}_{\lambda}$ is a feasible solution for $\bm{d}_{\lambda}$. Then, $\phi(\bm{d}_{\lambda}) \geq \bm{c}^{T} \bm{x}_{\lambda} = \lambda \bm{c}^{T} \bm{x}_{1} + (1-\lambda) \bm{c}^{T} \bm{x}_{2} = \lambda \phi(\bm{d}_{1}) + (1- \lambda) \phi(\bm{d}_{2})$, which indicates $\phi(\bm{d})$ is concave. Let $\phi(\bm{d})$ indicate the optimal value of the linear relaxation of the SPDR problem. Substitute $\bm{x}$ with $y_{j \bm{h}}$ and view $y_{j \bm{h}}$ as the decision variables, then the concave property still holds for $\eqref{improve_primal}$. $V^{\text{HO}} = E[\phi(\bm{d})] \leq \phi(E[\bm{d}]) = z(\text{DLP})$.
 \end{pf}
 
+\begin{pf}{Proof of Lemma \ref{additive}}
+  For any optimal solution $x^{*}$ of $OPT(\bm{C}({t}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$, $x^{*} + \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}({1}), \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$. For any optimal solution $x^{*}$ of $OPT(\bm{C}({1}), \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$, $x^{*}- \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}({t}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$ because $x^{*}- \gamma^{[1, t_1)} \geq \gamma^{[1, t_{2})}- \gamma^{[1, t_1)} = \gamma^{[t_1, t_2)}$.    
+\end{pf}
+
+\begin{pf}{Proof of Proposition \ref{loss_dpp}}
+
+  $$
+  \begin{aligned}
+  & \mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right) \\
+  \leqslant & \mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) < x_{i^{t}j^{t}}^{\mathrm{DPP}}(t)+1-\frac{\lambda_{i^t}^{[t, \theta T]}}{N+1}\right) \\
+  = & \mathbb{P}\left(x_{i^{t}j^{t}}^{\mathrm{DPP}}(t) - x_{i^{t}j^{t}}^{*}(t) > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{N+1}\right) \\
+  \stackrel{(\mathrm{a})}{\leqslant} & \mathbb{P}\left(\max_{i^{\prime}}\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right) \\
+  = & \mathbb{P}\left(\bigcup_{i^{\prime}}\left\{\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right] - d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right\}\right) \\
+  \leqslant & \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)}\right) \\
+  \stackrel{(\mathrm{b})}{=} & \sum_{i^{\prime}} \sum_{i} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right\rvert\,\left(i^t = i\right) \right) \mathbb{P}\left(i^t = i \right)  \\
+  \leqslant & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right\rvert\,\left(i^t = i\right) \right) \bm{1}\left\{t \leqslant \theta T\right\} \\
+  \stackrel{(\mathrm{c})}{=} & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right) \bm{1}\left\{t \leqslant \theta T\right\}.
+  \end{aligned}
+  $$
+  
+  (a) is obtained from the well-known Lipschitz property of optimal solutions to linear programs with respect to perturbations in the right-hand side, as established by \citet{mangasarian1987lipschitz}.
+  
+  
+  For each $t$, consider $OPT(C({t}), d, 0)$. In the DPP, $d = \lambda^{[t, \theta T]}$, while in the sample path HO, $d = d^{[t, \theta T]}$. We choose $x^{*}(t)$ be an optimal solution of $OPT(C({t}), d^{[t, \theta T]}, 0)$ such that  
+  
+  $$
+  \left\|x^{*}(t)-x^{\mathrm{DPP}}(t)\right\|_{\infty} \leqslant K \left\|d^{[t, \theta T]}-\lambda^{[t, \theta T]}\right\|_{\infty}=K \left\|d^{[t, \theta T]}-\mathbb{E}\left[d^{[t, \theta T]}\right]\right\|_{\infty}.
+  $$    
+  
+  
+  (b) follows from Bayes formula. (c) follows because of the arrival independence between different time periods.
+  
+  We consider
+  $\inf_{t, i: t \in\left[\theta T\right]} \frac{\lambda_{i}^{\left(t, \theta T\right]}(\theta)}{\theta T-t}$ is lower bounded by some positive constant $\lambda_{\min } \triangleq \inf_{i} \frac{\lambda_{i}^{T}}{T}.$
+  
+  Then, we have 
+  $\mathbb{E}\left[d_{i}^{(t, \theta T]}\right]=\lambda_{i}^{\left(t, \theta T\right]} \geqslant \lambda_{\min}\left(\theta T- t\right)$. Let $T_0=\left\lceil\frac{2(N+1)}{\lambda_{\min}}\right\rceil$.
+  For $t \leq \theta T - T_{0}$, $\frac{\mathbb{E} [d_{i}^{(t, \theta T]}]- N-1}{K (N+1)} \geqslant \frac{\lambda_{\min}\left(\theta T-t\right)- \lambda_{\min} T_0 / 2}{K (N+1)} \geqslant \frac{\lambda_{\min}\left(\theta T-t\right)}{2 K (N+1)}$.
+  
+  Finally,
+  
+  $$
+  \begin{aligned}
+  &  E[OPT(\bm{C}, d^{[1, T]}, 0) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
+  \leqslant &  \delta \sum_{t=1}^{\theta T} \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]- d_{i^{\prime}}^{(t, \theta T]}\right|>\frac{\mathbb{E}\left[d_{i^{t}}^{[t, \theta T]}\right]- N-1}{K (N+1)}\right) \bm{1}\left\{t \leqslant \theta T\right\} \\
+  \leqslant &  \delta \sum_{i} \sum_{t=1}^{\theta T} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]-d_{i^{\prime}}^{(t, \theta T]}\right|> \frac{\lambda_{\min}\left(\theta T-t\right)}{2 K (N+1)}\right) \\
+   \stackrel{(\mathrm{a})}{\leqslant} &  \delta \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- 2 \frac{\left(\lambda_{\min}\left(\theta T-t\right)\right)^2}{\left(2 K (N+1)\right)^2(\theta T-t)}\right)+ 2 \delta \sum_{i} \sum_{t=\theta T-T_0+1}^{\theta T} \sum_{i^{\prime}} 1 \\
+  = &  \delta \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- \frac{\lambda_{\min }^2}{2 K^2 (N+1)^2} \cdot (\theta T-t)\right)+ O(1) \\
+  = &  \delta M^2 \sum_{t=1}^{\theta T - T_0} 2 \exp \left(- \frac{\lambda_{\min}^2}{2 K^2 (N+1)^2} \cdot (\theta T-t)\right)+O(1).
+  \end{aligned}
+  $$
+  
+  (a) holds from Hoeffding's inequality
+  
+  $$
+  \mathrm{P}\left(\left|S_n-\mathrm{E}\left[S_n\right]\right| \geq t\right) \leq 2 \exp \left(-\frac{2 t^2}{\sum_{i=1}^n\left(b_i-a_i\right)^2}\right)
+  $$
+  In this case, $S_n = d_{i^{\prime}}^{(t, \theta T]}$, $a_i =0, b_i =1$.
+  
+  Let $\theta \to \infty$, we can further upper bound by 
+  
+  % $$
+  % \begin{aligned}
+  % & 2 l N \sum_{i} \sum_{t=T_0}^{+\infty} 2 \exp \left(-2 \frac{\lambda_{\min}^2 t^2}{\delta^2 N^2 \theta T}\right) + O(1) \\
+  % \leqslant & 2 l N^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(2 \frac{\lambda_{\min}^2}{\delta^2 N^2 T}\right) \cdot \frac{t^2}{\theta}\right)+O(1) \\
+  % = & O(\sqrt{\theta})
+  % \end{aligned}
+  % $$
+  
+  $$
+  \begin{aligned}
+  &  \delta M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(- \frac{\lambda_{\min}^2 t^2}{2 K^2 (N+1)^2 t}\right) + O(1) \\
+  = &  \delta M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(\frac{\lambda_{\min}^2}{2 K^2 (N+1)^2}\right) \cdot t\right)+O(1) \\
+  = & O(1)
+  \end{aligned}
+  $$
+  
+The last equality is because for given $C>0$, $\sum_{t=1}^{+\infty} \exp(-Ct) = \frac{e^{-C}}{C}$.
+\end{pf}
+
 \newpage

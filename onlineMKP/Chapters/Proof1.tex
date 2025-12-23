@@ -93,8 +93,8 @@ Therefore we have $z(BPP) \leq z(BPC)$ according to the strong duality.
   For any optimal solution $x^{*}$ of $OPT(\bm{C}({t}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$, $x^{*} + \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}({1}), \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$. For any optimal solution $x^{*}$ of $OPT(\bm{C}({1}), \hat{d}+d^{[1, t_2)}, \gamma^{[1, t_2)})$, $x^{*}- \gamma^{[1, t_1)}$ is a feasible solution of $OPT(\bm{C}({t}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$ because $x^{*}- \gamma^{[1, t_1)} \geq \gamma^{[1, t_{2})}- \gamma^{[1, t_1)} = \gamma^{[t_1, t_2)}$.    
 \end{pf}
 
-\begin{pf}{Proof of Proposition \ref{loss_dpp}}
-
+\begin{pf}{Proof of Lemma \ref{theta_loss}}
+First, we consider $\mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right)$, 
   $$
   \begin{aligned}
   & \mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right) \\
@@ -104,8 +104,8 @@ Therefore we have $z(BPP) \leq z(BPC)$ according to the strong duality.
   = & \mathbb{P}\left(\bigcup_{i^{\prime}}\left\{\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right] - d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right\}\right) \\
   \leqslant & \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right|> \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)}\right) \\
   \stackrel{(\mathrm{b})}{=} & \sum_{i^{\prime}} \sum_{i} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right\rvert\,\left(i^t = i\right) \right) \mathbb{P}\left(i^t = i \right)  \\
-  \leqslant & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right\rvert\,\left(i^t = i\right) \right) \bm{1}\left\{t \leqslant \theta T\right\} \\
-  \stackrel{(\mathrm{c})}{=} & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right) \bm{1}\left\{t \leqslant \theta T\right\}.
+  \leqslant & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left.\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i^t}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right\rvert\,\left(i^t = i\right) \right) \\
+  \stackrel{(\mathrm{c})}{=} & \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{[t, \theta T]}\right]-d_{i^{\prime}}^{[t, \theta T]}\right| > \frac{\mathbb{E}\left[d_{i}^{[t, \theta T]}\right]-N-1}{K (N+1)} \right).
   \end{aligned}
   $$
   
@@ -118,11 +118,10 @@ Therefore we have $z(BPP) \leq z(BPC)$ according to the strong duality.
   \left\|x^{*}(t)-x^{\mathrm{DPP}}(t)\right\|_{\infty} \leqslant K \left\|d^{[t, \theta T]}-\lambda^{[t, \theta T]}\right\|_{\infty}=K \left\|d^{[t, \theta T]}-\mathbb{E}\left[d^{[t, \theta T]}\right]\right\|_{\infty}.
   $$    
   
-  
   (b) follows from Bayes formula. (c) follows because of the arrival independence between different time periods.
   
   We consider
-  $\inf_{t, i: t \in\left[\theta T\right]} \frac{\lambda_{i}^{\left(t, \theta T\right]}(\theta)}{\theta T-t}$ is lower bounded by some positive constant $\lambda_{\min } \triangleq \inf_{i} \frac{\lambda_{i}^{T}}{T}.$
+  $\min_{t, i: t \in\left[1, \theta T\right]} \frac{\lambda_{i}^{\left(t, \theta T\right]}(\theta)}{\theta T-t}$ is lower bounded by some positive constant $\lambda_{\min} \triangleq \min_{i} \frac{\lambda_{i}({T})}{T}.$
   
   Then, we have 
   $\mathbb{E}\left[d_{i}^{(t, \theta T]}\right]=\lambda_{i}^{\left(t, \theta T\right]} \geqslant \lambda_{\min}\left(\theta T- t\right)$. Let $T_0=\left\lceil\frac{2(N+1)}{\lambda_{\min}}\right\rceil$.
@@ -132,12 +131,12 @@ Therefore we have $z(BPP) \leq z(BPC)$ according to the strong duality.
   
   $$
   \begin{aligned}
-  &  E[OPT(\bm{C}, d^{[1, T]}, 0) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
-  \leqslant &  \delta \sum_{t=1}^{\theta T} \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]- d_{i^{\prime}}^{(t, \theta T]}\right|>\frac{\mathbb{E}\left[d_{i^{t}}^{[t, \theta T]}\right]- N-1}{K (N+1)}\right) \bm{1}\left\{t \leqslant \theta T\right\} \\
-  \leqslant &  \delta \sum_{i} \sum_{t=1}^{\theta T} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]-d_{i^{\prime}}^{(t, \theta T]}\right|> \frac{\lambda_{\min}\left(\theta T-t\right)}{2 K (N+1)}\right) \\
-   \stackrel{(\mathrm{a})}{\leqslant} &  \delta \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- 2 \frac{\left(\lambda_{\min}\left(\theta T-t\right)\right)^2}{\left(2 K (N+1)\right)^2(\theta T-t)}\right)+ 2 \delta \sum_{i} \sum_{t=\theta T-T_0+1}^{\theta T} \sum_{i^{\prime}} 1 \\
-  = &  \delta \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- \frac{\lambda_{\min }^2}{2 K^2 (N+1)^2} \cdot (\theta T-t)\right)+ O(1) \\
-  = &  \delta M^2 \sum_{t=1}^{\theta T - T_0} 2 \exp \left(- \frac{\lambda_{\min}^2}{2 K^2 (N+1)^2} \cdot (\theta T-t)\right)+O(1).
+  &  \sum_{t=1}^{\theta T} \mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right) \\
+  \leqslant &   \sum_{t=1}^{\theta T} \sum_{i} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]- d_{i^{\prime}}^{(t, \theta T]}\right|>\frac{\mathbb{E}\left[d_{i^{t}}^{[t, \theta T]}\right]- N-1}{K (N+1)}\right) \bm{1}\left\{t \leqslant \theta T\right\} \\
+  \leqslant &   \sum_{i} \sum_{t=1}^{\theta T} \sum_{i^{\prime}} \mathbb{P}\left(\left|\mathbb{E}\left[d_{i^{\prime}}^{(t, \theta T]}\right]-d_{i^{\prime}}^{(t, \theta T]}\right|> \frac{\lambda_{\min}\left(\theta T-t\right)}{2 K (N+1)}\right) \\
+   \stackrel{(\mathrm{a})}{\leqslant} &  \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- 2 \frac{\left(\lambda_{\min}\left(\theta T-t\right)\right)^2}{\left(2 K (N+1)\right)^2(\theta T-t)}\right)+ 2 \sum_{i} \sum_{t=\theta T-T_0+1}^{\theta T} \sum_{i^{\prime}} 1 \\
+  = &   \sum_{i} \sum_{t=1}^{\theta T-T_0} \sum_{i^{\prime}} 2 \exp \left(- \frac{\lambda_{\min }^2}{2 K^2 (N+1)^2} \cdot (\theta T-t)\right)+ O(1) \\
+  = &  M^2 \sum_{t=1}^{\theta T - T_0} 2 \exp \left(- \frac{\lambda_{\min}^2}{2 K^2 (N+1)^2} \cdot (\theta T-t)\right)+O(1).
   \end{aligned}
   $$
   
@@ -147,9 +146,21 @@ Therefore we have $z(BPP) \leq z(BPC)$ according to the strong duality.
   \mathrm{P}\left(\left|S_n-\mathrm{E}\left[S_n\right]\right| \geq t\right) \leq 2 \exp \left(-\frac{2 t^2}{\sum_{i=1}^n\left(b_i-a_i\right)^2}\right)
   $$
   In this case, $S_n = d_{i^{\prime}}^{(t, \theta T]}$, $a_i =0, b_i =1$.
-  
+\end{pf}
+
+\begin{pf}{Proof of Proposition \ref{loss_dpp}}
   Let $\theta \to \infty$, we can further upper bound by 
   
+  $$
+  \begin{aligned}
+  &  E[OPT(\bm{C}, d^{[1, \theta T]}, 0) - OPT(\bm{C}, d^{[1, \theta T]}, \gamma^{[1, \theta T]})] \\
+  \leqslant &  \delta M^2 \sum_{t=1}^{\theta T - T_0} 2 \exp \left(- \frac{\lambda_{\min}^2}{2 K^2 (N+1)^2} \cdot (\theta T-t)\right)+O(1) \\
+  = &  \delta M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(- \frac{\lambda_{\min}^2 t^2}{2 K^2 (N+1)^2 t}\right) + O(1) \\
+  = &  \delta M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(\frac{\lambda_{\min}^2}{2 K^2 (N+1)^2}\right) \cdot t\right)+O(1) \\
+  = & O(1)
+  \end{aligned}
+  $$
+
   % $$
   % \begin{aligned}
   % & 2 l N \sum_{i} \sum_{t=T_0}^{+\infty} 2 \exp \left(-2 \frac{\lambda_{\min}^2 t^2}{\delta^2 N^2 \theta T}\right) + O(1) \\
@@ -157,14 +168,6 @@ Therefore we have $z(BPP) \leq z(BPC)$ according to the strong duality.
   % = & O(\sqrt{\theta})
   % \end{aligned}
   % $$
-  
-  $$
-  \begin{aligned}
-  &  \delta M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(- \frac{\lambda_{\min}^2 t^2}{2 K^2 (N+1)^2 t}\right) + O(1) \\
-  = &  \delta M^2 \sum_{t=T_0}^{+\infty} 2 \exp \left(-\left(\frac{\lambda_{\min}^2}{2 K^2 (N+1)^2}\right) \cdot t\right)+O(1) \\
-  = & O(1)
-  \end{aligned}
-  $$
   
 The last equality is because for given $C>0$, $\sum_{t=1}^{+\infty} \exp(-Ct) = \frac{e^{-C}}{C}$.
 \end{pf}

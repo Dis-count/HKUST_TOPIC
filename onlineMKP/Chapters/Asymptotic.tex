@@ -17,17 +17,19 @@ The second benchmark is the offline relaxed optimal value $V^{\text{HO}}$, which
 $E[\text{loss}^{\pi}] = V^{\text{OFF}} - V^{\pi} \leq V^{\text{HO}} - V^{\pi}$. To obtain a tractable upper bound, we will measure the loss of policy $\pi$ through the difference $V^{\text{HO}} - V^{\pi}$.
 
 
-Direct analysis of this loss term, however, is often intractable. To evaluate policy performance systematically, we adopt the standard asymptotic scaling framework prevalent in revenue management literature (see \citet{gallego1997multiproduct}). Let $\theta \in \mathbb{N}$ be a scale parameter. For a given base instance, we generate a sequence of scaled problems. In the $\theta$-th problem, the resource capacity vector is scaled to $\bm{C}(\theta) = \theta \bm{C}$, and the selling horizon is extended to $\theta T$ periods. The arrival rates are defined as $\lambda_i^t(\theta) = \lambda_i^{\lceil t/\theta \rceil}$ for $t \in [\theta T]$. 
+Direct analysis of this loss term, however, is often intractable. To evaluate policy performance systematically, we adopt the standard asymptotic scaling framework prevalent in revenue management literature (see \citet{gallego1997multiproduct}). Let $\theta \in \mathbb{N}$ be a scale parameter. For a given base instance, we generate a sequence of scaled problems. In the $\theta$-th problem, the resource capacity vector is scaled to $\bm{C}(\theta) = \theta \bm{C}$, and the selling horizon is extended to $\theta T$ periods. The arrival rates are defined as $\lambda_i^t(\theta) = \lambda_i^{\lceil t/\theta \rceil}$ for $t \in \{1,2,\ldots, \theta T\}$, where $\lceil \cdot \rceil$ denotes the ceiling function.
 
-Let $V_{\theta}^{\pi}$ be the expected revenue of policy $\pi$ in the scaled problem. Within this framework, we will study the asymptotic behavior of the loss $V^{\text{HO}}_{\theta}- V^{\pi}_{\theta}$ as the scale parameter $\theta \to \infty$. This provides the core metric for assessing the asymptotic optimality of policy $\pi$. For the DPP policy, we have Proposition \ref{loss_dpp}.
+Let $V_{\theta}^{\pi}$ denote the expected revenue under policy $\pi$ in the scaled problem. 
+We analyze the asymptotic behavior of the loss $V^{\text{HO}}_{\theta}- V^{\pi}_{\theta}$ as the scale parameter $\theta \to \infty$, which serves as the core metric for assessing the asymptotic optimality of $\pi$. Having introduced the DPP policy in Section \ref{policy_DPP}, we now examine the asymptotic loss, $V^{\text{HO}}_{\theta}- V^{DPP}_{\theta}$ for this specific policy, where $V_{\theta}^{DPP}$ is  its corresponding expected revenue.
+
+
+% For the DPP policy, we have Proposition \ref{loss_dpp}.
 
 % HO makes an allocation decision only after all requests are known, and thus achieves the optimal value for the relaxed static model.
 
-\begin{prop}\label{loss_dpp}
-When $\theta \to \infty$, we have $V_{\theta}^{\text{HO}} - V_{\theta}^{\text{DPP}} = O(1)$. 
-\end{prop}
 
-We now outline the proof of Proposition \ref{loss_dpp}. First, we perform a loss decomposition. Starting from a modified version of \eqref{improve_primal} that imposes lower bounds on $\bm{x}$, we decompose--for each sample path--the total loss between the DPP and the hindsight optimum into $\theta T$ increments. Each increment corresponds to the gap between two objective values of the modified problem under different lower bounds for $\bm{x}$. Second, we establish a uniform bound on the single-period loss. Each increment is shown to be bounded above by a constant that depends only on ${r_i}$. The third step is we bound the probability of loss. Finally, we sum the increments over the horizon $T$. This sum converges to a constant, completing the proof.
+The analysis proceeds in three steps. First, a loss decomposition is performed. Using a modified version of \eqref{improve_primal} with lower bounds imposed on $\bm{x}$, the total loss (on each sample path) between the DPP policy and the hindsight optimum is decomposed into $\theta T$ increments. Each increment represents the gap between the objective values of the modified problem under distinct lower bounds for $\bm{x}$. Second, a uniform bound on the single-period loss is established, demonstrating that each increment is bounded above by a constant dependent solely on $r_M$. Third, the sum of these increments over the horizon $T$ is bounded and shown to converge to a constant as $\theta \to \infty$.
+
 
 % Then we upper bound each increment. We show that
 
@@ -36,7 +38,7 @@ We now outline the proof of Proposition \ref{loss_dpp}. First, we perform a loss
 % Step 3: Bounding the Probability of Loss
 % Step 4: Summing Over Time
 
-In the first step, let $\gamma_{ij}$, $\gamma_{i0}$ denote the number of type $i$ accepted in capacity $j$ and rejected by DPP, respectively. We consider the following variant of \eqref{improve_primal}.
+{\bf Step 1}, let $\gamma_{ij}$, $\gamma_{i0}$ denote the number of type $i$ accepted in capacity $j$ and rejected by DPP, respectively. We consider the following variant of \eqref{improve_primal}.
 
 \begin{equation}\label{OPT}
     \begin{aligned}
@@ -50,40 +52,40 @@ In the first step, let $\gamma_{ij}$, $\gamma_{i0}$ denote the number of type $i
 
 Note that comparing to the primal, we add a set of constraints $x_{ij} \geq \gamma_{ij}$ for all $i \in \mathcal{M}, j \in \mathcal{N} \cup \{0\}$. It is clear that \eqref{improve_primal} equals $OPT(\bm{C}, d, 0)$.
 
-We use superscripts to denote realized values from a sample path. Specifically, for $t_1 \leq t_2$, let $d_{i}^{[t_1, t_2]}$ denote the realized demand for type $i$ during $[t_1, t_2]$, and let $\gamma_{ij}^{[t_1, t_2)}$ denote the number of type $i$ requests allocated to knapsack $j$ by the DPP during $[t_1, t_2)$. The total realized demand over the horizon is therefore $d^{[1, T]}$. The total expected demand over the horizon is expressed by $\lambda^{[1, T]}$.
+We use superscripts to denote realized values from a sample path. Specifically, for $t_1 \leq t_2$, let $d_{i}^{[t_1, t_2]}$ ($d_{i}^{[t_1, t_2+1)}$) denote the realized demand for type $i$ during $[t_1, t_2]$, and let $\gamma_{ij}^{[t_1, t_2]}$ denote the number of type $i$ requests allocated to knapsack $j$ by the DPP during $[t_1, t_2]$. The total realized demand over the horizon is therefore $d^{[1, T]}$. The total expected demand over the horizon is expressed by $\lambda^{[1, T]}$.
 
 $OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)})$ can be interpreted as the total reward obtained under a virtual policy where we first follow the DPP during $[1, t+1)$ and then from time $t+1$ we follow the optimal solution assuming that we know the future demands. Let $x_{i^{t}j^{t}}^{*}(t)$ denote the optimal solution for $\text{OPT}(\bm{C}({t}), d^{[t, T]}, 0)$ at time $t$, where $i^{t}$ indicates the arriving type at time $t$, $j^{t}$ indicates the assigned knapsack at time $t$. 
 
 The following lemma shows an important property of \eqref{OPT}.
 
 \begin{lem}\label{additive}
-    Given $\hat{d}$, for any $1 \leq t_1 \leq t_2 \leq T+1$, we have
-    $$OPT(\bm{C}({1}), \hat{d} + d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} r_{i} \sum_{j} \gamma_{ij}^{[1, t_1)} + OPT(\bm{C}({t_1}), \hat{d}+d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$$
+    For any $1 \leq t_1 \leq t_2 \leq T+1$, we have
+    $$OPT(\bm{C}({1}), d^{[1, t_2)} , \gamma^{[1, t_2)}) = \sum_{i} r_{i} \sum_{j} \gamma_{ij}^{[1, t_1)} + OPT(\bm{C}({t_1}), d^{[t_1, t_2)}, \gamma^{[t_1, t_2)})$$
 \end{lem}
 
-For one sample path $\omega$, the HO under $\omega$ is $OPT(\bm{C}, d^{[1, T]}, 0)$. From Lemma \ref{additive}, by setting $\hat{d} = 0$ and $t_1 = t_2 = T+1$, we can see that the total revenue collected under $\omega$ is $OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})$. Therefore, the loss incured by DPP for $\omega$ can be written as
+For one sample path $\omega$, the HO under $\omega$ is $OPT(\bm{C}, d_{\omega}^{[1, T]}, 0)$. From Lemma \ref{additive}, by setting $t_1 = t_2 = T+1$, we can see that the total revenue collected under $\omega$ is $OPT(\bm{C}, d_{\omega}^{[1, T]}, \gamma^{[1, T]})$. Therefore, the loss incured by DPP for $\omega$ can be written as
 
 \begin{align*}
-    & OPT^{\omega}(\bm{C}, d^{[1, T]}, 0) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1, T]}) \\
- = & \sum_{t=1}^{T} [OPT^{\omega}(\bm{C}, d^{[1,T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1,T]}, \gamma^{[1,t+1)})]
+    & OPT(\bm{C}, d_{\omega}^{[1, T]}, 0) - OPT(\bm{C}, d_{\omega}^{[1, T]}, \gamma^{[1, T]}) \\
+ = & \sum_{t=1}^{T} [OPT(\bm{C}, d_{\omega}^{[1,T]}, \gamma^{[1,t)}) - OPT(\bm{C}, d_{\omega}^{[1,T]}, \gamma^{[1,t+1)})]
 \end{align*}
 
 The revenue loss between HO and DPP can be decomposed into $T$ increments. Each increment represents the gap between two ``adjacent'' OPTs.
 
-In the second step, we show that the gap can be uniformly bounded by a constant $\delta$ related to $\{r_{M}\}$. ({\color{blue} unrelated to problem scale, need to be proved.}) For any $\omega$, $OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) \leq \delta$.
+{\bf Step 2}, we show that the gap can be uniformly bounded by a constant $\delta$ related to $r_{M}$. ({\color{blue} unrelated to problem scale, need to be proved.}) For any $\omega$, $OPT(\bm{C}, d_{\omega}^{[1, T]}, \gamma^{[1,t)}) - OPT(\bm{C}, d_{\omega}^{[1, T]}, \gamma^{[1,t+1)}) \leq \delta$.
 
 The expected revenue loss can be upper bounded:
 
 \begin{align*}
-    & E_{\omega}[OPT^{\omega}(\bm{C}, d^{[1, T]}, 0) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
- \leq & \delta \sum_{t=1}^{T} P(OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT^{\omega}(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) > 0) \\
- = & \delta \sum_{t=1}^{T} P(OPT^{\omega}(\bm{C}({t}), d^{[t, T]}, 0) - OPT^{\omega}(\bm{C}({t}), d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
+    & E[OPT(\bm{C}, d^{[1, T]}, 0) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1, T]})] \\
+ \leq & \delta \sum_{t=1}^{T} P(OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t)}) - OPT(\bm{C}, d^{[1, T]}, \gamma^{[1,t+1)}) > 0) \\
+ = & \delta \sum_{t=1}^{T} P(OPT(\bm{C}({t}), d^{[t, T]}, 0) - OPT(\bm{C}({t}), d^{[t, T]}, \gamma^{[t,t+1)}) > 0) \\
  \leq & \delta \sum_{t=1}^{T} P(x_{i^{t}j^{t}}^{*}(t) <1)
 \end{align*}
 
 The first inequality results from $E[A] \leq \delta E[\bm{1}_{A>0}] = \delta P(A>0)$. The second equation is as follows. If $x_{i^{t}j^{t}}^{*}(t) \geq 1$, then $x^{*}(t)$ is still feasible for $OPT(\bm{C}({t}), d^{[t, T]}, \gamma^{[t,t+1)})$. (Because the optimal policy)
 
-In the third step, we consider $P(x_{i^{t}j^{t}}^{*}(t) <1)$. Let $x_{i^t j^{t}}^{\mathrm{DPP}}(t)$ denote the number of type $i^{t}$ assigned to knapsack $j^{t}$ for DPP. At time period $t$, after realization of $i^{t}$, based on the maximum choice of $j^{t}$ in DPP, we have
+{\bf Step 3}, we consider $\sum_{t=1}^{\theta T} P(x_{i^{t}j^{t}}^{*}(t) <1)$ and shows its upper bound. Let $x_{i^t j^{t}}^{\mathrm{DPP}}(t)$ denote the number of type $i^{t}$ assigned to knapsack $j^{t}$ for DPP. At time period $t$, after realization of $i^{t}$, based on the maximum choice of $j^{t}$ in DPP, we have
 
 $$
 x_{i^t j^t}^{\mathrm{DPP}}(t)=\max_{j} x_{i^t j}^{\mathrm{DPP}}(t) \geqslant \frac{\sum_{j} x_{i^t j}^{\mathrm{DPP}}(t)}{\sum_{j} 1} = \frac{\lambda_{i^t}^{[t, \theta T]}}{N+1}
@@ -108,5 +110,18 @@ The inequality holds because the maximum value over $j$ is always greater than o
 
 % The first equation follows from Lemma \ref{additive}. (Let $t_1 = t_2 = t$, $\hat{d} = d^{[t, T]}$; let $t_1 = t, t_2 = t+1$, $\hat{d} = d^{[t+1, T]}$).
 
-The bound on $\mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right)$ converges to the constant is presented in the Appendix.
+The bound on $\sum_{t=1}^{\theta T} \mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right)$ is established in Lemma \ref{theta_loss}, where $\lambda_{\min } \triangleq \min_{i} \frac{\lambda_{i}({T})}{T}$, $T_0=\left\lceil\frac{2(N+1)}{\lambda_{\min}}\right\rceil$, and $K$ is a constant.
+
+\begin{lem}\label{theta_loss}
+    The following bound holds:
+    $\sum_{t=1}^{\theta T} \mathbb{P}\left(x_{i^{t}j^{t}}^{*}(t) <1\right)$ can be bounded by $$M^2 \sum_{t=1}^{\theta T - T_0} 2 \exp \left(- \frac{\lambda_{\min}^2}{2 K^2 (N+1)^2} \cdot (\theta T-t)\right)+O(1).$$
+\end{lem}
+
+The analysis in Steps 1-3 leads to the following proposition, characterizing the asymptotic loss of the DPP policy.
+
+\begin{prop}\label{loss_dpp}
+    The asymptotic loss for the DPP policy is bounded. That is, 
+    $$\lim_{\theta \to \infty} (V_{\theta}^{\text{HO}} - V_{\theta}^{\text{DPP}}) =  O(1).$$
+\end{prop}
+
 \newpage

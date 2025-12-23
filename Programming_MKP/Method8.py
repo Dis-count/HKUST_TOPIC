@@ -75,7 +75,6 @@ class column_generation:
 
         m.setParam('OutputFlag', 0)
         m.optimize()
-
         # m.write('2.lp')
 
         dual1 = m.getAttr('Pi', alpha_con)

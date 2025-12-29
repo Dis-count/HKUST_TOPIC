@@ -2,8 +2,8 @@ import numpy as np
 from I_BPC import CompareMethods
 import time
 from Mist import sequence_pool
-from Method10 import deterministicModel
-# Results of Different Policies under multiple probabilities
+from deterministicMMKP import deterministicModel
+# Results of loss under Different Policies
 
 # [0.18, 0.7, 0.06, 0.06], [0, 0.5, 0, 0.5],
 # [0.2, 0.8, 0, 0], [0, 1, 0, 0]

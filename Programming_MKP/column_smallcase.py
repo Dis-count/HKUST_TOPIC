@@ -49,7 +49,7 @@ class deterministicModel:
         m.setParam('OutputFlag', 0)
         m.optimize()
         
-        m.write('2.lp')
+        # m.write('2.lp')
         dual = np.array(m.getAttr('X'))
         opt_x = dual[0: self.I * self.given_lines]
         opt_x = np.reshape(opt_x, (self.I, self.given_lines))
@@ -84,9 +84,6 @@ class deterministicModel:
         m.addConstrs(alpha[i] + beta[i, j] >= self.demand_width_array[i] - self.s
                      for i in range(self.I) for j in range(self.given_lines))
 
-        # m.addConstrs(grb.quicksum(beta[i, j] * dom_set[h][i] for i in range(self.I)) <= gamma[j]
-        #              for j in range(self.given_lines) for h in range(len(dom_set[j])) )
-
         for j in range(self.given_lines):
             for coff_h in dom_set[j]:
                 m.addConstr(grb.quicksum(beta[i, j] * coff_h[i] for i in range(self.I)) <= gamma[j])
@@ -104,7 +101,6 @@ class deterministicModel:
         opt_gamma = dual[self.I * self.given_lines + self.I:]
 
         return opt_alpha, opt_beta, opt_gamma
-
 
     def LP_formulation(self, demand, roll_width):
         #  The traditional bid-price control
@@ -126,7 +122,6 @@ class deterministicModel:
         print(x_ij)
         return x_ij, m.objVal
 
-    # def 
 
 if __name__ == "__main__":
     given_lines = 2
@@ -170,5 +165,4 @@ if __name__ == "__main__":
     # print(f'gamma: {opt_gamma}')
 
     print(f'x: {opt_x}')
-
     test.LP_formulation(demand, roll_width)

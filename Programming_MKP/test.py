@@ -1,5 +1,6 @@
 def DP(L, M, delta, memo=None):
     """
+    Calculate the number of possible patterns given L and M by DP.
     Compute DP(L, M) using the recurrence relation:
     DP(L, M) = sum_{k=0}^{floor(L/(M+delta))} DP(L - k*(M+delta), M-1)
 

@@ -1,11 +1,11 @@
 import gurobipy as grb
 from gurobipy import GRB
 import numpy as np
-from Method10 import deterministicModel
-from Method8 import column_generation
+from deterministicMMKP import deterministicModel
+from column_gene import column_generation
 import copy
 
-# improved bid-price
+# compilation of policies
 
 class CompareMethods:
     def __init__(self, roll_width, given_lines, I, num_period, value, weight, probab):

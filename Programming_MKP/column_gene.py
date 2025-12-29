@@ -7,8 +7,8 @@ import copy
 
 class column_generation:
     def __init__(self, roll_width, given_lines, weight, I, value):
-        self.roll_width = roll_width
-        self.given_lines = given_lines
+        self.roll_width = roll_width     # capacities
+        self.given_lines = given_lines    # number of knapsacks
         self.weight = weight
         self.value_array = value
         self.I = I

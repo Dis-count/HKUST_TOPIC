@@ -14,7 +14,7 @@ class deterministicModel:
         self.I = I
 
     def IP_formulation(self, demand_lower, demand_upper):
-        #  Seat planning with upper and lower bound
+        #  solution with upper and lower bound
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.INTEGER)
         m.addConstrs(grb.quicksum(self.weight[i] * x[i, j]
@@ -40,7 +40,7 @@ class deterministicModel:
         return newd, newx
 
     def LP(self, demand_upper):
-        #  Seat planning with upper and lower bound
+        #  solution with upper bound
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb = 0, vtype = GRB.CONTINUOUS)
         m.addConstrs(grb.quicksum(self.weight[i] * x[i, j]
@@ -64,7 +64,7 @@ class deterministicModel:
         return newd, newx
 
     def IP_advanced(self, demand_lower):
-        #  seat planning given the lower demand
+        #  solution given the lower demand
         m = grb.Model()
         x = m.addVars(self.I, self.given_lines, lb=0, vtype=GRB.INTEGER)
         m.addConstrs(grb.quicksum(self.weight[i] * x[i, j]

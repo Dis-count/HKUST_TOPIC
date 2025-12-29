@@ -1,7 +1,0 @@
-Run Start Time:Tue Aug  5 13:51:35 2025
-The number of periods: 	60
-BPP: 0.96 ;BPC: 0.96 ;RDPH: 0.99 ;Number of accepted people: 1.55 
-worst_BPP: 0.9613 
-;worst_BPC: 0.9613 
-;worst_RDPH: 0.9871 
-;Total Runtime	3.886097
